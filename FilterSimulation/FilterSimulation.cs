@@ -263,6 +263,7 @@ namespace FilterSimulation
             {
                 fmFilterSimulation currentSimulation = fSolution.CurrentObjects.Simulation;
                 fSolution.CurrentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, simName);
+                fSolution.CurrentObjects.Simulation.CopySuspensionParameters(currentSimulation);
                 fSolution.CurrentObjects.Simulation.Keep();
             }
 

@@ -536,5 +536,32 @@ namespace FilterSimulation.fmFilterObjects
             BackupData.CopyFrom(sim.BackupData);
             Modified = sim.Modified;
         }
+
+        internal void CopySuspensionParameters(fmFilterSimulation simulation)
+        {
+            eta_f = simulation.eta_f;
+            
+            rho_f = simulation.rho_f;
+            rho_s = simulation.rho_s;
+            rho_sus = simulation.rho_sus;
+            
+            Cm = simulation.Cm;
+            Cv = simulation.Cv;
+            C = simulation.C;
+            
+            eps0 = simulation.eps0;
+            kappa0 = simulation.kappa0;
+
+            nc = simulation.nc;
+
+            Pc0 = simulation.Pc0;
+            rc0 = simulation.rc0;
+            a0 = simulation.a0;
+
+            ne = simulation.ne;
+
+            hce = simulation.hce;
+            Rm0 = simulation.Rm0;
+        }
     }
 }
