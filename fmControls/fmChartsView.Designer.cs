@@ -39,6 +39,7 @@ namespace fmControls
             this.panelLeft = new System.Windows.Forms.Panel();
             this.GridPanel = new System.Windows.Forms.Panel();
             this.selectedSimulationParametersTable = new fmDataGrid.fmDataGrid();
+            this.SelectedSimulationParametersCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.additionalParametersTable = new fmDataGrid.fmDataGrid();
             this.DeleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
             this.AdditionalParametersCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -146,17 +147,26 @@ namespace fmControls
             this.selectedSimulationParametersTable.AllowUserToDeleteRows = false;
             this.selectedSimulationParametersTable.AllowUserToResizeRows = false;
             this.selectedSimulationParametersTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.selectedSimulationParametersTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SelectedSimulationParametersCheckBoxColumn});
             this.selectedSimulationParametersTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.selectedSimulationParametersTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.selectedSimulationParametersTable.HighLightCurrentRow = true;
             this.selectedSimulationParametersTable.Location = new System.Drawing.Point(0, 21);
             this.selectedSimulationParametersTable.Name = "selectedSimulationParametersTable";
-            this.selectedSimulationParametersTable.ReadOnly = true;
             this.selectedSimulationParametersTable.RowHeadersVisible = false;
             this.selectedSimulationParametersTable.RowTemplate.Height = 18;
             this.selectedSimulationParametersTable.Size = new System.Drawing.Size(254, 213);
             this.selectedSimulationParametersTable.TabIndex = 10;
             this.selectedSimulationParametersTable.Visible = false;
+            this.selectedSimulationParametersTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellValueChanged);
+            // 
+            // SelectedSimulationParametersCheckBoxColumn
+            // 
+            this.SelectedSimulationParametersCheckBoxColumn.HeaderText = "";
+            this.SelectedSimulationParametersCheckBoxColumn.Name = "SelectedSimulationParametersCheckBoxColumn";
+            this.SelectedSimulationParametersCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.SelectedSimulationParametersCheckBoxColumn.Width = 20;
             // 
             // additionalParametersTable
             // 
@@ -176,8 +186,8 @@ namespace fmControls
             this.additionalParametersTable.RowTemplate.Height = 18;
             this.additionalParametersTable.Size = new System.Drawing.Size(254, 213);
             this.additionalParametersTable.TabIndex = 5;
-            this.additionalParametersTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellContentClick);
             this.additionalParametersTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellValueChanged);
+            this.additionalParametersTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellContentClick);
             // 
             // DeleteButtonColumn
             // 
@@ -395,6 +405,7 @@ namespace fmControls
         private System.Windows.Forms.Panel rangePanel;
         private fmDataGrid.fmNumericalTextBox rowsQuantity;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn SelectedSimulationParametersCheckBoxColumn;
 
 
     }

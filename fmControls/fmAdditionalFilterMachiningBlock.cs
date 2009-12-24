@@ -42,6 +42,11 @@ namespace fmControls
         {
             IsDrawn = isDrawn;
         }
-       
+
+        public void Copy(bool isDrawn, fmFilterMachiningBlock op2)
+        {
+            this.CopyValues(op2);
+            IsDrawn = isDrawn;
+        }
     }
 }

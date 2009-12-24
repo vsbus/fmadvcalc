@@ -16,7 +16,7 @@ namespace fmControls
 {
     public partial class fmChartsView : UserControl
     {
-        private List<fmFilterMachiningBlock> fmGlobalBlocks;
+        private List<fmAdditionalFilterMachiningBlock> fmGlobalBlocks;
         private List<fmAdditionalFilterMachiningBlock> fmLocalBlocks = new List<fmAdditionalFilterMachiningBlock>();
         public fmFilterMachiningBlock currentSimFMB;
         private bool isUseLocalParams = true;
@@ -100,11 +100,13 @@ namespace fmControls
         {
             List<fmBlockParameter> blockParameterList =
                 new fmFilterMachiningBlock(fmCalculationOptionView1).Parameters;
-            
+             
             foreach (fmBlockParameter p in blockParameterList)
             {
                 additionalParametersTable.AddColumn<DataGridViewNumericalTextBoxColumn>(p.name).Width = 50;
-                selectedSimulationParametersTable.AddColumn<DataGridViewNumericalTextBoxColumn>(p.name).Width = 50;
+                DataGridViewColumn col = selectedSimulationParametersTable.AddColumn<DataGridViewNumericalTextBoxColumn>(p.name);
+                col.Width = 50;
+                col.ReadOnly = true;
             }
             
             UpdateUnits();
@@ -334,7 +336,7 @@ namespace fmControls
 
         private void DrawCurvesAndColumnsForAxis(int xAxisParameterIndex, int yAxisParameterIndex, int y2AxisParameterIndex, SymbolType symbol)
         {
-            foreach (fmFilterMachiningBlock globalFMB in fmGlobalBlocks)
+            foreach (fmAdditionalFilterMachiningBlock globalFMB in fmGlobalBlocks)
             {
                 fmAdditionalFilterMachiningBlock tmp = new fmAdditionalFilterMachiningBlock(true, fmCalculationOptionView1);
                 tmp.CalculationOption = fmLocalBlocks[0].CalculationOption;
@@ -364,6 +366,7 @@ namespace fmControls
                 }
                 else
                 {
+                    tmp.IsDrawn = globalFMB.IsDrawn;
                     DrawCurveAndColumn(xAxisParameterIndex, tmp, yAxisParameterIndex, y2AxisParameterIndex, symbol);
                     symbol++;
                 }
@@ -403,27 +406,7 @@ namespace fmControls
             }
             AddColumn(aVy, machiningBlock.Parameters[yAxisParameterIndex], machiningBlock.IsDrawn);
         }
-
-        //double SearchNearestStep(int left, int right, double obj, double target)
-        //{
-        //     int m = (right - left)/2;
-        //    if (left+m+1 >= niceSteps.Length )return niceSteps[left+m]*obj;
-        //    if (target/obj<niceSteps[0] )return niceSteps[0]*obj;
-        //    if (target/obj>niceSteps[left+m+1]) return SearchNearestStep(left+m + 1, right, obj, target);
-        //    if (target/obj<niceSteps[left+m]) return SearchNearestStep(left, left+m, obj, target);
-            
-        //    double f = (niceSteps[left+m]+ niceSteps[left+m + 1])/2;
-        //    if(niceSteps[left+m+1]*obj>=target && f*obj<=target )
-        //    {
-        //        return niceSteps[left+m+1]*obj;
-        //    }
-        //    if(f*obj>target && niceSteps[left+m]*obj<=target )
-        //    {
-        //        return niceSteps[left+m]*obj;
-        //    }
-        //    return niceSteps[left+m]*obj;
-        //}
-
+        
         private void FindDxForKIntermediatePoints(double a, double b, int K, out double dx, out double x1)
         {
             double[] X = {1, 1.25, 2, 2.5, 5};
@@ -568,7 +551,14 @@ namespace fmControls
 
         public void BuildCurves(List<fmFilterMachiningBlock> fmBlocks)
         {
-            fmGlobalBlocks = fmBlocks;
+            fmGlobalBlocks = new List<fmAdditionalFilterMachiningBlock>();
+            fmGlobalBlocks.Clear();
+            foreach(fmFilterMachiningBlock f in fmBlocks)
+            {
+                fmAdditionalFilterMachiningBlock t = new fmAdditionalFilterMachiningBlock(true, null);
+                t.Copy(true,f);
+                fmGlobalBlocks.Add(t);
+            }
             DrawChartAndTable(); 
             BindSelectedSimulationParametersTableDataSource();
         }
@@ -616,13 +606,19 @@ namespace fmControls
         private void BindSelectedSimulationParametersTableDataSource()
         {
             selectedSimulationParametersTable.Rows.Clear();
+            
             foreach (fmFilterMachiningBlock mb in fmGlobalBlocks)
             {
                 selectedSimulationParametersTable.Rows.Add();
+                DataGridViewRow row =
+                    selectedSimulationParametersTable.Rows[selectedSimulationParametersTable.Rows.Count - 1];
+                row.Cells["SelectedSimulationParametersCheckBoxColumn"].Value = true;
+               
                 foreach(fmBlockParameter param in mb.Parameters)
                 {
                     int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
-                    selectedSimulationParametersTable.Rows[selectedSimulationParametersTable.Rows.Count - 1].Cells[idx].Value = param.value/param.unitFamily.CurrentUnit.Coef;
+                    row.Cells[idx].Value = param.value/param.unitFamily.CurrentUnit.Coef;
+                    
                 }
             }
         }
@@ -643,6 +639,16 @@ namespace fmControls
                 RowsQuantity = (int) fmValue.StringToValue(rowsQuantity.Text).Value;
                 rowsQuantity.Text = RowsQuantity.ToString();
                 rowsQuantity.Focus();
+                DrawChartAndTable();
+            }
+        }
+  
+        private void selectedSimulationParametersTable_CellValueChanged (object sender, DataGridViewCellEventArgs e)
+        {
+            if (selectedSimulationParametersTable.Columns[e.ColumnIndex].Name == "SelectedSimulationParametersCheckBoxColumn"
+                && fmLocalBlocks.Count > e.RowIndex)
+            {
+                fmGlobalBlocks[e.RowIndex].IsDrawn = (bool) selectedSimulationParametersTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 DrawChartAndTable();
             }
         }
