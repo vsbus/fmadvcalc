@@ -1,0 +1,83 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A9AFDCE0-9E84-4AF7-86A9-71A9D528721F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>fmCalcBlocksLibrary</RootNamespace>
+    <AssemblyName>fmCalcBlocksLibrary</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BlockParameter\Event.cs" />
+    <Compile Include="Blocks\fmBaseBlock.cs" />
+    <Compile Include="Controls\fmCalculationOptionView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\fmCalculationOptionView.Designer.cs">
+      <DependentUpon>fmCalculationOptionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Blocks\fmEpsKappaWithneBlock.cs" />
+    <Compile Include="Blocks\fmEpsKappaBlock.cs" />
+    <Compile Include="Blocks\fmFilterMachiningBlock.cs" />
+    <Compile Include="BlockParameter\fmBlockParameter.cs" />
+    <Compile Include="BlockParameter\fmBlockParameterEventHandler.cs" />
+    <Compile Include="BlockParameter\fmBlockParameterEvetArgs.cs" />
+    <Compile Include="Blocks\fmPcrcaBlock.cs" />
+    <Compile Include="Blocks\fmPcrcaWithncBlock.cs" />
+    <Compile Include="Blocks\fmRmhceBlock.cs" />
+    <Compile Include="Blocks\fmSuspensionBlock.cs" />
+    <Compile Include="Blocks\fmSuspensionWithEtafBlock.cs" />
+    <Compile Include="fmGlobalParameter.cs" />
+    <Compile Include="fmRange.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\fmCalculationLibrary\fmCalculationLibrary.csproj">
+      <Project>{D4A4B18A-B19E-46A7-8028-EF259E24849B}</Project>
+      <Name>fmCalculationLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\fmCalculatorsLibrary\fmCalculatorsLibrary.csproj">
+      <Project>{440BE5B3-2621-475D-96E9-51EB0D91CAAC}</Project>
+      <Name>fmCalculatorsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\fmDataGrid\fmDataGrid.csproj">
+      <Project>{30A5CD2D-C64C-402B-A957-3885E498A97C}</Project>
+      <Name>fmDataGrid</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

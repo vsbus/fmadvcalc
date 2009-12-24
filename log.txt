@@ -1,0 +1,40 @@
+2009-11-26	Added window with min-max ranges
+
+2009-11-24	Added Charts
+
+2009-11-23	Added collection of all using parameters. Added possibility to iterate and check existance of parameters in collections
+2009-11-16	CalculationOptionTreeView added
+
+2009-10-21	Added some calculation options
+2009-10-21	Fixed problem with sorting. Now umbers compared correctly
+2009-10-21	Fixed problem with rounding. Added possibility to change amount of displayed digits
+
+2009-10-13	Rounding of numbers: 3 digits after coma
+2009-10-13	Now Full info is disables as default
+2009-10-13	Added calculation option Standart 4
+
+2009-10-09	When you create new serie, it contains simulation with almost all data copy from previous selected simulation. Only Name of simulation will have new value: serieName + "-1"
+2009-10-09	Now we have options {sim, serie, suspension} to enter material parameters for a whole group
+2009-10-06	Now calculation option is separate for each simulatiom
+
+2009-09-25	Tabbing problem fixed
+2009-09-25	Developed calculations of standart option
+
+2009-09-22	Highlighting of a rows. Rows in a table highlighs now by coloring in more dark color
+
+2009-09-22	Area removed from simSeries
+2009-09-22	When [duplicate] program add "_d" to the name os serie/simulation
+2009-09-22	Tabulating in eta, rho, C table seems to be fixed (need good testing, or to discuss it via phone)
+
+2009-09-19	Added duplicating of serie(with simulations) and simulation
+2009-09-19	Added possibility to resize the whole window. Now you can use program with any resolution.
+2009-09-19	Simulation parameters panel and suspension parameters panel merged to one panel.
+
+
+TABulating between tables
+Selecting of a first elements at startup
+Highlighting of a row
+byChecking conception for Machine Type table
+Add units
+Assign some default values for the Series and Simulation names (need to discuss what exactly)
+some problems with selections (selectin of the first element in the table doesn't work correctly)

@@ -1,0 +1,94 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DA84AD71-10A9-4B07-88EB-AADC0E158327}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdvancedCalculator</RootNamespace>
+    <AssemblyName>AdvancedCalculator</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdvancedCalculator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdvancedCalculator.Designer.cs">
+      <DependentUpon>AdvancedCalculator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DigitsOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DigitsOptions.Designer.cs">
+      <DependentUpon>DigitsOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AdvancedCalculator.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>AdvancedCalculator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DigitsOptions.resx">
+      <DependentUpon>DigitsOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitsOptions.resx">
+      <DependentUpon>UnitsOptions.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="UnitsOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UnitsOptions.Designer.cs">
+      <DependentUpon>UnitsOptions.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FilterSimulation\FilterSimulation.csproj">
+      <Project>{D06514FC-2EC2-4D62-9583-9A4D8E8298E3}</Project>
+      <Name>FilterSimulation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\fmCalculationLibrary\fmCalculationLibrary.csproj">
+      <Project>{D4A4B18A-B19E-46A7-8028-EF259E24849B}</Project>
+      <Name>fmCalculationLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\fmDataGrid\fmDataGrid.csproj">
+      <Project>{30A5CD2D-C64C-402B-A957-3885E498A97C}</Project>
+      <Name>fmDataGrid</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
