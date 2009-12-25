@@ -10,7 +10,7 @@ namespace fmControls
     public class fmAdditionalFilterMachiningBlock: fmFilterMachiningBlock
     {
         public bool IsDrawn = true;
-
+        
         public fmAdditionalFilterMachiningBlock(bool isDrawn, fmCalculationOptionView calculationOptionView,
             DataGridViewCell A_Cell,
             DataGridViewCell Dp_Cell,
@@ -43,11 +43,11 @@ namespace fmControls
         {
             IsDrawn = isDrawn;
         }
+    }
 
-        public void Copy(bool isDrawn, fmFilterMachiningBlock op2)
-        {
-            this.CopyValues(op2);
-            IsDrawn = isDrawn;
-        }
+    public class fmSelectedFilterMachiningBlock
+    {
+        public bool IsChecked = true;
+        public fmFilterMachiningBlock filterMachiningBlock;
     }
 }

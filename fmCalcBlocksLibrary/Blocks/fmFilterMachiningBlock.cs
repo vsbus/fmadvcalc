@@ -514,7 +514,7 @@ namespace fmCalcBlocksLibrary.Blocks
                                            null, null, null, null, null, null, null)
         {
         }
-
+        
         public fmFilterMachiningBlock(
             fmCalculationOptionView calculationOptionView,
             DataGridViewCell A_Cell,
