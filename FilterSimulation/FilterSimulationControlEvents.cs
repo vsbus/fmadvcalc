@@ -268,8 +268,8 @@ namespace FilterSimulation
         {
             bool isVisible = fullSimulationInfoCheckBox.Checked;
             simulationDataGrid.Columns["simulationProjectColumn"].Visible = isVisible;
-            simulationDataGrid.Columns["simulationMaterialColumn"].Visible = isVisible;
-            simulationDataGrid.Columns["simulationCustomerColumn"].Visible = isVisible;
+            //simulationDataGrid.Columns["simulationMaterialColumn"].Visible = isVisible;
+            //simulationDataGrid.Columns["simulationCustomerColumn"].Visible = isVisible;
             simulationDataGrid.Columns["simulationSuspensionNameColumn"].Visible = isVisible;
             simulationDataGrid.Columns["simulationFilterMediumColumn"].Visible = isVisible;
             simulationDataGrid.Columns["simulationMachineTypeColumn"].Visible = isVisible;

@@ -206,9 +206,9 @@ namespace FilterSimulation
                 row.Cells["simSeriesCheckedColumn"].Value = serie.Checked;
                 row.Cells["simSeriesNameColumn"].Value = serie.Name;
                 row.Cells["simSeriesProjectColumn"].Value = serie.Parent.Parent.Name;
-                row.Cells["simSeriesMaterialNameColumn"].Value = serie.Parent.Material;
-                row.Cells["simSeriesCustomerNameColumn"].Value = serie.Parent.Customer;
-                row.Cells["simSeriesSuspensionNameColumn"].Value = serie.Parent.Name;
+                //row.Cells["simSeriesMaterialNameColumn"].Value = serie.Parent.Material;
+                //row.Cells["simSeriesCustomerNameColumn"].Value = serie.Parent.Customer;
+                row.Cells["simSeriesSuspensionNameColumn"].Value = serie.Parent.Material + " - " + serie.Parent.Customer + " - " + serie.Parent.Name;
                 row.Cells["simSeriesFilterMediumColumn"].Value = serie.FilterMedium;
                 row.Cells["simSeriesMachineTypeNameColumn"].Value = serie.MachineType.Name;
                 row.Cells["simSeriesMachineNameColumn"].Value = serie.MachineName;
@@ -223,14 +223,16 @@ namespace FilterSimulation
 
                 row.Cells["simulationCheckedColumn"].Value = sim.Checked;
                 row.Cells["simulationProjectColumn"].Value = sim.Parent.Parent.Parent.Name;
-                row.Cells["simulationMaterialColumn"].Value = sim.Parent.Parent.Material;
-                row.Cells["simulationCustomerColumn"].Value = sim.Parent.Parent.Customer;
-                row.Cells["simulationSuspensionNameColumn"].Value = sim.Parent.Parent.Name;
+                //row.Cells["simulationMaterialColumn"].Value = sim.Parent.Parent.Material;
+                //row.Cells["simulationCustomerColumn"].Value = sim.Parent.Parent.Customer;
+                row.Cells["simulationSuspensionNameColumn"].Value = sim.Parent.Parent.Material + " - " + sim.Parent.Parent.Customer + " - " + sim.Parent.Parent.Name;
                 row.Cells["simulationFilterMediumColumn"].Value = sim.Parent.FilterMedium;
                 row.Cells["simulationMachineTypeColumn"].Value = sim.Parent.MachineType.Name;
                 row.Cells["simulationMachineNameColumn"].Value = sim.Parent.MachineName;
                 row.Cells["simulationSimSeriesNameColumn"].Value = sim.Parent.Name;
                 row.Cells["simulationNameColumn"].Value = sim.Name;
+
+                sim.filterMachiningBlock.CalculateAndDisplay();
             }
         }
 
@@ -315,6 +317,7 @@ namespace FilterSimulation
                         row.Cells["simulation_nColumn"],
                         row.Cells["simulation_tcColumn"],
                         row.Cells["simulation_tfColumn"],
+                        row.Cells["simulation_trColumn"],
                         row.Cells["simulation_hcColumn"],
                         row.Cells["simulation_MfColumn"],
                         row.Cells["simulation_MsusColumn"],
@@ -490,9 +493,9 @@ namespace FilterSimulation
                     Guid guid = (Guid)row.Cells["suspensionGuidColumn"].Value;
                     fmFilterSimSuspension sus = sol.FindSuspension(guid);
 
-                    Color rowColor = CreateColorFromString(sus.Parent.Guid.ToString());
+                    //Color rowColor = CreateColorFromString(sus.Parent.Guid.ToString());
                     SetRowFontStyle(row, sus.Modified ? FontStyle.Bold : FontStyle.Regular);
-                    SetRowBackColor(row, rowColor);
+                    //SetRowBackColor(row, rowColor);
                 }
 
             string prevVal = "";

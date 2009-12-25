@@ -35,6 +35,7 @@ namespace fmCalcBlocksLibrary
         public static fmGlobalParameter n;
         public static fmGlobalParameter tc;
         public static fmGlobalParameter tf;
+        public static fmGlobalParameter tr;
         public static fmGlobalParameter hc;
         public static fmGlobalParameter Qsus;
         public static fmGlobalParameter Qmsus;
@@ -75,6 +76,7 @@ namespace fmCalcBlocksLibrary
             AddParameter(ref n, new fmGlobalParameter("n", fmUnitFamily.FrequencyFamily, new fmRange(0, 1)));
             AddParameter(ref tc, new fmGlobalParameter("tc", fmUnitFamily.TimeFamily, new fmRange(0, 1000)));
             AddParameter(ref tf, new fmGlobalParameter("tf", fmUnitFamily.TimeFamily, new fmRange(0, 1000)));
+            AddParameter(ref tr, new fmGlobalParameter("tr", fmUnitFamily.TimeFamily, new fmRange(0, 1000)));
             AddParameter(ref hc, new fmGlobalParameter("hc", fmUnitFamily.LengthFamily, new fmRange(0, 1)));
             AddParameter(ref Mf, new fmGlobalParameter("Mf", fmUnitFamily.MassFamily, new fmRange(0, 10)));
             AddParameter(ref Msus, new fmGlobalParameter("Msus", fmUnitFamily.MassFamily, new fmRange(0, 10)));

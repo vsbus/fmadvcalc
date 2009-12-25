@@ -124,6 +124,7 @@ namespace fmControls
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.n.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tc.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tr.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.hc.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Mf.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Msus.name)],
@@ -533,10 +534,7 @@ namespace fmControls
         }
         private int GetFilterMachiningBlockParameterIndexByName(string parameterName)
         {
-            fmFilterMachiningBlock tmp = new fmFilterMachiningBlock(fmCalculationOptionView1, null, null, null,
-                                                                            null, null, null, null, null, null, null,
-                                                                            null, null, null, null, null, null, null,
-                                                                            null, null);
+            fmFilterMachiningBlock tmp = new fmFilterMachiningBlock(fmCalculationOptionView1);
             for (int index = 0; index < tmp.Parameters.Count; ++index)
             {
                 fmBlockParameter p = tmp.Parameters[index];

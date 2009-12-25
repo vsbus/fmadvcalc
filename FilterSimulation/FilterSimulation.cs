@@ -62,7 +62,10 @@ namespace FilterSimulation
 
             foreach (DataGridViewColumn col in simulationDataGrid.Columns)
             {
-                col.Width = 50;
+                if (col != simulationDataGrid.Columns["simulationSuspensionNameColumn"])
+                {
+                    col.Width = 50;
+                }
             }
 
             fmFilterSimProject fProj = new fmFilterSimProject(fSolution, "Prj1");

@@ -138,6 +138,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private fmBlockParameter n;
         private fmBlockParameter tc;
         private fmBlockParameter tf;
+        private fmBlockParameter tr;
         private fmBlockParameter hc;
         private fmBlockParameter Mf;
         private fmBlockParameter Msus;
@@ -199,6 +200,11 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             get { return tf.value; }
             set { tf.value = value; }
+        }
+        public fmValue tr_Value
+        {
+            get { return tr.value; }
+            set { tr.value = value; }
         }
         public fmValue hc_Value
         {
@@ -441,6 +447,7 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      ref n.value,
                                                                      ref tc.value,
                                                                      ref tf.value,
+                                                                     ref tr.value,
                                                                      ref hc.value,
                                                                      ref Qsus.value,
                                                                      ref Qmsus.value,
@@ -503,7 +510,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public fmFilterMachiningBlock(
             fmCalculationOptionView calculationOptionView)
-            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null,
+            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null,
                                            null, null, null, null, null, null, null)
         {
         }
@@ -516,6 +523,7 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell n_Cell,
             DataGridViewCell tc_Cell,
             DataGridViewCell tf_Cell,
+            DataGridViewCell tr_Cell,
             DataGridViewCell hc_Cell,
             DataGridViewCell Mf_Cell,
             DataGridViewCell Msus_Cell,
@@ -538,6 +546,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref n, fmGlobalParameter.n, n_Cell, true);
             AddParameter(ref tc, fmGlobalParameter.tc, tc_Cell, false);
             AddParameter(ref tf, fmGlobalParameter.tf, tf_Cell, false);
+            AddParameter(ref tr, fmGlobalParameter.tr, tr_Cell, false);
             AddParameter(ref hc, fmGlobalParameter.hc, hc_Cell, false);
             AddParameter(ref Mf, fmGlobalParameter.Mf, Mf_Cell, false);
             AddParameter(ref Msus, fmGlobalParameter.Msus, Msus_Cell, false);
@@ -561,9 +570,7 @@ namespace fmCalcBlocksLibrary.Blocks
             if (processOnChange && calculationOptionView != null)
             {
                 CalculationOption calcOption = calculationOptionView.GetSelectedOption();
-                //CalculationOption = calculationOptionView.GetSelectedOption();
                 List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetInputedParametersList(calcOption);
-                //List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetInputedParametersList(CalculationOption);
                 foreach (fmBlockParameter parameter in parameters)
                 {
                     bool found = inputedParameters.Contains(parameter.globalParameter);
@@ -625,228 +632,6 @@ namespace fmCalcBlocksLibrary.Blocks
             CopyParameters(filterMachiningBlock);
             CopyConstants(filterMachiningBlock);
         }
-
-
-        //private void RadioButtonCheckChanged(object sender, EventArgs e)
-        //{
-        //    if (processOnChange)
-        //    {
-        //        bool standartN = rBtn_A_Dp_sf_ntc.Checked
-        //            || rBtn_A_Dp_sf_tf.Checked
-        //            || rBtn_A_Dp_ntc_tf.Checked
-        //            || rBtn_A_hc_sf_ntc.Checked
-        //            || rBtn_A_Dp_hc_sf.Checked
-        //            || rBtn_A_Dp_hc_ntc.Checked;
-        //        bool designN = rBtn_Q_Dp_hc_ntc.Checked;
-        //        bool optimizationN = rBtn_A_Q_Dp_sf.Checked;
-
-        //        if (standartN)
-        //        {
-        //            if (rBtn_A_Dp_sf_ntc.Checked)
-        //            {
-        //                calculationOption = CalculationOption.Standart1;
-
-        //                Dp.isInputed = true;
-        //                sf.isInputed = true;
-        //                n.isInputed = true;
-        //                tc.isInputed = false;
-        //                tf.isInputed = false;
-        //                hc.isInputed = false;
-
-        //                Dp.cell.ReadOnly = false;
-        //                sf.cell.ReadOnly = false;
-        //                n.cell.ReadOnly = false;
-        //                tc.cell.ReadOnly = false;
-        //                tf.cell.ReadOnly = true;
-        //                hc.cell.ReadOnly = true;
-        //            }
-        //            else if (rBtn_A_Dp_sf_tf.Checked)
-        //            {
-        //                calculationOption = CalculationOption.Standart2;
-
-        //                Dp.isInputed = true;
-        //                sf.isInputed = true;
-        //                n.isInputed = false;
-        //                tc.isInputed = false;
-        //                tf.isInputed = true;
-        //                hc.isInputed = false;
-
-        //                Dp.cell.ReadOnly = false;
-        //                sf.cell.ReadOnly = false;
-        //                n.cell.ReadOnly = true;
-        //                tc.cell.ReadOnly = true;
-        //                tf.cell.ReadOnly = false;
-        //                hc.cell.ReadOnly = true;
-        //            }
-        //            else if (rBtn_A_Dp_ntc_tf.Checked)
-        //            {
-        //                calculationOption = CalculationOption.Standart3;
-
-        //                Dp.isInputed = true;
-        //                sf.isInputed = false;
-        //                n.isInputed = true;
-        //                tc.isInputed = false;
-        //                tf.isInputed = true;
-        //                hc.isInputed = false;
-
-        //                Dp.cell.ReadOnly = false;
-        //                sf.cell.ReadOnly = true;
-        //                n.cell.ReadOnly = false;
-        //                tc.cell.ReadOnly = false;
-        //                tf.cell.ReadOnly = false;
-        //                hc.cell.ReadOnly = true;
-        //            }
-        //            else if (rBtn_A_hc_sf_ntc.Checked)
-        //            {
-        //                calculationOption = CalculationOption.Standart4;
-
-        //                Dp.isInputed = false;
-        //                sf.isInputed = true;
-        //                n.isInputed = true;
-        //                tc.isInputed = false;
-        //                tf.isInputed = false;
-        //                hc.isInputed = true;
-
-        //                Dp.cell.ReadOnly = true;
-        //                sf.cell.ReadOnly = false;
-        //                n.cell.ReadOnly = false;
-        //                tc.cell.ReadOnly = false;
-        //                tf.cell.ReadOnly = true;
-        //                hc.cell.ReadOnly = false;
-        //            }
-        //            else if (rBtn_A_Dp_hc_sf.Checked)
-        //            {
-        //                calculationOption = CalculationOption.Standart7;
-
-        //                Dp.isInputed = true;
-        //                sf.isInputed = true;
-        //                n.isInputed = false;
-        //                tc.isInputed = false;
-        //                tf.isInputed = false;
-        //                hc.isInputed = true;
-
-        //                Dp.cell.ReadOnly = false;
-        //                sf.cell.ReadOnly = false;
-        //                n.cell.ReadOnly = true;
-        //                tc.cell.ReadOnly = true;
-        //                tf.cell.ReadOnly = true;
-        //                hc.cell.ReadOnly = false;
-        //            }
-        //            else if (rBtn_A_Dp_hc_ntc.Checked)
-        //            {
-        //                calculationOption = CalculationOption.Standart8;
-
-        //                Dp.isInputed = true;
-        //                sf.isInputed = false;
-        //                n.isInputed = true;
-        //                tc.isInputed = false;
-        //                tf.isInputed = false;
-        //                hc.isInputed = true;
-
-        //                Dp.cell.ReadOnly = false;
-        //                sf.cell.ReadOnly = true;
-        //                n.cell.ReadOnly = false;
-        //                tc.cell.ReadOnly = false;
-        //                tf.cell.ReadOnly = true;
-        //                hc.cell.ReadOnly = false;
-        //            }
-
-        //            A.isInputed = true;
-        //            Mf.isInputed = false;
-        //            Msus.isInputed = false;
-        //            Vsus.isInputed = false;
-        //            Ms.isInputed = false;
-        //            Qsus.isInputed = false;
-        //            Qmsus.isInputed = false;
-        //            Qms.isInputed = false;
-
-        //            A.cell.ReadOnly = false;
-        //            Mf.cell.ReadOnly = true;
-        //            Msus.cell.ReadOnly = true;
-        //            Vsus.cell.ReadOnly = true;
-        //            Ms.cell.ReadOnly = true;
-        //            Qsus.cell.ReadOnly = true;
-        //            Qmsus.cell.ReadOnly = true;
-        //            Qms.cell.ReadOnly = true;
-        //        }
-        //        else if (designN)
-        //        {
-        //            if (rBtn_Q_Dp_hc_ntc.Checked)
-        //            {
-        //                calculationOption = CalculationOption.Design1;
-
-        //                A.isInputed = false;
-        //                Mf.isInputed = false;
-        //                Msus.isInputed = false;
-        //                Vsus.isInputed = false;
-        //                Ms.isInputed = false;
-        //                Qsus.isInputed = false;
-        //                Qmsus.isInputed = false;
-        //                Qms.isInputed = true;
-        //                Dp.isInputed = true;
-        //                sf.isInputed = false;
-        //                n.isInputed = true;
-        //                tc.isInputed = false;
-        //                tf.isInputed = false;
-        //                hc.isInputed = true;
-
-        //                Dp.cell.ReadOnly = false;
-        //                sf.cell.ReadOnly = true;
-        //                n.cell.ReadOnly = false;
-        //                tc.cell.ReadOnly = false;
-        //                tf.cell.ReadOnly = true;
-        //                hc.cell.ReadOnly = false;
-        //                A.cell.ReadOnly = true;
-        //                Mf.cell.ReadOnly = true;
-        //                Msus.cell.ReadOnly = true;
-        //                Vsus.cell.ReadOnly = true;
-        //                Ms.cell.ReadOnly = true;
-        //                Qsus.cell.ReadOnly = false;
-        //                Qmsus.cell.ReadOnly = false;
-        //                Qms.cell.ReadOnly = false;
-        //            }
-        //        }
-        //        else if (optimizationN)
-        //        {
-        //            if (rBtn_A_Q_Dp_sf.Checked)
-        //            {
-        //                calculationOption = CalculationOption.Optimization1;
-
-        //                A.isInputed = true;
-        //                Mf.isInputed = false;
-        //                Msus.isInputed = false;
-        //                Vsus.isInputed = false;
-        //                Ms.isInputed = false;
-        //                Qsus.isInputed = false;
-        //                Qmsus.isInputed = false;
-        //                Qms.isInputed = true;
-        //                Dp.isInputed = true;
-        //                sf.isInputed = true;
-        //                n.isInputed = false;
-        //                tc.isInputed = false;
-        //                tf.isInputed = false;
-        //                hc.isInputed = false;
-
-        //                Dp.cell.ReadOnly = false;
-        //                sf.cell.ReadOnly = false;
-        //                n.cell.ReadOnly = true;
-        //                tc.cell.ReadOnly = true;
-        //                tf.cell.ReadOnly = true;
-        //                hc.cell.ReadOnly = true;
-        //                A.cell.ReadOnly = false;
-        //                Mf.cell.ReadOnly = true;
-        //                Msus.cell.ReadOnly = true;
-        //                Vsus.cell.ReadOnly = true;
-        //                Ms.cell.ReadOnly = true;
-        //                Qsus.cell.ReadOnly = false;
-        //                Qmsus.cell.ReadOnly = false;
-        //                Qms.cell.ReadOnly = false;
-        //            }
-        //        }
-
-        //        ReWriteParameters();
-        //    }
-        //}
     }
 }
 

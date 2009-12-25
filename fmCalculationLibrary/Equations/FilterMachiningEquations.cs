@@ -143,5 +143,10 @@ namespace fmCalculationLibrary.Equations
         {
             return 2 * Pc * kappa * Dp * sf * A * rho_s * (1 - eps) / (eta_f * Qms) - 2 * hce;
         }
+
+        public static fmValue Eval_tr_From_tc_tf(fmValue tc, fmValue tf)
+        {
+            return tc - tf;
+        }
     }
 }
