@@ -799,6 +799,7 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid.Columns["simulation_nColumn"].HeaderCell, fmUnitFamily.FrequencyFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns["simulation_tcColumn"].HeaderCell, fmUnitFamily.TimeFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns["simulation_tfColumn"].HeaderCell, fmUnitFamily.TimeFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns["simulation_trColumn"].HeaderCell, fmUnitFamily.TimeFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns["simulation_hcColumn"].HeaderCell, fmUnitFamily.LengthFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns["simulation_MfColumn"].HeaderCell, fmUnitFamily.MassFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns["simulation_MsusColumn"].HeaderCell, fmUnitFamily.MassFamily);
