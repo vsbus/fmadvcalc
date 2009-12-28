@@ -117,6 +117,7 @@ namespace FilterSimulation
                 if (e.ColumnIndex != -1
                     && e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["simulationGuidColumn"].Index
                     && e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["simulationCheckedColumn"].Index)
+
                 {
                     SetRowFontStyle(row, FontStyle.Bold);
 
@@ -133,6 +134,7 @@ namespace FilterSimulation
                     {
                         sim = fSolution.FindSimulation((Guid)guidCellValue);
                         sim.Checked = (bool)row.Cells["simulationCheckedColumn"].Value;
+                        (sender as fmDataGrid.fmDataGrid).EndEdit();
                     }
                 }
 

@@ -1456,10 +1456,11 @@ namespace FilterSimulation
             // 
             // simulationCheckedColumn
             // 
-            this.simulationCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.simulationCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.simulationCheckedColumn.HeaderText = "";
+            this.simulationCheckedColumn.MinimumWidth = 20;
             this.simulationCheckedColumn.Name = "simulationCheckedColumn";
-            this.simulationCheckedColumn.Width = 5;
+            this.simulationCheckedColumn.Width = 20;
             // 
             // simulationProjectColumn
             // 

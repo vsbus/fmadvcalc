@@ -1,16 +1,19 @@
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using FilterSimulation.fmFilterObjects;
 using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
+using Rectangle=System.Drawing.Rectangle;
 
 namespace FilterSimulation
 {
     public partial class FilterSimulation : UserControl
     {
         private fmFilterSimSolution fSolution = new fmFilterSimSolution();
-        
+        private CheckBox ckBox;
+
         public FilterSimulation()
         {
             InitializeComponent();
@@ -40,6 +43,38 @@ namespace FilterSimulation
             toolTip.SetToolTip(simulationRestoreButton, "Restore simulation");
             toolTip.SetToolTip(simulationDeleteButton, "Delete simulation");
         }
+        private void InitializeHeaderCheckBox()
+        {
+            DataGridViewCheckBoxColumn c1 = simulationDataGrid.Columns["simulationCheckedColumn"] as DataGridViewCheckBoxColumn;           
+            ckBox = new CheckBox();
+            Rectangle rect = simulationDataGrid.GetCellDisplayRectangle(c1.Index, -1, true);
+            
+            ckBox.Checked = true;
+            ckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            ckBox.Name = "ckBox";
+            ckBox.Text = "";
+            ckBox.UseVisualStyleBackColor = true;
+            
+           ckBox.Size = new Size(15, 15);
+          
+            ckBox.Location = new Point(rect.Location.X +3, rect.Location.Y + rect.Height/2 );
+            ckBox.CheckedChanged += new EventHandler(ckBox_CheckedChanged);
+            simulationDataGrid.Controls.Add(ckBox);
+        }
+        void ckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            for (int j = 0; j < simulationDataGrid.RowCount; j++)
+            {
+                if(simulationDataGrid.Rows[j].Visible)
+                {
+                    simulationDataGrid["simulationCheckedColumn", j].Value = ckBox.Checked;
+                    simulationDataGrid["simulationCheckedColumn", j].Value =
+                        simulationDataGrid["simulationCheckedColumn", j].FormattedValue;
+                }
+            }
+            simulationDataGrid.EndEdit();
+        }
+      
 
         private void FilterSimulation_Load(object sender, EventArgs e)
         {
@@ -101,6 +136,8 @@ namespace FilterSimulation
             projectDataGrid.CurrentCell = projectDataGrid.Rows[0].Cells["projectNameColumn"];
 
             UpdateCurrentObjectAndDisplaySolution(projectDataGrid);
+
+            InitializeHeaderCheckBox();
         }
 
         #region Machine Table
