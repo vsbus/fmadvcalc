@@ -160,6 +160,7 @@ namespace fmControls
             this.selectedSimulationParametersTable.TabIndex = 10;
             this.selectedSimulationParametersTable.Visible = false;
             this.selectedSimulationParametersTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellValueChanged);
+            this.selectedSimulationParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
             // 
             // SelectedSimulationParametersCheckBoxColumn
             // 
@@ -188,6 +189,7 @@ namespace fmControls
             this.additionalParametersTable.TabIndex = 5;
             this.additionalParametersTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellValueChanged);
             this.additionalParametersTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellContentClick);
+            this.additionalParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
             // 
             // DeleteButtonColumn
             // 
