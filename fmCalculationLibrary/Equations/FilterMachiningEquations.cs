@@ -148,5 +148,40 @@ namespace fmCalculationLibrary.Equations
         {
             return tc - tf;
         }
+
+        public static fmValue Eval_tf_From_tc_tr(fmValue tc, fmValue tr)
+        {
+            return tc - tr;
+        }
+
+        public static fmValue Eval_tc_From_tr_tf(fmValue tr, fmValue tf)
+        {
+            return tf + tr;
+        }
+
+        public static fmValue Eval_tf_From_Pc_kappa_Dp_A_rhos_eps_etaf_Qms_hce_tr(
+            fmValue Pc,
+            fmValue kappa,
+            fmValue Dp,
+            fmValue A,
+            fmValue rhos,
+            fmValue eps,
+            fmValue etaf,
+            fmValue Qms,
+            fmValue hce,
+            fmValue tr)
+        {
+            fmValue A1 = 2 * Pc * kappa * Dp * A * rhos * (1 - eps) / (etaf * Qms);
+            fmValue B1 = -2 * hce;
+            fmValue C1 = etaf / (2 * Pc * kappa * Dp);
+
+            fmValue b = (-C1 * A1 * A1 - C1 * A1 * B1 + 2 * tr);
+            fmValue c = tr * tr - C1 * A1 * tr * B1;
+            fmValue D = b * b - 4 * c;
+            fmValue x1 = (-b - fmValue.Sqrt(D)) / 2;
+            fmValue x2 = (-b + fmValue.Sqrt(D)) / 2;
+
+            return x1;
+        }
     }
 }

@@ -1,0 +1,40 @@
+how to change calculation option:
+
+
+- fmFilterMachiningBlock.cs
+
+1. in enum CalculationOption:
+		Change description of the option
+		
+2. in method
+		GetInputedParametersList(CalculationOption calculationOption)
+	change comment and insert required row.
+	
+3. in method
+		GetCalculatorCalculationOption()
+	insert constructionS if (...) {...}
+	
+	
+- fmFilterMachiningCalculators.cs
+	
+4. in enum CalculationOptions
+		add correspond optionS
+		
+5. add required lines into one of methods:
+		IsStandartKindOption
+		IsDesignKindOption
+		IsOptimizationKindOption
+		
+6. add required lines into one of methods:
+		IsStandartSubKind1DpOption
+		IsStandartSubKind2hcOption
+		IsStandartSubKind3DphcOption
+		
+7. add calculational code into one of methods:
+		DoSubCalculationsStandart123
+		DoSubCalculationsStandart456
+		DoSubCalculationsStandart78
+		DoCalculationsOptimization
+		DoCalculationsDesign
+		DoCalculationsStandart
+	

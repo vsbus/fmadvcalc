@@ -13,34 +13,34 @@ namespace fmCalcBlocksLibrary.Blocks
     {
         // Standart -- In this case we have always the area A as input 
         // and the (Qsus, Qmsus, Qms) as calculated.
-        [Description("1: A, Dp, sf, (n/tc)")]
+        [Description("1: A, Dp, (sf/tr), (n/tc)")]
         Standart1,
-        [Description("2: A, Dp, sf, tf")]
+        [Description("2: A, Dp, (sf/tr), tf")]
         Standart2,
-        [Description("3: A, Dp, (n/tc), tf")]
+        [Description("3: A, Dp, (n/tc/tr), tf")]
         Standart3,
-        [Description("4: A, hc, sf, (n/tc)")]
+        [Description("4: A, hc, (sf/tr), (n/tc)")]
         Standart4,
-        //Standart5,  // A, hc, sf, tf           -- input
-        //Standart6,  // A, hc, (n/tc), tf       -- input
-        [Description("7: A, Dp, hc, sf")]
+        //Standart5,  // A, hc, (sf/tr), tf           -- input
+        //Standart6,  // A, hc, (n/tc/tr), tf       -- input
+        [Description("7: A, Dp, hc, (sf/tr)")]
         Standart7,
-        [Description("8: A, Dp, hc, (n/tc)")]
+        [Description("8: A, Dp, hc, (n/tc/tr)")]
         Standart8,
         
         // Design -- In this case we have always the (Qsus, Qmsus, Qms) as input 
         // and the filter area A is calculated 
-        [Description("1: Q, Dp, hc, (n/tc)")]
+        [Description("1: Q, Dp, hc, (n/tc/tr)")]
         Design1,
-        //Design2,    // Q, Dp, hc, sf           -- input 
-        //Design3,    // Q, sf, (n/tc), hc       -- input 
+        //Design2,    // Q, Dp, hc, (sf/tr)           -- input 
+        //Design3,    // Q, sf, (n/tc/tr), hc       -- input 
 
         // Optimization -- In this case we have always the filter 
         // area A and the (Qsus, Qmsus, Qms) as input
-        [Description("1: A, Q, Dp, sf")]
+        [Description("1: A, Q, Dp, (sf/tr)")]
         Optimization1
-        //Optimization2,  // A, Q, hc, sf           -- input
-        //Optimization3   // A, Q, (n/tc), sf       -- input
+        //Optimization2,  // A, Q, hc, (sf/tr)           -- input
+        //Optimization3   // A, Q, (n/tc), (sf/tr)       -- input
     }
     
     static public class CalculationOptionHelper
@@ -50,59 +50,65 @@ namespace fmCalcBlocksLibrary.Blocks
             List<fmGlobalParameter> result = new List<fmGlobalParameter>();
             switch (calculationOption)
             {
-                //[Description("1: A, Dp, sf, (n/tc)")]
+                //[Description("1: A, Dp, (sf/tr), (n/tc)")]
                 case CalculationOption.Standart1:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.tr);
                     result.Add(fmGlobalParameter.n);
                     result.Add(fmGlobalParameter.tc);
                     break;
 
-                //[Description("2: A, Dp, sf, tf")]
+                //[Description("2: A, Dp, (sf/tr), tf")]
                 case CalculationOption.Standart2:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.tr);
                     result.Add(fmGlobalParameter.tf);
                     break;
 
-                //[Description("3: A, Dp, (n/tc), tf")]
+                //[Description("3: A, Dp, (n/tc/tr), tf")]
                 case CalculationOption.Standart3:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.n);
                     result.Add(fmGlobalParameter.tc);
+                    result.Add(fmGlobalParameter.tr);
                     result.Add(fmGlobalParameter.tf);
                     break;
         
-                //[Description("4: A, hc, sf, (n/tc)")]
+                //[Description("4: A, hc, (sf/tr), (n/tc)")]
                 case CalculationOption.Standart4:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.tr);
                     result.Add(fmGlobalParameter.n);
                     result.Add(fmGlobalParameter.tc);
                     break;
         
-                //[Description("7: A, Dp, hc, sf")]
+                //[Description("7: A, Dp, hc, (sf/tr)")]
                 case CalculationOption.Standart7:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.tr);
                     break;
         
-                //[Description("8: A, Dp, hc, (n/tc)")]
+                //[Description("8: A, Dp, hc, (n/tc/tr)")]
                 case CalculationOption.Standart8:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.n);
                     result.Add(fmGlobalParameter.tc);
+                    result.Add(fmGlobalParameter.tr);
                     break;
         
-                //[Description("1: Q, Dp, hc, (n/tc)")]
+                //[Description("1: Q, Dp, hc, (n/tc/tr)")]
                 case CalculationOption.Design1:
                     result.Add(fmGlobalParameter.Qms);
                     result.Add(fmGlobalParameter.Qmsus);
@@ -111,9 +117,10 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.n);
                     result.Add(fmGlobalParameter.tc);
+                    result.Add(fmGlobalParameter.tr);
                     break;
         
-                //[Description("1: A, Q, Dp, sf")]
+                //[Description("1: A, Q, Dp, (sf/tr)")]
                 case CalculationOption.Optimization1:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qms);
@@ -121,6 +128,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qsus);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.tr);
                     break;
             }
 
@@ -314,131 +322,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculations()
         {
-            fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions calcOption;
-
-            if (A.isInputed && !Qms.isInputed && !Qmsus.isInputed && !Qsus.isInputed)
-            {
-                if (A.isInputed && Dp.isInputed && !hc.isInputed)
-                {
-                    if (sf.isInputed && n.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_n_INPUT;
-                    }
-                    else if (sf.isInputed && tc.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT;
-                    }
-                    else if (sf.isInputed && tf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT;
-                    }
-                    else if (n.isInputed && tf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_n_tf_INPUT;
-                    }
-                    else if (tc.isInputed && tf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT;
-                    }
-                    else
-                    {
-                        throw new Exception("Not processed combination of inputs");
-                    }
-                }
-                else if (A.isInputed && !Dp.isInputed && hc.isInputed)
-                {
-                    if (sf.isInputed && n.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_n_INPUT;
-                    }
-                    else if (sf.isInputed && tc.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_tc_INPUT;
-                    }
-                    else
-                    {
-                        throw new Exception("Not processed combination of inputs");
-                    }
-                }
-                else if (A.isInputed && Dp.isInputed && hc.isInputed)
-                {
-                    if (sf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT;
-                    }
-                    else if (n.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_n_INPUT;
-                    }
-                    else if (tc.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT;
-                    }
-                    else
-                    {
-                        throw new Exception("Not processed combination of inputs");
-                    }
-                }
-                else
-                {
-                    throw new Exception("Not processed combination of inputs");
-                }
-            }
-            else if ((Qms.isInputed || Qmsus.isInputed || Qsus.isInputed)
-                     && !A.isInputed)
-            {
-                if (Qms.isInputed && Dp.isInputed && hc.isInputed && n.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
-                }
-                else if (Qms.isInputed && Dp.isInputed && hc.isInputed && tc.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
-                }
-                else if (Qmsus.isInputed && Dp.isInputed && hc.isInputed && n.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
-                }
-                else if (Qmsus.isInputed && Dp.isInputed && hc.isInputed && tc.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
-                }
-                else if (Qsus.isInputed && Dp.isInputed && hc.isInputed && n.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
-                }
-                else if (Qsus.isInputed && Dp.isInputed && hc.isInputed && tc.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
-                }
-                else
-                {
-                    throw new Exception("Not processed combination of inputs");
-                }
-            }
-            else if (A.isInputed && (Qms.isInputed || Qmsus.isInputed || Qsus.isInputed))
-            {
-                if (Qms.isInputed && Dp.isInputed && sf.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT;
-                }
-                else if (Qmsus.isInputed && Dp.isInputed && sf.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT;
-                }
-                else if (Qsus.isInputed && Dp.isInputed && sf.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT;
-                }
-                else
-                {
-                    throw new Exception("Not processed combination of inputs");
-                }
-            }
-            else
-            {
-                throw new Exception("Not processed calculation Option");
-            }
+            fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions calcOption = GetCalculatorCalculationOption();
 
             fmCalculatorsLibrary.fmFilterMachiningCalculator.Process(calcOption,
                                                                      ref A.value,
@@ -475,17 +359,341 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      hce_value);
         }
 
+        private fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOption()
+        {
+            fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions calcOption;
+            if (A.isInputed && !Qms.isInputed && !Qmsus.isInputed && !Qsus.isInputed)
+            {
+                if (A.isInputed && Dp.isInputed && !hc.isInputed)
+                {
+                    if (sf.isInputed && n.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_n_INPUT;
+                    }
+                    else if (tr.isInputed && n.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_n_INPUT;
+                    }
+                    else if (sf.isInputed && tc.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT;
+                    }
+                    else if (tr.isInputed && tc.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT;
+                    }
+                    else if (sf.isInputed && tf.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT;
+                    }
+                    else if (tr.isInputed && tf.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT;
+                    }
+                    else if (n.isInputed && tf.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_n_tf_INPUT;
+                    }
+                    else if (tc.isInputed && tf.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT;
+                    }
+                    else if (tr.isInputed && tf.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
+                    }
+                    else
+                    {
+                        throw new Exception("Not processed combination of inputs");
+                    }
+                }
+                else if (A.isInputed && !Dp.isInputed && hc.isInputed)
+                {
+                    if (sf.isInputed && n.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_n_INPUT;
+                    }
+                    else if (tr.isInputed && n.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_tr_n_INPUT;
+                    }
+                    else if (sf.isInputed && tc.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_tc_INPUT;
+                    }
+                    else if (tr.isInputed && tc.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_tr_tc_INPUT;
+                    }
+                    else
+                    {
+                        throw new Exception("Not processed combination of inputs");
+                    }
+                }
+                else if (A.isInputed && Dp.isInputed && hc.isInputed)
+                {
+                    if (sf.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT;
+                    }
+                    else if (tr.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT;
+                    }
+                    else if (n.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_n_INPUT;
+                    }
+                    else if (tc.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT;
+                    }
+                    else if (tr.isInputed)
+                    {
+                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT;
+                    }
+                    else
+                    {
+                        throw new Exception("Not processed combination of inputs");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Not processed combination of inputs");
+                }
+            }
+            else if ((Qms.isInputed || Qmsus.isInputed || Qsus.isInputed)
+                     && !A.isInputed)
+            {
+                if (Dp.isInputed && hc.isInputed)
+                {
+                    if (Qms.isInputed)
+                    {
+                        if (n.isInputed)
+                        {
+                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
+                        }
+                        else if (tc.isInputed)
+                        {
+                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
+                        }
+                        else if (tr.isInputed)
+                        {
+                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tr_INPUT;
+                        }
+                        else
+                        {
+                            throw new Exception("Not processed combination of inputs");
+                        }
+                    }
+                    else if (Qmsus.isInputed)
+                    {
+                        if (n.isInputed)
+                        {
+                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
+                        }
+                        else if (tc.isInputed)
+                        {
+                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
+                        }
+                        else if (tr.isInputed)
+                        {
+                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tr_INPUT;
+                        }
+                        else
+                        {
+                            throw new Exception("Not processed combination of inputs");
+                        }
+                    }
+                    else if (Qsus.isInputed)
+                    {
+                        if (n.isInputed)
+                        {
+                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
+                        }
+                        else if (tc.isInputed)
+                        {
+                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
+                        }
+                        else if (tr.isInputed)
+                        {
+                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT;
+                        }
+                        else
+                        {
+                            throw new Exception("Not processed combination of inputs");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Not processed combination of inputs");
+                    }
+                }
+                else
+                {
+                    throw new Exception("Not processed combination of inputs");
+                }
+
+                //if (Qms.isInputed && Dp.isInputed && hc.isInputed && n.isInputed)
+                //{
+                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
+                //}
+                //else if (Qms.isInputed && Dp.isInputed && hc.isInputed && tc.isInputed)
+                //{
+                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
+                //}
+                //else if (Qmsus.isInputed && Dp.isInputed && hc.isInputed && n.isInputed)
+                //{
+                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
+                //}
+                //else if (Qmsus.isInputed && Dp.isInputed && hc.isInputed && tc.isInputed)
+                //{
+                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
+                //}
+                //else if (Qsus.isInputed && Dp.isInputed && hc.isInputed && n.isInputed)
+                //{
+                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
+                //}
+                //else if (Qsus.isInputed && Dp.isInputed && hc.isInputed && tc.isInputed)
+                //{
+                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
+                //}
+                //else
+                //{
+                //    throw new Exception("Not processed combination of inputs");
+                //}
+            }
+            else if (A.isInputed && (Qms.isInputed || Qmsus.isInputed || Qsus.isInputed))
+            {
+                if (Qms.isInputed && Dp.isInputed && sf.isInputed)
+                {
+                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT;
+                }
+                else if (Qmsus.isInputed && Dp.isInputed && sf.isInputed)
+                {
+                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT;
+                }
+                else if (Qsus.isInputed && Dp.isInputed && sf.isInputed)
+                {
+                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT;
+                }
+                else if (Qms.isInputed && Dp.isInputed && tr.isInputed)
+                {
+                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT;
+                }
+                else if (Qmsus.isInputed && Dp.isInputed && tr.isInputed)
+                {
+                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT;
+                }
+                else if (Qsus.isInputed && Dp.isInputed && tr.isInputed)
+                {
+                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT;
+                }
+                else
+                {
+                    throw new Exception("Not processed combination of inputs");
+                }
+            }
+            else
+            {
+                throw new Exception("Not processed calculation Option");
+            }
+
+            return calcOption;
+        }
+        private CalculationOption GetBlockCalculationOption()
+        {
+            return calculationOptionView.GetSelectedOption();
+            //switch (GetCalculatorCalculationOption())
+            //{
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT:
+            //        return CalculationOption.Design1;
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT:
+            //        return CalculationOption.Optimization1;
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_n_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_n_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT:
+            //        return CalculationOption.Standart1;
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT:
+            //        return CalculationOption.Standart2;
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_n_tf_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT:
+            //        return CalculationOption.Standart3;
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_n_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_tc_INPUT:
+            //        return CalculationOption.Standart4;
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT:
+            //        return CalculationOption.Standart7;
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_n_INPUT:
+            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT:
+            //        return CalculationOption.Standart8;
+            //}
+
+            //throw new Exception("Not processed calculator calculation option");
+        }
+
         override public void UpdateIsInputed(fmBlockParameter enteredParameter)
         {
-            if (enteredParameter == n)
+            CalculationOption calcOption = GetBlockCalculationOption();
+            bool sfCanBeInputed = calcOption == CalculationOption.Standart1
+                || calcOption == CalculationOption.Standart2
+                || calcOption == CalculationOption.Standart4
+                || calcOption == CalculationOption.Standart7
+                || calcOption == CalculationOption.Optimization1;
+
+            if (sfCanBeInputed)
             {
-                tc.isInputed = false;
-                n.isInputed = true;
+                if (enteredParameter == sf)
+                {
+                    sf.isInputed = true;
+                    tr.isInputed = false;
+                }
+                else if (enteredParameter == tr)
+                {
+                    sf.isInputed = false;
+                    tr.isInputed = true;
+                }
+
+                if (enteredParameter == n)
+                {
+                    tc.isInputed = false;
+                    n.isInputed = true;
+                }
+                else if (enteredParameter == tc)
+                {
+                    tc.isInputed = true;
+                    n.isInputed = false;
+                }
             }
-            else if (enteredParameter == tc)
+            else
             {
-                tc.isInputed = true;
-                n.isInputed = false;
+                if (enteredParameter == n)
+                {
+                    tc.isInputed = false;
+                    n.isInputed = true;
+                    tr.isInputed = false;
+                }
+                else if (enteredParameter == tc)
+                {
+                    tc.isInputed = true;
+                    n.isInputed = false;
+                    tr.isInputed = false;
+                }
+                else if (enteredParameter == tr)
+                {
+                    tc.isInputed = false;
+                    n.isInputed = false;
+                    tr.isInputed = true;
+                }
             }
 
             if (enteredParameter == Qms)
