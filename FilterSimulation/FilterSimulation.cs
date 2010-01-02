@@ -134,7 +134,7 @@ namespace FilterSimulation
             DisplaySolution(fSolution);
 
             projectDataGrid.CurrentCell = projectDataGrid.Rows[0].Cells["projectNameColumn"];
-
+            
             UpdateCurrentObjectAndDisplaySolution(projectDataGrid);
 
             InitializeHeaderCheckBox();
@@ -163,7 +163,7 @@ namespace FilterSimulation
                 fSolution.CurrentObjects.Project = null;
 
                 fSolution.CurrentColumns.Project = "projectNameColumn";
-                fSolution.CurrentColumns.Suspension = "suspensionNameColumn";
+                fSolution.CurrentColumns.Suspension = "suspensionMaterialColumn";
                 fSolution.CurrentColumns.SimSerie = "simSeriesNameColumn";
                 fSolution.CurrentColumns.Simulation = "simulationNameColumn";
 
@@ -189,7 +189,7 @@ namespace FilterSimulation
                         displayingTables = false;
                         return;
                     }
-
+                    
                     Guid suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells["suspensionGuidColumn"].Value;
                     fSolution.CurrentColumns.Suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Name;
                     fSolution.CurrentObjects.Suspension = fSolution.FindSuspension(suspensionGuid);
