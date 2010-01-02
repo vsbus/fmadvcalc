@@ -883,6 +883,7 @@ namespace FilterSimulation
                 sim.pc0rc0a0Block.rho_s_Value = sim.rho_s;
                 sim.filterMachiningBlock.etaf_Value = sim.eta_f;
                 sim.filterMachiningBlock.rho_f_Value = sim.rho_f;
+                sim.filterMachiningBlock.rho_s_Value = sim.rho_s;
                 sim.filterMachiningBlock.rho_sus_Value = sim.rho_sus;
                 sim.filterMachiningBlock.Cm_Value = sim.Cm;
                 sim.filterMachiningBlock.Cv_Value = sim.Cv;
