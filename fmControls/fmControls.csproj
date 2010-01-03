@@ -39,20 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="fmAdditionalFilterMachiningBlock.cs" />
-    <Compile Include="fmChartsView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="fmChartsView.Designer.cs">
-      <DependentUpon>fmChartsView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="fmChartsView.resx">
-      <DependentUpon>fmChartsView.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\fmCalcBlocksLibrary\fmCalcBlocksLibrary.csproj">

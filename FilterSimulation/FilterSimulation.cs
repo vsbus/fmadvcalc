@@ -45,7 +45,7 @@ namespace FilterSimulation
         }
         private void InitializeHeaderCheckBox()
         {
-            DataGridViewCheckBoxColumn c1 = simulationDataGrid.Columns["simulationCheckedColumn"] as DataGridViewCheckBoxColumn;           
+            DataGridViewCheckBoxColumn c1 = simulationDataGrid.Columns[simulationCheckedColumn.Index] as DataGridViewCheckBoxColumn;           
             ckBox = new CheckBox();
             Rectangle rect = simulationDataGrid.GetCellDisplayRectangle(c1.Index, -1, true);
             
@@ -61,7 +61,7 @@ namespace FilterSimulation
             ckBox.CheckedChanged += new EventHandler(ckBox_CheckedChanged);
             simulationDataGrid.Controls.Add(ckBox);
         }
-        void ckBox_CheckedChanged(object sender, EventArgs e)
+        private void ckBox_CheckedChanged(object sender, EventArgs e)
         {
             for (int j = 0; j < simulationDataGrid.RowCount; j++)
             {
@@ -76,7 +76,7 @@ namespace FilterSimulation
         }
       
 
-        private void FilterSimulation_Load(object sender, EventArgs e)
+        protected void FilterSimulation_Load(object sender, EventArgs e)
         {
             SetUpToolTips();
 
@@ -92,12 +92,12 @@ namespace FilterSimulation
             UpdateUnitsAndData();
             fullSimulationInfoCheckBox_CheckedChanged(null, new EventArgs());
 
-            simulationDataGrid.Sort(simulationDataGrid.Columns["simulationSimSeriesNameColumn"], ListSortDirection.Ascending);
-            simSeriesDataGrid.Sort(simSeriesDataGrid.Columns["simSeriesSuspensionNameColumn"], ListSortDirection.Ascending);
+            simulationDataGrid.Sort(simulationDataGrid.Columns[simulationSimSeriesNameColumn.Index], ListSortDirection.Ascending);
+            simSeriesDataGrid.Sort(simSeriesDataGrid.Columns[simSeriesSuspensionNameColumn.Index], ListSortDirection.Ascending);
 
             foreach (DataGridViewColumn col in simulationDataGrid.Columns)
             {
-                if (col != simulationDataGrid.Columns["simulationSuspensionNameColumn"])
+                if (col != simulationDataGrid.Columns[simulationSuspensionNameColumn.Index])
                 {
                     col.Width = 50;
                 }
@@ -127,13 +127,13 @@ namespace FilterSimulation
             sim.sf = new fmValue(30 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
             sim.n = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
             // END DEBUG CODE
-            
+
             fProj.Keep();
             fProj2.Keep();
 
             DisplaySolution(fSolution);
 
-            projectDataGrid.CurrentCell = projectDataGrid.Rows[0].Cells["projectNameColumn"];
+            projectDataGrid.CurrentCell = projectDataGrid.Rows[0].Cells[projectNameColumn.Index];
             
             UpdateCurrentObjectAndDisplaySolution(projectDataGrid);
 
@@ -162,62 +162,70 @@ namespace FilterSimulation
 
                 fSolution.CurrentObjects.Project = null;
 
-                fSolution.CurrentColumns.Project = "projectNameColumn";
-                fSolution.CurrentColumns.Suspension = "suspensionMaterialColumn";
-                fSolution.CurrentColumns.SimSerie = "simSeriesNameColumn";
-                fSolution.CurrentColumns.Simulation = "simulationNameColumn";
+                //fSolution.CurrentColumns.Project = "projectNameColumn";
+                //fSolution.CurrentColumns.Suspension = "suspensionNameColumn";
+                //fSolution.CurrentColumns.SimSerie = "simSeriesNameColumn";
+                //fSolution.CurrentColumns.Simulation = "simulationNameColumn";
+                fSolution.CurrentColumns.Project = projectNameColumn.Index;
+                fSolution.CurrentColumns.Suspension = suspensionNameColumn.Index;
+                fSolution.CurrentColumns.SimSerie = simSeriesNameColumn.Index;
+                fSolution.CurrentColumns.Simulation = simulationNameColumn.Index;
 
                 if (dgv == projectDataGrid)
                 {
-                    if (projectDataGrid.CurrentCell == null 
-                        || projectDataGrid.CurrentRow.Cells["projectGuidColumn"].Value == null)
+                    if (projectDataGrid.CurrentCell == null
+                        || projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value == null)
                     {
                         displayingTables = false;
                         return;
                     }
 
-                    Guid projectGuid = (Guid)projectDataGrid.CurrentRow.Cells["projectGuidColumn"].Value;
-                    fSolution.CurrentColumns.Project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Name;
+                    Guid projectGuid = (Guid)projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value;
+                    //fSolution.CurrentColumns.Project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Name;
+                    fSolution.CurrentColumns.Project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Index;
                     
                     fSolution.CurrentObjects.Project = fSolution.FindProject(projectGuid);
                 }
                 else if (dgv == suspensionDataGrid)
                 {
                     if (suspensionDataGrid.CurrentCell == null
-                        || suspensionDataGrid.CurrentRow.Cells["suspensionGuidColumn"].Value == null)
+                        || suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value == null)
                     {
                         displayingTables = false;
                         return;
                     }
                     
-                    Guid suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells["suspensionGuidColumn"].Value;
-                    fSolution.CurrentColumns.Suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Name;
+                    Guid suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value;
+                    //fSolution.CurrentColumns.Suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Name;
+                    fSolution.CurrentColumns.Suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Index;
                     fSolution.CurrentObjects.Suspension = fSolution.FindSuspension(suspensionGuid);
                 }
                 else if (dgv == simSeriesDataGrid)
                 {
                     if (simSeriesDataGrid.CurrentCell == null
-                        ||  simSeriesDataGrid.CurrentRow.Cells["simSeriesGuidColumn"].Value == null)
+                        || simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value == null)
                     {
                         displayingTables = false;
                         return;
                     }
 
-                    Guid simSeriesGuid = (Guid)simSeriesDataGrid.CurrentRow.Cells["simSeriesGuidColumn"].Value;
-                    fSolution.CurrentColumns.SimSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Name;
+                    Guid simSeriesGuid = (Guid)simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value;
+                    //fSolution.CurrentColumns.SimSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Name;
+                    fSolution.CurrentColumns.SimSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Index;
                     fSolution.CurrentObjects.Serie = fSolution.FindSerie(simSeriesGuid);
                 }
                 else if (dgv == simulationDataGrid)
                 {
                     if (simulationDataGrid.CurrentCell == null
-                        || simulationDataGrid.CurrentRow.Cells["simulationGuidColumn"].Value == null)
+                        || simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value == null)
                     {
                         displayingTables = false;
                         return;
                     }
 
-                    Guid simulationGuid = (Guid)simulationDataGrid.CurrentRow.Cells["simulationGuidColumn"].Value;
-                    fSolution.CurrentColumns.Simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Name;
+                    Guid simulationGuid = (Guid)simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value;
+                    //fSolution.CurrentColumns.Simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Name;
+                    fSolution.CurrentColumns.Simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Index;
                     fSolution.CurrentObjects.Simulation = fSolution.FindSimulation(simulationGuid);
                 }
 
@@ -307,7 +315,8 @@ namespace FilterSimulation
                 fSolution.CurrentObjects.Simulation.Keep();
             }
 
-            fSolution.CurrentColumns.Simulation = "simulationNameColumn";
+            //fSolution.CurrentColumns.Simulation = "simulationNameColumn";
+            fSolution.CurrentColumns.Simulation = simulationNameColumn.Index;
             DisplaySolution(fSolution);
             SortTables();
             SelectCurrentItemsInSolution(fSolution);

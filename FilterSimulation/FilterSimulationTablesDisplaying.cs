@@ -24,11 +24,27 @@ namespace FilterSimulation
             }
         }
 
-        static DataGridViewRow FindRowByGuid(DataGridViewRowCollection collection, Guid guid, string guidColumnName)
+        //static DataGridViewRow FindRowByGuid(DataGridViewRowCollection collection, Guid guid, string guidColumnName)
+        //{
+        //    foreach (DataGridViewRow row in collection)
+        //    {
+        //        if (row.Cells[guidColumnName].Value != null && guid == (Guid)row.Cells[guidColumnName].Value)
+        //        {
+        //            return row;
+        //        }
+        //    }
+
+        //    DataGridViewCell currentCell = collection.Count > 0 ? collection[0].DataGridView.CurrentCell : null;
+        //    int insertionIndex = (currentCell != null) ? currentCell.RowIndex + 1 : collection.Count;
+        //    collection.Insert(insertionIndex, 1);
+        //    return collection[insertionIndex];
+        //}
+
+        static DataGridViewRow FindRowByGuid(DataGridViewRowCollection collection, Guid guid, int guidColumnIndex)
         {
             foreach (DataGridViewRow row in collection)
             {
-                if (row.Cells[guidColumnName].Value != null && guid == (Guid)row.Cells[guidColumnName].Value)
+                if (row.Cells[guidColumnIndex].Value != null && guid == (Guid)row.Cells[guidColumnIndex].Value)
                 {
                     return row;
                 }
@@ -62,11 +78,30 @@ namespace FilterSimulation
             return ret;
         }
 
-        void HideExtraRows(DataGridView grid, string guidColumnName)
+        //void HideExtraRows(DataGridView grid, string guidColumnName)
+        //{
+        //    foreach (DataGridViewRow row in grid.Rows)
+        //    {
+        //        object cellValue = row.Cells[guidColumnName].Value;
+        //        if (cellValue != null)
+        //        {
+        //            Guid guid = (Guid)cellValue;
+        //            if (fSolution.FindProject(guid) == null
+        //                && fSolution.FindSerie(guid) == null
+        //                && fSolution.FindSuspension(guid) == null
+        //                && fSolution.FindSimulation(guid) == null)
+        //            {
+        //                row.Visible = false;
+        //            }
+        //        }
+        //    }
+        //}
+
+        void HideExtraRows(DataGridView grid, int guidColumnIndex)
         {
             foreach (DataGridViewRow row in grid.Rows)
             {
-                object cellValue = row.Cells[guidColumnName].Value;
+                object cellValue = row.Cells[guidColumnIndex].Value;
                 if (cellValue != null)
                 {
                     Guid guid = (Guid)cellValue;
@@ -80,16 +115,17 @@ namespace FilterSimulation
                 }
             }
         }
+
         void HideExtraRowsInTables(bool project, bool suspension, bool simSeries, bool simulation)
         {
             if (project)
-                HideExtraRows(projectDataGrid, "projectGuidColumn");
+                HideExtraRows(projectDataGrid, projectGuidColumn.Index);
             if (suspension)
-                HideExtraRows(suspensionDataGrid, "suspensionGuidColumn");
+                HideExtraRows(suspensionDataGrid, suspensionGuidColumn.Index);
             if (simSeries)
-                HideExtraRows(simSeriesDataGrid, "simSeriesGuidColumn");
+                HideExtraRows(simSeriesDataGrid, simSeriesGuidColumn.Index);
             if (simulation)
-                HideExtraRows(simulationDataGrid, "simulationGuidColumn");
+                HideExtraRows(simulationDataGrid, simulationGuidColumn.Index);
         }
 
         void ShowHideCalcOptionControls()
@@ -120,8 +156,9 @@ namespace FilterSimulation
         }
         void AddHideRowsForProject(fmFilterSimProject proj, bool visible)
         {
-            DataGridViewRow row = FindRowByGuid(projectDataGrid.Rows, proj.Guid, "projectGuidColumn");
-            row.Cells["projectGuidColumn"].Value = proj.Guid;
+            //DataGridViewRow row = FindRowByGuid(projectDataGrid.Rows, proj.Guid, "projectGuidColumn");
+            DataGridViewRow row = FindRowByGuid(projectDataGrid.Rows, proj.Guid, projectGuidColumn.Index);
+            row.Cells[projectGuidColumn.Index].Value = proj.Guid;
             row.Visible = visible;
 
             bool itIsCurrentProject = proj == fSolution.CurrentObjects.Project;
@@ -133,8 +170,9 @@ namespace FilterSimulation
         }
         void AddHideRowsForSuspension(fmFilterSimSuspension sus, bool visible)
         {
-            DataGridViewRow row = FindRowByGuid(suspensionDataGrid.Rows, sus.Guid, "suspensionGuidColumn"/*, "suspensionCheckedColumn"*/);
-            row.Cells["suspensionGuidColumn"].Value = sus.Guid;
+            //DataGridViewRow row = FindRowByGuid(suspensionDataGrid.Rows, sus.Guid, "suspensionGuidColumn");
+            DataGridViewRow row = FindRowByGuid(suspensionDataGrid.Rows, sus.Guid, suspensionGuidColumn.Index);
+            row.Cells[suspensionGuidColumn.Index].Value = sus.Guid;
             row.Visible = visible;
 
             bool itIsCurrentSuspension = sus == fSolution.CurrentObjects.Suspension;
@@ -146,8 +184,9 @@ namespace FilterSimulation
         }
         void AddHideRowsForSerie(fmFilterSimSerie serie, bool visible)
         {
-            DataGridViewRow row = FindRowByGuid(simSeriesDataGrid.Rows, serie.Guid, "simSeriesGuidColumn"/*, "simSeriesCheckedColumn"*/);
-            row.Cells["simSeriesGuidColumn"].Value = serie.Guid;
+            //DataGridViewRow row = FindRowByGuid(simSeriesDataGrid.Rows, serie.Guid, "simSeriesGuidColumn");
+            DataGridViewRow row = FindRowByGuid(simSeriesDataGrid.Rows, serie.Guid, simSeriesGuidColumn.Index);
+            row.Cells[simSeriesGuidColumn.Index].Value = serie.Guid;
             row.Visible = visible;
 
             bool itIsCurrentSimSerie = serie == fSolution.CurrentObjects.Serie;
@@ -159,8 +198,9 @@ namespace FilterSimulation
         }
         void AddHideRowsForSimulation(fmFilterSimulation sim, bool visible)
         {
-            DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, "simulationGuidColumn"/*, "simulationCheckedColumn"*/);
-            row.Cells["simulationGuidColumn"].Value = sim.Guid;
+            //DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, "simulationGuidColumn"/*, "simulationCheckedColumn"*/);
+            DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, simulationGuidColumn.Index);
+            row.Cells[simulationGuidColumn.Index].Value = sim.Guid;
             row.Visible = visible;
             AddHideColumnsForMaterialParameters(sim);
         }
@@ -177,60 +217,60 @@ namespace FilterSimulation
         {
             foreach (DataGridViewRow row in projectDataGrid.Rows)
             {
-                Guid guid = (Guid)row.Cells["projectGuidColumn"].Value;
+                Guid guid = (Guid)row.Cells[projectGuidColumn.Index].Value;
                 fmFilterSimProject proj = sol.FindProject(guid);
                 if (proj == null) continue;
 
-                row.Cells["projectCheckedColumn"].Value = proj.Checked;
-                row.Cells["projectNameColumn"].Value = proj.Name;
+                row.Cells[projectCheckedColumn.Index].Value = proj.Checked;
+                row.Cells[projectNameColumn.Index].Value = proj.Name;
             }
 
             foreach (DataGridViewRow row in suspensionDataGrid.Rows)
             {
-                Guid guid = (Guid)row.Cells["suspensionGuidColumn"].Value;
+                Guid guid = (Guid)row.Cells[suspensionGuidColumn.Index].Value;
                 fmFilterSimSuspension sus = sol.FindSuspension(guid);
                 if (sus == null) continue;
 
-                row.Cells["suspensionCheckedColumn"].Value = sus.Checked;
-                row.Cells["suspensionNameColumn"].Value = sus.Name;
-                row.Cells["suspensionMaterialColumn"].Value = sus.Material;
-                row.Cells["suspensionCustomerColumn"].Value = sus.Customer;
+                row.Cells[suspensionCheckedColumn.Index].Value = sus.Checked;
+                row.Cells[suspensionNameColumn.Index].Value = sus.Name;
+                row.Cells[suspensionMaterialColumn.Index].Value = sus.Material;
+                row.Cells[suspensionCustomerColumn.Index].Value = sus.Customer;
             }
 
             foreach (DataGridViewRow row in simSeriesDataGrid.Rows)
             {
-                Guid guid = (Guid)row.Cells["simSeriesGuidColumn"].Value;
+                Guid guid = (Guid)row.Cells[simSeriesGuidColumn.Index].Value;
                 fmFilterSimSerie serie = sol.FindSerie(guid);
                 if (serie == null) continue;
 
-                row.Cells["simSeriesCheckedColumn"].Value = serie.Checked;
-                row.Cells["simSeriesNameColumn"].Value = serie.Name;
-                row.Cells["simSeriesProjectColumn"].Value = serie.Parent.Parent.Name;
-                //row.Cells["simSeriesMaterialNameColumn"].Value = serie.Parent.Material;
-                //row.Cells["simSeriesCustomerNameColumn"].Value = serie.Parent.Customer;
-                row.Cells["simSeriesSuspensionNameColumn"].Value = serie.Parent.Material + " - " + serie.Parent.Customer + " - " + serie.Parent.Name;
-                row.Cells["simSeriesFilterMediumColumn"].Value = serie.FilterMedium;
-                row.Cells["simSeriesMachineTypeNameColumn"].Value = serie.MachineType.Name;
-                row.Cells["simSeriesMachineNameColumn"].Value = serie.MachineName;
-                row.Cells["simSeriesLastModifiedDateColumn"].Value = Convert.ToString(serie.LastModifiedDate);
+                row.Cells[simSeriesCheckedColumn.Index].Value = serie.Checked;
+                row.Cells[simSeriesNameColumn.Index].Value = serie.Name;
+                row.Cells[simSeriesProjectColumn.Index].Value = serie.Parent.Parent.Name;
+                //row.Cells[simSeriesMaterialNameColumn.Index].Value = serie.Parent.Material;
+                //row.Cells[simSeriesCustomerNameColumn.Index].Value = serie.Parent.Customer;
+                row.Cells[simSeriesSuspensionNameColumn.Index].Value = serie.Parent.Material + " - " + serie.Parent.Customer + " - " + serie.Parent.Name;
+                row.Cells[simSeriesFilterMediumColumn.Index].Value = serie.FilterMedium;
+                row.Cells[simSeriesMachineTypeNameColumn.Index].Value = serie.MachineType.Name;
+                row.Cells[simSeriesMachineNameColumn.Index].Value = serie.MachineName;
+                row.Cells[simSeriesLastModifiedDateColumn.Index].Value = Convert.ToString(serie.LastModifiedDate);
             }
 
             foreach (DataGridViewRow row in simulationDataGrid.Rows)
             {
-                Guid guid = (Guid)row.Cells["simulationGuidColumn"].Value;
+                Guid guid = (Guid)row.Cells[simulationGuidColumn.Index].Value;
                 fmFilterSimulation sim = sol.FindSimulation(guid);
                 if (sim == null) continue;
 
-                row.Cells["simulationCheckedColumn"].Value = sim.Checked;
-                row.Cells["simulationProjectColumn"].Value = sim.Parent.Parent.Parent.Name;
-                //row.Cells["simulationMaterialColumn"].Value = sim.Parent.Parent.Material;
-                //row.Cells["simulationCustomerColumn"].Value = sim.Parent.Parent.Customer;
-                row.Cells["simulationSuspensionNameColumn"].Value = sim.Parent.Parent.Material + " - " + sim.Parent.Parent.Customer + " - " + sim.Parent.Parent.Name;
-                row.Cells["simulationFilterMediumColumn"].Value = sim.Parent.FilterMedium;
-                row.Cells["simulationMachineTypeColumn"].Value = sim.Parent.MachineType.Name;
-                row.Cells["simulationMachineNameColumn"].Value = sim.Parent.MachineName;
-                row.Cells["simulationSimSeriesNameColumn"].Value = sim.Parent.Name;
-                row.Cells["simulationNameColumn"].Value = sim.Name;
+                row.Cells[simulationCheckedColumn.Index].Value = sim.Checked;
+                row.Cells[simulationProjectColumn.Index].Value = sim.Parent.Parent.Parent.Name;
+                //row.Cells[simulationMaterialColumn.Index].Value = sim.Parent.Parent.Material;
+                //row.Cells[simulationCustomerColumn.Index].Value = sim.Parent.Parent.Customer;
+                row.Cells[simulationSuspensionNameColumn.Index].Value = sim.Parent.Parent.Material + " - " + sim.Parent.Parent.Customer + " - " + sim.Parent.Parent.Name;
+                row.Cells[simulationFilterMediumColumn.Index].Value = sim.Parent.FilterMedium;
+                row.Cells[simulationMachineTypeColumn.Index].Value = sim.Parent.MachineType.Name;
+                row.Cells[simulationMachineNameColumn.Index].Value = sim.Parent.MachineName;
+                row.Cells[simulationSimSeriesNameColumn.Index].Value = sim.Parent.Name;
+                row.Cells[simulationNameColumn.Index].Value = sim.Name;
 
                 sim.filterMachiningBlock.CalculateAndDisplay();
             }
@@ -258,13 +298,20 @@ namespace FilterSimulation
                 {
                     sim.susBlock = new fmSuspensionWithEtafBlock(
                         radioButton_rho_f, radioButton_rho_s, radioButton_rho_sus, radioButton_C,
-                        FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "eta_f").Cells[liquidCol.Index],
-                        FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "rho_f").Cells[liquidCol.Index],
-                        FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "rho_s").Cells[liquidCol.Index],
-                        FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "rho_sus").Cells[liquidCol.Index],
-                        FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "Cm").Cells[liquidCol.Index],
-                        FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "Cv").Cells[liquidCol.Index],
-                        FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "C").Cells[liquidCol.Index]);
+                        //FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "eta_f").Cells[liquidCol.Index],
+                        //FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "rho_f").Cells[liquidCol.Index],
+                        //FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "rho_s").Cells[liquidCol.Index],
+                        //FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "rho_sus").Cells[liquidCol.Index],
+                        //FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "Cm").Cells[liquidCol.Index],
+                        //FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "Cv").Cells[liquidCol.Index],
+                        //FindRowByValueInColumn(liquidDataGrid, "liquidParameterName", "C").Cells[liquidCol.Index]);
+                        FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "eta_f").Cells[liquidCol.Index],
+                        FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "rho_f").Cells[liquidCol.Index],
+                        FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "rho_s").Cells[liquidCol.Index],
+                        FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "rho_sus").Cells[liquidCol.Index],
+                        FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "Cm").Cells[liquidCol.Index],
+                        FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "Cv").Cells[liquidCol.Index],
+                        FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "C").Cells[liquidCol.Index]);
 
                     sim.susBlock.ValuesChanged += susBlock_ValuesChanged;
                     sim.susBlock.ValuesChangedByUser += susBlock_ValuesChangedByUser;
@@ -274,9 +321,12 @@ namespace FilterSimulation
                 if (sim.eps0Kappa0Block == null)
                 {
                     sim.eps0Kappa0Block = new fmEpsKappaWithneBlock(
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "eps0").Cells[epsKappaCol.Index],
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "kappa0").Cells[epsKappaCol.Index],
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "ne").Cells[epsKappaCol.Index]);
+                        //FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "eps0").Cells[epsKappaCol.Index],
+                        //FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "kappa0").Cells[epsKappaCol.Index],
+                        //FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "ne").Cells[epsKappaCol.Index]);
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "eps0").Cells[epsKappaCol.Index],
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "kappa0").Cells[epsKappaCol.Index],
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "ne").Cells[epsKappaCol.Index]);
 
                     sim.eps0Kappa0Block.ValuesChanged += epsKappaBlock_ValuesChanged;
                     sim.eps0Kappa0Block.ValuesChangedByUser += eps0Kappa0Block_ValuesChangedByUser;
@@ -285,10 +335,14 @@ namespace FilterSimulation
                 if (sim.pc0rc0a0Block == null)
                 {
                     sim.pc0rc0a0Block = new fmPcrcaWithncBlock(
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Pc0").Cells[epsKappaCol.Index],
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "rc0").Cells[epsKappaCol.Index],
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "a0").Cells[epsKappaCol.Index],
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "nc").Cells[epsKappaCol.Index]);
+                        //FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Pc0").Cells[epsKappaCol.Index],
+                        //FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "rc0").Cells[epsKappaCol.Index],
+                        //FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "a0").Cells[epsKappaCol.Index],
+                        //FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "nc").Cells[epsKappaCol.Index]);
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Pc0").Cells[epsKappaCol.Index],
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "rc0").Cells[epsKappaCol.Index],
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "a0").Cells[epsKappaCol.Index],
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "nc").Cells[epsKappaCol.Index]);
 
                     sim.pc0rc0a0Block.ValuesChanged += pcrcaBlock_ValuesChanged;
                     sim.pc0rc0a0Block.ValuesChangedByUser += pc0rc0a0Block_ValuesChangedByUser;
@@ -297,40 +351,43 @@ namespace FilterSimulation
                 if (sim.rm0HceBlock == null)
                 {
                     sim.rm0HceBlock = new fmRmhceBlock(
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Rm0").Cells[epsKappaCol.Index],
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "hce").Cells[epsKappaCol.Index]);
+                        //FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Rm0").Cells[epsKappaCol.Index],
+                        //FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "hce").Cells[epsKappaCol.Index]);
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Rm0").Cells[epsKappaCol.Index],
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce").Cells[epsKappaCol.Index]);
 
                     sim.rm0HceBlock.ValuesChanged += rmHceBlock_ValuesChanged;
                     sim.rm0HceBlock.ValuesChangedByUser += rm0HceBlock_ValuesChangedByUser;
                 }
 
-                DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, "simulationGuidColumn");
+                //DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, "simulationGuidColumn");
+                DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, simulationGuidColumn.Index);
                 if (sim.filterMachiningBlock == null)
                 {
                     fmCalculationOptionView cow = CreateNewCalculationOptionView(suspensionParametersPanel, 450, 3, 180, 160);
 
                     sim.filterMachiningBlock = new fmFilterMachiningBlock(
                         cow,
-                        row.Cells["simulationFilterAreaColumn"],
-                        row.Cells["simulation_DpColumn"],
-                        row.Cells["simulation_sfColumn"],
-                        row.Cells["simulation_nColumn"],
-                        row.Cells["simulation_tcColumn"],
-                        row.Cells["simulation_tfColumn"],
-                        row.Cells["simulation_trColumn"],
-                        row.Cells["simulation_hcColumn"],
-                        row.Cells["simulation_MfColumn"],
-                        row.Cells["simulation_MsusColumn"],
-                        row.Cells["simulation_VsusColumn"],
-                        row.Cells["simulation_MsColumn"],
-                        row.Cells["simulation_QsusColumn"],
-                        row.Cells["simulation_QmsusColumn"],
-                        row.Cells["simulation_QmsColumn"],
-                        row.Cells["simulation_epsColumn"],
-                        row.Cells["simulation_kappaColumn"],
-                        row.Cells["simulation_PcColumn"],
-                        row.Cells["simulation_rcColumn"],
-                        row.Cells["simulation_aColumn"]);
+                        row.Cells[simulationFilterAreaColumn.Index],
+                        row.Cells[simulation_DpColumn.Index],
+                        row.Cells[simulation_sfColumn.Index],
+                        row.Cells[simulation_nColumn.Index],
+                        row.Cells[simulation_tcColumn.Index],
+                        row.Cells[simulation_tfColumn.Index],
+                        row.Cells[simulation_trColumn.Index],
+                        row.Cells[simulation_hcColumn.Index],
+                        row.Cells[simulation_MfColumn.Index],
+                        row.Cells[simulation_MsusColumn.Index],
+                        row.Cells[simulation_VsusColumn.Index],
+                        row.Cells[simulation_MsColumn.Index],
+                        row.Cells[simulation_QsusColumn.Index],
+                        row.Cells[simulation_QmsusColumn.Index],
+                        row.Cells[simulation_QmsColumn.Index],
+                        row.Cells[simulation_epsColumn.Index],
+                        row.Cells[simulation_kappaColumn.Index],
+                        row.Cells[simulation_PcColumn.Index],
+                        row.Cells[simulation_rcColumn.Index],
+                        row.Cells[simulation_aColumn.Index]);
 
                     sim.filterMachiningBlock.ValuesChanged += filterMachiningBlock_ValuesChanged;
                 }
@@ -480,7 +537,7 @@ namespace FilterSimulation
         {
             foreach (DataGridViewRow row in projectDataGrid.Rows)
             {
-                Guid guid = (Guid)row.Cells["projectGuidColumn"].Value;
+                Guid guid = (Guid)row.Cells[projectGuidColumn.Index].Value;
                 fmFilterSimProject proj = sol.FindProject(guid);
                 if (proj != null)
                 {
@@ -490,7 +547,7 @@ namespace FilterSimulation
 
             foreach (DataGridViewRow row in suspensionDataGrid.Rows) if (row.Visible)
                 {
-                    Guid guid = (Guid)row.Cells["suspensionGuidColumn"].Value;
+                    Guid guid = (Guid)row.Cells[suspensionGuidColumn.Index].Value;
                     fmFilterSimSuspension sus = sol.FindSuspension(guid);
 
                     //Color rowColor = CreateColorFromString(sus.Parent.Guid.ToString());
@@ -503,7 +560,7 @@ namespace FilterSimulation
 
             foreach (DataGridViewRow row in simSeriesDataGrid.Rows) if (row.Visible)
                 {
-                    Guid guid = (Guid)row.Cells["simSeriesGuidColumn"].Value;
+                    Guid guid = (Guid)row.Cells[simSeriesGuidColumn.Index].Value;
                     fmFilterSimSerie serie = sol.FindSerie(guid);
 
                     if (row.Cells[row.DataGridView.SortedColumn.Index].Value == null)
@@ -524,7 +581,7 @@ namespace FilterSimulation
             cID = false;
             foreach (DataGridViewRow row in simulationDataGrid.Rows) if (row.Visible)
                 {
-                    Guid guid = (Guid)row.Cells["simulationGuidColumn"].Value;
+                    Guid guid = (Guid)row.Cells[simulationGuidColumn.Index].Value;
                     fmFilterSimulation sim = sol.FindSimulation(guid);
 
                     if (row.Cells[row.DataGridView.SortedColumn.Index].Value == null)
@@ -556,7 +613,7 @@ namespace FilterSimulation
                 foreach (DataGridViewRow row in projectDataGrid.Rows)
                     if (row.Visible)
                     {
-                        Guid guid = (Guid)row.Cells["projectGuidColumn"].Value;
+                        Guid guid = (Guid)row.Cells[projectGuidColumn.Index].Value;
                         int colIndex = projectDataGrid.Columns[fSolution.CurrentColumns.Project].Index;
                         if (guid == sol.CurrentObjects.Project.Guid)
                         {
@@ -574,7 +631,12 @@ namespace FilterSimulation
                 foreach (DataGridViewRow row in suspensionDataGrid.Rows)
                     if (row.Visible)
                     {
-                        Guid guid = (Guid)row.Cells["suspensionGuidColumn"].Value;
+                        Guid guid = (Guid)row.Cells[suspensionGuidColumn.Index].Value;
+                        //object temp;
+                        //temp = suspensionDataGrid;
+                        //temp = suspensionDataGrid.Columns;
+                        //temp = suspensionDataGrid.Columns[fSolution.CurrentColumns.Suspension];
+                        //temp = suspensionDataGrid.Columns[fSolution.CurrentColumns.Suspension].Index;
                         int colIndex = suspensionDataGrid.Columns[fSolution.CurrentColumns.Suspension].Index;
                         if (guid == sol.CurrentObjects.Suspension.Guid)
                         {
@@ -592,7 +654,7 @@ namespace FilterSimulation
                 foreach (DataGridViewRow row in simSeriesDataGrid.Rows)
                     if (row.Visible)
                     {
-                        Guid guid = (Guid)row.Cells["simSeriesGuidColumn"].Value;
+                        Guid guid = (Guid)row.Cells[simSeriesGuidColumn.Index].Value;
                         int colIndex = simSeriesDataGrid.Columns[fSolution.CurrentColumns.SimSerie].Index;
                         if (guid == sol.CurrentObjects.Serie.Guid)
                         {
@@ -604,7 +666,7 @@ namespace FilterSimulation
                     if (row.Visible)
                     {
                         string mName = sol.CurrentObjects.Serie.MachineType.Name;
-                        int colIndex = machineTypesDataGrid.Columns["machineTypeNameColumn"].Index;
+                        int colIndex = machineTypesDataGrid.Columns[machineTypeNameColumn.Index].Index;
                         if (mName == row.Cells[colIndex].Value.ToString())
                         {
                             machineTypesDataGrid.CurrentCell = row.Cells[colIndex];
@@ -621,7 +683,7 @@ namespace FilterSimulation
                 foreach (DataGridViewRow row in simulationDataGrid.Rows)
                     if (row.Visible)
                     {
-                        Guid guid = (Guid)row.Cells["simulationGuidColumn"].Value;
+                        Guid guid = (Guid)row.Cells[simulationGuidColumn.Index].Value;
                         int colIndex = simulationDataGrid.Columns[fSolution.CurrentColumns.Simulation].Index;
                         if (guid == sol.CurrentObjects.Simulation.Guid)
                         {
@@ -640,7 +702,7 @@ namespace FilterSimulation
          * Changes color of rows
          * Changes font of rows
          * */
-        void DisplaySolution(fmFilterSimSolution sol)
+        virtual protected void DisplaySolution(fmFilterSimSolution sol)
         {
             if (displayingSolution == false)
             {
@@ -654,47 +716,47 @@ namespace FilterSimulation
                 UpdateColorsAndFontForSolution(sol);
                 SelectCurrentItemsInSolution(sol);
 
-                DisplayCharts(sol);
+                //DisplayCharts(sol);
                 
                 displayingSolution = false;
             }
         }
 
-        private void DisplayCharts(fmFilterSimSolution sol)
-        {
-            List<fmFilterMachiningBlock> fmbList = new List<fmFilterMachiningBlock>();
+//        private void DisplayCharts(fmFilterSimSolution sol)
+//        {
+//            List<fmFilterMachiningBlock> fmbList = new List<fmFilterMachiningBlock>();
                 
-            if (byCheckingSimulations)
-            {
-                if (sol.CurrentObjects.Simulation != null)
-                {
-                    fmbList.Add(sol.CurrentObjects.Simulation.filterMachiningBlock);
-                }
-            }
-            else
-            {
-                //if (sol.CurrentObjects.Serie != null)
-                //{
-                //    for (int i = 0; i < sol.CurrentObjects.Serie.SimulationsList.Count; i++)
-                //    {
-                //        if (sol.CurrentObjects.Serie.SimulationsList[i].Checked)
-                //        {
-                //            fmbList.Add(sol.CurrentObjects.Serie.SimulationsList[i].filterMachiningBlock);
-                //        }
-                //    }
-                //}
-                foreach (fmFilterSimulation sim in sol.GetAllSimulations())
-                {
-                    if (sim.Checked)
-                    {
-                        fmbList.Add(sim.filterMachiningBlock);
-                    }
-                }
-            }
+//            if (byCheckingSimulations)
+//            {
+//                if (sol.CurrentObjects.Simulation != null)
+//                {
+//                    fmbList.Add(sol.CurrentObjects.Simulation.filterMachiningBlock);
+//                }
+//            }
+//            else
+//            {
+//                //if (sol.CurrentObjects.Serie != null)
+//                //{
+//                //    for (int i = 0; i < sol.CurrentObjects.Serie.SimulationsList.Count; i++)
+//                //    {
+//                //        if (sol.CurrentObjects.Serie.SimulationsList[i].Checked)
+//                //        {
+//                //            fmbList.Add(sol.CurrentObjects.Serie.SimulationsList[i].filterMachiningBlock);
+//                //        }
+//                //    }
+//                //}
+//                foreach (fmFilterSimulation sim in sol.GetAllSimulations())
+//                {
+//                    if (sim.Checked)
+//                    {
+//                        fmbList.Add(sim.filterMachiningBlock);
+//                    }
+//                }
+//            }
 
-            ChartsView.currentSimFMB = sol.CurrentObjects.Simulation == null ? null : sol.CurrentObjects.Simulation.filterMachiningBlock;
-            ChartsView.BuildCurves(fmbList);
-        }
+////            ChartsView.currentSimFMB = sol.CurrentObjects.Simulation == null ? null : sol.CurrentObjects.Simulation.filterMachiningBlock;
+//            //ChartsView.BuildCurves(fmbList);
+//        }
 
         static Color CreateColorFromString(string s)
         {
@@ -756,67 +818,102 @@ namespace FilterSimulation
             cell.Value = parName + " (" + unitFamily.CurrentUnit.Name + ")";
         }
 
-        static void WriteUnitsToTable(DataGridView dg, string parameterColumnName, string parameterName, string unitColumnName, fmUnitFamily unitFamily)
+        //static void WriteUnitsToTable(DataGridView dg, string parameterColumnName, string parameterName, string unitColumnName, fmUnitFamily unitFamily)
+        //{
+        //    FindRowByValueInColumn(dg, parameterColumnName, parameterName).Cells[unitColumnName].Value = unitFamily.CurrentUnit.Name;
+        //}
+
+        static void WriteUnitsToTable(DataGridView dg, int parameterColumnNameIndex, string parameterName, int unitColumnNameIndex, fmUnitFamily unitFamily)
         {
-            FindRowByValueInColumn(dg, parameterColumnName, parameterName).Cells[unitColumnName].Value = unitFamily.CurrentUnit.Name;
+            FindRowByValueInColumn(dg, parameterColumnNameIndex, parameterName).Cells[unitColumnNameIndex].Value = unitFamily.CurrentUnit.Name;
         }
 
-        static DataGridViewRow FindRowByValueInColumn(DataGridView dg, string columnName, string stringValue)
+        static DataGridViewRow FindRowByValueInColumn(DataGridView dg, int columnIndex, string stringValue)
         {
             foreach (DataGridViewRow row in dg.Rows)
             {
-                object value = row.Cells[columnName].Value;
+                object value = row.Cells[columnIndex].Value;
                 if (value != null && value.ToString() == stringValue)
                     return row;
             }
             return null;
         }
 
-        private void UpdateUnitsAndData()
+        //static DataGridViewRow FindRowByValueInColumn(DataGridView dg, string columnName, string stringValue)
+        //{
+        //    foreach (DataGridViewRow row in dg.Rows)
+        //    {
+        //        object value = row.Cells[columnName].Value;
+        //        if (value != null && value.ToString() == stringValue)
+        //            return row;
+        //    }
+        //    return null;
+        //}
+
+        virtual protected void UpdateUnitsAndData()
         {
             StopAllBlockProcessing();
             {
-                WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "eta_f", "liquidParameterUnits", fmUnitFamily.ViscosityFamily);
-                WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "rho_f", "liquidParameterUnits", fmUnitFamily.DensityFamily);
-                WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "rho_s", "liquidParameterUnits", fmUnitFamily.DensityFamily);
-                WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "rho_sus", "liquidParameterUnits", fmUnitFamily.DensityFamily);
-                WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "Cm", "liquidParameterUnits", fmUnitFamily.ConcentrationFamily);
-                WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "Cv", "liquidParameterUnits", fmUnitFamily.ConcentrationFamily);
-                WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "C", "liquidParameterUnits", fmUnitFamily.ConcentrationCFamily);
-
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "eps0", "epsKappaUnits", fmUnitFamily.ConcentrationFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "kappa0", "epsKappaUnits", fmUnitFamily.NoUnitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "ne", "epsKappaUnits", fmUnitFamily.NoUnitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Pc0", "epsKappaUnits", fmUnitFamily.PermeabilityFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "rc0", "epsKappaUnits", fmUnitFamily.CakeResistanceRcFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "a0", "epsKappaUnits", fmUnitFamily.CakeResistanceAFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "nc", "epsKappaUnits", fmUnitFamily.NoUnitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Rm0", "epsKappaUnits", fmUnitFamily.FilterMediumResistanceFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "hce", "epsKappaUnits", fmUnitFamily.LengthFamily);
-
-                WriteUnitToHeader(simulationDataGrid.Columns["simulationFilterAreaColumn"].HeaderCell, fmUnitFamily.AreaFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_DpColumn"].HeaderCell, fmUnitFamily.PressureFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_nColumn"].HeaderCell, fmUnitFamily.FrequencyFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_tcColumn"].HeaderCell, fmUnitFamily.TimeFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_tfColumn"].HeaderCell, fmUnitFamily.TimeFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_trColumn"].HeaderCell, fmUnitFamily.TimeFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_hcColumn"].HeaderCell, fmUnitFamily.LengthFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_MfColumn"].HeaderCell, fmUnitFamily.MassFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_MsusColumn"].HeaderCell, fmUnitFamily.MassFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_VsusColumn"].HeaderCell, fmUnitFamily.VolumeFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_MsColumn"].HeaderCell, fmUnitFamily.MassFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_QsusColumn"].HeaderCell, fmUnitFamily.FlowRateVolume);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_QmsusColumn"].HeaderCell, fmUnitFamily.FlowRateMass);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_QmsColumn"].HeaderCell, fmUnitFamily.FlowRateMass);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_sfColumn"].HeaderCell, fmUnitFamily.ConcentrationFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_epsColumn"].HeaderCell,fmUnitFamily.ConcentrationFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_kappaColumn"].HeaderCell,fmUnitFamily.NoUnitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_PcColumn"].HeaderCell, fmUnitFamily.PermeabilityFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_rcColumn"].HeaderCell, fmUnitFamily.CakeResistanceRcFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns["simulation_aColumn"].HeaderCell, fmUnitFamily.CakeResistanceAFamily);
+                //liquidParameterName.Index
+                //liquidDataGrid.Rows[0].Cells["liquidParameterName"].Value = "debug botva";
+                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "eta_f", "liquidParameterUnits", fmUnitFamily.ViscosityFamily);
+                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "rho_f", "liquidParameterUnits", fmUnitFamily.DensityFamily);
+                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "rho_s", "liquidParameterUnits", fmUnitFamily.DensityFamily);
+                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "rho_sus", "liquidParameterUnits", fmUnitFamily.DensityFamily);
+                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "Cm", "liquidParameterUnits", fmUnitFamily.ConcentrationFamily);
+                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "Cv", "liquidParameterUnits", fmUnitFamily.ConcentrationFamily);
+                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "C", "liquidParameterUnits", fmUnitFamily.ConcentrationCFamily);
+                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "eta_f", liquidParameterUnits.Index, fmUnitFamily.ViscosityFamily);
+                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "rho_f", liquidParameterUnits.Index, fmUnitFamily.DensityFamily);
+                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "rho_s", liquidParameterUnits.Index, fmUnitFamily.DensityFamily);
+                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "rho_sus", liquidParameterUnits.Index, fmUnitFamily.DensityFamily);
+                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "Cm", liquidParameterUnits.Index, fmUnitFamily.ConcentrationFamily);
+                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "Cv", liquidParameterUnits.Index, fmUnitFamily.ConcentrationFamily);
+                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "C", liquidParameterUnits.Index, fmUnitFamily.ConcentrationCFamily);
 
 
-                ChartsView.UpdateUnits();
+                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "eps0", "epsKappaUnits", fmUnitFamily.ConcentrationFamily);
+                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "kappa0", "epsKappaUnits", fmUnitFamily.NoUnitFamily);
+                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "ne", "epsKappaUnits", fmUnitFamily.NoUnitFamily);
+                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Pc0", "epsKappaUnits", fmUnitFamily.PermeabilityFamily);
+                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "rc0", "epsKappaUnits", fmUnitFamily.CakeResistanceRcFamily);
+                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "a0", "epsKappaUnits", fmUnitFamily.CakeResistanceAFamily);
+                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "nc", "epsKappaUnits", fmUnitFamily.NoUnitFamily);
+                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Rm0", "epsKappaUnits", fmUnitFamily.FilterMediumResistanceFamily);
+                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "hce", "epsKappaUnits", fmUnitFamily.LengthFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "eps0", epsKappaUnits.Index, fmUnitFamily.ConcentrationFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "kappa0", epsKappaUnits.Index, fmUnitFamily.NoUnitFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "ne", epsKappaUnits.Index, fmUnitFamily.NoUnitFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Pc0", epsKappaUnits.Index, fmUnitFamily.PermeabilityFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "rc0", epsKappaUnits.Index, fmUnitFamily.CakeResistanceRcFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "a0", epsKappaUnits.Index, fmUnitFamily.CakeResistanceAFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "nc", epsKappaUnits.Index, fmUnitFamily.NoUnitFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Rm0", epsKappaUnits.Index, fmUnitFamily.FilterMediumResistanceFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce", epsKappaUnits.Index, fmUnitFamily.LengthFamily);
+
+                WriteUnitToHeader(simulationDataGrid.Columns[simulationFilterAreaColumn.Index].HeaderCell, fmUnitFamily.AreaFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_DpColumn.Index].HeaderCell, fmUnitFamily.PressureFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_nColumn.Index].HeaderCell, fmUnitFamily.FrequencyFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_tcColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_tfColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_trColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_hcColumn.Index].HeaderCell, fmUnitFamily.LengthFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_MfColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsusColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_VsusColumn.Index].HeaderCell, fmUnitFamily.VolumeFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QsusColumn.Index].HeaderCell, fmUnitFamily.FlowRateVolume);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QmsusColumn.Index].HeaderCell, fmUnitFamily.FlowRateMass);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QmsColumn.Index].HeaderCell, fmUnitFamily.FlowRateMass);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_sfColumn.Index].HeaderCell, fmUnitFamily.ConcentrationFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_epsColumn.Index].HeaderCell,fmUnitFamily.ConcentrationFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_kappaColumn.Index].HeaderCell,fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_PcColumn.Index].HeaderCell, fmUnitFamily.PermeabilityFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_rcColumn.Index].HeaderCell, fmUnitFamily.CakeResistanceRcFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_aColumn.Index].HeaderCell, fmUnitFamily.CakeResistanceAFamily);
+
+
+                //ChartsView.UpdateUnits();
             }
             ResumeAllBlockProcessing();
             RewriteDataForAllBlocks();
@@ -995,17 +1092,19 @@ namespace FilterSimulation
             sim.Qmsus = filterMachiningBlock.Qmsus_Value;
             sim.Qms = filterMachiningBlock.Qms_Value;
 
-            if (wasChanged)
-            {
-                WriteDataForSolution(fSolution);
-            }
+            //if (wasChanged)
+            //{
+            //    WriteDataForSolution(fSolution);
+            //}
 
-            UpdateColorsAndFontForSolution(fSolution);
+            //UpdateColorsAndFontForSolution(fSolution);
             
-            if (wasChanged)
-            {
-                DisplayCharts(fSolution);
-            }
+            //if (wasChanged)
+            //{
+            //    DisplayCharts(fSolution);
+            //}
+
+            DisplaySolution(fSolution);
         }
     }
 }

@@ -10,7 +10,8 @@ namespace FilterSimulation
         private void projectCreateButton_Click(object sender, EventArgs e)
         {
             fSolution.CurrentObjects.Project = new fmFilterSimProject(fSolution, "Unnamed project");
-            fSolution.CurrentColumns.Project = "projectNameColumn";
+            //fSolution.CurrentColumns.Project = "projectNameColumn";
+            fSolution.CurrentColumns.Project = projectNameColumn.Index;
             DisplaySolution(fSolution);
             projectDataGrid.BeginEdit(true);
         }
@@ -68,7 +69,8 @@ namespace FilterSimulation
             }
 
             fSolution.CurrentObjects.Suspension = new fmFilterSimSuspension(parentProject, "Unnamed suspension", "Unnamed material", "Unnamed customer");
-            fSolution.CurrentColumns.Suspension = "suspensionNameColumn";
+            //fSolution.CurrentColumns.Suspension = "suspensionNameColumn";
+            fSolution.CurrentColumns.Suspension = suspensionNameColumn.Index;
             DisplaySolution(fSolution);
             suspensionDataGrid.BeginEdit(true);
         }
@@ -204,7 +206,8 @@ namespace FilterSimulation
                 fSolution.CurrentObjects.Simulation.Keep();
             }
 
-            fSolution.CurrentColumns.Simulation = "simulationNameColumn";
+            //fSolution.CurrentColumns.Simulation = "simulationNameColumn";
+            fSolution.CurrentColumns.Simulation = simulationNameColumn.Index;
             DisplaySolution(fSolution);
             SortTables();
             SelectCurrentItemsInSolution(fSolution);
@@ -267,13 +270,13 @@ namespace FilterSimulation
         private void fullSimulationInfoCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             bool isVisible = fullSimulationInfoCheckBox.Checked;
-            simulationDataGrid.Columns["simulationProjectColumn"].Visible = isVisible;
-            //simulationDataGrid.Columns["simulationMaterialColumn"].Visible = isVisible;
-            //simulationDataGrid.Columns["simulationCustomerColumn"].Visible = isVisible;
-            simulationDataGrid.Columns["simulationSuspensionNameColumn"].Visible = isVisible;
-            simulationDataGrid.Columns["simulationFilterMediumColumn"].Visible = isVisible;
-            simulationDataGrid.Columns["simulationMachineTypeColumn"].Visible = isVisible;
-            simulationDataGrid.Columns["simulationMachineNameColumn"].Visible = isVisible;
+            simulationDataGrid.Columns[simulationProjectColumn.Index].Visible = isVisible;
+            //simulationDataGrid.Columns[simulationMaterialColumn.Index].Visible = isVisible;
+            //simulationDataGrid.Columns[simulationCustomerColumn.Index].Visible = isVisible;
+            simulationDataGrid.Columns[simulationSuspensionNameColumn.Index].Visible = isVisible;
+            simulationDataGrid.Columns[simulationFilterMediumColumn.Index].Visible = isVisible;
+            simulationDataGrid.Columns[simulationMachineTypeColumn.Index].Visible = isVisible;
+            simulationDataGrid.Columns[simulationMachineNameColumn.Index].Visible = isVisible;
         }
 
         private void duplicateSerieButton_Click(object sender, EventArgs e)

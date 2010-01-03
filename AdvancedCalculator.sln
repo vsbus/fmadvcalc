@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fmControls", "fmControls\fm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fmZedGraph", "fmZedControl\fmZedGraph.csproj", "{6AA10204-B802-462B-AC8B-D012081866BA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterSimulationWithTablesAndGraphs", "FilterSimulationWithTablesAndGraphs\FilterSimulationWithTablesAndGraphs.csproj", "{03F73A3C-29A8-41D2-9287-2B8C3EF8A1EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{6AA10204-B802-462B-AC8B-D012081866BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AA10204-B802-462B-AC8B-D012081866BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AA10204-B802-462B-AC8B-D012081866BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03F73A3C-29A8-41D2-9287-2B8C3EF8A1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03F73A3C-29A8-41D2-9287-2B8C3EF8A1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03F73A3C-29A8-41D2-9287-2B8C3EF8A1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03F73A3C-29A8-41D2-9287-2B8C3EF8A1EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

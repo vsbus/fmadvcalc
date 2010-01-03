@@ -36,7 +36,7 @@ namespace AdvancedCalculator
             this.unitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.precisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterSimulation1 = new FilterSimulation.FilterSimulation();
+            this.filterSimulationWithTablesAndGraphs1 = new FilterSimulationWithTablesAndGraphs.FilterSimulationWithTablesAndGraphs();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +63,7 @@ namespace AdvancedCalculator
             // 
             this.saveAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAllToolStripMenuItem.Image")));
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAllToolStripMenuItem.Text = "Save All";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
@@ -80,38 +80,38 @@ namespace AdvancedCalculator
             // unitsToolStripMenuItem
             // 
             this.unitsToolStripMenuItem.Name = "unitsToolStripMenuItem";
-            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.unitsToolStripMenuItem.Text = "Units";
             this.unitsToolStripMenuItem.Click += new System.EventHandler(this.unitsToolStripMenuItem_Click);
             // 
             // precisionToolStripMenuItem
             // 
             this.precisionToolStripMenuItem.Name = "precisionToolStripMenuItem";
-            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.precisionToolStripMenuItem.Text = "Precision";
             this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
             // 
             // rangesToolStripMenuItem
             // 
             this.rangesToolStripMenuItem.Name = "rangesToolStripMenuItem";
-            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.rangesToolStripMenuItem.Text = "Ranges";
             this.rangesToolStripMenuItem.Click += new System.EventHandler(this.rangesToolStripMenuItem_Click);
             // 
-            // filterSimulation1
+            // filterSimulationWithTablesAndGraphs1
             // 
-            this.filterSimulation1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.filterSimulation1.Location = new System.Drawing.Point(0, 24);
-            this.filterSimulation1.Name = "filterSimulation1";
-            this.filterSimulation1.Size = new System.Drawing.Size(931, 645);
-            this.filterSimulation1.TabIndex = 0;
+            this.filterSimulationWithTablesAndGraphs1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.filterSimulationWithTablesAndGraphs1.Location = new System.Drawing.Point(0, 24);
+            this.filterSimulationWithTablesAndGraphs1.Name = "filterSimulationWithTablesAndGraphs1";
+            this.filterSimulationWithTablesAndGraphs1.Size = new System.Drawing.Size(931, 645);
+            this.filterSimulationWithTablesAndGraphs1.TabIndex = 2;
             // 
             // AdvancedCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(931, 669);
-            this.Controls.Add(this.filterSimulation1);
+            this.Controls.Add(this.filterSimulationWithTablesAndGraphs1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "AdvancedCalculator";
             this.Text = "Advanced Calculator";
@@ -125,7 +125,6 @@ namespace AdvancedCalculator
 
         #endregion
 
-        private FilterSimulation.FilterSimulation filterSimulation1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAllToolStripMenuItem;
@@ -133,6 +132,7 @@ namespace AdvancedCalculator
         private System.Windows.Forms.ToolStripMenuItem unitsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem precisionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rangesToolStripMenuItem;
+        private FilterSimulationWithTablesAndGraphs.FilterSimulationWithTablesAndGraphs filterSimulationWithTablesAndGraphs1;
 
 
 
