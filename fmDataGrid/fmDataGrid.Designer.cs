@@ -82,7 +82,13 @@ namespace fmDataGrid
                 && CurrentCell != null 
                 && e.RowIndex == CurrentCell.RowIndex)
             {
-                e.CellStyle.BackColor = Color.LightGreen;
+                //Color newColor = Color.LightGreen;
+                Color newColor = Color.FromArgb(200, 255, 200);
+                Color oldColor = e.CellStyle.BackColor;
+                newColor = Color.FromArgb(oldColor.R * newColor.R / 255, 
+                    oldColor.G * newColor.G / 255, 
+                    oldColor.B * newColor.B / 255);
+                e.CellStyle.BackColor = newColor;
             }
             base.OnCellPainting(e);
         }

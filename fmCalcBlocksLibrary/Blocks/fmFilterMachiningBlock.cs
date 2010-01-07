@@ -6,6 +6,7 @@ using fmCalcBlocksLibrary.Controls;
 using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
@@ -716,6 +717,54 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
+        override public void UpdateCellsBackColor()
+        {
+            foreach (fmBlockParameter parameter in parameters)
+            {
+                SetParameterCellBackColor(parameter, Color.White);
+            }
+
+            CalculationOption calcOption = GetBlockCalculationOption();
+
+            bool sfCanBeInputed = calcOption == CalculationOption.Standart1
+                || calcOption == CalculationOption.Standart2
+                || calcOption == CalculationOption.Standart4
+                || calcOption == CalculationOption.Standart7
+                || calcOption == CalculationOption.Optimization1;
+            if (sfCanBeInputed)
+            {
+                Color sf_GroupColor = Color.LightCoral;
+                SetParameterCellBackColor(sf, sf_GroupColor);
+                SetParameterCellBackColor(tr, sf_GroupColor);
+            }
+
+            bool ntcCanBeInputed = calcOption == CalculationOption.Standart1
+                || calcOption == CalculationOption.Standart3
+                || calcOption == CalculationOption.Standart4
+                || calcOption == CalculationOption.Standart8
+                || calcOption == CalculationOption.Design1;
+            if (ntcCanBeInputed)
+            {
+                Color n_tc_GroupColor = Color.LightBlue;
+                SetParameterCellBackColor(n, n_tc_GroupColor);
+                SetParameterCellBackColor(tc, n_tc_GroupColor);
+                if (!sfCanBeInputed)
+                {
+                    SetParameterCellBackColor(tr, n_tc_GroupColor);
+                }
+            }
+
+            bool QCanBeInputed = calcOption == CalculationOption.Design1
+                || calcOption == CalculationOption.Optimization1;
+            if (QCanBeInputed)
+            {
+                Color Q_GroupColor = Color.LightGreen;
+                SetParameterCellBackColor(Qms, Q_GroupColor);
+                SetParameterCellBackColor(Qmsus, Q_GroupColor);
+                SetParameterCellBackColor(Qsus, Q_GroupColor);
+            }
+        }
+
         public fmFilterMachiningBlock(
             fmCalculationOptionView calculationOptionView)
             : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null,
@@ -788,6 +837,7 @@ namespace fmCalcBlocksLibrary.Blocks
                         parameter.cell.ReadOnly = !found;
                     }
                 }
+                UpdateCellsBackColor();
                 ReWriteParameters();
             }
         }

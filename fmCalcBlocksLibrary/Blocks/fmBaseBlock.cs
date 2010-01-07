@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
+using System.Drawing;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
@@ -41,8 +42,6 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             if (processOnChange)
             {
-                
-                
                 fmDataGrid.fmDataGrid dataGrid = sender as fmDataGrid.fmDataGrid;
 
                 int parameterIndex;
@@ -51,6 +50,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 if (enteredParameter != null)
                 {
                     UpdateIsInputed(enteredParameter);
+                    UpdateCellsBackColor();
                     enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.unitFamily.CurrentUnit.Coef;
                     
                     if (ValuesChangedByUser != null)
@@ -121,5 +121,14 @@ namespace fmCalcBlocksLibrary.Blocks
 
         abstract public void DoCalculations();
         abstract public void UpdateIsInputed(fmBlockParameter enteredParameter);
+        virtual public void UpdateCellsBackColor() {}
+
+        protected void SetParameterCellBackColor(fmBlockParameter parameter, Color backColor)
+        {
+            if (parameter.cell != null)
+            {
+                parameter.cell.Style.BackColor = backColor;
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
+using System.Drawing;
 
 namespace fmCalcBlocksLibrary.Blocks
 {

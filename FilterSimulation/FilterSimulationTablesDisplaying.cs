@@ -593,9 +593,9 @@ namespace FilterSimulation
                     cID ^= (prevVal == "" || prevVal != val);
                     prevVal = val;
 
-                    Color rowColor = cID ? Color.White : Color.LightGray;
-                    SetRowFontStyle(row, sim.Modified ? FontStyle.Bold : FontStyle.Regular);
-                    SetRowBackColor(row, rowColor);
+                    //Color rowColor = cID ? Color.White : Color.LightGray;
+                    //SetRowFontStyle(row, sim.Modified ? FontStyle.Bold : FontStyle.Regular);
+                    //SetRowBackColor(row, rowColor);
                 }
         }
         void SortTables()
