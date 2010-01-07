@@ -55,11 +55,22 @@ namespace FilterSimulationWithTablesAndGraphs
                 //        }
                 //    }
                 //}
-                foreach (fmFilterSimulation sim in sol.GetAllSimulations())
+                //foreach (fmFilterSimulation sim in sol.GetAllSimulations())
+                //{
+                //    if (sim.Checked)
+                //    {
+                //        fmbList.Add(sim.filterMachiningBlock);
+                //    }
+                //}
+                foreach( DataGridViewRow row in simulationDataGrid.Rows)
                 {
-                    if (sim.Checked)
+                    if(row.Visible)
                     {
-                        fmbList.Add(sim.filterMachiningBlock);
+                        fmFilterSimulation sim = sol.FindSimulation(new Guid(row.Cells[simulationGuidColumn.Name].Value.ToString()));
+                        if(sim.Checked)
+                        {
+                            fmbList.Add(sim.filterMachiningBlock);
+                        }
                     }
                 }
             }
