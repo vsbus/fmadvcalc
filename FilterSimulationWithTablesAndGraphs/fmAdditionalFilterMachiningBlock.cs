@@ -21,6 +21,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                                 DataGridViewCell tr_Cell,
                                                 DataGridViewCell hc_Cell,
                                                 DataGridViewCell Mf_Cell,
+                                                DataGridViewCell Vf_Cell,
                                                 DataGridViewCell Msus_Cell,
                                                 DataGridViewCell Vsus_Cell,
                                                 DataGridViewCell Ms_Cell,
@@ -31,7 +32,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                                 DataGridViewCell kappa_Cell,
                                                 DataGridViewCell Pc_Cell,
                                                 DataGridViewCell rc_Cell,
-                                                DataGridViewCell a_Cell) : base(calculationOptionView, A_Cell, Dp_Cell, sf_Cell, n_Cell, tc_Cell, tf_Cell, tr_Cell, hc_Cell, Mf_Cell,
+                                                DataGridViewCell a_Cell) : base(calculationOptionView, A_Cell, Dp_Cell, sf_Cell, n_Cell, tc_Cell, tf_Cell, tr_Cell, hc_Cell, Mf_Cell, Vf_Cell,
                                                                                 Msus_Cell, Vsus_Cell, Ms_Cell, Qsus_Cell, Qmsus_Cell, Qms_Cell, eps_Cell, kappa_Cell, Pc_Cell,
                                                                                 rc_Cell, a_Cell)
         {

@@ -377,6 +377,7 @@ namespace FilterSimulation
                         row.Cells[simulation_trColumn.Index],
                         row.Cells[simulation_hcColumn.Index],
                         row.Cells[simulation_MfColumn.Index],
+                        row.Cells[simulation_VfColumn.Index],
                         row.Cells[simulation_MsusColumn.Index],
                         row.Cells[simulation_VsusColumn.Index],
                         row.Cells[simulation_MsColumn.Index],

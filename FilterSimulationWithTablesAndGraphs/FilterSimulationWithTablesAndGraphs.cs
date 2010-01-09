@@ -45,23 +45,6 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             else
             {
-                //if (sol.CurrentObjects.Serie != null)
-                //{
-                //    for (int i = 0; i < sol.CurrentObjects.Serie.SimulationsList.Count; i++)
-                //    {
-                //        if (sol.CurrentObjects.Serie.SimulationsList[i].Checked)
-                //        {
-                //            fmbList.Add(sol.CurrentObjects.Serie.SimulationsList[i].filterMachiningBlock);
-                //        }
-                //    }
-                //}
-                //foreach (fmFilterSimulation sim in sol.GetAllSimulations())
-                //{
-                //    if (sim.Checked)
-                //    {
-                //        fmbList.Add(sim.filterMachiningBlock);
-                //    }
-                //}
                 foreach( DataGridViewRow row in simulationDataGrid.Rows)
                 {
                     if(row.Visible)

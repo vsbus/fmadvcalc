@@ -150,6 +150,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private fmBlockParameter tr;
         private fmBlockParameter hc;
         private fmBlockParameter Mf;
+        private fmBlockParameter Vf;
         private fmBlockParameter Msus;
         private fmBlockParameter Vsus;
         private fmBlockParameter Ms;
@@ -224,6 +225,11 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             get { return Mf.value; }
             set { Mf.value = value; }
+        }
+        public fmValue Vf_Value
+        {
+            get { return Vf.value; }
+            set { Vf.value = value; }
         }
         public fmValue Msus_Value
         {
@@ -339,6 +345,7 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      ref Qms.value,
                                                                      ref Vsus.value,
                                                                      ref Mf.value,
+                                                                     ref Vf.value,
                                                                      ref Ms.value,
                                                                      ref Msus.value,
                                                                      ref eps.value,
@@ -534,35 +541,6 @@ namespace fmCalcBlocksLibrary.Blocks
                 {
                     throw new Exception("Not processed combination of inputs");
                 }
-
-                //if (Qms.isInputed && Dp.isInputed && hc.isInputed && n.isInputed)
-                //{
-                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
-                //}
-                //else if (Qms.isInputed && Dp.isInputed && hc.isInputed && tc.isInputed)
-                //{
-                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
-                //}
-                //else if (Qmsus.isInputed && Dp.isInputed && hc.isInputed && n.isInputed)
-                //{
-                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
-                //}
-                //else if (Qmsus.isInputed && Dp.isInputed && hc.isInputed && tc.isInputed)
-                //{
-                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
-                //}
-                //else if (Qsus.isInputed && Dp.isInputed && hc.isInputed && n.isInputed)
-                //{
-                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
-                //}
-                //else if (Qsus.isInputed && Dp.isInputed && hc.isInputed && tc.isInputed)
-                //{
-                //    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
-                //}
-                //else
-                //{
-                //    throw new Exception("Not processed combination of inputs");
-                //}
             }
             else if (A.isInputed && (Qms.isInputed || Qmsus.isInputed || Qsus.isInputed))
             {
@@ -605,41 +583,6 @@ namespace fmCalcBlocksLibrary.Blocks
         private CalculationOption GetBlockCalculationOption()
         {
             return calculationOptionView.GetSelectedOption();
-            //switch (GetCalculatorCalculationOption())
-            //{
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT:
-            //        return CalculationOption.Design1;
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT:
-            //        return CalculationOption.Optimization1;
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_n_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_n_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT:
-            //        return CalculationOption.Standart1;
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT:
-            //        return CalculationOption.Standart2;
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_n_tf_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT:
-            //        return CalculationOption.Standart3;
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_n_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_tc_INPUT:
-            //        return CalculationOption.Standart4;
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT:
-            //        return CalculationOption.Standart7;
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_n_INPUT:
-            //    case fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT:
-            //        return CalculationOption.Standart8;
-            //}
-
-            //throw new Exception("Not processed calculator calculation option");
         }
 
         override public void UpdateIsInputed(fmBlockParameter enteredParameter)
@@ -767,7 +710,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public fmFilterMachiningBlock(
             fmCalculationOptionView calculationOptionView)
-            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null,
+            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
                                            null, null, null, null, null, null, null)
         {
         }
@@ -783,6 +726,7 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell tr_Cell,
             DataGridViewCell hc_Cell,
             DataGridViewCell Mf_Cell,
+            DataGridViewCell Vf_Cell,
             DataGridViewCell Msus_Cell,
             DataGridViewCell Vsus_Cell,
             DataGridViewCell Ms_Cell,
@@ -806,6 +750,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref tr, fmGlobalParameter.tr, tr_Cell, false);
             AddParameter(ref hc, fmGlobalParameter.hc, hc_Cell, false);
             AddParameter(ref Mf, fmGlobalParameter.Mf, Mf_Cell, false);
+            AddParameter(ref Vf, fmGlobalParameter.Vf, Vf_Cell, false);
             AddParameter(ref Msus, fmGlobalParameter.Msus, Msus_Cell, false);
             AddParameter(ref Vsus, fmGlobalParameter.Vsus, Vsus_Cell, false);
             AddParameter(ref Ms, fmGlobalParameter.Ms, Ms_Cell, false);

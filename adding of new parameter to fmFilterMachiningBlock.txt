@@ -1,0 +1,28 @@
+
+in file fmFilterMachiningBlock.cs
+
+	1. add block parameter to class fmFilterMachiningBlock.
+
+	2. add correcponding property
+	    public fmValue xxx_Value
+
+	3. in DoCalculations in call of fmCalculatorsLibrary.fmFilterMachiningCalculator.Process add new parameter.
+
+	4. to constructor fmFilterMachiningBlock add 
+
+in file fmFilterMachiningCalculator.cs
+
+	5. Add to Process function (3 places)
+
+	6. Add parameter to class fmVariables
+
+	7. change DoCalculationsXXX()
+
+in file fmGlobalParameter.cs
+
+	8. add parameter to public class fmGlobalParameter
+
+	9. add to static fmGlobalParameter()
+
+
+10. solving of errors of compiler

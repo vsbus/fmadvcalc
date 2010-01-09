@@ -110,35 +110,6 @@ namespace FilterSimulation
             this.projectCreateButton = new System.Windows.Forms.Button();
             this.simulationPanel = new System.Windows.Forms.Panel();
             this.simulationDataGrid = new fmDataGrid.fmDataGrid();
-            this.simulationGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.simulationProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationMachineTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationSimSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationFilterAreaColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_DpColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_sfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_nColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_tcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_tfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_trColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_hcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_MfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_MsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_VsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_MsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_QsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_QmsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_QmsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_epsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_kappaColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_PcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_rcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.simulation_aColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.simulationDeleteButton = new System.Windows.Forms.Button();
             this.simulationRestoreButton = new System.Windows.Forms.Button();
@@ -172,6 +143,36 @@ namespace FilterSimulation
             this.panelMain = new System.Windows.Forms.Panel();
             this.splitter5 = new System.Windows.Forms.Splitter();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.simulationGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.simulationProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationMachineTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationSimSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationFilterAreaColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_DpColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_sfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_nColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_tcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_tfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_trColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_hcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_MfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_VfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_MsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_VsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_MsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_QsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_QmsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_QmsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_epsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_kappaColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_PcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_rcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_aColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.panelLeft.SuspendLayout();
             this.suspensionParametersAndCalcOptionsPanel.SuspendLayout();
             this.suspensionParametersPanel.SuspendLayout();
@@ -1113,6 +1114,7 @@ namespace FilterSimulation
             this.simulation_trColumn,
             this.simulation_hcColumn,
             this.simulation_MfColumn,
+            this.simulation_VfColumn,
             this.simulation_MsusColumn,
             this.simulation_VsusColumn,
             this.simulation_MsColumn,
@@ -1147,184 +1149,6 @@ namespace FilterSimulation
             this.simulationDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellEndEdit);
             this.simulationDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellValueChanged);
             this.simulationDataGrid.CurrentCellChanged += new System.EventHandler(this.simulationDataGrid_CurrentCellChanged);
-            // 
-            // simulationGuidColumn
-            // 
-            this.simulationGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.simulationGuidColumn.HeaderText = "Guid";
-            this.simulationGuidColumn.Name = "simulationGuidColumn";
-            this.simulationGuidColumn.ReadOnly = true;
-            this.simulationGuidColumn.Visible = false;
-            // 
-            // simulationCheckedColumn
-            // 
-            this.simulationCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.simulationCheckedColumn.HeaderText = "";
-            this.simulationCheckedColumn.MinimumWidth = 20;
-            this.simulationCheckedColumn.Name = "simulationCheckedColumn";
-            this.simulationCheckedColumn.Width = 20;
-            // 
-            // simulationProjectColumn
-            // 
-            this.simulationProjectColumn.HeaderText = "Project";
-            this.simulationProjectColumn.Name = "simulationProjectColumn";
-            this.simulationProjectColumn.ReadOnly = true;
-            // 
-            // simulationSuspensionNameColumn
-            // 
-            this.simulationSuspensionNameColumn.HeaderText = "Suspension";
-            this.simulationSuspensionNameColumn.Name = "simulationSuspensionNameColumn";
-            this.simulationSuspensionNameColumn.ReadOnly = true;
-            this.simulationSuspensionNameColumn.Width = 150;
-            // 
-            // simulationFilterMediumColumn
-            // 
-            this.simulationFilterMediumColumn.HeaderText = "Filter Medium";
-            this.simulationFilterMediumColumn.Name = "simulationFilterMediumColumn";
-            this.simulationFilterMediumColumn.ReadOnly = true;
-            // 
-            // simulationMachineTypeColumn
-            // 
-            this.simulationMachineTypeColumn.HeaderText = "Machine Type";
-            this.simulationMachineTypeColumn.Name = "simulationMachineTypeColumn";
-            this.simulationMachineTypeColumn.ReadOnly = true;
-            // 
-            // simulationMachineNameColumn
-            // 
-            this.simulationMachineNameColumn.HeaderText = "Machine Name";
-            this.simulationMachineNameColumn.Name = "simulationMachineNameColumn";
-            this.simulationMachineNameColumn.ReadOnly = true;
-            // 
-            // simulationSimSeriesNameColumn
-            // 
-            this.simulationSimSeriesNameColumn.HeaderText = "SimSeries";
-            this.simulationSimSeriesNameColumn.Name = "simulationSimSeriesNameColumn";
-            this.simulationSimSeriesNameColumn.ReadOnly = true;
-            // 
-            // simulationNameColumn
-            // 
-            this.simulationNameColumn.HeaderText = "Simulation Name";
-            this.simulationNameColumn.Name = "simulationNameColumn";
-            // 
-            // simulationFilterAreaColumn
-            // 
-            this.simulationFilterAreaColumn.HeaderText = "Filter Area";
-            this.simulationFilterAreaColumn.Name = "simulationFilterAreaColumn";
-            this.simulationFilterAreaColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_DpColumn
-            // 
-            this.simulation_DpColumn.HeaderText = "Dp";
-            this.simulation_DpColumn.Name = "simulation_DpColumn";
-            this.simulation_DpColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_sfColumn
-            // 
-            this.simulation_sfColumn.HeaderText = "sf";
-            this.simulation_sfColumn.Name = "simulation_sfColumn";
-            this.simulation_sfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_nColumn
-            // 
-            this.simulation_nColumn.HeaderText = "n";
-            this.simulation_nColumn.Name = "simulation_nColumn";
-            this.simulation_nColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_tcColumn
-            // 
-            this.simulation_tcColumn.HeaderText = "tc";
-            this.simulation_tcColumn.Name = "simulation_tcColumn";
-            this.simulation_tcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_tfColumn
-            // 
-            this.simulation_tfColumn.HeaderText = "tf";
-            this.simulation_tfColumn.Name = "simulation_tfColumn";
-            this.simulation_tfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_trColumn
-            // 
-            this.simulation_trColumn.HeaderText = "tr";
-            this.simulation_trColumn.Name = "simulation_trColumn";
-            this.simulation_trColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_hcColumn
-            // 
-            this.simulation_hcColumn.HeaderText = "hc";
-            this.simulation_hcColumn.Name = "simulation_hcColumn";
-            this.simulation_hcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_MfColumn
-            // 
-            this.simulation_MfColumn.HeaderText = "Mf";
-            this.simulation_MfColumn.Name = "simulation_MfColumn";
-            this.simulation_MfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_MsusColumn
-            // 
-            this.simulation_MsusColumn.HeaderText = "Msus";
-            this.simulation_MsusColumn.Name = "simulation_MsusColumn";
-            this.simulation_MsusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_VsusColumn
-            // 
-            this.simulation_VsusColumn.HeaderText = "Vsus";
-            this.simulation_VsusColumn.Name = "simulation_VsusColumn";
-            this.simulation_VsusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_MsColumn
-            // 
-            this.simulation_MsColumn.HeaderText = "Ms";
-            this.simulation_MsColumn.Name = "simulation_MsColumn";
-            this.simulation_MsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_QsusColumn
-            // 
-            this.simulation_QsusColumn.HeaderText = "Qsus";
-            this.simulation_QsusColumn.Name = "simulation_QsusColumn";
-            this.simulation_QsusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_QmsusColumn
-            // 
-            this.simulation_QmsusColumn.HeaderText = "Qmsus";
-            this.simulation_QmsusColumn.Name = "simulation_QmsusColumn";
-            this.simulation_QmsusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_QmsColumn
-            // 
-            this.simulation_QmsColumn.HeaderText = "Qms";
-            this.simulation_QmsColumn.Name = "simulation_QmsColumn";
-            this.simulation_QmsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_epsColumn
-            // 
-            this.simulation_epsColumn.HeaderText = "eps";
-            this.simulation_epsColumn.Name = "simulation_epsColumn";
-            this.simulation_epsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_kappaColumn
-            // 
-            this.simulation_kappaColumn.HeaderText = "kappa";
-            this.simulation_kappaColumn.Name = "simulation_kappaColumn";
-            this.simulation_kappaColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_PcColumn
-            // 
-            this.simulation_PcColumn.HeaderText = "Pc";
-            this.simulation_PcColumn.Name = "simulation_PcColumn";
-            this.simulation_PcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_rcColumn
-            // 
-            this.simulation_rcColumn.HeaderText = "rc";
-            this.simulation_rcColumn.Name = "simulation_rcColumn";
-            this.simulation_rcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_aColumn
-            // 
-            this.simulation_aColumn.HeaderText = "a";
-            this.simulation_aColumn.Name = "simulation_aColumn";
-            this.simulation_aColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // panel5
             // 
@@ -1613,6 +1437,190 @@ namespace FilterSimulation
             this.splitter5.TabIndex = 35;
             this.splitter5.TabStop = false;
             // 
+            // simulationGuidColumn
+            // 
+            this.simulationGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.simulationGuidColumn.HeaderText = "Guid";
+            this.simulationGuidColumn.Name = "simulationGuidColumn";
+            this.simulationGuidColumn.ReadOnly = true;
+            this.simulationGuidColumn.Visible = false;
+            this.simulationGuidColumn.Width = 35;
+            // 
+            // simulationCheckedColumn
+            // 
+            this.simulationCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.simulationCheckedColumn.HeaderText = "";
+            this.simulationCheckedColumn.MinimumWidth = 20;
+            this.simulationCheckedColumn.Name = "simulationCheckedColumn";
+            this.simulationCheckedColumn.Width = 20;
+            // 
+            // simulationProjectColumn
+            // 
+            this.simulationProjectColumn.HeaderText = "Project";
+            this.simulationProjectColumn.Name = "simulationProjectColumn";
+            this.simulationProjectColumn.ReadOnly = true;
+            // 
+            // simulationSuspensionNameColumn
+            // 
+            this.simulationSuspensionNameColumn.HeaderText = "Suspension";
+            this.simulationSuspensionNameColumn.Name = "simulationSuspensionNameColumn";
+            this.simulationSuspensionNameColumn.ReadOnly = true;
+            this.simulationSuspensionNameColumn.Width = 150;
+            // 
+            // simulationFilterMediumColumn
+            // 
+            this.simulationFilterMediumColumn.HeaderText = "Filter Medium";
+            this.simulationFilterMediumColumn.Name = "simulationFilterMediumColumn";
+            this.simulationFilterMediumColumn.ReadOnly = true;
+            // 
+            // simulationMachineTypeColumn
+            // 
+            this.simulationMachineTypeColumn.HeaderText = "Machine Type";
+            this.simulationMachineTypeColumn.Name = "simulationMachineTypeColumn";
+            this.simulationMachineTypeColumn.ReadOnly = true;
+            // 
+            // simulationMachineNameColumn
+            // 
+            this.simulationMachineNameColumn.HeaderText = "Machine Name";
+            this.simulationMachineNameColumn.Name = "simulationMachineNameColumn";
+            this.simulationMachineNameColumn.ReadOnly = true;
+            // 
+            // simulationSimSeriesNameColumn
+            // 
+            this.simulationSimSeriesNameColumn.HeaderText = "SimSeries";
+            this.simulationSimSeriesNameColumn.Name = "simulationSimSeriesNameColumn";
+            this.simulationSimSeriesNameColumn.ReadOnly = true;
+            // 
+            // simulationNameColumn
+            // 
+            this.simulationNameColumn.HeaderText = "Simulation Name";
+            this.simulationNameColumn.Name = "simulationNameColumn";
+            // 
+            // simulationFilterAreaColumn
+            // 
+            this.simulationFilterAreaColumn.HeaderText = "Filter Area";
+            this.simulationFilterAreaColumn.Name = "simulationFilterAreaColumn";
+            this.simulationFilterAreaColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_DpColumn
+            // 
+            this.simulation_DpColumn.HeaderText = "Dp";
+            this.simulation_DpColumn.Name = "simulation_DpColumn";
+            this.simulation_DpColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_sfColumn
+            // 
+            this.simulation_sfColumn.HeaderText = "sf";
+            this.simulation_sfColumn.Name = "simulation_sfColumn";
+            this.simulation_sfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_nColumn
+            // 
+            this.simulation_nColumn.HeaderText = "n";
+            this.simulation_nColumn.Name = "simulation_nColumn";
+            this.simulation_nColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_tcColumn
+            // 
+            this.simulation_tcColumn.HeaderText = "tc";
+            this.simulation_tcColumn.Name = "simulation_tcColumn";
+            this.simulation_tcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_tfColumn
+            // 
+            this.simulation_tfColumn.HeaderText = "tf";
+            this.simulation_tfColumn.Name = "simulation_tfColumn";
+            this.simulation_tfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_trColumn
+            // 
+            this.simulation_trColumn.HeaderText = "tr";
+            this.simulation_trColumn.Name = "simulation_trColumn";
+            this.simulation_trColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_hcColumn
+            // 
+            this.simulation_hcColumn.HeaderText = "hc";
+            this.simulation_hcColumn.Name = "simulation_hcColumn";
+            this.simulation_hcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_MfColumn
+            // 
+            this.simulation_MfColumn.HeaderText = "Mf";
+            this.simulation_MfColumn.Name = "simulation_MfColumn";
+            this.simulation_MfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_VfColumn
+            // 
+            this.simulation_VfColumn.HeaderText = "Vf";
+            this.simulation_VfColumn.Name = "simulation_VfColumn";
+            // 
+            // simulation_MsusColumn
+            // 
+            this.simulation_MsusColumn.HeaderText = "Msus";
+            this.simulation_MsusColumn.Name = "simulation_MsusColumn";
+            this.simulation_MsusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_VsusColumn
+            // 
+            this.simulation_VsusColumn.HeaderText = "Vsus";
+            this.simulation_VsusColumn.Name = "simulation_VsusColumn";
+            this.simulation_VsusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_MsColumn
+            // 
+            this.simulation_MsColumn.HeaderText = "Ms";
+            this.simulation_MsColumn.Name = "simulation_MsColumn";
+            this.simulation_MsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_QsusColumn
+            // 
+            this.simulation_QsusColumn.HeaderText = "Qsus";
+            this.simulation_QsusColumn.Name = "simulation_QsusColumn";
+            this.simulation_QsusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_QmsusColumn
+            // 
+            this.simulation_QmsusColumn.HeaderText = "Qmsus";
+            this.simulation_QmsusColumn.Name = "simulation_QmsusColumn";
+            this.simulation_QmsusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_QmsColumn
+            // 
+            this.simulation_QmsColumn.HeaderText = "Qms";
+            this.simulation_QmsColumn.Name = "simulation_QmsColumn";
+            this.simulation_QmsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_epsColumn
+            // 
+            this.simulation_epsColumn.HeaderText = "eps";
+            this.simulation_epsColumn.Name = "simulation_epsColumn";
+            this.simulation_epsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_kappaColumn
+            // 
+            this.simulation_kappaColumn.HeaderText = "kappa";
+            this.simulation_kappaColumn.Name = "simulation_kappaColumn";
+            this.simulation_kappaColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_PcColumn
+            // 
+            this.simulation_PcColumn.HeaderText = "Pc";
+            this.simulation_PcColumn.Name = "simulation_PcColumn";
+            this.simulation_PcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_rcColumn
+            // 
+            this.simulation_rcColumn.HeaderText = "rc";
+            this.simulation_rcColumn.Name = "simulation_rcColumn";
+            this.simulation_rcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_aColumn
+            // 
+            this.simulation_aColumn.HeaderText = "a";
+            this.simulation_aColumn.Name = "simulation_aColumn";
+            this.simulation_aColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // FilterSimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1765,36 +1773,37 @@ namespace FilterSimulation
         protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineTypeNameColumn;
         protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineNameColumn;
         protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesLastModifiedDateColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationGuidColumn;
-        protected System.Windows.Forms.DataGridViewCheckBoxColumn simulationCheckedColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationProjectColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationSuspensionNameColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationFilterMediumColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineTypeColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineNameColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationSimSeriesNameColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationNameColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulationFilterAreaColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_DpColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_sfColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_nColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tcColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tfColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_trColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_hcColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MfColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsusColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VsusColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QsusColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QmsusColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QmsColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_epsColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_kappaColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_PcColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_rcColumn;
-        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_aColumn;
         protected System.Windows.Forms.Panel simSeriesPanel;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationGuidColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn simulationCheckedColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simulationProjectColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simulationSuspensionNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simulationFilterMediumColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineTypeColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simulationSimSeriesNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simulationNameColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulationFilterAreaColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_DpColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_sfColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_nColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tcColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tfColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_trColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_hcColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MfColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VfColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsusColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VsusColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QsusColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QmsusColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QmsColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_epsColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_kappaColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_PcColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_rcColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_aColumn;
 
     }
 }
