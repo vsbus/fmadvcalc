@@ -855,15 +855,6 @@ namespace FilterSimulation
         {
             StopAllBlockProcessing();
             {
-                //liquidParameterName.Index
-                //liquidDataGrid.Rows[0].Cells["liquidParameterName"].Value = "debug botva";
-                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "eta_f", "liquidParameterUnits", fmUnitFamily.ViscosityFamily);
-                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "rho_f", "liquidParameterUnits", fmUnitFamily.DensityFamily);
-                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "rho_s", "liquidParameterUnits", fmUnitFamily.DensityFamily);
-                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "rho_sus", "liquidParameterUnits", fmUnitFamily.DensityFamily);
-                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "Cm", "liquidParameterUnits", fmUnitFamily.ConcentrationFamily);
-                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "Cv", "liquidParameterUnits", fmUnitFamily.ConcentrationFamily);
-                //WriteUnitsToTable(liquidDataGrid, "liquidParameterName", "C", "liquidParameterUnits", fmUnitFamily.ConcentrationCFamily);
                 WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "eta_f", liquidParameterUnits.Index, fmUnitFamily.ViscosityFamily);
                 WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "rho_f", liquidParameterUnits.Index, fmUnitFamily.DensityFamily);
                 WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "rho_s", liquidParameterUnits.Index, fmUnitFamily.DensityFamily);
@@ -872,16 +863,6 @@ namespace FilterSimulation
                 WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "Cv", liquidParameterUnits.Index, fmUnitFamily.ConcentrationFamily);
                 WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "C", liquidParameterUnits.Index, fmUnitFamily.ConcentrationCFamily);
 
-
-                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "eps0", "epsKappaUnits", fmUnitFamily.ConcentrationFamily);
-                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "kappa0", "epsKappaUnits", fmUnitFamily.NoUnitFamily);
-                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "ne", "epsKappaUnits", fmUnitFamily.NoUnitFamily);
-                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Pc0", "epsKappaUnits", fmUnitFamily.PermeabilityFamily);
-                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "rc0", "epsKappaUnits", fmUnitFamily.CakeResistanceRcFamily);
-                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "a0", "epsKappaUnits", fmUnitFamily.CakeResistanceAFamily);
-                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "nc", "epsKappaUnits", fmUnitFamily.NoUnitFamily);
-                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "Rm0", "epsKappaUnits", fmUnitFamily.FilterMediumResistanceFamily);
-                //WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, "epsKappaParameterName", "hce", "epsKappaUnits", fmUnitFamily.LengthFamily);
                 WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "eps0", epsKappaUnits.Index, fmUnitFamily.ConcentrationFamily);
                 WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "kappa0", epsKappaUnits.Index, fmUnitFamily.NoUnitFamily);
                 WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "ne", epsKappaUnits.Index, fmUnitFamily.NoUnitFamily);
@@ -900,6 +881,7 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_trColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_hcColumn.Index].HeaderCell, fmUnitFamily.LengthFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_MfColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_VfColumn.Index].HeaderCell, fmUnitFamily.VolumeFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsusColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_VsusColumn.Index].HeaderCell, fmUnitFamily.VolumeFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
@@ -912,9 +894,6 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_PcColumn.Index].HeaderCell, fmUnitFamily.PermeabilityFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_rcColumn.Index].HeaderCell, fmUnitFamily.CakeResistanceRcFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_aColumn.Index].HeaderCell, fmUnitFamily.CakeResistanceAFamily);
-
-
-                //ChartsView.UpdateUnits();
             }
             ResumeAllBlockProcessing();
             RewriteDataForAllBlocks();
