@@ -28,6 +28,35 @@ namespace fmCalculationLibrary.Equations
             }
         }
 
+        private class FunctionC1xp1C2xp2C3p3C4 : fmFunction
+        {
+            private readonly fmValue c1;
+            private readonly fmValue p1;
+            private readonly fmValue c2;
+            private readonly fmValue p2;
+            private readonly fmValue c3;
+            private readonly fmValue p3;
+            private readonly fmValue c4;
+
+            public FunctionC1xp1C2xp2C3p3C4(fmValue c1, fmValue p1, fmValue c2, fmValue p2, fmValue c3, fmValue p3, fmValue c4)
+            {
+                this.c1 = c1;
+                this.p1 = p1;
+                this.c2 = c2;
+                this.p2 = p2;
+                this.c3 = c3;
+                this.p3 = p3;
+                this.c4 = c4;
+            }
+
+            public override fmValue Eval(fmValue x)
+            {
+                return c1 * fmValue.Pow(x, p1) + c2 * fmValue.Pow(x, p2) + c3 * fmValue.Pow(x, p3) + c4;
+            }
+        }
+
+        private static fmValue _infinity = new fmValue(1e20);
+
         static public List<fmValue> SolveC1xp1C2xp2C3(fmValue c1, fmValue p1, fmValue c2, fmValue p2, fmValue c3)
         {
             List<fmValue> result = new List<fmValue>();
@@ -72,17 +101,16 @@ namespace fmCalculationLibrary.Equations
 
             fmValue x0 = SolveC1xp1C2xp2(c1 * p1, p1 - 1, c2 * p2, p2 - 1);
 
-            fmValue inf = new fmValue(1e20);
             const int interations = 100;  // precision is 1e20 / 2^100 ~~ 1e-11
 
             if (!x0.Defined)
             {
-                result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), zero, inf, interations));
+                result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), zero, _infinity, interations));
                 return result;
             }
 
             result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), zero, x0, interations));
-            result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), x0, inf, interations));
+            result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), x0, _infinity, interations));
 
             if (!result[1].Defined)
             {
@@ -146,6 +174,32 @@ namespace fmCalculationLibrary.Equations
                 return new fmValue();
 
             return zero;
+        }
+
+        internal static List<fmValue> SolveC1xp1C2xp2C3xp3C4(fmValue c1, fmValue p1, fmValue c2, fmValue p2, fmValue c3, fmValue p3, fmValue c4)
+        {
+            List<fmValue> breakPoints = SolveC1xp1C2xp2C3(c1*p1, p1 - p3, c2*p2, p2 - p3, c3*p3);
+            fmValue zero = new fmValue(0);
+            while (breakPoints.Count > 0 && breakPoints[0] == zero)
+                breakPoints.RemoveAt(0);
+            breakPoints.Insert(0, zero);
+            breakPoints.Add(_infinity);
+
+            const int interations = 100;  // precision is 1e20 / 2^100 ~~ 1e-11
+
+            List<fmValue> result = new List<fmValue>();
+
+            for (int i = 1; i < breakPoints.Count; ++i)
+            {
+                fmValue localRoot = fmNewtonMethod.FindRoot(
+                    new FunctionC1xp1C2xp2C3p3C4(c1, p1, c2, p2, c3, p3, c4),
+                    breakPoints[i - 1], breakPoints[i], interations);
+                if (localRoot.Defined)
+                    result.Add(localRoot);
+            }
+                
+            result.Sort();
+            return result;
         }
     }
 }

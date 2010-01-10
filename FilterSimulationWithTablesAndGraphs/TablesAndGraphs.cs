@@ -208,7 +208,9 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 for (int i = 0; i < coordinatesGrid.RowCount; ++i)
                 {
-                    fmValue curValue = fmValue.ObjectToValue(coordinatesGrid.CurrentCell.Value);
+                    fmValue curValue = coordinatesGrid.CurrentCell == null
+                                           ? new fmValue()
+                                           : fmValue.ObjectToValue(coordinatesGrid.CurrentCell.Value);
                     fmValue newValue = fmValue.ObjectToValue(coordinatesGrid.Rows[i].Cells[0].Value);
                     if (newValue.Defined
                         && (!curValue.Defined || fmValue.Abs(newValue - currentSelectedXValue) < fmValue.Abs(curValue - currentSelectedXValue)))

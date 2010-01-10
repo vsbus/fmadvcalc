@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using fmMathEquations=fmCalculationLibrary.Equations.fmMathEquations;
 
@@ -98,7 +99,16 @@ namespace fmCalculationLibrary.Equations
 
             List<fmValue> roots = fmMathEquations.SolveC1xp1C2xp2C3(c1, p1, c2, p2, c3);
 
-            if (roots.Count == 1)
+            return SelectBestDpRoot(roots);
+        }
+
+        private static fmValue SelectBestDpRoot(List<fmValue> roots)
+        {
+            List<fmValue> localRoots = new List<fmValue>(roots);
+            localRoots.Sort();
+            
+            fmValue bar = new fmValue(1e5);
+            if (localRoots.Count == 1)
             {
                 return roots[0];
             }
@@ -106,12 +116,13 @@ namespace fmCalculationLibrary.Equations
             fmValue minLimit = 0.1 * bar;
             fmValue maxLimit = 20 * bar;
 
-            if (roots[0] < minLimit)
-            {
-                return roots[1];
-            }
+            while (localRoots.Count > 1 && localRoots[0] < minLimit)
+                localRoots.RemoveAt(0);
 
-            return roots[0];
+            if (localRoots.Count == 0)
+                return new fmValue();
+
+            return localRoots[0];
         }
 
         public static fmValue Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(fmValue eta_f, fmValue hc, fmValue hce, fmValue Pc, fmValue kappa, fmValue Dp)
@@ -182,6 +193,33 @@ namespace fmCalculationLibrary.Equations
             fmValue x2 = (-b + fmValue.Sqrt(D)) / 2;
 
             return x1;
+        }
+
+        public static fmValue Eval_hc_From_A_Vf_kappa(fmValue A, fmValue Vf, fmValue kappa)
+        {
+            return Vf*kappa/A;
+        }
+
+        public static fmValue Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(
+            fmValue nc, fmValue ne, fmValue eta_f, fmValue A, fmValue tf, fmValue Cv, fmValue eps0, 
+            fmValue Pc0, fmValue hce, fmValue Vf)
+        {
+            fmValue p1 = 1 - nc;
+            fmValue p2 = 1 - nc - ne;
+            fmValue p3 = -ne;
+
+            fmValue bar = new fmValue(1e5);
+
+            fmValue C1 = eta_f/(2*A*A);
+
+            fmValue K1 = tf*(1 - Cv)/Cv;
+            fmValue K2 = -tf*eps0*fmValue.Pow(bar, ne)/Cv;
+            fmValue K3 = 2*C1/Pc0*fmValue.Pow(bar, ne - nc)*eps0/Cv*hce*A*Vf;
+            fmValue K4 = C1*fmValue.Pow(bar, -nc)*Vf*(-Vf*Cv - 2*hce*A*(1 - Cv))/(Cv*Pc0);
+
+            List<fmValue> roots = fmMathEquations.SolveC1xp1C2xp2C3xp3C4(K1, p1, K2, p2, K3, p3, K4);
+
+            return SelectBestDpRoot(roots);
         }
     }
 }
