@@ -28,21 +28,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private const int CUSTOM_CURVE_WIDTH = 1;
         private static readonly Color SELECTED_COLUMN_COLOR = Color.LightBlue;
 
-        //public fmChartsView()
-        //{
-        //    InitializeComponent();
-        //    CreateColumnsInParametersTables();
-        //    rowsQuantity.Text = RowsQuantity.ToString();
-
-        //    // BEGIN DEBUG CODE
-        //    AddRow();
-        //    fmLocalBlocks[0].A_Value = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
-        //    fmLocalBlocks[0].Dp_Value = new fmValue(1 * fmUnitFamily.PressureFamily.CurrentUnit.Coef);
-        //    fmLocalBlocks[0].sf_Value = new fmValue(30 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
-        //    fmLocalBlocks[0].n_Value = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
-        //    // END DEBUG CODE
-        //}
-
         private void FillListBox(ListBox listBox, List<string> strings)
         {
             listBox.Items.Clear();
@@ -295,14 +280,23 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 for (int i = 0; i < fmSelectedBlocks.Count; i++)
                 {
-                    fmSelectedFilterMachiningBlock temp = fmSelectedBlocks[i];
-                    fmAdditionalFilterMachiningBlock tmp = new fmAdditionalFilterMachiningBlock(true,
+                    fmSelectedFilterMachiningBlock selectedBlock = fmSelectedBlocks[i];
+                    fmAdditionalFilterMachiningBlock tempBlock = new fmAdditionalFilterMachiningBlock(true,
                                                                                                 calculationOptionViewInTablesAndGraphs);
-                    tmp.CalculationOption = fmLocalBlocks[0].CalculationOption;
-                    tmp.CopyValues(temp.filterMachiningBlock);
+                    tempBlock.CalculationOption = fmLocalBlocks[0].CalculationOption;
+                    tempBlock.CopyValues(selectedBlock.filterMachiningBlock);
+                    for (int j = 0; j < tempBlock.Parameters.Count; ++j)
+                    {
+                        tempBlock.Parameters[j].isInputed = selectedBlock.filterMachiningBlock.Parameters[j].isInputed;
+                    } 
+                    foreach (fmBlockParameter p in tempBlock.Parameters)
+                    {
+                        if (p.name == listBoxXAxis.Text)
+                            tempBlock.UpdateIsInputed(p);
+                    }
 
-                    tmp.IsDrawn = temp.IsChecked;
-                    DrawCurveAndColumn(xAxisParameterIndex, tmp, yAxisParameterIndex, y2AxisParameterIndex, symbol, selectedSimulationParametersTable.CurrentCell != null ? i == selectedSimulationParametersTable.CurrentCell.RowIndex : false);
+                    tempBlock.IsDrawn = selectedBlock.IsChecked;
+                    DrawCurveAndColumn(xAxisParameterIndex, tempBlock, yAxisParameterIndex, y2AxisParameterIndex, symbol, selectedSimulationParametersTable.CurrentCell != null ? i == selectedSimulationParametersTable.CurrentCell.RowIndex : false);
                     symbol++;
                 }
             }
