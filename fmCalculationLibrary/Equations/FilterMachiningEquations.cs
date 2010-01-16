@@ -221,5 +221,10 @@ namespace fmCalculationLibrary.Equations
 
             return SelectBestDpRoot(roots);
         }
+
+        public static fmValue Eval_V_From_rho_M(fmValue rho, fmValue M)
+        {
+            return M/rho;
+        }
     }
 }

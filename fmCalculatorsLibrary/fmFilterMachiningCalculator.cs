@@ -12,11 +12,14 @@ namespace fmCalculatorsLibrary
             STANDART1_A_Dp_tr_n_INPUT,
             STANDART1_A_Dp_sf_tc_INPUT,
             STANDART1_A_Dp_tr_tc_INPUT,
+            
             STANDART2_A_Dp_sf_tf_INPUT,
             STANDART2_A_Dp_tr_tf_INPUT,
+            
             STANDART3_A_Dp_n_tf_INPUT,
             STANDART3_A_Dp_tc_tf_INPUT,
             STANDART3_A_Dp_tr_tf_INPUT,
+            
             STANDART4_A_hc_sf_n_INPUT,
             STANDART4_A_hc_sf_tc_INPUT,
             STANDART4_A_hc_tr_n_INPUT,
@@ -25,8 +28,14 @@ namespace fmCalculatorsLibrary
             STANDART4_A_Vf_sf_tc_INPUT,
             STANDART4_A_Vf_tr_n_INPUT,
             STANDART4_A_Vf_tr_tc_INPUT,
+            STANDART4_A_Mf_sf_n_INPUT,
+            STANDART4_A_Mf_sf_tc_INPUT,
+            STANDART4_A_Mf_tr_n_INPUT,
+            STANDART4_A_Mf_tr_tc_INPUT,
+            
             STANDART7_A_Dp_hc_sf_INPUT,
             STANDART7_A_Dp_hc_tr_INPUT,
+            
             STANDART8_A_Dp_hc_n_INPUT,
             STANDART8_A_Dp_hc_tc_INPUT,
             STANDART8_A_Dp_hc_tr_INPUT,
@@ -100,30 +109,66 @@ namespace fmCalculatorsLibrary
         public fmVariables variables = new fmVariables();
         public fmIntermediateVariables intermediateVariables = new fmIntermediateVariables();
 
-        private bool IsStandartKindOption(CalculationOptions calculationOption)
+        private bool IsStandart1Option(CalculationOptions calculationOption)
         {
             return calculationOption == CalculationOptions.STANDART1_A_Dp_sf_n_INPUT
-                || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_n_INPUT
-                || calculationOption == CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART3_A_Dp_n_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_hc_sf_n_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_hc_sf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_hc_tr_n_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_hc_tr_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_n_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_n_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT
-                || calculationOption == CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_n_INPUT
+                   || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_n_INPUT
+                   || calculationOption == CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT
+                   || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT;
+        }
+
+        private bool IsStandart2Option(CalculationOptions calculationOption)
+        {
+            return calculationOption == CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT
+                || calculationOption == CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT;
+        }
+
+        private bool IsStandart3Option(CalculationOptions calculationOption)
+        {
+            return calculationOption == CalculationOptions.STANDART3_A_Dp_n_tf_INPUT
+                   || calculationOption == CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT
+                   || calculationOption == CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
+        }
+
+        private bool IsStandart4Option(CalculationOptions calculationOption)
+        {
+            return calculationOption == CalculationOptions.STANDART4_A_hc_sf_n_INPUT
+                   || calculationOption == CalculationOptions.STANDART4_A_hc_sf_tc_INPUT
+                   || calculationOption == CalculationOptions.STANDART4_A_hc_tr_n_INPUT
+                   || calculationOption == CalculationOptions.STANDART4_A_hc_tr_tc_INPUT
+
+                   || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_n_INPUT
+                   || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT
+                   || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_n_INPUT
+                   || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT
+
+                   || calculationOption == CalculationOptions.STANDART4_A_Mf_sf_n_INPUT
+                   || calculationOption == CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT
+                   || calculationOption == CalculationOptions.STANDART4_A_Mf_tr_n_INPUT
+                   || calculationOption == CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT;
+        }
+
+        private bool IsStandart7Option(CalculationOptions calculationOption)
+        {
+            return calculationOption == CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT
+                   || calculationOption == CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT;
+        }
+
+        private bool IsStandart8Option(CalculationOptions calculationOption)
+        {
+            return calculationOption == CalculationOptions.STANDART8_A_Dp_hc_n_INPUT
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT;
+        }
+
+        private bool IsStandartKindOption(CalculationOptions calculationOption)
+        {
+            return IsStandart1Option(calculationOption)
+                   || IsStandart2Option(calculationOption)
+                   || IsStandart3Option(calculationOption)
+                   || IsStandart4Option(calculationOption)
+                   || IsStandart7Option(calculationOption)
+                   || IsStandart8Option(calculationOption);
         }
 
         private bool IsDesignKindOption(CalculationOptions calculationOption)
@@ -151,36 +196,42 @@ namespace fmCalculatorsLibrary
 
         private bool IsStandartSubKind1DpOption(CalculationOptions calculationOption)
         {
-            return calculationOption == CalculationOptions.STANDART1_A_Dp_sf_n_INPUT
-                || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_n_INPUT
-                || calculationOption == CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART3_A_Dp_n_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
+            //return calculationOption == CalculationOptions.STANDART1_A_Dp_sf_n_INPUT
+            //    || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_n_INPUT
+            //    || calculationOption == CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT
+            //    || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT
+            //    || calculationOption == CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT
+            //    || calculationOption == CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT
+            //    || calculationOption == CalculationOptions.STANDART3_A_Dp_n_tf_INPUT
+            //    || calculationOption == CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT
+            //    || calculationOption == CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
+            return IsStandart1Option(calculationOption)
+                   || IsStandart2Option(calculationOption)
+                   || IsStandart3Option(calculationOption);
         }
 
         private bool IsStandartSubKind2hcOption(CalculationOptions calculationOption)
         {
-            return calculationOption == CalculationOptions.STANDART4_A_hc_sf_n_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_hc_sf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_hc_tr_n_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_hc_tr_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_n_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_n_INPUT
-                || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT;
+            //return calculationOption == CalculationOptions.STANDART4_A_hc_sf_n_INPUT
+            //    || calculationOption == CalculationOptions.STANDART4_A_hc_sf_tc_INPUT
+            //    || calculationOption == CalculationOptions.STANDART4_A_hc_tr_n_INPUT
+            //    || calculationOption == CalculationOptions.STANDART4_A_hc_tr_tc_INPUT
+            //    || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_n_INPUT
+            //    || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT
+            //    || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_n_INPUT
+            //    || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT;
+            return IsStandart4Option(calculationOption);
         }
 
         private bool IsStandartSubKind3DphcOption(CalculationOptions calculationOption)
         {
-            return calculationOption == CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT
-                || calculationOption == CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_n_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT;
+            //return calculationOption == CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT
+            //    || calculationOption == CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT
+            //    || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_n_INPUT
+            //    || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT
+            //    || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT;
+            return IsStandart7Option(calculationOption)
+                   || IsStandart8Option(calculationOption);
         }
 
         override public void DoCalculations()
@@ -221,7 +272,6 @@ namespace fmCalculatorsLibrary
                 throw new Exception("Not classified calculation suboption of Standart");
             }
 
-            variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
             variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
             variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
             variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
@@ -492,6 +542,7 @@ namespace fmCalculatorsLibrary
                             variables.tf,
                             constants.eta_f);
             variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+            variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
         }
         private void DoSubCalculationsStandart456()
         {
@@ -499,6 +550,7 @@ namespace fmCalculatorsLibrary
             {
                 case CalculationOptions.STANDART4_A_hc_sf_n_INPUT:
                 case CalculationOptions.STANDART4_A_Vf_sf_n_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_sf_n_INPUT:
                     {
                         variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
                         variables.tf = FilterMachiningEquations.Eval_tf_From_sf_tc(variables.sf, variables.tc);
@@ -507,6 +559,7 @@ namespace fmCalculatorsLibrary
                     break;
                 case CalculationOptions.STANDART4_A_hc_tr_n_INPUT:
                 case CalculationOptions.STANDART4_A_Vf_tr_n_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_tr_n_INPUT:
                     {
                         variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
                         variables.tf = FilterMachiningEquations.Eval_tf_From_tc_tr(variables.tc, variables.tr);
@@ -515,6 +568,7 @@ namespace fmCalculatorsLibrary
                     break;
                 case CalculationOptions.STANDART4_A_hc_sf_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT:
                     {
                         variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
                         variables.tf = FilterMachiningEquations.Eval_tf_From_sf_tc(variables.sf, variables.tc);
@@ -523,6 +577,7 @@ namespace fmCalculatorsLibrary
                     break;
                 case CalculationOptions.STANDART4_A_hc_tr_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT:
                     {
                         variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
                         variables.tf = FilterMachiningEquations.Eval_tf_From_tc_tr(variables.tc, variables.tr);
@@ -543,12 +598,23 @@ namespace fmCalculatorsLibrary
                     variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
                     variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
                     variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    
+                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
                     break;
                 case CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Vf_tr_n_INPUT:
                 case CalculationOptions.STANDART4_A_Vf_sf_n_INPUT:
+                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
+                    variables.Dp = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(constants.nc, constants.ne, constants.eta_f, variables.A, variables.tf, constants.Cv, constants.eps0, constants.Pc0, constants.hce, variables.Vf);
+                    variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
+                    variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
+                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(variables.A, variables.Vf, variables.kappa);
+                    break;
+                case CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_tr_n_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_sf_n_INPUT:
+                    variables.Vf = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_f, variables.Mf);
                     variables.Dp = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(constants.nc, constants.ne, constants.eta_f, variables.A, variables.tf, constants.Cv, constants.eps0, constants.Pc0, constants.hce, variables.Vf);
                     variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
                     variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
@@ -578,7 +644,6 @@ namespace fmCalculatorsLibrary
                         variables.tc = FilterMachiningEquations.Eval_tc_From_tf_sf(variables.tf, variables.sf);
                         variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
                         variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                        variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     }
                     break;
                 case CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT:
@@ -587,7 +652,6 @@ namespace fmCalculatorsLibrary
                         variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
                         variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
                         variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                        variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     }
                     break;
                 case CalculationOptions.STANDART8_A_Dp_hc_n_INPUT:
@@ -596,7 +660,6 @@ namespace fmCalculatorsLibrary
                         variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
                         variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
                         variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                        variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     }
                     break;
                 case CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT:
@@ -605,7 +668,6 @@ namespace fmCalculatorsLibrary
                         variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
                         variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
                         variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                        variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     }
                     break;
                 case CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT:
@@ -614,12 +676,14 @@ namespace fmCalculatorsLibrary
                         variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
                         variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
                         variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                        variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     }
                     break;
                 default:
                     throw new Exception("not processed calculation option");
             }
+
+            variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+            variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
         }
 
         public fmFilterMachiningCalculator(CalculationOptions defaultCalculationOption)

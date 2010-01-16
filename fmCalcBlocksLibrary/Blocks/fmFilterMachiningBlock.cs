@@ -23,7 +23,7 @@ namespace fmCalcBlocksLibrary.Blocks
         [Description("3: A, Dp, (n/tc/tr), tf")]
         Standart3,
         
-        [Description("4: A, (hc/Vf), (sf/tr), (n/tc)")]
+        [Description("4: A, (hc/Vf/Mf), (sf/tr), (n/tc)")]
         Standart4,
         
         //Standart5,  // A, hc, (sf/tr), tf           -- input
@@ -86,11 +86,12 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tf);
                     break;
         
-                //[Description("4: A, (hc/Vf), (sf/tr), (n/tc)")]
+                //[Description("4: A, (hc/Vf/Mf), (sf/tr), (n/tc)")]
                 case CalculationOption.Standart4:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.Vf);
+                    result.Add(fmGlobalParameter.Mf);
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.tr);
                     result.Add(fmGlobalParameter.n);
@@ -486,6 +487,37 @@ namespace fmCalcBlocksLibrary.Blocks
                             throw new Exception("Not processed combination of inputs");
                         }
                     }
+                    else if (Mf.isInputed)
+                    {
+                        if (sf.isInputed && n.isInputed)
+                        {
+                            calcOption =
+                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+                                    STANDART4_A_Mf_sf_n_INPUT;
+                        }
+                        else if (tr.isInputed && n.isInputed)
+                        {
+                            calcOption =
+                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+                                    STANDART4_A_Mf_tr_n_INPUT;
+                        }
+                        else if (sf.isInputed && tc.isInputed)
+                        {
+                            calcOption =
+                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+                                    STANDART4_A_Mf_sf_tc_INPUT;
+                        }
+                        else if (tr.isInputed && tc.isInputed)
+                        {
+                            calcOption =
+                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+                                    STANDART4_A_Mf_tr_tc_INPUT;
+                        }
+                        else
+                        {
+                            throw new Exception("Not processed combination of inputs");
+                        }
+                    }
                     else
                     {
                         throw new Exception("Not processed combination of inputs");
@@ -716,11 +748,19 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 hc.isInputed = true;
                 Vf.isInputed = false;
+                Mf.isInputed = false;
             }
             else if (enteredParameter == Vf)
             {
                 hc.isInputed = false;
                 Vf.isInputed = true;
+                Mf.isInputed = false;
+            }
+            else if (enteredParameter == Mf)
+            {
+                hc.isInputed = false;
+                Vf.isInputed = false;
+                Mf.isInputed = true;
             }
         }
 
@@ -780,6 +820,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 Color hc_GroupColor = Color.LightSeaGreen;
                 SetParameterCellBackColor(hc, hc_GroupColor);
                 SetParameterCellBackColor(Vf, hc_GroupColor);
+                SetParameterCellBackColor(Mf, hc_GroupColor);
             }
         }
 
