@@ -7,11 +7,11 @@ how to change calculation option:
 		Change description of the option
 		
 2. in method
-		GetInputedParametersList(CalculationOption calculationOption)
+		GetInputedParametersList (CalculationOption calculationOption)
 	change comment and insert required row.
 	
 3. in method
-		GetCalculatorCalculationOption()
+		GetCalculatorCalculationOption ()
 	insert constructionS if (...) {...}
 	
 	
@@ -21,16 +21,12 @@ how to change calculation option:
 		add correspond optionS
 		
 5. add required lines into one of methods:
-		IsStandartKindOption
+		IsStandartXOption
 		IsDesignKindOption
 		IsOptimizationKindOption
 		
-6. add required lines into one of methods:
-		IsStandartSubKind1DpOption
-		IsStandartSubKind2hcOption
-		IsStandartSubKind3DphcOption
 		
-7. add calculational code into one of methods:
+6. add calculational code into one of methods:
 		DoSubCalculationsStandart123
 		DoSubCalculationsStandart456
 		DoSubCalculationsStandart78
