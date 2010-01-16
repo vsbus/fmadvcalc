@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalcBlocksLibrary.Controls;
 using fmCalculationLibrary;
-using fmCalculationLibrary.MeasureUnits;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -147,29 +146,29 @@ namespace fmCalcBlocksLibrary.Blocks
 
     public class fmFilterMachiningBlock : fmBaseBlock
     {
-        public fmCalculationOptionView calculationOptionView;
+        public readonly fmCalculationOptionView calculationOptionView;
 
-        private fmBlockParameter A;
-        private fmBlockParameter Dp;
-        private fmBlockParameter sf;
-        private fmBlockParameter n;
-        private fmBlockParameter tc;
-        private fmBlockParameter tf;
-        private fmBlockParameter tr;
-        private fmBlockParameter hc;
-        private fmBlockParameter Mf;
-        private fmBlockParameter Vf;
-        private fmBlockParameter Msus;
-        private fmBlockParameter Vsus;
-        private fmBlockParameter Ms;
-        private fmBlockParameter Qsus;
-        private fmBlockParameter Qmsus;
-        private fmBlockParameter Qms;
-        private fmBlockParameter eps;
-        private fmBlockParameter kappa;
-        private fmBlockParameter Pc;
-        private fmBlockParameter rc;
-        private fmBlockParameter a;
+        private readonly fmBlockParameter A;
+        private readonly fmBlockParameter Dp;
+        private readonly fmBlockParameter sf;
+        private readonly fmBlockParameter n;
+        private readonly fmBlockParameter tc;
+        private readonly fmBlockParameter tf;
+        private readonly fmBlockParameter tr;
+        private readonly fmBlockParameter hc;
+        private readonly fmBlockParameter Mf;
+        private readonly fmBlockParameter Vf;
+        private readonly fmBlockParameter Msus;
+        private readonly fmBlockParameter Vsus;
+        private readonly fmBlockParameter Ms;
+        private readonly fmBlockParameter Qsus;
+        private readonly fmBlockParameter Qmsus;
+        private readonly fmBlockParameter Qms;
+        private readonly fmBlockParameter eps;
+        private readonly fmBlockParameter kappa;
+        private readonly fmBlockParameter Pc;
+        private readonly fmBlockParameter rc;
+        private readonly fmBlockParameter a;
 
         private fmValue hce_value;
         
