@@ -39,7 +39,8 @@ namespace fmCalculationLibrary.NumericalMethods
 
             if (!isIncreasing && !isDecreasing)
             {
-                throw new Exception("Function given to Newton method is not increasing and not decreasing.");
+                //throw new Exception("Function given to Newton method is not increasing and not decreasing.");
+                return new fmValue();
             }
 
             fmValue left = beginValue;
