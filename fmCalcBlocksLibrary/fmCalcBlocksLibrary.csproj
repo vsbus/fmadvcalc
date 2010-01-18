@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockParameter\Event.cs" />
+    <Compile Include="BlockParameter\fmBlockParameterGroup.cs" />
     <Compile Include="Blocks\fmBaseBlock.cs" />
     <Compile Include="Controls\fmCalculationOptionView.cs">
       <SubType>Component</SubType>

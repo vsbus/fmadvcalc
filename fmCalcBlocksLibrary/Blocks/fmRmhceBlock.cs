@@ -10,6 +10,7 @@ namespace fmCalcBlocksLibrary.Blocks
     {
         private fmBlockParameter Rm, hce;
         private fmValue Pc_value;
+        private fmBlockParameterGroup Rm_hce_group = new fmBlockParameterGroup();
 
         public fmValue hce_Value
         {
@@ -49,19 +50,6 @@ namespace fmCalcBlocksLibrary.Blocks
                                                            ref hce.value,
                                                            Pc_value);
         }
-        override public void UpdateIsInputed(fmBlockParameter enteredParameter)
-        {
-            if (enteredParameter == hce)
-            {
-                hce.isInputed = true;
-                Rm.isInputed = false;
-            }
-            else if (enteredParameter == Rm)
-            {
-                hce.isInputed = false;
-                Rm.isInputed = true;
-            }
-        }
         
         public fmRmhceBlock(
             DataGridViewCell Rm_Cell,
@@ -70,8 +58,10 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref Rm, fmGlobalParameter.Rm, Rm_Cell, false);
             AddParameter(ref hce, fmGlobalParameter.hce, hce_Cell, true);
 
+            Rm.group = Rm_hce_group;
+            hce.group = Rm_hce_group;
+
             processOnChange = true;
-            //ReWriteParameters();
         }
     }
 }

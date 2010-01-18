@@ -11,6 +11,8 @@ namespace fmCalcBlocksLibrary.Blocks
         private fmBlockParameter Pc, rc, a;
         private fmValue rho_s_value, eps_value;
 
+        private fmBlockParameterGroup Pc_rc_a_group = new fmBlockParameterGroup();
+
         public fmValue Pc_Value
         {
             get { return Pc.value; }
@@ -65,28 +67,7 @@ namespace fmCalcBlocksLibrary.Blocks
                                                            rho_s_value,
                                                            eps_value);
         }
-        override public void UpdateIsInputed(fmBlockParameter enteredParameter)
-        {
-            if (enteredParameter == Pc)
-            {
-                Pc.isInputed = true;
-                rc.isInputed = false;
-                a.isInputed = false;
-            }
-            else if (enteredParameter == rc)
-            {
-                Pc.isInputed = false;
-                rc.isInputed = true;
-                a.isInputed = false;
-            }
-            else if (enteredParameter == a)
-            {
-                Pc.isInputed = false;
-                rc.isInputed = false;
-                a.isInputed = true;
-            }
-        }
-        
+
         public fmPcrcaBlock(
             DataGridViewCell Pc_Cell,
             DataGridViewCell rc_Cell,
@@ -96,8 +77,11 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref rc, fmGlobalParameter.rc, rc_Cell, false);
             AddParameter(ref a, fmGlobalParameter.a, a_Cell, false);
 
+            Pc.group = Pc_rc_a_group;
+            rc.group = Pc_rc_a_group;
+            a.group = Pc_rc_a_group;
+
             processOnChange = true;
-            //ReWriteParameters();
         }
     }
 }

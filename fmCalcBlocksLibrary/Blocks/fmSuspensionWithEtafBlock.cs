@@ -9,6 +9,8 @@ namespace fmCalcBlocksLibrary.Blocks
     {
         private fmBlockParameter eta_f;
 
+        private fmBlockParameterGroup eta_f_group = new fmBlockParameterGroup();
+
         public fmValue eta_f_Value
         {
             get { return eta_f.value; }

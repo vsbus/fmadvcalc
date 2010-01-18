@@ -50,7 +50,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 if (enteredParameter != null)
                 {
                     UpdateIsInputed(enteredParameter);
-                    UpdateCellsBackColor();
+                    //UpdateCellsBackColor();
                     enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.unitFamily.CurrentUnit.Coef;
                     
                     if (ValuesChangedByUser != null)
@@ -74,19 +74,7 @@ namespace fmCalcBlocksLibrary.Blocks
             parameterIndex = -1;
             return null;
         }
-        //protected void AddParameter(
-        //    ref fmBlockParameter p, 
-        //    string parameterName, 
-        //    fmUnitFamily unitFamily, 
-        //    DataGridViewCell cell,
-        //    bool isInputedDefault)
-        //{
-        //    p = new fmBlockParameter(parameterName, unitFamily, cell, isInputedDefault);
-        //    fmDataGrid.fmDataGrid dataGrid = cell.DataGridView as fmDataGrid.fmDataGrid;
-        //    dataGrid.CellValueChangedByUser -= CellValueChanged;
-        //    dataGrid.CellValueChangedByUser += CellValueChanged;
-        //    parameters.Add(p);
-        //}
+
         protected void AddParameter(
             ref fmBlockParameter p,
             fmGlobalParameter globalParameter,
@@ -116,12 +104,26 @@ namespace fmCalcBlocksLibrary.Blocks
             DoCalculations();
             ReWriteParameters();
         }
+        
         public event Event ValuesChanged;
         public event fmBlockParameterEventHandler ValuesChangedByUser;
 
         abstract public void DoCalculations();
-        abstract public void UpdateIsInputed(fmBlockParameter enteredParameter);
-        virtual public void UpdateCellsBackColor() {}
+        //abstract public void UpdateIsInputed(fmBlockParameter enteredParameter);
+        // abstract void CalculationOptionWasChanged();
+        public void UpdateIsInputed(fmBlockParameter enteredParameter)
+        {
+            foreach (fmBlockParameter p in parameters)
+            {
+                if (p.group != null 
+                    && p.group == enteredParameter.group)
+                {
+                    p.isInputed = p == enteredParameter;
+                }
+            }
+        }
+        
+        //virtual public void UpdateCellsBackColor() {}
 
         protected void SetParameterCellBackColor(fmBlockParameter parameter, Color backColor)
         {

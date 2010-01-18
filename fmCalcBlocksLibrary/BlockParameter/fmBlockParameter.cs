@@ -11,6 +11,7 @@ namespace fmCalcBlocksLibrary.BlockParameter
         public fmUnitFamily unitFamily;
         public fmGlobalParameter globalParameter;
         public fmValue value;
+        public fmBlockParameterGroup group;
         private bool m_isInputed;
         public bool isInputed
         {
@@ -33,6 +34,7 @@ namespace fmCalcBlocksLibrary.BlockParameter
                                 bool isInputedDefault)
         {
             name = globalParameter.Name;
+            this.group = null;
             this.cell = cell;
             unitFamily = globalParameter.unitFamily;
             this.globalParameter = globalParameter;

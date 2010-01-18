@@ -170,6 +170,24 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameter rc;
         private readonly fmBlockParameter a;
 
+        private readonly fmBlockParameterGroup A_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup Dp_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(255, 255, 204));
+        private readonly fmBlockParameterGroup n_tc_group = new fmBlockParameterGroup(Color.FromArgb(255, 230, 204));
+        private readonly fmBlockParameterGroup n_tc_tr_group = new fmBlockParameterGroup(Color.FromArgb(255, 204, 204));
+        private readonly fmBlockParameterGroup tf_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup hc_MVf_group = new fmBlockParameterGroup(Color.FromArgb(255, 143, 143));
+        private readonly fmBlockParameterGroup hc_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup Msus_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup Vsus_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup Ms_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup Q_group = new fmBlockParameterGroup(Color.FromArgb(102, 204, 204));
+        //private readonly fmBlockParameterGroup eps_group = new fmBlockParameterGroup();
+        //private readonly fmBlockParameterGroup kappa_group = new fmBlockParameterGroup();
+        //private readonly fmBlockParameterGroup Pc_group = new fmBlockParameterGroup();
+        //private readonly fmBlockParameterGroup rc_group = new fmBlockParameterGroup();
+        //private readonly fmBlockParameterGroup a_group = new fmBlockParameterGroup();
+
         private fmValue hce_value;
         
         private fmValue Pc0_value;
@@ -669,157 +687,111 @@ namespace fmCalcBlocksLibrary.Blocks
             return calculationOptionView.GetSelectedOption();
         }
 
-        override public void UpdateIsInputed(fmBlockParameter enteredParameter)
+        //override public void UpdateIsInputed(fmBlockParameter enteredParameter)
+        //{
+        //    CalculationOption calcOption = GetBlockCalculationOption();
+        //    bool sfCanBeInputed = calcOption == CalculationOption.Standart1
+        //        || calcOption == CalculationOption.Standart2
+        //        || calcOption == CalculationOption.Standart4
+        //        || calcOption == CalculationOption.Standart7
+        //        || calcOption == CalculationOption.Optimization1;
+
+        //    if (sfCanBeInputed)
+        //    {
+        //        if (enteredParameter == sf)
+        //        {
+        //            sf.isInputed = true;
+        //            tr.isInputed = false;
+        //        }
+        //        else if (enteredParameter == tr)
+        //        {
+        //            sf.isInputed = false;
+        //            tr.isInputed = true;
+        //        }
+
+        //        if (enteredParameter == n)
+        //        {
+        //            tc.isInputed = false;
+        //            n.isInputed = true;
+        //        }
+        //        else if (enteredParameter == tc)
+        //        {
+        //            tc.isInputed = true;
+        //            n.isInputed = false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (enteredParameter == n)
+        //        {
+        //            tc.isInputed = false;
+        //            n.isInputed = true;
+        //            tr.isInputed = false;
+        //        }
+        //        else if (enteredParameter == tc)
+        //        {
+        //            tc.isInputed = true;
+        //            n.isInputed = false;
+        //            tr.isInputed = false;
+        //        }
+        //        else if (enteredParameter == tr)
+        //        {
+        //            tc.isInputed = false;
+        //            n.isInputed = false;
+        //            tr.isInputed = true;
+        //        }
+        //    }
+
+        //    if (enteredParameter == Qms)
+        //    {
+        //        Qms.isInputed = true;
+        //        Qmsus.isInputed = false;
+        //        Qsus.isInputed = false;
+        //    }
+        //    else if (enteredParameter == Qmsus)
+        //    {
+        //        Qms.isInputed = false;
+        //        Qmsus.isInputed = true;
+        //        Qsus.isInputed = false;
+        //    }
+        //    else if (enteredParameter == Qsus)
+        //    {
+        //        Qms.isInputed = false;
+        //        Qmsus.isInputed = false;
+        //        Qsus.isInputed = true;
+        //    }
+
+        //    if (enteredParameter == hc)
+        //    {
+        //        hc.isInputed = true;
+        //        Vf.isInputed = false;
+        //        Mf.isInputed = false;
+        //    }
+        //    else if (enteredParameter == Vf)
+        //    {
+        //        hc.isInputed = false;
+        //        Vf.isInputed = true;
+        //        Mf.isInputed = false;
+        //    }
+        //    else if (enteredParameter == Mf)
+        //    {
+        //        hc.isInputed = false;
+        //        Vf.isInputed = false;
+        //        Mf.isInputed = true;
+        //    }
+        //}
+
+        public void UpdateCellsBackColor()
         {
-            CalculationOption calcOption = GetBlockCalculationOption();
-            bool sfCanBeInputed = calcOption == CalculationOption.Standart1
-                || calcOption == CalculationOption.Standart2
-                || calcOption == CalculationOption.Standart4
-                || calcOption == CalculationOption.Standart7
-                || calcOption == CalculationOption.Optimization1;
-
-            if (sfCanBeInputed)
+            foreach (fmBlockParameter p in parameters)
             {
-                if (enteredParameter == sf)
+                if (p.cell != null)
                 {
-                    sf.isInputed = true;
-                    tr.isInputed = false;
+                    Color color = p.group == null
+                                     ? Color.White
+                                     : p.group.color;
+                    p.cell.Style.BackColor = color;
                 }
-                else if (enteredParameter == tr)
-                {
-                    sf.isInputed = false;
-                    tr.isInputed = true;
-                }
-
-                if (enteredParameter == n)
-                {
-                    tc.isInputed = false;
-                    n.isInputed = true;
-                }
-                else if (enteredParameter == tc)
-                {
-                    tc.isInputed = true;
-                    n.isInputed = false;
-                }
-            }
-            else
-            {
-                if (enteredParameter == n)
-                {
-                    tc.isInputed = false;
-                    n.isInputed = true;
-                    tr.isInputed = false;
-                }
-                else if (enteredParameter == tc)
-                {
-                    tc.isInputed = true;
-                    n.isInputed = false;
-                    tr.isInputed = false;
-                }
-                else if (enteredParameter == tr)
-                {
-                    tc.isInputed = false;
-                    n.isInputed = false;
-                    tr.isInputed = true;
-                }
-            }
-
-            if (enteredParameter == Qms)
-            {
-                Qms.isInputed = true;
-                Qmsus.isInputed = false;
-                Qsus.isInputed = false;
-            }
-            else if (enteredParameter == Qmsus)
-            {
-                Qms.isInputed = false;
-                Qmsus.isInputed = true;
-                Qsus.isInputed = false;
-            }
-            else if (enteredParameter == Qsus)
-            {
-                Qms.isInputed = false;
-                Qmsus.isInputed = false;
-                Qsus.isInputed = true;
-            }
-
-            if (enteredParameter == hc)
-            {
-                hc.isInputed = true;
-                Vf.isInputed = false;
-                Mf.isInputed = false;
-            }
-            else if (enteredParameter == Vf)
-            {
-                hc.isInputed = false;
-                Vf.isInputed = true;
-                Mf.isInputed = false;
-            }
-            else if (enteredParameter == Mf)
-            {
-                hc.isInputed = false;
-                Vf.isInputed = false;
-                Mf.isInputed = true;
-            }
-        }
-
-        override public void UpdateCellsBackColor()
-        {
-            foreach (fmBlockParameter parameter in parameters)
-            {
-                SetParameterCellBackColor(parameter, Color.White);
-            }
-
-            CalculationOption calcOption = GetBlockCalculationOption();
-
-            bool sfCanBeInputed = calcOption == CalculationOption.Standart1
-                || calcOption == CalculationOption.Standart2
-                || calcOption == CalculationOption.Standart4
-                || calcOption == CalculationOption.Standart7
-                || calcOption == CalculationOption.Optimization1;
-            if (sfCanBeInputed)
-            {
-                Color sf_GroupColor = Color.LightCoral;
-                SetParameterCellBackColor(sf, sf_GroupColor);
-                SetParameterCellBackColor(tr, sf_GroupColor);
-            }
-
-            bool ntcCanBeInputed = calcOption == CalculationOption.Standart1
-                || calcOption == CalculationOption.Standart3
-                || calcOption == CalculationOption.Standart4
-                || calcOption == CalculationOption.Standart8
-                || calcOption == CalculationOption.Design1;
-            if (ntcCanBeInputed)
-            {
-                Color n_tc_GroupColor = Color.LightBlue;
-                SetParameterCellBackColor(n, n_tc_GroupColor);
-                SetParameterCellBackColor(tc, n_tc_GroupColor);
-                if (!sfCanBeInputed)
-                {
-                    SetParameterCellBackColor(tr, n_tc_GroupColor);
-                }
-            }
-
-            bool QCanBeInputed = calcOption == CalculationOption.Design1
-                || calcOption == CalculationOption.Optimization1;
-            if (QCanBeInputed)
-            {
-                Color Q_GroupColor = Color.LightGreen;
-                SetParameterCellBackColor(Qms, Q_GroupColor);
-                SetParameterCellBackColor(Qmsus, Q_GroupColor);
-                SetParameterCellBackColor(Qsus, Q_GroupColor);
-            }
-
-            bool hcCanBeInput = calcOption == CalculationOption.Standart4
-                                || calcOption == CalculationOption.Standart7
-                                || calcOption == CalculationOption.Standart8
-                                || calcOption == CalculationOption.Design1;
-            if (hcCanBeInput)
-            {
-                Color hc_GroupColor = Color.LightSeaGreen;
-                SetParameterCellBackColor(hc, hc_GroupColor);
-                SetParameterCellBackColor(Vf, hc_GroupColor);
-                SetParameterCellBackColor(Mf, hc_GroupColor);
             }
         }
 
@@ -897,8 +869,152 @@ namespace fmCalcBlocksLibrary.Blocks
                         parameter.cell.ReadOnly = !found;
                     }
                 }
+
+                UpdateGroups();
                 UpdateCellsBackColor();
                 ReWriteParameters();
+            }
+        }
+
+        fmBlockParameterGroup WhatGroupOfParameterWithCalcOption(fmBlockParameter parameter, CalculationOption calcOption)
+        {
+            Dictionary< CalculationOption, Dictionary<fmBlockParameter, fmBlockParameterGroup> > table = new Dictionary<CalculationOption, Dictionary<fmBlockParameter, fmBlockParameterGroup>>();
+            foreach (CalculationOption option in Enum.GetValues(typeof(CalculationOption)))
+            {
+                table[option] = new Dictionary<fmBlockParameter, fmBlockParameterGroup>();
+            }
+
+            SetGroupsOfStandart1(table[CalculationOption.Standart1]);
+            SetGroupsOfStandart2(table[CalculationOption.Standart2]);
+            SetGroupsOfStandart3(table[CalculationOption.Standart3]);
+            SetGroupsOfStandart4(table[CalculationOption.Standart4]);
+            SetGroupsOfStandart7(table[CalculationOption.Standart7]);
+            SetGroupsOfStandart8(table[CalculationOption.Standart8]);
+            SetGroupsOfDesign1(table[CalculationOption.Design1]);
+            SetGroupsOfOptimization1(table[CalculationOption.Optimization1]);
+
+            return table[calcOption][parameter];
+        }
+
+        private void SetGroupsOfOptimization1(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockParameter p in parameters)
+                table[p] = null;
+
+            //[Description("1: A, Q, Dp, (sf/tr)")]
+            table[A] = A_group;
+            table[Qms] = Q_group;
+            table[Qmsus] = Q_group;
+            table[Qsus] = Q_group;
+            table[sf] = sf_tr_group;
+            table[tr] = sf_tr_group;
+        }
+
+        private void SetGroupsOfDesign1(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockParameter p in parameters)
+                table[p] = null;
+
+            //[Description("1: Q, Dp, hc, (n/tc/tr)")]
+            table[Qms] = Q_group;
+            table[Qmsus] = Q_group;
+            table[Qsus] = Q_group;
+            table[Dp] = Dp_group;
+            table[hc] = hc_group;
+            table[n] = n_tc_tr_group;
+            table[tc] = n_tc_tr_group;
+            table[tr] = n_tc_tr_group;
+        }
+
+        private void SetGroupsOfStandart8(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockParameter p in parameters)
+                table[p] = null;
+
+            //[Description("8: A, Dp, hc, (n/tc/tr)")]
+            table[A] = A_group;
+            table[Dp] = Dp_group;
+            table[hc] = hc_group;
+            table[n] = n_tc_tr_group;
+            table[tc] = n_tc_tr_group;
+            table[tr] = n_tc_tr_group;
+        }
+
+        private void SetGroupsOfStandart7(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockParameter p in parameters)
+                table[p] = null;
+
+            //[Description("7: A, Dp, hc, (sf/tr)")]
+            table[A] = A_group;
+            table[hc] = hc_group;
+            table[sf] = sf_tr_group;
+            table[tr] = sf_tr_group;
+        }
+
+        private void SetGroupsOfStandart4(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockParameter p in parameters)
+                table[p] = null;
+
+            //[Description("4: A, (hc/Vf/Mf), (sf/tr), (n/tc)")]
+            table[A] = A_group;
+            table[hc] = hc_MVf_group;
+            table[Vf] = hc_MVf_group;
+            table[Mf] = hc_MVf_group;
+            table[sf] = sf_tr_group;
+            table[tr] = sf_tr_group;
+            table[n] = n_tc_group;
+            table[tc] = n_tc_group;
+        }
+
+        private void SetGroupsOfStandart3(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockParameter p in parameters)
+                table[p] = null;
+
+            //[Description("3: A, Dp, (n/tc/tr), tf")]
+            table[A] = A_group;
+            table[Dp] = Dp_group;
+            table[n] = n_tc_tr_group;
+            table[tc] = n_tc_tr_group;
+            table[tr] = n_tc_tr_group;
+            table[tf] = tf_group;
+        }
+
+        private void SetGroupsOfStandart2(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockParameter p in parameters)
+                table[p] = null;
+
+            //[Description("2: A, Dp, (sf/tr), tf")]
+            table[A] = A_group;
+            table[Dp] = Dp_group;
+            table[sf] = sf_tr_group;
+            table[tr] = sf_tr_group;
+            table[tf] = tf_group;
+        }
+
+        private void SetGroupsOfStandart1(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockParameter p in parameters)
+                table[p] = null;
+
+            //[Description("1: A, Dp, (sf/tr), (n/tc)")]
+            table[A] = A_group;
+            table[Dp] = Dp_group;
+            table[sf] = sf_tr_group;
+            table[tr] = sf_tr_group; 
+            table[n] = n_tc_group;
+            table[tc] = n_tc_group;
+        }
+
+        private void UpdateGroups()
+        {
+            CalculationOption calcOption = GetBlockCalculationOption();
+            foreach (fmBlockParameter p in parameters)
+            {
+                p.group = WhatGroupOfParameterWithCalcOption(p, calcOption);
             }
         }
         

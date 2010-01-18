@@ -21,6 +21,11 @@ namespace fmCalcBlocksLibrary.Blocks
         private fmBlockParameter Cv;
         private fmBlockParameter C;
 
+        private fmBlockParameterGroup rho_f_group = new fmBlockParameterGroup();
+        private fmBlockParameterGroup rho_s_group = new fmBlockParameterGroup();
+        private fmBlockParameterGroup rho_sus_group = new fmBlockParameterGroup();
+        private fmBlockParameterGroup C_group = new fmBlockParameterGroup();
+
         public fmValue rho_f_Value
         {
             get { return rho_f.value; }
@@ -127,27 +132,6 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                 ref C.value);
         }
 
-        override public void UpdateIsInputed(fmBlockParameter enteredParameter)
-        {
-            if (enteredParameter == Cm)
-            {
-                Cm.isInputed = true;
-                Cv.isInputed = false;
-                C.isInputed = false;
-            }
-            else if (enteredParameter == Cv)
-            {
-                Cm.isInputed = false;
-                Cv.isInputed = true;
-                C.isInputed = false;
-            }
-            else if (enteredParameter == C)
-            {
-                Cm.isInputed = false;
-                Cv.isInputed = false;
-                C.isInputed = true;
-            }
-        }
         public fmSuspensionBlock(RadioButton rho_f_RadioButton,
                                  RadioButton rho_s_RadioButton,
                                  RadioButton rho_sus_RadioButton,
@@ -170,6 +154,13 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref Cm, fmGlobalParameter.Cm, Cm_Cell, false);
             AddParameter(ref Cv, fmGlobalParameter.Cv, Cv_Cell, false);
             AddParameter(ref C, fmGlobalParameter.C, C_Cell, false);
+
+            rho_f.group = rho_f_group;
+            rho_s.group = rho_s_group;
+            rho_sus.group = rho_sus_group;
+            Cm.group = C_group;
+            Cv.group = C_group;
+            C.group = C_group;
 
             processOnChange = true;
 

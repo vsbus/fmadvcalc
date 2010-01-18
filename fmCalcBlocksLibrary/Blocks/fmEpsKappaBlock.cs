@@ -11,6 +11,8 @@ namespace fmCalcBlocksLibrary.Blocks
         private fmBlockParameter eps, kappa;
         private fmValue Cv_value;
 
+        private fmBlockParameterGroup eps_kappa_group = new fmBlockParameterGroup();
+
         public fmValue eps_Value
         {
             get { return eps.value; }
@@ -48,19 +50,6 @@ namespace fmCalcBlocksLibrary.Blocks
                                                               ref kappa.value,
                                                               Cv_value);
         }
-        override public void UpdateIsInputed(fmBlockParameter enteredParameter)
-        {
-            if (enteredParameter == eps)
-            {
-                eps.isInputed = true;
-                kappa.isInputed = false;
-            }
-            else if (enteredParameter == kappa)
-            {
-                eps.isInputed = false;
-                kappa.isInputed = true;
-            }
-        }
        
         public fmEpsKappaBlock(
             DataGridViewCell eps_Cell,
@@ -69,9 +58,10 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref eps, fmGlobalParameter.eps, eps_Cell, true);
             AddParameter(ref kappa, fmGlobalParameter.kappa, kappa_Cell, false);
 
-            processOnChange = true;
+            eps.group = eps_kappa_group;
+            kappa.group = eps_kappa_group;
 
-            //ReWriteParameters();
+            processOnChange = true;
         }
     }
 }
