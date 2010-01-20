@@ -6,6 +6,7 @@ using fmCalcBlocksLibrary.Controls;
 using fmCalculationLibrary;
 using System.Collections.Generic;
 using System.Drawing;
+using fmCalculatorsLibrary;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
@@ -28,7 +29,7 @@ namespace fmCalcBlocksLibrary.Blocks
         //Standart5,  // A, hc, (sf/tr), tf           -- input
         //Standart6,  // A, hc, (n/tc/tr), tf       -- input
         
-        [Description("7: A, Dp, hc, (sf/tr)")]
+        [Description("7: A, Dp, (hc/Vf), (sf/tr)")]
         Standart7,
         
         [Description("8: A, Dp, hc, (n/tc/tr)")]
@@ -51,7 +52,7 @@ namespace fmCalcBlocksLibrary.Blocks
     
     static public class CalculationOptionHelper
     {
-        public static List<fmGlobalParameter> GetInputedParametersList(CalculationOption calculationOption)
+        public static List<fmGlobalParameter> GetParametersListThatCanBeInput(CalculationOption calculationOption)
         {
             List<fmGlobalParameter> result = new List<fmGlobalParameter>();
             switch (calculationOption)
@@ -97,11 +98,12 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     break;
         
-                //[Description("7: A, Dp, hc, (sf/tr)")]
+                //[Description("7: A, Dp, (hc/Vf), (sf/tr)")]
                 case CalculationOption.Standart7:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.hc);
+                    result.Add(fmGlobalParameter.Vf);
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.tr);
                     break;
@@ -416,296 +418,774 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      hce_value);
         }
 
-        private fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOption()
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOption()
         {
-            fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions calcOption;
-            if (A.isInputed && !Qms.isInputed && !Qmsus.isInputed && !Qsus.isInputed)
+            List<fmBlockParameter> inputParameters = GetInputedParameters();
+
+            fmFilterMachiningCalculator.CalculationOptions calcOption;
+
+            calcOption = GetCalculatorCalculationOptionStandart();
+            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
             {
-                if (A.isInputed && Dp.isInputed && !hc.isInputed)
-                {
-                    if (sf.isInputed && n.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_n_INPUT;
-                    }
-                    else if (tr.isInputed && n.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_n_INPUT;
-                    }
-                    else if (sf.isInputed && tc.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT;
-                    }
-                    else if (tr.isInputed && tc.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT;
-                    }
-                    else if (sf.isInputed && tf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT;
-                    }
-                    else if (tr.isInputed && tf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT;
-                    }
-                    else if (n.isInputed && tf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_n_tf_INPUT;
-                    }
-                    else if (tc.isInputed && tf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT;
-                    }
-                    else if (tr.isInputed && tf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
-                    }
-                    else
-                    {
-                        throw new Exception("Not processed combination of inputs");
-                    }
-                }
-                else if (A.isInputed && !Dp.isInputed)
-                {
-                    if (hc.isInputed)
-                    {
-                        if (sf.isInputed && n.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_hc_sf_n_INPUT;
-                        }
-                        else if (tr.isInputed && n.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_hc_tr_n_INPUT;
-                        }
-                        else if (sf.isInputed && tc.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_hc_sf_tc_INPUT;
-                        }
-                        else if (tr.isInputed && tc.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_hc_tr_tc_INPUT;
-                        }
-                        else
-                        {
-                            throw new Exception("Not processed combination of inputs");
-                        }
-                    }
-                    else if (Vf.isInputed)
-                    {
-                        if (sf.isInputed && n.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_Vf_sf_n_INPUT;
-                        }
-                        else if (tr.isInputed && n.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_Vf_tr_n_INPUT;
-                        }
-                        else if (sf.isInputed && tc.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_Vf_sf_tc_INPUT;
-                        }
-                        else if (tr.isInputed && tc.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_Vf_tr_tc_INPUT;
-                        }
-                        else
-                        {
-                            throw new Exception("Not processed combination of inputs");
-                        }
-                    }
-                    else if (Mf.isInputed)
-                    {
-                        if (sf.isInputed && n.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_Mf_sf_n_INPUT;
-                        }
-                        else if (tr.isInputed && n.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_Mf_tr_n_INPUT;
-                        }
-                        else if (sf.isInputed && tc.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_Mf_sf_tc_INPUT;
-                        }
-                        else if (tr.isInputed && tc.isInputed)
-                        {
-                            calcOption =
-                                fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-                                    STANDART4_A_Mf_tr_tc_INPUT;
-                        }
-                        else
-                        {
-                            throw new Exception("Not processed combination of inputs");
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Not processed combination of inputs");
-                    }
-                }
-                else if (A.isInputed && Dp.isInputed && hc.isInputed)
-                {
-                    if (sf.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT;
-                    }
-                    else if (tr.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT;
-                    }
-                    else if (n.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_n_INPUT;
-                    }
-                    else if (tc.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT;
-                    }
-                    else if (tr.isInputed)
-                    {
-                        calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT;
-                    }
-                    else
-                    {
-                        throw new Exception("Not processed combination of inputs");
-                    }
-                }
-                else
-                {
-                    throw new Exception("Not processed combination of inputs");
-                }
-            }
-            else if ((Qms.isInputed || Qmsus.isInputed || Qsus.isInputed)
-                     && !A.isInputed)
-            {
-                if (Dp.isInputed && hc.isInputed)
-                {
-                    if (Qms.isInputed)
-                    {
-                        if (n.isInputed)
-                        {
-                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
-                        }
-                        else if (tc.isInputed)
-                        {
-                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
-                        }
-                        else if (tr.isInputed)
-                        {
-                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tr_INPUT;
-                        }
-                        else
-                        {
-                            throw new Exception("Not processed combination of inputs");
-                        }
-                    }
-                    else if (Qmsus.isInputed)
-                    {
-                        if (n.isInputed)
-                        {
-                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
-                        }
-                        else if (tc.isInputed)
-                        {
-                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
-                        }
-                        else if (tr.isInputed)
-                        {
-                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tr_INPUT;
-                        }
-                        else
-                        {
-                            throw new Exception("Not processed combination of inputs");
-                        }
-                    }
-                    else if (Qsus.isInputed)
-                    {
-                        if (n.isInputed)
-                        {
-                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
-                        }
-                        else if (tc.isInputed)
-                        {
-                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
-                        }
-                        else if (tr.isInputed)
-                        {
-                            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT;
-                        }
-                        else
-                        {
-                            throw new Exception("Not processed combination of inputs");
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Not processed combination of inputs");
-                    }
-                }
-                else
-                {
-                    throw new Exception("Not processed combination of inputs");
-                }
-            }
-            else if (A.isInputed && (Qms.isInputed || Qmsus.isInputed || Qsus.isInputed))
-            {
-                if (Qms.isInputed && Dp.isInputed && sf.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT;
-                }
-                else if (Qmsus.isInputed && Dp.isInputed && sf.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT;
-                }
-                else if (Qsus.isInputed && Dp.isInputed && sf.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT;
-                }
-                else if (Qms.isInputed && Dp.isInputed && tr.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT;
-                }
-                else if (Qmsus.isInputed && Dp.isInputed && tr.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT;
-                }
-                else if (Qsus.isInputed && Dp.isInputed && tr.isInputed)
-                {
-                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT;
-                }
-                else
-                {
-                    throw new Exception("Not processed combination of inputs");
-                }
-            }
-            else
-            {
-                throw new Exception("Not processed calculation Option");
+                return calcOption;
             }
 
-            return calcOption;
+            calcOption = GetCalculatorCalculationOptionDesign();
+            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
+            {
+                return calcOption;
+            }
+
+            calcOption = GetCalculatorCalculationOptionOptimization();
+            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
+            {
+                return calcOption;
+            }
+
+            throw new Exception("Not processed combination of inputs"); 
+
+            //{
+            //    if (A.isInputed && !Qms.isInputed && !Qmsus.isInputed && !Qsus.isInputed)
+            //    {
+            //        if (A.isInputed && Dp.isInputed && !hc.isInputed)
+            //        {
+            //            if (sf.isInputed && n.isInputed)
+            //            {
+            //                calcOption =
+            //                    fmFilterMachiningCalculator.CalculationOptions.
+            //                        STANDART1_A_Dp_sf_n_INPUT;
+            //            }
+            //            else if (tr.isInputed && n.isInputed)
+            //            {
+            //                calcOption =
+            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                        STANDART1_A_Dp_tr_n_INPUT;
+            //            }
+            //            else if (sf.isInputed && tc.isInputed)
+            //            {
+            //                calcOption =
+            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                        STANDART1_A_Dp_sf_tc_INPUT;
+            //            }
+            //            else if (tr.isInputed && tc.isInputed)
+            //            {
+            //                calcOption =
+            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                        STANDART1_A_Dp_tr_tc_INPUT;
+            //            }
+            //            else if (sf.isInputed && tf.isInputed)
+            //            {
+            //                calcOption =
+            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                        STANDART2_A_Dp_sf_tf_INPUT;
+            //            }
+            //            else if (tr.isInputed && tf.isInputed)
+            //            {
+            //                calcOption =
+            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                        STANDART2_A_Dp_tr_tf_INPUT;
+            //            }
+            //            else if (n.isInputed && tf.isInputed)
+            //            {
+            //                calcOption =
+            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                        STANDART3_A_Dp_n_tf_INPUT;
+            //            }
+            //            else if (tc.isInputed && tf.isInputed)
+            //            {
+            //                calcOption =
+            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                        STANDART3_A_Dp_tc_tf_INPUT;
+            //            }
+            //            else if (tr.isInputed && tf.isInputed)
+            //            {
+            //                calcOption =
+            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                        STANDART3_A_Dp_tr_tf_INPUT;
+            //            }
+            //            else
+            //            {
+            //                throw new Exception("Not processed combination of inputs");
+            //            }
+            //        }
+            //        else if (A.isInputed && !Dp.isInputed)
+            //        {
+            //            if (hc.isInputed)
+            //            {
+            //                if (sf.isInputed && n.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_hc_sf_n_INPUT;
+            //                }
+            //                else if (tr.isInputed && n.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_hc_tr_n_INPUT;
+            //                }
+            //                else if (sf.isInputed && tc.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_hc_sf_tc_INPUT;
+            //                }
+            //                else if (tr.isInputed && tc.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_hc_tr_tc_INPUT;
+            //                }
+            //                else
+            //                {
+            //                    throw new Exception("Not processed combination of inputs");
+            //                }
+            //            }
+            //            else if (Vf.isInputed)
+            //            {
+            //                if (sf.isInputed && n.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_Vf_sf_n_INPUT;
+            //                }
+            //                else if (tr.isInputed && n.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_Vf_tr_n_INPUT;
+            //                }
+            //                else if (sf.isInputed && tc.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_Vf_sf_tc_INPUT;
+            //                }
+            //                else if (tr.isInputed && tc.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_Vf_tr_tc_INPUT;
+            //                }
+            //                else
+            //                {
+            //                    throw new Exception("Not processed combination of inputs");
+            //                }
+            //            }
+            //            else if (Mf.isInputed)
+            //            {
+            //                if (sf.isInputed && n.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_Mf_sf_n_INPUT;
+            //                }
+            //                else if (tr.isInputed && n.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_Mf_tr_n_INPUT;
+            //                }
+            //                else if (sf.isInputed && tc.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_Mf_sf_tc_INPUT;
+            //                }
+            //                else if (tr.isInputed && tc.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART4_A_Mf_tr_tc_INPUT;
+            //                }
+            //                else
+            //                {
+            //                    throw new Exception("Not processed combination of inputs");
+            //                }
+            //            }
+            //            else
+            //            {
+            //                throw new Exception("Not processed combination of inputs");
+            //            }
+            //        }
+            //        else if (A.isInputed && Dp.isInputed)
+            //        {
+            //            if (hc.isInputed)
+            //            {
+            //                if (sf.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART7_A_Dp_hc_sf_INPUT;
+            //                }
+            //                else if (tr.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART7_A_Dp_hc_tr_INPUT;
+            //                }
+            //                else if (n.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART8_A_Dp_hc_n_INPUT;
+            //                }
+            //                else if (tc.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART8_A_Dp_hc_tc_INPUT;
+            //                }
+            //                else if (tr.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART8_A_Dp_hc_tr_INPUT;
+            //                }
+            //                else
+            //                {
+            //                    throw new Exception("Not processed combination of inputs");
+            //                }
+            //            }
+            //            else if (Vf.isInputed)
+            //            {
+            //                if (sf.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART7_A_Dp_Vf_sf_INPUT;
+            //                }
+            //                else if (tr.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART7_A_Dp_Vf_tr_INPUT;
+            //                }
+            //                else if (n.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART8_A_Dp_Vf_n_INPUT;
+            //                }
+            //                else if (tc.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART8_A_Dp_Vf_tc_INPUT;
+            //                }
+            //                else if (tr.isInputed)
+            //                {
+            //                    calcOption =
+            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
+            //                            STANDART8_A_Dp_Vf_tr_INPUT;
+            //                }
+            //                else
+            //                {
+            //                    throw new Exception("Not processed combination of inputs");
+            //                }
+            //            }
+            //            else
+            //            {
+            //                throw new Exception("Not processed combination of inputs");
+            //            }
+            //        }
+            //        else
+            //        {
+            //            throw new Exception("Not processed combination of inputs");
+            //        }
+            //    }
+            //    else if ((Qms.isInputed || Qmsus.isInputed || Qsus.isInputed)
+            //             && !A.isInputed)
+            //    {
+            //        if (Dp.isInputed && hc.isInputed)
+            //        {
+            //            if (Qms.isInputed)
+            //            {
+            //                if (n.isInputed)
+            //                {
+            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
+            //                }
+            //                else if (tc.isInputed)
+            //                {
+            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
+            //                }
+            //                else if (tr.isInputed)
+            //                {
+            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tr_INPUT;
+            //                }
+            //                else
+            //                {
+            //                    throw new Exception("Not processed combination of inputs");
+            //                }
+            //            }
+            //            else if (Qmsus.isInputed)
+            //            {
+            //                if (n.isInputed)
+            //                {
+            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
+            //                }
+            //                else if (tc.isInputed)
+            //                {
+            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
+            //                }
+            //                else if (tr.isInputed)
+            //                {
+            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tr_INPUT;
+            //                }
+            //                else
+            //                {
+            //                    throw new Exception("Not processed combination of inputs");
+            //                }
+            //            }
+            //            else if (Qsus.isInputed)
+            //            {
+            //                if (n.isInputed)
+            //                {
+            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
+            //                }
+            //                else if (tc.isInputed)
+            //                {
+            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
+            //                }
+            //                else if (tr.isInputed)
+            //                {
+            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT;
+            //                }
+            //                else
+            //                {
+            //                    throw new Exception("Not processed combination of inputs");
+            //                }
+            //            }
+            //            else
+            //            {
+            //                throw new Exception("Not processed combination of inputs");
+            //            }
+            //        }
+            //        else
+            //        {
+            //            throw new Exception("Not processed combination of inputs");
+            //        }
+            //    }
+            //    else if (A.isInputed && (Qms.isInputed || Qmsus.isInputed || Qsus.isInputed))
+            //    {
+            //        if (Qms.isInputed && Dp.isInputed && sf.isInputed)
+            //        {
+            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT;
+            //        }
+            //        else if (Qmsus.isInputed && Dp.isInputed && sf.isInputed)
+            //        {
+            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT;
+            //        }
+            //        else if (Qsus.isInputed && Dp.isInputed && sf.isInputed)
+            //        {
+            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT;
+            //        }
+            //        else if (Qms.isInputed && Dp.isInputed && tr.isInputed)
+            //        {
+            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT;
+            //        }
+            //        else if (Qmsus.isInputed && Dp.isInputed && tr.isInputed)
+            //        {
+            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT;
+            //        }
+            //        else if (Qsus.isInputed && Dp.isInputed && tr.isInputed)
+            //        {
+            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT;
+            //        }
+            //        else
+            //        {
+            //            throw new Exception("Not processed combination of inputs");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        throw new Exception("Not processed calculation Option");
+            //    }
+
+            //    return calcOption;   
+            //}
         }
+
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionOptimization()
+        {
+            List<fmBlockParameter> inputParameters = GetInputedParameters();
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qms, Dp, sf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qsus, Dp, sf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qmsus, Dp, sf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qms, Dp, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qsus, Dp, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qmsus, Dp, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT;
+            }
+
+            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionDesign()
+        {
+            List<fmBlockParameter> inputParameters = GetInputedParameters();
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qms, Dp, hc, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qsus, Dp, hc, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qmsus, Dp, hc, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qms, Dp, hc, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qsus, Dp, hc, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qmsus, Dp, hc, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qms, Dp, hc, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tr_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qsus, Dp, hc, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qmsus, Dp, hc, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tr_INPUT;
+            }
+
+            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart()
+        {
+            fmFilterMachiningCalculator.CalculationOptions calcOption;
+
+            calcOption = GetCalculatorCalculationOptionStandart1();
+            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
+            {
+                return calcOption;
+            }
+
+            calcOption = GetCalculatorCalculationOptionStandart2();
+            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
+            {
+                return calcOption;
+            }
+
+            calcOption = GetCalculatorCalculationOptionStandart3();
+            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
+            {
+                return calcOption;
+            }
+
+            calcOption = GetCalculatorCalculationOptionStandart4();
+            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
+            {
+                return calcOption;
+            }
+
+            calcOption = GetCalculatorCalculationOptionStandart7();
+            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
+            {
+                return calcOption;
+            }
+
+            calcOption = GetCalculatorCalculationOptionStandart8();
+            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
+            {
+                return calcOption;
+            }
+
+            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart8()
+        {
+            List<fmBlockParameter> inputParameters = GetInputedParameters();
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vf_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vf_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT;
+            }
+
+            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart7()
+        {
+            List<fmBlockParameter> inputParameters = GetInputedParameters();
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, sf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, sf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, tr })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT;
+            }
+
+            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart4()
+        {
+            List<fmBlockParameter> inputParameters = GetInputedParameters();
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, hc, sf, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, hc, sf, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, hc, tr, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_tr_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, hc, tr, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_tr_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Vf, sf, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_sf_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Vf, sf, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Vf, tr, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_tr_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Vf, tr, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Mf, sf, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_sf_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Mf, sf, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Mf, tr, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_tr_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Mf, tr, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT;
+            }
+
+            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart3()
+        {
+            List<fmBlockParameter> inputParameters = GetInputedParameters();
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, n, tf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_n_tf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tc, tf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tr, tf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
+            }
+
+            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart2()
+        {
+            List<fmBlockParameter> inputParameters = GetInputedParameters();
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, sf, tf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tr, tf })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT;
+            }
+
+            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart1()
+        {
+            List<fmBlockParameter> inputParameters = GetInputedParameters();
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, sf, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tr, n })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, sf, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tr, tc })))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT;
+            }
+
+            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private bool IsSameLists(List<fmBlockParameter> a, List<fmBlockParameter> b)
+        {
+            if (a.Count != b.Count)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < a.Count; ++i)
+            {
+                if (a[i] != b[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private List<fmBlockParameter> GetParametersListFromArray(fmBlockParameter[] array)
+        {
+            List<fmBlockParameter> list = new List<fmBlockParameter>();
+            foreach (fmBlockParameter p in array)
+            {
+                list.Add(p);
+            }
+
+            List<fmBlockParameter> result = new List<fmBlockParameter>();
+            foreach (fmBlockParameter p in parameters)
+            {
+                if (list.Contains(p))
+                {
+                    result.Add(p);
+                }
+            }
+
+            return result;
+        }
+
+        private List<fmBlockParameter> GetInputedParameters()
+        {
+            List<fmBlockParameter> result = new List<fmBlockParameter>();
+            foreach (fmBlockParameter p in parameters)
+            {
+                if (p.isInputed)
+                {
+                    result.Add(p);
+                }
+            }
+            return result;
+        }
+
         private CalculationOption GetBlockCalculationOption()
         {
             return calculationOptionView.GetSelectedOption();
@@ -882,19 +1362,38 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             if (processOnChange && calculationOptionView != null)
             {
+                UpdateGroups();
+
                 CalculationOption calcOption = calculationOptionView.GetSelectedOption();
-                List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetInputedParametersList(calcOption);
+                List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calcOption);
+                Dictionary<fmBlockParameterGroup, bool> groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
+
+                foreach (fmBlockParameter parameter in parameters)
+                {
+                    if (parameter.group != null)
+                    {
+                        groupUsed[parameter.group] = false;
+                    }
+                }
+
                 foreach (fmBlockParameter parameter in parameters)
                 {
                     bool found = inputedParameters.Contains(parameter.globalParameter);
-                    parameter.isInputed = found;
+                    bool notUsedGroup = parameter.group == null ? true : !groupUsed[parameter.group];
+                    
+                    parameter.isInputed = found && notUsedGroup;
+                    
+                    if (parameter.group != null)
+                    {
+                        groupUsed[parameter.group] = true;
+                    }
+                    
                     if (parameter.cell != null)
                     {
                         parameter.cell.ReadOnly = !found;
                     }
                 }
 
-                UpdateGroups();
                 UpdateCellsBackColor();
                 ReWriteParameters();
             }
@@ -969,9 +1468,10 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockParameter p in parameters)
                 table[p] = null;
 
-            //[Description("7: A, Dp, hc, (sf/tr)")]
+            //[Description("7: A, Dp, (hc/Vf), (sf/tr)")]
             table[A] = A_group;
-            table[hc] = hc_group;
+            table[hc] = hc_MVf_group;
+            table[Vf] = hc_MVf_group;
             table[sf] = sf_tr_group;
             table[tr] = sf_tr_group;
         }

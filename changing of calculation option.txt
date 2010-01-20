@@ -13,6 +13,9 @@ how to change calculation option:
 3. in method
 		GetCalculatorCalculationOption ()
 	insert constructionS if (...) {...}
+
+4. correct method similar to
+		SetGroupsOfStandartX
 	
 	
 - fmFilterMachiningCalculators.cs

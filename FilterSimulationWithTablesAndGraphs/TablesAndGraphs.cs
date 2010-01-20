@@ -94,7 +94,7 @@ namespace FilterSimulationWithTablesAndGraphs
             List<fmBlockParameter> blockParameterList =
                 new fmFilterMachiningBlock(calculationOptionViewInTablesAndGraphs).Parameters;
             List<fmGlobalParameter> inputParameters =
-                CalculationOptionHelper.GetInputedParametersList(calculationOptionViewInTablesAndGraphs.GetSelectedOption());
+                CalculationOptionHelper.GetParametersListThatCanBeInput(calculationOptionViewInTablesAndGraphs.GetSelectedOption());
 
             foreach (fmBlockParameter p in blockParameterList)
             {
@@ -258,7 +258,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         fmAdditionalFilterMachiningBlock localFMB = fmLocalBlocks[j];
                         tmp.IsDrawn = localFMB.IsDrawn;
                         List<fmGlobalParameter> inputParameters = CalculationOptionHelper.
-                            GetInputedParametersList(calculationOptionViewInTablesAndGraphs.GetSelectedOption());
+                            GetParametersListThatCanBeInput(calculationOptionViewInTablesAndGraphs.GetSelectedOption());
 
                         for (int i = 0; i < tmp.Parameters.Count; ++i)
                         {
@@ -599,7 +599,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             List<string> inputNames = new List<string>();
             List<string> outputNames = new List<string>();
-            List<fmGlobalParameter> inputParameters = CalculationOptionHelper.GetInputedParametersList(calculationOptionViewInTablesAndGraphs.GetSelectedOption());
+            List<fmGlobalParameter> inputParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calculationOptionViewInTablesAndGraphs.GetSelectedOption());
             List<fmBlockParameter> blockParameterList = new fmFilterMachiningBlock(calculationOptionViewInTablesAndGraphs).Parameters;
             foreach (fmBlockParameter p in blockParameterList)
             {
