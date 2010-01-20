@@ -4,8 +4,8 @@
 	<property unless="${property::exists('releaseDir')}" name="releaseDir" value="${baseDir}\Releases" />
 	<property unless="${property::exists('buildType')}" name="buildType" value="dev" />
 
-	<property unless="${property::exists('svn.login')}" name="svn.login" value="VPutrov" />
-	<property unless="${property::exists('svn.password')}" name="svn.password" value="nadin-KO85" />
+	<property unless="${property::exists('svn.login')}" name="svn.login" value="masha" />
+	<property unless="${property::exists('svn.password')}" name="svn.password" value="bar" />
 
 	<property unless="${property::exists('makereleasepackage.copydir')}" name="makereleasepackage.copydir" value="${baseDir}\ToDeploy" />
 	<property unless="${property::exists('makereleasepackage.domainassemblypath')}" name="makereleasepackage.domainassemblypath" value="AdvancedCalculator\bin\Release\FilterSimulationWithTablesAndGraphs.dll" />
