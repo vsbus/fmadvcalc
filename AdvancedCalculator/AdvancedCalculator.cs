@@ -45,5 +45,10 @@ namespace AdvancedCalculator
             //filterSimulation1.UpdateAll();
             filterSimulationWithTablesAndGraphs1.UpdateAll();
         }
+
+        private void AdvancedCalculator_Load(object sender, EventArgs e)
+        {
+           Text = string.Format("AdvancedCalculator (v.{0})", Config.Version);
+        }
     }
 }

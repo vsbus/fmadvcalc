@@ -63,7 +63,7 @@ namespace AdvancedCalculator
             // 
             this.saveAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAllToolStripMenuItem.Image")));
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveAllToolStripMenuItem.Text = "Save All";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
@@ -80,21 +80,21 @@ namespace AdvancedCalculator
             // unitsToolStripMenuItem
             // 
             this.unitsToolStripMenuItem.Name = "unitsToolStripMenuItem";
-            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.unitsToolStripMenuItem.Text = "Units";
             this.unitsToolStripMenuItem.Click += new System.EventHandler(this.unitsToolStripMenuItem_Click);
             // 
             // precisionToolStripMenuItem
             // 
             this.precisionToolStripMenuItem.Name = "precisionToolStripMenuItem";
-            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.precisionToolStripMenuItem.Text = "Precision";
             this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
             // 
             // rangesToolStripMenuItem
             // 
             this.rangesToolStripMenuItem.Name = "rangesToolStripMenuItem";
-            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.rangesToolStripMenuItem.Text = "Ranges";
             this.rangesToolStripMenuItem.Click += new System.EventHandler(this.rangesToolStripMenuItem_Click);
             // 
@@ -115,6 +115,7 @@ namespace AdvancedCalculator
             this.Controls.Add(this.menuStrip1);
             this.Name = "AdvancedCalculator";
             this.Text = "Advanced Calculator";
+            this.Load += new System.EventHandler(this.AdvancedCalculator_Load);
             this.Resize += new System.EventHandler(this.AdvancedCalculator_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
