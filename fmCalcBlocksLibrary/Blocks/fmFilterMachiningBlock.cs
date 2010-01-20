@@ -169,19 +169,43 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameter Pc;
         private readonly fmBlockParameter rc;
         private readonly fmBlockParameter a;
-
+        /*
+            220 200 230
+            240 230 180
+         *  180 230 230
+         *  240 180 230
+         *  180 240 150
+         *  
+         * 190 200 240
+         * 250 230 150
+         * 230 240 190
+         * 250 240 190
+         * 190 240 240
+         * 
+         * 160 250 250
+         * 210 190 240
+         * 220 240 170
+         * 240 200 190
+         * 250 220 150
+         * 
+         
+         
+         * 259 210 130
+         * 150 250 180
+         
+         */
         private readonly fmBlockParameterGroup A_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup Dp_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(255, 255, 204));
-        private readonly fmBlockParameterGroup n_tc_group = new fmBlockParameterGroup(Color.FromArgb(255, 230, 204));
-        private readonly fmBlockParameterGroup n_tc_tr_group = new fmBlockParameterGroup(Color.FromArgb(255, 204, 204));
+        private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 240));
+        private readonly fmBlockParameterGroup n_tc_group = new fmBlockParameterGroup(Color.FromArgb(250, 230, 150));
+        private readonly fmBlockParameterGroup n_tc_tr_group = new fmBlockParameterGroup(Color.FromArgb(230, 240, 190));
         private readonly fmBlockParameterGroup tf_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup hc_MVf_group = new fmBlockParameterGroup(Color.FromArgb(255, 143, 143));
+        private readonly fmBlockParameterGroup hc_MVf_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
         private readonly fmBlockParameterGroup hc_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup Msus_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup Vsus_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup Ms_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup Q_group = new fmBlockParameterGroup(Color.FromArgb(102, 204, 204));
+        private readonly fmBlockParameterGroup Q_group = new fmBlockParameterGroup(Color.FromArgb(190, 240, 240));
         //private readonly fmBlockParameterGroup eps_group = new fmBlockParameterGroup();
         //private readonly fmBlockParameterGroup kappa_group = new fmBlockParameterGroup();
         //private readonly fmBlockParameterGroup Pc_group = new fmBlockParameterGroup();
