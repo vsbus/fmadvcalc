@@ -177,7 +177,10 @@ namespace fmCalculatorsLibrary
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_Vf_n_INPUT
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_Vf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT;
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_n_INPUT
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_tc_INPUT
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_tr_INPUT;
         }
 
         private bool IsStandartKindOption(CalculationOptions calculationOption)
