@@ -10,7 +10,6 @@ namespace FilterSimulation
         private void projectCreateButton_Click(object sender, EventArgs e)
         {
             fSolution.CurrentObjects.Project = new fmFilterSimProject(fSolution, "Unnamed project");
-            //fSolution.CurrentColumns.Project = "projectNameColumn";
             fSolution.CurrentColumns.Project = projectNameColumn.Index;
             DisplaySolution(fSolution);
             projectDataGrid.BeginEdit(true);
@@ -69,7 +68,6 @@ namespace FilterSimulation
             }
 
             fSolution.CurrentObjects.Suspension = new fmFilterSimSuspension(parentProject, "Unnamed suspension", "Unnamed material", "Unnamed customer");
-            //fSolution.CurrentColumns.Suspension = "suspensionNameColumn";
             fSolution.CurrentColumns.Suspension = suspensionNameColumn.Index;
             DisplaySolution(fSolution);
             suspensionDataGrid.BeginEdit(true);
@@ -206,7 +204,6 @@ namespace FilterSimulation
                 fSolution.CurrentObjects.Simulation.Keep();
             }
 
-            //fSolution.CurrentColumns.Simulation = "simulationNameColumn";
             fSolution.CurrentColumns.Simulation = simulationNameColumn.Index;
             DisplaySolution(fSolution);
             SortTables();
@@ -271,8 +268,6 @@ namespace FilterSimulation
         {
             bool isVisible = fullSimulationInfoCheckBox.Checked;
             simulationDataGrid.Columns[simulationProjectColumn.Index].Visible = isVisible;
-            //simulationDataGrid.Columns[simulationMaterialColumn.Index].Visible = isVisible;
-            //simulationDataGrid.Columns[simulationCustomerColumn.Index].Visible = isVisible;
             simulationDataGrid.Columns[simulationSuspensionNameColumn.Index].Visible = isVisible;
             simulationDataGrid.Columns[simulationFilterMediumColumn.Index].Visible = isVisible;
             simulationDataGrid.Columns[simulationMachineTypeColumn.Index].Visible = isVisible;
@@ -297,21 +292,6 @@ namespace FilterSimulation
             SortTables();
 
             simSeriesDataGrid.BeginEdit(true);
-        }
-
-        private void unitsButton_Click(object sender, EventArgs e)
-        {
-            //UnitsOptions uoForm = new UnitsOptions();
-            //uoForm.ShowDialog();
-            //UpdateUnitsAndData();
-            //DisplaySolution(fSolution);
-        }
-
-        private void DigitsOptionsbutton_Click_1(object sender, EventArgs e)
-        {
-            //DigitsOptions doForm = new DigitsOptions();
-            //doForm.ShowDialog();
-            //DisplaySolution(fSolution);
         }
     }
 }

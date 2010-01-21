@@ -36,10 +36,12 @@ namespace FilterSimulation.fmFilterObjects
         {
             get { return Data.SusList; }
         }
+
         public Guid Guid
         {
             get { return m_Guid; }
         }
+
         public string Name
         {
             get { return Data.Name; }
@@ -49,6 +51,7 @@ namespace FilterSimulation.fmFilterObjects
                 Data.Name = value;
             }
         }
+
         public bool Modified
         {
             get { return m_Modified; }
@@ -58,10 +61,12 @@ namespace FilterSimulation.fmFilterObjects
                 //m_ParentSolution.Modified |= value;
             }
         }
+
         public fmFilterSimSolution Parent
         {
             get { return m_ParentSolution; }
         }
+
         public bool Checked
         {
             get { return m_Checked; }
@@ -80,6 +85,7 @@ namespace FilterSimulation.fmFilterObjects
             Data.SusList = new List<fmFilterSimSuspension>();
             Keep();
         }
+
         public void Keep()
         {
             foreach (fmFilterSimSuspension sus in Data.SusList)
@@ -89,23 +95,26 @@ namespace FilterSimulation.fmFilterObjects
             BackupData.CopyFrom(Data, this);
             Modified = false;
         }
+
         public void Restore()
         {
             Data.CopyFrom(BackupData, this);
             Modified = false;
-            //m_Checked = true;
         }
+
         public void Delete()
         {
             foreach (fmFilterSimSuspension sus in Data.SusList.GetRange(0, Data.SusList.Count))
                 sus.Delete();
             m_ParentSolution.RemoveProject(this);
         }
+
         public void AddSuspension(fmFilterSimSuspension sus)
         {
             Data.SusList.Add(sus);
             Modified = true;
         }
+
         public void RemoveSuspension(fmFilterSimSuspension sus)
         {
             Data.SusList.Remove(sus);
@@ -131,6 +140,7 @@ namespace FilterSimulation.fmFilterObjects
             }
             return ret;
         }
+
         public fmFilterSimSuspension FindSuspension(Guid guid)
         {
             foreach (fmFilterSimSuspension sus in Data.SusList)
@@ -140,6 +150,7 @@ namespace FilterSimulation.fmFilterObjects
             }
             return null;
         }
+
         public fmFilterSimulation FindSimulation(Guid guid)
         {
             foreach (fmFilterSimSuspension sus in Data.SusList)
@@ -150,16 +161,5 @@ namespace FilterSimulation.fmFilterObjects
             }
             return null;
         }
-
-        //public fmFilterSimSerie FindSerie(Guid guid)
-        //{
-        //    foreach (fmFilterSimSuspension sus in Data.SusList)
-        //    {
-        //        fmFilterSimSerie ser = sus.FindSerie(guid);
-        //        if (ser != null)
-        //            return ser;
-        //    }
-        //    return null;
-        //}
     }
 }

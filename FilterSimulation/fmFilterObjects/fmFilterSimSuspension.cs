@@ -108,7 +108,6 @@ namespace FilterSimulation.fmFilterObjects
             Data.Material = Material;
             Data.Customer = Customer;
             Data.SeriesList = new List<fmFilterSimSerie>();
-            //m_Checked = true;
             Keep();
         }
 
@@ -135,7 +134,6 @@ namespace FilterSimulation.fmFilterObjects
         public void CopyFrom(fmFilterSimSuspension sus)
         {
             m_Guid = sus.m_Guid;
-            //m_ParentProject = sus.m_ParentProject;
             Modified = sus.Modified;
             Data.CopyFrom(sus.Data, this);
             BackupData.CopyFrom(sus.BackupData, this);

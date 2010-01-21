@@ -79,10 +79,6 @@ namespace FilterSimulation.fmFilterObjects
 
     public struct CurrentColumnsStruct
     {
-        //public string Project;
-        //public string Suspension;
-        //public string SimSerie;
-        //public string Simulation;
         public int Project;
         public int Suspension;
         public int SimSerie;

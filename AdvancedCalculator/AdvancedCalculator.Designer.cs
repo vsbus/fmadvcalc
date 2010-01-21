@@ -116,7 +116,6 @@ namespace AdvancedCalculator
             this.Name = "AdvancedCalculator";
             this.Text = "Advanced Calculator";
             this.Load += new System.EventHandler(this.AdvancedCalculator_Load);
-            this.Resize += new System.EventHandler(this.AdvancedCalculator_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

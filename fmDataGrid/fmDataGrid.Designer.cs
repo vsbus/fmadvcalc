@@ -6,8 +6,6 @@ namespace fmDataGrid
 {
     partial class fmDataGrid
     {
-        //private Color m_currentRowColor = Color.Cyan;
-
         private void CopyEditedValueToCellValue()
         {
             CurrentCell.Value = CurrentCell.EditedFormattedValue;
@@ -15,7 +13,6 @@ namespace fmDataGrid
 
         private void fmDataGridTextChanged(object sender, EventArgs e)
         {
-            //CopyEditedValueToCellValue();   STRANGE, BUT THIS LEAD TO BLACK CELLS
             CurrentCell.Value = (sender as TextBox).Text;
             if (CellValueChangedByUser != null)
             {
@@ -48,15 +45,6 @@ namespace fmDataGrid
             }
         }
 
-        
-        //public void SetRowColor(DataGridViewRow row, Color color)
-        //{
-        //    foreach(DataGridViewCell c in row.Cells)
-        //    {
-        //        c.Style.BackColor = color;
-        //    }
-        //}
-
         private void InitializeComponent()
         {
             #region Activate Immediate Writing text to cells
@@ -82,7 +70,6 @@ namespace fmDataGrid
                 && CurrentCell != null 
                 && e.RowIndex == CurrentCell.RowIndex)
             {
-                //Color newColor = Color.LightGreen;
                 Color newColor = Color.FromArgb(200, 255, 200);
                 Color oldColor = e.CellStyle.BackColor;
                 newColor = Color.FromArgb(oldColor.R * newColor.R / 255, 

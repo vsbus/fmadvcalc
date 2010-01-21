@@ -50,7 +50,6 @@ namespace fmCalcBlocksLibrary.Blocks
                 if (enteredParameter != null)
                 {
                     UpdateIsInputed(enteredParameter);
-                    //UpdateCellsBackColor();
                     enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.unitFamily.CurrentUnit.Coef;
                     
                     if (ValuesChangedByUser != null)
@@ -64,7 +63,6 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private fmBlockParameter FindEnteredParameter(DataGridViewCell cell, out int parameterIndex)
         {
-            //foreach (fmParameter par in parameters)
             for (int i = 0; i < parameters.Count; ++i)
                 if (parameters[i].cell == cell)
                 {
@@ -95,10 +93,12 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             processOnChange = false;
         }
+
         public void ResumeProcessing()
         {
             processOnChange = true;
         }
+
         public void CalculateAndDisplay()
         {
             DoCalculations();
@@ -109,8 +109,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public event fmBlockParameterEventHandler ValuesChangedByUser;
 
         abstract public void DoCalculations();
-        //abstract public void UpdateIsInputed(fmBlockParameter enteredParameter);
-        // abstract void CalculationOptionWasChanged();
+
         public void UpdateIsInputed(fmBlockParameter enteredParameter)
         {
             foreach (fmBlockParameter p in parameters)
@@ -123,8 +122,6 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
         
-        //virtual public void UpdateCellsBackColor() {}
-
         protected void SetParameterCellBackColor(fmBlockParameter parameter, Color backColor)
         {
             if (parameter.cell != null)

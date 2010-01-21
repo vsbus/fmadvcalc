@@ -162,10 +162,6 @@ namespace FilterSimulation
 
                 fSolution.CurrentObjects.Project = null;
 
-                //fSolution.CurrentColumns.Project = "projectNameColumn";
-                //fSolution.CurrentColumns.Suspension = "suspensionNameColumn";
-                //fSolution.CurrentColumns.SimSerie = "simSeriesNameColumn";
-                //fSolution.CurrentColumns.Simulation = "simulationNameColumn";
                 fSolution.CurrentColumns.Project = projectNameColumn.Index;
                 fSolution.CurrentColumns.Suspension = suspensionNameColumn.Index;
                 fSolution.CurrentColumns.SimSerie = simSeriesNameColumn.Index;
@@ -181,7 +177,6 @@ namespace FilterSimulation
                     }
 
                     Guid projectGuid = (Guid)projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value;
-                    //fSolution.CurrentColumns.Project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Name;
                     fSolution.CurrentColumns.Project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Index;
                     
                     fSolution.CurrentObjects.Project = fSolution.FindProject(projectGuid);
@@ -196,7 +191,6 @@ namespace FilterSimulation
                     }
                     
                     Guid suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value;
-                    //fSolution.CurrentColumns.Suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Name;
                     fSolution.CurrentColumns.Suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Index;
                     fSolution.CurrentObjects.Suspension = fSolution.FindSuspension(suspensionGuid);
                 }
@@ -210,7 +204,6 @@ namespace FilterSimulation
                     }
 
                     Guid simSeriesGuid = (Guid)simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value;
-                    //fSolution.CurrentColumns.SimSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Name;
                     fSolution.CurrentColumns.SimSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Index;
                     fSolution.CurrentObjects.Serie = fSolution.FindSerie(simSeriesGuid);
                 }
@@ -224,7 +217,6 @@ namespace FilterSimulation
                     }
 
                     Guid simulationGuid = (Guid)simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value;
-                    //fSolution.CurrentColumns.Simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Name;
                     fSolution.CurrentColumns.Simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Index;
                     fSolution.CurrentObjects.Simulation = fSolution.FindSimulation(simulationGuid);
                 }
@@ -315,7 +307,6 @@ namespace FilterSimulation
                 fSolution.CurrentObjects.Simulation.Keep();
             }
 
-            //fSolution.CurrentColumns.Simulation = "simulationNameColumn";
             fSolution.CurrentColumns.Simulation = simulationNameColumn.Index;
             DisplaySolution(fSolution);
             SortTables();

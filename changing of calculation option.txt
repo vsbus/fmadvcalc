@@ -7,7 +7,7 @@ how to change calculation option:
 		Change description of the option
 		
 2. in method
-		GetInputedParametersList (CalculationOption calculationOption)
+		GetParametersListThatCanBeInput (CalculationOption calculationOption)
 	change comment and insert required row.
 	
 3. in method

@@ -78,7 +78,7 @@
 	</target>
 
 	<target name="svn.update">
-		<exec program="svn.exe" commandline="update ${baseDir} --revision ${svn.revision} --username ${svn.login} --password ${svn.password}" workingdir="${baseDir}" />
+		<exec program="svn.exe" commandline="update" workingdir="${baseDir}" />
 	</target>
 
 	<target name="svn.revision">
@@ -164,8 +164,8 @@
 		<exec program="msbuild.exe" commandline="${build.solution}" basedir="${build.framework.dir}" workingdir="${baseDir}/" resultproperty="build.result" failonerror="false"  />
 	</target>
 	<target name="build.postBuildActions">
-
 		<if test="${property::exists('build.result')}">
+			<echo message="build result : ${build.result}" />
 			<fail if="${build.result != '0'}" message="Msbuild failed. Exit code: ${build.result}" />
 		</if>
 	</target>
@@ -231,7 +231,7 @@
 		<call target="config" />
 		<call target="build.release" />
 		<call target="makereleasepackage" />
-		<exec program="svn.exe" commandline="commit ${releaseDir} --message &quot;[NAnt] new release package added&quot;" />
+
 	</target>
 
 	<target name="makereleasepackage">
@@ -245,8 +245,8 @@
 		<delete dir="${makereleasepackage.copydir}" />
 	                             	
 		<copy todir="${makereleasepackage.copydir}">
-			<fileset basedir="${baseDir}">
-		<include name="AdvancedCalculator/bin/Release/**/*" />		
+			<fileset basedir="${baseDir}/AdvancedCalculator/bin/Release">
+		<include name="**/*" />		
 			</fileset>
 		</copy>
 	</target>

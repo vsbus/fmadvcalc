@@ -180,7 +180,6 @@ namespace FilterSimulation.fmFilterObjects
         public void CopyFrom(fmFilterSimSerie serie)
         {
             m_Guid = serie.m_Guid;
-            //m_ParentSuspension = serie.m_ParentSuspension;
             Data.CopyFrom(serie.Data, this);
             BackupData.CopyFrom(serie.BackupData, this);
             Modified = serie.Modified;

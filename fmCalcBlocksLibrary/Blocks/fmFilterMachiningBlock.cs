@@ -29,7 +29,7 @@ namespace fmCalcBlocksLibrary.Blocks
         //Standart5,  // A, hc, (sf/tr), tf           -- input
         //Standart6,  // A, hc, (n/tc/tr), tf       -- input
         
-        [Description("7: A, Dp, (hc/Vf), (sf/tr)")]
+        [Description("7: A, Dp, (hc/Vf/Mf), (sf/tr)")]
         Standart7,
         
         [Description("8: A, Dp, hc, (n/tc/tr)")]
@@ -98,12 +98,13 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     break;
         
-                //[Description("7: A, Dp, (hc/Vf), (sf/tr)")]
+                //[Description("7: A, Dp, (hc/Vf/Mf), (sf/tr)")]
                 case CalculationOption.Standart7:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.Vf);
+                    result.Add(fmGlobalParameter.Mf);
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.tr);
                     break;
@@ -171,12 +172,13 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameter Pc;
         private readonly fmBlockParameter rc;
         private readonly fmBlockParameter a;
+
         /*
-            220 200 230
-            240 230 180
-         *  180 230 230
-         *  240 180 230
-         *  180 240 150
+         * 220 200 230
+         * 240 230 180
+         * 180 230 230
+         * 240 180 230
+         * 180 240 150
          *  
          * 190 200 240
          * 250 230 150
@@ -189,13 +191,11 @@ namespace fmCalcBlocksLibrary.Blocks
          * 220 240 170
          * 240 200 190
          * 250 220 150
-         * 
-         
-         
+         *
          * 259 210 130
          * 150 250 180
-         
          */
+
         private readonly fmBlockParameterGroup A_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup Dp_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 240));
@@ -443,399 +443,38 @@ namespace fmCalcBlocksLibrary.Blocks
             }
 
             throw new Exception("Not processed combination of inputs"); 
-
-            //{
-            //    if (A.isInputed && !Qms.isInputed && !Qmsus.isInputed && !Qsus.isInputed)
-            //    {
-            //        if (A.isInputed && Dp.isInputed && !hc.isInputed)
-            //        {
-            //            if (sf.isInputed && n.isInputed)
-            //            {
-            //                calcOption =
-            //                    fmFilterMachiningCalculator.CalculationOptions.
-            //                        STANDART1_A_Dp_sf_n_INPUT;
-            //            }
-            //            else if (tr.isInputed && n.isInputed)
-            //            {
-            //                calcOption =
-            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                        STANDART1_A_Dp_tr_n_INPUT;
-            //            }
-            //            else if (sf.isInputed && tc.isInputed)
-            //            {
-            //                calcOption =
-            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                        STANDART1_A_Dp_sf_tc_INPUT;
-            //            }
-            //            else if (tr.isInputed && tc.isInputed)
-            //            {
-            //                calcOption =
-            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                        STANDART1_A_Dp_tr_tc_INPUT;
-            //            }
-            //            else if (sf.isInputed && tf.isInputed)
-            //            {
-            //                calcOption =
-            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                        STANDART2_A_Dp_sf_tf_INPUT;
-            //            }
-            //            else if (tr.isInputed && tf.isInputed)
-            //            {
-            //                calcOption =
-            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                        STANDART2_A_Dp_tr_tf_INPUT;
-            //            }
-            //            else if (n.isInputed && tf.isInputed)
-            //            {
-            //                calcOption =
-            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                        STANDART3_A_Dp_n_tf_INPUT;
-            //            }
-            //            else if (tc.isInputed && tf.isInputed)
-            //            {
-            //                calcOption =
-            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                        STANDART3_A_Dp_tc_tf_INPUT;
-            //            }
-            //            else if (tr.isInputed && tf.isInputed)
-            //            {
-            //                calcOption =
-            //                    fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                        STANDART3_A_Dp_tr_tf_INPUT;
-            //            }
-            //            else
-            //            {
-            //                throw new Exception("Not processed combination of inputs");
-            //            }
-            //        }
-            //        else if (A.isInputed && !Dp.isInputed)
-            //        {
-            //            if (hc.isInputed)
-            //            {
-            //                if (sf.isInputed && n.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_hc_sf_n_INPUT;
-            //                }
-            //                else if (tr.isInputed && n.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_hc_tr_n_INPUT;
-            //                }
-            //                else if (sf.isInputed && tc.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_hc_sf_tc_INPUT;
-            //                }
-            //                else if (tr.isInputed && tc.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_hc_tr_tc_INPUT;
-            //                }
-            //                else
-            //                {
-            //                    throw new Exception("Not processed combination of inputs");
-            //                }
-            //            }
-            //            else if (Vf.isInputed)
-            //            {
-            //                if (sf.isInputed && n.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_Vf_sf_n_INPUT;
-            //                }
-            //                else if (tr.isInputed && n.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_Vf_tr_n_INPUT;
-            //                }
-            //                else if (sf.isInputed && tc.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_Vf_sf_tc_INPUT;
-            //                }
-            //                else if (tr.isInputed && tc.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_Vf_tr_tc_INPUT;
-            //                }
-            //                else
-            //                {
-            //                    throw new Exception("Not processed combination of inputs");
-            //                }
-            //            }
-            //            else if (Mf.isInputed)
-            //            {
-            //                if (sf.isInputed && n.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_Mf_sf_n_INPUT;
-            //                }
-            //                else if (tr.isInputed && n.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_Mf_tr_n_INPUT;
-            //                }
-            //                else if (sf.isInputed && tc.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_Mf_sf_tc_INPUT;
-            //                }
-            //                else if (tr.isInputed && tc.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART4_A_Mf_tr_tc_INPUT;
-            //                }
-            //                else
-            //                {
-            //                    throw new Exception("Not processed combination of inputs");
-            //                }
-            //            }
-            //            else
-            //            {
-            //                throw new Exception("Not processed combination of inputs");
-            //            }
-            //        }
-            //        else if (A.isInputed && Dp.isInputed)
-            //        {
-            //            if (hc.isInputed)
-            //            {
-            //                if (sf.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART7_A_Dp_hc_sf_INPUT;
-            //                }
-            //                else if (tr.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART7_A_Dp_hc_tr_INPUT;
-            //                }
-            //                else if (n.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART8_A_Dp_hc_n_INPUT;
-            //                }
-            //                else if (tc.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART8_A_Dp_hc_tc_INPUT;
-            //                }
-            //                else if (tr.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART8_A_Dp_hc_tr_INPUT;
-            //                }
-            //                else
-            //                {
-            //                    throw new Exception("Not processed combination of inputs");
-            //                }
-            //            }
-            //            else if (Vf.isInputed)
-            //            {
-            //                if (sf.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART7_A_Dp_Vf_sf_INPUT;
-            //                }
-            //                else if (tr.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART7_A_Dp_Vf_tr_INPUT;
-            //                }
-            //                else if (n.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART8_A_Dp_Vf_n_INPUT;
-            //                }
-            //                else if (tc.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART8_A_Dp_Vf_tc_INPUT;
-            //                }
-            //                else if (tr.isInputed)
-            //                {
-            //                    calcOption =
-            //                        fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.
-            //                            STANDART8_A_Dp_Vf_tr_INPUT;
-            //                }
-            //                else
-            //                {
-            //                    throw new Exception("Not processed combination of inputs");
-            //                }
-            //            }
-            //            else
-            //            {
-            //                throw new Exception("Not processed combination of inputs");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            throw new Exception("Not processed combination of inputs");
-            //        }
-            //    }
-            //    else if ((Qms.isInputed || Qmsus.isInputed || Qsus.isInputed)
-            //             && !A.isInputed)
-            //    {
-            //        if (Dp.isInputed && hc.isInputed)
-            //        {
-            //            if (Qms.isInputed)
-            //            {
-            //                if (n.isInputed)
-            //                {
-            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
-            //                }
-            //                else if (tc.isInputed)
-            //                {
-            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
-            //                }
-            //                else if (tr.isInputed)
-            //                {
-            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tr_INPUT;
-            //                }
-            //                else
-            //                {
-            //                    throw new Exception("Not processed combination of inputs");
-            //                }
-            //            }
-            //            else if (Qmsus.isInputed)
-            //            {
-            //                if (n.isInputed)
-            //                {
-            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
-            //                }
-            //                else if (tc.isInputed)
-            //                {
-            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
-            //                }
-            //                else if (tr.isInputed)
-            //                {
-            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tr_INPUT;
-            //                }
-            //                else
-            //                {
-            //                    throw new Exception("Not processed combination of inputs");
-            //                }
-            //            }
-            //            else if (Qsus.isInputed)
-            //            {
-            //                if (n.isInputed)
-            //                {
-            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
-            //                }
-            //                else if (tc.isInputed)
-            //                {
-            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
-            //                }
-            //                else if (tr.isInputed)
-            //                {
-            //                    calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT;
-            //                }
-            //                else
-            //                {
-            //                    throw new Exception("Not processed combination of inputs");
-            //                }
-            //            }
-            //            else
-            //            {
-            //                throw new Exception("Not processed combination of inputs");
-            //            }
-            //        }
-            //        else
-            //        {
-            //            throw new Exception("Not processed combination of inputs");
-            //        }
-            //    }
-            //    else if (A.isInputed && (Qms.isInputed || Qmsus.isInputed || Qsus.isInputed))
-            //    {
-            //        if (Qms.isInputed && Dp.isInputed && sf.isInputed)
-            //        {
-            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT;
-            //        }
-            //        else if (Qmsus.isInputed && Dp.isInputed && sf.isInputed)
-            //        {
-            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT;
-            //        }
-            //        else if (Qsus.isInputed && Dp.isInputed && sf.isInputed)
-            //        {
-            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT;
-            //        }
-            //        else if (Qms.isInputed && Dp.isInputed && tr.isInputed)
-            //        {
-            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT;
-            //        }
-            //        else if (Qmsus.isInputed && Dp.isInputed && tr.isInputed)
-            //        {
-            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT;
-            //        }
-            //        else if (Qsus.isInputed && Dp.isInputed && tr.isInputed)
-            //        {
-            //            calcOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT;
-            //        }
-            //        else
-            //        {
-            //            throw new Exception("Not processed combination of inputs");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        throw new Exception("Not processed calculation Option");
-            //    }
-
-            //    return calcOption;   
-            //}
         }
 
         private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionOptimization()
         {
             List<fmBlockParameter> inputParameters = GetInputedParameters();
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qms, Dp, sf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qms, Dp, sf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qsus, Dp, sf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qsus, Dp, sf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qmsus, Dp, sf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qmsus, Dp, sf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qms, Dp, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qms, Dp, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qsus, Dp, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qsus, Dp, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Qmsus, Dp, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qmsus, Dp, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT;
             }
@@ -847,47 +486,47 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             List<fmBlockParameter> inputParameters = GetInputedParameters();
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qms, Dp, hc, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qms, Dp, hc, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qsus, Dp, hc, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qsus, Dp, hc, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qmsus, Dp, hc, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qmsus, Dp, hc, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qms, Dp, hc, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qms, Dp, hc, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qsus, Dp, hc, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qsus, Dp, hc, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qmsus, Dp, hc, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qmsus, Dp, hc, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qms, Dp, hc, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qms, Dp, hc, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tr_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qsus, Dp, hc, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qsus, Dp, hc, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { Qmsus, Dp, hc, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qmsus, Dp, hc, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tr_INPUT;
             }
@@ -942,32 +581,32 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             List<fmBlockParameter> inputParameters = GetInputedParameters();
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vf_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vf_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT;
             }
@@ -979,24 +618,34 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             List<fmBlockParameter> inputParameters = GetInputedParameters();
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, sf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, sf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, hc, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, sf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, sf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, Vf, tr })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Mf, sf }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Mf_sf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Mf, tr }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT;
             }
 
             return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
@@ -1006,62 +655,62 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             List<fmBlockParameter> inputParameters = GetInputedParameters();
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, hc, sf, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, hc, sf, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, hc, sf, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, hc, sf, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, hc, tr, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, hc, tr, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_tr_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, hc, tr, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, hc, tr, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_tr_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Vf, sf, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vf, sf, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_sf_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Vf, sf, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vf, sf, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Vf, tr, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vf, tr, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_tr_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Vf, tr, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vf, tr, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Mf, sf, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Mf, sf, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_sf_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Mf, sf, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Mf, sf, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Mf, tr, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Mf, tr, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_tr_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Mf, tr, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Mf, tr, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT;
             }
@@ -1073,17 +722,17 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             List<fmBlockParameter> inputParameters = GetInputedParameters();
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, n, tf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, n, tf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_n_tf_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tc, tf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tc, tf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tr, tf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tr, tf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
             }
@@ -1095,12 +744,12 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             List<fmBlockParameter> inputParameters = GetInputedParameters();
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, sf, tf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, sf, tf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tr, tf })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tr, tf }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT;
             }
@@ -1112,27 +761,32 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             List<fmBlockParameter> inputParameters = GetInputedParameters();
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, sf, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, sf, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tr, n })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tr, n }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_n_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, sf, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, sf, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT;
             }
 
-            if (IsSameLists(inputParameters, GetParametersListFromArray(new fmBlockParameter[] { A, Dp, tr, tc })))
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tr, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT;
             }
 
             return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
+        }
+
+        private bool IsSameLists(List<fmBlockParameter> a, fmBlockParameter [] b)
+        {
+            return IsSameLists(a, GetParametersListFromArray(b));
         }
 
         private bool IsSameLists(List<fmBlockParameter> a, List<fmBlockParameter> b)
@@ -1190,100 +844,6 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             return calculationOptionView.GetSelectedOption();
         }
-
-        //override public void UpdateIsInputed(fmBlockParameter enteredParameter)
-        //{
-        //    CalculationOption calcOption = GetBlockCalculationOption();
-        //    bool sfCanBeInputed = calcOption == CalculationOption.Standart1
-        //        || calcOption == CalculationOption.Standart2
-        //        || calcOption == CalculationOption.Standart4
-        //        || calcOption == CalculationOption.Standart7
-        //        || calcOption == CalculationOption.Optimization1;
-
-        //    if (sfCanBeInputed)
-        //    {
-        //        if (enteredParameter == sf)
-        //        {
-        //            sf.isInputed = true;
-        //            tr.isInputed = false;
-        //        }
-        //        else if (enteredParameter == tr)
-        //        {
-        //            sf.isInputed = false;
-        //            tr.isInputed = true;
-        //        }
-
-        //        if (enteredParameter == n)
-        //        {
-        //            tc.isInputed = false;
-        //            n.isInputed = true;
-        //        }
-        //        else if (enteredParameter == tc)
-        //        {
-        //            tc.isInputed = true;
-        //            n.isInputed = false;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (enteredParameter == n)
-        //        {
-        //            tc.isInputed = false;
-        //            n.isInputed = true;
-        //            tr.isInputed = false;
-        //        }
-        //        else if (enteredParameter == tc)
-        //        {
-        //            tc.isInputed = true;
-        //            n.isInputed = false;
-        //            tr.isInputed = false;
-        //        }
-        //        else if (enteredParameter == tr)
-        //        {
-        //            tc.isInputed = false;
-        //            n.isInputed = false;
-        //            tr.isInputed = true;
-        //        }
-        //    }
-
-        //    if (enteredParameter == Qms)
-        //    {
-        //        Qms.isInputed = true;
-        //        Qmsus.isInputed = false;
-        //        Qsus.isInputed = false;
-        //    }
-        //    else if (enteredParameter == Qmsus)
-        //    {
-        //        Qms.isInputed = false;
-        //        Qmsus.isInputed = true;
-        //        Qsus.isInputed = false;
-        //    }
-        //    else if (enteredParameter == Qsus)
-        //    {
-        //        Qms.isInputed = false;
-        //        Qmsus.isInputed = false;
-        //        Qsus.isInputed = true;
-        //    }
-
-        //    if (enteredParameter == hc)
-        //    {
-        //        hc.isInputed = true;
-        //        Vf.isInputed = false;
-        //        Mf.isInputed = false;
-        //    }
-        //    else if (enteredParameter == Vf)
-        //    {
-        //        hc.isInputed = false;
-        //        Vf.isInputed = true;
-        //        Mf.isInputed = false;
-        //    }
-        //    else if (enteredParameter == Mf)
-        //    {
-        //        hc.isInputed = false;
-        //        Vf.isInputed = false;
-        //        Mf.isInputed = true;
-        //    }
-        //}
 
         public void UpdateCellsBackColor()
         {
@@ -1468,10 +1028,11 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockParameter p in parameters)
                 table[p] = null;
 
-            //[Description("7: A, Dp, (hc/Vf), (sf/tr)")]
+            //[Description("7: A, Dp, (hc/Vf/Mf), (sf/tr)")]
             table[A] = A_group;
             table[hc] = hc_MVf_group;
             table[Vf] = hc_MVf_group;
+            table[Mf] = hc_MVf_group;
             table[sf] = sf_tr_group;
             table[tr] = sf_tr_group;
         }
@@ -1592,4 +1153,3 @@ namespace fmCalcBlocksLibrary.Blocks
         }
     }
 }
-
