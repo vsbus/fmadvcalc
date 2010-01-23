@@ -56,6 +56,8 @@ namespace fmCalculationLibrary.Equations
         }
 
         private static fmValue _infinity = new fmValue(1e20);
+        
+       
 
         static public List<fmValue> SolveC1xp1C2xp2C3(fmValue c1, fmValue p1, fmValue c2, fmValue p2, fmValue c3)
         {
@@ -200,6 +202,11 @@ namespace fmCalculationLibrary.Equations
                 
             result.Sort();
             return result;
+        }
+        
+        static public List<fmValue> SolvePowerSumEquation(List<fmValue> coefs, List<fmValue> power)
+        {
+            return new List<fmValue>();
         }
     }
 }
