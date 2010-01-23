@@ -17,20 +17,10 @@
 	<property unless="${property::exists('build.version.minor')}" name="build.version.minor" value="0" />
 	<property unless="${property::exists('build.version.build')}" name="build.version.build" value="1" />
 	<property unless="${property::exists('build.version.revision')}" name="build.version.revision" value="0" />
-	<property unless="${property::exists('build.framework.dir')}" name="build.framework.dir" value="C:\Windows\Microsoft.NET\Framework\v2.0.50727" />
+	<property unless="${property::exists('build.framework.dir')}" name="build.framework.dir" value="${framework::get-framework-directory('net-2.0')}" />
 	<property unless="${property::exists('build.solution')}" name="build.solution" value="AdvancedCalculator.sln" />
 
-
-
-	<property unless="${property::exists('makereleasepackage.copydir')}" name="makereleasepackage.copydir" value="${baseDir}\ToDeploy" />
-        
-	<target name="all">
-		<call target="init" />
-		<call target="svn" />
-		<call target="config" />
-		<call target="build" />
-	</target>
-
+	        
 	<target name="main">
 		<call target="init" />
 		<call target="svn" />
@@ -164,8 +154,8 @@
 		<exec program="msbuild.exe" commandline="${build.solution}" basedir="${build.framework.dir}" workingdir="${baseDir}/" resultproperty="build.result" failonerror="false"  />
 	</target>
 	<target name="build.postBuildActions">
+
 		<if test="${property::exists('build.result')}">
-			<echo message="build result : ${build.result}" />
 			<fail if="${build.result != '0'}" message="Msbuild failed. Exit code: ${build.result}" />
 		</if>
 	</target>
@@ -236,7 +226,6 @@
 
 	<target name="makereleasepackage">
 		<call target="makereleasepackage.copyfiles" />
-		<echo message="after makereleasepackage.copyfiles" />
 		<call target="makereleasepackage.archivefiles" />
 	</target>
 
@@ -245,8 +234,8 @@
 		<delete dir="${makereleasepackage.copydir}" />
 	                             	
 		<copy todir="${makereleasepackage.copydir}">
-			<fileset basedir="${baseDir}/AdvancedCalculator/bin/Release">
-		<include name="**/*" />		
+			<fileset basedir="${baseDir}/AdvancedCalculator/bin">
+		<include name="Release/**/*" />		
 			</fileset>
 		</copy>
 	</target>
@@ -255,7 +244,7 @@
 		<property name="this.assemblyName" value="${baseDir}\${makereleasepackage.domainassemblypath}" />
 		<property name="this.currentDate" value="${datetime::now()}" />
 		<property name="this.archivetitle" value="${makereleasepackage.sitename}_site" />
-		<property name="this.archiveName" value="${releaseDir}\${this.archivetitle}_${this::format-number(datetime::get-month(this.currentDate))}${this::format-number(datetime::get-day(this.currentDate))}${this::format-number(datetime::get-year(this.currentDate))}_build_${assemblyname::get-version(assemblyname::get-assembly-name(this.assemblyName))}.zip" />
+		<property name="this.archiveName" value="${releaseDir}\${this.archivetitle}_${this::format-number(datetime::get-year(this.currentDate))}${this::format-number(datetime::get-month(this.currentDate))}${this::format-number(datetime::get-day(this.currentDate))}_build_${assemblyname::get-version(assemblyname::get-assembly-name(this.assemblyName))}.rar" />
 		<delete file="${this.archiveName}" />
 		<exec program="C:\Program Files\WinRAR\winrar.exe" commandline="a -r ${this.archiveName} ${makereleasepackage.copydir}\* -afzip -ep1" />
 		<!--exec program="svn.exe" commandline="add ${this.archiveName}" / -->
