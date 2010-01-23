@@ -1,0 +1,8 @@
+H:\jannis\LocalMashaVersion\Tests\bin\Release\Tests.dll
+H:\jannis\LocalMashaVersion\Tests\bin\Release\Tests.pdb
+H:\jannis\LocalMashaVersion\Tests\bin\Release\fmCalculationLibrary.dll
+H:\jannis\LocalMashaVersion\Tests\bin\Release\nunit.framework.dll
+H:\jannis\LocalMashaVersion\Tests\bin\Release\fmCalculationLibrary.pdb
+H:\jannis\LocalMashaVersion\Tests\obj\Release\ResolveAssemblyReference.cache
+H:\jannis\LocalMashaVersion\Tests\obj\Release\Tests.dll
+H:\jannis\LocalMashaVersion\Tests\obj\Release\Tests.pdb
