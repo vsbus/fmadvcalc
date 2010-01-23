@@ -41,6 +41,10 @@ namespace fmCalculatorsLibrary
             STANDART7_A_Dp_Vf_tr_INPUT,
             STANDART7_A_Dp_Mf_sf_INPUT,
             STANDART7_A_Dp_Mf_tr_INPUT,
+            STANDART7_A_Dp_Vsus_sf_INPUT,
+            STANDART7_A_Dp_Vsus_tr_INPUT,
+            STANDART7_A_Dp_Msus_sf_INPUT,
+            STANDART7_A_Dp_Msus_tr_INPUT,
             
             STANDART8_A_Dp_hc_n_INPUT,
             STANDART8_A_Dp_hc_tc_INPUT,
@@ -51,6 +55,12 @@ namespace fmCalculatorsLibrary
             STANDART8_A_Dp_Mf_n_INPUT,
             STANDART8_A_Dp_Mf_tc_INPUT,
             STANDART8_A_Dp_Mf_tr_INPUT,
+            STANDART8_A_Dp_Vsus_n_INPUT,
+            STANDART8_A_Dp_Vsus_tc_INPUT,
+            STANDART8_A_Dp_Vsus_tr_INPUT,
+            STANDART8_A_Dp_Msus_n_INPUT,
+            STANDART8_A_Dp_Msus_tc_INPUT,
+            STANDART8_A_Dp_Msus_tr_INPUT,
 
             DESIGN1_Qms_Dp_hc_n_INPUT,
             DESIGN1_Qsus_Dp_hc_n_INPUT,
@@ -164,10 +174,16 @@ namespace fmCalculatorsLibrary
         {
             return calculationOption == CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT
                    || calculationOption == CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT
+                   
                    || calculationOption == CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT
                    || calculationOption == CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT
                    || calculationOption == CalculationOptions.STANDART7_A_Dp_Mf_sf_INPUT
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT;
+                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT
+                   
+                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Vsus_sf_INPUT
+                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Vsus_tr_INPUT
+                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Msus_sf_INPUT
+                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Msus_tr_INPUT;
         }
 
         private bool IsStandart8Option(CalculationOptions calculationOption)
@@ -180,7 +196,13 @@ namespace fmCalculatorsLibrary
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_n_INPUT
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_tr_INPUT;
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_tr_INPUT
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vsus_n_INPUT
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vsus_tc_INPUT
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vsus_tr_INPUT
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Msus_n_INPUT
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Msus_tc_INPUT
+                || calculationOption == CalculationOptions.STANDART8_A_Dp_Msus_tr_INPUT;
         }
 
         private bool IsStandartKindOption(CalculationOptions calculationOption)
@@ -272,8 +294,6 @@ namespace fmCalculatorsLibrary
                 throw new Exception("Not classified calculation suboption of Standart");
             }
 
-            variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-            variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
             variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
             variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Vsus_tc(variables.Vsus, variables.tc);
             variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Msus_tc(variables.Msus, variables.tc);
@@ -543,8 +563,61 @@ namespace fmCalculatorsLibrary
                             constants.eta_f);
             variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
             variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
+            variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+            variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
         }
         private void DoSubCalculationsStandart456()
+        {
+            DoSubCalculationsStandart4_sf_tr_n_tc_tf();
+
+            switch (calculationOption)
+            {
+                case CalculationOptions.STANDART4_A_hc_sf_n_INPUT:
+                case CalculationOptions.STANDART4_A_hc_tr_n_INPUT:
+                case CalculationOptions.STANDART4_A_hc_sf_tc_INPUT:
+                case CalculationOptions.STANDART4_A_hc_tr_tc_INPUT:
+                    variables.Dp = FilterMachiningEquations.Eval_Dp_From_etaf_Cv_Pc0_nc_eps0_ne_hc_hce_tf(constants.eta_f, constants.Cv, constants.Pc0, constants.nc, constants.eps0, constants.ne, variables.hc, constants.hce, variables.tf);
+                    variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
+                    variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
+                    variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
+                    variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
+                    break;
+                case CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT:
+                case CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT:
+                case CalculationOptions.STANDART4_A_Vf_tr_n_INPUT:
+                case CalculationOptions.STANDART4_A_Vf_sf_n_INPUT:
+                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
+                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
+                    break;
+                case CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_tr_n_INPUT:
+                case CalculationOptions.STANDART4_A_Mf_sf_n_INPUT:
+                    variables.Vf = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_f, variables.Mf);
+                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
+                    break;
+                default:
+                    throw new Exception("not processed calculation option");
+            }
+
+            variables.Pc = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(constants.Pc0, variables.Dp, constants.nc);
+            variables.rc = PcrcaEquations.Eval_rc_From_Pc(variables.Pc);
+            variables.a = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(variables.Pc, variables.eps, constants.rho_s);
+        }
+
+        private void DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf()
+        {
+            variables.Dp = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(constants.nc, constants.ne, constants.eta_f, variables.A, variables.tf, constants.Cv, constants.eps0, constants.Pc0, constants.hce, variables.Vf);
+            variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
+            variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
+            variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(variables.A, variables.Vf, variables.kappa);
+            variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+            variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
+        }
+
+        private void DoSubCalculationsStandart4_sf_tr_n_tc_tf()
         {
             switch (calculationOption)
             {
@@ -587,46 +660,6 @@ namespace fmCalculatorsLibrary
                 default:
                     throw new Exception("not processed calculation option");
             }
-
-            switch (calculationOption)
-            {
-                case CalculationOptions.STANDART4_A_hc_sf_n_INPUT:
-                case CalculationOptions.STANDART4_A_hc_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_hc_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_hc_tr_tc_INPUT:
-                    variables.Dp = FilterMachiningEquations.Eval_Dp_From_etaf_Cv_Pc0_nc_eps0_ne_hc_hce_tf(constants.eta_f, constants.Cv, constants.Pc0, constants.nc, constants.eps0, constants.ne, variables.hc, constants.hce, variables.tf);
-                    variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-                    variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-                    variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-                    break;
-                case CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_sf_n_INPUT:
-                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-                    variables.Dp = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(constants.nc, constants.ne, constants.eta_f, variables.A, variables.tf, constants.Cv, constants.eps0, constants.Pc0, constants.hce, variables.Vf);
-                    variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-                    variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(variables.A, variables.Vf, variables.kappa);
-                    break;
-                case CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_sf_n_INPUT:
-                    variables.Vf = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_f, variables.Mf);
-                    variables.Dp = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(constants.nc, constants.ne, constants.eta_f, variables.A, variables.tf, constants.Cv, constants.eps0, constants.Pc0, constants.hce, variables.Vf);
-                    variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-                    variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(variables.A, variables.Vf, variables.kappa);
-                    break;
-                default:
-                    throw new Exception("not processed calculation option");
-            }
-
-            variables.Pc = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(constants.Pc0, variables.Dp, constants.nc);
-            variables.rc = PcrcaEquations.Eval_rc_From_Pc(variables.Pc);
-            variables.a = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(variables.Pc, variables.eps, constants.rho_s);
         }
         private void DoSubCalculationsStandart78()
         {
@@ -645,6 +678,8 @@ namespace fmCalculatorsLibrary
                 case CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT:
                     variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
+                    variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
                     break;
                 case CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT:
@@ -653,6 +688,8 @@ namespace fmCalculatorsLibrary
                 case CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT:
                     variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(variables.A, variables.Vf, variables.kappa);
                     variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
+                    variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
                     break;
                 case CalculationOptions.STANDART7_A_Dp_Mf_sf_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT:
@@ -661,6 +698,28 @@ namespace fmCalculatorsLibrary
                 case CalculationOptions.STANDART8_A_Dp_Mf_tr_INPUT:
                     variables.Vf = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_f, variables.Mf);
                     variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(variables.A, variables.Vf, variables.kappa);
+                    variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
+                    break;
+                case CalculationOptions.STANDART7_A_Dp_Vsus_sf_INPUT:
+                case CalculationOptions.STANDART7_A_Dp_Vsus_tr_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Vsus_n_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Vsus_tc_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Vsus_tr_INPUT:
+                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
+                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(variables.A, variables.Vsus, variables.kappa);
+                    variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
+                    break;
+                case CalculationOptions.STANDART7_A_Dp_Msus_sf_INPUT:
+                case CalculationOptions.STANDART7_A_Dp_Msus_tr_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Msus_n_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Msus_tc_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Msus_tr_INPUT:
+                    variables.Vsus = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_sus, variables.Msus);
+                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(variables.A, variables.Vsus, variables.kappa);
+                    variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
+                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
                     break;
                 default:
                     throw new Exception("not processed calculation option");
@@ -671,6 +730,8 @@ namespace fmCalculatorsLibrary
                 case CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Mf_sf_INPUT:
+                case CalculationOptions.STANDART7_A_Dp_Vsus_sf_INPUT:
+                case CalculationOptions.STANDART7_A_Dp_Msus_sf_INPUT:
                     {
                         variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
                         variables.tc = FilterMachiningEquations.Eval_tc_From_tf_sf(variables.tf, variables.sf);
@@ -681,6 +742,8 @@ namespace fmCalculatorsLibrary
                 case CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT:
+                case CalculationOptions.STANDART7_A_Dp_Vsus_tr_INPUT:
+                case CalculationOptions.STANDART7_A_Dp_Msus_tr_INPUT:
                     {
                         variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
                         variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
@@ -691,6 +754,8 @@ namespace fmCalculatorsLibrary
                 case CalculationOptions.STANDART8_A_Dp_hc_n_INPUT:
                 case CalculationOptions.STANDART8_A_Dp_Vf_n_INPUT:
                 case CalculationOptions.STANDART8_A_Dp_Mf_n_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Vsus_n_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Msus_n_INPUT:
                     {
                         variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
                         variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
@@ -701,6 +766,8 @@ namespace fmCalculatorsLibrary
                 case CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT:
                 case CalculationOptions.STANDART8_A_Dp_Vf_tc_INPUT:
                 case CalculationOptions.STANDART8_A_Dp_Mf_tc_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Vsus_tc_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Msus_tc_INPUT:
                     {
                         variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
                         variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
@@ -711,6 +778,8 @@ namespace fmCalculatorsLibrary
                 case CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT:
                 case CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT:
                 case CalculationOptions.STANDART8_A_Dp_Mf_tr_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Vsus_tr_INPUT:
+                case CalculationOptions.STANDART8_A_Dp_Msus_tr_INPUT:
                     {
                         variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
                         variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
@@ -721,6 +790,7 @@ namespace fmCalculatorsLibrary
                 default:
                     throw new Exception("not processed calculation option");
             }
+
         }
 
         public fmFilterMachiningCalculator(CalculationOptions defaultCalculationOption)

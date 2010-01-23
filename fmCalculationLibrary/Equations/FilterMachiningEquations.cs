@@ -226,5 +226,10 @@ namespace fmCalculationLibrary.Equations
         {
             return M/rho;
         }
+
+        public static fmValue Eval_hc_From_A_Vsus_kappa(fmValue A, fmValue Vsus, fmValue kappa)
+        {
+            return Vsus * kappa / (A * (1 + kappa));
+        }
     }
 }

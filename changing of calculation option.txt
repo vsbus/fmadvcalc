@@ -16,6 +16,8 @@ how to change calculation option:
 
 4. correct method similar to
 		SetGroupsOfStandartX
+		SetGroupsOfDesign
+		SetGroupsOfOptimization
 	
 	
 - fmFilterMachiningCalculators.cs
