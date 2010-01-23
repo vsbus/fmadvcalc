@@ -86,69 +86,69 @@ namespace fmCalculationLibrary.Equations
 
         static public List<fmValue> SolveC1xp1C2xp2C3(fmValue c1, fmValue p1, fmValue c2, fmValue p2, fmValue c3)
         {
-            return SolvePowerSumEquation(c3, new fmValue[,] {{c1, p1}, {c2, p2}});
-            //List<fmValue> result = new List<fmValue>();
-            //if (!c1.Defined || !p1.Defined || !c2.Defined || !p2.Defined || !c3.Defined)
-            //{
-            //    result.Add(new fmValue());
-            //    return result;
-            //}
+            //return SolvePowerSumEquation(c3, new fmValue[,] {{c1, p1}, {c2, p2}});
+            List<fmValue> result = new List<fmValue>();
+            if (!c1.Defined || !p1.Defined || !c2.Defined || !p2.Defined || !c3.Defined)
+            {
+                result.Add(new fmValue());
+                return result;
+            }
 
-            //if (c1 == _zero)
-            //{
-            //    result.Add(SolveC1xp1C2(c2, p2, c3));
-            //    return result;
-            //}
-            //if (c2 == _zero)
-            //{
-            //    result.Add(SolveC1xp1C2(c1, p1, c3));
-            //    return result;
-            //}
-            //if (c3 == _zero)
-            //{
-            //    result.Add(SolveC1xp1C2xp2(c1, p1, c2, p2));
-            //    return result;
-            //}
-            //if (p1 == _zero)
-            //{
-            //    result.Add(SolveC1xp1C2(c2, p2, c1 + c3));
-            //    return result;
-            //}
-            //if (p2 == _zero)
-            //{
-            //    result.Add(SolveC1xp1C2(c1, p1, c2 + c3));
-            //    return result;
-            //}
-            //if (p1 == p2)
-            //{
-            //    result.Add(SolveC1xp1C2(c1 + c2, p1, c3));
-            //    return result;
-            //}
+            if (c1 == _zero)
+            {
+                result.Add(SolveC1xp1C2(c2, p2, c3));
+                return result;
+            }
+            if (c2 == _zero)
+            {
+                result.Add(SolveC1xp1C2(c1, p1, c3));
+                return result;
+            }
+            if (c3 == _zero)
+            {
+                result.Add(SolveC1xp1C2xp2(c1, p1, c2, p2));
+                return result;
+            }
+            if (p1 == _zero)
+            {
+                result.Add(SolveC1xp1C2(c2, p2, c1 + c3));
+                return result;
+            }
+            if (p2 == _zero)
+            {
+                result.Add(SolveC1xp1C2(c1, p1, c2 + c3));
+                return result;
+            }
+            if (p1 == p2)
+            {
+                result.Add(SolveC1xp1C2(c1 + c2, p1, c3));
+                return result;
+            }
 
-            //fmValue x0 = SolveC1xp1C2xp2(c1 * p1, p1 - 1, c2 * p2, p2 - 1);
+            fmValue x0 = SolveC1xp1C2xp2(c1 * p1, p1 - 1, c2 * p2, p2 - 1);
 
-            //const int iterations = 100;  // precision is 1e20 / 2^100 ~~ 1e-11
+            const int iterations = 100;  // precision is 1e20 / 2^100 ~~ 1e-11
 
-            //if (!x0.Defined)
-            //{
-            //    result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, _infinity, iterations));
-            //    return result;
-            //}
+            if (!x0.Defined)
+            {
+                result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, _infinity, iterations));
+                return result;
+            }
 
-            //result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, x0, iterations));
-            //result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), x0, _infinity, iterations));
+            result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, x0, iterations));
+            result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), x0, _infinity, iterations));
 
-            //if (!result[1].Defined)
-            //{
-            //    result.RemoveAt(1);
-            //}
-            //else if (!result[0].Defined)
-            //{
-            //    result.RemoveAt(0);
-            //}
+            if (!result[1].Defined)
+            {
+                result.RemoveAt(1);
+            }
+            else if (!result[0].Defined)
+            {
+                result.RemoveAt(0);
+            }
 
-            //result.Sort();
-            //return result;
+            result.Sort();
+            return result;
         }
 
         static public fmValue SolveC1xp1C2(fmValue c1, fmValue p1, fmValue c2)

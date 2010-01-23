@@ -48,10 +48,6 @@ namespace Tests
                                                            new fmValue[2,2] {{c1, new fmValue(2)}, {c2, new fmValue(4)}});
             expectedResult = new List<fmValue>(new fmValue[] { new fmValue(-2), new fmValue(0), new fmValue(2) });
             Assert.IsTrue(EqualLists(result, expectedResult));
-
-
-
-
         }
 
         //[Test]
