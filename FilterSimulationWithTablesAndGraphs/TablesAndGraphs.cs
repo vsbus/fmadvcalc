@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Text;
 using fmCalcBlocksLibrary.Blocks;
 using System.Windows.Forms;
+using fmCalcBlocksLibrary.Controls;
 using fmCalculationLibrary;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmZedGraph;
@@ -35,6 +36,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 listBox.Items.Add(s);
             }
+            
         }
 
         private void CreateColumnsInParametersTables()
@@ -594,16 +596,42 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-
         private void calculationOptionViewInTablesAndGraphs_CheckedChanged(object sender, EventArgs e)
         {
             List<string> inputNames = new List<string>();
             List<string> outputNames = new List<string>();
             List<fmGlobalParameter> inputParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calculationOptionViewInTablesAndGraphs.GetSelectedOption());
-            List<fmBlockParameter> blockParameterList = new fmFilterMachiningBlock(calculationOptionViewInTablesAndGraphs).Parameters;
+            fmFilterMachiningBlock machiningBlock = new fmFilterMachiningBlock(calculationOptionViewInTablesAndGraphs);
+            List<fmBlockParameter> blockParameterList = machiningBlock.Parameters;
             foreach (fmBlockParameter p in blockParameterList)
             {
-                (inputParameters.Contains(p.globalParameter) ? inputNames : outputNames).Add(p.name);
+                //(inputParameters.Contains(p.globalParameter) ? inputNames : outputNames).Add(p.name);
+                if (!inputParameters.Contains(p.globalParameter))
+                {
+                    outputNames.Add(p.name);
+                }
+                else
+                {
+                    List<fmBlockParameter> list = machiningBlock.GetParametersByGroup(p.group);
+                    if(list.Count <= 1)
+                    {
+                        inputNames.Add(p.name);
+                    }
+                    else if(list.Count>1)
+                    {
+                        foreach(fmBlockParameter param in list)
+                        {
+                            if (!inputNames.Contains(param.name))
+                            {
+                                inputNames.Add(param.name);
+                            }
+                            if (!outputNames.Contains(param.name))
+                            {
+                                outputNames.Add(param.name);
+                            }
+                        }
+                    }
+                }
             }
 
             FillListBox(listBoxXAxis, inputNames);
