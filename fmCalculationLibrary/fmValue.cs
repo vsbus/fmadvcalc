@@ -137,9 +137,25 @@ namespace fmCalculationLibrary
             return op1.Value < op2.Value;
         }
 
+        public static bool operator <=(fmValue op1, fmValue op2)
+        {
+            if (!op1.Defined && !op2.Defined)
+                return false;
+            if (!op1.Defined)
+                return true;
+            if (!op2.Defined)
+                return false;
+            return op1.Value <= op2.Value;
+        }
+
         public static bool operator >(fmValue op1, fmValue op2)
         {
             return op2 < op1;
+        }
+
+        public static bool operator >=(fmValue op1, fmValue op2)
+        {
+            return op2 <= op1;
         }
 
         public static bool operator ==(fmValue op1, fmValue op2)
