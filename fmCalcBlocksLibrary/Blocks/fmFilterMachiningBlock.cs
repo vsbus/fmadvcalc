@@ -424,6 +424,22 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      hce_value);
         }
 
+        public List<fmBlockParameter> GetParametersByGroup (fmBlockParameterGroup group)
+        {
+            List<fmBlockParameter> result = new List<fmBlockParameter>();
+            if(group!=null)
+            {
+                foreach (fmBlockParameter p in parameters)
+                {
+                    if (p.group != null && p.group == group)
+                        result.Add(p);
+                }
+            }
+            return result;
+        }
+
+
+
         private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOption()
         {
             List<fmBlockParameter> inputParameters = GetInputedParameters();
