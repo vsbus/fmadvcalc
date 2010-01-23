@@ -231,5 +231,37 @@ namespace fmCalculationLibrary.Equations
         {
             return Vsus * kappa / (A * (1 + kappa));
         }
+
+        public static fmValue Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vsus(fmValue nc, fmValue ne, fmValue eta_f, fmValue A, fmValue tf, fmValue Cv, fmValue eps0, 
+            fmValue Pc0, fmValue hce, fmValue Vsus)
+        {
+            fmValue bar = new fmValue(1e5);
+
+            fmValue K1 = tf;
+            fmValue p1 = 2*ne;
+
+            fmValue K2 = -2*tf*eps0*fmValue.Pow(bar, ne);
+            fmValue p2 = ne;
+
+            fmValue K3 = -0.5*eta_f*fmValue.Pow(bar, -nc)/(A*A)/Pc0*Vsus*(-1 + Cv)*(-Vsus*Cv - 2*hce*A);
+            fmValue p3 = 2*ne + nc - 1;
+
+            fmValue K4 = -0.5/(A*A)/Pc0*eta_f*fmValue.Pow(bar, -nc + ne)*Vsus*eps0*(-4*hce*A + 2*hce*A*Cv - Vsus*Cv);
+            fmValue p4 = ne + nc - 1;
+
+            fmValue K5 = -eta_f*fmValue.Pow(bar, -nc)/A/Pc0*Vsus*eps0*eps0*fmValue.Pow(bar, ne*2)*hce;
+            fmValue p5 = nc - 1;
+
+            fmValue K6 = tf*eps0*eps0*fmValue.Pow(bar, ne*2);
+
+            List<fmValue> roots = fmMathEquations.SolvePowerSumEquation(K6,
+                                                                        new fmValue[,]
+                                                                            {
+                                                                                {K1, p1}, {K2, p2}, {K3, p3}, {K4, p4},
+                                                                                {K5, p5}
+                                                                            });
+
+            return SelectBestDpRoot(roots);
+        }
     }
 }
