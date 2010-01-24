@@ -207,17 +207,17 @@ namespace fmCalcBlocksLibrary.Blocks
          * 150 250 180
          */
 
-        private readonly fmBlockParameterGroup A_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup Dp_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup A_group = new fmBlockParameterGroup(Color.FromArgb(150, 250, 180));
+        private readonly fmBlockParameterGroup Dp_group = new fmBlockParameterGroup(Color.FromArgb(250, 210, 150));
         private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 240));
         private readonly fmBlockParameterGroup n_tc_group = new fmBlockParameterGroup(Color.FromArgb(250, 230, 150));
         private readonly fmBlockParameterGroup n_tc_tr_group = new fmBlockParameterGroup(Color.FromArgb(230, 240, 190));
-        private readonly fmBlockParameterGroup tf_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup tf_group = new fmBlockParameterGroup(Color.FromArgb(180, 230, 230));
         private readonly fmBlockParameterGroup hc_MV_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
-        private readonly fmBlockParameterGroup hc_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup Msus_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup Vsus_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup Ms_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup hc_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
+        //private readonly fmBlockParameterGroup Msus_group = new fmBlockParameterGroup();
+        //private readonly fmBlockParameterGroup Vsus_group = new fmBlockParameterGroup();
+        //private readonly fmBlockParameterGroup Ms_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup Q_group = new fmBlockParameterGroup(Color.FromArgb(190, 240, 240));
         //private readonly fmBlockParameterGroup eps_group = new fmBlockParameterGroup();
         //private readonly fmBlockParameterGroup kappa_group = new fmBlockParameterGroup();
