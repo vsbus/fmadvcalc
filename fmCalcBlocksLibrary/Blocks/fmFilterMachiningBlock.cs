@@ -23,16 +23,16 @@ namespace fmCalcBlocksLibrary.Blocks
         [Description("3: A, Dp, (n/tc/tr), tf")]
         Standart3,
         
-        [Description("4: A, (hc/Vf/Mf/Vsus/Msus), (sf/tr), (n/tc)")]
+        [Description("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)")]
         Standart4,
         
         //Standart5,  // A, hc, (sf/tr), tf           -- input
         //Standart6,  // A, hc, (n/tc/tr), tf       -- input
-        
-        [Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus), (sf/tr)")]
+
+        [Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)")]
         Standart7,
-        
-        [Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus), (n/tc/tr)")]
+
+        [Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
         Standart8,
         
         // Design -- In this case we have always the (Qsus, Qmsus, Qms) as input 
@@ -86,7 +86,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tf);
                     break;
         
-                //[Description("4: A, (hc/Vf/Mf/Vsus/Msus), (sf/tr), (n/tc)")]
+                //[Description("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)")]
                 case CalculationOption.Standart4:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.hc);
@@ -94,13 +94,14 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Mf);
                     result.Add(fmGlobalParameter.Vsus);
                     result.Add(fmGlobalParameter.Msus);
+                    result.Add(fmGlobalParameter.Ms);
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.tr);
                     result.Add(fmGlobalParameter.n);
                     result.Add(fmGlobalParameter.tc);
                     break;
         
-                //[Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus), (sf/tr)")]
+                //[Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)")]
                 case CalculationOption.Standart7:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
@@ -109,11 +110,12 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Mf);
                     result.Add(fmGlobalParameter.Vsus);
                     result.Add(fmGlobalParameter.Msus);
+                    result.Add(fmGlobalParameter.Ms);
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.tr);
                     break;
         
-                //[Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus), (n/tc/tr)")]
+                //[Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
                 case CalculationOption.Standart8:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
@@ -122,6 +124,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Mf);
                     result.Add(fmGlobalParameter.Vsus);
                     result.Add(fmGlobalParameter.Msus);
+                    result.Add(fmGlobalParameter.Ms);
                     result.Add(fmGlobalParameter.n);
                     result.Add(fmGlobalParameter.tc);
                     result.Add(fmGlobalParameter.tr);
@@ -678,6 +681,21 @@ namespace fmCalcBlocksLibrary.Blocks
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Msus_tr_INPUT;
             }
 
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, n }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Ms_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, tc }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Ms_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, tr }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Ms_tr_INPUT;
+            }
+
             return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
         }
 
@@ -733,6 +751,16 @@ namespace fmCalcBlocksLibrary.Blocks
             if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Msus, tr }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Msus_tr_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, sf }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Ms_sf_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, tr }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Ms_tr_INPUT;
             }
 
             return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
@@ -840,6 +868,26 @@ namespace fmCalcBlocksLibrary.Blocks
             if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Msus, tr, tc }))
             {
                 return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Msus_tr_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Ms, sf, n }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Ms_sf_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Ms, sf, tc }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Ms_sf_tc_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Ms, tr, n }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Ms_tr_n_INPUT;
+            }
+
+            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Ms, tr, tc }))
+            {
+                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Ms_tr_tc_INPUT;
             }
 
             return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
@@ -1141,7 +1189,7 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockParameter p in parameters)
                 table[p] = null;
 
-            //[Description("8: A, Dp, (hc/Vf/Mf), (n/tc/tr)")]
+            //[Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
             table[A] = A_group;
             table[Dp] = Dp_group;
             table[hc] = hc_MV_group;
@@ -1149,6 +1197,7 @@ namespace fmCalcBlocksLibrary.Blocks
             table[Mf] = hc_MV_group;
             table[Vsus] = hc_MV_group;
             table[Msus] = hc_MV_group;
+            table[Ms] = hc_MV_group;
             table[n] = n_tc_tr_group;
             table[tc] = n_tc_tr_group;
             table[tr] = n_tc_tr_group;
@@ -1159,13 +1208,14 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockParameter p in parameters)
                 table[p] = null;
 
-            //[Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus), (sf/tr)")]
+            //[Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)")]
             table[A] = A_group;
             table[hc] = hc_MV_group;
             table[Vf] = hc_MV_group;
             table[Mf] = hc_MV_group;
             table[Vsus] = hc_MV_group;
             table[Msus] = hc_MV_group;
+            table[Ms] = hc_MV_group;
             table[sf] = sf_tr_group;
             table[tr] = sf_tr_group;
         }
@@ -1175,13 +1225,14 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockParameter p in parameters)
                 table[p] = null;
 
-            //[Description("4: A, (hc/Vf/Mf), (sf/tr), (n/tc)")]
+            //[Description("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)")]
             table[A] = A_group;
             table[hc] = hc_MV_group;
             table[Vf] = hc_MV_group;
             table[Mf] = hc_MV_group;
             table[Vsus] = hc_MV_group;
             table[Msus] = hc_MV_group;
+            table[Ms] = hc_MV_group;
             table[sf] = sf_tr_group;
             table[tr] = sf_tr_group;
             table[n] = n_tc_group;

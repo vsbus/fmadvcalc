@@ -263,5 +263,10 @@ namespace fmCalculationLibrary.Equations
 
             return SelectBestDpRoot(roots);
         }
+
+        public static fmValue Eval_Msus_From_Ms_Cm(fmValue Ms, fmValue Cm)
+        {
+            return Ms/Cm;
+        }
     }
 }
