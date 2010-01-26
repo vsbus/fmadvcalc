@@ -44,6 +44,7 @@ namespace fmCalcBlocksLibrary
         public static fmGlobalParameter Mf;
         public static fmGlobalParameter Vf;
         public static fmGlobalParameter Ms;
+        public static fmGlobalParameter Vs;
         public static fmGlobalParameter Msus;
         public static fmGlobalParameter eps;
         public static fmGlobalParameter kappa;
@@ -84,6 +85,7 @@ namespace fmCalcBlocksLibrary
             AddParameter(ref Msus, new fmGlobalParameter("Msus", fmUnitFamily.MassFamily, new fmRange(0, 10)));
             AddParameter(ref Vsus, new fmGlobalParameter("Vsus", fmUnitFamily.VolumeFamily, new fmRange(0, 20)));
             AddParameter(ref Ms, new fmGlobalParameter("Ms", fmUnitFamily.MassFamily, new fmRange(0, 10)));
+            AddParameter(ref Vs, new fmGlobalParameter("Vs", fmUnitFamily.VolumeFamily, new fmRange(0, 20)));
             AddParameter(ref Qsus, new fmGlobalParameter("Qsus", fmUnitFamily.FlowRateVolume, new fmRange(0, 0.002)));
             AddParameter(ref Qmsus, new fmGlobalParameter("Qmsus", fmUnitFamily.FlowRateMass, new fmRange(0, 2)));
             AddParameter(ref Qms, new fmGlobalParameter("Qms", fmUnitFamily.FlowRateMass, new fmRange(0, 2)));

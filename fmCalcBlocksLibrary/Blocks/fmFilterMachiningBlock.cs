@@ -175,6 +175,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameter Msus;
         private readonly fmBlockParameter Vsus;
         private readonly fmBlockParameter Ms;
+        private readonly fmBlockParameter Vs;
         private readonly fmBlockParameter Qsus;
         private readonly fmBlockParameter Qmsus;
         private readonly fmBlockParameter Qms;
@@ -308,6 +309,11 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Ms.value; }
             set { Ms.value = value; }
         }
+        public fmValue Vs_Value
+        {
+            get { return Vs.value; }
+            set { Vs.value = value; }
+        }
         public fmValue Qsus_Value
         {
             get { return Qsus.value; }
@@ -409,6 +415,7 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      ref Mf.value,
                                                                      ref Vf.value,
                                                                      ref Ms.value,
+                                                                     ref Vs.value,
                                                                      ref Msus.value,
                                                                      ref eps.value,
                                                                      ref kappa.value,
@@ -1036,7 +1043,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public fmFilterMachiningBlock(
             fmCalculationOptionView calculationOptionView)
-            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
                                            null, null, null, null, null, null, null)
         {
         }
@@ -1056,6 +1063,7 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell Msus_Cell,
             DataGridViewCell Vsus_Cell,
             DataGridViewCell Ms_Cell,
+            DataGridViewCell Vs_Cell,
             DataGridViewCell Qsus_Cell,
             DataGridViewCell Qmsus_Cell,
             DataGridViewCell Qms_Cell,
@@ -1080,6 +1088,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref Msus, fmGlobalParameter.Msus, Msus_Cell, false);
             AddParameter(ref Vsus, fmGlobalParameter.Vsus, Vsus_Cell, false);
             AddParameter(ref Ms, fmGlobalParameter.Ms, Ms_Cell, false);
+            AddParameter(ref Vs, fmGlobalParameter.Vs, Vs_Cell, false);
             AddParameter(ref Qsus, fmGlobalParameter.Qsus, Qsus_Cell, false);
             AddParameter(ref Qmsus, fmGlobalParameter.Qmsus, Qmsus_Cell, false);
             AddParameter(ref Qms, fmGlobalParameter.Qms, Qms_Cell, false);

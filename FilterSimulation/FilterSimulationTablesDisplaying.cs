@@ -308,6 +308,7 @@ namespace FilterSimulation
                         row.Cells[simulation_MsusColumn.Index],
                         row.Cells[simulation_VsusColumn.Index],
                         row.Cells[simulation_MsColumn.Index],
+                        row.Cells[simulation_VsColumn.Index],
                         row.Cells[simulation_QsusColumn.Index],
                         row.Cells[simulation_QmsusColumn.Index],
                         row.Cells[simulation_QmsColumn.Index],

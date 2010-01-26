@@ -165,6 +165,7 @@ namespace FilterSimulation
             this.simulation_MsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_VsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_MsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_VsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_QsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_QmsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_QmsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
@@ -1118,6 +1119,7 @@ namespace FilterSimulation
             this.simulation_MsusColumn,
             this.simulation_VsusColumn,
             this.simulation_MsColumn,
+            this.simulation_VsColumn,
             this.simulation_QsusColumn,
             this.simulation_QmsusColumn,
             this.simulation_QmsColumn,
@@ -1573,6 +1575,11 @@ namespace FilterSimulation
             this.simulation_MsColumn.Name = "simulation_MsColumn";
             this.simulation_MsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // simulation_VsColumn
+            // 
+            this.simulation_VsColumn.HeaderText = "Vs";
+            this.simulation_VsColumn.Name = "simulation_VsColumn";
+            // 
             // simulation_QsusColumn
             // 
             this.simulation_QsusColumn.HeaderText = "Qsus";
@@ -1775,35 +1782,36 @@ namespace FilterSimulation
         protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesLastModifiedDateColumn;
         protected System.Windows.Forms.Panel simSeriesPanel;
         protected System.Windows.Forms.DataGridViewTextBoxColumn simulationGuidColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn simulationCheckedColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn simulationProjectColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn simulationSuspensionNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn simulationFilterMediumColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineTypeColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn simulationSimSeriesNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn simulationNameColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulationFilterAreaColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_DpColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_sfColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_nColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tcColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tfColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_trColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_hcColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MfColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VfColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsusColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VsusColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QsusColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QmsusColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QmsColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_epsColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_kappaColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_PcColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_rcColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_aColumn;
+        protected System.Windows.Forms.DataGridViewCheckBoxColumn simulationCheckedColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationProjectColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationSuspensionNameColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationFilterMediumColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineTypeColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineNameColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationSimSeriesNameColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationNameColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulationFilterAreaColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_DpColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_sfColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_nColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tcColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tfColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_trColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_hcColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MfColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VfColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsusColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VsusColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VsColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QsusColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QmsusColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QmsColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_epsColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_kappaColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_PcColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_rcColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_aColumn;
 
     }
 }

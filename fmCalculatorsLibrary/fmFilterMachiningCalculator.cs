@@ -114,6 +114,7 @@ namespace fmCalculatorsLibrary
             public fmValue Mf;
             public fmValue Vf;
             public fmValue Ms;
+            public fmValue Vs;
             public fmValue Msus;
             public fmValue eps;
             public fmValue kappa;
@@ -434,6 +435,7 @@ namespace fmCalculatorsLibrary
             variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
             variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
             variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+            variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
         }
         private void DoCalculationsOptimization()
         {
@@ -515,6 +517,7 @@ namespace fmCalculatorsLibrary
             variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
             variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
             variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+            variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
         }
         private void DoSubCalculationsStandart123()
         {
@@ -606,6 +609,7 @@ namespace fmCalculatorsLibrary
             variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
             variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
             variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+            variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
         }
         private void DoSubCalculationsStandart456()
         {
@@ -625,6 +629,7 @@ namespace fmCalculatorsLibrary
                     variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT:
@@ -633,6 +638,7 @@ namespace fmCalculatorsLibrary
                     variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT:
@@ -641,6 +647,7 @@ namespace fmCalculatorsLibrary
                     variables.Vf = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_f, variables.Mf);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART4_A_Vsus_tr_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Vsus_sf_tc_INPUT:
@@ -649,6 +656,7 @@ namespace fmCalculatorsLibrary
                     variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART4_A_Msus_tr_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Msus_sf_tc_INPUT:
@@ -657,11 +665,13 @@ namespace fmCalculatorsLibrary
                     variables.Vsus = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_sus, variables.Msus);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART4_A_Ms_tr_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Ms_sf_tc_INPUT:
                 case CalculationOptions.STANDART4_A_Ms_tr_n_INPUT:
                 case CalculationOptions.STANDART4_A_Ms_sf_n_INPUT:
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     variables.Msus = FilterMachiningEquations.Eval_Msus_From_Ms_Cm(variables.Ms, constants.Cm);
                     variables.Vsus = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_sus, variables.Msus);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
@@ -772,6 +782,7 @@ namespace fmCalculatorsLibrary
                     variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT:
@@ -783,6 +794,7 @@ namespace fmCalculatorsLibrary
                     variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART7_A_Dp_Mf_sf_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT:
@@ -794,6 +806,7 @@ namespace fmCalculatorsLibrary
                     variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART7_A_Dp_Vsus_sf_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Vsus_tr_INPUT:
@@ -805,6 +818,7 @@ namespace fmCalculatorsLibrary
                     variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART7_A_Dp_Msus_sf_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Msus_tr_INPUT:
@@ -816,12 +830,14 @@ namespace fmCalculatorsLibrary
                     variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
                     variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
                     variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     break;
                 case CalculationOptions.STANDART7_A_Dp_Ms_sf_INPUT:
                 case CalculationOptions.STANDART7_A_Dp_Ms_tr_INPUT:
                 case CalculationOptions.STANDART8_A_Dp_Ms_n_INPUT:
                 case CalculationOptions.STANDART8_A_Dp_Ms_tc_INPUT:
                 case CalculationOptions.STANDART8_A_Dp_Ms_tr_INPUT:
+                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
                     variables.Msus = FilterMachiningEquations.Eval_Msus_From_Ms_Cm(variables.Ms, constants.Cm);
                     variables.Vsus = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_sus, variables.Msus);
                     variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(variables.A, variables.Vsus, variables.kappa);
@@ -926,6 +942,7 @@ namespace fmCalculatorsLibrary
             ref fmValue Mf,
             ref fmValue Vf,
             ref fmValue Ms,
+            ref fmValue Vs,
             ref fmValue Msus,
             ref fmValue eps,
             ref fmValue kappa,
@@ -958,11 +975,12 @@ namespace fmCalculatorsLibrary
             c.variables.Qsus = Qsus;
             c.variables.Qmsus = Qmsus;
             c.variables.Qms = Qms;
-            c.variables.Vsus = Vsus;
             c.variables.Mf = Mf;
             c.variables.Vf = Vf;
             c.variables.Ms = Ms;
+            c.variables.Vs = Vs;
             c.variables.Msus = Msus;
+            c.variables.Vsus = Vsus;
             c.variables.eps = eps;
             c.variables.kappa = kappa;
             c.variables.Pc = Pc;
@@ -994,11 +1012,12 @@ namespace fmCalculatorsLibrary
             Qsus = c.variables.Qsus;
             Qmsus = c.variables.Qmsus;
             Qms = c.variables.Qms;
-            Vsus = c.variables.Vsus;
             Mf = c.variables.Mf;
             Vf = c.variables.Vf;
             Ms = c.variables.Ms;
+            Vs = c.variables.Vs;
             Msus = c.variables.Msus;
+            Vsus = c.variables.Vsus;
             eps = c.variables.eps;
             kappa = c.variables.kappa;
             Pc = c.variables.Pc;
