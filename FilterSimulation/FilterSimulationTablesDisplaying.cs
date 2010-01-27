@@ -302,11 +302,23 @@ namespace FilterSimulation
                         row.Cells[simulation_tcColumn.Index],
                         row.Cells[simulation_tfColumn.Index],
                         row.Cells[simulation_trColumn.Index],
+                        row.Cells[simulation_hc_tfColumn.Index],
+                        row.Cells[simulation_dhc_dtColumn.Index],
                         row.Cells[simulation_hcColumn.Index],
                         row.Cells[simulation_MfColumn.Index],
                         row.Cells[simulation_VfColumn.Index],
+                        row.Cells[simulation_mf_Column.Index],
+                        row.Cells[simulation_vf_Column.Index],
+                        row.Cells[simulation_ms_Column.Index],
+                        row.Cells[simulation_vs_Column.Index],
+                        row.Cells[simulation_msus_Column.Index],
+                        row.Cells[simulation_vsus_Column.Index],
+                        row.Cells[simulation_mc_Column.Index],
+                        row.Cells[simulation_vc_Column.Index],
                         row.Cells[simulation_MsusColumn.Index],
                         row.Cells[simulation_VsusColumn.Index],
+                        row.Cells[simulation_VcColumn.Index],
+                        row.Cells[simulation_McColumn.Index],
                         row.Cells[simulation_MsColumn.Index],
                         row.Cells[simulation_VsColumn.Index],
                         row.Cells[simulation_QsusColumn.Index],
@@ -735,11 +747,23 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_tcColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_tfColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_trColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_hc_tfColumn.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_dhc_dtColumn.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_hcColumn.Index].HeaderCell, fmUnitFamily.LengthFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_MfColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_VfColumn.Index].HeaderCell, fmUnitFamily.VolumeFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_mf_Column.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_vf_Column.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_ms_Column.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_vs_Column.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_msus_Column.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_vsus_Column.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_mc_Column.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_vc_Column.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsusColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_VsusColumn.Index].HeaderCell, fmUnitFamily.VolumeFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_VcColumn.Index].HeaderCell, fmUnitFamily.VolumeFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_McColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_QsusColumn.Index].HeaderCell, fmUnitFamily.FlowRateVolume);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_QmsusColumn.Index].HeaderCell, fmUnitFamily.FlowRateMass);

@@ -106,6 +106,8 @@ namespace fmCalculatorsLibrary
             public fmValue tc;
             public fmValue tf;
             public fmValue tr;
+            public fmValue hc_tf;
+            public fmValue dhc_dt;
             public fmValue hc;
             public fmValue Qsus;
             public fmValue Qmsus;
@@ -113,6 +115,16 @@ namespace fmCalculatorsLibrary
             public fmValue Vsus;
             public fmValue Mf;
             public fmValue Vf;
+            public fmValue mf;
+            public fmValue vf;
+            public fmValue ms;
+            public fmValue vs;
+            public fmValue msus;
+            public fmValue vsus;
+            public fmValue mc;
+            public fmValue vc;
+            public fmValue Vc;
+            public fmValue Mc;
             public fmValue Ms;
             public fmValue Vs;
             public fmValue Msus;
@@ -934,6 +946,8 @@ namespace fmCalculatorsLibrary
             ref fmValue tc,
             ref fmValue tf,
             ref fmValue tr,
+            ref fmValue hc_tf,
+            ref fmValue dhc_dt,
             ref fmValue hc,
             ref fmValue Qsus,
             ref fmValue Qmsus,
@@ -941,6 +955,16 @@ namespace fmCalculatorsLibrary
             ref fmValue Vsus,
             ref fmValue Mf,
             ref fmValue Vf,
+            ref fmValue mf,
+            ref fmValue vf,
+            ref fmValue ms,
+            ref fmValue vs,
+            ref fmValue msus,
+            ref fmValue vsus,
+            ref fmValue mc,
+            ref fmValue vc,
+            ref fmValue Vc,
+            ref fmValue Mc,
             ref fmValue Ms,
             ref fmValue Vs,
             ref fmValue Msus,
@@ -971,12 +995,16 @@ namespace fmCalculatorsLibrary
             c.variables.tc = tc;
             c.variables.tf = tf;
             c.variables.tr = tr;
+            c.variables.hc_tf = hc_tf;
+            c.variables.dhc_dt = dhc_dt;
             c.variables.hc = hc;
             c.variables.Qsus = Qsus;
             c.variables.Qmsus = Qmsus;
             c.variables.Qms = Qms;
             c.variables.Mf = Mf;
             c.variables.Vf = Vf;
+            c.variables.Vc = Vc;
+            c.variables.Mc = Mc;
             c.variables.Ms = Ms;
             c.variables.Vs = Vs;
             c.variables.Msus = Msus;
@@ -1008,12 +1036,16 @@ namespace fmCalculatorsLibrary
             tc = c.variables.tc;
             tf = c.variables.tf;
             tr = c.variables.tr;
+            hc_tf = c.variables.hc_tf;
+            dhc_dt = c.variables.dhc_dt;
             hc = c.variables.hc;
             Qsus = c.variables.Qsus;
             Qmsus = c.variables.Qmsus;
             Qms = c.variables.Qms;
             Mf = c.variables.Mf;
             Vf = c.variables.Vf;
+            Vc = c.variables.Vc;
+            Mc = c.variables.Mc;
             Ms = c.variables.Ms;
             Vs = c.variables.Vs;
             Msus = c.variables.Msus;

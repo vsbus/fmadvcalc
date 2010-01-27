@@ -29,12 +29,12 @@ namespace FilterSimulation
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterSimulation));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.radioButton_rho_f = new System.Windows.Forms.RadioButton();
             this.radioButton_rho_s = new System.Windows.Forms.RadioButton();
             this.radioButton_rho_sus = new System.Windows.Forms.RadioButton();
@@ -52,25 +52,9 @@ namespace FilterSimulation
             this.meterialInputSerieRadioButton = new System.Windows.Forms.RadioButton();
             this.meterialInputSimualationRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid = new fmDataGrid.fmDataGrid();
-            this.epsKappaParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.epsKappaUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.liquidDataGrid = new fmDataGrid.fmDataGrid();
-            this.liquidParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.liquidParameterUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.secondFromTopPanel = new System.Windows.Forms.Panel();
             this.simSeriesPanel = new System.Windows.Forms.Panel();
-            this.simSeriesDataGrid = new fmDataGrid.fmDataGrid();
-            this.simSeriesCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.simSeriesGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesMachineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesLastModifiedDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.simSeriesDeleteButton = new System.Windows.Forms.Button();
             this.simSeriesRestoreButton = new System.Windows.Forms.Button();
@@ -80,12 +64,6 @@ namespace FilterSimulation
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.topPanel = new System.Windows.Forms.Panel();
             this.suspensionPanel = new System.Windows.Forms.Panel();
-            this.suspensionDataGrid = new fmDataGrid.fmDataGrid();
-            this.suspensionGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.suspensionCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.suspensionMaterialColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.suspensionCustomerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.suspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
             this.suspensionDeleteButton = new System.Windows.Forms.Button();
             this.suspensionRestoreButton = new System.Windows.Forms.Button();
@@ -94,22 +72,13 @@ namespace FilterSimulation
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.machinePanel = new System.Windows.Forms.Panel();
-            this.machineTypesDataGrid = new fmDataGrid.fmDataGrid();
-            this.machineTypeCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.machineTypeSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.machineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.projectPanel = new System.Windows.Forms.Panel();
-            this.projectDataGrid = new fmDataGrid.fmDataGrid();
-            this.projectGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.projectCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.projectNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.projectDeleteButton = new System.Windows.Forms.Button();
             this.projectRestoreButton = new System.Windows.Forms.Button();
             this.projectKeepButton = new System.Windows.Forms.Button();
             this.projectCreateButton = new System.Windows.Forms.Button();
             this.simulationPanel = new System.Windows.Forms.Panel();
-            this.simulationDataGrid = new fmDataGrid.fmDataGrid();
             this.panel5 = new System.Windows.Forms.Panel();
             this.simulationDeleteButton = new System.Windows.Forms.Button();
             this.simulationRestoreButton = new System.Windows.Forms.Button();
@@ -121,6 +90,41 @@ namespace FilterSimulation
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.panelRight = new System.Windows.Forms.Panel();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.splitter5 = new System.Windows.Forms.Splitter();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.simulationDataGrid = new fmDataGrid.fmDataGrid();
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid = new fmDataGrid.fmDataGrid();
+            this.epsKappaParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.epsKappaUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.liquidDataGrid = new fmDataGrid.fmDataGrid();
+            this.liquidParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.liquidParameterUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesDataGrid = new fmDataGrid.fmDataGrid();
+            this.simSeriesCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.simSeriesGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesMachineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesLastModifiedDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suspensionDataGrid = new fmDataGrid.fmDataGrid();
+            this.suspensionGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suspensionCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.suspensionMaterialColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suspensionCustomerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.machineTypesDataGrid = new fmDataGrid.fmDataGrid();
+            this.machineTypeCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.machineTypeSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.machineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projectDataGrid = new fmDataGrid.fmDataGrid();
+            this.projectGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projectCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.projectNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -139,10 +143,6 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panelTop = new System.Windows.Forms.Panel();
-            this.panelMain = new System.Windows.Forms.Panel();
-            this.splitter5 = new System.Windows.Forms.Splitter();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.simulationGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.simulationProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -159,11 +159,23 @@ namespace FilterSimulation
             this.simulation_tcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_tfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_trColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_hc_tfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_dhc_dtColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_hcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_MfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_VfColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_mf_Column = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_vf_Column = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_ms_Column = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_vs_Column = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_msus_Column = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_vsus_Column = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_mc_Column = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_vc_Column = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_MsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_VsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_VcColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.simulation_McColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_MsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_VsColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.simulation_QsusColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
@@ -179,26 +191,26 @@ namespace FilterSimulation
             this.suspensionParametersPanel.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).BeginInit();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.simSeriesDataGrid)).BeginInit();
             this.panel3.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.suspensionPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.suspensionDataGrid)).BeginInit();
             this.panel2.SuspendLayout();
             this.machinePanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.machineTypesDataGrid)).BeginInit();
             this.projectPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.projectDataGrid)).BeginInit();
             this.panel1.SuspendLayout();
             this.simulationPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.simulationDataGrid)).BeginInit();
             this.panel5.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.simulationDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.simSeriesDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.suspensionDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.machineTypesDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projectDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // radioButton_rho_f
@@ -401,81 +413,6 @@ namespace FilterSimulation
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
             // 
-            // eps0Kappa0Pc0Rc0Alpha0DataGrid
-            // 
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.AllowUserToAddRows = false;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.AllowUserToDeleteRows = false;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.AllowUserToResizeColumns = false;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.AllowUserToResizeRows = false;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.epsKappaParameterName,
-            this.epsKappaUnits});
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.HighLightCurrentRow = false;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Location = new System.Drawing.Point(265, 3);
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Name = "eps0Kappa0Pc0Rc0Alpha0DataGrid";
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowHeadersVisible = false;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowTemplate.Height = 16;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Size = new System.Drawing.Size(166, 165);
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.TabIndex = 12;
-            // 
-            // epsKappaParameterName
-            // 
-            this.epsKappaParameterName.HeaderText = "Parameter";
-            this.epsKappaParameterName.Name = "epsKappaParameterName";
-            this.epsKappaParameterName.ReadOnly = true;
-            this.epsKappaParameterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.epsKappaParameterName.Width = 61;
-            // 
-            // epsKappaUnits
-            // 
-            this.epsKappaUnits.HeaderText = "Units";
-            this.epsKappaUnits.Name = "epsKappaUnits";
-            this.epsKappaUnits.ReadOnly = true;
-            this.epsKappaUnits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.epsKappaUnits.Width = 37;
-            // 
-            // liquidDataGrid
-            // 
-            this.liquidDataGrid.AllowUserToAddRows = false;
-            this.liquidDataGrid.AllowUserToResizeColumns = false;
-            this.liquidDataGrid.AllowUserToResizeRows = false;
-            this.liquidDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.liquidDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.liquidDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.liquidDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.liquidParameterName,
-            this.liquidParameterUnits});
-            this.liquidDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.liquidDataGrid.HighLightCurrentRow = false;
-            this.liquidDataGrid.Location = new System.Drawing.Point(101, 3);
-            this.liquidDataGrid.Name = "liquidDataGrid";
-            this.liquidDataGrid.RowHeadersVisible = false;
-            this.liquidDataGrid.RowTemplate.Height = 16;
-            this.liquidDataGrid.Size = new System.Drawing.Size(161, 165);
-            this.liquidDataGrid.TabIndex = 5;
-            // 
-            // liquidParameterName
-            // 
-            this.liquidParameterName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.liquidParameterName.HeaderText = "Parameter";
-            this.liquidParameterName.Name = "liquidParameterName";
-            this.liquidParameterName.ReadOnly = true;
-            this.liquidParameterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.liquidParameterName.Width = 61;
-            // 
-            // liquidParameterUnits
-            // 
-            this.liquidParameterUnits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.liquidParameterUnits.HeaderText = "Units";
-            this.liquidParameterUnits.Name = "liquidParameterUnits";
-            this.liquidParameterUnits.ReadOnly = true;
-            this.liquidParameterUnits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.liquidParameterUnits.Width = 37;
-            // 
             // splitter4
             // 
             this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -504,109 +441,6 @@ namespace FilterSimulation
             this.simSeriesPanel.Name = "simSeriesPanel";
             this.simSeriesPanel.Size = new System.Drawing.Size(976, 129);
             this.simSeriesPanel.TabIndex = 8;
-            // 
-            // simSeriesDataGrid
-            // 
-            this.simSeriesDataGrid.AllowUserToAddRows = false;
-            this.simSeriesDataGrid.AllowUserToResizeRows = false;
-            this.simSeriesDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.simSeriesDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.simSeriesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.simSeriesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.simSeriesCheckedColumn,
-            this.simSeriesGuidColumn,
-            this.simSeriesNameColumn,
-            this.simSeriesProjectColumn,
-            this.simSeriesSuspensionNameColumn,
-            this.simSeriesFilterMediumColumn,
-            this.simSeriesMachineTypeNameColumn,
-            this.simSeriesMachineNameColumn,
-            this.simSeriesLastModifiedDateColumn});
-            this.simSeriesDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.simSeriesDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.simSeriesDataGrid.HighLightCurrentRow = true;
-            this.simSeriesDataGrid.Location = new System.Drawing.Point(0, 20);
-            this.simSeriesDataGrid.Name = "simSeriesDataGrid";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.simSeriesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.simSeriesDataGrid.RowHeadersVisible = false;
-            this.simSeriesDataGrid.RowTemplate.Height = 18;
-            this.simSeriesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.simSeriesDataGrid.Size = new System.Drawing.Size(976, 109);
-            this.simSeriesDataGrid.TabIndex = 0;
-            this.simSeriesDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellClick);
-            this.simSeriesDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellEndEdit);
-            this.simSeriesDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellValueChanged);
-            this.simSeriesDataGrid.CurrentCellChanged += new System.EventHandler(this.simSeriesDataGrid_CurrentCellChanged);
-            // 
-            // simSeriesCheckedColumn
-            // 
-            this.simSeriesCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.simSeriesCheckedColumn.HeaderText = "";
-            this.simSeriesCheckedColumn.Name = "simSeriesCheckedColumn";
-            this.simSeriesCheckedColumn.Width = 5;
-            // 
-            // simSeriesGuidColumn
-            // 
-            this.simSeriesGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.simSeriesGuidColumn.HeaderText = "Guid";
-            this.simSeriesGuidColumn.Name = "simSeriesGuidColumn";
-            this.simSeriesGuidColumn.ReadOnly = true;
-            this.simSeriesGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.simSeriesGuidColumn.Visible = false;
-            // 
-            // simSeriesNameColumn
-            // 
-            this.simSeriesNameColumn.HeaderText = "Series Name";
-            this.simSeriesNameColumn.Name = "simSeriesNameColumn";
-            this.simSeriesNameColumn.Width = 75;
-            // 
-            // simSeriesProjectColumn
-            // 
-            this.simSeriesProjectColumn.HeaderText = "Project";
-            this.simSeriesProjectColumn.Name = "simSeriesProjectColumn";
-            this.simSeriesProjectColumn.ReadOnly = true;
-            this.simSeriesProjectColumn.Width = 75;
-            // 
-            // simSeriesSuspensionNameColumn
-            // 
-            this.simSeriesSuspensionNameColumn.HeaderText = "Suspension";
-            this.simSeriesSuspensionNameColumn.Name = "simSeriesSuspensionNameColumn";
-            this.simSeriesSuspensionNameColumn.ReadOnly = true;
-            this.simSeriesSuspensionNameColumn.Width = 150;
-            // 
-            // simSeriesFilterMediumColumn
-            // 
-            this.simSeriesFilterMediumColumn.HeaderText = "Filter Medium";
-            this.simSeriesFilterMediumColumn.Name = "simSeriesFilterMediumColumn";
-            this.simSeriesFilterMediumColumn.Width = 75;
-            // 
-            // simSeriesMachineTypeNameColumn
-            // 
-            this.simSeriesMachineTypeNameColumn.HeaderText = "Machine Type";
-            this.simSeriesMachineTypeNameColumn.Name = "simSeriesMachineTypeNameColumn";
-            this.simSeriesMachineTypeNameColumn.ReadOnly = true;
-            this.simSeriesMachineTypeNameColumn.Width = 75;
-            // 
-            // simSeriesMachineNameColumn
-            // 
-            this.simSeriesMachineNameColumn.HeaderText = "Machine Name";
-            this.simSeriesMachineNameColumn.Name = "simSeriesMachineNameColumn";
-            this.simSeriesMachineNameColumn.Visible = false;
-            this.simSeriesMachineNameColumn.Width = 75;
-            // 
-            // simSeriesLastModifiedDateColumn
-            // 
-            this.simSeriesLastModifiedDateColumn.HeaderText = "Last Modified Date";
-            this.simSeriesLastModifiedDateColumn.Name = "simSeriesLastModifiedDateColumn";
-            this.simSeriesLastModifiedDateColumn.ReadOnly = true;
-            this.simSeriesLastModifiedDateColumn.Width = 130;
             // 
             // panel3
             // 
@@ -725,76 +559,6 @@ namespace FilterSimulation
             this.suspensionPanel.Size = new System.Drawing.Size(690, 114);
             this.suspensionPanel.TabIndex = 2;
             // 
-            // suspensionDataGrid
-            // 
-            this.suspensionDataGrid.AllowUserToAddRows = false;
-            this.suspensionDataGrid.AllowUserToResizeRows = false;
-            this.suspensionDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.suspensionDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.suspensionDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.suspensionDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.suspensionGuidColumn,
-            this.suspensionCheckedColumn,
-            this.suspensionMaterialColumn,
-            this.suspensionCustomerColumn,
-            this.suspensionNameColumn});
-            this.suspensionDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.suspensionDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.suspensionDataGrid.HighLightCurrentRow = true;
-            this.suspensionDataGrid.Location = new System.Drawing.Point(0, 20);
-            this.suspensionDataGrid.Name = "suspensionDataGrid";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.suspensionDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.suspensionDataGrid.RowHeadersVisible = false;
-            this.suspensionDataGrid.RowTemplate.Height = 18;
-            this.suspensionDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.suspensionDataGrid.Size = new System.Drawing.Size(686, 90);
-            this.suspensionDataGrid.TabIndex = 0;
-            this.suspensionDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellClick);
-            this.suspensionDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellEndEdit);
-            this.suspensionDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellValueChanged);
-            this.suspensionDataGrid.CurrentCellChanged += new System.EventHandler(this.suspensionDataGrid_CurrentCellChanged);
-            // 
-            // suspensionGuidColumn
-            // 
-            this.suspensionGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.suspensionGuidColumn.HeaderText = "Guid";
-            this.suspensionGuidColumn.Name = "suspensionGuidColumn";
-            this.suspensionGuidColumn.ReadOnly = true;
-            this.suspensionGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.suspensionGuidColumn.Visible = false;
-            // 
-            // suspensionCheckedColumn
-            // 
-            this.suspensionCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.suspensionCheckedColumn.HeaderText = "";
-            this.suspensionCheckedColumn.Name = "suspensionCheckedColumn";
-            this.suspensionCheckedColumn.Width = 5;
-            // 
-            // suspensionMaterialColumn
-            // 
-            this.suspensionMaterialColumn.HeaderText = "Material";
-            this.suspensionMaterialColumn.Name = "suspensionMaterialColumn";
-            this.suspensionMaterialColumn.Width = 70;
-            // 
-            // suspensionCustomerColumn
-            // 
-            this.suspensionCustomerColumn.HeaderText = "Customer";
-            this.suspensionCustomerColumn.Name = "suspensionCustomerColumn";
-            this.suspensionCustomerColumn.Width = 70;
-            // 
-            // suspensionNameColumn
-            // 
-            this.suspensionNameColumn.HeaderText = "Suspension Name";
-            this.suspensionNameColumn.Name = "suspensionNameColumn";
-            this.suspensionNameColumn.Width = 120;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.suspensionDeleteButton);
@@ -892,54 +656,6 @@ namespace FilterSimulation
             this.machinePanel.TabIndex = 3;
             this.machinePanel.Resize += new System.EventHandler(this.machinePanel_Resize);
             // 
-            // machineTypesDataGrid
-            // 
-            this.machineTypesDataGrid.AllowUserToAddRows = false;
-            this.machineTypesDataGrid.AllowUserToDeleteRows = false;
-            this.machineTypesDataGrid.AllowUserToResizeRows = false;
-            this.machineTypesDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.machineTypesDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.machineTypesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.machineTypesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.machineTypeCheckedColumn,
-            this.machineTypeSymbolColumn,
-            this.machineTypeNameColumn});
-            this.machineTypesDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.machineTypesDataGrid.HighLightCurrentRow = false;
-            this.machineTypesDataGrid.Location = new System.Drawing.Point(-1, 20);
-            this.machineTypesDataGrid.Name = "machineTypesDataGrid";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.machineTypesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.machineTypesDataGrid.RowHeadersVisible = false;
-            this.machineTypesDataGrid.RowTemplate.Height = 18;
-            this.machineTypesDataGrid.Size = new System.Drawing.Size(113, 56);
-            this.machineTypesDataGrid.TabIndex = 2;
-            // 
-            // machineTypeCheckedColumn
-            // 
-            this.machineTypeCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.machineTypeCheckedColumn.HeaderText = "";
-            this.machineTypeCheckedColumn.Name = "machineTypeCheckedColumn";
-            this.machineTypeCheckedColumn.Width = 5;
-            // 
-            // machineTypeSymbolColumn
-            // 
-            this.machineTypeSymbolColumn.HeaderText = "Machine Type Symbol";
-            this.machineTypeSymbolColumn.Name = "machineTypeSymbolColumn";
-            this.machineTypeSymbolColumn.Visible = false;
-            // 
-            // machineTypeNameColumn
-            // 
-            this.machineTypeNameColumn.HeaderText = "Machine Type";
-            this.machineTypeNameColumn.Name = "machineTypeNameColumn";
-            this.machineTypeNameColumn.ReadOnly = true;
-            // 
             // projectPanel
             // 
             this.projectPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -950,61 +666,6 @@ namespace FilterSimulation
             this.projectPanel.Name = "projectPanel";
             this.projectPanel.Size = new System.Drawing.Size(170, 114);
             this.projectPanel.TabIndex = 0;
-            // 
-            // projectDataGrid
-            // 
-            this.projectDataGrid.AllowUserToAddRows = false;
-            this.projectDataGrid.AllowUserToResizeRows = false;
-            this.projectDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.projectDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.projectDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.projectDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.projectGuidColumn,
-            this.projectCheckedColumn,
-            this.projectNameColumn});
-            this.projectDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.projectDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.projectDataGrid.HighLightCurrentRow = true;
-            this.projectDataGrid.Location = new System.Drawing.Point(0, 20);
-            this.projectDataGrid.Name = "projectDataGrid";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.projectDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.projectDataGrid.RowHeadersVisible = false;
-            this.projectDataGrid.RowTemplate.Height = 18;
-            this.projectDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.projectDataGrid.Size = new System.Drawing.Size(166, 90);
-            this.projectDataGrid.TabIndex = 0;
-            this.projectDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellClick);
-            this.projectDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellEndEdit);
-            this.projectDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellValueChanged);
-            this.projectDataGrid.CurrentCellChanged += new System.EventHandler(this.projectDataGrid_CurrentCellChanged);
-            // 
-            // projectGuidColumn
-            // 
-            this.projectGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.projectGuidColumn.HeaderText = "Guid";
-            this.projectGuidColumn.Name = "projectGuidColumn";
-            this.projectGuidColumn.ReadOnly = true;
-            this.projectGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.projectGuidColumn.Visible = false;
-            // 
-            // projectCheckedColumn
-            // 
-            this.projectCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.projectCheckedColumn.HeaderText = "";
-            this.projectCheckedColumn.Name = "projectCheckedColumn";
-            this.projectCheckedColumn.Width = 5;
-            // 
-            // projectNameColumn
-            // 
-            this.projectNameColumn.HeaderText = "Project Name";
-            this.projectNameColumn.Name = "projectNameColumn";
             // 
             // panel1
             // 
@@ -1087,70 +748,6 @@ namespace FilterSimulation
             this.simulationPanel.Name = "simulationPanel";
             this.simulationPanel.Size = new System.Drawing.Size(980, 180);
             this.simulationPanel.TabIndex = 9;
-            // 
-            // simulationDataGrid
-            // 
-            this.simulationDataGrid.AllowUserToAddRows = false;
-            this.simulationDataGrid.AllowUserToOrderColumns = true;
-            this.simulationDataGrid.AllowUserToResizeRows = false;
-            this.simulationDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.simulationDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.simulationDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.simulationDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.simulationGuidColumn,
-            this.simulationCheckedColumn,
-            this.simulationProjectColumn,
-            this.simulationSuspensionNameColumn,
-            this.simulationFilterMediumColumn,
-            this.simulationMachineTypeColumn,
-            this.simulationMachineNameColumn,
-            this.simulationSimSeriesNameColumn,
-            this.simulationNameColumn,
-            this.simulationFilterAreaColumn,
-            this.simulation_DpColumn,
-            this.simulation_sfColumn,
-            this.simulation_nColumn,
-            this.simulation_tcColumn,
-            this.simulation_tfColumn,
-            this.simulation_trColumn,
-            this.simulation_hcColumn,
-            this.simulation_MfColumn,
-            this.simulation_VfColumn,
-            this.simulation_MsusColumn,
-            this.simulation_VsusColumn,
-            this.simulation_MsColumn,
-            this.simulation_VsColumn,
-            this.simulation_QsusColumn,
-            this.simulation_QmsusColumn,
-            this.simulation_QmsColumn,
-            this.simulation_epsColumn,
-            this.simulation_kappaColumn,
-            this.simulation_PcColumn,
-            this.simulation_rcColumn,
-            this.simulation_aColumn});
-            this.simulationDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.simulationDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            this.simulationDataGrid.HighLightCurrentRow = true;
-            this.simulationDataGrid.Location = new System.Drawing.Point(0, 20);
-            this.simulationDataGrid.Name = "simulationDataGrid";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.simulationDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.simulationDataGrid.RowHeadersVisible = false;
-            this.simulationDataGrid.RowTemplate.Height = 18;
-            this.simulationDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.simulationDataGrid.Size = new System.Drawing.Size(976, 156);
-            this.simulationDataGrid.TabIndex = 0;
-            this.simulationDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellClick);
-            this.simulationDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.simulationDataGrid_SortCompare);
-            this.simulationDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellEndEdit);
-            this.simulationDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellValueChanged);
-            this.simulationDataGrid.CurrentCellChanged += new System.EventHandler(this.simulationDataGrid_CurrentCellChanged);
             // 
             // panel5
             // 
@@ -1293,6 +890,463 @@ namespace FilterSimulation
             this.panelRight.Size = new System.Drawing.Size(980, 0);
             this.panelRight.TabIndex = 8;
             // 
+            // panelTop
+            // 
+            this.panelTop.Controls.Add(this.panelRight);
+            this.panelTop.Controls.Add(this.panelLeft);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(980, 432);
+            this.panelTop.TabIndex = 34;
+            // 
+            // panelMain
+            // 
+            this.panelMain.Controls.Add(this.simulationPanel);
+            this.panelMain.Controls.Add(this.splitter5);
+            this.panelMain.Controls.Add(this.panelTop);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(980, 615);
+            this.panelMain.TabIndex = 35;
+            // 
+            // splitter5
+            // 
+            this.splitter5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter5.Location = new System.Drawing.Point(0, 432);
+            this.splitter5.Name = "splitter5";
+            this.splitter5.Size = new System.Drawing.Size(980, 3);
+            this.splitter5.TabIndex = 35;
+            this.splitter5.TabStop = false;
+            // 
+            // simulationDataGrid
+            // 
+            this.simulationDataGrid.AllowUserToAddRows = false;
+            this.simulationDataGrid.AllowUserToOrderColumns = true;
+            this.simulationDataGrid.AllowUserToResizeRows = false;
+            this.simulationDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.simulationDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.simulationDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.simulationDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.simulationGuidColumn,
+            this.simulationCheckedColumn,
+            this.simulationProjectColumn,
+            this.simulationSuspensionNameColumn,
+            this.simulationFilterMediumColumn,
+            this.simulationMachineTypeColumn,
+            this.simulationMachineNameColumn,
+            this.simulationSimSeriesNameColumn,
+            this.simulationNameColumn,
+            this.simulationFilterAreaColumn,
+            this.simulation_DpColumn,
+            this.simulation_sfColumn,
+            this.simulation_nColumn,
+            this.simulation_tcColumn,
+            this.simulation_tfColumn,
+            this.simulation_trColumn,
+            this.simulation_hc_tfColumn,
+            this.simulation_dhc_dtColumn,
+            this.simulation_hcColumn,
+            this.simulation_MfColumn,
+            this.simulation_VfColumn,
+            this.simulation_mf_Column,
+            this.simulation_vf_Column,
+            this.simulation_ms_Column,
+            this.simulation_vs_Column,
+            this.simulation_msus_Column,
+            this.simulation_vsus_Column,
+            this.simulation_mc_Column,
+            this.simulation_vc_Column,
+            this.simulation_MsusColumn,
+            this.simulation_VsusColumn,
+            this.simulation_VcColumn,
+            this.simulation_McColumn,
+            this.simulation_MsColumn,
+            this.simulation_VsColumn,
+            this.simulation_QsusColumn,
+            this.simulation_QmsusColumn,
+            this.simulation_QmsColumn,
+            this.simulation_epsColumn,
+            this.simulation_kappaColumn,
+            this.simulation_PcColumn,
+            this.simulation_rcColumn,
+            this.simulation_aColumn});
+            this.simulationDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.simulationDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.simulationDataGrid.HighLightCurrentRow = true;
+            this.simulationDataGrid.Location = new System.Drawing.Point(0, 20);
+            this.simulationDataGrid.Name = "simulationDataGrid";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.simulationDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.simulationDataGrid.RowHeadersVisible = false;
+            this.simulationDataGrid.RowTemplate.Height = 18;
+            this.simulationDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.simulationDataGrid.Size = new System.Drawing.Size(976, 156);
+            this.simulationDataGrid.TabIndex = 0;
+            this.simulationDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellValueChanged);
+            this.simulationDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.simulationDataGrid_SortCompare);
+            this.simulationDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellEndEdit);
+            this.simulationDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellClick);
+            this.simulationDataGrid.CurrentCellChanged += new System.EventHandler(this.simulationDataGrid_CurrentCellChanged);
+            // 
+            // eps0Kappa0Pc0Rc0Alpha0DataGrid
+            // 
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.AllowUserToAddRows = false;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.AllowUserToDeleteRows = false;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.AllowUserToResizeColumns = false;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.AllowUserToResizeRows = false;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.epsKappaParameterName,
+            this.epsKappaUnits});
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.HighLightCurrentRow = false;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Location = new System.Drawing.Point(265, 3);
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Name = "eps0Kappa0Pc0Rc0Alpha0DataGrid";
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowHeadersVisible = false;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowTemplate.Height = 16;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Size = new System.Drawing.Size(166, 165);
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.TabIndex = 12;
+            // 
+            // epsKappaParameterName
+            // 
+            this.epsKappaParameterName.HeaderText = "Parameter";
+            this.epsKappaParameterName.Name = "epsKappaParameterName";
+            this.epsKappaParameterName.ReadOnly = true;
+            this.epsKappaParameterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.epsKappaParameterName.Width = 61;
+            // 
+            // epsKappaUnits
+            // 
+            this.epsKappaUnits.HeaderText = "Units";
+            this.epsKappaUnits.Name = "epsKappaUnits";
+            this.epsKappaUnits.ReadOnly = true;
+            this.epsKappaUnits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.epsKappaUnits.Width = 37;
+            // 
+            // liquidDataGrid
+            // 
+            this.liquidDataGrid.AllowUserToAddRows = false;
+            this.liquidDataGrid.AllowUserToResizeColumns = false;
+            this.liquidDataGrid.AllowUserToResizeRows = false;
+            this.liquidDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.liquidDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.liquidDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.liquidDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.liquidParameterName,
+            this.liquidParameterUnits});
+            this.liquidDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.liquidDataGrid.HighLightCurrentRow = false;
+            this.liquidDataGrid.Location = new System.Drawing.Point(101, 3);
+            this.liquidDataGrid.Name = "liquidDataGrid";
+            this.liquidDataGrid.RowHeadersVisible = false;
+            this.liquidDataGrid.RowTemplate.Height = 16;
+            this.liquidDataGrid.Size = new System.Drawing.Size(161, 165);
+            this.liquidDataGrid.TabIndex = 5;
+            // 
+            // liquidParameterName
+            // 
+            this.liquidParameterName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.liquidParameterName.HeaderText = "Parameter";
+            this.liquidParameterName.Name = "liquidParameterName";
+            this.liquidParameterName.ReadOnly = true;
+            this.liquidParameterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.liquidParameterName.Width = 61;
+            // 
+            // liquidParameterUnits
+            // 
+            this.liquidParameterUnits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.liquidParameterUnits.HeaderText = "Units";
+            this.liquidParameterUnits.Name = "liquidParameterUnits";
+            this.liquidParameterUnits.ReadOnly = true;
+            this.liquidParameterUnits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.liquidParameterUnits.Width = 37;
+            // 
+            // simSeriesDataGrid
+            // 
+            this.simSeriesDataGrid.AllowUserToAddRows = false;
+            this.simSeriesDataGrid.AllowUserToResizeRows = false;
+            this.simSeriesDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.simSeriesDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.simSeriesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.simSeriesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.simSeriesCheckedColumn,
+            this.simSeriesGuidColumn,
+            this.simSeriesNameColumn,
+            this.simSeriesProjectColumn,
+            this.simSeriesSuspensionNameColumn,
+            this.simSeriesFilterMediumColumn,
+            this.simSeriesMachineTypeNameColumn,
+            this.simSeriesMachineNameColumn,
+            this.simSeriesLastModifiedDateColumn});
+            this.simSeriesDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.simSeriesDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.simSeriesDataGrid.HighLightCurrentRow = true;
+            this.simSeriesDataGrid.Location = new System.Drawing.Point(0, 20);
+            this.simSeriesDataGrid.Name = "simSeriesDataGrid";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.simSeriesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.simSeriesDataGrid.RowHeadersVisible = false;
+            this.simSeriesDataGrid.RowTemplate.Height = 18;
+            this.simSeriesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.simSeriesDataGrid.Size = new System.Drawing.Size(976, 109);
+            this.simSeriesDataGrid.TabIndex = 0;
+            this.simSeriesDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellValueChanged);
+            this.simSeriesDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellEndEdit);
+            this.simSeriesDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellClick);
+            this.simSeriesDataGrid.CurrentCellChanged += new System.EventHandler(this.simSeriesDataGrid_CurrentCellChanged);
+            // 
+            // simSeriesCheckedColumn
+            // 
+            this.simSeriesCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.simSeriesCheckedColumn.HeaderText = "";
+            this.simSeriesCheckedColumn.Name = "simSeriesCheckedColumn";
+            this.simSeriesCheckedColumn.Width = 5;
+            // 
+            // simSeriesGuidColumn
+            // 
+            this.simSeriesGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.simSeriesGuidColumn.HeaderText = "Guid";
+            this.simSeriesGuidColumn.Name = "simSeriesGuidColumn";
+            this.simSeriesGuidColumn.ReadOnly = true;
+            this.simSeriesGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.simSeriesGuidColumn.Visible = false;
+            // 
+            // simSeriesNameColumn
+            // 
+            this.simSeriesNameColumn.HeaderText = "Series Name";
+            this.simSeriesNameColumn.Name = "simSeriesNameColumn";
+            this.simSeriesNameColumn.Width = 75;
+            // 
+            // simSeriesProjectColumn
+            // 
+            this.simSeriesProjectColumn.HeaderText = "Project";
+            this.simSeriesProjectColumn.Name = "simSeriesProjectColumn";
+            this.simSeriesProjectColumn.ReadOnly = true;
+            this.simSeriesProjectColumn.Width = 75;
+            // 
+            // simSeriesSuspensionNameColumn
+            // 
+            this.simSeriesSuspensionNameColumn.HeaderText = "Suspension";
+            this.simSeriesSuspensionNameColumn.Name = "simSeriesSuspensionNameColumn";
+            this.simSeriesSuspensionNameColumn.ReadOnly = true;
+            this.simSeriesSuspensionNameColumn.Width = 150;
+            // 
+            // simSeriesFilterMediumColumn
+            // 
+            this.simSeriesFilterMediumColumn.HeaderText = "Filter Medium";
+            this.simSeriesFilterMediumColumn.Name = "simSeriesFilterMediumColumn";
+            this.simSeriesFilterMediumColumn.Width = 75;
+            // 
+            // simSeriesMachineTypeNameColumn
+            // 
+            this.simSeriesMachineTypeNameColumn.HeaderText = "Machine Type";
+            this.simSeriesMachineTypeNameColumn.Name = "simSeriesMachineTypeNameColumn";
+            this.simSeriesMachineTypeNameColumn.ReadOnly = true;
+            this.simSeriesMachineTypeNameColumn.Width = 75;
+            // 
+            // simSeriesMachineNameColumn
+            // 
+            this.simSeriesMachineNameColumn.HeaderText = "Machine Name";
+            this.simSeriesMachineNameColumn.Name = "simSeriesMachineNameColumn";
+            this.simSeriesMachineNameColumn.Visible = false;
+            this.simSeriesMachineNameColumn.Width = 75;
+            // 
+            // simSeriesLastModifiedDateColumn
+            // 
+            this.simSeriesLastModifiedDateColumn.HeaderText = "Last Modified Date";
+            this.simSeriesLastModifiedDateColumn.Name = "simSeriesLastModifiedDateColumn";
+            this.simSeriesLastModifiedDateColumn.ReadOnly = true;
+            this.simSeriesLastModifiedDateColumn.Width = 130;
+            // 
+            // suspensionDataGrid
+            // 
+            this.suspensionDataGrid.AllowUserToAddRows = false;
+            this.suspensionDataGrid.AllowUserToResizeRows = false;
+            this.suspensionDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.suspensionDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.suspensionDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.suspensionDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.suspensionGuidColumn,
+            this.suspensionCheckedColumn,
+            this.suspensionMaterialColumn,
+            this.suspensionCustomerColumn,
+            this.suspensionNameColumn});
+            this.suspensionDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.suspensionDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.suspensionDataGrid.HighLightCurrentRow = true;
+            this.suspensionDataGrid.Location = new System.Drawing.Point(0, 20);
+            this.suspensionDataGrid.Name = "suspensionDataGrid";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.suspensionDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.suspensionDataGrid.RowHeadersVisible = false;
+            this.suspensionDataGrid.RowTemplate.Height = 18;
+            this.suspensionDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.suspensionDataGrid.Size = new System.Drawing.Size(686, 90);
+            this.suspensionDataGrid.TabIndex = 0;
+            this.suspensionDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellValueChanged);
+            this.suspensionDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellEndEdit);
+            this.suspensionDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellClick);
+            this.suspensionDataGrid.CurrentCellChanged += new System.EventHandler(this.suspensionDataGrid_CurrentCellChanged);
+            // 
+            // suspensionGuidColumn
+            // 
+            this.suspensionGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.suspensionGuidColumn.HeaderText = "Guid";
+            this.suspensionGuidColumn.Name = "suspensionGuidColumn";
+            this.suspensionGuidColumn.ReadOnly = true;
+            this.suspensionGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.suspensionGuidColumn.Visible = false;
+            // 
+            // suspensionCheckedColumn
+            // 
+            this.suspensionCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.suspensionCheckedColumn.HeaderText = "";
+            this.suspensionCheckedColumn.Name = "suspensionCheckedColumn";
+            this.suspensionCheckedColumn.Width = 5;
+            // 
+            // suspensionMaterialColumn
+            // 
+            this.suspensionMaterialColumn.HeaderText = "Material";
+            this.suspensionMaterialColumn.Name = "suspensionMaterialColumn";
+            this.suspensionMaterialColumn.Width = 70;
+            // 
+            // suspensionCustomerColumn
+            // 
+            this.suspensionCustomerColumn.HeaderText = "Customer";
+            this.suspensionCustomerColumn.Name = "suspensionCustomerColumn";
+            this.suspensionCustomerColumn.Width = 70;
+            // 
+            // suspensionNameColumn
+            // 
+            this.suspensionNameColumn.HeaderText = "Suspension Name";
+            this.suspensionNameColumn.Name = "suspensionNameColumn";
+            this.suspensionNameColumn.Width = 120;
+            // 
+            // machineTypesDataGrid
+            // 
+            this.machineTypesDataGrid.AllowUserToAddRows = false;
+            this.machineTypesDataGrid.AllowUserToDeleteRows = false;
+            this.machineTypesDataGrid.AllowUserToResizeRows = false;
+            this.machineTypesDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.machineTypesDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.machineTypesDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.machineTypesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.machineTypeCheckedColumn,
+            this.machineTypeSymbolColumn,
+            this.machineTypeNameColumn});
+            this.machineTypesDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.machineTypesDataGrid.HighLightCurrentRow = false;
+            this.machineTypesDataGrid.Location = new System.Drawing.Point(-1, 20);
+            this.machineTypesDataGrid.Name = "machineTypesDataGrid";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.machineTypesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.machineTypesDataGrid.RowHeadersVisible = false;
+            this.machineTypesDataGrid.RowTemplate.Height = 18;
+            this.machineTypesDataGrid.Size = new System.Drawing.Size(113, 56);
+            this.machineTypesDataGrid.TabIndex = 2;
+            // 
+            // machineTypeCheckedColumn
+            // 
+            this.machineTypeCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.machineTypeCheckedColumn.HeaderText = "";
+            this.machineTypeCheckedColumn.Name = "machineTypeCheckedColumn";
+            this.machineTypeCheckedColumn.Width = 5;
+            // 
+            // machineTypeSymbolColumn
+            // 
+            this.machineTypeSymbolColumn.HeaderText = "Machine Type Symbol";
+            this.machineTypeSymbolColumn.Name = "machineTypeSymbolColumn";
+            this.machineTypeSymbolColumn.Visible = false;
+            // 
+            // machineTypeNameColumn
+            // 
+            this.machineTypeNameColumn.HeaderText = "Machine Type";
+            this.machineTypeNameColumn.Name = "machineTypeNameColumn";
+            this.machineTypeNameColumn.ReadOnly = true;
+            // 
+            // projectDataGrid
+            // 
+            this.projectDataGrid.AllowUserToAddRows = false;
+            this.projectDataGrid.AllowUserToResizeRows = false;
+            this.projectDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.projectDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.projectDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.projectDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.projectGuidColumn,
+            this.projectCheckedColumn,
+            this.projectNameColumn});
+            this.projectDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.projectDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.projectDataGrid.HighLightCurrentRow = true;
+            this.projectDataGrid.Location = new System.Drawing.Point(0, 20);
+            this.projectDataGrid.Name = "projectDataGrid";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.projectDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.projectDataGrid.RowHeadersVisible = false;
+            this.projectDataGrid.RowTemplate.Height = 18;
+            this.projectDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.projectDataGrid.Size = new System.Drawing.Size(166, 90);
+            this.projectDataGrid.TabIndex = 0;
+            this.projectDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellValueChanged);
+            this.projectDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellEndEdit);
+            this.projectDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellClick);
+            this.projectDataGrid.CurrentCellChanged += new System.EventHandler(this.projectDataGrid_CurrentCellChanged);
+            // 
+            // projectGuidColumn
+            // 
+            this.projectGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.projectGuidColumn.HeaderText = "Guid";
+            this.projectGuidColumn.Name = "projectGuidColumn";
+            this.projectGuidColumn.ReadOnly = true;
+            this.projectGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.projectGuidColumn.Visible = false;
+            // 
+            // projectCheckedColumn
+            // 
+            this.projectCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.projectCheckedColumn.HeaderText = "";
+            this.projectCheckedColumn.Name = "projectCheckedColumn";
+            this.projectCheckedColumn.Width = 5;
+            // 
+            // projectNameColumn
+            // 
+            this.projectNameColumn.HeaderText = "Project Name";
+            this.projectNameColumn.Name = "projectNameColumn";
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -1409,36 +1463,6 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
             // 
-            // panelTop
-            // 
-            this.panelTop.Controls.Add(this.panelRight);
-            this.panelTop.Controls.Add(this.panelLeft);
-            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(980, 432);
-            this.panelTop.TabIndex = 34;
-            // 
-            // panelMain
-            // 
-            this.panelMain.Controls.Add(this.simulationPanel);
-            this.panelMain.Controls.Add(this.splitter5);
-            this.panelMain.Controls.Add(this.panelTop);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(0, 0);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(980, 615);
-            this.panelMain.TabIndex = 35;
-            // 
-            // splitter5
-            // 
-            this.splitter5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter5.Location = new System.Drawing.Point(0, 432);
-            this.splitter5.Name = "splitter5";
-            this.splitter5.Size = new System.Drawing.Size(980, 3);
-            this.splitter5.TabIndex = 35;
-            this.splitter5.TabStop = false;
-            // 
             // simulationGuidColumn
             // 
             this.simulationGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -1540,6 +1564,18 @@ namespace FilterSimulation
             this.simulation_trColumn.Name = "simulation_trColumn";
             this.simulation_trColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // simulation_hc_tfColumn
+            // 
+            this.simulation_hc_tfColumn.HeaderText = "hc/tf";
+            this.simulation_hc_tfColumn.Name = "simulation_hc_tfColumn";
+            this.simulation_hc_tfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_dhc_dtColumn
+            // 
+            this.simulation_dhc_dtColumn.HeaderText = "dhc/dt";
+            this.simulation_dhc_dtColumn.Name = "simulation_dhc_dtColumn";
+            this.simulation_dhc_dtColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // simulation_hcColumn
             // 
             this.simulation_hcColumn.HeaderText = "hc";
@@ -1557,6 +1593,46 @@ namespace FilterSimulation
             this.simulation_VfColumn.HeaderText = "Vf";
             this.simulation_VfColumn.Name = "simulation_VfColumn";
             // 
+            // simulation_mf_Column
+            // 
+            this.simulation_mf_Column.HeaderText = "mf";
+            this.simulation_mf_Column.Name = "simulation_mf_Column";
+            // 
+            // simulation_vf_Column
+            // 
+            this.simulation_vf_Column.HeaderText = "vf";
+            this.simulation_vf_Column.Name = "simulation_vf_Column";
+            // 
+            // simulation_ms_Column
+            // 
+            this.simulation_ms_Column.HeaderText = "ms";
+            this.simulation_ms_Column.Name = "simulation_ms_Column";
+            // 
+            // simulation_vs_Column
+            // 
+            this.simulation_vs_Column.HeaderText = "vs";
+            this.simulation_vs_Column.Name = "simulation_vs_Column";
+            // 
+            // simulation_msus_Column
+            // 
+            this.simulation_msus_Column.HeaderText = "msus";
+            this.simulation_msus_Column.Name = "simulation_msus_Column";
+            // 
+            // simulation_vsus_Column
+            // 
+            this.simulation_vsus_Column.HeaderText = "vsus";
+            this.simulation_vsus_Column.Name = "simulation_vsus_Column";
+            // 
+            // simulation_mc_Column
+            // 
+            this.simulation_mc_Column.HeaderText = "mc";
+            this.simulation_mc_Column.Name = "simulation_mc_Column";
+            // 
+            // simulation_vc_Column
+            // 
+            this.simulation_vc_Column.HeaderText = "vc";
+            this.simulation_vc_Column.Name = "simulation_vc_Column";
+            // 
             // simulation_MsusColumn
             // 
             this.simulation_MsusColumn.HeaderText = "Msus";
@@ -1569,6 +1645,18 @@ namespace FilterSimulation
             this.simulation_VsusColumn.Name = "simulation_VsusColumn";
             this.simulation_VsusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // simulation_VcColumn
+            // 
+            this.simulation_VcColumn.HeaderText = "Vc";
+            this.simulation_VcColumn.Name = "simulation_VcColumn";
+            this.simulation_VcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_McColumn
+            // 
+            this.simulation_McColumn.HeaderText = "Mc";
+            this.simulation_McColumn.Name = "simulation_McColumn";
+            this.simulation_McColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // simulation_MsColumn
             // 
             this.simulation_MsColumn.HeaderText = "Ms";
@@ -1579,6 +1667,7 @@ namespace FilterSimulation
             // 
             this.simulation_VsColumn.HeaderText = "Vs";
             this.simulation_VsColumn.Name = "simulation_VsColumn";
+            this.simulation_VsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // simulation_QsusColumn
             // 
@@ -1643,30 +1732,30 @@ namespace FilterSimulation
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).EndInit();
             this.secondFromTopPanel.ResumeLayout(false);
             this.simSeriesPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.simSeriesDataGrid)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.topPanel.ResumeLayout(false);
             this.suspensionPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.suspensionDataGrid)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.machinePanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.machineTypesDataGrid)).EndInit();
             this.projectPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.projectDataGrid)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.simulationPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.simulationDataGrid)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.panelTop.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.simulationDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.simSeriesDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.suspensionDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.machineTypesDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.projectDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1797,11 +1886,23 @@ namespace FilterSimulation
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tcColumn;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_tfColumn;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_trColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_hc_tfColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_dhc_dtColumn;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_hcColumn;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MfColumn;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VfColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_mf_Column;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_vf_Column;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_ms_Column;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_vs_Column;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_msus_Column;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_vsus_Column;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_mc_Column;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_vc_Column;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsusColumn;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VsusColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VcColumn;
+        protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_McColumn;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_MsColumn;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_VsColumn;
         protected fmDataGrid.DataGridViewNumericalTextBoxColumn simulation_QsusColumn;

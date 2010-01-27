@@ -170,10 +170,22 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameter tf;
         private readonly fmBlockParameter tr;
         private readonly fmBlockParameter hc;
+        private readonly fmBlockParameter hc_tf;
+        private readonly fmBlockParameter dhc_dt;
         private readonly fmBlockParameter Mf;
         private readonly fmBlockParameter Vf;
+        private readonly fmBlockParameter mf;
+        private readonly fmBlockParameter vf;
+        private readonly fmBlockParameter ms;
+        private readonly fmBlockParameter vs;
+        private readonly fmBlockParameter msus;
+        private readonly fmBlockParameter vsus;
+        private readonly fmBlockParameter mc;
+        private readonly fmBlockParameter vc;
         private readonly fmBlockParameter Msus;
         private readonly fmBlockParameter Vsus;
+        private readonly fmBlockParameter Vc;
+        private readonly fmBlockParameter Mc;
         private readonly fmBlockParameter Ms;
         private readonly fmBlockParameter Vs;
         private readonly fmBlockParameter Qsus;
@@ -284,6 +296,16 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return hc.value; }
             set { hc.value = value; }
         }
+        public fmValue hc_tf_Value
+        {
+            get { return hc_tf.value; }
+            set { hc_tf.value = value; }
+        }
+        public fmValue dhc_dt_Value
+        {
+            get { return dhc_dt.value; }
+            set { dhc_dt.value = value; }
+        }
         public fmValue Mf_Value
         {
             get { return Mf.value; }
@@ -294,6 +316,46 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Vf.value; }
             set { Vf.value = value; }
         }
+        public fmValue mf_Value
+        {
+            get { return mf.value; }
+            set { mf.value = value; }
+        }
+        public fmValue vf_Value
+        {
+            get { return vf.value; }
+            set { vf.value = value; }
+        }
+        public fmValue ms_Value
+        {
+            get { return ms.value; }
+            set { ms.value = value; }
+        }
+        public fmValue vs_Value
+        {
+            get { return vs.value; }
+            set { vs.value = value; }
+        }
+        public fmValue msus_Value
+        {
+            get { return msus.value; }
+            set { msus.value = value; }
+        }
+        public fmValue vsus_Value
+        {
+            get { return vsus.value; }
+            set { vsus.value = value; }
+        }
+        public fmValue mc_Value
+        {
+            get { return mc.value; }
+            set { mc.value = value; }
+        }
+        public fmValue vc_Value
+        {
+            get { return vc.value; }
+            set { vc.value = value; }
+        }
         public fmValue Msus_Value
         {
             get { return Msus.value; }
@@ -303,6 +365,16 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             get { return Vsus.value; }
             set { Vsus.value = value; }
+        }
+        public fmValue Vc_Value
+        {
+            get { return Vc.value; }
+            set { Vc.value = value; }
+        }
+        public fmValue Mc_Value
+        {
+            get { return Mc.value; }
+            set { Mc.value = value; }
         }
         public fmValue Ms_Value
         {
@@ -339,7 +411,7 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Pc0_value; }
             set { Pc0_value = value; }
         }
-        public fmValue eps0_Value
+       public fmValue eps0_Value
         {
             get { return eps0_value; }
             set { eps0_value = value; }
@@ -407,6 +479,8 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      ref tc.value,
                                                                      ref tf.value,
                                                                      ref tr.value,
+                                                                     ref hc_tf.value,
+                                                                     ref dhc_dt.value,
                                                                      ref hc.value,
                                                                      ref Qsus.value,
                                                                      ref Qmsus.value,
@@ -414,6 +488,16 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      ref Vsus.value,
                                                                      ref Mf.value,
                                                                      ref Vf.value,
+                                                                     ref mf.value,
+                                                                     ref vf.value,
+                                                                     ref ms.value,
+                                                                     ref vs.value,
+                                                                     ref msus.value,
+                                                                     ref vsus.value,
+                                                                     ref mc.value,
+                                                                     ref vc.value,
+                                                                     ref Vc.value,
+                                                                     ref Mc.value,
                                                                      ref Ms.value,
                                                                      ref Vs.value,
                                                                      ref Msus.value,
@@ -1043,8 +1127,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public fmFilterMachiningBlock(
             fmCalculationOptionView calculationOptionView)
-            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                                           null, null, null, null, null, null, null)
+            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+                                           null, null, null, null, null, null, null, null)
         {
         }
         
@@ -1057,11 +1141,23 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell tc_Cell,
             DataGridViewCell tf_Cell,
             DataGridViewCell tr_Cell,
+            DataGridViewCell hc_tf_Cell,
+            DataGridViewCell dhc_dt_Cell,
             DataGridViewCell hc_Cell,
             DataGridViewCell Mf_Cell,
             DataGridViewCell Vf_Cell,
+            DataGridViewCell mf_Cell,
+            DataGridViewCell vf_Cell,
+            DataGridViewCell ms_Cell,
+            DataGridViewCell vs_Cell,
+            DataGridViewCell msus_Cell,
+            DataGridViewCell vsus_Cell,
+            DataGridViewCell mc_Cell,
+            DataGridViewCell vc_Cell,
             DataGridViewCell Msus_Cell,
             DataGridViewCell Vsus_Cell,
+            DataGridViewCell Vc_Cell,
+            DataGridViewCell Mc_Cell,
             DataGridViewCell Ms_Cell,
             DataGridViewCell Vs_Cell,
             DataGridViewCell Qsus_Cell,
@@ -1082,11 +1178,23 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref tc, fmGlobalParameter.tc, tc_Cell, false);
             AddParameter(ref tf, fmGlobalParameter.tf, tf_Cell, false);
             AddParameter(ref tr, fmGlobalParameter.tr, tr_Cell, false);
+            AddParameter(ref hc_tf, fmGlobalParameter.hc_tf, hc_tf_Cell, false);
+            AddParameter(ref dhc_dt, fmGlobalParameter.dhc_dt, dhc_dt_Cell, false);
             AddParameter(ref hc, fmGlobalParameter.hc, hc_Cell, false);
             AddParameter(ref Mf, fmGlobalParameter.Mf, Mf_Cell, false);
             AddParameter(ref Vf, fmGlobalParameter.Vf, Vf_Cell, false);
+            AddParameter(ref mf, fmGlobalParameter.mf, mf_Cell, false);
+            AddParameter(ref vf, fmGlobalParameter.vf, vf_Cell, false);
+            AddParameter(ref ms, fmGlobalParameter.ms, ms_Cell, false);
+            AddParameter(ref vs, fmGlobalParameter.vs, vs_Cell, false);
+            AddParameter(ref msus, fmGlobalParameter.msus, msus_Cell, false);
+            AddParameter(ref vsus, fmGlobalParameter.vsus, vsus_Cell, false);
+            AddParameter(ref vsus, fmGlobalParameter.mc, mc_Cell, false);
+            AddParameter(ref vsus, fmGlobalParameter.vc, vc_Cell, false);
             AddParameter(ref Msus, fmGlobalParameter.Msus, Msus_Cell, false);
             AddParameter(ref Vsus, fmGlobalParameter.Vsus, Vsus_Cell, false);
+            AddParameter(ref Vc, fmGlobalParameter.Vc, Vc_Cell, false);
+            AddParameter(ref Mc, fmGlobalParameter.Mc, Mc_Cell, false);
             AddParameter(ref Ms, fmGlobalParameter.Ms, Ms_Cell, false);
             AddParameter(ref Vs, fmGlobalParameter.Vs, Vs_Cell, false);
             AddParameter(ref Qsus, fmGlobalParameter.Qsus, Qsus_Cell, false);

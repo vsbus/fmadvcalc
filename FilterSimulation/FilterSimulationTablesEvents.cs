@@ -150,7 +150,7 @@ namespace FilterSimulation
         }
         private void simSeriesDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
-            UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
+            UpdateCurrentObjectAndDisplaySolution((DataGridView) sender);
         }
         private void simulationDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
