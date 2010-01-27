@@ -277,7 +277,7 @@ namespace fmCalculationLibrary
         public static fmValue Pow(fmValue op1, fmValue degree)
         {
             fmValue res = new fmValue();
-            res.Defined = op1.Defined && degree.Defined && op1.Value > 0;
+            res.Defined = op1.Defined && degree.Defined && op1.Value >= 0;
             res.Value = res.Defined ? Math.Pow(op1.Value, degree.Value) : 1;
             return res;
         }
