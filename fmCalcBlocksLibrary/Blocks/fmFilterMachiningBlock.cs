@@ -1189,8 +1189,8 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref vs, fmGlobalParameter.vs, vs_Cell, false);
             AddParameter(ref msus, fmGlobalParameter.msus, msus_Cell, false);
             AddParameter(ref vsus, fmGlobalParameter.vsus, vsus_Cell, false);
-            AddParameter(ref vsus, fmGlobalParameter.mc, mc_Cell, false);
-            AddParameter(ref vsus, fmGlobalParameter.vc, vc_Cell, false);
+            AddParameter(ref mc, fmGlobalParameter.mc, mc_Cell, false);
+            AddParameter(ref vc, fmGlobalParameter.vc, vc_Cell, false);
             AddParameter(ref Msus, fmGlobalParameter.Msus, Msus_Cell, false);
             AddParameter(ref Vsus, fmGlobalParameter.Vsus, Vsus_Cell, false);
             AddParameter(ref Vc, fmGlobalParameter.Vc, Vc_Cell, false);
