@@ -531,6 +531,8 @@ namespace FilterSimulation
                     string val = row.Cells[row.DataGridView.SortedColumn.Index].Value.ToString();
                     cID ^= (prevVal == "" || prevVal != val);
                     prevVal = val;
+
+                    SetRowFontStyle(row, sim.Modified ? FontStyle.Bold : FontStyle.Regular);
                 }
         }
         void SortTables()
