@@ -161,7 +161,7 @@ namespace fmCalculatorsLibrary
         public fmVariables variables = new fmVariables();
         public fmIntermediateVariables intermediateVariables = new fmIntermediateVariables();
 
-        private bool IsStandart1Option(CalculationOptions calculationOption)
+        private static bool IsStandart1Option(CalculationOptions calculationOption)
         {
             return calculationOption == CalculationOptions.STANDART1_A_Dp_sf_n_INPUT
                    || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_n_INPUT
@@ -169,20 +169,20 @@ namespace fmCalculatorsLibrary
                    || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT;
         }
 
-        private bool IsStandart2Option(CalculationOptions calculationOption)
+        private static bool IsStandart2Option(CalculationOptions calculationOption)
         {
             return calculationOption == CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT
                 || calculationOption == CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT;
         }
 
-        private bool IsStandart3Option(CalculationOptions calculationOption)
+        private static bool IsStandart3Option(CalculationOptions calculationOption)
         {
             return calculationOption == CalculationOptions.STANDART3_A_Dp_n_tf_INPUT
                    || calculationOption == CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT
                    || calculationOption == CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
         }
 
-        private bool IsStandart4Option(CalculationOptions calculationOption)
+        private static bool IsStandart4Option(CalculationOptions calculationOption)
         {
             return calculationOption == CalculationOptions.STANDART4_A_hc_sf_n_INPUT
                    || calculationOption == CalculationOptions.STANDART4_A_hc_sf_tc_INPUT
@@ -215,7 +215,7 @@ namespace fmCalculatorsLibrary
                    || calculationOption == CalculationOptions.STANDART4_A_Ms_tr_tc_INPUT;
         }
 
-        private bool IsStandart7Option(CalculationOptions calculationOption)
+        private static bool IsStandart7Option(CalculationOptions calculationOption)
         {
             return calculationOption == CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT
                    || calculationOption == CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT
@@ -234,7 +234,7 @@ namespace fmCalculatorsLibrary
                    || calculationOption == CalculationOptions.STANDART7_A_Dp_Ms_tr_INPUT;
         }
 
-        private bool IsStandart8Option(CalculationOptions calculationOption)
+        private static bool IsStandart8Option(CalculationOptions calculationOption)
         {
             return calculationOption == CalculationOptions.STANDART8_A_Dp_hc_n_INPUT
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT
@@ -259,7 +259,7 @@ namespace fmCalculatorsLibrary
                 || calculationOption == CalculationOptions.STANDART8_A_Dp_Ms_tr_INPUT;
         }
 
-        private bool IsStandartKindOption(CalculationOptions calculationOption)
+        private static bool IsStandartKindOption(CalculationOptions calculationOption)
         {
             return IsStandart1Option(calculationOption)
                    || IsStandart2Option(calculationOption)
@@ -269,7 +269,7 @@ namespace fmCalculatorsLibrary
                    || IsStandart8Option(calculationOption);
         }
 
-        private bool IsDesignKindOption(CalculationOptions calculationOption)
+        private static bool IsDesignKindOption(CalculationOptions calculationOption)
         {
             return calculationOption == CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT
                 || calculationOption == CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT
@@ -282,7 +282,7 @@ namespace fmCalculatorsLibrary
                 || calculationOption == CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT;
         }
 
-        private bool IsOptimizationKindOption(CalculationOptions calculationOption)
+        private static bool IsOptimizationKindOption(CalculationOptions calculationOption)
         {
             return calculationOption == CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT
                 || calculationOption == CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT
@@ -292,19 +292,19 @@ namespace fmCalculatorsLibrary
                 || calculationOption == CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT;
         }
 
-        private bool IsStandartSubKind1DpOption(CalculationOptions calculationOption)
+        private static bool IsStandartSubKind1DpOption(CalculationOptions calculationOption)
         {
             return IsStandart1Option(calculationOption)
                    || IsStandart2Option(calculationOption)
                    || IsStandart3Option(calculationOption);
         }
 
-        private bool IsStandartSubKind2hcOption(CalculationOptions calculationOption)
+        private static bool IsStandartSubKind2hcOption(CalculationOptions calculationOption)
         {
             return IsStandart4Option(calculationOption);
         }
 
-        private bool IsStandartSubKind3DphcOption(CalculationOptions calculationOption)
+        private static bool IsStandartSubKind3DphcOption(CalculationOptions calculationOption)
         {
             return IsStandart7Option(calculationOption)
                    || IsStandart8Option(calculationOption);
