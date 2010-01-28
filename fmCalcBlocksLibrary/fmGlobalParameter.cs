@@ -36,8 +36,8 @@ namespace fmCalcBlocksLibrary
         public static fmGlobalParameter tc;
         public static fmGlobalParameter tf;
         public static fmGlobalParameter tr;
-        public static fmGlobalParameter hc_tf;
-        public static fmGlobalParameter dhc_dt;
+        public static fmGlobalParameter hc_over_tf;
+        public static fmGlobalParameter dhc_over_dt;
         public static fmGlobalParameter hc;
         public static fmGlobalParameter Qsus;
         public static fmGlobalParameter Qmsus;
@@ -91,8 +91,8 @@ namespace fmCalcBlocksLibrary
             AddParameter(ref tc, new fmGlobalParameter("tc", fmUnitFamily.TimeFamily, new fmRange(0, 1000)));
             AddParameter(ref tf, new fmGlobalParameter("tf", fmUnitFamily.TimeFamily, new fmRange(0, 1000)));
             AddParameter(ref tr, new fmGlobalParameter("tr", fmUnitFamily.TimeFamily, new fmRange(0, 1000)));
-            AddParameter(ref hc_tf, new fmGlobalParameter("hc_tf", fmUnitFamily.NoUnitFamily, new fmRange(0, 1)));
-            AddParameter(ref dhc_dt, new fmGlobalParameter("dhc_dt", fmUnitFamily.NoUnitFamily, new fmRange(0, 1)));
+            AddParameter(ref hc_over_tf, new fmGlobalParameter("hc_over_tf", fmUnitFamily.NoUnitFamily, new fmRange(0, 1)));
+            AddParameter(ref dhc_over_dt, new fmGlobalParameter("dhc_over_dt", fmUnitFamily.NoUnitFamily, new fmRange(0, 1)));
             AddParameter(ref hc, new fmGlobalParameter("hc", fmUnitFamily.LengthFamily, new fmRange(0, 1)));
             AddParameter(ref Mf, new fmGlobalParameter("Mf", fmUnitFamily.MassFamily, new fmRange(0, 10)));
             AddParameter(ref Vf, new fmGlobalParameter("Vf", fmUnitFamily.VolumeFamily, new fmRange(0, 10)));

@@ -268,5 +268,40 @@ namespace fmCalculationLibrary.Equations
         {
             return Ms/Cm;
         }
+
+        public static fmValue Eval_hc_over_tf_From_hc_tf(fmValue hc, fmValue tf)
+        {
+            return hc/tf;
+        }
+
+        public static fmValue Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(fmValue kappa, fmValue Dp, fmValue Pc, fmValue eta, fmValue hc, fmValue hce)
+        {
+            return kappa * Dp * Pc / (eta * (hc + hce));
+        }
+
+        public static fmValue Eval_Mc_From_Msus_Mf(fmValue Msus, fmValue Mf)
+        {
+            return Eval_Cake_From_Sus_Flow(Msus, Mf);
+        }
+
+        private static fmValue Eval_Cake_From_Sus_Flow(fmValue Sus, fmValue Flow)
+        {
+            return Sus - Flow;
+        }
+
+        public static fmValue Eval_Vc_From_Vsus_Vf(fmValue Vsus, fmValue Vf)
+        {
+            return Eval_Cake_From_Sus_Flow(Vsus, Vf);
+        }
+
+        public static fmValue Eval_m_From_M_A(fmValue M, fmValue A)
+        {
+            return M/A;
+        }
+
+        public static fmValue Eval_v_From_V_A(fmValue V, fmValue A)
+        {
+            return V/A;
+        }
     }
 }

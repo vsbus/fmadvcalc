@@ -302,8 +302,8 @@ namespace FilterSimulation
                         row.Cells[simulation_tcColumn.Index],
                         row.Cells[simulation_tfColumn.Index],
                         row.Cells[simulation_trColumn.Index],
-                        row.Cells[simulation_hc_tfColumn.Index],
-                        row.Cells[simulation_dhc_dtColumn.Index],
+                        row.Cells[simulation_hc_over_tfColumn.Index],
+                        row.Cells[simulation_dhc_over_dtColumn.Index],
                         row.Cells[simulation_hcColumn.Index],
                         row.Cells[simulation_MfColumn.Index],
                         row.Cells[simulation_VfColumn.Index],
@@ -747,8 +747,8 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_tcColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_tfColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_trColumn.Index].HeaderCell, fmUnitFamily.TimeFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_hc_tfColumn.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_dhc_dtColumn.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_hc_over_tfColumn.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_dhc_over_dtColumn.Index].HeaderCell, fmUnitFamily.NoUnitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_hcColumn.Index].HeaderCell, fmUnitFamily.LengthFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_MfColumn.Index].HeaderCell, fmUnitFamily.MassFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_VfColumn.Index].HeaderCell, fmUnitFamily.VolumeFamily);

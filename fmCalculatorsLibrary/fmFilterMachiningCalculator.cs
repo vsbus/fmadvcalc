@@ -106,8 +106,8 @@ namespace fmCalculatorsLibrary
             public fmValue tc;
             public fmValue tf;
             public fmValue tr;
-            public fmValue hc_tf;
-            public fmValue dhc_dt;
+            public fmValue hc_over_tf;
+            public fmValue dhc_over_dt;
             public fmValue hc;
             public fmValue Qsus;
             public fmValue Qmsus;
@@ -328,6 +328,19 @@ namespace fmCalculatorsLibrary
             {
                 throw new Exception("Not classified calculation option kind");
             }
+
+            variables.hc_over_tf = FilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(variables.hc, variables.tf);
+            variables.dhc_over_dt = FilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(variables.kappa, variables.Dp, variables.Pc, constants.eta_f, variables.hc, constants.hce);
+            variables.Mc = FilterMachiningEquations.Eval_Mc_From_Msus_Mf(variables.Msus, variables.Mf);
+            variables.Vc = FilterMachiningEquations.Eval_Vc_From_Vsus_Vf(variables.Vsus, variables.Vf);
+            variables.mf = FilterMachiningEquations.Eval_m_From_M_A(variables.Mf, variables.A);
+            variables.vf = FilterMachiningEquations.Eval_v_From_V_A(variables.Vf, variables.A);
+            variables.msus = FilterMachiningEquations.Eval_m_From_M_A(variables.Msus, variables.A);
+            variables.vsus = FilterMachiningEquations.Eval_v_From_V_A(variables.Vsus, variables.A);
+            variables.ms = FilterMachiningEquations.Eval_m_From_M_A(variables.Ms, variables.A);
+            variables.vs = FilterMachiningEquations.Eval_v_From_V_A(variables.Vs, variables.A);
+            variables.mc = FilterMachiningEquations.Eval_m_From_M_A(variables.Mc, variables.A);
+            variables.vc = FilterMachiningEquations.Eval_v_From_V_A(variables.Vc, variables.A);
         }
         private void DoCalculationsStandart()
         {
@@ -946,8 +959,8 @@ namespace fmCalculatorsLibrary
             ref fmValue tc,
             ref fmValue tf,
             ref fmValue tr,
-            ref fmValue hc_tf,
-            ref fmValue dhc_dt,
+            ref fmValue hc_over_tf,
+            ref fmValue dhc_over_dt,
             ref fmValue hc,
             ref fmValue Qsus,
             ref fmValue Qmsus,
@@ -995,8 +1008,8 @@ namespace fmCalculatorsLibrary
             c.variables.tc = tc;
             c.variables.tf = tf;
             c.variables.tr = tr;
-            c.variables.hc_tf = hc_tf;
-            c.variables.dhc_dt = dhc_dt;
+            c.variables.hc_over_tf = hc_over_tf;
+            c.variables.dhc_over_dt = dhc_over_dt;
             c.variables.hc = hc;
             c.variables.Qsus = Qsus;
             c.variables.Qmsus = Qmsus;
@@ -1036,8 +1049,8 @@ namespace fmCalculatorsLibrary
             tc = c.variables.tc;
             tf = c.variables.tf;
             tr = c.variables.tr;
-            hc_tf = c.variables.hc_tf;
-            dhc_dt = c.variables.dhc_dt;
+            hc_over_tf = c.variables.hc_over_tf;
+            dhc_over_dt = c.variables.dhc_over_dt;
             hc = c.variables.hc;
             Qsus = c.variables.Qsus;
             Qmsus = c.variables.Qmsus;

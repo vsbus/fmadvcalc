@@ -170,8 +170,8 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameter tf;
         private readonly fmBlockParameter tr;
         private readonly fmBlockParameter hc;
-        private readonly fmBlockParameter hc_tf;
-        private readonly fmBlockParameter dhc_dt;
+        private readonly fmBlockParameter hc_over_tf;
+        private readonly fmBlockParameter dhc_over_dt;
         private readonly fmBlockParameter Mf;
         private readonly fmBlockParameter Vf;
         private readonly fmBlockParameter mf;
@@ -296,15 +296,15 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return hc.value; }
             set { hc.value = value; }
         }
-        public fmValue hc_tf_Value
+        public fmValue hc_over_tf_Value
         {
-            get { return hc_tf.value; }
-            set { hc_tf.value = value; }
+            get { return hc_over_tf.value; }
+            set { hc_over_tf.value = value; }
         }
-        public fmValue dhc_dt_Value
+        public fmValue dhc_over_dt_Value
         {
-            get { return dhc_dt.value; }
-            set { dhc_dt.value = value; }
+            get { return dhc_over_dt.value; }
+            set { dhc_over_dt.value = value; }
         }
         public fmValue Mf_Value
         {
@@ -479,8 +479,8 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      ref tc.value,
                                                                      ref tf.value,
                                                                      ref tr.value,
-                                                                     ref hc_tf.value,
-                                                                     ref dhc_dt.value,
+                                                                     ref hc_over_tf.value,
+                                                                     ref dhc_over_dt.value,
                                                                      ref hc.value,
                                                                      ref Qsus.value,
                                                                      ref Qmsus.value,
@@ -1141,8 +1141,8 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell tc_Cell,
             DataGridViewCell tf_Cell,
             DataGridViewCell tr_Cell,
-            DataGridViewCell hc_tf_Cell,
-            DataGridViewCell dhc_dt_Cell,
+            DataGridViewCell hc_over_tf_Cell,
+            DataGridViewCell dhc_over_dt_Cell,
             DataGridViewCell hc_Cell,
             DataGridViewCell Mf_Cell,
             DataGridViewCell Vf_Cell,
@@ -1178,8 +1178,8 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref tc, fmGlobalParameter.tc, tc_Cell, false);
             AddParameter(ref tf, fmGlobalParameter.tf, tf_Cell, false);
             AddParameter(ref tr, fmGlobalParameter.tr, tr_Cell, false);
-            AddParameter(ref hc_tf, fmGlobalParameter.hc_tf, hc_tf_Cell, false);
-            AddParameter(ref dhc_dt, fmGlobalParameter.dhc_dt, dhc_dt_Cell, false);
+            AddParameter(ref hc_over_tf, fmGlobalParameter.hc_over_tf, hc_over_tf_Cell, false);
+            AddParameter(ref dhc_over_dt, fmGlobalParameter.dhc_over_dt, dhc_over_dt_Cell, false);
             AddParameter(ref hc, fmGlobalParameter.hc, hc_Cell, false);
             AddParameter(ref Mf, fmGlobalParameter.Mf, Mf_Cell, false);
             AddParameter(ref Vf, fmGlobalParameter.Vf, Vf_Cell, false);
