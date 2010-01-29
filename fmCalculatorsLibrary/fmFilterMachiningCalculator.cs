@@ -109,9 +109,38 @@ namespace fmCalculatorsLibrary
             public fmValue hc_over_tf;
             public fmValue dhc_over_dt;
             public fmValue hc;
+            public fmValue Qf;
+            public fmValue Qf_d;
+            public fmValue Qs;
+            public fmValue Qs_d;
+            public fmValue Qc;
+            public fmValue Qc_d;
             public fmValue Qsus;
+            public fmValue Qsus_d;
             public fmValue Qmsus;
+            public fmValue Qmsus_d;
             public fmValue Qms;
+            public fmValue Qms_d;
+            public fmValue Qmf;
+            public fmValue Qmf_d;
+            public fmValue Qmc;
+            public fmValue Qmc_d;
+            public fmValue qf;
+            public fmValue qf_d;
+            public fmValue qs;
+            public fmValue qs_d;
+            public fmValue qc;
+            public fmValue qc_d;
+            public fmValue qsus;
+            public fmValue qsus_d;
+            public fmValue qmsus;
+            public fmValue qmsus_d;
+            public fmValue qms;
+            public fmValue qms_d;
+            public fmValue qmf;
+            public fmValue qmf_d;
+            public fmValue qmc;
+            public fmValue qmc_d;
             public fmValue Vsus;
             public fmValue Mf;
             public fmValue Vf;
@@ -962,9 +991,38 @@ namespace fmCalculatorsLibrary
             ref fmValue hc_over_tf,
             ref fmValue dhc_over_dt,
             ref fmValue hc,
+            ref fmValue Qf,
+            ref fmValue Qf_d,
+            ref fmValue Qs,
+            ref fmValue Qs_d,
+            ref fmValue Qc,
+            ref fmValue Qc_d,
             ref fmValue Qsus,
+            ref fmValue Qsus_d,
             ref fmValue Qmsus,
+            ref fmValue Qmsus_d,
             ref fmValue Qms,
+            ref fmValue Qms_d,
+            ref fmValue Qmf,
+            ref fmValue Qmf_d,
+            ref fmValue Qmc,
+            ref fmValue Qmc_d,
+            ref fmValue qf,
+            ref fmValue qf_d,
+            ref fmValue qs,
+            ref fmValue qs_d,
+            ref fmValue qc,
+            ref fmValue qc_d,
+            ref fmValue qsus,
+            ref fmValue qsus_d,
+            ref fmValue qmsus,
+            ref fmValue qmsus_d,
+            ref fmValue qms,
+            ref fmValue qms_d,
+            ref fmValue qmf,
+            ref fmValue qmf_d,
+            ref fmValue qmc,
+            ref fmValue qmc_d,
             ref fmValue Vsus,
             ref fmValue Mf,
             ref fmValue Vf,
@@ -1011,9 +1069,38 @@ namespace fmCalculatorsLibrary
             c.variables.hc_over_tf = hc_over_tf;
             c.variables.dhc_over_dt = dhc_over_dt;
             c.variables.hc = hc;
+            c.variables.Qf = Qf;
+            c.variables.Qf_d = Qf_d;
+            c.variables.Qs = Qs;
+            c.variables.Qs_d = Qs_d;
+            c.variables.Qc = Qc;
+            c.variables.Qc_d = Qc_d;
             c.variables.Qsus = Qsus;
+            c.variables.Qsus_d = Qsus_d;
             c.variables.Qmsus = Qmsus;
+            c.variables.Qmsus_d = Qmsus_d;
             c.variables.Qms = Qms;
+            c.variables.Qms_d = Qms_d;
+            c.variables.Qmf = Qmf;
+            c.variables.Qmf_d = Qmf_d;
+            c.variables.Qmc = Qmc;
+            c.variables.Qmc_d = Qmc_d;
+            c.variables.qf = qf;
+            c.variables.qf_d = qf_d;
+            c.variables.qs = qs;
+            c.variables.qs_d = qs_d;
+            c.variables.qc = qc;
+            c.variables.qc_d = qc_d;
+            c.variables.qsus = qsus;
+            c.variables.qsus_d = qsus_d;
+            c.variables.qmsus = qmsus;
+            c.variables.qmsus_d = qmsus_d;
+            c.variables.qms = qms;
+            c.variables.qms_d = qms_d;
+            c.variables.qmf = qmf;
+            c.variables.qmf_d = qmf_d;
+            c.variables.qmc = qmc;
+            c.variables.qmc_d = qmc_d;
             c.variables.Mf = Mf;
             c.variables.Vf = Vf;
             c.variables.mf = mf;
@@ -1060,9 +1147,46 @@ namespace fmCalculatorsLibrary
             hc_over_tf = c.variables.hc_over_tf;
             dhc_over_dt = c.variables.dhc_over_dt;
             hc = c.variables.hc;
+            Qf = c.variables.Qf;
+            Qf_d = c.variables.Qf_d;
+            Qs = c.variables.Qs;
+            Qs_d = c.variables.Qs_d;
+            Qc = c.variables.Qc;
+            Qc_d = c.variables.Qc_d;
             Qsus = c.variables.Qsus;
+            Qsus_d = c.variables.Qsus_d;
             Qmsus = c.variables.Qmsus;
+            Qmsus_d = c.variables.Qmsus_d;
             Qms = c.variables.Qms;
+            Qms_d = c.variables.Qms_d;
+            Qmf = c.variables.Qmf;
+            Qmf_d = c.variables.Qmf_d;
+            Qmc = c.variables.Qmc;
+            Qmc_d = c.variables.Qmc_d;
+            qf = c.variables.qf;
+            qf_d = c.variables.qf_d;
+            qs = c.variables.qs;
+            qs_d = c.variables.qs_d;
+            qc = c.variables.qc;
+            qc_d = c.variables.qc_d;
+            qsus = c.variables.qsus;
+            qsus_d = c.variables.qsus_d;
+            qmsus = c.variables.qmsus;
+            qmsus_d = c.variables.qmsus_d;
+            qms = c.variables.qms;
+            qms_d = c.variables.qms_d;
+            qmf = c.variables.qmf;
+            qmf_d = c.variables.qmf_d;
+            qmc = c.variables.qmc;
+            qmc_d = c.variables.qmc_d;
+            qf = c.variables.qf;
+            qsus = c.variables.qsus;
+            qs = c.variables.qs;
+            qc = c.variables.qc;
+            qmf = c.variables.qmf;
+            qmsus = c.variables.qmsus;
+            qms = c.variables.qms;
+            qmc = c.variables.qmc;
             Mf = c.variables.Mf;
             Vf = c.variables.Vf;
             mf = c.variables.mf;

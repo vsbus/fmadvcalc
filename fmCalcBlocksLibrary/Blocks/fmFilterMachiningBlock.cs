@@ -188,9 +188,38 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameter Mc;
         private readonly fmBlockParameter Ms;
         private readonly fmBlockParameter Vs;
+        private readonly fmBlockParameter Qf;
+        private readonly fmBlockParameter Qf_d;
+        private readonly fmBlockParameter Qs;
+        private readonly fmBlockParameter Qs_d;
+        private readonly fmBlockParameter Qc;
+        private readonly fmBlockParameter Qc_d;
         private readonly fmBlockParameter Qsus;
+        private readonly fmBlockParameter Qsus_d;
         private readonly fmBlockParameter Qmsus;
+        private readonly fmBlockParameter Qmsus_d;
         private readonly fmBlockParameter Qms;
+        private readonly fmBlockParameter Qms_d;
+        private readonly fmBlockParameter Qmf;
+        private readonly fmBlockParameter Qmf_d;
+        private readonly fmBlockParameter Qmc;
+        private readonly fmBlockParameter Qmc_d;
+        private readonly fmBlockParameter qf;
+        private readonly fmBlockParameter qf_d;
+        private readonly fmBlockParameter qs;
+        private readonly fmBlockParameter qs_d;
+        private readonly fmBlockParameter qc;
+        private readonly fmBlockParameter qc_d;
+        private readonly fmBlockParameter qsus;
+        private readonly fmBlockParameter qsus_d;
+        private readonly fmBlockParameter qmsus;
+        private readonly fmBlockParameter qmsus_d;
+        private readonly fmBlockParameter qms;
+        private readonly fmBlockParameter qms_d;
+        private readonly fmBlockParameter qmf;
+        private readonly fmBlockParameter qmf_d;
+        private readonly fmBlockParameter qmc;
+        private readonly fmBlockParameter qmc_d;
         private readonly fmBlockParameter eps;
         private readonly fmBlockParameter kappa;
         private readonly fmBlockParameter Pc;
@@ -386,20 +415,165 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Vs.value; }
             set { Vs.value = value; }
         }
+        public fmValue Qf_Value
+        {
+            get { return Qf.value; }
+            set { Qf.value = value; }
+        }
+        public fmValue Qf_d_Value
+        {
+            get { return Qf_d.value; }
+            set { Qf_d.value = value; }
+        }
+        public fmValue Qs_Value
+        {
+            get { return Qs.value; }
+            set { Qs.value = value; }
+        }
+        public fmValue Qs_d_Value
+        {
+            get { return Qs_d.value; }
+            set { Qs_d.value = value; }
+        }
+        public fmValue Qc_Value
+        {
+            get { return Qc.value; }
+            set { Qc.value = value; }
+        }
+        public fmValue Qc_d_Value
+        {
+            get { return Qc_d.value; }
+            set { Qc_d.value = value; }
+        }
         public fmValue Qsus_Value
         {
             get { return Qsus.value; }
             set { Qsus.value = value; }
+        }
+        public fmValue Qsus_d_Value
+        {
+            get { return Qsus_d.value; }
+            set { Qsus_d.value = value; }
         }
         public fmValue Qmsus_Value
         {
             get { return Qmsus.value; }
             set { Qmsus.value = value; }
         }
+        public fmValue Qmsus_d_Value
+        {
+            get { return Qmsus_d.value; }
+            set { Qmsus_d.value = value; }
+        }
         public fmValue Qms_Value
         {
             get { return Qms.value; }
             set { Qms.value = value; }
+        }
+        public fmValue Qms_d_Value
+        {
+            get { return Qms_d.value; }
+            set { Qms_d.value = value; }
+        }
+        public fmValue Qmf_Value
+        {
+            get { return Qmf.value; }
+            set { Qmf.value = value; }
+        }
+        public fmValue Qmf_d_Value
+        {
+            get { return Qmf_d.value; }
+            set { Qmf_d.value = value; }
+        }
+        public fmValue Qmc_Value
+        {
+            get { return Qmc.value; }
+            set { Qmc.value = value; }
+        }
+        public fmValue Qmc_d_Value
+        {
+            get { return Qmc_d.value; }
+            set { Qmc_d.value = value; }
+        }
+        public fmValue qf_Value
+        {
+            get { return qf.value; }
+            set { qf.value = value; }
+        }
+        public fmValue qf_d_Value
+        {
+            get { return qf_d.value; }
+            set { qf_d.value = value; }
+        }
+        public fmValue qs_Value
+        {
+            get { return qs.value; }
+            set { qs.value = value; }
+        }
+        public fmValue qs_d_Value
+        {
+            get { return qs_d.value; }
+            set { qs_d.value = value; }
+        }
+        public fmValue qc_Value
+        {
+            get { return qc.value; }
+            set { qc.value = value; }
+        }
+        public fmValue qc_d_Value
+        {
+            get { return qc_d.value; }
+            set { qc_d.value = value; }
+        }
+        public fmValue qsus_Value
+        {
+            get { return qsus.value; }
+            set { qsus.value = value; }
+        }
+        public fmValue qsus_d_Value
+        {
+            get { return qsus_d.value; }
+            set { qsus_d.value = value; }
+        }
+        public fmValue qmsus_Value
+        {
+            get { return qmsus.value; }
+            set { qmsus.value = value; }
+        }
+        public fmValue qmsus_d_Value
+        {
+            get { return qmsus_d.value; }
+            set { qmsus_d.value = value; }
+        }
+        public fmValue qms_Value
+        {
+            get { return qms.value; }
+            set { qms.value = value; }
+        }
+        public fmValue qms_d_Value
+        {
+            get { return qms_d.value; }
+            set { qms_d.value = value; }
+        }
+        public fmValue qmf_Value
+        {
+            get { return qmf.value; }
+            set { qmf.value = value; }
+        }
+        public fmValue qmf_d_Value
+        {
+            get { return qmf_d.value; }
+            set { qmf_d.value = value; }
+        }
+        public fmValue qmc_Value
+        {
+            get { return qmc.value; }
+            set { qmc.value = value; }
+        }
+        public fmValue qmc_d_Value
+        {
+            get { return qmc_d.value; }
+            set { qmc_d.value = value; }
         }
         public fmValue hce_Value
         {
@@ -482,9 +656,38 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      ref hc_over_tf.value,
                                                                      ref dhc_over_dt.value,
                                                                      ref hc.value,
+                                                                     ref Qf.value,
+                                                                     ref Qf_d.value,
+                                                                     ref Qs.value,
+                                                                     ref Qs_d.value,
+                                                                     ref Qc.value,
+                                                                     ref Qc_d.value,
                                                                      ref Qsus.value,
+                                                                     ref Qsus_d.value,
                                                                      ref Qmsus.value,
+                                                                     ref Qmsus_d.value,
                                                                      ref Qms.value,
+                                                                     ref Qms_d.value,
+                                                                     ref Qmf.value,
+                                                                     ref Qmf_d.value,
+                                                                     ref Qmc.value,
+                                                                     ref Qmc_d.value,
+                                                                     ref qf.value,
+                                                                     ref qf_d.value,
+                                                                     ref qs.value,
+                                                                     ref qs_d.value,
+                                                                     ref qc.value,
+                                                                     ref qc_d.value,
+                                                                     ref qsus.value,
+                                                                     ref qsus_d.value,
+                                                                     ref qmsus.value,
+                                                                     ref qmsus_d.value,
+                                                                     ref qms.value,
+                                                                     ref qms_d.value,
+                                                                     ref qmf.value,
+                                                                     ref qmf_d.value,
+                                                                     ref qmc.value,
+                                                                     ref qmc_d.value,
                                                                      ref Vsus.value,
                                                                      ref Mf.value,
                                                                      ref Vf.value,
@@ -1127,8 +1330,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public fmFilterMachiningBlock(
             fmCalculationOptionView calculationOptionView)
-            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-                                           null, null, null, null, null, null, null, null)
+            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null)
         {
         }
         
@@ -1160,9 +1362,38 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell Mc_Cell,
             DataGridViewCell Ms_Cell,
             DataGridViewCell Vs_Cell,
+            DataGridViewCell Qf_Cell,
+            DataGridViewCell Qf_d_Cell,
+            DataGridViewCell Qs_Cell,
+            DataGridViewCell Qs_d_Cell,
+            DataGridViewCell Qc_Cell,
+            DataGridViewCell Qc_d_Cell,
             DataGridViewCell Qsus_Cell,
+            DataGridViewCell Qsus_d_Cell,
             DataGridViewCell Qmsus_Cell,
+            DataGridViewCell Qmsus_d_Cell,
             DataGridViewCell Qms_Cell,
+            DataGridViewCell Qms_d_Cell,
+            DataGridViewCell Qmf_Cell,
+            DataGridViewCell Qmf_d_Cell,
+            DataGridViewCell Qmc_Cell,
+            DataGridViewCell Qmc_d_Cell,
+            DataGridViewCell qf_Cell,
+            DataGridViewCell qf_d_Cell,
+            DataGridViewCell qs_Cell,
+            DataGridViewCell qs_d_Cell,
+            DataGridViewCell qc_Cell,
+            DataGridViewCell qc_d_Cell,
+            DataGridViewCell qsus_Cell,
+            DataGridViewCell qsus_d_Cell,
+            DataGridViewCell qmsus_Cell,
+            DataGridViewCell qmsus_d_Cell,
+            DataGridViewCell qms_Cell,
+            DataGridViewCell qms_d_Cell,
+            DataGridViewCell qmf_Cell,
+            DataGridViewCell qmf_d_Cell,
+            DataGridViewCell qmc_Cell,
+            DataGridViewCell qmc_d_Cell,
             DataGridViewCell eps_Cell,
             DataGridViewCell kappa_Cell,
             DataGridViewCell Pc_Cell,
@@ -1197,9 +1428,38 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref Mc, fmGlobalParameter.Mc, Mc_Cell, false);
             AddParameter(ref Ms, fmGlobalParameter.Ms, Ms_Cell, false);
             AddParameter(ref Vs, fmGlobalParameter.Vs, Vs_Cell, false);
+            AddParameter(ref Qf, fmGlobalParameter.Qf, Qf_Cell, false);
+            AddParameter(ref Qf_d, fmGlobalParameter.Qf_d, Qf_d_Cell, false);
+            AddParameter(ref Qs, fmGlobalParameter.Qs, Qs_Cell, false);
+            AddParameter(ref Qs_d, fmGlobalParameter.Qs_d, Qs_d_Cell, false);
+            AddParameter(ref Qc, fmGlobalParameter.Qc, Qc_Cell, false);
+            AddParameter(ref Qc_d, fmGlobalParameter.Qc_d, Qc_d_Cell, false);
             AddParameter(ref Qsus, fmGlobalParameter.Qsus, Qsus_Cell, false);
+            AddParameter(ref Qsus_d, fmGlobalParameter.Qsus_d, Qsus_d_Cell, false);
             AddParameter(ref Qmsus, fmGlobalParameter.Qmsus, Qmsus_Cell, false);
+            AddParameter(ref Qmsus_d, fmGlobalParameter.Qmsus_d, Qmsus_d_Cell, false);
             AddParameter(ref Qms, fmGlobalParameter.Qms, Qms_Cell, false);
+            AddParameter(ref Qms_d, fmGlobalParameter.Qms_d, Qms_d_Cell, false);
+            AddParameter(ref Qmf, fmGlobalParameter.Qmf, Qmf_Cell, false);
+            AddParameter(ref Qmf_d, fmGlobalParameter.Qmf_d, Qmf_d_Cell, false);
+            AddParameter(ref Qmc, fmGlobalParameter.Qmc, Qmc_Cell, false);
+            AddParameter(ref Qmc_d, fmGlobalParameter.Qmc_d, Qmc_d_Cell, false);
+            AddParameter(ref qf, fmGlobalParameter.qf, qf_Cell, false);
+            AddParameter(ref qf_d, fmGlobalParameter.qf_d, qf_d_Cell, false);
+            AddParameter(ref qs, fmGlobalParameter.qs, qs_Cell, false);
+            AddParameter(ref qs_d, fmGlobalParameter.qs_d, qs_d_Cell, false);
+            AddParameter(ref qc, fmGlobalParameter.qc, qc_Cell, false);
+            AddParameter(ref qc_d, fmGlobalParameter.qc_d, qc_d_Cell, false);
+            AddParameter(ref qsus, fmGlobalParameter.qsus, qsus_Cell, false);
+            AddParameter(ref qsus_d, fmGlobalParameter.qsus_d, qsus_d_Cell, false);
+            AddParameter(ref qmsus, fmGlobalParameter.qmsus, qmsus_Cell, false);
+            AddParameter(ref qmsus_d, fmGlobalParameter.qmsus_d, qmsus_d_Cell, false);
+            AddParameter(ref qms, fmGlobalParameter.qms, qms_Cell, false);
+            AddParameter(ref qms_d, fmGlobalParameter.qms_d, qms_d_Cell, false);
+            AddParameter(ref qmf, fmGlobalParameter.qmf, qmf_Cell, false);
+            AddParameter(ref qmf_d, fmGlobalParameter.qmf_d, qmf_d_Cell, false);
+            AddParameter(ref qmc, fmGlobalParameter.qmc, qmc_Cell, false);
+            AddParameter(ref qmc_d, fmGlobalParameter.qmc_d, qmc_d_Cell, false);
             AddParameter(ref eps, fmGlobalParameter.eps, eps_Cell, false);
             AddParameter(ref kappa, fmGlobalParameter.kappa, kappa_Cell, false);
             AddParameter(ref Pc, fmGlobalParameter.Pc, Pc_Cell, false);
