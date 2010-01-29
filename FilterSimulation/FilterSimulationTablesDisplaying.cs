@@ -793,6 +793,7 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_vc_Column.Index].HeaderCell, fmCalcBlocksLibrary.fmGlobalParameter.vc.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsusColumn.Index].HeaderCell, fmCalcBlocksLibrary.fmGlobalParameter.Msus.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_VsusColumn.Index].HeaderCell, fmCalcBlocksLibrary.fmGlobalParameter.Vsus.unitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_VsColumn.Index].HeaderCell, fmCalcBlocksLibrary.fmGlobalParameter.Vs.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_VcColumn.Index].HeaderCell, fmCalcBlocksLibrary.fmGlobalParameter.Vc.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_McColumn.Index].HeaderCell, fmCalcBlocksLibrary.fmGlobalParameter.Mc.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsColumn.Index].HeaderCell, fmCalcBlocksLibrary.fmGlobalParameter.Ms.unitFamily);
