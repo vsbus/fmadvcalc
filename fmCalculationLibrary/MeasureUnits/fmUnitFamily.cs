@@ -23,6 +23,11 @@ namespace fmCalculationLibrary.MeasureUnits
         public static fmUnitFamily TimeFamily = new fmUnitFamily();
         public static fmUnitFamily FlowRateVolume = new fmUnitFamily();
         public static fmUnitFamily FlowRateMass = new fmUnitFamily();
+        public static fmUnitFamily SpeedFamily = new fmUnitFamily();
+        public static fmUnitFamily SpecificMassFamily = new fmUnitFamily();
+        public static fmUnitFamily SpecificVolumeFamily = new fmUnitFamily();
+        public static fmUnitFamily SpecificFlowRateVolume = new fmUnitFamily();
+        public static fmUnitFamily SpecificFlowRateMass = new fmUnitFamily();
         
         private int CurrentIndex;
         public List<fmUnit> Units = new List<fmUnit>();
@@ -81,6 +86,20 @@ namespace fmCalculationLibrary.MeasureUnits
 
             FlowRateMass.Units.Add(new fmUnit("kg/h", 1.0 / (60 * 60)));
             FlowRateMass.Units.Add(new fmUnit("kg/s", 1));
+
+            SpeedFamily.Units.Add(new fmUnit("mm/min", 1e-3/60));
+            SpeedFamily.Units.Add(new fmUnit("m/s", 1));
+
+            SpecificMassFamily.Units.Add(new fmUnit("kg/m2", 1));
+
+            SpecificVolumeFamily.Units.Add(new fmUnit("l/m2", 1e-3));
+            SpecificVolumeFamily.Units.Add(new fmUnit("m3/m2", 1));
+
+            SpecificFlowRateVolume.Units.Add(new fmUnit("l/m2min", 1e-3/60));
+            SpecificFlowRateVolume.Units.Add(new fmUnit("m3/m2s", 1));
+
+            SpecificFlowRateMass.Units.Add(new fmUnit("kg/m2min", 1.0/60));
+            SpecificFlowRateMass.Units.Add(new fmUnit("kg/m2s", 1));
         }
 
         public fmUnit CurrentUnit
