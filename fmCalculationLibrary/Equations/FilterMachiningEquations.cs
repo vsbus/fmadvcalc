@@ -279,20 +279,20 @@ namespace fmCalculationLibrary.Equations
             return kappa * Dp * Pc / (eta * (hc + hce));
         }
 
-        public static fmValue Eval_Mc_From_Msus_Mf(fmValue Msus, fmValue Mf)
-        {
-            return Eval_Cake_From_Sus_Flow(Msus, Mf);
-        }
+        //public static fmValue Eval_Mc_From_Msus_Mf(fmValue Msus, fmValue Mf)
+        //{
+        //    return Eval_Cake_From_Sus_Flow(Msus, Mf);
+        //}
 
-        private static fmValue Eval_Cake_From_Sus_Flow(fmValue Sus, fmValue Flow)
+        public static fmValue Eval_Cake_From_Sus_Flow(fmValue Sus, fmValue Flow)
         {
             return Sus - Flow;
         }
 
-        public static fmValue Eval_Vc_From_Vsus_Vf(fmValue Vsus, fmValue Vf)
-        {
-            return Eval_Cake_From_Sus_Flow(Vsus, Vf);
-        }
+        //public static fmValue Eval_Vc_From_Vsus_Vf(fmValue Vsus, fmValue Vf)
+        //{
+        //    return Eval_Cake_From_Sus_Flow(Vsus, Vf);
+        //}
 
         public static fmValue Eval_m_From_M_A(fmValue M, fmValue A)
         {
@@ -302,6 +302,37 @@ namespace fmCalculationLibrary.Equations
         public static fmValue Eval_v_From_V_A(fmValue V, fmValue A)
         {
             return V/A;
+        }
+
+        public static fmValue Eval_Qsus_d_From_eps_A_Cv_dhcdt(fmValue eps, fmValue A, fmValue Cv, fmValue dhc_dt)
+        {
+            fmValue one = new fmValue(1.0);
+            return (one - eps)*A/Cv*dhc_dt;
+        }
+
+        public static fmValue Eval_Qs_d_From_eps_A_dhcdt(fmValue eps, fmValue A, fmValue dhc_over_dt)
+        {
+            return (1 - eps)*A*dhc_over_dt;
+        }
+
+        public static fmValue Eval_Qm_From_M_t(fmValue Mf, fmValue tf)
+        {
+            return Mf/tf;
+        }
+
+        public static fmValue Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(fmValue A, fmValue Dp, fmValue Pc, fmValue eta, fmValue hc, fmValue hce)
+        {
+            return A * Dp * Pc / (eta * (hc + hce));
+        }
+
+        public static fmValue Eval_Q_From_V_t(fmValue V, fmValue t)
+        {
+            return V/t;
+        }
+
+        public static fmValue eval_q_From_Q_A(fmValue Q, fmValue A)
+        {
+            return Q/A;
         }
     }
 }

@@ -360,8 +360,8 @@ namespace fmCalculatorsLibrary
 
             variables.hc_over_tf = FilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(variables.hc, variables.tf);
             variables.dhc_over_dt = FilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(variables.kappa, variables.Dp, variables.Pc, constants.eta_f, variables.hc, constants.hce);
-            variables.Mc = FilterMachiningEquations.Eval_Mc_From_Msus_Mf(variables.Msus, variables.Mf);
-            variables.Vc = FilterMachiningEquations.Eval_Vc_From_Vsus_Vf(variables.Vsus, variables.Vf);
+            variables.Mc = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(variables.Msus, variables.Mf);
+            variables.Vc = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(variables.Vsus, variables.Vf);
             variables.mf = FilterMachiningEquations.Eval_m_From_M_A(variables.Mf, variables.A);
             variables.vf = FilterMachiningEquations.Eval_v_From_V_A(variables.Vf, variables.A);
             variables.msus = FilterMachiningEquations.Eval_m_From_M_A(variables.Msus, variables.A);
@@ -370,6 +370,35 @@ namespace fmCalculatorsLibrary
             variables.vs = FilterMachiningEquations.Eval_v_From_V_A(variables.Vs, variables.A);
             variables.mc = FilterMachiningEquations.Eval_m_From_M_A(variables.Mc, variables.A);
             variables.vc = FilterMachiningEquations.Eval_v_From_V_A(variables.Vc, variables.A);
+            variables.Qsus_d = FilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(variables.eps, variables.A, constants.Cv, variables.dhc_over_dt);
+            variables.Qmsus_d = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Qsus_d);
+            variables.Qs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Qms); ;
+            variables.Qs_d = FilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(variables.eps, variables.A, variables.dhc_over_dt);
+            variables.Qms_d = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_s, variables.Qs_d);
+            variables.Qmf = FilterMachiningEquations.Eval_Qm_From_M_t(variables.Mf, variables.tf);
+            variables.Qf = FilterMachiningEquations.Eval_Q_From_V_t(variables.Vf, variables.tf);
+            variables.Qf_d = FilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(variables.A, variables.Dp, variables.Pc, constants.eta_f, variables.hc, constants.hce);
+            variables.Qmf_d = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Qf_d); ;
+            variables.Qmc = FilterMachiningEquations.Eval_Qm_From_M_t(variables.Mc, variables.tc);
+            variables.Qc_d = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(variables.Qsus_d, variables.Qf_d);
+            variables.Qmc_d = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(variables.Qmsus_d, variables.Qmf_d);
+            variables.Qc = FilterMachiningEquations.Eval_Q_From_V_t(variables.Vc, variables.tc);
+            variables.qf = FilterMachiningEquations.eval_q_From_Q_A(variables.Qf, variables.A);
+            variables.qf_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qf_d, variables.A);
+            variables.qsus = FilterMachiningEquations.eval_q_From_Q_A(variables.Qsus, variables.A);
+            variables.qsus_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qsus_d, variables.A);
+            variables.qs = FilterMachiningEquations.eval_q_From_Q_A(variables.Qs, variables.A);
+            variables.qs_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qs_d, variables.A);
+            variables.qc = FilterMachiningEquations.eval_q_From_Q_A(variables.Qc, variables.A);
+            variables.qc_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qc_d, variables.A);
+            variables.qmf = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmf, variables.A);
+            variables.qmf_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmf_d, variables.A);
+            variables.qmsus = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmsus, variables.A);
+            variables.qmsus_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmsus_d, variables.A);
+            variables.qms = FilterMachiningEquations.eval_q_From_Q_A(variables.Qms, variables.A);
+            variables.qms_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qms_d, variables.A);
+            variables.qmc = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmc, variables.A);
+            variables.qmc_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmc_d, variables.A);
         }
         private void DoCalculationsStandart()
         {
