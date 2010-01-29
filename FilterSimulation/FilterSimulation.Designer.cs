@@ -1735,7 +1735,7 @@ namespace FilterSimulation
             // 
             // simulation_Qsus_dColumn
             // 
-            this.simulation_Qsus_dColumn.HeaderText = "Qsus_d";
+            this.simulation_Qsus_dColumn.HeaderText = "Qsus,d";
             this.simulation_Qsus_dColumn.Name = "simulation_Qsus_dColumn";
             this.simulation_Qsus_dColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1747,7 +1747,7 @@ namespace FilterSimulation
             // 
             // simulation_Qmsus_dColumn
             // 
-            this.simulation_Qmsus_dColumn.HeaderText = "Qmsus_d";
+            this.simulation_Qmsus_dColumn.HeaderText = "Qmsus,d";
             this.simulation_Qmsus_dColumn.Name = "simulation_Qmsus_dColumn";
             this.simulation_Qmsus_dColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1759,7 +1759,7 @@ namespace FilterSimulation
             // 
             // simulation_Qms_dColumn
             // 
-            this.simulation_Qms_dColumn.HeaderText = "Qms_d";
+            this.simulation_Qms_dColumn.HeaderText = "Qms,d";
             this.simulation_Qms_dColumn.Name = "simulation_Qms_dColumn";
             this.simulation_Qms_dColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1771,7 +1771,7 @@ namespace FilterSimulation
             // 
             // simulation_Qmf_dColumn
             // 
-            this.simulation_Qmf_dColumn.HeaderText = "Qmf_d";
+            this.simulation_Qmf_dColumn.HeaderText = "Qmf,d";
             this.simulation_Qmf_dColumn.Name = "simulation_Qmf_dColumn";
             this.simulation_Qmf_dColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1783,7 +1783,7 @@ namespace FilterSimulation
             // 
             // simulation_Qmc_dColumn
             // 
-            this.simulation_Qmc_dColumn.HeaderText = "Qmc_d";
+            this.simulation_Qmc_dColumn.HeaderText = "Qmc,d";
             this.simulation_Qmc_dColumn.Name = "simulation_Qmc_dColumn";
             this.simulation_Qmc_dColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1795,7 +1795,7 @@ namespace FilterSimulation
             // 
             // simulation_Qf_dColumn
             // 
-            this.simulation_Qf_dColumn.HeaderText = "Qf_d";
+            this.simulation_Qf_dColumn.HeaderText = "Qf,d";
             this.simulation_Qf_dColumn.Name = "simulation_Qf_dColumn";
             this.simulation_Qf_dColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1807,7 +1807,7 @@ namespace FilterSimulation
             // 
             // simulation_Qs_dColumn
             // 
-            this.simulation_Qs_dColumn.HeaderText = "Qs_d";
+            this.simulation_Qs_dColumn.HeaderText = "Qs,d";
             this.simulation_Qs_dColumn.Name = "simulation_Qs_dColumn";
             this.simulation_Qs_dColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1819,7 +1819,7 @@ namespace FilterSimulation
             // 
             // simulation_Qc_dColumn
             // 
-            this.simulation_Qc_dColumn.HeaderText = "Qc_d";
+            this.simulation_Qc_dColumn.HeaderText = "Qc,d";
             this.simulation_Qc_dColumn.Name = "simulation_Qc_dColumn";
             this.simulation_Qc_dColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1831,7 +1831,7 @@ namespace FilterSimulation
             // 
             // simulation_qf_d_Column
             // 
-            this.simulation_qf_d_Column.HeaderText = "qf_d";
+            this.simulation_qf_d_Column.HeaderText = "qf,d";
             this.simulation_qf_d_Column.Name = "simulation_qf_d_Column";
             this.simulation_qf_d_Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1843,7 +1843,7 @@ namespace FilterSimulation
             // 
             // simulation_qsus_d_Column
             // 
-            this.simulation_qsus_d_Column.HeaderText = "qsus_d";
+            this.simulation_qsus_d_Column.HeaderText = "qsus,d";
             this.simulation_qsus_d_Column.Name = "simulation_qsus_d_Column";
             this.simulation_qsus_d_Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1855,7 +1855,7 @@ namespace FilterSimulation
             // 
             // simulation_qs_d_Column
             // 
-            this.simulation_qs_d_Column.HeaderText = "qs_d";
+            this.simulation_qs_d_Column.HeaderText = "qs,d";
             this.simulation_qs_d_Column.Name = "simulation_qs_d_Column";
             this.simulation_qs_d_Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1867,7 +1867,7 @@ namespace FilterSimulation
             // 
             // simulation_qc_d_Column
             // 
-            this.simulation_qc_d_Column.HeaderText = "qc_d";
+            this.simulation_qc_d_Column.HeaderText = "qc,d";
             this.simulation_qc_d_Column.Name = "simulation_qc_d_Column";
             this.simulation_qc_d_Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1879,7 +1879,7 @@ namespace FilterSimulation
             // 
             // simulation_qmf_d_Column
             // 
-            this.simulation_qmf_d_Column.HeaderText = "qmf_d";
+            this.simulation_qmf_d_Column.HeaderText = "qmf,d";
             this.simulation_qmf_d_Column.Name = "simulation_qmf_d_Column";
             this.simulation_qmf_d_Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1891,7 +1891,7 @@ namespace FilterSimulation
             // 
             // simulation_qmsus_d_Column
             // 
-            this.simulation_qmsus_d_Column.HeaderText = "qmsus_d";
+            this.simulation_qmsus_d_Column.HeaderText = "qmsus,d";
             this.simulation_qmsus_d_Column.Name = "simulation_qmsus_d_Column";
             this.simulation_qmsus_d_Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1903,7 +1903,7 @@ namespace FilterSimulation
             // 
             // simulation_qms_d_Column
             // 
-            this.simulation_qms_d_Column.HeaderText = "qms_d";
+            this.simulation_qms_d_Column.HeaderText = "qms,d";
             this.simulation_qms_d_Column.Name = "simulation_qms_d_Column";
             this.simulation_qms_d_Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
@@ -1915,7 +1915,7 @@ namespace FilterSimulation
             // 
             // simulation_qmc_d_Column
             // 
-            this.simulation_qmc_d_Column.HeaderText = "qmc_d";
+            this.simulation_qmc_d_Column.HeaderText = "qmc,d";
             this.simulation_qmc_d_Column.Name = "simulation_qmc_d_Column";
             this.simulation_qmc_d_Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
