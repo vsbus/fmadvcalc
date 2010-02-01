@@ -210,5 +210,46 @@ namespace Tests
        
        // { 0, 3.99999999999876,}  item 0 for polynom  :560 +1*x^2 -9*x^3 = 0  expected value : 4
 
+
+
+        [Test]
+        public void Test4()
+        {
+            fmValue c1 = new fmValue(1);
+            fmValue p1 = new fmValue(1);
+
+            List<fmValue> result = fmMathEquations.SolvePowerSumEquation(new fmValue(0),
+                                                                         new fmValue[1,2] {{c1, p1}});
+            List<fmValue> expectedResult = new List<fmValue>(new fmValue[] { new fmValue(0) });
+
+            AssertAreEqual(expectedResult, result, "Test4 x = 0; expected answer is 0");
+        }
+
+        [Test]
+        public void Test5()
+        {
+            fmValue c1 = new fmValue(1);
+            fmValue p1 = new fmValue(-1);
+
+            List<fmValue> result = fmMathEquations.SolvePowerSumEquation(new fmValue(0),
+                                                                         new fmValue[1, 2] { { c1, p1 } });
+            List<fmValue> expectedResult = new List<fmValue>();
+
+            AssertAreEqual(expectedResult, result, "Test4 1/x = 0; expected answer is empty solution");
+        }
+
+        [Test]
+        public void Test6()
+        {
+            fmValue c1 = new fmValue(0);
+            fmValue p1 = new fmValue(1);
+
+            List<fmValue> result = fmMathEquations.SolvePowerSumEquation(new fmValue(0),
+                                                                         new fmValue[1, 2] { { c1, p1 } });
+            List<fmValue> expectedResult = new List<fmValue>();
+
+            AssertAreEqual(expectedResult, result, "Test4 0 * x = 0; expected answer is empty solution");
+        }
+
     }
 }

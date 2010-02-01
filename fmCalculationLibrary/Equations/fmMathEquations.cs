@@ -281,7 +281,11 @@ namespace fmCalculationLibrary.Equations
             }
             else if (coeffsAndPowers.GetLength(0) == 1)
             {
-                result.Add(fmValue.Pow(-freeCoeff / coeffsAndPowers[0, 0], 1 / coeffsAndPowers[0, 1]));
+                fmValue resVal = fmValue.Pow(-freeCoeff/coeffsAndPowers[0, 0], 1/coeffsAndPowers[0, 1]);
+                if (resVal.Defined)
+                {
+                    result.Add(resVal);
+                }
                 return result;
             }
             else
