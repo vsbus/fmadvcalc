@@ -246,7 +246,8 @@
 		<property name="this.archivetitle" value="${makereleasepackage.sitename}_site" />
 		<property name="this.archiveName" value="${releaseDir}\${this.archivetitle}_${this::format-number(datetime::get-year(this.currentDate))}${this::format-number(datetime::get-month(this.currentDate))}${this::format-number(datetime::get-day(this.currentDate))}_build_${assemblyname::get-version(assemblyname::get-assembly-name(this.assemblyName))}.rar" />
 		<delete file="${this.archiveName}" />
-		<exec program="C:\Program Files\WinRAR\winrar.exe" commandline="a -r ${this.archiveName} ${makereleasepackage.copydir}\* -afzip -ep1" />
+		<echo message="C:\Program Files\WinRAR\winrar.exe a -r &quot;${this.archiveName}&quot; ${makereleasepackage.copydir}\* -afzip -ep1"/>
+		<exec program="C:\Program Files\WinRAR\winrar.exe" commandline="a -r &quot;${this.archiveName}&quot; &quot;${makereleasepackage.copydir}\*&quot; -afzip -ep1" />
 		<!--exec program="svn.exe" commandline="add ${this.archiveName}" / -->
 	</target>
 

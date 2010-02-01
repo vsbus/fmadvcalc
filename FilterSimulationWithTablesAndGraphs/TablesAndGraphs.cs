@@ -28,6 +28,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private const int SOLID_CURVE_WIDTH = 2;
         private const int CUSTOM_CURVE_WIDTH = 1;
         private static readonly Color SELECTED_COLUMN_COLOR = Color.LightBlue;
+        private bool processingCalculationOptionViewCheckChanged = false;
 
         private void FillListBox(ListBox listBox, List<string> strings)
         {
@@ -212,44 +213,47 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void DrawChartAndTable()
         {
-            if (fmGlobalBlocks == null)
+            if (!processingCalculationOptionViewCheckChanged)
             {
-                return;
-            }
-
-            foreach (fmAdditionalFilterMachiningBlock localFMB in fmLocalBlocks)
-            {
-                localFMB.CopyConstants(currentSimFMB);
-                localFMB.CalculateAndDisplay();
-            }
-
-            int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
-            int yAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxYAxis.Text);
-            int y2AxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxY2Axis.Text);
-
-            SetUpChartAxis(xAxisParameterIndex, yAxisParameterIndex, y2AxisParameterIndex);
-            fmValue currentSelectedXValue = SetUpResultTable();
-
-            DrawCurvesAndColumnsForAxis(xAxisParameterIndex, yAxisParameterIndex, -1, SymbolType.Circle);
-            DrawCurvesAndColumnsForAxis(xAxisParameterIndex, -1, y2AxisParameterIndex, SymbolType.Circle);
-
-            if (currentSelectedXValue.Defined)
-            {
-                for (int i = 0; i < coordinatesGrid.RowCount; ++i)
+                if (fmGlobalBlocks == null)
                 {
-                    fmValue curValue = coordinatesGrid.CurrentCell == null
-                                           ? new fmValue()
-                                           : fmValue.ObjectToValue(coordinatesGrid.CurrentCell.Value);
-                    fmValue newValue = fmValue.ObjectToValue(coordinatesGrid.Rows[i].Cells[0].Value);
-                    if (newValue.Defined
-                        && (!curValue.Defined || fmValue.Abs(newValue - currentSelectedXValue) < fmValue.Abs(curValue - currentSelectedXValue)))
+                    return;
+                }
+
+                foreach (fmAdditionalFilterMachiningBlock localFMB in fmLocalBlocks)
+                {
+                    localFMB.CopyConstants(currentSimFMB);
+                    localFMB.CalculateAndDisplay();
+                }
+
+                int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
+                int yAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxYAxis.Text);
+                int y2AxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxY2Axis.Text);
+
+                SetUpChartAxis(xAxisParameterIndex, yAxisParameterIndex, y2AxisParameterIndex);
+                fmValue currentSelectedXValue = SetUpResultTable();
+
+                DrawCurvesAndColumnsForAxis(xAxisParameterIndex, yAxisParameterIndex, -1, SymbolType.Circle);
+                DrawCurvesAndColumnsForAxis(xAxisParameterIndex, -1, y2AxisParameterIndex, SymbolType.Circle);
+
+                if (currentSelectedXValue.Defined)
+                {
+                    for (int i = 0; i < coordinatesGrid.RowCount; ++i)
                     {
-                        coordinatesGrid.CurrentCell = coordinatesGrid.Rows[i].Cells[0];
+                        fmValue curValue = coordinatesGrid.CurrentCell == null
+                                               ? new fmValue()
+                                               : fmValue.ObjectToValue(coordinatesGrid.CurrentCell.Value);
+                        fmValue newValue = fmValue.ObjectToValue(coordinatesGrid.Rows[i].Cells[0].Value);
+                        if (newValue.Defined
+                            && (!curValue.Defined || fmValue.Abs(newValue - currentSelectedXValue) < fmValue.Abs(curValue - currentSelectedXValue)))
+                        {
+                            coordinatesGrid.CurrentCell = coordinatesGrid.Rows[i].Cells[0];
+                        }
                     }
                 }
+                fmZedGraphControl1.AxisChange();
+                fmZedGraphControl1.Refresh();
             }
-            fmZedGraphControl1.AxisChange();
-            fmZedGraphControl1.Refresh();
         }
 
         private void SetUpChartAxis(int xAxisParameterIndex, int yAxisParameterIndex, int y2AxisParameterIndex)
@@ -640,6 +644,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void calculationOptionViewInTablesAndGraphs_CheckedChanged(object sender, EventArgs e)
         {
+            processingCalculationOptionViewCheckChanged = true;
             List<string> inputNames = new List<string>();
             List<string> outputNames = new List<string>();
             List<fmGlobalParameter> inputParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calculationOptionViewInTablesAndGraphs.GetSelectedOption());
@@ -692,6 +697,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
             UpdateParametersTablesColumnsVisibility();
             UpdateIsInputedForParametersBlocks();
+
+            processingCalculationOptionViewCheckChanged = false;
+
             DrawChartAndTable();
         }
 

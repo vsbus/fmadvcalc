@@ -445,8 +445,8 @@ namespace FilterSimulationWithTablesAndGraphs
             this.additionalParametersTable.RowTemplate.Height = 18;
             this.additionalParametersTable.Size = new System.Drawing.Size(139, 101);
             this.additionalParametersTable.TabIndex = 5;
-            this.additionalParametersTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellContentClick);
             this.additionalParametersTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellValueChanged);
+            this.additionalParametersTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellContentClick);
             this.additionalParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
             // 
             // DeleteButtonColumn

@@ -1511,22 +1511,28 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
+        Dictionary<CalculationOption, Dictionary<fmBlockParameter, fmBlockParameterGroup>> table = null;
+
         fmBlockParameterGroup WhatGroupOfParameterWithCalcOption(fmBlockParameter parameter, CalculationOption calcOption)
         {
-            Dictionary< CalculationOption, Dictionary<fmBlockParameter, fmBlockParameterGroup> > table = new Dictionary<CalculationOption, Dictionary<fmBlockParameter, fmBlockParameterGroup>>();
-            foreach (CalculationOption option in Enum.GetValues(typeof(CalculationOption)))
+            if (table == null)
             {
-                table[option] = new Dictionary<fmBlockParameter, fmBlockParameterGroup>();
-            }
+                table = new Dictionary<CalculationOption, Dictionary<fmBlockParameter, fmBlockParameterGroup>>();
 
-            SetGroupsOfStandart1(table[CalculationOption.Standart1]);
-            SetGroupsOfStandart2(table[CalculationOption.Standart2]);
-            SetGroupsOfStandart3(table[CalculationOption.Standart3]);
-            SetGroupsOfStandart4(table[CalculationOption.Standart4]);
-            SetGroupsOfStandart7(table[CalculationOption.Standart7]);
-            SetGroupsOfStandart8(table[CalculationOption.Standart8]);
-            SetGroupsOfDesign1(table[CalculationOption.Design1]);
-            SetGroupsOfOptimization1(table[CalculationOption.Optimization1]);
+                foreach (CalculationOption option in Enum.GetValues(typeof(CalculationOption)))
+                {
+                    table[option] = new Dictionary<fmBlockParameter, fmBlockParameterGroup>();
+                }
+
+                SetGroupsOfStandart1(table[CalculationOption.Standart1]);
+                SetGroupsOfStandart2(table[CalculationOption.Standart2]);
+                SetGroupsOfStandart3(table[CalculationOption.Standart3]);
+                SetGroupsOfStandart4(table[CalculationOption.Standart4]);
+                SetGroupsOfStandart7(table[CalculationOption.Standart7]);
+                SetGroupsOfStandart8(table[CalculationOption.Standart8]);
+                SetGroupsOfDesign1(table[CalculationOption.Design1]);
+                SetGroupsOfOptimization1(table[CalculationOption.Optimization1]);
+            }
 
             return table[calcOption][parameter];
         }
