@@ -122,38 +122,48 @@ namespace Tests
             double eps = Math.Exp(-10);
             Random ran = new Random();
 
-            for (int n = 1; n < 5; n++)
+            for (int iter = 0; iter < 100; ++iter)
             {
-                fmValue freeCoeff;
-                fmValue [,] coeffAndPow = new fmValue[n, 2];
-                for (int j = 0; j < n; j++)
+                for (int n = 1; n < 5; n++)
                 {
-                    coeffAndPow[j, 0] = new fmValue(ran.Next(MAXCOEF) - MAXCOEF/2);
-                    coeffAndPow[j, 1] = new fmValue(ran.Next(MAXPOW)+1);
-                }
-
-                fmValue answer = new fmValue(ran.Next(5));
-                freeCoeff = new fmValue(0);
-                for (int j = 0; j < n; j++)
-                {
-                    freeCoeff -= coeffAndPow[j, 0] * fmValue.Pow(answer, coeffAndPow[j, 1]);
-                }
-
-                List<fmValue> result = fmMathEquations.SolvePowerSumEquation(freeCoeff, coeffAndPow);
-                Assert.Greater(result.Count, 0, "Unexpected SolvePowerSumEquation result count for equation :{0}; expected answer is {1}", GetEquation(freeCoeff, coeffAndPow), answer.Value);
-                bool isContainsAnswer = false;
-                foreach (fmValue val in result)
-                {
-                    fmValue res = freeCoeff;
+                    fmValue freeCoeff;
+                    fmValue[,] coeffAndPow = new fmValue[n,2];
                     for (int j = 0; j < n; j++)
                     {
-                        res += coeffAndPow[j, 0] * fmValue.Pow(val, coeffAndPow[j, 1]);
+                        coeffAndPow[j, 0] = new fmValue(ran.Next(MAXCOEF) - MAXCOEF/2);
+                        coeffAndPow[j, 1] = new fmValue(ran.Next(MAXPOW) + 1);
                     }
-                    Assert.GreaterOrEqual(val.Value, 0, "negative answer returned");
-                    if (Math.Abs(val.Value - answer.Value) < eps) isContainsAnswer = true;
-                    Assert.LessOrEqual(Math.Abs(res.Value), eps, "Wrong SolvePowerSumEquation result {2}  item {3} for polynom degree {0} for equation :{1}, expected answer {4}", n, GetEquation(freeCoeff, coeffAndPow), ListToString(result), val.Value.ToString(), answer.Value.ToString());
+
+                    fmValue answer = new fmValue(ran.Next(5));
+                    freeCoeff = new fmValue(0);
+                    for (int j = 0; j < n; j++)
+                    {
+                        freeCoeff -= coeffAndPow[j, 0]*fmValue.Pow(answer, coeffAndPow[j, 1]);
+                    }
+
+                    List<fmValue> result = fmMathEquations.SolvePowerSumEquation(freeCoeff, coeffAndPow);
+                    Assert.Greater(result.Count, 0,
+                                   "Unexpected SolvePowerSumEquation result count for equation :{0}; expected answer is {1}",
+                                   GetEquation(freeCoeff, coeffAndPow), answer.Value);
+                    bool isContainsAnswer = false;
+                    foreach (fmValue val in result)
+                    {
+                        fmValue res = freeCoeff;
+                        for (int j = 0; j < n; j++)
+                        {
+                            res += coeffAndPow[j, 0]*fmValue.Pow(val, coeffAndPow[j, 1]);
+                        }
+                        Assert.GreaterOrEqual(val.Value, 0, "negative answer returned");
+                        if (Math.Abs(val.Value - answer.Value) < eps) isContainsAnswer = true;
+                        Assert.LessOrEqual(Math.Abs(res.Value), eps,
+                                           "Wrong SolvePowerSumEquation result {2}  item {3} for polynom degree {0} for equation :{1}, expected answer {4}",
+                                           n, GetEquation(freeCoeff, coeffAndPow), ListToString(result),
+                                           val.Value.ToString(), answer.Value.ToString());
+                    }
+                    Assert.IsTrue(isContainsAnswer,
+                                  "Wrong SolvePowerSumEquation result:  result {2} does not contain expected  answer {0} for equation :{1}",
+                                  answer, GetEquation(freeCoeff, coeffAndPow), ListToString(result));
                 }
-                Assert.IsTrue(isContainsAnswer, "Wrong SolvePowerSumEquation result:  result {2} does not contain expected  answer {0} for equation :{1}", answer, GetEquation(freeCoeff, coeffAndPow), ListToString(result));
             }
         }
 
@@ -167,14 +177,15 @@ namespace Tests
 
             List<fmValue> result = fmMathEquations.SolvePowerSumEquation(new fmValue(0),
                                                                          new fmValue[3, 2] { { c1, new fmValue(3) }, { c2, new fmValue(1) }, { c3, new fmValue(1) } });
-            List<fmValue> expectedResult = new List<fmValue>(new fmValue[] {new fmValue(2) });
+            List<fmValue> expectedResult = new List<fmValue>(new fmValue[] {new fmValue(0) });
 
             AssertAreEqual(expectedResult, result, "Test1 0 +0*x^3 +8*x^1 -9*x^1 = 0; expected answer is 0");
         }
-        // 58 +2*x^1 -6*x^3 -7*x^1 = 0; expected answer is 2
+        
         [Test]
         public void Test2()
         {
+            // 58 +2*x^1 -6*x^3 -7*x^1 = 0; expected answer is 2
             fmValue c1= new fmValue(2);
             fmValue p1 = new fmValue(1);
             
@@ -188,12 +199,13 @@ namespace Tests
                                                                          new fmValue[3, 2] { { c1, p1}, {c2, p2}, {c3, p3} });
             List<fmValue> expectedResult = new List<fmValue>(new fmValue[] {new fmValue(2) });
 
-            AssertAreEqual(expectedResult, result, "Test1 0 +0*x^3 +8*x^1 -9*x^1 = 0; expected answer is 0");
+            AssertAreEqual(expectedResult, result, "govno");
         }
-        //63 +2*x^2 -3*x^3 = 0 expected answer is 3
+        
         [Test]
         public void Test3()
         {
+            //63 +2*x^2 -3*x^3 = 0 expected answer is 3
             fmValue c1= new fmValue(2);
             fmValue p1 = new fmValue(2);
             

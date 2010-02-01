@@ -235,6 +235,14 @@ namespace fmCalculationLibrary.Equations
 
                 compressing[p] += c;
             }
+            
+            SortedList<fmValue, fmValue> compressing2 = new SortedList<fmValue, fmValue>();
+            foreach (KeyValuePair<fmValue, fmValue> cp in compressing)
+            {
+                if (cp.Value != _zero)
+                    compressing2.Add(cp.Key, cp.Value);
+            }
+            compressing = compressing2;
 
             {
                 fmValue[,] compressedCoeffsAndPowers = new fmValue[compressing.Count - (compressing.ContainsKey(_zero) ? 1 : 0), 2];
@@ -290,7 +298,7 @@ namespace fmCalculationLibrary.Equations
             }
             else
             {
-                if (coeffsAndPowers[0, 1] > _one)
+                if (freeCoeff == _zero)
                     result.Add(_zero);
 
                 fmValue newFreeCoeff = new fmValue(coeffsAndPowers[0, 0] * coeffsAndPowers[0, 1]);
@@ -302,7 +310,7 @@ namespace fmCalculationLibrary.Equations
                 }
 
                 List<fmValue> changingPoints = new List<fmValue>();
-                changingPoints.Add(coeffsAndPowers[0, 1] > _zero ? -_infinity : _zero);
+                changingPoints.Add(_zero);
                 changingPoints.AddRange(SolvePowerSumEquation(newFreeCoeff, newCoeffsAndPowers));
                 changingPoints.Add(_infinity);
 
@@ -319,10 +327,12 @@ namespace fmCalculationLibrary.Equations
                     }
                 }
 
+                fmValue eps = new fmValue(1e-12);
                 result.Sort();
                 for (int i = result.Count - 1; i > 0; --i)
                 {
-                    if (result[i] == result[i - 1])
+                    if (result[i] <= (1 + eps) * result[i - 1]
+                        || result[i] - result[i - 1] <= eps)
                         result.RemoveAt(i);
                 }
 
