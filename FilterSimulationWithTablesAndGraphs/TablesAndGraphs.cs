@@ -333,10 +333,10 @@ namespace FilterSimulationWithTablesAndGraphs
                                                                                                 calculationOptionViewInTablesAndGraphs);
                     tempBlock.CalculationOption = fmLocalBlocks[0].CalculationOption;
                     tempBlock.CopyValues(selectedBlock.filterMachiningBlock);
-                    for (int j = 0; j < tempBlock.Parameters.Count; ++j)
-                    {
-                        tempBlock.Parameters[j].isInputed = selectedBlock.filterMachiningBlock.Parameters[j].isInputed;
-                    } 
+                    //for (int j = 0; j < tempBlock.Parameters.Count; ++j)
+                    //{
+                    //    tempBlock.Parameters[j].isInputed = selectedBlock.filterMachiningBlock.Parameters[j].isInputed;
+                    //} 
                     foreach (fmBlockParameter p in tempBlock.Parameters)
                     {
                         if (p.name == listBoxXAxis.Text)
@@ -496,7 +496,6 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
                     row.Cells[idx].Value = param.value / param.unitFamily.CurrentUnit.Coef;
-
                 }
             }
             if (selectedSimulationParametersTable.CurrentCell == null && selectedSimulationParametersTable.Rows.Count > 0)
