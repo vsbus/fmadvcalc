@@ -168,13 +168,20 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 ax[i] = lx[i];
                 ay[i] = ly[i];
+                if (i > 0 && IsAlmostEqual(ay[i - 1], ay[i]))
+                {
+                    ay[i] = ay[i - 1];
+                }
             }
-            //LineItem curve = fmZedGraphControl1.AddCurve("curve", ax, ay, color, symbol);
             LineItem curve = fmZedGraphControl1.AddCurve("curve", ax, ay, color, SymbolType.None);
             curve.IsY2Axis = isY2Axis;
             curve.IsVisible = isVisible;
-            //curve.Line.Style = isBold ? DashStyle.Solid :DashStyle.Custom;
             curve.Line.Width = isBold ? SOLID_CURVE_WIDTH : CUSTOM_CURVE_WIDTH;
+        }
+
+        private bool IsAlmostEqual(double val1, double val2)
+        {
+            return Math.Abs(val1 - val2) < 1e-12 * (Math.Abs(val1) + Math.Abs(val2));
         }
 
         private void AddColumn(fmValue[] aVy, fmBlockParameter parameter, bool isVisible, bool isSelected)
