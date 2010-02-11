@@ -244,10 +244,9 @@
 		<property name="this.assemblyName" value="${baseDir}\${makereleasepackage.domainassemblypath}" />
 		<property name="this.currentDate" value="${datetime::now()}" />
 		<property name="this.archivetitle" value="${makereleasepackage.sitename}_site" />
-		<property name="this.archiveName" value="${releaseDir}\${this.archivetitle}_${this::format-number(datetime::get-year(this.currentDate))}${this::format-number(datetime::get-month(this.currentDate))}${this::format-number(datetime::get-day(this.currentDate))}_build_${assemblyname::get-version(assemblyname::get-assembly-name(this.assemblyName))}.rar" />
+		<property name="this.archiveName" value="${releaseDir}\${this.archivetitle}_${this::format-number(datetime::get-year(this.currentDate))}${this::format-number(datetime::get-month(this.currentDate))}${this::format-number(datetime::get-day(this.currentDate))}_build_${assemblyname::get-version(assemblyname::get-assembly-name(this.assemblyName))}.7z" />
 		<delete file="${this.archiveName}" />
-		<echo message="C:\Program Files\WinRAR\winrar.exe a -r &quot;${this.archiveName}&quot; ${makereleasepackage.copydir}\* -afzip -ep1"/>
-		<exec program="C:\Program Files\WinRAR\winrar.exe" commandline="a -r &quot;${this.archiveName}&quot; &quot;${makereleasepackage.copydir}\*&quot; -afzip -ep1" />
+		<exec program="C:\Program Files\7-Zip\7z.exe" commandline="a &quot;${this.archiveName}&quot; &quot;${makereleasepackage.copydir}\*&quot;" />
 		<!--exec program="svn.exe" commandline="add ${this.archiveName}" / -->
 	</target>
 
