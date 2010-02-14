@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using fmCalcBlocksLibrary;
 using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
 using FilterSimulation.fmFilterObjects;
@@ -78,5 +79,28 @@ namespace FilterSimulationWithTablesAndGraphs
             base.UpdateUnitsAndData();
             UpdateUnitsInTablesAndGraphs();
         }
+
+        private void ReadMinMaxXValues()
+        {
+            if (loadingXRange == false)
+            {
+                double minXValue = fmValue.StringToValue(minXValueTextBox.Text).Value;
+                double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).Value;
+
+                int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
+                fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
+                double coef = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.unitFamily.CurrentUnit.Coef;
+                fmRange range = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange;
+                range.minValue = minXValue * coef;
+                range.maxValue = maxXValue * coef;
+            }
+        }
+
+        private void minMaxXValueTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ReadMinMaxXValues();
+            DrawChartAndTable();
+        }
+
     }
 }

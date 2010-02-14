@@ -17,17 +17,8 @@ namespace fmCalcBlocksLibrary
             get { return unitFamily.CurrentUnit.Name; }
         }
        
-        public fmRange chartXRange;
-        
-        public double MinValue
-        {
-            get { return chartXRange.minValue; }
-        }
-        public double MaxValue
-        {
-            get { return chartXRange.maxValue; }
-        }
-        
+        public fmRange chartDefaultXRange;
+        public fmRange chartCurretXRange;
         
         public static fmGlobalParameter A;
         public static fmGlobalParameter Dp;
@@ -197,7 +188,8 @@ namespace fmCalcBlocksLibrary
 
         public fmGlobalParameter(string name, fmUnitFamily unitFamily, fmRange minMaxRange):this(name, unitFamily)
         {
-            chartXRange = new fmRange(minMaxRange.minValue, minMaxRange.maxValue);
+            chartDefaultXRange = new fmRange(minMaxRange.minValue, minMaxRange.maxValue);
+            chartCurretXRange = new fmRange(minMaxRange.minValue, minMaxRange.maxValue);
         }
     }
 }

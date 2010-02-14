@@ -29,6 +29,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private const int CUSTOM_CURVE_WIDTH = 1;
         private static readonly Color SELECTED_COLUMN_COLOR = Color.LightBlue;
         private bool processingCalculationOptionViewCheckChanged = false;
+        private bool loadingXRange = false;
 
         private void FillListBox(ListBox listBox, List<string> strings)
         {
@@ -401,11 +402,10 @@ namespace FilterSimulationWithTablesAndGraphs
             List<fmValue> ax1 = new List<fmValue>();
             List<fmValue> ay1 = new List<fmValue>();
 
-            double xStart = tmp.Parameters[xAxisParameterIndex].globalParameter.MinValue
+            double xStart = tmp.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange.minValue
                 / tmp.Parameters[xAxisParameterIndex].unitFamily.CurrentUnit.Coef;
-            double xEnd = tmp.Parameters[xAxisParameterIndex].globalParameter.MaxValue
+            double xEnd = tmp.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange.maxValue
                 / tmp.Parameters[xAxisParameterIndex].unitFamily.CurrentUnit.Coef;
-
 
             double dx, x1;
             FindDxForKIntermediatePoints(xStart, xEnd, RowsQuantity - 2, out dx, out x1);
@@ -535,7 +535,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
         }
 
-        private static void CalculateCurve(fmFilterMachiningBlock tmp, int xAxisParameterIndex, int yAxisParameterIndex, out fmValue[] aax1, out fmValue[] aay1)
+        private void CalculateCurve(fmFilterMachiningBlock tmp, int xAxisParameterIndex, int yAxisParameterIndex, out fmValue[] aax1, out fmValue[] aay1)
         {
             aax1 = aay1 = null;
 
@@ -545,8 +545,8 @@ namespace FilterSimulationWithTablesAndGraphs
             List<fmValue> ax1 = new List<fmValue>();
             List<fmValue> ay1 = new List<fmValue>();
             const int steps = 30;
-            double max = tmp.Parameters[xAxisParameterIndex].globalParameter.chartXRange.maxValue;
-            double min = tmp.Parameters[xAxisParameterIndex].globalParameter.chartXRange.minValue;
+            double max = tmp.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange.maxValue;
+            double min = tmp.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange.minValue;
             double diaposon = max - min;
 
             for (int i = 0; i < steps; ++i)
@@ -712,7 +712,20 @@ namespace FilterSimulationWithTablesAndGraphs
         private void listBoxX_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateIsInputedForParametersBlocks();
+            LoadXRange();
             DrawChartAndTable();
+        }
+
+        private void LoadXRange()
+        {
+            loadingXRange = true;
+            int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
+            fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
+            double coef = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.unitFamily.CurrentUnit.Coef; 
+            fmRange range = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange;
+            minXValueTextBox.Text = (range.minValue / coef).ToString();
+            maxXValueTextBox.Text = (range.maxValue / coef).ToString();
+            loadingXRange = false;
         }
 
         private void listBoxY_SelectedIndexChanged(object sender, EventArgs e)
@@ -800,6 +813,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             fmGlobalBlocks = fmBlocks;
             UpdatefmSelectedBlocks();
+            LoadXRange();
             DrawChartAndTable();
             BindSelectedSimulationParametersTableDataSource();
         }

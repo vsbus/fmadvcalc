@@ -18,14 +18,14 @@ namespace FilterSimulation
         {
             foreach (fmBlockParameter p in new fmFilterMachiningBlock(null).Parameters)
             {
-                if (p.globalParameter.chartXRange != null)
+                if (p.globalParameter.chartDefaultXRange != null)
                 {
                     ParamGrid.Rows.Add(new object[]
                                            {
                                                p.name,
                                                p.unitFamily.CurrentUnit.Name,
-                                               p.globalParameter.chartXRange.minValue/p.unitFamily.CurrentUnit.Coef,
-                                               p.globalParameter.chartXRange.maxValue/p.unitFamily.CurrentUnit.Coef
+                                               p.globalParameter.chartDefaultXRange.minValue/p.unitFamily.CurrentUnit.Coef,
+                                               p.globalParameter.chartDefaultXRange.maxValue/p.unitFamily.CurrentUnit.Coef
                                            });
                 }
             }
@@ -36,10 +36,10 @@ namespace FilterSimulation
             int i = 0;
             foreach (fmBlockParameter p in new fmFilterMachiningBlock(null).Parameters)
             {
-                if (p.globalParameter.chartXRange != null)
+                if (p.globalParameter.chartDefaultXRange != null)
                 {
-                    p.globalParameter.chartXRange.minValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).Value * p.unitFamily.CurrentUnit.Coef;
-                    p.globalParameter.chartXRange.maxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).Value * p.unitFamily.CurrentUnit.Coef;
+                    p.globalParameter.chartDefaultXRange.minValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).Value * p.unitFamily.CurrentUnit.Coef;
+                    p.globalParameter.chartDefaultXRange.maxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).Value * p.unitFamily.CurrentUnit.Coef;
                     ++i;
                 }
             }
