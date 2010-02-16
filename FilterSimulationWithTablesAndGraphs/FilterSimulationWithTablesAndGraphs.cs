@@ -102,5 +102,11 @@ namespace FilterSimulationWithTablesAndGraphs
             DrawChartAndTable();
         }
 
+        private void useDefaultRangesButton_Click(object sender, EventArgs e)
+        {
+            LoadDefaultXRange();
+            DrawChartAndTable();
+        }
+
     }
 }

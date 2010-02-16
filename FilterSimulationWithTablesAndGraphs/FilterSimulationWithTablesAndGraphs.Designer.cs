@@ -37,8 +37,10 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel4 = new System.Windows.Forms.Panel();
             this.fmZedGraphControl1 = new fmZedGraph.fmZedGraphControl();
             this.panel7 = new System.Windows.Forms.Panel();
+            this.useDefaultRangesButton = new System.Windows.Forms.Button();
             this.maxXValueTextBox = new fmDataGrid.fmNumericalTextBox();
             this.minXValueTextBox = new fmDataGrid.fmNumericalTextBox();
+            this.xRangeLabel = new System.Windows.Forms.Label();
             this.buttonAddRow = new System.Windows.Forms.Button();
             this.UseParamsCheckBox = new System.Windows.Forms.CheckBox();
             this.coordinatesGrid = new fmDataGrid.fmDataGrid();
@@ -62,7 +64,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.splitter11 = new System.Windows.Forms.Splitter();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.splitter7 = new System.Windows.Forms.Splitter();
-            this.xRangeLabel = new System.Windows.Forms.Label();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -305,6 +306,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel7
             // 
+            this.panel7.Controls.Add(this.useDefaultRangesButton);
             this.panel7.Controls.Add(this.maxXValueTextBox);
             this.panel7.Controls.Add(this.minXValueTextBox);
             this.panel7.Controls.Add(this.xRangeLabel);
@@ -313,6 +315,16 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(208, 29);
             this.panel7.TabIndex = 5;
+            // 
+            // useDefaultRangesButton
+            // 
+            this.useDefaultRangesButton.Location = new System.Drawing.Point(147, 3);
+            this.useDefaultRangesButton.Name = "useDefaultRangesButton";
+            this.useDefaultRangesButton.Size = new System.Drawing.Size(58, 20);
+            this.useDefaultRangesButton.TabIndex = 3;
+            this.useDefaultRangesButton.Text = "Default";
+            this.useDefaultRangesButton.UseVisualStyleBackColor = true;
+            this.useDefaultRangesButton.Click += new System.EventHandler(this.useDefaultRangesButton_Click);
             // 
             // maxXValueTextBox
             // 
@@ -333,6 +345,15 @@ namespace FilterSimulationWithTablesAndGraphs
             this.minXValueTextBox.Size = new System.Drawing.Size(38, 20);
             this.minXValueTextBox.TabIndex = 0;
             this.minXValueTextBox.TextChanged += new System.EventHandler(this.minMaxXValueTextBox_TextChanged);
+            // 
+            // xRangeLabel
+            // 
+            this.xRangeLabel.AutoSize = true;
+            this.xRangeLabel.Location = new System.Drawing.Point(4, 6);
+            this.xRangeLabel.Name = "xRangeLabel";
+            this.xRangeLabel.Size = new System.Drawing.Size(49, 13);
+            this.xRangeLabel.TabIndex = 2;
+            this.xRangeLabel.Text = "X Range";
             // 
             // buttonAddRow
             // 
@@ -599,15 +620,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.splitter7.TabIndex = 32;
             this.splitter7.TabStop = false;
             // 
-            // xRangeLabel
-            // 
-            this.xRangeLabel.AutoSize = true;
-            this.xRangeLabel.Location = new System.Drawing.Point(4, 6);
-            this.xRangeLabel.Name = "xRangeLabel";
-            this.xRangeLabel.Size = new System.Drawing.Size(49, 13);
-            this.xRangeLabel.TabIndex = 2;
-            this.xRangeLabel.Text = "X Range";
-            // 
             // FilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -685,6 +697,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmDataGrid.fmNumericalTextBox maxXValueTextBox;
         private fmDataGrid.fmNumericalTextBox minXValueTextBox;
         private Label xRangeLabel;
+        private Button useDefaultRangesButton;
 
     }
 }

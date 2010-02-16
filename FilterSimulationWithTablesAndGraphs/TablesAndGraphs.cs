@@ -712,17 +712,32 @@ namespace FilterSimulationWithTablesAndGraphs
         private void listBoxX_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateIsInputedForParametersBlocks();
-            LoadXRange();
+            LoadCurrentXRange();
             DrawChartAndTable();
         }
 
-        private void LoadXRange()
+        private void LoadCurrentXRange()
         {
             loadingXRange = true;
             int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
             fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
             double coef = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.unitFamily.CurrentUnit.Coef; 
             fmRange range = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange;
+            minXValueTextBox.Text = (range.minValue / coef).ToString();
+            maxXValueTextBox.Text = (range.maxValue / coef).ToString();
+            loadingXRange = false;
+        }
+
+        private void LoadDefaultXRange()
+        {
+            loadingXRange = true;
+            int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
+            fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
+            double coef = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.unitFamily.CurrentUnit.Coef;
+            fmRange defaultRange = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartDefaultXRange;
+            fmRange range = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange;
+            range.minValue = defaultRange.minValue;
+            range.maxValue = defaultRange.maxValue;
             minXValueTextBox.Text = (range.minValue / coef).ToString();
             maxXValueTextBox.Text = (range.maxValue / coef).ToString();
             loadingXRange = false;
@@ -813,7 +828,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             fmGlobalBlocks = fmBlocks;
             UpdatefmSelectedBlocks();
-            LoadXRange();
+            LoadCurrentXRange();
             DrawChartAndTable();
             BindSelectedSimulationParametersTableDataSource();
         }
