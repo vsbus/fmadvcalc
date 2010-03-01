@@ -461,8 +461,11 @@ namespace FilterSimulationWithTablesAndGraphs
             this.selectedSimulationParametersTable.Size = new System.Drawing.Size(139, 101);
             this.selectedSimulationParametersTable.TabIndex = 10;
             this.selectedSimulationParametersTable.Visible = false;
-            this.selectedSimulationParametersTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellValueChanged);
+            this.selectedSimulationParametersTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellMouseLeave);
+            this.selectedSimulationParametersTable.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseMove);
+            this.selectedSimulationParametersTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseClick);
             this.selectedSimulationParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
+            this.selectedSimulationParametersTable.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellValueChangedByUser);
             // 
             // SelectedSimulationParametersCheckBoxColumn
             // 
@@ -504,8 +507,8 @@ namespace FilterSimulationWithTablesAndGraphs
             this.additionalParametersTable.Size = new System.Drawing.Size(139, 101);
             this.additionalParametersTable.TabIndex = 5;
             this.additionalParametersTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellContentClick);
-            this.additionalParametersTable.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellValueChanged);
             this.additionalParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
+            this.additionalParametersTable.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellValueChangedByUser);
             // 
             // DeleteButtonColumn
             // 

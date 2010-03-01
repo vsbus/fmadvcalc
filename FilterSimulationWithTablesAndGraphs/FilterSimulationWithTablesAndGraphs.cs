@@ -19,6 +19,8 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             InitializeComponent();
 
+            fmInputsInfoForSelectedSimulationsTableBlock = new fmFilterMachiningBlock(calculationOptionViewInTablesAndGraphs);
+
             CreateColumnsInParametersTables();
             rowsQuantity.Text = RowsQuantity.ToString();
 
@@ -108,5 +110,32 @@ namespace FilterSimulationWithTablesAndGraphs
             DrawChartAndTable();
         }
 
+        private void selectedSimulationParametersTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex > 0)
+            {
+                string parameterName = GetParameterNameFromHeader(selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderText);
+                fmInputsInfoForSelectedSimulationsTableBlock.UpdateIsInputed(
+                    fmInputsInfoForSelectedSimulationsTableBlock.GetParameterByName(parameterName));
+                UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
+                DrawChartAndTable();
+            }
+        }
+
+        private void selectedSimulationParametersTable_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex > 0)
+            {
+                selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonShadow);
+            }
+        }
+
+        private void selectedSimulationParametersTable_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex > 0)
+            {
+                selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonFace);
+            }
+        }
     }
 }

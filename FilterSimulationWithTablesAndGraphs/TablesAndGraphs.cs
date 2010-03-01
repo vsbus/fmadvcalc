@@ -19,6 +19,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private List<fmFilterMachiningBlock> fmGlobalBlocks;
         private List<fmAdditionalFilterMachiningBlock> fmLocalBlocks = new List<fmAdditionalFilterMachiningBlock>();
         private List<fmSelectedFilterMachiningBlock> fmSelectedBlocks = new List<fmSelectedFilterMachiningBlock>();
+        private fmFilterMachiningBlock fmInputsInfoForSelectedSimulationsTableBlock;
         public fmFilterMachiningBlock currentSimFMB;
         private bool isUseLocalParams = true;
         private readonly Color Y1AxColor = Color.Blue;
@@ -341,15 +342,17 @@ namespace FilterSimulationWithTablesAndGraphs
                                                                                                 calculationOptionViewInTablesAndGraphs);
                     tempBlock.CalculationOption = fmLocalBlocks[0].CalculationOption;
                     tempBlock.CopyValues(selectedBlock.filterMachiningBlock);
-                    //for (int j = 0; j < tempBlock.Parameters.Count; ++j)
-                    //{
-                    //    tempBlock.Parameters[j].isInputed = selectedBlock.filterMachiningBlock.Parameters[j].isInputed;
-                    //} 
-                    foreach (fmBlockParameter p in tempBlock.Parameters)
+
+                    for (int parameterIndex = 0; parameterIndex < tempBlock.Parameters.Count; ++parameterIndex)
                     {
-                        if (p.name == listBoxXAxis.Text)
-                            tempBlock.UpdateIsInputed(p);
+                        tempBlock.Parameters[parameterIndex].isInputed = fmInputsInfoForSelectedSimulationsTableBlock.Parameters[parameterIndex].isInputed;
                     }
+
+                    //foreach (fmBlockParameter p in tempBlock.Parameters)
+                    //{
+                    //    if (p.name == listBoxXAxis.Text)
+                    //        tempBlock.UpdateIsInputed(p);
+                    //}
 
                     tempBlock.IsDrawn = selectedBlock.IsChecked;
                     DrawCurveAndColumn(xAxisParameterIndex, tempBlock, yAxisParameterIndex, y2AxisParameterIndex, symbol, selectedSimulationParametersTable.CurrentCell != null ? i == selectedSimulationParametersTable.CurrentCell.RowIndex : false);
@@ -486,28 +489,65 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             int cellIndex = selectedSimulationParametersTable.CurrentCell == null ? 0 : selectedSimulationParametersTable.CurrentCell.ColumnIndex;
             selectedSimulationParametersTable.Rows.Clear();
-
+            
             for (int i = 0; i < fmSelectedBlocks.Count; i++)
             {
-                fmSelectedFilterMachiningBlock mb = fmSelectedBlocks[i];
-                selectedSimulationParametersTable.Rows.Add();
-                DataGridViewRow row =
-                    selectedSimulationParametersTable.Rows[selectedSimulationParametersTable.Rows.Count - 1];
-                row.Cells["SelectedSimulationParametersCheckBoxColumn"].Value = mb.IsChecked;
+                fmSelectedFilterMachiningBlock selectedBlock = fmSelectedBlocks[i];
+                fmAdditionalFilterMachiningBlock tempBlock = new fmAdditionalFilterMachiningBlock(true,
+                                                                                                  calculationOptionViewInTablesAndGraphs);
+                tempBlock.CalculationOption = fmLocalBlocks[0].CalculationOption;
+                tempBlock.CopyValues(selectedBlock.filterMachiningBlock);
 
-                if (currentBlock != null && mb.filterMachiningBlock == currentBlock.filterMachiningBlock)
+                DataGridViewRow row =
+                    selectedSimulationParametersTable.Rows[selectedSimulationParametersTable.Rows.Add()];
+                row.Cells["SelectedSimulationParametersCheckBoxColumn"].Value = selectedBlock.IsChecked;
+                
+                if (currentBlock != null && selectedBlock.filterMachiningBlock == currentBlock.filterMachiningBlock)
                 {
                     selectedSimulationParametersTable.CurrentCell = row.Cells[cellIndex];
                 }
-                foreach (fmBlockParameter param in mb.filterMachiningBlock.Parameters)
+
+                foreach (fmBlockParameter param in tempBlock.Parameters)
                 {
                     int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
                     row.Cells[idx].Value = param.value / param.unitFamily.CurrentUnit.Coef;
+                    if (param.group != null)
+                    {
+                        row.Cells[idx].Style.BackColor = param.group.color;
+                    }
                 }
             }
             if (selectedSimulationParametersTable.CurrentCell == null && selectedSimulationParametersTable.Rows.Count > 0)
             {
                 selectedSimulationParametersTable.CurrentCell = selectedSimulationParametersTable[cellIndex, 0];
+            }
+
+            UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
+        }
+
+        private void UpdateColorsForInputsAndOutputsInSelectedSimulationsTable()
+        {
+            for (int i = 0; i < fmSelectedBlocks.Count; i++)
+            {
+                fmAdditionalFilterMachiningBlock tempBlock = new fmAdditionalFilterMachiningBlock(true,
+                                                                                                  calculationOptionViewInTablesAndGraphs);
+                for (int parameterIndex = 0; parameterIndex < tempBlock.Parameters.Count; ++parameterIndex)
+                {
+                    tempBlock.Parameters[parameterIndex].isInputed = fmInputsInfoForSelectedSimulationsTableBlock.Parameters[parameterIndex].isInputed;
+                }
+                //foreach (fmBlockParameter p in tempBlock.Parameters)
+                //{
+                //    if (p.name == listBoxXAxis.Text)
+                //        tempBlock.UpdateIsInputed(p);
+                //}
+                
+                DataGridViewRow row = selectedSimulationParametersTable.Rows[i];
+                
+                foreach (fmBlockParameter param in tempBlock.Parameters)
+                {
+                    int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
+                    row.Cells[idx].Style.ForeColor = param.isInputed ? Color.Blue : Color.Black;
+                }
             }
         }
 
@@ -626,16 +666,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         #region events
 
-        //private void fmChartsView_Load(object sender, EventArgs e)
-        //{
-        //    calculationOptionViewInTablesAndGraphs_CheckedChanged(sender, e);
-        //}
-
         private void fmb_ValuesChangedByUser(object sender, fmBlockParameterEvetArgs e)
         {
             DrawChartAndTable();
         }
-
 
         private void additionalParametersTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -712,6 +746,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void listBoxX_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateIsInputedForParametersBlocks();
+            UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
             LoadCurrentXRange();
             DrawChartAndTable();
         }
@@ -779,7 +814,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        private void selectedSimulationParametersTable_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void selectedSimulationParametersTable_CellValueChangedByUser(object sender, DataGridViewCellEventArgs e)
         {
             if (selectedSimulationParametersTable.Columns[e.ColumnIndex].Name == "SelectedSimulationParametersCheckBoxColumn"
                 && fmSelectedBlocks.Count > e.RowIndex)
@@ -789,7 +824,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        private void additionalParametersTable_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void additionalParametersTable_CellValueChangedByUser(object sender, DataGridViewCellEventArgs e)
         {
             if (additionalParametersTable.Columns[e.ColumnIndex].Name == "AdditionalParametersCheckBoxColumn"
                 && fmLocalBlocks.Count > e.RowIndex)

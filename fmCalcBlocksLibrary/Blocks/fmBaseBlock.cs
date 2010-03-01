@@ -16,6 +16,13 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             get { return parameters; }
         }
+        public fmBlockParameter GetParameterByName(string parameterName)
+        {
+            foreach (fmBlockParameter parameter in parameters)
+                if (parameter.name == parameterName)
+                    return parameter;
+            return null;
+        }
 
         protected void ReWriteParameters()
         {

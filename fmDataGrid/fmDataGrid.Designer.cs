@@ -25,6 +25,10 @@ namespace fmDataGrid
             if ((sender as fmDataGrid).Columns[e.ColumnIndex].GetType() == (new DataGridViewCheckBoxColumn()).GetType())
             {
                 CopyEditedValueToCellValue();
+                if (CellValueChangedByUser != null)
+                {
+                    CellValueChangedByUser(this, new DataGridViewCellEventArgs(e.ColumnIndex, e.RowIndex));
+                }
             }
         }
         
