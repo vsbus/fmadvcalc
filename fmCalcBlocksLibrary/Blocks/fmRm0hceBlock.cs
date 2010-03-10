@@ -6,10 +6,10 @@ using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmRmhceBlock : fmBaseBlock
+    public class fmRm0hceBlock : fmBaseBlock
     {
-        private fmBlockParameter Rm, hce;
-        private fmValue Pc_value;
+        private fmBlockParameter Rm0, hce;
+        private fmBlockConstantParameter Pc;
         private fmBlockParameterGroup Rm_hce_group = new fmBlockParameterGroup();
 
         public fmValue hce_Value
@@ -19,13 +19,13 @@ namespace fmCalcBlocksLibrary.Blocks
         }
         public fmValue Rm_Value
         {
-            get { return Rm.value; }
-            set { Rm.value = value; }
+            get { return Rm0.value; }
+            set { Rm0.value = value; }
         }
         public fmValue Pc_Value
         {
-            get { return Pc_value; }
-            set { Pc_value = value; }
+            get { return Pc.value; }
+            set { Pc.value = value; }
         }
 
         override public void DoCalculations()
@@ -36,7 +36,7 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 calculationOptions = fmCalculatorsLibrary.fmRmhceCalculator.CalculationOptions.HCE_INPUT;
             }
-            else if (Rm.isInputed)
+            else if (Rm0.isInputed)
             {
                 calculationOptions = fmCalculatorsLibrary.fmRmhceCalculator.CalculationOptions.RM_INPUT;
             }
@@ -46,19 +46,21 @@ namespace fmCalcBlocksLibrary.Blocks
             }
 
             fmCalculatorsLibrary.fmRmhceCalculator.Process(calculationOptions,
-                                                           ref Rm.value,
+                                                           ref Rm0.value,
                                                            ref hce.value,
-                                                           Pc_value);
+                                                           Pc.value);
         }
         
-        public fmRmhceBlock(
+        public fmRm0hceBlock(
             DataGridViewCell Rm_Cell,
             DataGridViewCell hce_Cell)
         {
-            AddParameter(ref Rm, fmGlobalParameter.Rm, Rm_Cell, false);
+            AddParameter(ref Rm0, fmGlobalParameter.Rm0, Rm_Cell, false);
             AddParameter(ref hce, fmGlobalParameter.hce, hce_Cell, true);
 
-            Rm.group = Rm_hce_group;
+            AddConstantParameter(ref Pc, fmGlobalParameter.Pc);
+
+            Rm0.group = Rm_hce_group;
             hce.group = Rm_hce_group;
 
             processOnChange = true;

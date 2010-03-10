@@ -257,7 +257,7 @@ namespace FilterSimulation
                 DataGridViewColumn epsKappaCol = FindColumnByGuid(eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns, sim.Guid, 0);
                 if (sim.eps0Kappa0Block == null)
                 {
-                    sim.eps0Kappa0Block = new fmEpsKappaWithneBlock(
+                    sim.eps0Kappa0Block = new fmEps0Kappa0WithneBlock(
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "eps0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "kappa0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "ne").Cells[epsKappaCol.Index]);
@@ -268,7 +268,7 @@ namespace FilterSimulation
 
                 if (sim.pc0rc0a0Block == null)
                 {
-                    sim.pc0rc0a0Block = new fmPcrcaWithncBlock(
+                    sim.pc0rc0a0Block = new fmPc0rc0a0WithncBlock(
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Pc0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "rc0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "a0").Cells[epsKappaCol.Index],
@@ -280,7 +280,7 @@ namespace FilterSimulation
 
                 if (sim.rm0HceBlock == null)
                 {
-                    sim.rm0HceBlock = new fmRmhceBlock(
+                    sim.rm0HceBlock = new fmRm0hceBlock(
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Rm0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce").Cells[epsKappaCol.Index]);
 
@@ -440,67 +440,93 @@ namespace FilterSimulation
 
         private static void CopySimulationValuesToFilterMachining(fmFilterSimulation sim)
         {
-            sim.filterMachiningBlock.etaf_Value = sim.eta_f;
-            sim.filterMachiningBlock.rho_f_Value = sim.rho_f;
-            sim.filterMachiningBlock.rho_s_Value = sim.rho_s;
-            sim.filterMachiningBlock.rho_sus_Value = sim.rho_sus;
-            sim.filterMachiningBlock.Cm_Value = sim.Cm;
-            sim.filterMachiningBlock.Cv_Value = sim.Cv;
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
+            //foreach (fmBlockParameter p in sim.filterMachiningBlock.Parameters)
+            //{
+            //    p.value = sim.Parameters[p.globalParameter];
+            //}
+            //sim.filterMachiningBlock.etaf_Value = sim.eta_f;
+            //sim.filterMachiningBlock.rho_f_Value = sim.rho_f;
+            //sim.filterMachiningBlock.rho_s_Value = sim.rho_s;
+            //sim.filterMachiningBlock.rho_sus_Value = sim.rho_sus;
+            //sim.filterMachiningBlock.Cm_Value = sim.Cm;
+            //sim.filterMachiningBlock.Cv_Value = sim.Cv;
 
-            sim.filterMachiningBlock.eps0_Value = sim.eps0;
-            sim.filterMachiningBlock.kappa0_Value = sim.kappa0;
-            sim.filterMachiningBlock.ne_Value = sim.ne;
+            //sim.filterMachiningBlock.eps0_Value = sim.eps0;
+            //sim.filterMachiningBlock.kappa0_Value = sim.kappa0;
+            //sim.filterMachiningBlock.ne_Value = sim.ne;
 
-            sim.filterMachiningBlock.Pc0_Value = sim.Pc0;
-            sim.filterMachiningBlock.nc_Value = sim.nc;
+            //sim.filterMachiningBlock.Pc0_Value = sim.Pc0;
+            //sim.filterMachiningBlock.nc_Value = sim.nc;
 
-            sim.filterMachiningBlock.A_Value = sim.A;
-            sim.filterMachiningBlock.Dp_Value = sim.Dp;
-            sim.filterMachiningBlock.hc_Value = sim.hc;
-            sim.filterMachiningBlock.hce_Value = sim.hce;
-            sim.filterMachiningBlock.Mf_Value = sim.Mf;
-            sim.filterMachiningBlock.Ms_Value = sim.Ms;
-            sim.filterMachiningBlock.Msus_Value = sim.Msus;
-            sim.filterMachiningBlock.n_Value = sim.n;
-            sim.filterMachiningBlock.Qms_Value = sim.Qms;
-            sim.filterMachiningBlock.Qmsus_Value = sim.Qmsus;
-            sim.filterMachiningBlock.Qsus_Value = sim.Qsus;
-            sim.filterMachiningBlock.sf_Value = sim.sf;
-            sim.filterMachiningBlock.tc_Value = sim.tc;
-            sim.filterMachiningBlock.tf_Value = sim.tf;
-            sim.filterMachiningBlock.Vsus_Value = sim.Vsus;
+            //sim.filterMachiningBlock.A_Value = sim.A;
+            //sim.filterMachiningBlock.Dp_Value = sim.Dp;
+            //sim.filterMachiningBlock.hc_Value = sim.hc;
+            //sim.filterMachiningBlock.hce_Value = sim.hce;
+            //sim.filterMachiningBlock.Mf_Value = sim.Mf;
+            //sim.filterMachiningBlock.Ms_Value = sim.Ms;
+            //sim.filterMachiningBlock.Msus_Value = sim.Msus;
+            //sim.filterMachiningBlock.n_Value = sim.n;
+            //sim.filterMachiningBlock.Qms_Value = sim.Qms;
+            //sim.filterMachiningBlock.Qmsus_Value = sim.Qmsus;
+            //sim.filterMachiningBlock.Qsus_Value = sim.Qsus;
+            //sim.filterMachiningBlock.sf_Value = sim.sf;
+            //sim.filterMachiningBlock.tc_Value = sim.tc;
+            //sim.filterMachiningBlock.tf_Value = sim.tf;
+            //sim.filterMachiningBlock.Vsus_Value = sim.Vsus;
         }
         private static void CopySimulationValuesToRmHceBlock(fmFilterSimulation sim)
         {
-            sim.rm0HceBlock.hce_Value = sim.hce;
-            sim.rm0HceBlock.Rm_Value = sim.Rm0;
-            sim.rm0HceBlock.Pc_Value = sim.Pc0;
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.rm0HceBlock);
+            //foreach (fmBlockParameter p in sim.rm0HceBlock.Parameters)
+            //{
+            //    p.value = sim.Parameters[p.globalParameter];
+            //}
+            //sim.rm0HceBlock.hce_Value = sim.hce;
+            //sim.rm0HceBlock.Rm_Value = sim.Rm0;
+            //sim.rm0HceBlock.Pc_Value = sim.Pc0;
         }
         private static void CopySimulationValuesToPc0rc0a0ncBlock(fmFilterSimulation sim)
         {
-            sim.pc0rc0a0Block.rho_s_Value = sim.rho_s;
-            sim.pc0rc0a0Block.eps_Value = sim.eps0;
-            sim.pc0rc0a0Block.Pc_Value = sim.Pc0;
-            sim.pc0rc0a0Block.rc_Value = sim.rc0;
-            sim.pc0rc0a0Block.a_Value = sim.a0;
-            sim.pc0rc0a0Block.nc_Value = sim.nc;
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.pc0rc0a0Block);
+            //foreach (fmBlockParameter p in sim.pc0rc0a0Block.Parameters)
+            //{
+            //    p.value = sim.Parameters[p.globalParameter];
+            //}
+            //sim.pc0rc0a0Block.rho_s_Value = sim.rho_s;
+            //sim.pc0rc0a0Block.eps_Value = sim.eps0;
+            //sim.pc0rc0a0Block.Pc_Value = sim.Pc0;
+            //sim.pc0rc0a0Block.rc_Value = sim.rc0;
+            //sim.pc0rc0a0Block.a_Value = sim.a0;
+            //sim.pc0rc0a0Block.nc_Value = sim.nc;
         }
         private static void CopySimulationValuesToEps0Kappa0neBlock(fmFilterSimulation sim)
         {
-            sim.eps0Kappa0Block.Cv_Value = sim.Cv;
-            sim.eps0Kappa0Block.eps_Value = sim.eps0;
-            sim.eps0Kappa0Block.kappa_Value = sim.kappa0;
-            sim.eps0Kappa0Block.ne_Value = sim.ne;
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.eps0Kappa0Block);
+            //foreach (fmBlockParameter p in sim.eps0Kappa0Block.Parameters)
+            //{
+            //    p.value = sim.Parameters[p.globalParameter];
+            //}
+            //sim.eps0Kappa0Block.Cv_Value = sim.Cv;
+            //sim.eps0Kappa0Block.eps_Value = sim.eps0;
+            //sim.eps0Kappa0Block.kappa_Value = sim.kappa0;
+            //sim.eps0Kappa0Block.ne_Value = sim.ne;
         }
+
         private static void CopySimulationValuesToSusBlock(fmFilterSimulation sim)
         {
-            sim.susBlock.eta_f_Value = sim.eta_f;
-            sim.susBlock.rho_f_Value = sim.rho_f;
-            sim.susBlock.rho_s_Value = sim.rho_s;
-            sim.susBlock.rho_sus_Value = sim.rho_sus;
-            sim.susBlock.Cm_Value = sim.Cm;
-            sim.susBlock.Cv_Value = sim.Cv;
-            sim.susBlock.C_Value = sim.C;
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.susBlock);
+            //foreach (fmBlockParameter p in sim.susBlock.Parameters)
+            //{
+            //    p.value = sim.Parameters[p.globalParameter];
+            //}
+            //sim.susBlock.eta_f_Value = sim.eta_f;
+            //sim.susBlock.rho_f_Value = sim.rho_f;
+            //sim.susBlock.rho_s_Value = sim.rho_s;
+            //sim.susBlock.rho_sus_Value = sim.rho_sus;
+            //sim.susBlock.Cm_Value = sim.Cm;
+            //sim.susBlock.Cv_Value = sim.Cv;
+            //sim.susBlock.C_Value = sim.C;
         }
 
         void UpdateColorsAndFontForSolution(fmFilterSimSolution sol)
@@ -889,28 +915,48 @@ namespace FilterSimulation
             }
             else
             {
-                sim.eta_f = sim.susBlock.eta_f_Value;
-                sim.rho_f = sim.susBlock.rho_f_Value;
-                sim.rho_s = sim.susBlock.rho_s_Value;
-                sim.rho_sus = sim.susBlock.rho_sus_Value;
-                sim.Cm = sim.susBlock.Cm_Value;
-                sim.Cv = sim.susBlock.Cv_Value;
-                sim.C = sim.susBlock.C_Value;
+                fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.susBlock, sim);
+                //foreach (fmBlockParameter p in sim.susBlock.Parameters)
+                //{
+                //    sim.Parameters[p.globalParameter] = p.value;
+                //} 
+                //sim.eta_f = sim.susBlock.eta_f_Value;
+                //sim.rho_f = sim.susBlock.rho_f_Value;
+                //sim.rho_s = sim.susBlock.rho_s_Value;
+                //sim.rho_sus = sim.susBlock.rho_sus_Value;
+                //sim.Cm = sim.susBlock.Cm_Value;
+                //sim.Cv = sim.susBlock.Cv_Value;
+                //sim.C = sim.susBlock.C_Value;
 
-                sim.eps0Kappa0Block.Cv_Value = sim.Cv;
-                sim.pc0rc0a0Block.rho_s_Value = sim.rho_s;
-                sim.filterMachiningBlock.etaf_Value = sim.eta_f;
-                sim.filterMachiningBlock.rho_f_Value = sim.rho_f;
-                sim.filterMachiningBlock.rho_s_Value = sim.rho_s;
-                sim.filterMachiningBlock.rho_sus_Value = sim.rho_sus;
-                sim.filterMachiningBlock.Cm_Value = sim.Cm;
-                sim.filterMachiningBlock.Cv_Value = sim.Cv;
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.eps0Kappa0Block);
+                //foreach (fmBlockConstantParameter c in sim.eps0Kappa0Block.ConstantParameters)
+                //{
+                //    sim.Parameters[c.globalParameter] = c.value;
+                //} 
+                //sim.eps0Kappa0Block.Cv_Value = sim.Cv;
+
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.pc0rc0a0Block);
+                //foreach (fmBlockConstantParameter c in sim.pc0rc0a0Block.ConstantParameters)
+                //{
+                //    sim.Parameters[c.globalParameter] = c.value;
+                //}
+                //sim.pc0rc0a0Block.rho_s_Value = sim.rho_s;
+
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
+                //sim.filterMachiningBlock.etaf_Value = sim.eta_f;
+                //sim.filterMachiningBlock.rho_f_Value = sim.rho_f;
+                //sim.filterMachiningBlock.rho_s_Value = sim.rho_s;
+                //sim.filterMachiningBlock.rho_sus_Value = sim.rho_sus;
+                //sim.filterMachiningBlock.Cm_Value = sim.Cm;
+                //sim.filterMachiningBlock.Cv_Value = sim.Cv;
+
                 sim.eps0Kappa0Block.CalculateAndDisplay();
             }
         }
+
         void epsKappaBlock_ValuesChanged(object sender)
         {
-            fmEpsKappaBlock epsKappaBlock = sender as fmEpsKappaBlock;
+            fmEps0Kappa0Block epsKappaBlock = sender as fmEps0Kappa0Block;
             fmFilterSimulation sim = fSolution.FindSimulation(epsKappaBlock);
 
             if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
@@ -921,20 +967,23 @@ namespace FilterSimulation
             }
             else
             {
-                sim.eps0 = sim.eps0Kappa0Block.eps_Value;
-                sim.kappa0 = sim.eps0Kappa0Block.kappa_Value;
-                sim.ne = sim.eps0Kappa0Block.ne_Value;
+                //sim.eps0 = sim.eps0Kappa0Block.eps_Value;
+                //sim.kappa0 = sim.eps0Kappa0Block.kappa_Value;
+                //sim.ne = sim.eps0Kappa0Block.ne_Value;
+                fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.eps0Kappa0Block, sim);
 
-                sim.pc0rc0a0Block.eps_Value = sim.eps0;
-                sim.filterMachiningBlock.eps0_Value = sim.eps0;
-                sim.filterMachiningBlock.kappa0_Value = sim.kappa0;
-                sim.filterMachiningBlock.ne_Value = sim.ne;
+                //sim.pc0rc0a0Block.eps_Value = sim.eps0;
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.pc0rc0a0Block);
+                //sim.filterMachiningBlock.eps0_Value = sim.eps0;
+                //sim.filterMachiningBlock.kappa0_Value = sim.kappa0;
+                //sim.filterMachiningBlock.ne_Value = sim.ne;
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
                 sim.pc0rc0a0Block.CalculateAndDisplay();
             }
         }
         void rmHceBlock_ValuesChanged(object sender)
         {
-            fmRmhceBlock rmHceBlock = sender as fmRmhceBlock;
+            fmRm0hceBlock rmHceBlock = sender as fmRm0hceBlock;
             fmFilterSimulation sim = fSolution.FindSimulation(rmHceBlock);
 
             if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
@@ -945,15 +994,17 @@ namespace FilterSimulation
             }
             else
             {
-                sim.Rm0 = sim.rm0HceBlock.Rm_Value;
-                sim.hce = sim.rm0HceBlock.hce_Value;
-                sim.filterMachiningBlock.hce_Value = sim.hce;
+                //sim.Rm0 = sim.rm0HceBlock.Rm_Value;
+                //sim.hce = sim.rm0HceBlock.hce_Value;
+                fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.rm0HceBlock, sim);
+                //sim.filterMachiningBlock.hce_Value = sim.hce;
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
                 sim.filterMachiningBlock.CalculateAndDisplay();
             }
         }
         void pcrcaBlock_ValuesChanged(object sender)
         {
-            fmPcrcaBlock pcrcaBlock = sender as fmPcrcaBlock;
+            fmPc0rc0a0Block pcrcaBlock = sender as fmPc0rc0a0Block;
             fmFilterSimulation sim = fSolution.FindSimulation(pcrcaBlock);
 
             if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
@@ -964,14 +1015,17 @@ namespace FilterSimulation
             }
             else
             {
-                sim.Pc0 = sim.pc0rc0a0Block.Pc_Value;
-                sim.rc0 = sim.pc0rc0a0Block.rc_Value;
-                sim.a0 = sim.pc0rc0a0Block.a_Value;
-                sim.nc = sim.pc0rc0a0Block.nc_Value;
+                //sim.Pc0 = sim.pc0rc0a0Block.Pc_Value;
+                //sim.rc0 = sim.pc0rc0a0Block.rc_Value;
+                //sim.a0 = sim.pc0rc0a0Block.a_Value;
+                //sim.nc = sim.pc0rc0a0Block.nc_Value;
+                fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.pc0rc0a0Block, sim);
 
-                sim.rm0HceBlock.Pc_Value = sim.Pc0;
-                sim.filterMachiningBlock.Pc0_Value = sim.Pc0;
-                sim.filterMachiningBlock.nc_Value = sim.nc;
+                //sim.rm0HceBlock.Pc_Value = sim.Pc0;
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.rm0HceBlock);
+                //sim.filterMachiningBlock.Pc0_Value = sim.Pc0;
+                //sim.filterMachiningBlock.nc_Value = sim.nc;
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
                 sim.rm0HceBlock.CalculateAndDisplay();
             }
         }
@@ -988,30 +1042,36 @@ namespace FilterSimulation
                 return;
             }
 
-            bool wasChanged = sim.A != filterMachiningBlock.A_Value || sim.Dp != filterMachiningBlock.Dp_Value ||
-                              sim.sf != filterMachiningBlock.sf_Value || sim.n != filterMachiningBlock.n_Value ||
-                              sim.tc != filterMachiningBlock.tc_Value || sim.tf != filterMachiningBlock.tf_Value ||
-                              sim.hc != filterMachiningBlock.hc_Value || sim.Mf != filterMachiningBlock.Mf_Value ||
-                              sim.Msus != filterMachiningBlock.Msus_Value || sim.Vsus != filterMachiningBlock.Vsus_Value ||
-                              sim.Ms != filterMachiningBlock.Ms_Value || sim.Qsus != filterMachiningBlock.Qsus_Value ||
-                              sim.Qmsus != filterMachiningBlock.Qmsus_Value || sim.Qms != filterMachiningBlock.Qms_Value;
+            //bool wasChanged = sim.A != filterMachiningBlock.A_Value || sim.Dp != filterMachiningBlock.Dp_Value ||
+            //                  sim.sf != filterMachiningBlock.sf_Value || sim.n != filterMachiningBlock.n_Value ||
+            //                  sim.tc != filterMachiningBlock.tc_Value || sim.tf != filterMachiningBlock.tf_Value ||
+            //                  sim.hc != filterMachiningBlock.hc_Value || sim.Mf != filterMachiningBlock.Mf_Value ||
+            //                  sim.Msus != filterMachiningBlock.Msus_Value || sim.Vsus != filterMachiningBlock.Vsus_Value ||
+            //                  sim.Ms != filterMachiningBlock.Ms_Value || sim.Qsus != filterMachiningBlock.Qsus_Value ||
+            //                  sim.Qmsus != filterMachiningBlock.Qmsus_Value || sim.Qms != filterMachiningBlock.Qms_Value;
+            bool wasChanged = false;
+            foreach (fmBlockParameter p in filterMachiningBlock.Parameters)
+            {
+                wasChanged |= (p.value != sim.Parameters[p.globalParameter]);
+            }
 
             sim.CalculationOption = filterMachiningBlock.CalculationOption;
 
-            sim.A = filterMachiningBlock.A_Value;
-            sim.Dp = filterMachiningBlock.Dp_Value;
-            sim.sf = filterMachiningBlock.sf_Value;
-            sim.n = filterMachiningBlock.n_Value;
-            sim.tc = filterMachiningBlock.tc_Value;
-            sim.tf = filterMachiningBlock.tf_Value;
-            sim.hc = filterMachiningBlock.hc_Value;
-            sim.Mf = filterMachiningBlock.Mf_Value;
-            sim.Msus = filterMachiningBlock.Msus_Value;
-            sim.Vsus = filterMachiningBlock.Vsus_Value;
-            sim.Ms = filterMachiningBlock.Ms_Value;
-            sim.Qsus = filterMachiningBlock.Qsus_Value;
-            sim.Qmsus = filterMachiningBlock.Qmsus_Value;
-            sim.Qms = filterMachiningBlock.Qms_Value;
+            //sim.A = filterMachiningBlock.A_Value;
+            //sim.Dp = filterMachiningBlock.Dp_Value;
+            //sim.sf = filterMachiningBlock.sf_Value;
+            //sim.n = filterMachiningBlock.n_Value;
+            //sim.tc = filterMachiningBlock.tc_Value;
+            //sim.tf = filterMachiningBlock.tf_Value;
+            //sim.hc = filterMachiningBlock.hc_Value;
+            //sim.Mf = filterMachiningBlock.Mf_Value;
+            //sim.Msus = filterMachiningBlock.Msus_Value;
+            //sim.Vsus = filterMachiningBlock.Vsus_Value;
+            //sim.Ms = filterMachiningBlock.Ms_Value;
+            //sim.Qsus = filterMachiningBlock.Qsus_Value;
+            //sim.Qmsus = filterMachiningBlock.Qmsus_Value;
+            //sim.Qms = filterMachiningBlock.Qms_Value;
+            fmFilterSimulation.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
 
             DisplaySolution(fSolution);
         }

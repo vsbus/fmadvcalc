@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockParameter\Event.cs" />
+    <Compile Include="BlockParameter\fmBlockConstantParameter.cs" />
     <Compile Include="BlockParameter\fmBlockParameterGroup.cs" />
     <Compile Include="Blocks\fmBaseBlock.cs" />
     <Compile Include="Controls\fmCalculationOptionView.cs">
@@ -44,15 +45,15 @@
     <Compile Include="Controls\fmCalculationOptionView.Designer.cs">
       <DependentUpon>fmCalculationOptionView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Blocks\fmEpsKappaWithneBlock.cs" />
-    <Compile Include="Blocks\fmEpsKappaBlock.cs" />
+    <Compile Include="Blocks\fmEps0Kappa0WithneBlock.cs" />
+    <Compile Include="Blocks\fmEps0Kappa0Block.cs" />
     <Compile Include="Blocks\fmFilterMachiningBlock.cs" />
     <Compile Include="BlockParameter\fmBlockParameter.cs" />
     <Compile Include="BlockParameter\fmBlockParameterEventHandler.cs" />
     <Compile Include="BlockParameter\fmBlockParameterEvetArgs.cs" />
-    <Compile Include="Blocks\fmPcrcaBlock.cs" />
-    <Compile Include="Blocks\fmPcrcaWithncBlock.cs" />
-    <Compile Include="Blocks\fmRmhceBlock.cs" />
+    <Compile Include="Blocks\fmPc0rc0a0Block.cs" />
+    <Compile Include="Blocks\fmPc0rc0a0WithncBlock.cs" />
+    <Compile Include="Blocks\fmRm0hceBlock.cs" />
     <Compile Include="Blocks\fmSuspensionBlock.cs" />
     <Compile Include="Blocks\fmSuspensionWithEtafBlock.cs" />
     <Compile Include="fmGlobalParameter.cs" />

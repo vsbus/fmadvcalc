@@ -5,7 +5,7 @@ using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmEpsKappaWithneBlock : fmEpsKappaBlock
+    public class fmEps0Kappa0WithneBlock : fmEps0Kappa0Block
     {
         private fmBlockParameter ne;
 
@@ -15,7 +15,7 @@ namespace fmCalcBlocksLibrary.Blocks
             set { ne.value = value; }
         }
 
-        public fmEpsKappaWithneBlock(
+        public fmEps0Kappa0WithneBlock(
             DataGridViewCell eps_Cell,
             DataGridViewCell kappa_Cell,
             DataGridViewCell ne_Cell)

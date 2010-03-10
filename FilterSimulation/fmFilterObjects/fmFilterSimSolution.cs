@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using FilterSimulation.fmFilterObjects;
-using fmEpsKappaBlock=fmCalcBlocksLibrary.Blocks.fmEpsKappaBlock;
+using fmEpsKappaBlock=fmCalcBlocksLibrary.Blocks.fmEps0Kappa0Block;
 using fmFilterMachiningBlock=fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock;
-using fmPcrcaBlock=fmCalcBlocksLibrary.Blocks.fmPcrcaBlock;
-using fmRmhceBlock=fmCalcBlocksLibrary.Blocks.fmRmhceBlock;
+using fmPcrcaBlock=fmCalcBlocksLibrary.Blocks.fmPc0rc0a0Block;
+using fmRmhceBlock=fmCalcBlocksLibrary.Blocks.fmRm0hceBlock;
 using fmSuspensionBlock=fmCalcBlocksLibrary.Blocks.fmSuspensionBlock;
 
 namespace FilterSimulation.fmFilterObjects

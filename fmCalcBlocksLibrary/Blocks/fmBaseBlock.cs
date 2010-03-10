@@ -10,11 +10,16 @@ namespace fmCalcBlocksLibrary.Blocks
     abstract public class fmBaseBlock
     {
         protected List<fmBlockParameter> parameters = new List<fmBlockParameter>();
+        protected List<fmBlockConstantParameter> constantParameters = new List<fmBlockConstantParameter>();
         protected bool processOnChange;
 
         public List<fmBlockParameter> Parameters
         {
             get { return parameters; }
+        }
+        public List<fmBlockConstantParameter> ConstantParameters
+        {
+            get { return constantParameters; }
         }
         public fmBlockParameter GetParameterByName(string parameterName)
         {
@@ -94,6 +99,15 @@ namespace fmCalcBlocksLibrary.Blocks
                 dataGrid.CellValueChangedByUser += CellValueChanged;
             }
             parameters.Add(p);
+        }
+
+
+        protected void AddConstantParameter(
+            ref fmBlockConstantParameter p,
+            fmGlobalParameter globalParameter)
+        {
+            p = new fmBlockConstantParameter(globalParameter);
+            constantParameters.Add(p);
         }
 
         public void StopProcessing()

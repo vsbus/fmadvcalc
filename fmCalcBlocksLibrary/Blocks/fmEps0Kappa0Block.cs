@@ -6,37 +6,38 @@ using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmEpsKappaBlock : fmBaseBlock
+    public class fmEps0Kappa0Block : fmBaseBlock
     {
-        private fmBlockParameter eps, kappa;
-        private fmValue Cv_value;
+        private fmBlockParameter eps0, kappa0;
+        //private fmValue Cv_value;
+        private fmBlockConstantParameter Cv;
 
         private fmBlockParameterGroup eps_kappa_group = new fmBlockParameterGroup();
 
         public fmValue eps_Value
         {
-            get { return eps.value; }
-            set { eps.value = value; }
+            get { return eps0.value; }
+            set { eps0.value = value; }
         }
         public fmValue kappa_Value
         {
-            get { return kappa.value; }
-            set { kappa.value = value; }
+            get { return kappa0.value; }
+            set { kappa0.value = value; }
         }
         public fmValue Cv_Value
         {
-            get { return Cv_value; }
-            set { Cv_value = value; }
+            get { return Cv.value; }
+            set { Cv.value = value; }
         }
         
         override public void DoCalculations()
         {
             fmCalculatorsLibrary.fmEpsKappaCalculator.CalculationOptions calculationOption;
-            if (eps.isInputed)
+            if (eps0.isInputed)
             {
                 calculationOption = fmCalculatorsLibrary.fmEpsKappaCalculator.CalculationOptions.EPS_IS_INPUT;
             }
-            else if (kappa.isInputed)
+            else if (kappa0.isInputed)
             {
                 calculationOption = fmCalculatorsLibrary.fmEpsKappaCalculator.CalculationOptions.KAPPA_IS_INPUT;
             }
@@ -46,20 +47,21 @@ namespace fmCalcBlocksLibrary.Blocks
             }
 
             fmCalculatorsLibrary.fmEpsKappaCalculator.Process(calculationOption,
-                                                              ref eps.value,
-                                                              ref kappa.value,
-                                                              Cv_value);
+                                                              ref eps0.value,
+                                                              ref kappa0.value,
+                                                              Cv.value);
         }
        
-        public fmEpsKappaBlock(
+        public fmEps0Kappa0Block(
             DataGridViewCell eps_Cell,
             DataGridViewCell kappa_Cell)
         {
-            AddParameter(ref eps, fmGlobalParameter.eps, eps_Cell, true);
-            AddParameter(ref kappa, fmGlobalParameter.kappa, kappa_Cell, false);
+            AddParameter(ref eps0, fmGlobalParameter.eps0, eps_Cell, true);
+            AddParameter(ref kappa0, fmGlobalParameter.kappa0, kappa_Cell, false);
+            AddConstantParameter(ref Cv, fmGlobalParameter.Cv);
 
-            eps.group = eps_kappa_group;
-            kappa.group = eps_kappa_group;
+            eps0.group = eps_kappa_group;
+            kappa0.group = eps_kappa_group;
 
             processOnChange = true;
         }

@@ -6,12 +6,12 @@ namespace fmCalcBlocksLibrary
     public class fmGlobalParameter
     {
         public string name;
+        public fmUnitFamily unitFamily;
 
         public string Name
         {
             get { return name; }
         }
-        public fmUnitFamily unitFamily;
         public string Unit
         {
             get { return unitFamily.CurrentUnit.Name; }
@@ -80,10 +80,16 @@ namespace fmCalcBlocksLibrary
         public static fmGlobalParameter Msus;
         public static fmGlobalParameter eps;
         public static fmGlobalParameter kappa;
+        public static fmGlobalParameter eps0;
+        public static fmGlobalParameter kappa0;
         public static fmGlobalParameter Pc;
         public static fmGlobalParameter rc;
         public static fmGlobalParameter a;
+        public static fmGlobalParameter Pc0;
+        public static fmGlobalParameter rc0;
+        public static fmGlobalParameter a0;
         public static fmGlobalParameter Rm;
+        public static fmGlobalParameter Rm0;
         public static fmGlobalParameter hce;
         public static fmGlobalParameter ne;
         public static fmGlobalParameter rho_f;
@@ -164,10 +170,16 @@ namespace fmCalcBlocksLibrary
             AddParameter(ref qmc_d, new fmGlobalParameter("qmc,d", fmUnitFamily.SpecificFlowRateMass, new fmRange(0, 2)));
             AddParameter(ref eps, new fmGlobalParameter("eps", fmUnitFamily.ConcentrationFamily));
             AddParameter(ref kappa, new fmGlobalParameter("kappa", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref eps0, new fmGlobalParameter("eps0", fmUnitFamily.ConcentrationFamily));
+            AddParameter(ref kappa0, new fmGlobalParameter("kappa0", fmUnitFamily.NoUnitFamily));
             AddParameter(ref Pc, new fmGlobalParameter("Pc", fmUnitFamily.PermeabilityFamily));
             AddParameter(ref rc, new fmGlobalParameter("rc", fmUnitFamily.CakeResistanceRcFamily));
             AddParameter(ref a, new fmGlobalParameter("a", fmUnitFamily.CakeResistanceAFamily));
+            AddParameter(ref Pc0, new fmGlobalParameter("Pc0", fmUnitFamily.PermeabilityFamily));
+            AddParameter(ref rc0, new fmGlobalParameter("rc0", fmUnitFamily.CakeResistanceRcFamily));
+            AddParameter(ref a0, new fmGlobalParameter("a0", fmUnitFamily.CakeResistanceAFamily));
             AddParameter(ref Rm, new fmGlobalParameter("Rm", fmUnitFamily.FilterMediumResistanceFamily));
+            AddParameter(ref Rm0, new fmGlobalParameter("Rm0", fmUnitFamily.FilterMediumResistanceFamily));
             AddParameter(ref hce, new fmGlobalParameter("hce", fmUnitFamily.LengthFamily));
             AddParameter(ref ne, new fmGlobalParameter("ne", fmUnitFamily.NoUnitFamily));
             AddParameter(ref rho_f, new fmGlobalParameter("rho_f", fmUnitFamily.DensityFamily));
@@ -192,4 +204,6 @@ namespace fmCalcBlocksLibrary
             chartCurretXRange = new fmRange(minMaxRange.minValue, minMaxRange.maxValue);
         }
     }
+
+    
 }

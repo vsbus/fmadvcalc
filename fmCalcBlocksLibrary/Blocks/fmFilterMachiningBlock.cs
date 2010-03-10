@@ -267,22 +267,38 @@ namespace fmCalcBlocksLibrary.Blocks
         //private readonly fmBlockParameterGroup rc_group = new fmBlockParameterGroup();
         //private readonly fmBlockParameterGroup a_group = new fmBlockParameterGroup();
 
-        private fmValue hce_value;
+        //private fmValue hce_value;
         
-        private fmValue Pc0_value;
-        private fmValue nc_value;
+        //private fmValue Pc0_value;
+        //private fmValue nc_value;
         
-        private fmValue eps0_value;
-        private fmValue kappa0_value;
-        private fmValue ne_value;
+        //private fmValue eps0_value;
+        //private fmValue kappa0_value;
+        //private fmValue ne_value;
         
-        private fmValue etaf_value;
-        private fmValue rho_f_value;
-        private fmValue rho_s_value; 
-        private fmValue rho_sus_value;
-        private fmValue Cm_value;
-        private fmValue Cv_value;
+        //private fmValue etaf_value;
+        //private fmValue rho_f_value;
+        //private fmValue rho_s_value; 
+        //private fmValue rho_sus_value;
+        //private fmValue Cm_value;
+        //private fmValue Cv_value;
 
+        private fmBlockConstantParameter hce;
+
+        private fmBlockConstantParameter Pc0;
+        private fmBlockConstantParameter nc;
+
+        private fmBlockConstantParameter eps0;
+        private fmBlockConstantParameter kappa0;
+        private fmBlockConstantParameter ne;
+
+        private fmBlockConstantParameter etaf;
+        private fmBlockConstantParameter rho_f;
+        private fmBlockConstantParameter rho_s; 
+        private fmBlockConstantParameter rho_sus;
+        private fmBlockConstantParameter Cm;
+        private fmBlockConstantParameter Cv;
+        
         private CalculationOption calculationOption;
 
         public fmValue A_Value
@@ -577,63 +593,63 @@ namespace fmCalcBlocksLibrary.Blocks
         }
         public fmValue hce_Value
         {
-            get { return hce_value; }
-            set { hce_value = value; }
+            get { return hce.value; }
+            set { hce.value = value; }
         }
         public fmValue Pc0_Value
         {
-            get { return Pc0_value; }
-            set { Pc0_value = value; }
+            get { return Pc0.value; }
+            set { Pc0.value = value; }
         }
        public fmValue eps0_Value
         {
-            get { return eps0_value; }
-            set { eps0_value = value; }
+            get { return eps0.value; }
+            set { eps0.value = value; }
         }
         public fmValue nc_Value
         {
-            get { return nc_value; }
-            set { nc_value = value; }
+            get { return nc.value; }
+            set { nc.value = value; }
         }
         public fmValue ne_Value
         {
-            get { return ne_value; }
-            set { ne_value = value; }
+            get { return ne.value; }
+            set { ne.value = value; }
         }
         public fmValue kappa0_Value
         {
-            get { return kappa0_value; }
-            set { kappa0_value = value; }
+            get { return kappa0.value; }
+            set { kappa0.value = value; }
         }
         public fmValue etaf_Value
         {
-            get { return etaf_value; }
-            set { etaf_value = value; }
+            get { return etaf.value; }
+            set { etaf.value = value; }
         }
         public fmValue rho_f_Value
         {
-            get { return rho_f_value; }
-            set { rho_f_value = value; }
+            get { return rho_f.value; }
+            set { rho_f.value = value; }
         }
         public fmValue rho_s_Value
         {
-            get { return rho_s_value; }
-            set { rho_s_value = value; }
+            get { return rho_s.value; }
+            set { rho_s.value = value; }
         }
         public fmValue rho_sus_Value
         {
-            get { return rho_sus_value; }
-            set { rho_sus_value = value; }
+            get { return rho_sus.value; }
+            set { rho_sus.value = value; }
         }
         public fmValue Cm_Value
         {
-            get { return Cm_value; }
-            set { Cm_value = value; }
+            get { return Cm.value; }
+            set { Cm.value = value; }
         }
         public fmValue Cv_Value
         {
-            get { return Cv_value; }
-            set { Cv_value = value; }
+            get { return Cv.value; }
+            set { Cv.value = value; }
         }
         public CalculationOption CalculationOption
         {
@@ -709,18 +725,18 @@ namespace fmCalcBlocksLibrary.Blocks
                                                                      ref Pc.value,
                                                                      ref rc.value,
                                                                      ref a.value,
-                                                                     eps0_value,
-                                                                     kappa0_value,
-                                                                     Pc0_value,
-                                                                     etaf_value,
-                                                                     rho_f_value,
-                                                                     rho_s_value,
-                                                                     rho_sus_value,
-                                                                     Cv_value,
-                                                                     Cm_value,
-                                                                     ne_value,
-                                                                     nc_value,
-                                                                     hce_value);
+                                                                     eps0.value,
+                                                                     kappa0.value,
+                                                                     Pc0.value,
+                                                                     etaf.value,
+                                                                     rho_f.value,
+                                                                     rho_s.value,
+                                                                     rho_sus.value,
+                                                                     Cv.value,
+                                                                     Cm.value,
+                                                                     ne.value,
+                                                                     nc.value,
+                                                                     hce.value);
         }
 
         public List<fmBlockParameter> GetParametersByGroup (fmBlockParameterGroup group)
@@ -1466,6 +1482,19 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref rc, fmGlobalParameter.rc, rc_Cell, false);
             AddParameter(ref a, fmGlobalParameter.a, a_Cell, false);
 
+            AddConstantParameter(ref hce, fmGlobalParameter.hce);
+            AddConstantParameter(ref Pc0, fmGlobalParameter.Pc0);
+            AddConstantParameter(ref nc, fmGlobalParameter.nc);
+            AddConstantParameter(ref eps0, fmGlobalParameter.eps0);
+            AddConstantParameter(ref kappa0, fmGlobalParameter.kappa0);
+            AddConstantParameter(ref ne, fmGlobalParameter.ne);
+            AddConstantParameter(ref etaf, fmGlobalParameter.eta_f);
+            AddConstantParameter(ref rho_f, fmGlobalParameter.rho_f);
+            AddConstantParameter(ref rho_s, fmGlobalParameter.rho_s); 
+            AddConstantParameter(ref rho_sus, fmGlobalParameter.rho_sus);
+            AddConstantParameter(ref Cm, fmGlobalParameter.Cm);
+            AddConstantParameter(ref Cv, fmGlobalParameter.Cv);
+
             processOnChange = true;
             CalculationOptionViewCheckChanged(null, new EventArgs());
         }
@@ -1697,21 +1726,26 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             if (filterMachiningBlock != null)
             {
-                hce_value = filterMachiningBlock.hce_value;
+                //    hce_value = filterMachiningBlock.hce_value;
 
-                Pc0_value = filterMachiningBlock.Pc0_value;
-                nc_value = filterMachiningBlock.nc_value;
+                //    Pc0_value = filterMachiningBlock.Pc0_value;
+                //    nc_value = filterMachiningBlock.nc_value;
 
-                eps0_value = filterMachiningBlock.eps0_value;
-                kappa0_value = filterMachiningBlock.kappa0_value;
-                ne_value = filterMachiningBlock.ne_value;
+                //    eps0_value = filterMachiningBlock.eps0_value;
+                //    kappa0_value = filterMachiningBlock.kappa0_value;
+                //    ne_value = filterMachiningBlock.ne_value;
 
-                etaf_value = filterMachiningBlock.etaf_value;
-                rho_f_value = filterMachiningBlock.rho_f_value;
-                rho_s_value = filterMachiningBlock.rho_s_value;
-                rho_sus_value = filterMachiningBlock.rho_sus_value;
-                Cm_value = filterMachiningBlock.Cm_value;
-                Cv_value = filterMachiningBlock.Cv_value;
+                //    etaf_value = filterMachiningBlock.etaf_value;
+                //    rho_f_value = filterMachiningBlock.rho_f_value;
+                //    rho_s_value = filterMachiningBlock.rho_s_value;
+                //    rho_sus_value = filterMachiningBlock.rho_sus_value;
+                //    Cm_value = filterMachiningBlock.Cm_value;
+                //    Cv_value = filterMachiningBlock.Cv_value;
+
+                for (int i = 0; i < constantParameters.Count; ++i)
+                {
+                    constantParameters[i].value = filterMachiningBlock.constantParameters[i].value;
+                }
             }
         }
 

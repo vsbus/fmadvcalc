@@ -5,7 +5,7 @@ using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmPcrcaWithncBlock : fmPcrcaBlock
+    public class fmPc0rc0a0WithncBlock : fmPc0rc0a0Block
     {
         private fmBlockParameter nc;
 
@@ -15,7 +15,7 @@ namespace fmCalcBlocksLibrary.Blocks
             set { nc.value = value; }
         }
 
-        public fmPcrcaWithncBlock(
+        public fmPc0rc0a0WithncBlock(
             DataGridViewCell Pc_Cell,
             DataGridViewCell rc_Cell,
             DataGridViewCell a_Cell,
