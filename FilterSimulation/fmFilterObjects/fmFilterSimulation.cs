@@ -58,6 +58,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public void CopyFrom(fmFilterSimulationData from)
         {
+            Name = from.Name;
             foreach (fmCalcBlocksLibrary.fmGlobalParameter p in from.parameters.Keys)
             {
                 parameters[p] = from.parameters[p];
@@ -197,7 +198,7 @@ namespace FilterSimulation.fmFilterObjects
             set
             {
                 m_Modified = value;
-                if (value)
+                if (value && m_ParentSerie != null)
                 {
                     m_ParentSerie.Modified = true;
                 }
@@ -640,7 +641,6 @@ namespace FilterSimulation.fmFilterObjects
         }
         public void CopyFrom(fmFilterSimulation sim)
         {
-            //Data.Guid = sim.Data.Guid;
             Data.CopyFrom(sim.Data);
             BackupData.CopyFrom(sim.BackupData);
             Modified = sim.Modified;
@@ -738,6 +738,10 @@ namespace FilterSimulation.fmFilterObjects
         {
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockConstantParameter p in block.ConstantParameters)
             {
+                if (sim.Parameters[p.globalParameter] != p.value)
+                {
+                    sim.Modified = true;
+                }
                 sim.Parameters[p.globalParameter] = p.value;
             }
         }
@@ -746,6 +750,10 @@ namespace FilterSimulation.fmFilterObjects
         {
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockParameter p in block.Parameters)
             {
+                if (sim.Parameters[p.globalParameter] != p.value)
+                {
+                    sim.Modified = true;
+                }
                 sim.Parameters[p.globalParameter] = p.value;
             }
         }

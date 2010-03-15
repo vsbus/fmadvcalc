@@ -19,51 +19,83 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             InitializeComponent();
 
-            fmInputsInfoForSelectedSimulationsTableBlock = new fmFilterMachiningBlock(calculationOptionViewInTablesAndGraphs);
+            //fmInputsInfoForSelectedSimulationsTableBlock = new fmFilterMachiningBlock(calculationOptionViewInTablesAndGraphs);
 
             CreateColumnsInParametersTables();
-            rowsQuantity.Text = RowsQuantity.ToString();
+            ReadUseParamsCheckBoxAndApply();
+            //rowsQuantity.Text = RowsQuantity.ToString();
 
-            calculationOptionViewInTablesAndGraphs_CheckedChanged(null, new EventArgs());
+            //calculationOptionViewInTablesAndGraphs_CheckedChanged(null, new EventArgs());
 
-            // BEGIN DEBUG CODE
-            AddRow();
-            fmLocalBlocks[0].A_Value = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
-            fmLocalBlocks[0].Dp_Value = new fmValue(1 * fmUnitFamily.PressureFamily.CurrentUnit.Coef);
-            fmLocalBlocks[0].sf_Value = new fmValue(30 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
-            fmLocalBlocks[0].n_Value = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
-            // END DEBUG CODE
+            //// BEGIN DEBUG CODE
+            //AddRow();
+            //fmLocalBlocks[0].A_Value = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
+            //fmLocalBlocks[0].Dp_Value = new fmValue(1 * fmUnitFamily.PressureFamily.CurrentUnit.Coef);
+            //fmLocalBlocks[0].sf_Value = new fmValue(30 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
+            //fmLocalBlocks[0].n_Value = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
+            //// END DEBUG CODE
         }
 
         private void DisplayCharts(fmFilterSimSolution sol)
         {
-            List<fmFilterMachiningBlock> fmbList = new List<fmFilterMachiningBlock>();
+            List<fmFilterSimulation> simList = GetSelectedSimulationsList(sol);
+
+            //List<fmFilterMachiningBlock> fmbList = new List<fmFilterMachiningBlock>();
+
+            //if (byCheckingSimulations)
+            //{
+            //    if (sol.CurrentObjects.Simulation != null)
+            //    {
+            //        fmbList.Add(sol.CurrentObjects.Simulation.filterMachiningBlock);
+            //    }
+            //}
+            //else
+            //{
+            //    foreach (DataGridViewRow row in simulationDataGrid.Rows)
+            //    {
+            //        if (row.Visible)
+            //        {
+            //            fmFilterSimulation sim = sol.FindSimulation(new Guid(row.Cells[simulationGuidColumn.Name].Value.ToString()));
+            //            if (sim.Checked)
+            //            {
+            //                fmbList.Add(sim.filterMachiningBlock);
+            //            }
+            //        }
+            //    }
+            //}
+
+            //currentSimFMB = sol.CurrentObjects.Simulation == null ? null : sol.CurrentObjects.Simulation.filterMachiningBlock;
+
+            BuildCurves(simList);
+        }
+
+        private List<fmFilterSimulation> GetSelectedSimulationsList(fmFilterSimSolution sol)
+        {
+            List<fmFilterSimulation> simList = new List<fmFilterSimulation>();
 
             if (byCheckingSimulations)
             {
                 if (sol.CurrentObjects.Simulation != null)
                 {
-                    fmbList.Add(sol.CurrentObjects.Simulation.filterMachiningBlock);
+                    simList.Add(sol.CurrentObjects.Simulation);
                 }
             }
             else
             {
-                foreach( DataGridViewRow row in simulationDataGrid.Rows)
+                foreach (DataGridViewRow row in simulationDataGrid.Rows)
                 {
-                    if(row.Visible)
+                    if (row.Visible)
                     {
                         fmFilterSimulation sim = sol.FindSimulation(new Guid(row.Cells[simulationGuidColumn.Name].Value.ToString()));
-                        if(sim.Checked)
+                        if (sim.Checked)
                         {
-                            fmbList.Add(sim.filterMachiningBlock);
+                            simList.Add(sim);
                         }
                     }
                 }
             }
 
-            
-            currentSimFMB = sol.CurrentObjects.Simulation == null ? null : sol.CurrentObjects.Simulation.filterMachiningBlock;
-            BuildCurves(fmbList);
+            return simList;
         }
 
         override protected void DisplaySolution(fmFilterSimSolution sol)
@@ -79,63 +111,63 @@ namespace FilterSimulationWithTablesAndGraphs
         override protected void UpdateUnitsAndData()
         {
             base.UpdateUnitsAndData();
-            UpdateUnitsInTablesAndGraphs();
+            //UpdateUnitsInTablesAndGraphs();
         }
 
-        private void ReadMinMaxXValues()
-        {
-            if (loadingXRange == false)
-            {
-                double minXValue = fmValue.StringToValue(minXValueTextBox.Text).Value;
-                double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).Value;
+        //private void ReadMinMaxXValues()
+        //{
+        //    if (loadingXRange == false)
+        //    {
+        //        double minXValue = fmValue.StringToValue(minXValueTextBox.Text).Value;
+        //        double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).Value;
 
-                int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
-                fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
-                double coef = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.unitFamily.CurrentUnit.Coef;
-                fmRange range = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange;
-                range.minValue = minXValue * coef;
-                range.maxValue = maxXValue * coef;
-            }
-        }
+        //        int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
+        //        fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
+        //        double coef = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.unitFamily.CurrentUnit.Coef;
+        //        fmRange range = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange;
+        //        range.minValue = minXValue * coef;
+        //        range.maxValue = maxXValue * coef;
+        //    }
+        //}
 
         private void minMaxXValueTextBox_TextChanged(object sender, EventArgs e)
         {
-            ReadMinMaxXValues();
-            DrawChartAndTable();
+        //    ReadMinMaxXValues();
+        //    DrawChartAndTable();
         }
 
         private void useDefaultRangesButton_Click(object sender, EventArgs e)
         {
-            LoadDefaultXRange();
-            DrawChartAndTable();
+            //LoadDefaultXRange();
+            //DrawChartAndTable();
         }
 
         private void selectedSimulationParametersTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex == -1 && e.ColumnIndex > 0)
-            {
-                string parameterName = GetParameterNameFromHeader(selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderText);
-                fmInputsInfoForSelectedSimulationsTableBlock.UpdateIsInputed(
-                    fmInputsInfoForSelectedSimulationsTableBlock.GetParameterByName(parameterName));
-                UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
-                DrawChartAndTable();
-            }
+        //    if (e.RowIndex == -1 && e.ColumnIndex > 0)
+        //    {
+        //        string parameterName = GetParameterNameFromHeader(selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderText);
+        //        fmInputsInfoForSelectedSimulationsTableBlock.UpdateIsInputed(
+        //            fmInputsInfoForSelectedSimulationsTableBlock.GetParameterByName(parameterName));
+        //        UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
+        //        DrawChartAndTable();
+        //    }
         }
 
         private void selectedSimulationParametersTable_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex == -1 && e.ColumnIndex > 0)
-            {
-                selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonShadow);
-            }
+        //    if (e.RowIndex == -1 && e.ColumnIndex > 0)
+        //    {
+        //        selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonShadow);
+        //    }
         }
 
         private void selectedSimulationParametersTable_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 && e.ColumnIndex > 0)
-            {
-                selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonFace);
-            }
+        //    if (e.RowIndex == -1 && e.ColumnIndex > 0)
+        //    {
+        //        selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonFace);
+        //    }
         }
     }
 }

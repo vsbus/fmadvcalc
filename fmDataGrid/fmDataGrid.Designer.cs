@@ -81,7 +81,26 @@ namespace fmDataGrid
                     oldColor.B * newColor.B / 255);
                 e.CellStyle.BackColor = newColor;
             }
-            base.OnCellPainting(e);
+
+            if (CurrentCell != null)
+            {
+                if (CurrentCell.RowIndex == e.RowIndex
+                    && CurrentCell.ColumnIndex == e.ColumnIndex)
+                {
+                    if (CurrentCell.OwningColumn.GetType() != (new DataGridViewCheckBoxColumn()).GetType())
+                    {
+                        DefaultCellStyle.SelectionBackColor = e.CellStyle.BackColor;
+                        DefaultCellStyle.SelectionForeColor = e.CellStyle.ForeColor;
+                        e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+                    }
+                    else
+                    {
+                        DefaultCellStyle.SelectionBackColor = Color.DarkBlue;
+                    }
+                }
+            }
+
+            //base.OnCellPainting(e);
         }
 
         override protected void OnCurrentCellChanged(EventArgs e)

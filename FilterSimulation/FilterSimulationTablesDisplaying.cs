@@ -537,7 +537,7 @@ namespace FilterSimulation
                 fmFilterSimProject proj = sol.FindProject(guid);
                 if (proj != null)
                 {
-                    SetRowFontStyle(row, proj.Modified ? FontStyle.Bold : FontStyle.Regular);
+                    SetRowFontBoldOrRegular(row, proj.Modified ? FontStyle.Bold : FontStyle.Regular);
                 }
             }
 
@@ -546,7 +546,7 @@ namespace FilterSimulation
                     Guid guid = (Guid)row.Cells[suspensionGuidColumn.Index].Value;
                     fmFilterSimSuspension sus = sol.FindSuspension(guid);
 
-                    SetRowFontStyle(row, sus.Modified ? FontStyle.Bold : FontStyle.Regular);
+                    SetRowFontBoldOrRegular(row, sus.Modified ? FontStyle.Bold : FontStyle.Regular);
                 }
 
             string prevVal = "";
@@ -567,7 +567,7 @@ namespace FilterSimulation
                     prevVal = val;
 
                     Color rowColor = cID ? Color.White : Color.LightGray;
-                    SetRowFontStyle(row, serie.Modified ? FontStyle.Bold : FontStyle.Regular);
+                    SetRowFontBoldOrRegular(row, serie.Modified ? FontStyle.Bold : FontStyle.Regular);
                     SetRowBackColor(row, rowColor);
                 }
 
@@ -587,7 +587,7 @@ namespace FilterSimulation
                     cID ^= (prevVal == "" || prevVal != val);
                     prevVal = val;
 
-                    SetRowFontStyle(row, sim.Modified ? FontStyle.Bold : FontStyle.Regular);
+                    SetRowFontBoldOrRegular(row, sim.Modified ? FontStyle.Bold : FontStyle.Regular);
                 }
         }
         void SortTables()

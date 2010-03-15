@@ -47,11 +47,20 @@ namespace FilterSimulation
             machineTypesDataGrid.Height = machinePanel.Height - machineTypesDataGrid.Top - 3;
         }
 
-        private void SetRowFontStyle(DataGridViewRow row, FontStyle fs)
+        private void SetRowFontBoldOrRegular(DataGridViewRow row, FontStyle fs)
         {
-            foreach (DataGridViewCell cell in row.Cells)
+            if (fs != FontStyle.Bold && fs != FontStyle.Regular)
             {
-                cell.Style.Font = new Font(cell.DataGridView.Font, fs);
+                throw new Exception("font style used in SetRowFontBoldOrRegular in not bold and not regular");
+            }
+
+            Font newFont = new Font(row.DataGridView.Font, fs);
+            if (row.Cells[0].Style.Font == null || row.Cells[0].Style.Font.Style != fs)
+            {
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    cell.Style.Font = newFont;
+                }
             }
         }
     }

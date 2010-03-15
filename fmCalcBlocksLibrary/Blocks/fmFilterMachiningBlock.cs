@@ -1325,10 +1325,10 @@ namespace fmCalcBlocksLibrary.Blocks
             return result;
         }
 
-        private CalculationOption GetBlockCalculationOption()
-        {
-            return calculationOptionView.GetSelectedOption();
-        }
+        //private CalculationOption GetBlockCalculationOption()
+        //{
+        //    return calculationOptionView.GetSelectedOption();
+        //}
 
         public void UpdateCellsBackColor()
         {
@@ -1503,10 +1503,13 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             if (processOnChange && calculationOptionView != null)
             {
+                CalculationOption = calculationOptionView.GetSelectedOption();
+
                 UpdateGroups();
 
-                CalculationOption calcOption = calculationOptionView.GetSelectedOption();
-                List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calcOption);
+                //CalculationOption calcOption = calculationOptionView.GetSelectedOption();
+                //List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calcOption);
+                List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(CalculationOption);
                 Dictionary<fmBlockParameterGroup, bool> groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
 
                 foreach (fmBlockParameter parameter in parameters)
@@ -1692,12 +1695,12 @@ namespace fmCalcBlocksLibrary.Blocks
             table[tc] = n_tc_group;
         }
 
-        private void UpdateGroups()
+        public void UpdateGroups()
         {
-            CalculationOption calcOption = GetBlockCalculationOption();
+            //CalculationOption calcOption = GetBlockCalculationOption();
             foreach (fmBlockParameter p in parameters)
             {
-                p.group = WhatGroupOfParameterWithCalcOption(p, calcOption);
+                p.group = WhatGroupOfParameterWithCalcOption(p, CalculationOption);
             }
         }
         

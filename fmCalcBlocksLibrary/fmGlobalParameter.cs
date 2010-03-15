@@ -12,7 +12,10 @@ namespace fmCalcBlocksLibrary
         {
             get { return name; }
         }
-        public string Unit
+        //
+        // Summary:
+        //     Return name of current unit for parameter
+        public string UnitName
         {
             get { return unitFamily.CurrentUnit.Name; }
         }
@@ -101,11 +104,13 @@ namespace fmCalcBlocksLibrary
         public static fmGlobalParameter eta_f;
         public static fmGlobalParameter nc;
         public static List<fmGlobalParameter> Parameters = new List<fmGlobalParameter>();
+        public static Dictionary<string, fmGlobalParameter> ParametersByName = new Dictionary<string,fmGlobalParameter>();
 
         static void AddParameter( ref fmGlobalParameter p1, fmGlobalParameter p2)
         {
             p1 = p2;
             Parameters.Add(p1);
+            ParametersByName[p1.name] = p1;
         }
 
         static fmGlobalParameter()

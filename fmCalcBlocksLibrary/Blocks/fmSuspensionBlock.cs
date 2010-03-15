@@ -164,7 +164,13 @@ namespace fmCalcBlocksLibrary.Blocks
 
             processOnChange = true;
 
-            RadioButtonCheckChanged(null, new EventArgs());
+            if (rBtn_rho_f != null 
+                || rBtn_rho_s != null
+                || rBtn_rho_sus != null
+                || rBtn_C != null)
+            {
+                RadioButtonCheckChanged(null, new EventArgs());
+            }
         }
 
         private void RadioButtonCheckChanged(object sender, EventArgs e)
@@ -211,7 +217,10 @@ namespace fmCalcBlocksLibrary.Blocks
                                        RadioButton globalRadioButton)
         {
             localRadioButton = globalRadioButton;
-            localRadioButton.CheckedChanged += RadioButtonCheckChanged;
+            if (localRadioButton != null)
+            {
+                localRadioButton.CheckedChanged += RadioButtonCheckChanged;
+            }
         }
     }
 }

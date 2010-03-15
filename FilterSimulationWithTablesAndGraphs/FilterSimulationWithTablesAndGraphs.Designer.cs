@@ -371,8 +371,6 @@ namespace FilterSimulationWithTablesAndGraphs
             // UseParamsCheckBox
             // 
             this.UseParamsCheckBox.AutoSize = true;
-            this.UseParamsCheckBox.Checked = true;
-            this.UseParamsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.UseParamsCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.UseParamsCheckBox.Location = new System.Drawing.Point(0, 0);
             this.UseParamsCheckBox.Name = "UseParamsCheckBox";

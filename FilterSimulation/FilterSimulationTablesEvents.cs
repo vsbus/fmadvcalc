@@ -18,7 +18,7 @@ namespace FilterSimulation
 
                 if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["projectNameColumn"].Index)
                 {
-                    SetRowFontStyle(row, FontStyle.Bold);
+                    SetRowFontBoldOrRegular(row, FontStyle.Bold);
                     prj = fSolution.FindProject((Guid)guidCellValue);
                     prj.Name = Convert.ToString(row.Cells["projectNameColumn"].Value);
                 }
@@ -46,7 +46,7 @@ namespace FilterSimulation
                     || e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["suspensionMaterialColumn"].Index
                     || e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["suspensionCustomerColumn"].Index)
                 {
-                    SetRowFontStyle(row, FontStyle.Bold);
+                    SetRowFontBoldOrRegular(row, FontStyle.Bold);
 
                     sus = fSolution.FindSuspension((Guid)guidCellValue);
 
@@ -81,7 +81,7 @@ namespace FilterSimulation
 
                 if (e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["simSeriesCheckedColumn"].Index)
                 {
-                    SetRowFontStyle(row, FontStyle.Bold);
+                    SetRowFontBoldOrRegular(row, FontStyle.Bold);
 
                     serie = fSolution.FindSerie((Guid)guidCellValue);
 
@@ -119,7 +119,7 @@ namespace FilterSimulation
                     && e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["simulationCheckedColumn"].Index)
 
                 {
-                    SetRowFontStyle(row, FontStyle.Bold);
+                    SetRowFontBoldOrRegular(row, FontStyle.Bold);
 
                     sim = fSolution.FindSimulation((Guid)guidCellValue);
 
