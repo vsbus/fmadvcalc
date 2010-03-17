@@ -34,9 +34,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="fmBaseCalculator.cs" />
+    <Compile Include="fmCalculationBaseParameter.cs" />
+    <Compile Include="fmCalculationConstantParameter.cs" />
+    <Compile Include="fmCalculationVariableParameter.cs" />
+    <Compile Include="fmEps0Kappa0Calculator.cs" />
     <Compile Include="fmEpsKappaCalculator.cs" />
     <Compile Include="fmFilterMachiningCalculator.cs" />
+    <Compile Include="fmPc0rc0a0Calculator.cs" />
     <Compile Include="fmPcrcaCalculator.cs" />
+    <Compile Include="fmRm0hceCalculator.cs" />
     <Compile Include="fmRmhceCalculator.cs" />
     <Compile Include="fmSuspensionCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

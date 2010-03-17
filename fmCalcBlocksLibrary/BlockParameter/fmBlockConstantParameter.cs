@@ -4,13 +4,8 @@ using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.BlockParameter
 {
-    public class fmBlockConstantParameter
+    public class fmBlockConstantParameter : fmCalculatorsLibrary.fmCalculationConstantParameter
     {
-        public fmGlobalParameter globalParameter;
-        public fmValue value;
-        public fmBlockConstantParameter(fmGlobalParameter globalParameter)
-        {
-            this.globalParameter = globalParameter;
-        }
+        public fmBlockConstantParameter(fmGlobalParameter globalParameter) : base(globalParameter) { }
     }
 }

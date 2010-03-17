@@ -4,6 +4,8 @@ using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
 using System.Drawing;
+using fmCalculatorsLibrary;
+using System.Collections.Generic;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
@@ -14,12 +16,12 @@ namespace fmCalcBlocksLibrary.Blocks
         private RadioButton rBtn_rho_sus;
         private RadioButton rBtn_C;
 
-        private fmBlockParameter rho_f;
-        private fmBlockParameter rho_s;
-        private fmBlockParameter rho_sus;
-        private fmBlockParameter Cm;
-        private fmBlockParameter Cv;
-        private fmBlockParameter C;
+        private fmBlockVariableParameter rho_f;
+        private fmBlockVariableParameter rho_s;
+        private fmBlockVariableParameter rho_sus;
+        private fmBlockVariableParameter Cm;
+        private fmBlockVariableParameter Cv;
+        private fmBlockVariableParameter C;
 
         private fmBlockParameterGroup rho_f_group = new fmBlockParameterGroup();
         private fmBlockParameterGroup rho_s_group = new fmBlockParameterGroup();
@@ -59,77 +61,35 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculations()
         {
-            fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions calculationOption;
-
-            if (rho_f.isInputed == false)
+            fmSuspensionCalculator suspesionCalculator =
+                new fmSuspensionCalculator(AllParameters);
+            
+            if (rBtn_rho_f.Checked)
             {
-                if (Cm.isInputed)
-                {
-                    calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.RHOF_CALCULATED_CM_INPUT;
-                }
-                else if (Cv.isInputed)
-                {
-                    calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.RHOF_CALCULATED_CV_INPUT;
-                }
-                else if (C.isInputed)
-                {
-                    calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.RHOF_CALCULATED_C_INPUT;
-                }
-                else
-                {
-                    throw new Exception("nothing from Cm/Cv/C are isInputed");
-                }
+                suspesionCalculator.calculationOption =
+                    fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED;
             }
-            else if (rho_s.isInputed == false)
+            else if (rBtn_rho_s.Checked)
             {
-                if (Cm.isInputed)
-                {
-                    calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.RHOS_CALCULATED_CM_INPUT;
-                }
-                else if (Cv.isInputed)
-                {
-                    calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.RHOS_CALCULATED_CV_INPUT;
-                }
-                else if (C.isInputed)
-                {
-                    calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.RHOS_CALCULATED_C_INPUT;
-                }
-                else
-                {
-                    throw new Exception("nothing from Cm/Cv/C are isInputed");
-                }
+                suspesionCalculator.calculationOption =
+                    fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED;
             }
-            else if (rho_sus.isInputed == false)
+            else if (rBtn_rho_sus.Checked)
             {
-                if (Cm.isInputed)
-                {
-                    calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.RHOSUS_CALCULATED_CM_INPUT;
-                }
-                else if (Cv.isInputed)
-                {
-                    calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.RHOSUS_CALCULATED_CV_INPUT;
-                }
-                else if (C.isInputed)
-                {
-                    calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.RHOSUS_CALCULATED_C_INPUT;
-                }
-                else
-                {
-                    throw new Exception("nothing from Cm/Cv/C are isInputed");
-                }
+                suspesionCalculator.calculationOption =
+                    fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
             }
-            else
+            else if (rBtn_C.Checked)
             {
-                calculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.CalculationOptions.CM_CV_C_CALCULATED;
+                suspesionCalculator.calculationOption =
+                    fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
+            }
+            else 
+            {
+                throw new Exception("No radiobuttons checked in suspension block");
             }
 
-            fmCalculatorsLibrary.fmSuspensionCalculator.Process(calculationOption,
-                                                                ref rho_f.value,
-                                                                ref rho_s.value,
-                                                                ref rho_sus.value,
-                                                                ref Cm.value,
-                                                                ref Cv.value,
-                                                                ref C.value);
+            suspesionCalculator.DoCalculations();
         }
 
         public fmSuspensionBlock(RadioButton rho_f_RadioButton,
@@ -184,7 +144,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 Cv.isInputed = false;
                 C.isInputed = false;
 
-                foreach (fmBlockParameter p in parameters)
+                foreach (fmBlockVariableParameter p in parameters)
                 {
                     p.cell.ReadOnly = false;
                 }

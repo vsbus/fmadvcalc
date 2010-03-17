@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual Studio 2005
+# Visual C# Express 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fmDataGrid", "fmDataGrid\fmDataGrid.csproj", "{30A5CD2D-C64C-402B-A957-3885E498A97C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCalculator", "AdvancedCalculator\AdvancedCalculator.csproj", "{DA84AD71-10A9-4B07-88EB-AADC0E158327}"
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterSimulationWithTablesAndGraphs", "FilterSimulationWithTablesAndGraphs\FilterSimulationWithTablesAndGraphs.csproj", "{03F73A3C-29A8-41D2-9287-2B8C3EF8A1EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{421C1B0C-B7D7-486D-AEAC-581F82201798}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleForBlocks", "SampleForBlocks\SampleForBlocks.csproj", "{CC39F4AC-47AE-4D23-B9AF-D9058316ED0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{421C1B0C-B7D7-486D-AEAC-581F82201798}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{421C1B0C-B7D7-486D-AEAC-581F82201798}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{421C1B0C-B7D7-486D-AEAC-581F82201798}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC39F4AC-47AE-4D23-B9AF-D9058316ED0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC39F4AC-47AE-4D23-B9AF-D9058316ED0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC39F4AC-47AE-4D23-B9AF-D9058316ED0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC39F4AC-47AE-4D23-B9AF-D9058316ED0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -118,6 +118,10 @@
       <Project>{D4A4B18A-B19E-46A7-8028-EF259E24849B}</Project>
       <Name>fmCalculationLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\fmCalculatorsLibrary\fmCalculatorsLibrary.csproj">
+      <Project>{440BE5B3-2621-475D-96E9-51EB0D91CAAC}</Project>
+      <Name>fmCalculatorsLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\fmControls\fmControls.csproj">
       <Project>{4C76F538-29C4-4595-B2DF-DBAC9F80D652}</Project>
       <Name>fmControls</Name>

@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FilterSimulation.fmFilterObjects;
-using fmEpsKappaBlock=fmCalcBlocksLibrary.Blocks.fmEps0Kappa0Block;
-using fmFilterMachiningBlock=fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock;
-using fmPcrcaBlock=fmCalcBlocksLibrary.Blocks.fmPc0rc0a0Block;
-using fmRmhceBlock=fmCalcBlocksLibrary.Blocks.fmRm0hceBlock;
-using fmSuspensionBlock=fmCalcBlocksLibrary.Blocks.fmSuspensionBlock;
+using fmCalcBlocksLibrary.Blocks;
 
 namespace FilterSimulation.fmFilterObjects
 {
@@ -197,26 +193,26 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
-        public fmFilterSimulation FindSimulation(fmRmhceBlock RmhceBlock)
+        public fmFilterSimulation FindSimulation(fmRm0hceBlock Rm0hceBlock)
         {
             foreach (fmFilterSimulation sim in GetAllSimulations())
-                if (sim.rm0HceBlock == RmhceBlock)
+                if (sim.rm0HceBlock == Rm0hceBlock)
                     return sim;
             return null;
         }
 
-        public fmFilterSimulation FindSimulation(fmEpsKappaBlock epsKappaBlock)
+        public fmFilterSimulation FindSimulation(fmEps0Kappa0Block eps0Kappa0Block)
         {
             foreach (fmFilterSimulation sim in GetAllSimulations())
-                if (sim.eps0Kappa0Block == epsKappaBlock)
+                if (sim.eps0Kappa0Block == eps0Kappa0Block)
                     return sim;
             return null;
         }
 
-        public fmFilterSimulation FindSimulation(fmPcrcaBlock pcrcaBlock)
+        public fmFilterSimulation FindSimulation(fmPc0rc0a0Block pc0rc0a0Block)
         {
             foreach (fmFilterSimulation sim in GetAllSimulations())
-                if (sim.pc0rc0a0Block == pcrcaBlock)
+                if (sim.pc0rc0a0Block == pc0rc0a0Block)
                     return sim;
             return null;
         }

@@ -1,138 +1,82 @@
 using fmCalculationLibrary;
 using fmCalculationLibrary.Equations;
+using System.Collections.Generic;
 
 namespace fmCalculatorsLibrary
 {
     public class fmSuspensionCalculator : fmBaseCalculator
     {
-        public enum CalculationOptions
+        public enum SuspensionCalculationOptions
         {
-            RHOF_CALCULATED_CM_INPUT,
-            RHOF_CALCULATED_CV_INPUT,
-            RHOF_CALCULATED_C_INPUT,
-            RHOS_CALCULATED_CM_INPUT,
-            RHOS_CALCULATED_CV_INPUT,
-            RHOS_CALCULATED_C_INPUT,
-            RHOSUS_CALCULATED_CM_INPUT,
-            RHOSUS_CALCULATED_CV_INPUT,
-            RHOSUS_CALCULATED_C_INPUT,
+            RHOF_CALCULATED,
+            RHOS_CALCULATED,
+            RHOSUS_CALCULATED,
             CM_CV_C_CALCULATED
         }
-        public class fmVariables
-        {
-            public fmValue rho_f;
-            public fmValue rho_s;
-            public fmValue rho_sus;
-            public fmValue Cm;
-            public fmValue Cv;
-            public fmValue C;
-        }
+        public SuspensionCalculationOptions calculationOption;
 
-        public CalculationOptions calculationOption;
-        public fmVariables variables = new fmVariables();
+        public fmSuspensionCalculator(List<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
 
         override public void DoCalculations()
         {
-            bool CmIsInputed = calculationOption == CalculationOptions.RHOF_CALCULATED_CM_INPUT
-                || calculationOption == CalculationOptions.RHOS_CALCULATED_CM_INPUT
-                || calculationOption == CalculationOptions.RHOSUS_CALCULATED_CM_INPUT;
-
-            bool CvIsInputed = calculationOption == CalculationOptions.RHOF_CALCULATED_CV_INPUT
-                || calculationOption == CalculationOptions.RHOS_CALCULATED_CV_INPUT
-                || calculationOption == CalculationOptions.RHOSUS_CALCULATED_CV_INPUT;
-
-            bool CIsInputed = calculationOption == CalculationOptions.RHOF_CALCULATED_C_INPUT
-                || calculationOption == CalculationOptions.RHOS_CALCULATED_C_INPUT
-                || calculationOption == CalculationOptions.RHOSUS_CALCULATED_C_INPUT;
+            fmCalculationVariableParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter C = variables[fmGlobalParameter.C] as fmCalculationVariableParameter;
+            
+            System.Exception NoCIsInputed = new System.Exception("Some of Cm, Cv or must be inputed");
 
             switch (calculationOption)
             {
-                case CalculationOptions.RHOF_CALCULATED_CM_INPUT:
+                case SuspensionCalculationOptions.RHOF_CALCULATED:
                     {
-                        variables.rho_f = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_Cm(variables.rho_s, variables.rho_sus, variables.Cm);
+                        if (Cm.isInputed)
+                            rho_f.value = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_Cm(rho_s.value, rho_sus.value, Cm.value);
+                        else if (Cv.isInputed)
+                            rho_f.value = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_Cv(rho_s.value, rho_sus.value, Cv.value);
+                        else if (C.isInputed)
+                            rho_f.value = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_C(rho_s.value, rho_sus.value, C.value);
+                        else 
+                            throw NoCIsInputed;
                         break;
                     }
-                case CalculationOptions.RHOF_CALCULATED_CV_INPUT:
+                case SuspensionCalculationOptions.RHOS_CALCULATED:
                     {
-                        variables.rho_f = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_Cv(variables.rho_s, variables.rho_sus, variables.Cv);
+                        if (Cm.isInputed)
+                            rho_s.value = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_Cm(rho_f.value, rho_sus.value, Cm.value);
+                        else if (Cv.isInputed)
+                            rho_s.value = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_Cv(rho_f.value, rho_sus.value, Cv.value);
+                        else if (C.isInputed)
+                            rho_s.value = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_C(rho_f.value, rho_sus.value, C.value);
+                        else throw 
+                            NoCIsInputed;
                         break;
                     }
-                case CalculationOptions.RHOF_CALCULATED_C_INPUT:
+                case SuspensionCalculationOptions.RHOSUS_CALCULATED:
                     {
-                        variables.rho_f = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_C(variables.rho_s, variables.rho_sus, variables.C);
+                        if (Cm.isInputed)
+                            rho_sus.value = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cm(rho_f.value, rho_s.value, Cm.value);
+                        else if (Cv.isInputed)
+                            rho_sus.value = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cv(rho_f.value, rho_s.value, Cv.value);
+                        else if (C.isInputed)
+                            rho_sus.value = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_C(rho_f.value, rho_s.value, C.value);
+                        else 
+                            throw NoCIsInputed;
                         break;
                     }
-                case CalculationOptions.RHOS_CALCULATED_CM_INPUT:
-                    {
-                        variables.rho_s = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_Cm(variables.rho_f, variables.rho_sus, variables.Cm);
-                        break;
-                    }
-                case CalculationOptions.RHOS_CALCULATED_CV_INPUT:
-                    {
-                        variables.rho_s = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_Cv(variables.rho_f, variables.rho_sus, variables.Cv);
-                        break;
-                    }
-                case CalculationOptions.RHOS_CALCULATED_C_INPUT:
-                    {
-                        variables.rho_s = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_C(variables.rho_f, variables.rho_sus, variables.C);
-                        break;
-                    }
-                case CalculationOptions.RHOSUS_CALCULATED_CM_INPUT:
-                    {
-                        variables.rho_sus = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cm(variables.rho_f, variables.rho_s, variables.Cm);
-                        break;
-                    }
-                case CalculationOptions.RHOSUS_CALCULATED_CV_INPUT:
-                    {
-                        variables.rho_sus = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cv(variables.rho_f, variables.rho_s, variables.Cv);
-                        break;
-                    }
-                case CalculationOptions.RHOSUS_CALCULATED_C_INPUT:
-                    {
-                        variables.rho_sus = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_C(variables.rho_f, variables.rho_s, variables.C);
-                        break;
-                    }
-                case CalculationOptions.CM_CV_C_CALCULATED:
+                case SuspensionCalculationOptions.CM_CV_C_CALCULATED:
                     {
                         break;
                     }
+                default:
+                    throw new System.Exception("Unknown calculation option");
             }
 
-            if (!CmIsInputed) variables.Cm = SuspensionEquations.Eval_Cm_From_rho(variables.rho_f, variables.rho_s, variables.rho_sus);
-            if (!CvIsInputed) variables.Cv = SuspensionEquations.Eval_Cv_From_rho(variables.rho_f, variables.rho_s, variables.rho_sus);
-            if (!CIsInputed) variables.C = SuspensionEquations.Eval_C_From_rho(variables.rho_f, variables.rho_s, variables.rho_sus);
-        }
-
-        public fmSuspensionCalculator(CalculationOptions defaultCalculationOption)
-        {
-            calculationOption = defaultCalculationOption;
-        }
-
-        static public void Process(CalculationOptions calculationOption,
-            ref fmValue rho_f,
-            ref fmValue rho_s,
-            ref fmValue rho_sus,
-            ref fmValue Cm,
-            ref fmValue Cv,
-            ref fmValue C)
-        {
-            fmSuspensionCalculator c = new fmSuspensionCalculator(calculationOption);
-
-            c.variables.rho_f = rho_f;
-            c.variables.rho_s = rho_s;
-            c.variables.rho_sus = rho_sus;
-            c.variables.Cm = Cm;
-            c.variables.Cv = Cv;
-            c.variables.C = C;
-            
-            c.DoCalculations();
-
-            rho_f = c.variables.rho_f;
-            rho_s = c.variables.rho_s;
-            rho_sus = c.variables.rho_sus;
-            Cm = c.variables.Cm;
-            Cv = c.variables.Cv;
-            C = c.variables.C;
+            if (!Cm.isInputed) Cm.value = SuspensionEquations.Eval_Cm_From_rho(rho_f.value, rho_s.value, rho_sus.value);
+            if (!Cv.isInputed) Cv.value = SuspensionEquations.Eval_Cv_From_rho(rho_f.value, rho_s.value, rho_sus.value);
+            if (!C.isInputed) C.value = SuspensionEquations.Eval_C_From_rho(rho_f.value, rho_s.value, rho_sus.value);
         }
     }
 }

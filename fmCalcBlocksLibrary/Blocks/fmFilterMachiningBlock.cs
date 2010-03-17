@@ -10,55 +10,15 @@ using fmCalculatorsLibrary;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public enum CalculationOption
-    {
-        // Standart -- In this case we have always the area A as input 
-        // and the (Qsus, Qmsus, Qms) as calculated.
-        [Description("1: A, Dp, (sf/tr), (n/tc)")]
-        Standart1,
-        
-        [Description("2: A, Dp, (sf/tr), tf")]
-        Standart2,
-        
-        [Description("3: A, Dp, (n/tc/tr), tf")]
-        Standart3,
-        
-        [Description("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)")]
-        Standart4,
-        
-        //Standart5,  // A, hc, (sf/tr), tf           -- input
-        //Standart6,  // A, hc, (n/tc/tr), tf       -- input
-
-        [Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)")]
-        Standart7,
-
-        [Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
-        Standart8,
-        
-        // Design -- In this case we have always the (Qsus, Qmsus, Qms) as input 
-        // and the filter area A is calculated 
-        [Description("1: Q, Dp, hc, (n/tc/tr)")]
-        Design1,
-        //Design2,    // Q, Dp, hc, (sf/tr)           -- input 
-        //Design3,    // Q, sf, (n/tc/tr), hc       -- input 
-
-        // Optimization -- In this case we have always the filter 
-        // area A and the (Qsus, Qmsus, Qms) as input
-        [Description("1: A, Q, Dp, (sf/tr)")]
-        Optimization1
-        //Optimization2,  // A, Q, hc, (sf/tr)           -- input
-        //Optimization3   // A, Q, (n/tc), (sf/tr)       -- input
-    }
-    
     static public class CalculationOptionHelper
     {
-        public static List<fmGlobalParameter> GetParametersListThatCanBeInput(CalculationOption calculationOption)
+        public static List<fmGlobalParameter> GetParametersListThatCanBeInput(fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption)
         {
             List<fmGlobalParameter> result = new List<fmGlobalParameter>();
             switch (calculationOption)
             {
                 //[Description("1: A, Dp, (sf/tr), (n/tc)")]
-                case CalculationOption.Standart1:
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.sf);
@@ -68,7 +28,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("2: A, Dp, (sf/tr), tf")]
-                case CalculationOption.Standart2:
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart2:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.sf);
@@ -77,7 +37,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("3: A, Dp, (n/tc/tr), tf")]
-                case CalculationOption.Standart3:
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart3:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.n);
@@ -85,9 +45,9 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tr);
                     result.Add(fmGlobalParameter.tf);
                     break;
-        
+
                 //[Description("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)")]
-                case CalculationOption.Standart4:
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.Vf);
@@ -100,9 +60,9 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.n);
                     result.Add(fmGlobalParameter.tc);
                     break;
-        
+
                 //[Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)")]
-                case CalculationOption.Standart7:
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart7:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.hc);
@@ -114,9 +74,9 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.tr);
                     break;
-        
+
                 //[Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
-                case CalculationOption.Standart8:
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.hc);
@@ -129,9 +89,9 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     result.Add(fmGlobalParameter.tr);
                     break;
-        
+
                 //[Description("1: Q, Dp, hc, (n/tc/tr)")]
-                case CalculationOption.Design1:
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1:
                     result.Add(fmGlobalParameter.Qms);
                     result.Add(fmGlobalParameter.Qmsus);
                     result.Add(fmGlobalParameter.Qsus);
@@ -141,9 +101,9 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     result.Add(fmGlobalParameter.tr);
                     break;
-        
+
                 //[Description("1: A, Q, Dp, (sf/tr)")]
-                case CalculationOption.Optimization1:
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qms);
                     result.Add(fmGlobalParameter.Qmsus);
@@ -162,69 +122,69 @@ namespace fmCalcBlocksLibrary.Blocks
     {
         public readonly fmCalculationOptionView calculationOptionView;
 
-        private readonly fmBlockParameter A;
-        private readonly fmBlockParameter Dp;
-        private readonly fmBlockParameter sf;
-        private readonly fmBlockParameter n;
-        private readonly fmBlockParameter tc;
-        private readonly fmBlockParameter tf;
-        private readonly fmBlockParameter tr;
-        private readonly fmBlockParameter hc;
-        private readonly fmBlockParameter hc_over_tf;
-        private readonly fmBlockParameter dhc_over_dt;
-        private readonly fmBlockParameter Mf;
-        private readonly fmBlockParameter Vf;
-        private readonly fmBlockParameter mf;
-        private readonly fmBlockParameter vf;
-        private readonly fmBlockParameter ms;
-        private readonly fmBlockParameter vs;
-        private readonly fmBlockParameter msus;
-        private readonly fmBlockParameter vsus;
-        private readonly fmBlockParameter mc;
-        private readonly fmBlockParameter vc;
-        private readonly fmBlockParameter Msus;
-        private readonly fmBlockParameter Vsus;
-        private readonly fmBlockParameter Vc;
-        private readonly fmBlockParameter Mc;
-        private readonly fmBlockParameter Ms;
-        private readonly fmBlockParameter Vs;
-        private readonly fmBlockParameter Qf;
-        private readonly fmBlockParameter Qf_d;
-        private readonly fmBlockParameter Qs;
-        private readonly fmBlockParameter Qs_d;
-        private readonly fmBlockParameter Qc;
-        private readonly fmBlockParameter Qc_d;
-        private readonly fmBlockParameter Qsus;
-        private readonly fmBlockParameter Qsus_d;
-        private readonly fmBlockParameter Qmsus;
-        private readonly fmBlockParameter Qmsus_d;
-        private readonly fmBlockParameter Qms;
-        private readonly fmBlockParameter Qms_d;
-        private readonly fmBlockParameter Qmf;
-        private readonly fmBlockParameter Qmf_d;
-        private readonly fmBlockParameter Qmc;
-        private readonly fmBlockParameter Qmc_d;
-        private readonly fmBlockParameter qf;
-        private readonly fmBlockParameter qf_d;
-        private readonly fmBlockParameter qs;
-        private readonly fmBlockParameter qs_d;
-        private readonly fmBlockParameter qc;
-        private readonly fmBlockParameter qc_d;
-        private readonly fmBlockParameter qsus;
-        private readonly fmBlockParameter qsus_d;
-        private readonly fmBlockParameter qmsus;
-        private readonly fmBlockParameter qmsus_d;
-        private readonly fmBlockParameter qms;
-        private readonly fmBlockParameter qms_d;
-        private readonly fmBlockParameter qmf;
-        private readonly fmBlockParameter qmf_d;
-        private readonly fmBlockParameter qmc;
-        private readonly fmBlockParameter qmc_d;
-        private readonly fmBlockParameter eps;
-        private readonly fmBlockParameter kappa;
-        private readonly fmBlockParameter Pc;
-        private readonly fmBlockParameter rc;
-        private readonly fmBlockParameter a;
+        private readonly fmBlockVariableParameter A;
+        private readonly fmBlockVariableParameter Dp;
+        private readonly fmBlockVariableParameter sf;
+        private readonly fmBlockVariableParameter n;
+        private readonly fmBlockVariableParameter tc;
+        private readonly fmBlockVariableParameter tf;
+        private readonly fmBlockVariableParameter tr;
+        private readonly fmBlockVariableParameter hc;
+        private readonly fmBlockVariableParameter hc_over_tf;
+        private readonly fmBlockVariableParameter dhc_over_dt;
+        private readonly fmBlockVariableParameter Mf;
+        private readonly fmBlockVariableParameter Vf;
+        private readonly fmBlockVariableParameter mf;
+        private readonly fmBlockVariableParameter vf;
+        private readonly fmBlockVariableParameter ms;
+        private readonly fmBlockVariableParameter vs;
+        private readonly fmBlockVariableParameter msus;
+        private readonly fmBlockVariableParameter vsus;
+        private readonly fmBlockVariableParameter mc;
+        private readonly fmBlockVariableParameter vc;
+        private readonly fmBlockVariableParameter Msus;
+        private readonly fmBlockVariableParameter Vsus;
+        private readonly fmBlockVariableParameter Vc;
+        private readonly fmBlockVariableParameter Mc;
+        private readonly fmBlockVariableParameter Ms;
+        private readonly fmBlockVariableParameter Vs;
+        private readonly fmBlockVariableParameter Qf;
+        private readonly fmBlockVariableParameter Qf_d;
+        private readonly fmBlockVariableParameter Qs;
+        private readonly fmBlockVariableParameter Qs_d;
+        private readonly fmBlockVariableParameter Qc;
+        private readonly fmBlockVariableParameter Qc_d;
+        private readonly fmBlockVariableParameter Qsus;
+        private readonly fmBlockVariableParameter Qsus_d;
+        private readonly fmBlockVariableParameter Qmsus;
+        private readonly fmBlockVariableParameter Qmsus_d;
+        private readonly fmBlockVariableParameter Qms;
+        private readonly fmBlockVariableParameter Qms_d;
+        private readonly fmBlockVariableParameter Qmf;
+        private readonly fmBlockVariableParameter Qmf_d;
+        private readonly fmBlockVariableParameter Qmc;
+        private readonly fmBlockVariableParameter Qmc_d;
+        private readonly fmBlockVariableParameter qf;
+        private readonly fmBlockVariableParameter qf_d;
+        private readonly fmBlockVariableParameter qs;
+        private readonly fmBlockVariableParameter qs_d;
+        private readonly fmBlockVariableParameter qc;
+        private readonly fmBlockVariableParameter qc_d;
+        private readonly fmBlockVariableParameter qsus;
+        private readonly fmBlockVariableParameter qsus_d;
+        private readonly fmBlockVariableParameter qmsus;
+        private readonly fmBlockVariableParameter qmsus_d;
+        private readonly fmBlockVariableParameter qms;
+        private readonly fmBlockVariableParameter qms_d;
+        private readonly fmBlockVariableParameter qmf;
+        private readonly fmBlockVariableParameter qmf_d;
+        private readonly fmBlockVariableParameter qmc;
+        private readonly fmBlockVariableParameter qmc_d;
+        private readonly fmBlockVariableParameter eps;
+        private readonly fmBlockVariableParameter kappa;
+        private readonly fmBlockVariableParameter Pc;
+        private readonly fmBlockVariableParameter rc;
+        private readonly fmBlockVariableParameter a;
 
         /*
          * 220 200 230
@@ -268,14 +228,14 @@ namespace fmCalcBlocksLibrary.Blocks
         //private readonly fmBlockParameterGroup a_group = new fmBlockParameterGroup();
 
         //private fmValue hce_value;
-        
+
         //private fmValue Pc0_value;
         //private fmValue nc_value;
-        
+
         //private fmValue eps0_value;
         //private fmValue kappa0_value;
         //private fmValue ne_value;
-        
+
         //private fmValue etaf_value;
         //private fmValue rho_f_value;
         //private fmValue rho_s_value; 
@@ -294,12 +254,12 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private fmBlockConstantParameter etaf;
         private fmBlockConstantParameter rho_f;
-        private fmBlockConstantParameter rho_s; 
+        private fmBlockConstantParameter rho_s;
         private fmBlockConstantParameter rho_sus;
         private fmBlockConstantParameter Cm;
         private fmBlockConstantParameter Cv;
-        
-        private CalculationOption calculationOption;
+
+        private fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption;
 
         public fmValue A_Value
         {
@@ -601,7 +561,7 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Pc0.value; }
             set { Pc0.value = value; }
         }
-       public fmValue eps0_Value
+        public fmValue eps0_Value
         {
             get { return eps0.value; }
             set { eps0.value = value; }
@@ -651,7 +611,7 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Cv.value; }
             set { Cv.value = value; }
         }
-        public CalculationOption CalculationOption
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption CalculationOption
         {
             get { return calculationOption; }
             set { calculationOption = value; }
@@ -659,92 +619,18 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculations()
         {
-            fmCalculatorsLibrary.fmFilterMachiningCalculator.CalculationOptions calcOption = GetCalculatorCalculationOption();
-
-            fmCalculatorsLibrary.fmFilterMachiningCalculator.Process(calcOption,
-                                                                     ref A.value,
-                                                                     ref Dp.value,
-                                                                     ref sf.value,
-                                                                     ref n.value,
-                                                                     ref tc.value,
-                                                                     ref tf.value,
-                                                                     ref tr.value,
-                                                                     ref hc_over_tf.value,
-                                                                     ref dhc_over_dt.value,
-                                                                     ref hc.value,
-                                                                     ref Qf.value,
-                                                                     ref Qf_d.value,
-                                                                     ref Qs.value,
-                                                                     ref Qs_d.value,
-                                                                     ref Qc.value,
-                                                                     ref Qc_d.value,
-                                                                     ref Qsus.value,
-                                                                     ref Qsus_d.value,
-                                                                     ref Qmsus.value,
-                                                                     ref Qmsus_d.value,
-                                                                     ref Qms.value,
-                                                                     ref Qms_d.value,
-                                                                     ref Qmf.value,
-                                                                     ref Qmf_d.value,
-                                                                     ref Qmc.value,
-                                                                     ref Qmc_d.value,
-                                                                     ref qf.value,
-                                                                     ref qf_d.value,
-                                                                     ref qs.value,
-                                                                     ref qs_d.value,
-                                                                     ref qc.value,
-                                                                     ref qc_d.value,
-                                                                     ref qsus.value,
-                                                                     ref qsus_d.value,
-                                                                     ref qmsus.value,
-                                                                     ref qmsus_d.value,
-                                                                     ref qms.value,
-                                                                     ref qms_d.value,
-                                                                     ref qmf.value,
-                                                                     ref qmf_d.value,
-                                                                     ref qmc.value,
-                                                                     ref qmc_d.value,
-                                                                     ref Vsus.value,
-                                                                     ref Mf.value,
-                                                                     ref Vf.value,
-                                                                     ref mf.value,
-                                                                     ref vf.value,
-                                                                     ref ms.value,
-                                                                     ref vs.value,
-                                                                     ref msus.value,
-                                                                     ref vsus.value,
-                                                                     ref mc.value,
-                                                                     ref vc.value,
-                                                                     ref Vc.value,
-                                                                     ref Mc.value,
-                                                                     ref Ms.value,
-                                                                     ref Vs.value,
-                                                                     ref Msus.value,
-                                                                     ref eps.value,
-                                                                     ref kappa.value,
-                                                                     ref Pc.value,
-                                                                     ref rc.value,
-                                                                     ref a.value,
-                                                                     eps0.value,
-                                                                     kappa0.value,
-                                                                     Pc0.value,
-                                                                     etaf.value,
-                                                                     rho_f.value,
-                                                                     rho_s.value,
-                                                                     rho_sus.value,
-                                                                     Cv.value,
-                                                                     Cm.value,
-                                                                     ne.value,
-                                                                     nc.value,
-                                                                     hce.value);
+            fmFilterMachiningCalculator filterMachinigCalculator =
+                new fmFilterMachiningCalculator(AllParameters);
+            filterMachinigCalculator.calculationOption = calculationOption;
+            filterMachinigCalculator.DoCalculations();
         }
 
-        public List<fmBlockParameter> GetParametersByGroup (fmBlockParameterGroup group)
+        public List<fmBlockVariableParameter> GetParametersByGroup(fmBlockParameterGroup group)
         {
-            List<fmBlockParameter> result = new List<fmBlockParameter>();
-            if(group!=null)
+            List<fmBlockVariableParameter> result = new List<fmBlockVariableParameter>();
+            if (group != null)
             {
-                foreach (fmBlockParameter p in parameters)
+                foreach (fmBlockVariableParameter p in parameters)
                 {
                     if (p.group != null && p.group == group)
                         result.Add(p);
@@ -753,528 +639,12 @@ namespace fmCalcBlocksLibrary.Blocks
             return result;
         }
 
-
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOption()
-        {
-            fmFilterMachiningCalculator.CalculationOptions calcOption;
-
-            calcOption = GetCalculatorCalculationOptionStandart();
-            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
-            {
-                return calcOption;
-            }
-
-            calcOption = GetCalculatorCalculationOptionDesign();
-            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
-            {
-                return calcOption;
-            }
-
-            calcOption = GetCalculatorCalculationOptionOptimization();
-            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
-            {
-                return calcOption;
-            }
-
-            throw new Exception("Not processed combination of inputs"); 
-        }
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionOptimization()
-        {
-            List<fmBlockParameter> inputParameters = GetInputedParameters();
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qms, Dp, sf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qsus, Dp, sf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qmsus, Dp, sf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qms, Dp, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qsus, Dp, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Qmsus, Dp, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT;
-            }
-
-            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
-        }
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionDesign()
-        {
-            List<fmBlockParameter> inputParameters = GetInputedParameters();
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qms, Dp, hc, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qsus, Dp, hc, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qmsus, Dp, hc, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qms, Dp, hc, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qsus, Dp, hc, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qmsus, Dp, hc, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qms, Dp, hc, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qms_Dp_hc_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qsus, Dp, hc, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { Qmsus, Dp, hc, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.DESIGN1_Qmsus_Dp_hc_tr_INPUT;
-            }
-
-            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
-        }
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart()
-        {
-            fmFilterMachiningCalculator.CalculationOptions calcOption;
-
-            calcOption = GetCalculatorCalculationOptionStandart1();
-            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
-            {
-                return calcOption;
-            }
-
-            calcOption = GetCalculatorCalculationOptionStandart2();
-            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
-            {
-                return calcOption;
-            }
-
-            calcOption = GetCalculatorCalculationOptionStandart3();
-            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
-            {
-                return calcOption;
-            }
-
-            calcOption = GetCalculatorCalculationOptionStandart4();
-            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
-            {
-                return calcOption;
-            }
-
-            calcOption = GetCalculatorCalculationOptionStandart7();
-            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
-            {
-                return calcOption;
-            }
-
-            calcOption = GetCalculatorCalculationOptionStandart8();
-            if (calcOption != fmFilterMachiningCalculator.CalculationOptions.UNDEFINED)
-            {
-                return calcOption;
-            }
-
-            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
-        }
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart8()
-        {
-            List<fmBlockParameter> inputParameters = GetInputedParameters();
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vf_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vf_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Mf, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Mf_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Mf, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Mf_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Mf, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Mf_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vsus, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vsus_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vsus, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vsus_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vsus, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Vsus_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Msus, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Msus_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Msus, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Msus_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Msus, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Msus_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Ms_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Ms_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART8_A_Dp_Ms_tr_INPUT;
-            }
-
-            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
-        }
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart7()
-        {
-            List<fmBlockParameter> inputParameters = GetInputedParameters();
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, sf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, hc, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, sf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vf, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Mf, sf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Mf_sf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Mf, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vsus, sf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Vsus_sf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Vsus, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Vsus_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Msus, sf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Msus_sf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Msus, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Msus_tr_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, sf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Ms_sf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, Ms, tr }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART7_A_Dp_Ms_tr_INPUT;
-            }
-
-            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
-        }
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart4()
-        {
-            List<fmBlockParameter> inputParameters = GetInputedParameters();
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, hc, sf, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, hc, sf, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_sf_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, hc, tr, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_tr_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, hc, tr, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_hc_tr_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vf, sf, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_sf_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vf, sf, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vf, tr, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_tr_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vf, tr, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Mf, sf, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_sf_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Mf, sf, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Mf, tr, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_tr_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Mf, tr, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vsus, sf, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vsus_sf_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vsus, sf, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vsus_sf_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vsus, tr, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vsus_tr_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Vsus, tr, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Vsus_tr_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Msus, sf, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Msus_sf_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Msus, sf, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Msus_sf_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Msus, tr, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Msus_tr_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Msus, tr, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Msus_tr_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Ms, sf, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Ms_sf_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Ms, sf, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Ms_sf_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Ms, tr, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Ms_tr_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Ms, tr, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART4_A_Ms_tr_tc_INPUT;
-            }
-
-            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
-        }
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart3()
-        {
-            List<fmBlockParameter> inputParameters = GetInputedParameters();
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, n, tf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_n_tf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tc, tf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tr, tf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
-            }
-
-            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
-        }
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart2()
-        {
-            List<fmBlockParameter> inputParameters = GetInputedParameters();
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, sf, tf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tr, tf }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT;
-            }
-
-            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
-        }
-
-        private fmFilterMachiningCalculator.CalculationOptions GetCalculatorCalculationOptionStandart1()
-        {
-            List<fmBlockParameter> inputParameters = GetInputedParameters();
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, sf, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tr, n }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_n_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, sf, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT;
-            }
-
-            if (IsSameLists(inputParameters, new fmBlockParameter[] { A, Dp, tr, tc }))
-            {
-                return fmFilterMachiningCalculator.CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT;
-            }
-
-            return fmFilterMachiningCalculator.CalculationOptions.UNDEFINED;
-        }
-
-        private bool IsSameLists(List<fmBlockParameter> a, fmBlockParameter [] b)
+        private bool IsSameLists(List<fmBlockVariableParameter> a, fmBlockVariableParameter[] b)
         {
             return IsSameLists(a, GetParametersListFromArray(b));
         }
 
-        private bool IsSameLists(List<fmBlockParameter> a, List<fmBlockParameter> b)
+        private bool IsSameLists(List<fmBlockVariableParameter> a, List<fmBlockVariableParameter> b)
         {
             if (a.Count != b.Count)
             {
@@ -1292,16 +662,16 @@ namespace fmCalcBlocksLibrary.Blocks
             return true;
         }
 
-        private List<fmBlockParameter> GetParametersListFromArray(fmBlockParameter[] array)
+        private List<fmBlockVariableParameter> GetParametersListFromArray(fmBlockVariableParameter[] array)
         {
-            List<fmBlockParameter> list = new List<fmBlockParameter>();
-            foreach (fmBlockParameter p in array)
+            List<fmBlockVariableParameter> list = new List<fmBlockVariableParameter>();
+            foreach (fmBlockVariableParameter p in array)
             {
                 list.Add(p);
             }
 
-            List<fmBlockParameter> result = new List<fmBlockParameter>();
-            foreach (fmBlockParameter p in parameters)
+            List<fmBlockVariableParameter> result = new List<fmBlockVariableParameter>();
+            foreach (fmBlockVariableParameter p in parameters)
             {
                 if (list.Contains(p))
                 {
@@ -1312,10 +682,10 @@ namespace fmCalcBlocksLibrary.Blocks
             return result;
         }
 
-        private List<fmBlockParameter> GetInputedParameters()
+        private List<fmBlockVariableParameter> GetInputedParameters()
         {
-            List<fmBlockParameter> result = new List<fmBlockParameter>();
-            foreach (fmBlockParameter p in parameters)
+            List<fmBlockVariableParameter> result = new List<fmBlockVariableParameter>();
+            foreach (fmBlockVariableParameter p in parameters)
             {
                 if (p.isInputed)
                 {
@@ -1325,14 +695,9 @@ namespace fmCalcBlocksLibrary.Blocks
             return result;
         }
 
-        //private CalculationOption GetBlockCalculationOption()
-        //{
-        //    return calculationOptionView.GetSelectedOption();
-        //}
-
         public void UpdateCellsBackColor()
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
             {
                 if (p.cell != null)
                 {
@@ -1346,10 +711,10 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public fmFilterMachiningBlock(
             fmCalculationOptionView calculationOptionView)
-            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,null, null, null, null, null, null, null, null, null, null, null, null, null)
+            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
         {
         }
-        
+
         public fmFilterMachiningBlock(
             fmCalculationOptionView calculationOptionView,
             DataGridViewCell A_Cell,
@@ -1490,7 +855,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref ne, fmGlobalParameter.ne);
             AddConstantParameter(ref etaf, fmGlobalParameter.eta_f);
             AddConstantParameter(ref rho_f, fmGlobalParameter.rho_f);
-            AddConstantParameter(ref rho_s, fmGlobalParameter.rho_s); 
+            AddConstantParameter(ref rho_s, fmGlobalParameter.rho_s);
             AddConstantParameter(ref rho_sus, fmGlobalParameter.rho_sus);
             AddConstantParameter(ref Cm, fmGlobalParameter.Cm);
             AddConstantParameter(ref Cv, fmGlobalParameter.Cv);
@@ -1507,12 +872,10 @@ namespace fmCalcBlocksLibrary.Blocks
 
                 UpdateGroups();
 
-                //CalculationOption calcOption = calculationOptionView.GetSelectedOption();
-                //List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calcOption);
                 List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(CalculationOption);
                 Dictionary<fmBlockParameterGroup, bool> groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
 
-                foreach (fmBlockParameter parameter in parameters)
+                foreach (fmBlockVariableParameter parameter in parameters)
                 {
                     if (parameter.group != null)
                     {
@@ -1520,18 +883,18 @@ namespace fmCalcBlocksLibrary.Blocks
                     }
                 }
 
-                foreach (fmBlockParameter parameter in parameters)
+                foreach (fmBlockVariableParameter parameter in parameters)
                 {
                     bool found = inputedParameters.Contains(parameter.globalParameter);
                     bool notUsedGroup = parameter.group == null ? true : !groupUsed[parameter.group];
-                    
+
                     parameter.isInputed = found && notUsedGroup;
-                    
+
                     if (parameter.group != null)
                     {
                         groupUsed[parameter.group] = true;
                     }
-                    
+
                     if (parameter.cell != null)
                     {
                         parameter.cell.ReadOnly = !found;
@@ -1543,35 +906,35 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
-        Dictionary<CalculationOption, Dictionary<fmBlockParameter, fmBlockParameterGroup>> table = null;
+        Dictionary<fmFilterMachiningCalculator.FilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>> table = null;
 
-        fmBlockParameterGroup WhatGroupOfParameterWithCalcOption(fmBlockParameter parameter, CalculationOption calcOption)
+        fmBlockParameterGroup WhatGroupOfParameterWithCalcOption(fmBlockVariableParameter parameter, fmFilterMachiningCalculator.FilterMachiningCalculationOption calcOption)
         {
             if (table == null)
             {
-                table = new Dictionary<CalculationOption, Dictionary<fmBlockParameter, fmBlockParameterGroup>>();
+                table = new Dictionary<fmFilterMachiningCalculator.FilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>>();
 
-                foreach (CalculationOption option in Enum.GetValues(typeof(CalculationOption)))
+                foreach (fmFilterMachiningCalculator.FilterMachiningCalculationOption option in Enum.GetValues(typeof(fmFilterMachiningCalculator.FilterMachiningCalculationOption)))
                 {
-                    table[option] = new Dictionary<fmBlockParameter, fmBlockParameterGroup>();
+                    table[option] = new Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>();
                 }
 
-                SetGroupsOfStandart1(table[CalculationOption.Standart1]);
-                SetGroupsOfStandart2(table[CalculationOption.Standart2]);
-                SetGroupsOfStandart3(table[CalculationOption.Standart3]);
-                SetGroupsOfStandart4(table[CalculationOption.Standart4]);
-                SetGroupsOfStandart7(table[CalculationOption.Standart7]);
-                SetGroupsOfStandart8(table[CalculationOption.Standart8]);
-                SetGroupsOfDesign1(table[CalculationOption.Design1]);
-                SetGroupsOfOptimization1(table[CalculationOption.Optimization1]);
+                SetGroupsOfStandart1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1]);
+                SetGroupsOfStandart2(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart2]);
+                SetGroupsOfStandart3(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart3]);
+                SetGroupsOfStandart4(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4]);
+                SetGroupsOfStandart7(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart7]);
+                SetGroupsOfStandart8(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8]);
+                SetGroupsOfDesign1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1]);
+                SetGroupsOfOptimization1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1]);
             }
 
             return table[calcOption][parameter];
         }
 
-        private void SetGroupsOfOptimization1(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        private void SetGroupsOfOptimization1(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
             //[Description("1: A, Q, Dp, (sf/tr)")]
@@ -1583,9 +946,9 @@ namespace fmCalcBlocksLibrary.Blocks
             table[tr] = sf_tr_group;
         }
 
-        private void SetGroupsOfDesign1(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        private void SetGroupsOfDesign1(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
             //[Description("1: Q, Dp, hc, (n/tc/tr)")]
@@ -1599,9 +962,9 @@ namespace fmCalcBlocksLibrary.Blocks
             table[tr] = n_tc_tr_group;
         }
 
-        private void SetGroupsOfStandart8(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        private void SetGroupsOfStandart8(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
             //[Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
@@ -1618,9 +981,9 @@ namespace fmCalcBlocksLibrary.Blocks
             table[tr] = n_tc_tr_group;
         }
 
-        private void SetGroupsOfStandart7(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        private void SetGroupsOfStandart7(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
             //[Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)")]
@@ -1635,9 +998,9 @@ namespace fmCalcBlocksLibrary.Blocks
             table[tr] = sf_tr_group;
         }
 
-        private void SetGroupsOfStandart4(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        private void SetGroupsOfStandart4(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
             //[Description("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)")]
@@ -1654,9 +1017,9 @@ namespace fmCalcBlocksLibrary.Blocks
             table[tc] = n_tc_group;
         }
 
-        private void SetGroupsOfStandart3(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        private void SetGroupsOfStandart3(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
             //[Description("3: A, Dp, (n/tc/tr), tf")]
@@ -1668,9 +1031,9 @@ namespace fmCalcBlocksLibrary.Blocks
             table[tf] = tf_group;
         }
 
-        private void SetGroupsOfStandart2(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        private void SetGroupsOfStandart2(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
             //[Description("2: A, Dp, (sf/tr), tf")]
@@ -1681,16 +1044,16 @@ namespace fmCalcBlocksLibrary.Blocks
             table[tf] = tf_group;
         }
 
-        private void SetGroupsOfStandart1(Dictionary<fmBlockParameter, fmBlockParameterGroup> table)
+        private void SetGroupsOfStandart1(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
             //[Description("1: A, Dp, (sf/tr), (n/tc)")]
             table[A] = A_group;
             table[Dp] = Dp_group;
             table[sf] = sf_tr_group;
-            table[tr] = sf_tr_group; 
+            table[tr] = sf_tr_group;
             table[n] = n_tc_group;
             table[tc] = n_tc_group;
         }
@@ -1698,12 +1061,12 @@ namespace fmCalcBlocksLibrary.Blocks
         public void UpdateGroups()
         {
             //CalculationOption calcOption = GetBlockCalculationOption();
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
             {
                 p.group = WhatGroupOfParameterWithCalcOption(p, CalculationOption);
             }
         }
-        
+
         private void AssignCalculationOptionView(ref fmCalculationOptionView localCalculationOptionView,
                                                  fmCalculationOptionView globalCalculationOptionView)
         {

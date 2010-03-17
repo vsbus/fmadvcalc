@@ -8,7 +8,7 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmPc0rc0a0Block : fmBaseBlock
     {
-        private fmBlockParameter Pc0, rc0, a0;
+        private fmBlockVariableParameter Pc0, rc0, a0;
         private fmBlockConstantParameter rho_s;
         private fmBlockConstantParameter eps;
 
@@ -42,31 +42,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculations()
         {
-            fmCalculatorsLibrary.fmPcrcaCalculator.CalculationOptions calculationOptions;
-
-            if (Pc0.isInputed)
-            {
-                calculationOptions = fmCalculatorsLibrary.fmPcrcaCalculator.CalculationOptions.PC_INPUT;
-            }
-            else if (rc0.isInputed)
-            {
-                calculationOptions = fmCalculatorsLibrary.fmPcrcaCalculator.CalculationOptions.RC_INPUT;
-            }
-            else if (a0.isInputed)
-            {
-                calculationOptions = fmCalculatorsLibrary.fmPcrcaCalculator.CalculationOptions.A_INPUT;
-            }
-            else
-            {
-                throw new Exception("nothing is inputed");
-            }
-
-            fmCalculatorsLibrary.fmPcrcaCalculator.Process(calculationOptions,
-                                                           ref Pc0.value,
-                                                           ref rc0.value,
-                                                           ref a0.value,
-                                                           rho_s.value,
-                                                           eps.value);
+            fmCalculatorsLibrary.fmPc0rc0a0Calculator Pc0rc0a0Calculator = new fmCalculatorsLibrary.fmPc0rc0a0Calculator(AllParameters);
+            Pc0rc0a0Calculator.DoCalculations();
         }
 
         public fmPc0rc0a0Block(

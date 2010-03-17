@@ -1,67 +1,29 @@
 using fmCalculationLibrary;
 using fmCalculationLibrary.Equations;
+using System.Collections.Generic;
 
 namespace fmCalculatorsLibrary
 {
     public class fmEpsKappaCalculator : fmBaseCalculator
     {
-        public enum CalculationOptions
-        {
-            EPS_IS_INPUT,
-            KAPPA_IS_INPUT
-        }
-        public class fmConstants
-        {
-            public fmValue Cv;
-        }
-        public class fmVariables
-        {
-            public fmValue eps;
-            public fmValue kappa;
-        }
-
-        public CalculationOptions calculationOption;
-        public fmConstants constants = new fmConstants();
-        public fmVariables variables = new fmVariables();
-
+        public fmEpsKappaCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
-            switch (calculationOption)
+            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            if (eps.isInputed)
             {
-                case CalculationOptions.EPS_IS_INPUT:
-                    {
-                        variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-                    }
-                    break;
-                case CalculationOptions.KAPPA_IS_INPUT:
-                    {
-                        variables.eps = EpsKappaEquations.Eval_eps_From_kappa_Cv(variables.kappa, constants.Cv);
-                    }
-                    break;
+                kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+            }
+            else if (kappa.isInputed)
+            {
+                eps.value = EpsKappaEquations.Eval_eps_From_kappa_Cv(kappa.value, Cv.value);
+            }
+            else
+            {
+                throw new System.Exception("One of eps and kappa must be inputed");
             }
         }
-
-        public fmEpsKappaCalculator(CalculationOptions defaultCalculationOption)
-        {
-            calculationOption = defaultCalculationOption;
-        }
-
-        static public void Process(CalculationOptions calculationOption,
-            ref fmValue eps,
-            ref fmValue kappa,
-            fmValue Cv)
-        {
-            fmEpsKappaCalculator c = new fmEpsKappaCalculator(calculationOption);
-
-            c.variables.eps = eps;
-            c.variables.kappa = kappa;
-            c.constants.Cv = Cv;
-
-            c.DoCalculations();
-
-            eps = c.variables.eps;
-            kappa = c.variables.kappa;
-        }
-
     }
 }

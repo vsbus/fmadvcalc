@@ -7,7 +7,7 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmEps0Kappa0WithneBlock : fmEps0Kappa0Block
     {
-        private fmBlockParameter ne;
+        private fmBlockVariableParameter ne;
 
         public fmValue ne_Value
         {
@@ -16,10 +16,10 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         public fmEps0Kappa0WithneBlock(
-            DataGridViewCell eps_Cell,
-            DataGridViewCell kappa_Cell,
+            DataGridViewCell eps0_Cell,
+            DataGridViewCell kappa0_Cell,
             DataGridViewCell ne_Cell)
-            : base(eps_Cell, kappa_Cell)
+            : base(eps0_Cell, kappa0_Cell)
         {
             AddParameter(ref ne, fmGlobalParameter.ne, ne_Cell, true);
         }

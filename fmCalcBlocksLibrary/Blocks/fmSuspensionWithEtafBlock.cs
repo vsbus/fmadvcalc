@@ -7,7 +7,7 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmSuspensionWithEtafBlock : fmSuspensionBlock
     {
-        private fmBlockParameter eta_f;
+        private fmBlockVariableParameter eta_f;
 
         private fmBlockParameterGroup eta_f_group = new fmBlockParameterGroup();
 

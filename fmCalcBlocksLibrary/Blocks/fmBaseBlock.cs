@@ -9,11 +9,11 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     abstract public class fmBaseBlock
     {
-        protected List<fmBlockParameter> parameters = new List<fmBlockParameter>();
+        protected List<fmBlockVariableParameter> parameters = new List<fmBlockVariableParameter>();
         protected List<fmBlockConstantParameter> constantParameters = new List<fmBlockConstantParameter>();
         protected bool processOnChange;
 
-        public List<fmBlockParameter> Parameters
+        public List<fmBlockVariableParameter> Parameters
         {
             get { return parameters; }
         }
@@ -21,10 +21,20 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             get { return constantParameters; }
         }
-        public fmBlockParameter GetParameterByName(string parameterName)
+        public List<fmCalculatorsLibrary.fmCalculationBaseParameter> AllParameters
         {
-            foreach (fmBlockParameter parameter in parameters)
-                if (parameter.name == parameterName)
+            get
+            {
+                List<fmCalculatorsLibrary.fmCalculationBaseParameter> result = new List<fmCalculatorsLibrary.fmCalculationBaseParameter>();
+                foreach (fmBlockVariableParameter p in parameters) result.Add(p);
+                foreach (fmBlockConstantParameter p in constantParameters) result.Add(p);
+                return result;
+            }
+        }
+        public fmBlockVariableParameter GetParameterByName(string parameterName)
+        {
+            foreach (fmBlockVariableParameter parameter in parameters)
+                if (parameter.globalParameter.name == parameterName)
                     return parameter;
             return null;
         }
@@ -37,7 +47,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
                 for (int i = 0; i < parameters.Count; ++i)
                 {
-                    string newVal = (parameters[i].value / parameters[i].unitFamily.CurrentUnit.Coef).ToString();
+                    string newVal = (parameters[i].value / parameters[i].globalParameter.unitFamily.CurrentUnit.Coef).ToString();
                     if (parameters[i].cell != null)
                     {
                         parameters[i].cell.Value = newVal;
@@ -57,12 +67,12 @@ namespace fmCalcBlocksLibrary.Blocks
                 fmDataGrid.fmDataGrid dataGrid = sender as fmDataGrid.fmDataGrid;
 
                 int parameterIndex;
-                fmBlockParameter enteredParameter = FindEnteredParameter(dataGrid.CurrentCell, out parameterIndex);
+                fmBlockVariableParameter enteredParameter = FindEnteredParameter(dataGrid.CurrentCell, out parameterIndex);
 
                 if (enteredParameter != null)
                 {
                     UpdateIsInputed(enteredParameter);
-                    enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.unitFamily.CurrentUnit.Coef;
+                    enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.globalParameter.unitFamily.CurrentUnit.Coef;
                     
                     if (ValuesChangedByUser != null)
                         ValuesChangedByUser(this, new fmBlockParameterEvetArgs(parameterIndex));
@@ -73,7 +83,7 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
-        private fmBlockParameter FindEnteredParameter(DataGridViewCell cell, out int parameterIndex)
+        private fmBlockVariableParameter FindEnteredParameter(DataGridViewCell cell, out int parameterIndex)
         {
             for (int i = 0; i < parameters.Count; ++i)
                 if (parameters[i].cell == cell)
@@ -86,12 +96,12 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         protected void AddParameter(
-            ref fmBlockParameter p,
+            ref fmBlockVariableParameter p,
             fmGlobalParameter globalParameter,
             DataGridViewCell cell,
             bool isInputedDefault)
         {
-            p = new fmBlockParameter(globalParameter, cell, isInputedDefault);
+            p = new fmBlockVariableParameter(globalParameter, cell, isInputedDefault);
             if (cell != null)
             {
                 fmDataGrid.fmDataGrid dataGrid = cell.DataGridView as fmDataGrid.fmDataGrid;
@@ -131,9 +141,9 @@ namespace fmCalcBlocksLibrary.Blocks
 
         abstract public void DoCalculations();
 
-        public void UpdateIsInputed(fmBlockParameter enteredParameter)
+        public void UpdateIsInputed(fmBlockVariableParameter enteredParameter)
         {
-            foreach (fmBlockParameter p in parameters)
+            foreach (fmBlockVariableParameter p in parameters)
             {
                 if (p.group != null 
                     && p.group == enteredParameter.group)
@@ -143,7 +153,7 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
         
-        protected void SetParameterCellBackColor(fmBlockParameter parameter, Color backColor)
+        protected void SetParameterCellBackColor(fmBlockVariableParameter parameter, Color backColor)
         {
             if (parameter.cell != null)
             {

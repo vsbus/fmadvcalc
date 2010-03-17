@@ -4,24 +4,32 @@ using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.BlockParameter
 {
-    public class fmBlockParameter
+    public class fmBlockVariableParameter : fmCalculatorsLibrary.fmCalculationVariableParameter
     {
-        public string name;
+        /// <summary>
+        /// cell where user can see a value of parameter or 
+        /// enter a new value
+        /// </summary>
         public DataGridViewCell cell;
-        public fmUnitFamily unitFamily;
-        public fmGlobalParameter globalParameter;
-        public fmValue value;
+
+        /// <summary>
+        /// group containes several parameters where 
+        /// one of them must be inputed and all others
+        /// are calculated
+        /// </summary>
         public fmBlockParameterGroup group;
-        private bool m_isInputed;
+
+
+        //private bool m_isInputed;
         public bool isInputed
         {
             get
             {
-                return m_isInputed;
+                return base.isInputed;
             }
             set
             {
-                m_isInputed = value;
+                base.isInputed = value;
                 if (cell != null)
                 {
                     cell.Style.ForeColor = value ? System.Drawing.Color.Blue : System.Drawing.Color.Black;
@@ -29,15 +37,12 @@ namespace fmCalcBlocksLibrary.BlockParameter
             }
         }
 
-        public fmBlockParameter(fmGlobalParameter globalParameter,
+        public fmBlockVariableParameter(fmGlobalParameter globalParameter,
                                 DataGridViewCell cell,
-                                bool isInputedDefault)
+                                bool isInputedDefault) : base (globalParameter)
         {
-            name = globalParameter.Name;
             this.group = null;
             this.cell = cell;
-            unitFamily = globalParameter.unitFamily;
-            this.globalParameter = globalParameter;
             isInputed = isInputedDefault;
         }
     }

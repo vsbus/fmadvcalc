@@ -7,3 +7,13 @@ exists container<string, fmGlobalParameter> parametersByName -- for getting para
 I need a function GetParametersListThatCanBeInput(calcluation Option)
 for a fmFilterMachiningBlock.CalculationOption
 for a fmFilterSimulation.CalculationOption (it is complex parameter of all options of sub blocks)
+
+
+In fmFilterSimulation 
+	I need to have next info about each parameter:
+		- fmValue value;
+		- bool isInputed;
+	I need to have info about calculation options for next parts:
+		- suspension parameters set {rho_f, rho_s, rho_sus, Cm, Cv, C};
+		- machine geometry parameters set {A, L, B, L/B}
+		- FilterMachining calculation option

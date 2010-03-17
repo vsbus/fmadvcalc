@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.Blocks;
+using fmCalculatorsLibrary;
 using FontStyle=System.Drawing.FontStyle;
 using System.Reflection;
 
@@ -15,11 +16,11 @@ namespace fmCalcBlocksLibrary.Controls
         private TreeNode SelectedLeaf
         {
             get { return m_SelectedLeaf; }
-            set 
+            set
             {
                 bool valueIsNew = value != m_SelectedLeaf;
-                m_SelectedLeaf = value; 
-                
+                m_SelectedLeaf = value;
+
                 bool runCheckedChangedForUpdatingCalculationOptions = valueIsNew && CheckedChangedForUpdatingCalculationOptions != null;
                 if (runCheckedChangedForUpdatingCalculationOptions)
                 {
@@ -49,23 +50,23 @@ namespace fmCalcBlocksLibrary.Controls
         private void CreateTree()
         {
             TreeNode standartNode = new TreeNode("Standart");
-            standartNode.Nodes.Add(GetEnumDescription(CalculationOption.Standart1));
-            standartNode.Nodes.Add(GetEnumDescription(CalculationOption.Standart2));
-            standartNode.Nodes.Add(GetEnumDescription(CalculationOption.Standart3));
-            standartNode.Nodes.Add(GetEnumDescription(CalculationOption.Standart4));
-            standartNode.Nodes.Add(GetEnumDescription(CalculationOption.Standart7));
-            standartNode.Nodes.Add(GetEnumDescription(CalculationOption.Standart8));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart2));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart3));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart7));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8));
             Nodes.Add(standartNode);
 
             TreeNode designNode = new TreeNode("Design");
-            designNode.Nodes.Add(GetEnumDescription(CalculationOption.Design1));
+            designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1));
             Nodes.Add(designNode);
 
             TreeNode optimizationNode = new TreeNode("Optimization");
-            optimizationNode.Nodes.Add(GetEnumDescription(CalculationOption.Optimization1));
+            optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1));
             Nodes.Add(optimizationNode);
 
-            SetSelectedOption(CalculationOption.Standart1);
+            SetSelectedOption(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1);
 
             TreeView_AfterSelect(this, new TreeViewEventArgs(SelectedLeaf));
         }
@@ -109,14 +110,14 @@ namespace fmCalcBlocksLibrary.Controls
             }
         }
 
-        public CalculationOption GetSelectedOption()
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption GetSelectedOption()
         {
             if (SelectedLeaf == null)
             {
                 throw new Exception("No calculation selected in fmCalculationOptionView");
             }
 
-            foreach (CalculationOption option in Enum.GetValues(typeof(CalculationOption)))
+            foreach (fmFilterMachiningCalculator.FilterMachiningCalculationOption option in Enum.GetValues(typeof(fmFilterMachiningCalculator.FilterMachiningCalculationOption)))
                 if (GetEnumDescription(option) == SelectedLeaf.Text)
                     return option;
 
@@ -136,7 +137,7 @@ namespace fmCalcBlocksLibrary.Controls
             return result;
         }
 
-        public void SetSelectedOption(CalculationOption option)
+        public void SetSelectedOption(fmFilterMachiningCalculator.FilterMachiningCalculationOption option)
         {
             foreach (TreeNode leaf in GetLeafs(Nodes))
                 if (GetEnumDescription(option) == leaf.Text)

@@ -7,7 +7,7 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmPc0rc0a0WithncBlock : fmPc0rc0a0Block
     {
-        private fmBlockParameter nc;
+        private fmBlockVariableParameter nc;
 
         public fmValue nc_Value
         {
@@ -16,11 +16,11 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         public fmPc0rc0a0WithncBlock(
-            DataGridViewCell Pc_Cell,
-            DataGridViewCell rc_Cell,
-            DataGridViewCell a_Cell,
+            DataGridViewCell Pc0_Cell,
+            DataGridViewCell rc0_Cell,
+            DataGridViewCell a0_Cell,
             DataGridViewCell nc_Cell)
-            : base(Pc_Cell, rc_Cell, a_Cell)
+            : base(Pc0_Cell, rc0_Cell, a0_Cell)
         {
             AddParameter(ref nc, fmGlobalParameter.nc, nc_Cell, true);
         }

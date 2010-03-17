@@ -1,24 +1,20 @@
 using System;
+using fmCalcBlocksLibrary.Blocks;
 using fmCalculationLibrary;
-using CalculationOption=fmCalcBlocksLibrary.Blocks.CalculationOption;
-using fmEpsKappaWithneBlock=fmCalcBlocksLibrary.Blocks.fmEps0Kappa0WithneBlock;
-using fmFilterMachiningBlock=fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock;
-using fmPcrcaWithncBlock=fmCalcBlocksLibrary.Blocks.fmPc0rc0a0WithncBlock;
-using fmRmhceBlock=fmCalcBlocksLibrary.Blocks.fmRm0hceBlock;
-using fmSuspensionWithEtafBlock=fmCalcBlocksLibrary.Blocks.fmSuspensionWithEtafBlock;
 using System.Collections.Generic;
+using fmCalculatorsLibrary;
 
 namespace FilterSimulation.fmFilterObjects
 {
     class fmFilterSimulationData
     {
         public string Name;
-        public Dictionary<fmCalcBlocksLibrary.fmGlobalParameter, fmValue> parameters = new Dictionary<fmCalcBlocksLibrary.fmGlobalParameter, fmValue>();
+        public Dictionary<fmGlobalParameter, fmValue> parameters = new Dictionary<fmGlobalParameter, fmValue>();
 
         //public fmValue eta_f
         //{
-        //    get { return parameters[fmCalcBlocksLibrary.fmGlobalParameter.eta_f]; }
-        //    set { parameters[fmCalcBlocksLibrary.fmGlobalParameter.eta_f]
+        //    get { return parameters[fmGlobalParameter.eta_f]; }
+        //    set { parameters[fmGlobalParameter.eta_f]
         //}
         //public fmValue rho_f;
         //public fmValue rho_s;
@@ -54,12 +50,12 @@ namespace FilterSimulation.fmFilterObjects
         //public fmValue tf;
         //public fmValue Vsus;
 
-        public CalculationOption calculationOption;
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
         {
             Name = from.Name;
-            foreach (fmCalcBlocksLibrary.fmGlobalParameter p in from.parameters.Keys)
+            foreach (fmGlobalParameter p in from.parameters.Keys)
             {
                 parameters[p] = from.parameters[p];
             }
@@ -67,96 +63,94 @@ namespace FilterSimulation.fmFilterObjects
 
         public fmFilterSimulationData()
         {
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.eta_f] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.rho_f] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.rho_s] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.rho_sus] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Cm] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Cv] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.C] = new fmValue();
+            parameters[fmGlobalParameter.eta_f] = new fmValue();
+            parameters[fmGlobalParameter.rho_f] = new fmValue();
+            parameters[fmGlobalParameter.rho_s] = new fmValue();
+            parameters[fmGlobalParameter.rho_sus] = new fmValue();
+            parameters[fmGlobalParameter.Cm] = new fmValue();
+            parameters[fmGlobalParameter.Cv] = new fmValue();
+            parameters[fmGlobalParameter.C] = new fmValue();
 
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.eps0] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.kappa0] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.ne] = new fmValue();
+            parameters[fmGlobalParameter.eps0] = new fmValue();
+            parameters[fmGlobalParameter.kappa0] = new fmValue();
+            parameters[fmGlobalParameter.ne] = new fmValue();
 
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Pc0] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.rc0] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.a0] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.nc] = new fmValue();
+            parameters[fmGlobalParameter.Pc0] = new fmValue();
+            parameters[fmGlobalParameter.rc0] = new fmValue();
+            parameters[fmGlobalParameter.a0] = new fmValue();
+            parameters[fmGlobalParameter.nc] = new fmValue();
 
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.eta_f] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.eta_f] = new fmValue();
+            parameters[fmGlobalParameter.eta_f] = new fmValue();
+            parameters[fmGlobalParameter.eta_f] = new fmValue();
 
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.hce] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Rm0] = new fmValue();
-            
+            parameters[fmGlobalParameter.hce] = new fmValue();
+            parameters[fmGlobalParameter.Rm0] = new fmValue();
 
+            parameters[fmGlobalParameter.A] = new fmValue();
+            parameters[fmGlobalParameter.Dp] = new fmValue();
+            parameters[fmGlobalParameter.hc] = new fmValue();
+            parameters[fmGlobalParameter.Mf] = new fmValue();
+            parameters[fmGlobalParameter.Ms] = new fmValue();
+            parameters[fmGlobalParameter.Msus] = new fmValue();
+            parameters[fmGlobalParameter.n] = new fmValue();
+            parameters[fmGlobalParameter.Qms] = new fmValue();
+            parameters[fmGlobalParameter.Qmsus] = new fmValue();
+            parameters[fmGlobalParameter.Qsus] = new fmValue();
+            parameters[fmGlobalParameter.sf] = new fmValue();
+            parameters[fmGlobalParameter.tc] = new fmValue();
+            parameters[fmGlobalParameter.tf] = new fmValue();
+            parameters[fmGlobalParameter.Vsus] = new fmValue();
 
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.A] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Dp] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.hc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Mf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Ms] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Msus] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.n] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qms] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qmsus] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qsus] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.sf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.tc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.tf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Vsus] = new fmValue();
+            parameters[fmGlobalParameter.eps] = new fmValue();
+            parameters[fmGlobalParameter.kappa] = new fmValue();
+            parameters[fmGlobalParameter.Pc] = new fmValue();
+            parameters[fmGlobalParameter.rc] = new fmValue();
+            parameters[fmGlobalParameter.a] = new fmValue();
 
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.eps] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.kappa] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Pc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.rc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.a] = new fmValue();
-
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.tr] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.hc_over_tf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.dhc_over_dt] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qf_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qs] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qs_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qc_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qsus_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qmsus_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qms_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qmf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qmf_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qmc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Qmc_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qf_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qs] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qs_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qc_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qsus] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qsus_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qmsus] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qmsus_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qms] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qms_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qmf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qmf_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qmc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.qmc_d] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Vf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.mf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.vf] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.ms] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.vs] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.msus] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.vsus] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.mc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.vc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Vc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Mc] = new fmValue();
-            parameters[fmCalcBlocksLibrary.fmGlobalParameter.Vs] = new fmValue();
+            parameters[fmGlobalParameter.tr] = new fmValue();
+            parameters[fmGlobalParameter.hc_over_tf] = new fmValue();
+            parameters[fmGlobalParameter.dhc_over_dt] = new fmValue();
+            parameters[fmGlobalParameter.Qf] = new fmValue();
+            parameters[fmGlobalParameter.Qf_d] = new fmValue();
+            parameters[fmGlobalParameter.Qs] = new fmValue();
+            parameters[fmGlobalParameter.Qs_d] = new fmValue();
+            parameters[fmGlobalParameter.Qc] = new fmValue();
+            parameters[fmGlobalParameter.Qc_d] = new fmValue();
+            parameters[fmGlobalParameter.Qsus_d] = new fmValue();
+            parameters[fmGlobalParameter.Qmsus_d] = new fmValue();
+            parameters[fmGlobalParameter.Qms_d] = new fmValue();
+            parameters[fmGlobalParameter.Qmf] = new fmValue();
+            parameters[fmGlobalParameter.Qmf_d] = new fmValue();
+            parameters[fmGlobalParameter.Qmc] = new fmValue();
+            parameters[fmGlobalParameter.Qmc_d] = new fmValue();
+            parameters[fmGlobalParameter.qf] = new fmValue();
+            parameters[fmGlobalParameter.qf_d] = new fmValue();
+            parameters[fmGlobalParameter.qs] = new fmValue();
+            parameters[fmGlobalParameter.qs_d] = new fmValue();
+            parameters[fmGlobalParameter.qc] = new fmValue();
+            parameters[fmGlobalParameter.qc_d] = new fmValue();
+            parameters[fmGlobalParameter.qsus] = new fmValue();
+            parameters[fmGlobalParameter.qsus_d] = new fmValue();
+            parameters[fmGlobalParameter.qmsus] = new fmValue();
+            parameters[fmGlobalParameter.qmsus_d] = new fmValue();
+            parameters[fmGlobalParameter.qms] = new fmValue();
+            parameters[fmGlobalParameter.qms_d] = new fmValue();
+            parameters[fmGlobalParameter.qmf] = new fmValue();
+            parameters[fmGlobalParameter.qmf_d] = new fmValue();
+            parameters[fmGlobalParameter.qmc] = new fmValue();
+            parameters[fmGlobalParameter.qmc_d] = new fmValue();
+            parameters[fmGlobalParameter.Vf] = new fmValue();
+            parameters[fmGlobalParameter.mf] = new fmValue();
+            parameters[fmGlobalParameter.vf] = new fmValue();
+            parameters[fmGlobalParameter.ms] = new fmValue();
+            parameters[fmGlobalParameter.vs] = new fmValue();
+            parameters[fmGlobalParameter.msus] = new fmValue();
+            parameters[fmGlobalParameter.vsus] = new fmValue();
+            parameters[fmGlobalParameter.mc] = new fmValue();
+            parameters[fmGlobalParameter.vc] = new fmValue();
+            parameters[fmGlobalParameter.Vc] = new fmValue();
+            parameters[fmGlobalParameter.Mc] = new fmValue();
+            parameters[fmGlobalParameter.Vs] = new fmValue();
         }
     }
 
@@ -170,9 +164,9 @@ namespace FilterSimulation.fmFilterObjects
         private bool m_Checked = true;
 
         public fmSuspensionWithEtafBlock susBlock;
-        public fmEpsKappaWithneBlock eps0Kappa0Block;
-        public fmPcrcaWithncBlock pc0rc0a0Block;
-        public fmRmhceBlock rm0HceBlock;
+        public fmEps0Kappa0WithneBlock eps0Kappa0Block;
+        public fmPc0rc0a0WithncBlock pc0rc0a0Block;
+        public fmRm0hceBlock rm0HceBlock;
         public fmFilterMachiningBlock filterMachiningBlock;
 
         public Guid Guid
@@ -215,7 +209,7 @@ namespace FilterSimulation.fmFilterObjects
             set { m_ParentSerie = value; }
         }
 
-        public Dictionary<fmCalcBlocksLibrary.fmGlobalParameter, fmValue> Parameters
+        public Dictionary<fmGlobalParameter, fmValue> Parameters
         {
             get { return Data.parameters; }
         }
@@ -582,7 +576,7 @@ namespace FilterSimulation.fmFilterObjects
         //        Data.Vsus = value;
         //    }
         //}
-        public CalculationOption CalculationOption
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption FilterMachiningCalculationOption
         {
             get { return Data.calculationOption; }
             set 
@@ -672,33 +666,33 @@ namespace FilterSimulation.fmFilterObjects
             //hce = simulation.hce;
             //Rm0 = simulation.Rm0;
 
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.eta_f] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.eta_f];
+            Parameters[fmGlobalParameter.eta_f] = simulation.Parameters[fmGlobalParameter.eta_f];
 
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.rho_f] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.rho_f];
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.rho_s] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.rho_s];
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.rho_sus] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.rho_sus];
+            Parameters[fmGlobalParameter.rho_f] = simulation.Parameters[fmGlobalParameter.rho_f];
+            Parameters[fmGlobalParameter.rho_s] = simulation.Parameters[fmGlobalParameter.rho_s];
+            Parameters[fmGlobalParameter.rho_sus] = simulation.Parameters[fmGlobalParameter.rho_sus];
 
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.Cm] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.Cm];
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.Cv] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.Cv];
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.C] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.C];
+            Parameters[fmGlobalParameter.Cm] = simulation.Parameters[fmGlobalParameter.Cm];
+            Parameters[fmGlobalParameter.Cv] = simulation.Parameters[fmGlobalParameter.Cv];
+            Parameters[fmGlobalParameter.C] = simulation.Parameters[fmGlobalParameter.C];
             
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.eps0] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.eps0];
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.kappa0] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.kappa0];
+            Parameters[fmGlobalParameter.eps0] = simulation.Parameters[fmGlobalParameter.eps0];
+            Parameters[fmGlobalParameter.kappa0] = simulation.Parameters[fmGlobalParameter.kappa0];
             
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.nc] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.nc];
+            Parameters[fmGlobalParameter.nc] = simulation.Parameters[fmGlobalParameter.nc];
             
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.Pc0] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.Pc0];
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.rc0] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.rc0];
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.a0] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.a0];
+            Parameters[fmGlobalParameter.Pc0] = simulation.Parameters[fmGlobalParameter.Pc0];
+            Parameters[fmGlobalParameter.rc0] = simulation.Parameters[fmGlobalParameter.rc0];
+            Parameters[fmGlobalParameter.a0] = simulation.Parameters[fmGlobalParameter.a0];
             
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.ne] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.ne];
+            Parameters[fmGlobalParameter.ne] = simulation.Parameters[fmGlobalParameter.ne];
             
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.hce] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.hce];
-            Parameters[fmCalcBlocksLibrary.fmGlobalParameter.Rm0] = simulation.Parameters[fmCalcBlocksLibrary.fmGlobalParameter.Rm0];
+            Parameters[fmGlobalParameter.hce] = simulation.Parameters[fmGlobalParameter.hce];
+            Parameters[fmGlobalParameter.Rm0] = simulation.Parameters[fmGlobalParameter.Rm0];
             
-            //foreach (fmCalcBlocksLibrary.fmGlobalParameter p in Parameters.Keys)
+            //foreach (fmGlobalParameter p in Parameters.Keys)
             //{
-            //    if (p.Kind == fmCalcBlocksLibrary.fmGlobalParameter.fmGlobalParameterKind.SuspensionParameterKind)
+            //    if (p.Kind == fmGlobalParameter.fmGlobalParameterKind.SuspensionParameterKind)
             //    {
             //        Parameters[p] = simulation.Parameters[p];
             //    }
@@ -708,7 +702,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public static void CopyVariableParametersFromSimulationToBlock(fmFilterSimulation sim, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockParameter p in block.Parameters)
+            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
             {
                 p.value = sim.Parameters[p.globalParameter];
             }
@@ -748,7 +742,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public static void CopyVariableParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulation sim)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockParameter p in block.Parameters)
+            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
             {
                 if (sim.Parameters[p.globalParameter] != p.value)
                 {

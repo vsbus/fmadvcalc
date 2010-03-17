@@ -1,4 +1,4 @@
-namespace fmCalcBlocksLibrary
+namespace fmCalculationLibrary
 {
     public class fmRange
     {

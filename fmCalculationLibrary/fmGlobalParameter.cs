@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using fmCalculationLibrary.MeasureUnits;
 
-namespace fmCalcBlocksLibrary
+namespace fmCalculationLibrary
 {
     public class fmGlobalParameter
     {
@@ -19,10 +19,10 @@ namespace fmCalcBlocksLibrary
         {
             get { return unitFamily.CurrentUnit.Name; }
         }
-       
+
         public fmRange chartDefaultXRange;
         public fmRange chartCurretXRange;
-        
+
         public static fmGlobalParameter A;
         public static fmGlobalParameter Dp;
         public static fmGlobalParameter sf;
@@ -104,9 +104,9 @@ namespace fmCalcBlocksLibrary
         public static fmGlobalParameter eta_f;
         public static fmGlobalParameter nc;
         public static List<fmGlobalParameter> Parameters = new List<fmGlobalParameter>();
-        public static Dictionary<string, fmGlobalParameter> ParametersByName = new Dictionary<string,fmGlobalParameter>();
+        public static Dictionary<string, fmGlobalParameter> ParametersByName = new Dictionary<string, fmGlobalParameter>();
 
-        static void AddParameter( ref fmGlobalParameter p1, fmGlobalParameter p2)
+        static void AddParameter(ref fmGlobalParameter p1, fmGlobalParameter p2)
         {
             p1 = p2;
             Parameters.Add(p1);
@@ -199,16 +199,17 @@ namespace fmCalcBlocksLibrary
 
         public fmGlobalParameter(string name, fmUnitFamily unitFamily)
         {
-            this.name = name;           
+            this.name = name;
             this.unitFamily = unitFamily;
         }
 
-        public fmGlobalParameter(string name, fmUnitFamily unitFamily, fmRange minMaxRange):this(name, unitFamily)
+        public fmGlobalParameter(string name, fmUnitFamily unitFamily, fmRange minMaxRange)
+            : this(name, unitFamily)
         {
             chartDefaultXRange = new fmRange(minMaxRange.minValue, minMaxRange.maxValue);
             chartCurretXRange = new fmRange(minMaxRange.minValue, minMaxRange.maxValue);
         }
     }
 
-    
+
 }

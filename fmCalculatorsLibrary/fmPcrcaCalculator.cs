@@ -1,82 +1,38 @@
 using fmCalculationLibrary;
 using fmCalculationLibrary.Equations;
+using System;
+using System.Collections.Generic;
 
 namespace fmCalculatorsLibrary
 {
     public class fmPcrcaCalculator : fmBaseCalculator
     {
-        public enum CalculationOptions
-        {
-            PC_INPUT,
-            RC_INPUT,
-            A_INPUT
-        }
-        public class fmVariables
-        {
-            public fmValue Pc;
-            public fmValue rc;
-            public fmValue a;
-        }
-        public class fmConstants
-        {
-            public fmValue rho_s;
-            public fmValue eps;
-        }
-
-        public CalculationOptions calculationOption;
-        public fmVariables variables = new fmVariables();
-        public fmConstants constants = new fmConstants();
-
+        public fmPcrcaCalculator(List<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
-            switch (calculationOption)
+            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter eps = variables[fmGlobalParameter.eps] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+
+            if (Pc.isInputed)
             {
-                case CalculationOptions.PC_INPUT:
-                    {
-                        variables.rc = PcrcaEquations.Eval_rc_From_Pc(variables.Pc);
-                        variables.a = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(variables.Pc, constants.eps, constants.rho_s);
-                        break;
-                    }
-                case CalculationOptions.RC_INPUT:
-                    {
-                        variables.Pc = PcrcaEquations.Eval_Pc_From_rc(variables.rc);
-                        variables.a = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(variables.Pc, constants.eps, constants.rho_s);
-                        break;
-                    }
-                case CalculationOptions.A_INPUT:
-                    {
-                        variables.Pc = PcrcaEquations.Eval_Pc_From_a_eps_rho_s(variables.a, constants.eps, constants.rho_s);
-                        variables.rc = PcrcaEquations.Eval_rc_From_Pc(variables.Pc);
-                        break;
-                    }
+                rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
+                a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
             }
-        }
-
-        public fmPcrcaCalculator(CalculationOptions defaultCalculationOption)
-        {
-            calculationOption = defaultCalculationOption;
-        }
-
-        static public void Process(CalculationOptions calculationOption,
-            ref fmValue Pc,
-            ref fmValue rc,
-            ref fmValue a,
-            fmValue rho_s,
-            fmValue eps)
-        {
-            fmPcrcaCalculator c = new fmPcrcaCalculator(calculationOption);
-
-            c.variables.Pc = Pc;
-            c.variables.rc = rc;
-            c.variables.a = a;
-            c.constants.rho_s = rho_s;
-            c.constants.eps = eps;
-
-            c.DoCalculations();
-
-            Pc = c.variables.Pc;
-            rc = c.variables.rc;
-            a = c.variables.a;
+            else if (rc.isInputed)
+            {
+                Pc.value = PcrcaEquations.Eval_Pc_From_rc(rc.value);
+                a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+            }
+            else if (a.isInputed)
+            {
+                Pc.value = PcrcaEquations.Eval_Pc_From_a_eps_rho_s(a.value, eps.value, rho_s.value);
+                rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            }
+            else 
+                throw new Exception("One of Pc, rc or a must be inputed");
         }
     }
 }

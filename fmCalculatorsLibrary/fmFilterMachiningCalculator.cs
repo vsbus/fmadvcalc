@@ -1,342 +1,169 @@
 using System;
+using System.ComponentModel;
 using fmCalculationLibrary;
 using fmCalculationLibrary.Equations;
+using System.Collections.Generic;
+
+//fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter hc_over_tf = variables[fmGlobalParameter.hc_over_tf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qmsus_d = variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qmsus_d = variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+//fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+//fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter kappa0 = variables[fmGlobalParameter.kappa0] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+//fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
 
 namespace fmCalculatorsLibrary
 {
     public class fmFilterMachiningCalculator : fmBaseCalculator
     {
-        public enum CalculationOptions
+        public enum FilterMachiningCalculationOption
         {
-            UNDEFINED,
+            // Standart -- In this case we have always the area A as input 
+            // and the (Qsus, Qmsus, Qms) as calculated.
+            [Description("1: A, Dp, (sf/tr), (n/tc)")]
+            Standart1,
 
-            STANDART1_A_Dp_sf_n_INPUT,
-            STANDART1_A_Dp_tr_n_INPUT,
-            STANDART1_A_Dp_sf_tc_INPUT,
-            STANDART1_A_Dp_tr_tc_INPUT,
-            
-            STANDART2_A_Dp_sf_tf_INPUT,
-            STANDART2_A_Dp_tr_tf_INPUT,
-            
-            STANDART3_A_Dp_n_tf_INPUT,
-            STANDART3_A_Dp_tc_tf_INPUT,
-            STANDART3_A_Dp_tr_tf_INPUT,
-            
-            STANDART4_A_hc_sf_n_INPUT,
-            STANDART4_A_hc_sf_tc_INPUT,
-            STANDART4_A_hc_tr_n_INPUT,
-            STANDART4_A_hc_tr_tc_INPUT,
-            STANDART4_A_Vf_sf_n_INPUT,
-            STANDART4_A_Vf_sf_tc_INPUT,
-            STANDART4_A_Vf_tr_n_INPUT,
-            STANDART4_A_Vf_tr_tc_INPUT,
-            STANDART4_A_Mf_sf_n_INPUT,
-            STANDART4_A_Mf_sf_tc_INPUT,
-            STANDART4_A_Mf_tr_n_INPUT,
-            STANDART4_A_Mf_tr_tc_INPUT,
-            STANDART4_A_Vsus_sf_n_INPUT,
-            STANDART4_A_Vsus_sf_tc_INPUT,
-            STANDART4_A_Vsus_tr_n_INPUT,
-            STANDART4_A_Vsus_tr_tc_INPUT,
-            STANDART4_A_Msus_sf_n_INPUT,
-            STANDART4_A_Msus_sf_tc_INPUT,
-            STANDART4_A_Msus_tr_n_INPUT,
-            STANDART4_A_Msus_tr_tc_INPUT,
-            STANDART4_A_Ms_sf_n_INPUT,
-            STANDART4_A_Ms_sf_tc_INPUT,
-            STANDART4_A_Ms_tr_n_INPUT,
-            STANDART4_A_Ms_tr_tc_INPUT,
-            
-            STANDART7_A_Dp_hc_sf_INPUT,
-            STANDART7_A_Dp_hc_tr_INPUT,
-            STANDART7_A_Dp_Vf_sf_INPUT,
-            STANDART7_A_Dp_Vf_tr_INPUT,
-            STANDART7_A_Dp_Mf_sf_INPUT,
-            STANDART7_A_Dp_Mf_tr_INPUT,
-            STANDART7_A_Dp_Vsus_sf_INPUT,
-            STANDART7_A_Dp_Vsus_tr_INPUT,
-            STANDART7_A_Dp_Msus_sf_INPUT,
-            STANDART7_A_Dp_Msus_tr_INPUT,
-            STANDART7_A_Dp_Ms_sf_INPUT,
-            STANDART7_A_Dp_Ms_tr_INPUT,
-            
-            STANDART8_A_Dp_hc_n_INPUT,
-            STANDART8_A_Dp_hc_tc_INPUT,
-            STANDART8_A_Dp_hc_tr_INPUT,
-            STANDART8_A_Dp_Vf_n_INPUT,
-            STANDART8_A_Dp_Vf_tc_INPUT,
-            STANDART8_A_Dp_Vf_tr_INPUT,
-            STANDART8_A_Dp_Mf_n_INPUT,
-            STANDART8_A_Dp_Mf_tc_INPUT,
-            STANDART8_A_Dp_Mf_tr_INPUT,
-            STANDART8_A_Dp_Vsus_n_INPUT,
-            STANDART8_A_Dp_Vsus_tc_INPUT,
-            STANDART8_A_Dp_Vsus_tr_INPUT,
-            STANDART8_A_Dp_Msus_n_INPUT,
-            STANDART8_A_Dp_Msus_tc_INPUT,
-            STANDART8_A_Dp_Msus_tr_INPUT,
-            STANDART8_A_Dp_Ms_n_INPUT,
-            STANDART8_A_Dp_Ms_tc_INPUT,
-            STANDART8_A_Dp_Ms_tr_INPUT,
+            [Description("2: A, Dp, (sf/tr), tf")]
+            Standart2,
 
-            DESIGN1_Qms_Dp_hc_n_INPUT,
-            DESIGN1_Qsus_Dp_hc_n_INPUT,
-            DESIGN1_Qmsus_Dp_hc_n_INPUT,
-            DESIGN1_Qms_Dp_hc_tc_INPUT,
-            DESIGN1_Qsus_Dp_hc_tc_INPUT,
-            DESIGN1_Qmsus_Dp_hc_tc_INPUT,
-            DESIGN1_Qms_Dp_hc_tr_INPUT,
-            DESIGN1_Qsus_Dp_hc_tr_INPUT,
-            DESIGN1_Qmsus_Dp_hc_tr_INPUT,
+            [Description("3: A, Dp, (n/tc/tr), tf")]
+            Standart3,
 
-            OPTIMIZATION1_A_Qms_Dp_sf_INPUT,
-            OPTIMIZATION1_A_Qsus_Dp_sf_INPUT,
-            OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT,
-            OPTIMIZATION1_A_Qms_Dp_tr_INPUT,
-            OPTIMIZATION1_A_Qsus_Dp_tr_INPUT,
-            OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT
+            [Description("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)")]
+            Standart4,
+
+            //Standart5,  // A, hc, (sf/tr), tf           -- input
+            //Standart6,  // A, hc, (n/tc/tr), tf       -- input
+
+            [Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)")]
+            Standart7,
+
+            [Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
+            Standart8,
+
+            // Design -- In this case we have always the (Qsus, Qmsus, Qms) as input 
+            // and the filter area A is calculated 
+            [Description("1: Q, Dp, hc, (n/tc/tr)")]
+            Design1,
+            //Design2,    // Q, Dp, hc, (sf/tr)           -- input 
+            //Design3,    // Q, sf, (n/tc/tr), hc       -- input 
+
+            // Optimization -- In this case we have always the filter 
+            // area A and the (Qsus, Qmsus, Qms) as input
+            [Description("1: A, Q, Dp, (sf/tr)")]
+            Optimization1
+            //Optimization2,  // A, Q, hc, (sf/tr)           -- input
+            //Optimization3   // A, Q, (n/tc), (sf/tr)       -- input
         }
 
-        public class fmVariables
+        public FilterMachiningCalculationOption calculationOption;
+        
+        public fmFilterMachiningCalculator(List<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+
+        private static bool IsStandartKindOption(FilterMachiningCalculationOption calculationOption)
         {
-            public fmValue A;
-            public fmValue Dp;
-            public fmValue sf;
-            public fmValue n;
-            public fmValue tc;
-            public fmValue tf;
-            public fmValue tr;
-            public fmValue hc_over_tf;
-            public fmValue dhc_over_dt;
-            public fmValue hc;
-            public fmValue Qf;
-            public fmValue Qf_d;
-            public fmValue Qs;
-            public fmValue Qs_d;
-            public fmValue Qc;
-            public fmValue Qc_d;
-            public fmValue Qsus;
-            public fmValue Qsus_d;
-            public fmValue Qmsus;
-            public fmValue Qmsus_d;
-            public fmValue Qms;
-            public fmValue Qms_d;
-            public fmValue Qmf;
-            public fmValue Qmf_d;
-            public fmValue Qmc;
-            public fmValue Qmc_d;
-            public fmValue qf;
-            public fmValue qf_d;
-            public fmValue qs;
-            public fmValue qs_d;
-            public fmValue qc;
-            public fmValue qc_d;
-            public fmValue qsus;
-            public fmValue qsus_d;
-            public fmValue qmsus;
-            public fmValue qmsus_d;
-            public fmValue qms;
-            public fmValue qms_d;
-            public fmValue qmf;
-            public fmValue qmf_d;
-            public fmValue qmc;
-            public fmValue qmc_d;
-            public fmValue Vsus;
-            public fmValue Mf;
-            public fmValue Vf;
-            public fmValue mf;
-            public fmValue vf;
-            public fmValue ms;
-            public fmValue vs;
-            public fmValue msus;
-            public fmValue vsus;
-            public fmValue mc;
-            public fmValue vc;
-            public fmValue Vc;
-            public fmValue Mc;
-            public fmValue Ms;
-            public fmValue Vs;
-            public fmValue Msus;
-            public fmValue eps;
-            public fmValue kappa;
-            public fmValue Pc;
-            public fmValue rc;
-            public fmValue a;
+            return calculationOption == FilterMachiningCalculationOption.Standart1
+              || calculationOption == FilterMachiningCalculationOption.Standart2
+              || calculationOption == FilterMachiningCalculationOption.Standart3
+              || calculationOption == FilterMachiningCalculationOption.Standart4
+              || calculationOption == FilterMachiningCalculationOption.Standart7
+              || calculationOption == FilterMachiningCalculationOption.Standart8;
         }
 
-        public class fmConstants
+        private static bool IsDesignKindOption(FilterMachiningCalculationOption calculationOption)
         {
-            public fmValue eps0;
-            public fmValue kappa0;
-            public fmValue Pc0;
-            public fmValue eta_f;
-            public fmValue rho_f;
-            public fmValue rho_s;
-            public fmValue rho_sus;
-            public fmValue Cv;
-            public fmValue Cm;
-            public fmValue ne;
-            public fmValue nc;
-            public fmValue hce;
+            return calculationOption == FilterMachiningCalculationOption.Design1;
         }
 
-        public class fmIntermediateVariables
+        private static bool IsOptimizationKindOption(FilterMachiningCalculationOption calculationOption)
         {
-            //public fmValue Vf;
+            return calculationOption == FilterMachiningCalculationOption.Optimization1;
         }
 
-        public CalculationOptions calculationOption;
-        public fmConstants constants = new fmConstants();
-        public fmVariables variables = new fmVariables();
-        public fmIntermediateVariables intermediateVariables = new fmIntermediateVariables();
-
-        private static bool IsStandart1Option(CalculationOptions calculationOption)
+        private static bool IsStandartSubKind1DpOption(FilterMachiningCalculationOption calculationOption)
         {
-            return calculationOption == CalculationOptions.STANDART1_A_Dp_sf_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT
-                   || calculationOption == CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT;
+            return calculationOption == FilterMachiningCalculationOption.Standart1
+              || calculationOption == FilterMachiningCalculationOption.Standart2
+              || calculationOption == FilterMachiningCalculationOption.Standart3;
         }
 
-        private static bool IsStandart2Option(CalculationOptions calculationOption)
+        private static bool IsStandartSubKind2hcOption(FilterMachiningCalculationOption calculationOption)
         {
-            return calculationOption == CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT
-                || calculationOption == CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT;
+            return calculationOption == FilterMachiningCalculationOption.Standart4;
         }
 
-        private static bool IsStandart3Option(CalculationOptions calculationOption)
+        private static bool IsStandartSubKind3DphcOption(FilterMachiningCalculationOption calculationOption)
         {
-            return calculationOption == CalculationOptions.STANDART3_A_Dp_n_tf_INPUT
-                   || calculationOption == CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT
-                   || calculationOption == CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT;
-        }
-
-        private static bool IsStandart4Option(CalculationOptions calculationOption)
-        {
-            return calculationOption == CalculationOptions.STANDART4_A_hc_sf_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_hc_sf_tc_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_hc_tr_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_hc_tr_tc_INPUT
-
-                   || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT
-
-                   || calculationOption == CalculationOptions.STANDART4_A_Mf_sf_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Mf_tr_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT
-
-                   || calculationOption == CalculationOptions.STANDART4_A_Vsus_sf_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Vsus_sf_tc_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Vsus_tr_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Vsus_tr_tc_INPUT
-
-                   || calculationOption == CalculationOptions.STANDART4_A_Msus_sf_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Msus_sf_tc_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Msus_tr_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Msus_tr_tc_INPUT
-
-                   || calculationOption == CalculationOptions.STANDART4_A_Ms_sf_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Ms_sf_tc_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Ms_tr_n_INPUT
-                   || calculationOption == CalculationOptions.STANDART4_A_Ms_tr_tc_INPUT;
-        }
-
-        private static bool IsStandart7Option(CalculationOptions calculationOption)
-        {
-            return calculationOption == CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT
-                   
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Mf_sf_INPUT
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT
-                   
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Vsus_sf_INPUT
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Vsus_tr_INPUT
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Msus_sf_INPUT
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Msus_tr_INPUT
-
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Ms_sf_INPUT
-                   || calculationOption == CalculationOptions.STANDART7_A_Dp_Ms_tr_INPUT;
-        }
-
-        private static bool IsStandart8Option(CalculationOptions calculationOption)
-        {
-            return calculationOption == CalculationOptions.STANDART8_A_Dp_hc_n_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT
-
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vf_n_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_n_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Mf_tr_INPUT
-
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vsus_n_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vsus_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Vsus_tr_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Msus_n_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Msus_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Msus_tr_INPUT
-
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Ms_n_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Ms_tc_INPUT
-                || calculationOption == CalculationOptions.STANDART8_A_Dp_Ms_tr_INPUT;
-        }
-
-        private static bool IsStandartKindOption(CalculationOptions calculationOption)
-        {
-            return IsStandart1Option(calculationOption)
-                   || IsStandart2Option(calculationOption)
-                   || IsStandart3Option(calculationOption)
-                   || IsStandart4Option(calculationOption)
-                   || IsStandart7Option(calculationOption)
-                   || IsStandart8Option(calculationOption);
-        }
-
-        private static bool IsDesignKindOption(CalculationOptions calculationOption)
-        {
-            return calculationOption == CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT
-                || calculationOption == CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT
-                || calculationOption == CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT
-                || calculationOption == CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT
-                || calculationOption == CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT
-                || calculationOption == CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT
-                || calculationOption == CalculationOptions.DESIGN1_Qms_Dp_hc_tr_INPUT
-                || calculationOption == CalculationOptions.DESIGN1_Qmsus_Dp_hc_tr_INPUT
-                || calculationOption == CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT;
-        }
-
-        private static bool IsOptimizationKindOption(CalculationOptions calculationOption)
-        {
-            return calculationOption == CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT
-                || calculationOption == CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT
-                || calculationOption == CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT
-                || calculationOption == CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT
-                || calculationOption == CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT
-                || calculationOption == CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT;
-        }
-
-        private static bool IsStandartSubKind1DpOption(CalculationOptions calculationOption)
-        {
-            return IsStandart1Option(calculationOption)
-                   || IsStandart2Option(calculationOption)
-                   || IsStandart3Option(calculationOption);
-        }
-
-        private static bool IsStandartSubKind2hcOption(CalculationOptions calculationOption)
-        {
-            return IsStandart4Option(calculationOption);
-        }
-
-        private static bool IsStandartSubKind3DphcOption(CalculationOptions calculationOption)
-        {
-            return IsStandart7Option(calculationOption)
-                   || IsStandart8Option(calculationOption);
+            return calculationOption == FilterMachiningCalculationOption.Standart7
+              || calculationOption == FilterMachiningCalculationOption.Standart8;
         }
 
         override public void DoCalculations()
@@ -358,47 +185,112 @@ namespace fmCalculatorsLibrary
                 throw new Exception("Not classified calculation option kind");
             }
 
-            variables.hc_over_tf = FilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(variables.hc, variables.tf);
-            variables.dhc_over_dt = FilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(variables.kappa, variables.Dp, variables.Pc, constants.eta_f, variables.hc, constants.hce);
-            variables.Mc = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(variables.Msus, variables.Mf);
-            variables.Vc = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(variables.Vsus, variables.Vf);
-            variables.mf = FilterMachiningEquations.Eval_m_From_M_A(variables.Mf, variables.A);
-            variables.vf = FilterMachiningEquations.Eval_v_From_V_A(variables.Vf, variables.A);
-            variables.msus = FilterMachiningEquations.Eval_m_From_M_A(variables.Msus, variables.A);
-            variables.vsus = FilterMachiningEquations.Eval_v_From_V_A(variables.Vsus, variables.A);
-            variables.ms = FilterMachiningEquations.Eval_m_From_M_A(variables.Ms, variables.A);
-            variables.vs = FilterMachiningEquations.Eval_v_From_V_A(variables.Vs, variables.A);
-            variables.mc = FilterMachiningEquations.Eval_m_From_M_A(variables.Mc, variables.A);
-            variables.vc = FilterMachiningEquations.Eval_v_From_V_A(variables.Vc, variables.A);
-            variables.Qsus_d = FilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(variables.eps, variables.A, constants.Cv, variables.dhc_over_dt);
-            variables.Qmsus_d = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Qsus_d);
-            variables.Qs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Qms); ;
-            variables.Qs_d = FilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(variables.eps, variables.A, variables.dhc_over_dt);
-            variables.Qms_d = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_s, variables.Qs_d);
-            variables.Qmf = FilterMachiningEquations.Eval_Qm_From_M_t(variables.Mf, variables.tf);
-            variables.Qf = FilterMachiningEquations.Eval_Q_From_V_t(variables.Vf, variables.tf);
-            variables.Qf_d = FilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(variables.A, variables.Dp, variables.Pc, constants.eta_f, variables.hc, constants.hce);
-            variables.Qmf_d = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Qf_d); ;
-            variables.Qmc = FilterMachiningEquations.Eval_Qm_From_M_t(variables.Mc, variables.tc);
-            variables.Qc_d = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(variables.Qsus_d, variables.Qf_d);
-            variables.Qmc_d = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(variables.Qmsus_d, variables.Qmf_d);
-            variables.Qc = FilterMachiningEquations.Eval_Q_From_V_t(variables.Vc, variables.tc);
-            variables.qf = FilterMachiningEquations.eval_q_From_Q_A(variables.Qf, variables.A);
-            variables.qf_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qf_d, variables.A);
-            variables.qsus = FilterMachiningEquations.eval_q_From_Q_A(variables.Qsus, variables.A);
-            variables.qsus_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qsus_d, variables.A);
-            variables.qs = FilterMachiningEquations.eval_q_From_Q_A(variables.Qs, variables.A);
-            variables.qs_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qs_d, variables.A);
-            variables.qc = FilterMachiningEquations.eval_q_From_Q_A(variables.Qc, variables.A);
-            variables.qc_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qc_d, variables.A);
-            variables.qmf = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmf, variables.A);
-            variables.qmf_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmf_d, variables.A);
-            variables.qmsus = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmsus, variables.A);
-            variables.qmsus_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmsus_d, variables.A);
-            variables.qms = FilterMachiningEquations.eval_q_From_Q_A(variables.Qms, variables.A);
-            variables.qms_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qms_d, variables.A);
-            variables.qmc = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmc, variables.A);
-            variables.qmc_d = FilterMachiningEquations.eval_q_From_Q_A(variables.Qmc_d, variables.A);
+            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc_over_tf = variables[fmGlobalParameter.hc_over_tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmsus_d = variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmsus_d = variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+
+            hc_over_tf.value = FilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
+            dhc_over_dt.value = FilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
+            Mc.value = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(Msus.value, Mf.value);
+            Vc.value = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(Vsus.value, Vf.value);
+            mf.value = FilterMachiningEquations.Eval_m_From_M_A(Mf.value, A.value);
+            vf.value = FilterMachiningEquations.Eval_v_From_V_A(Vf.value, A.value);
+            msus.value = FilterMachiningEquations.Eval_m_From_M_A(Msus.value, A.value);
+            vsus.value = FilterMachiningEquations.Eval_v_From_V_A(Vsus.value, A.value);
+            ms.value = FilterMachiningEquations.Eval_m_From_M_A(Ms.value, A.value);
+            vs.value = FilterMachiningEquations.Eval_v_From_V_A(Vs.value, A.value);
+            mc.value = FilterMachiningEquations.Eval_m_From_M_A(Mc.value, A.value);
+            vc.value = FilterMachiningEquations.Eval_v_From_V_A(Vc.value, A.value);
+            Qsus_d.value = FilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
+            Qmsus_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Qsus_d.value);
+            Qs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value); ;
+            Qs_d.value = FilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
+            Qms_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, Qs_d.value);
+            Qmf.value = FilterMachiningEquations.Eval_Qm_From_M_t(Mf.value, tf.value);
+            Qf.value = FilterMachiningEquations.Eval_Q_From_V_t(Vf.value, tf.value);
+            Qf_d.value = FilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
+            Qmf_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value); ;
+            Qmc.value = FilterMachiningEquations.Eval_Qm_From_M_t(Mc.value, tc.value);
+            Qc_d.value = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
+            Qmc_d.value = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
+            Qc.value = FilterMachiningEquations.Eval_Q_From_V_t(Vc.value, tc.value);
+            qf.value = FilterMachiningEquations.eval_q_From_Q_A(Qf.value, A.value);
+            qf_d.value = FilterMachiningEquations.eval_q_From_Q_A(Qf_d.value, A.value);
+            qsus.value = FilterMachiningEquations.eval_q_From_Q_A(Qsus.value, A.value);
+            qsus_d.value = FilterMachiningEquations.eval_q_From_Q_A(Qsus_d.value, A.value);
+            qs.value = FilterMachiningEquations.eval_q_From_Q_A(Qs.value, A.value);
+            qs_d.value = FilterMachiningEquations.eval_q_From_Q_A(Qs_d.value, A.value);
+            qc.value = FilterMachiningEquations.eval_q_From_Q_A(Qc.value, A.value);
+            qc_d.value = FilterMachiningEquations.eval_q_From_Q_A(Qc_d.value, A.value);
+            qmf.value = FilterMachiningEquations.eval_q_From_Q_A(Qmf.value, A.value);
+            qmf_d.value = FilterMachiningEquations.eval_q_From_Q_A(Qmf_d.value, A.value);
+            qmsus.value = FilterMachiningEquations.eval_q_From_Q_A(Qmsus.value, A.value);
+            qmsus_d.value = FilterMachiningEquations.eval_q_From_Q_A(Qmsus_d.value, A.value);
+            qms.value = FilterMachiningEquations.eval_q_From_Q_A(Qms.value, A.value);
+            qms_d.value = FilterMachiningEquations.eval_q_From_Q_A(Qms_d.value, A.value);
+            qmc.value = FilterMachiningEquations.eval_q_From_Q_A(Qmc.value, A.value);
+            qmc_d.value = FilterMachiningEquations.eval_q_From_Q_A(Qmc_d.value, A.value);
         }
         private void DoCalculationsStandart()
         {
@@ -419,824 +311,753 @@ namespace fmCalculatorsLibrary
                 throw new Exception("Not classified calculation suboption of Standart");
             }
 
-            variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Vsus_tc(variables.Vsus, variables.tc);
-            variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Msus_tc(variables.Msus, variables.tc);
-            variables.Qms = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(variables.Qmsus, constants.Cm);
+            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+
+            Qsus.value = FilterMachiningEquations.Eval_Qsus_From_Vsus_tc(Vsus.value, tc.value);
+            Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Msus_tc(Msus.value, tc.value);
+            Qms.value = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(Qmsus.value, Cm.value);
         }
         private void DoCalculationsDesign()
         {
-            variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-            variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-            variables.Pc = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(constants.Pc0, variables.Dp, constants.nc);
-            variables.rc = PcrcaEquations.Eval_rc_From_Pc(variables.Pc);
-            variables.a = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(variables.Pc, variables.eps, constants.rho_s);
-            variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
+            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+
+            eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+            Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+            tf.value = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
 
 
-            switch (calculationOption)
+            if (Qms.isInputed)
             {
-                case CalculationOptions.DESIGN1_Qms_Dp_hc_n_INPUT:
-                    {
-                        variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(variables.Qms, constants.Cm);
-                        variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(variables.Qms, constants.rho_s, constants.Cv);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.DESIGN1_Qmsus_Dp_hc_n_INPUT:
-                    {
-                        variables.Qms = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(variables.Qmsus, constants.Cm);
-                        variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(variables.Qms, constants.rho_s, constants.Cv);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.DESIGN1_Qsus_Dp_hc_n_INPUT:
-                    {
-                        variables.Qms = FilterMachiningEquations.Eval_Qm_From_Qsus_rhos_Cv(variables.Qsus, constants.rho_s, constants.Cv);
-                        variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(variables.Qms, constants.Cm);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.DESIGN1_Qms_Dp_hc_tc_INPUT:
-                    {
-                        variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(variables.Qms, constants.Cm);
-                        variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(variables.Qms, constants.rho_s, constants.Cv);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.DESIGN1_Qmsus_Dp_hc_tc_INPUT:
-                    {
-                        variables.Qms = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(variables.Qmsus, constants.Cm);
-                        variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(variables.Qms, constants.rho_s, constants.Cv);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.DESIGN1_Qsus_Dp_hc_tc_INPUT:
-                    {
-                        variables.Qms = FilterMachiningEquations.Eval_Qm_From_Qsus_rhos_Cv(variables.Qsus, constants.rho_s, constants.Cv);
-                        variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(variables.Qms, constants.Cm);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.DESIGN1_Qms_Dp_hc_tr_INPUT:
-                    {
-                        variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(variables.Qms, constants.Cm);
-                        variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(variables.Qms, constants.rho_s, constants.Cv);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                    }
-                    break;
-                case CalculationOptions.DESIGN1_Qmsus_Dp_hc_tr_INPUT:
-                    {
-                        variables.Qms = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(variables.Qmsus, constants.Cm);
-                        variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(variables.Qms, constants.rho_s, constants.Cv);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                    }
-                    break;
-                case CalculationOptions.DESIGN1_Qsus_Dp_hc_tr_INPUT:
-                    {
-                        variables.Qms = FilterMachiningEquations.Eval_Qm_From_Qsus_rhos_Cv(variables.Qsus, constants.rho_s, constants.Cv);
-                        variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(variables.Qms, constants.Cm);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                    }
-                    break;
-                default:
-                    throw new Exception("not processed calculation option");
+                Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(Qms.value, Cm.value);
+                Qsus.value = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(Qms.value, rho_s.value, Cv.value);
+                
             }
+            else if (Qmsus.isInputed)
+            {
+                Qms.value = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(Qmsus.value, Cm.value);
+                Qsus.value = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(Qms.value, rho_s.value, Cv.value);
+            }
+            else if (Qsus.isInputed)
+            {
+                Qms.value = FilterMachiningEquations.Eval_Qm_From_Qsus_rhos_Cv(Qsus.value, rho_s.value, Cv.value);
+                Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(Qms.value, Cm.value);
+            }
+            else
+                throw NoQInputed();
 
-            variables.A = FilterMachiningEquations.Eval_A_From_Qms_eps_rhos_hc_n(variables.Qms, variables.eps, constants.rho_s, variables.hc, variables.n);
-            variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-            variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-            variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-            variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-            variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
-            variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-            variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
+            if (n.isInputed)
+            {
+                tc.value = FilterMachiningEquations.Eval_tc_From_n(n.value);
+                tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+            }
+            else if (tc.isInputed)
+            {
+                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+            }
+            else if (tr.isInputed)
+            {
+                tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
+                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+            }
+            else
+                throw No_n_tc_tr_Inputed();
+
+            A.value = FilterMachiningEquations.Eval_A_From_Qms_eps_rhos_hc_n(Qms.value, eps.value, rho_s.value, hc.value, n.value);
+            sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
+            Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+            Vsus.value = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+            Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+            Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
         }
+
+        private Exception No_n_tc_tr_Inputed()
+        {
+            return new Exception("One of n, tc and tr must be inputed");
+        }
+
+        private Exception NoQInputed()
+        {
+            return new Exception("One of Qms, Qmsus and Qsus must be inputed");
+        }
+
         private void DoCalculationsOptimization()
         {
-            variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-            variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-            variables.Pc = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(constants.Pc0, variables.Dp, constants.nc);
-            variables.rc = PcrcaEquations.Eval_rc_From_Pc(variables.Pc);
-            variables.a = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(variables.Pc, variables.eps, constants.rho_s);
+            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
 
-            switch (calculationOption)
+            eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+            Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+
+            if (Qms.isInputed)
             {
-                case CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT:
-                case CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT:
-                    {
-                        variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(variables.Qms, constants.Cm);
-                        variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(variables.Qms, constants.rho_s, constants.Cv);
-                    }
-                    break;
-                case CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT:
-                case CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT:
-                    {
-                        variables.Qms = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(variables.Qmsus, constants.Cm);
-                        variables.Qsus = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(variables.Qms, constants.rho_s, constants.Cv);
-                    }
-                    break;
-                case CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT:
-                case CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT:
-                    {
-                        variables.Qms = FilterMachiningEquations.Eval_Qm_From_Qsus_rhos_Cv(variables.Qsus, constants.rho_s, constants.Cv);
-                        variables.Qmsus = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(variables.Qms, constants.Cm);
-                    }
-                    break;
-                default:
-                    throw new Exception("not processed calculation option");
+                Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(Qms.value, Cm.value);
+                Qsus.value = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(Qms.value, rho_s.value, Cv.value);
             }
-
-
-            switch (calculationOption)
+            else if (Qmsus.isInputed)
             {
-                case CalculationOptions.OPTIMIZATION1_A_Qms_Dp_sf_INPUT:
-                case CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_sf_INPUT:
-                case CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_sf_INPUT:
-                    {
-                        variables.hc = FilterMachiningEquations.Eval_hc_From_Pc_kappa_Dp_sf_A_rhos_eps_etaf_Qms_hce(variables.Pc, variables.kappa, variables.Dp, variables.sf, variables.A, constants.rho_s, variables.eps, constants.eta_f, variables.Qms, constants.hce);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tf_sf(variables.tf, variables.sf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-
-                case CalculationOptions.OPTIMIZATION1_A_Qms_Dp_tr_INPUT:
-                case CalculationOptions.OPTIMIZATION1_A_Qmsus_Dp_tr_INPUT:
-                case CalculationOptions.OPTIMIZATION1_A_Qsus_Dp_tr_INPUT:
-                    {
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_Pc_kappa_Dp_A_rhos_eps_etaf_Qms_hce_tr(variables.Pc,
-                            variables.kappa,
-                            variables.Dp,
-                            variables.A,
-                            constants.rho_s,
-                            variables.eps,
-                            constants.eta_f,
-                            variables.Qms,
-                            constants.hce,
-                            variables.tr);
-
-                        variables.hc = FilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(constants.hce, variables.Pc, variables.kappa, variables.Dp, variables.tf, constants.eta_f);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                    }
-                    break;
-                default:
-                    throw new Exception("not processed calculation option");
+                Qms.value = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(Qmsus.value, Cm.value);
+                Qsus.value = FilterMachiningEquations.Eval_Qsus_From_Qms_rhos_Cv(Qms.value, rho_s.value, Cv.value);
             }
+            else if (Qsus.isInputed)
+            {
+                Qms.value = FilterMachiningEquations.Eval_Qm_From_Qsus_rhos_Cv(Qsus.value, rho_s.value, Cv.value);
+                Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(Qms.value, Cm.value);
+            }
+            else
+                throw NoQInputed();
 
-            variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-            variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-            variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-            variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
-            variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-            variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
+
+            if (sf.isInputed)
+            {
+                hc.value = FilterMachiningEquations.Eval_hc_From_Pc_kappa_Dp_sf_A_rhos_eps_etaf_Qms_hce(Pc.value, kappa.value, Dp.value, sf.value, A.value, rho_s.value, eps.value, eta_f.value, Qms.value, hce.value);
+                tf.value = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
+                tc.value = FilterMachiningEquations.Eval_tc_From_tf_sf(tf.value, sf.value);
+                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+            }
+            else if (tr.isInputed)
+            {
+                tf.value = FilterMachiningEquations.Eval_tf_From_Pc_kappa_Dp_A_rhos_eps_etaf_Qms_hce_tr(Pc.value, kappa.value, Dp.value, A.value, rho_s.value, eps.value, eta_f.value, Qms.value, hce.value, tr.value);
+
+                hc.value = FilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(hce.value, Pc.value, kappa.value, Dp.value, tf.value, eta_f.value);
+                tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
+                sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
+                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+            }
+            else
+                throw GenerateExceptionForGroupWithoutInput(sf, tr);
+
+            Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+            Vsus.value = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+            Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+            Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+        }
+
+        private static Exception GenerateExceptionForGroupWithoutInput(params fmCalculationBaseParameter [] parameters)
+        {
+            string parametersSet = "";
+            foreach (fmCalculationBaseParameter p in parameters)
+                parametersSet += ", " + p.globalParameter.name;
+            parametersSet = "{" + parametersSet.Substring(2) + "}";
+            return new Exception("One of " + parametersSet + " must be inputed");
         }
         private void DoSubCalculationsStandart123()
         {
-            variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-            variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-            variables.Pc = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(constants.Pc0, variables.Dp, constants.nc);
-            variables.rc = PcrcaEquations.Eval_rc_From_Pc(variables.Pc);
-            variables.a = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(variables.Pc, variables.eps, constants.rho_s);
+            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
 
-            switch (calculationOption)
+            eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+            Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+
+            if (calculationOption == FilterMachiningCalculationOption.Standart1)
             {
-                case CalculationOptions.STANDART1_A_Dp_sf_n_INPUT:
-                    {
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_sf_tc(variables.sf, variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART1_A_Dp_tr_n_INPUT:
-                    {
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_tc_tr(variables.tc, variables.tr);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
+                if (n.isInputed)
+                {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_n(n.value);
+                }
+                else if (tc.isInputed)
+                {
+                    n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                }
+                else 
+                    throw GenerateExceptionForGroupWithoutInput(tc, n);
 
-                    }
-                    break;
-                case CalculationOptions.STANDART1_A_Dp_sf_tc_INPUT:
-                    {
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_sf_tc(variables.sf, variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART1_A_Dp_tr_tc_INPUT:
-                    {
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_tc_tr(variables.tc, variables.tr);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                    }
-                    break;
-                case CalculationOptions.STANDART2_A_Dp_sf_tf_INPUT:
-                    {
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tf_sf(variables.tf, variables.sf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART2_A_Dp_tr_tf_INPUT:
-                    {
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                    }
-                    break;
-                case CalculationOptions.STANDART3_A_Dp_n_tf_INPUT:
-                    {
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART3_A_Dp_tc_tf_INPUT:
-                    {
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART3_A_Dp_tr_tf_INPUT:
-                    {
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                    }
-                    break;
-                default:
-                    throw new Exception("not processed calculation option");
+                if (sf.isInputed)
+                {
+                    tf.value = FilterMachiningEquations.Eval_tf_From_sf_tc(sf.value, tc.value);
+                    tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+                }
+                else if (tr.isInputed)
+                {
+                    tf.value = FilterMachiningEquations.Eval_tf_From_tc_tr(tc.value, tr.value);
+                    sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
+                }
+                else 
+                    throw GenerateExceptionForGroupWithoutInput(tf, sf);
+            }
+            else if (calculationOption == FilterMachiningCalculationOption.Standart2)
+            {
+                if (sf.isInputed)
+                {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_tf_sf(tf.value, sf.value);
+                    tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+                }
+                else if (tr.isInputed)
+                {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
+                    sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
+                }
+                else
+                    throw GenerateExceptionForGroupWithoutInput(sf, tr);
+
+                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+            }
+            else if (calculationOption == FilterMachiningCalculationOption.Standart3)
+            {
+                if (n.isInputed)
+                {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_n(n.value);
+                    tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+                }
+                else if (tc.isInputed)
+                {
+                    n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                    tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+                }
+                else if (tr.isInputed)
+                {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
+                    n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                }
+
+                sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
             }
 
-            variables.hc = FilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(
-                            constants.hce,
-                            variables.Pc,
-                            variables.kappa,
-                            variables.Dp,
-                            variables.tf,
-                            constants.eta_f);
-            variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-            variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-            variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-            variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
-            variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-            variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
+            hc.value = FilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(hce.value, Pc.value, kappa.value,
+                                                                                     Dp.value, tf.value, eta_f.value);
+            Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+            Vsus.value = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+            Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+            Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
         }
         private void DoSubCalculationsStandart456()
         {
-            DoSubCalculationsStandart4_sf_tr_n_tc_tf();
-
-            switch (calculationOption)
+            if (calculationOption == FilterMachiningCalculationOption.Standart4)
             {
-                case CalculationOptions.STANDART4_A_hc_sf_n_INPUT:
-                case CalculationOptions.STANDART4_A_hc_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_hc_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_hc_tr_tc_INPUT:
-                    variables.Dp = FilterMachiningEquations.Eval_Dp_From_etaf_Cv_Pc0_nc_eps0_ne_hc_hce_tf(constants.eta_f, constants.Cv, constants.Pc0, constants.nc, constants.eps0, constants.ne, variables.hc, constants.hce, variables.tf);
-                    variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-                    variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-                    variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-                    variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_sf_n_INPUT:
-                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_sf_n_INPUT:
-                    variables.Vf = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_f, variables.Mf);
-                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART4_A_Vsus_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vsus_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vsus_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Vsus_sf_n_INPUT:
-                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
-                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART4_A_Msus_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Msus_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Msus_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Msus_sf_n_INPUT:
-                    variables.Vsus = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_sus, variables.Msus);
-                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART4_A_Ms_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Ms_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Ms_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Ms_sf_n_INPUT:
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    variables.Msus = FilterMachiningEquations.Eval_Msus_From_Ms_Cm(variables.Ms, constants.Cm);
-                    variables.Vsus = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_sus, variables.Msus);
-                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
-                    break;
-                default:
-                    throw new Exception("not processed calculation option");
-            }
+                fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+fmCalculationVariableParameter hc_over_tf = variables[fmGlobalParameter.hc_over_tf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
+fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qmsus_d = variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qmsus_d = variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
+fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
+fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
+fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
+fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
+fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+fmCalculationConstantParameter kappa0 = variables[fmGlobalParameter.kappa0] as fmCalculationConstantParameter;
+fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
 
-            variables.Pc = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(constants.Pc0, variables.Dp, constants.nc);
-            variables.rc = PcrcaEquations.Eval_rc_From_Pc(variables.Pc);
-            variables.a = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(variables.Pc, variables.eps, constants.rho_s);
+                DoSubCalculationsStandart4_sf_tr_n_tc_tf();
+
+                if (hc.isInputed)
+                {
+                    Dp.value = FilterMachiningEquations.Eval_Dp_From_etaf_Cv_Pc0_nc_eps0_ne_hc_hce_tf(eta_f.value, Cv.value, Pc0.value, nc.value, eps0.value, ne.value, hc.value, hce.value, tf.value);
+                    eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+                    kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+                    Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+                    Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Vsus.value = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
+                    Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Vf.isInputed)
+                {
+                    Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Mf.isInputed)
+                {
+                    Vf.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Vsus.isInputed)
+                {
+                    Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Msus.isInputed)
+                {
+                    Vsus.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Ms.isInputed)
+                {
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Msus.value = FilterMachiningEquations.Eval_Msus_From_Ms_Cm(Ms.value, Cm.value);
+                    Vsus.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                    DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
+                }
+                else
+                    throw GenerateExceptionForGroupWithoutInput(hc, Vf, Mf, Vsus, Msus, Vs, Ms);
+
+                Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+                rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
+                a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+            }
         }
 
 
         private void DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus()
         {
-            variables.Dp = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vsus(constants.nc, constants.ne, constants.eta_f, variables.A, variables.tf, constants.Cv, constants.eps0, constants.Pc0, constants.hce, variables.Vsus);
-            variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-            variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-            variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(variables.A, variables.Vsus, variables.kappa);
-            variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-            variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
+            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+
+            Dp.value = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vsus(nc.value, ne.value, eta_f.value, A.value, tf.value, Cv.value, eps0.value, Pc0.value, hce.value, Vsus.value);
+            eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+            hc.value = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
+            Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
         }
 
         private void DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf()
         {
-            variables.Dp = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(constants.nc, constants.ne, constants.eta_f, variables.A, variables.tf, constants.Cv, constants.eps0, constants.Pc0, constants.hce, variables.Vf);
-            variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-            variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-            variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(variables.A, variables.Vf, variables.kappa);
-            variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-            variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
+            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+
+            Dp.value = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(nc.value, ne.value, eta_f.value, A.value, tf.value, Cv.value, eps0.value, Pc0.value, hce.value, Vf.value);
+            eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+            hc.value = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(A.value, Vf.value, kappa.value);
+            Vsus.value = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
         }
 
         private void DoSubCalculationsStandart4_sf_tr_n_tc_tf()
         {
-            switch (calculationOption)
+            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            
+            if (n.isInputed)
             {
-                case CalculationOptions.STANDART4_A_hc_sf_n_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_sf_n_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_sf_n_INPUT:
-                case CalculationOptions.STANDART4_A_Vsus_sf_n_INPUT:
-                case CalculationOptions.STANDART4_A_Msus_sf_n_INPUT:
-                case CalculationOptions.STANDART4_A_Ms_sf_n_INPUT:
-                    {
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_sf_tc(variables.sf, variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART4_A_hc_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Vsus_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Msus_tr_n_INPUT:
-                case CalculationOptions.STANDART4_A_Ms_tr_n_INPUT:
-                    {
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_tc_tr(variables.tc, variables.tr);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                    }
-                    break;
-                case CalculationOptions.STANDART4_A_hc_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vsus_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Msus_sf_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Ms_sf_tc_INPUT:
-                    {
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_sf_tc(variables.sf, variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART4_A_hc_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vf_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Mf_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Vsus_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Msus_tr_tc_INPUT:
-                case CalculationOptions.STANDART4_A_Ms_tr_tc_INPUT:
-                    {
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_tc_tr(variables.tc, variables.tr);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                    }
-                    break;
-                default:
-                    throw new Exception("not processed calculation option");
+                tc.value = FilterMachiningEquations.Eval_tc_From_n(n.value);
             }
+            else if (tc.isInputed)
+            {
+                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+            }
+            else
+                throw GenerateExceptionForGroupWithoutInput(n, tc);
+
+            if (sf.isInputed)
+            {
+                tf.value = FilterMachiningEquations.Eval_tf_From_sf_tc(sf.value, tc.value);
+                tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+            }
+            else if (tr.isInputed)
+            {
+                tf.value = FilterMachiningEquations.Eval_tf_From_tc_tr(tc.value, tr.value);
+                sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
+            }
+            else
+                throw GenerateExceptionForGroupWithoutInput(sf, tf, tr);
         }
+
         private void DoSubCalculationsStandart78()
         {
-            variables.eps = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(constants.eps0, variables.Dp, constants.ne);
-            variables.kappa = EpsKappaEquations.Eval_kappa_From_eps_Cv(variables.eps, constants.Cv);
-            variables.Pc = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(constants.Pc0, variables.Dp, constants.nc);
-            variables.rc = PcrcaEquations.Eval_rc_From_Pc(variables.Pc);
-            variables.a = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(variables.Pc, variables.eps, constants.rho_s);
+            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc_over_tf =
+                variables[fmGlobalParameter.hc_over_tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter dhc_over_dt =
+                variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qsus_d =
+                variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmsus_d =
+                variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qsus_d =
+                variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmsus_d =
+                variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter kappa0 =
+                variables[fmGlobalParameter.kappa0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_sus =
+                variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
 
-            switch (calculationOption)
+            eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+            Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+
+            if (calculationOption == FilterMachiningCalculationOption.Standart7
+                || calculationOption == FilterMachiningCalculationOption.Standart8)
             {
-                case CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_hc_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT:
-                    variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-                    variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vf_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vf_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT:
-                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(variables.A, variables.Vf, variables.kappa);
-                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-                    variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART7_A_Dp_Mf_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Mf_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Mf_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Mf_tr_INPUT:
-                    variables.Vf = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_f, variables.Mf);
-                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(variables.A, variables.Vf, variables.kappa);
-                    variables.Vsus = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART7_A_Dp_Vsus_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Vsus_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vsus_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vsus_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vsus_tr_INPUT:
-                    variables.Msus = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_sus, variables.Vsus);
-                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(variables.A, variables.Vsus, variables.kappa);
-                    variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART7_A_Dp_Msus_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Msus_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Msus_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Msus_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Msus_tr_INPUT:
-                    variables.Vsus = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_sus, variables.Msus);
-                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(variables.A, variables.Vsus, variables.kappa);
-                    variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-                    variables.Ms = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(variables.Msus, constants.Cm);
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    break;
-                case CalculationOptions.STANDART7_A_Dp_Ms_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Ms_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Ms_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Ms_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Ms_tr_INPUT:
-                    variables.Vs = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_s, variables.Ms);
-                    variables.Msus = FilterMachiningEquations.Eval_Msus_From_Ms_Cm(variables.Ms, constants.Cm);
-                    variables.Vsus = FilterMachiningEquations.Eval_V_From_rho_M(constants.rho_sus, variables.Msus);
-                    variables.hc = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(variables.A, variables.Vsus, variables.kappa);
-                    variables.Vf = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(variables.A, variables.hc, variables.kappa);
-                    variables.Mf = FilterMachiningEquations.Eval_M_From_rho_V(constants.rho_f, variables.Vf);
-                    break;
-                default:
-                    throw new Exception("not processed calculation option");
+                if (hc.isInputed)
+                {
+                    Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+                    Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Vsus.value = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
+                    Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Vf.isInputed)
+                {
+                    hc.value = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(A.value, Vf.value, kappa.value);
+                    Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Vsus.value = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
+                    Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Mf.isInputed)
+                {
+                    Vf.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                    hc.value = FilterMachiningEquations.Eval_hc_From_A_Vf_kappa(A.value, Vf.value, kappa.value);
+                    Vsus.value = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
+                    Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Vsus.isInputed)
+                {
+                    Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    hc.value = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
+                    Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+                    Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Msus.isInputed)
+                {
+                    Vsus.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                    hc.value = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
+                    Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+                    Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                }
+                else if (Ms.isInputed)
+                {
+                    Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Msus.value = FilterMachiningEquations.Eval_Msus_From_Ms_Cm(Ms.value, Cm.value);
+                    Vsus.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                    hc.value = FilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
+                    Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+                    Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                }
+                else
+                    throw GenerateExceptionForGroupWithoutInput(hc, Vf, Mf, Vsus, Msus, Ms);
             }
 
-            switch (calculationOption)
+            if (calculationOption == FilterMachiningCalculationOption.Standart7)
             {
-                case CalculationOptions.STANDART7_A_Dp_hc_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Vf_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Mf_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Vsus_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Msus_sf_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Ms_sf_INPUT:
-                    {
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tf_sf(variables.tf, variables.sf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART7_A_Dp_hc_tr_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Vf_tr_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Mf_tr_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Vsus_tr_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Msus_tr_INPUT:
-                case CalculationOptions.STANDART7_A_Dp_Ms_tr_INPUT:
-                    {
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                    }
-                    break;
-                case CalculationOptions.STANDART8_A_Dp_hc_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vf_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Mf_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vsus_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Msus_n_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Ms_n_INPUT:
-                    {
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_n(variables.n);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART8_A_Dp_hc_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vf_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Mf_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vsus_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Msus_tc_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Ms_tc_INPUT:
-                    {
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                        variables.tr = FilterMachiningEquations.Eval_tr_From_tc_tf(variables.tc, variables.tf);
-                    }
-                    break;
-                case CalculationOptions.STANDART8_A_Dp_hc_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vf_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Mf_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Vsus_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Msus_tr_INPUT:
-                case CalculationOptions.STANDART8_A_Dp_Ms_tr_INPUT:
-                    {
-                        variables.tf = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(constants.eta_f, variables.hc, constants.hce, variables.Pc, variables.kappa, variables.Dp);
-                        variables.tc = FilterMachiningEquations.Eval_tc_From_tr_tf(variables.tr, variables.tf);
-                        variables.n = FilterMachiningEquations.Eval_n_From_tc(variables.tc);
-                        variables.sf = FilterMachiningEquations.Eval_sf_From_tf_tc(variables.tf, variables.tc);
-                    }
-                    break;
-                default:
-                    throw new Exception("not processed calculation option");
+                tf.value = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
+                tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
+                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                    
+                if (sf.isInputed)
+                {
+                    tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+                }
+                else if (tr.isInputed)
+                {
+                    sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
+                }
+                else
+                    throw GenerateExceptionForGroupWithoutInput(sf, tr);
             }
 
-        }
-
-        public fmFilterMachiningCalculator(CalculationOptions defaultCalculationOption)
-        {
-            calculationOption = defaultCalculationOption;
-        }
-
-        static public void Process(CalculationOptions calculationOption,
-            ref fmValue A,
-            ref fmValue Dp,
-            ref fmValue sf,
-            ref fmValue n,
-            ref fmValue tc,
-            ref fmValue tf,
-            ref fmValue tr,
-            ref fmValue hc_over_tf,
-            ref fmValue dhc_over_dt,
-            ref fmValue hc,
-            ref fmValue Qf,
-            ref fmValue Qf_d,
-            ref fmValue Qs,
-            ref fmValue Qs_d,
-            ref fmValue Qc,
-            ref fmValue Qc_d,
-            ref fmValue Qsus,
-            ref fmValue Qsus_d,
-            ref fmValue Qmsus,
-            ref fmValue Qmsus_d,
-            ref fmValue Qms,
-            ref fmValue Qms_d,
-            ref fmValue Qmf,
-            ref fmValue Qmf_d,
-            ref fmValue Qmc,
-            ref fmValue Qmc_d,
-            ref fmValue qf,
-            ref fmValue qf_d,
-            ref fmValue qs,
-            ref fmValue qs_d,
-            ref fmValue qc,
-            ref fmValue qc_d,
-            ref fmValue qsus,
-            ref fmValue qsus_d,
-            ref fmValue qmsus,
-            ref fmValue qmsus_d,
-            ref fmValue qms,
-            ref fmValue qms_d,
-            ref fmValue qmf,
-            ref fmValue qmf_d,
-            ref fmValue qmc,
-            ref fmValue qmc_d,
-            ref fmValue Vsus,
-            ref fmValue Mf,
-            ref fmValue Vf,
-            ref fmValue mf,
-            ref fmValue vf,
-            ref fmValue ms,
-            ref fmValue vs,
-            ref fmValue msus,
-            ref fmValue vsus,
-            ref fmValue mc,
-            ref fmValue vc,
-            ref fmValue Vc,
-            ref fmValue Mc,
-            ref fmValue Ms,
-            ref fmValue Vs,
-            ref fmValue Msus,
-            ref fmValue eps,
-            ref fmValue kappa,
-            ref fmValue Pc,
-            ref fmValue rc,
-            ref fmValue a,
-            fmValue eps0,
-            fmValue kappa0,
-            fmValue Pc0,
-            fmValue eta_f,
-            fmValue rho_f,
-            fmValue rho_s,
-            fmValue rho_sus,
-            fmValue Cv,
-            fmValue Cm,
-            fmValue ne,
-            fmValue nc,
-            fmValue hce)
-        {
-            fmFilterMachiningCalculator c = new fmFilterMachiningCalculator(calculationOption);
-
-            c.variables.A = A;
-            c.variables.Dp = Dp;
-            c.variables.sf = sf;
-            c.variables.n = n;
-            c.variables.tc = tc;
-            c.variables.tf = tf;
-            c.variables.tr = tr;
-            c.variables.hc_over_tf = hc_over_tf;
-            c.variables.dhc_over_dt = dhc_over_dt;
-            c.variables.hc = hc;
-            c.variables.Qf = Qf;
-            c.variables.Qf_d = Qf_d;
-            c.variables.Qs = Qs;
-            c.variables.Qs_d = Qs_d;
-            c.variables.Qc = Qc;
-            c.variables.Qc_d = Qc_d;
-            c.variables.Qsus = Qsus;
-            c.variables.Qsus_d = Qsus_d;
-            c.variables.Qmsus = Qmsus;
-            c.variables.Qmsus_d = Qmsus_d;
-            c.variables.Qms = Qms;
-            c.variables.Qms_d = Qms_d;
-            c.variables.Qmf = Qmf;
-            c.variables.Qmf_d = Qmf_d;
-            c.variables.Qmc = Qmc;
-            c.variables.Qmc_d = Qmc_d;
-            c.variables.qf = qf;
-            c.variables.qf_d = qf_d;
-            c.variables.qs = qs;
-            c.variables.qs_d = qs_d;
-            c.variables.qc = qc;
-            c.variables.qc_d = qc_d;
-            c.variables.qsus = qsus;
-            c.variables.qsus_d = qsus_d;
-            c.variables.qmsus = qmsus;
-            c.variables.qmsus_d = qmsus_d;
-            c.variables.qms = qms;
-            c.variables.qms_d = qms_d;
-            c.variables.qmf = qmf;
-            c.variables.qmf_d = qmf_d;
-            c.variables.qmc = qmc;
-            c.variables.qmc_d = qmc_d;
-            c.variables.Mf = Mf;
-            c.variables.Vf = Vf;
-            c.variables.mf = mf;
-            c.variables.vf = vf;
-            c.variables.ms = ms;
-            c.variables.vs = vs;
-            c.variables.msus = msus;
-            c.variables.vsus = vsus;
-            c.variables.mc = mc;
-            c.variables.vc = vc;
-            c.variables.Vc = Vc;
-            c.variables.Mc = Mc;
-            c.variables.Ms = Ms;
-            c.variables.Vs = Vs;
-            c.variables.Msus = Msus;
-            c.variables.Vsus = Vsus;
-            c.variables.eps = eps;
-            c.variables.kappa = kappa;
-            c.variables.Pc = Pc;
-            c.variables.rc = rc;
-            c.variables.a = a;
-            c.constants.eps0 = eps0;
-            c.constants.kappa0 = kappa0;
-            c.constants.Pc0 = Pc0;
-            c.constants.eta_f = eta_f;
-            c.constants.rho_f = rho_f;
-            c.constants.rho_s = rho_s;
-            c.constants.rho_sus = rho_sus;
-            c.constants.Cv = Cv;
-            c.constants.Cm = Cm;
-            c.constants.ne = ne;
-            c.constants.nc = nc;
-            c.constants.hce = hce;
-
-            c.DoCalculations();
-
-            A = c.variables.A;
-            Dp = c.variables.Dp;
-            sf = c.variables.sf;
-            n = c.variables.n;
-            tc = c.variables.tc;
-            tf = c.variables.tf;
-            tr = c.variables.tr;
-            hc_over_tf = c.variables.hc_over_tf;
-            dhc_over_dt = c.variables.dhc_over_dt;
-            hc = c.variables.hc;
-            Qf = c.variables.Qf;
-            Qf_d = c.variables.Qf_d;
-            Qs = c.variables.Qs;
-            Qs_d = c.variables.Qs_d;
-            Qc = c.variables.Qc;
-            Qc_d = c.variables.Qc_d;
-            Qsus = c.variables.Qsus;
-            Qsus_d = c.variables.Qsus_d;
-            Qmsus = c.variables.Qmsus;
-            Qmsus_d = c.variables.Qmsus_d;
-            Qms = c.variables.Qms;
-            Qms_d = c.variables.Qms_d;
-            Qmf = c.variables.Qmf;
-            Qmf_d = c.variables.Qmf_d;
-            Qmc = c.variables.Qmc;
-            Qmc_d = c.variables.Qmc_d;
-            qf = c.variables.qf;
-            qf_d = c.variables.qf_d;
-            qs = c.variables.qs;
-            qs_d = c.variables.qs_d;
-            qc = c.variables.qc;
-            qc_d = c.variables.qc_d;
-            qsus = c.variables.qsus;
-            qsus_d = c.variables.qsus_d;
-            qmsus = c.variables.qmsus;
-            qmsus_d = c.variables.qmsus_d;
-            qms = c.variables.qms;
-            qms_d = c.variables.qms_d;
-            qmf = c.variables.qmf;
-            qmf_d = c.variables.qmf_d;
-            qmc = c.variables.qmc;
-            qmc_d = c.variables.qmc_d;
-            qf = c.variables.qf;
-            qsus = c.variables.qsus;
-            qs = c.variables.qs;
-            qc = c.variables.qc;
-            qmf = c.variables.qmf;
-            qmsus = c.variables.qmsus;
-            qms = c.variables.qms;
-            qmc = c.variables.qmc;
-            Mf = c.variables.Mf;
-            Vf = c.variables.Vf;
-            mf = c.variables.mf;
-            vf = c.variables.vf;
-            ms = c.variables.ms;
-            vs = c.variables.vs;
-            msus = c.variables.msus;
-            vsus = c.variables.vsus;
-            mc = c.variables.mc;
-            vc = c.variables.vc;
-            Vc = c.variables.Vc;
-            Mc = c.variables.Mc;
-            Ms = c.variables.Ms;
-            Vs = c.variables.Vs;
-            Msus = c.variables.Msus;
-            Vsus = c.variables.Vsus;
-            eps = c.variables.eps;
-            kappa = c.variables.kappa;
-            Pc = c.variables.Pc;
-            rc = c.variables.rc;
-            a = c.variables.a;
+            if (calculationOption == FilterMachiningCalculationOption.Standart8)
+            {
+                if (n.isInputed)
+                {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_n(n.value);
+                    tf.value = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
+                    sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
+                    tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+                }
+                else if (tc.isInputed)
+                {
+                    n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                    tf.value = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
+                    sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
+                    tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+                }
+                else if (tr.isInputed)
+                {
+                    tf.value = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
+                    tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
+                    n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                    sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
+                }
+                else
+                    throw GenerateExceptionForGroupWithoutInput(n, tc, tr);
+            }
         }
     }
 }
