@@ -20,7 +20,7 @@ namespace FilterSimulationWithTablesAndGraphs
     {
         private List<fmFilterSimulation> externalSimList;
         //private fmFilterSimulation externalCurrentSimulation;
-        private List<fmCheckedAndLinkToFilterSimulation> internalSelectedSimList;
+        private List<fmSelectedSimulationData> internalSelectedSimList;
         //private List<fmFilterMachiningBlock> fmGlobalBlocks;
         //private List<fmAdditionalFilterMachiningBlock> fmLocalBlocks = new List<fmAdditionalFilterMachiningBlock>();
         //private List<fmSelectedFilterMachiningBlock> fmSelectedBlocks = new List<fmSelectedFilterMachiningBlock>();
@@ -505,7 +505,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             for (int i = 0; i < internalSelectedSimList.Count; i++)
             {
-                fmFilterSimulation sim = internalSelectedSimList[i].simulation;
+                fmFilterSimulation sim = internalSelectedSimList[i].externalSimulation;
                 fmFilterSimulation tempSim = new fmFilterSimulation(null, sim);
                 tempSim.FilterMachiningCalculationOption = calculationOptionViewInTablesAndGraphs.GetSelectedOption();
 
@@ -774,6 +774,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void listBoxX_SelectedIndexChanged(object sender, EventArgs e)
         {
             RecalculateCurves();
+            BindCalculatedResultsToTable();
         //    UpdateIsInputedForParametersBlocks();
         //    UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
         //    LoadCurrentXRange();
@@ -810,8 +811,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void listBoxY_SelectedIndexChanged(object sender, EventArgs e)
         {
-            RecalculateCurves();
-        //    DrawChartAndTable();
+            BindCalculatedResultsToTable();
         }
 
         private void listBoxY2_SelectedIndexChanged(object sender, EventArgs e)
@@ -921,10 +921,11 @@ namespace FilterSimulationWithTablesAndGraphs
             //LoadCurrentXRange();
             //DrawChartAndTable();
             RecalculateCurves();
+            BindCalculatedResultsToTable();
             //DisplayCurves();
         }
 
-        private void RecalculateCurves()
+        private void BindCalculatedResultsToTable()
         {
             if (listBoxXAxis.Text == ""
                 || listBoxYAxis.Text == "")
@@ -935,64 +936,109 @@ namespace FilterSimulationWithTablesAndGraphs
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
             fmGlobalParameter yParameter = fmGlobalParameter.ParametersByName[listBoxYAxis.Text];
 
-            fmZedGraphControl1.GraphPane.CurveList.Clear();
+            coordinatesGrid.Columns.Clear();
 
-            if (!isUseLocalParams)
+            foreach (fmSelectedSimulationData simData in internalSelectedSimList)
             {
-                for (int i = 0; i < internalSelectedSimList.Count; i++)
+                int xCol = coordinatesGrid.Columns.Add(xParameter.name, xParameter.name);
+                int yCol = coordinatesGrid.Columns.Add(yParameter.name, yParameter.name);
+                for (int i = 0; i < simData.calculatedDataList.Count; ++i)
                 {
-                    List<double> lx = new List<double>();
-                    List<double> ly = new List<double>();
-                        
-                    for (double x = 0.1; x <= 10; x += 0.1)
+                    if (coordinatesGrid.RowCount< i + 1)
                     {
-                        fmFilterSimulation tempSim = new fmFilterSimulation(null, internalSelectedSimList[i].simulation);
-                        tempSim.FilterMachiningCalculationOption = calculationOptionViewInTablesAndGraphs.GetSelectedOption();
-
-                        tempSim.Parameters[xParameter].value = new fmValue(x);
-
-                        fmSuspensionCalculator suspensionCalculator = new fmSuspensionCalculator(tempSim.Parameters.Values);
-                        suspensionCalculator.DoCalculations();
-
-                        fmEps0Kappa0Calculator eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.Parameters.Values);
-                        eps0Kappa0Calculator.DoCalculations();
-
-                        fmPc0rc0a0Calculator pc0rc0a0Calculator = new fmPc0rc0a0Calculator(tempSim.Parameters.Values);
-                        pc0rc0a0Calculator.DoCalculations();
-
-                        fmRm0hceCalculator rm0hceCalculator = new fmRm0hceCalculator(tempSim.Parameters.Values);
-                        rm0hceCalculator.DoCalculations();
-
-                        fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.Parameters.Values);
-                        filterMachiningCalculator.DoCalculations();
-
-                        lx.Add(tempSim.Parameters[xParameter].value.Value);
-                        ly.Add(tempSim.Parameters[yParameter].value.Value);
+                        coordinatesGrid.RowCount = i + 1;
                     }
-
-                    double[] ax = new double[lx.Count];
-                    double[] ay = new double[ly.Count];
-                    for (int j = 0; j < lx.Count; ++j)
-                    {
-                        ax[j] = lx[j];
-                        ay[j] = ly[j];
-                    }
-                    fmZedGraphControl1.AddCurve("curve", ax, ay, Color.Black, SymbolType.None);
-                    fmZedGraphControl1.GraphPane.AxisChange();
-                    fmZedGraphControl1.Refresh();
-
-                    //foreach (fmBlockParameter p in tempBlock.Parameters)
-                    //{
-                    //    if (p.name == listBoxXAxis.Text)
-                    //        tempBlock.UpdateIsInputed(p);
-                    //}
-
-                    //tempBlock.IsDrawn = selectedBlock.IsChecked;
-                    //DrawCurveAndColumn(xAxisParameterIndex, tempBlock, yAxisParameterIndex, y2AxisParameterIndex, symbol, selectedSimulationParametersTable.CurrentCell != null ? i == selectedSimulationParametersTable.CurrentCell.RowIndex : false);
-                    //symbol++;
+                    coordinatesGrid[xCol, i].Value = simData.calculatedDataList[i].parameters[xParameter].ValueInUnits;
+                    coordinatesGrid[yCol, i].Value = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits;
                 }
             }
         }
+
+        private void RecalculateCurves()
+        {
+            if (listBoxXAxis.Text == "")
+            {
+                return;
+            }
+
+            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+
+            if (!isUseLocalParams)
+            {
+                foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                {
+                    double xStart = xParameter.chartCurretXRange.minValue
+                        / xParameter.unitFamily.CurrentUnit.Coef;
+                    double xEnd = xParameter.chartCurretXRange.maxValue
+                        / xParameter.unitFamily.CurrentUnit.Coef;
+
+                    List<double> xList = CreateXValues(xStart, xEnd, 20);
+
+                    simData.calculatedDataList = new List<fmFilterSimulationData>();
+
+                    foreach (double x in xList)
+                    {
+                        fmFilterSimulationData tempSim = new fmFilterSimulationData();
+                        tempSim.CopyIsInputedFrom(simData.internalSimulation);
+                        tempSim.calculationOption = simData.internalSimulation.calculationOption;
+                        tempSim.CopyValuesFrom(simData.externalSimulation.Data);
+                        tempSim.parameters[xParameter].value = new fmValue(x * xParameter.unitFamily.CurrentUnit.Coef);
+
+                        fmSuspensionCalculator suspensionCalculator = new fmSuspensionCalculator(tempSim.parameters.Values);
+                        suspensionCalculator.DoCalculations();
+
+                        fmEps0Kappa0Calculator eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.parameters.Values);
+                        eps0Kappa0Calculator.DoCalculations();
+
+                        fmPc0rc0a0Calculator pc0rc0a0Calculator = new fmPc0rc0a0Calculator(tempSim.parameters.Values);
+                        pc0rc0a0Calculator.DoCalculations();
+
+                        fmRm0hceCalculator rm0hceCalculator = new fmRm0hceCalculator(tempSim.parameters.Values);
+                        rm0hceCalculator.DoCalculations();
+
+                        fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values);
+                        filterMachiningCalculator.DoCalculations();
+
+                        simData.calculatedDataList.Add(tempSim);
+                    }
+                }
+            }
+        }
+
+        private List<double> CreateXValues(double xStart, double xEnd, int minimalNodesAmount)
+        {
+            double[] X = {1, 1.25, 2, 2.5, 5};
+            const double eps = 1e-9;
+
+            const int maxPower = 15;
+
+            for (int power = maxPower; power >= -maxPower; --power)
+                for (int xIndex = X.Length - 1; xIndex >= 0; --xIndex)
+                {
+                    double x = X[xIndex];
+                    double dx = x * Math.Pow(10.0, power);
+                    double nodesCount = 2 + Math.Floor(xEnd / dx - eps) - Math.Floor(xStart / dx + eps);
+                    if (nodesCount >= minimalNodesAmount)
+                    {
+                        List<double> result = new List<double>();
+                        result.Add(xStart);
+                        for (int i = 1; i < nodesCount - 1; ++i)
+                        {
+                            result.Add((Math.Floor(xStart / dx + eps) + i) * dx);
+                        }
+                        result.Add(xEnd);
+                        return result;
+                    }
+                }
+
+            return new List<double>();
+        }
+
+        //private void CopyOnlyParameterValues(fmFilterSimulation src, fmFilterSimulation dst)
+        //{
+        //    foreach (fmGlobalParameter p in src.Parameters.Keys)
+        //        src.Parameters[p].value = dst.Parameters[p].value;
+        //}
 
         private void BindXYLists()
         {
@@ -1041,34 +1087,38 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateInternalSelectedSimList(List<fmFilterSimulation> simList)
         {
-            List<fmCheckedAndLinkToFilterSimulation> newInternalSelectedSimList = new List<fmCheckedAndLinkToFilterSimulation>();
+            List<fmSelectedSimulationData> newInternalSelectedSimList = new List<fmSelectedSimulationData>();
             foreach (fmFilterSimulation sim in simList)
             {
-                fmCheckedAndLinkToFilterSimulation newCheckedSim = null;
-                foreach (fmCheckedAndLinkToFilterSimulation checkedSim in internalSelectedSimList)
+                fmSelectedSimulationData newSelectedSim = null;
+                foreach (fmSelectedSimulationData checkedSim in internalSelectedSimList)
                 {
-                    if (checkedSim.simulation == sim)
+                    if (checkedSim.externalSimulation == sim)
                     {
-                        newCheckedSim = checkedSim;
+                        newSelectedSim = checkedSim;
                     }
                 }
-                if (newCheckedSim == null)
+                if (newSelectedSim == null)
                 {
-                    newCheckedSim = new fmCheckedAndLinkToFilterSimulation(true, sim);
+                    newSelectedSim = new fmSelectedSimulationData(true, sim);
                 }
-                newInternalSelectedSimList.Add(newCheckedSim);
+                newInternalSelectedSimList.Add(newSelectedSim);
             }
             internalSelectedSimList = newInternalSelectedSimList;
         }
     }
-    public class fmCheckedAndLinkToFilterSimulation
+    public class fmSelectedSimulationData
     {
         public bool isChecked;
-        public fmFilterSimulation simulation;
-        public fmCheckedAndLinkToFilterSimulation(bool isChecked, fmFilterSimulation simulation)
+        public fmFilterSimulation externalSimulation;
+        public fmFilterSimulationData internalSimulation;
+        public List<fmFilterSimulationData> calculatedDataList;
+        public fmSelectedSimulationData(bool isChecked, fmFilterSimulation externalSimulation)
         {
             this.isChecked = isChecked;
-            this.simulation = simulation;
+            this.externalSimulation = externalSimulation;
+            internalSimulation = new fmFilterSimulationData();
+            internalSimulation.CopyFrom(externalSimulation.Data);
         }
     }
 }

@@ -8,6 +8,14 @@ namespace fmCalculatorsLibrary
         public fmGlobalParameter globalParameter;
         public fmValue value;
 
+        public fmValue ValueInUnits
+        {
+            get
+            {
+                return value/globalParameter.unitFamily.CurrentUnit.Coef;
+            }
+        }
+
         public fmCalculationBaseParameter(fmGlobalParameter globalParameter)
         {
             this.globalParameter = globalParameter;

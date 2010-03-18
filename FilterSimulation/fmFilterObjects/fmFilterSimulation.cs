@@ -6,18 +6,36 @@ using fmCalculatorsLibrary;
 
 namespace FilterSimulation.fmFilterObjects
 {
-    class fmFilterSimulationData
+    public class fmFilterSimulationData
     {
         public string Name;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption;
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
         {
             Name = from.Name;
+            CopyValuesFrom(from);
+            CopyIsInputedFrom(from);
+        }
+
+        public void CopyValuesFrom(fmFilterSimulationData from)
+        {
             foreach (fmGlobalParameter p in from.parameters.Keys)
             {
-                parameters[p] = from.parameters[p];
+                parameters[p].value = from.parameters[p].value;
+            }
+        }
+
+        public void CopyIsInputedFrom(fmFilterSimulationData from)
+        {
+            foreach (fmGlobalParameter p in from.parameters.Keys)
+            {
+                if (parameters[p] is fmCalculationVariableParameter)
+                {
+                    (parameters[p] as fmCalculationVariableParameter).isInputed =
+                        (from.parameters[p] as fmCalculationVariableParameter).isInputed;
+                }
             }
         }
 
@@ -123,8 +141,8 @@ namespace FilterSimulation.fmFilterObjects
     {
         private Guid m_Guid;
         private fmFilterSimSerie m_ParentSerie;
-        private fmFilterSimulationData Data = new fmFilterSimulationData();
-        private fmFilterSimulationData BackupData = new fmFilterSimulationData();
+        private fmFilterSimulationData m_Data = new fmFilterSimulationData();
+        private fmFilterSimulationData m_BackupData = new fmFilterSimulationData();
         private bool m_Modified;
         private bool m_Checked = true;
 
@@ -141,14 +159,14 @@ namespace FilterSimulation.fmFilterObjects
         }
         public string Name
         {
-            get { return Data.Name; }
+            get { return m_Data.Name; }
             set 
             {
-                if (Data.Name != value)
+                if (m_Data.Name != value)
                 {
                     Modified = true;
                 }
-                Data.Name = value;
+                m_Data.Name = value;
             }
         }
         public bool Modified
@@ -173,384 +191,388 @@ namespace FilterSimulation.fmFilterObjects
             get { return m_ParentSerie; }
             set { m_ParentSerie = value; }
         }
+        public fmFilterSimulationData Data
+        {
+            get { return m_Data; }
+        }
 
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> Parameters
         {
-            get { return Data.parameters; }
+            get { return m_Data.parameters; }
         }
 
         //public fmValue eta_f
         //{
-        //    get { return Data.eta_f; }
+        //    get { return m_Data.eta_f; }
         //    set 
         //    {
-        //        if (Data.eta_f != value)
+        //        if (m_Data.eta_f != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.eta_f = value; 
+        //        m_Data.eta_f = value; 
         //    }
         //}
         //public fmValue rho_f
         //{
-        //    get { return Data.rho_f; }
+        //    get { return m_Data.rho_f; }
         //    set 
         //    {
-        //        if (Data.rho_f != value)
+        //        if (m_Data.rho_f != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.rho_f = value; 
+        //        m_Data.rho_f = value; 
         //    }
         //}
         //public fmValue rho_s
         //{
-        //    get { return Data.rho_s; }
+        //    get { return m_Data.rho_s; }
         //    set 
         //    {
-        //        if (Data.rho_s != value)
+        //        if (m_Data.rho_s != value)
         //        {
         //            Modified = true;
         //        }
                 
-        //        Data.rho_s = value; 
+        //        m_Data.rho_s = value; 
         //    }
         //}
         //public fmValue rho_sus
         //{
-        //    get { return Data.rho_sus; }
+        //    get { return m_Data.rho_sus; }
         //    set 
         //    {
-        //        if (Data.rho_sus != value)
+        //        if (m_Data.rho_sus != value)
         //        {
         //            Modified = true;
         //        }
                 
-        //        Data.rho_sus = value; 
+        //        m_Data.rho_sus = value; 
         //    }
         //}
         //public fmValue Cm
         //{
-        //    get { return Data.Cm; }
+        //    get { return m_Data.Cm; }
         //    set
         //    {
-        //        if (Data.Cm != value)
+        //        if (m_Data.Cm != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Cm = value; 
+        //        m_Data.Cm = value; 
         //    }
         //}
         //public fmValue Cv
         //{
-        //    get { return Data.Cv; }
+        //    get { return m_Data.Cv; }
         //    set
         //    {
-        //        if (Data.Cv != value)
+        //        if (m_Data.Cv != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Cv = value; 
+        //        m_Data.Cv = value; 
         //    }
         //}
         //public fmValue C
         //{
-        //    get { return Data.C; }
+        //    get { return m_Data.C; }
         //    set
         //    {
-        //        if (Data.C != value)
+        //        if (m_Data.C != value)
         //        {
         //            Modified = true;
         //        } 
-        //        Data.C = value; 
+        //        m_Data.C = value; 
         //    }
         //}
         //public fmValue eps0
         //{
-        //    get { return Data.eps0; }
+        //    get { return m_Data.eps0; }
         //    set
         //    {
-        //        if (Data.eps0 != value)
+        //        if (m_Data.eps0 != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.eps0 = value;
+        //        m_Data.eps0 = value;
         //    }
         //}
         //public fmValue kappa0
         //{
-        //    get { return Data.kappa0; }
+        //    get { return m_Data.kappa0; }
         //    set
         //    {
-        //        if (Data.kappa0 != value)
+        //        if (m_Data.kappa0 != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.kappa0 = value;
+        //        m_Data.kappa0 = value;
         //    }
         //}
         //public fmValue ne
         //{
-        //    get { return Data.ne; }
+        //    get { return m_Data.ne; }
         //    set
         //    {
-        //        if (Data.ne != value)
+        //        if (m_Data.ne != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.ne = value;
+        //        m_Data.ne = value;
         //    }
         //}
         //public fmValue Pc0
         //{
-        //    get { return Data.Pc0; }
+        //    get { return m_Data.Pc0; }
         //    set
         //    {
-        //        if (Data.Pc0 != value)
+        //        if (m_Data.Pc0 != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Pc0 = value;
+        //        m_Data.Pc0 = value;
         //    }
         //}
         //public fmValue rc0
         //{
-        //    get { return Data.rc0; }
+        //    get { return m_Data.rc0; }
         //    set
         //    {
-        //        if (Data.rc0 != value)
+        //        if (m_Data.rc0 != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.rc0 = value;
+        //        m_Data.rc0 = value;
         //    }
         //}
         //public fmValue a0
         //{
-        //    get { return Data.a0; }
+        //    get { return m_Data.a0; }
         //    set
         //    {
-        //        if (Data.a0 != value)
+        //        if (m_Data.a0 != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.a0 = value;
+        //        m_Data.a0 = value;
         //    }
         //}
         //public fmValue nc
         //{
-        //    get { return Data.nc; }
+        //    get { return m_Data.nc; }
         //    set
         //    {
-        //        if (Data.nc != value)
+        //        if (m_Data.nc != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.nc = value;
+        //        m_Data.nc = value;
         //    }
         //}
         //public fmValue hce
         //{
-        //    get { return Data.hce; }
+        //    get { return m_Data.hce; }
         //    set
         //    {
-        //        if (Data.hce != value)
+        //        if (m_Data.hce != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.hce = value;
+        //        m_Data.hce = value;
         //    }
         //}
         //public fmValue Rm0
         //{
-        //    get { return Data.Rm0; }
+        //    get { return m_Data.Rm0; }
         //    set
         //    {
-        //        if (Data.Rm0 != value)
+        //        if (m_Data.Rm0 != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Rm0 = value;
+        //        m_Data.Rm0 = value;
         //    }
         //}
         //public fmValue A
         //{
-        //    get { return Data.A; }
+        //    get { return m_Data.A; }
         //    set
         //    {
-        //        if (Data.A != value)
+        //        if (m_Data.A != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.A = value;
+        //        m_Data.A = value;
         //    }
         //}
         //public fmValue Dp
         //{
-        //    get { return Data.Dp; }
+        //    get { return m_Data.Dp; }
         //    set
         //    {
-        //        if (Data.Dp != value)
+        //        if (m_Data.Dp != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Dp = value;
+        //        m_Data.Dp = value;
         //    }
         //}
         //public fmValue hc
         //{
-        //    get { return Data.hc; }
+        //    get { return m_Data.hc; }
         //    set
         //    {
-        //        if (Data.hc != value)
+        //        if (m_Data.hc != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.hc = value;
+        //        m_Data.hc = value;
         //    }
         //}
         //public fmValue Mf
         //{
-        //    get { return Data.Mf; }
+        //    get { return m_Data.Mf; }
         //    set
         //    {
-        //        if (Data.Mf != value)
+        //        if (m_Data.Mf != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Mf = value;
+        //        m_Data.Mf = value;
         //    }
         //}        
         //public fmValue Ms
         //{
-        //    get { return Data.Ms; }
+        //    get { return m_Data.Ms; }
         //    set
         //    {
-        //        if (Data.Ms != value)
+        //        if (m_Data.Ms != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Ms = value;
+        //        m_Data.Ms = value;
         //    }
         //}
         //public fmValue Msus
         //{
-        //    get { return Data.Msus; }
+        //    get { return m_Data.Msus; }
         //    set
         //    {
-        //        if (Data.Msus != value)
+        //        if (m_Data.Msus != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Msus = value;
+        //        m_Data.Msus = value;
         //    }
         //}
         //public fmValue n
         //{
-        //    get { return Data.n; }
+        //    get { return m_Data.n; }
         //    set
         //    {
-        //        if (Data.n != value)
+        //        if (m_Data.n != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.n = value;
+        //        m_Data.n = value;
         //    }
         //}
         //public fmValue Qms
         //{
-        //    get { return Data.Qms; }
+        //    get { return m_Data.Qms; }
         //    set
         //    {
-        //        if (Data.Qms != value)
+        //        if (m_Data.Qms != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Qms = value;
+        //        m_Data.Qms = value;
         //    }
         //}
         //public fmValue Qmsus
         //{
-        //    get { return Data.Qmsus; }
+        //    get { return m_Data.Qmsus; }
         //    set
         //    {
-        //        if (Data.Qmsus != value)
+        //        if (m_Data.Qmsus != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Qmsus = value;
+        //        m_Data.Qmsus = value;
         //    }
         //}
         //public fmValue Qsus
         //{
-        //    get { return Data.Qsus; }
+        //    get { return m_Data.Qsus; }
         //    set
         //    {
-        //        if (Data.Qsus != value)
+        //        if (m_Data.Qsus != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Qsus = value;
+        //        m_Data.Qsus = value;
         //    }
         //}
         //public fmValue sf
         //{
-        //    get { return Data.sf; }
+        //    get { return m_Data.sf; }
         //    set
         //    {
-        //        if (Data.sf != value)
+        //        if (m_Data.sf != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.sf = value;
+        //        m_Data.sf = value;
         //    }
         //}
         //public fmValue tc
         //{
-        //    get { return Data.tc; }
+        //    get { return m_Data.tc; }
         //    set
         //    {
-        //        if (Data.tc != value)
+        //        if (m_Data.tc != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.tc = value;
+        //        m_Data.tc = value;
         //    }
         //}
         //public fmValue tf
         //{
-        //    get { return Data.tf; }
+        //    get { return m_Data.tf; }
         //    set
         //    {
-        //        if (Data.tf != value)
+        //        if (m_Data.tf != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.tf = value;
+        //        m_Data.tf = value;
         //    }
         //}
         //public fmValue Vsus
         //{
-        //    get { return Data.Vsus; }
+        //    get { return m_Data.Vsus; }
         //    set
         //    {
-        //        if (Data.Vsus != value)
+        //        if (m_Data.Vsus != value)
         //        {
         //            Modified = true;
         //        }
-        //        Data.Vsus = value;
+        //        m_Data.Vsus = value;
         //    }
         //}
         public fmFilterMachiningCalculator.FilterMachiningCalculationOption FilterMachiningCalculationOption
         {
-            get { return Data.filterMachiningCalculationOption; }
+            get { return m_Data.calculationOption; }
             set 
             {
-                if (Data.filterMachiningCalculationOption != value)
+                if (m_Data.calculationOption != value)
                 {
                     Modified = true;
                 }
-                Data.filterMachiningCalculationOption = value; 
+                m_Data.calculationOption = value; 
             }
         }
 
@@ -566,7 +588,7 @@ namespace FilterSimulation.fmFilterObjects
                 m_ParentSerie = parentSerie;
                 parentSerie.AddSimulation(this);
             }
-            Data.Name = Name;
+            m_Data.Name = Name;
             Keep();
         }
 
@@ -585,12 +607,12 @@ namespace FilterSimulation.fmFilterObjects
         
         public void Keep()
         {
-            BackupData.CopyFrom(Data);
+            m_BackupData.CopyFrom(m_Data);
             Modified = false;
         }
         public void Restore()
         {
-            Data.CopyFrom(BackupData);
+            m_Data.CopyFrom(m_BackupData);
             Modified = false;
         }
         public void Delete()
@@ -600,8 +622,8 @@ namespace FilterSimulation.fmFilterObjects
         }
         public void CopyFrom(fmFilterSimulation sim)
         {
-            Data.CopyFrom(sim.Data);
-            BackupData.CopyFrom(sim.BackupData);
+            m_Data.CopyFrom(sim.m_Data);
+            m_BackupData.CopyFrom(sim.m_BackupData);
             Modified = sim.Modified;
         }
 

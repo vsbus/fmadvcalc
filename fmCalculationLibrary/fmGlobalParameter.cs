@@ -8,10 +8,6 @@ namespace fmCalculationLibrary
         public string name;
         public fmUnitFamily unitFamily;
 
-        public string Name
-        {
-            get { return name; }
-        }
         //
         // Summary:
         //     Return name of current unit for parameter
