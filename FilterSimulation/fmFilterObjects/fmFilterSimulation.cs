@@ -9,48 +9,8 @@ namespace FilterSimulation.fmFilterObjects
     class fmFilterSimulationData
     {
         public string Name;
-        public Dictionary<fmGlobalParameter, fmValue> parameters = new Dictionary<fmGlobalParameter, fmValue>();
-
-        //public fmValue eta_f
-        //{
-        //    get { return parameters[fmGlobalParameter.eta_f]; }
-        //    set { parameters[fmGlobalParameter.eta_f]
-        //}
-        //public fmValue rho_f;
-        //public fmValue rho_s;
-        //public fmValue rho_sus;
-        //public fmValue Cm;
-        //public fmValue Cv;
-        //public fmValue C;
-
-        //public fmValue eps0;
-        //public fmValue kappa0;
-        //public fmValue ne;
-
-        //public fmValue Pc0;
-        //public fmValue rc0;
-        //public fmValue a0;
-        //public fmValue nc;
-        
-        //public fmValue hce;
-        //public fmValue Rm0;
-        
-        //public fmValue A;
-        //public fmValue Dp;
-        //public fmValue hc;
-        //public fmValue Mf;
-        //public fmValue Ms;
-        //public fmValue Msus;
-        //public fmValue n;
-        //public fmValue Qms;
-        //public fmValue Qmsus;
-        //public fmValue Qsus;
-        //public fmValue sf;
-        //public fmValue tc;
-        //public fmValue tf;
-        //public fmValue Vsus;
-
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption;
+        public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
         {
@@ -61,96 +21,101 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
+        private void AddParameter(fmCalculationBaseParameter parameter)
+        {
+            parameters[parameter.globalParameter] = parameter;
+        }
+
         public fmFilterSimulationData()
         {
-            parameters[fmGlobalParameter.eta_f] = new fmValue();
-            parameters[fmGlobalParameter.rho_f] = new fmValue();
-            parameters[fmGlobalParameter.rho_s] = new fmValue();
-            parameters[fmGlobalParameter.rho_sus] = new fmValue();
-            parameters[fmGlobalParameter.Cm] = new fmValue();
-            parameters[fmGlobalParameter.Cv] = new fmValue();
-            parameters[fmGlobalParameter.C] = new fmValue();
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_f));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_f));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_s));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_sus));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Cm));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Cv));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.C));
 
-            parameters[fmGlobalParameter.eps0] = new fmValue();
-            parameters[fmGlobalParameter.kappa0] = new fmValue();
-            parameters[fmGlobalParameter.ne] = new fmValue();
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps0));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.kappa0));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ne));
 
-            parameters[fmGlobalParameter.Pc0] = new fmValue();
-            parameters[fmGlobalParameter.rc0] = new fmValue();
-            parameters[fmGlobalParameter.a0] = new fmValue();
-            parameters[fmGlobalParameter.nc] = new fmValue();
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Pc0));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rc0));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.a0));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.nc));
 
-            parameters[fmGlobalParameter.eta_f] = new fmValue();
-            parameters[fmGlobalParameter.eta_f] = new fmValue();
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_f));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_f));
 
-            parameters[fmGlobalParameter.hce] = new fmValue();
-            parameters[fmGlobalParameter.Rm0] = new fmValue();
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hce));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Rm0));
 
-            parameters[fmGlobalParameter.A] = new fmValue();
-            parameters[fmGlobalParameter.Dp] = new fmValue();
-            parameters[fmGlobalParameter.hc] = new fmValue();
-            parameters[fmGlobalParameter.Mf] = new fmValue();
-            parameters[fmGlobalParameter.Ms] = new fmValue();
-            parameters[fmGlobalParameter.Msus] = new fmValue();
-            parameters[fmGlobalParameter.n] = new fmValue();
-            parameters[fmGlobalParameter.Qms] = new fmValue();
-            parameters[fmGlobalParameter.Qmsus] = new fmValue();
-            parameters[fmGlobalParameter.Qsus] = new fmValue();
-            parameters[fmGlobalParameter.sf] = new fmValue();
-            parameters[fmGlobalParameter.tc] = new fmValue();
-            parameters[fmGlobalParameter.tf] = new fmValue();
-            parameters[fmGlobalParameter.Vsus] = new fmValue();
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.A));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Ms));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Msus));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.n));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qms));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmsus));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qsus));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vsus));
 
-            parameters[fmGlobalParameter.eps] = new fmValue();
-            parameters[fmGlobalParameter.kappa] = new fmValue();
-            parameters[fmGlobalParameter.Pc] = new fmValue();
-            parameters[fmGlobalParameter.rc] = new fmValue();
-            parameters[fmGlobalParameter.a] = new fmValue();
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.kappa));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Pc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.a));
 
-            parameters[fmGlobalParameter.tr] = new fmValue();
-            parameters[fmGlobalParameter.hc_over_tf] = new fmValue();
-            parameters[fmGlobalParameter.dhc_over_dt] = new fmValue();
-            parameters[fmGlobalParameter.Qf] = new fmValue();
-            parameters[fmGlobalParameter.Qf_d] = new fmValue();
-            parameters[fmGlobalParameter.Qs] = new fmValue();
-            parameters[fmGlobalParameter.Qs_d] = new fmValue();
-            parameters[fmGlobalParameter.Qc] = new fmValue();
-            parameters[fmGlobalParameter.Qc_d] = new fmValue();
-            parameters[fmGlobalParameter.Qsus_d] = new fmValue();
-            parameters[fmGlobalParameter.Qmsus_d] = new fmValue();
-            parameters[fmGlobalParameter.Qms_d] = new fmValue();
-            parameters[fmGlobalParameter.Qmf] = new fmValue();
-            parameters[fmGlobalParameter.Qmf_d] = new fmValue();
-            parameters[fmGlobalParameter.Qmc] = new fmValue();
-            parameters[fmGlobalParameter.Qmc_d] = new fmValue();
-            parameters[fmGlobalParameter.qf] = new fmValue();
-            parameters[fmGlobalParameter.qf_d] = new fmValue();
-            parameters[fmGlobalParameter.qs] = new fmValue();
-            parameters[fmGlobalParameter.qs_d] = new fmValue();
-            parameters[fmGlobalParameter.qc] = new fmValue();
-            parameters[fmGlobalParameter.qc_d] = new fmValue();
-            parameters[fmGlobalParameter.qsus] = new fmValue();
-            parameters[fmGlobalParameter.qsus_d] = new fmValue();
-            parameters[fmGlobalParameter.qmsus] = new fmValue();
-            parameters[fmGlobalParameter.qmsus_d] = new fmValue();
-            parameters[fmGlobalParameter.qms] = new fmValue();
-            parameters[fmGlobalParameter.qms_d] = new fmValue();
-            parameters[fmGlobalParameter.qmf] = new fmValue();
-            parameters[fmGlobalParameter.qmf_d] = new fmValue();
-            parameters[fmGlobalParameter.qmc] = new fmValue();
-            parameters[fmGlobalParameter.qmc_d] = new fmValue();
-            parameters[fmGlobalParameter.Vf] = new fmValue();
-            parameters[fmGlobalParameter.mf] = new fmValue();
-            parameters[fmGlobalParameter.vf] = new fmValue();
-            parameters[fmGlobalParameter.ms] = new fmValue();
-            parameters[fmGlobalParameter.vs] = new fmValue();
-            parameters[fmGlobalParameter.msus] = new fmValue();
-            parameters[fmGlobalParameter.vsus] = new fmValue();
-            parameters[fmGlobalParameter.mc] = new fmValue();
-            parameters[fmGlobalParameter.vc] = new fmValue();
-            parameters[fmGlobalParameter.Vc] = new fmValue();
-            parameters[fmGlobalParameter.Mc] = new fmValue();
-            parameters[fmGlobalParameter.Vs] = new fmValue();
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tr));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hc_over_tf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.dhc_over_dt));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qf_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qs));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qs_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qc_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qsus_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmsus_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qms_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmf_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmc_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qf_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qs));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qs_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qc_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qsus));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qsus_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmsus));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmsus_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qms));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qms_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmf_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmc_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.mf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.vf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ms));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.vs));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.msus));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.vsus));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.mc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.vc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vs));
         }
     }
 
@@ -209,7 +174,7 @@ namespace FilterSimulation.fmFilterObjects
             set { m_ParentSerie = value; }
         }
 
-        public Dictionary<fmGlobalParameter, fmValue> Parameters
+        public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> Parameters
         {
             get { return Data.parameters; }
         }
@@ -578,14 +543,14 @@ namespace FilterSimulation.fmFilterObjects
         //}
         public fmFilterMachiningCalculator.FilterMachiningCalculationOption FilterMachiningCalculationOption
         {
-            get { return Data.calculationOption; }
+            get { return Data.filterMachiningCalculationOption; }
             set 
             {
-                if (Data.calculationOption != value)
+                if (Data.filterMachiningCalculationOption != value)
                 {
                     Modified = true;
                 }
-                Data.calculationOption = value; 
+                Data.filterMachiningCalculationOption = value; 
             }
         }
 
@@ -704,7 +669,8 @@ namespace FilterSimulation.fmFilterObjects
         {
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
             {
-                p.value = sim.Parameters[p.globalParameter];
+                p.value = sim.Parameters[p.globalParameter].value;
+                p.isInputed = (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed;
             }
         }
 
@@ -712,7 +678,7 @@ namespace FilterSimulation.fmFilterObjects
         {
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockConstantParameter p in block.ConstantParameters)
             {
-                p.value = sim.Parameters[p.globalParameter];
+                p.value = sim.Parameters[p.globalParameter].value;
             }
         }
 
@@ -732,11 +698,11 @@ namespace FilterSimulation.fmFilterObjects
         {
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockConstantParameter p in block.ConstantParameters)
             {
-                if (sim.Parameters[p.globalParameter] != p.value)
+                if (sim.Parameters[p.globalParameter].value != p.value)
                 {
                     sim.Modified = true;
                 }
-                sim.Parameters[p.globalParameter] = p.value;
+                sim.Parameters[p.globalParameter].value = p.value;
             }
         }
 
@@ -744,11 +710,13 @@ namespace FilterSimulation.fmFilterObjects
         {
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
             {
-                if (sim.Parameters[p.globalParameter] != p.value)
+                if (sim.Parameters[p.globalParameter].value != p.value
+                    || (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed != p.isInputed)
                 {
                     sim.Modified = true;
                 }
-                sim.Parameters[p.globalParameter] = p.value;
+                sim.Parameters[p.globalParameter].value = p.value;
+                (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed = p.isInputed;
             }
         }
     }

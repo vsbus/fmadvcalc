@@ -1053,7 +1053,7 @@ namespace FilterSimulation
             bool wasChanged = false;
             foreach (fmBlockVariableParameter p in filterMachiningBlock.Parameters)
             {
-                wasChanged |= (p.value != sim.Parameters[p.globalParameter]);
+                wasChanged |= (p.value != sim.Parameters[p.globalParameter].value);
             }
 
             sim.FilterMachiningCalculationOption = filterMachiningBlock.CalculationOption;

@@ -6,7 +6,7 @@ namespace fmCalculatorsLibrary
 {
     public class fmEps0Kappa0Calculator : fmBaseCalculator
     {
-        public fmEps0Kappa0Calculator(List<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+        public fmEps0Kappa0Calculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
             fmCalculationVariableParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationVariableParameter;

@@ -125,8 +125,8 @@ namespace fmCalculatorsLibrary
         }
 
         public FilterMachiningCalculationOption calculationOption;
-        
-        public fmFilterMachiningCalculator(List<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+
+        public fmFilterMachiningCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
 
         private static bool IsStandartKindOption(FilterMachiningCalculationOption calculationOption)
         {

@@ -7,7 +7,7 @@ namespace fmCalculatorsLibrary
 {
     public class fmPc0rc0a0Calculator : fmBaseCalculator
     {
-        public fmPc0rc0a0Calculator(List<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+        public fmPc0rc0a0Calculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
             fmCalculationVariableParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationVariableParameter;

@@ -15,7 +15,7 @@ namespace fmCalculatorsLibrary
         }
         public SuspensionCalculationOptions calculationOption;
 
-        public fmSuspensionCalculator(List<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+        public fmSuspensionCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
 
         override public void DoCalculations()
         {

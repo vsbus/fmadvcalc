@@ -113,19 +113,44 @@ namespace FilterSimulation
             fmFilterSimulation sim = new fmFilterSimulation(fSimSerie, "simulatioN");
 
             // BEGIN DEBUG CODE
-            sim.Parameters[fmGlobalParameter.eta_f] = new fmValue(1 * fmUnitFamily.ViscosityFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.rho_f] = new fmValue(1000 * fmUnitFamily.DensityFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.rho_s] = new fmValue(1500 * fmUnitFamily.DensityFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.eps0] = new fmValue(50 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.ne] = new fmValue(0.02 * fmUnitFamily.NoUnitFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.Pc0] = new fmValue(1 * fmUnitFamily.PermeabilityFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.nc] = new fmValue(0.3 * fmUnitFamily.NoUnitFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.hce] = new fmValue(5 * fmUnitFamily.LengthFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.Cm] = new fmValue(20 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.A] = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.Dp] = new fmValue(1 * fmUnitFamily.PressureFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.sf] = new fmValue(30 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
-            sim.Parameters[fmGlobalParameter.n] = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
+            sim.Parameters[fmGlobalParameter.eta_f].value = new fmValue(1 * fmUnitFamily.ViscosityFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.eta_f] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.rho_f].value = new fmValue(1000 * fmUnitFamily.DensityFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.rho_f] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.rho_s].value = new fmValue(1500 * fmUnitFamily.DensityFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.rho_s] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.eps0].value = new fmValue(50 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.eps0] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.ne].value = new fmValue(0.02 * fmUnitFamily.NoUnitFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.ne] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.Pc0].value = new fmValue(1 * fmUnitFamily.PermeabilityFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.Pc0] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.nc].value = new fmValue(0.3 * fmUnitFamily.NoUnitFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.nc] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.hce].value = new fmValue(5 * fmUnitFamily.LengthFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.hce] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.Cm].value = new fmValue(20 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.Cm] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.A].value = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.A] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.Dp].value = new fmValue(1 * fmUnitFamily.PressureFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.Dp] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.sf].value = new fmValue(30 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.sf] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
+            
+            sim.Parameters[fmGlobalParameter.n].value = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
+            (sim.Parameters[fmGlobalParameter.n] as fmCalculatorsLibrary.fmCalculationVariableParameter).isInputed = true;
             // END DEBUG CODE
 
             fProj.Keep();

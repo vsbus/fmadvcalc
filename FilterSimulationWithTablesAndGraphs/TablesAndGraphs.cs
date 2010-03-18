@@ -516,7 +516,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmGlobalParameter param in tempSim.Parameters.Keys)
                 {
                     int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
-                    row.Cells[idx].Value = tempSim.Parameters[param] / param.unitFamily.CurrentUnit.Coef;
+                    row.Cells[idx].Value = tempSim.Parameters[param].value / param.unitFamily.CurrentUnit.Coef;
                 }
 
                 fmFilterMachiningBlock tempBlock = new fmFilterMachiningBlock(null);
@@ -773,6 +773,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void listBoxX_SelectedIndexChanged(object sender, EventArgs e)
         {
+            RecalculateCurves();
         //    UpdateIsInputedForParametersBlocks();
         //    UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
         //    LoadCurrentXRange();
@@ -781,7 +782,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void LoadCurrentXRange()
         {
-            RecalculateCurves();
+            //RecalculateCurves();
             //loadingXRange = true;
             //int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
             //fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
@@ -925,42 +926,60 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void RecalculateCurves()
         {
-            //int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
-            //int yAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxYAxis.Text);
+            if (listBoxXAxis.Text == ""
+                || listBoxYAxis.Text == "")
+            {
+                return;
+            }
 
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
             fmGlobalParameter yParameter = fmGlobalParameter.ParametersByName[listBoxYAxis.Text];
-            //fmGlobalParameter yParameter = new fmFilterMachiningBlock(null).Parameters[yAxisParameterIndex].globalParameter;
 
-            //DrawCurvesAndColumnsForAxis(xAxisParameterIndex, yAxisParameterIndex, -1, SymbolType.Circle);
+            fmZedGraphControl1.GraphPane.CurveList.Clear();
+
             if (!isUseLocalParams)
             {
                 for (int i = 0; i < internalSelectedSimList.Count; i++)
                 {
-                    //fmSelectedFilterMachiningBlock selectedBlock = fmSelectedBlocks[i];
-                    //fmAdditionalFilterMachiningBlock tempBlock = new fmAdditionalFilterMachiningBlock(true,
-                                                                                                //calculationOptionViewInTablesAndGraphs);
-                    //tempBlock.CalculationOption = fmLocalBlocks[0].CalculationOption;
-                    //tempBlock.CopyValues(selectedBlock.filterMachiningBlock);
+                    List<double> lx = new List<double>();
+                    List<double> ly = new List<double>();
+                        
+                    for (double x = 0.1; x <= 10; x += 0.1)
+                    {
+                        fmFilterSimulation tempSim = new fmFilterSimulation(null, internalSelectedSimList[i].simulation);
+                        tempSim.FilterMachiningCalculationOption = calculationOptionViewInTablesAndGraphs.GetSelectedOption();
 
-                    //for (double x = 0.1; x <= 10; x += 0.1)
-                    //{
-                    //    fmFilterSimulation tempSim = new fmFilterSimulation(null, internalSelectedSimList[i].simulation);
-                    //    tempSim.FilterMachiningCalculationOption = calculationOptionViewInTablesAndGraphs.GetSelectedOption();
+                        tempSim.Parameters[xParameter].value = new fmValue(x);
 
-                    //    tempSim.Parameters[xParameter] = new fmValue(x);
+                        fmSuspensionCalculator suspensionCalculator = new fmSuspensionCalculator(tempSim.Parameters.Values);
+                        suspensionCalculator.DoCalculations();
 
-                    //    fmSuspensionCalculator suspensionCalculator = new fmSuspensionCalculator(tempSim.susBlock.AllParameters);
-                    //    //fmFilterSimulation.CopyAllParametersFromSimulationToBlock(tempSim, susBlock);
-                    //    //susBlock.DoCalculations();
-                    //    suspensionCalculator.DoCalculations();
-                    //    fmFilterSimulation.CopyAllParametersFromBlockToSimulation(tempSim.susBlock, tempSim);
+                        fmEps0Kappa0Calculator eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.Parameters.Values);
+                        eps0Kappa0Calculator.DoCalculations();
 
-                    //    //fmEps0Kappa0WithneBlock eps0kappa0Block = new fmEps0Kappa0WithneBlock(null, null, null);
-                    //    //fmFilterSimulation.CopyAllParametersFromSimulationToBlock(tempSim, eps0kappa0Block);
-                    //    //eps0kappa0Block.DoCalculations();
-                    //    //fmFilterSimulation.CopyAllParametersFromBlockToSimulation(eps0kappa0Block, tempSim);
-                    //}
+                        fmPc0rc0a0Calculator pc0rc0a0Calculator = new fmPc0rc0a0Calculator(tempSim.Parameters.Values);
+                        pc0rc0a0Calculator.DoCalculations();
+
+                        fmRm0hceCalculator rm0hceCalculator = new fmRm0hceCalculator(tempSim.Parameters.Values);
+                        rm0hceCalculator.DoCalculations();
+
+                        fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.Parameters.Values);
+                        filterMachiningCalculator.DoCalculations();
+
+                        lx.Add(tempSim.Parameters[xParameter].value.Value);
+                        ly.Add(tempSim.Parameters[yParameter].value.Value);
+                    }
+
+                    double[] ax = new double[lx.Count];
+                    double[] ay = new double[ly.Count];
+                    for (int j = 0; j < lx.Count; ++j)
+                    {
+                        ax[j] = lx[j];
+                        ay[j] = ly[j];
+                    }
+                    fmZedGraphControl1.AddCurve("curve", ax, ay, Color.Black, SymbolType.None);
+                    fmZedGraphControl1.GraphPane.AxisChange();
+                    fmZedGraphControl1.Refresh();
 
                     //foreach (fmBlockParameter p in tempBlock.Parameters)
                     //{

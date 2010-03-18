@@ -5,7 +5,7 @@ using fmCalculationLibrary;
 
 namespace fmCalculatorsLibrary
 {
-    public class fmCalculationVariableParameter : fmCalculationBaseParameter
+    public class fmCalculationVariableParameter : fmCalculationConstantParameter
     {
         public bool isInputed;
 
