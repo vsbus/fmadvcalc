@@ -28,10 +28,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="fmCalculationLibrary, Version=1.0.1.76, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\fmCalculationLibrary\bin\Debug\fmCalculationLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -75,6 +71,10 @@
     <ProjectReference Include="..\fmCalcBlocksLibrary\fmCalcBlocksLibrary.csproj">
       <Project>{A9AFDCE0-9E84-4AF7-86A9-71A9D528721F}</Project>
       <Name>fmCalcBlocksLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\fmCalculationLibrary\fmCalculationLibrary.csproj">
+      <Project>{D4A4B18A-B19E-46A7-8028-EF259E24849B}</Project>
+      <Name>fmCalculationLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\fmDataGrid\fmDataGrid.csproj">
       <Project>{30A5CD2D-C64C-402B-A957-3885E498A97C}</Project>
