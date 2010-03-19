@@ -30,7 +30,7 @@
   <ItemGroup>
     <Reference Include="fmCalculationLibrary, Version=1.0.1.76, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\fmCalculationLibrary\bin\Release\fmCalculationLibrary.dll</HintPath>
+      <HintPath>..\fmCalculationLibrary\bin\Debug\fmCalculationLibrary.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
