@@ -27,6 +27,18 @@ namespace fmZedGraph
         public fmZedGraphControl()
         {
             InitializeComponent();
+
+            GraphPane.XAxis.MajorGrid.Color = Color.LightGray;
+            GraphPane.XAxis.MajorGrid.IsVisible = true;
+            GraphPane.XAxis.MajorGrid.DashOff = 0;
+            GraphPane.XAxis.MajorGrid.DashOn = 15;
+
+            GraphPane.YAxis.MajorGrid.Color = Color.LightGray;
+            GraphPane.YAxis.MajorGrid.IsVisible = true;
+            GraphPane.YAxis.MajorGrid.DashOff = 0;
+            GraphPane.YAxis.MajorGrid.DashOn = 15;
+
+            
         }
     }
 }
