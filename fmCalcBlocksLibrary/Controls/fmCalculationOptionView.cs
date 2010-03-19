@@ -124,6 +124,16 @@ namespace fmCalcBlocksLibrary.Controls
             throw new Exception("Calculation option for description [" + SelectedLeaf.Text + "] not found");
         }
 
+        private static List<TreeNode> GetNodes(TreeNodeCollection list)
+        {
+            List<TreeNode> result = new List<TreeNode>();
+            foreach (TreeNode node in list)
+            {
+                result.Add(node);
+                result.AddRange(GetLeafs(node.Nodes));
+            }
+            return result;
+        }
         private static List<TreeNode> GetLeafs(TreeNodeCollection list)
         {
             List<TreeNode> result = new List<TreeNode>();
@@ -139,6 +149,11 @@ namespace fmCalcBlocksLibrary.Controls
 
         public void SetSelectedOption(fmFilterMachiningCalculator.FilterMachiningCalculationOption option)
         {
+            foreach (TreeNode node in GetNodes(Nodes))
+            {
+                SetNodeFontStyle(node, FontStyle.Regular);
+            }
+
             foreach (TreeNode leaf in GetLeafs(Nodes))
                 if (GetEnumDescription(option) == leaf.Text)
                 {

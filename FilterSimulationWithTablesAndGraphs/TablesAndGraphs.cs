@@ -39,10 +39,22 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void FillListBox(ListBox listBox, List<string> strings)
         {
-            listBox.Items.Clear();
-            foreach (string s in strings)
+            //listBox.Items.Clear();
+            //foreach (string s in strings)
+            //{
+            //    listBox.Items.Add(s);
+            //}
+            for (int i = listBox.Items.Count - 1; i >= 0; --i)
+                if (!strings.Contains(listBox.Items[i].ToString()))
+                    listBox.Items.RemoveAt(i);
+
+            for (int i = 0, j = 0; j < strings.Count; ++i, ++j)
             {
-                listBox.Items.Add(s);
+                if (i == listBox.Items.Count
+                    || listBox.Items[i].ToString() != strings[j])
+                {
+                    listBox.Items.Insert(i, strings[j]);
+                }
             }
         }
 
@@ -1024,7 +1036,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     {
                         fmFilterSimulationData tempSim = new fmFilterSimulationData();
                         tempSim.CopyIsInputedFrom(simData.externalSimulation.Data);
-                        //tempSim.calculationOption = simData.internalSimulation.calculationOption;
+                        //tempSim.filterMachinigCalculationOption = simData.internalSimulation.filterMachinigCalculationOption;
                         tempSim.CopyValuesFrom(simData.externalSimulation.Data);
                         tempSim.parameters[xParameter].value = new fmValue(x * xParameter.unitFamily.CurrentUnit.Coef);
 
@@ -1042,6 +1054,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         rm0hceCalculator.DoCalculations();
 
                         fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values);
+                        filterMachiningCalculator.calculationOption = simData.externalSimulation.Data.filterMachinigCalculationOption;
                         filterMachiningCalculator.DoCalculations();
 
                         simData.calculatedDataList.Add(tempSim);
@@ -1090,12 +1103,13 @@ namespace FilterSimulationWithTablesAndGraphs
             List<string> inputNames = new List<string>();
             //List<fmGlobalParameter> simInputParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calculationOptionViewInTablesAndGraphs.GetSelectedOption());
 
-            List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>();
+            List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
 
-            if (internalSelectedSimList.Count > 0)
-                foreach (fmCalculationVariableParameter p in internalSelectedSimList[0].externalSimulation.Parameters.Values)
-                    if (p.isInputed)
-                        simInputParameters.Add(p.globalParameter);
+            foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                for (int i = simInputParameters.Count - 1; i >= 0; --i)
+                   if (!simData.externalSimulation.Parameters.ContainsKey(simInputParameters[i]) 
+                       || !(simData.externalSimulation.Parameters[simInputParameters[i]] as fmCalculationVariableParameter).isInputed)
+                        simInputParameters.RemoveAt(i);
 
             //List<fmBlockVariableParameter> susBlockParameters = new fmSuspensionBlock(null, null, null, null, null, null, null, null, null, null).Parameters;
             //List<fmGlobalParameter> susParameters = new List<fmGlobalParameter>();

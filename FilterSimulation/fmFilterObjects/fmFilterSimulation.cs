@@ -10,12 +10,14 @@ namespace FilterSimulation.fmFilterObjects
     {
         public string Name;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption;
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachinigCalculationOption;
         public fmSuspensionCalculator.SuspensionCalculationOptions suspensionCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
         {
             Name = from.Name;
+            filterMachinigCalculationOption = from.filterMachinigCalculationOption;
+            suspensionCalculationOption = from.suspensionCalculationOption;
             CopyValuesFrom(from);
             CopyIsInputedFrom(from);
         }
@@ -566,14 +568,14 @@ namespace FilterSimulation.fmFilterObjects
         //}
         public fmFilterMachiningCalculator.FilterMachiningCalculationOption FilterMachiningCalculationOption
         {
-            get { return m_Data.calculationOption; }
+            get { return m_Data.filterMachinigCalculationOption; }
             set 
             {
-                if (m_Data.calculationOption != value)
+                if (m_Data.filterMachinigCalculationOption != value)
                 {
                     Modified = true;
                 }
-                m_Data.calculationOption = value; 
+                m_Data.filterMachinigCalculationOption = value; 
             }
         }
 

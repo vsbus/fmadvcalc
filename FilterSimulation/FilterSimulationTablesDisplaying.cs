@@ -293,6 +293,7 @@ namespace FilterSimulation
                 if (sim.filterMachiningBlock == null)
                 {
                     fmCalculationOptionView cow = CreateNewCalculationOptionView(suspensionParametersPanel, 450, 3, 180, 160);
+                    cow.SetSelectedOption(sim.FilterMachiningCalculationOption);
 
                     sim.filterMachiningBlock = new fmFilterMachiningBlock(
                         cow,
@@ -442,6 +443,7 @@ namespace FilterSimulation
         private static void CopySimulationValuesToFilterMachining(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
+            sim.filterMachiningBlock.CalculationOption = sim.FilterMachiningCalculationOption;
             //foreach (fmBlockParameter p in sim.filterMachiningBlock.Parameters)
             //{
             //    p.value = sim.Parameters[p.globalParameter];
@@ -517,17 +519,6 @@ namespace FilterSimulation
         private static void CopySimulationValuesToSusBlock(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.susBlock);
-            //foreach (fmBlockParameter p in sim.susBlock.Parameters)
-            //{
-            //    p.value = sim.Parameters[p.globalParameter];
-            //}
-            //sim.susBlock.eta_f_Value = sim.eta_f;
-            //sim.susBlock.rho_f_Value = sim.rho_f;
-            //sim.susBlock.rho_s_Value = sim.rho_s;
-            //sim.susBlock.rho_sus_Value = sim.rho_sus;
-            //sim.susBlock.Cm_Value = sim.Cm;
-            //sim.susBlock.Cv_Value = sim.Cv;
-            //sim.susBlock.C_Value = sim.C;
         }
 
         void UpdateColorsAndFontForSolution(fmFilterSimSolution sol)
