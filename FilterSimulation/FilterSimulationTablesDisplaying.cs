@@ -917,6 +917,7 @@ namespace FilterSimulation
             else
             {
                 fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.susBlock, sim);
+                sim.Data.suspensionCalculationOption = sim.susBlock.GetCalculationOption();
                 //foreach (fmBlockParameter p in sim.susBlock.Parameters)
                 //{
                 //    sim.Parameters[p.globalParameter] = p.value;

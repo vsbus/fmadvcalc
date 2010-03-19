@@ -10,21 +10,21 @@ namespace fmCalcBlocksLibrary.Blocks
     {
         private fmBlockVariableParameter Pc0, rc0, a0;
         private fmBlockConstantParameter rho_s;
-        private fmBlockConstantParameter eps;
+        private fmBlockConstantParameter eps0;
 
         private fmBlockParameterGroup Pc_rc_a_group = new fmBlockParameterGroup();
 
-        public fmValue Pc_Value
+        public fmValue Pc0_Value
         {
             get { return Pc0.value; }
             set { Pc0.value = value; }
         }
-        public fmValue rc_Value
+        public fmValue rc0_Value
         {
             get { return rc0.value; }
             set { rc0.value = value; }
         }
-        public fmValue a_Value
+        public fmValue a0_Value
         {
             get { return a0.value; }
             set { a0.value = value; }
@@ -34,10 +34,10 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return rho_s.value; }
             set { rho_s.value = value; }
         }
-        public fmValue eps_Value
+        public fmValue eps0_Value
         {
-            get { return eps.value; }
-            set { eps.value = value; }
+            get { return eps0.value; }
+            set { eps0.value = value; }
         }
 
         override public void DoCalculations()
@@ -56,7 +56,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref a0, fmGlobalParameter.a0, a_Cell, false);
 
             AddConstantParameter(ref rho_s, fmGlobalParameter.rho_s);
-            AddConstantParameter(ref eps, fmGlobalParameter.eps);
+            AddConstantParameter(ref eps0, fmGlobalParameter.eps0);
 
             Pc0.group = Pc_rc_a_group;
             rc0.group = Pc_rc_a_group;

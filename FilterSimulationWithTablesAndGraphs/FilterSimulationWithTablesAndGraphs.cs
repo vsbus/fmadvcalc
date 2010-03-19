@@ -23,7 +23,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             CreateColumnsInParametersTables();
             ReadUseParamsCheckBoxAndApply();
-            //rowsQuantity.Text = RowsQuantity.ToString();
+            rowsQuantity.Text = RowsQuantity.ToString();
 
             //calculationOptionViewInTablesAndGraphs_CheckedChanged(null, new EventArgs());
 
@@ -114,26 +114,28 @@ namespace FilterSimulationWithTablesAndGraphs
             //UpdateUnitsInTablesAndGraphs();
         }
 
-        //private void ReadMinMaxXValues()
-        //{
-        //    if (loadingXRange == false)
-        //    {
-        //        double minXValue = fmValue.StringToValue(minXValueTextBox.Text).Value;
-        //        double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).Value;
+        private void ReadMinMaxXValues()
+        {
+            if (loadingXRange == false)
+            {
+                double minXValue = fmValue.StringToValue(minXValueTextBox.Text).Value;
+                double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).Value;
 
-        //        int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
-        //        fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
-        //        double coef = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.unitFamily.CurrentUnit.Coef;
-        //        fmRange range = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange;
-        //        range.minValue = minXValue * coef;
-        //        range.maxValue = maxXValue * coef;
-        //    }
-        //}
+                fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+                double coef = xParameter.unitFamily.CurrentUnit.Coef;
+                fmRange range = xParameter.chartCurretXRange;
+
+                range.minValue = minXValue * coef;
+                range.maxValue = maxXValue * coef;
+            }
+        }
 
         private void minMaxXValueTextBox_TextChanged(object sender, EventArgs e)
         {
-        //    ReadMinMaxXValues();
-        //    DrawChartAndTable();
+            ReadMinMaxXValues();
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToChart();
+            BindCalculatedResultsToTable();
         }
 
         private void useDefaultRangesButton_Click(object sender, EventArgs e)

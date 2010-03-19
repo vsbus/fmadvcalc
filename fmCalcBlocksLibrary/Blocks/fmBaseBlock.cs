@@ -54,11 +54,16 @@ namespace fmCalcBlocksLibrary.Blocks
                     }
                 }
 
-                if (ValuesChanged != null)
-                    ValuesChanged(this);
+                CallValuesChanged();
 
                 processOnChange = true;
             }
+        }
+
+        protected void CallValuesChanged()
+        {
+            if (ValuesChanged != null)
+                ValuesChanged(this);
         }       
         public void CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {

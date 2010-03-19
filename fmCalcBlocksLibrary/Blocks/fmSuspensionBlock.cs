@@ -59,36 +59,35 @@ namespace fmCalcBlocksLibrary.Blocks
             set { C.value = value; }
         }
 
+        public fmSuspensionCalculator.SuspensionCalculationOptions GetCalculationOption()
+        {
+            if (rBtn_rho_f.Checked)
+            {
+                return fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED;
+            }
+            else if (rBtn_rho_s.Checked)
+            {
+                return fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED;
+            }
+            else if (rBtn_rho_sus.Checked)
+            {
+                return fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
+            }
+            else if (rBtn_C.Checked)
+            {
+                return fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
+            }
+            else
+            {
+                throw new Exception("No radiobuttons checked in suspension block");
+            }
+        }
+
         override public void DoCalculations()
         {
             fmSuspensionCalculator suspesionCalculator =
                 new fmSuspensionCalculator(AllParameters);
-            
-            if (rBtn_rho_f.Checked)
-            {
-                suspesionCalculator.calculationOption =
-                    fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED;
-            }
-            else if (rBtn_rho_s.Checked)
-            {
-                suspesionCalculator.calculationOption =
-                    fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED;
-            }
-            else if (rBtn_rho_sus.Checked)
-            {
-                suspesionCalculator.calculationOption =
-                    fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
-            }
-            else if (rBtn_C.Checked)
-            {
-                suspesionCalculator.calculationOption =
-                    fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
-            }
-            else 
-            {
-                throw new Exception("No radiobuttons checked in suspension block");
-            }
-
+            suspesionCalculator.calculationOption = GetCalculationOption();
             suspesionCalculator.DoCalculations();
         }
 
@@ -171,6 +170,8 @@ namespace fmCalcBlocksLibrary.Blocks
                     Cv.cell.ReadOnly = true;
                     C.cell.ReadOnly = true;
                 }
+
+                CallValuesChanged();
             }
         }
         private void AssignRadioButton(ref RadioButton localRadioButton,
