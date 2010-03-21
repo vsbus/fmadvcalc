@@ -59,7 +59,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.tablesAndGraphsTopLeftPanel = new System.Windows.Forms.Panel();
             this.calculationOptionViewInTablesAndGraphs = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.listBoxXAxis = new System.Windows.Forms.ListBox();
-            this.listBoxYAxis = new System.Windows.Forms.ListBox();
+            this.listBoxYAxis = new System.Windows.Forms.CheckedListBox();
             this.splitter11 = new System.Windows.Forms.Splitter();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.splitter7 = new System.Windows.Forms.Splitter();
@@ -458,9 +458,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.selectedSimulationParametersTable.Size = new System.Drawing.Size(139, 101);
             this.selectedSimulationParametersTable.TabIndex = 10;
             this.selectedSimulationParametersTable.Visible = false;
-            this.selectedSimulationParametersTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseClick);
             this.selectedSimulationParametersTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellMouseLeave);
             this.selectedSimulationParametersTable.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseMove);
+            this.selectedSimulationParametersTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseClick);
             this.selectedSimulationParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
             this.selectedSimulationParametersTable.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellValueChangedByUser);
             // 
@@ -560,7 +560,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.calculationOptionViewInTablesAndGraphs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.calculationOptionViewInTablesAndGraphs.Location = new System.Drawing.Point(0, 0);
             this.calculationOptionViewInTablesAndGraphs.Name = "calculationOptionViewInTablesAndGraphs";
-            this.calculationOptionViewInTablesAndGraphs.Size = new System.Drawing.Size(109, 114);
+            this.calculationOptionViewInTablesAndGraphs.Size = new System.Drawing.Size(85, 114);
             this.calculationOptionViewInTablesAndGraphs.TabIndex = 4;
             this.calculationOptionViewInTablesAndGraphs.CheckedChanged += new System.EventHandler(this.calculationOptionViewInTablesAndGraphs_CheckedChanged);
             // 
@@ -568,21 +568,22 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.listBoxXAxis.Dock = System.Windows.Forms.DockStyle.Right;
             this.listBoxXAxis.FormattingEnabled = true;
-            this.listBoxXAxis.Location = new System.Drawing.Point(109, 0);
+            this.listBoxXAxis.Location = new System.Drawing.Point(85, 0);
             this.listBoxXAxis.Name = "listBoxXAxis";
-            this.listBoxXAxis.Size = new System.Drawing.Size(56, 108);
+            this.listBoxXAxis.Size = new System.Drawing.Size(64, 108);
             this.listBoxXAxis.TabIndex = 1;
             this.listBoxXAxis.SelectedIndexChanged += new System.EventHandler(this.listBoxX_SelectedIndexChanged);
             // 
             // listBoxYAxis
             // 
+            this.listBoxYAxis.CheckOnClick = true;
             this.listBoxYAxis.Dock = System.Windows.Forms.DockStyle.Right;
             this.listBoxYAxis.FormattingEnabled = true;
-            this.listBoxYAxis.Location = new System.Drawing.Point(165, 0);
+            this.listBoxYAxis.Location = new System.Drawing.Point(149, 0);
             this.listBoxYAxis.Name = "listBoxYAxis";
-            this.listBoxYAxis.Size = new System.Drawing.Size(56, 108);
+            this.listBoxYAxis.Size = new System.Drawing.Size(72, 109);
             this.listBoxYAxis.TabIndex = 2;
-            this.listBoxYAxis.SelectedIndexChanged += new System.EventHandler(this.listBoxY_SelectedIndexChanged);
+            this.listBoxYAxis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listBoxYAxis_ItemCheck);
             // 
             // splitter11
             // 
@@ -676,7 +677,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private System.Windows.Forms.Panel tablesAndGraphsTopLeftPanel;
         private fmCalcBlocksLibrary.Controls.fmCalculationOptionView calculationOptionViewInTablesAndGraphs;
         private System.Windows.Forms.ListBox listBoxXAxis;
-        private System.Windows.Forms.ListBox listBoxYAxis;
+        private System.Windows.Forms.CheckedListBox listBoxYAxis;
         private System.Windows.Forms.Splitter splitter10;
         private Splitter splitter11;
         private Splitter splitter6;

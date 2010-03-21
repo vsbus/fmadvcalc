@@ -28,6 +28,27 @@ namespace SampleForBlocks
             fmCalcBlocksLibrary.Blocks.fmSuspensionBlock susBlock = new fmCalcBlocksLibrary.Blocks.fmSuspensionBlock(
                 radioButton_rho_f, radioButton_rho_s, radioButton_rho_sus, radioButton_C,
                 fmDataGrid1[1, 0], fmDataGrid1[1, 1], fmDataGrid1[1, 2], fmDataGrid1[1, 3], fmDataGrid1[1, 4], fmDataGrid1[1, 5]);
+
+
+            checkedListBox1.Items.Clear();
+            for (int i = 1; i <= 9; ++i)
+                checkedListBox1.Items.Add(i);
         }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            //listBox1.Items.Clear();
+            //foreach (object s in checkedListBox1.CheckedItems) 
+            //    listBox1.Items.Add(s);
+            //listBox1.Items.Add(checkedListBox1.Items[e.Index]);
+
+            //listBox1.Items.Clear();
+            //for (int i = 0; i < checkedListBox1.Items.Count; ++i)
+            //{
+            //    if (checkedListBox1.GetItemChecked(i) || e.Index == i)
+            //        listBox1.Items.Add(checkedListBox1.Items[i]);
+            //}
+        }
+
     }
 }

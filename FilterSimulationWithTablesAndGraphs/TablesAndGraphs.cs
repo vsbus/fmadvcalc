@@ -827,17 +827,6 @@ namespace FilterSimulationWithTablesAndGraphs
         //    loadingXRange = false;
         //}
 
-        private void listBoxY_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            BindCalculatedResultsToTable();
-            BindCalculatedResultsToChart();
-        }
-
-        private void listBoxY2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        //    DrawChartAndTable();
-        }
-
         private void buttonAddRow_Click(object sender, EventArgs e)
         {
         //    AddRow();
@@ -987,25 +976,39 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
             }
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
-            fmGlobalParameter yParameter = fmGlobalParameter.ParametersByName[listBoxYAxis.Text];
-
             fmZedGraphControl1.GraphPane.CurveList.Clear();
 
-            foreach (fmSelectedSimulationData simData in internalSelectedSimList)
-            {
-                double[] ax = new double[simData.calculatedDataList.Count];
-                double[] ay = new double[simData.calculatedDataList.Count];
+            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
 
-                for (int i = 0; i < simData.calculatedDataList.Count; ++i)
+            Color [] colors = new Color[]{Color.Blue, Color.Green, Color.Red};
+            int colorId = 0;
+
+            foreach (string yAxisName in listBoxYAxis.CheckedItems)
+            {
+                fmGlobalParameter yParameter = fmGlobalParameter.ParametersByName[yAxisName];
+
+                foreach (fmSelectedSimulationData simData in internalSelectedSimList)
                 {
-                    ax[i] = simData.calculatedDataList[i].parameters[xParameter].ValueInUnits.Value;
-                    ay[i] = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits.Value;
+                    double[] ax = new double[simData.calculatedDataList.Count];
+                    double[] ay = new double[simData.calculatedDataList.Count];
+
+                    for (int i = 0; i < simData.calculatedDataList.Count; ++i)
+                    {
+                        ax[i] = simData.calculatedDataList[i].parameters[xParameter].ValueInUnits.Value;
+                        ay[i] = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits.Value;
+                    }
+
+                    LineItem curve = fmZedGraphControl1.GraphPane.AddCurve("", ax, ay, colors[colorId], SymbolType.None);
+                    if (listBoxYAxis.CheckedItems.Count == 2 && colorId == 1)
+                    {
+                        curve.IsY2Axis = true;
+                    }
                 }
 
-                fmZedGraphControl1.GraphPane.AddCurve("", ax, ay, Color.Blue, SymbolType.None);
+                if (++colorId == colors.Length) colorId = 0;
             }
 
+            fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = listBoxYAxis.CheckedItems.Count == 2;
             fmZedGraphControl1.GraphPane.AxisChange();
             fmZedGraphControl1.Refresh();
         }

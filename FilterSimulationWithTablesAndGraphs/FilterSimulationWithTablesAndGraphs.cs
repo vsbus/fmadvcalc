@@ -171,5 +171,18 @@ namespace FilterSimulationWithTablesAndGraphs
         //        selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonFace);
         //    }
         }
+
+        private void listBoxYAxis_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            //CheckedListBox clb = sender as CheckedListBox;
+            //for (int i = 0; i < clb.Items.Count; ++i)
+            //{
+            //    if (e.Index == i)
+            //        clb.SetItemChecked(i, true);
+            //}
+            // TODO: ceate global info what to display and make it in above cycle
+            BindCalculatedResultsToChart();
+            BindCalculatedResultsToTable();
+        }
     }
 }
