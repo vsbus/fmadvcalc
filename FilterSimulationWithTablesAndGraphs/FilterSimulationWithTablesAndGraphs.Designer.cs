@@ -34,6 +34,44 @@ namespace FilterSimulationWithTablesAndGraphs
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterSimulationWithTablesAndGraphs));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("1: A, Dp, (sf/tr), (n/tc)");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("2: A, Dp, (sf/tr), tf");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("3: A, Dp, (n/tc/tr), tf");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Standart", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("1: Q, Dp, hc, (n/tc/tr)");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Design", new System.Windows.Forms.TreeNode[] {
+            treeNode8});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("1: A, Q, Dp, (sf/tr)");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Optimization", new System.Windows.Forms.TreeNode[] {
+            treeNode10});
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("1: A, Dp, (sf/tr), (n/tc)");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("2: A, Dp, (sf/tr), tf");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("3: A, Dp, (n/tc/tr), tf");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Standart", new System.Windows.Forms.TreeNode[] {
+            treeNode12,
+            treeNode13,
+            treeNode14,
+            treeNode15,
+            treeNode16,
+            treeNode17});
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("1: Q, Dp, hc, (n/tc/tr)");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Design", new System.Windows.Forms.TreeNode[] {
+            treeNode19});
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("1: A, Q, Dp, (sf/tr)");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Optimization", new System.Windows.Forms.TreeNode[] {
+            treeNode21});
             this.panel4 = new System.Windows.Forms.Panel();
             this.fmZedGraphControl1 = new fmZedGraph.fmZedGraphControl();
             this.panel7 = new System.Windows.Forms.Panel();
@@ -302,6 +340,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.fmZedGraphControl1.ScrollMinY2 = 0;
             this.fmZedGraphControl1.Size = new System.Drawing.Size(208, 196);
             this.fmZedGraphControl1.TabIndex = 4;
+            this.fmZedGraphControl1.HighLightedPointsChanged += fmZedgraphControl1_HighlightedPointsChanged;
             // 
             // panel7
             // 
@@ -397,6 +436,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.coordinatesGrid.RowTemplate.Height = 18;
             this.coordinatesGrid.Size = new System.Drawing.Size(208, 167);
             this.coordinatesGrid.TabIndex = 0;
+            this.coordinatesGrid.CurrentCellChanged += new System.EventHandler(this.coordinatesGrid_CurrentCellChanged);
             // 
             // label1
             // 
@@ -458,9 +498,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.selectedSimulationParametersTable.Size = new System.Drawing.Size(139, 101);
             this.selectedSimulationParametersTable.TabIndex = 10;
             this.selectedSimulationParametersTable.Visible = false;
+            this.selectedSimulationParametersTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseClick);
             this.selectedSimulationParametersTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellMouseLeave);
             this.selectedSimulationParametersTable.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseMove);
-            this.selectedSimulationParametersTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseClick);
             this.selectedSimulationParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
             this.selectedSimulationParametersTable.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellValueChangedByUser);
             // 
@@ -560,6 +600,79 @@ namespace FilterSimulationWithTablesAndGraphs
             this.calculationOptionViewInTablesAndGraphs.Dock = System.Windows.Forms.DockStyle.Fill;
             this.calculationOptionViewInTablesAndGraphs.Location = new System.Drawing.Point(0, 0);
             this.calculationOptionViewInTablesAndGraphs.Name = "calculationOptionViewInTablesAndGraphs";
+            treeNode1.Name = "";
+            treeNode1.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            treeNode1.Text = "1: A, Dp, (sf/tr), (n/tc)";
+            treeNode2.Name = "";
+            treeNode2.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode2.Text = "2: A, Dp, (sf/tr), tf";
+            treeNode3.Name = "";
+            treeNode3.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode3.Text = "3: A, Dp, (n/tc/tr), tf";
+            treeNode4.Name = "";
+            treeNode4.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode4.Text = "4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)";
+            treeNode5.Name = "";
+            treeNode5.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode5.Text = "7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)";
+            treeNode6.Name = "";
+            treeNode6.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode6.Text = "8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)";
+            treeNode7.Name = "";
+            treeNode7.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            treeNode7.Text = "Standart";
+            treeNode8.Name = "";
+            treeNode8.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode8.Text = "1: Q, Dp, hc, (n/tc/tr)";
+            treeNode9.Name = "";
+            treeNode9.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode9.Text = "Design";
+            treeNode10.Name = "";
+            treeNode10.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode10.Text = "1: A, Q, Dp, (sf/tr)";
+            treeNode11.Name = "";
+            treeNode11.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode11.Text = "Optimization";
+            treeNode12.Name = "";
+            treeNode12.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            treeNode12.Text = "1: A, Dp, (sf/tr), (n/tc)";
+            treeNode13.Name = "";
+            treeNode13.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode13.Text = "2: A, Dp, (sf/tr), tf";
+            treeNode14.Name = "";
+            treeNode14.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode14.Text = "3: A, Dp, (n/tc/tr), tf";
+            treeNode15.Name = "";
+            treeNode15.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode15.Text = "4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)";
+            treeNode16.Name = "";
+            treeNode16.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode16.Text = "7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)";
+            treeNode17.Name = "";
+            treeNode17.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode17.Text = "8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)";
+            treeNode18.Name = "";
+            treeNode18.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            treeNode18.Text = "Standart";
+            treeNode19.Name = "";
+            treeNode19.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode19.Text = "1: Q, Dp, hc, (n/tc/tr)";
+            treeNode20.Name = "";
+            treeNode20.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode20.Text = "Design";
+            treeNode21.Name = "";
+            treeNode21.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode21.Text = "1: A, Q, Dp, (sf/tr)";
+            treeNode22.Name = "";
+            treeNode22.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            treeNode22.Text = "Optimization";
+            this.calculationOptionViewInTablesAndGraphs.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode9,
+            treeNode11,
+            treeNode18,
+            treeNode20,
+            treeNode22});
             this.calculationOptionViewInTablesAndGraphs.Size = new System.Drawing.Size(85, 114);
             this.calculationOptionViewInTablesAndGraphs.TabIndex = 4;
             this.calculationOptionViewInTablesAndGraphs.CheckedChanged += new System.EventHandler(this.calculationOptionViewInTablesAndGraphs_CheckedChanged);

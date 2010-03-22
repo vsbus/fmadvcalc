@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using ZedGraph;
+using System;
 
 namespace fmZedGraph
 {
+    public delegate void HighlightPointsEventHandler(object sender, HighlighPointsEventArgs e);
     public partial class fmZedGraphControl : ZedGraphControl
     {
-
         private RectangleF rect;
         Point pnt, cPnt;
         private bool isClick = false;
@@ -14,12 +15,14 @@ namespace fmZedGraph
         List<CurveItem> selectedCurves = new List<CurveItem>();
         private bool IsCancelSelections = true;
         private int originalCurvesCount;
+        List<CurveItem> highLightedPoints;
+        public event HighlightPointsEventHandler HighLightedPointsChanged;
        
         public List<fmCurvePoint> SelectedPoints
         {
             get { return selectedPoints;}
         }
-        public  List<CurveItem> SelectedCurves
+        public List<CurveItem> SelectedCurves
         {
             get { return selectedCurves;}
         }

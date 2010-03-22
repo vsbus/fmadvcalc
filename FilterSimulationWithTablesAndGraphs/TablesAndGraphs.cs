@@ -16,6 +16,72 @@ using fmCalculatorsLibrary;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
+    class fmDisplayingArray
+    {
+        private fmGlobalParameter parameter;
+        private Color color;
+        private bool isY2Axis;
+        private fmValue [] values;
+
+        public fmGlobalParameter Parameter
+        {
+            get
+            {
+                return parameter;
+            }
+            set
+            {
+                parameter = value;
+            }
+        }
+        public fmValue[] Values
+        {
+            get
+            {
+                return values;
+            }
+            set
+            {
+                values = value;
+            }
+        }
+        public double[] ValuesInDoubles
+        {
+            get
+            {
+                double [] result = new double[values.Length];
+                for (int i = 0; i < values.Length; ++i)
+                    result[i] = values[i].Value;
+                return result;
+            }
+        }
+        public Color Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+        public bool IsY2Axis
+        {
+            get { return isY2Axis; }
+            set { isY2Axis = value; }
+        }
+    }
+    class fmDisplayingResults
+    {
+        private fmDisplayingArray x;
+        private List<fmDisplayingArray> y;
+        public fmDisplayingArray xParameter
+        {
+            get { return x; }
+            set { x = value; }
+        }
+        public List<fmDisplayingArray> yParameters
+        {
+            get { return y; }
+            set { y = value; }
+        }
+    }
+
     public partial class FilterSimulationWithTablesAndGraphs
     {
         private List<fmFilterSimulation> externalSimList;
@@ -36,7 +102,9 @@ namespace FilterSimulationWithTablesAndGraphs
         //private static readonly Color SELECTED_COLUMN_COLOR = Color.LightBlue;
         //private bool processingCalculationOptionViewCheckChanged = false;
         private bool loadingXRange = false;
-
+        private fmDisplayingResults displayingResults = new fmDisplayingResults();
+        private object highLightCaller = null;
+        
         private void FillListBox(ListBox listBox, List<string> strings)
         {
             //listBox.Items.Clear();
@@ -787,8 +855,9 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             LoadCurrentXRange();
             RecalculateSimulationsWithIterationX();
-            BindCalculatedResultsToTable();
-            BindCalculatedResultsToChart();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
+            
         //    UpdateIsInputedForParametersBlocks();
         //    UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
         //    LoadCurrentXRange();
@@ -885,8 +954,8 @@ namespace FilterSimulationWithTablesAndGraphs
                 rowsQuantity.Text = RowsQuantity.ToString();
                 rowsQuantity.Focus();
                 RecalculateSimulationsWithIterationX();
-                BindCalculatedResultsToChart();
-                BindCalculatedResultsToTable();
+                BindCalculatedResultsToDisplayingResults();
+                BindCalculatedResultsToChartAndTable();
             }
         }
 
@@ -931,86 +1000,166 @@ namespace FilterSimulationWithTablesAndGraphs
             LoadCurrentXRange();
             //DrawChartAndTable();
             RecalculateSimulationsWithIterationX();
-            BindCalculatedResultsToTable();
-            BindCalculatedResultsToChart();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();            
         }
 
         private void BindCalculatedResultsToTable()
         {
-            if (listBoxXAxis.Text == ""
-                || listBoxYAxis.Text == "")
+            //if (listBoxXAxis.Text == ""
+            //    || listBoxYAxis.Text == "")
+            //{
+            //    return;
+            //}
+
+            //fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            //fmGlobalParameter yParameter = fmGlobalParameter.ParametersByName[listBoxYAxis.Text];
+
+            //coordinatesGrid.Columns.Clear();
+
+            //foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+            //{
+            //    int xCol = coordinatesGrid.Columns.Add(xParameter.name, xParameter.name);
+            //    coordinatesGrid.Columns[xCol].Width = 50;
+                
+            //    int yCol = coordinatesGrid.Columns.Add(yParameter.name, yParameter.name);
+            //    coordinatesGrid.Columns[yCol].Width = 50;
+
+            //    for (int i = 0; i < simData.calculatedDataList.Count; ++i)
+            //    {
+            //        if (coordinatesGrid.RowCount< i + 1)
+            //        {
+            //            coordinatesGrid.RowCount = i + 1;
+            //        }
+            //        coordinatesGrid[xCol, i].Value = simData.calculatedDataList[i].parameters[xParameter].ValueInUnits;
+            //        coordinatesGrid[yCol, i].Value = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits;
+            //    }
+            //}
+
+            if (displayingResults.yParameters == null)
             {
                 return;
             }
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
-            fmGlobalParameter yParameter = fmGlobalParameter.ParametersByName[listBoxYAxis.Text];
-
             coordinatesGrid.Columns.Clear();
 
-            foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+            int xCol = coordinatesGrid.Columns.Add(displayingResults.xParameter.Parameter.name, 
+                displayingResults.xParameter.Parameter.name);
+            coordinatesGrid.Columns[xCol].Width = 50;
+            coordinatesGrid.RowCount = displayingResults.xParameter.Values.Length;
+            for (int i = 0; i < coordinatesGrid.RowCount; ++i)
             {
-                int xCol = coordinatesGrid.Columns.Add(xParameter.name, xParameter.name);
-                coordinatesGrid.Columns[xCol].Width = 50;
-                
-                int yCol = coordinatesGrid.Columns.Add(yParameter.name, yParameter.name);
+                coordinatesGrid[xCol, i].Value = displayingResults.xParameter.Values[i];
+            }
+
+            foreach (fmDisplayingArray dispArray in displayingResults.yParameters)
+            {
+                int yCol = coordinatesGrid.Columns.Add(dispArray.Parameter.name, dispArray.Parameter.name);
                 coordinatesGrid.Columns[yCol].Width = 50;
 
-                for (int i = 0; i < simData.calculatedDataList.Count; ++i)
+                for (int i = 0; i < coordinatesGrid.RowCount; ++i)
                 {
-                    if (coordinatesGrid.RowCount< i + 1)
-                    {
-                        coordinatesGrid.RowCount = i + 1;
-                    }
-                    coordinatesGrid[xCol, i].Value = simData.calculatedDataList[i].parameters[xParameter].ValueInUnits;
-                    coordinatesGrid[yCol, i].Value = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits;
+                    coordinatesGrid[yCol, i].Value = dispArray.Values[i];
                 }
             }
         }
 
         private void BindCalculatedResultsToChart()
         {
-            if (listBoxXAxis.Text == ""
-                || listBoxYAxis.Text == "")
+            if (displayingResults.yParameters == null)
             {
                 return;
             }
 
             fmZedGraphControl1.GraphPane.CurveList.Clear();
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            bool y2AxisWasUsed = false;
 
-            Color [] colors = new Color[]{Color.Blue, Color.Green, Color.Red};
-            int colorId = 0;
-
-            foreach (string yAxisName in listBoxYAxis.CheckedItems)
+            foreach (fmDisplayingArray dispArray in displayingResults.yParameters)
             {
-                fmGlobalParameter yParameter = fmGlobalParameter.ParametersByName[yAxisName];
-
-                foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                LineItem curve = fmZedGraphControl1.GraphPane.AddCurve("", 
+                    displayingResults.xParameter.ValuesInDoubles, 
+                    dispArray.ValuesInDoubles, 
+                    dispArray.Color, 
+                    SymbolType.None);
+                curve.IsY2Axis = dispArray.IsY2Axis;
+                if (curve.IsY2Axis)
                 {
-                    double[] ax = new double[simData.calculatedDataList.Count];
-                    double[] ay = new double[simData.calculatedDataList.Count];
-
-                    for (int i = 0; i < simData.calculatedDataList.Count; ++i)
-                    {
-                        ax[i] = simData.calculatedDataList[i].parameters[xParameter].ValueInUnits.Value;
-                        ay[i] = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits.Value;
-                    }
-
-                    LineItem curve = fmZedGraphControl1.GraphPane.AddCurve("", ax, ay, colors[colorId], SymbolType.None);
-                    if (listBoxYAxis.CheckedItems.Count == 2 && colorId == 1)
-                    {
-                        curve.IsY2Axis = true;
-                    }
+                    y2AxisWasUsed = true;
                 }
-
-                if (++colorId == colors.Length) colorId = 0;
             }
 
-            fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = listBoxYAxis.CheckedItems.Count == 2;
+            fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = y2AxisWasUsed;
             fmZedGraphControl1.GraphPane.AxisChange();
             fmZedGraphControl1.Refresh();
+        }
+
+        private void BindCalculatedResultsToChartAndTable()
+        {
+            BindCalculatedResultsToChart();
+            BindCalculatedResultsToTable();
+        }
+
+        private void BindCalculatedResultsToDisplayingResults()
+        {
+            if (listBoxXAxis.Text == ""
+                || listBoxYAxis.Text == "")
+            {
+                return;
+            }
+
+            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
+            foreach (string s in listBoxYAxis.CheckedItems)
+            {
+                yParameters.Add(fmGlobalParameter.ParametersByName[s]);
+            }
+
+            BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
+        }
+        private void BindCalculatedResultsToDisplayingResults(fmGlobalParameter xParameter, List<fmGlobalParameter> yParameters)
+        {
+            if (listBoxXAxis.Text == ""
+                || listBoxYAxis.Text == ""
+                || internalSelectedSimList.Count == 0)
+            {
+                return;
+            }
+
+            fmDisplayingArray xArray = new fmDisplayingArray();
+            displayingResults.xParameter = xArray;
+            displayingResults.yParameters = new List<fmDisplayingArray>();
+            
+            xArray.Parameter = xParameter;
+            xArray.Values = new fmValue[internalSelectedSimList[0].calculatedDataList.Count];
+            for (int i = 0; i < internalSelectedSimList[0].calculatedDataList.Count; ++i)
+            {
+                xArray.Values[i] = internalSelectedSimList[0].calculatedDataList[i].parameters[xParameter].ValueInUnits;
+            }
+
+            Color[] colors = new Color[] {Color.Blue, Color.Green, Color.Red};
+            int colorId = 0;
+
+            foreach (fmGlobalParameter yParameter in yParameters)
+            {
+                foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                {
+                    fmDisplayingArray yArray = new fmDisplayingArray();
+                    yArray.Parameter = yParameter;
+                    yArray.Values = new fmValue[simData.calculatedDataList.Count];
+                    yArray.IsY2Axis = colorId == 1 && yParameters.Count == 2;
+                    yArray.Color = colors[colorId];
+                    
+                    if (++colorId == colors.Length) colorId = 0;
+                    
+                    for (int i = 0; i < simData.calculatedDataList.Count; ++i)
+                    {
+                        yArray.Values[i] = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits;
+                    }
+
+                    displayingResults.yParameters.Add(yArray);
+                }
+            }
         }
 
         private void RecalculateSimulationsWithIterationX()

@@ -134,8 +134,8 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             ReadMinMaxXValues();
             RecalculateSimulationsWithIterationX();
-            BindCalculatedResultsToChart();
-            BindCalculatedResultsToTable();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
         }
 
         private void useDefaultRangesButton_Click(object sender, EventArgs e)
@@ -174,15 +174,76 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void listBoxYAxis_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            //CheckedListBox clb = sender as CheckedListBox;
-            //for (int i = 0; i < clb.Items.Count; ++i)
-            //{
-            //    if (e.Index == i)
-            //        clb.SetItemChecked(i, true);
-            //}
-            // TODO: ceate global info what to display and make it in above cycle
-            BindCalculatedResultsToChart();
-            BindCalculatedResultsToTable();
+            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
+
+            CheckedListBox clb = sender as CheckedListBox;
+            for (int i = 0; i < clb.Items.Count; ++i)
+            {
+                if (clb.GetItemChecked(i) ^ (e.Index == i))
+                    yParameters.Add(fmGlobalParameter.ParametersByName[clb.Items[i].ToString()]);        
+            }
+            BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
+            BindCalculatedResultsToChartAndTable();
+        }
+
+        private void HighLightCurrentPoints(object sender)
+        {
+            HighLightCurrentPoints(sender, -1);
+        }
+
+        private void HighLightCurrentPoints(object sender, double x)
+        {
+            if (highLightCaller == null)
+            {
+                highLightCaller = sender;
+                
+                if (sender == coordinatesGrid)
+                {
+                    if (coordinatesGrid.CurrentCell != null)
+                    {
+                        int index = coordinatesGrid.CurrentCell.RowIndex;
+                        x = displayingResults.xParameter.Values[index].Value;
+                        fmZedGraphControl1.HighLightPoints(x);
+                    }
+                }
+
+                if (sender == fmZedGraphControl1)
+                {
+                    int columnIndex = coordinatesGrid.CurrentCell == null ? 0 : coordinatesGrid.CurrentCell.ColumnIndex;
+                    //int xx = fmZedGraphControl1.MousePosition.X;
+                    //fmZedGraphControl1.GraphPane.XAxis.Scale.ReverseTransform(e.Location.X);
+                    int rowIndex = 0;
+
+                    foreach (DataGridViewRow row in coordinatesGrid.Rows)
+                    {
+                        fmValue value = fmValue.ObjectToValue(row.Cells[0].Value);
+                        fmValue bestValue = fmValue.ObjectToValue(coordinatesGrid[0, rowIndex].Value);
+                        if (fmValue.Abs(value - x) < fmValue.Abs(bestValue - x))
+                        {
+                            rowIndex = row.Index;
+                        }
+                    }
+
+                    DataGridViewCell newCell = coordinatesGrid[columnIndex, rowIndex];
+                    if (coordinatesGrid.CurrentCell != newCell)
+                    {
+                        coordinatesGrid.CurrentCell = newCell;
+                    }
+                }
+
+                highLightCaller = null;
+            }
+        }
+
+        private void coordinatesGrid_CurrentCellChanged(object sender, EventArgs e)
+        {
+            HighLightCurrentPoints(sender);
+        }
+
+        private void fmZedgraphControl1_HighlightedPointsChanged(object sender, fmZedGraph.HighlighPointsEventArgs e)
+        {
+            HighLightCurrentPoints(sender, e.X);
         }
     }
 }

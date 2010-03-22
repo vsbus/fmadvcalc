@@ -2,9 +2,22 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using ZedGraph;
+using System.Collections.Generic;
 
 namespace fmZedGraph
 {
+    public class HighlighPointsEventArgs : EventArgs
+    {
+        private double x;
+        public double X
+        {
+            get { return x; }
+        }
+        public HighlighPointsEventArgs(double x)
+        {
+            this.x = x;
+        }
+    }
     partial class fmZedGraphControl
     {
         /// <summary>
@@ -149,7 +162,50 @@ namespace fmZedGraph
                 Invalidate();
             }
         }
-       
+
+        private List<CurveItem> FindNearestPoints(double x)
+        {
+            List<CurveItem> result = new List<CurveItem>();
+            foreach (CurveItem curve in GraphPane.CurveList)
+            {
+                PointPair bestPoint = curve.Points[0];
+                const double eps = 1e-9;
+                for (int i = 1; i < curve.Points.Count; i++)
+                {
+                    PointPair currentPoint = curve.Points[i];
+                    if (Math.Abs(currentPoint.X - x) < Math.Abs(bestPoint.X - x) - eps)
+                    {
+                        bestPoint = currentPoint;
+                    }
+                }
+                LineItem newCurvePoint = new LineItem("", new double[] { bestPoint.X },
+                                                    new double[] { bestPoint.Y },
+                                                    curve.Color, SymbolType.Circle);
+                newCurvePoint.Symbol.Fill = new Fill(curve.Color);
+                newCurvePoint.IsY2Axis = curve.IsY2Axis;
+                result.Add(newCurvePoint);
+            }
+            return result;
+        }
+
+        private void AddHighLightedPoints(List<CurveItem> points)
+        {
+            highLightedPoints = points;
+            foreach (LineItem point in highLightedPoints)
+                GraphPane.CurveList.Add(point);
+        }
+
+        private void RemoveHighLightedPoints()
+        {
+            if (highLightedPoints != null)
+            {
+                for (int i = GraphPane.CurveList.Count - 1; i >= 0; --i)
+                    if (highLightedPoints.Contains(GraphPane.CurveList[i]))
+                        GraphPane.CurveList.RemoveAt(i);
+                highLightedPoints.Clear();
+            }
+        }
+
         private void fmZedGraphControl_MouseMove(object sender, MouseEventArgs e)
         {
             if (isClick)
@@ -159,6 +215,21 @@ namespace fmZedGraph
                 cPnt = e.Location;
                 r = CalcScreenRect(pnt, cPnt);
                 ControlPaint.DrawReversibleFrame( r, BackColor, FrameStyle.Dashed );
+            }
+
+            double currentX = GraphPane.XAxis.Scale.ReverseTransform(e.Location.X);
+            HighLightPoints(currentX);
+        }
+
+        public void HighLightPoints(double currentX)
+        {
+            RemoveHighLightedPoints();
+            List<CurveItem> points = FindNearestPoints(currentX);
+            AddHighLightedPoints(points);
+            Refresh();
+            if (HighLightedPointsChanged != null)
+            {
+                HighLightedPointsChanged(this, new HighlighPointsEventArgs(currentX));
             }
         }
 
