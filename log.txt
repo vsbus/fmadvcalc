@@ -1,3 +1,5 @@
+2010-03-24	Sasha view SVN
+
 2010-01-02	Added new PCtowork with repository
 
 2009-11-26	Added window with min-max ranges
