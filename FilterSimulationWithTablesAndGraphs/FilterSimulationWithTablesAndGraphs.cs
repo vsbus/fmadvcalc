@@ -140,8 +140,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void useDefaultRangesButton_Click(object sender, EventArgs e)
         {
-            //LoadDefaultXRange();
-            //DrawChartAndTable();
+            LoadDefaultXRange();
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
         }
 
         private void selectedSimulationParametersTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -211,8 +213,6 @@ namespace FilterSimulationWithTablesAndGraphs
                 if (sender == fmZedGraphControl1)
                 {
                     int columnIndex = coordinatesGrid.CurrentCell == null ? 0 : coordinatesGrid.CurrentCell.ColumnIndex;
-                    //int xx = fmZedGraphControl1.MousePosition.X;
-                    //fmZedGraphControl1.GraphPane.XAxis.Scale.ReverseTransform(e.Location.X);
                     int rowIndex = 0;
 
                     foreach (DataGridViewRow row in coordinatesGrid.Rows)
@@ -241,7 +241,7 @@ namespace FilterSimulationWithTablesAndGraphs
             HighLightCurrentPoints(sender);
         }
 
-        private void fmZedgraphControl1_HighlightedPointsChanged(object sender, fmZedGraph.HighlighPointsEventArgs e)
+        private void fmZedGraphControl1_HighLightedPointsChanged(object sender, fmZedGraph.HighlighPointsEventArgs e)
         {
             HighLightCurrentPoints(sender, e.X);
         }

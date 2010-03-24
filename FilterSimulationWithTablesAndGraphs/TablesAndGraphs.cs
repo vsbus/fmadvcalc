@@ -870,9 +870,6 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
 
             loadingXRange = true;
-            //int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
-            //fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
-            //fmRange range = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange;
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
             fmRange range = xParameter.chartCurretXRange;
@@ -881,20 +878,19 @@ namespace FilterSimulationWithTablesAndGraphs
             loadingXRange = false;
         }
 
-        //private void LoadDefaultXRange()
-        //{
-        //    loadingXRange = true;
-        //    int xAxisParameterIndex = GetFilterMachiningBlockParameterIndexByName(listBoxXAxis.Text);
-        //    fmFilterMachiningBlock tmpFMB = new fmFilterMachiningBlock(null);
-        //    double coef = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.unitFamily.CurrentUnit.Coef;
-        //    fmRange defaultRange = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartDefaultXRange;
-        //    fmRange range = tmpFMB.Parameters[xAxisParameterIndex].globalParameter.chartCurretXRange;
-        //    range.minValue = defaultRange.minValue;
-        //    range.maxValue = defaultRange.maxValue;
-        //    minXValueTextBox.Text = (range.minValue / coef).ToString();
-        //    maxXValueTextBox.Text = (range.maxValue / coef).ToString();
-        //    loadingXRange = false;
-        //}
+        private void LoadDefaultXRange()
+        {
+            loadingXRange = true;
+            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            double coef = xParameter.unitFamily.CurrentUnit.Coef;
+            fmRange defaultRange = xParameter.chartDefaultXRange;
+            fmRange range = xParameter.chartCurretXRange;
+            range.minValue = defaultRange.minValue;
+            range.maxValue = defaultRange.maxValue;
+            minXValueTextBox.Text = (range.minValue / coef).ToString();
+            maxXValueTextBox.Text = (range.maxValue / coef).ToString();
+            loadingXRange = false;
+        }
 
         private void buttonAddRow_Click(object sender, EventArgs e)
         {
