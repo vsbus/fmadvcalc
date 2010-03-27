@@ -68,8 +68,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.suspensionPanel.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.suspensionParametersPanel.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.suspensionParametersAndCalcOptionsPanel.SuspendLayout();
             this.simulationPanel.SuspendLayout();
             this.panelRight.SuspendLayout();
@@ -223,8 +221,6 @@ namespace FilterSimulationWithTablesAndGraphs
             // suspensionParametersPanel
             // 
             this.suspensionParametersPanel.Size = new System.Drawing.Size(765, 186);
-            this.suspensionParametersPanel.Controls.SetChildIndex(this.groupBox1, 0);
-            this.suspensionParametersPanel.Controls.SetChildIndex(this.groupBox2, 0);
             // 
             // splitter4
             // 
@@ -612,10 +608,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.suspensionPanel.ResumeLayout(false);
             this.secondFromTopPanel.ResumeLayout(false);
             this.suspensionParametersPanel.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.suspensionParametersAndCalcOptionsPanel.ResumeLayout(false);
             this.simulationPanel.ResumeLayout(false);
             this.panelRight.ResumeLayout(false);

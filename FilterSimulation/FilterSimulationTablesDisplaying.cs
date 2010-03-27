@@ -94,17 +94,17 @@ namespace FilterSimulation
                 HideExtraRows(simulationDataGrid, simulationGuidColumn.Index);
         }
 
-        void ShowHideCalcOptionControls()
-        {
-            if (fSolution.CurrentObjects.Simulation != null)
-            {
-                fSolution.CurrentObjects.Simulation.filterMachiningBlock.calculationOptionView.Visible = true;
+        //void ShowHideCalcOptionControls()
+        //{
+        //    if (fSolution.CurrentObjects.Simulation != null)
+        //    {
+        //        fSolution.CurrentObjects.Simulation.filterMachiningBlock.calculationOptionView.Visible = true;
 
-                foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
-                    if (sim != fSolution.CurrentObjects.Simulation)
-                        sim.filterMachiningBlock.calculationOptionView.Visible = false;
-            }
-        }
+        //        foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
+        //            if (sim != fSolution.CurrentObjects.Simulation)
+        //                sim.filterMachiningBlock.calculationOptionView.Visible = false;
+        //    }
+        //}
 
         void AddHideRowsForSolution(fmFilterSimSolution sol)
         {
@@ -242,7 +242,6 @@ namespace FilterSimulation
                 if (sim.susBlock == null)
                 {
                     sim.susBlock = new fmSuspensionWithEtafBlock(
-                        radioButton_rho_f, radioButton_rho_s, radioButton_rho_sus, radioButton_C,
                         FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "eta_f").Cells[liquidCol.Index],
                         FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "rho_f").Cells[liquidCol.Index],
                         FindRowByValueInColumn(liquidDataGrid, liquidParameterName.Index, "rho_s").Cells[liquidCol.Index],
@@ -292,11 +291,7 @@ namespace FilterSimulation
                 DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, simulationGuidColumn.Index);
                 if (sim.filterMachiningBlock == null)
                 {
-                    fmCalculationOptionView cow = CreateNewCalculationOptionView(suspensionParametersPanel, 450, 3, 180, 160);
-                    cow.SetSelectedOption(sim.FilterMachiningCalculationOption);
-
                     sim.filterMachiningBlock = new fmFilterMachiningBlock(
-                        cow,
                         row.Cells[simulationFilterAreaColumn.Index],
                         row.Cells[simulation_DpColumn.Index],
                         row.Cells[simulation_sfColumn.Index],
@@ -689,7 +684,7 @@ namespace FilterSimulation
 
                 AddHideRowsForSolution(sol);
                 AssignNewCellsWithCalculationEngine(sol);
-                ShowHideCalcOptionControls();
+                //ShowHideCalcOptionControls();
                 WriteDataForSolution(sol);
 
                 UpdateColorsAndFontForSolution(sol);
@@ -908,7 +903,7 @@ namespace FilterSimulation
             else
             {
                 fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.susBlock, sim);
-                sim.Data.suspensionCalculationOption = sim.susBlock.GetCalculationOption();
+                sim.Data.suspensionCalculationOption = sim.susBlock.calculationOption;
                 //foreach (fmBlockParameter p in sim.susBlock.Parameters)
                 //{
                 //    sim.Parameters[p.globalParameter] = p.value;

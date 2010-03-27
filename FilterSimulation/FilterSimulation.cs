@@ -339,5 +339,16 @@ namespace FilterSimulation
 
             simulationDataGrid.BeginEdit(true);
         }
+
+        private void calculationOptionChangeButton_Click(object sender, EventArgs e)
+        {
+            CalculationOptionSelectionDialog cosd = new CalculationOptionSelectionDialog();
+            cosd.suspensionCalculationOption = fSolution.CurrentObjects.Simulation.Data.suspensionCalculationOption;
+            if (cosd.ShowDialog() == DialogResult.OK)
+            {
+                fSolution.CurrentObjects.Simulation.susBlock.SetCalculationOptionAndUpdateCellsColor(cosd.suspensionCalculationOption);
+                DisplaySolution(fSolution);
+            }
+        }
     }
 }

@@ -26,7 +26,6 @@ namespace SampleForBlocks
             fmDataGrid1.Rows.Add(new object[] { "C", new fmValue() });
 
             fmCalcBlocksLibrary.Blocks.fmSuspensionBlock susBlock = new fmCalcBlocksLibrary.Blocks.fmSuspensionBlock(
-                radioButton_rho_f, radioButton_rho_s, radioButton_rho_sus, radioButton_C,
                 fmDataGrid1[1, 0], fmDataGrid1[1, 1], fmDataGrid1[1, 2], fmDataGrid1[1, 3], fmDataGrid1[1, 4], fmDataGrid1[1, 5]);
 
 

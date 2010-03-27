@@ -395,7 +395,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     row.Cells[idx].Value = tempSim.Parameters[param].value / param.unitFamily.CurrentUnit.Coef;
                 }
 
-                fmFilterMachiningBlock tempBlock = new fmFilterMachiningBlock(null);
+                fmFilterMachiningBlock tempBlock = new fmFilterMachiningBlock();
                 tempBlock.CalculationOption = sim.FilterMachiningCalculationOption;
                 tempBlock.UpdateGroups();
 

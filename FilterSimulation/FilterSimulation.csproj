@@ -39,6 +39,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculationOptionSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalculationOptionSelectionDialog.Designer.cs">
+      <DependentUpon>CalculationOptionSelectionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="FilterSimulation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -91,6 +97,10 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CalculationOptionSelectionDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CalculationOptionSelectionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FilterSimulation.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FilterSimulation.cs</DependentUpon>

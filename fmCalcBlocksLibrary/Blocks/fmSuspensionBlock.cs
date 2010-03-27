@@ -11,10 +11,10 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmSuspensionBlock : fmBaseBlock
     {
-        private RadioButton rBtn_rho_f;
-        private RadioButton rBtn_rho_s;
-        private RadioButton rBtn_rho_sus;
-        private RadioButton rBtn_C;
+        //private RadioButton rBtn_rho_f;
+        //private RadioButton rBtn_rho_s;
+        //private RadioButton rBtn_rho_sus;
+        //private RadioButton rBtn_C;
 
         private fmBlockVariableParameter rho_f;
         private fmBlockVariableParameter rho_s;
@@ -59,54 +59,48 @@ namespace fmCalcBlocksLibrary.Blocks
             set { C.value = value; }
         }
 
-        public fmSuspensionCalculator.SuspensionCalculationOptions GetCalculationOption()
-        {
-            if (rBtn_rho_f.Checked)
-            {
-                return fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED;
-            }
-            else if (rBtn_rho_s.Checked)
-            {
-                return fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED;
-            }
-            else if (rBtn_rho_sus.Checked)
-            {
-                return fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
-            }
-            else if (rBtn_C.Checked)
-            {
-                return fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
-            }
-            else
-            {
-                throw new Exception("No radiobuttons checked in suspension block");
-            }
-        }
+        public fmSuspensionCalculator.SuspensionCalculationOptions calculationOption;
+
+        //public fmSuspensionCalculator.SuspensionCalculationOptions GetCalculationOption()
+        //{
+        //    if (rBtn_rho_f.Checked)
+        //    {
+        //        return fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED;
+        //    }
+        //    else if (rBtn_rho_s.Checked)
+        //    {
+        //        return fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED;
+        //    }
+        //    else if (rBtn_rho_sus.Checked)
+        //    {
+        //        return fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
+        //    }
+        //    else if (rBtn_C.Checked)
+        //    {
+        //        return fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("No radiobuttons checked in suspension block");
+        //    }
+        //}
 
         override public void DoCalculations()
         {
             fmSuspensionCalculator suspesionCalculator =
                 new fmSuspensionCalculator(AllParameters);
-            suspesionCalculator.calculationOption = GetCalculationOption();
+            //suspesionCalculator.calculationOption = GetCalculationOption();
+            suspesionCalculator.calculationOption = calculationOption;
             suspesionCalculator.DoCalculations();
         }
 
-        public fmSuspensionBlock(RadioButton rho_f_RadioButton,
-                                 RadioButton rho_s_RadioButton,
-                                 RadioButton rho_sus_RadioButton,
-                                 RadioButton C_RadioButton,
-                                 DataGridViewCell rho_f_Cell,
+        public fmSuspensionBlock(DataGridViewCell rho_f_Cell,
                                  DataGridViewCell rho_s_Cell,
                                  DataGridViewCell rho_sus_Cell,
                                  DataGridViewCell Cm_Cell,
                                  DataGridViewCell Cv_Cell,
                                  DataGridViewCell C_Cell)
         {
-            AssignRadioButton(ref rBtn_rho_f, rho_f_RadioButton);
-            AssignRadioButton(ref rBtn_rho_s, rho_s_RadioButton);
-            AssignRadioButton(ref rBtn_rho_sus, rho_sus_RadioButton);
-            AssignRadioButton(ref rBtn_C, C_RadioButton);
-
             AddParameter(ref rho_f, fmGlobalParameter.rho_f, rho_f_Cell, true);
             AddParameter(ref rho_s, fmGlobalParameter.rho_s, rho_s_Cell, true);
             AddParameter(ref rho_sus, fmGlobalParameter.rho_sus, rho_sus_Cell, true);
@@ -123,16 +117,24 @@ namespace fmCalcBlocksLibrary.Blocks
 
             processOnChange = true;
 
-            if (rBtn_rho_f != null 
-                || rBtn_rho_s != null
-                || rBtn_rho_sus != null
-                || rBtn_C != null)
-            {
-                RadioButtonCheckChanged(null, new EventArgs());
-            }
+            calculationOption = fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
+
+            //if (rBtn_rho_f != null 
+            //    || rBtn_rho_s != null
+            //    || rBtn_rho_sus != null
+            //    || rBtn_C != null)
+            //{
+            //    RadioButtonCheckChanged(null, new EventArgs());
+            //}
         }
 
-        private void RadioButtonCheckChanged(object sender, EventArgs e)
+        public void SetCalculationOptionAndUpdateCellsColor(fmSuspensionCalculator.SuspensionCalculationOptions calculationOption)
+        {
+            this.calculationOption = calculationOption;
+            UpdateCellsColorsAndReadOnly();
+        }
+
+        private void UpdateCellsColorsAndReadOnly()
         {
             if (processOnChange)
             {
@@ -148,22 +150,26 @@ namespace fmCalcBlocksLibrary.Blocks
                     p.cell.ReadOnly = false;
                 }
 
-                if (rBtn_rho_f.Checked)
+                //if (rBtn_rho_f.Checked)
+                if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED)
                 {
                     rho_f.isInputed = false;
                     rho_f.cell.ReadOnly = true;
                 }
-                else if (rBtn_rho_s.Checked)
+                //else if (rBtn_rho_s.Checked)
+                else if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED)
                 {
                     rho_s.isInputed = false;
                     rho_s.cell.ReadOnly = true;
                 }
-                else if (rBtn_rho_sus.Checked)
+                //else if (rBtn_rho_sus.Checked)
+                else if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED)
                 {
                     rho_sus.isInputed = false;
                     rho_sus.cell.ReadOnly = true;
                 }
-                else if (rBtn_C.Checked)
+                //else if (rBtn_C.Checked)
+                else if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED)
                 {
                     Cm.isInputed = false;
                     Cm.cell.ReadOnly = true;
@@ -174,14 +180,57 @@ namespace fmCalcBlocksLibrary.Blocks
                 CallValuesChanged();
             }
         }
-        private void AssignRadioButton(ref RadioButton localRadioButton,
-                                       RadioButton globalRadioButton)
-        {
-            localRadioButton = globalRadioButton;
-            if (localRadioButton != null)
-            {
-                localRadioButton.CheckedChanged += RadioButtonCheckChanged;
-            }
-        }
+
+        //private void RadioButtonCheckChanged(object sender, EventArgs e)
+        //{
+        //    if (processOnChange)
+        //    {
+        //        rho_f.isInputed = true;
+        //        rho_s.isInputed = true;
+        //        rho_sus.isInputed = true;
+        //        Cm.isInputed = true;
+        //        Cv.isInputed = false;
+        //        C.isInputed = false;
+
+        //        foreach (fmBlockVariableParameter p in parameters)
+        //        {
+        //            p.cell.ReadOnly = false;
+        //        }
+
+        //        if (rBtn_rho_f.Checked)
+        //        {
+        //            rho_f.isInputed = false;
+        //            rho_f.cell.ReadOnly = true;
+        //        }
+        //        else if (rBtn_rho_s.Checked)
+        //        {
+        //            rho_s.isInputed = false;
+        //            rho_s.cell.ReadOnly = true;
+        //        }
+        //        else if (rBtn_rho_sus.Checked)
+        //        {
+        //            rho_sus.isInputed = false;
+        //            rho_sus.cell.ReadOnly = true;
+        //        }
+        //        else if (rBtn_C.Checked)
+        //        {
+        //            Cm.isInputed = false;
+        //            Cm.cell.ReadOnly = true;
+        //            Cv.cell.ReadOnly = true;
+        //            C.cell.ReadOnly = true;
+        //        }
+
+        //        CallValuesChanged();
+        //    }
+        //}
+        //private void AssignRadioButton(ref RadioButton localRadioButton,
+        //                               RadioButton globalRadioButton)
+        //{
+        //    localRadioButton = globalRadioButton;
+        //    if (localRadioButton != null)
+        //    {
+        //        localRadioButton.CheckedChanged += RadioButtonCheckChanged;
+        //    }
+        //}
     }
 }

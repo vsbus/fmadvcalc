@@ -16,7 +16,7 @@ namespace FilterSimulation
 
         private void BindDataGrid()
         {
-            foreach (fmBlockVariableParameter p in new fmFilterMachiningBlock(null).Parameters)
+            foreach (fmBlockVariableParameter p in new fmFilterMachiningBlock().Parameters)
             {
                 if (p.globalParameter.chartDefaultXRange != null)
                 {
@@ -34,7 +34,7 @@ namespace FilterSimulation
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
             int i = 0;
-            foreach (fmBlockVariableParameter p in new fmFilterMachiningBlock(null).Parameters)
+            foreach (fmBlockVariableParameter p in new fmFilterMachiningBlock().Parameters)
             {
                 if (p.globalParameter.chartDefaultXRange != null)
                 {

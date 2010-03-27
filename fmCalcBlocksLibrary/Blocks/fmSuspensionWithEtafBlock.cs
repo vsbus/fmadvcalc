@@ -18,17 +18,13 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         public fmSuspensionWithEtafBlock(
-            RadioButton rho_f_RadioButton,
-            RadioButton rho_s_RadioButton,
-            RadioButton rho_sus_RadioButton,
-            RadioButton C_RadioButton,
             DataGridViewCell eta_f_Cell,
             DataGridViewCell rho_f_Cell,
             DataGridViewCell rho_s_Cell,
             DataGridViewCell rho_sus_Cell,
             DataGridViewCell Cm_Cell,
             DataGridViewCell Cv_Cell,
-            DataGridViewCell C_Cell) : base (rho_f_RadioButton, rho_s_RadioButton, rho_sus_RadioButton, C_RadioButton, rho_f_Cell, rho_s_Cell, rho_sus_Cell, Cm_Cell,Cv_Cell, C_Cell)
+            DataGridViewCell C_Cell) : base (rho_f_Cell, rho_s_Cell, rho_sus_Cell, Cm_Cell,Cv_Cell, C_Cell)
         {
             AddParameter(ref eta_f, fmGlobalParameter.eta_f, eta_f_Cell, true);
         }

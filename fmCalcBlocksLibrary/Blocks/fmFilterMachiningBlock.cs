@@ -709,14 +709,12 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
-        public fmFilterMachiningBlock(
-            fmCalculationOptionView calculationOptionView)
-            : this(calculationOptionView, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+        public fmFilterMachiningBlock()
+            : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
         {
         }
 
         public fmFilterMachiningBlock(
-            fmCalculationOptionView calculationOptionView,
             DataGridViewCell A_Cell,
             DataGridViewCell Dp_Cell,
             DataGridViewCell sf_Cell,
@@ -781,8 +779,6 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell rc_Cell,
             DataGridViewCell a_Cell)
         {
-            AssignCalculationOptionView(ref this.calculationOptionView, calculationOptionView);
-
             AddParameter(ref A, fmGlobalParameter.A, A_Cell, true);
             AddParameter(ref Dp, fmGlobalParameter.Dp, Dp_Cell, true);
             AddParameter(ref sf, fmGlobalParameter.sf, sf_Cell, true);
@@ -861,7 +857,6 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref Cv, fmGlobalParameter.Cv);
 
             processOnChange = true;
-            CalculationOptionViewCheckChanged(null, new EventArgs());
         }
 
         private void CalculationOptionViewCheckChanged(object sender, EventArgs e)
