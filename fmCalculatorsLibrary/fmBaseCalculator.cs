@@ -10,8 +10,9 @@ namespace fmCalculatorsLibrary
         public fmBaseCalculator(IEnumerable<fmCalculationBaseParameter> parameterList)
         {
             variables = new Dictionary<fmGlobalParameter,fmCalculationBaseParameter>();
-            foreach (fmCalculationBaseParameter p in parameterList)
-                variables[p.globalParameter] = p;
+            if (parameterList != null)
+                foreach (fmCalculationBaseParameter p in parameterList)
+                    variables[p.globalParameter] = p;
         }
     }
 }

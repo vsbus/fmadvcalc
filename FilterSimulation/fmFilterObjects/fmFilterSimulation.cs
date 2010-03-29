@@ -138,6 +138,44 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mc));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vs));
         }
+
+        public List<fmGlobalParameter> GetParametersThatCanBeInputedList()
+        {
+            List<fmGlobalParameter> result = new List<fmGlobalParameter>();
+
+            result.Add(fmGlobalParameter.eta_f);
+            List<fmGlobalParameter> suspensionParametersList = new List<fmGlobalParameter>();
+            if (suspensionCalculationOption != fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED)
+                suspensionParametersList.Add(fmGlobalParameter.rho_f);
+            if (suspensionCalculationOption != fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED)
+                suspensionParametersList.Add(fmGlobalParameter.rho_s);
+            if (suspensionCalculationOption != fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED)
+                suspensionParametersList.Add(fmGlobalParameter.rho_sus);
+            if (suspensionCalculationOption != fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED)
+            {
+                suspensionParametersList.Add(fmGlobalParameter.Cm);
+                suspensionParametersList.Add(fmGlobalParameter.Cv);
+                suspensionParametersList.Add(fmGlobalParameter.C);
+            }
+            result.AddRange(suspensionParametersList);
+            
+            
+            result.AddRange(new fmEps0Kappa0Calculator(null).variables.Keys);
+            result.Add(fmGlobalParameter.ne);
+
+
+            result.AddRange(new fmPc0rc0a0Calculator(null).variables.Keys);
+            result.Add(fmGlobalParameter.nc);
+
+
+            result.AddRange(new fmRm0hceCalculator(null).variables.Keys);
+            
+            
+            List<fmGlobalParameter> filterMachiningParametersList = CalculationOptionHelper.GetParametersListThatCanBeInput(filterMachinigCalculationOption);
+            result.AddRange(filterMachiningParametersList);
+
+            return result;
+        }
     }
 
     public class fmFilterSimulation

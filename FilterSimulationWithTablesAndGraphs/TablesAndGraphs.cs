@@ -912,13 +912,27 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private List<fmGlobalParameter> GetCommonInputParametersList()
         {
+            //List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
+            //foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+            //    for (int i = simInputParameters.Count - 1; i >= 0; --i)
+            //        if (!simData.externalSimulation.Parameters.ContainsKey(simInputParameters[i])
+            //            || !(simData.externalSimulation.Parameters[simInputParameters[i]] as fmCalculationVariableParameter).isInputed)
+            //            simInputParameters.RemoveAt(i);
+            //return simInputParameters;
+
             List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
             foreach (fmSelectedSimulationData simData in internalSelectedSimList)
-                for (int i = simInputParameters.Count - 1; i >= 0; --i)
-                    if (!simData.externalSimulation.Parameters.ContainsKey(simInputParameters[i])
-                        || !(simData.externalSimulation.Parameters[simInputParameters[i]] as fmCalculationVariableParameter).isInputed)
-                        simInputParameters.RemoveAt(i);
+                simInputParameters = ListsIntersection(simInputParameters, simData.externalSimulation.Data.GetParametersThatCanBeInputedList());
             return simInputParameters;
+        }
+
+        private List<fmGlobalParameter> ListsIntersection(List<fmGlobalParameter> a, List<fmGlobalParameter> b)
+        {
+            List<fmGlobalParameter> result = new List<fmGlobalParameter>();
+            foreach (fmGlobalParameter p in a)
+                if (b.Contains(p))
+                    result.Add(p);
+            return result;
         }
 
         private void UpdateInternalSelectedSimList(List<fmFilterSimulation> simList)

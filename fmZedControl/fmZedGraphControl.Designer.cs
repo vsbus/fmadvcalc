@@ -324,55 +324,27 @@ namespace fmZedGraph
         }
         public LineItem AddCurve(string label, double[] x, double[] y, Color color)
         {
-            try
-            {
-                LineItem curve = this.GraphPane.AddCurve(label, x, y, color);
-                originalCurvesCount += 1;
-                return curve;
-            }
-            catch(Exception ex)
-            {
-                throw;
-            }
+            LineItem curve = this.GraphPane.AddCurve(label, x, y, color);
+            originalCurvesCount += 1;
+            return curve;
         }
         public LineItem AddCurve(string label, double[] x, double[] y, Color color, SymbolType symbolType)
         {
-            try
-            {
-                LineItem curve = this.GraphPane.AddCurve(label, x, y, color, symbolType);
-                originalCurvesCount += 1;
-                return curve;
-            }
-            catch(Exception ex)
-            {
-                throw;
-            }
+            LineItem curve = this.GraphPane.AddCurve(label, x, y, color, symbolType);
+            originalCurvesCount += 1;
+            return curve;
         }
         public LineItem AddCurve(string label, IPointList points, Color color)
         {
-            try
-            {
-                LineItem curve = this.GraphPane.AddCurve(label, points, color);
-                originalCurvesCount += 1;
-                return curve;
-            }
-            catch(Exception ex)
-            {
-                throw;
-            }
+            LineItem curve = this.GraphPane.AddCurve(label, points, color);
+            originalCurvesCount += 1;
+            return curve;
         }
         public LineItem AddCurve(string label, IPointList points, Color color, SymbolType symbolType)
         {
-            try
-            {
-                LineItem curve = this.GraphPane.AddCurve(label, points, color, symbolType);
-                originalCurvesCount += 1;
-                return curve;
-            }
-            catch(Exception ex)
-            {
-                throw;
-            }
+            LineItem curve = this.GraphPane.AddCurve(label, points, color, symbolType);
+            originalCurvesCount += 1;
+            return curve;
         }
 
         #endregion
