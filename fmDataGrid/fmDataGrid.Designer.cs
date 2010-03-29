@@ -15,9 +15,7 @@ namespace fmDataGrid
         {
             CurrentCell.Value = (sender as TextBox).Text;
             if (CellValueChangedByUser != null)
-            {
                 CellValueChangedByUser(this, new DataGridViewCellEventArgs(CurrentCell.ColumnIndex, CurrentCell.RowIndex));
-            }
         }
 
         private void fmCheckBoxClick(object sender, DataGridViewCellEventArgs e)
@@ -26,9 +24,7 @@ namespace fmDataGrid
             {
                 CopyEditedValueToCellValue();
                 if (CellValueChangedByUser != null)
-                {
                     CellValueChangedByUser(this, new DataGridViewCellEventArgs(e.ColumnIndex, e.RowIndex));
-                }
             }
         }
         

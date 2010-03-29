@@ -396,7 +396,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
 
                 fmFilterMachiningBlock tempBlock = new fmFilterMachiningBlock();
-                tempBlock.CalculationOption = sim.FilterMachiningCalculationOption;
+                tempBlock.calculationOption = sim.FilterMachiningCalculationOption;
                 tempBlock.UpdateGroups();
 
                 foreach (fmBlockVariableParameter param in tempBlock.Parameters)

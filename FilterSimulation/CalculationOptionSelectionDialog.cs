@@ -12,6 +12,8 @@ namespace FilterSimulation
     public partial class CalculationOptionSelectionDialog : Form
     {
         public fmSuspensionCalculator.SuspensionCalculationOptions suspensionCalculationOption;
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption simulationCalculationOption;
+
         public CalculationOptionSelectionDialog()
         {
             InitializeComponent();
@@ -27,6 +29,8 @@ namespace FilterSimulation
                                           fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
             CmCvC_radioButton.Checked = suspensionCalculationOption ==
                                         fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
+
+            fmCalculationOptionView1.SetSelectedOption(simulationCalculationOption);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -71,6 +75,11 @@ namespace FilterSimulation
                 suspensionCalculationOption = fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
             if (CmCvC_radioButton.Checked)
                 suspensionCalculationOption = fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
+        }
+
+        private void fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions(object sender, EventArgs e)
+        {
+            simulationCalculationOption = fmCalculationOptionView1.GetSelectedOption();
         }
     }
 }

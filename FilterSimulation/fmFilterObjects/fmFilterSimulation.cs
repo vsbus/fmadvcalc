@@ -620,7 +620,7 @@ namespace FilterSimulation.fmFilterObjects
         }
         public void Delete()
         {
-            filterMachiningBlock.calculationOptionView.Dispose();
+            //filterMachiningBlock.calculationOptionView.Dispose();
             m_ParentSerie.RemoveSimulation(this);
         }
         public void CopyFrom(fmFilterSimulation sim)

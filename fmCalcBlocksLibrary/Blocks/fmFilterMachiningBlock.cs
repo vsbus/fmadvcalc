@@ -120,7 +120,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
     public class fmFilterMachiningBlock : fmBaseBlock
     {
-        public readonly fmCalculationOptionView calculationOptionView;
+        //public readonly fmCalculationOptionView calculationOptionView;
 
         private readonly fmBlockVariableParameter A;
         private readonly fmBlockVariableParameter Dp;
@@ -259,7 +259,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private fmBlockConstantParameter Cm;
         private fmBlockConstantParameter Cv;
 
-        private fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption;
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption;
 
         public fmValue A_Value
         {
@@ -611,11 +611,11 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Cv.value; }
             set { Cv.value = value; }
         }
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption CalculationOption
-        {
-            get { return calculationOption; }
-            set { calculationOption = value; }
-        }
+        //public fmFilterMachiningCalculator.FilterMachiningCalculationOption CalculationOption
+        //{
+        //    get { return calculationOption; }
+        //    set { calculationOption = value; }
+        //}
 
         override public void DoCalculations()
         {
@@ -856,49 +856,82 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref Cm, fmGlobalParameter.Cm);
             AddConstantParameter(ref Cv, fmGlobalParameter.Cv);
 
+            SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1);
+
             processOnChange = true;
         }
 
-        private void CalculationOptionViewCheckChanged(object sender, EventArgs e)
+        //private void CalculationOptionViewCheckChanged(object sender, EventArgs e)
+        //{
+        //    if (processOnChange && calculationOptionView != null)
+        //    {
+        //        //CalculationOption = calculationOptionView.GetSelectedOption();
+        //        calculationOption = calculationOptionView.GetSelectedOption();
+
+        //        UpdateGroups();
+
+        //        //List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(CalculationOption);
+        //        List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calculationOption);
+        //        Dictionary<fmBlockParameterGroup, bool> groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
+
+        //        foreach (fmBlockVariableParameter parameter in parameters)
+        //        {
+        //            if (parameter.group != null)
+        //            {
+        //                groupUsed[parameter.group] = false;
+        //            }
+        //        }
+
+        //        foreach (fmBlockVariableParameter parameter in parameters)
+        //        {
+        //            bool found = inputedParameters.Contains(parameter.globalParameter);
+        //            bool notUsedGroup = parameter.group == null ? true : !groupUsed[parameter.group];
+
+        //            parameter.isInputed = found && notUsedGroup;
+
+        //            if (parameter.group != null)
+        //            {
+        //                groupUsed[parameter.group] = true;
+        //            }
+
+        //            if (parameter.cell != null)
+        //            {
+        //                parameter.cell.ReadOnly = !found;
+        //            }
+        //        }
+
+        //        UpdateCellsBackColor();
+        //        ReWriteParameters();
+        //    }
+        //}
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption)
         {
-            if (processOnChange && calculationOptionView != null)
+            this.calculationOption = calculationOption;
+            UpdateGroups();
+            List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calculationOption);
+            Dictionary<fmBlockParameterGroup, bool> groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
+
+            foreach (fmBlockVariableParameter parameter in parameters)
+                if (parameter.group != null)
+                    groupUsed[parameter.group] = false;
+
+            foreach (fmBlockVariableParameter parameter in parameters)
             {
-                CalculationOption = calculationOptionView.GetSelectedOption();
+                bool found = inputedParameters.Contains(parameter.globalParameter);
+                bool notUsedGroup = parameter.group == null ? true : !groupUsed[parameter.group];
 
-                UpdateGroups();
+                parameter.isInputed = found && notUsedGroup;
 
-                List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(CalculationOption);
-                Dictionary<fmBlockParameterGroup, bool> groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
+                if (parameter.group != null)
+                    groupUsed[parameter.group] = true;
 
-                foreach (fmBlockVariableParameter parameter in parameters)
-                {
-                    if (parameter.group != null)
-                    {
-                        groupUsed[parameter.group] = false;
-                    }
-                }
-
-                foreach (fmBlockVariableParameter parameter in parameters)
-                {
-                    bool found = inputedParameters.Contains(parameter.globalParameter);
-                    bool notUsedGroup = parameter.group == null ? true : !groupUsed[parameter.group];
-
-                    parameter.isInputed = found && notUsedGroup;
-
-                    if (parameter.group != null)
-                    {
-                        groupUsed[parameter.group] = true;
-                    }
-
-                    if (parameter.cell != null)
-                    {
-                        parameter.cell.ReadOnly = !found;
-                    }
-                }
-
-                UpdateCellsBackColor();
-                ReWriteParameters();
+                if (parameter.cell != null)
+                    parameter.cell.ReadOnly = !found;
             }
+
+            UpdateCellsBackColor();
+            ReWriteParameters();
         }
 
         Dictionary<fmFilterMachiningCalculator.FilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>> table = null;
@@ -1055,22 +1088,17 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public void UpdateGroups()
         {
-            //CalculationOption calcOption = GetBlockCalculationOption();
             foreach (fmBlockVariableParameter p in parameters)
-            {
-                p.group = WhatGroupOfParameterWithCalcOption(p, CalculationOption);
-            }
+                p.group = WhatGroupOfParameterWithCalcOption(p, calculationOption);
         }
 
-        private void AssignCalculationOptionView(ref fmCalculationOptionView localCalculationOptionView,
-                                                 fmCalculationOptionView globalCalculationOptionView)
-        {
-            localCalculationOptionView = globalCalculationOptionView;
-            if (localCalculationOptionView != null)
-            {
-                localCalculationOptionView.CheckedChangedForUpdatingCalculationOptions += CalculationOptionViewCheckChanged;
-            }
-        }
+        //private void AssignCalculationOptionView(ref fmCalculationOptionView localCalculationOptionView,
+        //                                         fmCalculationOptionView globalCalculationOptionView)
+        //{
+        //    localCalculationOptionView = globalCalculationOptionView;
+        //    if (localCalculationOptionView != null)
+        //        localCalculationOptionView.CheckedChangedForUpdatingCalculationOptions += CalculationOptionViewCheckChanged;
+        //}
 
         public void CopyParameters(fmFilterMachiningBlock filterMachiningBlock)
         {

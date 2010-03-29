@@ -571,9 +571,9 @@ namespace FilterSimulation
             this.simSeriesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.simSeriesDataGrid.Size = new System.Drawing.Size(976, 109);
             this.simSeriesDataGrid.TabIndex = 0;
-            this.simSeriesDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellClick);
-            this.simSeriesDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellEndEdit);
             this.simSeriesDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellValueChanged);
+            this.simSeriesDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellEndEdit);
+            this.simSeriesDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellClick);
             this.simSeriesDataGrid.CurrentCellChanged += new System.EventHandler(this.simSeriesDataGrid_CurrentCellChanged);
             // 
             // simSeriesCheckedColumn
@@ -787,9 +787,9 @@ namespace FilterSimulation
             this.suspensionDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.suspensionDataGrid.Size = new System.Drawing.Size(686, 90);
             this.suspensionDataGrid.TabIndex = 0;
-            this.suspensionDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellClick);
-            this.suspensionDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellEndEdit);
             this.suspensionDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellValueChanged);
+            this.suspensionDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellEndEdit);
+            this.suspensionDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellClick);
             this.suspensionDataGrid.CurrentCellChanged += new System.EventHandler(this.suspensionDataGrid_CurrentCellChanged);
             // 
             // suspensionGuidColumn
@@ -1011,9 +1011,9 @@ namespace FilterSimulation
             this.projectDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.projectDataGrid.Size = new System.Drawing.Size(166, 90);
             this.projectDataGrid.TabIndex = 0;
-            this.projectDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellClick);
-            this.projectDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellEndEdit);
             this.projectDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellValueChanged);
+            this.projectDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellEndEdit);
+            this.projectDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellClick);
             this.projectDataGrid.CurrentCellChanged += new System.EventHandler(this.projectDataGrid_CurrentCellChanged);
             // 
             // projectGuidColumn
@@ -1126,6 +1126,7 @@ namespace FilterSimulation
             this.simulationDataGrid.AllowUserToResizeRows = false;
             this.simulationDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.simulationDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.simulationDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.simulationDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.simulationDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.simulationGuidColumn,
@@ -1218,10 +1219,10 @@ namespace FilterSimulation
             this.simulationDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.simulationDataGrid.Size = new System.Drawing.Size(976, 156);
             this.simulationDataGrid.TabIndex = 0;
-            this.simulationDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellClick);
+            this.simulationDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellValueChanged);
             this.simulationDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.simulationDataGrid_SortCompare);
             this.simulationDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellEndEdit);
-            this.simulationDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellValueChanged);
+            this.simulationDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellClick);
             this.simulationDataGrid.CurrentCellChanged += new System.EventHandler(this.simulationDataGrid_CurrentCellChanged);
             // 
             // simulationGuidColumn

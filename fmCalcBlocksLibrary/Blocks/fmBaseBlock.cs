@@ -31,13 +31,12 @@ namespace fmCalcBlocksLibrary.Blocks
                 return result;
             }
         }
-        public fmBlockVariableParameter GetParameterByName(string parameterName)
-        {
-            foreach (fmBlockVariableParameter parameter in parameters)
-                if (parameter.globalParameter.name == parameterName)
-                    return parameter;
-            return null;
-        }
+
+        public event Event ValuesChanged;
+        public event fmBlockParameterEventHandler ValuesChangedByUser;
+
+
+        abstract public void DoCalculations();
 
         protected void ReWriteParameters()
         {
@@ -49,22 +48,38 @@ namespace fmCalcBlocksLibrary.Blocks
                 {
                     string newVal = (parameters[i].value / parameters[i].globalParameter.unitFamily.CurrentUnit.Coef).ToString();
                     if (parameters[i].cell != null)
-                    {
                         parameters[i].cell.Value = newVal;
-                    }
                 }
-
                 CallValuesChanged();
 
                 processOnChange = true;
             }
         }
 
-        protected void CallValuesChanged()
+        public void UpdateIsInputed(fmBlockVariableParameter enteredParameter)
         {
-            if (ValuesChanged != null)
-                ValuesChanged(this);
-        }       
+            foreach (fmBlockVariableParameter p in parameters)
+                if (p.group != null
+                        && p.group == enteredParameter.group)
+                    p.isInputed = p == enteredParameter;
+        }
+
+        public void CalculateAndDisplay()
+        {
+            DoCalculations();
+            ReWriteParameters();
+        }
+
+        public void StopProcessing()
+        {
+            processOnChange = false;
+        }
+
+        public void ResumeProcessing()
+        {
+            processOnChange = true;
+        }
+        
         public void CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (processOnChange)
@@ -88,18 +103,6 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
-        private fmBlockVariableParameter FindEnteredParameter(DataGridViewCell cell, out int parameterIndex)
-        {
-            for (int i = 0; i < parameters.Count; ++i)
-                if (parameters[i].cell == cell)
-                {
-                    parameterIndex = i;
-                    return parameters[i];
-                }
-            parameterIndex = -1;
-            return null;
-        }
-
         protected void AddParameter(
             ref fmBlockVariableParameter p,
             fmGlobalParameter globalParameter,
@@ -116,7 +119,6 @@ namespace fmCalcBlocksLibrary.Blocks
             parameters.Add(p);
         }
 
-
         protected void AddConstantParameter(
             ref fmBlockConstantParameter p,
             fmGlobalParameter globalParameter)
@@ -125,45 +127,36 @@ namespace fmCalcBlocksLibrary.Blocks
             constantParameters.Add(p);
         }
 
-        public void StopProcessing()
+        public fmBlockVariableParameter GetParameterByName(string parameterName)
         {
-            processOnChange = false;
+            foreach (fmBlockVariableParameter parameter in parameters)
+                if (parameter.globalParameter.name == parameterName)
+                    return parameter;
+            return null;
         }
 
-        public void ResumeProcessing()
+        protected void CallValuesChanged()
         {
-            processOnChange = true;
-        }
-
-        public void CalculateAndDisplay()
-        {
-            DoCalculations();
-            ReWriteParameters();
+            if (ValuesChanged != null)
+                ValuesChanged(this);
         }
         
-        public event Event ValuesChanged;
-        public event fmBlockParameterEventHandler ValuesChangedByUser;
-
-        abstract public void DoCalculations();
-
-        public void UpdateIsInputed(fmBlockVariableParameter enteredParameter)
+        private fmBlockVariableParameter FindEnteredParameter(DataGridViewCell cell, out int parameterIndex)
         {
-            foreach (fmBlockVariableParameter p in parameters)
-            {
-                if (p.group != null 
-                    && p.group == enteredParameter.group)
+            for (int i = 0; i < parameters.Count; ++i)
+                if (parameters[i].cell == cell)
                 {
-                    p.isInputed = p == enteredParameter;
+                    parameterIndex = i;
+                    return parameters[i];
                 }
-            }
+            parameterIndex = -1;
+            return null;
         }
-        
+
         protected void SetParameterCellBackColor(fmBlockVariableParameter parameter, Color backColor)
         {
             if (parameter.cell != null)
-            {
                 parameter.cell.Style.BackColor = backColor;
-            }
         }
     }
 }

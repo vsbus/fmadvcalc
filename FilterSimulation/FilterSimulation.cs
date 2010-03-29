@@ -344,9 +344,11 @@ namespace FilterSimulation
         {
             CalculationOptionSelectionDialog cosd = new CalculationOptionSelectionDialog();
             cosd.suspensionCalculationOption = fSolution.CurrentObjects.Simulation.Data.suspensionCalculationOption;
+            cosd.simulationCalculationOption = fSolution.CurrentObjects.Simulation.Data.filterMachinigCalculationOption;
             if (cosd.ShowDialog() == DialogResult.OK)
             {
-                fSolution.CurrentObjects.Simulation.susBlock.SetCalculationOptionAndUpdateCellsColor(cosd.suspensionCalculationOption);
+                fSolution.CurrentObjects.Simulation.susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);
+                fSolution.CurrentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.simulationCalculationOption);
                 DisplaySolution(fSolution);
             }
         }
