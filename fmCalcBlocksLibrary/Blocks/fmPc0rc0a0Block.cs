@@ -64,5 +64,6 @@ namespace fmCalcBlocksLibrary.Blocks
 
             processOnChange = true;
         }
+        public fmPc0rc0a0Block() : this(null, null, null) { }
     }
 }

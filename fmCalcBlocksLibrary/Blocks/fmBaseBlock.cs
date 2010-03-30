@@ -58,10 +58,11 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public void UpdateIsInputed(fmBlockVariableParameter enteredParameter)
         {
-            foreach (fmBlockVariableParameter p in parameters)
-                if (p.group != null
-                        && p.group == enteredParameter.group)
-                    p.isInputed = p == enteredParameter;
+            if (enteredParameter != null)
+                foreach (fmBlockVariableParameter p in parameters)
+                    if (p.group != null
+                            && p.group == enteredParameter.group)
+                        p.isInputed = p == enteredParameter;
         }
 
         public void CalculateAndDisplay()

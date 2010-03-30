@@ -168,6 +168,11 @@ namespace fmZedGraph
             List<CurveItem> result = new List<CurveItem>();
             foreach (CurveItem curve in GraphPane.CurveList)
             {
+                if (highLightedPoints.Contains(curve))
+                {
+                    continue;
+                }
+
                 PointPair bestPoint = curve.Points[0];
                 const double eps = 1e-9;
                 for (int i = 1; i < curve.Points.Count; i++)
@@ -223,14 +228,37 @@ namespace fmZedGraph
 
         public void HighLightPoints(double currentX)
         {
-            RemoveHighLightedPoints();
             List<CurveItem> points = FindNearestPoints(currentX);
+            //if (IsSamePointsList(points, highLightedPoints))
+            //{
+            //    return;
+            //}
+            RemoveHighLightedPoints();
             AddHighLightedPoints(points);
+            highLightedPoints = points;
             Refresh();
             if (HighLightedPointsChanged != null)
             {
                 HighLightedPointsChanged(this, new HighlighPointsEventArgs(currentX));
             }
+        }
+
+        private bool IsSamePointsList(List<CurveItem> a, List<CurveItem> b)
+        {
+            if (a == null || b == null)
+                return false;
+
+            if (a.Count != b.Count)
+                return false;
+
+            for (int i = 0; i < a.Count; ++i)
+                if (a[i][0].X != b[i][0].X
+                        || a[i][0].Y != b[i][0].Y)
+                {
+                    return false;
+                }
+
+            return true;
         }
 
         private bool fmZedGraphControl_MouseDownEvent(ZedGraphControl sender, MouseEventArgs e)

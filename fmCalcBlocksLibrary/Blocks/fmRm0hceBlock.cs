@@ -49,5 +49,6 @@ namespace fmCalcBlocksLibrary.Blocks
 
             processOnChange = true;
         }
+        public fmRm0hceBlock() : this(null, null) { }
     }
 }

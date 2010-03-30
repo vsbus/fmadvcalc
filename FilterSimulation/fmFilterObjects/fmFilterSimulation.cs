@@ -159,22 +159,96 @@ namespace FilterSimulation.fmFilterObjects
             }
             result.AddRange(suspensionParametersList);
             
-            
-            result.AddRange(new fmEps0Kappa0Calculator(null).variables.Keys);
+            result.Add(fmGlobalParameter.eps0);
+            result.Add(fmGlobalParameter.kappa0);
             result.Add(fmGlobalParameter.ne);
 
-
-            result.AddRange(new fmPc0rc0a0Calculator(null).variables.Keys);
+            result.Add(fmGlobalParameter.Pc0);
+            result.Add(fmGlobalParameter.rc0);
+            result.Add(fmGlobalParameter.a0);
             result.Add(fmGlobalParameter.nc);
 
-
-            result.AddRange(new fmRm0hceCalculator(null).variables.Keys);
-            
+            result.Add(fmGlobalParameter.Rm0);
+            result.Add(fmGlobalParameter.hce);
             
             List<fmGlobalParameter> filterMachiningParametersList = CalculationOptionHelper.GetParametersListThatCanBeInput(filterMachinigCalculationOption);
             result.AddRange(filterMachiningParametersList);
 
             return result;
+        }
+
+        public static void CopyVariableParametersFromSimulationToBlock(fmFilterSimulationData simData, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
+        {
+            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
+            {
+                p.value = simData.parameters[p.globalParameter].value;
+                p.isInputed = (simData.parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed;
+            }
+        }
+
+        public static void CopyConstantParametersFromSimulationToBlock(fmFilterSimulationData simData, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
+        {
+            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockConstantParameter p in block.ConstantParameters)
+            {
+                p.value = simData.parameters[p.globalParameter].value;
+            }
+        }
+
+        public static void CopyAllParametersFromSimulationToBlock(fmFilterSimulationData simData, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
+        {
+            CopyVariableParametersFromSimulationToBlock(simData, block);
+            CopyConstantParametersFromSimulationToBlock(simData, block);
+        }
+
+        public static void CopyAllParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulationData simData)
+        {
+            CopyConstantParametersFromBlockToSimulation(block, simData);
+            CopyVariableParametersFromBlockToSimulation(block, simData);
+        }
+
+        public static void CopyConstantParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulationData simData)
+        {
+            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockConstantParameter p in block.ConstantParameters)
+            {
+                simData.parameters[p.globalParameter].value = p.value;
+            }
+        }
+
+        public static void CopyVariableParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulationData simData)
+        {
+            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
+            {
+                simData.parameters[p.globalParameter].value = p.value;
+                (simData.parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed = p.isInputed;
+            }
+        }
+
+        private void UpdateIsInputedInParametersFromBlock(fmBaseBlock block, fmGlobalParameter inputedParameter)
+        {
+            CopyAllParametersFromSimulationToBlock(this, block);
+            block.UpdateIsInputed(block.GetParameterByName(inputedParameter.name));
+            fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(block, this);
+        }
+
+        public void UpdateIsInputed(fmGlobalParameter inputedParameter)
+        {
+            fmFilterMachiningBlock fmb = new fmFilterMachiningBlock();
+            fmb.calculationOption = filterMachinigCalculationOption;
+            fmb.UpdateGroups();
+            UpdateIsInputedInParametersFromBlock(fmb, inputedParameter);
+
+            fmSuspensionBlock susb = new fmSuspensionBlock();
+            susb.calculationOption = suspensionCalculationOption;
+            UpdateIsInputedInParametersFromBlock(susb, inputedParameter);
+
+            fmEps0Kappa0Block epskappab = new fmEps0Kappa0Block();
+            UpdateIsInputedInParametersFromBlock(epskappab, inputedParameter);
+
+            fmPc0rc0a0Block pcrcab = new fmPc0rc0a0Block();
+            UpdateIsInputedInParametersFromBlock(pcrcab, inputedParameter);
+
+            fmRm0hceBlock rmhceb = new fmRm0hceBlock();
+            UpdateIsInputedInParametersFromBlock(rmhceb, inputedParameter);
         }
     }
 
@@ -242,368 +316,6 @@ namespace FilterSimulation.fmFilterObjects
             get { return m_Data.parameters; }
         }
 
-        //public fmValue eta_f
-        //{
-        //    get { return m_Data.eta_f; }
-        //    set 
-        //    {
-        //        if (m_Data.eta_f != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.eta_f = value; 
-        //    }
-        //}
-        //public fmValue rho_f
-        //{
-        //    get { return m_Data.rho_f; }
-        //    set 
-        //    {
-        //        if (m_Data.rho_f != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.rho_f = value; 
-        //    }
-        //}
-        //public fmValue rho_s
-        //{
-        //    get { return m_Data.rho_s; }
-        //    set 
-        //    {
-        //        if (m_Data.rho_s != value)
-        //        {
-        //            Modified = true;
-        //        }
-                
-        //        m_Data.rho_s = value; 
-        //    }
-        //}
-        //public fmValue rho_sus
-        //{
-        //    get { return m_Data.rho_sus; }
-        //    set 
-        //    {
-        //        if (m_Data.rho_sus != value)
-        //        {
-        //            Modified = true;
-        //        }
-                
-        //        m_Data.rho_sus = value; 
-        //    }
-        //}
-        //public fmValue Cm
-        //{
-        //    get { return m_Data.Cm; }
-        //    set
-        //    {
-        //        if (m_Data.Cm != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Cm = value; 
-        //    }
-        //}
-        //public fmValue Cv
-        //{
-        //    get { return m_Data.Cv; }
-        //    set
-        //    {
-        //        if (m_Data.Cv != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Cv = value; 
-        //    }
-        //}
-        //public fmValue C
-        //{
-        //    get { return m_Data.C; }
-        //    set
-        //    {
-        //        if (m_Data.C != value)
-        //        {
-        //            Modified = true;
-        //        } 
-        //        m_Data.C = value; 
-        //    }
-        //}
-        //public fmValue eps0
-        //{
-        //    get { return m_Data.eps0; }
-        //    set
-        //    {
-        //        if (m_Data.eps0 != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.eps0 = value;
-        //    }
-        //}
-        //public fmValue kappa0
-        //{
-        //    get { return m_Data.kappa0; }
-        //    set
-        //    {
-        //        if (m_Data.kappa0 != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.kappa0 = value;
-        //    }
-        //}
-        //public fmValue ne
-        //{
-        //    get { return m_Data.ne; }
-        //    set
-        //    {
-        //        if (m_Data.ne != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.ne = value;
-        //    }
-        //}
-        //public fmValue Pc0
-        //{
-        //    get { return m_Data.Pc0; }
-        //    set
-        //    {
-        //        if (m_Data.Pc0 != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Pc0 = value;
-        //    }
-        //}
-        //public fmValue rc0
-        //{
-        //    get { return m_Data.rc0; }
-        //    set
-        //    {
-        //        if (m_Data.rc0 != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.rc0 = value;
-        //    }
-        //}
-        //public fmValue a0
-        //{
-        //    get { return m_Data.a0; }
-        //    set
-        //    {
-        //        if (m_Data.a0 != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.a0 = value;
-        //    }
-        //}
-        //public fmValue nc
-        //{
-        //    get { return m_Data.nc; }
-        //    set
-        //    {
-        //        if (m_Data.nc != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.nc = value;
-        //    }
-        //}
-        //public fmValue hce
-        //{
-        //    get { return m_Data.hce; }
-        //    set
-        //    {
-        //        if (m_Data.hce != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.hce = value;
-        //    }
-        //}
-        //public fmValue Rm0
-        //{
-        //    get { return m_Data.Rm0; }
-        //    set
-        //    {
-        //        if (m_Data.Rm0 != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Rm0 = value;
-        //    }
-        //}
-        //public fmValue A
-        //{
-        //    get { return m_Data.A; }
-        //    set
-        //    {
-        //        if (m_Data.A != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.A = value;
-        //    }
-        //}
-        //public fmValue Dp
-        //{
-        //    get { return m_Data.Dp; }
-        //    set
-        //    {
-        //        if (m_Data.Dp != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Dp = value;
-        //    }
-        //}
-        //public fmValue hc
-        //{
-        //    get { return m_Data.hc; }
-        //    set
-        //    {
-        //        if (m_Data.hc != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.hc = value;
-        //    }
-        //}
-        //public fmValue Mf
-        //{
-        //    get { return m_Data.Mf; }
-        //    set
-        //    {
-        //        if (m_Data.Mf != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Mf = value;
-        //    }
-        //}        
-        //public fmValue Ms
-        //{
-        //    get { return m_Data.Ms; }
-        //    set
-        //    {
-        //        if (m_Data.Ms != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Ms = value;
-        //    }
-        //}
-        //public fmValue Msus
-        //{
-        //    get { return m_Data.Msus; }
-        //    set
-        //    {
-        //        if (m_Data.Msus != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Msus = value;
-        //    }
-        //}
-        //public fmValue n
-        //{
-        //    get { return m_Data.n; }
-        //    set
-        //    {
-        //        if (m_Data.n != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.n = value;
-        //    }
-        //}
-        //public fmValue Qms
-        //{
-        //    get { return m_Data.Qms; }
-        //    set
-        //    {
-        //        if (m_Data.Qms != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Qms = value;
-        //    }
-        //}
-        //public fmValue Qmsus
-        //{
-        //    get { return m_Data.Qmsus; }
-        //    set
-        //    {
-        //        if (m_Data.Qmsus != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Qmsus = value;
-        //    }
-        //}
-        //public fmValue Qsus
-        //{
-        //    get { return m_Data.Qsus; }
-        //    set
-        //    {
-        //        if (m_Data.Qsus != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Qsus = value;
-        //    }
-        //}
-        //public fmValue sf
-        //{
-        //    get { return m_Data.sf; }
-        //    set
-        //    {
-        //        if (m_Data.sf != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.sf = value;
-        //    }
-        //}
-        //public fmValue tc
-        //{
-        //    get { return m_Data.tc; }
-        //    set
-        //    {
-        //        if (m_Data.tc != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.tc = value;
-        //    }
-        //}
-        //public fmValue tf
-        //{
-        //    get { return m_Data.tf; }
-        //    set
-        //    {
-        //        if (m_Data.tf != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.tf = value;
-        //    }
-        //}
-        //public fmValue Vsus
-        //{
-        //    get { return m_Data.Vsus; }
-        //    set
-        //    {
-        //        if (m_Data.Vsus != value)
-        //        {
-        //            Modified = true;
-        //        }
-        //        m_Data.Vsus = value;
-        //    }
-        //}
         public fmFilterMachiningCalculator.FilterMachiningCalculationOption FilterMachiningCalculationOption
         {
             get { return m_Data.filterMachinigCalculationOption; }
@@ -670,30 +382,6 @@ namespace FilterSimulation.fmFilterObjects
 
         internal void CopySuspensionParameters(fmFilterSimulation simulation)
         {
-            //eta_f = simulation.eta_f;
-
-            //rho_f = simulation.rho_f;
-            //rho_s = simulation.rho_s;
-            //rho_sus = simulation.rho_sus;
-
-            //Cm = simulation.Cm;
-            //Cv = simulation.Cv;
-            //C = simulation.C;
-
-            //eps0 = simulation.eps0;
-            //kappa0 = simulation.kappa0;
-
-            //nc = simulation.nc;
-
-            //Pc0 = simulation.Pc0;
-            //rc0 = simulation.rc0;
-            //a0 = simulation.a0;
-
-            //ne = simulation.ne;
-
-            //hce = simulation.hce;
-            //Rm0 = simulation.Rm0;
-
             Parameters[fmGlobalParameter.eta_f] = simulation.Parameters[fmGlobalParameter.eta_f];
 
             Parameters[fmGlobalParameter.rho_f] = simulation.Parameters[fmGlobalParameter.rho_f];
@@ -717,15 +405,6 @@ namespace FilterSimulation.fmFilterObjects
             
             Parameters[fmGlobalParameter.hce] = simulation.Parameters[fmGlobalParameter.hce];
             Parameters[fmGlobalParameter.Rm0] = simulation.Parameters[fmGlobalParameter.Rm0];
-            
-            //foreach (fmGlobalParameter p in Parameters.Keys)
-            //{
-            //    if (p.Kind == fmGlobalParameter.fmGlobalParameterKind.SuspensionParameterKind)
-            //    {
-            //        Parameters[p] = simulation.Parameters[p];
-            //    }
-            //}
-
         }
 
         public static void CopyVariableParametersFromSimulationToBlock(fmFilterSimulation sim, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)

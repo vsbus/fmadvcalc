@@ -49,5 +49,6 @@ namespace fmCalcBlocksLibrary.Blocks
 
             processOnChange = true;
         }
+        public fmEps0Kappa0Block() : this(null, null) {}
     }
 }

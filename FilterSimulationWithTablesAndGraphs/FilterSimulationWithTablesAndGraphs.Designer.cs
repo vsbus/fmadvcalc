@@ -67,7 +67,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.projectPanel.SuspendLayout();
             this.suspensionPanel.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
-            this.suspensionParametersPanel.SuspendLayout();
             this.suspensionParametersAndCalcOptionsPanel.SuspendLayout();
             this.simulationPanel.SuspendLayout();
             this.panelRight.SuspendLayout();
@@ -607,7 +606,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.projectPanel.ResumeLayout(false);
             this.suspensionPanel.ResumeLayout(false);
             this.secondFromTopPanel.ResumeLayout(false);
-            this.suspensionParametersPanel.ResumeLayout(false);
             this.suspensionParametersAndCalcOptionsPanel.ResumeLayout(false);
             this.simulationPanel.ResumeLayout(false);
             this.panelRight.ResumeLayout(false);

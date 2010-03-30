@@ -382,7 +382,7 @@ namespace FilterSimulation
             foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
                 if (meterialInputSerieRadioButton.Checked && sim.Parent == fSolution.CurrentObjects.Simulation.Parent
                     || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParametersToSimulations(sim.rm0HceBlock, fSolution.CurrentObjects.Simulation.rm0HceBlock);
+                    CopyBlockParameters(sim.rm0HceBlock, fSolution.CurrentObjects.Simulation.rm0HceBlock);
             displayingSolution = false;
         }
 
@@ -392,7 +392,7 @@ namespace FilterSimulation
             foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
                 if (meterialInputSerieRadioButton.Checked && sim.Parent == fSolution.CurrentObjects.Simulation.Parent
                     || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParametersToSimulations(sim.pc0rc0a0Block, fSolution.CurrentObjects.Simulation.pc0rc0a0Block);
+                    CopyBlockParameters(sim.pc0rc0a0Block, fSolution.CurrentObjects.Simulation.pc0rc0a0Block);
             displayingSolution = false;
         }
 
@@ -402,11 +402,11 @@ namespace FilterSimulation
             foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
                 if (meterialInputSerieRadioButton.Checked && sim.Parent == fSolution.CurrentObjects.Simulation.Parent
                     || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParametersToSimulations(sim.eps0Kappa0Block, fSolution.CurrentObjects.Simulation.eps0Kappa0Block);
+                    CopyBlockParameters(sim.eps0Kappa0Block, fSolution.CurrentObjects.Simulation.eps0Kappa0Block);
             displayingSolution = false;
         }
        
-        static void CopyBlockParametersToSimulations(fmBaseBlock dst, fmBaseBlock src)
+        static void CopyBlockParameters(fmBaseBlock dst, fmBaseBlock src)
         {
             src.DoCalculations();
             for (int parameterIndex = 0; parameterIndex < dst.Parameters.Count; ++parameterIndex)
@@ -422,14 +422,15 @@ namespace FilterSimulation
             foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
                 if (meterialInputSerieRadioButton.Checked && sim.Parent == fSolution.CurrentObjects.Simulation.Parent
                     || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParametersToSimulations(sim.susBlock, fSolution.CurrentObjects.Simulation.susBlock);
+                    CopyBlockParameters(sim.susBlock, fSolution.CurrentObjects.Simulation.susBlock);
             displayingSolution = false;
         }
 
         private static void CopySimulationValuesToFilterMachining(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
-            sim.filterMachiningBlock.calculationOption = sim.FilterMachiningCalculationOption;
+            if (sim.filterMachiningBlock.calculationOption != sim.FilterMachiningCalculationOption)
+                sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.FilterMachiningCalculationOption);
         }
         private static void CopySimulationValuesToRmHceBlock(fmFilterSimulation sim)
         {

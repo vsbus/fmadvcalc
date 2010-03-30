@@ -5,7 +5,7 @@ namespace fmCalculatorsLibrary
 {
     abstract public class fmBaseCalculator
     {
-        public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> variables;
+        protected Dictionary<fmGlobalParameter, fmCalculationBaseParameter> variables;
         abstract public void DoCalculations();
         public fmBaseCalculator(IEnumerable<fmCalculationBaseParameter> parameterList)
         {

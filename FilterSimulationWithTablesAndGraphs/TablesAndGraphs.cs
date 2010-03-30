@@ -381,22 +381,20 @@ namespace FilterSimulationWithTablesAndGraphs
 
             for (int i = 0; i < internalSelectedSimList.Count; i++)
             {
-                fmFilterSimulation sim = internalSelectedSimList[i].externalSimulation;
-                fmFilterSimulation tempSim = new fmFilterSimulation(null, sim);
-                //tempSim.FilterMachiningCalculationOption = calculationOptionViewInTablesAndGraphs.GetSelectedOption();
+                fmFilterSimulationData tempSim = internalSelectedSimList[i].internalSimulation;
 
                 DataGridViewRow row =
                     selectedSimulationParametersTable.Rows[selectedSimulationParametersTable.Rows.Add()];
                 row.Cells["SelectedSimulationParametersCheckBoxColumn"].Value = internalSelectedSimList[i].isChecked;
 
-                foreach (fmGlobalParameter param in tempSim.Parameters.Keys)
+                foreach (fmGlobalParameter param in tempSim.parameters.Keys)
                 {
                     int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
-                    row.Cells[idx].Value = tempSim.Parameters[param].value / param.unitFamily.CurrentUnit.Coef;
+                    row.Cells[idx].Value = tempSim.parameters[param].value / param.unitFamily.CurrentUnit.Coef;
                 }
 
                 fmFilterMachiningBlock tempBlock = new fmFilterMachiningBlock();
-                tempBlock.calculationOption = sim.FilterMachiningCalculationOption;
+                tempBlock.calculationOption = tempSim.filterMachinigCalculationOption;
                 tempBlock.UpdateGroups();
 
                 foreach (fmBlockVariableParameter param in tempBlock.Parameters)
@@ -408,15 +406,38 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
             }
-            
-            //UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
+
+            BindForeColorToSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
+        }
+
+        private void BindForeColorToSelectedSimulationsTable()
+        {
+            for (int i = 0; i < internalSelectedSimList.Count; i++)
+            {
+                fmFilterSimulationData tempSim = internalSelectedSimList[i].internalSimulation;
+                DataGridViewRow row = selectedSimulationParametersTable.Rows[i];
+
+                foreach (fmGlobalParameter param in tempSim.parameters.Keys)
+                {
+                    int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
+                    Color cellForeColor = Color.Black;
+                    if (tempSim.parameters[param] is fmCalculationVariableParameter)
+                    {
+                        if ((tempSim.parameters[param] as fmCalculationVariableParameter).isInputed)
+                            cellForeColor = Color.Blue;
+                    }
+                    row.Cells[idx].Style.ForeColor = cellForeColor;
+                }
+            }
         }
 
         private void UpdateVisibilityOfColumnsInSelectedSimulationsTable()
         {
-            //List<fmGlobalParameter> inputs = CalculationOptionHelper.GetParametersListThatCanBeInput(
-            //    calculationOptionViewInTablesAndGraphs.GetSelectedOption());
+            //List<fmGlobalParameter> simParams = new List<fmGlobalParameter>();
+            //foreach (fmBlockVariableParameter p in (new fmFilterMachiningBlock()).Parameters)
+            //    simParams.Add(p.globalParameter);
+            //List<fmGlobalParameter> inputs = ListsIntersection(GetCommonInputParametersList(), simParams);
             List<fmGlobalParameter> inputs = GetCommonInputParametersList();
             
             foreach (DataGridViewColumn col in selectedSimulationParametersTable.Columns)
@@ -522,6 +543,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void listBoxX_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.Text]);
+            BindForeColorToSelectedSimulationsTable();
             LoadCurrentXRange();
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
@@ -531,6 +554,17 @@ namespace FilterSimulationWithTablesAndGraphs
         //    UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
         //    LoadCurrentXRange();
         //    DrawChartAndTable();
+        }
+
+        private void UpdateIsInputed(fmGlobalParameter inputedParameter)
+        {
+            for (int i = 0; i < internalSelectedSimList.Count; ++i)
+            {
+                if (internalSelectedSimList[i].isChecked)
+                {
+                    internalSelectedSimList[i].internalSimulation.UpdateIsInputed(inputedParameter);
+                }
+            }
         }
 
         private void LoadCurrentXRange()
@@ -663,7 +697,6 @@ namespace FilterSimulationWithTablesAndGraphs
             BindSelectedSimulationListToTable();
             BindXYLists();
             LoadCurrentXRange();
-            //DrawChartAndTable();
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();            
@@ -822,13 +855,13 @@ namespace FilterSimulationWithTablesAndGraphs
                     foreach (double x in xList)
                     {
                         fmFilterSimulationData tempSim = new fmFilterSimulationData();
-                        tempSim.CopyIsInputedFrom(simData.externalSimulation.Data);
-                        //tempSim.filterMachinigCalculationOption = simData.internalSimulation.filterMachinigCalculationOption;
+                        //tempSim.CopyIsInputedFrom(simData.externalSimulation.Data);
+                        tempSim.CopyIsInputedFrom(simData.internalSimulation);
                         tempSim.CopyValuesFrom(simData.externalSimulation.Data);
                         tempSim.parameters[xParameter].value = new fmValue(x * xParameter.unitFamily.CurrentUnit.Coef);
 
                         fmSuspensionCalculator suspensionCalculator = new fmSuspensionCalculator(tempSim.parameters.Values);
-                        suspensionCalculator.calculationOption = simData.externalSimulation.Data.suspensionCalculationOption;
+                        suspensionCalculator.calculationOption = simData.internalSimulation.suspensionCalculationOption;
                         suspensionCalculator.DoCalculations();
 
                         fmEps0Kappa0Calculator eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.parameters.Values);
@@ -841,7 +874,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         rm0hceCalculator.DoCalculations();
 
                         fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values);
-                        filterMachiningCalculator.calculationOption = simData.externalSimulation.Data.filterMachinigCalculationOption;
+                        filterMachiningCalculator.calculationOption = simData.internalSimulation.filterMachinigCalculationOption;
                         filterMachiningCalculator.DoCalculations();
 
                         simData.calculatedDataList.Add(tempSim);
@@ -912,17 +945,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private List<fmGlobalParameter> GetCommonInputParametersList()
         {
-            //List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
-            //foreach (fmSelectedSimulationData simData in internalSelectedSimList)
-            //    for (int i = simInputParameters.Count - 1; i >= 0; --i)
-            //        if (!simData.externalSimulation.Parameters.ContainsKey(simInputParameters[i])
-            //            || !(simData.externalSimulation.Parameters[simInputParameters[i]] as fmCalculationVariableParameter).isInputed)
-            //            simInputParameters.RemoveAt(i);
-            //return simInputParameters;
-
             List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
             foreach (fmSelectedSimulationData simData in internalSelectedSimList)
-                simInputParameters = ListsIntersection(simInputParameters, simData.externalSimulation.Data.GetParametersThatCanBeInputedList());
+                if (simData.isChecked)
+                    simInputParameters = ListsIntersection(simInputParameters, simData.internalSimulation.GetParametersThatCanBeInputedList());
             return simInputParameters;
         }
 
