@@ -972,6 +972,18 @@ namespace FilterSimulationWithTablesAndGraphs
                     if (checkedSim.externalSimulation == sim)
                     {
                         newSelectedSim = checkedSim;
+                        
+                        if (newSelectedSim.internalSimulation.filterMachinigCalculationOption !=
+                                        sim.FilterMachiningCalculationOption
+                                || newSelectedSim.internalSimulation.suspensionCalculationOption !=
+                                        sim.Data.suspensionCalculationOption)
+                        {
+                            newSelectedSim.internalSimulation.CopyFrom(sim.Data);
+                        }
+                        else
+                        {
+                            newSelectedSim.internalSimulation.CopyValuesFrom(sim.Data);
+                        }
                     }
                 }
                 if (newSelectedSim == null)
