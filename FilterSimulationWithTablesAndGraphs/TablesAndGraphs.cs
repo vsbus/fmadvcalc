@@ -846,7 +846,7 @@ namespace FilterSimulationWithTablesAndGraphs
             else
             {
                 fmGlobalParameter y1Parameter = displayingResults.yParameters[0].Parameter;
-                fmGlobalParameter y2Parameter = displayingResults.yParameters[1].Parameter;
+                fmGlobalParameter y2Parameter = displayingResults.yParameters[displayingResults.yParameters.Count - 1].Parameter;
                 fmZedGraphControl1.GraphPane.YAxis.Title.Text = y1Parameter.name + " (" + y1Parameter.UnitName + ")";
                 fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = Color.Blue;
                 

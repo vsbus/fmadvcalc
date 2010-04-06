@@ -9,13 +9,20 @@ namespace fmZedGraph
     public class HighlighPointsEventArgs : EventArgs
     {
         private double x;
+        private bool isHighlight;
         public double X
         {
             get { return x; }
         }
-        public HighlighPointsEventArgs(double x)
+        public bool IsHighlight
+        {
+            get { return isHighlight; }
+            //set { isHighlight = value; }
+        }
+        public HighlighPointsEventArgs(double x, bool isHighlight)
         {
             this.x = x;
+            this.isHighlight = isHighlight;
         }
     }
     partial class fmZedGraphControl
@@ -232,6 +239,10 @@ namespace fmZedGraph
             else
             {
                 RemoveHighLightedPoints();
+                if (HighLightedPointsChanged != null)
+                {
+                    HighLightedPointsChanged(this, new HighlighPointsEventArgs(currentX, false));
+                }
                 Refresh();
             }
         }
@@ -249,7 +260,7 @@ namespace fmZedGraph
             Refresh();
             if (HighLightedPointsChanged != null)
             {
-                HighLightedPointsChanged(this, new HighlighPointsEventArgs(currentX));
+                HighLightedPointsChanged(this, new HighlighPointsEventArgs(currentX, true));
             }
         }
 

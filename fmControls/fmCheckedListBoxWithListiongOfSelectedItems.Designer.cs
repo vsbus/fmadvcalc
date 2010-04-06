@@ -39,22 +39,22 @@ namespace fmControls
             this.mainCheckedListBox.FormattingEnabled = true;
             this.mainCheckedListBox.Location = new System.Drawing.Point(0, 0);
             this.mainCheckedListBox.Name = "mainCheckedListBox";
-            this.mainCheckedListBox.Size = new System.Drawing.Size(109, 109);
+            this.mainCheckedListBox.Size = new System.Drawing.Size(109, 124);
             this.mainCheckedListBox.TabIndex = 0;
             // 
             // selectedItemsCheckedListBox
             // 
             this.selectedItemsCheckedListBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.selectedItemsCheckedListBox.FormattingEnabled = true;
-            this.selectedItemsCheckedListBox.Location = new System.Drawing.Point(0, 124);
+            this.selectedItemsCheckedListBox.Location = new System.Drawing.Point(0, 139);
             this.selectedItemsCheckedListBox.Name = "selectedItemsCheckedListBox";
-            this.selectedItemsCheckedListBox.Size = new System.Drawing.Size(109, 49);
+            this.selectedItemsCheckedListBox.Size = new System.Drawing.Size(109, 34);
             this.selectedItemsCheckedListBox.TabIndex = 1;
             // 
             // splitter1
             // 
             this.splitter1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.splitter1.Location = new System.Drawing.Point(0, 121);
+            this.splitter1.Location = new System.Drawing.Point(0, 136);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(109, 3);
             this.splitter1.TabIndex = 2;

@@ -193,10 +193,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void HighLightCurrentPoints(object sender)
         {
-            HighLightCurrentPoints(sender, -1);
+            HighLightCurrentPoints(sender, -1, true);
         }
 
-        private void HighLightCurrentPoints(object sender, double x)
+        private void HighLightCurrentPoints(object sender, double x, bool isHighLight)
         {
             if (highLightCaller == null)
             {
@@ -217,23 +217,32 @@ namespace FilterSimulationWithTablesAndGraphs
                     int columnIndex = coordinatesGrid.CurrentCell == null ? 0 : coordinatesGrid.CurrentCell.ColumnIndex;
                     int rowIndex = 0;
 
-                    foreach (DataGridViewRow row in coordinatesGrid.Rows)
+                    fmValue minValue = fmValue.ObjectToValue(coordinatesGrid.Rows[0].Cells[0].Value);
+                    fmValue maxValue = fmValue.ObjectToValue(coordinatesGrid.Rows[coordinatesGrid.RowCount - 1].Cells[0].Value);
+                    if (!isHighLight || x < minValue.Value || x > maxValue.Value)
                     {
-                        fmValue value = fmValue.ObjectToValue(row.Cells[0].Value);
-                        fmValue bestValue = fmValue.ObjectToValue(coordinatesGrid[0, rowIndex].Value);
-                        if (fmValue.Abs(value - x) < fmValue.Abs(bestValue - x))
-                        {
-                            rowIndex = row.Index;
-                        }
+                        coordinatesGrid.CurrentCell = null;
                     }
-
-                    if (coordinatesGrid.RowCount > 0 && coordinatesGrid.ColumnCount > 0)
+                    else
                     {
-                        DataGridViewCell newCell = coordinatesGrid[columnIndex, rowIndex];
-                        if (coordinatesGrid.CurrentCell != newCell)
+                        foreach (DataGridViewRow row in coordinatesGrid.Rows)
                         {
-                            coordinatesGrid.CurrentCell = newCell;
+                            fmValue value = fmValue.ObjectToValue(row.Cells[0].Value);
+                            fmValue bestValue = fmValue.ObjectToValue(coordinatesGrid[0, rowIndex].Value);
+                            if (fmValue.Abs(value - x) < fmValue.Abs(bestValue - x))
+                            {
+                                rowIndex = row.Index;
+                            }
                         }
+
+                        if (coordinatesGrid.RowCount > 0 && coordinatesGrid.ColumnCount > 0)
+                        {
+                            DataGridViewCell newCell = coordinatesGrid[columnIndex, rowIndex];
+                            if (coordinatesGrid.CurrentCell != newCell)
+                            {
+                                coordinatesGrid.CurrentCell = newCell;
+                            }
+                        }    
                     }
                 }
 
@@ -248,7 +257,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void fmZedGraphControl1_HighLightedPointsChanged(object sender, fmZedGraph.HighlighPointsEventArgs e)
         {
-            HighLightCurrentPoints(sender, e.X);
+            HighLightCurrentPoints(sender, e.X, e.IsHighlight);
         }
 
         private void calculationOptionTandCChangeButton_Click(object sender, EventArgs e)
