@@ -217,8 +217,8 @@ namespace FilterSimulationWithTablesAndGraphs
                     int columnIndex = coordinatesGrid.CurrentCell == null ? 0 : coordinatesGrid.CurrentCell.ColumnIndex;
                     int rowIndex = 0;
 
-                    fmValue minValue = fmValue.ObjectToValue(coordinatesGrid.Rows[0].Cells[0].Value);
-                    fmValue maxValue = fmValue.ObjectToValue(coordinatesGrid.Rows[coordinatesGrid.RowCount - 1].Cells[0].Value);
+                    fmValue minValue = coordinatesGrid.RowCount == 0 ? new fmValue() : fmValue.ObjectToValue(coordinatesGrid.Rows[0].Cells[0].Value);
+                    fmValue maxValue = coordinatesGrid.RowCount == 0 ? new fmValue() : fmValue.ObjectToValue(coordinatesGrid.Rows[coordinatesGrid.RowCount - 1].Cells[0].Value);
                     if (!isHighLight || x < minValue.Value || x > maxValue.Value)
                     {
                         coordinatesGrid.CurrentCell = null;
