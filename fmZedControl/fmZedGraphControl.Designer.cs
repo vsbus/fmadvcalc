@@ -168,7 +168,8 @@ namespace fmZedGraph
             List<CurveItem> result = new List<CurveItem>();
             foreach (CurveItem curve in GraphPane.CurveList)
             {
-                if (highLightedPoints.Contains(curve))
+                if (highLightedPoints != null
+                    && highLightedPoints.Contains(curve))
                 {
                     continue;
                 }
@@ -223,7 +224,16 @@ namespace fmZedGraph
             }
 
             double currentX = GraphPane.XAxis.Scale.ReverseTransform(e.Location.X);
-            HighLightPoints(currentX);
+            if (GraphPane.XAxis.Scale.Min <= currentX
+                && currentX <= GraphPane.XAxis.Scale.Max)
+            {
+                HighLightPoints(currentX);
+            }
+            else
+            {
+                RemoveHighLightedPoints();
+                Refresh();
+            }
         }
 
         public void HighLightPoints(double currentX)

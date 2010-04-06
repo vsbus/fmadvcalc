@@ -10,6 +10,11 @@ namespace fmCalculationLibrary
         public double Value;
         public static int outputPrecision = 3;
 
+        public static fmValue Infinity()
+        {
+            return new fmValue(1e100);
+        }
+
         public fmValue(double x)
         {
             Defined = true;
@@ -346,5 +351,10 @@ namespace fmCalculationLibrary
             throw new ArgumentException("object is not a fmValue");
         }
 
+
+        public static fmValue Max(fmValue a, fmValue b)
+        {
+            return a > b ? a : b;
+        }
     }
 }

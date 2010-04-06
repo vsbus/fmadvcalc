@@ -12,7 +12,7 @@ namespace FilterSimulation
     public partial class CalculationOptionSelectionDialog : Form
     {
         public fmSuspensionCalculator.SuspensionCalculationOptions suspensionCalculationOption;
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption simulationCalculationOption;
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public CalculationOptionSelectionDialog()
         {
@@ -30,7 +30,7 @@ namespace FilterSimulation
             CmCvC_radioButton.Checked = suspensionCalculationOption ==
                                         fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
 
-            fmCalculationOptionView1.SetSelectedOption(simulationCalculationOption);
+            fmCalculationOptionView1.SetSelectedOption(filterMachiningCalculationOption);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -79,7 +79,7 @@ namespace FilterSimulation
 
         private void fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions(object sender, EventArgs e)
         {
-            simulationCalculationOption = fmCalculationOptionView1.GetSelectedOption();
+            filterMachiningCalculationOption = fmCalculationOptionView1.GetSelectedOption();
         }
     }
 }

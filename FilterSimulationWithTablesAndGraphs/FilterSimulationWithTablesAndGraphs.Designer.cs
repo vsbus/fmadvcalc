@@ -57,8 +57,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.ParamsControlsPanel4 = new System.Windows.Forms.Panel();
             this.splitter10 = new System.Windows.Forms.Splitter();
             this.tablesAndGraphsTopLeftPanel = new System.Windows.Forms.Panel();
-            this.listBoxYAxis = new System.Windows.Forms.CheckedListBox();
+            this.listBoxYAxis = new fmControls.fmCheckedListBoxWithListiongOfSelectedItems();
             this.listBoxXAxis = new System.Windows.Forms.ListBox();
+            this.calculationOptionTandCChangeButton = new System.Windows.Forms.Button();
             this.splitter11 = new System.Windows.Forms.Splitter();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.splitter7 = new System.Windows.Forms.Splitter();
@@ -544,6 +545,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.listBoxYAxis);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.listBoxXAxis);
+            this.tablesAndGraphsTopLeftPanel.Controls.Add(this.calculationOptionTandCChangeButton);
             this.tablesAndGraphsTopLeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablesAndGraphsTopLeftPanel.Location = new System.Drawing.Point(593, 0);
             this.tablesAndGraphsTopLeftPanel.Name = "tablesAndGraphsTopLeftPanel";
@@ -552,14 +554,12 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // listBoxYAxis
             // 
-            this.listBoxYAxis.CheckOnClick = true;
             this.listBoxYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxYAxis.FormattingEnabled = true;
             this.listBoxYAxis.Location = new System.Drawing.Point(78, 0);
             this.listBoxYAxis.Name = "listBoxYAxis";
-            this.listBoxYAxis.Size = new System.Drawing.Size(94, 109);
-            this.listBoxYAxis.TabIndex = 2;
-            this.listBoxYAxis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listBoxYAxis_ItemCheck);
+            this.listBoxYAxis.Size = new System.Drawing.Size(94, 91);
+            this.listBoxYAxis.TabIndex = 4;
+            this.listBoxYAxis.SelectedItemsChanged += new System.EventHandler(this.listBoxYAxis_SelectedItemsChanged);
             // 
             // listBoxXAxis
             // 
@@ -567,9 +567,20 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxXAxis.FormattingEnabled = true;
             this.listBoxXAxis.Location = new System.Drawing.Point(0, 0);
             this.listBoxXAxis.Name = "listBoxXAxis";
-            this.listBoxXAxis.Size = new System.Drawing.Size(78, 108);
+            this.listBoxXAxis.Size = new System.Drawing.Size(78, 82);
             this.listBoxXAxis.TabIndex = 1;
             this.listBoxXAxis.SelectedIndexChanged += new System.EventHandler(this.listBoxX_SelectedIndexChanged);
+            // 
+            // calculationOptionTandCChangeButton
+            // 
+            this.calculationOptionTandCChangeButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.calculationOptionTandCChangeButton.Location = new System.Drawing.Point(0, 91);
+            this.calculationOptionTandCChangeButton.Name = "calculationOptionTandCChangeButton";
+            this.calculationOptionTandCChangeButton.Size = new System.Drawing.Size(172, 23);
+            this.calculationOptionTandCChangeButton.TabIndex = 3;
+            this.calculationOptionTandCChangeButton.Text = "Calculation Option";
+            this.calculationOptionTandCChangeButton.UseVisualStyleBackColor = true;
+            this.calculationOptionTandCChangeButton.Click += new System.EventHandler(this.calculationOptionTandCChangeButton_Click);
             // 
             // splitter11
             // 
@@ -657,7 +668,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private System.Windows.Forms.CheckBox UseParamsCheckBox;
         private System.Windows.Forms.Panel tablesAndGraphsTopLeftPanel;
         private System.Windows.Forms.ListBox listBoxXAxis;
-        private System.Windows.Forms.CheckedListBox listBoxYAxis;
         private System.Windows.Forms.Splitter splitter10;
         private Splitter splitter11;
         private Splitter splitter6;
@@ -667,6 +677,8 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmDataGrid.fmNumericalTextBox minXValueTextBox;
         private Label xRangeLabel;
         private Button useDefaultRangesButton;
+        private Button calculationOptionTandCChangeButton;
+        private fmControls.fmCheckedListBoxWithListiongOfSelectedItems listBoxYAxis;
 
     }
 }

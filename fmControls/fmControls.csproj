@@ -39,6 +39,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="fmCheckedListBoxWithListiongOfSelectedItems.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="fmCheckedListBoxWithListiongOfSelectedItems.Designer.cs">
+      <DependentUpon>fmCheckedListBoxWithListiongOfSelectedItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +64,12 @@
       <Project>{6AA10204-B802-462B-AC8B-D012081866BA}</Project>
       <Name>fmZedGraph</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="fmCheckedListBoxWithListiongOfSelectedItems.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>fmCheckedListBoxWithListiongOfSelectedItems.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,13 +10,13 @@ namespace FilterSimulation.fmFilterObjects
     {
         public string Name;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachinigCalculationOption;
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption;
         public fmSuspensionCalculator.SuspensionCalculationOptions suspensionCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
         {
             Name = from.Name;
-            filterMachinigCalculationOption = from.filterMachinigCalculationOption;
+            filterMachiningCalculationOption = from.filterMachiningCalculationOption;
             suspensionCalculationOption = from.suspensionCalculationOption;
             CopyValuesFrom(from);
             CopyIsInputedFrom(from);
@@ -50,6 +50,7 @@ namespace FilterSimulation.fmFilterObjects
         public fmFilterSimulationData()
         {
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_f));
+
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_f));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_s));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_sus));
@@ -59,33 +60,34 @@ namespace FilterSimulation.fmFilterObjects
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps0));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.kappa0));
+            
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ne));
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Pc0));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rc0));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.a0));
+            
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.nc));
-
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_f));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_f));
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hce));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Rm0));
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.A));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.n));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tr));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hc));
+            
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mf));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Ms));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Msus));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.n));
+
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qms));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmsus));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qsus));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sf));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tc));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tf));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vsus));
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.kappa));
@@ -93,7 +95,8 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rc));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.a));
 
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tr));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vsus));
+            
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hc_over_tf));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.dhc_over_dt));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qf));
@@ -171,7 +174,7 @@ namespace FilterSimulation.fmFilterObjects
             result.Add(fmGlobalParameter.Rm0);
             result.Add(fmGlobalParameter.hce);
             
-            List<fmGlobalParameter> filterMachiningParametersList = CalculationOptionHelper.GetParametersListThatCanBeInput(filterMachinigCalculationOption);
+            List<fmGlobalParameter> filterMachiningParametersList = CalculationOptionHelper.GetParametersListThatCanBeInput(filterMachiningCalculationOption);
             result.AddRange(filterMachiningParametersList);
 
             return result;
@@ -233,7 +236,7 @@ namespace FilterSimulation.fmFilterObjects
         public void UpdateIsInputed(fmGlobalParameter inputedParameter)
         {
             fmFilterMachiningBlock fmb = new fmFilterMachiningBlock();
-            fmb.calculationOption = filterMachinigCalculationOption;
+            fmb.calculationOption = filterMachiningCalculationOption;
             fmb.UpdateGroups();
             UpdateIsInputedInParametersFromBlock(fmb, inputedParameter);
 
@@ -318,14 +321,14 @@ namespace FilterSimulation.fmFilterObjects
 
         public fmFilterMachiningCalculator.FilterMachiningCalculationOption FilterMachiningCalculationOption
         {
-            get { return m_Data.filterMachinigCalculationOption; }
+            get { return m_Data.filterMachiningCalculationOption; }
             set 
             {
-                if (m_Data.filterMachinigCalculationOption != value)
+                if (m_Data.filterMachiningCalculationOption != value)
                 {
                     Modified = true;
                 }
-                m_Data.filterMachinigCalculationOption = value; 
+                m_Data.filterMachiningCalculationOption = value; 
             }
         }
 

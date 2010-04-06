@@ -10,6 +10,8 @@ using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
 using FilterSimulation.fmFilterObjects;
 using fmCalcBlocksLibrary.Blocks;
+using FilterSimulation;
+using fmControls;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
@@ -148,14 +150,14 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void selectedSimulationParametersTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-        //    if (e.RowIndex == -1 && e.ColumnIndex > 0)
-        //    {
-        //        string parameterName = GetParameterNameFromHeader(selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderText);
-        //        fmInputsInfoForSelectedSimulationsTableBlock.UpdateIsInputed(
-        //            fmInputsInfoForSelectedSimulationsTableBlock.GetParameterByName(parameterName));
-        //        UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
-        //        DrawChartAndTable();
-        //    }
+            //if (e.RowIndex == -1 && e.ColumnIndex > 0)
+            //{
+            //    string parameterName = GetParameterNameFromHeader(selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderText);
+            //    fmInputsInfoForSelectedSimulationsTableBlock.UpdateIsInputed(
+            //        fmInputsInfoForSelectedSimulationsTableBlock.GetParameterByName(parameterName));
+            //    UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
+            //    DrawChartAndTable();
+            //}
         }
 
         private void selectedSimulationParametersTable_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
@@ -174,20 +176,20 @@ namespace FilterSimulationWithTablesAndGraphs
         //    }
         }
 
-        private void listBoxYAxis_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
-            List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
+        //private void listBoxYAxis_ItemCheck(object sender, ItemCheckEventArgs e)
+        //{
+        //    fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+        //    List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
 
-            CheckedListBox clb = sender as CheckedListBox;
-            for (int i = 0; i < clb.Items.Count; ++i)
-            {
-                if (clb.GetItemChecked(i) ^ (e.Index == i))
-                    yParameters.Add(fmGlobalParameter.ParametersByName[clb.Items[i].ToString()]);        
-            }
-            BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
-            BindCalculatedResultsToChartAndTable();
-        }
+        //    CheckedListBox clb = sender as CheckedListBox;
+        //    for (int i = 0; i < clb.Items.Count; ++i)
+        //    {
+        //        if (clb.GetItemChecked(i) ^ (e.Index == i))
+        //            yParameters.Add(fmGlobalParameter.ParametersByName[clb.Items[i].ToString()]);        
+        //    }
+        //    BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
+        //    BindCalculatedResultsToChartAndTable();
+        //}
 
         private void HighLightCurrentPoints(object sender)
         {
@@ -225,10 +227,13 @@ namespace FilterSimulationWithTablesAndGraphs
                         }
                     }
 
-                    DataGridViewCell newCell = coordinatesGrid[columnIndex, rowIndex];
-                    if (coordinatesGrid.CurrentCell != newCell)
+                    if (coordinatesGrid.RowCount > 0 && coordinatesGrid.ColumnCount > 0)
                     {
-                        coordinatesGrid.CurrentCell = newCell;
+                        DataGridViewCell newCell = coordinatesGrid[columnIndex, rowIndex];
+                        if (coordinatesGrid.CurrentCell != newCell)
+                        {
+                            coordinatesGrid.CurrentCell = newCell;
+                        }
                     }
                 }
 
@@ -244,6 +249,56 @@ namespace FilterSimulationWithTablesAndGraphs
         private void fmZedGraphControl1_HighLightedPointsChanged(object sender, fmZedGraph.HighlighPointsEventArgs e)
         {
             HighLightCurrentPoints(sender, e.X);
+        }
+
+        private void calculationOptionTandCChangeButton_Click(object sender, EventArgs e)
+        {
+            CalculationOptionSelectionDialog cosd = new CalculationOptionSelectionDialog();
+            cosd.suspensionCalculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
+            cosd.filterMachiningCalculationOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1;
+            if (internalSelectedSimList.Count > 0)
+            {
+                cosd.suspensionCalculationOption = internalSelectedSimList[0].internalSimulation.suspensionCalculationOption;
+                cosd.filterMachiningCalculationOption = internalSelectedSimList[0].internalSimulation.filterMachiningCalculationOption;
+            }
+
+            if (cosd.ShowDialog() == DialogResult.OK)
+            {
+                foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                {
+                    fmFilterSimulationData sim = simData.internalSimulation;
+                    
+                    fmSuspensionBlock susBlock = new fmSuspensionBlock();
+                    fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, susBlock);
+                    susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);
+                    fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(susBlock, sim);
+                    sim.suspensionCalculationOption = cosd.suspensionCalculationOption;
+
+                    fmFilterMachiningBlock filterMachiningBlock = new fmFilterMachiningBlock();
+                    fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, filterMachiningBlock);
+                    filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
+                    fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
+                    simData.internalSimulation.filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
+                }
+            }
+
+            BindBackColorToSelectedSimulationsTable();
+            BindXYLists();
+            SetXAxisParameterAsInputed();
+        }
+
+        private void listBoxYAxis_SelectedItemsChanged(object sender, EventArgs e)
+        {
+            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
+
+            fmCheckedListBoxWithListiongOfSelectedItems clb = sender as fmCheckedListBoxWithListiongOfSelectedItems;
+            for (int i = 0; i < clb.CheckedItems.Count; ++i)
+            {
+                yParameters.Add(fmGlobalParameter.ParametersByName[clb.CheckedItems[i].ToString()]);
+            }
+            BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
+            BindCalculatedResultsToChartAndTable();
         }
     }
 }
