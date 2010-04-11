@@ -763,12 +763,12 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void BindCalculatedResultsToTable()
         {
+            coordinatesGrid.Columns.Clear();
+
             if (displayingResults.yParameters == null)
             {
                 return;
             }
-
-            coordinatesGrid.Columns.Clear();
 
             // x-axis column
             {
@@ -802,6 +802,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (displayingResults.yParameters == null)
             {
+                fmZedGraphControl1.GraphPane.CurveList.Clear();
                 return;
             }
             
@@ -870,6 +871,8 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (listBoxXAxis.Text == "")
             {
+                displayingResults.xParameter = null;
+                displayingResults.yParameters = null;
                 return;
             }
 
@@ -884,8 +887,7 @@ namespace FilterSimulationWithTablesAndGraphs
         }
         private void BindCalculatedResultsToDisplayingResults(fmGlobalParameter xParameter, List<fmGlobalParameter> yParameters)
         {
-            if (listBoxXAxis.Text == ""
-                || internalSelectedSimList.Count == 0)
+            if (internalSelectedSimList.Count == 0)
             {
                 return;
             }

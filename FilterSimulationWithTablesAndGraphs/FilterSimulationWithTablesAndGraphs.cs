@@ -298,7 +298,6 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void listBoxYAxis_SelectedItemsChanged(object sender, EventArgs e)
         {
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
             List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
 
             fmCheckedListBoxWithListiongOfSelectedItems clb = sender as fmCheckedListBoxWithListiongOfSelectedItems;
@@ -306,6 +305,11 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 yParameters.Add(fmGlobalParameter.ParametersByName[clb.CheckedItems[i].ToString()]);
             }
+
+            if (listBoxXAxis.Text == "")
+                return;
+
+            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
             BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
             BindCalculatedResultsToChartAndTable();
         }

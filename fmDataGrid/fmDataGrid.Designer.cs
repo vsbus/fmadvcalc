@@ -87,7 +87,16 @@ namespace fmDataGrid
                     {
                         DefaultCellStyle.SelectionBackColor = e.CellStyle.BackColor;
                         DefaultCellStyle.SelectionForeColor = e.CellStyle.ForeColor;
-                        e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+                        //e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+                        Rectangle r = e.CellBounds;
+                        r.Width -= 2;
+                        r.Height -= 2;
+                        r.Inflate(-1, -1);
+                        //r.Inflate(-1, -1);
+                        e.PaintBackground(e.ClipBounds, false);
+                        e.PaintContent(e.ClipBounds);
+                        e.Graphics.DrawRectangle(new Pen(Color.Black), r);
+                        e.Handled = true;
                     }
                     else
                     {

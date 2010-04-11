@@ -1126,7 +1126,6 @@ namespace FilterSimulation
             this.simulationDataGrid.AllowUserToResizeRows = false;
             this.simulationDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.simulationDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.simulationDataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.simulationDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.simulationDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.simulationGuidColumn,
