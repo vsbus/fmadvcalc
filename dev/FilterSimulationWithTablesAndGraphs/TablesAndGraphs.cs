@@ -100,19 +100,49 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
     }
+    class fmDisplayingYListOfArrays
+    {
+        private fmGlobalParameter parameter;
+        private List<fmDisplayingArray> arrays;
+        
+        public fmGlobalParameter Parameter
+        {
+            get { return parameter; }
+            set { parameter = value; }
+        }
+        public List<fmDisplayingArray> Arrays
+        {
+            get { return arrays; }
+            set { arrays = value; }
+        }
+    }
     class fmDisplayingResults
     {
         private fmDisplayingArray x;
-        private List<fmDisplayingArray> y;
+        private List<fmDisplayingYListOfArrays> y;
         public fmDisplayingArray xParameter
         {
             get { return x; }
             set { x = value; }
         }
-        public List<fmDisplayingArray> yParameters
+        public List<fmDisplayingYListOfArrays> yParameters
         {
             get { return y; }
             set { y = value; }
+        }
+    }
+    public class fmSelectedSimulationData
+    {
+        public bool isChecked;
+        public fmFilterSimulation externalSimulation;
+        public fmFilterSimulationData internalSimulation;
+        public List<fmFilterSimulationData> calculatedDataList = new List<fmFilterSimulationData>();
+        public fmSelectedSimulationData(bool isChecked, fmFilterSimulation externalSimulation)
+        {
+            this.isChecked = isChecked;
+            this.externalSimulation = externalSimulation;
+            internalSimulation = new fmFilterSimulationData();
+            internalSimulation.CopyFrom(externalSimulation.Data);
         }
     }
 
@@ -121,6 +151,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private List<fmFilterSimulation> externalSimList;
         //private fmFilterSimulation externalCurrentSimulation;
         private List<fmSelectedSimulationData> internalSelectedSimList;
+        private List<fmFilterSimulationData> localInputParametersList;
         //private List<fmFilterMachiningBlock> fmGlobalBlocks;
         //private List<fmAdditionalFilterMachiningBlock> fmLocalBlocks = new List<fmAdditionalFilterMachiningBlock>();
         //private List<fmSelectedFilterMachiningBlock> fmSelectedBlocks = new List<fmSelectedFilterMachiningBlock>();
@@ -782,17 +813,22 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
             }
 
-            foreach (fmDisplayingArray dispArray in displayingResults.yParameters)
+            foreach (fmDisplayingYListOfArrays yArrays in displayingResults.yParameters)
             {
-                string parameterNameAndUnits = dispArray.Parameter.name + " (" + dispArray.Parameter.UnitName + ")";
-                int yCol = coordinatesGrid.Columns.Add(parameterNameAndUnits, parameterNameAndUnits);
-                coordinatesGrid.Columns[yCol].Width = 50;
+                fmGlobalParameter yParameter = yArrays.Parameter;
+                string parameterNameAndUnits = yParameter.name + " (" + yParameter.UnitName + ")";
 
-                if (dispArray.Values.Length == coordinatesGrid.RowCount)
+                foreach (fmDisplayingArray dispArray in yArrays.Arrays)
                 {
-                    for (int i = 0; i < coordinatesGrid.RowCount; ++i)
+                    int yCol = coordinatesGrid.Columns.Add(parameterNameAndUnits, parameterNameAndUnits);
+                    coordinatesGrid.Columns[yCol].Width = 50;
+
+                    if (dispArray.Values.Length == coordinatesGrid.RowCount)
                     {
-                        coordinatesGrid[yCol, i].Value = dispArray.Values[i];
+                        for (int i = 0; i < coordinatesGrid.RowCount; ++i)
+                        {
+                            coordinatesGrid[yCol, i].Value = dispArray.Values[i];
+                        }
                     }
                 }
             }
@@ -808,55 +844,54 @@ namespace FilterSimulationWithTablesAndGraphs
             
             fmZedGraphControl1.GraphPane.CurveList.Clear();
 
-            bool y2AxisWasUsed = false;
-
-            foreach (fmDisplayingArray dispArray in displayingResults.yParameters)
+            foreach (fmDisplayingYListOfArrays yArrays in displayingResults.yParameters)
             {
-                string scaleString = dispArray.Scale.Value == 1 ? "" : " * " + (1 / dispArray.Scale).ToString();
-                LineItem curve = fmZedGraphControl1.GraphPane.AddCurve(dispArray.Parameter.name + scaleString + " (" + dispArray.Parameter.UnitName + ")", 
-                    displayingResults.xParameter.ValuesInDoubles, 
-                    dispArray.ScaledValuesInDoubles, 
-                    dispArray.Color, 
-                    SymbolType.None);
-                curve.Line.Width = dispArray.Bold ? 2 : 1;
-                curve.IsY2Axis = dispArray.IsY2Axis;
-                if (curve.IsY2Axis)
+                fmGlobalParameter yParameter = yArrays.Parameter;
+                string parameterNameAndUnits = yParameter.name + " (" + yParameter.UnitName + ")";
+
+                foreach (fmDisplayingArray dispArray in yArrays.Arrays)
                 {
-                    y2AxisWasUsed = true;
+                    string scaleString = dispArray.Scale.Value == 1 ? "" : " * " + (1 / dispArray.Scale).ToString();
+                    LineItem curve = fmZedGraphControl1.GraphPane.AddCurve(dispArray.Parameter.name + scaleString + " (" + dispArray.Parameter.UnitName + ")",
+                        displayingResults.xParameter.ValuesInDoubles,
+                        dispArray.ScaledValuesInDoubles,
+                        dispArray.Color,
+                        SymbolType.None);
+                    curve.Line.Width = dispArray.Bold ? 2 : 1;
+                    curve.IsY2Axis = dispArray.IsY2Axis;
                 }
             }
-            
+
             fmGlobalParameter xParameter = displayingResults.xParameter.Parameter;
             fmZedGraphControl1.GraphPane.XAxis.Title.Text = xParameter.name + " (" + xParameter.UnitName +")";
             fmZedGraphControl1.GraphPane.Legend.IsVisible = false;
+            fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = false;
 
-
-            if (!y2AxisWasUsed)
+            if (displayingResults.yParameters.Count == 1)
             {
-                if (displayingResults.yParameters.Count == 1)
-                {
-                    fmGlobalParameter yParameter = displayingResults.yParameters[0].Parameter;
-                    fmZedGraphControl1.GraphPane.YAxis.Title.Text = yParameter.name + " (" + yParameter.UnitName + ")";
-                }
-                else
-                {
-                    fmZedGraphControl1.GraphPane.YAxis.Title.Text = "";
-                    fmZedGraphControl1.GraphPane.Legend.IsVisible = true;
-                }
+                fmGlobalParameter yParameter = displayingResults.yParameters[0].Parameter;
+                fmZedGraphControl1.GraphPane.YAxis.Title.Text = yParameter.name + " (" + yParameter.UnitName + ")";
+                fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = displayingResults.yParameters[0].Arrays[0].Color;
+            }
+            else if (displayingResults.yParameters.Count == 2)
+            {
+                fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = true;
+
+                fmGlobalParameter y1Parameter = displayingResults.yParameters[0].Parameter;
+                fmGlobalParameter y2Parameter = displayingResults.yParameters[1].Parameter;
+                fmZedGraphControl1.GraphPane.YAxis.Title.Text = y1Parameter.name + " (" + y1Parameter.UnitName + ")";
+                fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = displayingResults.yParameters[0].Arrays[0].Color;
+                
+                fmZedGraphControl1.GraphPane.Y2Axis.Title.Text = y2Parameter.name + " (" + y2Parameter.UnitName + ")";
+                fmZedGraphControl1.GraphPane.Y2Axis.Title.FontSpec.FontColor = displayingResults.yParameters[1].Arrays[0].Color;
             }
             else
             {
-                fmGlobalParameter y1Parameter = displayingResults.yParameters[0].Parameter;
-                fmGlobalParameter y2Parameter = displayingResults.yParameters[displayingResults.yParameters.Count - 1].Parameter;
-                fmZedGraphControl1.GraphPane.YAxis.Title.Text = y1Parameter.name + " (" + y1Parameter.UnitName + ")";
-                fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = Color.Blue;
-                
-                fmZedGraphControl1.GraphPane.Y2Axis.Title.Text = y2Parameter.name + " (" + y2Parameter.UnitName + ")";
-                fmZedGraphControl1.GraphPane.Y2Axis.Title.FontSpec.FontColor = Color.Green;
+                fmZedGraphControl1.GraphPane.YAxis.Title.Text = "";
+                fmZedGraphControl1.GraphPane.Legend.IsVisible = true;
             }
 
             fmZedGraphControl1.GraphPane.Title.Text = "";
-            fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = y2AxisWasUsed;
             fmZedGraphControl1.GraphPane.AxisChange();
             fmZedGraphControl1.Refresh();
         }
@@ -894,7 +929,6 @@ namespace FilterSimulationWithTablesAndGraphs
 
             fmDisplayingArray xArray = new fmDisplayingArray();
             displayingResults.xParameter = xArray;
-            displayingResults.yParameters = new List<fmDisplayingArray>();
             
             xArray.Parameter = xParameter;
             xArray.Values = new fmValue[internalSelectedSimList[0].calculatedDataList.Count];
@@ -908,8 +942,13 @@ namespace FilterSimulationWithTablesAndGraphs
             Color[] colors = new Color[] {Color.Blue, Color.Green, Color.Red, Color.Black};
             int colorId = 0;
 
+            displayingResults.yParameters = new List<fmDisplayingYListOfArrays>();
             foreach (fmGlobalParameter yParameter in yParameters)
             {
+                fmDisplayingYListOfArrays yListOfArrays = new fmDisplayingYListOfArrays();
+                yListOfArrays.Parameter = yParameter;
+                yListOfArrays.Arrays = new List<fmDisplayingArray>();
+
                 foreach (fmSelectedSimulationData simData in internalSelectedSimList)
                 {
                     if (!simData.isChecked) 
@@ -929,10 +968,12 @@ namespace FilterSimulationWithTablesAndGraphs
                         yArray.Values[i] = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits;
                     }
 
-                    displayingResults.yParameters.Add(yArray);
+                    yListOfArrays.Arrays.Add(yArray);
                 }
 
                 if (++colorId == colors.Length) colorId = 0;
+
+                displayingResults.yParameters.Add(yListOfArrays);
             }
         }
 
@@ -1012,7 +1053,6 @@ namespace FilterSimulationWithTablesAndGraphs
                     foreach (double x in xList)
                     {
                         fmFilterSimulationData tempSim = new fmFilterSimulationData();
-                        //tempSim.CopyIsInputedFrom(simData.externalSimulation.Data);
                         tempSim.CopyIsInputedFrom(simData.internalSimulation);
                         tempSim.CopyValuesFrom(simData.externalSimulation.Data);
                         tempSim.parameters[xParameter].value = new fmValue(x * xParameter.unitFamily.CurrentUnit.Coef);
@@ -1038,6 +1078,47 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
             }
+            //else
+            //{
+            //    foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+            //    {
+            //        double xStart = xParameter.chartCurretXRange.minValue
+            //            / xParameter.unitFamily.CurrentUnit.Coef;
+            //        double xEnd = xParameter.chartCurretXRange.maxValue
+            //            / xParameter.unitFamily.CurrentUnit.Coef;
+
+            //        List<double> xList = CreateXValues(xStart, xEnd, RowsQuantity);
+
+            //        simData.calculatedDataList = new List<fmFilterSimulationData>();
+
+            //        foreach (double x in xList)
+            //        {
+            //            fmFilterSimulationData tempSim = new fmFilterSimulationData();
+            //            tempSim.CopyIsInputedFrom(simData.internalSimulation);
+            //            tempSim.CopyValuesFrom(simData.externalSimulation.Data);
+            //            tempSim.parameters[xParameter].value = new fmValue(x * xParameter.unitFamily.CurrentUnit.Coef);
+
+            //            fmSuspensionCalculator suspensionCalculator = new fmSuspensionCalculator(tempSim.parameters.Values);
+            //            suspensionCalculator.calculationOption = simData.internalSimulation.suspensionCalculationOption;
+            //            suspensionCalculator.DoCalculations();
+
+            //            fmEps0Kappa0Calculator eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.parameters.Values);
+            //            eps0Kappa0Calculator.DoCalculations();
+
+            //            fmPc0rc0a0Calculator pc0rc0a0Calculator = new fmPc0rc0a0Calculator(tempSim.parameters.Values);
+            //            pc0rc0a0Calculator.DoCalculations();
+
+            //            fmRm0hceCalculator rm0hceCalculator = new fmRm0hceCalculator(tempSim.parameters.Values);
+            //            rm0hceCalculator.DoCalculations();
+
+            //            fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values);
+            //            filterMachiningCalculator.calculationOption = simData.internalSimulation.filterMachiningCalculationOption;
+            //            filterMachiningCalculator.DoCalculations();
+
+            //            simData.calculatedDataList.Add(tempSim);
+            //        }
+            //    }
+            //}
         }
 
         private List<double> CreateXValues(double xStart, double xEnd, int minimalNodesAmount)
@@ -1151,20 +1232,6 @@ namespace FilterSimulationWithTablesAndGraphs
                 newInternalSelectedSimList.Add(newSelectedSim);
             }
             internalSelectedSimList = newInternalSelectedSimList;
-        }
-    }
-    public class fmSelectedSimulationData
-    {
-        public bool isChecked;
-        public fmFilterSimulation externalSimulation;
-        public fmFilterSimulationData internalSimulation;
-        public List<fmFilterSimulationData> calculatedDataList = new List<fmFilterSimulationData>();
-        public fmSelectedSimulationData(bool isChecked, fmFilterSimulation externalSimulation)
-        {
-            this.isChecked = isChecked;
-            this.externalSimulation = externalSimulation;
-            internalSimulation = new fmFilterSimulationData();
-            internalSimulation.CopyFrom(externalSimulation.Data);
         }
     }
 }

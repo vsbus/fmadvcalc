@@ -21,13 +21,9 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             InitializeComponent();
 
-            //fmInputsInfoForSelectedSimulationsTableBlock = new fmFilterMachiningBlock(calculationOptionViewInTablesAndGraphs);
-
             CreateColumnsInParametersTables();
             ReadUseParamsCheckBoxAndApply();
             rowsQuantity.Text = RowsQuantity.ToString();
-
-            //calculationOptionViewInTablesAndGraphs_CheckedChanged(null, new EventArgs());
 
             //// BEGIN DEBUG CODE
             //AddRow();
@@ -41,33 +37,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private void DisplayCharts(fmFilterSimSolution sol)
         {
             List<fmFilterSimulation> simList = GetSelectedSimulationsList(sol);
-
-            //List<fmFilterMachiningBlock> fmbList = new List<fmFilterMachiningBlock>();
-
-            //if (byCheckingSimulations)
-            //{
-            //    if (sol.CurrentObjects.Simulation != null)
-            //    {
-            //        fmbList.Add(sol.CurrentObjects.Simulation.filterMachiningBlock);
-            //    }
-            //}
-            //else
-            //{
-            //    foreach (DataGridViewRow row in simulationDataGrid.Rows)
-            //    {
-            //        if (row.Visible)
-            //        {
-            //            fmFilterSimulation sim = sol.FindSimulation(new Guid(row.Cells[simulationGuidColumn.Name].Value.ToString()));
-            //            if (sim.Checked)
-            //            {
-            //                fmbList.Add(sim.filterMachiningBlock);
-            //            }
-            //        }
-            //    }
-            //}
-
-            //currentSimFMB = sol.CurrentObjects.Simulation == null ? null : sol.CurrentObjects.Simulation.filterMachiningBlock;
-
             BuildCurves(simList);
         }
 
