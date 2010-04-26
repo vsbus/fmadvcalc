@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using ZedGraph;
 using System;
+using System.Windows.Forms;
 
 namespace fmZedGraph
 {
@@ -15,6 +16,7 @@ namespace fmZedGraph
         List<CurveItem> selectedCurves = new List<CurveItem>();
         private bool IsCancelSelections = true;
         private int originalCurvesCount;
+        private bool IsHighlightPoints = true;
         List<CurveItem> highLightedPoints;
         public event HighlightPointsEventHandler HighLightedPointsChanged;
        
@@ -41,7 +43,32 @@ namespace fmZedGraph
             GraphPane.YAxis.MajorGrid.DashOff = 0;
             GraphPane.YAxis.MajorGrid.DashOn = 15;
 
-            
+            ContextMenuBuilder += MyContextMenuBuilder;
+        }
+
+        private void MyContextMenuBuilder(ZedGraphControl control, ContextMenuStrip menuStrip, Point mousePt, ZedGraphControl.ContextMenuObjectState objState)
+        {
+            ToolStripMenuItem item = new ToolStripMenuItem();
+            item.Name = "highlight_currentX_points_tag";
+            item.Tag = "highlight_currentX_points_tag";
+            item.Text = "Not show points in the diagram";
+            item.Checked = !IsHighlightPoints;
+            item.Click += new EventHandler(IsHighlightMenuItemClick);
+            menuStrip.Items.Add(item);
+        }
+
+        void IsHighlightMenuItemClick(object sender, EventArgs e)
+        {
+            IsHighlightPoints = !IsHighlightPoints;
+            if (IsHighlightPoints)
+            {
+                HighlightPoints();
+            }
+            else
+            {
+                RemoveHighLightedPoints();
+                Refresh();
+            }
         }
     }
 }

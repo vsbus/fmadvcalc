@@ -234,7 +234,7 @@ namespace fmZedGraph
             if (GraphPane.XAxis.Scale.Min <= currentX
                 && currentX <= GraphPane.XAxis.Scale.Max)
             {
-                HighLightPoints(currentX);
+                HighlightPoints(currentX);
             }
             else
             {
@@ -247,21 +247,25 @@ namespace fmZedGraph
             }
         }
 
-        public void HighLightPoints(double currentX)
+        public void HighlightPoints(double currentX)
         {
-            List<CurveItem> points = FindNearestPoints(currentX);
-            //if (IsSamePointsList(points, highLightedPoints))
-            //{
-            //    return;
-            //}
             RemoveHighLightedPoints();
-            AddHighLightedPoints(points);
-            highLightedPoints = points;
-            Refresh();
+            if (IsHighlightPoints == true)
+            {
+                highLightedPoints = FindNearestPoints(currentX); ;
+                HighlightPoints();
+            }
+
             if (HighLightedPointsChanged != null)
             {
                 HighLightedPointsChanged(this, new HighlighPointsEventArgs(currentX, true));
             }
+        }
+
+        private void HighlightPoints()
+        {
+            AddHighLightedPoints(highLightedPoints);
+            Refresh();
         }
 
         private bool IsSamePointsList(List<CurveItem> a, List<CurveItem> b)

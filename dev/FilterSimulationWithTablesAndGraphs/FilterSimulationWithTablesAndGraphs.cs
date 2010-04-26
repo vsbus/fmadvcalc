@@ -177,7 +177,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     {
                         int index = coordinatesGrid.CurrentCell.RowIndex;
                         x = displayingResults.xParameter.Values[index].Value;
-                        fmZedGraphControl1.HighLightPoints(x);
+                        fmZedGraphControl1.HighlightPoints(x);
                     }
                 }
 
