@@ -805,6 +805,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 string parameterNameAndUnits = displayingResults.xParameter.Parameter.name + " (" + displayingResults.xParameter.Parameter.UnitName + ")";
                 int xCol = coordinatesGrid.Columns.Add(parameterNameAndUnits, parameterNameAndUnits);
+                coordinatesGrid.Columns[xCol].ReadOnly = true;
                 coordinatesGrid.Columns[xCol].Width = 50;
                 coordinatesGrid.RowCount = displayingResults.xParameter.Values.Length;
                 for (int i = 0; i < coordinatesGrid.RowCount; ++i)
@@ -821,6 +822,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmDisplayingArray dispArray in yArrays.Arrays)
                 {
                     int yCol = coordinatesGrid.Columns.Add(parameterNameAndUnits, parameterNameAndUnits);
+                    coordinatesGrid.Columns[yCol].ReadOnly = true;
                     coordinatesGrid.Columns[yCol].Width = 50;
 
                     if (dispArray.Values.Length == coordinatesGrid.RowCount)
