@@ -265,14 +265,18 @@ namespace FilterSimulationWithTablesAndGraphs
             SetXAxisParameterAsInputed();
         }
 
-        private void listBoxYAxis_SelectedItemsChanged(object sender, EventArgs e)
+        private void listBoxYAxis_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
 
-            fmCheckedListBoxWithListiongOfSelectedItems clb = sender as fmCheckedListBoxWithListiongOfSelectedItems;
-            for (int i = 0; i < clb.CheckedItems.Count; ++i)
+            CheckedListBox clb = sender as CheckedListBox;
+            for (int i = 0; i < clb.Items.Count; ++i)
             {
-                yParameters.Add(fmGlobalParameter.ParametersByName[clb.CheckedItems[i].ToString()]);
+                if (i == e.Index && e.NewValue == CheckState.Checked
+                    || clb.GetItemChecked(i) && (e.NewValue == CheckState.Checked || i != e.Index))
+                {
+                    yParameters.Add(fmGlobalParameter.ParametersByName[clb.Items[i].ToString()]);
+                }
             }
 
             if (listBoxXAxis.Text == "")

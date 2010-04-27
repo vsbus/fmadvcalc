@@ -1169,15 +1169,14 @@ namespace FilterSimulationWithTablesAndGraphs
             //if (listBoxXAxis.Items.Count > indexX)
             //    listBoxXAxis.SelectedItem = listBoxXAxis.Items[indexX];
 
-            List<object> outputNames = new List<object>();
+            List<string> outputNames = new List<string>();
 
             foreach (fmGlobalParameter p in new fmFilterSimulation().Parameters.Keys)
             {
                 outputNames.Add(p.name);
             }
 
-            //FillListBox(listBoxYAxis, outputNames);
-            listBoxYAxis.FillWithItems(outputNames);
+            FillListBox(listBoxYAxis, outputNames);
             //int indexY = listBoxYAxis.Items.IndexOf("hc");
             //if (indexY == -1) indexY = 0;
             //if (listBoxYAxis.Items.Count > indexY)
