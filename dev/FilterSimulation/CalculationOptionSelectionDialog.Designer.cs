@@ -35,12 +35,12 @@ namespace FilterSimulation
             this.CmCvC_radioButton = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.simulationCalculationOptionGroupBox = new System.Windows.Forms.GroupBox();
+            this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.okButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.suspensionGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.simulationCalculationOptionGroupBox.SuspendLayout();
@@ -89,7 +89,7 @@ namespace FilterSimulation
             this.suspensionGroupBox.Controls.Add(this.rho_sus_radioButton);
             this.suspensionGroupBox.Controls.Add(this.rho_s_radioButton);
             this.suspensionGroupBox.Controls.Add(this.rho_f_radioButton);
-            this.suspensionGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.suspensionGroupBox.Location = new System.Drawing.Point(3, 3);
             this.suspensionGroupBox.Name = "suspensionGroupBox";
             this.suspensionGroupBox.Size = new System.Drawing.Size(190, 222);
             this.suspensionGroupBox.TabIndex = 1;
@@ -115,18 +115,27 @@ namespace FilterSimulation
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(508, 243);
+            this.panel1.Size = new System.Drawing.Size(494, 233);
             this.panel1.TabIndex = 2;
             // 
             // simulationCalculationOptionGroupBox
             // 
             this.simulationCalculationOptionGroupBox.Controls.Add(this.fmCalculationOptionView1);
-            this.simulationCalculationOptionGroupBox.Location = new System.Drawing.Point(208, 12);
+            this.simulationCalculationOptionGroupBox.Location = new System.Drawing.Point(199, 3);
             this.simulationCalculationOptionGroupBox.Name = "simulationCalculationOptionGroupBox";
             this.simulationCalculationOptionGroupBox.Size = new System.Drawing.Size(288, 222);
             this.simulationCalculationOptionGroupBox.TabIndex = 2;
             this.simulationCalculationOptionGroupBox.TabStop = false;
             this.simulationCalculationOptionGroupBox.Text = "Simulation calculation option";
+            // 
+            // fmCalculationOptionView1
+            // 
+            this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
+            this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
+            this.fmCalculationOptionView1.Size = new System.Drawing.Size(282, 203);
+            this.fmCalculationOptionView1.TabIndex = 0;
+            this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
             // 
             // panel2
             // 
@@ -135,15 +144,15 @@ namespace FilterSimulation
             this.panel2.Controls.Add(this.cancelButton);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 243);
+            this.panel2.Location = new System.Drawing.Point(0, 233);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(508, 25);
+            this.panel2.Size = new System.Drawing.Size(494, 25);
             this.panel2.TabIndex = 3;
             // 
             // okButton
             // 
             this.okButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.okButton.Location = new System.Drawing.Point(338, 0);
+            this.okButton.Location = new System.Drawing.Point(324, 0);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 25);
             this.okButton.TabIndex = 1;
@@ -154,7 +163,7 @@ namespace FilterSimulation
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(413, 0);
+            this.panel4.Location = new System.Drawing.Point(399, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(10, 25);
             this.panel4.TabIndex = 3;
@@ -162,7 +171,7 @@ namespace FilterSimulation
             // cancelButton
             // 
             this.cancelButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cancelButton.Location = new System.Drawing.Point(423, 0);
+            this.cancelButton.Location = new System.Drawing.Point(409, 0);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(6);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 25);
@@ -174,25 +183,16 @@ namespace FilterSimulation
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(498, 0);
+            this.panel3.Location = new System.Drawing.Point(484, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 25);
             this.panel3.TabIndex = 2;
-            // 
-            // fmCalculationOptionView1
-            // 
-            this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
-            this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
-            this.fmCalculationOptionView1.Size = new System.Drawing.Size(282, 203);
-            this.fmCalculationOptionView1.TabIndex = 0;
-            this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
             // 
             // CalculationOptionSelectionDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 268);
+            this.ClientSize = new System.Drawing.Size(494, 258);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "CalculationOptionSelectionDialog";
@@ -214,7 +214,6 @@ namespace FilterSimulation
         private System.Windows.Forms.RadioButton rho_sus_radioButton;
         private System.Windows.Forms.GroupBox suspensionGroupBox;
         private System.Windows.Forms.RadioButton CmCvC_radioButton;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
@@ -222,5 +221,6 @@ namespace FilterSimulation
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.GroupBox simulationCalculationOptionGroupBox;
         private fmCalcBlocksLibrary.Controls.fmCalculationOptionView fmCalculationOptionView1;
+        protected System.Windows.Forms.Panel panel1;
     }
 }

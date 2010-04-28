@@ -39,6 +39,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculationOptionSelectionExpandedDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CalculationOptionSelectionExpandedDialog.Designer.cs">
+      <DependentUpon>CalculationOptionSelectionExpandedDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="FilterSimulationWithTablesAndGraphs.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -89,6 +95,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CalculationOptionSelectionExpandedDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CalculationOptionSelectionExpandedDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FilterSimulationWithTablesAndGraphs.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FilterSimulationWithTablesAndGraphs.cs</DependentUpon>

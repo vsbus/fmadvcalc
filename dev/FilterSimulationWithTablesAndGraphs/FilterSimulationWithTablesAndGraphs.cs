@@ -253,7 +253,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void calculationOptionTandCChangeButton_Click(object sender, EventArgs e)
         {
-            CalculationOptionSelectionDialog cosd = new CalculationOptionSelectionDialog();
+            CalculationOptionSelectionExpandedDialog cosd = new CalculationOptionSelectionExpandedDialog();
             cosd.suspensionCalculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
             cosd.filterMachiningCalculationOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1;
             if (internalSelectedSimList.Count > 0)
