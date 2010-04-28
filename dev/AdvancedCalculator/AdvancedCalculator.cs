@@ -40,5 +40,16 @@ namespace AdvancedCalculator
         {
            Text = string.Format("AdvancedCalculator (v.{0})", Config.Version);
         }
+
+        private void yaxisParametersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FilterSimulation.YAxisListingForm yalForm = new FilterSimulation.YAxisListingForm();
+            yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.yAxisListParametersToDisplay);
+            if (yalForm.ShowDialog() == DialogResult.OK)
+            {
+                filterSimulationWithTablesAndGraphs1.yAxisListParametersToDisplay = yalForm.GetCheckedItems();
+                filterSimulationWithTablesAndGraphs1.UpdateAll();
+            }
+        }
     }
 }

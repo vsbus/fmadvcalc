@@ -169,6 +169,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private bool loadingXRange = false;
         private fmDisplayingResults displayingResults = new fmDisplayingResults();
         private object highLightCaller = null;
+        public List<fmGlobalParameter> yAxisListParametersToDisplay;
         
         private void FillListBox(ListBox listBox, List<string> strings)
         {
@@ -1171,9 +1172,12 @@ namespace FilterSimulationWithTablesAndGraphs
 
             List<string> outputNames = new List<string>();
 
-            foreach (fmGlobalParameter p in new fmFilterSimulation().Parameters.Keys)
+            foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
             {
-                outputNames.Add(p.name);
+                if (yAxisListParametersToDisplay.Contains(p))
+                {
+                    outputNames.Add(p.name);
+                }
             }
 
             FillListBox(listBoxYAxis, outputNames);

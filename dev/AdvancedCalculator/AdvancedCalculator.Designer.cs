@@ -37,6 +37,7 @@ namespace AdvancedCalculator
             this.precisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterSimulationWithTablesAndGraphs1 = new FilterSimulationWithTablesAndGraphs.FilterSimulationWithTablesAndGraphs();
+            this.yaxisParametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,7 +64,7 @@ namespace AdvancedCalculator
             // 
             this.saveAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAllToolStripMenuItem.Image")));
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAllToolStripMenuItem.Text = "Save All";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
@@ -72,7 +73,8 @@ namespace AdvancedCalculator
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.unitsToolStripMenuItem,
             this.precisionToolStripMenuItem,
-            this.rangesToolStripMenuItem});
+            this.rangesToolStripMenuItem,
+            this.yaxisParametersToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
@@ -80,21 +82,21 @@ namespace AdvancedCalculator
             // unitsToolStripMenuItem
             // 
             this.unitsToolStripMenuItem.Name = "unitsToolStripMenuItem";
-            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.unitsToolStripMenuItem.Text = "Units";
             this.unitsToolStripMenuItem.Click += new System.EventHandler(this.unitsToolStripMenuItem_Click);
             // 
             // precisionToolStripMenuItem
             // 
             this.precisionToolStripMenuItem.Name = "precisionToolStripMenuItem";
-            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.precisionToolStripMenuItem.Text = "Precision";
             this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
             // 
             // rangesToolStripMenuItem
             // 
             this.rangesToolStripMenuItem.Name = "rangesToolStripMenuItem";
-            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.rangesToolStripMenuItem.Text = "Ranges";
             this.rangesToolStripMenuItem.Click += new System.EventHandler(this.rangesToolStripMenuItem_Click);
             // 
@@ -105,6 +107,13 @@ namespace AdvancedCalculator
             this.filterSimulationWithTablesAndGraphs1.Name = "filterSimulationWithTablesAndGraphs1";
             this.filterSimulationWithTablesAndGraphs1.Size = new System.Drawing.Size(931, 645);
             this.filterSimulationWithTablesAndGraphs1.TabIndex = 2;
+            // 
+            // yaxisParametersToolStripMenuItem
+            // 
+            this.yaxisParametersToolStripMenuItem.Name = "yaxisParametersToolStripMenuItem";
+            this.yaxisParametersToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.yaxisParametersToolStripMenuItem.Text = "Y-axis parameters";
+            this.yaxisParametersToolStripMenuItem.Click += new System.EventHandler(this.yaxisParametersToolStripMenuItem_Click);
             // 
             // AdvancedCalculator
             // 
@@ -133,6 +142,7 @@ namespace AdvancedCalculator
         private System.Windows.Forms.ToolStripMenuItem precisionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rangesToolStripMenuItem;
         private FilterSimulationWithTablesAndGraphs.FilterSimulationWithTablesAndGraphs filterSimulationWithTablesAndGraphs1;
+        private System.Windows.Forms.ToolStripMenuItem yaxisParametersToolStripMenuItem;
 
 
 

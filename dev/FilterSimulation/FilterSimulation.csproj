@@ -94,6 +94,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="YAxisListingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="YAxisListingForm.Designer.cs">
+      <DependentUpon>YAxisListingForm.cs</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +123,10 @@
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YAxisListingForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>YAxisListingForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

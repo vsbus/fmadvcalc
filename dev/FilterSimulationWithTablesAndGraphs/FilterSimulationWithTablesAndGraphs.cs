@@ -25,6 +25,8 @@ namespace FilterSimulationWithTablesAndGraphs
             ReadUseParamsCheckBoxAndApply();
             rowsQuantity.Text = RowsQuantity.ToString();
 
+            CreateDefaultXAxisParametersListForDisplaying();
+
             //// BEGIN DEBUG CODE
             //AddRow();
             //fmLocalBlocks[0].A_Value = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
@@ -32,6 +34,26 @@ namespace FilterSimulationWithTablesAndGraphs
             //fmLocalBlocks[0].sf_Value = new fmValue(30 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
             //fmLocalBlocks[0].n_Value = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
             //// END DEBUG CODE
+        }
+
+        private void CreateDefaultXAxisParametersListForDisplaying()
+        {
+            yAxisListParametersToDisplay = new List<fmGlobalParameter>();
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.A);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.Dp);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.hc);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.hc_over_tf);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.Mf);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.Ms);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.Msus);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.n);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.Qms);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.Qmsus);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.Qsus);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.sf);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.tc);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.tf);
+            yAxisListParametersToDisplay.Add(fmGlobalParameter.tr);
         }
 
         private void DisplayCharts(fmFilterSimSolution sol)
