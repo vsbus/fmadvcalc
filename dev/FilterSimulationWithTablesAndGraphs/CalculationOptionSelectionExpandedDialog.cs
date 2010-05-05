@@ -10,24 +10,43 @@ namespace FilterSimulationWithTablesAndGraphs
 {
     public partial class CalculationOptionSelectionExpandedDialog : FilterSimulation.CalculationOptionSelectionDialog
     {
-        private CalculationDialogExpandedItemSelection m_CalculationDialogExpandedItemSelection;
+        private CalculationOptionDialogExpandedItemSelection m_CalculationOptionDialogExpandedItemSelection;
+        private CalculationOptionDialogExpandedCalculationOptionKind m_CalculationOptionKind;
 
-        public CalculationDialogExpandedItemSelection ItemSelection
+        public CalculationOptionDialogExpandedItemSelection ItemSelection
         {
             get
             {
-                return m_CalculationDialogExpandedItemSelection;
+                return m_CalculationOptionDialogExpandedItemSelection;
+            }
+        }
+
+        public CalculationOptionDialogExpandedCalculationOptionKind CalculationOptionKind
+        {
+            get
+            {
+                return m_CalculationOptionKind;
             }
         }
 
         public CalculationOptionSelectionExpandedDialog()
         {
             InitializeComponent();
+            UpdateCalculationOptionKind();
+            UpdateItemSelection();
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            panel1.Enabled = !radioButton2.Checked;
+            UpdateCalculationOptionKind();
+        }
+
+        private void UpdateCalculationOptionKind()
+        {
+            m_CalculationOptionKind = radioButton1.Checked
+                                          ? CalculationOptionDialogExpandedCalculationOptionKind.New
+                                          : CalculationOptionDialogExpandedCalculationOptionKind.MotherInitial;
+            panel1.Enabled = m_CalculationOptionKind == CalculationOptionDialogExpandedCalculationOptionKind.New;
         }
 
         private void currentItemRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -49,24 +68,35 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (currentItemRadioButton.Checked)
             {
-                m_CalculationDialogExpandedItemSelection = CalculationDialogExpandedItemSelection.Current;
+                m_CalculationOptionDialogExpandedItemSelection = CalculationOptionDialogExpandedItemSelection.Current;
             }
             else if (checkedItemsRadioButton.Checked)
             {
-                m_CalculationDialogExpandedItemSelection = CalculationDialogExpandedItemSelection.Checked;
+                m_CalculationOptionDialogExpandedItemSelection = CalculationOptionDialogExpandedItemSelection.Checked;
             }
             else if (allItemsRadioButton.Checked)
             {
-                m_CalculationDialogExpandedItemSelection = CalculationDialogExpandedItemSelection.All;
+                m_CalculationOptionDialogExpandedItemSelection = CalculationOptionDialogExpandedItemSelection.All;
             }
             else
             {
                 throw new Exception("no item radio button selected");
             }
         }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateCalculationOptionKind();
+        }
     }
 
-    public enum CalculationDialogExpandedItemSelection
+    public enum CalculationOptionDialogExpandedCalculationOptionKind
+    {
+        MotherInitial,
+        New
+    }
+
+    public enum CalculationOptionDialogExpandedItemSelection
     {
         Current,
         Checked,

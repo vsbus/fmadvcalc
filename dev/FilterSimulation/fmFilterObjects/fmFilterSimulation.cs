@@ -332,6 +332,19 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
+        public fmSuspensionCalculator.SuspensionCalculationOptions SuspensionCalculationOption
+        {
+            get { return m_Data.suspensionCalculationOption; }
+            set
+            {
+                if (m_Data.suspensionCalculationOption != value)
+                {
+                    Modified = true;
+                }
+                m_Data.suspensionCalculationOption = value;
+            }
+        }
+
         public fmFilterSimulation()
         {
             m_Guid = Guid.NewGuid();

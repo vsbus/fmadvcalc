@@ -271,18 +271,18 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (fmSelectedSimulationData simData in internalSelectedSimList)
                 {
-                    if (cosd.ItemSelection == CalculationDialogExpandedItemSelection.All)
+                    if (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.All)
                     {
                         selectedList.Add(simData);
                     }
-                    else if (cosd.ItemSelection == CalculationDialogExpandedItemSelection.Checked)
+                    else if (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.Checked)
                     {
                         if (simData.isChecked)
                         {
                             selectedList.Add(simData);
                         }
                     }
-                    else if (cosd.ItemSelection == CalculationDialogExpandedItemSelection.Current)
+                    else if (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.Current)
                     {
                         if (simData.isCurrentActive)
                         {
@@ -295,18 +295,35 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmSelectedSimulationData simData in selectedList)
                 {
                     fmFilterSimulationData sim = simData.internalSimulation;
+                    fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions suspensionCalculationOption;
+                    fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption;
+
+                    if (cosd.CalculationOptionKind == CalculationOptionDialogExpandedCalculationOptionKind.New)
+                    {
+                        suspensionCalculationOption = cosd.suspensionCalculationOption;
+                        filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
+                    }
+                    else if (cosd.CalculationOptionKind == CalculationOptionDialogExpandedCalculationOptionKind.MotherInitial)
+                    {
+                        suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
+                        filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
+                    }
+                    else
+                    {
+                        throw new Exception("unknown Calculation option Kind");
+                    }
 
                     fmSuspensionBlock susBlock = new fmSuspensionBlock();
                     fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, susBlock);
-                    susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);
+                    susBlock.SetCalculationOptionAndUpdateCellsStyle(suspensionCalculationOption);
                     fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(susBlock, sim);
-                    sim.suspensionCalculationOption = cosd.suspensionCalculationOption;
+                    sim.suspensionCalculationOption = suspensionCalculationOption;
 
                     fmFilterMachiningBlock filterMachiningBlock = new fmFilterMachiningBlock();
                     fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, filterMachiningBlock);
-                    filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
+                    filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(filterMachiningCalculationOption);
                     fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
-                    simData.internalSimulation.filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
+                    simData.internalSimulation.filterMachiningCalculationOption = filterMachiningCalculationOption;
                 }    
             }
 
