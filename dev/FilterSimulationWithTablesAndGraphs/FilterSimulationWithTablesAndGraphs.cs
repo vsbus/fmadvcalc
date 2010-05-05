@@ -260,8 +260,8 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 if (simData.isCurrentActive)
                 {
-                    cosd.suspensionCalculationOption = simData.internalSimulation.suspensionCalculationOption;
-                    cosd.filterMachiningCalculationOption = simData.internalSimulation.filterMachiningCalculationOption;
+                    cosd.suspensionCalculationOption = simData.internalSimulationData.suspensionCalculationOption;
+                    cosd.filterMachiningCalculationOption = simData.internalSimulationData.filterMachiningCalculationOption;
                 }
             }
 
@@ -294,7 +294,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (fmSelectedSimulationData simData in selectedList)
                 {
-                    fmFilterSimulationData sim = simData.internalSimulation;
+                    fmFilterSimulationData sim = simData.internalSimulationData;
                     fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions suspensionCalculationOption;
                     fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption;
 
@@ -323,7 +323,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, filterMachiningBlock);
                     filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(filterMachiningCalculationOption);
                     fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
-                    simData.internalSimulation.filterMachiningCalculationOption = filterMachiningCalculationOption;
+                    simData.internalSimulationData.filterMachiningCalculationOption = filterMachiningCalculationOption;
                 }    
             }
 

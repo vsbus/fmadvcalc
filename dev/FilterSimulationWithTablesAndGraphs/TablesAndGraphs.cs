@@ -136,38 +136,38 @@ namespace FilterSimulationWithTablesAndGraphs
         public bool isChecked;
         public bool isCurrentActive;
         public fmFilterSimulation externalSimulation;
-        public fmFilterSimulationData internalSimulation;
+        public fmFilterSimulationData internalSimulationData;
         public List<fmFilterSimulationData> calculatedDataList = new List<fmFilterSimulationData>();
         public fmSelectedSimulationData(bool isChecked, fmFilterSimulation externalSimulation)
         {
             this.isChecked = isChecked;
             this.isCurrentActive = false;
             this.externalSimulation = externalSimulation;
-            internalSimulation = new fmFilterSimulationData();
-            internalSimulation.CopyFrom(externalSimulation.Data);
+            internalSimulationData = new fmFilterSimulationData();
+            internalSimulationData.CopyFrom(externalSimulation.Data);
+        }
+    }
+    public class fmLocalInputParametersData
+    {
+        public bool isChecked;
+        public bool isCurrentActive;
+        public fmFilterMachiningBlock filterMachiningBlock;
+        public List<List<fmFilterSimulationData>> calculatedDataLists = new List<List<fmFilterSimulationData>>();
+        public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock)
+        {
+            this.isChecked = isChecked;
+            this.isCurrentActive = false;
+            this.filterMachiningBlock = filterMachiningBlock;
         }
     }
 
     public partial class FilterSimulationWithTablesAndGraphs
     {
         private List<fmFilterSimulation> externalSimList;
-        //private fmFilterSimulation externalCurrentSimulation;
         private List<fmSelectedSimulationData> internalSelectedSimList;
-        private List<fmFilterSimulationData> localInputParametersList;
-        //private List<fmFilterMachiningBlock> fmGlobalBlocks;
-        //private List<fmAdditionalFilterMachiningBlock> fmLocalBlocks = new List<fmAdditionalFilterMachiningBlock>();
-        //private List<fmSelectedFilterMachiningBlock> fmSelectedBlocks = new List<fmSelectedFilterMachiningBlock>();
-        //private fmFilterMachiningBlock fmInputsInfoForSelectedSimulationsTableBlock;
-        //public fmFilterMachiningBlock currentSimFMB;
+        private List<fmLocalInputParametersData> localInputParametersList = new List<fmLocalInputParametersData>();
         private bool isUseLocalParams;
-        //private readonly Color Y1AxColor = Color.Blue;
-        //private readonly Color Y2AxColor = Color.Green;
         private int RowsQuantity = 30;
-        //private fmSelectedFilterMachiningBlock currentBlock;
-        //private const int SOLID_CURVE_WIDTH = 2;
-        //private const int CUSTOM_CURVE_WIDTH = 1;
-        //private static readonly Color SELECTED_COLUMN_COLOR = Color.LightBlue;
-        //private bool processingCalculationOptionViewCheckChanged = false;
         private bool loadingXRange = false;
         private fmDisplayingResults displayingResults = new fmDisplayingResults();
         private object highLightCaller = null;
@@ -210,83 +210,83 @@ namespace FilterSimulationWithTablesAndGraphs
             UpdateUnitsInTablesAndGraphs();
         }
 
-        //private void AddRow()
-        //{
-        //    additionalParametersTable.Rows.Add();
-        //    DataGridViewRow row = additionalParametersTable.Rows[additionalParametersTable.Rows.Count - 1];
-        //    row.Cells["AdditionalParametersCheckBoxColumn"].Value = true;
-        //    fmAdditionalFilterMachiningBlock fmb = new fmAdditionalFilterMachiningBlock(true, calculationOptionViewInTablesAndGraphs,
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.A.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Dp.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.sf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.n.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tr.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.hc_over_tf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.dhc_over_dt.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.hc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Mf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Vf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.mf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.vf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.ms.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.vs.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.msus.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.vsus.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.mc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.vc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Msus.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Vsus.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Vc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Mc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Ms.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Vs.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qf_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qs.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qs_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qc_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qsus.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qsus_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmsus.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmsus_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qms.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qms_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmf_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmc_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qf_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qs.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qs_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qc_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qsus.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qsus_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmsus.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmsus_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qms.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qms_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmf.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmf_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmc_d.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.eps.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.kappa.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Pc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.rc.name)],
-        //                                                            row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.a.name)]);
-        //    fmb.ValuesChangedByUser += fmb_ValuesChangedByUser;
-        //    fmLocalBlocks.Add(fmb);
+        private void AddRow()
+        {
+            additionalParametersTable.Rows.Add();
+            DataGridViewRow row = additionalParametersTable.Rows[additionalParametersTable.Rows.Count - 1];
+            row.Cells["AdditionalParametersCheckBoxColumn"].Value = true;
+            fmFilterMachiningBlock fmb = new fmFilterMachiningBlock(row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.A.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Dp.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.sf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.n.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tr.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.hc_over_tf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.dhc_over_dt.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.hc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Mf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Vf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.mf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.vf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.ms.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.vs.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.msus.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.vsus.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.mc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.vc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Msus.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Vsus.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Vc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Mc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Ms.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Vs.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qf_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qs.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qs_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qc_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qsus.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qsus_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmsus.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmsus_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qms.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qms_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmf_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Qmc_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qf_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qs.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qs_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qc_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qsus.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qsus_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmsus.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmsus_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qms.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qms_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmf_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.qmc_d.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.eps.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.kappa.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Pc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.rc.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.a.name)]);
+            //fmb.ValuesChangedByUser += fmb_ValuesChangedByUser;
+            //fmLocalBlocks.Add(fmb);
+            localInputParametersList.Add(new fmLocalInputParametersData(true, fmb));
 
-        //    fmb.CopyValues(currentSimFMB);
-        //    fmb.CalculateAndDisplay();
+            //fmb.CopyValues(currentSimFMB);
+            fmb.CalculateAndDisplay();
 
-        //    UpdateIsInputedForParametersBlocks();
-        //}
+            //UpdateIsInputedForParametersBlocks();
+        }
 
         //private void UpdateParametersTablesColumnsVisibility()
         //{
@@ -441,7 +441,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             for (int i = 0; i < internalSelectedSimList.Count; i++)
             {
-                fmFilterSimulationData tempSim = internalSelectedSimList[i].internalSimulation;
+                fmFilterSimulationData tempSim = internalSelectedSimList[i].internalSimulationData;
 
                 DataGridViewRow row =
                     selectedSimulationParametersTable.Rows[selectedSimulationParametersTable.Rows.Add()];
@@ -463,7 +463,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             for (int i = 0; i < internalSelectedSimList.Count; i++)
             {
-                fmFilterSimulationData tempSim = internalSelectedSimList[i].internalSimulation;
+                fmFilterSimulationData tempSim = internalSelectedSimList[i].internalSimulationData;
                 DataGridViewRow row = selectedSimulationParametersTable.Rows[i];
 
                 fmFilterMachiningBlock tempBlock = new fmFilterMachiningBlock();
@@ -485,7 +485,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             for (int i = 0; i < internalSelectedSimList.Count; i++)
             {
-                fmFilterSimulationData tempSim = internalSelectedSimList[i].internalSimulation;
+                fmFilterSimulationData tempSim = internalSelectedSimList[i].internalSimulationData;
                 DataGridViewRow row = selectedSimulationParametersTable.Rows[i];
 
                 foreach (fmGlobalParameter param in tempSim.parameters.Keys)
@@ -504,11 +504,6 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateVisibilityOfColumnsInSelectedSimulationsTable()
         {
-            //List<fmGlobalParameter> simParams = new List<fmGlobalParameter>();
-            //foreach (fmBlockVariableParameter p in (new fmFilterMachiningBlock()).Parameters)
-            //    simParams.Add(p.globalParameter);
-            //List<fmGlobalParameter> inputs = ListsIntersection(GetCommonInputParametersList(), simParams);
-            //List<fmGlobalParameter> inputs = GetCommonInputParametersList();
             List<fmGlobalParameter> inputs = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
             inputs.Remove(fmGlobalParameter.eta_f);
             inputs.Remove(fmGlobalParameter.rho_f);
@@ -527,8 +522,8 @@ namespace FilterSimulationWithTablesAndGraphs
                     if (inputs.Contains(par))
                     {
                         foreach (fmSelectedSimulationData simData in internalSelectedSimList)
-                            if (simData.internalSimulation.parameters[par] is fmCalculationVariableParameter
-                                && (simData.internalSimulation.parameters[par] as fmCalculationVariableParameter).isInputed)
+                            if (simData.internalSimulationData.parameters[par] is fmCalculationVariableParameter
+                                && (simData.internalSimulationData.parameters[par] as fmCalculationVariableParameter).isInputed)
                             {
                                 col.Visible = true;
                                 break;
@@ -649,7 +644,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             foreach (fmSelectedSimulationData simData in internalSelectedSimList)
             {
-                simData.internalSimulation.UpdateIsInputed(inputedParameter);
+                simData.internalSimulationData.UpdateIsInputed(inputedParameter);
             }
         }
 
@@ -683,8 +678,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void buttonAddRow_Click(object sender, EventArgs e)
         {
-        //    AddRow();
-        //    DrawChartAndTable();
+            AddRow();
+            UpdateVisibilityOfColumnsInLocalParametrsTable();
         }
 
         private void UseParamsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -796,6 +791,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             this.externalSimList = simList;
             BindSelectedSimulationListToTable();
+            UpdateVisibilityOfColumnsInLocalParametrsTable();
             BindXYLists();
             LoadCurrentXRange();
             if (listBoxXAxis.Text != "")
@@ -803,6 +799,116 @@ namespace FilterSimulationWithTablesAndGraphs
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();            
+        }
+
+        //private void BindLocalParametersListToTable()
+        //{
+        //    additionalParametersTable.Rows.Clear();
+
+        //    for (int i = 0; i < localInputParametersList.Count; i++)
+        //    {
+        //        //fmFilterSimulationData tempSim = localInputParametersList[i].internalSimulationData;
+
+        //        DataGridViewRow row =
+        //            additionalParametersTable.Rows[additionalParametersTable.Rows.Add()];
+        //        row.Cells["AdditionalParametersCheckBoxColumn"].Value = localInputParametersList[i].isChecked;
+
+        //        fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock fmb = new fmFilterMachiningBlock(
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.A),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Dp),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.sf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.n),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.tc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.tf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.tr),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.hc_over_tf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.dhc_over_dt),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.hc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Mf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Vf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.mf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.vf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.ms),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.vs),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.msus),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.vsus),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.mc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.vc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Msus),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Vsus),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Vc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Mc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Ms),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Vs),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qf_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qs),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qs_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qc_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qsus),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qsus_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmsus),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmsus_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qms),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qms_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmf_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmc_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qf_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qs),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qs_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qc_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qsus),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qsus_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmsus),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmsus_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qms),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qms_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmf),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmf_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qms),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmc_d),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.eps),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.kappa),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.Pc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.rc),
+        //            GetLocalInputParametersCell(row, fmGlobalParameter.a));
+
+        //        foreach (fmGlobalParameter param in tempSim.parameters.Keys)
+        //        {
+        //            int idx = GetColumnIndexByHeader(additionalParametersTable, param.name);
+        //            row.Cells[idx].Value = tempSim.parameters[param].value / param.unitFamily.CurrentUnit.Coef;
+        //        }
+        //    }
+
+        //    UpdateVisibilityOfColumnsInLocalParametrsTable();
+        //}
+
+        private void UpdateVisibilityOfColumnsInLocalParametrsTable()
+        {
+            List<fmGlobalParameter> inputs = new List<fmGlobalParameter>();
+            foreach (fmLocalInputParametersData localParameters in localInputParametersList)
+            {
+                inputs = ParametersListsUnion(inputs, CalculationOptionHelper.GetParametersListThatCanBeInput(localParameters.filterMachiningBlock.calculationOption));
+            }
+
+            foreach (DataGridViewColumn col in additionalParametersTable.Columns)
+            {
+                string parName = GetParameterNameFromHeader(col.HeaderText);
+                if (fmGlobalParameter.ParametersByName.ContainsKey(parName))
+                {
+                    col.Visible = inputs.Contains(fmGlobalParameter.ParametersByName[parName]);
+                }
+            }
+        }
+
+        private DataGridViewCell GetLocalInputParametersCell(DataGridViewRow row, fmGlobalParameter parameter)
+        {
+            return row.Cells[GetColumnIndexByHeader(additionalParametersTable, parameter.name)];
         }
 
         private void BindCalculatedResultsToTable()
@@ -937,58 +1043,128 @@ namespace FilterSimulationWithTablesAndGraphs
         }
         private void BindCalculatedResultsToDisplayingResults(fmGlobalParameter xParameter, List<fmGlobalParameter> yParameters)
         {
-            if (internalSelectedSimList.Count == 0)
+            if (!isUseLocalParams)
             {
-                return;
-            }
-
-            fmDisplayingArray xArray = new fmDisplayingArray();
-            displayingResults.xParameter = xArray;
-            
-            xArray.Parameter = xParameter;
-            xArray.Values = new fmValue[internalSelectedSimList[0].calculatedDataList.Count];
-            for (int i = 0; i < internalSelectedSimList[0].calculatedDataList.Count; ++i)
-            {
-                xArray.Values[i] = internalSelectedSimList[0].calculatedDataList[i].parameters[xParameter].ValueInUnits;
-            }
-
-            Dictionary<fmGlobalParameter, fmValue> degreeOffset = CreateDegreeOffsets(yParameters);
-
-            Color[] colors = new Color[] {Color.Blue, Color.Green, Color.Red, Color.Black};
-            int colorId = 0;
-
-            displayingResults.yParameters = new List<fmDisplayingYListOfArrays>();
-            foreach (fmGlobalParameter yParameter in yParameters)
-            {
-                fmDisplayingYListOfArrays yListOfArrays = new fmDisplayingYListOfArrays();
-                yListOfArrays.Parameter = yParameter;
-                yListOfArrays.Arrays = new List<fmDisplayingArray>();
-
-                foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                if (internalSelectedSimList.Count == 0)
                 {
-                    if (!simData.isChecked) 
-                        continue;
-
-                    fmDisplayingArray yArray = new fmDisplayingArray();
-                    yArray.Parameter = yParameter;
-                    yArray.Values = new fmValue[simData.calculatedDataList.Count];
-                    yArray.Scale = yParameters.Count > 2 ? degreeOffset[yParameter] : new fmValue(1);
-                    yArray.IsY2Axis = colorId == 1 && yParameters.Count == 2;
-                    yArray.Color = colors[colorId];
-                    yArray.Bold = selectedSimulationParametersTable.CurrentCell != null
-                                    && internalSelectedSimList.IndexOf(simData) == selectedSimulationParametersTable.CurrentCell.RowIndex;
-                    
-                    for (int i = 0; i < simData.calculatedDataList.Count; ++i)
-                    {
-                        yArray.Values[i] = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits;
-                    }
-
-                    yListOfArrays.Arrays.Add(yArray);
+                    return;
                 }
 
-                if (++colorId == colors.Length) colorId = 0;
+                fmDisplayingArray xArray = new fmDisplayingArray();
+                displayingResults.xParameter = xArray;
 
-                displayingResults.yParameters.Add(yListOfArrays);
+                xArray.Parameter = xParameter;
+                xArray.Values = new fmValue[internalSelectedSimList[0].calculatedDataList.Count];
+                for (int i = 0; i < internalSelectedSimList[0].calculatedDataList.Count; ++i)
+                {
+                    xArray.Values[i] =
+                        internalSelectedSimList[0].calculatedDataList[i].parameters[xParameter].ValueInUnits;
+                }
+
+                Dictionary<fmGlobalParameter, fmValue> degreeOffset = CreateDegreeOffsets(yParameters);
+
+                Color[] colors = new Color[] {Color.Blue, Color.Green, Color.Red, Color.Black};
+                int colorId = 0;
+
+                displayingResults.yParameters = new List<fmDisplayingYListOfArrays>();
+                foreach (fmGlobalParameter yParameter in yParameters)
+                {
+                    fmDisplayingYListOfArrays yListOfArrays = new fmDisplayingYListOfArrays();
+                    yListOfArrays.Parameter = yParameter;
+                    yListOfArrays.Arrays = new List<fmDisplayingArray>();
+
+                    foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                    {
+                        if (!simData.isChecked)
+                            continue;
+
+                        fmDisplayingArray yArray = new fmDisplayingArray();
+                        yArray.Parameter = yParameter;
+                        yArray.Values = new fmValue[simData.calculatedDataList.Count];
+                        yArray.Scale = yParameters.Count > 2 ? degreeOffset[yParameter] : new fmValue(1);
+                        yArray.IsY2Axis = colorId == 1 && yParameters.Count == 2;
+                        yArray.Color = colors[colorId];
+                        yArray.Bold = selectedSimulationParametersTable.CurrentCell != null
+                                      &&
+                                      internalSelectedSimList.IndexOf(simData) ==
+                                      selectedSimulationParametersTable.CurrentCell.RowIndex;
+
+                        for (int i = 0; i < simData.calculatedDataList.Count; ++i)
+                        {
+                            yArray.Values[i] = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits;
+                        }
+
+                        yListOfArrays.Arrays.Add(yArray);
+                    }
+
+                    if (++colorId == colors.Length) colorId = 0;
+
+                    displayingResults.yParameters.Add(yListOfArrays);
+                }
+            }
+            else
+            {
+                if (localInputParametersList.Count == 0
+                    || localInputParametersList[0].calculatedDataLists.Count == 0)
+                {
+                    return;
+                }
+
+                fmDisplayingArray xArray = new fmDisplayingArray();
+                displayingResults.xParameter = xArray;
+
+                xArray.Parameter = xParameter;
+                int pointsCount = localInputParametersList[0].calculatedDataLists[0].Count;
+                xArray.Values = new fmValue[pointsCount];
+                for (int i = 0; i < pointsCount; ++i)
+                {
+                    xArray.Values[i] =
+                        localInputParametersList[0].calculatedDataLists[0][i].parameters[xParameter].ValueInUnits;
+                }
+
+                Dictionary<fmGlobalParameter, fmValue> degreeOffset = CreateDegreeOffsets(yParameters);
+
+                Color[] colors = new Color[] { Color.Blue, Color.Green, Color.Red, Color.Black };
+                int colorId = 0;
+
+                displayingResults.yParameters = new List<fmDisplayingYListOfArrays>();
+                foreach (fmGlobalParameter yParameter in yParameters)
+                {
+                    fmDisplayingYListOfArrays yListOfArrays = new fmDisplayingYListOfArrays();
+                    yListOfArrays.Parameter = yParameter;
+                    yListOfArrays.Arrays = new List<fmDisplayingArray>();
+
+                    //foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+
+                    foreach (fmLocalInputParametersData localParameters in localInputParametersList)
+                    {
+                        if (!localParameters.isChecked)
+                            continue;
+
+                        foreach (List<fmFilterSimulationData> list in localParameters.calculatedDataLists)
+                        {
+                            fmDisplayingArray yArray = new fmDisplayingArray();
+                            yArray.Parameter = yParameter;
+                            yArray.Values = new fmValue[pointsCount];
+                            yArray.Scale = yParameters.Count > 2 ? degreeOffset[yParameter] : new fmValue(1);
+                            yArray.IsY2Axis = colorId == 1 && yParameters.Count == 2;
+                            yArray.Color = colors[colorId];
+                            yArray.Bold = additionalParametersTable.CurrentCell != null
+                                          && localInputParametersList.IndexOf(localParameters) ==
+                                             additionalParametersTable.CurrentCell.RowIndex;
+
+                            for (int i = 0; i < list.Count; ++i)
+                            {
+                                yArray.Values[i] = list[i].parameters[yParameter].ValueInUnits;
+                            }
+
+                            yListOfArrays.Arrays.Add(yArray);
+                        }
+                    }
+
+                    if (++colorId == colors.Length) colorId = 0;
+                    displayingResults.yParameters.Add(yListOfArrays);
+                }
             }
         }
 
@@ -1068,12 +1244,12 @@ namespace FilterSimulationWithTablesAndGraphs
                     foreach (double x in xList)
                     {
                         fmFilterSimulationData tempSim = new fmFilterSimulationData();
-                        tempSim.CopyIsInputedFrom(simData.internalSimulation);
+                        tempSim.CopyIsInputedFrom(simData.internalSimulationData);
                         tempSim.CopyValuesFrom(simData.externalSimulation.Data);
                         tempSim.parameters[xParameter].value = new fmValue(x * xParameter.unitFamily.CurrentUnit.Coef);
 
                         fmSuspensionCalculator suspensionCalculator = new fmSuspensionCalculator(tempSim.parameters.Values);
-                        suspensionCalculator.calculationOption = simData.internalSimulation.suspensionCalculationOption;
+                        suspensionCalculator.calculationOption = simData.internalSimulationData.suspensionCalculationOption;
                         suspensionCalculator.DoCalculations();
 
                         fmEps0Kappa0Calculator eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.parameters.Values);
@@ -1086,54 +1262,47 @@ namespace FilterSimulationWithTablesAndGraphs
                         rm0hceCalculator.DoCalculations();
 
                         fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values);
-                        filterMachiningCalculator.calculationOption = simData.internalSimulation.filterMachiningCalculationOption;
+                        filterMachiningCalculator.calculationOption = simData.internalSimulationData.filterMachiningCalculationOption;
                         filterMachiningCalculator.DoCalculations();
 
                         simData.calculatedDataList.Add(tempSim);
                     }
                 }
             }
-            //else
-            //{
-            //    foreach (fmSelectedSimulationData simData in internalSelectedSimList)
-            //    {
-            //        double xStart = xParameter.chartCurretXRange.minValue
-            //            / xParameter.unitFamily.CurrentUnit.Coef;
-            //        double xEnd = xParameter.chartCurretXRange.maxValue
-            //            / xParameter.unitFamily.CurrentUnit.Coef;
+            else
+            {
+                foreach (fmLocalInputParametersData localParameters in localInputParametersList)
+                {
+                    localParameters.calculatedDataLists = new List<List<fmFilterSimulationData>>();
+                    foreach (fmFilterSimulation sim in externalSimList)
+                    {
+                        double xStart = xParameter.chartCurretXRange.minValue
+                            / xParameter.unitFamily.CurrentUnit.Coef;
+                        double xEnd = xParameter.chartCurretXRange.maxValue
+                            / xParameter.unitFamily.CurrentUnit.Coef;
 
-            //        List<double> xList = CreateXValues(xStart, xEnd, RowsQuantity);
+                        List<double> xList = CreateXValues(xStart, xEnd, RowsQuantity);
 
-            //        simData.calculatedDataList = new List<fmFilterSimulationData>();
+                        List<fmFilterSimulationData> calculatedDataList = new List<fmFilterSimulationData>();
 
-            //        foreach (double x in xList)
-            //        {
-            //            fmFilterSimulationData tempSim = new fmFilterSimulationData();
-            //            tempSim.CopyIsInputedFrom(simData.internalSimulation);
-            //            tempSim.CopyValuesFrom(simData.externalSimulation.Data);
-            //            tempSim.parameters[xParameter].value = new fmValue(x * xParameter.unitFamily.CurrentUnit.Coef);
+                        foreach (double x in xList)
+                        {
+                            fmFilterSimulationData tempSim = new fmFilterSimulationData();
+                            fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.filterMachiningBlock, tempSim);
+                            tempSim.CopyMaterialParametersValuesFrom(sim.Data);
+                            tempSim.parameters[xParameter].value = new fmValue(x * xParameter.unitFamily.CurrentUnit.Coef);
 
-            //            fmSuspensionCalculator suspensionCalculator = new fmSuspensionCalculator(tempSim.parameters.Values);
-            //            suspensionCalculator.calculationOption = simData.internalSimulation.suspensionCalculationOption;
-            //            suspensionCalculator.DoCalculations();
+                            fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values);
+                            filterMachiningCalculator.calculationOption = localParameters.filterMachiningBlock.calculationOption;
+                            filterMachiningCalculator.DoCalculations();
 
-            //            fmEps0Kappa0Calculator eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.parameters.Values);
-            //            eps0Kappa0Calculator.DoCalculations();
+                            calculatedDataList.Add(tempSim);
+                        }
 
-            //            fmPc0rc0a0Calculator pc0rc0a0Calculator = new fmPc0rc0a0Calculator(tempSim.parameters.Values);
-            //            pc0rc0a0Calculator.DoCalculations();
-
-            //            fmRm0hceCalculator rm0hceCalculator = new fmRm0hceCalculator(tempSim.parameters.Values);
-            //            rm0hceCalculator.DoCalculations();
-
-            //            fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values);
-            //            filterMachiningCalculator.calculationOption = simData.internalSimulation.filterMachiningCalculationOption;
-            //            filterMachiningCalculator.DoCalculations();
-
-            //            simData.calculatedDataList.Add(tempSim);
-            //        }
-            //    }
-            //}
+                        localParameters.calculatedDataLists.Add(calculatedDataList);
+                    }
+                }
+            }
         }
 
         private List<double> CreateXValues(double xStart, double xEnd, int minimalNodesAmount)
@@ -1204,15 +1373,24 @@ namespace FilterSimulationWithTablesAndGraphs
             List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
             foreach (fmSelectedSimulationData simData in internalSelectedSimList)
                 if (simData.isChecked)
-                    simInputParameters = ListsIntersection(simInputParameters, simData.internalSimulation.GetParametersThatCanBeInputedList());
+                    simInputParameters = ParametersListsIntersection(simInputParameters, simData.internalSimulationData.GetParametersThatCanBeInputedList());
             return simInputParameters;
         }
 
-        private List<fmGlobalParameter> ListsIntersection(List<fmGlobalParameter> a, List<fmGlobalParameter> b)
+        private List<fmGlobalParameter> ParametersListsIntersection(List<fmGlobalParameter> a, List<fmGlobalParameter> b)
         {
             List<fmGlobalParameter> result = new List<fmGlobalParameter>();
-            foreach (fmGlobalParameter p in a)
-                if (b.Contains(p))
+            foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
+                if (a.Contains(p) && b.Contains(p))
+                    result.Add(p);
+            return result;
+        }
+
+        private List<fmGlobalParameter> ParametersListsUnion(List<fmGlobalParameter> a, List<fmGlobalParameter> b)
+        {
+            List<fmGlobalParameter> result = new List<fmGlobalParameter>();
+            foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
+                if (a.Contains(p) || b.Contains(p))
                     result.Add(p);
             return result;
         }
@@ -1228,18 +1406,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     if (checkedSim.externalSimulation == sim)
                     {
                         newSelectedSim = checkedSim;
-                        
-                        //if (newSelectedSim.internalSimulation.filterMachinigCalculationOption !=
-                        //                sim.FilterMachiningCalculationOption
-                        //        || newSelectedSim.internalSimulation.suspensionCalculationOption !=
-                        //                sim.Data.suspensionCalculationOption)
-                        //{
-                        //    newSelectedSim.internalSimulation.CopyFrom(sim.Data);
-                        //}
-                        //else
-                        {
-                            newSelectedSim.internalSimulation.CopyValuesFrom(sim.Data);
-                        }
+                        newSelectedSim.internalSimulationData.CopyValuesFrom(sim.Data);
                     }
                 }
                 if (newSelectedSim == null)
