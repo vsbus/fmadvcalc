@@ -152,18 +152,21 @@ namespace FilterSimulationWithTablesAndGraphs
         public bool isChecked;
         public bool isCurrentActive;
         public fmFilterMachiningBlock filterMachiningBlock;
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption initialFilterMachiningCalculationOption;
         public List<List<fmFilterSimulationData>> calculatedDataLists = new List<List<fmFilterSimulationData>>();
-        public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock)
+        public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock, fmFilterMachiningCalculator.FilterMachiningCalculationOption initialFilterMachiningCalculationOption)
         {
             this.isChecked = isChecked;
             this.isCurrentActive = false;
             this.filterMachiningBlock = filterMachiningBlock;
+            this.initialFilterMachiningCalculationOption = initialFilterMachiningCalculationOption;
         }
     }
 
     public partial class FilterSimulationWithTablesAndGraphs
     {
         private List<fmFilterSimulation> externalSimList;
+        private fmFilterSimulation externalCurrentActiveSimulation;
         private List<fmSelectedSimulationData> internalSelectedSimList;
         private List<fmLocalInputParametersData> localInputParametersList = new List<fmLocalInputParametersData>();
         private bool isUseLocalParams;
@@ -278,14 +281,21 @@ namespace FilterSimulationWithTablesAndGraphs
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Pc.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.rc.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.a.name)]);
-            //fmb.ValuesChangedByUser += fmb_ValuesChangedByUser;
-            //fmLocalBlocks.Add(fmb);
-            localInputParametersList.Add(new fmLocalInputParametersData(true, fmb));
+            fmb.ValuesChangedByUser += fmb_ValuesChangedByUser;
+            localInputParametersList.Add(new fmLocalInputParametersData(true, fmb, externalCurrentActiveSimulation.FilterMachiningCalculationOption));
 
-            //fmb.CopyValues(currentSimFMB);
+            fmb.SetCalculationOptionAndUpdateCellsStyle(externalCurrentActiveSimulation.FilterMachiningCalculationOption);
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(externalCurrentActiveSimulation, fmb);
             fmb.CalculateAndDisplay();
 
             //UpdateIsInputedForParametersBlocks();
+        }
+
+        void fmb_ValuesChangedByUser(object sender, fmBlockParameterEvetArgs e)
+        {
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();   
         }
 
         //private void UpdateParametersTablesColumnsVisibility()
@@ -553,13 +563,17 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void additionalParametersTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-        //    if (additionalParametersTable.Rows.Count > 1
-        //        && additionalParametersTable.Columns[e.ColumnIndex].Name == "DeleteButtonColumn")
-        //    {
-        //        fmLocalBlocks.RemoveAt(e.RowIndex);
-        //        additionalParametersTable.Rows.RemoveAt(e.RowIndex);
-        //        DrawChartAndTable();
-        //    }
+            if (additionalParametersTable.Rows.Count > 1
+                && additionalParametersTable.Columns[e.ColumnIndex].Name == "DeleteButtonColumn")
+            {
+                localInputParametersList.RemoveAt(e.RowIndex);
+                additionalParametersTable.Rows.RemoveAt(e.RowIndex);
+                UpdateVisibilityOfColumnsInLocalParametrsTable();
+                BindXYLists();
+                RecalculateSimulationsWithIterationX();
+                BindCalculatedResultsToDisplayingResults();
+                BindCalculatedResultsToChartAndTable();
+            }
         }
 
         private void calculationOptionViewInTablesAndGraphs_CheckedChanged(object sender, EventArgs e)
@@ -642,9 +656,19 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateIsInputed(fmGlobalParameter inputedParameter)
         {
-            foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+            if (!isUseLocalParams)
             {
-                simData.internalSimulationData.UpdateIsInputed(inputedParameter);
+                foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                {
+                    simData.internalSimulationData.UpdateIsInputed(inputedParameter);
+                }
+            }
+            else
+            {
+                foreach (fmLocalInputParametersData localParameters in localInputParametersList)
+                {
+                    localParameters.filterMachiningBlock.UpdateIsInputed(localParameters.filterMachiningBlock.GetParameterByName(inputedParameter.name));
+                }
             }
         }
 
@@ -680,6 +704,11 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             AddRow();
             UpdateVisibilityOfColumnsInLocalParametrsTable();
+            UpdateIsCurrentActiveProperty(additionalParametersTable.CurrentRow == null ? -1 : additionalParametersTable.CurrentRow.Index);
+            BindXYLists();
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
         }
 
         private void UseParamsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -714,9 +743,19 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateIsCurrentActiveProperty(int currentRowIndex)
         {
-            for (int i = 0; i < internalSelectedSimList.Count; ++i)
+            if (!isUseLocalParams)
             {
-                internalSelectedSimList[i].isCurrentActive = i == currentRowIndex;
+                for (int i = 0; i < internalSelectedSimList.Count; ++i)
+                {
+                    internalSelectedSimList[i].isCurrentActive = i == currentRowIndex;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < localInputParametersList.Count; ++i)
+                {
+                    localInputParametersList[i].isCurrentActive = i == currentRowIndex;
+                }
             }
         }
 
@@ -733,12 +772,14 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void additionalParametersTable_CellValueChangedByUser(object sender, DataGridViewCellEventArgs e)
         {
-        //    if (additionalParametersTable.Columns[e.ColumnIndex].Name == "AdditionalParametersCheckBoxColumn"
-        //        && fmLocalBlocks.Count > e.RowIndex)
-        //    {
-        //        fmLocalBlocks[e.RowIndex].IsDrawn = (bool)additionalParametersTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-        //        DrawChartAndTable();
-        //    }
+            if (additionalParametersTable.Columns[e.ColumnIndex].Name == "AdditionalParametersCheckBoxColumn"
+                && localInputParametersList.Count > e.RowIndex)
+            {
+                localInputParametersList[e.RowIndex].isChecked = (bool)additionalParametersTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                RecalculateSimulationsWithIterationX();
+                BindCalculatedResultsToDisplayingResults();
+                BindCalculatedResultsToChartAndTable();
+            }
         }
 
         private void rowsQuantity_TextChanged(object sender, EventArgs e)
@@ -787,9 +828,10 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        public void BuildCurves(List<fmFilterSimulation> simList)
+        public void BuildCurves(List<fmFilterSimulation> simList, fmFilterSimulation currentActiveSimulation)
         {
             this.externalSimList = simList;
+            this.externalCurrentActiveSimulation = currentActiveSimulation;
             BindSelectedSimulationListToTable();
             UpdateVisibilityOfColumnsInLocalParametrsTable();
             BindXYLists();
@@ -798,7 +840,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.Text]);
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
-            BindCalculatedResultsToChartAndTable();            
+            BindCalculatedResultsToChartAndTable();
         }
 
         //private void BindLocalParametersListToTable()
@@ -917,6 +959,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             if (displayingResults.yParameters == null)
             {
+                fmZedGraphControl1.Refresh();
                 return;
             }
 
@@ -957,14 +1000,13 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void BindCalculatedResultsToChart()
         {
+            fmZedGraphControl1.GraphPane.CurveList.Clear();
+
             if (displayingResults.yParameters == null)
             {
-                fmZedGraphControl1.GraphPane.CurveList.Clear();
                 return;
             }
             
-            fmZedGraphControl1.GraphPane.CurveList.Clear();
-
             foreach (fmDisplayingYListOfArrays yArrays in displayingResults.yParameters)
             {
                 fmGlobalParameter yParameter = yArrays.Parameter;
@@ -992,7 +1034,10 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 fmGlobalParameter yParameter = displayingResults.yParameters[0].Parameter;
                 fmZedGraphControl1.GraphPane.YAxis.Title.Text = yParameter.name + " (" + yParameter.UnitName + ")";
-                fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = displayingResults.yParameters[0].Arrays[0].Color;
+                if (displayingResults.yParameters[0].Arrays.Count > 0)
+                {
+                    fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = displayingResults.yParameters[0].Arrays[0].Color;
+                }
             }
             else if (displayingResults.yParameters.Count == 2)
             {
@@ -1001,10 +1046,16 @@ namespace FilterSimulationWithTablesAndGraphs
                 fmGlobalParameter y1Parameter = displayingResults.yParameters[0].Parameter;
                 fmGlobalParameter y2Parameter = displayingResults.yParameters[1].Parameter;
                 fmZedGraphControl1.GraphPane.YAxis.Title.Text = y1Parameter.name + " (" + y1Parameter.UnitName + ")";
-                fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = displayingResults.yParameters[0].Arrays[0].Color;
+                if (displayingResults.yParameters[0].Arrays.Count > 0)
+                {
+                    fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = displayingResults.yParameters[0].Arrays[0].Color;
+                }
                 
                 fmZedGraphControl1.GraphPane.Y2Axis.Title.Text = y2Parameter.name + " (" + y2Parameter.UnitName + ")";
-                fmZedGraphControl1.GraphPane.Y2Axis.Title.FontSpec.FontColor = displayingResults.yParameters[1].Arrays[0].Color;
+                if (displayingResults.yParameters[1].Arrays.Count > 0)
+                {
+                    fmZedGraphControl1.GraphPane.Y2Axis.Title.FontSpec.FontColor = displayingResults.yParameters[1].Arrays[0].Color;
+                }
             }
             else
             {
@@ -1133,8 +1184,6 @@ namespace FilterSimulationWithTablesAndGraphs
                     fmDisplayingYListOfArrays yListOfArrays = new fmDisplayingYListOfArrays();
                     yListOfArrays.Parameter = yParameter;
                     yListOfArrays.Arrays = new List<fmDisplayingArray>();
-
-                    //foreach (fmSelectedSimulationData simData in internalSelectedSimList)
 
                     foreach (fmLocalInputParametersData localParameters in localInputParametersList)
                     {
@@ -1370,11 +1419,25 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private List<fmGlobalParameter> GetCommonInputParametersList()
         {
-            List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
-            foreach (fmSelectedSimulationData simData in internalSelectedSimList)
-                if (simData.isChecked)
-                    simInputParameters = ParametersListsIntersection(simInputParameters, simData.internalSimulationData.GetParametersThatCanBeInputedList());
-            return simInputParameters;
+            if (!isUseLocalParams)
+            {
+                List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
+                foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                    //if (simData.isChecked)
+                        simInputParameters = ParametersListsIntersection(simInputParameters,
+                                                                         simData.internalSimulationData.
+                                                                             GetParametersThatCanBeInputedList());
+                return simInputParameters;
+            }
+            else
+            {
+                List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
+                foreach (fmLocalInputParametersData localParameters in localInputParametersList)
+                    simInputParameters = ParametersListsIntersection(simInputParameters,
+                                                              CalculationOptionHelper.GetParametersListThatCanBeInput(
+                                                                  localParameters.filterMachiningBlock.calculationOption));
+                return simInputParameters;
+            }
         }
 
         private List<fmGlobalParameter> ParametersListsIntersection(List<fmGlobalParameter> a, List<fmGlobalParameter> b)
