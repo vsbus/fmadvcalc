@@ -714,6 +714,14 @@ namespace FilterSimulationWithTablesAndGraphs
         private void UseParamsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             ReadUseParamsCheckBoxAndApply();
+            UpdateVisibilityOfColumnsInLocalParametrsTable();
+            BindXYLists();
+            LoadCurrentXRange();
+            if (listBoxXAxis.Text != "")
+                UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.Text]);
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
         }
 
         private void ReadUseParamsCheckBoxAndApply()
@@ -1096,6 +1104,8 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (!isUseLocalParams)
             {
+                displayingResults.yParameters = new List<fmDisplayingYListOfArrays>();
+                
                 if (internalSelectedSimList.Count == 0)
                 {
                     return;
@@ -1117,7 +1127,6 @@ namespace FilterSimulationWithTablesAndGraphs
                 Color[] colors = new Color[] {Color.Blue, Color.Green, Color.Red, Color.Black};
                 int colorId = 0;
 
-                displayingResults.yParameters = new List<fmDisplayingYListOfArrays>();
                 foreach (fmGlobalParameter yParameter in yParameters)
                 {
                     fmDisplayingYListOfArrays yListOfArrays = new fmDisplayingYListOfArrays();
@@ -1155,6 +1164,8 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             else
             {
+                displayingResults.yParameters = new List<fmDisplayingYListOfArrays>();
+                
                 if (localInputParametersList.Count == 0
                     || localInputParametersList[0].calculatedDataLists.Count == 0)
                 {
@@ -1178,7 +1189,6 @@ namespace FilterSimulationWithTablesAndGraphs
                 Color[] colors = new Color[] { Color.Blue, Color.Green, Color.Red, Color.Black };
                 int colorId = 0;
 
-                displayingResults.yParameters = new List<fmDisplayingYListOfArrays>();
                 foreach (fmGlobalParameter yParameter in yParameters)
                 {
                     fmDisplayingYListOfArrays yListOfArrays = new fmDisplayingYListOfArrays();
