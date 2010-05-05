@@ -256,18 +256,46 @@ namespace FilterSimulationWithTablesAndGraphs
             CalculationOptionSelectionExpandedDialog cosd = new CalculationOptionSelectionExpandedDialog();
             cosd.suspensionCalculationOption = fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
             cosd.filterMachiningCalculationOption = fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1;
-            if (internalSelectedSimList.Count > 0)
+            foreach (fmSelectedSimulationData simData in internalSelectedSimList)
             {
-                cosd.suspensionCalculationOption = internalSelectedSimList[0].internalSimulation.suspensionCalculationOption;
-                cosd.filterMachiningCalculationOption = internalSelectedSimList[0].internalSimulation.filterMachiningCalculationOption;
+                if (simData.isCurrentActive)
+                {
+                    cosd.suspensionCalculationOption = simData.internalSimulation.suspensionCalculationOption;
+                    cosd.filterMachiningCalculationOption = simData.internalSimulation.filterMachiningCalculationOption;
+                }
             }
 
             if (cosd.ShowDialog() == DialogResult.OK)
             {
+                List<fmSelectedSimulationData> selectedList = new List<fmSelectedSimulationData>();
+
                 foreach (fmSelectedSimulationData simData in internalSelectedSimList)
                 {
+                    if (cosd.ItemSelection == CalculationDialogExpandedItemSelection.All)
+                    {
+                        selectedList.Add(simData);
+                    }
+                    else if (cosd.ItemSelection == CalculationDialogExpandedItemSelection.Checked)
+                    {
+                        if (simData.isChecked)
+                        {
+                            selectedList.Add(simData);
+                        }
+                    }
+                    else if (cosd.ItemSelection == CalculationDialogExpandedItemSelection.Current)
+                    {
+                        if (simData.isCurrentActive)
+                        {
+                            selectedList.Add(simData);
+                        }
+                    }    
+                }
+
+
+                foreach (fmSelectedSimulationData simData in selectedList)
+                {
                     fmFilterSimulationData sim = simData.internalSimulation;
-                    
+
                     fmSuspensionBlock susBlock = new fmSuspensionBlock();
                     fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, susBlock);
                     susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);
@@ -279,7 +307,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
                     fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
                     simData.internalSimulation.filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
-                }
+                }    
             }
 
             BindBackColorToSelectedSimulationsTable();

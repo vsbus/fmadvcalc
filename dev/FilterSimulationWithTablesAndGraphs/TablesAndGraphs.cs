@@ -134,12 +134,14 @@ namespace FilterSimulationWithTablesAndGraphs
     public class fmSelectedSimulationData
     {
         public bool isChecked;
+        public bool isCurrentActive;
         public fmFilterSimulation externalSimulation;
         public fmFilterSimulationData internalSimulation;
         public List<fmFilterSimulationData> calculatedDataList = new List<fmFilterSimulationData>();
         public fmSelectedSimulationData(bool isChecked, fmFilterSimulation externalSimulation)
         {
             this.isChecked = isChecked;
+            this.isCurrentActive = false;
             this.externalSimulation = externalSimulation;
             internalSimulation = new fmFilterSimulationData();
             internalSimulation.CopyFrom(externalSimulation.Data);
@@ -645,12 +647,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateIsInputed(fmGlobalParameter inputedParameter)
         {
-            for (int i = 0; i < internalSelectedSimList.Count; ++i)
+            foreach (fmSelectedSimulationData simData in internalSelectedSimList)
             {
-                if (internalSelectedSimList[i].isChecked)
-                {
-                    internalSelectedSimList[i].internalSimulation.UpdateIsInputed(inputedParameter);
-                }
+                simData.internalSimulation.UpdateIsInputed(inputedParameter);
             }
         }
 
@@ -710,6 +709,19 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 BindCalculatedResultsToDisplayingResults();
                 BindCalculatedResultsToChartAndTable();
+            }
+
+            if (dgv != null)
+            {
+                UpdateIsCurrentActiveProperty(dgv.CurrentRow != null ? dgv.CurrentRow.Index : -1);
+            }
+        }
+
+        private void UpdateIsCurrentActiveProperty(int currentRowIndex)
+        {
+            for (int i = 0; i < internalSelectedSimList.Count; ++i)
+            {
+                internalSelectedSimList[i].isCurrentActive = i == currentRowIndex;
             }
         }
 

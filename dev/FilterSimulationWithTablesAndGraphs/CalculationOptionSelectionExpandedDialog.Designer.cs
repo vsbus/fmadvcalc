@@ -111,6 +111,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.allItemsRadioButton.TabIndex = 2;
             this.allItemsRadioButton.Text = "All Items";
             this.allItemsRadioButton.UseVisualStyleBackColor = true;
+            this.allItemsRadioButton.CheckedChanged += new System.EventHandler(this.allItemsRadioButton_CheckedChanged);
             // 
             // checkedItemsRadioButton
             // 
@@ -121,6 +122,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.checkedItemsRadioButton.TabIndex = 1;
             this.checkedItemsRadioButton.Text = "Checked Items";
             this.checkedItemsRadioButton.UseVisualStyleBackColor = true;
+            this.checkedItemsRadioButton.CheckedChanged += new System.EventHandler(this.checkedItemsRadioButton_CheckedChanged);
             // 
             // currentItemRadioButton
             // 
@@ -133,6 +135,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.currentItemRadioButton.TabStop = true;
             this.currentItemRadioButton.Text = "Current Item";
             this.currentItemRadioButton.UseVisualStyleBackColor = true;
+            this.currentItemRadioButton.CheckedChanged += new System.EventHandler(this.currentItemRadioButton_CheckedChanged);
             // 
             // CalculationOptionSelectionExpandedDialog
             // 
