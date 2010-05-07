@@ -963,7 +963,27 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void BindCalculatedResultsToTable()
         {
-            coordinatesGrid.Columns.Clear();
+            int yParametersCount = displayingResults.yParameters == null ? 0 : displayingResults.yParameters.Count;
+            coordinatesGrid.ColumnCount = 1 + yParametersCount;
+
+            if (displayingResults.xParameter == null)
+            {
+                coordinatesGrid.Columns.Clear();
+                return;
+            }
+
+            // x-axis column
+            {
+                string parameterNameAndUnits = displayingResults.xParameter.Parameter.name + " (" + displayingResults.xParameter.Parameter.UnitName + ")";
+                coordinatesGrid.Columns[0].HeaderText = parameterNameAndUnits;
+                coordinatesGrid.Columns[0].ReadOnly = true;
+                coordinatesGrid.Columns[0].Width = 50;
+                coordinatesGrid.RowCount = displayingResults.xParameter.Values.Length;
+                for (int i = 0; i < coordinatesGrid.RowCount; ++i)
+                {
+                    coordinatesGrid[0, i].Value = displayingResults.xParameter.Values[i];
+                }
+            }
 
             if (displayingResults.yParameters == null)
             {
@@ -971,18 +991,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
             }
 
-            // x-axis column
-            {
-                string parameterNameAndUnits = displayingResults.xParameter.Parameter.name + " (" + displayingResults.xParameter.Parameter.UnitName + ")";
-                int xCol = coordinatesGrid.Columns.Add(parameterNameAndUnits, parameterNameAndUnits);
-                coordinatesGrid.Columns[xCol].ReadOnly = true;
-                coordinatesGrid.Columns[xCol].Width = 50;
-                coordinatesGrid.RowCount = displayingResults.xParameter.Values.Length;
-                for (int i = 0; i < coordinatesGrid.RowCount; ++i)
-                {
-                    coordinatesGrid[xCol, i].Value = displayingResults.xParameter.Values[i];
-                }
-            }
+            int yCol = 0;
 
             foreach (fmDisplayingYListOfArrays yArrays in displayingResults.yParameters)
             {
@@ -991,7 +1000,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (fmDisplayingArray dispArray in yArrays.Arrays)
                 {
-                    int yCol = coordinatesGrid.Columns.Add(parameterNameAndUnits, parameterNameAndUnits);
+                    ++yCol;
+                    coordinatesGrid.Columns[yCol].HeaderText = parameterNameAndUnits;
                     coordinatesGrid.Columns[yCol].ReadOnly = true;
                     coordinatesGrid.Columns[yCol].Width = 50;
 
