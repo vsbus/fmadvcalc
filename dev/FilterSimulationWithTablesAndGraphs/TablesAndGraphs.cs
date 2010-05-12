@@ -688,6 +688,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void LoadDefaultXRange()
         {
+            if (listBoxXAxis.Text == "")
+            {
+                return;
+            }
             loadingXRange = true;
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
