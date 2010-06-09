@@ -214,6 +214,10 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commonCalcBlockDataGrid = new fmDataGrid.fmDataGrid();
+            this.commonCalcBlockParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commonCalcBlockUnitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commonCalcBlockParameterValueColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.panelLeft.SuspendLayout();
             this.suspensionParametersAndCalcOptionsPanel.SuspendLayout();
             this.suspensionParametersPanel.SuspendLayout();
@@ -240,6 +244,7 @@ namespace FilterSimulation
             this.panel5.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // byCheckingProjectsCheckBox
@@ -346,6 +351,7 @@ namespace FilterSimulation
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.commonCalcBlockDataGrid);
             this.panel6.Controls.Add(this.eps0Kappa0Pc0Rc0Alpha0DataGrid);
             this.panel6.Controls.Add(this.liquidDataGrid);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1938,6 +1944,48 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
             // 
+            // commonCalcBlockDataGrid
+            // 
+            this.commonCalcBlockDataGrid.AllowUserToAddRows = false;
+            this.commonCalcBlockDataGrid.AllowUserToDeleteRows = false;
+            this.commonCalcBlockDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.commonCalcBlockDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.commonCalcBlockDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.commonCalcBlockDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.commonCalcBlockParameterNameColumn,
+            this.commonCalcBlockUnitColumn,
+            this.commonCalcBlockParameterValueColumn});
+            this.commonCalcBlockDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
+            this.commonCalcBlockDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.commonCalcBlockDataGrid.HighLightCurrentRow = false;
+            this.commonCalcBlockDataGrid.Location = new System.Drawing.Point(327, 0);
+            this.commonCalcBlockDataGrid.Name = "commonCalcBlockDataGrid";
+            this.commonCalcBlockDataGrid.RowHeadersVisible = false;
+            this.commonCalcBlockDataGrid.RowTemplate.Height = 18;
+            this.commonCalcBlockDataGrid.Size = new System.Drawing.Size(185, 175);
+            this.commonCalcBlockDataGrid.TabIndex = 13;
+            // 
+            // commonCalcBlockParameterNameColumn
+            // 
+            this.commonCalcBlockParameterNameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.commonCalcBlockParameterNameColumn.HeaderText = "Parameter";
+            this.commonCalcBlockParameterNameColumn.Name = "commonCalcBlockParameterNameColumn";
+            this.commonCalcBlockParameterNameColumn.Width = 80;
+            // 
+            // commonCalcBlockUnitColumn
+            // 
+            this.commonCalcBlockUnitColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.commonCalcBlockUnitColumn.HeaderText = "Units";
+            this.commonCalcBlockUnitColumn.Name = "commonCalcBlockUnitColumn";
+            this.commonCalcBlockUnitColumn.Width = 56;
+            // 
+            // commonCalcBlockParameterValueColumn
+            // 
+            this.commonCalcBlockParameterValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.commonCalcBlockParameterValueColumn.HeaderText = "Value";
+            this.commonCalcBlockParameterValueColumn.Name = "commonCalcBlockParameterValueColumn";
+            this.commonCalcBlockParameterValueColumn.Width = 40;
+            // 
             // FilterSimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1977,6 +2025,7 @@ namespace FilterSimulation
             this.panel5.PerformLayout();
             this.panelTop.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2162,5 +2211,9 @@ namespace FilterSimulation
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Splitter splitter6;
+        private fmDataGrid.fmDataGrid commonCalcBlockDataGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commonCalcBlockParameterNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commonCalcBlockUnitColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn commonCalcBlockParameterValueColumn;
     }
 }
