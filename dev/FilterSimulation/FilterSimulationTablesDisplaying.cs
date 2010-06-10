@@ -623,8 +623,130 @@ namespace FilterSimulation
                 UpdateColorsAndFontForSolution(sol);
                 SelectCurrentItemsInSolution(sol);
 
+                CopySimToCommonFilterMachiningBlock(sol.CurrentObjects.Simulation);
+
                 displayingSolution = false;
             }
+        }
+
+        private void CopySimToCommonFilterMachiningBlock(fmFilterSimulation sim)
+        {
+            if (sim != null)
+            {
+                if (commonFilterMachiningBlock == null)
+                {
+                    InitCommonFilterMachiningBlock();
+                }
+
+                commonFilterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.calculationOption);
+
+                for (int i = 0; i < commonFilterMachiningBlock.Parameters.Count; ++i)
+                {
+                    commonCalcBlockDataGrid.Rows[i].Visible = commonFilterMachiningBlock.Parameters[i].group != null;
+                }
+
+                for (int i = 0; i < commonFilterMachiningBlock.ConstantParameters.Count; ++i)
+                {
+                    commonFilterMachiningBlock.ConstantParameters[i].value = sim.filterMachiningBlock.ConstantParameters[i].value;
+                }
+                for (int i = 0; i < commonFilterMachiningBlock.Parameters.Count; ++i)
+                {
+                    commonFilterMachiningBlock.Parameters[i].value = sim.filterMachiningBlock.Parameters[i].value;
+                    commonFilterMachiningBlock.Parameters[i].isInputed = sim.filterMachiningBlock.Parameters[i].isInputed;
+                }
+                commonFilterMachiningBlock.CalculateAndDisplay();
+            }
+        }
+
+        private void InitCommonFilterMachiningBlock()
+        {
+            fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock voidBlock = new fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock();
+            commonCalcBlockDataGrid.RowCount = voidBlock.Parameters.Count;
+            for (int i = 0; i < voidBlock.Parameters.Count; ++i)
+            {
+                commonCalcBlockDataGrid["commonCalcBlockParameterNameColumn", i].Value = voidBlock.Parameters[i].globalParameter.name;
+            }
+
+            commonFilterMachiningBlock = new fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock(
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 0],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 1],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 2],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 3],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 4],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 5],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 6],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 7],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 8],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 9],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 10],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 11],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 12],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 13],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 14],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 15],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 16],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 17],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 18],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 19],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 20],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 21],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 22],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 23],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 24],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 25],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 26],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 27],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 28],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 29],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 30],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 31],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 32],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 33],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 34],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 35],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 36],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 37],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 38],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 39],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 40],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 41],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 42],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 43],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 44],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 45],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 46],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 47],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 48],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 49],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 50],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 51],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 52],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 53],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 54],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 55],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 56],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 57],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 58],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 59],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 60],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 61],
+                commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", 62]);
+
+            commonFilterMachiningBlock.ValuesChangedByUser += new fmBlockParameterEventHandler(commonFilterMachiningBlock_ValuesChangedByUser);
+
+            UpdateUnitsOfCommonFilterMachiningBlock();
+        }
+
+        void commonFilterMachiningBlock_ValuesChangedByUser(object sender, fmBlockParameterEvetArgs e)
+        {
+            foreach (fmBlockVariableParameter p in commonFilterMachiningBlock.Parameters)
+            {
+                fmBlockVariableParameter p2 = fSolution.CurrentObjects.Simulation.filterMachiningBlock.GetParameterByName(p.globalParameter.name);
+                p2.value = p.value;
+                p2.isInputed = p.isInputed;
+            }
+
+            fSolution.CurrentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();
         }
 
         static Color CreateColorFromString(string s)
@@ -781,9 +903,22 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_PcColumn.Index].HeaderCell, fmGlobalParameter.Pc.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_rcColumn.Index].HeaderCell, fmGlobalParameter.rc.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_aColumn.Index].HeaderCell, fmGlobalParameter.a.unitFamily);
+
+                UpdateUnitsOfCommonFilterMachiningBlock();
             }
             ResumeAllBlockProcessing();
             RewriteDataForAllBlocks();
+        }
+
+        private void UpdateUnitsOfCommonFilterMachiningBlock()
+        {
+            if (commonFilterMachiningBlock != null)
+            {
+                for (int i = 0; i < commonFilterMachiningBlock.Parameters.Count; ++i)
+                {
+                    commonCalcBlockDataGrid["commonCalcBlockUnitColumn", i].Value = commonFilterMachiningBlock.Parameters[i].globalParameter.UnitName;
+                }
+            }
         }
 
         private void RewriteDataForAllBlocks()

@@ -12,6 +12,7 @@ namespace FilterSimulation
     public partial class FilterSimulation : UserControl
     {
         private fmFilterSimSolution fSolution = new fmFilterSimSolution();
+        private fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock commonFilterMachiningBlock = null;
         private CheckBox ckBox;
 
         public FilterSimulation()
