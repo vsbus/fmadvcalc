@@ -377,6 +377,14 @@ namespace FilterSimulation.fmFilterObjects
                 parentSerie.AddSimulation(this);
             }
             m_Data.Name = Name;
+
+            fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock voidBlock = new fmFilterMachiningBlock();
+            voidBlock.SetCalculationOptionAndUpdateCellsStyle(Data.filterMachiningCalculationOption);
+            foreach (fmCalculationVariableParameter var in voidBlock.Parameters)
+            {
+                (Data.parameters[var.globalParameter] as fmCalculationVariableParameter).isInputed = var.isInputed;
+            }
+
             Keep();
         }
 
