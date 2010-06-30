@@ -34,14 +34,17 @@ namespace FilterSimulation
             this.UnitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MinRangeColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.MaxRangeColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.ParamGrid)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(324, 328);
+            this.buttonOK.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonOK.Location = new System.Drawing.Point(336, 0);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.Size = new System.Drawing.Size(75, 26);
             this.buttonOK.TabIndex = 1;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -59,12 +62,14 @@ namespace FilterSimulation
             this.UnitColumn,
             this.MinRangeColumn,
             this.MaxRangeColumn});
+            this.ParamGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ParamGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.ParamGrid.HighLightCurrentRow = false;
             this.ParamGrid.Location = new System.Drawing.Point(0, 0);
             this.ParamGrid.Name = "ParamGrid";
             this.ParamGrid.RowHeadersVisible = false;
             this.ParamGrid.RowTemplate.Height = 18;
-            this.ParamGrid.Size = new System.Drawing.Size(411, 329);
+            this.ParamGrid.Size = new System.Drawing.Size(411, 337);
             this.ParamGrid.TabIndex = 0;
             // 
             // ParameterNameColumn
@@ -97,16 +102,26 @@ namespace FilterSimulation
             this.MaxRangeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.MaxRangeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.buttonOK);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 337);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(411, 26);
+            this.panel1.TabIndex = 2;
+            // 
             // ParameterIntervalOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(411, 363);
-            this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.ParamGrid);
+            this.Controls.Add(this.panel1);
             this.Name = "ParameterIntervalOption";
             this.Text = "ParameterIntervalOption";
             ((System.ComponentModel.ISupportInitialize)(this.ParamGrid)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -119,6 +134,7 @@ namespace FilterSimulation
         private fmDataGrid.DataGridViewNumericalTextBoxColumn MinRangeColumn;
         private fmDataGrid.DataGridViewNumericalTextBoxColumn MaxRangeColumn;
         private System.Windows.Forms.Button buttonOK;
+        private System.Windows.Forms.Panel panel1;
 
 
 

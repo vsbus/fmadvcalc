@@ -356,5 +356,16 @@ namespace fmCalculationLibrary
         {
             return a > b ? a : b;
         }
+
+        public static bool Less(fmValue a, fmValue b)
+        {
+            fmValue eps = new fmValue(1e-9 * Math.Max(Math.Abs(a.Value), Math.Abs(b.Value)));
+            return a < b - eps;
+        }
+
+        public static bool Greater(fmValue a, fmValue b)
+        {
+            return Less(b, a);
+        }
     }
 }

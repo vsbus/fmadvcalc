@@ -68,6 +68,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdvancedCalculator\AdvancedCalculator.csproj">
+      <Project>{DA84AD71-10A9-4B07-88EB-AADC0E158327}</Project>
+      <Name>AdvancedCalculator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FilterSimulation\FilterSimulation.csproj">
+      <Project>{D06514FC-2EC2-4D62-9583-9A4D8E8298E3}</Project>
+      <Name>FilterSimulation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\fmCalcBlocksLibrary\fmCalcBlocksLibrary.csproj">
       <Project>{A9AFDCE0-9E84-4AF7-86A9-71A9D528721F}</Project>
       <Name>fmCalcBlocksLibrary</Name>
@@ -75,6 +83,10 @@
     <ProjectReference Include="..\fmCalculationLibrary\fmCalculationLibrary.csproj">
       <Project>{D4A4B18A-B19E-46A7-8028-EF259E24849B}</Project>
       <Name>fmCalculationLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\fmCalculatorsLibrary\fmCalculatorsLibrary.csproj">
+      <Project>{440BE5B3-2621-475D-96E9-51EB0D91CAAC}</Project>
+      <Name>fmCalculatorsLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\fmDataGrid\fmDataGrid.csproj">
       <Project>{30A5CD2D-C64C-402B-A957-3885E498A97C}</Project>

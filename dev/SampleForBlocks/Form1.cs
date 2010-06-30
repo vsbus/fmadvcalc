@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using fmCalculationLibrary;
+using FilterSimulation;
 
 namespace SampleForBlocks
 {
@@ -16,38 +17,63 @@ namespace SampleForBlocks
             InitializeComponent();
         }
 
+        fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlockWithLimits fmBlock;
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            fmDataGrid1.Rows.Add(new object[] { "rho_f", new fmValue() });
-            fmDataGrid1.Rows.Add(new object[] { "rho_s", new fmValue() });
-            fmDataGrid1.Rows.Add(new object[] { "rho_sus", new fmValue() });
-            fmDataGrid1.Rows.Add(new object[] { "Cm", new fmValue() });
-            fmDataGrid1.Rows.Add(new object[] { "Cv", new fmValue() });
-            fmDataGrid1.Rows.Add(new object[] { "C", new fmValue() });
+            fmValue.outputPrecision = 6;
 
-            fmCalcBlocksLibrary.Blocks.fmSuspensionBlock susBlock = new fmCalcBlocksLibrary.Blocks.fmSuspensionBlock(
-                fmDataGrid1[1, 0], fmDataGrid1[1, 1], fmDataGrid1[1, 2], fmDataGrid1[1, 3], fmDataGrid1[1, 4], fmDataGrid1[1, 5]);
+            fmBlock = new fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlockWithLimits();
+            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in fmBlock.Parameters)
+            {
+                int i = fmDataGrid1.Rows.Add();
+                fmDataGrid1["parameterNameColumn", i].Value = p.globalParameter.name;
+                fmDataGrid1["unitsColumn", i].Value = p.globalParameter.UnitName;
+                fmBlock.AssignCell(p, fmDataGrid1["valueColumn", i]);
+            }
 
+            
+            fmBlock.hce_Value = new fmValue(0.005);
+            fmBlock.Pc0_Value = new fmValue(1e-13);
+            fmBlock.nc_Value = new fmValue(0.3);
+            fmBlock.eps0_Value = new fmValue(0.5);
+            fmBlock.kappa0_Value = new fmValue(0.4);
+            fmBlock.ne_Value = new fmValue(0.02);
+            fmBlock.etaf_Value = new fmValue(1e-3);
+            fmBlock.rho_f_Value = new fmValue(1000);
+            fmBlock.rho_s_Value = new fmValue(1500);
+            fmBlock.rho_sus_Value = new fmValue(1070);
+            fmBlock.Cm_Value = new fmValue(0.2);
+            fmBlock.Cv_Value = new fmValue(0.143);
 
-            checkedListBox1.Items.Clear();
-            for (int i = 1; i <= 9; ++i)
-                checkedListBox1.Items.Add(i);
+            fmBlock.SetCalculationOptionAndUpdateCellsStyle(fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1);
+            
         }
 
-        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void rangesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //listBox1.Items.Clear();
-            //foreach (object s in checkedListBox1.CheckedItems) 
-            //    listBox1.Items.Add(s);
-            //listBox1.Items.Add(checkedListBox1.Items[e.Index]);
-
-            //listBox1.Items.Clear();
-            //for (int i = 0; i < checkedListBox1.Items.Count; ++i)
-            //{
-            //    if (checkedListBox1.GetItemChecked(i) || e.Index == i)
-            //        listBox1.Items.Add(checkedListBox1.Items[i]);
-            //}
+            FilterSimulation.ParameterIntervalOption proForm = new FilterSimulation.ParameterIntervalOption();
+            proForm.ShowDialog();
+            fmBlock.CalculateAndDisplay();
         }
 
+        private void calculationOptionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CalculationOptionSelectionDialog cosd = new CalculationOptionSelectionDialog();
+            //cosd.suspensionCalculationOption = ;
+            cosd.filterMachiningCalculationOption = fmBlock.calculationOption;
+            if (cosd.ShowDialog() == DialogResult.OK)
+            {
+                fmBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
+                fmBlock.CalculateAndDisplay();
+            }
+        }
+
+        private void precisionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AdvancedCalculator.DigitsOptions doForm = new AdvancedCalculator.DigitsOptions();
+            doForm.ShowDialog();
+            fmBlock.CalculateAndDisplay();
+        }
     }
 }

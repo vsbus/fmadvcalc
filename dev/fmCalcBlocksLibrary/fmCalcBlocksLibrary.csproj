@@ -40,6 +40,7 @@
     <Compile Include="BlockParameter\fmBlockConstantParameter.cs" />
     <Compile Include="BlockParameter\fmBlockParameterGroup.cs" />
     <Compile Include="Blocks\fmBaseBlock.cs" />
+    <Compile Include="Blocks\fmFilterMachiningBlockWithLimits.cs" />
     <Compile Include="Controls\fmCalculationOptionView.cs">
       <SubType>Component</SubType>
     </Compile>

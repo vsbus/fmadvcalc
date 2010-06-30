@@ -38,7 +38,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         abstract public void DoCalculations();
 
-        protected void ReWriteParameters()
+        virtual protected void ReWriteParameters()
         {
             if (processOnChange)
             {
@@ -110,14 +110,21 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell cell,
             bool isInputedDefault)
         {
-            p = new fmBlockVariableParameter(globalParameter, cell, isInputedDefault);
+            p = new fmBlockVariableParameter(globalParameter, isInputedDefault);
+            AssignCell(p, cell);
+            parameters.Add(p);
+        }
+
+        public void AssignCell(fmBlockVariableParameter p, DataGridViewCell cell)
+        {
+            p.cell = cell;
+            
             if (cell != null)
             {
                 fmDataGrid.fmDataGrid dataGrid = cell.DataGridView as fmDataGrid.fmDataGrid;
                 dataGrid.CellValueChangedByUser -= CellValueChanged;
                 dataGrid.CellValueChangedByUser += CellValueChanged;
             }
-            parameters.Add(p);
         }
 
         protected void AddConstantParameter(

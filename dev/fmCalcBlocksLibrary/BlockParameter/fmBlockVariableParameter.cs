@@ -38,11 +38,10 @@ namespace fmCalcBlocksLibrary.BlockParameter
         }
 
         public fmBlockVariableParameter(fmGlobalParameter globalParameter,
-                                DataGridViewCell cell,
                                 bool isInputedDefault) : base (globalParameter)
         {
             this.group = null;
-            this.cell = cell;
+            this.cell = null;
             isInputed = isInputedDefault;
         }
     }

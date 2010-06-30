@@ -22,6 +22,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{421C1B0C-B7D7-486D-AEAC-581F82201798}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleForBlocks", "SampleForBlocks\SampleForBlocks.csproj", "{CC39F4AC-47AE-4D23-B9AF-D9058316ED0C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D06514FC-2EC2-4D62-9583-9A4D8E8298E3} = {D06514FC-2EC2-4D62-9583-9A4D8E8298E3}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
