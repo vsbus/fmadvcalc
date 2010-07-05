@@ -17,6 +17,15 @@ namespace fmCalcBlocksLibrary.Blocks
             base.DoCalculations();
         }
 
+        private enum fmResultCheckStatus
+        {
+            N_A,
+            LESS_THAN_MINIMUM,
+            GREATER_THAN_MAXIMUM,
+            INSIDE_RANGE
+        }
+        
+
         override protected void ReWriteParameters()
         {
             base.ReWriteParameters();
@@ -63,6 +72,10 @@ namespace fmCalcBlocksLibrary.Blocks
                     {
                         fmValue minValue = GetMinLimit(parameters[i]);
                         fmValue maxValue = GetMaxLimit(parameters[i]);
+                        if (minValue.Value > maxValue.Value)
+                        {
+                            minValue = maxValue = new fmValue();
+                        }
                         string newValLeft = parameters[i].group == null ? "" : (minValue / coef).ToString();
                         string newValRight = parameters[i].group == null ? "" : (maxValue / coef).ToString();
 
@@ -182,6 +195,49 @@ namespace fmCalcBlocksLibrary.Blocks
         
         private fmValue GetFirstValidArgument(fmBlockVariableParameter parameter, double a, double b)
         {
+            Dictionary<fmGlobalParameter, fmResultCheckStatus> startStatus = GetResultStatus(parameter, a);
+            double lo = a;
+            double hi = b;
+            for (int i = 0; i < 40; ++i)
+            {
+                double mid = 0.5*(lo + hi);
+                Dictionary<fmGlobalParameter, fmResultCheckStatus> midStatus = GetResultStatus(parameter, mid);
+                bool validValue = true;
+                foreach(fmGlobalParameter p in midStatus.Keys)
+                {
+                    if (startStatus[p] != fmResultCheckStatus.INSIDE_RANGE
+                        && startStatus[p] == midStatus[p])
+                    {
+                        validValue = false;
+                        break;
+                    }
+                }
+                if (validValue)
+                {
+                    hi = mid;
+                }
+                else
+                {
+                    lo = mid;
+                }
+            }
+
+            
+            fmValue res = new fmValue(lo);
+            /*
+             * Dictionary<fmGlobalParameter, fmResultCheckStatus> endStatus = GetResultStatus(parameter, hi);
+            foreach(fmResultCheckStatus status in endStatus.Values)
+            {
+                if (status != fmResultCheckStatus.INSIDE_RANGE)
+                {
+                    res = new fmValue();
+                    break;
+                }
+            }
+             */
+            return res;
+
+            /*
             int n = 100 + 1;
 
             List<fmValue> valuesToCheck = GetNodesList(a, b, n);
@@ -211,6 +267,53 @@ namespace fmCalcBlocksLibrary.Blocks
             }
 
             return best;
+            */
+        }
+
+        private Dictionary<fmGlobalParameter, fmResultCheckStatus> GetResultStatus(fmBlockVariableParameter parameter, double valueToCheck)
+        {
+            Dictionary<fmGlobalParameter, fmResultCheckStatus> result = new Dictionary<fmGlobalParameter, fmResultCheckStatus>();
+
+            fmBlockVariableParameter groupInput = FindGroupRepresetator(parameter.group);
+            fmValue groupInputInitialValue = groupInput.value;
+            groupInput.isInputed = false;
+            parameter.isInputed = true;
+
+            parameter.value = new fmValue(valueToCheck);
+
+            DoCalculations();
+
+            foreach (fmBlockVariableParameter p in parameters)
+            {
+                fmGlobalParameter gParam = p.globalParameter;
+                if (p.value.Defined == false)
+                {
+                    result[gParam] = fmResultCheckStatus.N_A;
+                }
+                else
+                {
+                    if (p.value.Value > gParam.chartDefaultXRange.maxValue)
+                    {
+                        result[gParam] = fmResultCheckStatus.GREATER_THAN_MAXIMUM;
+                    }
+                    else if (p.value.Value < gParam.chartDefaultXRange.minValue)
+                    {
+                        result[gParam] = fmResultCheckStatus.LESS_THAN_MINIMUM;
+                    }
+                    else
+                    {
+                        result[gParam] = fmResultCheckStatus.INSIDE_RANGE;
+                    }
+                }
+            }
+            
+            parameter.isInputed = false;
+            groupInput.value = groupInputInitialValue;
+            groupInput.isInputed = true;
+
+            DoCalculations();
+
+            return result;
         }
 
         private bool IsInRange(double p, double a, double b)
