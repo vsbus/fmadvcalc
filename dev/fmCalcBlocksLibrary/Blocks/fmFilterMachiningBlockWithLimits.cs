@@ -41,14 +41,19 @@ namespace fmCalcBlocksLibrary.Blocks
                         continue;
                     }
 
+                    DataGridView dataGrid = parameters[i].cell.DataGridView;
+                    int rowIndex = parameters[i].cell.RowIndex;
+                    int colIndex = parameters[i].cell.ColumnIndex;
                     double coef = parameters[i].globalParameter.unitFamily.CurrentUnit.Coef;
-                    DataGridViewCell minLimitCell = parameters[i].cell.DataGridView[parameters[i].cell.ColumnIndex - 1, parameters[i].cell.RowIndex];
-                    DataGridViewCell maxLimitCell = parameters[i].cell.DataGridView[parameters[i].cell.ColumnIndex + 1, parameters[i].cell.RowIndex];
+                    
+                    dataGrid[colIndex - 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.minValue / coef;
+                    dataGrid[colIndex + 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.maxValue / coef;
+
+                    DataGridViewCell minLimitCell = dataGrid[colIndex - 1, rowIndex];
+                    DataGridViewCell maxLimitCell = dataGrid[colIndex + 1, rowIndex];
 
                     if (parameters[i].group == null)
                     {
-                        string LimitsString = (parameters[i].globalParameter.chartDefaultXRange.minValue / coef).ToString() + " " + (parameters[i].globalParameter.chartDefaultXRange.maxValue / coef).ToString();
-                        parameters[i].cell.DataGridView[parameters[i].cell.ColumnIndex + 2, parameters[i].cell.RowIndex].Value = LimitsString;
                         minLimitCell.Value = "";
                         maxLimitCell.Value = "";
 
@@ -79,12 +84,11 @@ namespace fmCalcBlocksLibrary.Blocks
                         string newValLeft = parameters[i].group == null ? "" : (minValue / coef).ToString();
                         string newValRight = parameters[i].group == null ? "" : (maxValue / coef).ToString();
 
-                        parameters[i].cell.DataGridView[parameters[i].cell.ColumnIndex + 2, parameters[i].cell.RowIndex].Value = "";
                         minLimitCell.Value = newValLeft;
                         maxLimitCell.Value = newValRight;
 
-                        if (minValue > parameters[i].value
-                            || maxValue < parameters[i].value)
+                        if (minValue.Defined && maxValue.Defined 
+                            && (minValue > parameters[i].value || maxValue < parameters[i].value))
                         {
                             minLimitCell.Style.ForeColor = Color.Black;
                             maxLimitCell.Style.ForeColor = Color.Black;

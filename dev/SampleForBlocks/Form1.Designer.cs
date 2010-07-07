@@ -29,16 +29,17 @@ namespace SampleForBlocks
         private void InitializeComponent()
         {
             this.fmDataGrid1 = new fmDataGrid.fmDataGrid();
-            this.parameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.valueColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.maxLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.rangesColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.rangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculationOptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.precisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.parameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.minAbsLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.minLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.valueColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.maxLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.maxAbsLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.fmDataGrid1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -53,10 +54,11 @@ namespace SampleForBlocks
             this.fmDataGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.parameterNameColumn,
             this.unitsColumn,
+            this.minAbsLimitColumn,
             this.minLimitColumn,
             this.valueColumn,
             this.maxLimitColumn,
-            this.rangesColumn});
+            this.maxAbsLimitColumn});
             this.fmDataGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fmDataGrid1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.fmDataGrid1.HighLightCurrentRow = false;
@@ -66,36 +68,6 @@ namespace SampleForBlocks
             this.fmDataGrid1.RowTemplate.Height = 18;
             this.fmDataGrid1.Size = new System.Drawing.Size(728, 378);
             this.fmDataGrid1.TabIndex = 0;
-            // 
-            // parameterNameColumn
-            // 
-            this.parameterNameColumn.HeaderText = "Parameter";
-            this.parameterNameColumn.Name = "parameterNameColumn";
-            // 
-            // unitsColumn
-            // 
-            this.unitsColumn.HeaderText = "Units";
-            this.unitsColumn.Name = "unitsColumn";
-            // 
-            // minLimitColumn
-            // 
-            this.minLimitColumn.HeaderText = "Min";
-            this.minLimitColumn.Name = "minLimitColumn";
-            // 
-            // valueColumn
-            // 
-            this.valueColumn.HeaderText = "Value";
-            this.valueColumn.Name = "valueColumn";
-            // 
-            // maxLimitColumn
-            // 
-            this.maxLimitColumn.HeaderText = "Max";
-            this.maxLimitColumn.Name = "maxLimitColumn";
-            // 
-            // rangesColumn
-            // 
-            this.rangesColumn.HeaderText = "Ranges";
-            this.rangesColumn.Name = "rangesColumn";
             // 
             // menuStrip1
             // 
@@ -130,6 +102,48 @@ namespace SampleForBlocks
             this.precisionToolStripMenuItem.Text = "Precision";
             this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
             // 
+            // parameterNameColumn
+            // 
+            this.parameterNameColumn.HeaderText = "Parameter";
+            this.parameterNameColumn.Name = "parameterNameColumn";
+            // 
+            // unitsColumn
+            // 
+            this.unitsColumn.HeaderText = "Units";
+            this.unitsColumn.Name = "unitsColumn";
+            // 
+            // minAbsLimitColumn
+            // 
+            this.minAbsLimitColumn.HeaderText = "MinAbs";
+            this.minAbsLimitColumn.Name = "minAbsLimitColumn";
+            this.minAbsLimitColumn.Width = 60;
+            // 
+            // minLimitColumn
+            // 
+            this.minLimitColumn.HeaderText = "Min";
+            this.minLimitColumn.Name = "minLimitColumn";
+            this.minLimitColumn.Width = 60;
+            // 
+            // valueColumn
+            // 
+            this.valueColumn.HeaderText = "Value";
+            this.valueColumn.Name = "valueColumn";
+            this.valueColumn.Width = 60;
+            // 
+            // maxLimitColumn
+            // 
+            this.maxLimitColumn.HeaderText = "Max";
+            this.maxLimitColumn.Name = "maxLimitColumn";
+            this.maxLimitColumn.Width = 60;
+            // 
+            // maxAbsLimitColumn
+            // 
+            this.maxAbsLimitColumn.HeaderText = "MaxAbs";
+            this.maxAbsLimitColumn.Name = "maxAbsLimitColumn";
+            this.maxAbsLimitColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.maxAbsLimitColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.maxAbsLimitColumn.Width = 60;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,16 +166,17 @@ namespace SampleForBlocks
         #endregion
 
         private fmDataGrid.fmDataGrid fmDataGrid1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn parameterNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitsColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn minLimitColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn valueColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn maxLimitColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rangesColumn;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem rangesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem calculationOptionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem precisionToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parameterNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitsColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn minAbsLimitColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn minLimitColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn valueColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn maxLimitColumn;
+        private fmDataGrid.DataGridViewNumericalTextBoxColumn maxAbsLimitColumn;
     }
 }
 
