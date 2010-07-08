@@ -204,7 +204,7 @@ namespace FilterSimulation.fmFilterObjects
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
             {
                 p.value = simData.parameters[p.globalParameter].value;
-                p.isInputed = (simData.parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed;
+                p.IsInputed = (simData.parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed;
             }
         }
 
@@ -241,7 +241,7 @@ namespace FilterSimulation.fmFilterObjects
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
             {
                 simData.parameters[p.globalParameter].value = p.value;
-                (simData.parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed = p.isInputed;
+                (simData.parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed = p.IsInputed;
             }
         }
 
@@ -455,7 +455,7 @@ namespace FilterSimulation.fmFilterObjects
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
             {
                 p.value = sim.Parameters[p.globalParameter].value;
-                p.isInputed = (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed;
+                p.IsInputed = (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed;
             }
         }
 
@@ -496,12 +496,12 @@ namespace FilterSimulation.fmFilterObjects
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
             {
                 if (sim.Parameters[p.globalParameter].value != p.value
-                    || (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed != p.isInputed)
+                    || (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed != p.IsInputed)
                 {
                     sim.Modified = true;
                 }
                 sim.Parameters[p.globalParameter].value = p.value;
-                (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed = p.isInputed;
+                (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed = p.IsInputed;
             }
         }
     }

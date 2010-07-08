@@ -21,7 +21,7 @@ namespace fmCalcBlocksLibrary.BlockParameter
 
 
         //private bool m_isInputed;
-        public bool isInputed
+        public bool IsInputed
         {
             get
             {
@@ -42,7 +42,7 @@ namespace fmCalcBlocksLibrary.BlockParameter
         {
             this.group = null;
             this.cell = null;
-            isInputed = isInputedDefault;
+            IsInputed = isInputedDefault;
         }
     }
 }

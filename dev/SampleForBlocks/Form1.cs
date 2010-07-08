@@ -21,7 +21,7 @@ namespace SampleForBlocks
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            fmValue.outputPrecision = 6;
+            fmValue.outputPrecision = 3;
 
             fmBlock = new fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlockWithLimits();
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in fmBlock.Parameters)

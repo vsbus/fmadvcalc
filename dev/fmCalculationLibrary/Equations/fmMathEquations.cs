@@ -84,7 +84,7 @@ namespace fmCalculationLibrary.Equations
         
        
 
-        static public List<fmValue> SolveC1xp1C2xp2C3(fmValue c1, fmValue p1, fmValue c2, fmValue p2, fmValue c3)
+        static public List<fmValue> SolveC1xp1C2xp2C3(fmValue c1, fmValue p1, fmValue c2, fmValue p2, fmValue c3, fmValue upperBoundForBisection)
         {
             //return SolvePowerSumEquation(c3, new fmValue[,] {{c1, p1}, {c2, p2}});
             List<fmValue> result = new List<fmValue>();
@@ -131,12 +131,12 @@ namespace fmCalculationLibrary.Equations
 
             if (!x0.Defined)
             {
-                result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, _infinity, iterations));
+                result.Add(fmBisectionMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, upperBoundForBisection, iterations));
                 return result;
             }
 
-            result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, x0, iterations));
-            result.Add(fmNewtonMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), x0, _infinity, iterations));
+            result.Add(fmBisectionMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, x0, iterations));
+            result.Add(fmBisectionMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), x0, upperBoundForBisection, iterations));
 
             if (!result[1].Defined)
             {
@@ -198,7 +198,7 @@ namespace fmCalculationLibrary.Equations
 
         internal static List<fmValue> SolveC1xp1C2xp2C3xp3C4(fmValue c1, fmValue p1, fmValue c2, fmValue p2, fmValue c3, fmValue p3, fmValue c4)
         {
-            List<fmValue> breakPoints = SolveC1xp1C2xp2C3(c1*p1, p1 - p3, c2*p2, p2 - p3, c3*p3);
+            List<fmValue> breakPoints = SolveC1xp1C2xp2C3(c1*p1, p1 - p3, c2*p2, p2 - p3, c3*p3, _infinity);
             while (breakPoints.Count > 0 && breakPoints[0] == _zero)
                 breakPoints.RemoveAt(0);
             breakPoints.Insert(0, _zero);
@@ -210,7 +210,7 @@ namespace fmCalculationLibrary.Equations
 
             for (int i = 1; i < breakPoints.Count; ++i)
             {
-                fmValue localRoot = fmNewtonMethod.FindRoot(
+                fmValue localRoot = fmBisectionMethod.FindRoot(
                     new FunctionC1xp1C2xp2C3p3C4(c1, p1, c2, p2, c3, p3, c4),
                     breakPoints[i - 1], breakPoints[i], interations);
                 if (localRoot.Defined)
@@ -318,7 +318,7 @@ namespace fmCalculationLibrary.Equations
 
                 for (int i = 1; i < changingPoints.Count; ++i)
                 {
-                    fmValue localSolution = fmNewtonMethod.FindRoot(new FunctionPowerSum(freeCoeff, coeffsAndPowers),
+                    fmValue localSolution = fmBisectionMethod.FindRoot(new FunctionPowerSum(freeCoeff, coeffsAndPowers),
                                                                     changingPoints[i - 1],
                                                                     changingPoints[i], iterations);
                     if (localSolution.Defined)

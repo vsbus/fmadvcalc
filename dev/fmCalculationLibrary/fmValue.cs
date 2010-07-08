@@ -367,5 +367,56 @@ namespace fmCalculationLibrary
         {
             return Less(b, a);
         }
+
+        internal static fmValue Sign(fmValue beginValue, fmValue eps)
+        {
+            return new fmValue(Math.Abs(beginValue.Value) <= eps.Value ? 0 : beginValue.Value > 0 ? 1 : -1, beginValue.Defined && eps.Defined);
+        }
+
+        public fmValue RoundUp(fmValue x, int precision)
+        {
+            if (x.Value == 0)
+                return x;
+
+            double factor = GetFactor(x, precision);
+            x.Value *= factor;
+            x.Value = Math.Ceiling(x.Value - 1e-12);
+            x.Value /= factor;
+            return x;
+        }
+
+        public fmValue RoundDown(fmValue x, int precision)
+        {
+            if (x.Value == 0)
+                return x;
+
+            double factor = GetFactor(x, precision);
+            x.Value *= factor;
+            x.Value = Math.Floor(x.Value + 1e-12);
+            x.Value /= factor;
+            return x;
+        }
+
+        private double GetFactor(fmValue x, int precision)
+        {
+            double pMin = Math.Pow(10, precision - 1);
+            double pMax = Math.Pow(10, precision);
+            double factor = 1;
+            fmValue result = x;
+            
+            while (Math.Abs(result.Value) < pMin)
+            {
+                result.Value *= 10;
+                factor *= 10;
+            }
+
+            while (Math.Abs(result.Value) >= pMax)
+            {
+                result.Value /= 10;
+                factor /= 10;
+            }
+
+            return factor;
+        }
     }
 }

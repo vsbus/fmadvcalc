@@ -2,77 +2,81 @@ using System;
 
 namespace fmCalculationLibrary.NumericalMethods
 {
-    public class fmNewtonMethod
+    public class fmBisectionMethod
     {
-        private static bool IsIncreasing(fmFunction function, fmValue beginValue, fmValue endValue)
+        public static bool FindRootRange(fmFunction function, fmValue beginArg, fmValue endArg, int iterationsCount, out fmValue beginRes, out fmValue endRes)
         {
-            fmValue eps = new fmValue(0.1);
-            fmValue val1 = function.Eval(beginValue + (endValue - beginValue) * eps);
-            fmValue val2 = function.Eval(beginValue + (endValue - beginValue) * (1 - eps));
+            beginRes = new fmValue();
+            endRes = new fmValue();
 
-            if (!val1.Defined || !val2.Defined)
+            if (beginArg.Defined == false || endArg.Defined == false)
             {
                 return false;
             }
-
-            return val1 < val2;
-        }
-
-        private static bool IsDecreasing(fmFunction function, fmValue beginValue, fmValue endValue)
-        {
-            fmValue eps = new fmValue(0.1);
-            fmValue val1 = function.Eval(beginValue + (endValue - beginValue) * eps);
-            fmValue val2 = function.Eval(beginValue + (endValue - beginValue) * (1 - eps));
-
-            if (!val1.Defined || !val2.Defined)
+            
+            fmValue eps = new fmValue(1e-6);
+            fmValue len = fmValue.Abs(endArg - beginArg);
+            if (len < new fmValue(1))
+            {
+                eps = eps * len;
+            }
+            fmValue beginValue = function.Eval(beginArg + eps);
+            fmValue endValue = function.Eval(endArg - eps);
+            if (beginValue.Defined == false || endValue.Defined == false)
             {
                 return false;
             }
-
-            return val1 > val2;
-        }
-
-        public static fmValue FindRoot(fmFunction function, fmValue beginValue, fmValue endValue, int iterationsCount)
-        {
-            bool isIncreasing = IsIncreasing(function, beginValue, endValue);
-            bool isDecreasing = IsDecreasing(function, beginValue, endValue);
-
-            if (!isIncreasing && !isDecreasing)
+            if (beginValue == endValue)
             {
-                //throw new Exception("Function given to Newton method is not increasing and not decreasing.");
-                return new fmValue();
+                if (beginValue.Value == 0)
+                {
+                    beginRes = beginArg;
+                    endRes = endArg;
+                    return true;
+                }
+                else
+                    return false;
             }
+            
+            fmValue beginSign = fmValue.Sign(beginValue, eps);
+            fmValue endSign = fmValue.Sign(endValue, eps);
+            if ((beginSign * endSign).Value > 0)
+                return false;
 
-            fmValue left = beginValue;
-            fmValue right = endValue;
+            fmValue left = beginArg;
+            fmValue right = endArg;
             for (int i = 0; i < iterationsCount; ++i)
             {
                 fmValue middle = 0.5 * (left + right);
                 fmValue value = function.Eval(middle);
 
                 if (!value.Defined)
-                {
                     throw new Exception("Function given to NewtonMethod not defind in point " + middle.Value);
-                }
 
-                if (isIncreasing && value.Value > 0
-                    || isDecreasing && value.Value < 0)
-                {
+                fmValue midSign = fmValue.Sign(value, eps);
+                if (midSign.Value == 0 || midSign == endSign)
                     right = middle;
-                }
                 else
-                {
                     left = middle;
-                }
             }
 
-            fmValue res = 0.5 * (left + right);
-            fmValue eps = new fmValue(1e-8);
+            beginRes = left;
+            endRes = right;
+            return true;
+        }
 
-            if (fmValue.Abs(function.Eval(res)) > eps)
+        public static fmValue FindRoot(fmFunction function, fmValue beginArg, fmValue endArg, int iterationsCount)
+        {
+            fmValue beginRes;
+            fmValue endRes;
+            if (FindRootRange(function, beginArg, endArg, iterationsCount, out beginRes, out endRes) == true)
+            {
+                return 0.5 * (beginRes + endRes);
+            }
+            else
+            {
                 return new fmValue();
-
-            return res;
+            }
         }
     }
 }

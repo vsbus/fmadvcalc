@@ -687,7 +687,7 @@ namespace fmCalcBlocksLibrary.Blocks
             List<fmBlockVariableParameter> result = new List<fmBlockVariableParameter>();
             foreach (fmBlockVariableParameter p in parameters)
             {
-                if (p.isInputed)
+                if (p.IsInputed)
                 {
                     result.Add(p);
                 }
@@ -921,7 +921,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 bool found = inputedParameters.Contains(parameter.globalParameter);
                 bool notUsedGroup = parameter.group == null ? true : !groupUsed[parameter.group];
 
-                parameter.isInputed = found && notUsedGroup;
+                parameter.IsInputed = found && notUsedGroup;
 
                 if (parameter.group != null)
                     groupUsed[parameter.group] = true;

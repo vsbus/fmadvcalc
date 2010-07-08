@@ -652,7 +652,7 @@ namespace FilterSimulation
                 for (int i = 0; i < commonFilterMachiningBlock.Parameters.Count; ++i)
                 {
                     commonFilterMachiningBlock.Parameters[i].value = sim.filterMachiningBlock.Parameters[i].value;
-                    commonFilterMachiningBlock.Parameters[i].isInputed = sim.filterMachiningBlock.Parameters[i].isInputed;
+                    commonFilterMachiningBlock.Parameters[i].IsInputed = sim.filterMachiningBlock.Parameters[i].IsInputed;
                 }
                 commonFilterMachiningBlock.CalculateAndDisplay();
             }
@@ -743,7 +743,7 @@ namespace FilterSimulation
             {
                 fmBlockVariableParameter p2 = fSolution.CurrentObjects.Simulation.filterMachiningBlock.GetParameterByName(p.globalParameter.name);
                 p2.value = p.value;
-                p2.isInputed = p.isInputed;
+                p2.IsInputed = p.IsInputed;
             }
 
             fSolution.CurrentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();

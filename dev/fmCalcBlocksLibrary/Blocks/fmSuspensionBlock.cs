@@ -110,12 +110,12 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             if (processOnChange)
             {
-                rho_f.isInputed = true;
-                rho_s.isInputed = true;
-                rho_sus.isInputed = true;
-                Cm.isInputed = true;
-                Cv.isInputed = false;
-                C.isInputed = false;
+                rho_f.IsInputed = true;
+                rho_s.IsInputed = true;
+                rho_sus.IsInputed = true;
+                Cm.IsInputed = true;
+                Cv.IsInputed = false;
+                C.IsInputed = false;
 
                 foreach (fmBlockVariableParameter p in parameters)
                 {
@@ -126,28 +126,28 @@ namespace fmCalcBlocksLibrary.Blocks
                 //if (rBtn_rho_f.Checked)
                 if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED)
                 {
-                    rho_f.isInputed = false;
+                    rho_f.IsInputed = false;
                     //rho_f.cell.ReadOnly = true;
                     SetCellReadOnlyFlag(rho_f, true);
                 }
                 //else if (rBtn_rho_s.Checked)
                 else if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED)
                 {
-                    rho_s.isInputed = false;
+                    rho_s.IsInputed = false;
                     //rho_s.cell.ReadOnly = true;
                     SetCellReadOnlyFlag(rho_s, true);
                 }
                 //else if (rBtn_rho_sus.Checked)
                 else if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED)
                 {
-                    rho_sus.isInputed = false;
+                    rho_sus.IsInputed = false;
                     //rho_sus.cell.ReadOnly = true;
                     SetCellReadOnlyFlag(rho_sus, true);
                 }
                 //else if (rBtn_C.Checked)
                 else if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED)
                 {
-                    Cm.isInputed = false;
+                    Cm.IsInputed = false;
                     //Cm.cell.ReadOnly = true;
                     //Cv.cell.ReadOnly = true;
                     //C.cell.ReadOnly = true;

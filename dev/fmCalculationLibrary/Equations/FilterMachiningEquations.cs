@@ -97,7 +97,7 @@ namespace fmCalculationLibrary.Equations
             fmValue c2 = c * eps0 / fmValue.Pow(bar, nc - ne);
             fmValue c3 = -tf;
 
-            List<fmValue> roots = fmMathEquations.SolveC1xp1C2xp2C3(c1, p1, c2, p2, c3);
+            List<fmValue> roots = fmMathEquations.SolveC1xp1C2xp2C3(c1, p1, c2, p2, c3, new fmValue(1e10));
 
             return SelectBestDpRoot(roots);
         }
@@ -114,7 +114,7 @@ namespace fmCalculationLibrary.Equations
             }
 
             fmValue minLimit = 0.1 * bar;
-            fmValue maxLimit = 20 * bar;
+            fmValue maxLimit = 2000 * bar;
 
             while (localRoots.Count > 1 && localRoots[0] < minLimit)
                 localRoots.RemoveAt(0);
