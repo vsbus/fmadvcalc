@@ -40,9 +40,9 @@
     <Compile Include="Equations\fmEquationsCEPI.cs" />
     <Compile Include="fmGlobalParameter.cs" />
     <Compile Include="fmRange.cs" />
+    <Compile Include="NumericalMethods\fmBisectionMethod.cs" />
     <Compile Include="NumericalMethods\fmFunction.cs" />
     <Compile Include="Equations\fmMathEquations.cs" />
-    <Compile Include="NumericalMethods\fmNewtonMethod.cs" />
     <Compile Include="MeasureUnits\fmUnitFamily.cs" />
     <Compile Include="fmValue.cs" />
     <Compile Include="MeasureUnits\fmUnit.cs" />
