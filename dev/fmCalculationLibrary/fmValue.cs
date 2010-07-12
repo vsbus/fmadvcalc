@@ -418,5 +418,10 @@ namespace fmCalculationLibrary
 
             return factor;
         }
+
+        public static fmValue Min(fmValue a, fmValue b)
+        {
+            return a < b ? a : b;
+        }
     }
 }

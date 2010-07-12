@@ -49,6 +49,28 @@ namespace fmCalcBlocksLibrary.Blocks
                 Dictionary<fmGlobalParameter, fmResultCheckStatus> resultStatus = m_block.GetResultStatus(m_xParameter, x.Value);
                 fmValue result = new fmValue(1);
                 foreach (fmResultCheckStatus status in resultStatus.Values)
+                    if (status == fmResultCheckStatus.N_A)
+                        result.Value = 0;
+
+                return result;
+            }
+        }
+
+        private class fmIsAllDefinedAndNotNegative : fmCalculationLibrary.NumericalMethods.fmFunction
+        {
+            private fmFilterMachiningBlockWithLimits m_block;
+            private fmBlockVariableParameter m_xParameter;
+            public fmIsAllDefinedAndNotNegative(fmFilterMachiningBlockWithLimits block, fmBlockVariableParameter xParameter)
+            {
+                m_block = block;
+                m_xParameter = xParameter;
+            }
+
+            public override fmValue Eval(fmValue x)
+            {
+                Dictionary<fmGlobalParameter, fmResultCheckStatus> resultStatus = m_block.GetResultStatus(m_xParameter, x.Value);
+                fmValue result = new fmValue(1);
+                foreach (fmResultCheckStatus status in resultStatus.Values)
                     if (status == fmResultCheckStatus.N_A || status == fmResultCheckStatus.NEGATIVE)
                         result.Value = 0;
 
@@ -142,7 +164,8 @@ namespace fmCalcBlocksLibrary.Blocks
                         }
                         else
                         {
-                            GetMinMaxLimits(parameters[i], out minValue, out maxValue);
+                            //GetMinMaxLimits(parameters[i], out minValue, out maxValue);
+                            GetMinMaxLimitsOfIncompleteInputs(parameters[i], out minValue, out maxValue);
                             
                             if (minValue.Value > maxValue.Value)
                             {
@@ -175,6 +198,48 @@ namespace fmCalcBlocksLibrary.Blocks
 
                 processOnChange = true;
             }
+        }
+
+        private bool GetMinMaxLimitsOfIncompleteInputs(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue)
+        {
+            List<fmBlockVariableParameter> naInputs = GetNAInputsList();
+            naInputs.Remove(parameter);
+            bool result = false;
+            minValue = maxValue = new fmValue();
+
+            for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
+            {
+                for (int i = 0; i < naInputs.Count; ++i)
+                {
+                    fmBlockVariableParameter p = naInputs[i];
+                    p.value = new fmValue((mask & (1 << i)) == 0
+                                              ? p.globalParameter.chartDefaultXRange.minValue
+                                              : p.globalParameter.chartDefaultXRange.maxValue);
+                }
+
+                fmValue curMin, curMax;
+                if (GetMinMaxLimits(parameter, out curMin, out curMax))
+                {
+                    if (result == false)
+                    {
+                        result = true;
+                        minValue = curMin;
+                        maxValue = curMax;
+                    }
+                    else
+                    {
+                        minValue = fmValue.Min(minValue, curMin);
+                        maxValue = fmValue.Max(maxValue, curMax);
+                    }
+                }
+            }
+
+            foreach (fmBlockVariableParameter p in naInputs)
+            {
+                p.value = new fmValue();
+            }
+
+            return result;
         }
 
         private bool GetMinMaxLimits(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue)
@@ -339,14 +404,15 @@ namespace fmCalcBlocksLibrary.Blocks
             }
 
             left = minValue;
+            fmIsAllDefinedAndNotNegative isAllDefinedAndNotNegative = new fmIsAllDefinedAndNotNegative(this, parameter);
 
-            if (isAllDefined.Eval(maxValue) == trueValue)
+            if (isAllDefinedAndNotNegative.Eval(maxValue) == trueValue)
             {
                 right = maxValue;
             }
             else
             {
-                right = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(isAllDefined, left, maxValue, 30);
+                right = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(isAllDefinedAndNotNegative, left, maxValue, 30);
             }
 
             return true;
