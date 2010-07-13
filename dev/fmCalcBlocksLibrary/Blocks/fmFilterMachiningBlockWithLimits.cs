@@ -391,31 +391,37 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             // We use a fact that all results with min value of parameter are defined, otherwise we assume that there are no solution
             
-            fmIsAllDefined isAllDefined = new fmIsAllDefined(this, parameter);
-            fmValue falseValue = new fmValue(0);
+            fmIsAllDefinedAndNotNegative isAllDefinedAndNotNegative = new fmIsAllDefinedAndNotNegative(this, parameter);
             fmValue trueValue = new fmValue(1);
             fmValue minValue = new fmValue(parameter.globalParameter.chartDefaultXRange.minValue);
             fmValue maxValue = new fmValue(parameter.globalParameter.chartDefaultXRange.maxValue);
-            if (isAllDefined.Eval(minValue) == falseValue)
+
+            if (isAllDefinedAndNotNegative.Eval(minValue) == trueValue)
             {
-                left = new fmValue();
-                right = new fmValue();
-                return false;
+                left = minValue;
+                
+                if (isAllDefinedAndNotNegative.Eval(maxValue) == trueValue)
+                {
+                    right = maxValue;
+                }
+                else
+                {
+                    right = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(
+                        isAllDefinedAndNotNegative, left, maxValue, 30);
+                }
+
+                return true;
             }
-
-            left = minValue;
-            fmIsAllDefinedAndNotNegative isAllDefinedAndNotNegative = new fmIsAllDefinedAndNotNegative(this, parameter);
-
             if (isAllDefinedAndNotNegative.Eval(maxValue) == trueValue)
             {
                 right = maxValue;
+                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(
+                    isAllDefinedAndNotNegative, right, minValue, 30);
+                return true;
             }
-            else
-            {
-                right = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(isAllDefinedAndNotNegative, left, maxValue, 30);
-            }
-
-            return true;
+            left = new fmValue();
+            right = new fmValue();
+            return false;
         }
 
         //private fmValue GetFirstOKValue(fmBlockVariableParameter parameter,
