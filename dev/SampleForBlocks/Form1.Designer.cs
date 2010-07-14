@@ -29,10 +29,6 @@ namespace SampleForBlocks
         private void InitializeComponent()
         {
             this.fmDataGrid1 = new fmDataGrid.fmDataGrid();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.rangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.calculationOptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.precisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.minAbsLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
@@ -40,6 +36,11 @@ namespace SampleForBlocks
             this.valueColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.maxLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
             this.maxAbsLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.rangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calculationOptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.precisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetInputsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.fmDataGrid1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -69,48 +70,17 @@ namespace SampleForBlocks
             this.fmDataGrid1.Size = new System.Drawing.Size(728, 378);
             this.fmDataGrid1.TabIndex = 0;
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.rangesToolStripMenuItem,
-            this.calculationOptionToolStripMenuItem,
-            this.precisionToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(728, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // rangesToolStripMenuItem
-            // 
-            this.rangesToolStripMenuItem.Name = "rangesToolStripMenuItem";
-            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.rangesToolStripMenuItem.Text = "Ranges";
-            this.rangesToolStripMenuItem.Click += new System.EventHandler(this.rangesToolStripMenuItem_Click);
-            // 
-            // calculationOptionToolStripMenuItem
-            // 
-            this.calculationOptionToolStripMenuItem.Name = "calculationOptionToolStripMenuItem";
-            this.calculationOptionToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
-            this.calculationOptionToolStripMenuItem.Text = "Calculation Option";
-            this.calculationOptionToolStripMenuItem.Click += new System.EventHandler(this.calculationOptionToolStripMenuItem_Click);
-            // 
-            // precisionToolStripMenuItem
-            // 
-            this.precisionToolStripMenuItem.Name = "precisionToolStripMenuItem";
-            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.precisionToolStripMenuItem.Text = "Precision";
-            this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
-            // 
             // parameterNameColumn
             // 
             this.parameterNameColumn.HeaderText = "Parameter";
             this.parameterNameColumn.Name = "parameterNameColumn";
+            this.parameterNameColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // unitsColumn
             // 
             this.unitsColumn.HeaderText = "Units";
             this.unitsColumn.Name = "unitsColumn";
+            this.unitsColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // minAbsLimitColumn
             // 
@@ -141,8 +111,48 @@ namespace SampleForBlocks
             this.maxAbsLimitColumn.HeaderText = "MaxAbs";
             this.maxAbsLimitColumn.Name = "maxAbsLimitColumn";
             this.maxAbsLimitColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.maxAbsLimitColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.maxAbsLimitColumn.Width = 60;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rangesToolStripMenuItem,
+            this.calculationOptionToolStripMenuItem,
+            this.precisionToolStripMenuItem,
+            this.resetInputsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(728, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // rangesToolStripMenuItem
+            // 
+            this.rangesToolStripMenuItem.Name = "rangesToolStripMenuItem";
+            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.rangesToolStripMenuItem.Text = "Ranges";
+            this.rangesToolStripMenuItem.Click += new System.EventHandler(this.rangesToolStripMenuItem_Click);
+            // 
+            // calculationOptionToolStripMenuItem
+            // 
+            this.calculationOptionToolStripMenuItem.Name = "calculationOptionToolStripMenuItem";
+            this.calculationOptionToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
+            this.calculationOptionToolStripMenuItem.Text = "Calculation Option";
+            this.calculationOptionToolStripMenuItem.Click += new System.EventHandler(this.calculationOptionToolStripMenuItem_Click);
+            // 
+            // precisionToolStripMenuItem
+            // 
+            this.precisionToolStripMenuItem.Name = "precisionToolStripMenuItem";
+            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.precisionToolStripMenuItem.Text = "Precision";
+            this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
+            // 
+            // resetInputsToolStripMenuItem
+            // 
+            this.resetInputsToolStripMenuItem.Name = "resetInputsToolStripMenuItem";
+            this.resetInputsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
+            this.resetInputsToolStripMenuItem.Text = "Reset Inputs";
+            this.resetInputsToolStripMenuItem.Click += new System.EventHandler(this.resetInputsToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -177,6 +187,7 @@ namespace SampleForBlocks
         private fmDataGrid.DataGridViewNumericalTextBoxColumn valueColumn;
         private fmDataGrid.DataGridViewNumericalTextBoxColumn maxLimitColumn;
         private fmDataGrid.DataGridViewNumericalTextBoxColumn maxAbsLimitColumn;
+        private System.Windows.Forms.ToolStripMenuItem resetInputsToolStripMenuItem;
     }
 }
 

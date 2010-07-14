@@ -48,20 +48,40 @@ namespace fmDataGrid
         private void InitializeComponent()
         {
             #region Activate Immediate Writing text to cells
-            EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(fmDataGridEditingControlShowing);
+            EditingControlShowing += fmDataGridEditingControlShowing;
             #endregion
 
             #region Activate Immediate Writing checkBoxes to cells
             CellContentClick += fmCheckBoxClick;
             CellContentDoubleClick += fmCheckBoxClick;
             #endregion
-            
+
+            #region Activate Clearing of cell by pressing Delete button
+            KeyDown += fmKeyDown;
+            #endregion
+
             #region Setup font and row heights
             RowTemplate.Height = 18;
             Font = new Font(Font.FontFamily, 8.25f, FontStyle.Regular);
             #endregion
 
             SortCompare += fmDataGridSortCompare;
+        }
+
+        void fmKeyDown(object sender, KeyEventArgs e)
+        {
+            if (CurrentCell != null)
+            {
+                int colIndex = CurrentCell.ColumnIndex;
+                int rowIndex = CurrentCell.RowIndex;
+                if (e.KeyCode == Keys.Delete && colIndex != -1 && rowIndex != -1
+                    && Columns[colIndex].GetType() == (new DataGridViewNumericalTextBoxColumn()).GetType())
+                {
+                    CurrentCell.Value = "";
+                    if (CellValueChangedByUser != null)
+                        CellValueChangedByUser(this, new DataGridViewCellEventArgs(colIndex, rowIndex));
+                }
+            }
         }
 
         override protected void OnCellPainting(DataGridViewCellPaintingEventArgs e)

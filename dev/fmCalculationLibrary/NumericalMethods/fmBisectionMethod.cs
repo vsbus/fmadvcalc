@@ -15,8 +15,8 @@ namespace fmCalculationLibrary.NumericalMethods
             }
             
             fmValue eps = new fmValue(1e-6);
-            fmValue len = fmValue.Abs(endArg - beginArg);
-            if (len < new fmValue(1))
+            fmValue len = endArg - beginArg;
+            if (fmValue.Abs(len) < new fmValue(1))
             {
                 eps = eps * len;
             }

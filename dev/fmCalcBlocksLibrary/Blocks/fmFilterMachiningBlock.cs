@@ -861,50 +861,6 @@ namespace fmCalcBlocksLibrary.Blocks
             processOnChange = true;
         }
 
-        //private void CalculationOptionViewCheckChanged(object sender, EventArgs e)
-        //{
-        //    if (processOnChange && calculationOptionView != null)
-        //    {
-        //        //CalculationOption = calculationOptionView.GetSelectedOption();
-        //        calculationOption = calculationOptionView.GetSelectedOption();
-
-        //        UpdateGroups();
-
-        //        //List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(CalculationOption);
-        //        List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calculationOption);
-        //        Dictionary<fmBlockParameterGroup, bool> groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
-
-        //        foreach (fmBlockVariableParameter parameter in parameters)
-        //        {
-        //            if (parameter.group != null)
-        //            {
-        //                groupUsed[parameter.group] = false;
-        //            }
-        //        }
-
-        //        foreach (fmBlockVariableParameter parameter in parameters)
-        //        {
-        //            bool found = inputedParameters.Contains(parameter.globalParameter);
-        //            bool notUsedGroup = parameter.group == null ? true : !groupUsed[parameter.group];
-
-        //            parameter.isInputed = found && notUsedGroup;
-
-        //            if (parameter.group != null)
-        //            {
-        //                groupUsed[parameter.group] = true;
-        //            }
-
-        //            if (parameter.cell != null)
-        //            {
-        //                parameter.cell.ReadOnly = !found;
-        //            }
-        //        }
-
-        //        UpdateCellsBackColor();
-        //        ReWriteParameters();
-        //    }
-        //}
-
         public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption)
         {
             this.calculationOption = calculationOption;
@@ -970,6 +926,7 @@ namespace fmCalcBlocksLibrary.Blocks
             table[Qms] = Q_group;
             table[Qmsus] = Q_group;
             table[Qsus] = Q_group;
+            table[Dp] = Dp_group;
             table[sf] = sf_tr_group;
             table[tr] = sf_tr_group;
         }

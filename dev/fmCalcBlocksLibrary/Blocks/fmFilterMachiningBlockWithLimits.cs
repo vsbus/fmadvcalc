@@ -203,7 +203,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private bool GetMinMaxLimitsOfIncompleteInputs(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue)
         {
             List<fmBlockVariableParameter> naInputs = GetNAInputsList();
-            naInputs.Remove(parameter);
+            naInputs.Remove(FindGroupRepresetator(parameter.group));
             bool result = false;
             minValue = maxValue = new fmValue();
 
@@ -238,6 +238,7 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 p.value = new fmValue();
             }
+            DoCalculations();
 
             return result;
         }
@@ -406,8 +407,12 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
                 else
                 {
-                    right = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(
+                    /*
+                     * right = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(
                         isAllDefinedAndNotNegative, left, maxValue, 30);
+                     * */
+                    fmValue temp;
+                    fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllDefinedAndNotNegative, left, maxValue, 30, out right, out temp);
                 }
 
                 return true;
@@ -541,52 +546,8 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
             }
 
-            
             fmValue res = new fmValue(lo);
-            /*
-             * Dictionary<fmGlobalParameter, fmResultCheckStatus> endStatus = GetResultStatus(parameter, hi);
-            foreach(fmResultCheckStatus status in endStatus.Values)
-            {
-                if (status != fmResultCheckStatus.INSIDE_RANGE)
-                {
-                    res = new fmValue();
-                    break;
-                }
-            }
-             */
             return res;
-
-            /*
-            int n = 100 + 1;
-
-            List<fmValue> valuesToCheck = GetNodesList(a, b, n);
-            fmValue best = GetFirstOKValue(parameter, valuesToCheck);
-
-            //if (best.Defined == false)
-            //{
-            //    n = 1000 + 1;
-            //    valuesToCheck = GetNodesList(a, b, n);
-            //    best = GetFirstOKValue(parameter, valuesToCheck);
-            //}
-
-            if (best.Defined == false)
-            {
-                return new fmValue();
-            }
-
-            for (int it = 0; it < 10; ++it)
-            {
-                double d = (b - a) / (n - 1);
-                a = IsInRange(best.Value - d, a, b) ? best.Value - d : a;
-                b = IsInRange(best.Value + d, a, b) ? best.Value + d : b;
-                n = 20 + 1;
-
-                valuesToCheck = GetNodesList(a, b, n);
-                best = GetFirstOKValue(parameter, valuesToCheck);
-            }
-
-            return best;
-            */
         }
 
         private Dictionary<fmGlobalParameter, fmValue> GetResultsWithSpecialParameterValue(fmBlockVariableParameter parameter, double paramValue)

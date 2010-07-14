@@ -75,5 +75,14 @@ namespace SampleForBlocks
             doForm.ShowDialog();
             fmBlock.CalculateAndDisplay();
         }
+
+        private void resetInputsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in fmBlock.Parameters)
+            {
+                p.value = new fmValue();
+            }
+            fmBlock.CalculateAndDisplay();
+        }
     }
 }
