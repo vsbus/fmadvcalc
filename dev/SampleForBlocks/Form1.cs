@@ -32,7 +32,6 @@ namespace SampleForBlocks
                 fmBlock.AssignCell(p, fmDataGrid1["valueColumn", i]);
             }
 
-            
             fmBlock.hce_Value = new fmValue(0.005);
             fmBlock.Pc0_Value = new fmValue(1e-13);
             fmBlock.nc_Value = new fmValue(0.3);
@@ -48,6 +47,38 @@ namespace SampleForBlocks
 
             fmBlock.SetCalculationOptionAndUpdateCellsStyle(fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1);
             
+        }
+
+        private void CopyDataToSecondTable()
+        {
+            for (int i = 0; i < fmBlock.Parameters.Count; ++i)
+            {
+                if (fmDataGrid2.RowCount < i + 1)
+                {
+                    fmDataGrid2.RowCount = i + 1;
+                }
+                fmDataGrid2.Rows[i].Cells[0].Value = fmBlock.Parameters[i].globalParameter.name;
+                fmDataGrid2.Rows[i].Cells[1].Value = fmBlock.Parameters[i].globalParameter.UnitName;
+                double coef = fmBlock.Parameters[i].globalParameter.unitFamily.CurrentUnit.Coef;
+                fmDataGrid2.Rows[i].Cells[2].Value = fmBlock.Parameters[i].globalParameter.chartDefaultXRange.minValue / coef;
+                fmDataGrid2.Rows[i].Cells[3].Value = fmBlock.Parameters[i].ValueInUnits;
+                fmDataGrid2.Rows[i].Cells[4].Value = fmBlock.Parameters[i].globalParameter.chartDefaultXRange.maxValue / coef;
+                Color colorMin = fmBlock.Parameters[i].value.Defined == false
+                    || fmBlock.Parameters[i].value.Value < fmBlock.Parameters[i].globalParameter.chartDefaultXRange.minValue
+                        ? Color.Pink
+                        : Color.White;
+                Color colorMax = fmBlock.Parameters[i].value.Defined == false
+                    || fmBlock.Parameters[i].value.Value > fmBlock.Parameters[i].globalParameter.chartDefaultXRange.maxValue
+                        ? Color.Pink
+                        : Color.White;
+                Color colorValue = colorMin != Color.White || colorMax != Color.White ? Color.Pink : Color.White;
+                fmDataGrid2.Rows[i].Cells[2].Style.BackColor = colorMin;
+                fmDataGrid2.Rows[i].Cells[3].Style.BackColor = colorValue;
+                fmDataGrid2.Rows[i].Cells[4].Style.BackColor = colorMax;
+
+                fmBlock.Parameters[i].cell.DataGridView.Rows[fmBlock.Parameters[i].cell.RowIndex].Visible = fmBlock.Parameters[i].group != null;
+                fmDataGrid2.Rows[i].Visible = fmBlock.Parameters[i].group == null;
+            }
         }
 
         private void rangesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,6 +114,11 @@ namespace SampleForBlocks
                 p.value = new fmValue();
             }
             fmBlock.CalculateAndDisplay();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            CopyDataToSecondTable();
         }
     }
 }
