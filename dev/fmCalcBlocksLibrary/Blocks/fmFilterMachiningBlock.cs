@@ -973,6 +973,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
             //[Description("7: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr)")]
             table[A] = A_group;
+            table[Dp] = Dp_group;
             table[hc] = hc_MV_group;
             table[Vf] = hc_MV_group;
             table[Mf] = hc_MV_group;
