@@ -90,6 +90,16 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tr);
                     break;
 
+                //[Description("r: A, Dp, sf, (hc/tc/n)")]
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartForRanges:
+                    result.Add(fmGlobalParameter.A);
+                    result.Add(fmGlobalParameter.Dp);
+                    result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.hc);
+                    result.Add(fmGlobalParameter.tc);
+                    result.Add(fmGlobalParameter.n);
+                    break;
+
                 //[Description("1: Q, Dp, hc, (n/tc/tr)")]
                 case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1:
                     result.Add(fmGlobalParameter.Qms);
@@ -217,6 +227,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup tf_group = new fmBlockParameterGroup(Color.FromArgb(180, 230, 230));
         private readonly fmBlockParameterGroup hc_MV_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
         private readonly fmBlockParameterGroup hc_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
+        private readonly fmBlockParameterGroup hc_tc_n_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
         //private readonly fmBlockParameterGroup Msus_group = new fmBlockParameterGroup();
         //private readonly fmBlockParameterGroup Vsus_group = new fmBlockParameterGroup();
         //private readonly fmBlockParameterGroup Ms_group = new fmBlockParameterGroup();
@@ -909,11 +920,26 @@ namespace fmCalcBlocksLibrary.Blocks
                 SetGroupsOfStandart4(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4]);
                 SetGroupsOfStandart7(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart7]);
                 SetGroupsOfStandart8(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8]);
+                SetGroupsOfStandartForRanges(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartForRanges]);
                 SetGroupsOfDesign1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1]);
                 SetGroupsOfOptimization1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1]);
             }
 
             return table[calcOption][parameter];
+        }
+
+        private void SetGroupsOfStandartForRanges(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockVariableParameter p in parameters)
+                table[p] = null;
+
+            //[Description("r: A, Dp, sf, (hc/tc/n)")]
+            table[A] = A_group;
+            table[Dp] = Dp_group;
+            table[sf] = sf_tr_group;
+            table[hc] = hc_tc_n_group;
+            table[tc] = hc_tc_n_group;
+            table[n] = hc_tc_n_group;
         }
 
         private void SetGroupsOfOptimization1(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)

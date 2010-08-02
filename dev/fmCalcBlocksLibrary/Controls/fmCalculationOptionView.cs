@@ -56,6 +56,7 @@ namespace fmCalcBlocksLibrary.Controls
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4));
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart7));
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartForRanges));
             Nodes.Add(standartNode);
 
             TreeNode designNode = new TreeNode("Design");

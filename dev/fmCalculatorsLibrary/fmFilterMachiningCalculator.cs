@@ -109,6 +109,9 @@ namespace fmCalculatorsLibrary
             [Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
             Standart8,
 
+            [Description("r: A, Dp, sf, (hc/tc/n)")]
+            StandartForRanges,
+
             // Design -- In this case we have always the (Qsus, Qmsus, Qms) as input 
             // and the filter area A is calculated 
             [Description("1: Q, Dp, hc, (n/tc/tr)")]
@@ -135,7 +138,8 @@ namespace fmCalculatorsLibrary
               || calculationOption == FilterMachiningCalculationOption.Standart3
               || calculationOption == FilterMachiningCalculationOption.Standart4
               || calculationOption == FilterMachiningCalculationOption.Standart7
-              || calculationOption == FilterMachiningCalculationOption.Standart8;
+              || calculationOption == FilterMachiningCalculationOption.Standart8
+              || calculationOption == FilterMachiningCalculationOption.StandartForRanges;
         }
 
         private static bool IsDesignKindOption(FilterMachiningCalculationOption calculationOption)
@@ -306,6 +310,10 @@ namespace fmCalculatorsLibrary
             {
                 DoSubCalculationsStandart78();
             }
+            else if (IsStandartForRangesOption(calculationOption))
+            {
+                DoSubCalculationsStandartForRanges();
+            }
             else
             {
                 throw new Exception("Not classified calculation suboption of Standart");
@@ -322,6 +330,85 @@ namespace fmCalculatorsLibrary
             Qsus.value = FilterMachiningEquations.Eval_Qsus_From_Vsus_tc(Vsus.value, tc.value);
             Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Msus_tc(Msus.value, tc.value);
             Qms.value = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(Qmsus.value, Cm.value);
+        }
+
+        private void DoSubCalculationsStandartForRanges()
+        {
+            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+
+            eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+            Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+
+            if (hc.isInputed == false)
+            {
+                if (tc.isInputed)
+                {
+                    n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                }
+                else if (n.isInputed)
+                {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_n(n.value);
+                }
+                else
+                {
+                    throw new Exception("nothing from (hc, tc, n) was inputed in StandartForRanges option");
+                }
+
+                tf.value = FilterMachiningEquations.Eval_tf_From_sf_tc(sf.value, tc.value);
+                hc.value = FilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(hce.value, Pc.value, kappa.value, Dp.value, tf.value, eta_f.value);
+            }
+            else // hc.isInputed == true
+            {
+                tf.value = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
+                tc.value = FilterMachiningEquations.Eval_tc_From_tf_sf(tf.value, sf.value);
+                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+            }
+
+            Vf.value = FilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+            Vsus.value = FilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
+            Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+            Ms.value = FilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
+            Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+
+            tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+        }
+
+        private bool IsStandartForRangesOption(FilterMachiningCalculationOption calculationOption)
+        {
+            return calculationOption == FilterMachiningCalculationOption.StandartForRanges;
         }
         private void DoCalculationsDesign()
         {
