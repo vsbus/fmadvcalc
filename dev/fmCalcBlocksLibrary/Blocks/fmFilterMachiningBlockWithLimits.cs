@@ -79,11 +79,11 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         
-        private class fmIsAllInRanges : fmCalculationLibrary.NumericalMethods.fmFunction
+        private class fmIsOutOfRanges : fmCalculationLibrary.NumericalMethods.fmFunction
         {
             private fmFilterMachiningBlockWithLimits m_block;
             private fmBlockVariableParameter m_xParameter;
-            public fmIsAllInRanges(fmFilterMachiningBlockWithLimits block, fmBlockVariableParameter xParameter) 
+            public fmIsOutOfRanges(fmFilterMachiningBlockWithLimits block, fmBlockVariableParameter xParameter) 
             {
                 m_block = block;
                 m_xParameter = xParameter;
@@ -92,12 +92,11 @@ namespace fmCalcBlocksLibrary.Blocks
             public override fmValue Eval(fmValue x)
             {
                 Dictionary<fmGlobalParameter, fmResultCheckStatus> resultStatus = m_block.GetResultStatus(m_xParameter, x.Value);
-                fmValue result = new fmValue(1);
                 foreach (fmResultCheckStatus status in resultStatus.Values)
                     if (status != fmResultCheckStatus.INSIDE_RANGE)
-                        result.Value = 0;
+                        return new fmValue(1);
 
-                return result;
+                return new fmValue(0);
             }
         }
 
@@ -165,6 +164,8 @@ namespace fmCalcBlocksLibrary.Blocks
                         else
                         {
                             //GetMinMaxLimits(parameters[i], out minValue, out maxValue);
+                            
+                            CalculateAbsRanges();
                             GetMinMaxLimitsOfIncompleteInputs(parameters[i], out minValue, out maxValue);
                             
                             if (minValue.Value > maxValue.Value)
@@ -197,6 +198,74 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
 
                 processOnChange = true;
+            }
+        }
+
+        private void CalculateAbsRanges()
+        {
+            List<fmGlobalParameter> varList = new List<fmGlobalParameter>();
+            varList.Add(fmGlobalParameter.A);
+            varList.Add(fmGlobalParameter.Dp);
+            varList.Add(fmGlobalParameter.sf);
+            varList.Add(fmGlobalParameter.tc);
+
+            Dictionary<fmGlobalParameter, int> index = new Dictionary<fmGlobalParameter,int>();
+
+            List<fmCalculationBaseParameter> pList = new List<fmCalculationBaseParameter>();
+            for (int i = 0; i < AllParameters.Count; ++i)
+            {
+                fmCalculationBaseParameter p = AllParameters[i];
+
+                if (p is fmBlockVariableParameter)
+                {
+                    bool isInputed = varList.Contains(p.globalParameter);
+                    pList.Add(new fmCalculationVariableParameter(p.globalParameter, p.value, isInputed));
+                    index[p.globalParameter] = i;
+                    if (isInputed == false)
+                    {
+                        p.globalParameter.chartDefaultXRange.minValue = 1e100;
+                        p.globalParameter.chartDefaultXRange.maxValue = -1e100;
+                    }
+                }
+                else
+                {
+                    pList.Add(new fmCalculationConstantParameter(p.globalParameter, p.value));
+                }
+            }
+
+            fmCalculatorsLibrary.fmFilterMachiningCalculator calc = new fmFilterMachiningCalculator(pList);
+
+            for (int mask = 0; mask < (1 << varList.Count); ++mask)
+            {
+                for (int i = 0; i < varList.Count; ++i)
+                {
+                    if ((mask & (1 << i)) != 0)
+                    {
+                        pList[index[varList[i]]].value = new fmValue(varList[i].chartDefaultXRange.maxValue);
+                    }
+                    else
+                    {
+                        pList[index[varList[i]]].value = new fmValue(varList[i].chartDefaultXRange.minValue);
+                    }
+                }
+
+                calc.DoCalculations();
+
+                foreach (fmCalculationBaseParameter p in pList)
+                {
+                    if (p is fmCalculationVariableParameter)
+                    {
+                        if (p.value.Defined && p.globalParameter.chartDefaultXRange.maxValue < p.value.Value)
+                        {
+                            p.globalParameter.chartDefaultXRange.maxValue = p.value.Value;
+                        }
+
+                        if (p.value.Defined && p.globalParameter.chartDefaultXRange.minValue > p.value.Value)
+                        {
+                            p.globalParameter.chartDefaultXRange.minValue = Math.Max(0, p.value.Value);
+                        }
+                    }
+                }
             }
         }
 
@@ -260,9 +329,9 @@ namespace fmCalcBlocksLibrary.Blocks
                 return false;
             }
 
-            fmValue eps = 1e-8 * (maxValue - minValue);
-            minValue = minValue - eps;
-            maxValue = maxValue + eps;
+            fmValue eps = new fmValue(1e-10);// *(maxValue - minValue);
+            minValue = minValue * (1 - eps);
+            maxValue = maxValue * (1 + eps);
 
             return true;
         }
@@ -277,34 +346,62 @@ namespace fmCalcBlocksLibrary.Blocks
                 return false;
             }
 
-            fmIsAllInRanges isAllInRanges = new fmIsAllInRanges(this, parameter);
-            fmValue trueValue = new fmValue(1);
-            if (isAllInRanges.Eval(left) == trueValue)
+            fmIsOutOfRanges isOutOfRanges = new fmIsOutOfRanges(this, parameter);
+            fmValue falseValue = new fmValue(0);
+            if (isOutOfRanges.Eval(left) == falseValue)
             {
                 minValue = left;
             }
             else
             {
                 fmValue temp;
-                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllInRanges, point, left, 30, out temp, out minValue);
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isOutOfRanges, left, point, 40, out minValue, out temp);
             }
 
-            if (isAllInRanges.Eval(right) == trueValue)
+            if (isOutOfRanges.Eval(right) == falseValue)
             {
                 maxValue = right;
             }
             else
             {
                 fmValue temp;
-                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllInRanges, point, right, 30, out temp, out maxValue);
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isOutOfRanges, right, point, 40, out maxValue, out temp);
             }
 
             return true;
         }
 
+        bool isGoodResultStatus(Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus)
+        {
+            bool goodPoint = true;
+            foreach (fmResultCheckStatus status in resultSatus.Values)
+            {
+                if (status != fmResultCheckStatus.INSIDE_RANGE)
+                {
+                    goodPoint = false;
+                    break;
+                }
+            }
+            return goodPoint;
+        }
+
         private fmValue FindPointWithMeaningfulResult(fmBlockVariableParameter parameter, fmValue left, fmValue right)
         {
-            fmIsAllInRanges isAllInRanges = new fmIsAllInRanges(this, parameter);
+            fmIsOutOfRanges isAllInRanges = new fmIsOutOfRanges(this, parameter);
+
+            {
+                Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus1 = GetResultStatus(parameter, left.Value);
+                if (isGoodResultStatus(resultSatus1))
+                {
+                    return left;
+                }
+
+                Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus2 = GetResultStatus(parameter, right.Value);
+                if (isGoodResultStatus(resultSatus2))
+                {
+                    return right;
+                }
+            }
 
             for (int it = 0; it < 30; ++it)
             {
@@ -318,20 +415,10 @@ namespace fmCalcBlocksLibrary.Blocks
                     if (status == fmResultCheckStatus.N_A)
                         throw new Exception("resultSatus1 contains n/a in FindPointWithMeaningfulResult");
 
-                bool goodPoint = true;
-                foreach (fmResultCheckStatus status in resultSatus1.Values)
-                {
-                    if (status != fmResultCheckStatus.INSIDE_RANGE)
-                    {
-                        goodPoint = false;
-                        break;
-                    }
-                }
-                if (goodPoint)
+                if (isGoodResultStatus(resultSatus1))
                 {
                     return mid1;
                 }
-
 
                 Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus2 = GetResultStatus(parameter, mid2.Value);
                 foreach (fmResultCheckStatus status in resultSatus2.Values)
@@ -351,7 +438,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     {
                         needToGoRight = true;
                     }
-                    
+
                     if (curStatus == fmResultCheckStatus.LESS_THAN_MINIMUM && curBehavior == fmResultBehaviorStatus.DECREASING
                         || curStatus == fmResultCheckStatus.GREATER_THAN_MAXIMUM && curBehavior == fmResultBehaviorStatus.INCREASING)
                     {
@@ -396,6 +483,19 @@ namespace fmCalcBlocksLibrary.Blocks
             fmValue trueValue = new fmValue(1);
             fmValue minValue = new fmValue(parameter.globalParameter.chartDefaultXRange.minValue);
             fmValue maxValue = new fmValue(parameter.globalParameter.chartDefaultXRange.maxValue);
+
+            if (isAllDefinedAndNotNegative.Eval(minValue) != trueValue)
+            {
+                double eps = 1e-9;
+                if (minValue.Value == 0)
+                {
+                    minValue.Value += maxValue.Value * eps;
+                }
+                else
+                {
+                    minValue.Value *= 1 + eps;
+                }
+            }
 
             if (isAllDefinedAndNotNegative.Eval(minValue) == trueValue)
             {

@@ -14,12 +14,17 @@ namespace fmCalculationLibrary.NumericalMethods
                 return false;
             }
             
-            fmValue eps = new fmValue(1e-6);
             fmValue len = endArg - beginArg;
+            fmValue eps = new fmValue(1e-8);
+            if (len.Value < 0)
+            {
+                eps = -eps;
+            }
             if (fmValue.Abs(len) < new fmValue(1))
             {
-                eps = eps * len;
+                eps = eps * fmValue.Abs(len);
             }
+
             fmValue beginValue = function.Eval(beginArg + eps);
             fmValue endValue = function.Eval(endArg - eps);
             if (beginValue.Defined == false || endValue.Defined == false)
@@ -35,7 +40,15 @@ namespace fmCalculationLibrary.NumericalMethods
                     return true;
                 }
                 else
+                {
+                    if (function.Eval(endArg).Value == 0)
+                    {
+                        beginRes = endRes = endArg;
+                        return true;
+                    }
+
                     return false;
+                }
             }
             
             fmValue beginSign = fmValue.Sign(beginValue, eps);

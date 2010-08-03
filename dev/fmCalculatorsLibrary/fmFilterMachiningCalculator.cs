@@ -1104,15 +1104,17 @@ fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalcu
             if (calculationOption == FilterMachiningCalculationOption.Standart7)
             {
                 tf.value = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
-                tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
-                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
-                    
+                
                 if (sf.isInputed)
                 {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_tf_sf(tf.value, sf.value);
+                    n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
                     tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
                 }
                 else if (tr.isInputed)
                 {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
+                    n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
                     sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
                 }
                 else
