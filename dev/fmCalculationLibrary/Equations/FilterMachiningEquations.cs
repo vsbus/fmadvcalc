@@ -192,7 +192,7 @@ namespace fmCalculationLibrary.Equations
             fmValue x1 = (-b - fmValue.Sqrt(D)) / 2;
             fmValue x2 = (-b + fmValue.Sqrt(D)) / 2;
 
-            return x1;
+            return x2;
         }
 
         public static fmValue Eval_hc_From_A_Vf_kappa(fmValue A, fmValue Vf, fmValue kappa)

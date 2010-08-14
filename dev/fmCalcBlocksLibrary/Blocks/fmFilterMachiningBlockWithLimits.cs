@@ -403,8 +403,45 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
             }
 
+            {
+                Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus1 = GetResultStatus(parameter, left.Value);
+                bool ok = true;
+                foreach (fmResultCheckStatus status in resultSatus1.Values)
+                    if (status == fmResultCheckStatus.N_A)
+                        ok = false;
+
+                if (!ok)
+                {
+                    left += 1e-9 * (right - left);
+                    resultSatus1 = GetResultStatus(parameter, left.Value);
+                    foreach (fmResultCheckStatus status in resultSatus1.Values)
+                        if (status == fmResultCheckStatus.N_A)
+                            return new fmValue();
+                }
+
+
+                Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus2 = GetResultStatus(parameter, right.Value);
+                ok = true;
+                foreach (fmResultCheckStatus status in resultSatus2.Values)
+                    if (status == fmResultCheckStatus.N_A)
+                        ok = false;
+
+                if (!ok)
+                {
+                    right -= 1e-9 * (right - left);
+                    resultSatus2 = GetResultStatus(parameter, right.Value);
+                    foreach (fmResultCheckStatus status in resultSatus2.Values)
+                        if (status == fmResultCheckStatus.N_A)
+                            return new fmValue();
+                }
+            }
+
             for (int it = 0; it < 30; ++it)
             {
+                if (right - left <= right * 1e-9)
+                {
+                    break;
+                }
                 fmValue mid = 0.5 * (left + right);
                 fmValue eps = (right - left) * 1e-8;
                 fmValue mid1 = mid - eps;
@@ -512,7 +549,7 @@ namespace fmCalcBlocksLibrary.Blocks
                         isAllDefinedAndNotNegative, left, maxValue, 30);
                      * */
                     fmValue temp;
-                    fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllDefinedAndNotNegative, left, maxValue, 30, out right, out temp);
+                    fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllDefinedAndNotNegative, left, maxValue, 30, out temp, out right);
                 }
 
                 return true;
@@ -520,8 +557,9 @@ namespace fmCalcBlocksLibrary.Blocks
             if (isAllDefinedAndNotNegative.Eval(maxValue) == trueValue)
             {
                 right = maxValue;
-                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(
-                    isAllDefinedAndNotNegative, right, minValue, 30);
+                //left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(isAllDefinedAndNotNegative, right, minValue, 30);
+                fmValue temp;
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllDefinedAndNotNegative, right, minValue, 30, out temp, out left);
                 return true;
             }
             left = new fmValue();
