@@ -1,0 +1,94 @@
+digraph A {
+
+	Constants [label = "Constants:\nrho, eps0, Pc0\nnc, ne", color = grey];
+	Dp [color = blue];
+	A [color = blue];
+	eps_kappa [label = "eps; kappa", style = filled, color = "0.5 0.7 0.7"];
+	Pc_rc_a [label = "Pc; rc; a", style = filled, color = "0.5 0.7 0.7"];
+
+	Dp->eps_kappa [style = dotted];
+	Constants->eps_kappa [style = dotted, color = grey];
+
+	Dp->Pc_rc_a [style = dotted];
+	Constants->Pc_rc_a [style = dotted, color = grey];
+	eps_kappa->Pc_rc_a [style = dotted];
+
+	n_tc [label = "n; tc", color = green, shape = box];
+	tr [color = green];
+
+	hc [color = red];
+	v [label = "vc; \nvs; vsus", color = red];
+	vf [color = red];
+
+	tf [color = red, shape = box];
+	sf [color = red];
+
+	n_tc->sf [color = green];
+	tf->sf;
+
+	n_tc->tr [color = green];
+	tf->tr;
+
+	Constants->hc [style = dotted, color = grey];
+	Pc_rc_a->hc [style = dotted];
+	eps_kappa->hc [style = dotted];
+	Dp->hc [style = dotted];
+	tf->hc;
+
+	hc->v;
+	Constants->v [style = dotted, color = grey];
+	eps_kappa->v [style = dotted];
+
+	v->vf;
+	Constants->vf [style = dotted, color = grey];
+
+	Vf [color = red];
+	vf->Vf;
+
+	V [label = "Vs;\nVsus; Vcake", color = red];
+	v->V;
+	A->V [style = dotted, color = blue];
+
+	mf [color = red];
+	vf->mf;
+
+	m [label = "ms;\nmsus; mcake", color = red];
+	v->m;
+	Constants->m [style = dotted, color = grey];
+
+	Mf [color = red];
+	mf->Mf;
+
+	M [label = "Ms;\nMsus; Mcake", color = red];
+	m->M;
+	A->M [style = dotted, color = blue];
+
+	qf [color = red];
+	vf->qf;
+	tf->qf;
+
+	q [label = "qs;\nqsus; qcake", color = red];
+	v->q;
+	n_tc->q [color = green];
+
+	Qf [color = red];
+	qf->Qf;
+
+	Q [label = "Qs;\nQsus; Qcake", color = red];
+	q->Q;
+	A->Q [style = dotted, color = blue];
+
+	qmf [color = red];
+	qf->qmf;
+
+	qm [label = "qms;\nqmsus; qmcake", color = red];
+	q->qm;
+	Constants->qm [style = dotted, color = grey];
+
+	Qmf [color = red];
+	qmf->Qmf;
+
+	Qm [label = "Qms;\nQmsus; Qmcake", color = red];
+	qm->Qm;
+	A->Qm [style = dotted, color = blue];
+}
