@@ -17,7 +17,16 @@ digraph A {
 	tr [color = green];
 
 	hc [color = red];
-	v [label = "vf; vc; \nvs; vsus", color = red];
+	hc->vcake;
+	
+	eps_kappa->vf;
+	vcake->vf;
+
+	vf->vsus;
+	eps_kappa->vsus;
+
+	vsus->vs;
+	Constants->vs;
 
 	tf [color = red, shape = box];
 	sf [color = red];
@@ -33,10 +42,6 @@ digraph A {
 	eps_kappa->hc [style = dotted];
 	Dp->hc [style = dotted, color = blue];
 	tf->hc;
-
-	hc->v;
-	Constants->v [style = dotted, color = grey];
-	eps_kappa->v [style = dotted];
 
 	V [label = "Vf; Vs;\nVsus; Vcake", color = red];
 	v->V;
