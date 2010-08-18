@@ -100,6 +100,34 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.n);
                     break;
 
+                //[Description("global: A, Dp, (hc, V, M, tf, sf), (n, tc, tr)")]
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartGlobal:
+                    result.Add(fmGlobalParameter.A);
+                    result.Add(fmGlobalParameter.Dp);
+                    result.Add(fmGlobalParameter.hc);
+                    result.Add(fmGlobalParameter.vc);
+                    result.Add(fmGlobalParameter.vf);
+                    result.Add(fmGlobalParameter.vs);
+                    result.Add(fmGlobalParameter.vsus);
+                    result.Add(fmGlobalParameter.Vc);
+                    result.Add(fmGlobalParameter.Vf);
+                    result.Add(fmGlobalParameter.Vs);
+                    result.Add(fmGlobalParameter.Vsus);
+                    result.Add(fmGlobalParameter.mc);
+                    result.Add(fmGlobalParameter.mf);
+                    result.Add(fmGlobalParameter.ms);
+                    result.Add(fmGlobalParameter.msus);
+                    result.Add(fmGlobalParameter.Mc);
+                    result.Add(fmGlobalParameter.Mf);
+                    result.Add(fmGlobalParameter.Ms);
+                    result.Add(fmGlobalParameter.Msus);
+                    result.Add(fmGlobalParameter.tf);
+                    result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.n);
+                    result.Add(fmGlobalParameter.tc);
+                    result.Add(fmGlobalParameter.tr );
+                    break;
+
                 //[Description("1: Q, Dp, hc, (n/tc/tr)")]
                 case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1:
                     result.Add(fmGlobalParameter.Qms);
@@ -921,11 +949,44 @@ namespace fmCalcBlocksLibrary.Blocks
                 SetGroupsOfStandart7(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart7]);
                 SetGroupsOfStandart8(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8]);
                 SetGroupsOfStandartForRanges(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartForRanges]);
+                SetGroupsOfStandartGlobal(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartGlobal]);
                 SetGroupsOfDesign1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1]);
                 SetGroupsOfOptimization1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1]);
             }
 
             return table[calcOption][parameter];
+        }
+
+        private void SetGroupsOfStandartGlobal(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockVariableParameter p in parameters)
+                table[p] = null;
+
+            //[Description("global: A, Dp, (hc, V, M, tf, sf), (n, tc, tr)")]
+            table[A] = A_group;
+            table[Dp] = Dp_group;
+            table[hc] = hc_MV_group;
+            table[vc] = hc_MV_group;
+            table[vf] = hc_MV_group;
+            table[vs] = hc_MV_group;
+            table[vsus] = hc_MV_group;
+            table[Vc] = hc_MV_group;
+            table[Vf] = hc_MV_group;
+            table[Vs] = hc_MV_group;
+            table[Vsus] = hc_MV_group;
+            table[mc] = hc_MV_group;
+            table[mf] = hc_MV_group;
+            table[ms] = hc_MV_group;
+            table[msus] = hc_MV_group;
+            table[Mc] = hc_MV_group;
+            table[Mf] = hc_MV_group;
+            table[Ms] = hc_MV_group;
+            table[Msus] = hc_MV_group;
+            table[tf] = hc_MV_group;
+            table[sf] = hc_MV_group;
+            table[n] = n_tc_tr_group;
+            table[tc] = n_tc_tr_group;
+            table[tr] = n_tc_tr_group;
         }
 
         private void SetGroupsOfStandartForRanges(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)

@@ -330,9 +330,64 @@ namespace fmCalculationLibrary.Equations
             return V/t;
         }
 
-        public static fmValue eval_q_From_Q_A(fmValue Q, fmValue A)
+        public static fmValue Eval_q_From_Q_A(fmValue Q, fmValue A)
         {
             return Q/A;
+        }
+
+        public static fmValue Eval_vsus_From_vs_rho_Cm(fmValue vs, fmValue rho_s, fmValue rho_sus, fmValue Cm)
+        {
+            return vs * rho_s / (rho_sus * Cm);
+        }
+
+        public static fmValue Eval_vf_From_vsus_kappa(fmValue vsus, fmValue kappa)
+        {
+            return vsus / (1 + kappa);
+        }
+
+        public static fmValue Eval_vf_From_mc_kappa_rho(fmValue mc, fmValue kappa, fmValue rho_sus, fmValue rho_f)
+        {
+            return mc / ((1 + kappa) * rho_sus - rho_f);
+        }
+
+        public static fmValue Eval_vc_From_vf_kappa(fmValue vf, fmValue kappa)
+        {
+            return vf * kappa;
+        }
+
+        public static fmValue Eval_tf_From_sf_tr(fmValue sf, fmValue tr)
+        {
+            return sf * tr / (1 - sf);
+        }
+
+        public static fmValue Eval_vf_From_vc_kappa(fmValue vc, fmValue kappa)
+        {
+            return vc / kappa;
+        }
+
+        public static fmValue Eval_V_From_v_A(fmValue v, fmValue A)
+        {
+            return v * A;
+        }
+
+        public static fmValue Eval_vsus_From_vf_kappa(fmValue vf, fmValue kappa)
+        {
+            return vf * (1 + kappa);
+        }
+
+        public static fmValue Eval_mc_From_vf_kappa_rho(fmValue vf, fmValue kappa, fmValue rho_sus, fmValue rho_f)
+        {
+            return vf * ((1 + kappa) * rho_sus - rho_f);
+        }
+
+        public static fmValue Eval_vs_From_vsus_rho_Cm(fmValue vsus, fmValue rho_sus, fmValue rho_s, fmValue Cm)
+        {
+            return vsus * rho_sus / rho_s * Cm;
+        }
+
+        public static fmValue Eval_M_From_m_A(fmValue m, fmValue A)
+        {
+            return m * A;
         }
     }
 }
