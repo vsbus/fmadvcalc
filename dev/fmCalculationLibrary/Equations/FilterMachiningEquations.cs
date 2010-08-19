@@ -157,7 +157,12 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue Eval_tr_From_tc_tf(fmValue tc, fmValue tf)
         {
-            return tc - tf;
+            fmValue res = tc - tf;
+            if (fmValue.Abs(res) <= 1e-9 * fmValue.Max(fmValue.Abs(tc), fmValue.Abs(tf)))
+            {
+                res.Value = 0;
+            }
+            return res;
         }
 
         public static fmValue Eval_tf_From_tc_tr(fmValue tc, fmValue tr)

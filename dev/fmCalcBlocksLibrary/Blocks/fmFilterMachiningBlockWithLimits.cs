@@ -12,6 +12,14 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmFilterMachiningBlockWithLimits : fmFilterMachiningBlock
     {
+        public void DoCalculationsLimitsClue()
+        {
+            fmFilterMachiningCalculator filterMachinigCalculator =
+                new fmFilterMachiningCalculator(AllParameters);
+            filterMachinigCalculator.calculationOption = calculationOption;
+            filterMachinigCalculator.DoCalculationsLimitsClue();
+        }
+
         override public void DoCalculations()
         {
             base.DoCalculations();
@@ -688,9 +696,15 @@ namespace fmCalcBlocksLibrary.Blocks
             return res;
         }
 
-        private Dictionary<fmGlobalParameter, fmValue> GetResultsWithSpecialParameterValue(fmBlockVariableParameter parameter, double paramValue)
+        private Dictionary<fmGlobalParameter, fmValue> GetClueResultsWithSpecialParameterValue(fmBlockVariableParameter parameter, double paramValue)
         {
             Dictionary<fmGlobalParameter, fmValue> result = new Dictionary<fmGlobalParameter, fmValue>();
+
+            List<fmValue> keepedValues = new List<fmValue>();
+            for (int i = 0; i < parameters.Count; ++i)
+            {
+                keepedValues.Add(parameters[i].value);
+            }
 
             fmBlockVariableParameter groupInput = FindGroupRepresetator(parameter.group);
             fmValue groupInputInitialValue = groupInput.value;
@@ -699,23 +713,28 @@ namespace fmCalcBlocksLibrary.Blocks
 
             parameter.value = new fmValue(paramValue);
 
-            DoCalculations();
+            DoCalculationsLimitsClue();
 
-            foreach (fmBlockVariableParameter p in parameters)
-                result[p.globalParameter] = p.value;
+            result[fmGlobalParameter.A] = GetParameterByName(fmGlobalParameter.A.name).value;
+            result[fmGlobalParameter.Dp] = GetParameterByName(fmGlobalParameter.Dp.name).value;
+            result[fmGlobalParameter.sf] = GetParameterByName(fmGlobalParameter.sf.name).value;
+            result[fmGlobalParameter.tc] = GetParameterByName(fmGlobalParameter.tc.name).value;
 
             parameter.IsInputed = false;
             groupInput.value = groupInputInitialValue;
             groupInput.IsInputed = true;
 
-            DoCalculations();
+            for (int i = 0; i < Parameters.Count; ++i)
+            {
+                parameters[i].value = keepedValues[i];
+            }
 
             return result;
         }
 
         private Dictionary<fmGlobalParameter, fmResultCheckStatus> GetResultStatus(fmBlockVariableParameter parameter, double valueToCheck)
         {
-            Dictionary<fmGlobalParameter, fmValue> resultValues = GetResultsWithSpecialParameterValue(parameter, valueToCheck);
+            Dictionary<fmGlobalParameter, fmValue> resultValues = GetClueResultsWithSpecialParameterValue(parameter, valueToCheck);
             Dictionary<fmGlobalParameter, fmResultCheckStatus> result = new Dictionary<fmGlobalParameter, fmResultCheckStatus>();
 
             foreach (fmGlobalParameter p in resultValues.Keys)
@@ -751,8 +770,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private Dictionary<fmGlobalParameter, fmResultBehaviorStatus> GetResultBehavior(fmBlockVariableParameter parameter, double x1, double x2)
         {
-            Dictionary<fmGlobalParameter, fmValue> result1 = GetResultsWithSpecialParameterValue(parameter, x1);
-            Dictionary<fmGlobalParameter, fmValue> result2 = GetResultsWithSpecialParameterValue(parameter, x2);
+            Dictionary<fmGlobalParameter, fmValue> result1 = GetClueResultsWithSpecialParameterValue(parameter, x1);
+            Dictionary<fmGlobalParameter, fmValue> result2 = GetClueResultsWithSpecialParameterValue(parameter, x2);
             Dictionary<fmGlobalParameter, fmResultBehaviorStatus> result = new Dictionary<fmGlobalParameter, fmResultBehaviorStatus>();
             foreach (fmGlobalParameter p in result1.Keys)
             {
