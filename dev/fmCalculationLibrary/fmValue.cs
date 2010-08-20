@@ -423,5 +423,16 @@ namespace fmCalculationLibrary
         {
             return a < b ? a : b;
         }
+
+        public static int epsCompare(double x, double y, double eps)
+        {
+            double A = Math.Max(Math.Abs(x), Math.Abs(y));
+            eps = Math.Max(eps, eps * A);
+            if (Math.Abs(x - y) <= eps)
+            {
+                return 0;
+            }
+            return x < y ? -1 : 1;
+        }
     }
 }

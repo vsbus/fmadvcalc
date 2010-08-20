@@ -289,9 +289,12 @@ namespace fmCalcBlocksLibrary.Blocks
                 for (int i = 0; i < naInputs.Count; ++i)
                 {
                     fmBlockVariableParameter p = naInputs[i];
-                    p.value = new fmValue((mask & (1 << i)) == 0
-                                              ? p.globalParameter.chartDefaultXRange.minValue
-                                              : p.globalParameter.chartDefaultXRange.maxValue);
+                    double minVal = p.globalParameter.chartDefaultXRange.minValue;
+                    double maxVal = p.globalParameter.chartDefaultXRange.maxValue;
+                    double eps = 1e-8;
+                    minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
+                    maxVal = maxVal * (1 - eps);
+                    p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
                 }
 
                 fmValue curMin, curMax;
@@ -746,15 +749,16 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
                 else
                 {
-                    if (curValue.Value < 0)
+                    double eps = 1e-9;
+                    if (fmValue.epsCompare(curValue.Value, 0, eps) < 0)
                     {
                         result[p] = fmResultCheckStatus.NEGATIVE;
                     }
-                    else if (curValue.Value > p.chartDefaultXRange.maxValue)
+                    else if (fmValue.epsCompare(curValue.Value, p.chartDefaultXRange.maxValue, eps) > 0)
                     {
                         result[p] = fmResultCheckStatus.GREATER_THAN_MAXIMUM;
                     }
-                    else if (curValue.Value < p.chartDefaultXRange.minValue)
+                    else if (fmValue.epsCompare(curValue.Value, p.chartDefaultXRange.minValue, eps) < 0)
                     {
                         result[p] = fmResultCheckStatus.LESS_THAN_MINIMUM;
                     }
