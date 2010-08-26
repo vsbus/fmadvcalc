@@ -249,7 +249,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private readonly fmBlockParameterGroup A_group = new fmBlockParameterGroup(Color.FromArgb(150, 250, 180));
         private readonly fmBlockParameterGroup Dp_group = new fmBlockParameterGroup(Color.FromArgb(250, 210, 150));
-        private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 240));
+        private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 200));
         private readonly fmBlockParameterGroup n_tc_group = new fmBlockParameterGroup(Color.FromArgb(250, 230, 150));
         private readonly fmBlockParameterGroup n_tc_tr_group = new fmBlockParameterGroup(Color.FromArgb(230, 240, 190));
         private readonly fmBlockParameterGroup tf_group = new fmBlockParameterGroup(Color.FromArgb(180, 230, 230));
@@ -962,9 +962,14 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
-            //[Description("global: A, Dp, (hc, V, M, tf, sf), (n, tc, tr)")]
+            //[Description("global: A, Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
             table[A] = A_group;
+            
             table[Dp] = Dp_group;
+            
+            table[sf] = sf_tr_group;
+            table[tr] = sf_tr_group;
+
             table[hc] = hc_MV_group;
             table[vc] = hc_MV_group;
             table[vf] = hc_MV_group;
@@ -983,10 +988,9 @@ namespace fmCalcBlocksLibrary.Blocks
             table[Ms] = hc_MV_group;
             table[Msus] = hc_MV_group;
             table[tf] = hc_MV_group;
-            table[sf] = hc_MV_group;
-            table[n] = n_tc_tr_group;
-            table[tc] = n_tc_tr_group;
-            table[tr] = n_tc_tr_group;
+            table[n] = hc_MV_group;
+            table[tc] = hc_MV_group;
+            
         }
 
         private void SetGroupsOfStandartForRanges(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)

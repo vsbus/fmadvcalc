@@ -394,5 +394,15 @@ namespace fmCalculationLibrary.Equations
         {
             return m * A;
         }
+
+        public static fmValue Eval_tr_From_tc_sf(fmValue tc, fmValue sf)
+        {
+            return tc*(1 - sf);
+        }
+
+        public static fmValue Eval_sf_From_tr_tc(fmValue tr, fmValue tc)
+        {
+            return (tc - tr)/tc;
+        }
     }
 }

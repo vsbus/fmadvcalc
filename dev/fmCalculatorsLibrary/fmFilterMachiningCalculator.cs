@@ -112,7 +112,7 @@ namespace fmCalculatorsLibrary
             [Description("r: A, Dp, sf, (hc/tc/n)")]
             StandartForRanges,
 
-            [Description("global: A, Dp, (hc, V, M, tf, sf), (n, tc, tr)")]
+            [Description("global: A, Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
             StandartGlobal,
 
             // Design -- In this case we have always the (Qsus, Qmsus, Qms) as input 
@@ -744,43 +744,50 @@ namespace fmCalculatorsLibrary
                 isKnown_tf = true;
             }
 
-            if (isKnown_sf)
+            if (isKnown_tf)
             {
-                if (n.isInputed)
+                if (sf.isInputed)
                 {
-                    tc.value = FilterMachiningEquations.Eval_tc_From_n(n.value);
-                    tf.value = FilterMachiningEquations.Eval_tf_From_sf_tc(sf.value, tc.value);
-                }
-                else if (tc.isInputed)
-                {
-                    tf.value = FilterMachiningEquations.Eval_tf_From_sf_tc(sf.value, tc.value);
+                    tc.value = FilterMachiningEquations.Eval_tc_From_tf_sf(tf.value, sf.value);
                 }
                 else if (tr.isInputed)
                 {
-                    tf.value = FilterMachiningEquations.Eval_tf_From_sf_tr(sf.value, tr.value);
+                    tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
                 }
+                else
+                {
+                    throw new Exception("sf or tr must be inputed");
+                }
+
+                isKnown_tc = true;
+                
+                n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+                isKnown_n = true;
             }
 
-
-
-
-            if (isKnown_n)
+            if (n.isInputed)
             {
                 tc.value = FilterMachiningEquations.Eval_tc_From_n(n.value);
-                isKnown_tc = true;
             }
 
-            if (isKnown_tr)
+            if (isKnown_sf)
             {
-                tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
-                isKnown_tc = true;
+                tr.value = FilterMachiningEquations.Eval_tr_From_tc_sf(tc.value, sf.value);
+                isKnown_tr = true;
             }
-
+            else if (isKnown_tr)
+            {
+                sf.value = FilterMachiningEquations.Eval_sf_From_tr_tc(tr.value, tc.value);
+                isKnown_sf = true;
+            }
+            else
+            {
+                throw new Exception("sf or tr must be inputed");
+            }
 
             if (!isKnown_n) n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
+            if (!isKnown_tf) tf.value = FilterMachiningEquations.Eval_tf_From_sf_tc(sf.value, tc.value);
             if (!isKnown_tr) tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
-
-            if (!isKnown_sf) sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
             if (!isKnown_hc) hc.value = FilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(hce.value, Pc.value, kappa.value, Dp.value, tf.value, eta_f.value);
             if (!isKnown_vc) vc.value = hc.value;
             if (!isKnown_vf) vf.value = FilterMachiningEquations.Eval_vf_From_vc_kappa(vc.value, kappa.value);
@@ -798,7 +805,6 @@ namespace fmCalculatorsLibrary
             if (!isKnown_Vs) Vs.value = FilterMachiningEquations.Eval_V_From_v_A(vs.value, A.value);
             if (!isKnown_Msus) Msus.value = FilterMachiningEquations.Eval_M_From_m_A(msus.value, A.value);
             if (!isKnown_Ms) Ms.value = FilterMachiningEquations.Eval_M_From_m_A(ms.value, A.value);
-
 
             Qsus.value = FilterMachiningEquations.Eval_Qsus_From_Vsus_tc(Vsus.value, tc.value);
             Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Msus_tc(Msus.value, tc.value);
