@@ -116,6 +116,8 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 processOnChange = false;
 
+                CalculateAbsRanges();
+
                 for (int i = 0; i < parameters.Count; ++i)
                 {
                     if (parameters[i].cell == null)
@@ -127,7 +129,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     int rowIndex = parameters[i].cell.RowIndex;
                     int colIndex = parameters[i].cell.ColumnIndex;
                     double coef = parameters[i].globalParameter.unitFamily.CurrentUnit.Coef;
-                    
+
                     dataGrid[colIndex - 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.minValue / coef;
                     dataGrid[colIndex + 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.maxValue / coef;
 
@@ -158,49 +160,31 @@ namespace fmCalcBlocksLibrary.Blocks
                     else
                     {
                         fmValue minValue, maxValue;
-                            
-                        if (parameters[i].group == null)
-                        {
-                            minLimitCell.Value = "";
-                            maxLimitCell.Value = "";
 
+                        GetMinMaxLimitsOfIncompleteInputs(parameters[i], out minValue, out maxValue);
+
+                        if (minValue.Value > maxValue.Value)
+                        {
+                            minValue = maxValue = new fmValue();
+                        }
+
+                        minLimitCell.Value = (minValue / coef).ToString();
+                        maxLimitCell.Value = (maxValue / coef).ToString();
+
+                        if (minValue.Defined && maxValue.Defined
+                        && (minValue > parameters[i].value || maxValue < parameters[i].value))
+                        {
+                            minLimitCell.Style.ForeColor = Color.Black;
+                            maxLimitCell.Style.ForeColor = Color.Black;
+                            minLimitCell.Style.BackColor = Color.Red;
+                            maxLimitCell.Style.BackColor = Color.Red;
+                        }
+                        else
+                        {
                             minLimitCell.Style.ForeColor = Color.Black;
                             maxLimitCell.Style.ForeColor = Color.Black;
                             minLimitCell.Style.BackColor = Color.White;
                             maxLimitCell.Style.BackColor = Color.White;
-                        }
-                        else
-                        {
-                            //GetMinMaxLimits(parameters[i], out minValue, out maxValue);
-                            
-                            CalculateAbsRanges();
-                            GetMinMaxLimitsOfIncompleteInputs(parameters[i], out minValue, out maxValue);
-                            
-                            if (minValue.Value > maxValue.Value)
-                            {
-                                minValue = maxValue = new fmValue();
-                            }
-
-                            //minLimitCell.Value = minValue.RoundUp(minValue / coef, fmValue.outputPrecision).ToString();
-                            //maxLimitCell.Value = minValue.RoundDown(maxValue / coef, fmValue.outputPrecision).ToString();
-                            minLimitCell.Value = (minValue / coef).ToString();
-                            maxLimitCell.Value = (maxValue / coef).ToString();
-
-                            if (minValue.Defined && maxValue.Defined
-                            && (minValue > parameters[i].value || maxValue < parameters[i].value))
-                            {
-                                minLimitCell.Style.ForeColor = Color.Black;
-                                maxLimitCell.Style.ForeColor = Color.Black;
-                                minLimitCell.Style.BackColor = Color.Red;
-                                maxLimitCell.Style.BackColor = Color.Red;
-                            }
-                            else
-                            {
-                                minLimitCell.Style.ForeColor = Color.Black;
-                                maxLimitCell.Style.ForeColor = Color.Black;
-                                minLimitCell.Style.BackColor = Color.White;
-                                maxLimitCell.Style.BackColor = Color.White;
-                            }
                         }
                     }
                 }
@@ -279,48 +263,161 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private bool GetMinMaxLimitsOfIncompleteInputs(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue)
         {
-            List<fmBlockVariableParameter> naInputs = GetNAInputsList();
-            naInputs.Remove(FindGroupRepresetator(parameter.group));
-            bool result = false;
-            minValue = maxValue = new fmValue();
-
-            for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
+            if (calculationOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartGlobal)
             {
-                for (int i = 0; i < naInputs.Count; ++i)
+                List<fmValue> keepedValues = new List<fmValue>();
+                for (int i = 0; i < parameters.Count; ++i)
                 {
-                    fmBlockVariableParameter p = naInputs[i];
-                    double minVal = p.globalParameter.chartDefaultXRange.minValue;
-                    double maxVal = p.globalParameter.chartDefaultXRange.maxValue;
-                    double eps = 1e-8;
-                    minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
-                    maxVal = maxVal * (1 - eps);
-                    p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
+                    keepedValues.Add(parameters[i].value);
                 }
 
-                fmValue curMin, curMax;
-                if (GetMinMaxLimits(parameter, out curMin, out curMax))
+                List<fmBlockVariableParameter> keepedInputInfo = new List<fmBlockVariableParameter>();
+                foreach (fmBlockVariableParameter p in parameters)
                 {
-                    if (result == false)
+                    if (p.IsInputed)
                     {
-                        result = true;
-                        minValue = curMin;
-                        maxValue = curMax;
-                    }
-                    else
-                    {
-                        minValue = fmValue.Min(minValue, curMin);
-                        maxValue = fmValue.Max(maxValue, curMax);
+                        keepedInputInfo.Add(p);
                     }
                 }
-            }
 
-            foreach (fmBlockVariableParameter p in naInputs)
+                UpdateIsInputed(parameter);
+                parameter.value = new fmValue();
+
+                List<fmBlockVariableParameter> naInputs = new List<fmBlockVariableParameter>();
+                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.name), naInputs);
+                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.Dp.name), naInputs);
+                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.name), naInputs);
+                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.tc.name), naInputs);
+
+                //bool result = false;
+                //minValue = maxValue = new fmValue();
+
+                //for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
+                //{
+                //    for (int i = 0; i < naInputs.Count; ++i)
+                //    {
+                //        fmBlockVariableParameter p = naInputs[i];
+                //        double minVal = p.globalParameter.chartDefaultXRange.minValue;
+                //        double maxVal = p.globalParameter.chartDefaultXRange.maxValue;
+                //        //double eps = 1e-8;
+                //        //minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
+                //        //maxVal = maxVal * (1 - eps);
+                //        p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
+                //    }
+
+                //    DoCalculations();
+
+                //    if (result == false)
+                //    {
+                //        minValue = maxValue = parameter.value;
+                //        result = true;
+                //    }
+                //    else
+                //    {
+                //        minValue = fmValue.Min(minValue, parameter.value);
+                //        maxValue = fmValue.Max(maxValue, parameter.value);
+                //    }
+                //}
+                naInputs.Remove(FindGroupRepresetator(parameter.group));
+                bool result = false;
+                minValue = maxValue = new fmValue();
+
+                for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
+                {
+                    for (int i = 0; i < naInputs.Count; ++i)
+                    {
+                        fmBlockVariableParameter p = naInputs[i];
+                        double minVal = p.globalParameter.chartDefaultXRange.minValue;
+                        double maxVal = p.globalParameter.chartDefaultXRange.maxValue;
+                        double eps = 1e-8;
+                        minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
+                        maxVal = maxVal * (1 - eps);
+                        p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
+                    }
+
+                    fmValue curMin, curMax;
+                    if (GetMinMaxLimits(parameter, out curMin, out curMax))
+                    {
+                        if (result == false)
+                        {
+                            result = true;
+                            minValue = curMin;
+                            maxValue = curMax;
+                        }
+                        else
+                        {
+                            minValue = fmValue.Min(minValue, curMin);
+                            maxValue = fmValue.Max(maxValue, curMax);
+                        }
+                    }
+                }
+
+                for (int i = 0; i < Parameters.Count; ++i)
+                {
+                    parameters[i].value = keepedValues[i];
+                }
+
+                foreach (fmBlockVariableParameter p in keepedInputInfo)
+                {
+                    UpdateIsInputed(p);
+                }
+
+                return result;
+            }
+            else
             {
-                p.value = new fmValue();
-            }
-            DoCalculations();
+                List<fmBlockVariableParameter> naInputs = GetNAInputsList();
+                naInputs.Remove(FindGroupRepresetator(parameter.group));
+                bool result = false;
+                minValue = maxValue = new fmValue();
 
-            return result;
+                for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
+                {
+                    for (int i = 0; i < naInputs.Count; ++i)
+                    {
+                        fmBlockVariableParameter p = naInputs[i];
+                        double minVal = p.globalParameter.chartDefaultXRange.minValue;
+                        double maxVal = p.globalParameter.chartDefaultXRange.maxValue;
+                        double eps = 1e-8;
+                        minVal = minVal == 0 ? Math.Min(maxVal, 1)*eps : minVal*(1 + eps);
+                        maxVal = maxVal*(1 - eps);
+                        p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
+                    }
+
+                    fmValue curMin, curMax;
+                    if (GetMinMaxLimits(parameter, out curMin, out curMax))
+                    {
+                        if (result == false)
+                        {
+                            result = true;
+                            minValue = curMin;
+                            maxValue = curMax;
+                        }
+                        else
+                        {
+                            minValue = fmValue.Min(minValue, curMin);
+                            maxValue = fmValue.Max(maxValue, curMax);
+                        }
+                    }
+                }
+
+                foreach (fmBlockVariableParameter p in naInputs)
+                {
+                    p.value = new fmValue();
+                }
+                DoCalculations();
+
+                return result;
+            }
+        }
+
+        private void CheckNAAndAdd(fmBlockVariableParameter p, List<fmBlockVariableParameter> naInputs)
+        {
+            if (FindGroupRepresetator(p.group).value.Defined == false)
+            {
+                naInputs.Add(p);
+                UpdateIsInputed(p);
+            }
         }
 
         private bool GetMinMaxLimits(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue)
