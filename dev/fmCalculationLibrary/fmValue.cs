@@ -5,7 +5,7 @@ namespace fmCalculationLibrary
 {
     public struct fmValue : IComparable
     {
-        private const string UNDEFINED_VALUE = "n/a";
+        private const string UNDEFINED_VALUE = "";
         public bool Defined;
         public double Value;
         public static int outputPrecision = 3;
