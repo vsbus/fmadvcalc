@@ -171,19 +171,45 @@ namespace fmCalcBlocksLibrary.Blocks
                         minLimitCell.Value = (minValue / coef).ToString();
                         maxLimitCell.Value = (maxValue / coef).ToString();
 
-                        if (minValue.Defined && maxValue.Defined
-                        && (minValue > parameters[i].value || maxValue < parameters[i].value))
+                        //if (minValue.Defined && maxValue.Defined && parameters[i].value.Defined
+                        //&& (minValue > parameters[i].value || maxValue < parameters[i].value))
+                        //{
+                        //    minLimitCell.Style.ForeColor = Color.Black;
+                        //    maxLimitCell.Style.ForeColor = Color.Black;
+                        //    minLimitCell.Style.BackColor = Color.Red;
+                        //    maxLimitCell.Style.BackColor = Color.Red;
+                        //}
+                        //else
+                        //{
+                        //    minLimitCell.Style.ForeColor = Color.Black;
+                        //    maxLimitCell.Style.ForeColor = Color.Black;
+                        //    minLimitCell.Style.BackColor = Color.White;
+                        //    maxLimitCell.Style.BackColor = Color.White;
+                        //}
+
+                        if (minValue.Defined 
+                            && parameters[i].value.Defined 
+                            && minValue > parameters[i].value)
                         {
                             minLimitCell.Style.ForeColor = Color.Black;
-                            maxLimitCell.Style.ForeColor = Color.Black;
                             minLimitCell.Style.BackColor = Color.Red;
-                            maxLimitCell.Style.BackColor = Color.Red;
                         }
                         else
                         {
                             minLimitCell.Style.ForeColor = Color.Black;
-                            maxLimitCell.Style.ForeColor = Color.Black;
                             minLimitCell.Style.BackColor = Color.White;
+                        }
+
+                        if (maxValue.Defined
+                            && parameters[i].value.Defined
+                            && maxValue < parameters[i].value)
+                        {
+                            maxLimitCell.Style.ForeColor = Color.Black;
+                            maxLimitCell.Style.BackColor = Color.Red;
+                        }
+                        else
+                        {
+                            maxLimitCell.Style.ForeColor = Color.Black;
                             maxLimitCell.Style.BackColor = Color.White;
                         }
                     }
