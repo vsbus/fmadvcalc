@@ -249,7 +249,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private readonly fmBlockParameterGroup A_group = new fmBlockParameterGroup(Color.FromArgb(150, 250, 180));
         private readonly fmBlockParameterGroup Dp_group = new fmBlockParameterGroup(Color.FromArgb(250, 210, 150));
-        private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 200));
+        private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 150));
         private readonly fmBlockParameterGroup n_tc_group = new fmBlockParameterGroup(Color.FromArgb(250, 230, 150));
         private readonly fmBlockParameterGroup n_tc_tr_group = new fmBlockParameterGroup(Color.FromArgb(230, 240, 190));
         private readonly fmBlockParameterGroup tf_group = new fmBlockParameterGroup(Color.FromArgb(180, 230, 230));
@@ -819,63 +819,75 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell a_Cell)
         {
             AddParameter(ref A, fmGlobalParameter.A, A_Cell, true);
+            
             AddParameter(ref Dp, fmGlobalParameter.Dp, Dp_Cell, true);
-            AddParameter(ref sf, fmGlobalParameter.sf, sf_Cell, true);
+            
             AddParameter(ref n, fmGlobalParameter.n, n_Cell, true);
             AddParameter(ref tc, fmGlobalParameter.tc, tc_Cell, false);
-            AddParameter(ref tf, fmGlobalParameter.tf, tf_Cell, false);
+            
             AddParameter(ref tr, fmGlobalParameter.tr, tr_Cell, false);
-            AddParameter(ref hc_over_tf, fmGlobalParameter.hc_over_tf, hc_over_tf_Cell, false);
-            AddParameter(ref dhc_over_dt, fmGlobalParameter.dhc_over_dt, dhc_over_dt_Cell, false);
+            AddParameter(ref sf, fmGlobalParameter.sf, sf_Cell, true);
+            
             AddParameter(ref hc, fmGlobalParameter.hc, hc_Cell, false);
+            AddParameter(ref tf, fmGlobalParameter.tf, tf_Cell, false);
+            
+            AddParameter(ref Msus, fmGlobalParameter.Msus, Msus_Cell, false);
+            AddParameter(ref Vsus, fmGlobalParameter.Vsus, Vsus_Cell, false);
             AddParameter(ref Mf, fmGlobalParameter.Mf, Mf_Cell, false);
             AddParameter(ref Vf, fmGlobalParameter.Vf, Vf_Cell, false);
+            AddParameter(ref Ms, fmGlobalParameter.Ms, Ms_Cell, false);
+            AddParameter(ref Vs, fmGlobalParameter.Vs, Vs_Cell, false);
+            AddParameter(ref Mc, fmGlobalParameter.Mc, Mc_Cell, false);
+            AddParameter(ref Vc, fmGlobalParameter.Vc, Vc_Cell, false);
+
+            AddParameter(ref msus, fmGlobalParameter.msus, msus_Cell, false);
+            AddParameter(ref vsus, fmGlobalParameter.vsus, vsus_Cell, false);
             AddParameter(ref mf, fmGlobalParameter.mf, mf_Cell, false);
             AddParameter(ref vf, fmGlobalParameter.vf, vf_Cell, false);
             AddParameter(ref ms, fmGlobalParameter.ms, ms_Cell, false);
             AddParameter(ref vs, fmGlobalParameter.vs, vs_Cell, false);
-            AddParameter(ref msus, fmGlobalParameter.msus, msus_Cell, false);
-            AddParameter(ref vsus, fmGlobalParameter.vsus, vsus_Cell, false);
             AddParameter(ref mc, fmGlobalParameter.mc, mc_Cell, false);
             AddParameter(ref vc, fmGlobalParameter.vc, vc_Cell, false);
-            AddParameter(ref Msus, fmGlobalParameter.Msus, Msus_Cell, false);
-            AddParameter(ref Vsus, fmGlobalParameter.Vsus, Vsus_Cell, false);
-            AddParameter(ref Vc, fmGlobalParameter.Vc, Vc_Cell, false);
-            AddParameter(ref Mc, fmGlobalParameter.Mc, Mc_Cell, false);
-            AddParameter(ref Ms, fmGlobalParameter.Ms, Ms_Cell, false);
-            AddParameter(ref Vs, fmGlobalParameter.Vs, Vs_Cell, false);
-            AddParameter(ref Qf, fmGlobalParameter.Qf, Qf_Cell, false);
-            AddParameter(ref Qf_d, fmGlobalParameter.Qf_d, Qf_d_Cell, false);
-            AddParameter(ref Qs, fmGlobalParameter.Qs, Qs_Cell, false);
-            AddParameter(ref Qs_d, fmGlobalParameter.Qs_d, Qs_d_Cell, false);
-            AddParameter(ref Qc, fmGlobalParameter.Qc, Qc_Cell, false);
-            AddParameter(ref Qc_d, fmGlobalParameter.Qc_d, Qc_d_Cell, false);
-            AddParameter(ref Qsus, fmGlobalParameter.Qsus, Qsus_Cell, false);
-            AddParameter(ref Qsus_d, fmGlobalParameter.Qsus_d, Qsus_d_Cell, false);
+
             AddParameter(ref Qmsus, fmGlobalParameter.Qmsus, Qmsus_Cell, false);
-            AddParameter(ref Qmsus_d, fmGlobalParameter.Qmsus_d, Qmsus_d_Cell, false);
-            AddParameter(ref Qms, fmGlobalParameter.Qms, Qms_Cell, false);
-            AddParameter(ref Qms_d, fmGlobalParameter.Qms_d, Qms_d_Cell, false);
+            AddParameter(ref Qsus, fmGlobalParameter.Qsus, Qsus_Cell, false);
             AddParameter(ref Qmf, fmGlobalParameter.Qmf, Qmf_Cell, false);
-            AddParameter(ref Qmf_d, fmGlobalParameter.Qmf_d, Qmf_d_Cell, false);
+            AddParameter(ref Qf, fmGlobalParameter.Qf, Qf_Cell, false);
+            AddParameter(ref Qms, fmGlobalParameter.Qms, Qms_Cell, false);
+            AddParameter(ref Qs, fmGlobalParameter.Qs, Qs_Cell, false);
             AddParameter(ref Qmc, fmGlobalParameter.Qmc, Qmc_Cell, false);
-            AddParameter(ref Qmc_d, fmGlobalParameter.Qmc_d, Qmc_d_Cell, false);
-            AddParameter(ref qf, fmGlobalParameter.qf, qf_Cell, false);
-            AddParameter(ref qf_d, fmGlobalParameter.qf_d, qf_d_Cell, false);
-            AddParameter(ref qs, fmGlobalParameter.qs, qs_Cell, false);
-            AddParameter(ref qs_d, fmGlobalParameter.qs_d, qs_d_Cell, false);
-            AddParameter(ref qc, fmGlobalParameter.qc, qc_Cell, false);
-            AddParameter(ref qc_d, fmGlobalParameter.qc_d, qc_d_Cell, false);
-            AddParameter(ref qsus, fmGlobalParameter.qsus, qsus_Cell, false);
-            AddParameter(ref qsus_d, fmGlobalParameter.qsus_d, qsus_d_Cell, false);
+            AddParameter(ref Qc, fmGlobalParameter.Qc, Qc_Cell, false);
+
             AddParameter(ref qmsus, fmGlobalParameter.qmsus, qmsus_Cell, false);
-            AddParameter(ref qmsus_d, fmGlobalParameter.qmsus_d, qmsus_d_Cell, false);
-            AddParameter(ref qms, fmGlobalParameter.qms, qms_Cell, false);
-            AddParameter(ref qms_d, fmGlobalParameter.qms_d, qms_d_Cell, false);
+            AddParameter(ref qsus, fmGlobalParameter.qsus, qsus_Cell, false);
             AddParameter(ref qmf, fmGlobalParameter.qmf, qmf_Cell, false);
-            AddParameter(ref qmf_d, fmGlobalParameter.qmf_d, qmf_d_Cell, false);
+            AddParameter(ref qf, fmGlobalParameter.qf, qf_Cell, false);
+            AddParameter(ref qms, fmGlobalParameter.qms, qms_Cell, false);
+            AddParameter(ref qs, fmGlobalParameter.qs, qs_Cell, false);
             AddParameter(ref qmc, fmGlobalParameter.qmc, qmc_Cell, false);
+            AddParameter(ref qc, fmGlobalParameter.qc, qc_Cell, false);
+
+            AddParameter(ref Qmsus_d, fmGlobalParameter.Qmsus_d, Qmsus_d_Cell, false);
+            AddParameter(ref Qsus_d, fmGlobalParameter.Qsus_d, Qsus_d_Cell, false);
+            AddParameter(ref Qmf_d, fmGlobalParameter.Qmf_d, Qmf_d_Cell, false);
+            AddParameter(ref Qf_d, fmGlobalParameter.Qf_d, Qf_d_Cell, false);
+            AddParameter(ref Qms_d, fmGlobalParameter.Qms_d, Qms_d_Cell, false);
+            AddParameter(ref Qs_d, fmGlobalParameter.Qs_d, Qs_d_Cell, false);
+            AddParameter(ref Qmc_d, fmGlobalParameter.Qmc_d, Qmc_d_Cell, false);
+            AddParameter(ref Qc_d, fmGlobalParameter.Qc_d, Qc_d_Cell, false);
+
+            AddParameter(ref qmsus_d, fmGlobalParameter.qmsus_d, qmsus_d_Cell, false);
+            AddParameter(ref qsus_d, fmGlobalParameter.qsus_d, qsus_d_Cell, false);
+            AddParameter(ref qmf_d, fmGlobalParameter.qmf_d, qmf_d_Cell, false);
+            AddParameter(ref qf_d, fmGlobalParameter.qf_d, qf_d_Cell, false);
+            AddParameter(ref qms_d, fmGlobalParameter.qms_d, qms_d_Cell, false);
+            AddParameter(ref qs_d, fmGlobalParameter.qs_d, qs_d_Cell, false);
             AddParameter(ref qmc_d, fmGlobalParameter.qmc_d, qmc_d_Cell, false);
+            AddParameter(ref qc_d, fmGlobalParameter.qc_d, qc_d_Cell, false);
+            
+            AddParameter(ref hc_over_tf, fmGlobalParameter.hc_over_tf, hc_over_tf_Cell, false);
+            AddParameter(ref dhc_over_dt, fmGlobalParameter.dhc_over_dt, dhc_over_dt_Cell, false);
+            
             AddParameter(ref eps, fmGlobalParameter.eps, eps_Cell, false);
             AddParameter(ref kappa, fmGlobalParameter.kappa, kappa_Cell, false);
             AddParameter(ref Pc, fmGlobalParameter.Pc, Pc_Cell, false);
@@ -1141,14 +1153,6 @@ namespace fmCalcBlocksLibrary.Blocks
                 p.group = WhatGroupOfParameterWithCalcOption(p, calculationOption);
         }
 
-        //private void AssignCalculationOptionView(ref fmCalculationOptionView localCalculationOptionView,
-        //                                         fmCalculationOptionView globalCalculationOptionView)
-        //{
-        //    localCalculationOptionView = globalCalculationOptionView;
-        //    if (localCalculationOptionView != null)
-        //        localCalculationOptionView.CheckedChangedForUpdatingCalculationOptions += CalculationOptionViewCheckChanged;
-        //}
-
         public void CopyParameters(fmFilterMachiningBlock filterMachiningBlock)
         {
             if (filterMachiningBlock != null)
@@ -1164,22 +1168,6 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             if (filterMachiningBlock != null)
             {
-                //    hce_value = filterMachiningBlock.hce_value;
-
-                //    Pc0_value = filterMachiningBlock.Pc0_value;
-                //    nc_value = filterMachiningBlock.nc_value;
-
-                //    eps0_value = filterMachiningBlock.eps0_value;
-                //    kappa0_value = filterMachiningBlock.kappa0_value;
-                //    ne_value = filterMachiningBlock.ne_value;
-
-                //    etaf_value = filterMachiningBlock.etaf_value;
-                //    rho_f_value = filterMachiningBlock.rho_f_value;
-                //    rho_s_value = filterMachiningBlock.rho_s_value;
-                //    rho_sus_value = filterMachiningBlock.rho_sus_value;
-                //    Cm_value = filterMachiningBlock.Cm_value;
-                //    Cv_value = filterMachiningBlock.Cv_value;
-
                 for (int i = 0; i < constantParameters.Count; ++i)
                 {
                     constantParameters[i].value = filterMachiningBlock.constantParameters[i].value;
