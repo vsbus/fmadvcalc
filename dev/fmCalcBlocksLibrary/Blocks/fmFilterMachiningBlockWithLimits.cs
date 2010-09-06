@@ -299,35 +299,6 @@ namespace fmCalcBlocksLibrary.Blocks
                 CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.name), naInputs);
                 CheckNAAndAdd(GetParameterByName(fmGlobalParameter.tc.name), naInputs);
 
-                //bool result = false;
-                //minValue = maxValue = new fmValue();
-
-                //for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
-                //{
-                //    for (int i = 0; i < naInputs.Count; ++i)
-                //    {
-                //        fmBlockVariableParameter p = naInputs[i];
-                //        double minVal = p.globalParameter.chartDefaultXRange.minValue;
-                //        double maxVal = p.globalParameter.chartDefaultXRange.maxValue;
-                //        //double eps = 1e-8;
-                //        //minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
-                //        //maxVal = maxVal * (1 - eps);
-                //        p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
-                //    }
-
-                //    DoCalculations();
-
-                //    if (result == false)
-                //    {
-                //        minValue = maxValue = parameter.value;
-                //        result = true;
-                //    }
-                //    else
-                //    {
-                //        minValue = fmValue.Min(minValue, parameter.value);
-                //        maxValue = fmValue.Max(maxValue, parameter.value);
-                //    }
-                //}
                 naInputs.Remove(FindGroupRepresetator(parameter.group));
                 bool result = false;
                 minValue = maxValue = new fmValue();
@@ -616,18 +587,6 @@ namespace fmCalcBlocksLibrary.Blocks
             }
 
             return new fmValue();
-
-
-            //fmValue trueValue = new fmValue(1);
-            //for (int i = 0; i <= 100; ++i)
-            //{
-            //    fmValue p = left + (right - left) * i / 100;
-            //    if (isAllInRanges.Eval(p) == trueValue)
-            //    {
-            //        return p;
-            //    }
-            //}
-            //return new fmValue();
         }
 
         private bool GetRangeWithDefinedResult(fmBlockVariableParameter parameter, out fmValue left, out fmValue right)
@@ -662,10 +621,6 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
                 else
                 {
-                    /*
-                     * right = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(
-                        isAllDefinedAndNotNegative, left, maxValue, 30);
-                     * */
                     fmValue temp;
                     fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllDefinedAndNotNegative, left, maxValue, 30, out temp, out right);
                 }
@@ -675,7 +630,6 @@ namespace fmCalcBlocksLibrary.Blocks
             if (isAllDefinedAndNotNegative.Eval(maxValue) == trueValue)
             {
                 right = maxValue;
-                //left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(isAllDefinedAndNotNegative, right, minValue, 30);
                 fmValue temp;
                 fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllDefinedAndNotNegative, right, minValue, 30, out temp, out left);
                 return true;
@@ -684,81 +638,6 @@ namespace fmCalcBlocksLibrary.Blocks
             right = new fmValue();
             return false;
         }
-
-        //private fmValue GetFirstOKValue(fmBlockVariableParameter parameter,
-        //    List<fmValue> valuesToCheck)
-        //{
-        //    fmBlockVariableParameter groupInput = FindGroupRepresetator(parameter.group);
-        //    fmValue groupInputInitialValue = groupInput.value;
-        //    groupInput.IsInputed = false;
-        //    parameter.IsInputed = true;
-
-        //    fmValue result = new fmValue();
-        //    for (int i = 0; i < valuesToCheck.Count; ++i)
-        //    {
-        //        parameter.value = valuesToCheck[i];
-
-
-        //        List<fmBlockVariableParameter> listOfNAInputs = GetNAInputsList();
-        //        listOfNAInputs.Remove(parameter);
-
-        //        if (listOfNAInputs.Count != 0)
-        //        {
-        //            for (int mask = 0; mask < (1 << listOfNAInputs.Count); ++mask)
-        //            {
-        //                for (int t = 0; t < listOfNAInputs.Count; ++t)
-        //                {
-        //                    double a = listOfNAInputs[t].globalParameter.chartDefaultXRange.minValue;
-        //                    double b = listOfNAInputs[t].globalParameter.chartDefaultXRange.maxValue;
-        //                    double eps = 1e-9 * (b - a);
-
-        //                    if ((mask & (1 << t)) == 0)
-        //                    {
-        //                        listOfNAInputs[t].value = new fmValue(a + eps);
-        //                    }
-        //                    else
-        //                    {
-        //                        listOfNAInputs[t].value = new fmValue(b - eps);
-        //                    }
-        //                }
-
-        //                DoCalculations();
-        //                if (IsParametersInRanges())
-        //                {
-        //                    result = parameter.value;
-        //                    break;
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            DoCalculations();
-        //            if (IsParametersInRanges())
-        //            {
-        //                result = parameter.value;
-        //                break;
-        //            }
-        //        }
-
-        //        foreach (fmBlockVariableParameter p in listOfNAInputs)
-        //        {
-        //            p.value = new fmValue();
-        //        }
-
-        //        if (result.Defined == true)
-        //        {
-        //            break;
-        //        }
-        //    }
-
-        //    parameter.IsInputed = false;
-        //    groupInput.value = groupInputInitialValue;
-        //    groupInput.IsInputed = true;
-
-        //    DoCalculations();
-
-        //    return result;
-        //}
 
         private List<fmBlockVariableParameter> GetNAInputsList()
         {
