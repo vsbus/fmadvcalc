@@ -121,8 +121,8 @@ namespace fmCalculatorsLibrary
             Design1,
             //Design2,    // Q, Dp, hc, (sf/tr)           -- input 
             //Design3,    // Q, sf, (n/tc/tr), hc       -- input 
-            [Description("global: Q, Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
-            DesignGlobal,
+            [Description("global: (A, Q), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
+            StandartAndDesignGlobal,
 
             // Optimization -- In this case we have always the filter 
             // area A and the (Qsus, Qmsus, Qms) as input
@@ -151,7 +151,7 @@ namespace fmCalculatorsLibrary
         private static bool IsDesignKindOption(FilterMachiningCalculationOption calculationOption)
         {
             return calculationOption == FilterMachiningCalculationOption.Design1
-                || calculationOption == FilterMachiningCalculationOption.DesignGlobal;
+                || calculationOption == FilterMachiningCalculationOption.StandartAndDesignGlobal;
         }
 
         private static bool IsOptimizationKindOption(FilterMachiningCalculationOption calculationOption)
@@ -980,7 +980,7 @@ namespace fmCalculatorsLibrary
             {
                 DoSubCalculationsDesign1();
             }
-            else if (calculationOption == FilterMachiningCalculationOption.DesignGlobal)
+            else if (calculationOption == FilterMachiningCalculationOption.StandartAndDesignGlobal)
             {
                 DoSubCalculationsDesignGlobal();
             }
@@ -1111,6 +1111,58 @@ namespace fmCalculatorsLibrary
             bool isKnown_Qmsus = Qmsus.isInputed;
             bool isKnown_Qmc = Qmc.isInputed;
 
+            #region A0
+            if (isKnown_A)
+            {
+                if (isKnown_Msus)
+                {
+                    msus.value = FilterMachiningEquations.Eval_m_From_M_A(Msus.value, A.value);
+                    isKnown_msus = true;
+                }
+
+                if (isKnown_Ms)
+                {
+                    ms.value = FilterMachiningEquations.Eval_m_From_M_A(Ms.value, A.value);
+                    isKnown_ms = true;
+                }
+
+                if (isKnown_Mc)
+                {
+                    mc.value = FilterMachiningEquations.Eval_m_From_M_A(Mc.value, A.value);
+                    isKnown_mc = true;
+                }
+
+                if (isKnown_Mf)
+                {
+                    mf.value = FilterMachiningEquations.Eval_m_From_M_A(Mf.value, A.value);
+                    isKnown_mf = true;
+                }
+
+                if (isKnown_Vsus)
+                {
+                    vsus.value = FilterMachiningEquations.Eval_v_From_V_A(Vsus.value, A.value);
+                    isKnown_vsus = true;
+                }
+
+                if (isKnown_Vs)
+                {
+                    vs.value = FilterMachiningEquations.Eval_v_From_V_A(Vs.value, A.value);
+                    isKnown_vs = true;
+                }
+
+                if (isKnown_Vc)
+                {
+                    vc.value = FilterMachiningEquations.Eval_v_From_V_A(Vc.value, A.value);
+                    isKnown_vc = true;
+                }
+
+                if (isKnown_Vf)
+                {
+                    vf.value = FilterMachiningEquations.Eval_v_From_V_A(Vf.value, A.value);
+                    isKnown_vf = true;
+                }
+            }
+            #endregion
             #region A
             if (isKnown_ms)
             {

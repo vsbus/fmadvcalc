@@ -128,8 +128,9 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tr );
                     break;
 
-                //[Description("global: Q, Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
-                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.DesignGlobal:
+                //[Description("global: (A, Q), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
+                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal:
+                    result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
                     result.Add(fmGlobalParameter.Qsus);
                     result.Add(fmGlobalParameter.Qmf);
@@ -298,6 +299,7 @@ namespace fmCalcBlocksLibrary.Blocks
         //private readonly fmBlockParameterGroup Vsus_group = new fmBlockParameterGroup();
         //private readonly fmBlockParameterGroup Ms_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup Q_group = new fmBlockParameterGroup(Color.FromArgb(190, 240, 240));
+        private readonly fmBlockParameterGroup AQ_group = new fmBlockParameterGroup(Color.FromArgb(170, 245, 210));
         //private readonly fmBlockParameterGroup eps_group = new fmBlockParameterGroup();
         //private readonly fmBlockParameterGroup kappa_group = new fmBlockParameterGroup();
         //private readonly fmBlockParameterGroup Pc_group = new fmBlockParameterGroup();
@@ -1004,7 +1006,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 SetGroupsOfStandartGlobal(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartGlobal]);
                 
                 SetGroupsOfDesign1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1]);
-                SetGroupsOfDesignGlobal(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.DesignGlobal]);
+                SetGroupsOfDesignGlobal(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal]);
                 
                 SetGroupsOfOptimization1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1]);
             }
@@ -1017,15 +1019,16 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
-            //[Description("global: Q, Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
-            table[Qmsus] = Q_group;
-            table[Qsus] = Q_group;
-            table[Qmf] = Q_group;
-            table[Qf] = Q_group;
-            table[Qms] = Q_group;
-            table[Qs] = Q_group;
-            table[Qmc] = Q_group;
-            table[Qc] = Q_group;
+            //[Description("global: (A, Q), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
+            table[A] = AQ_group;
+            table[Qmsus] = AQ_group;
+            table[Qsus] = AQ_group;
+            table[Qmf] = AQ_group;
+            table[Qf] = AQ_group;
+            table[Qms] = AQ_group;
+            table[Qs] = AQ_group;
+            table[Qmc] = AQ_group;
+            table[Qc] = AQ_group;
 
             table[Dp] = Dp_group;
 

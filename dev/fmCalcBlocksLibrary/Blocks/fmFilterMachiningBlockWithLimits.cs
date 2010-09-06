@@ -161,7 +161,8 @@ namespace fmCalcBlocksLibrary.Blocks
                     {
                         fmValue minValue, maxValue;
 
-                        GetMinMaxLimitsOfIncompleteInputs(parameters[i], out minValue, out maxValue);
+                        //GetMinMaxLimitsOfIncompleteInputs(parameters[i], out minValue, out maxValue);
+                        minValue = maxValue = new fmValue();
 
                         if (minValue.Value > maxValue.Value)
                         {
