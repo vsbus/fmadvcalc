@@ -1,0 +1,104 @@
+digraph A {
+
+	Constants [label = "Constants:\nrho, eps0, Pc0\nnc, ne", color = grey];
+	Dp [color = blue];
+	A [color = blue];
+	eps_kappa [label = "eps; kappa", style = filled, color = "0.5 0.7 0.7"];
+	Pc_rc_a [label = "Pc; rc; a", style = filled, color = "0.5 0.7 0.7"];
+
+	Dp->eps_kappa [style = dotted, color = blue];
+	Constants->eps_kappa [style = dotted, color = grey];
+
+	Dp->Pc_rc_a [style = dotted, color = blue];
+	Constants->Pc_rc_a [style = dotted, color = grey];
+	eps_kappa->Pc_rc_a [style = dotted];
+
+	n_tc [label = "n; tc", color = red, shape = box];
+	tr [color = green];
+	sf [color = green, shape = boxs];
+
+	tf [color = red, shape = box];
+
+	sf->tf;
+	n_tc->tf;
+
+	Constants->hc [style = dotted, color = grey];
+	Pc_rc_a->hc [style = dotted];
+	eps_kappa->hc [style = dotted];
+	Dp->hc [style = dotted, color = blue];
+	tf->hc [label = "1"];
+
+	vcake [color = red];
+	hc [color = red];
+	hc->vcake  [label = "2"];
+	
+	vf [color = red];
+	eps_kappa->vf [style = dotted];
+	vcake->vf [label = "3"];
+
+	vsus [color = red];
+	vf->vsus [label = "4"];
+	eps_kappa->vsus [style = dotted];
+
+	vs [color = red];
+	vsus->vs [label = "5"];
+	//Constants->vs [style = dotted, color = grey];
+
+	
+	n_tc->tr;
+	sf->tr;
+
+	mf [color = red];
+	vf->mf [label = "6"];
+	//Constants->mf [style = dotted, color = grey];
+
+	ms [color = red];
+	vs->ms [label = "8"];
+	//Constants->ms [style = dotted, color = grey];
+
+	msus [color = red];
+	vsus->msus [label = "7"];
+	//Constants->msus [style = dotted, color = grey];
+
+	mcake [color = red];
+	vf->mcake [label = "9"];
+	eps_kappa->mcake [style = dotted];
+	//Constants->mcake [style = dotted, color = grey];
+
+	Mf [color = red];
+	mf->Mf;
+	//A->Mf [style = dotted, color = blue];
+
+	Ms [color = red];
+	ms->Ms;
+	//A->Ms [style = dotted, color = blue];
+
+	Msus [color = red];
+	msus->Msus;
+	//A->Msus [style = dotted, color = blue];
+
+	Mcake [color = red];
+	mcake->Mcake;
+	//A->Mcake [style = dotted, color = blue];
+
+	Vf [color = red];
+	vf->Vf;
+	//A->Vf [style = dotted, color = blue];
+
+	Vs [color = red];
+	vs->Vs;
+	//A->Vs [style = dotted, color = blue];
+
+	Vsus [color = red];
+	vsus->Vsus;
+	//A->Vsus [style = dotted, color = blue];
+
+	Vcake [color = red];
+	vcake->Vcake;
+	//A->Vcake [style = dotted, color = blue];
+
+	q [label = "qf; qs;\nqsus; qcake", style = filled, color = "0.5 0.7 0.7"];
+	Q [label = "Qf; Qs;\nQsus; Qcake", style = filled, color = "0.5 0.7 0.7"];
+	qm [label = "qmf; qms;\nqmsus; qmcake", style = filled, color = "0.5 0.7 0.7"];
+	Qm [label = "Qmf; Qms;\nQmsus; Qmcake", style = filled, color = "0.5 0.7 0.7"];
+}
