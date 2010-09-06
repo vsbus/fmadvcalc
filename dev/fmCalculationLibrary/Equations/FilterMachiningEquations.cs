@@ -404,5 +404,30 @@ namespace fmCalculationLibrary.Equations
         {
             return (tc - tr)/tc;
         }
+
+        public static fmValue Eval_vc_From_vsus_kappa(fmValue vsus, fmValue kappa)
+        {
+            return kappa / (1 + kappa) * vsus;
+        }
+
+        public static fmValue Eval_vc_From_mc_kappa_rho(fmValue mc, fmValue kappa, fmValue rho_sus, fmValue rho_f)
+        {
+            return mc * kappa / ((1 + kappa) * rho_sus - rho_f);
+        }
+
+        public static fmValue Eval_t_From_Q_V(fmValue Q, fmValue V)
+        {
+            return V / Q;
+        }
+
+        public static fmValue Eval_V_From_Q_t(fmValue Q, fmValue t)
+        {
+            return Q * t;
+        }
+
+        public static fmValue Eval_A_From_V_v(fmValue V, fmValue v)
+        {
+            return V / v;
+        }
     }
 }

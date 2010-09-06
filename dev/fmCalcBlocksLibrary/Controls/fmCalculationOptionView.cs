@@ -62,6 +62,7 @@ namespace fmCalcBlocksLibrary.Controls
 
             TreeNode designNode = new TreeNode("Design");
             designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1));
+            designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.DesignGlobal));
             Nodes.Add(designNode);
 
             TreeNode optimizationNode = new TreeNode("Optimization");
