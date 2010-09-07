@@ -49,6 +49,11 @@ namespace fmCalcBlocksLibrary.Controls
 
         private void CreateTree()
         {
+            TreeNode globalNode = new TreeNode("Global");
+            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal));
+            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartGlobal));
+            Nodes.Add(globalNode);
+            
             TreeNode standartNode = new TreeNode("Standart");
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1));
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart2));
@@ -57,12 +62,10 @@ namespace fmCalcBlocksLibrary.Controls
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart7));
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8));
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartForRanges));
-            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartGlobal));
             Nodes.Add(standartNode);
 
             TreeNode designNode = new TreeNode("Design");
             designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1));
-            designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal));
             Nodes.Add(designNode);
 
             TreeNode optimizationNode = new TreeNode("Optimization");

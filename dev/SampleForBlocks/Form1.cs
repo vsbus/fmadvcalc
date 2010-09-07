@@ -45,7 +45,7 @@ namespace SampleForBlocks
             fmBlock.rho_sus_Value = fmCalculationLibrary.Equations.SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cm(fmBlock.rho_f_Value, fmBlock.rho_s_Value, fmBlock.Cm_Value);
             fmBlock.Cv_Value = fmCalculationLibrary.Equations.SuspensionEquations.Eval_Cv_From_rho(fmBlock.rho_f_Value, fmBlock.rho_s_Value, fmBlock.rho_sus_Value);
             
-            fmBlock.SetCalculationOptionAndUpdateCellsStyle(fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartGlobal);
+            fmBlock.SetCalculationOptionAndUpdateCellsStyle(fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal);
             
         }
 
