@@ -114,7 +114,7 @@ namespace SampleForBlocks
             this.fmDataGrid2.ReadOnly = true;
             this.fmDataGrid2.RowHeadersVisible = false;
             this.fmDataGrid2.RowTemplate.Height = 18;
-            this.fmDataGrid2.Size = new System.Drawing.Size(297, 349);
+            this.fmDataGrid2.Size = new System.Drawing.Size(297, 620);
             this.fmDataGrid2.TabIndex = 2;
             // 
             // parameterResultColumn
@@ -176,7 +176,7 @@ namespace SampleForBlocks
             this.fmDataGrid1.Name = "fmDataGrid1";
             this.fmDataGrid1.RowHeadersVisible = false;
             this.fmDataGrid1.RowTemplate.Height = 18;
-            this.fmDataGrid1.Size = new System.Drawing.Size(449, 349);
+            this.fmDataGrid1.Size = new System.Drawing.Size(449, 620);
             this.fmDataGrid1.TabIndex = 0;
             // 
             // parameterNameColumn
@@ -233,7 +233,7 @@ namespace SampleForBlocks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 373);
+            this.ClientSize = new System.Drawing.Size(746, 644);
             this.Controls.Add(this.fmDataGrid2);
             this.Controls.Add(this.fmDataGrid1);
             this.Controls.Add(this.menuStrip1);
