@@ -194,6 +194,10 @@ namespace fmCalculatorsLibrary
             {
                 DoCalculationsStandartGlobal();
             }
+            else if (calculationOption == FilterMachiningCalculationOption.DesignGlobal)
+            {
+                DoSubCalculationsDesignGlobal();
+            }
             else
             {
                 if (IsStandartKindOption(calculationOption))
@@ -976,18 +980,7 @@ namespace fmCalculatorsLibrary
         }
         private void DoCalculationsDesign()
         {
-            if (calculationOption == FilterMachiningCalculationOption.Design1)
-            {
-                DoSubCalculationsDesign1();
-            }
-            else if (calculationOption == FilterMachiningCalculationOption.StandartAndDesignGlobal)
-            {
-                DoSubCalculationsDesignGlobal();
-            }
-            else
-            {
-                throw new Exception("unprocessed design calculation option");
-            }
+            DoSubCalculationsDesign1();
         }
 
         private void DoSubCalculationsDesignGlobal()
