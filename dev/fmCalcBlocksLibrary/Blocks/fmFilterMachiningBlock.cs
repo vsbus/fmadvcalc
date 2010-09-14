@@ -949,7 +949,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref Cm, fmGlobalParameter.Cm);
             AddConstantParameter(ref Cv, fmGlobalParameter.Cv);
 
-            SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1);
+            SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal);
 
             processOnChange = true;
         }

@@ -10,7 +10,7 @@ namespace FilterSimulation.fmFilterObjects
     {
         public string Name;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption;
+        public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption = fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal;
         public fmSuspensionCalculator.SuspensionCalculationOptions suspensionCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)

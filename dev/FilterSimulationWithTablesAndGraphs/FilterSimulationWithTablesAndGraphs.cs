@@ -105,7 +105,6 @@ namespace FilterSimulationWithTablesAndGraphs
         override protected void UpdateUnitsAndData()
         {
             base.UpdateUnitsAndData();
-            //UpdateUnitsInTablesAndGraphs();
         }
 
         private void ReadMinMaxXValues()
@@ -167,21 +166,6 @@ namespace FilterSimulationWithTablesAndGraphs
         //        selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonFace);
         //    }
         }
-
-        //private void listBoxYAxis_ItemCheck(object sender, ItemCheckEventArgs e)
-        //{
-        //    fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
-        //    List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
-
-        //    CheckedListBox clb = sender as CheckedListBox;
-        //    for (int i = 0; i < clb.Items.Count; ++i)
-        //    {
-        //        if (clb.GetItemChecked(i) ^ (e.Index == i))
-        //            yParameters.Add(fmGlobalParameter.ParametersByName[clb.Items[i].ToString()]);        
-        //    }
-        //    BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
-        //    BindCalculatedResultsToChartAndTable();
-        //}
 
         private void HighLightCurrentPoints(object sender)
         {
@@ -260,7 +244,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 cosd.suspensionCalculationOption =
                     fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
                 cosd.filterMachiningCalculationOption =
-                    fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1;
+                    fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal;
 
                 if (GetCurrentActiveSelectedSimulationData() != null)
                 {
@@ -334,7 +318,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 cosd.suspensionCalculationOption =
                     fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
                 cosd.filterMachiningCalculationOption =
-                    fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1;
+                    fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal;
 
                 if (GetCurrentActiveLocalParameters() != null)
                 {

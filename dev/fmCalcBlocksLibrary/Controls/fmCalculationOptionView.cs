@@ -72,7 +72,7 @@ namespace fmCalcBlocksLibrary.Controls
             optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1));
             Nodes.Add(optimizationNode);
 
-            SetSelectedOption(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1);
+            SetSelectedOption(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal);
 
             TreeView_AfterSelect(this, new TreeViewEventArgs(SelectedLeaf));
         }
