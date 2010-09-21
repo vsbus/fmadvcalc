@@ -202,6 +202,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter A;
         private readonly fmBlockVariableParameter Dp;
         private readonly fmBlockVariableParameter sf;
+        private readonly fmBlockVariableParameter sr;
         private readonly fmBlockVariableParameter n;
         private readonly fmBlockVariableParameter tc;
         private readonly fmBlockVariableParameter tf;
@@ -791,7 +792,7 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         public fmFilterMachiningBlock()
-            : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+            : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
         {
         }
 
@@ -799,6 +800,7 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell A_Cell,
             DataGridViewCell Dp_Cell,
             DataGridViewCell sf_Cell,
+            DataGridViewCell sr_Cell,
             DataGridViewCell n_Cell,
             DataGridViewCell tc_Cell,
             DataGridViewCell tf_Cell,
@@ -869,6 +871,7 @@ namespace fmCalcBlocksLibrary.Blocks
             
             AddParameter(ref tr, fmGlobalParameter.tr, tr_Cell, false);
             AddParameter(ref sf, fmGlobalParameter.sf, sf_Cell, true);
+            AddParameter(ref sr, fmGlobalParameter.sr, sr_Cell, true);
             
             AddParameter(ref hc, fmGlobalParameter.hc, hc_Cell, false);
             AddParameter(ref tf, fmGlobalParameter.tf, tf_Cell, false);

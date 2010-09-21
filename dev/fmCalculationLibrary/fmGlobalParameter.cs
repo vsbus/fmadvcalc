@@ -22,6 +22,7 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter A;
         public static fmGlobalParameter Dp;
         public static fmGlobalParameter sf;
+        public static fmGlobalParameter sr;
         public static fmGlobalParameter n;
         public static fmGlobalParameter tc;
         public static fmGlobalParameter tf;
@@ -137,6 +138,7 @@ namespace fmCalculationLibrary
             AddParameter(ref A, new fmGlobalParameter("A", fmUnitFamily.AreaFamily, new fmRange(0.01, 200)));
             AddParameter(ref Dp, new fmGlobalParameter("Dp", fmUnitFamily.PressureFamily, new fmRange(0.1 * 1e5, 6 * 1e5)));
             AddParameter(ref sf, new fmGlobalParameter("sf", fmUnitFamily.ConcentrationFamily, new fmRange(0.05, 1)));
+            AddParameter(ref sr, new fmGlobalParameter("sr", fmUnitFamily.ConcentrationFamily, new fmRange(0.05, 1)));
             AddParameter(ref n, new fmGlobalParameter("n", fmUnitFamily.FrequencyFamily, new fmRange(0.1 / 60, 6.0 / 60)));
             AddParameter(ref tc, new fmGlobalParameter("tc", fmUnitFamily.TimeFamily, new fmRange(60, 36000)));
             AddParameter(ref tf, new fmGlobalParameter("tf", fmUnitFamily.TimeFamily, new fmRange(1, 12000)));

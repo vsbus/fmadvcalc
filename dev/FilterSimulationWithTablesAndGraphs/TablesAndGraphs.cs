@@ -221,6 +221,7 @@ namespace FilterSimulationWithTablesAndGraphs
             fmFilterMachiningBlock fmb = new fmFilterMachiningBlock(row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.A.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Dp.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.sf.name)],
+                                                                    row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.sr.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.n.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tc.name)],
                                                                     row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.tf.name)],

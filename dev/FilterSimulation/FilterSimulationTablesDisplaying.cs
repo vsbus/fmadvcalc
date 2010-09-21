@@ -283,6 +283,7 @@ namespace FilterSimulation
                         row.Cells[simulationFilterAreaColumn.Index],
                         row.Cells[simulation_DpColumn.Index],
                         row.Cells[simulation_sfColumn.Index],
+                        row.Cells[simulation_srColumn.Index],
                         row.Cells[simulation_nColumn.Index],
                         row.Cells[simulation_tcColumn.Index],
                         row.Cells[simulation_tfColumn.Index],
