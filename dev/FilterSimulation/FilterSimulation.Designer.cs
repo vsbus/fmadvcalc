@@ -2196,7 +2196,7 @@ namespace FilterSimulation
         private fmDataGrid.DataGridViewNumericalTextBoxColumn commonCalcBlockParameterValueColumn;
         private fmDataGrid.DataGridViewNumericalTextBoxColumn commonCalcBlockMaxLocalColumn;
         private fmDataGrid.DataGridViewNumericalTextBoxColumn commonCalcBlockMaxAbsColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn simulationGuidColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationGuidColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn simulationCheckedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationProjectColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationSuspensionNameColumn;

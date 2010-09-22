@@ -128,7 +128,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tr );
                     break;
 
-                //[Description("global: (A, Q), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
+                //[Description("global: (A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
                 case fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
@@ -143,6 +143,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Dp);
 
                     result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.sr);
                     result.Add(fmGlobalParameter.tr);
                     
                     result.Add(fmGlobalParameter.hc);
@@ -290,6 +291,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup A_group = new fmBlockParameterGroup(Color.FromArgb(150, 250, 180));
         private readonly fmBlockParameterGroup Dp_group = new fmBlockParameterGroup(Color.FromArgb(250, 210, 150));
         private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 150));
+        private readonly fmBlockParameterGroup sf_sr_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 150));
         private readonly fmBlockParameterGroup n_tc_group = new fmBlockParameterGroup(Color.FromArgb(250, 230, 150));
         private readonly fmBlockParameterGroup n_tc_tr_group = new fmBlockParameterGroup(Color.FromArgb(230, 240, 190));
         private readonly fmBlockParameterGroup tf_group = new fmBlockParameterGroup(Color.FromArgb(180, 230, 230));
@@ -1009,7 +1011,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 SetGroupsOfStandartGlobal(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartGlobal]);
                 
                 SetGroupsOfDesign1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1]);
-                SetGroupsOfDesignGlobal(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal]);
+                SetGroupsOfStandartAndDesignGlobal(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal]);
                 
                 SetGroupsOfOptimization1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1]);
             }
@@ -1017,7 +1019,7 @@ namespace fmCalcBlocksLibrary.Blocks
             return table[calcOption][parameter];
         }
 
-        private void SetGroupsOfDesignGlobal(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
+        private void SetGroupsOfStandartAndDesignGlobal(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
             foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
@@ -1035,8 +1037,9 @@ namespace fmCalcBlocksLibrary.Blocks
 
             table[Dp] = Dp_group;
 
-            table[sf] = sf_tr_group;
-            table[tr] = sf_tr_group;
+            table[sf] = sf_sr_tr_group;
+            table[sr] = sf_sr_tr_group;
+            table[tr] = sf_sr_tr_group;
 
             table[hc] = hc_MV_group;
             table[vc] = hc_MV_group;

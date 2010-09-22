@@ -94,6 +94,7 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.A));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sr));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.n));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tc));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tf));

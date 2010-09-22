@@ -842,7 +842,8 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_qmc_Column.Index].HeaderCell, fmGlobalParameter.qmc.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_qmc_d_Column.Index].HeaderCell, fmGlobalParameter.qmc_d.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_sfColumn.Index].HeaderCell, fmGlobalParameter.sf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_epsColumn.Index].HeaderCell,fmGlobalParameter.eps.unitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_srColumn.Index].HeaderCell, fmGlobalParameter.sr.unitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulation_epsColumn.Index].HeaderCell, fmGlobalParameter.eps.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_kappaColumn.Index].HeaderCell,fmGlobalParameter.kappa.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_PcColumn.Index].HeaderCell, fmGlobalParameter.Pc.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_rcColumn.Index].HeaderCell, fmGlobalParameter.rc.unitFamily);

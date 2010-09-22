@@ -121,7 +121,7 @@ namespace fmCalculatorsLibrary
             Design1,
             //Design2,    // Q, Dp, hc, (sf/tr)           -- input 
             //Design3,    // Q, sf, (n/tc/tr), hc       -- input 
-            [Description("global: (A, Q), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
+            [Description("global: (A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
             StandartAndDesignGlobal,
 
             // Optimization -- In this case we have always the filter 
@@ -132,7 +132,7 @@ namespace fmCalculatorsLibrary
             //Optimization3   // A, Q, (n/tc), (sf/tr)       -- input
         }
 
-        public FilterMachiningCalculationOption calculationOption;
+        public FilterMachiningCalculationOption calculationOption = FilterMachiningCalculationOption.StandartAndDesignGlobal;
 
         public fmFilterMachiningCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
 
@@ -198,6 +198,7 @@ namespace fmCalculatorsLibrary
             fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
             fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
             fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter sr = variables[fmGlobalParameter.sr] as fmCalculationVariableParameter;
             fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
             fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
             fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
@@ -257,6 +258,7 @@ namespace fmCalculatorsLibrary
             bool isKnown_A = A.isInputed;
             bool isKnown_Dp = Dp.isInputed;
             bool isKnown_sf = sf.isInputed;
+            bool isKnown_sr = sr.isInputed;
             bool isKnown_n = n.isInputed;
             bool isKnown_tc = tc.isInputed;
             bool isKnown_tf = tf.isInputed;
@@ -505,9 +507,13 @@ namespace fmCalculatorsLibrary
                 {
                     tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
                 }
+                else if (isKnown_sr)
+                {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_sr_tf(sr.value, tf.value);
+                }
                 else
                 {
-                    throw new Exception("one of sf/tr must be inputed!");
+                    GenerateExceptionForGroupWithoutInput(sf, tr, sr);
                 }
                 isKnown_tc = true;
             }
@@ -521,6 +527,12 @@ namespace fmCalculatorsLibrary
             if (!isKnown_tc)
             {
                 throw new Exception("tc must be known in block C.");
+            }
+
+            if (!isKnown_tr && isKnown_sr)
+            {
+                tr.value = FilterMachiningEquations.Eval_tr_From_sr_tc(sr.value, tc.value);
+                isKnown_tr = true;
             }
 
             if (!isKnown_sf)
@@ -1360,6 +1372,7 @@ namespace fmCalculatorsLibrary
             fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
             fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
             fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            fmCalculationVariableParameter sr = variables[fmGlobalParameter.sr] as fmCalculationVariableParameter;
             fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
             fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
             fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
@@ -1446,6 +1459,7 @@ namespace fmCalculatorsLibrary
             bool isKnown_A = A.isInputed;
             bool isKnown_Dp = Dp.isInputed;
             bool isKnown_sf = sf.isInputed;
+            bool isKnown_sr = sr.isInputed;
             bool isKnown_n = n.isInputed;
             bool isKnown_tc = tc.isInputed;
             bool isKnown_tf = tf.isInputed;
@@ -1694,6 +1708,10 @@ namespace fmCalculatorsLibrary
                 {
                     tc.value = FilterMachiningEquations.Eval_tc_From_tr_tf(tr.value, tf.value);
                 }
+                else if (isKnown_sr)
+                {
+                    tc.value = FilterMachiningEquations.Eval_tc_From_sr_tf(sr.value, tf.value);
+                }
                 else
                 {
                     throw new Exception("one of sf/tr must be inputed!");
@@ -1712,6 +1730,12 @@ namespace fmCalculatorsLibrary
                 throw new Exception("tc must be known in block C.");
             }
 
+            if (!isKnown_tr && isKnown_sr)
+            {
+                tr.value = FilterMachiningEquations.Eval_tr_From_sr_tc(sr.value, tc.value);
+                isKnown_tr = true;
+            }
+
             if (!isKnown_sf)
             {
                 sf.value = FilterMachiningEquations.Eval_sf_From_tr_tc(tr.value, tc.value);
@@ -1722,6 +1746,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_n) n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
             if (!isKnown_tf) tf.value = FilterMachiningEquations.Eval_tf_From_sf_tc(sf.value, tc.value);
             if (!isKnown_tr) tr.value = FilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
+            if (!isKnown_sr) sr.value = FilterMachiningEquations.Eval_sr_From_tc_tr(tc.value, tr.value);
             if (!isKnown_hc) hc.value = FilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(hce.value, Pc.value, kappa.value, Dp.value, tf.value, eta_f.value);
 
             if (!isKnown_vc) vc.value = hc.value;
