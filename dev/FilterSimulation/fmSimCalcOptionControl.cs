@@ -54,20 +54,14 @@ namespace FilterSimulation
 
             radioButtonCount = 0;
 
-            standart1 = AddRadioButton("Standart 1: A, Dp, sf, (n/tc)");
-            standart2 = AddRadioButton("Standart 2: A, Dp, sf, tf");
             standart3 = AddRadioButton("Standart 3: A, Dp, (n/tc), tf");
             standart4 = AddRadioButton("Standart 4: A, hc, sf, (n/tc)");
-            standart7 = AddRadioButton("Standart 7: A, Dp, hc, sf");
             standart8 = AddRadioButton("Standart 8: A, Dp, hc, (n/tc)");
             design1 = AddRadioButton("Design 1: Q, Dp, hc, (n/tc)");
             optimization1 = AddRadioButton("Optimization 1: A, Q, Dp, sf");
 
-            standart1.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart1;
-            standart2.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart2;
             standart3.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart3;
             standart4.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4;
-            standart7.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart7;
             standart8.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8;
             design1.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1;
             optimization1.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1;
