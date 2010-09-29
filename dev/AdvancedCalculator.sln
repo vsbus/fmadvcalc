@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 9.00
-# Visual C# Express 2005
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fmDataGrid", "fmDataGrid\fmDataGrid.csproj", "{30A5CD2D-C64C-402B-A957-3885E498A97C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedCalculator", "AdvancedCalculator\AdvancedCalculator.csproj", "{DA84AD71-10A9-4B07-88EB-AADC0E158327}"
