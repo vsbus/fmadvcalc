@@ -6,7 +6,7 @@ namespace fmCalculatorsLibrary
 {
     public class fmSuspensionCalculator : fmBaseCalculator
     {
-        public enum SuspensionCalculationOptions
+        public enum fmSuspensionCalculationOptions
         {
             UNDEFINED,
             RHOF_CALCULATED,
@@ -14,24 +14,27 @@ namespace fmCalculatorsLibrary
             RHOSUS_CALCULATED,
             CM_CV_C_CALCULATED
         }
-        public SuspensionCalculationOptions calculationOption;
+        public fmSuspensionCalculationOptions calculationOption;
 
         public fmSuspensionCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
 
         override public void DoCalculations()
         {
-            fmCalculationVariableParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter C = variables[fmGlobalParameter.C] as fmCalculationVariableParameter;
+            // ReSharper disable InconsistentNaming
+            var rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationVariableParameter;
+            var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationVariableParameter;
+            var rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationVariableParameter;
+            var Cm = variables[fmGlobalParameter.Cm] as fmCalculationVariableParameter;
+            var Cv = variables[fmGlobalParameter.Cv] as fmCalculationVariableParameter;
+            var C = variables[fmGlobalParameter.C] as fmCalculationVariableParameter;
+            // ReSharper restore InconsistentNaming
             
-            System.Exception NoCIsInputed = new System.Exception("Some of Cm, Cv or must be inputed");
+            var noCIsInputedException = new System.Exception("Some of Cm, Cv or must be inputed");
 
+            // ReSharper disable PossibleNullReferenceException
             switch (calculationOption)
             {
-                case SuspensionCalculationOptions.RHOF_CALCULATED:
+                case fmSuspensionCalculationOptions.RHOF_CALCULATED:
                     {
                         if (Cm.isInputed)
                             rho_f.value = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_Cm(rho_s.value, rho_sus.value, Cm.value);
@@ -40,10 +43,10 @@ namespace fmCalculatorsLibrary
                         else if (C.isInputed)
                             rho_f.value = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_C(rho_s.value, rho_sus.value, C.value);
                         else 
-                            throw NoCIsInputed;
+                            throw noCIsInputedException;
                         break;
                     }
-                case SuspensionCalculationOptions.RHOS_CALCULATED:
+                case fmSuspensionCalculationOptions.RHOS_CALCULATED:
                     {
                         if (Cm.isInputed)
                             rho_s.value = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_Cm(rho_f.value, rho_sus.value, Cm.value);
@@ -52,10 +55,10 @@ namespace fmCalculatorsLibrary
                         else if (C.isInputed)
                             rho_s.value = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_C(rho_f.value, rho_sus.value, C.value);
                         else throw 
-                            NoCIsInputed;
+                            noCIsInputedException;
                         break;
                     }
-                case SuspensionCalculationOptions.RHOSUS_CALCULATED:
+                case fmSuspensionCalculationOptions.RHOSUS_CALCULATED:
                     {
                         if (Cm.isInputed)
                             rho_sus.value = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cm(rho_f.value, rho_s.value, Cm.value);
@@ -64,10 +67,10 @@ namespace fmCalculatorsLibrary
                         else if (C.isInputed)
                             rho_sus.value = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_C(rho_f.value, rho_s.value, C.value);
                         else 
-                            throw NoCIsInputed;
+                            throw noCIsInputedException;
                         break;
                     }
-                case SuspensionCalculationOptions.CM_CV_C_CALCULATED:
+                case fmSuspensionCalculationOptions.CM_CV_C_CALCULATED:
                     {
                         break;
                     }
@@ -78,6 +81,7 @@ namespace fmCalculatorsLibrary
             if (!Cm.isInputed) Cm.value = SuspensionEquations.Eval_Cm_From_rho(rho_f.value, rho_s.value, rho_sus.value);
             if (!Cv.isInputed) Cv.value = SuspensionEquations.Eval_Cv_From_rho(rho_f.value, rho_s.value, rho_sus.value);
             if (!C.isInputed) C.value = SuspensionEquations.Eval_C_From_rho(rho_f.value, rho_s.value, rho_sus.value);
+            // ReSharper restore PossibleNullReferenceException
         }
     }
 }

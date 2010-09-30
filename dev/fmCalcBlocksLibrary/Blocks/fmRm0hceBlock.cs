@@ -31,7 +31,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculations()
         {
-            fmRm0hceCalculator Rm0HceCalculator = new fmRm0hceCalculator(AllParameters);
+            fmRm0HceCalculator Rm0HceCalculator = new fmRm0HceCalculator(AllParameters);
             Rm0HceCalculator.DoCalculations();
         }
 

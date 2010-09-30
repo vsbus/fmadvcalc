@@ -11,7 +11,7 @@ namespace FilterSimulation
 {
     public partial class CalculationOptionSelectionDialog : Form
     {
-        public fmSuspensionCalculator.SuspensionCalculationOptions suspensionCalculationOption;
+        public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
         public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public CalculationOptionSelectionDialog()
@@ -22,13 +22,13 @@ namespace FilterSimulation
         private void CalculationOptionSelectionDialog_Load(object sender, EventArgs e)
         {
             rho_f_radioButton.Checked = suspensionCalculationOption ==
-                                        fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED;
+                                        fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOF_CALCULATED;
             rho_s_radioButton.Checked = suspensionCalculationOption ==
-                                        fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED;
+                                        fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
             rho_sus_radioButton.Checked = suspensionCalculationOption ==
-                                          fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
+                                          fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
             CmCvC_radioButton.Checked = suspensionCalculationOption ==
-                                        fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
+                                        fmSuspensionCalculator.fmSuspensionCalculationOptions.CM_CV_C_CALCULATED;
 
             fmCalculationOptionView1.SetSelectedOption(filterMachiningCalculationOption);
         }
@@ -68,13 +68,13 @@ namespace FilterSimulation
         private void UpdateSuspensionCalculationOption()
         {
             if (rho_f_radioButton.Checked)
-                suspensionCalculationOption = fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED;
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOF_CALCULATED;
             if (rho_s_radioButton.Checked)
-                suspensionCalculationOption = fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED;
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
             if (rho_sus_radioButton.Checked)
-                suspensionCalculationOption = fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
             if (CmCvC_radioButton.Checked)
-                suspensionCalculationOption = fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED;
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.CM_CV_C_CALCULATED;
         }
 
         private void fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions(object sender, EventArgs e)

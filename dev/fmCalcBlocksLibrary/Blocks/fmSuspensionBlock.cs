@@ -54,7 +54,7 @@ namespace fmCalcBlocksLibrary.Blocks
             set { C.value = value; }
         }
 
-        public fmSuspensionCalculator.SuspensionCalculationOptions calculationOption;
+        public fmSuspensionCalculator.fmSuspensionCalculationOptions calculationOption;
 
         override public void DoCalculations()
         {
@@ -87,14 +87,14 @@ namespace fmCalcBlocksLibrary.Blocks
 
             processOnChange = true;
 
-            SetCalculationOptionAndUpdateCellsStyle(fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED);
+            SetCalculationOptionAndUpdateCellsStyle(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
         }
         public fmSuspensionBlock() : this(
             null,null,null,
             null,null,null)
         {}
 
-        public void SetCalculationOptionAndUpdateCellsStyle(fmSuspensionCalculator.SuspensionCalculationOptions calculationOption)
+        public void SetCalculationOptionAndUpdateCellsStyle(fmSuspensionCalculator.fmSuspensionCalculationOptions calculationOption)
         {
             this.calculationOption = calculationOption;
             UpdateCellsColorsAndReadOnly();
@@ -124,28 +124,28 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
 
                 //if (rBtn_rho_f.Checked)
-                if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED)
+                if (calculationOption == fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOF_CALCULATED)
                 {
                     rho_f.IsInputed = false;
                     //rho_f.cell.ReadOnly = true;
                     SetCellReadOnlyFlag(rho_f, true);
                 }
                 //else if (rBtn_rho_s.Checked)
-                else if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED)
+                else if (calculationOption == fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED)
                 {
                     rho_s.IsInputed = false;
                     //rho_s.cell.ReadOnly = true;
                     SetCellReadOnlyFlag(rho_s, true);
                 }
                 //else if (rBtn_rho_sus.Checked)
-                else if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED)
+                else if (calculationOption == fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED)
                 {
                     rho_sus.IsInputed = false;
                     //rho_sus.cell.ReadOnly = true;
                     SetCellReadOnlyFlag(rho_sus, true);
                 }
                 //else if (rBtn_C.Checked)
-                else if (calculationOption == fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED)
+                else if (calculationOption == fmSuspensionCalculator.fmSuspensionCalculationOptions.CM_CV_C_CALCULATED)
                 {
                     Cm.IsInputed = false;
                     //Cm.cell.ReadOnly = true;

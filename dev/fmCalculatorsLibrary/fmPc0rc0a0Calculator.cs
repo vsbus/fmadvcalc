@@ -1,41 +1,45 @@
 using fmCalculationLibrary;
-using fmCalculationLibrary.Equations;
-using System;
 using System.Collections.Generic;
 
 namespace fmCalculatorsLibrary
 {
-    public class fmPc0rc0a0Calculator : fmBaseCalculator
+    public class fmPc0Rc0A0Calculator : fmBaseCalculator
     {
-        public fmPc0rc0a0Calculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+        public fmPc0Rc0A0Calculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
-            fmCalculationVariableParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter rc0 = variables[fmGlobalParameter.rc0] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter a0 = variables[fmGlobalParameter.a0] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            // ReSharper disable InconsistentNaming
+            var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationVariableParameter;
+            var rc0 = variables[fmGlobalParameter.rc0] as fmCalculationVariableParameter;
+            var a0 = variables[fmGlobalParameter.a0] as fmCalculationVariableParameter;
+            var eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
 
-            fmCalculationVariableParameter local_Pc = new fmCalculationVariableParameter(fmGlobalParameter.Pc, Pc0.value, Pc0.isInputed);
-            fmCalculationVariableParameter local_rc = new fmCalculationVariableParameter(fmGlobalParameter.rc, rc0.value, rc0.isInputed);
-            fmCalculationVariableParameter local_a = new fmCalculationVariableParameter(fmGlobalParameter.a, a0.value, a0.isInputed);
-            fmCalculationConstantParameter local_eps = new fmCalculationConstantParameter(fmGlobalParameter.eps, eps0.value);
-            fmCalculationConstantParameter local_rho_s = new fmCalculationConstantParameter(fmGlobalParameter.rho_s, rho_s.value);
-            List<fmCalculationBaseParameter> parameterList = new List<fmCalculationBaseParameter>();
-            parameterList.Add(local_Pc);
-            parameterList.Add(local_rc);
-            parameterList.Add(local_a);
-            parameterList.Add(local_eps);
-            parameterList.Add(local_rho_s);
+            // ReSharper disable PossibleNullReferenceException
+            var local_Pc = new fmCalculationVariableParameter(fmGlobalParameter.Pc, Pc0.value, Pc0.isInputed);
+            var local_rc = new fmCalculationVariableParameter(fmGlobalParameter.rc, rc0.value, rc0.isInputed);
+            var local_a = new fmCalculationVariableParameter(fmGlobalParameter.a, a0.value, a0.isInputed);
+            var local_eps = new fmCalculationConstantParameter(fmGlobalParameter.eps, eps0.value);
+            var local_rho_s = new fmCalculationConstantParameter(fmGlobalParameter.rho_s, rho_s.value);
+            // ReSharper restore InconsistentNaming
+            var parameterList = new List<fmCalculationBaseParameter>
+                                    {
+                                        local_Pc,
+                                        local_rc,
+                                        local_a,
+                                        local_eps,
+                                        local_rho_s
+                                    };
 
-            fmPcrcaCalculator PcrcaCalculator = new fmPcrcaCalculator(parameterList);
-            PcrcaCalculator.DoCalculations();
+            var pcrcaCalculator = new fmPcrcaCalculator(parameterList);
+            pcrcaCalculator.DoCalculations();
 
             Pc0.value = local_Pc.value;
             rc0.value = local_rc.value;
             a0.value = local_a.value;
             eps0.value = local_eps.value;
             rho_s.value = local_rho_s.value;
+            // ReSharper restore PossibleNullReferenceException
         }
     }
 }

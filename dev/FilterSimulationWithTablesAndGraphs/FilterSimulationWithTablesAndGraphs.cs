@@ -242,7 +242,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 CalculationOptionSelectionExpandedDialog cosd = new CalculationOptionSelectionExpandedDialog();
                 cosd.suspensionCalculationOption =
-                    fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
+                    fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
                 cosd.filterMachiningCalculationOption =
                     fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal;
 
@@ -271,7 +271,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     foreach (fmSelectedSimulationData simData in selectedList)
                     {
                         fmFilterSimulationData sim = simData.internalSimulationData;
-                        fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions
+                        fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions
                             suspensionCalculationOption;
                         fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption
                             filterMachiningCalculationOption;
@@ -316,7 +316,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 CalculationOptionSelectionExpandedDialog cosd = new CalculationOptionSelectionExpandedDialog();
                 cosd.suspensionCalculationOption =
-                    fmCalculatorsLibrary.fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED;
+                    fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
                 cosd.filterMachiningCalculationOption =
                     fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal;
 

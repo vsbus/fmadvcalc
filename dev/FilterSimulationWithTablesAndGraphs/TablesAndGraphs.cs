@@ -1329,10 +1329,10 @@ namespace FilterSimulationWithTablesAndGraphs
                         fmEps0Kappa0Calculator eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.parameters.Values);
                         eps0Kappa0Calculator.DoCalculations();
 
-                        fmPc0rc0a0Calculator pc0rc0a0Calculator = new fmPc0rc0a0Calculator(tempSim.parameters.Values);
+                        fmPc0Rc0A0Calculator pc0rc0a0Calculator = new fmPc0Rc0A0Calculator(tempSim.parameters.Values);
                         pc0rc0a0Calculator.DoCalculations();
 
-                        fmRm0hceCalculator rm0hceCalculator = new fmRm0hceCalculator(tempSim.parameters.Values);
+                        fmRm0HceCalculator rm0hceCalculator = new fmRm0HceCalculator(tempSim.parameters.Values);
                         rm0hceCalculator.DoCalculations();
 
                         fmFilterMachiningCalculator filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values);

@@ -7,15 +7,18 @@ namespace fmCalculatorsLibrary
 {
     public class fmPcrcaCalculator : fmBaseCalculator
     {
-        public fmPcrcaCalculator(List<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+        public fmPcrcaCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
-            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter eps = variables[fmGlobalParameter.eps] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            // ReSharper disable InconsistentNaming
+            var Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            var rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            var a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            var eps = variables[fmGlobalParameter.eps] as fmCalculationConstantParameter;
+            var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            // ReSharper restore InconsistentNaming
 
+            // ReSharper disable PossibleNullReferenceException
             if (Pc.isInputed)
             {
                 rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
@@ -33,6 +36,7 @@ namespace fmCalculatorsLibrary
             }
             else 
                 throw new Exception("One of Pc, rc or a must be inputed");
+            // ReSharper restore PossibleNullReferenceException
         }
     }
 }

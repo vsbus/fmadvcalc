@@ -11,7 +11,7 @@ namespace FilterSimulation.fmFilterObjects
         public string Name;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
         public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption = fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal;
-        public fmSuspensionCalculator.SuspensionCalculationOptions suspensionCalculationOption;
+        public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
         {
@@ -168,13 +168,13 @@ namespace FilterSimulation.fmFilterObjects
 
             result.Add(fmGlobalParameter.eta_f);
             List<fmGlobalParameter> suspensionParametersList = new List<fmGlobalParameter>();
-            if (suspensionCalculationOption != fmSuspensionCalculator.SuspensionCalculationOptions.RHOF_CALCULATED)
+            if (suspensionCalculationOption != fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOF_CALCULATED)
                 suspensionParametersList.Add(fmGlobalParameter.rho_f);
-            if (suspensionCalculationOption != fmSuspensionCalculator.SuspensionCalculationOptions.RHOS_CALCULATED)
+            if (suspensionCalculationOption != fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED)
                 suspensionParametersList.Add(fmGlobalParameter.rho_s);
-            if (suspensionCalculationOption != fmSuspensionCalculator.SuspensionCalculationOptions.RHOSUS_CALCULATED)
+            if (suspensionCalculationOption != fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED)
                 suspensionParametersList.Add(fmGlobalParameter.rho_sus);
-            if (suspensionCalculationOption != fmSuspensionCalculator.SuspensionCalculationOptions.CM_CV_C_CALCULATED)
+            if (suspensionCalculationOption != fmSuspensionCalculator.fmSuspensionCalculationOptions.CM_CV_C_CALCULATED)
             {
                 suspensionParametersList.Add(fmGlobalParameter.Cm);
                 suspensionParametersList.Add(fmGlobalParameter.Cv);
@@ -352,7 +352,7 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
-        public fmSuspensionCalculator.SuspensionCalculationOptions SuspensionCalculationOption
+        public fmSuspensionCalculator.fmSuspensionCalculationOptions SuspensionCalculationOption
         {
             get { return m_Data.suspensionCalculationOption; }
             set

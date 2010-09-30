@@ -42,7 +42,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculations()
         {
-            fmCalculatorsLibrary.fmPc0rc0a0Calculator Pc0rc0a0Calculator = new fmCalculatorsLibrary.fmPc0rc0a0Calculator(AllParameters);
+            fmCalculatorsLibrary.fmPc0Rc0A0Calculator Pc0rc0a0Calculator = new fmCalculatorsLibrary.fmPc0Rc0A0Calculator(AllParameters);
             Pc0rc0a0Calculator.DoCalculations();
         }
 
