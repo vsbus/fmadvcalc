@@ -1,21 +1,23 @@
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
-using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmPc0rc0a0WithncBlock : fmPc0rc0a0Block
+    public class fmPc0Rc0A0WithncBlock : fmPc0rc0a0Block
     {
-        private fmBlockVariableParameter nc;
+        // ReSharper disable InconsistentNaming
+        private readonly fmBlockVariableParameter nc;
+        // ReSharper restore InconsistentNaming
 
+        // ReSharper disable InconsistentNaming
         public fmValue nc_Value
         {
             get { return nc.value; }
             set { nc.value = value; }
         }
 
-        public fmPc0rc0a0WithncBlock(
+        public fmPc0Rc0A0WithncBlock(
             DataGridViewCell Pc0_Cell,
             DataGridViewCell rc0_Cell,
             DataGridViewCell a0_Cell,
@@ -24,5 +26,6 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             AddParameter(ref nc, fmGlobalParameter.nc, nc_Cell, true);
         }
+        // ReSharper restore InconsistentNaming
     }
 }

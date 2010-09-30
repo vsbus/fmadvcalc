@@ -1,28 +1,27 @@
-using System;
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
-using fmCalculationLibrary.MeasureUnits;
-using System.Drawing;
 using fmCalculatorsLibrary;
-using System.Collections.Generic;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmSuspensionBlock : fmBaseBlock
     {
-        private fmBlockVariableParameter rho_f;
-        private fmBlockVariableParameter rho_s;
-        private fmBlockVariableParameter rho_sus;
-        private fmBlockVariableParameter Cm;
-        private fmBlockVariableParameter Cv;
-        private fmBlockVariableParameter C;
+        // ReSharper disable InconsistentNaming
+        private readonly fmBlockVariableParameter rho_f;
+        private readonly fmBlockVariableParameter rho_s;
+        private readonly fmBlockVariableParameter rho_sus;
+        private readonly fmBlockVariableParameter Cm;
+        private readonly fmBlockVariableParameter Cv;
+        private readonly fmBlockVariableParameter C;
 
-        private fmBlockParameterGroup rho_f_group = new fmBlockParameterGroup();
-        private fmBlockParameterGroup rho_s_group = new fmBlockParameterGroup();
-        private fmBlockParameterGroup rho_sus_group = new fmBlockParameterGroup();
-        private fmBlockParameterGroup C_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup rho_f_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup rho_s_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup rho_sus_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup C_group = new fmBlockParameterGroup();
+        // ReSharper restore InconsistentNaming
 
+        // ReSharper disable InconsistentNaming
         public fmValue rho_f_Value
         {
             get { return rho_f.value; }
@@ -53,17 +52,18 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return C.value; }
             set { C.value = value; }
         }
+        // ReSharper restore InconsistentNaming
 
         public fmSuspensionCalculator.fmSuspensionCalculationOptions calculationOption;
 
         override public void DoCalculations()
         {
-            fmSuspensionCalculator suspesionCalculator =
-                new fmSuspensionCalculator(AllParameters);
-            suspesionCalculator.calculationOption = calculationOption;
+            var suspesionCalculator =
+                new fmSuspensionCalculator(AllParameters) { calculationOption = calculationOption };
             suspesionCalculator.DoCalculations();
         }
 
+        // ReSharper disable InconsistentNaming
         public fmSuspensionBlock(DataGridViewCell rho_f_Cell,
                                  DataGridViewCell rho_s_Cell,
                                  DataGridViewCell rho_sus_Cell,
@@ -89,18 +89,21 @@ namespace fmCalcBlocksLibrary.Blocks
 
             SetCalculationOptionAndUpdateCellsStyle(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
         }
-        public fmSuspensionBlock() : this(
-            null,null,null,
-            null,null,null)
-        {}
+        // ReSharper restore InconsistentNaming
 
-        public void SetCalculationOptionAndUpdateCellsStyle(fmSuspensionCalculator.fmSuspensionCalculationOptions calculationOption)
+        public fmSuspensionBlock()
+            : this(
+                null, null, null,
+                null, null, null)
+        { }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmSuspensionCalculator.fmSuspensionCalculationOptions newCalculationOption)
         {
-            this.calculationOption = calculationOption;
+            calculationOption = newCalculationOption;
             UpdateCellsColorsAndReadOnly();
         }
 
-        private void SetCellReadOnlyFlag(fmBlockVariableParameter p, bool value)
+        private static void SetCellReadOnlyFlag(fmBlockVariableParameter p, bool value)
         {
             if (p.cell != null)
                 p.cell.ReadOnly = value;

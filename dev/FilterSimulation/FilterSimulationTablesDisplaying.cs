@@ -256,7 +256,7 @@ namespace FilterSimulation
 
                 if (sim.pc0rc0a0Block == null)
                 {
-                    sim.pc0rc0a0Block = new fmPc0rc0a0WithncBlock(
+                    sim.pc0rc0a0Block = new fmPc0Rc0A0WithncBlock(
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Pc0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "rc0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "a0").Cells[epsKappaCol.Index],
@@ -268,7 +268,7 @@ namespace FilterSimulation
 
                 if (sim.rm0HceBlock == null)
                 {
-                    sim.rm0HceBlock = new fmRm0hceBlock(
+                    sim.rm0HceBlock = new fmRm0HceBlock(
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Rm0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce").Cells[epsKappaCol.Index]);
 
@@ -949,7 +949,7 @@ namespace FilterSimulation
         }
         void rmHceBlock_ValuesChanged(object sender)
         {
-            fmRm0hceBlock rmHceBlock = sender as fmRm0hceBlock;
+            fmRm0HceBlock rmHceBlock = sender as fmRm0HceBlock;
             fmFilterSimulation sim = fSolution.FindSimulation(rmHceBlock);
 
             if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links

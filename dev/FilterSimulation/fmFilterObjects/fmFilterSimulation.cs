@@ -270,7 +270,7 @@ namespace FilterSimulation.fmFilterObjects
             fmPc0rc0a0Block pcrcab = new fmPc0rc0a0Block();
             UpdateIsInputedInParametersFromBlock(pcrcab, inputedParameter);
 
-            fmRm0hceBlock rmhceb = new fmRm0hceBlock();
+            fmRm0HceBlock rmhceb = new fmRm0HceBlock();
             UpdateIsInputedInParametersFromBlock(rmhceb, inputedParameter);
         }
     }
@@ -286,8 +286,8 @@ namespace FilterSimulation.fmFilterObjects
 
         public fmSuspensionWithEtafBlock susBlock;
         public fmEps0Kappa0WithneBlock eps0Kappa0Block;
-        public fmPc0rc0a0WithncBlock pc0rc0a0Block;
-        public fmRm0hceBlock rm0HceBlock;
+        public fmPc0Rc0A0WithncBlock pc0rc0a0Block;
+        public fmRm0HceBlock rm0HceBlock;
         public fmFilterMachiningBlock filterMachiningBlock;
 
         public Guid Guid

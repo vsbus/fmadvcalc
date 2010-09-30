@@ -193,7 +193,7 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
-        public fmFilterSimulation FindSimulation(fmRm0hceBlock Rm0hceBlock)
+        public fmFilterSimulation FindSimulation(fmRm0HceBlock Rm0hceBlock)
         {
             foreach (fmFilterSimulation sim in GetAllSimulations())
                 if (sim.rm0HceBlock == Rm0hceBlock)

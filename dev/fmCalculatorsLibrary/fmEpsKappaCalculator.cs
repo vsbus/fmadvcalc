@@ -18,11 +18,11 @@ namespace fmCalculatorsLibrary
             // ReSharper disable PossibleNullReferenceException
             if (eps.isInputed)
             {
-                kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
+                kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             }
             else if (kappa.isInputed)
             {
-                eps.value = EpsKappaEquations.Eval_eps_From_kappa_Cv(kappa.value, Cv.value);
+                eps.value = fmEpsKappaEquations.Eval_eps_From_kappa_Cv(kappa.value, Cv.value);
             }
             else
             {

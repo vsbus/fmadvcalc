@@ -1,17 +1,17 @@
-using System;
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
-using fmCalculationLibrary.MeasureUnits;
 using fmCalculatorsLibrary;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmRm0hceBlock : fmBaseBlock
+    public class fmRm0HceBlock : fmBaseBlock
     {
-        private fmBlockVariableParameter Rm0, hce;
-        private fmBlockConstantParameter Pc0;
-        private fmBlockParameterGroup Rm0_hce_group = new fmBlockParameterGroup();
+        // ReSharper disable InconsistentNaming
+        private readonly fmBlockVariableParameter Rm0;
+        private readonly fmBlockVariableParameter hce;
+        private readonly fmBlockConstantParameter Pc0;
+        private readonly fmBlockParameterGroup Rm0_hce_group = new fmBlockParameterGroup();
 
         public fmValue hce_Value
         {
@@ -28,14 +28,16 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Pc0.value; }
             set { Pc0.value = value; }
         }
+        // ReSharper restore InconsistentNaming
 
         override public void DoCalculations()
         {
-            fmRm0HceCalculator Rm0HceCalculator = new fmRm0HceCalculator(AllParameters);
-            Rm0HceCalculator.DoCalculations();
+            var rm0HceCalculator = new fmRm0HceCalculator(AllParameters);
+            rm0HceCalculator.DoCalculations();
         }
 
-        public fmRm0hceBlock(
+        // ReSharper disable InconsistentNaming
+        public fmRm0HceBlock(
             DataGridViewCell Rm0_Cell,
             DataGridViewCell hce_Cell)
         {
@@ -49,6 +51,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
             processOnChange = true;
         }
-        public fmRm0hceBlock() : this(null, null) { }
+        // ReSharper restore InconsistentNaming
+
+        public fmRm0HceBlock() : this(null, null) { }
     }
 }

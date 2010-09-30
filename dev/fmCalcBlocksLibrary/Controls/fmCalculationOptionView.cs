@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using fmCalcBlocksLibrary.Blocks;
 using fmCalculatorsLibrary;
 using FontStyle=System.Drawing.FontStyle;
 using System.Reflection;
@@ -12,14 +11,14 @@ namespace fmCalcBlocksLibrary.Controls
 {
     public partial class fmCalculationOptionView : TreeView
     {
-        private TreeNode m_SelectedLeaf;
+        private TreeNode m_selectedLeaf;
         private TreeNode SelectedLeaf
         {
-            get { return m_SelectedLeaf; }
+            get { return m_selectedLeaf; }
             set
             {
-                bool valueIsNew = value != m_SelectedLeaf;
-                m_SelectedLeaf = value;
+                bool valueIsNew = value != m_selectedLeaf;
+                m_selectedLeaf = value;
 
                 bool runCheckedChangedForUpdatingCalculationOptions = valueIsNew && CheckedChangedForUpdatingCalculationOptions != null;
                 if (runCheckedChangedForUpdatingCalculationOptions)
@@ -39,9 +38,9 @@ namespace fmCalcBlocksLibrary.Controls
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
             string result = value.ToString();
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
 
-            if (attributes != null && attributes.Length > 0)
+            if (attributes.Length > 0)
                 result = attributes[0].Description;
 
             return result;
@@ -49,21 +48,21 @@ namespace fmCalcBlocksLibrary.Controls
 
         private void CreateTree()
         {
-            TreeNode globalNode = new TreeNode("Global");
+            var globalNode = new TreeNode("Global");
             globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL));
             Nodes.Add(globalNode);
             
-            TreeNode standartNode = new TreeNode("Standart");
+            var standartNode = new TreeNode("Standart");
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3));
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4));
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8));
             Nodes.Add(standartNode);
 
-            TreeNode designNode = new TreeNode("Design");
+            var designNode = new TreeNode("Design");
             designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1));
             Nodes.Add(designNode);
 
-            TreeNode optimizationNode = new TreeNode("Optimization");
+            var optimizationNode = new TreeNode("Optimization");
             optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1));
             Nodes.Add(optimizationNode);
 
@@ -73,12 +72,13 @@ namespace fmCalcBlocksLibrary.Controls
         }
 
         public fmCalculationOptionView()
-            : base()
         {
             InitializeComponent();
         }
 
+// ReSharper disable InconsistentNaming
         private void TreeView_AfterSelect(object sender, TreeViewEventArgs e)
+// ReSharper restore InconsistentNaming
         {
             if (e.Node.FirstNode == null)
             {
@@ -87,7 +87,7 @@ namespace fmCalcBlocksLibrary.Controls
                     SetNodeFontStyle(node, FontStyle.Bold);
                 }
 
-                if (SelectedLeaf != e.Node)
+                if (SelectedLeaf != null && SelectedLeaf != e.Node)
                 {
                     SelectedLeaf = e.Node;
                 }
@@ -100,7 +100,9 @@ namespace fmCalcBlocksLibrary.Controls
             node.Text = node.Text;
         }
 
+// ReSharper disable InconsistentNaming
         private void TreeView_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+// ReSharper restore InconsistentNaming
         {
             if (e.Node.FirstNode == null && SelectedLeaf != null)
             {
@@ -125,9 +127,9 @@ namespace fmCalcBlocksLibrary.Controls
             throw new Exception("Calculation option for description [" + SelectedLeaf.Text + "] not found");
         }
 
-        private static List<TreeNode> GetNodes(TreeNodeCollection list)
+        private static IEnumerable<TreeNode> GetNodes(TreeNodeCollection list)
         {
-            List<TreeNode> result = new List<TreeNode>();
+            var result = new List<TreeNode>();
             foreach (TreeNode node in list)
             {
                 result.Add(node);
@@ -135,12 +137,12 @@ namespace fmCalcBlocksLibrary.Controls
             }
             return result;
         }
-        private static List<TreeNode> GetLeafs(TreeNodeCollection list)
+        private static IEnumerable<TreeNode> GetLeafs(TreeNodeCollection list)
         {
-            List<TreeNode> result = new List<TreeNode>();
+            var result = new List<TreeNode>();
             foreach (TreeNode node in list)
             {
-                if (node.Nodes == null || node.Nodes.Count == 0)
+                if (node.Nodes.Count == 0)
                     result.Add(node);
                 else
                     result.AddRange(GetLeafs(node.Nodes));

@@ -1,7 +1,8 @@
 namespace fmCalculationLibrary.Equations
 {
-    public class EpsKappaEquations
+    public class fmEpsKappaEquations
     {
+        // ReSharper disable InconsistentNaming
         static public fmValue Eval_eps_From_kappa_Cv(fmValue kappa, fmValue Cv)
         {
             return 1 - Cv * (kappa + 1) / kappa;
@@ -11,5 +12,6 @@ namespace fmCalculationLibrary.Equations
         {
             return Cv / (1 - eps - Cv);
         }
+        // ReSharper restore InconsistentNaming
     }
 }
