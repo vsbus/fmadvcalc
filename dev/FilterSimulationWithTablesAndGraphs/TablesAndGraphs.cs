@@ -753,15 +753,19 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmDisplayingArray dispArray in yArrays.Arrays)
                 {
                     ++yCol;
-                    coordinatesGrid.Columns[yCol].HeaderText = parameterNameAndUnits;
-                    coordinatesGrid.Columns[yCol].ReadOnly = true;
-                    coordinatesGrid.Columns[yCol].Width = 50;
-
-                    if (dispArray.Values.Length == coordinatesGrid.RowCount)
+                    if (coordinatesGrid.Columns.Count > yCol)
                     {
-                        for (int i = 0; i < coordinatesGrid.RowCount; ++i)
+                        coordinatesGrid.Columns[yCol].HeaderText = parameterNameAndUnits;
+                        coordinatesGrid.Columns[yCol].ReadOnly = true;
+                        coordinatesGrid.Columns[yCol].Width = 50;
+
+
+                        if (dispArray.Values.Length == coordinatesGrid.RowCount)
                         {
-                            coordinatesGrid[yCol, i].Value = dispArray.Values[i];
+                            for (int i = 0; i < coordinatesGrid.RowCount; ++i)
+                            {
+                                coordinatesGrid[yCol, i].Value = dispArray.Values[i];
+                            }
                         }
                     }
                 }

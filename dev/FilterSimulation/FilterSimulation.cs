@@ -6,7 +6,7 @@ using FilterSimulation.fmFilterObjects;
 using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
 using fmCalculatorsLibrary;
-using Rectangle=System.Drawing.Rectangle;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace FilterSimulation
 {
@@ -47,32 +47,32 @@ namespace FilterSimulation
         }
         private void InitializeHeaderCheckBox()
         {
-            var c1 = simulationDataGrid.Columns[simulationCheckedColumn.Index] as DataGridViewCheckBoxColumn;           
+            var c1 = simulationDataGrid.Columns[simulationCheckedColumn.Index] as DataGridViewCheckBoxColumn;
             m_ckBox = new CheckBox();
             if (c1 != null)
             {
                 Rectangle rect = simulationDataGrid.GetCellDisplayRectangle(c1.Index, -1, true);
-            
+
                 m_ckBox.Checked = true;
                 m_ckBox.CheckState = CheckState.Checked;
                 m_ckBox.Name = "ckBox";
                 m_ckBox.Text = "";
                 m_ckBox.UseVisualStyleBackColor = true;
-            
+
                 m_ckBox.Size = new Size(15, 15);
-          
-                m_ckBox.Location = new Point(rect.Location.X +3, rect.Location.Y + rect.Height/2 );
+
+                m_ckBox.Location = new Point(rect.Location.X + 3, rect.Location.Y + rect.Height / 2);
             }
             m_ckBox.CheckedChanged += ckBox_CheckedChanged;
             simulationDataGrid.Controls.Add(m_ckBox);
         }
-// ReSharper disable InconsistentNaming
+        // ReSharper disable InconsistentNaming
         private void ckBox_CheckedChanged(object sender, EventArgs e)
-// ReSharper restore InconsistentNaming
+        // ReSharper restore InconsistentNaming
         {
             for (int j = 0; j < simulationDataGrid.RowCount; j++)
             {
-                if(simulationDataGrid.Rows[j].Visible)
+                if (simulationDataGrid.Rows[j].Visible)
                 {
                     simulationDataGrid["simulationCheckedColumn", j].Value = m_ckBox.Checked;
                     simulationDataGrid["simulationCheckedColumn", j].Value =
@@ -81,11 +81,11 @@ namespace FilterSimulation
             }
             simulationDataGrid.EndEdit();
         }
-      
 
-// ReSharper disable InconsistentNaming
+
+        // ReSharper disable InconsistentNaming
         protected void FilterSimulation_Load(object sender, EventArgs e)
-// ReSharper restore InconsistentNaming
+        // ReSharper restore InconsistentNaming
         {
             SetUpToolTips();
 
@@ -123,43 +123,43 @@ namespace FilterSimulation
 
             // BEGIN DEBUG CODE
             sim.Parameters[fmGlobalParameter.eta_f].value = new fmValue(1 * fmUnitFamily.ViscosityFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.eta_f]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.eta_f]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.rho_f].value = new fmValue(1000 * fmUnitFamily.DensityFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.rho_f]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.rho_f]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.rho_s].value = new fmValue(1500 * fmUnitFamily.DensityFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.rho_s]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.rho_s]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.eps0].value = new fmValue(50 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.eps0]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.eps0]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.ne].value = new fmValue(0.02 * fmUnitFamily.NoUnitFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.ne]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.ne]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.Pc0].value = new fmValue(1 * fmUnitFamily.PermeabilityFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.Pc0]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.Pc0]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.nc].value = new fmValue(0.3 * fmUnitFamily.NoUnitFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.nc]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.nc]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.hce].value = new fmValue(5 * fmUnitFamily.LengthFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.hce]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.hce]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.Cm].value = new fmValue(20 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.Cm]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.Cm]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.A].value = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.A]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.A]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.Dp].value = new fmValue(1 * fmUnitFamily.PressureFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.Dp]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.Dp]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.tr].value = new fmValue(10 * fmUnitFamily.TimeFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.tr]).isInputed = true;
-            
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.tr]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.n].value = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter) sim.Parameters[fmGlobalParameter.n]).isInputed = true;
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.n]).isInputed = true;
             // END DEBUG CODE
 
             fProj.Keep();
@@ -168,7 +168,7 @@ namespace FilterSimulation
             DisplaySolution(m_fSolution);
 
             projectDataGrid.CurrentCell = projectDataGrid.Rows[0].Cells[projectNameColumn.Index];
-            
+
             UpdateCurrentObjectAndDisplaySolution(projectDataGrid);
 
             InitializeHeaderCheckBox();
@@ -227,7 +227,7 @@ namespace FilterSimulation
                             m_displayingTables = false;
                             return;
                         }
-                    
+
                         var suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value;
                         m_fSolution.CurrentColumns.Suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Index;
                         m_fSolution.CurrentObjects.Suspension = m_fSolution.FindSuspension(suspensionGuid);
@@ -279,9 +279,9 @@ namespace FilterSimulation
             DisplaySolution(m_fSolution);
         }
 
-// ReSharper disable InconsistentNaming
+        // ReSharper disable InconsistentNaming
         private static void simulationDataGrid_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
-// ReSharper restore InconsistentNaming
+        // ReSharper restore InconsistentNaming
         {
             var dg = sender as fmDataGrid.fmDataGrid;
             // ReSharper disable InconsistentNaming
@@ -310,9 +310,9 @@ namespace FilterSimulation
             DisplaySolution(m_fSolution);
         }
 
-// ReSharper disable InconsistentNaming
+        // ReSharper disable InconsistentNaming
         private void simulationCreateButton_Click(object sender, EventArgs e)
-// ReSharper restore InconsistentNaming
+        // ReSharper restore InconsistentNaming
         {
             fmFilterSimSerie parentSerie = m_fSolution.CurrentObjects.Serie;
             if (parentSerie == null)
@@ -358,17 +358,17 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             simulationDataGrid.BeginEdit(true);
         }
 
-// ReSharper disable InconsistentNaming
+        // ReSharper disable InconsistentNaming
         private void calculationOptionChangeButton_Click(object sender, EventArgs e)
-// ReSharper restore InconsistentNaming
+        // ReSharper restore InconsistentNaming
         {
             var cosd = new fmCalculationOptionSelectionDialog
-                           {
-                               suspensionCalculationOption =
-                                   m_fSolution.CurrentObjects.Simulation.Data.suspensionCalculationOption,
-                               filterMachiningCalculationOption =
-                                   m_fSolution.CurrentObjects.Simulation.Data.filterMachiningCalculationOption
-                           };
+            {
+                suspensionCalculationOption =
+                    m_fSolution.CurrentObjects.Simulation.Data.suspensionCalculationOption,
+                filterMachiningCalculationOption =
+                    m_fSolution.CurrentObjects.Simulation.Data.filterMachiningCalculationOption
+            };
             if (cosd.ShowDialog() == DialogResult.OK)
             {
                 m_fSolution.CurrentObjects.Simulation.susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);

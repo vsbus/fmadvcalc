@@ -1,28 +1,26 @@
 using System;
 using System.Collections.Generic;
-using FilterSimulation.fmFilterObjects;
 
 namespace FilterSimulation.fmFilterObjects
 {
     struct fmFilterSimSuspensionData
     {
-        public string Name;
-        public string Material;
-        public string Customer;
-        public List<fmFilterSimSerie> SeriesList;
+        public string name;
+        public string material;
+        public string customer;
+        public List<fmFilterSimSerie> seriesList;
 
         public void CopyFrom(fmFilterSimSuspensionData from, fmFilterSimSuspension ownerSuspension)
         {
-            Name = from.Name;
-            Material = from.Material;
-            Customer = from.Customer;
-            SeriesList = new List<fmFilterSimSerie>();
-            foreach (fmFilterSimSerie serie in from.SeriesList)
+            name = from.name;
+            material = from.material;
+            customer = from.customer;
+            seriesList = new List<fmFilterSimSerie>();
+            foreach (fmFilterSimSerie serie in from.seriesList)
             {
-                fmFilterSimSerie newSerie = new fmFilterSimSerie();
-                
-                newSerie.Parent = ownerSuspension;
-                SeriesList.Add(newSerie);
+                var newSerie = new fmFilterSimSerie { Parent = ownerSuspension };
+
+                seriesList.Add(newSerie);
 
                 newSerie.CopyFrom(serie);
             }
@@ -31,127 +29,130 @@ namespace FilterSimulation.fmFilterObjects
 
     public class fmFilterSimSuspension
     {
-        private Guid m_Guid;
-        private fmFilterSimProject m_ParentProject;
-        private fmFilterSimSuspensionData Data, BackupData;
-        private bool m_Modified;
-        private bool m_Checked = true;
+        private Guid m_guid;
+        private fmFilterSimProject m_parentProject;
+        private fmFilterSimSuspensionData m_data;
+#pragma warning disable 649
+        private fmFilterSimSuspensionData m_backupData;
+#pragma warning restore 649
+        private bool m_modified;
+        private bool m_checked = true;
 
         public List<fmFilterSimSerie> SimSeriesList
         {
-            get { return Data.SeriesList; }
+            get { return m_data.seriesList; }
         }
         public Guid Guid
         {
-            get { return m_Guid; }
+            get { return m_guid; }
         }
         public string Name
         {
-            get { return Data.Name; }
-            set 
+            get { return m_data.name; }
+            set
             {
-                Modified |= Data.Name != value;
-                Data.Name = value;
+                Modified |= m_data.name != value;
+                m_data.name = value;
             }
         }
         public string Customer
         {
-            get { return Data.Customer; }
+            get { return m_data.customer; }
             set
             {
-                Modified |= Data.Customer != value;
-                Data.Customer = value;
+                Modified |= m_data.customer != value;
+                m_data.customer = value;
             }
         }
         public string Material
         {
-            get { return Data.Material; }
-            set 
+            get { return m_data.material; }
+            set
             {
-                Modified |= Data.Material != value;
-                Data.Material = value; 
+                Modified |= m_data.material != value;
+                m_data.material = value;
             }
         }
         public bool Modified
         {
-            get { return m_Modified; }
+            get { return m_modified; }
             set
             {
-                m_Modified = value;
-                m_ParentProject.Modified |= value;
+                m_modified = value;
+                m_parentProject.Modified |= value;
             }
         }
         public fmFilterSimProject Parent
         {
-            get { return m_ParentProject; }
-            set { m_ParentProject = value; }
+            get { return m_parentProject; }
+            set { m_parentProject = value; }
         }
-        
-        
+
+
         public bool Checked
         {
-            get { return m_Checked; }
-            set { m_Checked = value; }
+            get { return m_checked; }
+            set { m_checked = value; }
         }
 
 
         public fmFilterSimSuspension() { }
-        public fmFilterSimSuspension(fmFilterSimProject parentProject, string Name, string Material, string Customer)
+        public fmFilterSimSuspension(fmFilterSimProject parentProject, string name, string material, string customer)
         {
-            m_Guid = Guid.NewGuid();
+            m_guid = Guid.NewGuid();
             if (parentProject != null)
             {
-                m_ParentProject = parentProject;
+                m_parentProject = parentProject;
                 parentProject.AddSuspension(this);
             }
-            Data.Name = Name;
-            Data.Material = Material;
-            Data.Customer = Customer;
-            Data.SeriesList = new List<fmFilterSimSerie>();
+            m_data.name = name;
+            m_data.material = material;
+            m_data.customer = customer;
+            m_data.seriesList = new List<fmFilterSimSerie>();
             Keep();
         }
 
         public void Keep()
         {
-            foreach (fmFilterSimSerie ser in Data.SeriesList)
+            foreach (fmFilterSimSerie ser in m_data.seriesList)
             {
                 ser.Keep();
             }
-            BackupData.CopyFrom(Data, this);
+            m_backupData.CopyFrom(m_data, this);
             Modified = false;
         }
         public void Restore()
         {
-            Data.CopyFrom(BackupData, this);
+            m_data.CopyFrom(m_backupData, this);
             Modified = false;
         }
         public void Delete()
         {
-            foreach (fmFilterSimSerie serie in Data.SeriesList.GetRange(0, Data.SeriesList.Count))
+            foreach (fmFilterSimSerie serie in m_data.seriesList.GetRange(0, m_data.seriesList.Count))
                 serie.Delete();
-            m_ParentProject.RemoveSuspension(this);
+            m_parentProject.RemoveSuspension(this);
         }
         public void CopyFrom(fmFilterSimSuspension sus)
         {
-            m_Guid = sus.m_Guid;
+            m_guid = sus.m_guid;
             Modified = sus.Modified;
-            Data.CopyFrom(sus.Data, this);
-            BackupData.CopyFrom(sus.BackupData, this);
+            m_data.CopyFrom(sus.m_data, this);
+            m_backupData.CopyFrom(sus.m_backupData, this);
         }
         public void AddSerie(fmFilterSimSerie serie)
         {
-            Data.SeriesList.Add(serie);
+            m_data.seriesList.Add(serie);
             Modified = true;
         }
         public void RemoveSerie(fmFilterSimSerie serie)
         {
-            Data.SeriesList.Remove(serie);
+            m_data.seriesList.Remove(serie);
             Modified = true;
         }
 
         public List<fmFilterSimulation> GetAllSimulations()
         {
-            List<fmFilterSimulation> ret = new List<fmFilterSimulation>();
+            var ret = new List<fmFilterSimulation>();
             foreach (fmFilterSimSerie serie in SimSeriesList)
             {
                 ret.AddRange(serie.SimulationsList);
@@ -161,7 +162,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public fmFilterSimSerie FindSerie(Guid guid)
         {
-            foreach (fmFilterSimSerie ser in Data.SeriesList)
+            foreach (fmFilterSimSerie ser in m_data.seriesList)
             {
                 if (ser.Guid == guid)
                     return ser;
@@ -171,7 +172,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public fmFilterSimulation FindSimulation(Guid guid)
         {
-            foreach (fmFilterSimSerie ser in Data.SeriesList)
+            foreach (fmFilterSimSerie ser in m_data.seriesList)
             {
                 fmFilterSimulation sim = ser.FindSimulation(guid);
                 if (sim != null)

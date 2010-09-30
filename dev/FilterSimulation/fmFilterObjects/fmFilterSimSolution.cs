@@ -212,7 +212,7 @@ namespace FilterSimulation.fmFilterObjects
         public fmFilterSimulation FindSimulation(fmPc0Rc0A0Block pc0rc0a0Block)
         {
             foreach (fmFilterSimulation sim in GetAllSimulations())
-                if (sim.pc0rc0a0Block == pc0rc0a0Block)
+                if (sim.pc0Rc0A0Block == pc0rc0a0Block)
                     return sim;
             return null;
         }

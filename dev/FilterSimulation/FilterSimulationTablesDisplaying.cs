@@ -252,16 +252,16 @@ namespace FilterSimulation
                     sim.eps0Kappa0Block.ValuesChangedByUser += eps0Kappa0Block_ValuesChangedByUser;
                 }
 
-                if (sim.pc0rc0a0Block == null)
+                if (sim.pc0Rc0A0Block == null)
                 {
-                    sim.pc0rc0a0Block = new fmPc0Rc0A0WithncBlock(
+                    sim.pc0Rc0A0Block = new fmPc0Rc0A0WithncBlock(
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Pc0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "rc0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "a0").Cells[epsKappaCol.Index],
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "nc").Cells[epsKappaCol.Index]);
 
-                    sim.pc0rc0a0Block.ValuesChanged += pcrcaBlock_ValuesChanged;
-                    sim.pc0rc0a0Block.ValuesChangedByUser += pc0rc0a0Block_ValuesChangedByUser;
+                    sim.pc0Rc0A0Block.ValuesChanged += pcrcaBlock_ValuesChanged;
+                    sim.pc0Rc0A0Block.ValuesChangedByUser += pc0rc0a0Block_ValuesChangedByUser;
                 }
 
                 if (sim.rm0HceBlock == null)
@@ -356,7 +356,7 @@ namespace FilterSimulation
                 {
                     sim.filterMachiningBlock.CalculateAndDisplay();
                     sim.rm0HceBlock.CalculateAndDisplay();
-                    sim.pc0rc0a0Block.CalculateAndDisplay();
+                    sim.pc0Rc0A0Block.CalculateAndDisplay();
                     sim.eps0Kappa0Block.CalculateAndDisplay();
                     sim.susBlock.CalculateAndDisplay();
                 }
@@ -383,7 +383,7 @@ namespace FilterSimulation
             foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
                 if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.CurrentObjects.Simulation.Parent
                     || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParameters(sim.pc0rc0a0Block, m_fSolution.CurrentObjects.Simulation.pc0rc0a0Block);
+                    CopyBlockParameters(sim.pc0Rc0A0Block, m_fSolution.CurrentObjects.Simulation.pc0Rc0A0Block);
             displayingSolution = false;
         }
 
@@ -431,7 +431,7 @@ namespace FilterSimulation
         }
         private static void CopySimulationValuesToPc0rc0a0ncBlock(fmFilterSimulation sim)
         {
-            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.pc0rc0a0Block);
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.pc0Rc0A0Block);
         }
         private static void CopySimulationValuesToEps0Kappa0neBlock(fmFilterSimulation sim)
         {
@@ -853,7 +853,7 @@ namespace FilterSimulation
                 sim.susBlock.CalculateAndDisplay();
                 sim.eps0Kappa0Block.CalculateAndDisplay();
                 sim.filterMachiningBlock.CalculateAndDisplay();
-                sim.pc0rc0a0Block.CalculateAndDisplay();
+                sim.pc0Rc0A0Block.CalculateAndDisplay();
                 sim.rm0HceBlock.CalculateAndDisplay();
             }
         }
@@ -865,7 +865,7 @@ namespace FilterSimulation
                 sim.susBlock.ResumeProcessing();
                 sim.eps0Kappa0Block.ResumeProcessing();
                 sim.filterMachiningBlock.ResumeProcessing();
-                sim.pc0rc0a0Block.ResumeProcessing();
+                sim.pc0Rc0A0Block.ResumeProcessing();
                 sim.rm0HceBlock.ResumeProcessing();
             }
         }
@@ -877,7 +877,7 @@ namespace FilterSimulation
                 sim.susBlock.StopProcessing();
                 sim.eps0Kappa0Block.StopProcessing();
                 sim.filterMachiningBlock.StopProcessing();
-                sim.pc0rc0a0Block.StopProcessing();
+                sim.pc0Rc0A0Block.StopProcessing();
                 sim.rm0HceBlock.StopProcessing();
             }
         }
@@ -901,7 +901,7 @@ namespace FilterSimulation
 
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.eps0Kappa0Block);
 
-            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.pc0rc0a0Block);
+            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.pc0Rc0A0Block);
 
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
 
@@ -925,9 +925,9 @@ namespace FilterSimulation
                 return;
             }
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.eps0Kappa0Block, sim);
-            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.pc0rc0a0Block);
+            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.pc0Rc0A0Block);
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
-            sim.pc0rc0a0Block.CalculateAndDisplay();
+            sim.pc0Rc0A0Block.CalculateAndDisplay();
         }
         void rmHceBlock_ValuesChanged(object sender)
         {
@@ -965,7 +965,7 @@ namespace FilterSimulation
             }
             else
             {
-                fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.pc0rc0a0Block, sim);
+                fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.pc0Rc0A0Block, sim);
                 fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.rm0HceBlock);
                 fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
                 sim.rm0HceBlock.CalculateAndDisplay();

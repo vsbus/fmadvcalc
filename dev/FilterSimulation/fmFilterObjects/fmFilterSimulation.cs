@@ -1,4 +1,5 @@
 using System;
+using fmCalcBlocksLibrary.BlockParameter;
 using fmCalcBlocksLibrary.Blocks;
 using fmCalculationLibrary;
 using System.Collections.Generic;
@@ -8,14 +9,14 @@ namespace FilterSimulation.fmFilterObjects
 {
     public class fmFilterSimulationData
     {
-        public string Name;
+        public string name;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL;
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
         {
-            Name = from.Name;
+            name = from.name;
             filterMachiningCalculationOption = from.filterMachiningCalculationOption;
             suspensionCalculationOption = from.suspensionCalculationOption;
             CopyValuesFrom(from);
@@ -32,7 +33,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public void CopyMaterialParametersValuesFrom(fmFilterSimulationData from)
         {
-            fmGlobalParameter[] materialParametersList = new fmGlobalParameter[]
+            var materialParametersList = new[]
                                                              {
                                                                  fmGlobalParameter.eta_f, fmGlobalParameter.rho_f,
                                                                  fmGlobalParameter.rho_s, fmGlobalParameter.rho_sus,
@@ -55,8 +56,8 @@ namespace FilterSimulation.fmFilterObjects
             {
                 if (parameters[p] is fmCalculationVariableParameter)
                 {
-                    (parameters[p] as fmCalculationVariableParameter).isInputed =
-                        (from.parameters[p] as fmCalculationVariableParameter).isInputed;
+                    ((fmCalculationVariableParameter) parameters[p]).isInputed =
+                        ((fmCalculationVariableParameter) from.parameters[p]).isInputed;
                 }
             }
         }
@@ -164,10 +165,9 @@ namespace FilterSimulation.fmFilterObjects
 
         public List<fmGlobalParameter> GetParametersThatCanBeInputedList()
         {
-            List<fmGlobalParameter> result = new List<fmGlobalParameter>();
+            var result = new List<fmGlobalParameter> {fmGlobalParameter.eta_f};
 
-            result.Add(fmGlobalParameter.eta_f);
-            List<fmGlobalParameter> suspensionParametersList = new List<fmGlobalParameter>();
+            var suspensionParametersList = new List<fmGlobalParameter>();
             if (suspensionCalculationOption != fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOF_CALCULATED)
                 suspensionParametersList.Add(fmGlobalParameter.rho_f);
             if (suspensionCalculationOption != fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED)
@@ -200,49 +200,49 @@ namespace FilterSimulation.fmFilterObjects
             return result;
         }
 
-        public static void CopyVariableParametersFromSimulationToBlock(fmFilterSimulationData simData, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
+        public static void CopyVariableParametersFromSimulationToBlock(fmFilterSimulationData simData, fmBaseBlock block)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
+            foreach (fmBlockVariableParameter p in block.Parameters)
             {
                 p.value = simData.parameters[p.globalParameter].value;
-                p.IsInputed = (simData.parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed;
+                p.IsInputed = ((fmCalculationVariableParameter) simData.parameters[p.globalParameter]).isInputed;
             }
         }
 
-        public static void CopyConstantParametersFromSimulationToBlock(fmFilterSimulationData simData, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
+        public static void CopyConstantParametersFromSimulationToBlock(fmFilterSimulationData simData, fmBaseBlock block)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockConstantParameter p in block.ConstantParameters)
+            foreach (fmBlockConstantParameter p in block.ConstantParameters)
             {
                 p.value = simData.parameters[p.globalParameter].value;
             }
         }
 
-        public static void CopyAllParametersFromSimulationToBlock(fmFilterSimulationData simData, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
+        public static void CopyAllParametersFromSimulationToBlock(fmFilterSimulationData simData, fmBaseBlock block)
         {
             CopyVariableParametersFromSimulationToBlock(simData, block);
             CopyConstantParametersFromSimulationToBlock(simData, block);
         }
 
-        public static void CopyAllParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulationData simData)
+        public static void CopyAllParametersFromBlockToSimulation(fmBaseBlock block, fmFilterSimulationData simData)
         {
             CopyConstantParametersFromBlockToSimulation(block, simData);
             CopyVariableParametersFromBlockToSimulation(block, simData);
         }
 
-        public static void CopyConstantParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulationData simData)
+        public static void CopyConstantParametersFromBlockToSimulation(fmBaseBlock block, fmFilterSimulationData simData)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockConstantParameter p in block.ConstantParameters)
+            foreach (fmBlockConstantParameter p in block.ConstantParameters)
             {
                 simData.parameters[p.globalParameter].value = p.value;
             }
         }
 
-        public static void CopyVariableParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulationData simData)
+        public static void CopyVariableParametersFromBlockToSimulation(fmBaseBlock block, fmFilterSimulationData simData)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
+            foreach (fmBlockVariableParameter p in block.Parameters)
             {
                 simData.parameters[p.globalParameter].value = p.value;
-                (simData.parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed = p.IsInputed;
+                ((fmCalculationVariableParameter) simData.parameters[p.globalParameter]).isInputed = p.IsInputed;
             }
         }
 
@@ -250,140 +250,140 @@ namespace FilterSimulation.fmFilterObjects
         {
             CopyAllParametersFromSimulationToBlock(this, block);
             block.UpdateIsInputed(block.GetParameterByName(inputedParameter.name));
-            fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(block, this);
+            CopyAllParametersFromBlockToSimulation(block, this);
         }
 
         public void UpdateIsInputed(fmGlobalParameter inputedParameter)
         {
-            fmFilterMachiningBlock fmb = new fmFilterMachiningBlock();
-            fmb.calculationOption = filterMachiningCalculationOption;
+            var fmb = new fmFilterMachiningBlock
+                          {
+                              calculationOption = filterMachiningCalculationOption
+                          };
             fmb.UpdateGroups();
             UpdateIsInputedInParametersFromBlock(fmb, inputedParameter);
 
-            fmSuspensionBlock susb = new fmSuspensionBlock();
-            susb.calculationOption = suspensionCalculationOption;
+            var susb = new fmSuspensionBlock
+                           {
+                               calculationOption = suspensionCalculationOption
+                           };
             UpdateIsInputedInParametersFromBlock(susb, inputedParameter);
 
-            fmEps0Kappa0Block epskappab = new fmEps0Kappa0Block();
+            var epskappab = new fmEps0Kappa0Block();
             UpdateIsInputedInParametersFromBlock(epskappab, inputedParameter);
 
-            fmPc0Rc0A0Block pcrcab = new fmPc0Rc0A0Block();
+            var pcrcab = new fmPc0Rc0A0Block();
             UpdateIsInputedInParametersFromBlock(pcrcab, inputedParameter);
 
-            fmRm0HceBlock rmhceb = new fmRm0HceBlock();
+            var rmhceb = new fmRm0HceBlock();
             UpdateIsInputedInParametersFromBlock(rmhceb, inputedParameter);
         }
     }
 
     public class fmFilterSimulation
     {
-        private Guid m_Guid;
-        private fmFilterSimSerie m_ParentSerie;
-        private fmFilterSimulationData m_Data = new fmFilterSimulationData();
-        private fmFilterSimulationData m_BackupData = new fmFilterSimulationData();
-        private bool m_Modified;
-        private bool m_Checked = true;
+        private fmFilterSimSerie m_parentSerie;
+        private readonly fmFilterSimulationData m_data = new fmFilterSimulationData();
+        private readonly fmFilterSimulationData m_backupData = new fmFilterSimulationData();
+        private bool m_modified;
+        private bool m_checked = true;
 
         public fmSuspensionWithEtafBlock susBlock;
         public fmEps0Kappa0WithneBlock eps0Kappa0Block;
-        public fmPc0Rc0A0WithncBlock pc0rc0a0Block;
+        public fmPc0Rc0A0WithncBlock pc0Rc0A0Block;
         public fmRm0HceBlock rm0HceBlock;
         public fmFilterMachiningBlock filterMachiningBlock;
 
-        public Guid Guid
-        {
-            get { return m_Guid; }
-            set { m_Guid = value; }
-        }
+        public Guid Guid { get; set; }
+
         public string Name
         {
-            get { return m_Data.Name; }
+            get { return m_data.name; }
             set 
             {
-                if (m_Data.Name != value)
+                if (m_data.name != value)
                 {
                     Modified = true;
                 }
-                m_Data.Name = value;
+                m_data.name = value;
             }
         }
         public bool Modified
         {
-            get { return m_Modified; }
+            get { return m_modified; }
             set
             {
-                m_Modified = value;
-                if (value && m_ParentSerie != null)
+                m_modified = value;
+                if (value && m_parentSerie != null)
                 {
-                    m_ParentSerie.Modified = true;
+                    m_parentSerie.Modified = true;
                 }
             }
         }
         public bool Checked
         {
-            get { return m_Checked; }
-            set { m_Checked = value; }
+            get { return m_checked; }
+            set { m_checked = value; }
         }
         public fmFilterSimSerie Parent
         {
-            get { return m_ParentSerie; }
-            set { m_ParentSerie = value; }
+            get { return m_parentSerie; }
+            set { m_parentSerie = value; }
         }
         public fmFilterSimulationData Data
         {
-            get { return m_Data; }
+            get { return m_data; }
         }
 
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> Parameters
         {
-            get { return m_Data.parameters; }
+            get { return m_data.parameters; }
         }
 
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption FilterMachiningCalculationOption
         {
-            get { return m_Data.filterMachiningCalculationOption; }
+            get { return m_data.filterMachiningCalculationOption; }
             set 
             {
-                if (m_Data.filterMachiningCalculationOption != value)
+                if (m_data.filterMachiningCalculationOption != value)
                 {
                     Modified = true;
                 }
-                m_Data.filterMachiningCalculationOption = value; 
+                m_data.filterMachiningCalculationOption = value; 
             }
         }
 
         public fmSuspensionCalculator.fmSuspensionCalculationOptions SuspensionCalculationOption
         {
-            get { return m_Data.suspensionCalculationOption; }
+            get { return m_data.suspensionCalculationOption; }
             set
             {
-                if (m_Data.suspensionCalculationOption != value)
+                if (m_data.suspensionCalculationOption != value)
                 {
                     Modified = true;
                 }
-                m_Data.suspensionCalculationOption = value;
+                m_data.suspensionCalculationOption = value;
             }
         }
 
         public fmFilterSimulation()
         {
-            m_Guid = Guid.NewGuid();
+            Guid = Guid.NewGuid();
         }
-        public fmFilterSimulation(fmFilterSimSerie parentSerie, string Name)
+        public fmFilterSimulation(fmFilterSimSerie parentSerie, string name)
         {
-            m_Guid = Guid.NewGuid();
+            Guid = Guid.NewGuid();
             if (parentSerie != null)
             {
-                m_ParentSerie = parentSerie;
+                m_parentSerie = parentSerie;
                 parentSerie.AddSimulation(this);
             }
-            m_Data.Name = Name;
+            m_data.name = name;
 
-            fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock voidBlock = new fmFilterMachiningBlock();
+            var voidBlock = new fmFilterMachiningBlock();
             voidBlock.SetCalculationOptionAndUpdateCellsStyle(Data.filterMachiningCalculationOption);
-            foreach (fmCalculationVariableParameter var in voidBlock.Parameters)
+            foreach (fmBlockVariableParameter var in voidBlock.Parameters)
             {
-                (Data.parameters[var.globalParameter] as fmCalculationVariableParameter).isInputed = var.isInputed;
+                ((fmCalculationVariableParameter) Data.parameters[var.globalParameter]).isInputed = var.isInputed;
             }
 
             Keep();
@@ -393,34 +393,34 @@ namespace FilterSimulation.fmFilterObjects
         {
             if (parentSerie != null)
             {
-                m_ParentSerie = parentSerie;
+                m_parentSerie = parentSerie;
                 parentSerie.AddSimulation(this);
             }
             
             CopyFrom(toCopy);
-            m_Guid = Guid.NewGuid();
+            Guid = Guid.NewGuid();
             Keep();
         }
         
         public void Keep()
         {
-            m_BackupData.CopyFrom(m_Data);
+            m_backupData.CopyFrom(m_data);
             Modified = false;
         }
         public void Restore()
         {
-            m_Data.CopyFrom(m_BackupData);
+            m_data.CopyFrom(m_backupData);
             Modified = false;
         }
         public void Delete()
         {
             //filterMachiningBlock.calculationOptionView.Dispose();
-            m_ParentSerie.RemoveSimulation(this);
+            m_parentSerie.RemoveSimulation(this);
         }
         public void CopyFrom(fmFilterSimulation sim)
         {
-            m_Data.CopyFrom(sim.m_Data);
-            m_BackupData.CopyFrom(sim.m_BackupData);
+            m_data.CopyFrom(sim.m_data);
+            m_backupData.CopyFrom(sim.m_backupData);
             Modified = sim.Modified;
         }
 
@@ -451,38 +451,38 @@ namespace FilterSimulation.fmFilterObjects
             Parameters[fmGlobalParameter.Rm0] = simulation.Parameters[fmGlobalParameter.Rm0];
         }
 
-        public static void CopyVariableParametersFromSimulationToBlock(fmFilterSimulation sim, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
+        public static void CopyVariableParametersFromSimulationToBlock(fmFilterSimulation sim, fmBaseBlock block)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
+            foreach (fmBlockVariableParameter p in block.Parameters)
             {
                 p.value = sim.Parameters[p.globalParameter].value;
-                p.IsInputed = (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed;
+                p.IsInputed = ((fmCalculationVariableParameter) sim.Parameters[p.globalParameter]).isInputed;
             }
         }
 
-        public static void CopyConstantParametersFromSimulationToBlock(fmFilterSimulation sim, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
+        public static void CopyConstantParametersFromSimulationToBlock(fmFilterSimulation sim, fmBaseBlock block)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockConstantParameter p in block.ConstantParameters)
+            foreach (fmBlockConstantParameter p in block.ConstantParameters)
             {
                 p.value = sim.Parameters[p.globalParameter].value;
             }
         }
 
-        public static void CopyAllParametersFromSimulationToBlock(fmFilterSimulation sim, fmCalcBlocksLibrary.Blocks.fmBaseBlock block)
+        public static void CopyAllParametersFromSimulationToBlock(fmFilterSimulation sim, fmBaseBlock block)
         {
             CopyVariableParametersFromSimulationToBlock(sim, block);
             CopyConstantParametersFromSimulationToBlock(sim, block);
         }
 
-        public static void CopyAllParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulation sim)
+        public static void CopyAllParametersFromBlockToSimulation(fmBaseBlock block, fmFilterSimulation sim)
         {
             CopyConstantParametersFromBlockToSimulation(block, sim);
             CopyVariableParametersFromBlockToSimulation(block, sim);
         }
 
-        public static void CopyConstantParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulation sim)
+        public static void CopyConstantParametersFromBlockToSimulation(fmBaseBlock block, fmFilterSimulation sim)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockConstantParameter p in block.ConstantParameters)
+            foreach (fmBlockConstantParameter p in block.ConstantParameters)
             {
                 if (sim.Parameters[p.globalParameter].value != p.value)
                 {
@@ -492,17 +492,17 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
-        public static void CopyVariableParametersFromBlockToSimulation(fmCalcBlocksLibrary.Blocks.fmBaseBlock block, fmFilterSimulation sim)
+        public static void CopyVariableParametersFromBlockToSimulation(fmBaseBlock block, fmFilterSimulation sim)
         {
-            foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in block.Parameters)
+            foreach (fmBlockVariableParameter p in block.Parameters)
             {
                 if (sim.Parameters[p.globalParameter].value != p.value
-                    || (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed != p.IsInputed)
+                    || ((fmCalculationVariableParameter) sim.Parameters[p.globalParameter]).isInputed != p.IsInputed)
                 {
                     sim.Modified = true;
                 }
                 sim.Parameters[p.globalParameter].value = p.value;
-                (sim.Parameters[p.globalParameter] as fmCalculationVariableParameter).isInputed = p.IsInputed;
+                ((fmCalculationVariableParameter) sim.Parameters[p.globalParameter]).isInputed = p.IsInputed;
             }
         }
     }
