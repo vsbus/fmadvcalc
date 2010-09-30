@@ -1,6 +1,6 @@
 namespace FilterSimulationWithTablesAndGraphs
 {
-    partial class CalculationOptionSelectionExpandedDialog
+    partial class fmCalculationOptionSelectionExpandedDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -143,7 +143,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(702, 260);
             this.Controls.Add(this.panel5);
-            this.Name = "CalculationOptionSelectionExpandedDialog";
+            this.Name = "fmCalculationOptionSelectionExpandedDialog";
             this.Controls.SetChildIndex(this.panel5, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
             this.panel5.ResumeLayout(false);

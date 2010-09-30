@@ -1,65 +1,67 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
-    public partial class CalculationOptionSelectionExpandedDialog : FilterSimulation.CalculationOptionSelectionDialog
+    public partial class fmCalculationOptionSelectionExpandedDialog : FilterSimulation.CalculationOptionSelectionDialog
     {
-        private CalculationOptionDialogExpandedItemSelection m_CalculationOptionDialogExpandedItemSelection;
-        private CalculationOptionDialogExpandedCalculationOptionKind m_CalculationOptionKind;
+        private fmCalculationOptionDialogExpandedItemSelection m_calculationOptionDialogExpandedItemSelection;
+        private fmCalculationOptionDialogExpandedCalculationOptionKind m_calculationOptionKind;
 
-        public CalculationOptionDialogExpandedItemSelection ItemSelection
+        public fmCalculationOptionDialogExpandedItemSelection ItemSelection
         {
             get
             {
-                return m_CalculationOptionDialogExpandedItemSelection;
+                return m_calculationOptionDialogExpandedItemSelection;
             }
         }
 
-        public CalculationOptionDialogExpandedCalculationOptionKind CalculationOptionKind
+        public fmCalculationOptionDialogExpandedCalculationOptionKind CalculationOptionKind
         {
             get
             {
-                return m_CalculationOptionKind;
+                return m_calculationOptionKind;
             }
         }
 
-        public CalculationOptionSelectionExpandedDialog()
+        public fmCalculationOptionSelectionExpandedDialog()
         {
             InitializeComponent();
             UpdateCalculationOptionKind();
             UpdateItemSelection();
         }
 
+        // ReSharper disable InconsistentNaming
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             UpdateCalculationOptionKind();
         }
 
         private void UpdateCalculationOptionKind()
         {
-            m_CalculationOptionKind = radioButton1.Checked
-                                          ? CalculationOptionDialogExpandedCalculationOptionKind.New
-                                          : CalculationOptionDialogExpandedCalculationOptionKind.MotherInitial;
-            panel1.Enabled = m_CalculationOptionKind == CalculationOptionDialogExpandedCalculationOptionKind.New;
+            m_calculationOptionKind = radioButton1.Checked
+                                          ? fmCalculationOptionDialogExpandedCalculationOptionKind.NEW
+                                          : fmCalculationOptionDialogExpandedCalculationOptionKind.MOTHER_INITIAL;
+            panel1.Enabled = m_calculationOptionKind == fmCalculationOptionDialogExpandedCalculationOptionKind.NEW;
         }
 
+        // ReSharper disable InconsistentNaming
         private void currentItemRadioButton_CheckedChanged(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             UpdateItemSelection();
         }
 
+        // ReSharper disable InconsistentNaming
         private void checkedItemsRadioButton_CheckedChanged(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             UpdateItemSelection();
         }
 
+        // ReSharper disable InconsistentNaming
         private void allItemsRadioButton_CheckedChanged(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             UpdateItemSelection();
         }
@@ -68,15 +70,15 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (currentItemRadioButton.Checked)
             {
-                m_CalculationOptionDialogExpandedItemSelection = CalculationOptionDialogExpandedItemSelection.Current;
+                m_calculationOptionDialogExpandedItemSelection = fmCalculationOptionDialogExpandedItemSelection.CURRENT;
             }
             else if (checkedItemsRadioButton.Checked)
             {
-                m_CalculationOptionDialogExpandedItemSelection = CalculationOptionDialogExpandedItemSelection.Checked;
+                m_calculationOptionDialogExpandedItemSelection = fmCalculationOptionDialogExpandedItemSelection.CHECKED;
             }
             else if (allItemsRadioButton.Checked)
             {
-                m_CalculationOptionDialogExpandedItemSelection = CalculationOptionDialogExpandedItemSelection.All;
+                m_calculationOptionDialogExpandedItemSelection = fmCalculationOptionDialogExpandedItemSelection.ALL;
             }
             else
             {
@@ -84,23 +86,24 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
+        // ReSharper disable InconsistentNaming
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             UpdateCalculationOptionKind();
         }
     }
 
-    public enum CalculationOptionDialogExpandedCalculationOptionKind
+    public enum fmCalculationOptionDialogExpandedCalculationOptionKind
     {
-        MotherInitial,
-        New
+        MOTHER_INITIAL,
+        NEW
     }
 
-    public enum CalculationOptionDialogExpandedItemSelection
+    public enum fmCalculationOptionDialogExpandedItemSelection
     {
-        Current,
-        Checked,
-        All
+        CURRENT,
+        CHECKED,
+        ALL
     }
 }
-

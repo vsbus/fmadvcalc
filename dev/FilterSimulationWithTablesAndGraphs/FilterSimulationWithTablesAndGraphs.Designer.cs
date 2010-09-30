@@ -455,9 +455,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.selectedSimulationParametersTable.Size = new System.Drawing.Size(139, 101);
             this.selectedSimulationParametersTable.TabIndex = 10;
             this.selectedSimulationParametersTable.Visible = false;
-            this.selectedSimulationParametersTable.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseClick);
-            this.selectedSimulationParametersTable.CellMouseLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellMouseLeave);
-            this.selectedSimulationParametersTable.CellMouseMove += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.selectedSimulationParametersTable_CellMouseMove);
             this.selectedSimulationParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
             this.selectedSimulationParametersTable.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.selectedSimulationParametersTable_CellValueChangedByUser);
             // 

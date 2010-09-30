@@ -1,17 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using fmCalcBlocksLibrary;
 using fmCalculationLibrary;
-using fmCalculationLibrary.MeasureUnits;
 using FilterSimulation.fmFilterObjects;
 using fmCalcBlocksLibrary.Blocks;
-using FilterSimulation;
-using fmControls;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
@@ -38,22 +30,24 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void CreateDefaultXAxisParametersListForDisplaying()
         {
-            yAxisListParametersToDisplay = new List<fmGlobalParameter>();
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.A);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.Dp);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.hc);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.hc_over_tf);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.Mf);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.Ms);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.Msus);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.n);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.Qms);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.Qmsus);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.Qsus);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.sf);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.tc);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.tf);
-            yAxisListParametersToDisplay.Add(fmGlobalParameter.tr);
+            yAxisListParametersToDisplay = new List<fmGlobalParameter>
+                                               {
+                                                   fmGlobalParameter.A,
+                                                   fmGlobalParameter.Dp,
+                                                   fmGlobalParameter.hc,
+                                                   fmGlobalParameter.hc_over_tf,
+                                                   fmGlobalParameter.Mf,
+                                                   fmGlobalParameter.Ms,
+                                                   fmGlobalParameter.Msus,
+                                                   fmGlobalParameter.n,
+                                                   fmGlobalParameter.Qms,
+                                                   fmGlobalParameter.Qmsus,
+                                                   fmGlobalParameter.Qsus,
+                                                   fmGlobalParameter.sf,
+                                                   fmGlobalParameter.tc,
+                                                   fmGlobalParameter.tf,
+                                                   fmGlobalParameter.tr
+                                               };
         }
 
         private void DisplayCharts(fmFilterSimSolution sol)
@@ -65,7 +59,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private List<fmFilterSimulation> GetSelectedSimulationsList(fmFilterSimSolution sol)
         {
-            List<fmFilterSimulation> simList = new List<fmFilterSimulation>();
+            var simList = new List<fmFilterSimulation>();
 
             if (byCheckingSimulations)
             {
@@ -102,10 +96,6 @@ namespace FilterSimulationWithTablesAndGraphs
                 displayingSolution = false;
             }
         }
-        override protected void UpdateUnitsAndData()
-        {
-            base.UpdateUnitsAndData();
-        }
 
         private void ReadMinMaxXValues()
         {
@@ -123,7 +113,9 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
+        // ReSharper disable InconsistentNaming
         private void minMaxXValueTextBox_TextChanged(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             ReadMinMaxXValues();
             RecalculateSimulationsWithIterationX();
@@ -131,40 +123,14 @@ namespace FilterSimulationWithTablesAndGraphs
             BindCalculatedResultsToChartAndTable();
         }
 
+        // ReSharper disable InconsistentNaming
         private void useDefaultRangesButton_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             LoadDefaultXRange();
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
-        }
-
-        private void selectedSimulationParametersTable_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            //if (e.RowIndex == -1 && e.ColumnIndex > 0)
-            //{
-            //    string parameterName = GetParameterNameFromHeader(selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderText);
-            //    fmInputsInfoForSelectedSimulationsTableBlock.UpdateIsInputed(
-            //        fmInputsInfoForSelectedSimulationsTableBlock.GetParameterByName(parameterName));
-            //    UpdateColorsForInputsAndOutputsInSelectedSimulationsTable();
-            //    DrawChartAndTable();
-            //}
-        }
-
-        private void selectedSimulationParametersTable_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
-        {
-        //    if (e.RowIndex == -1 && e.ColumnIndex > 0)
-        //    {
-        //        selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonShadow);
-        //    }
-        }
-
-        private void selectedSimulationParametersTable_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
-        {
-        //    if (e.RowIndex == -1 && e.ColumnIndex > 0)
-        //    {
-        //        selectedSimulationParametersTable.Columns[e.ColumnIndex].HeaderCell.Style.BackColor = Color.FromKnownColor(KnownColor.ButtonFace);
-        //    }
         }
 
         private void HighLightCurrentPoints(object sender)
@@ -177,7 +143,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (m_highLightCaller == null)
             {
                 m_highLightCaller = sender;
-                
+
                 if (sender == coordinatesGrid)
                 {
                     if (coordinatesGrid.CurrentCell != null)
@@ -214,11 +180,8 @@ namespace FilterSimulationWithTablesAndGraphs
                         if (coordinatesGrid.RowCount > 0 && coordinatesGrid.ColumnCount > 0)
                         {
                             DataGridViewCell newCell = coordinatesGrid[columnIndex, rowIndex];
-                            if (coordinatesGrid.CurrentCell != newCell)
-                            {
-                                coordinatesGrid.CurrentCell = newCell;
-                            }
-                        }    
+                            coordinatesGrid.CurrentCell = newCell;
+                        }
                     }
                 }
 
@@ -226,25 +189,35 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
+        // ReSharper disable InconsistentNaming
         private void coordinatesGrid_CurrentCellChanged(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             HighLightCurrentPoints(sender);
         }
 
+        // ReSharper disable InconsistentNaming
         private void fmZedGraphControl1_HighLightedPointsChanged(object sender, fmZedGraph.HighlighPointsEventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             HighLightCurrentPoints(sender, e.X, e.IsHighlight);
         }
 
+        // ReSharper disable InconsistentNaming
         private void calculationOptionTandCChangeButton_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             if (!m_isUseLocalParams)
             {
-                CalculationOptionSelectionExpandedDialog cosd = new CalculationOptionSelectionExpandedDialog();
-                cosd.suspensionCalculationOption =
-                    fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
-                cosd.filterMachiningCalculationOption =
-                    fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL;
+                var cosd = new fmCalculationOptionSelectionExpandedDialog
+                {
+                    suspensionCalculationOption =
+                        fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions.
+                        RHOSUS_CALCULATED,
+                    filterMachiningCalculationOption =
+                        fmCalculatorsLibrary.fmFilterMachiningCalculator.
+                        fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL
+                };
 
                 if (GetCurrentActiveSelectedSimulationData() != null)
                 {
@@ -255,13 +228,13 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 if (cosd.ShowDialog() == DialogResult.OK)
                 {
-                    List<fmSelectedSimulationData> selectedList = new List<fmSelectedSimulationData>();
+                    var selectedList = new List<fmSelectedSimulationData>();
 
                     foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                     {
-                        if (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.All
-                            || (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.Checked && simData.isChecked)
-                            || (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.Current && simData.isCurrentActive))
+                        if (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.ALL
+                            || (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.CHECKED && simData.isChecked)
+                            || (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.CURRENT && simData.isCurrentActive))
                         {
                             selectedList.Add(simData);
                         }
@@ -276,13 +249,13 @@ namespace FilterSimulationWithTablesAndGraphs
                         fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption
                             filterMachiningCalculationOption;
 
-                        if (cosd.CalculationOptionKind == CalculationOptionDialogExpandedCalculationOptionKind.New)
+                        if (cosd.CalculationOptionKind == fmCalculationOptionDialogExpandedCalculationOptionKind.NEW)
                         {
                             suspensionCalculationOption = cosd.suspensionCalculationOption;
                             filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
                         }
                         else if (cosd.CalculationOptionKind ==
-                                 CalculationOptionDialogExpandedCalculationOptionKind.MotherInitial)
+                                 fmCalculationOptionDialogExpandedCalculationOptionKind.MOTHER_INITIAL)
                         {
                             suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
                             filterMachiningCalculationOption =
@@ -293,13 +266,13 @@ namespace FilterSimulationWithTablesAndGraphs
                             throw new Exception("unknown Calculation option Kind");
                         }
 
-                        fmSuspensionBlock susBlock = new fmSuspensionBlock();
+                        var susBlock = new fmSuspensionBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, susBlock);
                         susBlock.SetCalculationOptionAndUpdateCellsStyle(suspensionCalculationOption);
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(susBlock, sim);
                         sim.suspensionCalculationOption = suspensionCalculationOption;
 
-                        fmFilterMachiningBlock filterMachiningBlock = new fmFilterMachiningBlock();
+                        var filterMachiningBlock = new fmFilterMachiningBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, filterMachiningBlock);
                         filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(filterMachiningCalculationOption);
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
@@ -314,27 +287,31 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             else
             {
-                CalculationOptionSelectionExpandedDialog cosd = new CalculationOptionSelectionExpandedDialog();
-                cosd.suspensionCalculationOption =
-                    fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
-                cosd.filterMachiningCalculationOption =
-                    fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL;
+                var cosd = new fmCalculationOptionSelectionExpandedDialog
+                {
+                    suspensionCalculationOption =
+                        fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions.
+                        RHOSUS_CALCULATED,
+                    filterMachiningCalculationOption =
+                        fmCalculatorsLibrary.fmFilterMachiningCalculator.
+                        fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL
+                };
 
                 if (GetCurrentActiveLocalParameters() != null)
                 {
                     fmLocalInputParametersData localParameters = GetCurrentActiveLocalParameters();
                     cosd.filterMachiningCalculationOption = localParameters.filterMachiningBlock.calculationOption;
                 }
-                
+
                 if (cosd.ShowDialog() == DialogResult.OK)
                 {
-                    List<fmLocalInputParametersData> selectedList = new List<fmLocalInputParametersData>();
+                    var selectedList = new List<fmLocalInputParametersData>();
 
                     foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                     {
-                        if (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.All
-                            || (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.Checked && localParameters.isChecked)
-                            || (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.Current && localParameters.isCurrentActive))
+                        if (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.ALL
+                            || (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.CHECKED && localParameters.isChecked)
+                            || (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.CURRENT && localParameters.isCurrentActive))
                         {
                             selectedList.Add(localParameters);
                         }
@@ -346,12 +323,12 @@ namespace FilterSimulationWithTablesAndGraphs
                         fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption
                             filterMachiningCalculationOption;
 
-                        if (cosd.CalculationOptionKind == CalculationOptionDialogExpandedCalculationOptionKind.New)
+                        if (cosd.CalculationOptionKind == fmCalculationOptionDialogExpandedCalculationOptionKind.NEW)
                         {
                             filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
                         }
                         else if (cosd.CalculationOptionKind ==
-                                 CalculationOptionDialogExpandedCalculationOptionKind.MotherInitial)
+                                 fmCalculationOptionDialogExpandedCalculationOptionKind.MOTHER_INITIAL)
                         {
                             filterMachiningCalculationOption = localParameters.initialFilterMachiningCalculationOption;
                         }
@@ -397,19 +374,22 @@ namespace FilterSimulationWithTablesAndGraphs
             return null;
         }
 
+        // ReSharper disable InconsistentNaming
         private void listBoxYAxis_ItemCheck(object sender, ItemCheckEventArgs e)
+        // ReSharper restore InconsistentNaming
         {
-            List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
+            var yParameters = new List<fmGlobalParameter>();
 
-            CheckedListBox clb = sender as CheckedListBox;
-            for (int i = 0; i < clb.Items.Count; ++i)
-            {
-                if (i == e.Index && e.NewValue == CheckState.Checked
-                    || clb.GetItemChecked(i) && (e.NewValue == CheckState.Checked || i != e.Index))
+            var clb = sender as CheckedListBox;
+            if (clb != null)
+                for (int i = 0; i < clb.Items.Count; ++i)
                 {
-                    yParameters.Add(fmGlobalParameter.parametersByName[clb.Items[i].ToString()]);
+                    if (i == e.Index && e.NewValue == CheckState.Checked
+                        || clb.GetItemChecked(i) && (e.NewValue == CheckState.Checked || i != e.Index))
+                    {
+                        yParameters.Add(fmGlobalParameter.parametersByName[clb.Items[i].ToString()]);
+                    }
                 }
-            }
 
             if (listBoxXAxis.Text == "")
                 return;
