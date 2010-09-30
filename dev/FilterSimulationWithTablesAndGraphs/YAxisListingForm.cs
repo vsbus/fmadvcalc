@@ -1,16 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
-namespace FilterSimulation
+namespace FilterSimulationWithTablesAndGraphs
 {
-    public partial class YAxisListingForm : Form
+    public partial class fmYAxisListingForm : Form
     {
-        public YAxisListingForm()
+        public fmYAxisListingForm()
         {
             InitializeComponent();
 
@@ -30,7 +26,7 @@ namespace FilterSimulation
 
         public List<fmCalculationLibrary.fmGlobalParameter> GetCheckedItems()
         {
-            List<fmCalculationLibrary.fmGlobalParameter> result = new List<fmCalculationLibrary.fmGlobalParameter>();
+            var result = new List<fmCalculationLibrary.fmGlobalParameter>();
             for (int i = 0; i < checkedListBox1.Items.Count; ++i)
                 if (checkedListBox1.GetItemChecked(i))
                     result.Add(GetParameterInListBoxByIndex(i));
@@ -39,10 +35,14 @@ namespace FilterSimulation
 
         private fmCalculationLibrary.fmGlobalParameter GetParameterInListBoxByIndex(int i)
         {
+// ReSharper disable AssignNullToNotNullAttribute
             return fmCalculationLibrary.fmGlobalParameter.parametersByName[checkedListBox1.Items[i] as string];
+// ReSharper restore AssignNullToNotNullAttribute
         }
 
+// ReSharper disable InconsistentNaming
         private void okButton_Click(object sender, EventArgs e)
+// ReSharper restore InconsistentNaming
         {
             DialogResult = DialogResult.OK;
             Close();

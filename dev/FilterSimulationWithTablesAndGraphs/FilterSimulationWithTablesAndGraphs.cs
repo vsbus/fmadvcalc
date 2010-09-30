@@ -15,15 +15,15 @@ using fmControls;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
-    public partial class FilterSimulationWithTablesAndGraphs : FilterSimulation.FilterSimulation
+    public partial class fmFilterSimulationWithTablesAndGraphs : FilterSimulation.FilterSimulation
     {
-        public FilterSimulationWithTablesAndGraphs()
+        public fmFilterSimulationWithTablesAndGraphs()
         {
             InitializeComponent();
 
             CreateColumnsInParametersTables();
             ReadUseParamsCheckBoxAndApply();
-            rowsQuantity.Text = RowsQuantity.ToString();
+            rowsQuantity.Text = m_rowsQuantity.ToString();
 
             CreateDefaultXAxisParametersListForDisplaying();
 
@@ -109,7 +109,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void ReadMinMaxXValues()
         {
-            if (loadingXRange == false)
+            if (m_loadingXRange == false)
             {
                 double minXValue = fmValue.StringToValue(minXValueTextBox.Text).value;
                 double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).value;
@@ -174,16 +174,16 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void HighLightCurrentPoints(object sender, double x, bool isHighLight)
         {
-            if (highLightCaller == null)
+            if (m_highLightCaller == null)
             {
-                highLightCaller = sender;
+                m_highLightCaller = sender;
                 
                 if (sender == coordinatesGrid)
                 {
                     if (coordinatesGrid.CurrentCell != null)
                     {
                         int index = coordinatesGrid.CurrentCell.RowIndex;
-                        x = displayingResults.xParameter.Values[index].value;
+                        x = m_displayingResults.XParameter.Values[index].value;
                         fmZedGraphControl1.HighlightPoints(x);
                     }
                 }
@@ -222,7 +222,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
 
-                highLightCaller = null;
+                m_highLightCaller = null;
             }
         }
 
@@ -238,7 +238,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void calculationOptionTandCChangeButton_Click(object sender, EventArgs e)
         {
-            if (!isUseLocalParams)
+            if (!m_isUseLocalParams)
             {
                 CalculationOptionSelectionExpandedDialog cosd = new CalculationOptionSelectionExpandedDialog();
                 cosd.suspensionCalculationOption =
@@ -257,7 +257,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     List<fmSelectedSimulationData> selectedList = new List<fmSelectedSimulationData>();
 
-                    foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+                    foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                     {
                         if (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.All
                             || (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.Checked && simData.isChecked)
@@ -330,7 +330,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     List<fmLocalInputParametersData> selectedList = new List<fmLocalInputParametersData>();
 
-                    foreach (fmLocalInputParametersData localParameters in localInputParametersList)
+                    foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                     {
                         if (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.All
                             || (cosd.ItemSelection == CalculationOptionDialogExpandedItemSelection.Checked && localParameters.isChecked)
@@ -375,7 +375,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private fmLocalInputParametersData GetCurrentActiveLocalParameters()
         {
-            foreach (fmLocalInputParametersData localParameters in localInputParametersList)
+            foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
             {
                 if (localParameters.isCurrentActive)
                 {
@@ -387,7 +387,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private fmSelectedSimulationData GetCurrentActiveSelectedSimulationData()
         {
-            foreach (fmSelectedSimulationData simData in internalSelectedSimList)
+            foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
             {
                 if (simData.isCurrentActive)
                 {

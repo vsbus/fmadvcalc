@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
-    partial class FilterSimulationWithTablesAndGraphs
+    partial class fmFilterSimulationWithTablesAndGraphs
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterSimulationWithTablesAndGraphs));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel4 = new System.Windows.Forms.Panel();
             this.fmZedGraphControl1 = new fmZedGraph.fmZedGraphControl();
@@ -613,7 +613,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "FilterSimulationWithTablesAndGraphs";
+            this.Name = "fmFilterSimulationWithTablesAndGraphs";
             this.panelLeft.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
             this.projectPanel.ResumeLayout(false);

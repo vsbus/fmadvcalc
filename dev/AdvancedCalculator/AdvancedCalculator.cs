@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using FilterSimulationWithTablesAndGraphs;
 
 namespace AdvancedCalculator
 {
@@ -43,7 +44,7 @@ namespace AdvancedCalculator
 
         private void yaxisParametersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FilterSimulation.YAxisListingForm yalForm = new FilterSimulation.YAxisListingForm();
+            fmYAxisListingForm yalForm = new fmYAxisListingForm();
             yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.yAxisListParametersToDisplay);
             if (yalForm.ShowDialog() == DialogResult.OK)
             {

@@ -1,6 +1,6 @@
-namespace FilterSimulation
+namespace FilterSimulationWithTablesAndGraphs
 {
-    partial class YAxisListingForm
+    partial class fmYAxisListingForm
     {
         /// <summary>
         /// Required designer variable.
@@ -82,7 +82,7 @@ namespace FilterSimulation
             this.ClientSize = new System.Drawing.Size(197, 279);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "YAxisListingForm";
+            this.Name = "fmYAxisListingForm";
             this.Text = "YAxisListingForm";
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
