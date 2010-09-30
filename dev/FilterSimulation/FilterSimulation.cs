@@ -81,9 +81,9 @@ namespace FilterSimulation
         {
             SetUpToolTips();
 
-            byCheckingProjects = byCheckingProjectsCheckBox.Checked;
-            byCheckingSuspensions = byCheckingSuspensionsCheckBox.Checked;
-            byCheckingSimSeries = byCheckingSimSeriesCheckBox.Checked;
+            m_byCheckingProjects = byCheckingProjectsCheckBox.Checked;
+            m_byCheckingSuspensions = byCheckingSuspensionsCheckBox.Checked;
+            m_byCheckingSimSeries = byCheckingSimSeriesCheckBox.Checked;
             byCheckingSimulations = byCheckingSimulationsCheckBox.Checked;
 
             ResizeAllPanels();
@@ -182,9 +182,9 @@ namespace FilterSimulation
 
         private void UpdateCurrentObjectAndDisplaySolution(DataGridView dgv)
         {
-            if (displayingTables == false && displayingSolution == false && sortingTables == false)
+            if (m_displayingTables == false && displayingSolution == false && m_sortingTables == false)
             {
-                displayingTables = true;
+                m_displayingTables = true;
 
                 fSolution.CurrentObjects.Project = null;
 
@@ -198,7 +198,7 @@ namespace FilterSimulation
                     if (projectDataGrid.CurrentCell == null
                         || projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value == null)
                     {
-                        displayingTables = false;
+                        m_displayingTables = false;
                         return;
                     }
 
@@ -212,7 +212,7 @@ namespace FilterSimulation
                     if (suspensionDataGrid.CurrentCell == null
                         || suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value == null)
                     {
-                        displayingTables = false;
+                        m_displayingTables = false;
                         return;
                     }
                     
@@ -225,7 +225,7 @@ namespace FilterSimulation
                     if (simSeriesDataGrid.CurrentCell == null
                         || simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value == null)
                     {
-                        displayingTables = false;
+                        m_displayingTables = false;
                         return;
                     }
 
@@ -238,7 +238,7 @@ namespace FilterSimulation
                     if (simulationDataGrid.CurrentCell == null
                         || simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value == null)
                     {
-                        displayingTables = false;
+                        m_displayingTables = false;
                         return;
                     }
 
@@ -249,7 +249,7 @@ namespace FilterSimulation
 
                 DisplaySolution(fSolution);
 
-                displayingTables = false;
+                m_displayingTables = false;
             }
         }
         
@@ -301,13 +301,14 @@ namespace FilterSimulation
             fmFilterSimSerie parentSerie = fSolution.CurrentObjects.Serie;
             if (parentSerie == null)
             {
-                MessageBox.Show("Please select serie in serie table", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"Please select serie in serie table", "Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            if (!byCheckingSimSeries && parentSerie.Checked == false)
+            if (!m_byCheckingSimSeries && parentSerie.Checked == false)
             {
-                MessageBox.Show("You try to create simulation in unchecked serie.\nPlease create simulations in checked series.", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"You try to create simulation in unchecked serie.
+Please create simulations in checked series.", "Error!", MessageBoxButtons.OK);
                 return;
             }
 

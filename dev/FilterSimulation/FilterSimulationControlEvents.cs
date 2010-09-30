@@ -7,6 +7,7 @@ namespace FilterSimulation
     public partial class fmFilterSimulationControl
     {
         #region Project Buttons
+        // ReSharper disable InconsistentNaming
         private void projectCreateButton_Click(object sender, EventArgs e)
         {
             fSolution.CurrentObjects.Project = new fmFilterSimProject(fSolution, "Unnamed project");
@@ -42,9 +43,12 @@ namespace FilterSimulation
                 UpdateCurrentObjectAndDisplaySolution(projectDataGrid);
             }
         }
+        // ReSharper restore InconsistentNaming
         #endregion
         #region Suspension Buttons
+        // ReSharper disable InconsistentNaming
         private void keepSuspensionButton_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             if (fSolution.CurrentObjects.Suspension != null)
             {
@@ -52,18 +56,21 @@ namespace FilterSimulation
                 DisplaySolution(fSolution);
             }
         }
+        // ReSharper disable InconsistentNaming
         private void suspensionCreateButton_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             fmFilterSimProject parentProject = fSolution.CurrentObjects.Project;
             if (parentProject == null)
             {
-                MessageBox.Show("Please select project in project table", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"Please select project in project table", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            if (!byCheckingProjects && parentProject.Checked == false)
+            if (!m_byCheckingProjects && parentProject.Checked == false)
             {
-                MessageBox.Show("You try to create suspension in unchecked project.\nPlease create suspensions in checked projects.", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"You try to create suspension in unchecked project.
+Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
@@ -72,7 +79,9 @@ namespace FilterSimulation
             DisplaySolution(fSolution);
             suspensionDataGrid.BeginEdit(true);
         }
+        // ReSharper disable InconsistentNaming
         private void suspensionRestoreButton_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             if (fSolution.CurrentObjects.Suspension != null)
             {
@@ -81,7 +90,9 @@ namespace FilterSimulation
                 UpdateCurrentObjectAndDisplaySolution(suspensionDataGrid);
             }
         }
+        // ReSharper disable InconsistentNaming
         private void suspensionDeleteButton_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             if (fSolution.CurrentObjects.Suspension != null)
             {
@@ -94,25 +105,28 @@ namespace FilterSimulation
         }
         #endregion
         #region simSeries Buttons
+        // ReSharper disable InconsistentNaming
         private void simSerieCreate_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             fmFilterSimSuspension parentSuspension = fSolution.CurrentObjects.Suspension;
             if (parentSuspension == null)
             {
-                MessageBox.Show("Please select suspension in suspension table", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"Please select suspension in suspension table", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            if (!byCheckingSuspensions && parentSuspension.Checked == false)
+            if (!m_byCheckingSuspensions && parentSuspension.Checked == false)
             {
-                MessageBox.Show("You try to create serie in unchecked suspension.\nPlease create series in checked suspensions.", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"You try to create serie in unchecked suspension.
+Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
             fmFilterSimMachineType machine = GetCurrentMachine();
             if (machine == null)
             {
-                MessageBox.Show("Please select machine in machine table", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"Please select machine in machine table", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
@@ -137,6 +151,7 @@ namespace FilterSimulation
 
             simSeriesDataGrid.BeginEdit(true);
         }
+        // ReSharper disable InconsistentNaming
         private void simSeriesKeepButton_Click(object sender, EventArgs e)
         {
             if (fSolution.CurrentObjects.Serie != null)
@@ -165,20 +180,24 @@ namespace FilterSimulation
                 UpdateCurrentObjectAndDisplaySolution(simSeriesDataGrid.DisplayedRowCount(true) == 0 ? suspensionDataGrid : simSeriesDataGrid);
             }
         }
+        // ReSharper restore InconsistentNaming
         #endregion
         #region simulation Buttons
+        // ReSharper disable InconsistentNaming
         private void simulationDuplicateButton_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             fmFilterSimSerie parentSerie = fSolution.CurrentObjects.Serie;
             if (parentSerie == null)
             {
-                MessageBox.Show("Please select serie in serie table", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"Please select serie in serie table", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            if (!byCheckingSimSeries && parentSerie.Checked == false)
+            if (!m_byCheckingSimSeries && parentSerie.Checked == false)
             {
-                MessageBox.Show("You try to create simulation in unchecked serie.\nPlease create simulations in checked series.", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"You try to create simulation in unchecked serie.
+Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
@@ -199,8 +218,7 @@ namespace FilterSimulation
             else
             {
                 fmFilterSimulation currentSimulation = fSolution.CurrentObjects.Simulation;
-                fSolution.CurrentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, currentSimulation);
-                fSolution.CurrentObjects.Simulation.Name = simName;
+                fSolution.CurrentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, currentSimulation) { Name = simName };
                 fSolution.CurrentObjects.Simulation.Keep();
             }
 
@@ -211,6 +229,7 @@ namespace FilterSimulation
 
             simulationDataGrid.BeginEdit(true);
         }
+        // ReSharper disable InconsistentNaming
         private void simulationKeepButton_Click(object sender, EventArgs e)
         {
             if (fSolution.CurrentObjects.Simulation != null)
@@ -243,19 +262,19 @@ namespace FilterSimulation
 
         private void byCheckingProjectsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            byCheckingProjects = byCheckingProjectsCheckBox.Checked;
+            m_byCheckingProjects = byCheckingProjectsCheckBox.Checked;
             DisplaySolution(fSolution);
         }
 
         private void byCheckingSuspensionsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            byCheckingSuspensions = byCheckingSuspensionsCheckBox.Checked;
+            m_byCheckingSuspensions = byCheckingSuspensionsCheckBox.Checked;
             DisplaySolution(fSolution);
         }
 
         private void byCheckingSimSeriesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            byCheckingSimSeries = byCheckingSimSeriesCheckBox.Checked;
+            m_byCheckingSimSeries = byCheckingSimSeriesCheckBox.Checked;
             DisplaySolution(fSolution);
         }
         private void byCheckingSimulationsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -280,12 +299,11 @@ namespace FilterSimulation
 
             if (currentSerie == null)
             {
-                MessageBox.Show("Please select serie in simSeries table", "Error!", MessageBoxButtons.OK);
+                MessageBox.Show(@"Please select serie in simSeries table", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            fSolution.CurrentObjects.Serie = new fmFilterSimSerie(currentSerie.Parent, currentSerie);
-            fSolution.CurrentObjects.Serie.Name = currentSerie.Name + "d";
+            fSolution.CurrentObjects.Serie = new fmFilterSimSerie(currentSerie.Parent, currentSerie) { Name = currentSerie.Name + "d" };
             fSolution.CurrentObjects.Serie.Keep();
 
             DisplaySolution(fSolution);
@@ -293,5 +311,6 @@ namespace FilterSimulation
 
             simSeriesDataGrid.BeginEdit(true);
         }
+        // ReSharper restore InconsistentNaming
     }
 }

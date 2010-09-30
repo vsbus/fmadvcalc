@@ -2,12 +2,12 @@ namespace FilterSimulation
 {
     public partial class fmFilterSimulationControl
     {
-        private bool displayingTables = false;
-        protected bool displayingSolution = false;
-        private bool sortingTables = false;
-        private bool byCheckingProjects;
-        private bool byCheckingSuspensions;
-        private bool byCheckingSimSeries;
+        private bool m_displayingTables;
+        protected bool displayingSolution;
+        private bool m_sortingTables;
+        private bool m_byCheckingProjects;
+        private bool m_byCheckingSuspensions;
+        private bool m_byCheckingSimSeries;
         protected bool byCheckingSimulations;
     }
 }

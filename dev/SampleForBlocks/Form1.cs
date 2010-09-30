@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using FilterSimulation;
 using fmCalculationLibrary;
-using fmFilterSimulationControl;
 
 namespace SampleForBlocks
 {

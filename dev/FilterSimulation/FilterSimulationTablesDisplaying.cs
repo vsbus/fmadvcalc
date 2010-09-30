@@ -116,7 +116,7 @@ namespace FilterSimulation
 
             foreach (fmFilterSimSuspension sus in proj.SuspensionList)
             {
-                AddHideRowsForSuspension(sus, !byCheckingProjects ? (visible && proj.Checked) : itIsCurrentProject);
+                AddHideRowsForSuspension(sus, !m_byCheckingProjects ? (visible && proj.Checked) : itIsCurrentProject);
             }
         }
         void AddHideRowsForSuspension(fmFilterSimSuspension sus, bool visible)
@@ -129,7 +129,7 @@ namespace FilterSimulation
 
             foreach (fmFilterSimSerie serie in sus.SimSeriesList)
             {
-                AddHideRowsForSerie(serie, !byCheckingSuspensions ? (visible && sus.Checked) : itIsCurrentSuspension);
+                AddHideRowsForSerie(serie, !m_byCheckingSuspensions ? (visible && sus.Checked) : itIsCurrentSuspension);
             }
         }
         void AddHideRowsForSerie(fmFilterSimSerie serie, bool visible)
@@ -142,7 +142,7 @@ namespace FilterSimulation
 
             foreach (fmFilterSimulation sim in serie.SimulationsList)
             {
-                AddHideRowsForSimulation(sim, !byCheckingSimSeries ? (visible && serie.Checked) : itIsCurrentSimSerie);
+                AddHideRowsForSimulation(sim, !m_byCheckingSimSeries ? (visible && serie.Checked) : itIsCurrentSimSerie);
             }
         }
         void AddHideRowsForSimulation(fmFilterSimulation sim, bool visible)
@@ -506,10 +506,10 @@ namespace FilterSimulation
         }
         void SortTables()
         {
-            sortingTables = true;
+            m_sortingTables = true;
             simSeriesDataGrid.Sort(simSeriesDataGrid.SortedColumn, ListSortDirection.Ascending);
             simulationDataGrid.Sort(simulationDataGrid.SortedColumn, ListSortDirection.Ascending);
-            sortingTables = false;
+            m_sortingTables = false;
         }
 
         void SelectCurrentItemsInSolution(fmFilterSimSolution sol)
