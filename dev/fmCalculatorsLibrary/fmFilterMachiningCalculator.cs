@@ -148,8 +148,8 @@ namespace fmCalculatorsLibrary
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
-            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
-            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+            rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
             // ReSharper disable InconsistentNaming
             var isKnown_A = A.isInputed;
@@ -739,8 +739,8 @@ namespace fmCalculatorsLibrary
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
-            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
-            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+            rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
             // ReSharper disable InconsistentNaming
             var isKnown_A = A.isInputed;
@@ -1163,8 +1163,8 @@ namespace fmCalculatorsLibrary
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
-            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
-            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+            rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
             tf.value = FilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
 
 
@@ -1270,8 +1270,8 @@ namespace fmCalculatorsLibrary
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
-            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
-            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+            rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
             if (Qms.isInputed)
             {
@@ -1366,8 +1366,8 @@ namespace fmCalculatorsLibrary
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
-            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
-            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+            rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
             if (calculationOption == fmFilterMachiningCalculationOption.STANDART3)
             {
@@ -1485,8 +1485,8 @@ namespace fmCalculatorsLibrary
                     throw GenerateExceptionForGroupWithoutInput(hc, Vf, Mf, Vsus, Msus, Vs, Ms);
 
                 Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
-                rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
-                a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+                rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
+                a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
             }
         }
 
@@ -1631,8 +1631,8 @@ namespace fmCalculatorsLibrary
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             Pc.value = FilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
-            rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
-            a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+            rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
+            a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
             if (calculationOption == fmFilterMachiningCalculationOption.STANDART8)
             {

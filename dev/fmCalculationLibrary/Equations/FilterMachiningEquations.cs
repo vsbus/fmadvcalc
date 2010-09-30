@@ -97,7 +97,7 @@ namespace fmCalculationLibrary.Equations
             fmValue c2 = c * eps0 / fmValue.Pow(bar, nc - ne);
             fmValue c3 = -tf;
 
-            List<fmValue> roots = fmMathEquations.SolveC1xp1C2xp2C3(c1, p1, c2, p2, c3, new fmValue(1e10));
+            List<fmValue> roots = fmMathEquations.SolveC1Xp1C2Xp2C3(c1, p1, c2, p2, c3, new fmValue(1e10));
 
             return SelectBestDpRoot(roots);
         }
@@ -222,7 +222,7 @@ namespace fmCalculationLibrary.Equations
             fmValue K3 = 2*C1/Pc0*fmValue.Pow(bar, ne - nc)*eps0/Cv*hce*A*Vf;
             fmValue K4 = C1*fmValue.Pow(bar, -nc)*Vf*(-Vf*Cv - 2*hce*A*(1 - Cv))/(Cv*Pc0);
 
-            List<fmValue> roots = fmMathEquations.SolveC1xp1C2xp2C3xp3C4(K1, p1, K2, p2, K3, p3, K4);
+            List<fmValue> roots = fmMathEquations.SolveC1Xp1C2Xp2C3Xp3C4(K1, p1, K2, p2, K3, p3, K4);
 
             return SelectBestDpRoot(roots);
         }

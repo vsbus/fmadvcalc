@@ -21,18 +21,18 @@ namespace fmCalculatorsLibrary
             // ReSharper disable PossibleNullReferenceException
             if (Pc.isInputed)
             {
-                rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
-                a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+                rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
+                a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
             }
             else if (rc.isInputed)
             {
-                Pc.value = PcrcaEquations.Eval_Pc_From_rc(rc.value);
-                a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
+                Pc.value = fmPcrcaEquations.Eval_Pc_From_rc(rc.value);
+                a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
             }
             else if (a.isInputed)
             {
-                Pc.value = PcrcaEquations.Eval_Pc_From_a_eps_rho_s(a.value, eps.value, rho_s.value);
-                rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
+                Pc.value = fmPcrcaEquations.Eval_Pc_From_a_eps_rho_s(a.value, eps.value, rho_s.value);
+                rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             }
             else 
                 throw new Exception("One of Pc, rc or a must be inputed");

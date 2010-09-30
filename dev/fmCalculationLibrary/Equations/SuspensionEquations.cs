@@ -1,7 +1,8 @@
 namespace fmCalculationLibrary.Equations
 {
-    public class SuspensionEquations
+    public class fmSuspensionEquations
     {
+        // ReSharper disable InconsistentNaming
         static public fmValue Eval_rho_f_From_rho_s_rho_sus_Cm(fmValue rho_s, fmValue rho_sus, fmValue Cm)
         {
             return rho_s * rho_sus * (Cm - 1) / (-rho_s + Cm * rho_sus);
@@ -54,5 +55,6 @@ namespace fmCalculationLibrary.Equations
         {
             return rho_s * (rho_f - rho_sus) / (rho_f - rho_s);
         }
+        // ReSharper restore InconsistentNaming
     }
 }

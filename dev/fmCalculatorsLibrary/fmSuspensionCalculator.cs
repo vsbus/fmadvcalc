@@ -37,11 +37,11 @@ namespace fmCalculatorsLibrary
                 case fmSuspensionCalculationOptions.RHOF_CALCULATED:
                     {
                         if (Cm.isInputed)
-                            rho_f.value = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_Cm(rho_s.value, rho_sus.value, Cm.value);
+                            rho_f.value = fmSuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_Cm(rho_s.value, rho_sus.value, Cm.value);
                         else if (Cv.isInputed)
-                            rho_f.value = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_Cv(rho_s.value, rho_sus.value, Cv.value);
+                            rho_f.value = fmSuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_Cv(rho_s.value, rho_sus.value, Cv.value);
                         else if (C.isInputed)
-                            rho_f.value = SuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_C(rho_s.value, rho_sus.value, C.value);
+                            rho_f.value = fmSuspensionEquations.Eval_rho_f_From_rho_s_rho_sus_C(rho_s.value, rho_sus.value, C.value);
                         else 
                             throw noCIsInputedException;
                         break;
@@ -49,11 +49,11 @@ namespace fmCalculatorsLibrary
                 case fmSuspensionCalculationOptions.RHOS_CALCULATED:
                     {
                         if (Cm.isInputed)
-                            rho_s.value = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_Cm(rho_f.value, rho_sus.value, Cm.value);
+                            rho_s.value = fmSuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_Cm(rho_f.value, rho_sus.value, Cm.value);
                         else if (Cv.isInputed)
-                            rho_s.value = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_Cv(rho_f.value, rho_sus.value, Cv.value);
+                            rho_s.value = fmSuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_Cv(rho_f.value, rho_sus.value, Cv.value);
                         else if (C.isInputed)
-                            rho_s.value = SuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_C(rho_f.value, rho_sus.value, C.value);
+                            rho_s.value = fmSuspensionEquations.Eval_rho_s_From_rho_f_rho_sus_C(rho_f.value, rho_sus.value, C.value);
                         else throw 
                             noCIsInputedException;
                         break;
@@ -61,11 +61,11 @@ namespace fmCalculatorsLibrary
                 case fmSuspensionCalculationOptions.RHOSUS_CALCULATED:
                     {
                         if (Cm.isInputed)
-                            rho_sus.value = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cm(rho_f.value, rho_s.value, Cm.value);
+                            rho_sus.value = fmSuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cm(rho_f.value, rho_s.value, Cm.value);
                         else if (Cv.isInputed)
-                            rho_sus.value = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cv(rho_f.value, rho_s.value, Cv.value);
+                            rho_sus.value = fmSuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cv(rho_f.value, rho_s.value, Cv.value);
                         else if (C.isInputed)
-                            rho_sus.value = SuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_C(rho_f.value, rho_s.value, C.value);
+                            rho_sus.value = fmSuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_C(rho_f.value, rho_s.value, C.value);
                         else 
                             throw noCIsInputedException;
                         break;
@@ -78,9 +78,9 @@ namespace fmCalculatorsLibrary
                     throw new System.Exception("Unknown calculation option");
             }
 
-            if (!Cm.isInputed) Cm.value = SuspensionEquations.Eval_Cm_From_rho(rho_f.value, rho_s.value, rho_sus.value);
-            if (!Cv.isInputed) Cv.value = SuspensionEquations.Eval_Cv_From_rho(rho_f.value, rho_s.value, rho_sus.value);
-            if (!C.isInputed) C.value = SuspensionEquations.Eval_C_From_rho(rho_f.value, rho_s.value, rho_sus.value);
+            if (!Cm.isInputed) Cm.value = fmSuspensionEquations.Eval_Cm_From_rho(rho_f.value, rho_s.value, rho_sus.value);
+            if (!Cv.isInputed) Cv.value = fmSuspensionEquations.Eval_Cv_From_rho(rho_f.value, rho_s.value, rho_sus.value);
+            if (!C.isInputed) C.value = fmSuspensionEquations.Eval_C_From_rho(rho_f.value, rho_s.value, rho_sus.value);
             // ReSharper restore PossibleNullReferenceException
         }
     }

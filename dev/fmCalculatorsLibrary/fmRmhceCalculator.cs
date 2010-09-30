@@ -18,9 +18,9 @@ namespace fmCalculatorsLibrary
 
             // ReSharper disable PossibleNullReferenceException
             if (Rm.isInputed)
-                hce.value = RmhceEquations.Eval_hce_From_Rm_Pc(Rm.value, Pc.value);
+                hce.value = fmRmhceEquations.Eval_hce_From_Rm_Pc(Rm.value, Pc.value);
             else if (hce.isInputed)
-                Rm.value = RmhceEquations.Eval_Rm_From_hce_Pc(hce.value, Pc.value);
+                Rm.value = fmRmhceEquations.Eval_Rm_From_hce_Pc(hce.value, Pc.value);
             else
                 throw new Exception("Rm or hce must be inputed");
             // ReSharper restore PossibleNullReferenceException
