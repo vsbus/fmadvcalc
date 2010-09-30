@@ -515,7 +515,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateVisibilityOfColumnsInSelectedSimulationsTable()
         {
-            List<fmGlobalParameter> inputs = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
+            List<fmGlobalParameter> inputs = new List<fmGlobalParameter>(fmGlobalParameter.parameters);
             inputs.Remove(fmGlobalParameter.eta_f);
             inputs.Remove(fmGlobalParameter.rho_f);
             inputs.Remove(fmGlobalParameter.rho_s);
@@ -526,9 +526,9 @@ namespace FilterSimulationWithTablesAndGraphs
             foreach (DataGridViewColumn col in selectedSimulationParametersTable.Columns)
             {
                 string parName = GetParameterNameFromHeader(col.HeaderText);
-                if (fmGlobalParameter.ParametersByName.ContainsKey(parName))
+                if (fmGlobalParameter.parametersByName.ContainsKey(parName))
                 {
-                    fmGlobalParameter par = fmGlobalParameter.ParametersByName[parName];
+                    fmGlobalParameter par = fmGlobalParameter.parametersByName[parName];
                     col.Visible = false;
                     if (inputs.Contains(par))
                     {
@@ -646,7 +646,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void SetXAxisParameterAsInputed()
         {
             if (listBoxXAxis.Text != "")
-                UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.Text]);
+                UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.Text]);
             BindForeColorToSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
             LoadCurrentXRange();
@@ -679,7 +679,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
 
             loadingXRange = true;
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
             fmRange range = xParameter.chartCurretXRange;
             minXValueTextBox.Text = (range.MinValue / coef).ToString();
@@ -694,7 +694,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
             }
             loadingXRange = true;
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
             fmRange defaultRange = xParameter.chartDefaultXRange;
             fmRange range = xParameter.chartCurretXRange;
@@ -723,7 +723,7 @@ namespace FilterSimulationWithTablesAndGraphs
             BindXYLists();
             LoadCurrentXRange();
             if (listBoxXAxis.Text != "")
-                UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.Text]);
+                UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.Text]);
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
@@ -823,9 +823,9 @@ namespace FilterSimulationWithTablesAndGraphs
             foreach (DataGridViewColumn col in additionalParametersTable.Columns)
             {
                 string parName = GetParameterNameFromHeader(col.HeaderText);
-                if (fmGlobalParameter.ParametersByName.ContainsKey(parName))
+                if (fmGlobalParameter.parametersByName.ContainsKey(parName))
                 {
-                    fmGlobalParameter p = fmGlobalParameter.ParametersByName[parName];
+                    fmGlobalParameter p = fmGlobalParameter.parametersByName[parName];
                     col.HeaderText = p.name + " (" + p.UnitName + ")";
                 }
             }
@@ -833,9 +833,9 @@ namespace FilterSimulationWithTablesAndGraphs
             foreach (DataGridViewColumn col in selectedSimulationParametersTable.Columns)
             {
                 string parName = GetParameterNameFromHeader(col.HeaderText);
-                if (fmGlobalParameter.ParametersByName.ContainsKey(parName))
+                if (fmGlobalParameter.parametersByName.ContainsKey(parName))
                 {
-                    fmGlobalParameter p = fmGlobalParameter.ParametersByName[parName];
+                    fmGlobalParameter p = fmGlobalParameter.parametersByName[parName];
                     col.HeaderText = p.name + " (" + p.UnitName + ")";
                 }
             }
@@ -850,7 +850,7 @@ namespace FilterSimulationWithTablesAndGraphs
             BindXYLists();
             LoadCurrentXRange();
             if (listBoxXAxis.Text != "")
-                UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.Text]);
+                UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.Text]);
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
@@ -954,9 +954,9 @@ namespace FilterSimulationWithTablesAndGraphs
             foreach (DataGridViewColumn col in additionalParametersTable.Columns)
             {
                 string parName = GetParameterNameFromHeader(col.HeaderText);
-                if (fmGlobalParameter.ParametersByName.ContainsKey(parName))
+                if (fmGlobalParameter.parametersByName.ContainsKey(parName))
                 {
-                    col.Visible = inputs.Contains(fmGlobalParameter.ParametersByName[parName]);
+                    col.Visible = inputs.Contains(fmGlobalParameter.parametersByName[parName]);
                 }
             }
         }
@@ -1106,11 +1106,11 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
             }
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
             List<fmGlobalParameter> yParameters = new List<fmGlobalParameter>();
             foreach (string s in listBoxYAxis.CheckedItems)
             {
-                yParameters.Add(fmGlobalParameter.ParametersByName[s]);
+                yParameters.Add(fmGlobalParameter.parametersByName[s]);
             }
 
             BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
@@ -1300,7 +1300,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
             }
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
 
             if (!isUseLocalParams)
             {
@@ -1427,7 +1427,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             List<string> outputNames = new List<string>();
 
-            foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
+            foreach (fmGlobalParameter p in fmGlobalParameter.parameters)
             {
                 if (yAxisListParametersToDisplay.Contains(p))
                 {
@@ -1446,7 +1446,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (!isUseLocalParams)
             {
-                List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
+                List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.parameters);
                 foreach (fmSelectedSimulationData simData in internalSelectedSimList)
                     //if (simData.isChecked)
                         simInputParameters = ParametersListsIntersection(simInputParameters,
@@ -1456,7 +1456,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             else
             {
-                List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
+                List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.parameters);
                 foreach (fmLocalInputParametersData localParameters in localInputParametersList)
                     simInputParameters = ParametersListsIntersection(simInputParameters,
                                                               CalculationOptionHelper.GetParametersListThatCanBeInput(
@@ -1468,7 +1468,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private List<fmGlobalParameter> ParametersListsIntersection(List<fmGlobalParameter> a, List<fmGlobalParameter> b)
         {
             List<fmGlobalParameter> result = new List<fmGlobalParameter>();
-            foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
+            foreach (fmGlobalParameter p in fmGlobalParameter.parameters)
                 if (a.Contains(p) && b.Contains(p))
                     result.Add(p);
             return result;
@@ -1477,7 +1477,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private List<fmGlobalParameter> ParametersListsUnion(List<fmGlobalParameter> a, List<fmGlobalParameter> b)
         {
             List<fmGlobalParameter> result = new List<fmGlobalParameter>();
-            foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
+            foreach (fmGlobalParameter p in fmGlobalParameter.parameters)
                 if (a.Contains(p) || b.Contains(p))
                     result.Add(p);
             return result;

@@ -15,7 +15,7 @@ namespace FilterSimulation
             InitializeComponent();
 
             checkedListBox1.Items.Clear();
-            foreach (fmCalculationLibrary.fmGlobalParameter parameter in fmCalculationLibrary.fmGlobalParameter.Parameters)
+            foreach (fmCalculationLibrary.fmGlobalParameter parameter in fmCalculationLibrary.fmGlobalParameter.parameters)
             {
                 checkedListBox1.Items.Add(parameter.name);
             }
@@ -39,7 +39,7 @@ namespace FilterSimulation
 
         private fmCalculationLibrary.fmGlobalParameter GetParameterInListBoxByIndex(int i)
         {
-            return fmCalculationLibrary.fmGlobalParameter.ParametersByName[checkedListBox1.Items[i] as string];
+            return fmCalculationLibrary.fmGlobalParameter.parametersByName[checkedListBox1.Items[i] as string];
         }
 
         private void okButton_Click(object sender, EventArgs e)

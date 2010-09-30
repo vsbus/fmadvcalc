@@ -19,6 +19,7 @@ namespace fmCalculationLibrary
         public fmRange chartDefaultXRange;
         public fmRange chartCurretXRange;
 
+        // ReSharper disable InconsistentNaming
         public static fmGlobalParameter A;
         public static fmGlobalParameter Dp;
         public static fmGlobalParameter sf;
@@ -100,14 +101,16 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter C;
         public static fmGlobalParameter eta_f;
         public static fmGlobalParameter nc;
-        public static List<fmGlobalParameter> Parameters = new List<fmGlobalParameter>();
-        public static Dictionary<string, fmGlobalParameter> ParametersByName = new Dictionary<string, fmGlobalParameter>();
+        // ReSharper restore InconsistentNaming
+
+        public static List<fmGlobalParameter> parameters = new List<fmGlobalParameter>();
+        public static Dictionary<string, fmGlobalParameter> parametersByName = new Dictionary<string, fmGlobalParameter>();
 
         static void AddParameter(ref fmGlobalParameter p1, fmGlobalParameter p2)
         {
             p1 = p2;
-            Parameters.Add(p1);
-            ParametersByName[p1.name] = p1;
+            parameters.Add(p1);
+            parametersByName[p1.name] = p1;
         }
 
         static fmGlobalParameter()

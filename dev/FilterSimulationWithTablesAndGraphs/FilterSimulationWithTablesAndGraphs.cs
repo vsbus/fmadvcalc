@@ -114,7 +114,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 double minXValue = fmValue.StringToValue(minXValueTextBox.Text).value;
                 double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).value;
 
-                fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+                fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
                 double coef = xParameter.unitFamily.CurrentUnit.Coef;
                 fmRange range = xParameter.chartCurretXRange;
 
@@ -407,14 +407,14 @@ namespace FilterSimulationWithTablesAndGraphs
                 if (i == e.Index && e.NewValue == CheckState.Checked
                     || clb.GetItemChecked(i) && (e.NewValue == CheckState.Checked || i != e.Index))
                 {
-                    yParameters.Add(fmGlobalParameter.ParametersByName[clb.Items[i].ToString()]);
+                    yParameters.Add(fmGlobalParameter.parametersByName[clb.Items[i].ToString()]);
                 }
             }
 
             if (listBoxXAxis.Text == "")
                 return;
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
+            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
             BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
             BindCalculatedResultsToChartAndTable();
         }
