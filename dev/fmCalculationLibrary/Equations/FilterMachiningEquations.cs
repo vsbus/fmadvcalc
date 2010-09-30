@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
-using fmMathEquations=fmCalculationLibrary.Equations.fmMathEquations;
 
 namespace fmCalculationLibrary.Equations
 {
-    public class FilterMachiningEquations
+    public class fmFilterMachiningEquations
     {
+        // ReSharper disable InconsistentNaming
         static public fmValue Eval_tc_From_n(fmValue n)
         {
             return 1 / n;
@@ -22,7 +21,7 @@ namespace fmCalculationLibrary.Equations
         }
 
         static public fmValue Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(
-            fmValue hce, 
+            fmValue hce,
             fmValue Pc,
             fmValue kappa,
             fmValue Dp,
@@ -91,7 +90,7 @@ namespace fmCalculationLibrary.Equations
         {
             fmValue p1 = nc - 1;
             fmValue p2 = nc - ne - 1;
-            fmValue bar = new fmValue(1e5);
+            var bar = new fmValue(1e5);
             fmValue c = -eta_f * hc * (hc + 2 * hce) / (2 * Pc0 * Cv);
             fmValue c1 = c * (Cv - 1) / fmValue.Pow(bar, nc);
             fmValue c2 = c * eps0 / fmValue.Pow(bar, nc - ne);
@@ -104,17 +103,16 @@ namespace fmCalculationLibrary.Equations
 
         private static fmValue SelectBestDpRoot(List<fmValue> roots)
         {
-            List<fmValue> localRoots = new List<fmValue>(roots);
+            var localRoots = new List<fmValue>(roots);
             localRoots.Sort();
-            
-            fmValue bar = new fmValue(1e5);
+
+            var bar = new fmValue(1e5);
             if (localRoots.Count == 1)
             {
                 return roots[0];
             }
 
             fmValue minLimit = 0.1 * bar;
-            fmValue maxLimit = 2000 * bar;
 
             while (localRoots.Count > 1 && localRoots[0] < minLimit)
                 localRoots.RemoveAt(0);
@@ -194,7 +192,6 @@ namespace fmCalculationLibrary.Equations
             fmValue b = (-C1 * A1 * A1 - C1 * A1 * B1 + 2 * tr);
             fmValue c = tr * tr - C1 * A1 * tr * B1;
             fmValue D = b * b - 4 * c;
-            fmValue x1 = (-b - fmValue.Sqrt(D)) / 2;
             fmValue x2 = (-b + fmValue.Sqrt(D)) / 2;
 
             return x2;
@@ -202,25 +199,25 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue Eval_hc_From_A_Vf_kappa(fmValue A, fmValue Vf, fmValue kappa)
         {
-            return Vf*kappa/A;
+            return Vf * kappa / A;
         }
 
         public static fmValue Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(
-            fmValue nc, fmValue ne, fmValue eta_f, fmValue A, fmValue tf, fmValue Cv, fmValue eps0, 
+            fmValue nc, fmValue ne, fmValue eta_f, fmValue A, fmValue tf, fmValue Cv, fmValue eps0,
             fmValue Pc0, fmValue hce, fmValue Vf)
         {
             fmValue p1 = 1 - nc;
             fmValue p2 = 1 - nc - ne;
             fmValue p3 = -ne;
 
-            fmValue bar = new fmValue(1e5);
+            var bar = new fmValue(1e5);
 
-            fmValue C1 = eta_f/(2*A*A);
+            fmValue C1 = eta_f / (2 * A * A);
 
-            fmValue K1 = tf*(1 - Cv)/Cv;
-            fmValue K2 = -tf*eps0*fmValue.Pow(bar, ne)/Cv;
-            fmValue K3 = 2*C1/Pc0*fmValue.Pow(bar, ne - nc)*eps0/Cv*hce*A*Vf;
-            fmValue K4 = C1*fmValue.Pow(bar, -nc)*Vf*(-Vf*Cv - 2*hce*A*(1 - Cv))/(Cv*Pc0);
+            fmValue K1 = tf * (1 - Cv) / Cv;
+            fmValue K2 = -tf * eps0 * fmValue.Pow(bar, ne) / Cv;
+            fmValue K3 = 2 * C1 / Pc0 * fmValue.Pow(bar, ne - nc) * eps0 / Cv * hce * A * Vf;
+            fmValue K4 = C1 * fmValue.Pow(bar, -nc) * Vf * (-Vf * Cv - 2 * hce * A * (1 - Cv)) / (Cv * Pc0);
 
             List<fmValue> roots = fmMathEquations.SolveC1Xp1C2Xp2C3Xp3C4(K1, p1, K2, p2, K3, p3, K4);
 
@@ -229,7 +226,7 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue Eval_V_From_rho_M(fmValue rho, fmValue M)
         {
-            return M/rho;
+            return M / rho;
         }
 
         public static fmValue Eval_hc_From_A_Vsus_kappa(fmValue A, fmValue Vsus, fmValue kappa)
@@ -237,30 +234,30 @@ namespace fmCalculationLibrary.Equations
             return Vsus * kappa / (A * (1 + kappa));
         }
 
-        public static fmValue Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vsus(fmValue nc, fmValue ne, fmValue eta_f, fmValue A, fmValue tf, fmValue Cv, fmValue eps0, 
+        public static fmValue Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vsus(fmValue nc, fmValue ne, fmValue eta_f, fmValue A, fmValue tf, fmValue Cv, fmValue eps0,
             fmValue Pc0, fmValue hce, fmValue Vsus)
         {
-            fmValue bar = new fmValue(1e5);
+            var bar = new fmValue(1e5);
 
             fmValue K1 = tf;
-            fmValue p1 = 2*ne;
+            fmValue p1 = 2 * ne;
 
-            fmValue K2 = -2*tf*eps0*fmValue.Pow(bar, ne);
+            fmValue K2 = -2 * tf * eps0 * fmValue.Pow(bar, ne);
             fmValue p2 = ne;
 
-            fmValue K3 = -0.5*eta_f*fmValue.Pow(bar, -nc)/(A*A)/Pc0*Vsus*(-1 + Cv)*(-Vsus*Cv - 2*hce*A);
-            fmValue p3 = 2*ne + nc - 1;
+            fmValue K3 = -0.5 * eta_f * fmValue.Pow(bar, -nc) / (A * A) / Pc0 * Vsus * (-1 + Cv) * (-Vsus * Cv - 2 * hce * A);
+            fmValue p3 = 2 * ne + nc - 1;
 
-            fmValue K4 = -0.5/(A*A)/Pc0*eta_f*fmValue.Pow(bar, -nc + ne)*Vsus*eps0*(-4*hce*A + 2*hce*A*Cv - Vsus*Cv);
+            fmValue K4 = -0.5 / (A * A) / Pc0 * eta_f * fmValue.Pow(bar, -nc + ne) * Vsus * eps0 * (-4 * hce * A + 2 * hce * A * Cv - Vsus * Cv);
             fmValue p4 = ne + nc - 1;
 
-            fmValue K5 = -eta_f*fmValue.Pow(bar, -nc)/A/Pc0*Vsus*eps0*eps0*fmValue.Pow(bar, ne*2)*hce;
+            fmValue K5 = -eta_f * fmValue.Pow(bar, -nc) / A / Pc0 * Vsus * eps0 * eps0 * fmValue.Pow(bar, ne * 2) * hce;
             fmValue p5 = nc - 1;
 
-            fmValue K6 = tf*eps0*eps0*fmValue.Pow(bar, ne*2);
+            fmValue K6 = tf * eps0 * eps0 * fmValue.Pow(bar, ne * 2);
 
             List<fmValue> roots = fmMathEquations.SolvePowerSumEquation(K6,
-                                                                        new fmValue[,]
+                                                                        new[,]
                                                                             {
                                                                                 {K1, p1}, {K2, p2}, {K3, p3}, {K4, p4},
                                                                                 {K5, p5}
@@ -271,12 +268,12 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue Eval_Msus_From_Ms_Cm(fmValue Ms, fmValue Cm)
         {
-            return Ms/Cm;
+            return Ms / Cm;
         }
 
         public static fmValue Eval_hc_over_tf_From_hc_tf(fmValue hc, fmValue tf)
         {
-            return hc/tf;
+            return hc / tf;
         }
 
         public static fmValue Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(fmValue kappa, fmValue Dp, fmValue Pc, fmValue eta, fmValue hc, fmValue hce)
@@ -284,45 +281,35 @@ namespace fmCalculationLibrary.Equations
             return kappa * Dp * Pc / (eta * (hc + hce));
         }
 
-        //public static fmValue Eval_Mc_From_Msus_Mf(fmValue Msus, fmValue Mf)
-        //{
-        //    return Eval_Cake_From_Sus_Flow(Msus, Mf);
-        //}
-
         public static fmValue Eval_Cake_From_Sus_Flow(fmValue Sus, fmValue Flow)
         {
             return Sus - Flow;
         }
 
-        //public static fmValue Eval_Vc_From_Vsus_Vf(fmValue Vsus, fmValue Vf)
-        //{
-        //    return Eval_Cake_From_Sus_Flow(Vsus, Vf);
-        //}
-
         public static fmValue Eval_m_From_M_A(fmValue M, fmValue A)
         {
-            return M/A;
+            return M / A;
         }
 
         public static fmValue Eval_v_From_V_A(fmValue V, fmValue A)
         {
-            return V/A;
+            return V / A;
         }
 
         public static fmValue Eval_Qsus_d_From_eps_A_Cv_dhcdt(fmValue eps, fmValue A, fmValue Cv, fmValue dhc_dt)
         {
-            fmValue one = new fmValue(1.0);
-            return (one - eps)*A/Cv*dhc_dt;
+            var one = new fmValue(1.0);
+            return (one - eps) * A / Cv * dhc_dt;
         }
 
         public static fmValue Eval_Qs_d_From_eps_A_dhcdt(fmValue eps, fmValue A, fmValue dhc_over_dt)
         {
-            return (1 - eps)*A*dhc_over_dt;
+            return (1 - eps) * A * dhc_over_dt;
         }
 
         public static fmValue Eval_Qm_From_M_t(fmValue Mf, fmValue tf)
         {
-            return Mf/tf;
+            return Mf / tf;
         }
 
         public static fmValue Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(fmValue A, fmValue Dp, fmValue Pc, fmValue eta, fmValue hc, fmValue hce)
@@ -332,12 +319,12 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue Eval_Q_From_V_t(fmValue V, fmValue t)
         {
-            return V/t;
+            return V / t;
         }
 
         public static fmValue Eval_q_From_Q_A(fmValue Q, fmValue A)
         {
-            return Q/A;
+            return Q / A;
         }
 
         public static fmValue Eval_vsus_From_vs_rho_Cm(fmValue vs, fmValue rho_s, fmValue rho_sus, fmValue Cm)
@@ -397,12 +384,12 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue Eval_tr_From_tc_sf(fmValue tc, fmValue sf)
         {
-            return tc*(1 - sf);
+            return tc * (1 - sf);
         }
 
         public static fmValue Eval_sf_From_tr_tc(fmValue tr, fmValue tc)
         {
-            return (tc - tr)/tc;
+            return (tc - tr) / tc;
         }
 
         public static fmValue Eval_vc_From_vsus_kappa(fmValue vsus, fmValue kappa)
@@ -432,17 +419,18 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue Eval_sr_From_tc_tr(fmValue tc, fmValue tr)
         {
-            return tr/tc;
+            return tr / tc;
         }
 
         public static fmValue Eval_tc_From_sr_tf(fmValue sr, fmValue tf)
         {
-            return tf/(1 - sr);
+            return tf / (1 - sr);
         }
 
         public static fmValue Eval_tr_From_sr_tc(fmValue sr, fmValue tc)
         {
-            return sr*tc;
+            return sr * tc;
         }
+        // ReSharper restore InconsistentNaming
     }
 }
