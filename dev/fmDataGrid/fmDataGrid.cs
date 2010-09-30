@@ -1,26 +1,14 @@
 using System.Windows.Forms;
-using System;
 
 namespace fmDataGrid
 {
     public partial class fmDataGrid : DataGridView
     {
-        private bool m_HighLightCurrentRow = false;
-
-        public bool HighLightCurrentRow
-        {
-            set
-            {
-                m_HighLightCurrentRow = value;
-            }
-            get
-            {
-                return m_HighLightCurrentRow;
-            }
-        }
+        public bool HighLightCurrentRow { get; set; }
 
         public fmDataGrid()
         {
+            HighLightCurrentRow = false;
             InitializeComponent();
         }
 
@@ -42,10 +30,7 @@ namespace fmDataGrid
                 CurrentCell = Rows[rowIndex].Cells[CurrentCell.ColumnIndex];
                 return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         protected override void WndProc(ref Message m)
@@ -57,7 +42,6 @@ namespace fmDataGrid
                     && CurrentCell.ColumnIndex != -1)
                 {
                     int delta = (int)(m.WParam) >> 16;
-                    int deltaRow = delta > 0 ? -1 : delta < 0 ? 1 : 0;
 
                     if (delta > 0)
                     {
@@ -77,9 +61,8 @@ namespace fmDataGrid
 
         public T AddColumn<T>(string headerText) where T : DataGridViewColumn, new()
         {
-            T column = new T();
-            column.HeaderText = headerText;
-            this.Columns.Add(column);
+            var column = new T {HeaderText = headerText};
+            Columns.Add(column);
             return column;
         }
     }

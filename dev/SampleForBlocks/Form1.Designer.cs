@@ -37,17 +37,17 @@ namespace SampleForBlocks
             this.fmDataGrid2 = new fmDataGrid.fmDataGrid();
             this.parameterResultColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitsResultColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minAbsResult = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.valueResultColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.maxAbsResultColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.minAbsResult = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.valueResultColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.maxAbsResultColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.fmDataGrid1 = new fmDataGrid.fmDataGrid();
             this.parameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minAbsLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.minLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.valueColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.maxLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.maxAbsLimitColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.minAbsLimitColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.minLimitColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.valueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.maxLimitColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.maxAbsLimitColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fmDataGrid2)).BeginInit();
@@ -72,28 +72,28 @@ namespace SampleForBlocks
             this.rangesToolStripMenuItem.Name = "rangesToolStripMenuItem";
             this.rangesToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.rangesToolStripMenuItem.Text = "Ranges";
-            this.rangesToolStripMenuItem.Click += new System.EventHandler(this.rangesToolStripMenuItem_Click);
+            this.rangesToolStripMenuItem.Click += new System.EventHandler(this.RangesToolStripMenuItemClick);
             // 
             // calculationOptionToolStripMenuItem
             // 
             this.calculationOptionToolStripMenuItem.Name = "calculationOptionToolStripMenuItem";
             this.calculationOptionToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
             this.calculationOptionToolStripMenuItem.Text = "Calculation Option";
-            this.calculationOptionToolStripMenuItem.Click += new System.EventHandler(this.calculationOptionToolStripMenuItem_Click);
+            this.calculationOptionToolStripMenuItem.Click += new System.EventHandler(this.CalculationOptionToolStripMenuItemClick);
             // 
             // precisionToolStripMenuItem
             // 
             this.precisionToolStripMenuItem.Name = "precisionToolStripMenuItem";
             this.precisionToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.precisionToolStripMenuItem.Text = "Precision";
-            this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
+            this.precisionToolStripMenuItem.Click += new System.EventHandler(this.PrecisionToolStripMenuItemClick);
             // 
             // resetInputsToolStripMenuItem
             // 
             this.resetInputsToolStripMenuItem.Name = "resetInputsToolStripMenuItem";
             this.resetInputsToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
             this.resetInputsToolStripMenuItem.Text = "Reset Inputs";
-            this.resetInputsToolStripMenuItem.Click += new System.EventHandler(this.resetInputsToolStripMenuItem_Click);
+            this.resetInputsToolStripMenuItem.Click += new System.EventHandler(this.ResetInputsToolStripMenuItemClick);
             // 
             // fmDataGrid2
             // 
@@ -227,7 +227,7 @@ namespace SampleForBlocks
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.Timer1Tick);
             // 
             // Form1
             // 
@@ -240,7 +240,7 @@ namespace SampleForBlocks
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.Form1Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fmDataGrid2)).EndInit();
@@ -261,16 +261,16 @@ namespace SampleForBlocks
         private fmDataGrid.fmDataGrid fmDataGrid2;
         private System.Windows.Forms.DataGridViewTextBoxColumn parameterNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitsColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn minAbsLimitColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn minLimitColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn valueColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn maxLimitColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn maxAbsLimitColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn minAbsLimitColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn minLimitColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn valueColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn maxLimitColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn maxAbsLimitColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn parameterResultColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitsResultColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn minAbsResult;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn valueResultColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn maxAbsResultColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn minAbsResult;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn valueResultColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn maxAbsResultColumn;
         private System.Windows.Forms.Timer timer1;
     }
 }

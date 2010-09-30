@@ -34,8 +34,8 @@ namespace FilterSimulation
             this.ParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnlimitedFlagColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.MinRangeColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
-            this.MaxRangeColumn = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            this.MinRangeColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.MaxRangeColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ParamGrid)).BeginInit();
             this.SuspendLayout();
@@ -144,8 +144,8 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn ParameterNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnitColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn UnlimitedFlagColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn MinRangeColumn;
-        private fmDataGrid.DataGridViewNumericalTextBoxColumn MaxRangeColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn MinRangeColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn MaxRangeColumn;
 
 
 

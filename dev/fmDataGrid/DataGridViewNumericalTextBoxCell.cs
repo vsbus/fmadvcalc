@@ -1,28 +1,26 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 
 namespace fmDataGrid
 {
-    public class DataGridViewNumericalTextBoxCell : DataGridViewTextBoxCell
+    public class fmDataGridViewNumericalTextBoxCell : DataGridViewTextBoxCell
     {
-        public DataGridViewNumericalTextBoxCell() : base() { }
-
         public override void InitializeEditingControl(int rowIndex, object initialFormattedValue, DataGridViewCellStyle dataGridViewCellStyle)
         {
             base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
-            DataGridViewNumericalTextBoxEditingControl numTextBox = this.DataGridView.EditingControl as DataGridViewNumericalTextBoxEditingControl;
-            numTextBox.Height = this.OwningRow.Height;
-            string stringInCell = Convert.ToString(this.Value);
+            var numTextBox = DataGridView.EditingControl as fmDataGridViewNumericalTextBoxEditingControl;
+            // ReSharper disable PossibleNullReferenceException
+            numTextBox.Height = OwningRow.Height;
+            string stringInCell = Convert.ToString(Value);
             numTextBox.Text = stringInCell;
+            // ReSharper restore PossibleNullReferenceException
         }
 
         public override Type EditType
         {
             get
             {
-                return typeof(DataGridViewNumericalTextBoxEditingControl);
+                return typeof(fmDataGridViewNumericalTextBoxEditingControl);
             }
         }
     }

@@ -54,7 +54,7 @@ namespace FilterSimulation
                 }
             }
 
-            fmDataGrid.DataGridViewNumericalTextBoxColumn ret = new fmDataGrid.DataGridViewNumericalTextBoxColumn();
+            fmDataGrid.fmDataGridViewNumericalTextBoxColumn ret = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             ret.Visible = false;
             collection.Add(ret);
             ret.DataGridView.Rows[guidRowIndex].Cells[ret.Index].Value = guid;

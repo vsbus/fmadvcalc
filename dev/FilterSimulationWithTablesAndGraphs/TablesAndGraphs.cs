@@ -199,12 +199,12 @@ namespace FilterSimulationWithTablesAndGraphs
             foreach (fmGlobalParameter p in allSimParams)
             {
                 {
-                    DataGridViewColumn col = additionalParametersTable.AddColumn<DataGridViewNumericalTextBoxColumn>(p.name);
+                    DataGridViewColumn col = additionalParametersTable.AddColumn<fmDataGridViewNumericalTextBoxColumn>(p.name);
                     col.Width = 50;
                 }
 
                 {
-                    DataGridViewColumn col = selectedSimulationParametersTable.AddColumn<DataGridViewNumericalTextBoxColumn>(p.name);
+                    DataGridViewColumn col = selectedSimulationParametersTable.AddColumn<fmDataGridViewNumericalTextBoxColumn>(p.name);
                     col.Width = 50;
                     col.ReadOnly = true;
                 }

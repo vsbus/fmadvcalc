@@ -36,7 +36,7 @@ namespace fmDataGrid
 
         private void fmDataGridSortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
-            if (e.Column.GetType() == typeof(DataGridViewNumericalTextBoxColumn))
+            if (e.Column.GetType() == typeof(fmDataGridViewNumericalTextBoxColumn))
             {
                 fmCalculationLibrary.fmValue val1 = fmCalculationLibrary.fmValue.ObjectToValue(e.CellValue1);
                 fmCalculationLibrary.fmValue val2 = fmCalculationLibrary.fmValue.ObjectToValue(e.CellValue2);
@@ -75,7 +75,7 @@ namespace fmDataGrid
                 int colIndex = CurrentCell.ColumnIndex;
                 int rowIndex = CurrentCell.RowIndex;
                 if (e.KeyCode == Keys.Delete && colIndex != -1 && rowIndex != -1
-                    && Columns[colIndex].GetType() == (new DataGridViewNumericalTextBoxColumn()).GetType())
+                    && Columns[colIndex].GetType() == (new fmDataGridViewNumericalTextBoxColumn()).GetType())
                 {
                     CurrentCell.Value = "";
                     if (CellValueChangedByUser != null)

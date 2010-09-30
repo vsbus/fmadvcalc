@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 
 namespace fmDataGrid
 {
-    public class DataGridViewNumericalTextBoxColumn : DataGridViewColumn
+    public class fmDataGridViewNumericalTextBoxColumn : DataGridViewColumn
     {
-        public DataGridViewNumericalTextBoxColumn() : base(new DataGridViewNumericalTextBoxCell()) { }
+        public fmDataGridViewNumericalTextBoxColumn() : base(new fmDataGridViewNumericalTextBoxCell()) { }
 
         public override DataGridViewCell CellTemplate
         {
@@ -17,7 +15,7 @@ namespace fmDataGrid
             }
             set
             {
-                if (value != null && !value.GetType().IsAssignableFrom(typeof(DataGridViewNumericalTextBoxCell)))
+                if (value != null && !value.GetType().IsAssignableFrom(typeof(fmDataGridViewNumericalTextBoxCell)))
                     throw new InvalidCastException("Cell must be a NumericalTextBoxCell");
                 base.CellTemplate = value;
             }
