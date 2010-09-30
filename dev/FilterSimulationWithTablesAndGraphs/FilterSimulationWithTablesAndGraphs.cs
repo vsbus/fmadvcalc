@@ -111,8 +111,8 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (loadingXRange == false)
             {
-                double minXValue = fmValue.StringToValue(minXValueTextBox.Text).Value;
-                double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).Value;
+                double minXValue = fmValue.StringToValue(minXValueTextBox.Text).value;
+                double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).value;
 
                 fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
                 double coef = xParameter.unitFamily.CurrentUnit.Coef;
@@ -183,7 +183,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     if (coordinatesGrid.CurrentCell != null)
                     {
                         int index = coordinatesGrid.CurrentCell.RowIndex;
-                        x = displayingResults.xParameter.Values[index].Value;
+                        x = displayingResults.xParameter.Values[index].value;
                         fmZedGraphControl1.HighlightPoints(x);
                     }
                 }
@@ -195,7 +195,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                     fmValue minValue = coordinatesGrid.RowCount == 0 ? new fmValue() : fmValue.ObjectToValue(coordinatesGrid.Rows[0].Cells[0].Value);
                     fmValue maxValue = coordinatesGrid.RowCount == 0 ? new fmValue() : fmValue.ObjectToValue(coordinatesGrid.Rows[coordinatesGrid.RowCount - 1].Cells[0].Value);
-                    if (!isHighLight || x < minValue.Value || x > maxValue.Value)
+                    if (!isHighLight || x < minValue.value || x > maxValue.value)
                     {
                         coordinatesGrid.CurrentCell = null;
                     }

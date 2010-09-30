@@ -9,14 +9,14 @@ namespace fmCalculationLibrary.NumericalMethods
             beginRes = new fmValue();
             endRes = new fmValue();
 
-            if (beginArg.Defined == false || endArg.Defined == false)
+            if (beginArg.defined == false || endArg.defined == false)
             {
                 return false;
             }
             
             fmValue len = endArg - beginArg;
             fmValue eps = new fmValue(1e-8);
-            if (len.Value < 0)
+            if (len.value < 0)
             {
                 eps = -eps;
             }
@@ -27,13 +27,13 @@ namespace fmCalculationLibrary.NumericalMethods
 
             fmValue beginValue = function.Eval(beginArg + eps);
             fmValue endValue = function.Eval(endArg - eps);
-            if (beginValue.Defined == false || endValue.Defined == false)
+            if (beginValue.defined == false || endValue.defined == false)
             {
                 return false;
             }
             if (beginValue == endValue)
             {
-                if (beginValue.Value == 0)
+                if (beginValue.value == 0)
                 {
                     beginRes = beginArg;
                     endRes = endArg;
@@ -41,7 +41,7 @@ namespace fmCalculationLibrary.NumericalMethods
                 }
                 else
                 {
-                    if (function.Eval(endArg).Value == 0)
+                    if (function.Eval(endArg).value == 0)
                     {
                         beginRes = endRes = endArg;
                         return true;
@@ -53,7 +53,7 @@ namespace fmCalculationLibrary.NumericalMethods
             
             fmValue beginSign = fmValue.Sign(beginValue, eps);
             fmValue endSign = fmValue.Sign(endValue, eps);
-            if ((beginSign * endSign).Value > 0)
+            if ((beginSign * endSign).value > 0)
                 return false;
 
             fmValue left = beginArg;
@@ -63,11 +63,11 @@ namespace fmCalculationLibrary.NumericalMethods
                 fmValue middle = 0.5 * (left + right);
                 fmValue value = function.Eval(middle);
 
-                if (!value.Defined)
-                    throw new Exception("Function given to NewtonMethod not defind in point " + middle.Value);
+                if (!value.defined)
+                    throw new Exception("Function given to NewtonMethod not defind in point " + middle.value);
 
                 fmValue midSign = fmValue.Sign(value, eps);
-                if (midSign.Value == 0 || midSign == endSign)
+                if (midSign.value == 0 || midSign == endSign)
                     right = middle;
                 else
                     left = middle;

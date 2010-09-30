@@ -58,8 +58,8 @@ namespace FilterSimulation
                     if ((bool)ParamGrid.Rows[i].Cells["UnlimitedFlagColumn"].Value == false)
                     {
                         p.globalParameter.chartDefaultXRange.isUnlimited = false;
-                        p.globalParameter.chartDefaultXRange.minValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).Value * p.globalParameter.unitFamily.CurrentUnit.Coef;
-                        p.globalParameter.chartDefaultXRange.maxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).Value * p.globalParameter.unitFamily.CurrentUnit.Coef;
+                        p.globalParameter.chartDefaultXRange.minValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).value * p.globalParameter.unitFamily.CurrentUnit.Coef;
+                        p.globalParameter.chartDefaultXRange.maxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).value * p.globalParameter.unitFamily.CurrentUnit.Coef;
                     }
                     else
                     {

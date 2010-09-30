@@ -160,7 +160,7 @@ namespace fmCalculationLibrary.Equations
             fmValue res = tc - tf;
             if (fmValue.Abs(res) <= 1e-9 * fmValue.Max(fmValue.Abs(tc), fmValue.Abs(tf)))
             {
-                res.Value = 0;
+                res.value = 0;
             }
             return res;
         }

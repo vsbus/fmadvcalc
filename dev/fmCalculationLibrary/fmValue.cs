@@ -5,9 +5,9 @@ namespace fmCalculationLibrary
 {
     public struct fmValue : IComparable
     {
-        private const string UNDEFINED_VALUE = "";
-        public bool Defined;
-        public double Value;
+        private const string UndefinedValue = "";
+        public bool defined;
+        public double value;
         public static int outputPrecision = 3;
 
         public static fmValue Infinity()
@@ -17,27 +17,27 @@ namespace fmCalculationLibrary
 
         public fmValue(double x)
         {
-            Defined = true;
-            Value = x;
+            defined = true;
+            value = x;
         }
 
         public fmValue(double x, bool d)
         {
-            Defined = d;
-            Value = x;
+            defined = d;
+            value = x;
         }
 
         public fmValue(fmValue val)
         {
-            Defined = val.Defined;
-            Value = val.Value;
+            defined = val.defined;
+            value = val.value;
         }
 
         public fmValue Round(int precision)
         {
-            fmValue result = new fmValue(0, Defined);
+            var result = new fmValue(0, defined);
 
-            if (Value == 0)
+            if (value == 0)
             {
                 return result;
             }
@@ -47,22 +47,22 @@ namespace fmCalculationLibrary
             double factor = 1;
             const double eps = 1e-8;
             
-            result.Value = Value;
+            result.value = value;
             
-            while (Math.Abs(result.Value) < pMin - eps)
+            while (Math.Abs(result.value) < pMin - eps)
             {
-                result.Value *= 10; 
+                result.value *= 10; 
                 factor *= 10;
             }
 
-            while (Math.Abs(result.Value) >= pMax - eps)
+            while (Math.Abs(result.value) >= pMax - eps)
             {
-                result.Value /= 10;
+                result.value /= 10;
                 factor /= 10;
             }
 
-            result.Value = Math.Floor(result.Value + 0.5 + eps);
-            result.Value /= factor;
+            result.value = Math.Floor(result.value + 0.5 + eps);
+            result.value /= factor;
             return result;
         }
 
@@ -74,8 +74,8 @@ namespace fmCalculationLibrary
         public string ToString(int precision)
         {
             fmValue val = Round(precision);
-            string res = Convert.ToString(val.Value);
-            res = val.Defined ? res : UNDEFINED_VALUE;
+            string res = Convert.ToString(val.value);
+            res = val.defined ? res : UndefinedValue;
             return res;
         }
 
@@ -94,20 +94,20 @@ namespace fmCalculationLibrary
 
         public void WriteToStream(StreamWriter sw)
         {
-            sw.WriteLine(Defined);
-            sw.WriteLine(Value);
+            sw.WriteLine(defined);
+            sw.WriteLine(value);
         }
 
         public void ReadFromStream(StreamReader sr)
         {
-            Defined = Convert.ToBoolean(sr.ReadLine());
-            Value = Convert.ToDouble(sr.ReadLine());
+            defined = Convert.ToBoolean(sr.ReadLine());
+            value = Convert.ToDouble(sr.ReadLine());
         }
 
         public static fmValue StringToValue(String s)
         {
-            fmValue res = new fmValue();
-            res.Defined = double.TryParse(s, out res.Value);
+            var res = new fmValue();
+            res.defined = double.TryParse(s, out res.value);
             return res;
         }
 
@@ -133,24 +133,24 @@ namespace fmCalculationLibrary
 
         public static bool operator <(fmValue op1, fmValue op2)
         {
-            if (!op1.Defined && !op2.Defined)
+            if (!op1.defined && !op2.defined)
                 return false;
-            if (!op1.Defined)
+            if (!op1.defined)
                 return true;
-            if (!op2.Defined)
+            if (!op2.defined)
                 return false;
-            return op1.Value < op2.Value;
+            return op1.value < op2.value;
         }
 
         public static bool operator <=(fmValue op1, fmValue op2)
         {
-            if (!op1.Defined && !op2.Defined)
+            if (!op1.defined && !op2.defined)
                 return false;
-            if (!op1.Defined)
+            if (!op1.defined)
                 return true;
-            if (!op2.Defined)
+            if (!op2.defined)
                 return false;
-            return op1.Value <= op2.Value;
+            return op1.value <= op2.value;
         }
 
         public static bool operator >(fmValue op1, fmValue op2)
@@ -175,152 +175,150 @@ namespace fmCalculationLibrary
 
         public static fmValue operator -(fmValue op)
         {
-            fmValue res = new fmValue(-op.Value, op.Defined);
+            var res = new fmValue(-op.value, op.defined);
             return res;
         }
 
         public static fmValue operator +(fmValue op1, fmValue op2)
         {
-            fmValue res = new fmValue(op1.Value + op2.Value, op1.Defined && op2.Defined);
+            var res = new fmValue(op1.value + op2.value, op1.defined && op2.defined);
             return res;
         }
 
         public static fmValue operator +(fmValue op1, double op2)
         {
-            fmValue res = new fmValue(op1.Value + op2, op1.Defined);
+            var res = new fmValue(op1.value + op2, op1.defined);
             return res;
         }
 
         public static fmValue operator +(double op1, fmValue op2)
         {
-            fmValue res = new fmValue(op1 + op2.Value, op2.Defined);
+            var res = new fmValue(op1 + op2.value, op2.defined);
             return res;
         }
 
         public static fmValue operator -(fmValue op1, fmValue op2)
         {
-            fmValue res = new fmValue(op1.Value - op2.Value, op1.Defined && op2.Defined);
+            var res = new fmValue(op1.value - op2.value, op1.defined && op2.defined);
             return res;
         }
 
         public static fmValue operator -(fmValue op1, double op2)
         {
-            fmValue res = new fmValue(op1.Value - op2, op1.Defined);
+            var res = new fmValue(op1.value - op2, op1.defined);
             return res;
         }
 
         public static fmValue operator -(double op1, fmValue op2)
         {
-            fmValue res = new fmValue(op1 - op2.Value, op2.Defined);
+            var res = new fmValue(op1 - op2.value, op2.defined);
             return res;
         }
 
         public static fmValue operator *(fmValue op1, fmValue op2)
         {
-            fmValue res = new fmValue(op1.Value*op2.Value, op1.Defined && op2.Defined);
+            var res = new fmValue(op1.value*op2.value, op1.defined && op2.defined);
             return res;
         }
 
         public static fmValue operator *(fmValue op1, double op2)
         {
-            fmValue res = new fmValue(op1.Value*op2, op1.Defined);
+            var res = new fmValue(op1.value*op2, op1.defined);
             return res;
         }
 
         public static fmValue operator *(double op1, fmValue op2)
         {
-            fmValue res = new fmValue(op1*op2.Value, op2.Defined);
+            var res = new fmValue(op1*op2.value, op2.defined);
             return res;
         }
 
         public static fmValue operator /(fmValue op1, fmValue op2)
         {
-            fmValue res = new fmValue();
-            res.Defined = op1.Defined && op2.Defined && (op2.Value != 0.0);
-            res.Value = res.Defined ? op1.Value/op2.Value : 1;
+            var res = new fmValue
+                          {
+                              defined = op1.defined && op2.defined && (op2.value != 0.0)
+                          };
+            res.value = res.defined ? op1.value/op2.value : 1;
             return res;
         }
 
         public static fmValue operator /(fmValue op1, double op2)
         {
-            fmValue res = new fmValue();
-            res.Defined = op1.Defined && (op2 != 0.0);
-            res.Value = res.Defined ? op1.Value/op2 : 1;
+            var res = new fmValue {defined = op1.defined && (op2 != 0.0)};
+            res.value = res.defined ? op1.value/op2 : 1;
             return res;
         }
 
         public static fmValue operator /(double op1, fmValue op2)
         {
-            fmValue res = new fmValue();
-            res.Defined = op2.Defined && (op2.Value != 0.0);
-            res.Value = res.Defined ? op1/op2.Value : 1;
+            var res = new fmValue {defined = op2.defined && (op2.value != 0.0)};
+            res.value = res.defined ? op1/op2.value : 1;
             return res;
         }
 
         public static fmValue Abs(fmValue op)
         {
-            op.Value = Math.Abs(op.Value);
+            op.value = Math.Abs(op.value);
             return op;
         }
 
         public static fmValue Exp(fmValue op)
         {
-            fmValue res = new fmValue();
-            res.Defined = op.Defined;
-            res.Value = res.Defined ? Math.Exp(op.Value) : 1;
+            var res = new fmValue {defined = op.defined};
+            res.value = res.defined ? Math.Exp(op.value) : 1;
             return res;
         }
 
         public static fmValue Log(fmValue op)
         {
-            fmValue res = new fmValue();
-            res.Defined = op.Defined && op.Value > 0;
-            res.Value = res.Defined ? Math.Log(op.Value) : 1;
+            var res = new fmValue {defined = op.defined && op.value > 0};
+            res.value = res.defined ? Math.Log(op.value) : 1;
             return res;
         }
 
         public static fmValue Pow(fmValue op1, fmValue degree)
         {
-            fmValue res = new fmValue();
-            res.Defined = op1.Defined && degree.Defined && (op1.Value > 0 || op1.Value == 0 && degree.Value > 0);
-            res.Value = res.Defined ? Math.Pow(op1.Value, degree.Value) : 1;
+            var res = new fmValue
+                          {
+                              defined =
+                                  op1.defined && degree.defined && (op1.value > 0 || op1.value == 0 && degree.value > 0)
+                          };
+            res.value = res.defined ? Math.Pow(op1.value, degree.value) : 1;
             return res;
         }
 
         public static fmValue Pow(fmValue op1, double degree)
         {
-            fmValue res = new fmValue();
-            res.Defined = op1.Defined && op1.Value > 0;
-            res.Value = res.Defined ? Math.Pow(op1.Value, degree) : 1;
+            var res = new fmValue {defined = op1.defined && op1.value > 0};
+            res.value = res.defined ? Math.Pow(op1.value, degree) : 1;
             return res;
         }
 
         public static fmValue Sqrt(fmValue op1)
         {
-            fmValue res = new fmValue();
-            res.Defined = op1.Defined && op1.Value > 0;
-            res.Value = res.Defined ? Math.Sqrt(op1.Value) : 1;
+            var res = new fmValue {defined = op1.defined && op1.value > 0};
+            res.value = res.defined ? Math.Sqrt(op1.value) : 1;
             return res;
         }
 
         public static fmValue Sqr(fmValue op)
         {
-            fmValue res = new fmValue(op);
+            var res = new fmValue(op);
             res = res*op;
             return res;
         }
 
         public static fmValue Erf(fmValue op)
         {
-            fmValue res = new fmValue();
-            res.Defined = op.Defined;
-            res.Value = res.Defined ? normaldistr.erf(op.Value) : 1;
+            var res = new fmValue {defined = op.defined};
+            res.value = res.defined ? normaldistr.erf(op.value) : 1;
             return res;
         }
 
         public bool Equals(fmValue obj)
         {
-            return (!Defined && !obj.Defined || Defined && obj.Defined && obj.Value == Value);
+            return (!defined && !obj.defined || defined && obj.defined && obj.value == value);
         }
 
         public override bool Equals(object obj)
@@ -333,7 +331,7 @@ namespace fmCalculationLibrary
         {
             unchecked
             {
-                return (Value.GetHashCode()*397) ^ Defined.GetHashCode();
+                return (value.GetHashCode()*397) ^ defined.GetHashCode();
             }
         }
 
@@ -341,7 +339,7 @@ namespace fmCalculationLibrary
         {
             if (obj is fmValue)
             {
-                fmValue temp = (fmValue)obj;
+                var temp = (fmValue)obj;
 
                 if (this < temp) return -1;
                 if (this > temp) return 1;
@@ -359,7 +357,7 @@ namespace fmCalculationLibrary
 
         public static bool Less(fmValue a, fmValue b)
         {
-            fmValue eps = new fmValue(1e-9 * Math.Max(Math.Abs(a.Value), Math.Abs(b.Value)));
+            var eps = new fmValue(1e-9 * Math.Max(Math.Abs(a.value), Math.Abs(b.value)));
             return a < b - eps;
         }
 
@@ -370,49 +368,49 @@ namespace fmCalculationLibrary
 
         internal static fmValue Sign(fmValue beginValue, fmValue eps)
         {
-            return new fmValue(Math.Abs(beginValue.Value) <= eps.Value ? 0 : beginValue.Value > 0 ? 1 : -1, beginValue.Defined && eps.Defined);
+            return new fmValue(Math.Abs(beginValue.value) <= eps.value ? 0 : beginValue.value > 0 ? 1 : -1, beginValue.defined && eps.defined);
         }
 
         public fmValue RoundUp(fmValue x, int precision)
         {
-            if (x.Value == 0)
+            if (x.value == 0)
                 return x;
 
             double factor = GetFactor(x, precision);
-            x.Value *= factor;
-            x.Value = Math.Ceiling(x.Value - 1e-12);
-            x.Value /= factor;
+            x.value *= factor;
+            x.value = Math.Ceiling(x.value - 1e-12);
+            x.value /= factor;
             return x;
         }
 
         public fmValue RoundDown(fmValue x, int precision)
         {
-            if (x.Value == 0)
+            if (x.value == 0)
                 return x;
 
             double factor = GetFactor(x, precision);
-            x.Value *= factor;
-            x.Value = Math.Floor(x.Value + 1e-12);
-            x.Value /= factor;
+            x.value *= factor;
+            x.value = Math.Floor(x.value + 1e-12);
+            x.value /= factor;
             return x;
         }
 
-        private double GetFactor(fmValue x, int precision)
+        private static double GetFactor(fmValue x, int precision)
         {
             double pMin = Math.Pow(10, precision - 1);
             double pMax = Math.Pow(10, precision);
             double factor = 1;
             fmValue result = x;
             
-            while (Math.Abs(result.Value) < pMin)
+            while (Math.Abs(result.value) < pMin)
             {
-                result.Value *= 10;
+                result.value *= 10;
                 factor *= 10;
             }
 
-            while (Math.Abs(result.Value) >= pMax)
+            while (Math.Abs(result.value) >= pMax)
             {
-                result.Value /= 10;
+                result.value /= 10;
                 factor /= 10;
             }
 
@@ -424,10 +422,10 @@ namespace fmCalculationLibrary
             return a < b ? a : b;
         }
 
-        public static int epsCompare(double x, double y, double eps)
+        public static int EpsCompare(double x, double y, double eps)
         {
-            double A = Math.Max(Math.Abs(x), Math.Abs(y));
-            eps = Math.Max(eps, eps * A);
+            double a = Math.Max(Math.Abs(x), Math.Abs(y));
+            eps = Math.Max(eps, eps * a);
             if (Math.Abs(x - y) <= eps)
             {
                 return 0;

@@ -88,7 +88,7 @@ namespace fmCalculationLibrary.Equations
         {
             //return SolvePowerSumEquation(c3, new fmValue[,] {{c1, p1}, {c2, p2}});
             List<fmValue> result = new List<fmValue>();
-            if (!c1.Defined || !p1.Defined || !c2.Defined || !p2.Defined || !c3.Defined)
+            if (!c1.defined || !p1.defined || !c2.defined || !p2.defined || !c3.defined)
             {
                 result.Add(new fmValue());
                 return result;
@@ -129,7 +129,7 @@ namespace fmCalculationLibrary.Equations
 
             const int iterations = 100;  // precision is 1e20 / 2^100 ~~ 1e-11
 
-            if (!x0.Defined)
+            if (!x0.defined)
             {
                 result.Add(fmBisectionMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, upperBoundForBisection, iterations));
                 return result;
@@ -138,11 +138,11 @@ namespace fmCalculationLibrary.Equations
             result.Add(fmBisectionMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), _zero, x0, iterations));
             result.Add(fmBisectionMethod.FindRoot(new FunctionC1xp1C2xp2C3(c1, p1, c2, p2, c3), x0, upperBoundForBisection, iterations));
 
-            if (!result[1].Defined)
+            if (!result[1].defined)
             {
                 result.RemoveAt(1);
             }
-            else if (!result[0].Defined)
+            else if (!result[0].defined)
             {
                 result.RemoveAt(0);
             }
@@ -153,7 +153,7 @@ namespace fmCalculationLibrary.Equations
 
         static public fmValue SolveC1xp1C2(fmValue c1, fmValue p1, fmValue c2)
         {
-            if (!c1.Defined || !p1.Defined || !c2.Defined)
+            if (!c1.defined || !p1.defined || !c2.defined)
                 return new fmValue();
 
             if (c2 == _zero)
@@ -165,7 +165,7 @@ namespace fmCalculationLibrary.Equations
 
         static public fmValue SolveC1xp1C2xp2(fmValue c1, fmValue p1, fmValue c2, fmValue p2)
         {
-            if (!c1.Defined || !p1.Defined || !c2.Defined || !p2.Defined)
+            if (!c1.defined || !p1.defined || !c2.defined || !p2.defined)
                 return new fmValue();
 
             if (c1 == _zero)
@@ -184,7 +184,7 @@ namespace fmCalculationLibrary.Equations
 
         static public fmValue SolveC1xp1(fmValue c1, fmValue p1)
         {
-            if (!c1.Defined || !p1.Defined)
+            if (!c1.defined || !p1.defined)
                 return new fmValue();
 
             if (c1 == _zero)
@@ -213,7 +213,7 @@ namespace fmCalculationLibrary.Equations
                 fmValue localRoot = fmBisectionMethod.FindRoot(
                     new FunctionC1xp1C2xp2C3p3C4(c1, p1, c2, p2, c3, p3, c4),
                     breakPoints[i - 1], breakPoints[i], interations);
-                if (localRoot.Defined)
+                if (localRoot.defined)
                     result.Add(localRoot);
             }
                 
@@ -290,7 +290,7 @@ namespace fmCalculationLibrary.Equations
             else if (coeffsAndPowers.GetLength(0) == 1)
             {
                 fmValue resVal = fmValue.Pow(-freeCoeff/coeffsAndPowers[0, 0], 1/coeffsAndPowers[0, 1]);
-                if (resVal.Defined)
+                if (resVal.defined)
                 {
                     result.Add(resVal);
                 }
@@ -321,7 +321,7 @@ namespace fmCalculationLibrary.Equations
                     fmValue localSolution = fmBisectionMethod.FindRoot(new FunctionPowerSum(freeCoeff, coeffsAndPowers),
                                                                     changingPoints[i - 1],
                                                                     changingPoints[i], iterations);
-                    if (localSolution.Defined)
+                    if (localSolution.defined)
                     {
                         result.Add(localSolution);
                     }

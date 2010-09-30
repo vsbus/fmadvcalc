@@ -22,9 +22,9 @@ namespace Tests
 
                 for (int i = 0; i < expected.Count; ++i)
                 {
-                    Assert.LessOrEqual(Math.Abs(expected[i].Value - actual[i].Value), eps,
+                    Assert.LessOrEqual(Math.Abs(expected[i].value - actual[i].value), eps,
                                        prefix + ": unexpected value in result ({0})", ListToString(actual));
-                    Assert.GreaterOrEqual(actual[i].Value, 0, prefix+ ": negative value");
+                    Assert.GreaterOrEqual(actual[i].value, 0, prefix+ ": negative value");
                 }
             }
             else
@@ -38,7 +38,7 @@ namespace Tests
         {
             string result = "{";
             for(int i =0; i < list.Count; i++ )
-                result += " " + list[i].Value.ToString() + ",";
+                result += " " + list[i].value.ToString() + ",";
             result += "}";
             return result;
         }
@@ -49,7 +49,7 @@ namespace Tests
             for (int  i = 0; i < coeffAndPow.Length/coeffAndPow.Rank; i++)
             {
                 result += string.Format(" {0}*x^{1}",
-                                        ((coeffAndPow[i, 0].Value >= 0 ? "+" : "-") +
+                                        ((coeffAndPow[i, 0].value >= 0 ? "+" : "-") +
                                          fmValue.Abs(coeffAndPow[i, 0]).ToString()),
                                         fmValue.Abs(coeffAndPow[i, 1]).ToString());
             }
@@ -144,7 +144,7 @@ namespace Tests
                     List<fmValue> result = fmMathEquations.SolvePowerSumEquation(freeCoeff, coeffAndPow);
                     Assert.Greater(result.Count, 0,
                                    "Unexpected SolvePowerSumEquation result count for equation :{0}; expected answer is {1}",
-                                   GetEquation(freeCoeff, coeffAndPow), answer.Value);
+                                   GetEquation(freeCoeff, coeffAndPow), answer.value);
                     bool isContainsAnswer = false;
                     foreach (fmValue val in result)
                     {
@@ -153,12 +153,12 @@ namespace Tests
                         {
                             res += coeffAndPow[j, 0]*fmValue.Pow(val, coeffAndPow[j, 1]);
                         }
-                        Assert.GreaterOrEqual(val.Value, 0, "negative answer returned");
-                        if (Math.Abs(val.Value - answer.Value) < eps) isContainsAnswer = true;
-                        Assert.LessOrEqual(Math.Abs(res.Value), eps,
+                        Assert.GreaterOrEqual(val.value, 0, "negative answer returned");
+                        if (Math.Abs(val.value - answer.value) < eps) isContainsAnswer = true;
+                        Assert.LessOrEqual(Math.Abs(res.value), eps,
                                            "Wrong SolvePowerSumEquation result {2}  item {3} for polynom degree {0} for equation :{1}, expected answer {4}",
                                            n, GetEquation(freeCoeff, coeffAndPow), ListToString(result),
-                                           val.Value.ToString(), answer.Value.ToString());
+                                           val.value.ToString(), answer.value.ToString());
                     }
                     Assert.IsTrue(isContainsAnswer,
                                   "Wrong SolvePowerSumEquation result:  result {2} does not contain expected  answer {0} for equation :{1}",

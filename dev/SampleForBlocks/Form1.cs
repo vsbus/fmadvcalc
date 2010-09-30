@@ -61,12 +61,12 @@ namespace SampleForBlocks
                 fmDataGrid2.Rows[i].Cells[2].Value = m_fmBlock.Parameters[i].globalParameter.chartDefaultXRange.minValue / coef;
                 fmDataGrid2.Rows[i].Cells[3].Value = m_fmBlock.Parameters[i].ValueInUnits;
                 fmDataGrid2.Rows[i].Cells[4].Value = m_fmBlock.Parameters[i].globalParameter.chartDefaultXRange.maxValue / coef;
-                Color colorMin = m_fmBlock.Parameters[i].value.Defined == false
-                    || m_fmBlock.Parameters[i].value.Value < m_fmBlock.Parameters[i].globalParameter.chartDefaultXRange.minValue
+                Color colorMin = m_fmBlock.Parameters[i].value.defined == false
+                    || m_fmBlock.Parameters[i].value.value < m_fmBlock.Parameters[i].globalParameter.chartDefaultXRange.minValue
                         ? Color.Pink
                         : Color.White;
-                Color colorMax = m_fmBlock.Parameters[i].value.Defined == false
-                    || m_fmBlock.Parameters[i].value.Value > m_fmBlock.Parameters[i].globalParameter.chartDefaultXRange.maxValue
+                Color colorMax = m_fmBlock.Parameters[i].value.defined == false
+                    || m_fmBlock.Parameters[i].value.value > m_fmBlock.Parameters[i].globalParameter.chartDefaultXRange.maxValue
                         ? Color.Pink
                         : Color.White;
                 Color colorValue = colorMin != Color.White || colorMax != Color.White ? Color.Pink : Color.White;

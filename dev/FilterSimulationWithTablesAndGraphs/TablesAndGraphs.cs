@@ -64,7 +64,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 double [] result = new double[values.Length];
                 for (int i = 0; i < values.Length; ++i)
-                    result[i] = values[i].Value;
+                    result[i] = values[i].value;
                 return result;
             }
         }
@@ -74,7 +74,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 double[] result = new double[values.Length];
                 for (int i = 0; i < values.Length; ++i)
-                    result[i] = values[i].Value * scale.Value;
+                    result[i] = values[i].value * scale.value;
                 return result;
             }
         }
@@ -799,7 +799,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (!string.IsNullOrEmpty(rowsQuantity.Text))
             {
-                RowsQuantity = (int)fmValue.StringToValue(rowsQuantity.Text).Value;
+                RowsQuantity = (int)fmValue.StringToValue(rowsQuantity.Text).value;
                 rowsQuantity.Text = RowsQuantity.ToString();
                 rowsQuantity.Focus();
                 RecalculateSimulationsWithIterationX();
@@ -1037,7 +1037,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (fmDisplayingArray dispArray in yArrays.Arrays)
                 {
-                    string scaleString = dispArray.Scale.Value == 1 ? "" : " * " + (1 / dispArray.Scale).ToString();
+                    string scaleString = dispArray.Scale.value == 1 ? "" : " * " + (1 / dispArray.Scale).ToString();
                     LineItem curve = fmZedGraphControl1.GraphPane.AddCurve(dispArray.Parameter.name + scaleString + " (" + dispArray.Parameter.UnitName + ")",
                         displayingResults.xParameter.ValuesInDoubles,
                         dispArray.ScaledValuesInDoubles,
@@ -1259,8 +1259,8 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
 
-                fmValue degreeOffsetvalue = (maxY.Value > 0)
-                    ? new fmValue(Math.Pow(10.0, -Math.Ceiling(Math.Log(maxY.Value, 10.0) + 1e-10)))
+                fmValue degreeOffsetvalue = (maxY.value > 0)
+                    ? new fmValue(Math.Pow(10.0, -Math.Ceiling(Math.Log(maxY.value, 10.0) + 1e-10)))
                     : new fmValue(1);
                 degreeOffset[yParameter] = degreeOffsetvalue;
                 if (!degreeOffsetCount.ContainsKey(degreeOffsetvalue))
