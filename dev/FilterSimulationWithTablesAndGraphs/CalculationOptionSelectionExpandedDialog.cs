@@ -2,7 +2,7 @@ using System;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
-    public partial class fmCalculationOptionSelectionExpandedDialog : FilterSimulation.CalculationOptionSelectionDialog
+    public partial class fmCalculationOptionSelectionExpandedDialog : FilterSimulation.fmCalculationOptionSelectionDialog
     {
         private fmCalculationOptionDialogExpandedItemSelection m_calculationOptionDialogExpandedItemSelection;
         private fmCalculationOptionDialogExpandedCalculationOptionKind m_calculationOptionKind;

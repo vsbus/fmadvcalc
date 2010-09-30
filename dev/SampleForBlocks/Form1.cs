@@ -88,7 +88,7 @@ namespace SampleForBlocks
 
         private void CalculationOptionToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var cosd = new CalculationOptionSelectionDialog
+            var cosd = new fmCalculationOptionSelectionDialog
                            {
                                filterMachiningCalculationOption = m_fmBlock.calculationOption
                            };

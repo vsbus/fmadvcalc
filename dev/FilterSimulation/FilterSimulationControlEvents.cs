@@ -10,33 +10,33 @@ namespace FilterSimulation
         // ReSharper disable InconsistentNaming
         private void projectCreateButton_Click(object sender, EventArgs e)
         {
-            fSolution.CurrentObjects.Project = new fmFilterSimProject(fSolution, "Unnamed project");
-            fSolution.CurrentColumns.Project = projectNameColumn.Index;
-            DisplaySolution(fSolution);
+            m_fSolution.CurrentObjects.Project = new fmFilterSimProject(m_fSolution, "Unnamed project");
+            m_fSolution.CurrentColumns.Project = projectNameColumn.Index;
+            DisplaySolution(m_fSolution);
             projectDataGrid.BeginEdit(true);
         }
         private void keepProject_Click(object sender, EventArgs e)
         {
-            if (fSolution.CurrentObjects.Project != null)
+            if (m_fSolution.CurrentObjects.Project != null)
             {
-                fSolution.CurrentObjects.Project.Keep();
-                DisplaySolution(fSolution);
+                m_fSolution.CurrentObjects.Project.Keep();
+                DisplaySolution(m_fSolution);
             }
         }
         private void projectRestore_Click(object sender, EventArgs e)
         {
-            if (fSolution.CurrentObjects.Project != null)
+            if (m_fSolution.CurrentObjects.Project != null)
             {
-                fSolution.CurrentObjects.Project.Restore();
+                m_fSolution.CurrentObjects.Project.Restore();
                 HideExtraRowsInTables(false, true, true, true);
                 UpdateCurrentObjectAndDisplaySolution(projectDataGrid);
             }
         }
         private void projectDelete_Click(object sender, EventArgs e)
         {
-            if (fSolution.CurrentObjects.Project != null)
+            if (m_fSolution.CurrentObjects.Project != null)
             {
-                fSolution.CurrentObjects.Project.Delete();
+                m_fSolution.CurrentObjects.Project.Delete();
                 if (!projectDataGrid.MoveCursor(1))
                     projectDataGrid.MoveCursor(-1);
                 HideExtraRowsInTables(true, true, true, true);
@@ -50,17 +50,17 @@ namespace FilterSimulation
         private void keepSuspensionButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            if (fSolution.CurrentObjects.Suspension != null)
+            if (m_fSolution.CurrentObjects.Suspension != null)
             {
-                fSolution.CurrentObjects.Suspension.Keep();
-                DisplaySolution(fSolution);
+                m_fSolution.CurrentObjects.Suspension.Keep();
+                DisplaySolution(m_fSolution);
             }
         }
         // ReSharper disable InconsistentNaming
         private void suspensionCreateButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            fmFilterSimProject parentProject = fSolution.CurrentObjects.Project;
+            fmFilterSimProject parentProject = m_fSolution.CurrentObjects.Project;
             if (parentProject == null)
             {
                 MessageBox.Show(@"Please select project in project table", @"Error!", MessageBoxButtons.OK);
@@ -74,18 +74,18 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
                 return;
             }
 
-            fSolution.CurrentObjects.Suspension = new fmFilterSimSuspension(parentProject, "Unnamed suspension", "Unnamed material", "Unnamed customer");
-            fSolution.CurrentColumns.Suspension = suspensionNameColumn.Index;
-            DisplaySolution(fSolution);
+            m_fSolution.CurrentObjects.Suspension = new fmFilterSimSuspension(parentProject, "Unnamed suspension", "Unnamed material", "Unnamed customer");
+            m_fSolution.CurrentColumns.Suspension = suspensionNameColumn.Index;
+            DisplaySolution(m_fSolution);
             suspensionDataGrid.BeginEdit(true);
         }
         // ReSharper disable InconsistentNaming
         private void suspensionRestoreButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            if (fSolution.CurrentObjects.Suspension != null)
+            if (m_fSolution.CurrentObjects.Suspension != null)
             {
-                fSolution.CurrentObjects.Suspension.Restore();
+                m_fSolution.CurrentObjects.Suspension.Restore();
                 HideExtraRowsInTables(false, false, true, true);
                 UpdateCurrentObjectAndDisplaySolution(suspensionDataGrid);
             }
@@ -94,9 +94,9 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
         private void suspensionDeleteButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            if (fSolution.CurrentObjects.Suspension != null)
+            if (m_fSolution.CurrentObjects.Suspension != null)
             {
-                fSolution.CurrentObjects.Suspension.Delete();
+                m_fSolution.CurrentObjects.Suspension.Delete();
                 if (!suspensionDataGrid.MoveCursor(1))
                     suspensionDataGrid.MoveCursor(-1);
                 HideExtraRowsInTables(false, true, true, true);
@@ -109,7 +109,7 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
         private void simSerieCreate_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            fmFilterSimSuspension parentSuspension = fSolution.CurrentObjects.Suspension;
+            fmFilterSimSuspension parentSuspension = m_fSolution.CurrentObjects.Suspension;
             if (parentSuspension == null)
             {
                 MessageBox.Show(@"Please select suspension in suspension table", @"Error!", MessageBoxButtons.OK);
@@ -134,19 +134,19 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             for (int i = 1; ; ++i)
             {
                 serieName = "S" + i;
-                if (fSolution.FindSerie(serieName) == null)
+                if (m_fSolution.FindSerie(serieName) == null)
                 {
                     break;
                 }
             }
 
-            fmFilterSimulation curSim = fSolution.CurrentObjects.Simulation;
+            fmFilterSimulation curSim = m_fSolution.CurrentObjects.Simulation;
 
-            fSolution.CurrentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, "Unnamed filter medium", "Unknown Machine Name");
-            fSolution.CurrentObjects.Simulation = curSim != null ? new fmFilterSimulation(fSolution.CurrentObjects.Serie, curSim) : new fmFilterSimulation(fSolution.CurrentObjects.Serie, "");
-            fSolution.CurrentObjects.Simulation.Name = fSolution.CurrentObjects.Serie.Name + "-1";
-            fSolution.CurrentObjects.Serie.Keep();
-            DisplaySolution(fSolution);
+            m_fSolution.CurrentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, "Unnamed filter medium", "Unknown Machine Name");
+            m_fSolution.CurrentObjects.Simulation = curSim != null ? new fmFilterSimulation(m_fSolution.CurrentObjects.Serie, curSim) : new fmFilterSimulation(m_fSolution.CurrentObjects.Serie, "");
+            m_fSolution.CurrentObjects.Simulation.Name = m_fSolution.CurrentObjects.Serie.Name + "-1";
+            m_fSolution.CurrentObjects.Serie.Keep();
+            DisplaySolution(m_fSolution);
             SortTables();
 
             simSeriesDataGrid.BeginEdit(true);
@@ -154,26 +154,26 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
         // ReSharper disable InconsistentNaming
         private void simSeriesKeepButton_Click(object sender, EventArgs e)
         {
-            if (fSolution.CurrentObjects.Serie != null)
+            if (m_fSolution.CurrentObjects.Serie != null)
             {
-                fSolution.CurrentObjects.Serie.Keep();
-                DisplaySolution(fSolution);
+                m_fSolution.CurrentObjects.Serie.Keep();
+                DisplaySolution(m_fSolution);
             }
         }
         private void simSeriesRestoreButton_Click(object sender, EventArgs e)
         {
-            if (fSolution.CurrentObjects.Serie != null)
+            if (m_fSolution.CurrentObjects.Serie != null)
             {
-                fSolution.CurrentObjects.Serie.Restore();
+                m_fSolution.CurrentObjects.Serie.Restore();
                 HideExtraRowsInTables(false, false, false, true);
                 UpdateCurrentObjectAndDisplaySolution(simSeriesDataGrid);
             }
         }
         private void simSeriesDeleteButton_Click(object sender, EventArgs e)
         {
-            if (fSolution.CurrentObjects.Serie != null)
+            if (m_fSolution.CurrentObjects.Serie != null)
             {
-                fSolution.CurrentObjects.Serie.Delete();
+                m_fSolution.CurrentObjects.Serie.Delete();
                 if (!simSeriesDataGrid.MoveCursor(1))
                     simSeriesDataGrid.MoveCursor(-1);
                 HideExtraRowsInTables(false, false, true, true);
@@ -187,7 +187,7 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
         private void simulationDuplicateButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            fmFilterSimSerie parentSerie = fSolution.CurrentObjects.Serie;
+            fmFilterSimSerie parentSerie = m_fSolution.CurrentObjects.Serie;
             if (parentSerie == null)
             {
                 MessageBox.Show(@"Please select serie in serie table", @"Error!", MessageBoxButtons.OK);
@@ -205,53 +205,53 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             for (int i = 1; ; ++i)
             {
                 simName = parentSerie.Name + "-" + i;
-                if (fSolution.FindSimulation(simName) == null)
+                if (m_fSolution.FindSimulation(simName) == null)
                 {
                     break;
                 }
             }
 
-            if (fSolution.CurrentObjects.Simulation == null)
+            if (m_fSolution.CurrentObjects.Simulation == null)
             {
-                fSolution.CurrentObjects.Simulation = new fmFilterSimulation(parentSerie, simName);
+                m_fSolution.CurrentObjects.Simulation = new fmFilterSimulation(parentSerie, simName);
             }
             else
             {
-                fmFilterSimulation currentSimulation = fSolution.CurrentObjects.Simulation;
-                fSolution.CurrentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, currentSimulation) { Name = simName };
-                fSolution.CurrentObjects.Simulation.Keep();
+                fmFilterSimulation currentSimulation = m_fSolution.CurrentObjects.Simulation;
+                m_fSolution.CurrentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, currentSimulation) { Name = simName };
+                m_fSolution.CurrentObjects.Simulation.Keep();
             }
 
-            fSolution.CurrentColumns.Simulation = simulationNameColumn.Index;
-            DisplaySolution(fSolution);
+            m_fSolution.CurrentColumns.Simulation = simulationNameColumn.Index;
+            DisplaySolution(m_fSolution);
             SortTables();
-            SelectCurrentItemsInSolution(fSolution);
+            SelectCurrentItemsInSolution(m_fSolution);
 
             simulationDataGrid.BeginEdit(true);
         }
         // ReSharper disable InconsistentNaming
         private void simulationKeepButton_Click(object sender, EventArgs e)
         {
-            if (fSolution.CurrentObjects.Simulation != null)
+            if (m_fSolution.CurrentObjects.Simulation != null)
             {
-                fSolution.CurrentObjects.Simulation.Keep();
-                DisplaySolution(fSolution);
+                m_fSolution.CurrentObjects.Simulation.Keep();
+                DisplaySolution(m_fSolution);
             }
         }
         private void simulationRestoreButton_Click(object sender, EventArgs e)
         {
-            if (fSolution.CurrentObjects.Simulation != null)
+            if (m_fSolution.CurrentObjects.Simulation != null)
             {
-                fSolution.CurrentObjects.Simulation.Restore();
+                m_fSolution.CurrentObjects.Simulation.Restore();
                 HideExtraRowsInTables(false, false, false, false);
                 UpdateCurrentObjectAndDisplaySolution(simulationDataGrid);
             }
         }
         private void simulationDeleteButton_Click(object sender, EventArgs e)
         {
-            if (fSolution.CurrentObjects.Simulation != null)
+            if (m_fSolution.CurrentObjects.Simulation != null)
             {
-                fSolution.CurrentObjects.Simulation.Delete();
+                m_fSolution.CurrentObjects.Simulation.Delete();
                 if (!simulationDataGrid.MoveCursor(1))
                     simulationDataGrid.MoveCursor(-1);
                 HideExtraRowsInTables(false, false, false, true);
@@ -263,24 +263,24 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         private void byCheckingProjectsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             m_byCheckingProjects = byCheckingProjectsCheckBox.Checked;
-            DisplaySolution(fSolution);
+            DisplaySolution(m_fSolution);
         }
 
         private void byCheckingSuspensionsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             m_byCheckingSuspensions = byCheckingSuspensionsCheckBox.Checked;
-            DisplaySolution(fSolution);
+            DisplaySolution(m_fSolution);
         }
 
         private void byCheckingSimSeriesCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             m_byCheckingSimSeries = byCheckingSimSeriesCheckBox.Checked;
-            DisplaySolution(fSolution);
+            DisplaySolution(m_fSolution);
         }
         private void byCheckingSimulationsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             byCheckingSimulations = byCheckingSimulationsCheckBox.Checked;
-            DisplaySolution(fSolution);
+            DisplaySolution(m_fSolution);
         }
 
         private void fullSimulationInfoCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -295,7 +295,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
 
         private void duplicateSerieButton_Click(object sender, EventArgs e)
         {
-            fmFilterSimSerie currentSerie = fSolution.CurrentObjects.Serie;
+            fmFilterSimSerie currentSerie = m_fSolution.CurrentObjects.Serie;
 
             if (currentSerie == null)
             {
@@ -303,10 +303,10 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            fSolution.CurrentObjects.Serie = new fmFilterSimSerie(currentSerie.Parent, currentSerie) { Name = currentSerie.Name + "d" };
-            fSolution.CurrentObjects.Serie.Keep();
+            m_fSolution.CurrentObjects.Serie = new fmFilterSimSerie(currentSerie.Parent, currentSerie) { Name = currentSerie.Name + "d" };
+            m_fSolution.CurrentObjects.Serie.Keep();
 
-            DisplaySolution(fSolution);
+            DisplaySolution(m_fSolution);
             SortTables();
 
             simSeriesDataGrid.BeginEdit(true);

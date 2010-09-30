@@ -1,6 +1,6 @@
 namespace FilterSimulation
 {
-    partial class CalculationOptionSelectionDialog
+    partial class fmCalculationOptionSelectionDialog
     {
         /// <summary>
         /// Required designer variable.
@@ -195,7 +195,7 @@ namespace FilterSimulation
             this.ClientSize = new System.Drawing.Size(494, 258);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
-            this.Name = "CalculationOptionSelectionDialog";
+            this.Name = "fmCalculationOptionSelectionDialog";
             this.Text = "CalculationOptionSelectionDialog";
             this.Load += new System.EventHandler(this.CalculationOptionSelectionDialog_Load);
             this.suspensionGroupBox.ResumeLayout(false);

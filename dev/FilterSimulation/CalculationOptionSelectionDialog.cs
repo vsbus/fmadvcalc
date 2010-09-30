@@ -1,25 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using fmCalculatorsLibrary;
 
 namespace FilterSimulation
 {
-    public partial class CalculationOptionSelectionDialog : Form
+    public partial class fmCalculationOptionSelectionDialog : Form
     {
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
 
-        public CalculationOptionSelectionDialog()
+        public fmCalculationOptionSelectionDialog()
         {
             InitializeComponent();
         }
 
+        // ReSharper disable InconsistentNaming
         private void CalculationOptionSelectionDialog_Load(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             rho_f_radioButton.Checked = suspensionCalculationOption ==
                                         fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOF_CALCULATED;
@@ -33,15 +30,16 @@ namespace FilterSimulation
             fmCalculationOptionView1.SetSelectedOption(filterMachiningCalculationOption);
         }
 
+        // ReSharper disable InconsistentNaming
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
             Close();
         }
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            DialogResult = System.Windows.Forms.DialogResult.OK;
+            DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -81,5 +79,7 @@ namespace FilterSimulation
         {
             filterMachiningCalculationOption = fmCalculationOptionView1.GetSelectedOption();
         }
+        // ReSharper restore InconsistentNaming
+
     }
 }

@@ -69,10 +69,10 @@ namespace FilterSimulation
                 if (cellValue != null)
                 {
                     var guid = (Guid)cellValue;
-                    if (fSolution.FindProject(guid) == null
-                        && fSolution.FindSerie(guid) == null
-                        && fSolution.FindSuspension(guid) == null
-                        && fSolution.FindSimulation(guid) == null)
+                    if (m_fSolution.FindProject(guid) == null
+                        && m_fSolution.FindSerie(guid) == null
+                        && m_fSolution.FindSuspension(guid) == null
+                        && m_fSolution.FindSimulation(guid) == null)
                     {
                         row.Visible = false;
                     }
@@ -99,8 +99,8 @@ namespace FilterSimulation
                 AddHideRowsForProject(prj, true);
             }
 
-            DataGridViewColumn liquidCol = fSolution.CurrentObjects.Simulation == null ? null : FindColumnByGuid(liquidDataGrid.Columns, fSolution.CurrentObjects.Simulation.Guid, 0);
-            DataGridViewColumn epsKappaCol = fSolution.CurrentObjects.Simulation == null ? null : FindColumnByGuid(eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns, fSolution.CurrentObjects.Simulation.Guid, 0);
+            DataGridViewColumn liquidCol = m_fSolution.CurrentObjects.Simulation == null ? null : FindColumnByGuid(liquidDataGrid.Columns, m_fSolution.CurrentObjects.Simulation.Guid, 0);
+            DataGridViewColumn epsKappaCol = m_fSolution.CurrentObjects.Simulation == null ? null : FindColumnByGuid(eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns, m_fSolution.CurrentObjects.Simulation.Guid, 0);
             HideExtraMaterialColumns(liquidDataGrid, liquidCol);
             HideExtraMaterialColumns(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaCol);
 
@@ -112,7 +112,7 @@ namespace FilterSimulation
             row.Cells[projectGuidColumn.Index].Value = proj.Guid;
             row.Visible = visible;
 
-            bool itIsCurrentProject = proj == fSolution.CurrentObjects.Project;
+            bool itIsCurrentProject = proj == m_fSolution.CurrentObjects.Project;
 
             foreach (fmFilterSimSuspension sus in proj.SuspensionList)
             {
@@ -125,7 +125,7 @@ namespace FilterSimulation
             row.Cells[suspensionGuidColumn.Index].Value = sus.Guid;
             row.Visible = visible;
 
-            bool itIsCurrentSuspension = sus == fSolution.CurrentObjects.Suspension;
+            bool itIsCurrentSuspension = sus == m_fSolution.CurrentObjects.Suspension;
 
             foreach (fmFilterSimSerie serie in sus.SimSeriesList)
             {
@@ -138,7 +138,7 @@ namespace FilterSimulation
             row.Cells[simSeriesGuidColumn.Index].Value = serie.Guid;
             row.Visible = visible;
 
-            bool itIsCurrentSimSerie = serie == fSolution.CurrentObjects.Serie;
+            bool itIsCurrentSimSerie = serie == m_fSolution.CurrentObjects.Serie;
 
             foreach (fmFilterSimulation sim in serie.SimulationsList)
             {
@@ -368,10 +368,10 @@ namespace FilterSimulation
         // ReSharper restore InconsistentNaming
         {
             displayingSolution = true;
-            foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
-                if (meterialInputSerieRadioButton.Checked && sim.Parent == fSolution.CurrentObjects.Simulation.Parent
-                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParameters(sim.rm0HceBlock, fSolution.CurrentObjects.Simulation.rm0HceBlock);
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.CurrentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.CurrentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.rm0HceBlock, m_fSolution.CurrentObjects.Simulation.rm0HceBlock);
             displayingSolution = false;
         }
 
@@ -380,20 +380,20 @@ namespace FilterSimulation
         // ReSharper restore InconsistentNaming
         {
             displayingSolution = true;
-            foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
-                if (meterialInputSerieRadioButton.Checked && sim.Parent == fSolution.CurrentObjects.Simulation.Parent
-                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParameters(sim.pc0rc0a0Block, fSolution.CurrentObjects.Simulation.pc0rc0a0Block);
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.CurrentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.CurrentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.pc0rc0a0Block, m_fSolution.CurrentObjects.Simulation.pc0rc0a0Block);
             displayingSolution = false;
         }
 
         void eps0Kappa0Block_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         {
             displayingSolution = true;
-            foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
-                if (meterialInputSerieRadioButton.Checked && sim.Parent == fSolution.CurrentObjects.Simulation.Parent
-                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParameters(sim.eps0Kappa0Block, fSolution.CurrentObjects.Simulation.eps0Kappa0Block);
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.CurrentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.CurrentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.eps0Kappa0Block, m_fSolution.CurrentObjects.Simulation.eps0Kappa0Block);
             displayingSolution = false;
         }
 
@@ -412,10 +412,10 @@ namespace FilterSimulation
 // ReSharper restore InconsistentNaming
         {
             displayingSolution = true;
-            foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
-                if (meterialInputSerieRadioButton.Checked && sim.Parent == fSolution.CurrentObjects.Simulation.Parent
-                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParameters(sim.susBlock, fSolution.CurrentObjects.Simulation.susBlock);
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.CurrentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.CurrentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.susBlock, m_fSolution.CurrentObjects.Simulation.susBlock);
             displayingSolution = false;
         }
 
@@ -520,7 +520,7 @@ namespace FilterSimulation
                     if (row.Visible)
                     {
                         var guid = (Guid)row.Cells[projectGuidColumn.Index].Value;
-                        int colIndex = projectDataGrid.Columns[fSolution.CurrentColumns.Project].Index;
+                        int colIndex = projectDataGrid.Columns[m_fSolution.CurrentColumns.Project].Index;
                         if (guid == sol.CurrentObjects.Project.Guid)
                         {
                             projectDataGrid.CurrentCell = row.Cells[colIndex];
@@ -538,7 +538,7 @@ namespace FilterSimulation
                     if (row.Visible)
                     {
                         var guid = (Guid)row.Cells[suspensionGuidColumn.Index].Value;
-                        int colIndex = suspensionDataGrid.Columns[fSolution.CurrentColumns.Suspension].Index;
+                        int colIndex = suspensionDataGrid.Columns[m_fSolution.CurrentColumns.Suspension].Index;
                         if (guid == sol.CurrentObjects.Suspension.Guid)
                         {
                             suspensionDataGrid.CurrentCell = row.Cells[colIndex];
@@ -556,7 +556,7 @@ namespace FilterSimulation
                     if (row.Visible)
                     {
                         var guid = (Guid)row.Cells[simSeriesGuidColumn.Index].Value;
-                        int colIndex = simSeriesDataGrid.Columns[fSolution.CurrentColumns.SimSerie].Index;
+                        int colIndex = simSeriesDataGrid.Columns[m_fSolution.CurrentColumns.SimSerie].Index;
                         if (guid == sol.CurrentObjects.Serie.Guid)
                         {
                             simSeriesDataGrid.CurrentCell = row.Cells[colIndex];
@@ -585,7 +585,7 @@ namespace FilterSimulation
                     if (row.Visible)
                     {
                         var guid = (Guid)row.Cells[simulationGuidColumn.Index].Value;
-                        int colIndex = simulationDataGrid.Columns[fSolution.CurrentColumns.Simulation].Index;
+                        int colIndex = simulationDataGrid.Columns[m_fSolution.CurrentColumns.Simulation].Index;
                         if (guid == sol.CurrentObjects.Simulation.Guid)
                         {
                             simulationDataGrid.CurrentCell = row.Cells[colIndex];
@@ -626,30 +626,30 @@ namespace FilterSimulation
         {
             if (sim != null)
             {
-                if (commonFilterMachiningBlock == null)
+                if (m_commonFilterMachiningBlock == null)
                 {
                     InitCommonFilterMachiningBlock();
                 }
 
-                if (commonFilterMachiningBlock != null)
+                if (m_commonFilterMachiningBlock != null)
                 {
-                    commonFilterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.calculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.calculationOption);
 
-                    for (int i = 0; i < commonFilterMachiningBlock.Parameters.Count; ++i)
+                    for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                     {
-                        commonCalcBlockDataGrid.Rows[i].Visible = commonFilterMachiningBlock.Parameters[i].group != null;
+                        commonCalcBlockDataGrid.Rows[i].Visible = m_commonFilterMachiningBlock.Parameters[i].group != null;
                     }
 
-                    for (int i = 0; i < commonFilterMachiningBlock.ConstantParameters.Count; ++i)
+                    for (int i = 0; i < m_commonFilterMachiningBlock.ConstantParameters.Count; ++i)
                     {
-                        commonFilterMachiningBlock.ConstantParameters[i].value = sim.filterMachiningBlock.ConstantParameters[i].value;
+                        m_commonFilterMachiningBlock.ConstantParameters[i].value = sim.filterMachiningBlock.ConstantParameters[i].value;
                     }
-                    for (int i = 0; i < commonFilterMachiningBlock.Parameters.Count; ++i)
+                    for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                     {
-                        commonFilterMachiningBlock.Parameters[i].value = sim.filterMachiningBlock.Parameters[i].value;
-                        commonFilterMachiningBlock.Parameters[i].IsInputed = sim.filterMachiningBlock.Parameters[i].IsInputed;
+                        m_commonFilterMachiningBlock.Parameters[i].value = sim.filterMachiningBlock.Parameters[i].value;
+                        m_commonFilterMachiningBlock.Parameters[i].IsInputed = sim.filterMachiningBlock.Parameters[i].IsInputed;
                     }
-                    commonFilterMachiningBlock.CalculateAndDisplay();
+                    m_commonFilterMachiningBlock.CalculateAndDisplay();
                 }
             }
         }
@@ -665,13 +665,13 @@ namespace FilterSimulation
                 parToCell[voidBlock.Parameters[i].globalParameter] = commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", i];
             }
 
-            commonFilterMachiningBlock = new fmFilterMachiningBlockWithLimits();
-            foreach (var p in commonFilterMachiningBlock.Parameters)
+            m_commonFilterMachiningBlock = new fmFilterMachiningBlockWithLimits();
+            foreach (var p in m_commonFilterMachiningBlock.Parameters)
             {
-                commonFilterMachiningBlock.AssignCell(p, parToCell[p.globalParameter]);
+                m_commonFilterMachiningBlock.AssignCell(p, parToCell[p.globalParameter]);
             }
 
-            commonFilterMachiningBlock.ValuesChangedByUser += commonFilterMachiningBlock_ValuesChangedByUser;
+            m_commonFilterMachiningBlock.ValuesChangedByUser += commonFilterMachiningBlock_ValuesChangedByUser;
 
             UpdateUnitsOfCommonFilterMachiningBlock();
         }
@@ -680,14 +680,14 @@ namespace FilterSimulation
         void commonFilterMachiningBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
 // ReSharper restore InconsistentNaming
         {
-            foreach (fmBlockVariableParameter p in commonFilterMachiningBlock.Parameters)
+            foreach (fmBlockVariableParameter p in m_commonFilterMachiningBlock.Parameters)
             {
-                fmBlockVariableParameter p2 = fSolution.CurrentObjects.Simulation.filterMachiningBlock.GetParameterByName(p.globalParameter.name);
+                fmBlockVariableParameter p2 = m_fSolution.CurrentObjects.Simulation.filterMachiningBlock.GetParameterByName(p.globalParameter.name);
                 p2.value = p.value;
                 p2.IsInputed = p.IsInputed;
             }
 
-            fSolution.CurrentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();
+            m_fSolution.CurrentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();
         }
 
         static void HideExtraMaterialColumns(DataGridView dataGrid, DataGridViewColumn columnToLeave)
@@ -837,18 +837,18 @@ namespace FilterSimulation
 
         private void UpdateUnitsOfCommonFilterMachiningBlock()
         {
-            if (commonFilterMachiningBlock != null)
+            if (m_commonFilterMachiningBlock != null)
             {
-                for (int i = 0; i < commonFilterMachiningBlock.Parameters.Count; ++i)
+                for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                 {
-                    commonCalcBlockDataGrid["commonCalcBlockUnitColumn", i].Value = commonFilterMachiningBlock.Parameters[i].globalParameter.UnitName;
+                    commonCalcBlockDataGrid["commonCalcBlockUnitColumn", i].Value = m_commonFilterMachiningBlock.Parameters[i].globalParameter.UnitName;
                 }
             }
         }
 
         private void RewriteDataForAllBlocks()
         {
-            foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
             {
                 sim.susBlock.CalculateAndDisplay();
                 sim.eps0Kappa0Block.CalculateAndDisplay();
@@ -860,7 +860,7 @@ namespace FilterSimulation
 
         private void ResumeAllBlockProcessing()
         {
-            foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
             {
                 sim.susBlock.ResumeProcessing();
                 sim.eps0Kappa0Block.ResumeProcessing();
@@ -872,7 +872,7 @@ namespace FilterSimulation
 
         private void StopAllBlockProcessing()
         {
-            foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
             {
                 sim.susBlock.StopProcessing();
                 sim.eps0Kappa0Block.StopProcessing();
@@ -885,7 +885,7 @@ namespace FilterSimulation
         void susBlock_ValuesChanged(object sender)
         {
             var susBlock = sender as fmSuspensionWithEtafBlock;
-            fmFilterSimulation sim = fSolution.FindSimulation(susBlock);
+            fmFilterSimulation sim = m_fSolution.FindSimulation(susBlock);
 
             if (sim == null) // when we keep or restore simulations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
@@ -913,7 +913,7 @@ namespace FilterSimulation
         // ReSharper restore InconsistentNaming
         {
             var epsKappaBlock = sender as fmEps0Kappa0Block;
-            fmFilterSimulation sim = fSolution.FindSimulation(epsKappaBlock);
+            fmFilterSimulation sim = m_fSolution.FindSimulation(epsKappaBlock);
 
             if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
@@ -932,7 +932,7 @@ namespace FilterSimulation
         void rmHceBlock_ValuesChanged(object sender)
         {
             var rmHceBlock = sender as fmRm0HceBlock;
-            fmFilterSimulation sim = fSolution.FindSimulation(rmHceBlock);
+            fmFilterSimulation sim = m_fSolution.FindSimulation(rmHceBlock);
 
             if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
@@ -952,7 +952,7 @@ namespace FilterSimulation
         // ReSharper restore InconsistentNaming
         {
             var pcrcaBlock = sender as fmPc0Rc0A0Block;
-            fmFilterSimulation sim = fSolution.FindSimulation(pcrcaBlock);
+            fmFilterSimulation sim = m_fSolution.FindSimulation(pcrcaBlock);
 
             if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
@@ -977,7 +977,7 @@ namespace FilterSimulation
         // ReSharper restore InconsistentNaming
         {
             var filterMachiningBlock = sender as fmFilterMachiningBlock;
-            fmFilterSimulation sim = fSolution.FindSimulation(filterMachiningBlock);
+            fmFilterSimulation sim = m_fSolution.FindSimulation(filterMachiningBlock);
 
             if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
@@ -995,7 +995,7 @@ namespace FilterSimulation
                 fmFilterSimulation.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
             }
 
-            DisplaySolution(fSolution);
+            DisplaySolution(m_fSolution);
         }
     }
 }

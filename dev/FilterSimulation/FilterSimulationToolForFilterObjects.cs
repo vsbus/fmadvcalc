@@ -15,7 +15,7 @@ namespace FilterSimulation
                 {
                     return null;
                 }
-                return fSolution.FindMachineType(Convert.ToString(machineTypesDataGrid.CurrentRow.Cells["machineTypeSymbolColumn"].Value));
+                return m_fSolution.FindMachineType(Convert.ToString(machineTypesDataGrid.CurrentRow.Cells["machineTypeSymbolColumn"].Value));
             }
             return null;
         }
