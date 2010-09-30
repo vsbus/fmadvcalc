@@ -9,9 +9,13 @@ namespace fmCalculatorsLibrary
         public fmEpsKappaCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
-            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            // ReSharper disable InconsistentNaming
+            var eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            var kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            // ReSharper restore InconsistentNaming
+
+            // ReSharper disable PossibleNullReferenceException
             if (eps.isInputed)
             {
                 kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
@@ -24,6 +28,7 @@ namespace fmCalculatorsLibrary
             {
                 throw new System.Exception("One of eps and kappa must be inputed");
             }
+            // ReSharper restore PossibleNullReferenceException
         }
     }
 }

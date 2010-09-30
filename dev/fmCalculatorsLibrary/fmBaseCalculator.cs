@@ -7,11 +7,12 @@ namespace fmCalculatorsLibrary
     {
         protected Dictionary<fmGlobalParameter, fmCalculationBaseParameter> variables;
         abstract public void DoCalculations();
-        public fmBaseCalculator(IEnumerable<fmCalculationBaseParameter> parameterList)
+
+        protected fmBaseCalculator(IEnumerable<fmCalculationBaseParameter> parameterList)
         {
             variables = new Dictionary<fmGlobalParameter,fmCalculationBaseParameter>();
             if (parameterList != null)
-                foreach (fmCalculationBaseParameter p in parameterList)
+                foreach (var p in parameterList)
                     variables[p.globalParameter] = p;
         }
     }

@@ -1,5 +1,4 @@
 using fmCalculationLibrary;
-using fmCalculationLibrary.Equations;
 using System.Collections.Generic;
 
 namespace fmCalculatorsLibrary
@@ -9,21 +8,22 @@ namespace fmCalculatorsLibrary
         public fmEps0Kappa0Calculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
-            fmCalculationVariableParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter kappa0 = variables[fmGlobalParameter.kappa0] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            // ReSharper disable InconsistentNaming
+            var eps0 = variables[fmGlobalParameter.eps0] as fmCalculationVariableParameter;
+            var kappa0 = variables[fmGlobalParameter.kappa0] as fmCalculationVariableParameter;
+            var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
 
-            fmCalculationVariableParameter local_eps = new fmCalculationVariableParameter(fmGlobalParameter.eps, eps0.value, eps0.isInputed);
-            fmCalculationVariableParameter local_kappa = new fmCalculationVariableParameter(fmGlobalParameter.kappa, kappa0.value, kappa0.isInputed);
-            List<fmCalculationBaseParameter> parameterList = new List<fmCalculationBaseParameter>();
-            parameterList.Add(local_eps);
-            parameterList.Add(local_kappa);
-            parameterList.Add(Cv);
+            // ReSharper disable PossibleNullReferenceException
+            var local_eps = new fmCalculationVariableParameter(fmGlobalParameter.eps, eps0.value, eps0.isInputed);
+            var local_kappa = new fmCalculationVariableParameter(fmGlobalParameter.kappa, kappa0.value, kappa0.isInputed);
+            var parameterList = new List<fmCalculationBaseParameter> {local_eps, local_kappa, Cv};
+            // ReSharper restore InconsistentNaming
 
-            fmEpsKappaCalculator epsKappaCalculator = new fmEpsKappaCalculator(parameterList);
+            var epsKappaCalculator = new fmEpsKappaCalculator(parameterList);
             epsKappaCalculator.DoCalculations();
             eps0.value = local_eps.value;
             kappa0.value = local_kappa.value;
+            // ReSharper restore PossibleNullReferenceException
         }
     }
 }
