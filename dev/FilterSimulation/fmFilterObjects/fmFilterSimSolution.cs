@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using FilterSimulation.fmFilterObjects;
 using fmCalcBlocksLibrary.Blocks;
 
 namespace FilterSimulation.fmFilterObjects
 {
-    public struct CurrentObjectsStruct
+    public struct fmCurrentObjectsStruct
     {
         static public fmFilterSimSuspension GetFirstChild(fmFilterSimProject prj)
         {
@@ -22,78 +21,78 @@ namespace FilterSimulation.fmFilterObjects
             return serie != null && serie.SimulationsList.Count > 0 ? serie.SimulationsList[0] : null;
         }
 
-        private fmFilterSimProject m_Project;
-        private fmFilterSimSuspension m_Suspension;
-        private fmFilterSimSerie m_Serie;
-        private fmFilterSimulation m_Simulation;
+        private fmFilterSimProject m_project;
+        private fmFilterSimSuspension m_suspension;
+        private fmFilterSimSerie m_serie;
+        private fmFilterSimulation m_simulation;
 
         public fmFilterSimProject Project
         {
-            get { return m_Project; }
+            get { return m_project; }
             set
             {
-                m_Project = value;
-                m_Suspension = GetFirstChild(m_Project);
-                m_Serie = GetFirstChild(m_Suspension);
-                m_Simulation = GetFirstChild(m_Serie);
+                m_project = value;
+                m_suspension = GetFirstChild(m_project);
+                m_serie = GetFirstChild(m_suspension);
+                m_simulation = GetFirstChild(m_serie);
             }
         }
         public fmFilterSimSuspension Suspension
         {
-            get { return m_Suspension; }
+            get { return m_suspension; }
             set
             {
-                m_Suspension = value;
-                m_Project = m_Suspension.Parent;
-                m_Serie = GetFirstChild(m_Suspension);
-                m_Simulation = GetFirstChild(m_Serie);
+                m_suspension = value;
+                m_project = m_suspension.Parent;
+                m_serie = GetFirstChild(m_suspension);
+                m_simulation = GetFirstChild(m_serie);
             }
         }
         public fmFilterSimSerie Serie
         {
-            get { return m_Serie; }
+            get { return m_serie; }
             set
             {
-                m_Serie = value;
-                m_Suspension = m_Serie.Parent;
-                m_Project = m_Suspension.Parent;
-                m_Simulation = GetFirstChild(m_Serie);
+                m_serie = value;
+                m_suspension = m_serie.Parent;
+                m_project = m_suspension.Parent;
+                m_simulation = GetFirstChild(m_serie);
             }
         }
         public fmFilterSimulation Simulation
         {
-            get { return m_Simulation; }
+            get { return m_simulation; }
             set
             {
-                m_Simulation = value;
-                m_Serie = m_Simulation.Parent;
-                m_Suspension = m_Serie.Parent;
-                m_Project = m_Suspension.Parent;
+                m_simulation = value;
+                m_serie = m_simulation.Parent;
+                m_suspension = m_serie.Parent;
+                m_project = m_suspension.Parent;
             }
         }
     }
 
-    public struct CurrentColumnsStruct
+    public struct fmCurrentColumnsStruct
     {
-        public int Project;
-        public int Suspension;
-        public int SimSerie;
-        public int Simulation;
+        public int project;
+        public int suspension;
+        public int simSerie;
+        public int simulation;
     }
 
     public class fmFilterSimSolution
     {
-        public List<fmFilterSimProject> Projects = new List<fmFilterSimProject>();
-        public CurrentObjectsStruct CurrentObjects;
-        public CurrentColumnsStruct CurrentColumns;
+        public List<fmFilterSimProject> projects = new List<fmFilterSimProject>();
+        public fmCurrentObjectsStruct currentObjects;
+        public fmCurrentColumnsStruct currentColumns;
 
         public void AddProject(fmFilterSimProject prj)
         {
-            Projects.Add(prj);
+            projects.Add(prj);
         }
         public void RemoveProject(fmFilterSimProject prj)
         {
-            Projects.Remove(prj);
+            projects.Remove(prj);
         }
         public fmFilterSimSerie FindSerie(Guid guid)
         {
@@ -121,7 +120,7 @@ namespace FilterSimulation.fmFilterObjects
         
         public fmFilterSimProject FindProject(Guid guid)
         {
-            foreach (fmFilterSimProject prj in Projects)
+            foreach (fmFilterSimProject prj in projects)
             {
                 if (guid == prj.Guid)
                     return prj;
@@ -130,7 +129,7 @@ namespace FilterSimulation.fmFilterObjects
         }
         public fmFilterSimSuspension FindSuspension(Guid guid)
         {
-            foreach (fmFilterSimProject prj in Projects)
+            foreach (fmFilterSimProject prj in projects)
             {
                 fmFilterSimSuspension sus = prj.FindSuspension(guid);
                 if (sus != null)
@@ -141,8 +140,8 @@ namespace FilterSimulation.fmFilterObjects
 
         public List<fmFilterSimulation> GetAllSimulations()
         {
-            List<fmFilterSimulation> ret = new List<fmFilterSimulation>();
-            foreach (fmFilterSimProject prj in Projects)
+            var ret = new List<fmFilterSimulation>();
+            foreach (fmFilterSimProject prj in projects)
             {
                 ret.AddRange(prj.GetAllSimulations());
             }
@@ -150,8 +149,8 @@ namespace FilterSimulation.fmFilterObjects
         }
         public List<fmFilterSimSerie> GetAllSeries()
         {
-            List<fmFilterSimSerie> ret = new List<fmFilterSimSerie>();
-            foreach (fmFilterSimProject prj in Projects)
+            var ret = new List<fmFilterSimSerie>();
+            foreach (fmFilterSimProject prj in projects)
             {
                 ret.AddRange(prj.GetAllSeries());
             }
@@ -168,7 +167,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public fmFilterSimulation FindSimulation(Guid guid)
         {
-            foreach (fmFilterSimProject prj in Projects)
+            foreach (fmFilterSimProject prj in projects)
             {
                 fmFilterSimulation sim = prj.FindSimulation(guid);
                 if (sim != null)
@@ -193,10 +192,10 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
-        public fmFilterSimulation FindSimulation(fmRm0HceBlock Rm0hceBlock)
+        public fmFilterSimulation FindSimulation(fmRm0HceBlock rm0HceBlock)
         {
             foreach (fmFilterSimulation sim in GetAllSimulations())
-                if (sim.rm0HceBlock == Rm0hceBlock)
+                if (sim.rm0HceBlock == rm0HceBlock)
                     return sim;
             return null;
         }
@@ -209,10 +208,10 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
-        public fmFilterSimulation FindSimulation(fmPc0Rc0A0Block pc0rc0a0Block)
+        public fmFilterSimulation FindSimulation(fmPc0Rc0A0Block pc0Rc0A0Block)
         {
             foreach (fmFilterSimulation sim in GetAllSimulations())
-                if (sim.pc0Rc0A0Block == pc0rc0a0Block)
+                if (sim.pc0Rc0A0Block == pc0Rc0A0Block)
                     return sim;
             return null;
         }
@@ -221,7 +220,7 @@ namespace FilterSimulation.fmFilterObjects
         {
             foreach (fmFilterSimMachineType fmt in fmFilterSimMachineType.filterTypesList)
             {
-                if (fmt.Symbol == typeSymbol)
+                if (fmt.symbol == typeSymbol)
                 {
                     return fmt;
                 }
@@ -231,7 +230,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public void Keep()
         {
-            foreach (fmFilterSimProject prj in Projects)
+            foreach (fmFilterSimProject prj in projects)
             {
                 prj.Keep();
             }

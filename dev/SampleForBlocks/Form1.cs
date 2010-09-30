@@ -102,7 +102,7 @@ namespace SampleForBlocks
 
         private void PrecisionToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var doForm = new AdvancedCalculator.DigitsOptions();
+            var doForm = new AdvancedCalculator.fmDigitsOptions();
             doForm.ShowDialog();
             m_fmBlock.CalculateAndDisplay();
         }

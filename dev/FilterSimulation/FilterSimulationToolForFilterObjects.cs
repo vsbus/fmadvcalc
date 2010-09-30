@@ -22,15 +22,15 @@ namespace FilterSimulation
 
         static public fmFilterSimSuspension GetFirstChild(fmFilterSimProject prj)
         {
-            return CurrentObjectsStruct.GetFirstChild(prj);
+            return fmCurrentObjectsStruct.GetFirstChild(prj);
         }
         static public fmFilterSimSerie GetFirstChild(fmFilterSimSuspension sus)
         {
-            return CurrentObjectsStruct.GetFirstChild(sus);
+            return fmCurrentObjectsStruct.GetFirstChild(sus);
         }
         static public fmFilterSimulation GetFirstChild(fmFilterSimSerie serie)
         {
-            return CurrentObjectsStruct.GetFirstChild(serie);
+            return fmCurrentObjectsStruct.GetFirstChild(serie);
         }
     }
 }

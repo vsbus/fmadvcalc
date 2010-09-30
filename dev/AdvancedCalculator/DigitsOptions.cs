@@ -4,15 +4,17 @@ using fmCalculationLibrary;
 
 namespace AdvancedCalculator
 {
-    public partial class DigitsOptions : Form
+    public partial class fmDigitsOptions : Form
     {
-        public DigitsOptions()
+        public fmDigitsOptions()
         {
             InitializeComponent();
             precisionUpDown.Value = fmValue.outputPrecision;
         }
 
+        // ReSharper disable InconsistentNaming
         private void OKbutton_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             fmValue.outputPrecision = (int)precisionUpDown.Value;
             Close();

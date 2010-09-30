@@ -1,6 +1,6 @@
 namespace AdvancedCalculator
 {
-    partial class AdvancedCalculator
+    partial class fmAdvancedCalculator
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace AdvancedCalculator
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedCalculator));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmAdvancedCalculator));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -122,7 +122,7 @@ namespace AdvancedCalculator
             this.ClientSize = new System.Drawing.Size(931, 669);
             this.Controls.Add(this.filterSimulationWithTablesAndGraphs1);
             this.Controls.Add(this.menuStrip1);
-            this.Name = "AdvancedCalculator";
+            this.Name = "fmAdvancedCalculator";
             this.Text = "Advanced Calculator";
             this.Load += new System.EventHandler(this.AdvancedCalculator_Load);
             this.menuStrip1.ResumeLayout(false);

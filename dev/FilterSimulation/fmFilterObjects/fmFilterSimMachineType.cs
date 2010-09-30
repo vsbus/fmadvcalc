@@ -4,8 +4,8 @@ namespace FilterSimulation.fmFilterObjects
 {
     public class fmFilterSimMachineType
     {
-        public string Symbol;
-        public string Name;
+        public string symbol;
+        public string name;
 
         static private void AddFilter(ref fmFilterSimMachineType fmt, string symbol, string name)
         {
@@ -16,26 +16,26 @@ namespace FilterSimulation.fmFilterObjects
         static fmFilterSimMachineType()
         {
             filterTypesList = new List<fmFilterSimMachineType>();
-            AddFilter(ref Nutche, "NU", "Nutche");
-            AddFilter(ref Rotary, "RO", "Rotary");
-            AddFilter(ref Belt, "BE", "Belt");
-            AddFilter(ref Pressure_Leaf, "PLF", "Pressure Leaf");
-            AddFilter(ref Candle, "CAF", "Candle");
-            AddFilter(ref Filter_Presses, "FPRESS", "Filter Presses");
+            AddFilter(ref nutche, "NU", "Nutche");
+            AddFilter(ref rotary, "RO", "Rotary");
+            AddFilter(ref belt, "BE", "Belt");
+            AddFilter(ref pressureLeaf, "PLF", "Pressure Leaf");
+            AddFilter(ref candle, "CAF", "Candle");
+            AddFilter(ref filterPresses, "FPRESS", "Filter Presses");
         }
 
         public fmFilterSimMachineType(string symbol, string name)
         {
-            Symbol = symbol;
-            Name = name;
+            this.symbol = symbol;
+            this.name = name;
         }
 
         public static List<fmFilterSimMachineType> filterTypesList;
-        public static fmFilterSimMachineType Nutche;
-        public static fmFilterSimMachineType Rotary;
-        public static fmFilterSimMachineType Belt;
-        public static fmFilterSimMachineType Pressure_Leaf;
-        public static fmFilterSimMachineType Candle;
-        public static fmFilterSimMachineType Filter_Presses;
+        public static fmFilterSimMachineType nutche;
+        public static fmFilterSimMachineType rotary;
+        public static fmFilterSimMachineType belt;
+        public static fmFilterSimMachineType pressureLeaf;
+        public static fmFilterSimMachineType candle;
+        public static fmFilterSimMachineType filterPresses;
     }
 }

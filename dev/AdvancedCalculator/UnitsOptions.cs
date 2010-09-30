@@ -5,14 +5,16 @@ using fmCalculationLibrary.MeasureUnits;
 
 namespace AdvancedCalculator
 {
-    public partial class UnitsOptions : Form
+    public partial class fmUnitsOptions : Form
     {
-        public UnitsOptions()
+        public fmUnitsOptions()
         {
             InitializeComponent();
         }
 
+        // ReSharper disable InconsistentNaming
         private void UnitsOptions_Load(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             BindUnitComboBox(AreaUnitItem, fmUnitFamily.AreaFamily);
             BindUnitComboBox(TimeUnitItem, fmUnitFamily.TimeFamily);
@@ -34,7 +36,9 @@ namespace AdvancedCalculator
             unitItem.UnitComboBox.SelectedItem = dataSource.CurrentUnit;
         }
 
+        // ReSharper disable InconsistentNaming
         private void OKButton_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             fmUnitFamily.AreaFamily.SetCurrentUnit(AreaUnitItem.UnitComboBox.Text);
             fmUnitFamily.LengthFamily.SetCurrentUnit(LengthUnitItem.UnitComboBox.Text);

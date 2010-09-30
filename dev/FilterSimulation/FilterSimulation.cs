@@ -117,8 +117,8 @@ namespace FilterSimulation
             var fSus = new fmFilterSimSuspension(fProj, "Susp1", "Juce", "BASF");
             var fSus2 = new fmFilterSimSuspension(fProj2, "Susp2", "MaterialX", "Henkel");
             new fmFilterSimSuspension(fProj, "Susp3", "Water", "somebody");
-            var fSimSerie = new fmFilterSimSerie(fSus, "serie0", fmFilterSimMachineType.Nutche, "medium1", "karapty");
-            new fmFilterSimSerie(fSus2, "serie02", fmFilterSimMachineType.Belt, "medium2", "izh");
+            var fSimSerie = new fmFilterSimSerie(fSus, "serie0", fmFilterSimMachineType.nutche, "medium1", "karapty");
+            new fmFilterSimSerie(fSus2, "serie02", fmFilterSimMachineType.belt, "medium2", "izh");
             var sim = new fmFilterSimulation(fSimSerie, "simulatioN");
 
             // BEGIN DEBUG CODE
@@ -183,7 +183,7 @@ namespace FilterSimulation
         {
             foreach (fmFilterSimMachineType fmt in fmFilterSimMachineType.filterTypesList)
             {
-                AddMachineTypeRow(fmt.Symbol, fmt.Name);
+                AddMachineTypeRow(fmt.symbol, fmt.name);
             }
         }
         #endregion
@@ -194,12 +194,12 @@ namespace FilterSimulation
             {
                 m_displayingTables = true;
 
-                m_fSolution.CurrentObjects.Project = null;
+                m_fSolution.currentObjects.Project = null;
 
-                m_fSolution.CurrentColumns.Project = projectNameColumn.Index;
-                m_fSolution.CurrentColumns.Suspension = suspensionNameColumn.Index;
-                m_fSolution.CurrentColumns.SimSerie = simSeriesNameColumn.Index;
-                m_fSolution.CurrentColumns.Simulation = simulationNameColumn.Index;
+                m_fSolution.currentColumns.project = projectNameColumn.Index;
+                m_fSolution.currentColumns.suspension = suspensionNameColumn.Index;
+                m_fSolution.currentColumns.simSerie = simSeriesNameColumn.Index;
+                m_fSolution.currentColumns.simulation = simulationNameColumn.Index;
 
                 if (dgv == projectDataGrid)
                 {
@@ -213,8 +213,8 @@ namespace FilterSimulation
                         }
 
                         var projectGuid = (Guid)projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value;
-                        m_fSolution.CurrentColumns.Project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Index;
-                        m_fSolution.CurrentObjects.Project = m_fSolution.FindProject(projectGuid);
+                        m_fSolution.currentColumns.project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Index;
+                        m_fSolution.currentObjects.Project = m_fSolution.FindProject(projectGuid);
                     }
                 }
                 else if (dgv == suspensionDataGrid)
@@ -229,8 +229,8 @@ namespace FilterSimulation
                         }
 
                         var suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value;
-                        m_fSolution.CurrentColumns.Suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Index;
-                        m_fSolution.CurrentObjects.Suspension = m_fSolution.FindSuspension(suspensionGuid);
+                        m_fSolution.currentColumns.suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Index;
+                        m_fSolution.currentObjects.Suspension = m_fSolution.FindSuspension(suspensionGuid);
                     }
                 }
                 else if (dgv == simSeriesDataGrid)
@@ -245,8 +245,8 @@ namespace FilterSimulation
                         }
 
                         var simSeriesGuid = (Guid)simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value;
-                        m_fSolution.CurrentColumns.SimSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Index;
-                        m_fSolution.CurrentObjects.Serie = m_fSolution.FindSerie(simSeriesGuid);
+                        m_fSolution.currentColumns.simSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Index;
+                        m_fSolution.currentObjects.Serie = m_fSolution.FindSerie(simSeriesGuid);
                     }
                 }
                 else if (dgv == simulationDataGrid)
@@ -261,8 +261,8 @@ namespace FilterSimulation
                         }
 
                         var simulationGuid = (Guid)simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value;
-                        m_fSolution.CurrentColumns.Simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Index;
-                        m_fSolution.CurrentObjects.Simulation = m_fSolution.FindSimulation(simulationGuid);
+                        m_fSolution.currentColumns.simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Index;
+                        m_fSolution.currentObjects.Simulation = m_fSolution.FindSimulation(simulationGuid);
                     }
                 }
 
@@ -314,7 +314,7 @@ namespace FilterSimulation
         private void simulationCreateButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            fmFilterSimSerie parentSerie = m_fSolution.CurrentObjects.Serie;
+            fmFilterSimSerie parentSerie = m_fSolution.currentObjects.Serie;
             if (parentSerie == null)
             {
                 MessageBox.Show(@"Please select serie in serie table", @"Error!", MessageBoxButtons.OK);
@@ -338,19 +338,19 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 }
             }
 
-            if (m_fSolution.CurrentObjects.Simulation == null)
+            if (m_fSolution.currentObjects.Simulation == null)
             {
-                m_fSolution.CurrentObjects.Simulation = new fmFilterSimulation(parentSerie, simName);
+                m_fSolution.currentObjects.Simulation = new fmFilterSimulation(parentSerie, simName);
             }
             else
             {
-                fmFilterSimulation currentSimulation = m_fSolution.CurrentObjects.Simulation;
-                m_fSolution.CurrentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, simName);
-                m_fSolution.CurrentObjects.Simulation.CopySuspensionParameters(currentSimulation);
-                m_fSolution.CurrentObjects.Simulation.Keep();
+                fmFilterSimulation currentSimulation = m_fSolution.currentObjects.Simulation;
+                m_fSolution.currentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, simName);
+                m_fSolution.currentObjects.Simulation.CopySuspensionParameters(currentSimulation);
+                m_fSolution.currentObjects.Simulation.Keep();
             }
 
-            m_fSolution.CurrentColumns.Simulation = simulationNameColumn.Index;
+            m_fSolution.currentColumns.simulation = simulationNameColumn.Index;
             DisplaySolution(m_fSolution);
             SortTables();
             SelectCurrentItemsInSolution(m_fSolution);
@@ -365,14 +365,14 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             var cosd = new fmCalculationOptionSelectionDialog
             {
                 suspensionCalculationOption =
-                    m_fSolution.CurrentObjects.Simulation.Data.suspensionCalculationOption,
+                    m_fSolution.currentObjects.Simulation.Data.suspensionCalculationOption,
                 filterMachiningCalculationOption =
-                    m_fSolution.CurrentObjects.Simulation.Data.filterMachiningCalculationOption
+                    m_fSolution.currentObjects.Simulation.Data.filterMachiningCalculationOption
             };
             if (cosd.ShowDialog() == DialogResult.OK)
             {
-                m_fSolution.CurrentObjects.Simulation.susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);
-                m_fSolution.CurrentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
+                m_fSolution.currentObjects.Simulation.susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);
+                m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
                 DisplaySolution(m_fSolution);
             }
         }

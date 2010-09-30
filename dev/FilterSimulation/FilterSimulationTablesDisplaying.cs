@@ -94,13 +94,13 @@ namespace FilterSimulation
 
         void AddHideRowsForSolution(fmFilterSimSolution sol)
         {
-            foreach (fmFilterSimProject prj in sol.Projects)
+            foreach (fmFilterSimProject prj in sol.projects)
             {
                 AddHideRowsForProject(prj, true);
             }
 
-            DataGridViewColumn liquidCol = m_fSolution.CurrentObjects.Simulation == null ? null : FindColumnByGuid(liquidDataGrid.Columns, m_fSolution.CurrentObjects.Simulation.Guid, 0);
-            DataGridViewColumn epsKappaCol = m_fSolution.CurrentObjects.Simulation == null ? null : FindColumnByGuid(eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns, m_fSolution.CurrentObjects.Simulation.Guid, 0);
+            DataGridViewColumn liquidCol = m_fSolution.currentObjects.Simulation == null ? null : FindColumnByGuid(liquidDataGrid.Columns, m_fSolution.currentObjects.Simulation.Guid, 0);
+            DataGridViewColumn epsKappaCol = m_fSolution.currentObjects.Simulation == null ? null : FindColumnByGuid(eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns, m_fSolution.currentObjects.Simulation.Guid, 0);
             HideExtraMaterialColumns(liquidDataGrid, liquidCol);
             HideExtraMaterialColumns(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaCol);
 
@@ -112,7 +112,7 @@ namespace FilterSimulation
             row.Cells[projectGuidColumn.Index].Value = proj.Guid;
             row.Visible = visible;
 
-            bool itIsCurrentProject = proj == m_fSolution.CurrentObjects.Project;
+            bool itIsCurrentProject = proj == m_fSolution.currentObjects.Project;
 
             foreach (fmFilterSimSuspension sus in proj.SuspensionList)
             {
@@ -125,7 +125,7 @@ namespace FilterSimulation
             row.Cells[suspensionGuidColumn.Index].Value = sus.Guid;
             row.Visible = visible;
 
-            bool itIsCurrentSuspension = sus == m_fSolution.CurrentObjects.Suspension;
+            bool itIsCurrentSuspension = sus == m_fSolution.currentObjects.Suspension;
 
             foreach (fmFilterSimSerie serie in sus.SimSeriesList)
             {
@@ -138,7 +138,7 @@ namespace FilterSimulation
             row.Cells[simSeriesGuidColumn.Index].Value = serie.Guid;
             row.Visible = visible;
 
-            bool itIsCurrentSimSerie = serie == m_fSolution.CurrentObjects.Serie;
+            bool itIsCurrentSimSerie = serie == m_fSolution.currentObjects.Serie;
 
             foreach (fmFilterSimulation sim in serie.SimulationsList)
             {
@@ -196,7 +196,7 @@ namespace FilterSimulation
                 row.Cells[simSeriesProjectColumn.Index].Value = serie.Parent.Parent.Name;
                 row.Cells[simSeriesSuspensionNameColumn.Index].Value = serie.Parent.Material + " - " + serie.Parent.Customer + " - " + serie.Parent.Name;
                 row.Cells[simSeriesFilterMediumColumn.Index].Value = serie.FilterMedium;
-                row.Cells[simSeriesMachineTypeNameColumn.Index].Value = serie.MachineType.Name;
+                row.Cells[simSeriesMachineTypeNameColumn.Index].Value = serie.MachineType.name;
                 row.Cells[simSeriesMachineNameColumn.Index].Value = serie.MachineName;
                 row.Cells[simSeriesLastModifiedDateColumn.Index].Value = Convert.ToString(serie.LastModifiedDate);
             }
@@ -211,7 +211,7 @@ namespace FilterSimulation
                 row.Cells[simulationProjectColumn.Index].Value = sim.Parent.Parent.Parent.Name;
                 row.Cells[simulationSuspensionNameColumn.Index].Value = sim.Parent.Parent.Material + " - " + sim.Parent.Parent.Customer + " - " + sim.Parent.Parent.Name;
                 row.Cells[simulationFilterMediumColumn.Index].Value = sim.Parent.FilterMedium;
-                row.Cells[simulationMachineTypeColumn.Index].Value = sim.Parent.MachineType.Name;
+                row.Cells[simulationMachineTypeColumn.Index].Value = sim.Parent.MachineType.name;
                 row.Cells[simulationMachineNameColumn.Index].Value = sim.Parent.MachineName;
                 row.Cells[simulationSimSeriesNameColumn.Index].Value = sim.Parent.Name;
                 row.Cells[simulationNameColumn.Index].Value = sim.Name;
@@ -352,7 +352,7 @@ namespace FilterSimulation
                 CopySimulationValuesToRmHceBlock(sim);
                 CopySimulationValuesToFilterMachining(sim);
 
-                if (sim == sol.CurrentObjects.Simulation)
+                if (sim == sol.currentObjects.Simulation)
                 {
                     sim.filterMachiningBlock.CalculateAndDisplay();
                     sim.rm0HceBlock.CalculateAndDisplay();
@@ -369,9 +369,9 @@ namespace FilterSimulation
         {
             displayingSolution = true;
             foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
-                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.CurrentObjects.Simulation.Parent
-                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParameters(sim.rm0HceBlock, m_fSolution.CurrentObjects.Simulation.rm0HceBlock);
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.currentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.currentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.rm0HceBlock, m_fSolution.currentObjects.Simulation.rm0HceBlock);
             displayingSolution = false;
         }
 
@@ -381,9 +381,9 @@ namespace FilterSimulation
         {
             displayingSolution = true;
             foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
-                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.CurrentObjects.Simulation.Parent
-                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParameters(sim.pc0Rc0A0Block, m_fSolution.CurrentObjects.Simulation.pc0Rc0A0Block);
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.currentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.currentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.pc0Rc0A0Block, m_fSolution.currentObjects.Simulation.pc0Rc0A0Block);
             displayingSolution = false;
         }
 
@@ -391,9 +391,9 @@ namespace FilterSimulation
         {
             displayingSolution = true;
             foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
-                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.CurrentObjects.Simulation.Parent
-                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParameters(sim.eps0Kappa0Block, m_fSolution.CurrentObjects.Simulation.eps0Kappa0Block);
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.currentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.currentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.eps0Kappa0Block, m_fSolution.currentObjects.Simulation.eps0Kappa0Block);
             displayingSolution = false;
         }
 
@@ -413,9 +413,9 @@ namespace FilterSimulation
         {
             displayingSolution = true;
             foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
-                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.CurrentObjects.Simulation.Parent
-                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.CurrentObjects.Simulation.Parent.Parent)
-                    CopyBlockParameters(sim.susBlock, m_fSolution.CurrentObjects.Simulation.susBlock);
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.currentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.currentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.susBlock, m_fSolution.currentObjects.Simulation.susBlock);
             displayingSolution = false;
         }
 
@@ -514,14 +514,14 @@ namespace FilterSimulation
 
         void SelectCurrentItemsInSolution(fmFilterSimSolution sol)
         {
-            if (sol.CurrentObjects.Project != null)
+            if (sol.currentObjects.Project != null)
             {
                 foreach (DataGridViewRow row in projectDataGrid.Rows)
                     if (row.Visible)
                     {
                         var guid = (Guid)row.Cells[projectGuidColumn.Index].Value;
-                        int colIndex = projectDataGrid.Columns[m_fSolution.CurrentColumns.Project].Index;
-                        if (guid == sol.CurrentObjects.Project.Guid)
+                        int colIndex = projectDataGrid.Columns[m_fSolution.currentColumns.project].Index;
+                        if (guid == sol.currentObjects.Project.Guid)
                         {
                             projectDataGrid.CurrentCell = row.Cells[colIndex];
                         }
@@ -532,14 +532,14 @@ namespace FilterSimulation
                 projectDataGrid.CurrentCell = null;
             }
 
-            if (sol.CurrentObjects.Suspension != null)
+            if (sol.currentObjects.Suspension != null)
             {
                 foreach (DataGridViewRow row in suspensionDataGrid.Rows)
                     if (row.Visible)
                     {
                         var guid = (Guid)row.Cells[suspensionGuidColumn.Index].Value;
-                        int colIndex = suspensionDataGrid.Columns[m_fSolution.CurrentColumns.Suspension].Index;
-                        if (guid == sol.CurrentObjects.Suspension.Guid)
+                        int colIndex = suspensionDataGrid.Columns[m_fSolution.currentColumns.suspension].Index;
+                        if (guid == sol.currentObjects.Suspension.Guid)
                         {
                             suspensionDataGrid.CurrentCell = row.Cells[colIndex];
                         }
@@ -550,14 +550,14 @@ namespace FilterSimulation
                 suspensionDataGrid.CurrentCell = null;
             }
 
-            if (sol.CurrentObjects.Serie != null)
+            if (sol.currentObjects.Serie != null)
             {
                 foreach (DataGridViewRow row in simSeriesDataGrid.Rows)
                     if (row.Visible)
                     {
                         var guid = (Guid)row.Cells[simSeriesGuidColumn.Index].Value;
-                        int colIndex = simSeriesDataGrid.Columns[m_fSolution.CurrentColumns.SimSerie].Index;
-                        if (guid == sol.CurrentObjects.Serie.Guid)
+                        int colIndex = simSeriesDataGrid.Columns[m_fSolution.currentColumns.simSerie].Index;
+                        if (guid == sol.currentObjects.Serie.Guid)
                         {
                             simSeriesDataGrid.CurrentCell = row.Cells[colIndex];
                         }
@@ -566,7 +566,7 @@ namespace FilterSimulation
                 foreach (DataGridViewRow row in machineTypesDataGrid.Rows)
                     if (row.Visible)
                     {
-                        string mName = sol.CurrentObjects.Serie.MachineType.Name;
+                        string mName = sol.currentObjects.Serie.MachineType.name;
                         int colIndex = machineTypesDataGrid.Columns[machineTypeNameColumn.Index].Index;
                         if (mName == row.Cells[colIndex].Value.ToString())
                         {
@@ -579,14 +579,14 @@ namespace FilterSimulation
                 simSeriesDataGrid.CurrentCell = null;
             }
 
-            if (sol.CurrentObjects.Simulation != null)
+            if (sol.currentObjects.Simulation != null)
             {
                 foreach (DataGridViewRow row in simulationDataGrid.Rows)
                     if (row.Visible)
                     {
                         var guid = (Guid)row.Cells[simulationGuidColumn.Index].Value;
-                        int colIndex = simulationDataGrid.Columns[m_fSolution.CurrentColumns.Simulation].Index;
-                        if (guid == sol.CurrentObjects.Simulation.Guid)
+                        int colIndex = simulationDataGrid.Columns[m_fSolution.currentColumns.simulation].Index;
+                        if (guid == sol.currentObjects.Simulation.Guid)
                         {
                             simulationDataGrid.CurrentCell = row.Cells[colIndex];
                         }
@@ -616,7 +616,7 @@ namespace FilterSimulation
                 UpdateColorsAndFontForSolution(sol);
                 SelectCurrentItemsInSolution(sol);
 
-                CopySimToCommonFilterMachiningBlock(sol.CurrentObjects.Simulation);
+                CopySimToCommonFilterMachiningBlock(sol.currentObjects.Simulation);
 
                 displayingSolution = false;
             }
@@ -682,12 +682,12 @@ namespace FilterSimulation
         {
             foreach (fmBlockVariableParameter p in m_commonFilterMachiningBlock.Parameters)
             {
-                fmBlockVariableParameter p2 = m_fSolution.CurrentObjects.Simulation.filterMachiningBlock.GetParameterByName(p.globalParameter.name);
+                fmBlockVariableParameter p2 = m_fSolution.currentObjects.Simulation.filterMachiningBlock.GetParameterByName(p.globalParameter.name);
                 p2.value = p.value;
                 p2.IsInputed = p.IsInputed;
             }
 
-            m_fSolution.CurrentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();
+            m_fSolution.currentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();
         }
 
         static void HideExtraMaterialColumns(DataGridView dataGrid, DataGridViewColumn columnToLeave)

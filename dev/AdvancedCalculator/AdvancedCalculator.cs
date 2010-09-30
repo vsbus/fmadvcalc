@@ -4,47 +4,59 @@ using FilterSimulationWithTablesAndGraphs;
 
 namespace AdvancedCalculator
 {
-    public partial class AdvancedCalculator : Form
+    public partial class fmAdvancedCalculator : Form
     {
-        public AdvancedCalculator()
+        public fmAdvancedCalculator()
         {
             InitializeComponent();
         }
 
+        // ReSharper disable InconsistentNaming
         private void unitsToolStripMenuItem_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
-            UnitsOptions uoForm = new UnitsOptions();
+            var uoForm = new fmUnitsOptions();
             uoForm.ShowDialog();
             filterSimulationWithTablesAndGraphs1.UpdateAll();
         }
 
+        // ReSharper disable InconsistentNaming
         private void precisionToolStripMenuItem_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
-            DigitsOptions doForm = new DigitsOptions();
+            var doForm = new fmDigitsOptions();
             doForm.ShowDialog();
             filterSimulationWithTablesAndGraphs1.UpdateAll();
         }
 
+        // ReSharper disable InconsistentNaming
         private void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             filterSimulationWithTablesAndGraphs1.SaveAll();
         }
 
+        // ReSharper disable InconsistentNaming
         private void rangesToolStripMenuItem_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
-            FilterSimulation.fmParameterIntervalOption proForm = new FilterSimulation.fmParameterIntervalOption();
+            var proForm = new FilterSimulation.fmParameterIntervalOption();
             proForm.ShowDialog();
             filterSimulationWithTablesAndGraphs1.UpdateAll();
         }
 
+        // ReSharper disable InconsistentNaming
         private void AdvancedCalculator_Load(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
-           Text = string.Format("AdvancedCalculator (v.{0})", Config.Version);
+            Text = string.Format("AdvancedCalculator (v.{0})", Config.Version);
         }
 
+        // ReSharper disable InconsistentNaming
         private void yaxisParametersToolStripMenuItem_Click(object sender, EventArgs e)
+        // ReSharper restore InconsistentNaming
         {
-            fmYAxisListingForm yalForm = new fmYAxisListingForm();
+            var yalForm = new fmYAxisListingForm();
             yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.yAxisListParametersToDisplay);
             if (yalForm.ShowDialog() == DialogResult.OK)
             {

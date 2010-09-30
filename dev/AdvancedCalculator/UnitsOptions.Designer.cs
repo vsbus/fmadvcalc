@@ -2,7 +2,7 @@ using fmFilterSimulationControl;
 
 namespace AdvancedCalculator
 {
-    partial class UnitsOptions
+    partial class fmUnitsOptions
     {
         /// <summary>
         /// Required designer variable.
@@ -161,7 +161,7 @@ namespace AdvancedCalculator
             this.ClientSize = new System.Drawing.Size(243, 432);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.groupBox1);
-            this.Name = "UnitsOptions";
+            this.Name = "fmUnitsOptions";
             this.Text = "UnitsOptions";
             this.Load += new System.EventHandler(this.UnitsOptions_Load);
             this.groupBox1.ResumeLayout(false);

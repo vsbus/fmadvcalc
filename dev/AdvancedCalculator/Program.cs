@@ -1,10 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace AdvancedCalculator
 {
+    // ReSharper disable InconsistentNaming
     static class Program
+    // ReSharper restore InconsistentNaming
     {
         /// <summary>
         /// The main entry point for the application.
@@ -14,7 +15,7 @@ namespace AdvancedCalculator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new AdvancedCalculator());
+            Application.Run(new fmAdvancedCalculator());
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace AdvancedCalculator
 {
-    partial class DigitsOptions
+    partial class fmDigitsOptions
     {
         /// <summary>
         /// Required designer variable.
@@ -76,7 +76,7 @@ namespace AdvancedCalculator
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "DigitsOptions";
+            this.Name = "fmDigitsOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DigitsOptions";
             ((System.ComponentModel.ISupportInitialize)(this.precisionUpDown)).EndInit();

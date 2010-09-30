@@ -53,7 +53,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void DisplayCharts(fmFilterSimSolution sol)
         {
             List<fmFilterSimulation> simList = GetSelectedSimulationsList(sol);
-            fmFilterSimulation currentActiveSimulation = sol.CurrentObjects.Simulation;
+            fmFilterSimulation currentActiveSimulation = sol.currentObjects.Simulation;
             BuildCurves(simList, currentActiveSimulation);
         }
 
@@ -63,9 +63,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
             if (byCheckingSimulations)
             {
-                if (sol.CurrentObjects.Simulation != null)
+                if (sol.currentObjects.Simulation != null)
                 {
-                    simList.Add(sol.CurrentObjects.Simulation);
+                    simList.Add(sol.currentObjects.Simulation);
                 }
             }
             else
