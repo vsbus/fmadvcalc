@@ -8,11 +8,8 @@ namespace FilterSimulation
     {
         public Guid guidOfOwnedSimulation;
         public GroupBox groupBox;
-        public RadioButton standart1;
-        public RadioButton standart2;
         public RadioButton standart3;
         public RadioButton standart4;
-        public RadioButton standart7;
         public RadioButton standart8;
         public RadioButton design1;
         public RadioButton optimization1;
@@ -41,7 +38,7 @@ namespace FilterSimulation
             return ret;
         }
 
-        public fmSimCalcOptionControl(Guid simGuid, Control parentControl, int leftPos, int topPos, fmFilterMachiningCalculator.FilterMachiningCalculationOption cOption)
+        public fmSimCalcOptionControl(Guid simGuid, Control parentControl, int leftPos, int topPos, fmFilterMachiningCalculator.fmFilterMachiningCalculationOption cOption)
         {
             guidOfOwnedSimulation = simGuid;
 
@@ -60,11 +57,11 @@ namespace FilterSimulation
             design1 = AddRadioButton("Design 1: Q, Dp, hc, (n/tc)");
             optimization1 = AddRadioButton("Optimization 1: A, Q, Dp, sf");
 
-            standart3.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart3;
-            standart4.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4;
-            standart8.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8;
-            design1.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1;
-            optimization1.Checked = cOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1;
+            standart3.Checked = cOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3;
+            standart4.Checked = cOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4;
+            standart8.Checked = cOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8;
+            design1.Checked = cOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1;
+            optimization1.Checked = cOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1;
 
             groupBox.Height = top + step * (radioButtonCount + 1);
         }

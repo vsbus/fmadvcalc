@@ -4,157 +4,81 @@ using fmCalculationLibrary;
 using fmCalculationLibrary.Equations;
 using System.Collections.Generic;
 
-//fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter hc_over_tf = variables[fmGlobalParameter.hc_over_tf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qmsus_d = variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qmsus_d = variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
-//fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
-//fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter kappa0 = variables[fmGlobalParameter.kappa0] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-//fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
-
 namespace fmCalculatorsLibrary
 {
     public class fmFilterMachiningCalculator : fmBaseCalculator
     {
-        public enum FilterMachiningCalculationOption
+        public enum fmFilterMachiningCalculationOption
         {
             // Standart -- In this case we have always the area A as input 
             // and the (Qsus, Qmsus, Qms) as calculated.
             [Description("3: A, Dp, (n/tc/tr), tf")]
-            Standart3,
+            STANDART3,
 
             [Description("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)")]
-            Standart4,
+            STANDART4,
 
             [Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
-            Standart8,
+            STANDART8,
 
             // Design -- In this case we have always the (Qsus, Qmsus, Qms) as input 
             // and the filter area A is calculated 
             [Description("1: Q, Dp, hc, (n/tc/tr)")]
-            Design1,
+            DESIGN1,
             //Design2,    // Q, Dp, hc, (sf/tr)           -- input 
             //Design3,    // Q, sf, (n/tc/tr), hc       -- input 
             [Description("global: (A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
-            StandartAndDesignGlobal,
+            STANDART_AND_DESIGN_GLOBAL,
 
             // Optimization -- In this case we have always the filter 
             // area A and the (Qsus, Qmsus, Qms) as input
             [Description("1: A, Q, Dp, (sf/tr)")]
-            Optimization1
+            OPTIMIZATION1
             //Optimization2,  // A, Q, hc, (sf/tr)           -- input
             //Optimization3   // A, Q, (n/tc), (sf/tr)       -- input
         }
 
-        public FilterMachiningCalculationOption calculationOption = FilterMachiningCalculationOption.StandartAndDesignGlobal;
+        public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL;
 
         public fmFilterMachiningCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
 
-        private static bool IsStandartKindOption(FilterMachiningCalculationOption calculationOption)
+        private static bool IsStandartKindOption(fmFilterMachiningCalculationOption calculationOption)
         {
-            return calculationOption == FilterMachiningCalculationOption.Standart3
-              || calculationOption == FilterMachiningCalculationOption.Standart4
-              || calculationOption == FilterMachiningCalculationOption.Standart8
-              || calculationOption == FilterMachiningCalculationOption.StandartAndDesignGlobal;
+            return calculationOption == fmFilterMachiningCalculationOption.STANDART3
+              || calculationOption == fmFilterMachiningCalculationOption.STANDART4
+              || calculationOption == fmFilterMachiningCalculationOption.STANDART8
+              || calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL;
         }
 
-        private static bool IsDesignKindOption(FilterMachiningCalculationOption calculationOption)
+        private static bool IsDesignKindOption(fmFilterMachiningCalculationOption calculationOption)
         {
-            return calculationOption == FilterMachiningCalculationOption.Design1
-                || calculationOption == FilterMachiningCalculationOption.StandartAndDesignGlobal;
+            return calculationOption == fmFilterMachiningCalculationOption.DESIGN1
+                || calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL;
         }
 
-        private static bool IsOptimizationKindOption(FilterMachiningCalculationOption calculationOption)
+        private static bool IsOptimizationKindOption(fmFilterMachiningCalculationOption calculationOption)
         {
-            return calculationOption == FilterMachiningCalculationOption.Optimization1;
+            return calculationOption == fmFilterMachiningCalculationOption.OPTIMIZATION1;
         }
 
-        private static bool IsStandartSubKind1DpOption(FilterMachiningCalculationOption calculationOption)
+        private static bool IsStandartSubKind1DpOption(fmFilterMachiningCalculationOption calculationOption)
         {
-            return calculationOption == FilterMachiningCalculationOption.Standart3;
+            return calculationOption == fmFilterMachiningCalculationOption.STANDART3;
         }
 
-        private static bool IsStandartSubKind2hcOption(FilterMachiningCalculationOption calculationOption)
+        private static bool IsStandartSubKind2HcOption(fmFilterMachiningCalculationOption calculationOption)
         {
-            return calculationOption == FilterMachiningCalculationOption.Standart4;
+            return calculationOption == fmFilterMachiningCalculationOption.STANDART4;
         }
 
-        private static bool IsStandartSubKind3DphcOption(FilterMachiningCalculationOption calculationOption)
+        private static bool IsStandartSubKind3DphcOption(fmFilterMachiningCalculationOption calculationOption)
         {
-            return calculationOption == FilterMachiningCalculationOption.Standart8;
+            return calculationOption == fmFilterMachiningCalculationOption.STANDART8;
         }
 
         public void DoCalculationsLimitsClue()
         {
-            if (calculationOption == FilterMachiningCalculationOption.StandartAndDesignGlobal)
+            if (calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL)
             {
                 DoCalculationsStandartAndDesignGlobal_OnlyLimitClueParams();
             }
@@ -166,59 +90,60 @@ namespace fmCalculatorsLibrary
 
         private void DoCalculationsStandartAndDesignGlobal_OnlyLimitClueParams()
         {
-            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter sr = variables[fmGlobalParameter.sr] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            // ReSharper disable InconsistentNaming
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            var sr = variables[fmGlobalParameter.sr] as fmCalculationVariableParameter;
+            var n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            var tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            var tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            var mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
+            var vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
+            var ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
+            var vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
+            var msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
+            var vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
+            var mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
+            var vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
+            var Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
+            var Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
+            var Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            var Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
 
-            fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
+            var Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
+            var Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            var Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
+            var Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
+            var Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
+            var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
 
-            fmCalculationBaseParameter eps = variables[fmGlobalParameter.eps];
-            fmCalculationBaseParameter kappa = variables[fmGlobalParameter.kappa];
-            fmCalculationBaseParameter Pc = variables[fmGlobalParameter.Pc];
-            fmCalculationBaseParameter rc = variables[fmGlobalParameter.rc];
-            fmCalculationBaseParameter a = variables[fmGlobalParameter.a];
+            var eps = variables[fmGlobalParameter.eps];
+            var kappa = variables[fmGlobalParameter.kappa];
+            var Pc = variables[fmGlobalParameter.Pc];
+            var rc = variables[fmGlobalParameter.rc];
+            var a = variables[fmGlobalParameter.a];
 
-            fmCalculationBaseParameter eps0 = variables[fmGlobalParameter.eps0];
-            fmCalculationBaseParameter kappa0 = variables[fmGlobalParameter.kappa0];
-            fmCalculationBaseParameter Pc0 = variables[fmGlobalParameter.Pc0];
-            fmCalculationBaseParameter eta_f = variables[fmGlobalParameter.eta_f];
-            fmCalculationBaseParameter rho_f = variables[fmGlobalParameter.rho_f];
-            fmCalculationBaseParameter rho_s = variables[fmGlobalParameter.rho_s];
-            fmCalculationBaseParameter rho_sus = variables[fmGlobalParameter.rho_sus];
-            fmCalculationBaseParameter Cv = variables[fmGlobalParameter.Cv];
-            fmCalculationBaseParameter Cm = variables[fmGlobalParameter.Cm];
-            fmCalculationBaseParameter ne = variables[fmGlobalParameter.ne];
-            fmCalculationBaseParameter nc = variables[fmGlobalParameter.nc];
-            fmCalculationBaseParameter hce = variables[fmGlobalParameter.hce];
+            var eps0 = variables[fmGlobalParameter.eps0];
+            var Pc0 = variables[fmGlobalParameter.Pc0];
+            var eta_f = variables[fmGlobalParameter.eta_f];
+            var rho_f = variables[fmGlobalParameter.rho_f];
+            var rho_s = variables[fmGlobalParameter.rho_s];
+            var rho_sus = variables[fmGlobalParameter.rho_sus];
+            var Cv = variables[fmGlobalParameter.Cv];
+            var Cm = variables[fmGlobalParameter.Cm];
+            var ne = variables[fmGlobalParameter.ne];
+            var nc = variables[fmGlobalParameter.nc];
+            var hce = variables[fmGlobalParameter.hce];
+            // ReSharper restore InconsistentNaming
 
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
@@ -226,39 +151,40 @@ namespace fmCalculatorsLibrary
             rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
-            bool isKnown_A = A.isInputed;
-            bool isKnown_Dp = Dp.isInputed;
-            bool isKnown_sf = sf.isInputed;
-            bool isKnown_sr = sr.isInputed;
-            bool isKnown_n = n.isInputed;
-            bool isKnown_tc = tc.isInputed;
-            bool isKnown_tf = tf.isInputed;
-            bool isKnown_tr = tr.isInputed;
-            bool isKnown_hc = hc.isInputed;
-            bool isKnown_Vsus = Vsus.isInputed;
-            bool isKnown_Mf = Mf.isInputed;
-            bool isKnown_Vf = Vf.isInputed;
-            bool isKnown_mf = mf.isInputed;
-            bool isKnown_vf = vf.isInputed;
-            bool isKnown_ms = ms.isInputed;
-            bool isKnown_vs = vs.isInputed;
-            bool isKnown_msus = msus.isInputed;
-            bool isKnown_vsus = vsus.isInputed;
-            bool isKnown_mc = mc.isInputed;
-            bool isKnown_vc = vc.isInputed;
-            bool isKnown_Vc = Vc.isInputed;
-            bool isKnown_Mc = Mc.isInputed;
-            bool isKnown_Ms = Ms.isInputed;
-            bool isKnown_Vs = Vs.isInputed;
-            bool isKnown_Msus = Msus.isInputed;
-            bool isKnown_Qf = Qf.isInputed;
-            bool isKnown_Qs = Qs.isInputed;
-            bool isKnown_Qsus = Qsus.isInputed;
-            bool isKnown_Qc = Qc.isInputed;
-            bool isKnown_Qmf = Qmf.isInputed;
-            bool isKnown_Qms = Qms.isInputed;
-            bool isKnown_Qmsus = Qmsus.isInputed;
-            bool isKnown_Qmc = Qmc.isInputed;
+            // ReSharper disable InconsistentNaming
+            var isKnown_A = A.isInputed;
+            var isKnown_sf = sf.isInputed;
+            var isKnown_sr = sr.isInputed;
+            var isKnown_n = n.isInputed;
+            var isKnown_tc = tc.isInputed;
+            var isKnown_tf = tf.isInputed;
+            var isKnown_tr = tr.isInputed;
+            var isKnown_hc = hc.isInputed;
+            var isKnown_Vsus = Vsus.isInputed;
+            var isKnown_Mf = Mf.isInputed;
+            var isKnown_Vf = Vf.isInputed;
+            var isKnown_mf = mf.isInputed;
+            var isKnown_vf = vf.isInputed;
+            var isKnown_ms = ms.isInputed;
+            var isKnown_vs = vs.isInputed;
+            var isKnown_msus = msus.isInputed;
+            var isKnown_vsus = vsus.isInputed;
+            var isKnown_mc = mc.isInputed;
+            var isKnown_vc = vc.isInputed;
+            var isKnown_Vc = Vc.isInputed;
+            var isKnown_Mc = Mc.isInputed;
+            var isKnown_Ms = Ms.isInputed;
+            var isKnown_Vs = Vs.isInputed;
+            var isKnown_Msus = Msus.isInputed;
+            var isKnown_Qf = Qf.isInputed;
+            var isKnown_Qs = Qs.isInputed;
+            var isKnown_Qsus = Qsus.isInputed;
+            var isKnown_Qc = Qc.isInputed;
+            var isKnown_Qmf = Qmf.isInputed;
+            var isKnown_Qms = Qms.isInputed;
+            var isKnown_Qmsus = Qmsus.isInputed;
+            var isKnown_Qmc = Qmc.isInputed;
+            // ReSharper restore InconsistentNaming
 
             #region A0
             if (isKnown_A)
@@ -503,13 +429,17 @@ namespace fmCalculatorsLibrary
             if (!isKnown_tr && isKnown_sr)
             {
                 tr.value = FilterMachiningEquations.Eval_tr_From_sr_tc(sr.value, tc.value);
+/*
                 isKnown_tr = true;
+*/
             }
 
             if (!isKnown_sf)
             {
                 sf.value = FilterMachiningEquations.Eval_sf_From_tr_tc(tr.value, tc.value);
+/*
                 isKnown_sf = true;
+*/
             }
             #endregion
 
@@ -540,12 +470,14 @@ namespace fmCalculatorsLibrary
             if (!isKnown_A && isKnown_Vc)
             {
                 A.value = FilterMachiningEquations.Eval_A_From_V_v(Vc.value, vc.value);
+/*
                 isKnown_A = true;
+*/
             }
         }
         override public void DoCalculations()
         {
-            if (calculationOption == FilterMachiningCalculationOption.StandartAndDesignGlobal)
+            if (calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL)
             {
                 DoSubCalculationsStandartAndDesignGlobal();
             }
@@ -568,70 +500,72 @@ namespace fmCalculatorsLibrary
                     throw new Exception("Not classified calculation option kind");
                 }
 
-                fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter hc_over_tf = variables[fmGlobalParameter.hc_over_tf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qmsus_d = variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qmsus_d = variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-                fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
-                fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
-                fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
-                fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
-                fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
-                fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-                fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+                // ReSharper disable InconsistentNaming
+                var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+                var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+                var tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+                var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+                var hc_over_tf = variables[fmGlobalParameter.hc_over_tf] as fmCalculationVariableParameter;
+                var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
+                var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+                var Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
+                var Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
+                var Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
+                var Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
+                var Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
+                var Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
+                var Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+                var Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+                var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+                var Qmsus_d = variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
+                var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+                var Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
+                var Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
+                var Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
+                var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
+                var Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
+                var qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
+                var qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
+                var qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
+                var qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
+                var qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
+                var qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
+                var qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
+                var qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
+                var qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
+                var qmsus_d = variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
+                var qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
+                var qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
+                var qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
+                var qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
+                var qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
+                var qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
+                var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+                var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+                var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+                var mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
+                var vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
+                var ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
+                var vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
+                var msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
+                var vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
+                var mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
+                var vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
+                var Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
+                var Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
+                var Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+                var Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+                var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+                var eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+                var kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+                var Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+                var eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+                var rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+                var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+                var rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+                var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+                var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+                // ReSharper restore InconsistentNaming
 
                 hc_over_tf.value = FilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
                 dhc_over_dt.value = FilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
@@ -647,13 +581,13 @@ namespace fmCalculatorsLibrary
                 vc.value = FilterMachiningEquations.Eval_v_From_V_A(Vc.value, A.value);
                 Qsus_d.value = FilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
                 Qmsus_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Qsus_d.value);
-                Qs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value); ;
+                Qs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
                 Qs_d.value = FilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
                 Qms_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, Qs_d.value);
                 Qmf.value = FilterMachiningEquations.Eval_Qm_From_M_t(Mf.value, tf.value);
                 Qf.value = FilterMachiningEquations.Eval_Q_From_V_t(Vf.value, tf.value);
                 Qf_d.value = FilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-                Qmf_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value); ;
+                Qmf_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value);
                 Qmc.value = FilterMachiningEquations.Eval_Qm_From_M_t(Mc.value, tc.value);
                 Qc_d.value = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
                 Qmc_d.value = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
@@ -683,7 +617,7 @@ namespace fmCalculatorsLibrary
             {
                 DoSubCalculationsStandart123();
             }
-            else if (IsStandartSubKind2hcOption(calculationOption))
+            else if (IsStandartSubKind2HcOption(calculationOption))
             {
                 DoSubCalculationsStandart456();
             }
@@ -696,17 +630,21 @@ namespace fmCalculatorsLibrary
                 throw new Exception("Not classified calculation suboption of Standart");
             }
 
-            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            // ReSharper disable InconsistentNaming
+            var tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            var Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            // ReSharper restore InconsistentNaming
 
+            // ReSharper disable PossibleNullReferenceException
             Qsus.value = FilterMachiningEquations.Eval_Qsus_From_Vsus_tc(Vsus.value, tc.value);
             Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Msus_tc(Msus.value, tc.value);
             Qms.value = FilterMachiningEquations.Eval_Qms_From_Qmsus_Cm(Qmsus.value, Cm.value);
+            // ReSharper restore PossibleNullReferenceException
         }
 
         private void DoCalculationsDesign()
@@ -716,86 +654,87 @@ namespace fmCalculatorsLibrary
 
         private void DoSubCalculationsStandartAndDesignGlobal()
         {
-            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter sr = variables[fmGlobalParameter.sr] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            // ReSharper disable InconsistentNaming
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            var sr = variables[fmGlobalParameter.sr] as fmCalculationVariableParameter;
+            var n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            var tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            var tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            var mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
+            var vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
+            var ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
+            var vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
+            var msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
+            var vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
+            var mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
+            var vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
+            var Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
+            var Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
+            var Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            var Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
 
-            fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
+            var Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
+            var Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            var Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
+            var Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
+            var Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
+            var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
             
-            fmCalculationBaseParameter hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
-            fmCalculationBaseParameter dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
-            fmCalculationBaseParameter Qf_d = variables[fmGlobalParameter.Qf_d];
-            fmCalculationBaseParameter Qs_d = variables[fmGlobalParameter.Qs_d];
-            fmCalculationBaseParameter Qc_d = variables[fmGlobalParameter.Qc_d];
-            fmCalculationBaseParameter Qsus_d = variables[fmGlobalParameter.Qsus_d];
-            fmCalculationBaseParameter Qmsus_d = variables[fmGlobalParameter.Qmsus_d];
-            fmCalculationBaseParameter Qms_d = variables[fmGlobalParameter.Qms_d];
-            fmCalculationBaseParameter Qmf_d = variables[fmGlobalParameter.Qmf_d];
-            fmCalculationBaseParameter Qmc_d = variables[fmGlobalParameter.Qmc_d];
-            fmCalculationBaseParameter qf = variables[fmGlobalParameter.qf];
-            fmCalculationBaseParameter qf_d = variables[fmGlobalParameter.qf_d];
-            fmCalculationBaseParameter qs = variables[fmGlobalParameter.qs];
-            fmCalculationBaseParameter qs_d = variables[fmGlobalParameter.qs_d];
-            fmCalculationBaseParameter qc = variables[fmGlobalParameter.qc];
-            fmCalculationBaseParameter qc_d = variables[fmGlobalParameter.qc_d];
-            fmCalculationBaseParameter qsus = variables[fmGlobalParameter.qsus];
-            fmCalculationBaseParameter qsus_d = variables[fmGlobalParameter.qsus_d];
-            fmCalculationBaseParameter qmsus = variables[fmGlobalParameter.qmsus];
-            fmCalculationBaseParameter qmsus_d = variables[fmGlobalParameter.qmsus_d];
-            fmCalculationBaseParameter qms = variables[fmGlobalParameter.qms];
-            fmCalculationBaseParameter qms_d = variables[fmGlobalParameter.qms_d];
-            fmCalculationBaseParameter qmf = variables[fmGlobalParameter.qmf];
-            fmCalculationBaseParameter qmf_d = variables[fmGlobalParameter.qmf_d];
-            fmCalculationBaseParameter qmc = variables[fmGlobalParameter.qmc];
-            fmCalculationBaseParameter qmc_d = variables[fmGlobalParameter.qmc_d];
+            var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
+            var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
+            var Qf_d = variables[fmGlobalParameter.Qf_d];
+            var Qs_d = variables[fmGlobalParameter.Qs_d];
+            var Qc_d = variables[fmGlobalParameter.Qc_d];
+            var Qsus_d = variables[fmGlobalParameter.Qsus_d];
+            var Qmsus_d = variables[fmGlobalParameter.Qmsus_d];
+            var Qms_d = variables[fmGlobalParameter.Qms_d];
+            var Qmf_d = variables[fmGlobalParameter.Qmf_d];
+            var Qmc_d = variables[fmGlobalParameter.Qmc_d];
+            var qf = variables[fmGlobalParameter.qf];
+            var qf_d = variables[fmGlobalParameter.qf_d];
+            var qs = variables[fmGlobalParameter.qs];
+            var qs_d = variables[fmGlobalParameter.qs_d];
+            var qc = variables[fmGlobalParameter.qc];
+            var qc_d = variables[fmGlobalParameter.qc_d];
+            var qsus = variables[fmGlobalParameter.qsus];
+            var qsus_d = variables[fmGlobalParameter.qsus_d];
+            var qmsus = variables[fmGlobalParameter.qmsus];
+            var qmsus_d = variables[fmGlobalParameter.qmsus_d];
+            var qms = variables[fmGlobalParameter.qms];
+            var qms_d = variables[fmGlobalParameter.qms_d];
+            var qmf = variables[fmGlobalParameter.qmf];
+            var qmf_d = variables[fmGlobalParameter.qmf_d];
+            var qmc = variables[fmGlobalParameter.qmc];
+            var qmc_d = variables[fmGlobalParameter.qmc_d];
 
-            fmCalculationBaseParameter eps = variables[fmGlobalParameter.eps];
-            fmCalculationBaseParameter kappa = variables[fmGlobalParameter.kappa];
-            fmCalculationBaseParameter Pc = variables[fmGlobalParameter.Pc];
-            fmCalculationBaseParameter rc = variables[fmGlobalParameter.rc];
-            fmCalculationBaseParameter a = variables[fmGlobalParameter.a];
+            var eps = variables[fmGlobalParameter.eps];
+            var kappa = variables[fmGlobalParameter.kappa];
+            var Pc = variables[fmGlobalParameter.Pc];
+            var rc = variables[fmGlobalParameter.rc];
+            var a = variables[fmGlobalParameter.a];
 
-            fmCalculationBaseParameter eps0 = variables[fmGlobalParameter.eps0];
-            fmCalculationBaseParameter kappa0 = variables[fmGlobalParameter.kappa0];
-            fmCalculationBaseParameter Pc0 = variables[fmGlobalParameter.Pc0];
-            fmCalculationBaseParameter eta_f = variables[fmGlobalParameter.eta_f];
-            fmCalculationBaseParameter rho_f = variables[fmGlobalParameter.rho_f];
-            fmCalculationBaseParameter rho_s = variables[fmGlobalParameter.rho_s];
-            fmCalculationBaseParameter rho_sus = variables[fmGlobalParameter.rho_sus];
-            fmCalculationBaseParameter Cv = variables[fmGlobalParameter.Cv];
-            fmCalculationBaseParameter Cm = variables[fmGlobalParameter.Cm];
-            fmCalculationBaseParameter ne = variables[fmGlobalParameter.ne];
-            fmCalculationBaseParameter nc = variables[fmGlobalParameter.nc];
-            fmCalculationBaseParameter hce = variables[fmGlobalParameter.hce];
+            var eps0 = variables[fmGlobalParameter.eps0];
+            var Pc0 = variables[fmGlobalParameter.Pc0];
+            var eta_f = variables[fmGlobalParameter.eta_f];
+            var rho_f = variables[fmGlobalParameter.rho_f];
+            var rho_s = variables[fmGlobalParameter.rho_s];
+            var rho_sus = variables[fmGlobalParameter.rho_sus];
+            var Cv = variables[fmGlobalParameter.Cv];
+            var Cm = variables[fmGlobalParameter.Cm];
+            var ne = variables[fmGlobalParameter.ne];
+            var nc = variables[fmGlobalParameter.nc];
+            var hce = variables[fmGlobalParameter.hce];
+            // ReSharper restore InconsistentNaming
 
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
@@ -803,39 +742,40 @@ namespace fmCalculatorsLibrary
             rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
-            bool isKnown_A = A.isInputed;
-            bool isKnown_Dp = Dp.isInputed;
-            bool isKnown_sf = sf.isInputed;
-            bool isKnown_sr = sr.isInputed;
-            bool isKnown_n = n.isInputed;
-            bool isKnown_tc = tc.isInputed;
-            bool isKnown_tf = tf.isInputed;
-            bool isKnown_tr = tr.isInputed;
-            bool isKnown_hc = hc.isInputed;
-            bool isKnown_Vsus = Vsus.isInputed;
-            bool isKnown_Mf = Mf.isInputed;
-            bool isKnown_Vf = Vf.isInputed;
-            bool isKnown_mf = mf.isInputed;
-            bool isKnown_vf = vf.isInputed;
-            bool isKnown_ms = ms.isInputed;
-            bool isKnown_vs = vs.isInputed;
-            bool isKnown_msus = msus.isInputed;
-            bool isKnown_vsus = vsus.isInputed;
-            bool isKnown_mc = mc.isInputed;
-            bool isKnown_vc = vc.isInputed;
-            bool isKnown_Vc = Vc.isInputed;
-            bool isKnown_Mc = Mc.isInputed;
-            bool isKnown_Ms = Ms.isInputed;
-            bool isKnown_Vs = Vs.isInputed;
-            bool isKnown_Msus = Msus.isInputed;
-            bool isKnown_Qf = Qf.isInputed;
-            bool isKnown_Qs = Qs.isInputed;
-            bool isKnown_Qsus = Qsus.isInputed;
-            bool isKnown_Qc = Qc.isInputed;
-            bool isKnown_Qmf = Qmf.isInputed;
-            bool isKnown_Qms = Qms.isInputed;
-            bool isKnown_Qmsus = Qmsus.isInputed;
-            bool isKnown_Qmc = Qmc.isInputed;
+            // ReSharper disable InconsistentNaming
+            var isKnown_A = A.isInputed;
+            var isKnown_sf = sf.isInputed;
+            var isKnown_sr = sr.isInputed;
+            var isKnown_n = n.isInputed;
+            var isKnown_tc = tc.isInputed;
+            var isKnown_tf = tf.isInputed;
+            var isKnown_tr = tr.isInputed;
+            var isKnown_hc = hc.isInputed;
+            var isKnown_Vsus = Vsus.isInputed;
+            var isKnown_Mf = Mf.isInputed;
+            var isKnown_Vf = Vf.isInputed;
+            var isKnown_mf = mf.isInputed;
+            var isKnown_vf = vf.isInputed;
+            var isKnown_ms = ms.isInputed;
+            var isKnown_vs = vs.isInputed;
+            var isKnown_msus = msus.isInputed;
+            var isKnown_vsus = vsus.isInputed;
+            var isKnown_mc = mc.isInputed;
+            var isKnown_vc = vc.isInputed;
+            var isKnown_Vc = Vc.isInputed;
+            var isKnown_Mc = Mc.isInputed;
+            var isKnown_Ms = Ms.isInputed;
+            var isKnown_Vs = Vs.isInputed;
+            var isKnown_Msus = Msus.isInputed;
+            var isKnown_Qf = Qf.isInputed;
+            var isKnown_Qs = Qs.isInputed;
+            var isKnown_Qsus = Qsus.isInputed;
+            var isKnown_Qc = Qc.isInputed;
+            var isKnown_Qmf = Qmf.isInputed;
+            var isKnown_Qms = Qms.isInputed;
+            var isKnown_Qmsus = Qmsus.isInputed;
+            var isKnown_Qmc = Qmc.isInputed;
+            // ReSharper restore InconsistentNaming
 
             #region A0
             if (isKnown_A)
@@ -1086,7 +1026,9 @@ namespace fmCalculatorsLibrary
             if (!isKnown_sf)
             {
                 sf.value = FilterMachiningEquations.Eval_sf_From_tr_tc(tr.value, tc.value);
+/*
                 isKnown_sf = true;
+*/
             }
             #endregion
 
@@ -1127,7 +1069,9 @@ namespace fmCalculatorsLibrary
             if (!isKnown_A && isKnown_Vc)
             {
                 A.value = FilterMachiningEquations.Eval_A_From_V_v(Vc.value, vc.value);
+/*
                 isKnown_A = true;
+*/
             }
 
             if (!isKnown_Vc) Vc.value = FilterMachiningEquations.Eval_V_From_v_A(vc.value, A.value);
@@ -1146,7 +1090,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_Qmc) Qmc.value = FilterMachiningEquations.Eval_Qm_From_M_t(Mc.value, tc.value);
             
             if (!isKnown_Qsus) Qsus.value = FilterMachiningEquations.Eval_Qsus_From_Vsus_tc(Vsus.value, tc.value);
-            if (!isKnown_Qs) Qs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value); ;
+            if (!isKnown_Qs) Qs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
             if (!isKnown_Qf) Qf.value = FilterMachiningEquations.Eval_Q_From_V_t(Vf.value, tf.value);
             if (!isKnown_Qc) Qc.value = FilterMachiningEquations.Eval_Q_From_V_t(Vc.value, tc.value);
             
@@ -1157,7 +1101,7 @@ namespace fmCalculatorsLibrary
             Qs_d.value = FilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
             Qms_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, Qs_d.value);
             Qf_d.value = FilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmf_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value); ;
+            Qmf_d.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value);
             Qc_d.value = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
             Qmc_d.value = FilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = FilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
@@ -1180,39 +1124,41 @@ namespace fmCalculatorsLibrary
 
         private void DoSubCalculationsDesign1()
         {
-            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+// ReSharper disable InconsistentNaming
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            var n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            var tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            var tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            var Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            var Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            var Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            var eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            var kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            var Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            var rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            var a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            var eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            var eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            var rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            var rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            // ReSharper restore InconsistentNaming
 
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
@@ -1239,7 +1185,7 @@ namespace fmCalculatorsLibrary
                 Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(Qms.value, Cm.value);
             }
             else
-                throw NoQInputed();
+                throw NoQInputed_Exception();
 
             if (n.isInputed)
             {
@@ -1257,7 +1203,7 @@ namespace fmCalculatorsLibrary
                 n.value = FilterMachiningEquations.Eval_n_From_tc(tc.value);
             }
             else
-                throw No_n_tc_tr_Inputed();
+                throw No_n_tc_tr_Inputed_Exception();
 
             A.value = FilterMachiningEquations.Eval_A_From_Qms_eps_rhos_hc_n(Qms.value, eps.value, rho_s.value, hc.value, n.value);
             sf.value = FilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
@@ -1269,51 +1215,57 @@ namespace fmCalculatorsLibrary
             Vs.value = FilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
         }
 
-        private Exception No_n_tc_tr_Inputed()
+        #region exceptionTools
+        // ReSharper disable InconsistentNaming
+        private static Exception No_n_tc_tr_Inputed_Exception()
         {
             return new Exception("One of n, tc and tr must be inputed");
         }
-
-        private Exception NoQInputed()
+        
+        private static Exception NoQInputed_Exception()
         {
             return new Exception("One of Qms, Qmsus and Qsus must be inputed");
         }
+        // ReSharper restore InconsistentNaming
+        #endregion
 
         private void DoCalculationsOptimization()
         {
-            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            // ReSharper disable InconsistentNaming
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            var n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            var tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            var tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            var Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            var Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            var Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            var eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            var kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            var Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            var rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            var a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            var eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            var eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            var rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            var rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            // ReSharper restore InconsistentNaming
 
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
@@ -1337,7 +1289,7 @@ namespace fmCalculatorsLibrary
                 Qmsus.value = FilterMachiningEquations.Eval_Qmsus_From_Qms_Cm(Qms.value, Cm.value);
             }
             else
-                throw NoQInputed();
+                throw NoQInputed_Exception();
 
 
             if (sf.isInputed)
@@ -1371,43 +1323,45 @@ namespace fmCalculatorsLibrary
         private static Exception GenerateExceptionForGroupWithoutInput(params fmCalculationBaseParameter [] parameters)
         {
             string parametersSet = "";
-            foreach (fmCalculationBaseParameter p in parameters)
+            foreach (var p in parameters)
                 parametersSet += ", " + p.globalParameter.name;
             parametersSet = "{" + parametersSet.Substring(2) + "}";
             return new Exception("One of " + parametersSet + " must be inputed");
         }
         private void DoSubCalculationsStandart123()
         {
-            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+// ReSharper disable InconsistentNaming
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            var n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            var tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            var tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            var Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            var Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            var eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            var kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            var Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            var rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            var a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            var eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            var eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            var rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            var rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            // ReSharper restore InconsistentNaming
 
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
@@ -1415,7 +1369,7 @@ namespace fmCalculatorsLibrary
             rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
-            if (calculationOption == FilterMachiningCalculationOption.Standart3)
+            if (calculationOption == fmFilterMachiningCalculationOption.STANDART3)
             {
                 if (n.isInputed)
                 {
@@ -1447,83 +1401,36 @@ namespace fmCalculatorsLibrary
         }
         private void DoSubCalculationsStandart456()
         {
-            if (calculationOption == FilterMachiningCalculationOption.Standart4)
+            if (calculationOption == fmFilterMachiningCalculationOption.STANDART4)
             {
-                fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
-fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
-fmCalculationVariableParameter hc_over_tf = variables[fmGlobalParameter.hc_over_tf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
-fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qmsus_d = variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qmsus_d = variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
-fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
-fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
-fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
-fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
-fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
-fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
-fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
-fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
-fmCalculationConstantParameter kappa0 = variables[fmGlobalParameter.kappa0] as fmCalculationConstantParameter;
-fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
-fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
-fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
-fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
-fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
-fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
-fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
-fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+                // ReSharper disable InconsistentNaming
+                var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+                var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+                var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+                var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+                var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+                var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+                var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+                var Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+                var Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+                var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+                var eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+                var kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+                var Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+                var rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+                var a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+                var eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+                var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+                var eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+                var rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+                var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+                var rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+                var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+                var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+                var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+                var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+                var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+                // ReSharper restore InconsistentNaming
 
                 DoSubCalculationsStandart4_sf_tr_n_tc_tf();
 
@@ -1584,25 +1491,29 @@ fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalcu
         }
 
 
+        // ReSharper disable InconsistentNaming
         private void DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus()
+        // ReSharper restore InconsistentNaming
         {
-            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            // ReSharper disable InconsistentNaming
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            var eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            var kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            var eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            var eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            var rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            // ReSharper restore InconsistentNaming
 
             Dp.value = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vsus(nc.value, ne.value, eta_f.value, A.value, tf.value, Cv.value, eps0.value, Pc0.value, hce.value, Vsus.value);
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
@@ -1612,25 +1523,29 @@ fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalcu
             Mf.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
         }
 
+        // ReSharper disable InconsistentNaming
         private void DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf()
+        // ReSharper restore InconsistentNaming
         {
-            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            // ReSharper disable InconsistentNaming
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            var eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            var kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            var eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            var eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            var rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
+            var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            // ReSharper restore InconsistentNaming
 
             Dp.value = FilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(nc.value, ne.value, eta_f.value, A.value, tf.value, Cv.value, eps0.value, Pc0.value, hce.value, Vf.value);
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
@@ -1640,14 +1555,17 @@ fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalcu
             Msus.value = FilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
         }
 
+        // ReSharper disable InconsistentNaming
         private void DoSubCalculationsStandart4_sf_tr_n_tc_tf()
+        // ReSharper restore InconsistentNaming
         {
-            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            var sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            var n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            var tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            var tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
             
+            // ReSharper disable PossibleNullReferenceException
             if (n.isInputed)
             {
                 tc.value = FilterMachiningEquations.Eval_tc_From_n(n.value);
@@ -1671,93 +1589,44 @@ fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalcu
             }
             else
                 throw GenerateExceptionForGroupWithoutInput(sf, tf, tr);
+            // ReSharper restore PossibleNullReferenceException
         }
 
         private void DoSubCalculationsStandart78()
         {
-            fmCalculationVariableParameter A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter hc_over_tf =
-                variables[fmGlobalParameter.hc_over_tf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter dhc_over_dt =
-                variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qsus_d =
-                variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmsus_d =
-                variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qsus_d =
-                variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qmsus_d =
-                variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter mf = variables[fmGlobalParameter.mf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vf = variables[fmGlobalParameter.vf] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter ms = variables[fmGlobalParameter.ms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vs = variables[fmGlobalParameter.vs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter msus = variables[fmGlobalParameter.msus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vsus = variables[fmGlobalParameter.vsus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter mc = variables[fmGlobalParameter.mc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter vc = variables[fmGlobalParameter.vc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vc = variables[fmGlobalParameter.Vc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Mc = variables[fmGlobalParameter.Mc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
-            fmCalculationVariableParameter a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
-            fmCalculationConstantParameter eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter kappa0 =
-                variables[fmGlobalParameter.kappa0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter rho_sus =
+            // ReSharper disable InconsistentNaming
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
+            var n = variables[fmGlobalParameter.n] as fmCalculationVariableParameter;
+            var tc = variables[fmGlobalParameter.tc] as fmCalculationVariableParameter;
+            var tf = variables[fmGlobalParameter.tf] as fmCalculationVariableParameter;
+            var tr = variables[fmGlobalParameter.tr] as fmCalculationVariableParameter;
+            var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+            var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
+            var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
+            var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
+            var Ms = variables[fmGlobalParameter.Ms] as fmCalculationVariableParameter;
+            var Vs = variables[fmGlobalParameter.Vs] as fmCalculationVariableParameter;
+            var Msus = variables[fmGlobalParameter.Msus] as fmCalculationVariableParameter;
+            var eps = variables[fmGlobalParameter.eps] as fmCalculationVariableParameter;
+            var kappa = variables[fmGlobalParameter.kappa] as fmCalculationVariableParameter;
+            var Pc = variables[fmGlobalParameter.Pc] as fmCalculationVariableParameter;
+            var rc = variables[fmGlobalParameter.rc] as fmCalculationVariableParameter;
+            var a = variables[fmGlobalParameter.a] as fmCalculationVariableParameter;
+            var eps0 = variables[fmGlobalParameter.eps0] as fmCalculationConstantParameter;
+            var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
+            var eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            var rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            var rho_sus =
                 variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
+            var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
+            var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
+            var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            // ReSharper restore InconsistentNaming
 
             eps.value = FilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = EpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
@@ -1765,7 +1634,7 @@ fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalcu
             rc.value = PcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = PcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
-            if (calculationOption == FilterMachiningCalculationOption.Standart8)
+            if (calculationOption == fmFilterMachiningCalculationOption.STANDART8)
             {
                 if (hc.isInputed)
                 {
@@ -1825,7 +1694,7 @@ fmCalculationConstantParameter hce = variables[fmGlobalParameter.hce] as fmCalcu
                     throw GenerateExceptionForGroupWithoutInput(hc, Vf, Mf, Vsus, Msus, Ms);
             }
 
-            if (calculationOption == FilterMachiningCalculationOption.Standart8)
+            if (calculationOption == fmFilterMachiningCalculationOption.STANDART8)
             {
                 if (n.isInputed)
                 {

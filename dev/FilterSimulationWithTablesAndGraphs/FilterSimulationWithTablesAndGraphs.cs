@@ -244,7 +244,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 cosd.suspensionCalculationOption =
                     fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
                 cosd.filterMachiningCalculationOption =
-                    fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal;
+                    fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL;
 
                 if (GetCurrentActiveSelectedSimulationData() != null)
                 {
@@ -273,7 +273,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         fmFilterSimulationData sim = simData.internalSimulationData;
                         fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions
                             suspensionCalculationOption;
-                        fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption
+                        fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption
                             filterMachiningCalculationOption;
 
                         if (cosd.CalculationOptionKind == CalculationOptionDialogExpandedCalculationOptionKind.New)
@@ -318,7 +318,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 cosd.suspensionCalculationOption =
                     fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
                 cosd.filterMachiningCalculationOption =
-                    fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal;
+                    fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL;
 
                 if (GetCurrentActiveLocalParameters() != null)
                 {
@@ -343,7 +343,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     foreach (fmLocalInputParametersData localParameters in selectedList)
                     {
                         fmFilterMachiningBlock fmb = localParameters.filterMachiningBlock;
-                        fmCalculatorsLibrary.fmFilterMachiningCalculator.FilterMachiningCalculationOption
+                        fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption
                             filterMachiningCalculationOption;
 
                         if (cosd.CalculationOptionKind == CalculationOptionDialogExpandedCalculationOptionKind.New)

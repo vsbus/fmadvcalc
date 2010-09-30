@@ -12,7 +12,7 @@ namespace FilterSimulation
     public partial class CalculationOptionSelectionDialog : Form
     {
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption filterMachiningCalculationOption;
+        public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public CalculationOptionSelectionDialog()
         {

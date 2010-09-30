@@ -274,7 +274,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private bool GetMinMaxLimitsOfIncompleteInputs(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue)
         {
-            if (calculationOption == fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal)
+            if (calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL)
             {
                 List<fmValue> keepedValues = new List<fmValue>();
                 for (int i = 0; i < parameters.Count; ++i)

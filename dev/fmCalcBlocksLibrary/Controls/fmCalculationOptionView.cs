@@ -50,24 +50,24 @@ namespace fmCalcBlocksLibrary.Controls
         private void CreateTree()
         {
             TreeNode globalNode = new TreeNode("Global");
-            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal));
+            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL));
             Nodes.Add(globalNode);
             
             TreeNode standartNode = new TreeNode("Standart");
-            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart3));
-            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4));
-            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4));
+            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8));
             Nodes.Add(standartNode);
 
             TreeNode designNode = new TreeNode("Design");
-            designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1));
+            designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1));
             Nodes.Add(designNode);
 
             TreeNode optimizationNode = new TreeNode("Optimization");
-            optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1));
+            optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1));
             Nodes.Add(optimizationNode);
 
-            SetSelectedOption(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal);
+            SetSelectedOption(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL);
 
             TreeView_AfterSelect(this, new TreeViewEventArgs(SelectedLeaf));
         }
@@ -111,14 +111,14 @@ namespace fmCalcBlocksLibrary.Controls
             }
         }
 
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption GetSelectedOption()
+        public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption GetSelectedOption()
         {
             if (SelectedLeaf == null)
             {
                 throw new Exception("No calculation selected in fmCalculationOptionView");
             }
 
-            foreach (fmFilterMachiningCalculator.FilterMachiningCalculationOption option in Enum.GetValues(typeof(fmFilterMachiningCalculator.FilterMachiningCalculationOption)))
+            foreach (fmFilterMachiningCalculator.fmFilterMachiningCalculationOption option in Enum.GetValues(typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption)))
                 if (GetEnumDescription(option) == SelectedLeaf.Text)
                     return option;
 
@@ -148,7 +148,7 @@ namespace fmCalcBlocksLibrary.Controls
             return result;
         }
 
-        public void SetSelectedOption(fmFilterMachiningCalculator.FilterMachiningCalculationOption option)
+        public void SetSelectedOption(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption option)
         {
             foreach (TreeNode node in GetNodes(Nodes))
             {

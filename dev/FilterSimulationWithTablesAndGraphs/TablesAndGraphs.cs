@@ -152,9 +152,9 @@ namespace FilterSimulationWithTablesAndGraphs
         public bool isChecked;
         public bool isCurrentActive;
         public fmFilterMachiningBlock filterMachiningBlock;
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption initialFilterMachiningCalculationOption;
+        public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption initialFilterMachiningCalculationOption;
         public List<List<fmFilterSimulationData>> calculatedDataLists = new List<List<fmFilterSimulationData>>();
-        public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock, fmFilterMachiningCalculator.FilterMachiningCalculationOption initialFilterMachiningCalculationOption)
+        public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock, fmFilterMachiningCalculator.fmFilterMachiningCalculationOption initialFilterMachiningCalculationOption)
         {
             this.isChecked = isChecked;
             this.isCurrentActive = false;

@@ -12,13 +12,13 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     static public class CalculationOptionHelper
     {
-        public static List<fmGlobalParameter> GetParametersListThatCanBeInput(fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption)
+        public static List<fmGlobalParameter> GetParametersListThatCanBeInput(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calculationOption)
         {
             List<fmGlobalParameter> result = new List<fmGlobalParameter>();
             switch (calculationOption)
             {
                 //[Description("3: A, Dp, (n/tc/tr), tf")]
-                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart3:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.n);
@@ -28,7 +28,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)")]
-                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.Vf);
@@ -43,7 +43,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)")]
-                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Dp);
                     result.Add(fmGlobalParameter.hc);
@@ -58,7 +58,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("global: (A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
-                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
                     result.Add(fmGlobalParameter.Qsus);
@@ -98,7 +98,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("1: Q, Dp, hc, (n/tc/tr)")]
-                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1:
                     result.Add(fmGlobalParameter.Qms);
                     result.Add(fmGlobalParameter.Qmsus);
                     result.Add(fmGlobalParameter.Qsus);
@@ -110,7 +110,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("1: A, Q, Dp, (sf/tr)")]
-                case fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qms);
                     result.Add(fmGlobalParameter.Qmsus);
@@ -270,7 +270,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private fmBlockConstantParameter Cm;
         private fmBlockConstantParameter Cv;
 
-        public fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption;
+        public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calculationOption;
 
         #region accessors
         public fmValue A_Value
@@ -883,12 +883,12 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref Cm, fmGlobalParameter.Cm);
             AddConstantParameter(ref Cv, fmGlobalParameter.Cv);
 
-            SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal);
+            SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL);
 
             processOnChange = true;
         }
 
-        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.FilterMachiningCalculationOption calculationOption)
+        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calculationOption)
         {
             this.calculationOption = calculationOption;
             UpdateGroups();
@@ -917,27 +917,27 @@ namespace fmCalcBlocksLibrary.Blocks
             ReWriteParameters();
         }
 
-        Dictionary<fmFilterMachiningCalculator.FilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>> table = null;
+        Dictionary<fmFilterMachiningCalculator.fmFilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>> table = null;
 
-        fmBlockParameterGroup WhatGroupOfParameterWithCalcOption(fmBlockVariableParameter parameter, fmFilterMachiningCalculator.FilterMachiningCalculationOption calcOption)
+        fmBlockParameterGroup WhatGroupOfParameterWithCalcOption(fmBlockVariableParameter parameter, fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calcOption)
         {
             if (table == null)
             {
-                table = new Dictionary<fmFilterMachiningCalculator.FilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>>();
+                table = new Dictionary<fmFilterMachiningCalculator.fmFilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>>();
 
-                foreach (fmFilterMachiningCalculator.FilterMachiningCalculationOption option in Enum.GetValues(typeof(fmFilterMachiningCalculator.FilterMachiningCalculationOption)))
+                foreach (fmFilterMachiningCalculator.fmFilterMachiningCalculationOption option in Enum.GetValues(typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption)))
                 {
                     table[option] = new Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>();
                 }
 
-                SetGroupsOfStandart3(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart3]);
-                SetGroupsOfStandart4(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart4]);
-                SetGroupsOfStandart8(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Standart8]);
+                SetGroupsOfStandart3(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3]);
+                SetGroupsOfStandart4(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4]);
+                SetGroupsOfStandart8(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8]);
                 
-                SetGroupsOfDesign1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Design1]);
-                SetGroupsOfStandartAndDesignGlobal(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.StandartAndDesignGlobal]);
+                SetGroupsOfDesign1(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1]);
+                SetGroupsOfStandartAndDesignGlobal(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL]);
                 
-                SetGroupsOfOptimization1(table[fmFilterMachiningCalculator.FilterMachiningCalculationOption.Optimization1]);
+                SetGroupsOfOptimization1(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1]);
             }
 
             return table[calcOption][parameter];
