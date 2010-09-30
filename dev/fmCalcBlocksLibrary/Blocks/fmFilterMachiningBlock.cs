@@ -1,8 +1,6 @@
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
-using fmCalcBlocksLibrary.Controls;
 using fmCalculationLibrary;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,11 +8,11 @@ using fmCalculatorsLibrary;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    static public class CalculationOptionHelper
+    static public class fmCalculationOptionHelper
     {
         public static List<fmGlobalParameter> GetParametersListThatCanBeInput(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calculationOption)
         {
-            List<fmGlobalParameter> result = new List<fmGlobalParameter>();
+            var result = new List<fmGlobalParameter>();
             switch (calculationOption)
             {
                 //[Description("3: A, Dp, (n/tc/tr), tf")]
@@ -74,7 +72,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.sr);
                     result.Add(fmGlobalParameter.tr);
-                    
+
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.vc);
                     result.Add(fmGlobalParameter.vf);
@@ -127,8 +125,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
     public class fmFilterMachiningBlock : fmBaseBlock
     {
-        //public readonly fmCalculationOptionView calculationOptionView;
-
+        // ReSharper disable InconsistentNaming
         private readonly fmBlockVariableParameter A;
         private readonly fmBlockVariableParameter Dp;
         private readonly fmBlockVariableParameter sf;
@@ -193,6 +190,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter Pc;
         private readonly fmBlockVariableParameter rc;
         private readonly fmBlockVariableParameter a;
+        // ReSharper restore InconsistentNaming
 
         /*
          * 220 200 230
@@ -217,6 +215,7 @@ namespace fmCalcBlocksLibrary.Blocks
          * 150 250 180
          */
 
+        // ReSharper disable InconsistentNaming
         private readonly fmBlockParameterGroup A_group = new fmBlockParameterGroup(Color.FromArgb(150, 250, 180));
         private readonly fmBlockParameterGroup Dp_group = new fmBlockParameterGroup(Color.FromArgb(250, 210, 150));
         private readonly fmBlockParameterGroup sf_tr_group = new fmBlockParameterGroup(Color.FromArgb(190, 200, 150));
@@ -226,53 +225,30 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup tf_group = new fmBlockParameterGroup(Color.FromArgb(180, 230, 230));
         private readonly fmBlockParameterGroup hc_MV_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
         private readonly fmBlockParameterGroup hc_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
-        private readonly fmBlockParameterGroup hc_tc_n_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
-        //private readonly fmBlockParameterGroup Msus_group = new fmBlockParameterGroup();
-        //private readonly fmBlockParameterGroup Vsus_group = new fmBlockParameterGroup();
-        //private readonly fmBlockParameterGroup Ms_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup Q_group = new fmBlockParameterGroup(Color.FromArgb(190, 240, 240));
         private readonly fmBlockParameterGroup AQ_group = new fmBlockParameterGroup(Color.FromArgb(170, 245, 210));
-        //private readonly fmBlockParameterGroup eps_group = new fmBlockParameterGroup();
-        //private readonly fmBlockParameterGroup kappa_group = new fmBlockParameterGroup();
-        //private readonly fmBlockParameterGroup Pc_group = new fmBlockParameterGroup();
-        //private readonly fmBlockParameterGroup rc_group = new fmBlockParameterGroup();
-        //private readonly fmBlockParameterGroup a_group = new fmBlockParameterGroup();
 
-        //private fmValue hce_value;
+        private readonly fmBlockConstantParameter hce;
 
-        //private fmValue Pc0_value;
-        //private fmValue nc_value;
+        private readonly fmBlockConstantParameter Pc0;
+        private readonly fmBlockConstantParameter nc;
 
-        //private fmValue eps0_value;
-        //private fmValue kappa0_value;
-        //private fmValue ne_value;
+        private readonly fmBlockConstantParameter eps0;
+        private readonly fmBlockConstantParameter kappa0;
+        private readonly fmBlockConstantParameter ne;
 
-        //private fmValue etaf_value;
-        //private fmValue rho_f_value;
-        //private fmValue rho_s_value; 
-        //private fmValue rho_sus_value;
-        //private fmValue Cm_value;
-        //private fmValue Cv_value;
-
-        private fmBlockConstantParameter hce;
-
-        private fmBlockConstantParameter Pc0;
-        private fmBlockConstantParameter nc;
-
-        private fmBlockConstantParameter eps0;
-        private fmBlockConstantParameter kappa0;
-        private fmBlockConstantParameter ne;
-
-        private fmBlockConstantParameter etaf;
-        private fmBlockConstantParameter rho_f;
-        private fmBlockConstantParameter rho_s;
-        private fmBlockConstantParameter rho_sus;
-        private fmBlockConstantParameter Cm;
-        private fmBlockConstantParameter Cv;
+        private readonly fmBlockConstantParameter etaf;
+        private readonly fmBlockConstantParameter rho_f;
+        private readonly fmBlockConstantParameter rho_s;
+        private readonly fmBlockConstantParameter rho_sus;
+        private readonly fmBlockConstantParameter Cm;
+        private readonly fmBlockConstantParameter Cv;
+        // ReSharper restore InconsistentNaming
 
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calculationOption;
 
         #region accessors
+        // ReSharper disable InconsistentNaming
         public fmValue A_Value
         {
             get { return A.value; }
@@ -623,86 +599,25 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Cv.value; }
             set { Cv.value = value; }
         }
-        //public fmFilterMachiningCalculator.FilterMachiningCalculationOption CalculationOption
-        //{
-        //    get { return calculationOption; }
-        //    set { calculationOption = value; }
-        //}
+        // ReSharper restore InconsistentNaming
         #endregion
 
         override public void DoCalculations()
         {
-            fmFilterMachiningCalculator filterMachinigCalculator =
-                new fmFilterMachiningCalculator(AllParameters);
-            filterMachinigCalculator.calculationOption = calculationOption;
+            var filterMachinigCalculator =
+                new fmFilterMachiningCalculator(AllParameters) { calculationOption = calculationOption };
             filterMachinigCalculator.DoCalculations();
         }
 
         public List<fmBlockVariableParameter> GetParametersByGroup(fmBlockParameterGroup group)
         {
-            List<fmBlockVariableParameter> result = new List<fmBlockVariableParameter>();
+            var result = new List<fmBlockVariableParameter>();
             if (group != null)
             {
                 foreach (fmBlockVariableParameter p in parameters)
                 {
                     if (p.group != null && p.group == group)
                         result.Add(p);
-                }
-            }
-            return result;
-        }
-
-        private bool IsSameLists(List<fmBlockVariableParameter> a, fmBlockVariableParameter[] b)
-        {
-            return IsSameLists(a, GetParametersListFromArray(b));
-        }
-
-        private bool IsSameLists(List<fmBlockVariableParameter> a, List<fmBlockVariableParameter> b)
-        {
-            if (a.Count != b.Count)
-            {
-                return false;
-            }
-
-            for (int i = 0; i < a.Count; ++i)
-            {
-                if (a[i] != b[i])
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        private List<fmBlockVariableParameter> GetParametersListFromArray(fmBlockVariableParameter[] array)
-        {
-            List<fmBlockVariableParameter> list = new List<fmBlockVariableParameter>();
-            foreach (fmBlockVariableParameter p in array)
-            {
-                list.Add(p);
-            }
-
-            List<fmBlockVariableParameter> result = new List<fmBlockVariableParameter>();
-            foreach (fmBlockVariableParameter p in parameters)
-            {
-                if (list.Contains(p))
-                {
-                    result.Add(p);
-                }
-            }
-
-            return result;
-        }
-
-        private List<fmBlockVariableParameter> GetInputedParameters()
-        {
-            List<fmBlockVariableParameter> result = new List<fmBlockVariableParameter>();
-            foreach (fmBlockVariableParameter p in parameters)
-            {
-                if (p.IsInputed)
-                {
-                    result.Add(p);
                 }
             }
             return result;
@@ -728,6 +643,7 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         public fmFilterMachiningBlock(
+            // ReSharper disable InconsistentNaming
             DataGridViewCell A_Cell,
             DataGridViewCell Dp_Cell,
             DataGridViewCell sf_Cell,
@@ -792,21 +708,22 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell Pc_Cell,
             DataGridViewCell rc_Cell,
             DataGridViewCell a_Cell)
+        // ReSharper restore InconsistentNaming
         {
             AddParameter(ref A, fmGlobalParameter.A, A_Cell, true);
-            
+
             AddParameter(ref Dp, fmGlobalParameter.Dp, Dp_Cell, true);
-            
+
             AddParameter(ref n, fmGlobalParameter.n, n_Cell, true);
             AddParameter(ref tc, fmGlobalParameter.tc, tc_Cell, false);
-            
+
             AddParameter(ref tr, fmGlobalParameter.tr, tr_Cell, false);
             AddParameter(ref sf, fmGlobalParameter.sf, sf_Cell, true);
             AddParameter(ref sr, fmGlobalParameter.sr, sr_Cell, true);
-            
+
             AddParameter(ref hc, fmGlobalParameter.hc, hc_Cell, false);
             AddParameter(ref tf, fmGlobalParameter.tf, tf_Cell, false);
-            
+
             AddParameter(ref Msus, fmGlobalParameter.Msus, Msus_Cell, false);
             AddParameter(ref Vsus, fmGlobalParameter.Vsus, Vsus_Cell, false);
             AddParameter(ref Mf, fmGlobalParameter.Mf, Mf_Cell, false);
@@ -860,10 +777,10 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref qs_d, fmGlobalParameter.qs_d, qs_d_Cell, false);
             AddParameter(ref qmc_d, fmGlobalParameter.qmc_d, qmc_d_Cell, false);
             AddParameter(ref qc_d, fmGlobalParameter.qc_d, qc_d_Cell, false);
-            
+
             AddParameter(ref hc_over_tf, fmGlobalParameter.hc_over_tf, hc_over_tf_Cell, false);
             AddParameter(ref dhc_over_dt, fmGlobalParameter.dhc_over_dt, dhc_over_dt_Cell, false);
-            
+
             AddParameter(ref eps, fmGlobalParameter.eps, eps_Cell, false);
             AddParameter(ref kappa, fmGlobalParameter.kappa, kappa_Cell, false);
             AddParameter(ref Pc, fmGlobalParameter.Pc, Pc_Cell, false);
@@ -888,12 +805,12 @@ namespace fmCalcBlocksLibrary.Blocks
             processOnChange = true;
         }
 
-        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calculationOption)
+        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption newCalculationOption)
         {
-            this.calculationOption = calculationOption;
+            calculationOption = newCalculationOption;
             UpdateGroups();
-            List<fmGlobalParameter> inputedParameters = CalculationOptionHelper.GetParametersListThatCanBeInput(calculationOption);
-            Dictionary<fmBlockParameterGroup, bool> groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
+            List<fmGlobalParameter> inputedParameters = fmCalculationOptionHelper.GetParametersListThatCanBeInput(newCalculationOption);
+            var groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
 
             foreach (fmBlockVariableParameter parameter in parameters)
                 if (parameter.group != null)
@@ -917,30 +834,30 @@ namespace fmCalcBlocksLibrary.Blocks
             ReWriteParameters();
         }
 
-        Dictionary<fmFilterMachiningCalculator.fmFilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>> table = null;
+        Dictionary<fmFilterMachiningCalculator.fmFilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>> m_tables;
 
         fmBlockParameterGroup WhatGroupOfParameterWithCalcOption(fmBlockVariableParameter parameter, fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calcOption)
         {
-            if (table == null)
+            if (m_tables == null)
             {
-                table = new Dictionary<fmFilterMachiningCalculator.fmFilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>>();
+                m_tables = new Dictionary<fmFilterMachiningCalculator.fmFilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>>();
 
                 foreach (fmFilterMachiningCalculator.fmFilterMachiningCalculationOption option in Enum.GetValues(typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption)))
                 {
-                    table[option] = new Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>();
+                    m_tables[option] = new Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>();
                 }
 
-                SetGroupsOfStandart3(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3]);
-                SetGroupsOfStandart4(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4]);
-                SetGroupsOfStandart8(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8]);
-                
-                SetGroupsOfDesign1(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1]);
-                SetGroupsOfStandartAndDesignGlobal(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL]);
-                
-                SetGroupsOfOptimization1(table[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1]);
+                SetGroupsOfStandart3(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3]);
+                SetGroupsOfStandart4(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4]);
+                SetGroupsOfStandart8(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8]);
+
+                SetGroupsOfDesign1(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1]);
+                SetGroupsOfStandartAndDesignGlobal(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL]);
+
+                SetGroupsOfOptimization1(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1]);
             }
 
-            return table[calcOption][parameter];
+            return m_tables[calcOption][parameter];
         }
 
         private void SetGroupsOfStandartAndDesignGlobal(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)

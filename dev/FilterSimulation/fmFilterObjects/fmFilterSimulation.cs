@@ -194,7 +194,7 @@ namespace FilterSimulation.fmFilterObjects
             result.Add(fmGlobalParameter.Rm0);
             result.Add(fmGlobalParameter.hce);
             
-            List<fmGlobalParameter> filterMachiningParametersList = CalculationOptionHelper.GetParametersListThatCanBeInput(filterMachiningCalculationOption);
+            List<fmGlobalParameter> filterMachiningParametersList = fmCalculationOptionHelper.GetParametersListThatCanBeInput(filterMachiningCalculationOption);
             result.AddRange(filterMachiningParametersList);
 
             return result;

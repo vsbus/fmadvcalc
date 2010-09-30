@@ -948,7 +948,7 @@ namespace FilterSimulationWithTablesAndGraphs
             List<fmGlobalParameter> inputs = new List<fmGlobalParameter>();
             foreach (fmLocalInputParametersData localParameters in localInputParametersList)
             {
-                inputs = ParametersListsUnion(inputs, CalculationOptionHelper.GetParametersListThatCanBeInput(localParameters.filterMachiningBlock.calculationOption));
+                inputs = ParametersListsUnion(inputs, fmCalculationOptionHelper.GetParametersListThatCanBeInput(localParameters.filterMachiningBlock.calculationOption));
             }
 
             foreach (DataGridViewColumn col in additionalParametersTable.Columns)
@@ -1459,7 +1459,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 List<fmGlobalParameter> simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.parameters);
                 foreach (fmLocalInputParametersData localParameters in localInputParametersList)
                     simInputParameters = ParametersListsIntersection(simInputParameters,
-                                                              CalculationOptionHelper.GetParametersListThatCanBeInput(
+                                                              fmCalculationOptionHelper.GetParametersListThatCanBeInput(
                                                                   localParameters.filterMachiningBlock.calculationOption));
                 return simInputParameters;
             }

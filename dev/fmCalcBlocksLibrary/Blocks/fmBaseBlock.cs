@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
-using fmCalculationLibrary.MeasureUnits;
 using System.Drawing;
 
 namespace fmCalcBlocksLibrary.Blocks
@@ -25,7 +24,7 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             get
             {
-                List<fmCalculatorsLibrary.fmCalculationBaseParameter> result = new List<fmCalculatorsLibrary.fmCalculationBaseParameter>();
+                var result = new List<fmCalculatorsLibrary.fmCalculationBaseParameter>();
                 foreach (fmBlockVariableParameter p in parameters) result.Add(p);
                 foreach (fmBlockConstantParameter p in constantParameters) result.Add(p);
                 return result;
@@ -85,21 +84,24 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             if (processOnChange)
             {
-                fmDataGrid.fmDataGrid dataGrid = sender as fmDataGrid.fmDataGrid;
+                var dataGrid = sender as fmDataGrid.fmDataGrid;
 
-                int parameterIndex;
-                fmBlockVariableParameter enteredParameter = FindEnteredParameter(dataGrid.CurrentCell, out parameterIndex);
-
-                if (enteredParameter != null)
+                if (dataGrid != null)
                 {
-                    UpdateIsInputed(enteredParameter);
-                    enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.globalParameter.unitFamily.CurrentUnit.Coef;
+                    int parameterIndex;
+                    fmBlockVariableParameter enteredParameter = FindEnteredParameter(dataGrid.CurrentCell, out parameterIndex);
+
+                    if (enteredParameter != null)
+                    {
+                        UpdateIsInputed(enteredParameter);
+                        enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.globalParameter.unitFamily.CurrentUnit.Coef;
                     
-                    if (ValuesChangedByUser != null)
-                        ValuesChangedByUser(this, new fmBlockParameterEvetArgs(parameterIndex));
+                        if (ValuesChangedByUser != null)
+                            ValuesChangedByUser(this, new fmBlockParameterEvetArgs(parameterIndex));
                     
-                    DoCalculations();
-                    ReWriteParameters();
+                        DoCalculations();
+                        ReWriteParameters();
+                    }
                 }
             }
         }
@@ -121,9 +123,12 @@ namespace fmCalcBlocksLibrary.Blocks
             
             if (cell != null)
             {
-                fmDataGrid.fmDataGrid dataGrid = cell.DataGridView as fmDataGrid.fmDataGrid;
-                dataGrid.CellValueChangedByUser -= CellValueChanged;
-                dataGrid.CellValueChangedByUser += CellValueChanged;
+                var dataGrid = cell.DataGridView as fmDataGrid.fmDataGrid;
+                if (dataGrid != null)
+                {
+                    dataGrid.CellValueChangedByUser -= CellValueChanged;
+                    dataGrid.CellValueChangedByUser += CellValueChanged;
+                }
             }
         }
 

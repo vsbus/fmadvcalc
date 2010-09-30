@@ -1,13 +1,13 @@
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
-using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmEps0Kappa0WithneBlock : fmEps0Kappa0Block
     {
-        private fmBlockVariableParameter ne;
+        // ReSharper disable InconsistentNaming
+        private readonly fmBlockVariableParameter ne;
 
         public fmValue ne_Value
         {
@@ -23,5 +23,6 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             AddParameter(ref ne, fmGlobalParameter.ne, ne_Cell, true);
         }
+        // ReSharper restore InconsistentNaming
     }
 }
