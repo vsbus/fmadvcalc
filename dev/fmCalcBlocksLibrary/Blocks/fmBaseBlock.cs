@@ -97,7 +97,7 @@ namespace fmCalcBlocksLibrary.Blocks
                         enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.globalParameter.unitFamily.CurrentUnit.Coef;
                     
                         if (ValuesChangedByUser != null)
-                            ValuesChangedByUser(this, new fmBlockParameterEvetArgs(parameterIndex));
+                            ValuesChangedByUser(this, new fmBlockParameterEventArgs(parameterIndex));
                     
                         DoCalculations();
                         ReWriteParameters();

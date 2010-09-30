@@ -292,7 +292,7 @@ namespace FilterSimulationWithTablesAndGraphs
             //UpdateIsInputedForParametersBlocks();
         }
 
-        void fmb_ValuesChangedByUser(object sender, fmBlockParameterEvetArgs e)
+        void fmb_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         {
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();

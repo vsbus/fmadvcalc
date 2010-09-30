@@ -1,6 +1,5 @@
 using System.Windows.Forms;
 using fmCalculationLibrary;
-using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.BlockParameter
 {
@@ -25,11 +24,11 @@ namespace fmCalcBlocksLibrary.BlockParameter
         {
             get
             {
-                return base.isInputed;
+                return isInputed;
             }
             set
             {
-                base.isInputed = value;
+                isInputed = value;
                 if (cell != null)
                 {
                     cell.Style.ForeColor = value ? System.Drawing.Color.Blue : System.Drawing.Color.Black;
@@ -40,8 +39,8 @@ namespace fmCalcBlocksLibrary.BlockParameter
         public fmBlockVariableParameter(fmGlobalParameter globalParameter,
                                 bool isInputedDefault) : base (globalParameter)
         {
-            this.group = null;
-            this.cell = null;
+            group = null;
+            cell = null;
             IsInputed = isInputedDefault;
         }
     }

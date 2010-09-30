@@ -377,7 +377,7 @@ namespace FilterSimulation
             return cow;
         }
 
-        void rm0HceBlock_ValuesChangedByUser(object sender, fmBlockParameterEvetArgs e)
+        void rm0HceBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         {
             displayingSolution = true;
             foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
@@ -387,7 +387,7 @@ namespace FilterSimulation
             displayingSolution = false;
         }
 
-        void pc0rc0a0Block_ValuesChangedByUser(object sender, fmBlockParameterEvetArgs e)
+        void pc0rc0a0Block_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         {
             displayingSolution = true;
             foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
@@ -397,7 +397,7 @@ namespace FilterSimulation
             displayingSolution = false;
         }
 
-        void eps0Kappa0Block_ValuesChangedByUser(object sender, fmBlockParameterEvetArgs e)
+        void eps0Kappa0Block_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         {
             displayingSolution = true;
             foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
@@ -417,7 +417,7 @@ namespace FilterSimulation
             dst.CalculateAndDisplay();
         }
 
-        void susBlock_ValuesChangedByUser(object sender, fmBlockParameterEvetArgs e)
+        void susBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         {
             displayingSolution = true;
             foreach (fmFilterSimulation sim in fSolution.GetAllSimulations())
@@ -681,7 +681,7 @@ namespace FilterSimulation
             UpdateUnitsOfCommonFilterMachiningBlock();
         }
 
-        void commonFilterMachiningBlock_ValuesChangedByUser(object sender, fmBlockParameterEvetArgs e)
+        void commonFilterMachiningBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         {
             foreach (fmBlockVariableParameter p in commonFilterMachiningBlock.Parameters)
             {

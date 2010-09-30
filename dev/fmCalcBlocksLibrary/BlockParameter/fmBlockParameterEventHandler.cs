@@ -1,6 +1,4 @@
-using fmCalcBlocksLibrary.BlockParameter;
-
 namespace fmCalcBlocksLibrary.BlockParameter
 {
-    public delegate void fmBlockParameterEventHandler(object sender, fmBlockParameterEvetArgs e);
+    public delegate void fmBlockParameterEventHandler(object sender, fmBlockParameterEventArgs e);
 }

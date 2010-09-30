@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A9AFDCE0-9E84-4AF7-86A9-71A9D528721F}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -43,6 +43,7 @@
     <Compile Include="BlockParameter\Event.cs" />
     <Compile Include="BlockParameter\fmBlockBaseParameter.cs" />
     <Compile Include="BlockParameter\fmBlockConstantParameter.cs" />
+    <Compile Include="BlockParameter\fmBlockParameterEventArgs.cs" />
     <Compile Include="BlockParameter\fmBlockParameterGroup.cs" />
     <Compile Include="Blocks\fmBaseBlock.cs" />
     <Compile Include="Blocks\fmFilterMachiningBlockWithLimits.cs" />
@@ -57,7 +58,6 @@
     <Compile Include="Blocks\fmFilterMachiningBlock.cs" />
     <Compile Include="BlockParameter\fmBlockVariableParameter.cs" />
     <Compile Include="BlockParameter\fmBlockParameterEventHandler.cs" />
-    <Compile Include="BlockParameter\fmBlockParameterEvetArgs.cs" />
     <Compile Include="Blocks\fmPc0rc0a0Block.cs" />
     <Compile Include="Blocks\fmPc0rc0a0WithncBlock.cs" />
     <Compile Include="Blocks\fmRm0hceBlock.cs" />
