@@ -206,8 +206,8 @@ namespace fmCalculationLibrary
         {
             this.name = name;
             this.unitFamily = unitFamily;
-            chartDefaultXRange = minMaxRange.isUnlimited ? new fmRange() : new fmRange(minMaxRange.minValue, minMaxRange.maxValue);
-            chartCurretXRange = minMaxRange.isUnlimited ? new fmRange() : new fmRange(minMaxRange.minValue, minMaxRange.maxValue);
+            chartDefaultXRange = minMaxRange.isUnlimited ? new fmRange() : new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
+            chartCurretXRange = minMaxRange.isUnlimited ? new fmRange() : new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
         }
         
         public fmGlobalParameter(string name, fmUnitFamily unitFamily) : this(name, unitFamily, new fmRange()) { }

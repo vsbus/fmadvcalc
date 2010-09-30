@@ -15,7 +15,7 @@ namespace fmCalculationLibrary.NumericalMethods
             }
             
             fmValue len = endArg - beginArg;
-            fmValue eps = new fmValue(1e-8);
+            var eps = new fmValue(1e-8);
             if (len.value < 0)
             {
                 eps = -eps;
@@ -39,16 +39,13 @@ namespace fmCalculationLibrary.NumericalMethods
                     endRes = endArg;
                     return true;
                 }
-                else
+                if (function.Eval(endArg).value == 0)
                 {
-                    if (function.Eval(endArg).value == 0)
-                    {
-                        beginRes = endRes = endArg;
-                        return true;
-                    }
-
-                    return false;
+                    beginRes = endRes = endArg;
+                    return true;
                 }
+
+                return false;
             }
             
             fmValue beginSign = fmValue.Sign(beginValue, eps);
@@ -82,14 +79,11 @@ namespace fmCalculationLibrary.NumericalMethods
         {
             fmValue beginRes;
             fmValue endRes;
-            if (FindRootRange(function, beginArg, endArg, iterationsCount, out beginRes, out endRes) == true)
+            if (FindRootRange(function, beginArg, endArg, iterationsCount, out beginRes, out endRes))
             {
                 return 0.5 * (beginRes + endRes);
             }
-            else
-            {
-                return new fmValue();
-            }
+            return new fmValue();
         }
     }
 }

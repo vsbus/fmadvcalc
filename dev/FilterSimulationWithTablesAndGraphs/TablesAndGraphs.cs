@@ -682,8 +682,8 @@ namespace FilterSimulationWithTablesAndGraphs
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.Text];
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
             fmRange range = xParameter.chartCurretXRange;
-            minXValueTextBox.Text = (range.minValue / coef).ToString();
-            maxXValueTextBox.Text = (range.maxValue / coef).ToString();
+            minXValueTextBox.Text = (range.MinValue / coef).ToString();
+            maxXValueTextBox.Text = (range.MaxValue / coef).ToString();
             loadingXRange = false;
         }
 
@@ -698,10 +698,10 @@ namespace FilterSimulationWithTablesAndGraphs
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
             fmRange defaultRange = xParameter.chartDefaultXRange;
             fmRange range = xParameter.chartCurretXRange;
-            range.minValue = defaultRange.minValue;
-            range.maxValue = defaultRange.maxValue;
-            minXValueTextBox.Text = (range.minValue / coef).ToString();
-            maxXValueTextBox.Text = (range.maxValue / coef).ToString();
+            range.MinValue = defaultRange.MinValue;
+            range.MaxValue = defaultRange.MaxValue;
+            minXValueTextBox.Text = (range.MinValue / coef).ToString();
+            maxXValueTextBox.Text = (range.MaxValue / coef).ToString();
             loadingXRange = false;
         }
 
@@ -1306,9 +1306,9 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 foreach (fmSelectedSimulationData simData in internalSelectedSimList)
                 {
-                    double xStart = xParameter.chartCurretXRange.minValue
+                    double xStart = xParameter.chartCurretXRange.MinValue
                         / xParameter.unitFamily.CurrentUnit.Coef;
-                    double xEnd = xParameter.chartCurretXRange.maxValue
+                    double xEnd = xParameter.chartCurretXRange.MaxValue
                         / xParameter.unitFamily.CurrentUnit.Coef;
 
                     List<double> xList = CreateXValues(xStart, xEnd, RowsQuantity);
@@ -1350,9 +1350,9 @@ namespace FilterSimulationWithTablesAndGraphs
                     localParameters.calculatedDataLists = new List<List<fmFilterSimulationData>>();
                     foreach (fmFilterSimulation sim in externalSimList)
                     {
-                        double xStart = xParameter.chartCurretXRange.minValue
+                        double xStart = xParameter.chartCurretXRange.MinValue
                             / xParameter.unitFamily.CurrentUnit.Coef;
-                        double xEnd = xParameter.chartCurretXRange.maxValue
+                        double xEnd = xParameter.chartCurretXRange.MaxValue
                             / xParameter.unitFamily.CurrentUnit.Coef;
 
                         List<double> xList = CreateXValues(xStart, xEnd, RowsQuantity);

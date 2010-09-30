@@ -39,8 +39,8 @@ namespace FilterSimulation
 
                     if (p.globalParameter.chartDefaultXRange.isUnlimited == false)
                     {
-                        ParamGrid["MinRangeColumn", rowIndex].Value = p.globalParameter.chartDefaultXRange.minValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
-                        ParamGrid["MaxRangeColumn", rowIndex].Value = p.globalParameter.chartDefaultXRange.maxValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
+                        ParamGrid["MinRangeColumn", rowIndex].Value = p.globalParameter.chartDefaultXRange.MinValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
+                        ParamGrid["MaxRangeColumn", rowIndex].Value = p.globalParameter.chartDefaultXRange.MaxValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
                     }
                 }
             }
@@ -58,8 +58,8 @@ namespace FilterSimulation
                     if ((bool)ParamGrid.Rows[i].Cells["UnlimitedFlagColumn"].Value == false)
                     {
                         p.globalParameter.chartDefaultXRange.isUnlimited = false;
-                        p.globalParameter.chartDefaultXRange.minValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).value * p.globalParameter.unitFamily.CurrentUnit.Coef;
-                        p.globalParameter.chartDefaultXRange.maxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).value * p.globalParameter.unitFamily.CurrentUnit.Coef;
+                        p.globalParameter.chartDefaultXRange.MinValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).value * p.globalParameter.unitFamily.CurrentUnit.Coef;
+                        p.globalParameter.chartDefaultXRange.MaxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).value * p.globalParameter.unitFamily.CurrentUnit.Coef;
                     }
                     else
                     {

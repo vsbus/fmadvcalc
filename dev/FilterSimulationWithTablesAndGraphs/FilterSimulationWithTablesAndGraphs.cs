@@ -118,8 +118,8 @@ namespace FilterSimulationWithTablesAndGraphs
                 double coef = xParameter.unitFamily.CurrentUnit.Coef;
                 fmRange range = xParameter.chartCurretXRange;
 
-                range.minValue = minXValue * coef;
-                range.maxValue = maxXValue * coef;
+                range.MinValue = minXValue * coef;
+                range.MaxValue = maxXValue * coef;
             }
         }
 

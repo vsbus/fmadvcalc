@@ -130,8 +130,8 @@ namespace fmCalcBlocksLibrary.Blocks
                     int colIndex = parameters[i].cell.ColumnIndex;
                     double coef = parameters[i].globalParameter.unitFamily.CurrentUnit.Coef;
 
-                    dataGrid[colIndex - 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.minValue / coef;
-                    dataGrid[colIndex + 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.maxValue / coef;
+                    dataGrid[colIndex - 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.MinValue / coef;
+                    dataGrid[colIndex + 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.MaxValue / coef;
 
                     DataGridViewCell minLimitCell = dataGrid[colIndex - 1, rowIndex];
                     DataGridViewCell maxLimitCell = dataGrid[colIndex + 1, rowIndex];
@@ -141,8 +141,8 @@ namespace fmCalcBlocksLibrary.Blocks
                         minLimitCell.Value = "";
                         maxLimitCell.Value = "";
 
-                        if (fmValue.Greater(new fmValue(parameters[i].globalParameter.chartDefaultXRange.minValue), parameters[i].value)
-                            || fmValue.Less(new fmValue(parameters[i].globalParameter.chartDefaultXRange.maxValue), parameters[i].value))
+                        if (fmValue.Greater(new fmValue(parameters[i].globalParameter.chartDefaultXRange.MinValue), parameters[i].value)
+                            || fmValue.Less(new fmValue(parameters[i].globalParameter.chartDefaultXRange.MaxValue), parameters[i].value))
                         {
                             minLimitCell.Style.ForeColor = Color.Black;
                             maxLimitCell.Style.ForeColor = Color.Black;
@@ -226,8 +226,8 @@ namespace fmCalcBlocksLibrary.Blocks
                     index[p.globalParameter] = i;
                     if (isInputed == false)
                     {
-                        p.globalParameter.chartDefaultXRange.minValue = 1e100;
-                        p.globalParameter.chartDefaultXRange.maxValue = -1e100;
+                        p.globalParameter.chartDefaultXRange.MinValue = 1e100;
+                        p.globalParameter.chartDefaultXRange.MaxValue = -1e100;
                     }
                 }
                 else
@@ -244,11 +244,11 @@ namespace fmCalcBlocksLibrary.Blocks
                 {
                     if ((mask & (1 << i)) != 0)
                     {
-                        pList[index[varList[i]]].value = new fmValue(varList[i].chartDefaultXRange.maxValue);
+                        pList[index[varList[i]]].value = new fmValue(varList[i].chartDefaultXRange.MaxValue);
                     }
                     else
                     {
-                        pList[index[varList[i]]].value = new fmValue(varList[i].chartDefaultXRange.minValue);
+                        pList[index[varList[i]]].value = new fmValue(varList[i].chartDefaultXRange.MinValue);
                     }
                 }
 
@@ -258,14 +258,14 @@ namespace fmCalcBlocksLibrary.Blocks
                 {
                     if (p is fmCalculationVariableParameter)
                     {
-                        if (p.value.defined && p.globalParameter.chartDefaultXRange.maxValue < p.value.value)
+                        if (p.value.defined && p.globalParameter.chartDefaultXRange.MaxValue < p.value.value)
                         {
-                            p.globalParameter.chartDefaultXRange.maxValue = p.value.value;
+                            p.globalParameter.chartDefaultXRange.MaxValue = p.value.value;
                         }
 
-                        if (p.value.defined && p.globalParameter.chartDefaultXRange.minValue > p.value.value)
+                        if (p.value.defined && p.globalParameter.chartDefaultXRange.MinValue > p.value.value)
                         {
-                            p.globalParameter.chartDefaultXRange.minValue = Math.Max(0, p.value.value);
+                            p.globalParameter.chartDefaultXRange.MinValue = Math.Max(0, p.value.value);
                         }
                     }
                 }
@@ -309,8 +309,8 @@ namespace fmCalcBlocksLibrary.Blocks
                     for (int i = 0; i < naInputs.Count; ++i)
                     {
                         fmBlockVariableParameter p = naInputs[i];
-                        double minVal = p.globalParameter.chartDefaultXRange.minValue;
-                        double maxVal = p.globalParameter.chartDefaultXRange.maxValue;
+                        double minVal = p.globalParameter.chartDefaultXRange.MinValue;
+                        double maxVal = p.globalParameter.chartDefaultXRange.MaxValue;
                         double eps = 1e-8;
                         minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
                         maxVal = maxVal * (1 - eps);
@@ -358,8 +358,8 @@ namespace fmCalcBlocksLibrary.Blocks
                     for (int i = 0; i < naInputs.Count; ++i)
                     {
                         fmBlockVariableParameter p = naInputs[i];
-                        double minVal = p.globalParameter.chartDefaultXRange.minValue;
-                        double maxVal = p.globalParameter.chartDefaultXRange.maxValue;
+                        double minVal = p.globalParameter.chartDefaultXRange.MinValue;
+                        double maxVal = p.globalParameter.chartDefaultXRange.MaxValue;
                         double eps = 1e-8;
                         minVal = minVal == 0 ? Math.Min(maxVal, 1)*eps : minVal*(1 + eps);
                         maxVal = maxVal*(1 - eps);
@@ -596,8 +596,8 @@ namespace fmCalcBlocksLibrary.Blocks
             
             fmIsAllDefinedAndNotNegative isAllDefinedAndNotNegative = new fmIsAllDefinedAndNotNegative(this, parameter);
             fmValue trueValue = new fmValue(1);
-            fmValue minValue = new fmValue(parameter.globalParameter.chartDefaultXRange.minValue);
-            fmValue maxValue = new fmValue(parameter.globalParameter.chartDefaultXRange.maxValue);
+            fmValue minValue = new fmValue(parameter.globalParameter.chartDefaultXRange.MinValue);
+            fmValue maxValue = new fmValue(parameter.globalParameter.chartDefaultXRange.MaxValue);
 
             if (isAllDefinedAndNotNegative.Eval(minValue) != trueValue)
             {
@@ -741,11 +741,11 @@ namespace fmCalcBlocksLibrary.Blocks
                     {
                         result[p] = fmResultCheckStatus.NEGATIVE;
                     }
-                    else if (fmValue.EpsCompare(curValue.value, p.chartDefaultXRange.maxValue, eps) > 0)
+                    else if (fmValue.EpsCompare(curValue.value, p.chartDefaultXRange.MaxValue, eps) > 0)
                     {
                         result[p] = fmResultCheckStatus.GREATER_THAN_MAXIMUM;
                     }
-                    else if (fmValue.EpsCompare(curValue.value, p.chartDefaultXRange.minValue, eps) < 0)
+                    else if (fmValue.EpsCompare(curValue.value, p.chartDefaultXRange.MinValue, eps) < 0)
                     {
                         result[p] = fmResultCheckStatus.LESS_THAN_MINIMUM;
                     }
@@ -807,15 +807,15 @@ namespace fmCalcBlocksLibrary.Blocks
         private fmValue GetMaxLimit(fmBlockVariableParameter parameter)
         {
             return GetFirstValidArgument(parameter,
-                parameter.globalParameter.chartDefaultXRange.maxValue,
-                parameter.globalParameter.chartDefaultXRange.minValue);
+                parameter.globalParameter.chartDefaultXRange.MaxValue,
+                parameter.globalParameter.chartDefaultXRange.MinValue);
         }
 
         private fmValue GetMinLimit(fmBlockVariableParameter parameter)
         {
             return GetFirstValidArgument(parameter,
-                parameter.globalParameter.chartDefaultXRange.minValue,
-                parameter.globalParameter.chartDefaultXRange.maxValue);
+                parameter.globalParameter.chartDefaultXRange.MinValue,
+                parameter.globalParameter.chartDefaultXRange.MaxValue);
         }
 
         private fmBlockVariableParameter FindGroupRepresetator(fmBlockParameterGroup group)

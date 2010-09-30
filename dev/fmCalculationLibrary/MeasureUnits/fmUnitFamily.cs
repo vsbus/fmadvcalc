@@ -5,6 +5,7 @@ namespace fmCalculationLibrary.MeasureUnits
 {
     public class fmUnitFamily
     {
+        // ReSharper disable InconsistentNaming
         public static fmUnitFamily AreaFamily = new fmUnitFamily();
         public static fmUnitFamily LengthFamily = new fmUnitFamily();
         public static fmUnitFamily MassFamily = new fmUnitFamily();
@@ -28,92 +29,93 @@ namespace fmCalculationLibrary.MeasureUnits
         public static fmUnitFamily SpecificVolumeFamily = new fmUnitFamily();
         public static fmUnitFamily SpecificFlowRateVolume = new fmUnitFamily();
         public static fmUnitFamily SpecificFlowRateMass = new fmUnitFamily();
+        // ReSharper restore InconsistentNaming
         
-        private int CurrentIndex;
-        public List<fmUnit> Units = new List<fmUnit>();
+        private int m_currentIndex;
+        public List<fmUnit> units = new List<fmUnit>();
 
         static fmUnitFamily()
         {
-            NoUnitFamily.Units.Add(new fmUnit("-", 1));
+            NoUnitFamily.units.Add(new fmUnit("-", 1));
 
-            MassFamily.Units.Add(new fmUnit("kg", 1));
-            MassFamily.Units.Add(new fmUnit("g", .001));
-            MassFamily.Units.Add(new fmUnit("mg", .000001));
+            MassFamily.units.Add(new fmUnit("kg", 1));
+            MassFamily.units.Add(new fmUnit("g", .001));
+            MassFamily.units.Add(new fmUnit("mg", .000001));
 
-            VolumeFamily.Units.Add(new fmUnit("l", .001));
-            VolumeFamily.Units.Add(new fmUnit("m3", 1));
-            VolumeFamily.Units.Add(new fmUnit("cm3", 1e-6));
+            VolumeFamily.units.Add(new fmUnit("l", .001));
+            VolumeFamily.units.Add(new fmUnit("m3", 1));
+            VolumeFamily.units.Add(new fmUnit("cm3", 1e-6));
 
-            AreaFamily.Units.Add(new fmUnit("m2", 1));
-            AreaFamily.Units.Add(new fmUnit("cm2", 1e-4));
+            AreaFamily.units.Add(new fmUnit("m2", 1));
+            AreaFamily.units.Add(new fmUnit("cm2", 1e-4));
             
-            LengthFamily.Units.Add(new fmUnit("mm", .001));
-            LengthFamily.Units.Add(new fmUnit("cm", .01));
-            LengthFamily.Units.Add(new fmUnit("m", 1.0));
+            LengthFamily.units.Add(new fmUnit("mm", .001));
+            LengthFamily.units.Add(new fmUnit("cm", .01));
+            LengthFamily.units.Add(new fmUnit("m", 1.0));
 
-            FrequencyFamily.Units.Add(new fmUnit("min-1", 1.0/60));
-            FrequencyFamily.Units.Add(new fmUnit("s-1", 1));
+            FrequencyFamily.units.Add(new fmUnit("min-1", 1.0/60));
+            FrequencyFamily.units.Add(new fmUnit("s-1", 1));
 
-            ConcentrationFamily.Units.Add(new fmUnit("%", 0.01)); 
-            ConcentrationFamily.Units.Add(new fmUnit("-", 1));
+            ConcentrationFamily.units.Add(new fmUnit("%", 0.01)); 
+            ConcentrationFamily.units.Add(new fmUnit("-", 1));
 
-            ConcentrationCFamily.Units.Add(new fmUnit("g/l", 1));
+            ConcentrationCFamily.units.Add(new fmUnit("g/l", 1));
             
-            DensityFamily.Units.Add(new fmUnit("kg/m3", 1));
+            DensityFamily.units.Add(new fmUnit("kg/m3", 1));
 
-            ViscosityFamily.Units.Add(new fmUnit("mPa s", 1e-3));
+            ViscosityFamily.units.Add(new fmUnit("mPa s", 1e-3));
 
-            PermeabilityFamily.Units.Add(new fmUnit("10-13m2", 1e-13));
-            PermeabilityFamily.Units.Add(new fmUnit("m2", 1));
+            PermeabilityFamily.units.Add(new fmUnit("10-13m2", 1e-13));
+            PermeabilityFamily.units.Add(new fmUnit("m2", 1));
 
-            CakeResistanceRcFamily.Units.Add(new fmUnit("10+13m-2", 1e13));
-            CakeResistanceRcFamily.Units.Add(new fmUnit("m-2", 1));
+            CakeResistanceRcFamily.units.Add(new fmUnit("10+13m-2", 1e13));
+            CakeResistanceRcFamily.units.Add(new fmUnit("m-2", 1));
 
-            CakeResistanceAFamily.Units.Add(new fmUnit("10+10m/kg", 1e10));
-            CakeResistanceAFamily.Units.Add(new fmUnit("m/kg", 1));
+            CakeResistanceAFamily.units.Add(new fmUnit("10+10m/kg", 1e10));
+            CakeResistanceAFamily.units.Add(new fmUnit("m/kg", 1));
 
-            FilterMediumResistanceFamily.Units.Add(new fmUnit("10+10m-1", 1e10));
-            FilterMediumResistanceFamily.Units.Add(new fmUnit("m-1", 1));
+            FilterMediumResistanceFamily.units.Add(new fmUnit("10+10m-1", 1e10));
+            FilterMediumResistanceFamily.units.Add(new fmUnit("m-1", 1));
 
-            PressureFamily.Units.Add(new fmUnit("bar", 1e5)); 
-            PressureFamily.Units.Add(new fmUnit("Pa", 1));
+            PressureFamily.units.Add(new fmUnit("bar", 1e5)); 
+            PressureFamily.units.Add(new fmUnit("Pa", 1));
 
-            TimeFamily.Units.Add(new fmUnit("s", 1));
-            TimeFamily.Units.Add(new fmUnit("min", 60));
+            TimeFamily.units.Add(new fmUnit("s", 1));
+            TimeFamily.units.Add(new fmUnit("min", 60));
 
-            FlowRateVolume.Units.Add(new fmUnit("l/h", 1e-3/(60*60)));
-            FlowRateVolume.Units.Add(new fmUnit("m3/s", 1));
+            FlowRateVolume.units.Add(new fmUnit("l/h", 1e-3/(60*60)));
+            FlowRateVolume.units.Add(new fmUnit("m3/s", 1));
 
-            FlowRateMass.Units.Add(new fmUnit("kg/h", 1.0 / (60 * 60)));
-            FlowRateMass.Units.Add(new fmUnit("kg/s", 1));
+            FlowRateMass.units.Add(new fmUnit("kg/h", 1.0 / (60 * 60)));
+            FlowRateMass.units.Add(new fmUnit("kg/s", 1));
 
-            SpeedFamily.Units.Add(new fmUnit("mm/min", 1e-3/60));
-            SpeedFamily.Units.Add(new fmUnit("m/s", 1));
+            SpeedFamily.units.Add(new fmUnit("mm/min", 1e-3/60));
+            SpeedFamily.units.Add(new fmUnit("m/s", 1));
 
-            SpecificMassFamily.Units.Add(new fmUnit("kg/m2", 1));
+            SpecificMassFamily.units.Add(new fmUnit("kg/m2", 1));
 
-            SpecificVolumeFamily.Units.Add(new fmUnit("l/m2", 1e-3));
-            SpecificVolumeFamily.Units.Add(new fmUnit("m3/m2", 1));
+            SpecificVolumeFamily.units.Add(new fmUnit("l/m2", 1e-3));
+            SpecificVolumeFamily.units.Add(new fmUnit("m3/m2", 1));
 
-            SpecificFlowRateVolume.Units.Add(new fmUnit("l/m2min", 1e-3/60));
-            SpecificFlowRateVolume.Units.Add(new fmUnit("m3/m2s", 1));
+            SpecificFlowRateVolume.units.Add(new fmUnit("l/m2min", 1e-3/60));
+            SpecificFlowRateVolume.units.Add(new fmUnit("m3/m2s", 1));
 
-            SpecificFlowRateMass.Units.Add(new fmUnit("kg/m2min", 1.0/60));
-            SpecificFlowRateMass.Units.Add(new fmUnit("kg/m2s", 1));
+            SpecificFlowRateMass.units.Add(new fmUnit("kg/m2min", 1.0/60));
+            SpecificFlowRateMass.units.Add(new fmUnit("kg/m2s", 1));
         }
 
         public fmUnit CurrentUnit
         {
-            get { return Units[CurrentIndex]; }
+            get { return units[m_currentIndex]; }
         }
 
         public void SetCurrentUnit(string name)
         {
-            for (int i = 0; i < Units.Count; ++i)
+            for (int i = 0; i < units.Count; ++i)
             {
-                if (Units[i].Name == name)
+                if (units[i].Name == name)
                 {
-                    CurrentIndex = i;
+                    m_currentIndex = i;
                     return;
                 }
             }

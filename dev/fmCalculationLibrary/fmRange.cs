@@ -6,12 +6,12 @@ namespace fmCalculationLibrary
         private double m_minValue;
         private double m_maxValue;
         
-        public double minValue
+        public double MinValue
         {
             get { return isUnlimited ? 0 : m_minValue; }
             set { m_minValue = value; }
         }
-        public double maxValue
+        public double MaxValue
         {
             get { return isUnlimited ? 1e100 : m_maxValue; }
             set { m_maxValue = value; }
@@ -20,8 +20,8 @@ namespace fmCalculationLibrary
         public fmRange(double min, double max)
         {
             isUnlimited = false;
-            minValue = min;
-            maxValue = max;
+            MinValue = min;
+            MaxValue = max;
         }
 
         public fmRange()

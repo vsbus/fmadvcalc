@@ -29,7 +29,7 @@ namespace AdvancedCalculator
 
         private static void BindUnitComboBox(fmUnitItem unitItem, fmUnitFamily dataSource)
         {
-            unitItem.UnitComboBox.DataSource = dataSource.Units;
+            unitItem.UnitComboBox.DataSource = dataSource.units;
             unitItem.UnitComboBox.ValueMember = "Name";
             unitItem.UnitComboBox.SelectedItem = dataSource.CurrentUnit;
         }
