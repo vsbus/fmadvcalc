@@ -1,6 +1,6 @@
 using System.Windows.Forms;
 
-namespace FilterSimulation
+namespace fmFilterSimulationControl
 {
     partial class fmUnitItem
     {

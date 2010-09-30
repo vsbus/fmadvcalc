@@ -22,19 +22,21 @@ namespace FilterSimulation
             }
         }
 
-        private int radioButtonCount;
-        private const int top = 22;
-        private const int left = 10;
-        private const int step = 18;
+        private int m_radioButtonCount;
+        private const int Top = 22;
+        private const int Left = 10;
+        private const int Step = 18;
 
         RadioButton AddRadioButton(string caption)
         {
-            RadioButton ret = new RadioButton();
-            ret.Parent = groupBox;
-            ret.Top = top + step * (radioButtonCount++);
-            ret.Left = left;
-            ret.Text = caption;
-            ret.AutoSize = true;
+            var ret = new RadioButton
+                          {
+                              Parent = groupBox,
+                              Top = Top + Step*(m_radioButtonCount++),
+                              Left = Left,
+                              Text = caption,
+                              AutoSize = true
+                          };
             return ret;
         }
 
@@ -42,14 +44,16 @@ namespace FilterSimulation
         {
             guidOfOwnedSimulation = simGuid;
 
-            groupBox = new GroupBox();
-            groupBox.Parent = parentControl;
-            groupBox.Left = leftPos;
-            groupBox.Top = topPos;
-            groupBox.Visible = false;
-            groupBox.Text = "CalculationalOption";
+            groupBox = new GroupBox
+                           {
+                               Parent = parentControl,
+                               Left = leftPos,
+                               Top = topPos,
+                               Visible = false,
+                               Text = @"CalculationalOption"
+                           };
 
-            radioButtonCount = 0;
+            m_radioButtonCount = 0;
 
             standart3 = AddRadioButton("Standart 3: A, Dp, (n/tc), tf");
             standart4 = AddRadioButton("Standart 4: A, hc, sf, (n/tc)");
@@ -63,7 +67,7 @@ namespace FilterSimulation
             design1.Checked = cOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1;
             optimization1.Checked = cOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1;
 
-            groupBox.Height = top + step * (radioButtonCount + 1);
+            groupBox.Height = Top + Step * (m_radioButtonCount + 1);
         }
     }
 }

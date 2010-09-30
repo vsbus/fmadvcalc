@@ -9,13 +9,13 @@ using Rectangle=System.Drawing.Rectangle;
 
 namespace FilterSimulation
 {
-    public partial class FilterSimulation : UserControl
+    public partial class fmFilterSimulationControl : UserControl
     {
         private fmFilterSimSolution fSolution = new fmFilterSimSolution();
         private fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlockWithLimits commonFilterMachiningBlock = null;
         private CheckBox ckBox;
 
-        public FilterSimulation()
+        public fmFilterSimulationControl()
         {
             InitializeComponent();
         }
@@ -291,7 +291,7 @@ namespace FilterSimulation
 
         private void rangesButton_Click(object sender, EventArgs e)
         {
-            ParameterIntervalOption proForm = new ParameterIntervalOption();
+            fmParameterIntervalOption proForm = new fmParameterIntervalOption();
             proForm.ShowDialog();
             DisplaySolution(fSolution);
         }

@@ -7,7 +7,7 @@ using fmCalcBlocksLibrary.Blocks;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
-    public partial class fmFilterSimulationWithTablesAndGraphs : FilterSimulation.FilterSimulation
+    public partial class fmFilterSimulationWithTablesAndGraphs : FilterSimulation.fmFilterSimulationControl
     {
         public fmFilterSimulationWithTablesAndGraphs()
         {

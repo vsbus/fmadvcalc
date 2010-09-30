@@ -5,7 +5,7 @@ using fmCalculationLibrary.MeasureUnits;
 
 namespace FilterSimulation
 {
-    public partial class FilterSimulation
+    public partial class fmFilterSimulationControl
     {
         void CreateEps0Kappa0Pc0Rc0Alpha0Rm0HceTable()
         {

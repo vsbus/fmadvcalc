@@ -4,7 +4,7 @@ using FilterSimulation.fmFilterObjects;
 
 namespace FilterSimulation
 {
-    public partial class FilterSimulation
+    public partial class fmFilterSimulationControl
     {
         #region Project Buttons
         private void projectCreateButton_Click(object sender, EventArgs e)

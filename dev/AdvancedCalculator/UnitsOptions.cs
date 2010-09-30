@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-using FilterSimulation;
+using fmFilterSimulationControl;
 using fmCalculationLibrary.MeasureUnits;
 
 namespace AdvancedCalculator

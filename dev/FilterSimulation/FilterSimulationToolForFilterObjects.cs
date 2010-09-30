@@ -3,18 +3,23 @@ using FilterSimulation.fmFilterObjects;
 
 namespace FilterSimulation
 {
-    public partial class FilterSimulation
+    public partial class fmFilterSimulationControl
     {
         private fmFilterSimMachineType GetCurrentMachine()
         {
-            if (machineTypesDataGrid.CurrentCell.RowIndex == -1
-                || machineTypesDataGrid.CurrentCell.ColumnIndex == -1
-                || machineTypesDataGrid.CurrentRow.Cells["machineTypeSymbolColumn"].Value == null)
+            if (machineTypesDataGrid.CurrentRow != null)
             {
-                return null;
+                if (machineTypesDataGrid.CurrentCell.RowIndex == -1
+                    || machineTypesDataGrid.CurrentCell.ColumnIndex == -1
+                    || machineTypesDataGrid.CurrentRow.Cells["machineTypeSymbolColumn"].Value == null)
+                {
+                    return null;
+                }
+                return fSolution.FindMachineType(Convert.ToString(machineTypesDataGrid.CurrentRow.Cells["machineTypeSymbolColumn"].Value));
             }
-            return fSolution.FindMachineType(Convert.ToString(machineTypesDataGrid.CurrentRow.Cells["machineTypeSymbolColumn"].Value));
+            return null;
         }
+
         static public fmFilterSimSuspension GetFirstChild(fmFilterSimProject prj)
         {
             return CurrentObjectsStruct.GetFirstChild(prj);

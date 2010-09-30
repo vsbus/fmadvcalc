@@ -1,6 +1,6 @@
 namespace FilterSimulation
 {
-    partial class ParameterIntervalOption
+    partial class fmParameterIntervalOption
     {
         /// <summary>
         /// Required designer variable.
@@ -82,7 +82,6 @@ namespace FilterSimulation
             this.ParamGrid.RowTemplate.Height = 18;
             this.ParamGrid.Size = new System.Drawing.Size(488, 455);
             this.ParamGrid.TabIndex = 0;
-            this.ParamGrid.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.ParamGrid_CellValueChangedByUser);
             // 
             // ParameterNameColumn
             // 
@@ -128,7 +127,7 @@ namespace FilterSimulation
             this.ClientSize = new System.Drawing.Size(488, 481);
             this.Controls.Add(this.ParamGrid);
             this.Controls.Add(this.panel1);
-            this.Name = "ParameterIntervalOption";
+            this.Name = "fmParameterIntervalOption";
             this.Text = "ParameterIntervalOption";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ParamGrid)).EndInit();

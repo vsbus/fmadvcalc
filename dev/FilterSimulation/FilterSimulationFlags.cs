@@ -1,6 +1,6 @@
 namespace FilterSimulation
 {
-    public partial class FilterSimulation
+    public partial class fmFilterSimulationControl
     {
         private bool displayingTables = false;
         protected bool displayingSolution = false;

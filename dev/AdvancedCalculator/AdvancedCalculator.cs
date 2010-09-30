@@ -32,7 +32,7 @@ namespace AdvancedCalculator
 
         private void rangesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FilterSimulation.ParameterIntervalOption proForm = new FilterSimulation.ParameterIntervalOption();
+            FilterSimulation.fmParameterIntervalOption proForm = new FilterSimulation.fmParameterIntervalOption();
             proForm.ShowDialog();
             filterSimulationWithTablesAndGraphs1.UpdateAll();
         }

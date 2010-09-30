@@ -1,8 +1,9 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using fmCalculationLibrary;
 using FilterSimulation;
+using fmCalculationLibrary;
+using fmFilterSimulationControl;
 
 namespace SampleForBlocks
 {
@@ -81,7 +82,7 @@ namespace SampleForBlocks
 
         private void RangesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var proForm = new ParameterIntervalOption();
+            var proForm = new fmParameterIntervalOption();
             proForm.ShowDialog();
             m_fmBlock.CalculateAndDisplay();
         }

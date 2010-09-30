@@ -5,10 +5,13 @@ using FilterSimulation.fmFilterObjects;
 
 namespace FilterSimulation
 {
-    public partial class FilterSimulation
+    public partial class fmFilterSimulationControl
     {
         #region CellValueChenged
+        // ReSharper disable PossibleNullReferenceException
+        // ReSharper disable InconsistentNaming
         private void projectDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             if (!displayingSolution && e.RowIndex != -1)
             {
@@ -34,7 +37,9 @@ namespace FilterSimulation
 
             }
         }
+        // ReSharper disable InconsistentNaming
         private void suspensionDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             if (!displayingSolution && e.RowIndex != -1)
             {
@@ -71,30 +76,32 @@ namespace FilterSimulation
                 DisplaySolution(fSolution);
             }
         }
+        // ReSharper disable InconsistentNaming
         private void simSeriesDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             if (!displayingSolution && e.RowIndex != -1)
             {
-                DataGridViewRow row = (sender as fmDataGrid.fmDataGrid).Rows[e.RowIndex];
+                DataGridViewRow row = ((fmDataGrid.fmDataGrid)sender).Rows[e.RowIndex];
                 object guidCellValue = row.Cells["simSeriesGuidColumn"].Value;
                 fmFilterSimSerie serie;
 
-                if (e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["simSeriesCheckedColumn"].Index)
+                if (e.ColumnIndex != ((fmDataGrid.fmDataGrid)sender).Columns["simSeriesCheckedColumn"].Index)
                 {
                     SetRowFontBoldOrRegular(row, FontStyle.Bold);
 
                     serie = fSolution.FindSerie((Guid)guidCellValue);
 
-                    if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["simSeriesNameColumn"].Index)
+                    if (e.ColumnIndex == ((fmDataGrid.fmDataGrid)sender).Columns["simSeriesNameColumn"].Index)
                         serie.Name = Convert.ToString(row.Cells["simSeriesNameColumn"].Value);
 
-                    if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["simSeriesFilterMediumColumn"].Index)
+                    if (e.ColumnIndex == ((fmDataGrid.fmDataGrid)sender).Columns["simSeriesFilterMediumColumn"].Index)
                         serie.FilterMedium = Convert.ToString(row.Cells["simSeriesFilterMediumColumn"].Value);
 
-                    if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["simSeriesMachineNameColumn"].Index)
+                    if (e.ColumnIndex == ((fmDataGrid.fmDataGrid)sender).Columns["simSeriesMachineNameColumn"].Index)
                         serie.MachineName = Convert.ToString(row.Cells["simSeriesMachineNameColumn"].Value);
                 }
-                else if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["simSeriesCheckedColumn"].Index)
+                else if (e.ColumnIndex == ((fmDataGrid.fmDataGrid)sender).Columns["simSeriesCheckedColumn"].Index)
                 {
                     if (guidCellValue != null)
                     {
@@ -106,35 +113,37 @@ namespace FilterSimulation
                 DisplaySolution(fSolution);
             }
         }
+        // ReSharper disable InconsistentNaming
         private void simulationDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        // ReSharper restore InconsistentNaming
         {
+            var dataGrid = sender as fmDataGrid.fmDataGrid;
             if (!displayingSolution && e.RowIndex != -1)
             {
-                DataGridViewRow row = (sender as fmDataGrid.fmDataGrid).Rows[e.RowIndex];
+                DataGridViewRow row = dataGrid.Rows[e.RowIndex];
                 object guidCellValue = row.Cells["simulationGuidColumn"].Value;
                 fmFilterSimulation sim;
 
                 if (e.ColumnIndex != -1
-                    && e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["simulationGuidColumn"].Index
-                    && e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["simulationCheckedColumn"].Index)
-
+                    && e.ColumnIndex != dataGrid.Columns["simulationGuidColumn"].Index
+                    && e.ColumnIndex != dataGrid.Columns["simulationCheckedColumn"].Index)
                 {
                     SetRowFontBoldOrRegular(row, FontStyle.Bold);
 
                     sim = fSolution.FindSimulation((Guid)guidCellValue);
 
-                    if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["simulationNameColumn"].Index)
+                    if (e.ColumnIndex == dataGrid.Columns["simulationNameColumn"].Index)
                         sim.Name = Convert.ToString(row.Cells["simulationNameColumn"].Value);
                     else
                         return;
                 }
-                else if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["simulationCheckedColumn"].Index)
+                else if (e.ColumnIndex == dataGrid.Columns["simulationCheckedColumn"].Index)
                 {
                     if (guidCellValue != null)
                     {
                         sim = fSolution.FindSimulation((Guid)guidCellValue);
                         sim.Checked = (bool)row.Cells["simulationCheckedColumn"].Value;
-                        (sender as fmDataGrid.fmDataGrid).EndEdit();
+                        dataGrid.EndEdit();
                     }
                 }
 
@@ -144,13 +153,14 @@ namespace FilterSimulation
         #endregion
 
         #region CurrentCellChanged
+        // ReSharper disable InconsistentNaming
         private void suspensionDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
         private void simSeriesDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
-            UpdateCurrentObjectAndDisplaySolution((DataGridView) sender);
+            UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
         private void simulationDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
@@ -187,32 +197,32 @@ namespace FilterSimulation
         }
         private void simulationDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["simulationCheckedColumn"].Index)
+            if (e.ColumnIndex != ((fmDataGrid.fmDataGrid)sender).Columns["simulationCheckedColumn"].Index)
             {
                 DisplaySolution(fSolution);
             }
         }
+        // ReSharper restore InconsistentNaming
+        // ReSharper restore PossibleNullReferenceException
         #endregion
 
+        // ReSharper disable InconsistentNaming
         private void suspensionDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
-
         private void simSeriesDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
-
         private void simulationDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
-
         private void projectDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
-
+        // ReSharper restore InconsistentNaming
     }
 }
