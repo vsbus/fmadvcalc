@@ -967,7 +967,7 @@ namespace FilterSimulation
         }
         void pcrcaBlock_ValuesChanged(object sender)
         {
-            fmPc0rc0a0Block pcrcaBlock = sender as fmPc0rc0a0Block;
+            fmPc0Rc0A0Block pcrcaBlock = sender as fmPc0Rc0A0Block;
             fmFilterSimulation sim = fSolution.FindSimulation(pcrcaBlock);
 
             if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links

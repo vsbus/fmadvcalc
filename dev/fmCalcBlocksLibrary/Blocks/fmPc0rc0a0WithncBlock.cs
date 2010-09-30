@@ -4,7 +4,7 @@ using fmCalculationLibrary;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmPc0Rc0A0WithncBlock : fmPc0rc0a0Block
+    public class fmPc0Rc0A0WithncBlock : fmPc0Rc0A0Block
     {
         // ReSharper disable InconsistentNaming
         private readonly fmBlockVariableParameter nc;

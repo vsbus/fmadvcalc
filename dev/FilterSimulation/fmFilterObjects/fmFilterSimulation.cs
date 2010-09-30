@@ -267,7 +267,7 @@ namespace FilterSimulation.fmFilterObjects
             fmEps0Kappa0Block epskappab = new fmEps0Kappa0Block();
             UpdateIsInputedInParametersFromBlock(epskappab, inputedParameter);
 
-            fmPc0rc0a0Block pcrcab = new fmPc0rc0a0Block();
+            fmPc0Rc0A0Block pcrcab = new fmPc0Rc0A0Block();
             UpdateIsInputedInParametersFromBlock(pcrcab, inputedParameter);
 
             fmRm0HceBlock rmhceb = new fmRm0HceBlock();

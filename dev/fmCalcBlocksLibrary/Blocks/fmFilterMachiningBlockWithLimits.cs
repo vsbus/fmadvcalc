@@ -1,8 +1,6 @@
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
-using fmCalcBlocksLibrary.Controls;
 using fmCalculationLibrary;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,15 +12,9 @@ namespace fmCalcBlocksLibrary.Blocks
     {
         public void DoCalculationsLimitsClue()
         {
-            fmFilterMachiningCalculator filterMachinigCalculator =
-                new fmFilterMachiningCalculator(AllParameters);
-            filterMachinigCalculator.calculationOption = calculationOption;
+            var filterMachinigCalculator =
+                new fmFilterMachiningCalculator(AllParameters) {calculationOption = calculationOption};
             filterMachinigCalculator.DoCalculationsLimitsClue();
-        }
-
-        override public void DoCalculations()
-        {
-            base.DoCalculations();
         }
 
         private enum fmResultCheckStatus
@@ -42,32 +34,10 @@ namespace fmCalcBlocksLibrary.Blocks
             N_A
         }
 
-        private class fmIsAllDefined : fmCalculationLibrary.NumericalMethods.fmFunction
-        {
-            private fmFilterMachiningBlockWithLimits m_block;
-            private fmBlockVariableParameter m_xParameter;
-            public fmIsAllDefined(fmFilterMachiningBlockWithLimits block, fmBlockVariableParameter xParameter) 
-            {
-                m_block = block;
-                m_xParameter = xParameter;
-            }
-
-            public override fmValue Eval(fmValue x)
-            {
-                Dictionary<fmGlobalParameter, fmResultCheckStatus> resultStatus = m_block.GetResultStatus(m_xParameter, x.value);
-                fmValue result = new fmValue(1);
-                foreach (fmResultCheckStatus status in resultStatus.Values)
-                    if (status == fmResultCheckStatus.N_A)
-                        result.value = 0;
-
-                return result;
-            }
-        }
-
         private class fmIsAllDefinedAndNotNegative : fmCalculationLibrary.NumericalMethods.fmFunction
         {
-            private fmFilterMachiningBlockWithLimits m_block;
-            private fmBlockVariableParameter m_xParameter;
+            private readonly fmFilterMachiningBlockWithLimits m_block;
+            private readonly fmBlockVariableParameter m_xParameter;
             public fmIsAllDefinedAndNotNegative(fmFilterMachiningBlockWithLimits block, fmBlockVariableParameter xParameter)
             {
                 m_block = block;
@@ -77,7 +47,7 @@ namespace fmCalcBlocksLibrary.Blocks
             public override fmValue Eval(fmValue x)
             {
                 Dictionary<fmGlobalParameter, fmResultCheckStatus> resultStatus = m_block.GetResultStatus(m_xParameter, x.value);
-                fmValue result = new fmValue(1);
+                var result = new fmValue(1);
                 foreach (fmResultCheckStatus status in resultStatus.Values)
                     if (status == fmResultCheckStatus.N_A || status == fmResultCheckStatus.NEGATIVE)
                         result.value = 0;
@@ -89,8 +59,8 @@ namespace fmCalcBlocksLibrary.Blocks
         
         private class fmIsOutOfRanges : fmCalculationLibrary.NumericalMethods.fmFunction
         {
-            private fmFilterMachiningBlockWithLimits m_block;
-            private fmBlockVariableParameter m_xParameter;
+            private readonly fmFilterMachiningBlockWithLimits m_block;
+            private readonly fmBlockVariableParameter m_xParameter;
             public fmIsOutOfRanges(fmFilterMachiningBlockWithLimits block, fmBlockVariableParameter xParameter) 
             {
                 m_block = block;
@@ -206,15 +176,17 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private void CalculateAbsRanges()
         {
-            List<fmGlobalParameter> varList = new List<fmGlobalParameter>();
-            varList.Add(fmGlobalParameter.A);
-            varList.Add(fmGlobalParameter.Dp);
-            varList.Add(fmGlobalParameter.sf);
-            varList.Add(fmGlobalParameter.tc);
+            var varList = new List<fmGlobalParameter>
+                              {
+                                  fmGlobalParameter.A,
+                                  fmGlobalParameter.Dp,
+                                  fmGlobalParameter.sf,
+                                  fmGlobalParameter.tc
+                              };
 
-            Dictionary<fmGlobalParameter, int> index = new Dictionary<fmGlobalParameter,int>();
+            var index = new Dictionary<fmGlobalParameter,int>();
 
-            List<fmCalculationBaseParameter> pList = new List<fmCalculationBaseParameter>();
+            var pList = new List<fmCalculationBaseParameter>();
             for (int i = 0; i < AllParameters.Count; ++i)
             {
                 fmCalculationBaseParameter p = AllParameters[i];
@@ -236,20 +208,15 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
             }
 
-            fmCalculatorsLibrary.fmFilterMachiningCalculator calc = new fmFilterMachiningCalculator(pList);
+            var calc = new fmFilterMachiningCalculator(pList);
 
             for (int mask = 0; mask < (1 << varList.Count); ++mask)
             {
                 for (int i = 0; i < varList.Count; ++i)
                 {
-                    if ((mask & (1 << i)) != 0)
-                    {
-                        pList[index[varList[i]]].value = new fmValue(varList[i].chartDefaultXRange.MaxValue);
-                    }
-                    else
-                    {
-                        pList[index[varList[i]]].value = new fmValue(varList[i].chartDefaultXRange.MinValue);
-                    }
+                    pList[index[varList[i]]].value = (mask & (1 << i)) != 0 
+                        ? new fmValue(varList[i].chartDefaultXRange.MaxValue) 
+                        : new fmValue(varList[i].chartDefaultXRange.MinValue);
                 }
 
                 calc.DoCalculations();
@@ -272,17 +239,17 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
-        private bool GetMinMaxLimitsOfIncompleteInputs(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue)
+        private void GetMinMaxLimitsOfIncompleteInputs(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue)
         {
             if (calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL)
             {
-                List<fmValue> keepedValues = new List<fmValue>();
+                var keepedValues = new List<fmValue>();
                 for (int i = 0; i < parameters.Count; ++i)
                 {
                     keepedValues.Add(parameters[i].value);
                 }
 
-                List<fmBlockVariableParameter> keepedInputInfo = new List<fmBlockVariableParameter>();
+                var keepedInputInfo = new List<fmBlockVariableParameter>();
                 foreach (fmBlockVariableParameter p in parameters)
                 {
                     if (p.IsInputed)
@@ -294,7 +261,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 UpdateIsInputed(parameter);
                 parameter.value = new fmValue();
 
-                List<fmBlockVariableParameter> naInputs = new List<fmBlockVariableParameter>();
+                var naInputs = new List<fmBlockVariableParameter>();
                 CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.name), naInputs);
                 CheckNAAndAdd(GetParameterByName(fmGlobalParameter.Dp.name), naInputs);
                 CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.name), naInputs);
@@ -311,7 +278,7 @@ namespace fmCalcBlocksLibrary.Blocks
                         fmBlockVariableParameter p = naInputs[i];
                         double minVal = p.globalParameter.chartDefaultXRange.MinValue;
                         double maxVal = p.globalParameter.chartDefaultXRange.MaxValue;
-                        double eps = 1e-8;
+                        const double eps = 1e-8;
                         minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
                         maxVal = maxVal * (1 - eps);
                         p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
@@ -344,7 +311,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     UpdateIsInputed(p);
                 }
 
-                return result;
+                return;
             }
             else
             {
@@ -360,7 +327,7 @@ namespace fmCalcBlocksLibrary.Blocks
                         fmBlockVariableParameter p = naInputs[i];
                         double minVal = p.globalParameter.chartDefaultXRange.MinValue;
                         double maxVal = p.globalParameter.chartDefaultXRange.MaxValue;
-                        double eps = 1e-8;
+                        const double eps = 1e-8;
                         minVal = minVal == 0 ? Math.Min(maxVal, 1)*eps : minVal*(1 + eps);
                         maxVal = maxVal*(1 - eps);
                         p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
@@ -387,9 +354,8 @@ namespace fmCalcBlocksLibrary.Blocks
                 {
                     p.value = new fmValue();
                 }
-                DoCalculations();
 
-                return result;
+                return;
             }
         }
 
@@ -419,7 +385,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 return false;
             }
 
-            fmValue eps = new fmValue(1e-10);// *(maxValue - minValue);
+            var eps = new fmValue(1e-10);// *(maxValue - minValue);
             minValue = minValue * (1 - eps);
             maxValue = maxValue * (1 + eps);
 
@@ -436,8 +402,8 @@ namespace fmCalcBlocksLibrary.Blocks
                 return false;
             }
 
-            fmIsOutOfRanges isOutOfRanges = new fmIsOutOfRanges(this, parameter);
-            fmValue falseValue = new fmValue(0);
+            var isOutOfRanges = new fmIsOutOfRanges(this, parameter);
+            var falseValue = new fmValue(0);
             if (isOutOfRanges.Eval(left) == falseValue)
             {
                 minValue = left;
@@ -461,7 +427,7 @@ namespace fmCalcBlocksLibrary.Blocks
             return true;
         }
 
-        bool isGoodResultStatus(Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus)
+        static bool IsGoodResultStatus(Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus)
         {
             bool goodPoint = true;
             foreach (fmResultCheckStatus status in resultSatus.Values)
@@ -477,17 +443,16 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private fmValue FindPointWithMeaningfulResult(fmBlockVariableParameter parameter, fmValue left, fmValue right)
         {
-            fmIsOutOfRanges isAllInRanges = new fmIsOutOfRanges(this, parameter);
 
             {
                 Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus1 = GetResultStatus(parameter, left.value);
-                if (isGoodResultStatus(resultSatus1))
+                if (IsGoodResultStatus(resultSatus1))
                 {
                     return left;
                 }
 
                 Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus2 = GetResultStatus(parameter, right.value);
-                if (isGoodResultStatus(resultSatus2))
+                if (IsGoodResultStatus(resultSatus2))
                 {
                     return right;
                 }
@@ -542,7 +507,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     if (status == fmResultCheckStatus.N_A)
                         throw new Exception("resultSatus1 contains n/a in FindPointWithMeaningfulResult");
 
-                if (isGoodResultStatus(resultSatus1))
+                if (IsGoodResultStatus(resultSatus1))
                 {
                     return mid1;
                 }
@@ -573,11 +538,11 @@ namespace fmCalcBlocksLibrary.Blocks
                     }
                 }
 
-                if (needToGoRight == true && needToGoLeft == false)
+                if (needToGoRight && needToGoLeft == false)
                 {
                     left = mid1;
                 }
-                else if (needToGoRight == false && needToGoLeft == true)
+                else if (needToGoRight == false && needToGoLeft)
                 {
                     right = mid2;
                 }
@@ -594,14 +559,14 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             // We use a fact that all results with min value of parameter are defined, otherwise we assume that there are no solution
             
-            fmIsAllDefinedAndNotNegative isAllDefinedAndNotNegative = new fmIsAllDefinedAndNotNegative(this, parameter);
-            fmValue trueValue = new fmValue(1);
-            fmValue minValue = new fmValue(parameter.globalParameter.chartDefaultXRange.MinValue);
-            fmValue maxValue = new fmValue(parameter.globalParameter.chartDefaultXRange.MaxValue);
+            var isAllDefinedAndNotNegative = new fmIsAllDefinedAndNotNegative(this, parameter);
+            var trueValue = new fmValue(1);
+            var minValue = new fmValue(parameter.globalParameter.chartDefaultXRange.MinValue);
+            var maxValue = new fmValue(parameter.globalParameter.chartDefaultXRange.MaxValue);
 
             if (isAllDefinedAndNotNegative.Eval(minValue) != trueValue)
             {
-                double eps = 1e-9;
+                const double eps = 1e-9;
                 if (minValue.value == 0)
                 {
                     minValue.value += maxValue.value * eps;
@@ -642,7 +607,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private List<fmBlockVariableParameter> GetNAInputsList()
         {
-            List<fmBlockVariableParameter> result = new List<fmBlockVariableParameter>();
+            var result = new List<fmBlockVariableParameter>();
             foreach (fmBlockVariableParameter p in parameters)
             {
                 if (p.group != null && p.IsInputed && p.value.defined == false)
@@ -652,45 +617,12 @@ namespace fmCalcBlocksLibrary.Blocks
             }
             return result;
         }
-        
-        private fmValue GetFirstValidArgument(fmBlockVariableParameter parameter, double a, double b)
-        {
-            Dictionary<fmGlobalParameter, fmResultCheckStatus> startStatus = GetResultStatus(parameter, a);
-            double lo = a;
-            double hi = b;
-            for (int i = 0; i < 40; ++i)
-            {
-                double mid = 0.5*(lo + hi);
-                Dictionary<fmGlobalParameter, fmResultCheckStatus> midStatus = GetResultStatus(parameter, mid);
-                bool validValue = true;
-                foreach(fmGlobalParameter p in midStatus.Keys)
-                {
-                    if (startStatus[p] != fmResultCheckStatus.INSIDE_RANGE
-                        && startStatus[p] == midStatus[p])
-                    {
-                        validValue = false;
-                        break;
-                    }
-                }
-                if (validValue)
-                {
-                    hi = mid;
-                }
-                else
-                {
-                    lo = mid;
-                }
-            }
-
-            fmValue res = new fmValue(lo);
-            return res;
-        }
 
         private Dictionary<fmGlobalParameter, fmValue> GetClueResultsWithSpecialParameterValue(fmBlockVariableParameter parameter, double paramValue)
         {
-            Dictionary<fmGlobalParameter, fmValue> result = new Dictionary<fmGlobalParameter, fmValue>();
+            var result = new Dictionary<fmGlobalParameter, fmValue>();
 
-            List<fmValue> keepedValues = new List<fmValue>();
+            var keepedValues = new List<fmValue>();
             for (int i = 0; i < parameters.Count; ++i)
             {
                 keepedValues.Add(parameters[i].value);
@@ -725,7 +657,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private Dictionary<fmGlobalParameter, fmResultCheckStatus> GetResultStatus(fmBlockVariableParameter parameter, double valueToCheck)
         {
             Dictionary<fmGlobalParameter, fmValue> resultValues = GetClueResultsWithSpecialParameterValue(parameter, valueToCheck);
-            Dictionary<fmGlobalParameter, fmResultCheckStatus> result = new Dictionary<fmGlobalParameter, fmResultCheckStatus>();
+            var result = new Dictionary<fmGlobalParameter, fmResultCheckStatus>();
 
             foreach (fmGlobalParameter p in resultValues.Keys)
             {
@@ -736,7 +668,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
                 else
                 {
-                    double eps = 1e-9;
+                    const double eps = 1e-9;
                     if (fmValue.EpsCompare(curValue.value, 0, eps) < 0)
                     {
                         result[p] = fmResultCheckStatus.NEGATIVE;
@@ -763,7 +695,7 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             Dictionary<fmGlobalParameter, fmValue> result1 = GetClueResultsWithSpecialParameterValue(parameter, x1);
             Dictionary<fmGlobalParameter, fmValue> result2 = GetClueResultsWithSpecialParameterValue(parameter, x2);
-            Dictionary<fmGlobalParameter, fmResultBehaviorStatus> result = new Dictionary<fmGlobalParameter, fmResultBehaviorStatus>();
+            var result = new Dictionary<fmGlobalParameter, fmResultBehaviorStatus>();
             foreach (fmGlobalParameter p in result1.Keys)
             {
                 fmValue val1 = result1[p];
@@ -787,73 +719,16 @@ namespace fmCalcBlocksLibrary.Blocks
             return result;
         }
 
-        private bool IsInRange(double p, double a, double b)
-        {
-            return a <= p && p <= b
-                || b <= p && p <= a;
-        }
-
-        private static List<fmValue> GetNodesList(double a, double b, int n)
-        {
-            List<fmValue> valuesToCheck = new List<fmValue>();
-
-            for (int i = 0; i < n; ++i)
-            {
-                valuesToCheck.Add(new fmValue(a + (b - a) * i / (n - 1)));
-            }
-            return valuesToCheck;
-        }
-
-        private fmValue GetMaxLimit(fmBlockVariableParameter parameter)
-        {
-            return GetFirstValidArgument(parameter,
-                parameter.globalParameter.chartDefaultXRange.MaxValue,
-                parameter.globalParameter.chartDefaultXRange.MinValue);
-        }
-
-        private fmValue GetMinLimit(fmBlockVariableParameter parameter)
-        {
-            return GetFirstValidArgument(parameter,
-                parameter.globalParameter.chartDefaultXRange.MinValue,
-                parameter.globalParameter.chartDefaultXRange.MaxValue);
-        }
-
         private fmBlockVariableParameter FindGroupRepresetator(fmBlockParameterGroup group)
         {
             foreach (fmBlockVariableParameter p in parameters)
             {
-                if (p.group == group && p.IsInputed == true)
+                if (p.group == group && p.IsInputed)
                 {
                     return p;
                 }
             }
             return null;
         }
-
-        //private bool IsParametersInRanges()
-        //{
-        //    foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in parameters)
-        //    {
-        //        if (p.value.Defined == false
-        //            || fmValue.Less(p.value, new fmValue(p.globalParameter.chartDefaultXRange.minValue))
-        //            || fmValue.Greater(p.value, new fmValue(p.globalParameter.chartDefaultXRange.maxValue)))
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    return true;
-        //}
-
-        //internal bool IsParametersDefined()
-        //{
-        //    foreach (fmBlockVariableParameter p in parameters)
-        //    {
-        //        if (p.value.Defined == false)
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //    return true;
-        //}
     }
 }

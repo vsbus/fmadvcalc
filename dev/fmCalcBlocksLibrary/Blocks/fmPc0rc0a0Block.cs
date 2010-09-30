@@ -1,18 +1,19 @@
-using System;
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
-using fmCalculationLibrary.MeasureUnits;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmPc0rc0a0Block : fmBaseBlock
+    public class fmPc0Rc0A0Block : fmBaseBlock
     {
-        private fmBlockVariableParameter Pc0, rc0, a0;
-        private fmBlockConstantParameter rho_s;
-        private fmBlockConstantParameter eps0;
+        // ReSharper disable InconsistentNaming
+        private readonly fmBlockVariableParameter Pc0;
+        private readonly fmBlockVariableParameter rc0;
+        private readonly fmBlockVariableParameter a0;
+        private readonly fmBlockConstantParameter rho_s;
+        private readonly fmBlockConstantParameter eps0;
 
-        private fmBlockParameterGroup Pc_rc_a_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup Pc_rc_a_group = new fmBlockParameterGroup();
 
         public fmValue Pc0_Value
         {
@@ -39,14 +40,16 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return eps0.value; }
             set { eps0.value = value; }
         }
+        // ReSharper restore InconsistentNaming
 
         override public void DoCalculations()
         {
-            fmCalculatorsLibrary.fmPc0Rc0A0Calculator Pc0rc0a0Calculator = new fmCalculatorsLibrary.fmPc0Rc0A0Calculator(AllParameters);
-            Pc0rc0a0Calculator.DoCalculations();
+            var pc0Rc0A0Calculator = new fmCalculatorsLibrary.fmPc0Rc0A0Calculator(AllParameters);
+            pc0Rc0A0Calculator.DoCalculations();
         }
 
-        public fmPc0rc0a0Block(
+        // ReSharper disable InconsistentNaming
+        public fmPc0Rc0A0Block(
             DataGridViewCell Pc_Cell,
             DataGridViewCell rc_Cell,
             DataGridViewCell a_Cell)
@@ -64,6 +67,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
             processOnChange = true;
         }
-        public fmPc0rc0a0Block() : this(null, null, null) { }
+        // ReSharper restore InconsistentNaming
+
+        public fmPc0Rc0A0Block() : this(null, null, null) { }
     }
 }
