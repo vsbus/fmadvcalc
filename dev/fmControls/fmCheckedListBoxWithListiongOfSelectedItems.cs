@@ -1,9 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace fmControls
@@ -25,27 +21,35 @@ namespace fmControls
         {
             InitializeComponent();
             mainCheckedListBox.CheckOnClick = true;
-            mainCheckedListBox.ItemCheck += new ItemCheckEventHandler(mainCheckedListBox_ItemCheck);
-            selectedItemsCheckedListBox.ItemCheck += new ItemCheckEventHandler(selectedItemsCheckedListBox_ItemCheck);
+            mainCheckedListBox.ItemCheck += mainCheckedListBox_ItemCheck;
+            selectedItemsCheckedListBox.ItemCheck += selectedItemsCheckedListBox_ItemCheck;
         }
 
+        // ReSharper disable InconsistentNaming
         void selectedItemsCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        // ReSharper restore InconsistentNaming
         {
             if (e.NewValue == CheckState.Unchecked)
             {
-                CheckedListBox clb = sender as CheckedListBox;
+                var clb = sender as CheckedListBox;
+                // ReSharper disable PossibleNullReferenceException
                 object item = clb.Items[e.Index];
+                // ReSharper restore PossibleNullReferenceException
                 mainCheckedListBox.SetItemChecked(mainCheckedListBox.Items.IndexOf(item), false);
                 e.NewValue = CheckState.Checked;
             }
         }
 
+        // ReSharper disable InconsistentNaming
         void mainCheckedListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        // ReSharper restore InconsistentNaming
         {
-            List<object> items = new List<object>();
+            var items = new List<object>();
 
-            CheckedListBox clb = sender as CheckedListBox;
+            var clb = sender as CheckedListBox;
+            // ReSharper disable PossibleNullReferenceException
             for (int i = 0; i < clb.Items.Count; ++i)
+            // ReSharper restore PossibleNullReferenceException
             {
                 if (clb.GetItemChecked(i) ^ (e.Index == i))
                     items.Add(clb.Items[i]);
@@ -70,7 +74,7 @@ namespace fmControls
             mainCheckedListBox.Items.Add(item);
         }
 
-        private void FillListBox(ListBox listBox, List<object> items)
+        private static void FillListBox(ListBox listBox, List<object> items)
         {
             for (int i = listBox.Items.Count - 1; i >= 0; --i)
                 if (!items.Contains(listBox.Items[i]))
