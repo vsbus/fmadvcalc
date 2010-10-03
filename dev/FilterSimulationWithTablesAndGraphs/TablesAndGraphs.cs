@@ -406,18 +406,25 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateIsInputed(fmGlobalParameter inputedParameter)
         {
-            if (!m_isUseLocalParams)
-            {
-                foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
-                {
-                    simData.internalSimulationData.UpdateIsInputed(inputedParameter);
-                }
-            }
-            else
+            if (m_isUseLocalParams)
             {
                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                 {
                     localParameters.filterMachiningBlock.UpdateIsInputed(localParameters.filterMachiningBlock.GetParameterByName(inputedParameter.name));
+                }
+            }
+            else
+            {
+                foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
+                {
+                    foreach (var p in simData.externalSimulation.Parameters.Values)
+                    {
+                        if (p is fmCalculationVariableParameter)
+                        {
+                            ((fmCalculationVariableParameter)simData.internalSimulationData.parameters[p.globalParameter]).isInputed = ((fmCalculationVariableParameter)p).isInputed;
+                        }
+                    }
+                    simData.internalSimulationData.UpdateIsInputed(inputedParameter);
                 }
             }
         }
@@ -570,6 +577,7 @@ namespace FilterSimulationWithTablesAndGraphs
         }
 
         #endregion
+
         public void UpdateUnitsInTablesAndGraphs()
         {
             foreach (DataGridViewColumn col in additionalParametersTable.Columns)
@@ -607,93 +615,6 @@ namespace FilterSimulationWithTablesAndGraphs
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
         }
-
-        //private void BindLocalParametersListToTable()
-        //{
-        //    additionalParametersTable.Rows.Clear();
-
-        //    for (int i = 0; i < localInputParametersList.Count; i++)
-        //    {
-        //        //fmFilterSimulationData tempSim = localInputParametersList[i].internalSimulationData;
-
-        //        DataGridViewRow row =
-        //            additionalParametersTable.Rows[additionalParametersTable.Rows.Add()];
-        //        row.Cells["AdditionalParametersCheckBoxColumn"].Value = localInputParametersList[i].isChecked;
-
-        //        fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlock fmb = new fmFilterMachiningBlock(
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.A),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Dp),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.sf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.n),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.tc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.tf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.tr),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.hc_over_tf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.dhc_over_dt),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.hc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Mf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Vf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.mf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.vf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.ms),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.vs),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.msus),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.vsus),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.mc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.vc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Msus),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Vsus),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Vc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Mc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Ms),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Vs),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qf_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qs),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qs_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qc_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qsus),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qsus_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmsus),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmsus_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qms),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qms_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmf_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Qmc_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qf_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qs),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qs_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qc_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qsus),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qsus_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmsus),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmsus_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qms),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qms_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmf),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmf_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qms),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.qmc_d),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.eps),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.kappa),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.Pc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.rc),
-        //            GetLocalInputParametersCell(row, fmGlobalParameter.a));
-
-        //        foreach (fmGlobalParameter param in tempSim.parameters.Keys)
-        //        {
-        //            int idx = GetColumnIndexByHeader(additionalParametersTable, param.name);
-        //            row.Cells[idx].Value = tempSim.parameters[param].value / param.unitFamily.CurrentUnit.Coef;
-        //        }
-        //    }
-
-        //    UpdateVisibilityOfColumnsInLocalParametrsTable();
-        //}
 
         private void UpdateVisibilityOfColumnsInLocalParametrsTable()
         {
