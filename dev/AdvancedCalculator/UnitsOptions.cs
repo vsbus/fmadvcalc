@@ -12,7 +12,7 @@ namespace AdvancedCalculator
             InitializeComponent();
         }
 
-        // ReSharper disable InconsistentNaming
+        //  ReSharper disable InconsistentNaming
         private void UnitsOptions_Load(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
