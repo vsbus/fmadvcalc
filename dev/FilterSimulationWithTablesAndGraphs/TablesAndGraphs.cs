@@ -637,7 +637,12 @@ namespace FilterSimulationWithTablesAndGraphs
         private void BindCalculatedResultsToTable()
         {
             int yParametersCount = m_displayingResults.YParameters == null ? 0 : m_displayingResults.YParameters.Count;
-            coordinatesGrid.ColumnCount = 1 + yParametersCount;
+            
+            coordinatesGrid.ColumnCount = 1;
+            for (int i = 0; i < yParametersCount; ++i)
+            {
+                coordinatesGrid.ColumnCount += m_displayingResults.YParameters[i].Arrays.Count;
+            }
 
             if (m_displayingResults.XParameter == null)
             {

@@ -149,8 +149,11 @@ namespace FilterSimulationWithTablesAndGraphs
                     if (coordinatesGrid.CurrentCell != null)
                     {
                         int index = coordinatesGrid.CurrentCell.RowIndex;
-                        x = m_displayingResults.XParameter.Values[index].value;
-                        fmZedGraphControl1.HighlightPoints(x);
+                        if (0 <= index && index < m_displayingResults.XParameter.Values.Length)
+                        {
+                            x = m_displayingResults.XParameter.Values[index].value;
+                            fmZedGraphControl1.HighlightPoints(x);
+                        }
                     }
                 }
 
