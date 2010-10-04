@@ -16,7 +16,7 @@ namespace Tests
         
             if (expected!= null)
             {
-                Assert.IsNotNull(actual, prefix + ": actual list is null");
+                Assert.IsNotNull(actual, prefix + ": actual list is null") ;
                 
                 Assert.AreEqual(expected.Count, actual.Count, prefix + ": different list's counts  (result{0})", ListToString(actual));
 
