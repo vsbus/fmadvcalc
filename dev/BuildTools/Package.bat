@@ -1,0 +1,1 @@
+7z a AdvancedCalculator.1.0.198.0.7z "..\AdvancedCalculator\bin\Release\*.*"
