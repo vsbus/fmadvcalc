@@ -1,16 +1,16 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FilterSimulationWithTablesAndGraphs")]
+[assembly: AssemblyTitle("fmCalcBlocksLibrary")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("WareZ Provider ")]
-[assembly: AssemblyProduct("FilterSimulationWithTablesAndGraphs")]
-[assembly: AssemblyCopyright("Copyright © WareZ Provider  2010")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("fmCalcBlocksLibrary")]
+[assembly: AssemblyCopyright("Copyright �  2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3aa32a81-6cd6-4046-abd0-2af809615d83")]
+[assembly: Guid("2a434738-d440-4272-9cdb-922c0290b824")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("<MAJOR>.<MINOR>.<BUILD>.<REVISION>")]
-[assembly: AssemblyFileVersion("<MAJOR>.<MINOR>.<BUILD>.<REVISION>")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
