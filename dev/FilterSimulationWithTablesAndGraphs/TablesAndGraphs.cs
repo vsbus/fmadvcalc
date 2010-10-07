@@ -695,7 +695,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             fmZedGraphControl1.GraphPane.CurveList.Clear();
 
-            if (m_displayingResults.YParameters == null)
+            if (m_displayingResults.YParameters == null || m_displayingResults.XParameter == null)
             {
                 return;
             }
@@ -1106,6 +1106,10 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             FillListBox(listBoxXAxis, inputNames);
+            if (listBoxXAxis.Text == "" && inputNames.Contains(fmGlobalParameter.tf.name))
+            {
+                listBoxXAxis.Text = fmGlobalParameter.tf.name;
+            }
 
             var outputNames = new List<string>();
 
@@ -1118,6 +1122,18 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             FillListBox(listBoxYAxis, outputNames);
+
+            if (listBoxYAxis.CheckedItems.Count == 0)
+            {
+                if (outputNames.Contains(fmGlobalParameter.hc.name))
+                {
+                    listBoxYAxis.SetItemChecked(outputNames.IndexOf(fmGlobalParameter.hc.name), true);
+                }
+                if (outputNames.Contains(fmGlobalParameter.qf.name))
+                {
+                    listBoxYAxis.SetItemChecked(outputNames.IndexOf(fmGlobalParameter.qf.name), true);
+                }
+            }
         }
 
         private IEnumerable<fmGlobalParameter> GetCommonInputParametersList()
