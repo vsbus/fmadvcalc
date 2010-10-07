@@ -468,7 +468,7 @@ namespace FilterSimulation
 
             foreach (DataGridViewRow row in simSeriesDataGrid.Rows) if (row.Visible)
                 {
-                    Guid guid = (Guid)row.Cells[simSeriesGuidColumn.Index].Value;
+                    var guid = (Guid)row.Cells[simSeriesGuidColumn.Index].Value;
                     fmFilterSimSerie serie = sol.FindSerie(guid);
 
                     if (row.Cells[row.DataGridView.SortedColumn.Index].Value == null)
@@ -661,8 +661,8 @@ namespace FilterSimulation
             var parToCell = new Dictionary<fmGlobalParameter, DataGridViewCell>();
             for (int i = 0; i < voidBlock.Parameters.Count; ++i)
             {
-                commonCalcBlockDataGrid["commonCalcBlockParameterNameColumn", i].Value = voidBlock.Parameters[i].globalParameter.name;
-                parToCell[voidBlock.Parameters[i].globalParameter] = commonCalcBlockDataGrid["commonCalcBlockParameterValueColumn", i];
+                commonCalcBlockDataGrid[commonCalcBlockParameterNameColumn.Index, i].Value = voidBlock.Parameters[i].globalParameter.name;
+                parToCell[voidBlock.Parameters[i].globalParameter] = commonCalcBlockDataGrid[commonCalcBlockParameterValueColumn.Index, i];
             }
 
             m_commonFilterMachiningBlock = new fmFilterMachiningBlockWithLimits();
@@ -841,7 +841,7 @@ namespace FilterSimulation
             {
                 for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                 {
-                    commonCalcBlockDataGrid["commonCalcBlockUnitColumn", i].Value = m_commonFilterMachiningBlock.Parameters[i].globalParameter.UnitName;
+                    commonCalcBlockDataGrid[commonCalcBlockUnitColumn.Index, i].Value = m_commonFilterMachiningBlock.Parameters[i].globalParameter.UnitName;
                 }
             }
         }
