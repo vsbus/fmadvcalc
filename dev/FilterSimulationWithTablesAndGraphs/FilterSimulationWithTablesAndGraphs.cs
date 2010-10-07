@@ -17,8 +17,6 @@ namespace FilterSimulationWithTablesAndGraphs
             ReadUseParamsCheckBoxAndApply();
             rowsQuantity.Text = m_rowsQuantity.ToString();
 
-            CreateDefaultXAxisParametersListForDisplaying();
-
             //// BEGIN DEBUG CODE
             //AddRow();
             //fmLocalBlocks[0].A_Value = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
@@ -26,28 +24,6 @@ namespace FilterSimulationWithTablesAndGraphs
             //fmLocalBlocks[0].sf_Value = new fmValue(30 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
             //fmLocalBlocks[0].n_Value = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
             //// END DEBUG CODE
-        }
-
-        private void CreateDefaultXAxisParametersListForDisplaying()
-        {
-            yAxisListParametersToDisplay = new List<fmGlobalParameter>
-                                               {
-                                                   fmGlobalParameter.A,
-                                                   fmGlobalParameter.Dp,
-                                                   fmGlobalParameter.hc,
-                                                   fmGlobalParameter.hc_over_tf,
-                                                   fmGlobalParameter.Mf,
-                                                   fmGlobalParameter.Ms,
-                                                   fmGlobalParameter.Msus,
-                                                   fmGlobalParameter.n,
-                                                   fmGlobalParameter.Qms,
-                                                   fmGlobalParameter.Qmsus,
-                                                   fmGlobalParameter.Qsus,
-                                                   fmGlobalParameter.sf,
-                                                   fmGlobalParameter.tc,
-                                                   fmGlobalParameter.tf,
-                                                   fmGlobalParameter.tr
-                                               };
         }
 
         private void DisplayCharts(fmFilterSimSolution sol)

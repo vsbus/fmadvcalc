@@ -2188,8 +2188,8 @@ namespace FilterSimulation
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Splitter splitter6;
-        private fmDataGrid.fmDataGrid commonCalcBlockDataGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commonCalcBlockParameterNameColumn;
+        protected fmDataGrid.fmDataGrid commonCalcBlockDataGrid;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn commonCalcBlockParameterNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn commonCalcBlockUnitColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonCalcBlockMinAbsColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonCalcBlockMinLocalColumn;

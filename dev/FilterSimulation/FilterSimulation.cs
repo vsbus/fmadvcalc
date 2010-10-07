@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ namespace FilterSimulation
         private readonly fmFilterSimSolution m_fSolution = new fmFilterSimSolution();
         private fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlockWithLimits m_commonFilterMachiningBlock;
         private CheckBox m_ckBox;
+        public List<fmGlobalParameter> parametersToDisplay;
 
         public fmFilterSimulationControl()
         {
@@ -165,6 +167,8 @@ namespace FilterSimulation
             fProj.Keep();
             fProj2.Keep();
 
+            CreateDefaultListOfParametersForDisplaying();
+
             DisplaySolution(m_fSolution);
 
             projectDataGrid.CurrentCell = projectDataGrid.Rows[0].Cells[projectNameColumn.Index];
@@ -172,6 +176,52 @@ namespace FilterSimulation
             UpdateCurrentObjectAndDisplaySolution(projectDataGrid);
 
             InitializeHeaderCheckBox();
+        }
+
+        private void CreateDefaultListOfParametersForDisplaying()
+        {
+            parametersToDisplay = new List<fmGlobalParameter>
+                                               {
+                                                    fmGlobalParameter.A,
+                                                    fmGlobalParameter.Dp,
+                                                    fmGlobalParameter.sf,
+                                                    fmGlobalParameter.sr,
+                                                    fmGlobalParameter.n,
+                                                    fmGlobalParameter.tc,
+                                                    fmGlobalParameter.tf,
+                                                    fmGlobalParameter.tr,
+                                                    fmGlobalParameter.hc,
+                                                    fmGlobalParameter.Qf,
+                                                    fmGlobalParameter.Qs,
+                                                    fmGlobalParameter.Qc,
+                                                    fmGlobalParameter.Qsus,
+                                                    fmGlobalParameter.Qmsus,
+                                                    fmGlobalParameter.Qms,
+                                                    fmGlobalParameter.Qmf,
+                                                    fmGlobalParameter.Qmc,
+                                                    fmGlobalParameter.qf,
+                                                    fmGlobalParameter.qs,
+                                                    fmGlobalParameter.qc,
+                                                    fmGlobalParameter.qsus,
+                                                    fmGlobalParameter.qmsus,
+                                                    fmGlobalParameter.qms,
+                                                    fmGlobalParameter.qmf,
+                                                    fmGlobalParameter.qmc,
+                                                    fmGlobalParameter.Vsus,
+                                                    fmGlobalParameter.Mf,
+                                                    fmGlobalParameter.Vf,
+                                                    fmGlobalParameter.Vc,
+                                                    fmGlobalParameter.Mc,
+                                                    fmGlobalParameter.Ms,
+                                                    fmGlobalParameter.Vs,
+                                                    fmGlobalParameter.Msus,
+                                                    fmGlobalParameter.eps,
+                                                    fmGlobalParameter.kappa,
+                                                    fmGlobalParameter.Pc,
+                                                    fmGlobalParameter.rc,
+                                                    fmGlobalParameter.a,
+                                                    fmGlobalParameter.Rm
+                                               };
         }
 
         #region Machine Table

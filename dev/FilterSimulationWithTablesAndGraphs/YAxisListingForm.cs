@@ -35,14 +35,14 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private fmCalculationLibrary.fmGlobalParameter GetParameterInListBoxByIndex(int i)
         {
-// ReSharper disable AssignNullToNotNullAttribute
+            // ReSharper disable AssignNullToNotNullAttribute
             return fmCalculationLibrary.fmGlobalParameter.parametersByName[checkedListBox1.Items[i] as string];
-// ReSharper restore AssignNullToNotNullAttribute
+            // ReSharper restore AssignNullToNotNullAttribute
         }
 
-// ReSharper disable InconsistentNaming
+        // ReSharper disable InconsistentNaming
         private void okButton_Click(object sender, EventArgs e)
-// ReSharper restore InconsistentNaming
+        // ReSharper restore InconsistentNaming
         {
             DialogResult = DialogResult.OK;
             Close();

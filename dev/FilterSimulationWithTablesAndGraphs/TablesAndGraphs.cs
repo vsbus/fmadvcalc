@@ -123,8 +123,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private bool m_loadingXRange;
         private readonly fmDisplayingResults m_displayingResults = new fmDisplayingResults();
         private object m_highLightCaller;
-        public List<fmGlobalParameter> yAxisListParametersToDisplay;
-
+        
         private static void FillListBox(ListBox listBox, List<string> strings)
         {
             for (int i = listBox.Items.Count - 1; i >= 0; --i)
@@ -346,12 +345,6 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
             }
-        }
-
-        private static string GetParameterNameFromHeader(string headerText)
-        {
-            string[] s = headerText.Split('(');
-            return s[0].Trim();
         }
 
         private static int GetColumnIndexByHeader(DataGridView grid, string header)
@@ -639,7 +632,9 @@ namespace FilterSimulationWithTablesAndGraphs
             coordinatesGrid.ColumnCount = 1;
             for (int i = 0; i < yParametersCount; ++i)
             {
+                // ReSharper disable PossibleNullReferenceException
                 coordinatesGrid.ColumnCount += m_displayingResults.YParameters[i].Arrays.Count;
+                // ReSharper restore PossibleNullReferenceException
             }
 
             if (m_displayingResults.XParameter == null)
@@ -1116,7 +1111,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             foreach (fmGlobalParameter p in fmGlobalParameter.parameters)
             {
-                if (yAxisListParametersToDisplay.Contains(p))
+                if (parametersToDisplay.Contains(p))
                 {
                     outputNames.Add(p.name);
                 }

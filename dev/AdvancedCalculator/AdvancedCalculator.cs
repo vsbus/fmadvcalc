@@ -57,10 +57,10 @@ namespace AdvancedCalculator
         // ReSharper restore InconsistentNaming
         {
             var yalForm = new fmYAxisListingForm();
-            yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.yAxisListParametersToDisplay);
+            yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.parametersToDisplay);
             if (yalForm.ShowDialog() == DialogResult.OK)
             {
-                filterSimulationWithTablesAndGraphs1.yAxisListParametersToDisplay = yalForm.GetCheckedItems();
+                filterSimulationWithTablesAndGraphs1.parametersToDisplay = yalForm.GetCheckedItems();
                 filterSimulationWithTablesAndGraphs1.UpdateAll();
             }
         }

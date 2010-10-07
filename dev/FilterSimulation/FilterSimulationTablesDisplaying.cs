@@ -387,7 +387,9 @@ namespace FilterSimulation
             displayingSolution = false;
         }
 
+// ReSharper disable InconsistentNaming
         void eps0Kappa0Block_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+// ReSharper restore InconsistentNaming
         {
             displayingSolution = true;
             foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
@@ -429,11 +431,15 @@ namespace FilterSimulation
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.rm0HceBlock);
         }
+// ReSharper disable InconsistentNaming
         private static void CopySimulationValuesToPc0rc0a0ncBlock(fmFilterSimulation sim)
+// ReSharper restore InconsistentNaming
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.pc0Rc0A0Block);
         }
+// ReSharper disable InconsistentNaming
         private static void CopySimulationValuesToEps0Kappa0neBlock(fmFilterSimulation sim)
+// ReSharper restore InconsistentNaming
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.eps0Kappa0Block);
         }
@@ -618,8 +624,29 @@ namespace FilterSimulation
 
                 CopySimToCommonFilterMachiningBlock(sol.currentObjects.Simulation);
 
+                ShowHideSelectedParametersInSimulationDataGrid();
+
                 displayingSolution = false;
             }
+        }
+
+        private void ShowHideSelectedParametersInSimulationDataGrid()
+        {
+            foreach (DataGridViewColumn col in simulationDataGrid.Columns)
+            {
+                string pName = GetParameterNameFromHeader(col.HeaderText);
+                if (fmGlobalParameter.parametersByName.ContainsKey(pName))
+                {
+                    var p = fmGlobalParameter.parametersByName[pName];
+                    col.Visible = parametersToDisplay.Contains(p);
+                }
+            }
+        }
+
+        protected static string GetParameterNameFromHeader(string headerText)
+        {
+            string[] s = headerText.Split('(');
+            return s[0].Trim();
         }
 
         private void CopySimToCommonFilterMachiningBlock(fmFilterSimulation sim)
@@ -637,7 +664,8 @@ namespace FilterSimulation
 
                     for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                     {
-                        commonCalcBlockDataGrid.Rows[i].Visible = m_commonFilterMachiningBlock.Parameters[i].group != null;
+                        commonCalcBlockDataGrid.Rows[i].Visible = m_commonFilterMachiningBlock.Parameters[i].group != null
+                            && parametersToDisplay.Contains(m_commonFilterMachiningBlock.Parameters[i].globalParameter);
                     }
 
                     for (int i = 0; i < m_commonFilterMachiningBlock.ConstantParameters.Count; ++i)
@@ -882,7 +910,9 @@ namespace FilterSimulation
             }
         }
 
+// ReSharper disable InconsistentNaming
         void susBlock_ValuesChanged(object sender)
+// ReSharper restore InconsistentNaming
         {
             var susBlock = sender as fmSuspensionWithEtafBlock;
             fmFilterSimulation sim = m_fSolution.FindSimulation(susBlock);
@@ -929,7 +959,9 @@ namespace FilterSimulation
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
             sim.pc0Rc0A0Block.CalculateAndDisplay();
         }
+// ReSharper disable InconsistentNaming
         void rmHceBlock_ValuesChanged(object sender)
+// ReSharper restore InconsistentNaming
         {
             var rmHceBlock = sender as fmRm0HceBlock;
             fmFilterSimulation sim = m_fSolution.FindSimulation(rmHceBlock);
@@ -963,13 +995,10 @@ namespace FilterSimulation
                 }
                 return;
             }
-            else
-            {
-                fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.pc0Rc0A0Block, sim);
-                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.rm0HceBlock);
-                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
-                sim.rm0HceBlock.CalculateAndDisplay();
-            }
+            fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.pc0Rc0A0Block, sim);
+            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.rm0HceBlock);
+            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
+            sim.rm0HceBlock.CalculateAndDisplay();
         }
 
         // ReSharper disable InconsistentNaming
