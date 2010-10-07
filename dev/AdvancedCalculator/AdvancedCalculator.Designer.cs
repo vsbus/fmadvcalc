@@ -82,29 +82,29 @@ namespace AdvancedCalculator
             // unitsToolStripMenuItem
             // 
             this.unitsToolStripMenuItem.Name = "unitsToolStripMenuItem";
-            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.unitsToolStripMenuItem.Text = "Units";
             this.unitsToolStripMenuItem.Click += new System.EventHandler(this.unitsToolStripMenuItem_Click);
             // 
             // precisionToolStripMenuItem
             // 
             this.precisionToolStripMenuItem.Name = "precisionToolStripMenuItem";
-            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.precisionToolStripMenuItem.Text = "Precision";
             this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
             // 
             // rangesToolStripMenuItem
             // 
             this.rangesToolStripMenuItem.Name = "rangesToolStripMenuItem";
-            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.rangesToolStripMenuItem.Text = "Ranges";
             this.rangesToolStripMenuItem.Click += new System.EventHandler(this.rangesToolStripMenuItem_Click);
             // 
             // yaxisParametersToolStripMenuItem
             // 
             this.yaxisParametersToolStripMenuItem.Name = "yaxisParametersToolStripMenuItem";
-            this.yaxisParametersToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-            this.yaxisParametersToolStripMenuItem.Text = "Y-axis parameters";
+            this.yaxisParametersToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.yaxisParametersToolStripMenuItem.Text = "Parameters to display";
             this.yaxisParametersToolStripMenuItem.Click += new System.EventHandler(this.yaxisParametersToolStripMenuItem_Click);
             // 
             // filterSimulationWithTablesAndGraphs1
