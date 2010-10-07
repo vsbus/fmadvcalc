@@ -268,7 +268,7 @@ namespace FilterSimulation
                 {
                     sim.rm0HceBlock = new fmRm0HceBlock(
                         FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Rm0").Cells[epsKappaCol.Index],
-                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce").Cells[epsKappaCol.Index]);
+                        FindRowByValueInColumn(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce0").Cells[epsKappaCol.Index]);
 
                     sim.rm0HceBlock.ValuesChanged += rmHceBlock_ValuesChanged;
                     sim.rm0HceBlock.ValuesChangedByUser += rm0HceBlock_ValuesChangedByUser;
@@ -762,7 +762,7 @@ namespace FilterSimulation
                 WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "a0", epsKappaUnits.Index, fmGlobalParameter.a.unitFamily);
                 WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "nc", epsKappaUnits.Index, fmGlobalParameter.nc.unitFamily);
                 WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Rm0", epsKappaUnits.Index, fmGlobalParameter.Rm.unitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce", epsKappaUnits.Index, fmGlobalParameter.hce.unitFamily);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce0", epsKappaUnits.Index, fmGlobalParameter.hce0.unitFamily);
 
                 WriteUnitToHeader(simulationDataGrid.Columns[simulationFilterAreaColumn.Index].HeaderCell, fmGlobalParameter.A.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_DpColumn.Index].HeaderCell, fmGlobalParameter.Dp.unitFamily);

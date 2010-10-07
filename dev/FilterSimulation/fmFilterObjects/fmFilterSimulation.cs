@@ -42,7 +42,7 @@ namespace FilterSimulation.fmFilterObjects
                                                                  fmGlobalParameter.kappa0, fmGlobalParameter.ne,
                                                                  fmGlobalParameter.Pc0, fmGlobalParameter.rc0,
                                                                  fmGlobalParameter.a0, fmGlobalParameter.nc,
-                                                                 fmGlobalParameter.hce, fmGlobalParameter.Rm0
+                                                                 fmGlobalParameter.hce0, fmGlobalParameter.Rm0
                                                              };
             foreach (fmGlobalParameter p in materialParametersList)
             {
@@ -89,7 +89,7 @@ namespace FilterSimulation.fmFilterObjects
             
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.nc));
 
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hce));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hce0));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Rm0));
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.A));
@@ -192,7 +192,7 @@ namespace FilterSimulation.fmFilterObjects
             result.Add(fmGlobalParameter.nc);
 
             result.Add(fmGlobalParameter.Rm0);
-            result.Add(fmGlobalParameter.hce);
+            result.Add(fmGlobalParameter.hce0);
             
             List<fmGlobalParameter> filterMachiningParametersList = fmCalculationOptionHelper.GetParametersListThatCanBeInput(filterMachiningCalculationOption);
             result.AddRange(filterMachiningParametersList);
@@ -447,7 +447,7 @@ namespace FilterSimulation.fmFilterObjects
             
             Parameters[fmGlobalParameter.ne] = simulation.Parameters[fmGlobalParameter.ne];
             
-            Parameters[fmGlobalParameter.hce] = simulation.Parameters[fmGlobalParameter.hce];
+            Parameters[fmGlobalParameter.hce0] = simulation.Parameters[fmGlobalParameter.hce0];
             Parameters[fmGlobalParameter.Rm0] = simulation.Parameters[fmGlobalParameter.Rm0];
         }
 

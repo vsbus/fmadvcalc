@@ -142,7 +142,7 @@ namespace fmCalculatorsLibrary
             var Cm = variables[fmGlobalParameter.Cm];
             var ne = variables[fmGlobalParameter.ne];
             var nc = variables[fmGlobalParameter.nc];
-            var hce = variables[fmGlobalParameter.hce];
+            var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
             eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
@@ -564,7 +564,7 @@ namespace fmCalculatorsLibrary
                 var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
                 var rho_sus = variables[fmGlobalParameter.rho_sus] as fmCalculationConstantParameter;
                 var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
-                var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+                var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
                 // ReSharper restore InconsistentNaming
 
                 hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
@@ -733,7 +733,7 @@ namespace fmCalculatorsLibrary
             var Cm = variables[fmGlobalParameter.Cm];
             var ne = variables[fmGlobalParameter.ne];
             var nc = variables[fmGlobalParameter.nc];
-            var hce = variables[fmGlobalParameter.hce];
+            var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
             eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
@@ -1157,7 +1157,7 @@ namespace fmCalculatorsLibrary
             var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
             var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
             var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
             eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
@@ -1264,7 +1264,7 @@ namespace fmCalculatorsLibrary
             var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
             var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
             var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
             eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
@@ -1360,7 +1360,7 @@ namespace fmCalculatorsLibrary
             var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
             var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
             var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
             eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
@@ -1429,7 +1429,7 @@ namespace fmCalculatorsLibrary
                 var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
                 var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
                 var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-                var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+                var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
                 // ReSharper restore InconsistentNaming
 
                 DoSubCalculationsStandart4_sf_tr_n_tc_tf();
@@ -1512,7 +1512,7 @@ namespace fmCalculatorsLibrary
             var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
             var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
             var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
             Dp.value = fmFilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vsus(nc.value, ne.value, eta_f.value, A.value, tf.value, Cv.value, eps0.value, Pc0.value, hce.value, Vsus.value);
@@ -1544,7 +1544,7 @@ namespace fmCalculatorsLibrary
             var Cv = variables[fmGlobalParameter.Cv] as fmCalculationConstantParameter;
             var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
             var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
             Dp.value = fmFilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(nc.value, ne.value, eta_f.value, A.value, tf.value, Cv.value, eps0.value, Pc0.value, hce.value, Vf.value);
@@ -1625,7 +1625,7 @@ namespace fmCalculatorsLibrary
             var Cm = variables[fmGlobalParameter.Cm] as fmCalculationConstantParameter;
             var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
             var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
-            var hce = variables[fmGlobalParameter.hce] as fmCalculationConstantParameter;
+            var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
             eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);

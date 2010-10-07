@@ -42,7 +42,7 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell hce_Cell)
         {
             AddParameter(ref Rm0, fmGlobalParameter.Rm0, Rm0_Cell, false);
-            AddParameter(ref hce, fmGlobalParameter.hce, hce_Cell, true);
+            AddParameter(ref hce, fmGlobalParameter.hce0, hce_Cell, true);
 
             AddConstantParameter(ref Pc0, fmGlobalParameter.Pc0);
 

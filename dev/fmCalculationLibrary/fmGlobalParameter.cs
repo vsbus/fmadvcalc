@@ -91,7 +91,7 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter a0;
         public static fmGlobalParameter Rm;
         public static fmGlobalParameter Rm0;
-        public static fmGlobalParameter hce;
+        public static fmGlobalParameter hce0;
         public static fmGlobalParameter ne;
         public static fmGlobalParameter rho_f;
         public static fmGlobalParameter rho_s;
@@ -135,7 +135,7 @@ namespace fmCalculationLibrary
 
             AddParameter(ref nc, new fmGlobalParameter("nc", fmUnitFamily.NoUnitFamily, new fmRange(0, 2)));
             
-            AddParameter(ref hce, new fmGlobalParameter("hce", fmUnitFamily.LengthFamily, new fmRange(0, 40)));
+            AddParameter(ref hce0, new fmGlobalParameter("hce0", fmUnitFamily.LengthFamily, new fmRange(0, 40)));
             AddParameter(ref Rm0, new fmGlobalParameter("Rm0", fmUnitFamily.FilterMediumResistanceFamily, new fmRange(0, 10)));
             
             AddParameter(ref A, new fmGlobalParameter("A", fmUnitFamily.AreaFamily, new fmRange(0.01, 200)));

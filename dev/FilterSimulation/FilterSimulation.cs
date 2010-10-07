@@ -143,8 +143,8 @@ namespace FilterSimulation
             sim.Parameters[fmGlobalParameter.nc].value = new fmValue(0.3 * fmUnitFamily.NoUnitFamily.CurrentUnit.Coef);
             ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.nc]).isInputed = true;
 
-            sim.Parameters[fmGlobalParameter.hce].value = new fmValue(5 * fmUnitFamily.LengthFamily.CurrentUnit.Coef);
-            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.hce]).isInputed = true;
+            sim.Parameters[fmGlobalParameter.hce0].value = new fmValue(5 * fmUnitFamily.LengthFamily.CurrentUnit.Coef);
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.hce0]).isInputed = true;
 
             sim.Parameters[fmGlobalParameter.Cm].value = new fmValue(20 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
             ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.Cm]).isInputed = true;

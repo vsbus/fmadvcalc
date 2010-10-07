@@ -787,7 +787,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref rc, fmGlobalParameter.rc, rc_Cell, false);
             AddParameter(ref a, fmGlobalParameter.a, a_Cell, false);
 
-            AddConstantParameter(ref hce, fmGlobalParameter.hce);
+            AddConstantParameter(ref hce, fmGlobalParameter.hce0);
             AddConstantParameter(ref Pc0, fmGlobalParameter.Pc0);
             AddConstantParameter(ref nc, fmGlobalParameter.nc);
             AddConstantParameter(ref eps0, fmGlobalParameter.eps0);

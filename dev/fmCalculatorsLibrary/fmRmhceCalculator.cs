@@ -12,7 +12,7 @@ namespace fmCalculatorsLibrary
         {
             // ReSharper disable InconsistentNaming
             var Rm = variables[fmGlobalParameter.Rm] as fmCalculationVariableParameter;
-            var hce = variables[fmGlobalParameter.hce] as fmCalculationVariableParameter;
+            var hce = variables[fmGlobalParameter.hce0] as fmCalculationVariableParameter;
             var Pc = variables[fmGlobalParameter.Pc] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
@@ -22,7 +22,7 @@ namespace fmCalculatorsLibrary
             else if (hce.isInputed)
                 Rm.value = fmRmhceEquations.Eval_Rm_From_hce_Pc(hce.value, Pc.value);
             else
-                throw new Exception("Rm or hce must be inputed");
+                throw new Exception("Rm or hce0 must be inputed");
             // ReSharper restore PossibleNullReferenceException
         }
     }
