@@ -321,13 +321,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateVisibilityOfColumnsInSelectedSimulationsTable()
         {
-            var inputs = new List<fmGlobalParameter>(fmGlobalParameter.parameters);
-            inputs.Remove(fmGlobalParameter.eta_f);
-            inputs.Remove(fmGlobalParameter.rho_f);
-            inputs.Remove(fmGlobalParameter.rho_s);
-            inputs.Remove(fmGlobalParameter.rho_sus);
-            inputs.Remove(fmGlobalParameter.ne);
-            inputs.Remove(fmGlobalParameter.nc);
+            var inputs = new List<fmGlobalParameter>();
+            foreach (var p in new fmFilterMachiningBlock().Parameters)
+            {
+                inputs.Add(p.globalParameter);
+            }
 
             foreach (DataGridViewColumn col in selectedSimulationParametersTable.Columns)
             {
