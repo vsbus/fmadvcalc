@@ -38,6 +38,7 @@ namespace AdvancedCalculator
             this.rangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yaxisParametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterSimulationWithTablesAndGraphs1 = new FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs();
+            this.sAVEONDISKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,6 +56,7 @@ namespace AdvancedCalculator
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sAVEONDISKToolStripMenuItem,
             this.saveAllToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
@@ -64,7 +66,7 @@ namespace AdvancedCalculator
             // 
             this.saveAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAllToolStripMenuItem.Image")));
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.saveAllToolStripMenuItem.Text = "Save All";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
@@ -115,6 +117,13 @@ namespace AdvancedCalculator
             this.filterSimulationWithTablesAndGraphs1.Size = new System.Drawing.Size(931, 645);
             this.filterSimulationWithTablesAndGraphs1.TabIndex = 2;
             // 
+            // sAVEONDISKToolStripMenuItem
+            // 
+            this.sAVEONDISKToolStripMenuItem.Name = "sAVEONDISKToolStripMenuItem";
+            this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.sAVEONDISKToolStripMenuItem.Text = "SAVE ON DISK";
+            this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.sAVEONDISKToolStripMenuItem_Click);
+            // 
             // fmAdvancedCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -144,6 +153,7 @@ namespace AdvancedCalculator
         private System.Windows.Forms.ToolStripMenuItem rangesToolStripMenuItem;
         private FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs filterSimulationWithTablesAndGraphs1;
         private System.Windows.Forms.ToolStripMenuItem yaxisParametersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sAVEONDISKToolStripMenuItem;
 
 
 

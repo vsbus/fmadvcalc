@@ -20,6 +20,18 @@ namespace FilterSimulation.fmFilterObjects
                 newSus.CopyFrom(sus);
             }
         }
+
+        internal void Serialize(System.IO.TextWriter output)
+        {
+            output.WriteLine("    ProjectData Begin");
+            output.WriteLine("        name = {0}", name);
+            output.WriteLine("        susListSize = {0}", susList.Count);
+            foreach (var filterSimSuspension in susList)
+            {
+                filterSimSuspension.Serialize(output);
+            }
+            output.WriteLine("    ProjectData End");
+        }
     }
 
     public class fmFilterSimProject
@@ -152,6 +164,14 @@ namespace FilterSimulation.fmFilterObjects
                     return sim;
             }
             return null;
+        }
+
+        internal void Serialize(System.IO.TextWriter output)
+        {
+            output.WriteLine("Project Begin");
+            output.WriteLine("    m_checked = {0}", m_checked);
+            m_data.Serialize(output);
+            output.WriteLine("Project End");
         }
     }
 }

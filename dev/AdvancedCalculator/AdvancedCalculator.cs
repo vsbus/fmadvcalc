@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 using FilterSimulationWithTablesAndGraphs;
 
@@ -63,6 +64,13 @@ namespace AdvancedCalculator
                 filterSimulationWithTablesAndGraphs1.parametersToDisplay = yalForm.GetCheckedItems();
                 filterSimulationWithTablesAndGraphs1.UpdateAll();
             }
+        }
+
+        private void sAVEONDISKToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TextWriter output = new StreamWriter("fmdata.dat");
+            filterSimulationWithTablesAndGraphs1.Serialize(output);
+            output.Close();
         }
     }
 }

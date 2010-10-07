@@ -13,7 +13,7 @@ namespace FilterSimulation
 {
     public partial class fmFilterSimulationControl : UserControl
     {
-        private readonly fmFilterSimSolution m_fSolution = new fmFilterSimSolution();
+        protected readonly fmFilterSimSolution m_fSolution = new fmFilterSimSolution();
         private fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlockWithLimits m_commonFilterMachiningBlock;
         private CheckBox m_ckBox;
         public List<fmGlobalParameter> parametersToDisplay;

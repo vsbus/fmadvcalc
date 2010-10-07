@@ -25,6 +25,17 @@ namespace FilterSimulation.fmFilterObjects
                 newSerie.CopyFrom(serie);
             }
         }
+
+        internal void Serialize(System.IO.TextWriter output)
+        {
+            output.WriteLine("            SuspensionData Begin");
+            output.WriteLine("                name = {0}", name);
+            output.WriteLine("                material = {0}", material);
+            output.WriteLine("                customer = {0}", customer);
+            output.WriteLine("                seriesListSize = {0}", seriesList.Count);
+            //m_data.Serialize(output);
+            output.WriteLine("            SuspensionData End");
+        }
     }
 
     public class fmFilterSimSuspension
@@ -179,6 +190,14 @@ namespace FilterSimulation.fmFilterObjects
                     return sim;
             }
             return null;
+        }
+
+        internal void Serialize(System.IO.TextWriter output)
+        {
+            output.WriteLine("        Suspension Begin");
+            output.WriteLine("            m_checked = {0}", m_checked);
+            m_data.Serialize(output);
+            output.WriteLine("        Suspension End");
         }
     }
 }

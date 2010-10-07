@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using fmCalculationLibrary;
 using FilterSimulation.fmFilterObjects;
@@ -376,6 +377,11 @@ namespace FilterSimulationWithTablesAndGraphs
             fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
             BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
             BindCalculatedResultsToChartAndTable();
+        }
+
+        public void Serialize(TextWriter output)
+        {
+            m_fSolution.Serialize(output);
         }
     }
 }

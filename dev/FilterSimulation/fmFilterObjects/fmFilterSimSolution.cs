@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using fmCalcBlocksLibrary.Blocks;
 
 namespace FilterSimulation.fmFilterObjects
@@ -233,6 +234,14 @@ namespace FilterSimulation.fmFilterObjects
             foreach (fmFilterSimProject prj in projects)
             {
                 prj.Keep();
+            }
+        }
+
+        public void Serialize(TextWriter output)
+        {
+            foreach (var prj in projects)
+            {
+                prj.Serialize(output);
             }
         }
     }
