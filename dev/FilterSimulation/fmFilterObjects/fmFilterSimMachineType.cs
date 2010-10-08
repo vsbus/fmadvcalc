@@ -37,5 +37,23 @@ namespace FilterSimulation.fmFilterObjects
         public static fmFilterSimMachineType pressureLeaf;
         public static fmFilterSimMachineType candle;
         public static fmFilterSimMachineType filterPresses;
+
+        private static class fmMachineSerializeTags
+        {
+            public const string Begin = "Machine Begin";
+            public const string End = "Machine End";
+            // ReSharper disable InconsistentNaming
+            public const string symbol = "symbol";
+            public const string name = "name";
+            // ReSharper restore InconsistentNaming
+        }
+
+        internal void Serialize(System.IO.TextWriter output)
+        {
+            output.WriteLine("                        " + fmMachineSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmMachineSerializeTags.symbol, symbol, 7);
+            fmSerializeTools.SerializeProperty(output, fmMachineSerializeTags.name, name, 7);
+            output.WriteLine("                        " + fmMachineSerializeTags.End);
+        }
     }
 }

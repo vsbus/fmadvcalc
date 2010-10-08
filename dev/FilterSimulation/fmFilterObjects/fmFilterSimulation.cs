@@ -277,6 +277,59 @@ namespace FilterSimulation.fmFilterObjects
             var rmhceb = new fmRm0HceBlock();
             UpdateIsInputedInParametersFromBlock(rmhceb, inputedParameter);
         }
+
+        private static class fmFilterSimulationDataSerializeTags
+        {
+            public const string Begin = "FilterSimulationData Begin";
+            public const string End = "FilterSimulationData End";
+            // ReSharper disable InconsistentNaming
+            public const string name = "name";
+            public const string parametersSize = "parametersSize";
+            public const string filterMachiningCalculationOption = "filterMachiningCalculationOption";
+            public const string suspensionCalculationOption = "suspensionCalculationOption";
+            // ReSharper restore InconsistentNaming
+        }
+
+        private static class fmParameterSerializeTags
+        {
+            public const string Begin = "Parameter Begin";
+            public const string End = "Parameter End";
+            // ReSharper disable InconsistentNaming
+            public const string name = "name";
+            public const string typeName = "typeName";
+            public const string isInputed = "isInputed";
+            public const string defined = "defined";
+            public const string value = "value";
+            // ReSharper restore InconsistentNaming
+        }
+
+        internal void SerializeCalculationBaseParameter(System.IO.TextWriter output, fmCalculationBaseParameter p)
+        {
+            output.WriteLine("                                " + fmParameterSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.name, p.globalParameter.name, 9);
+            fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.typeName, p.GetType().Name, 9);
+            if (p is fmCalculationVariableParameter)
+            {
+                fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.isInputed, (p as fmCalculationVariableParameter).isInputed, 9);
+            }
+            fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.defined, p.value.defined, 9);
+            fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.value, p.value.value, 9);
+            output.WriteLine("                                " + fmParameterSerializeTags.End);
+        }
+
+        internal void Serialize(System.IO.TextWriter output)
+        {
+            output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.name, name, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.suspensionCalculationOption, suspensionCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.parametersSize, parameters.Count, 8);
+            foreach (var p in parameters.Values)
+            {
+                SerializeCalculationBaseParameter(output, p);
+            }
+            output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.End);
+        }
     }
 
     public class fmFilterSimulation
@@ -504,6 +557,23 @@ namespace FilterSimulation.fmFilterObjects
                 sim.Parameters[p.globalParameter].value = p.value;
                 ((fmCalculationVariableParameter) sim.Parameters[p.globalParameter]).isInputed = p.IsInputed;
             }
+        }
+
+        private static class fmFilterSimulationSerializeTags
+        {
+            public const string Begin = "FilterSimulation Begin";
+            public const string End = "FilterSimulation End";
+            // ReSharper disable InconsistentNaming
+            public const string m_checked = "m_checked";
+            // ReSharper restore InconsistentNaming
+        }
+
+        internal void Serialize(System.IO.TextWriter output)
+        {
+            output.WriteLine("                        " + fmFilterSimulationSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationSerializeTags.m_checked, m_checked, 7);
+            m_data.Serialize(output);
+            output.WriteLine("                        " + fmFilterSimulationSerializeTags.End);
         }
     }
 }

@@ -240,9 +240,7 @@ namespace FilterSimulation.fmFilterObjects
         public void Serialize(TextWriter output)
         {
             foreach (var prj in projects)
-            {
                 prj.Serialize(output);
-            }
         }
     }
 }

@@ -28,6 +28,33 @@ namespace FilterSimulation.fmFilterObjects
             }
             lastModifiedDate = from.lastModifiedDate;
         }
+
+        private static class fmSimSerieDataSerializeTags
+        {
+            public const string Begin = "SimSerieData Begin";
+            public const string End = "SimSerieData End";
+            // ReSharper disable InconsistentNaming
+            public const string name = "name";
+            public const string machineName = "machineName";
+            public const string filterMedium = "filterMedium";
+            public const string simListSize = "simListSize";
+            // ReSharper restore InconsistentNaming
+        }
+
+        internal void Serialize(System.IO.TextWriter output)
+        {
+            output.WriteLine("                    " + fmSimSerieDataSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmSimSerieDataSerializeTags.name, name, 6);
+            fmSerializeTools.SerializeProperty(output, fmSimSerieDataSerializeTags.machineName, machineName, 6);
+            machine.Serialize(output);
+            fmSerializeTools.SerializeProperty(output, fmSimSerieDataSerializeTags.filterMedium, filterMedium, 6);
+            fmSerializeTools.SerializeProperty(output, fmSimSerieDataSerializeTags.simListSize, simList.Count, 6);
+            foreach (var p in simList)
+            {
+                p.Serialize(output);
+            }
+            output.WriteLine("                    " + fmSimSerieDataSerializeTags.End);
+        }
     }
 
     public class fmFilterSimSerie
@@ -204,6 +231,23 @@ namespace FilterSimulation.fmFilterObjects
                     return sim;
             }
             return null;
+        }
+
+        private static class fmSimSerieSerializeTags
+        {
+            public const string Begin = "SimSerie Begin";
+            public const string End = "SimSerie End";
+            // ReSharper disable InconsistentNaming
+            public const string m_checked = "m_checked";
+            // ReSharper restore InconsistentNaming
+        }
+
+        internal void Serialize(System.IO.TextWriter output)
+        {
+            output.WriteLine("                " + fmSimSerieSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmSimSerieSerializeTags.m_checked, m_checked, 5);
+            m_data.Serialize(output);
+            output.WriteLine("                " + fmSimSerieSerializeTags.End);
         }
     }
 }

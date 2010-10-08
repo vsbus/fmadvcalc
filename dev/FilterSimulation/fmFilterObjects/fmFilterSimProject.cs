@@ -21,16 +21,26 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
+        private static class fmProjectDataSerializeTags
+        {
+            public const string Begin = "ProjectData Begin";
+            public const string End = "ProjectData End";
+            // ReSharper disable InconsistentNaming
+            public const string name = "name";
+            public const string susListSize = "susListSize";
+            // ReSharper restore InconsistentNaming
+        }
+
         internal void Serialize(System.IO.TextWriter output)
         {
-            output.WriteLine("    ProjectData Begin");
-            output.WriteLine("        name = {0}", name);
-            output.WriteLine("        susListSize = {0}", susList.Count);
+            output.WriteLine("    " + fmProjectDataSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmProjectDataSerializeTags.name, name, 2);
+            fmSerializeTools.SerializeProperty(output, fmProjectDataSerializeTags.susListSize, susList.Count, 2);
             foreach (var filterSimSuspension in susList)
             {
                 filterSimSuspension.Serialize(output);
             }
-            output.WriteLine("    ProjectData End");
+            output.WriteLine("    " + fmProjectDataSerializeTags.End);
         }
     }
 
@@ -166,12 +176,21 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
+        private static class fmProjectSerializeTags
+        {
+            public const string Begin = "Project Begin";
+            public const string End = "Project End";
+            // ReSharper disable InconsistentNaming
+            public const string m_checked = "m_checked";
+            // ReSharper restore InconsistentNaming
+        }
+
         internal void Serialize(System.IO.TextWriter output)
         {
-            output.WriteLine("Project Begin");
-            output.WriteLine("    m_checked = {0}", m_checked);
+            output.WriteLine(fmProjectSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmProjectSerializeTags.m_checked, m_checked, 1);
             m_data.Serialize(output);
-            output.WriteLine("Project End");
+            output.WriteLine(fmProjectSerializeTags.End);
         }
     }
 }

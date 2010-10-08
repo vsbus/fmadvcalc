@@ -381,6 +381,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void Serialize(TextWriter output)
         {
+            m_fSolution.Keep();
             m_fSolution.Serialize(output);
         }
     }

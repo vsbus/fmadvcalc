@@ -26,15 +26,30 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
+        private static class fmSuspensionDataSerializeTags
+        {
+            public const string Begin = "SuspensionData Begin";
+            public const string End = "SuspensionData End";
+            // ReSharper disable InconsistentNaming
+            public const string name = "name";
+            public const string material = "material";
+            public const string customer = "customer";
+            public const string seriesListSize = "seriesListSize";
+            // ReSharper restore InconsistentNaming
+        }
+
         internal void Serialize(System.IO.TextWriter output)
         {
-            output.WriteLine("            SuspensionData Begin");
-            output.WriteLine("                name = {0}", name);
-            output.WriteLine("                material = {0}", material);
-            output.WriteLine("                customer = {0}", customer);
-            output.WriteLine("                seriesListSize = {0}", seriesList.Count);
-            //m_data.Serialize(output);
-            output.WriteLine("            SuspensionData End");
+            output.WriteLine("            " + fmSuspensionDataSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmSuspensionDataSerializeTags.name, name, 4);
+            fmSerializeTools.SerializeProperty(output, fmSuspensionDataSerializeTags.material, material, 4);
+            fmSerializeTools.SerializeProperty(output, fmSuspensionDataSerializeTags.customer, customer, 4);
+            fmSerializeTools.SerializeProperty(output, fmSuspensionDataSerializeTags.seriesListSize, seriesList.Count, 4);
+            foreach (var p in seriesList)
+            {
+                p.Serialize(output);
+            }
+            output.WriteLine("            " + fmSuspensionDataSerializeTags.End);
         }
     }
 
@@ -192,12 +207,21 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
+        private static class fmSuspensionSerializeTags
+        {
+            public const string Begin = "Suspension Begin";
+            public const string End = "Suspension End";
+            // ReSharper disable InconsistentNaming
+            public const string m_checked = "m_checked";
+            // ReSharper restore InconsistentNaming
+        }
+
         internal void Serialize(System.IO.TextWriter output)
         {
-            output.WriteLine("        Suspension Begin");
-            output.WriteLine("            m_checked = {0}", m_checked);
+            output.WriteLine("        " + fmSuspensionSerializeTags.Begin);
+            fmSerializeTools.SerializeProperty(output, fmSuspensionSerializeTags.m_checked, m_checked, 3);
             m_data.Serialize(output);
-            output.WriteLine("        Suspension End");
+            output.WriteLine("        " + fmSuspensionSerializeTags.End);
         }
     }
 }
