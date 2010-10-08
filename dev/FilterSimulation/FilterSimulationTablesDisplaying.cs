@@ -529,7 +529,10 @@ namespace FilterSimulation
                         int colIndex = projectDataGrid.Columns[m_fSolution.currentColumns.project].Index;
                         if (guid == sol.currentObjects.Project.Guid)
                         {
-                            projectDataGrid.CurrentCell = row.Cells[colIndex];
+                            if (row.Cells[colIndex].Visible)
+                            {
+                                projectDataGrid.CurrentCell = row.Cells[colIndex];
+                            }
                         }
                     }
             }
@@ -547,7 +550,10 @@ namespace FilterSimulation
                         int colIndex = suspensionDataGrid.Columns[m_fSolution.currentColumns.suspension].Index;
                         if (guid == sol.currentObjects.Suspension.Guid)
                         {
-                            suspensionDataGrid.CurrentCell = row.Cells[colIndex];
+                            if (row.Cells[colIndex].Visible)
+                            {
+                                suspensionDataGrid.CurrentCell = row.Cells[colIndex];
+                            }
                         }
                     }
             }
@@ -594,7 +600,10 @@ namespace FilterSimulation
                         int colIndex = simulationDataGrid.Columns[m_fSolution.currentColumns.simulation].Index;
                         if (guid == sol.currentObjects.Simulation.Guid)
                         {
-                            simulationDataGrid.CurrentCell = row.Cells[colIndex];
+                            if (row.Cells[colIndex].Visible)
+                            {
+                                simulationDataGrid.CurrentCell = row.Cells[colIndex];
+                            }
                         }
                     }
             }

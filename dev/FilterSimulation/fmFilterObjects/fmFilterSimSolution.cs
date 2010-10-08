@@ -237,10 +237,29 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
+        private static class fmSolutionSerializeTags
+        {
+            // ReSharper disable InconsistentNaming
+            public const string projectsCount = "projectsCount";
+            // ReSharper restore InconsistentNaming
+        }
+
         public void Serialize(TextWriter output)
         {
+            fmSerializeTools.SerializeProperty(output, fmSolutionSerializeTags.projectsCount, projects.Count, 0);
             foreach (var prj in projects)
                 prj.Serialize(output);
+        }
+
+        public static fmFilterSimSolution Deserialize(TextReader input)
+        {
+            fmFilterSimSolution solution = new fmFilterSimSolution();
+            int projectsCount = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmSolutionSerializeTags.projectsCount));
+            for (int i = 0; i < projectsCount; ++i)
+            {
+                fmFilterSimProject.Deserialize(input, solution);
+            }
+            return solution;
         }
     }
 }

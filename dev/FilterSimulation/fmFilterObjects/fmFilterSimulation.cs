@@ -317,6 +317,29 @@ namespace FilterSimulation.fmFilterObjects
             output.WriteLine("                                " + fmParameterSerializeTags.End);
         }
 
+        private static fmCalculationBaseParameter DeserializeCalculationBaseParameter(System.IO.TextReader input)
+        {
+            input.ReadLine();
+            fmCalculationBaseParameter parameter;
+            string name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.name));
+            string typeName = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.typeName));
+            if (typeName == typeof(fmCalculationVariableParameter).Name)
+            {
+                var varParam = new fmCalculationVariableParameter(fmGlobalParameter.parametersByName[name]);
+                varParam.isInputed = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.isInputed));
+                parameter = varParam;
+            }
+            else
+            {
+                parameter = new fmCalculationConstantParameter(fmGlobalParameter.parametersByName[name]);
+            }
+            bool defined = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.defined));
+            double value = Convert.ToDouble(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.value));
+            parameter.value = new fmValue(value, defined);
+            input.ReadLine();
+            return parameter;
+        }
+
         internal void Serialize(System.IO.TextWriter output)
         {
             output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.Begin);
@@ -329,6 +352,46 @@ namespace FilterSimulation.fmFilterObjects
                 SerializeCalculationBaseParameter(output, p);
             }
             output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.End);
+        }
+
+        static object StringToEnum(string s, Type t)
+        {
+            foreach (var field in t.GetFields())
+            {
+                if (field.Name == s)
+                {
+                    return field.GetValue(null);
+                }
+            }
+            throw new Exception("There is no field " + s + " in enum " + t.Name);
+        }
+
+        internal static fmFilterSimulationData Deserialize(System.IO.TextReader input)
+        {
+            input.ReadLine();
+            fmFilterSimulationData simData = new fmFilterSimulationData();
+            simData.name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmFilterSimulationDataSerializeTags.name));
+            simData.filterMachiningCalculationOption =
+                (fmFilterMachiningCalculator.fmFilterMachiningCalculationOption)
+                StringToEnum(
+                    fmSerializeTools.DeserializeProperty(input,
+                                                         fmFilterSimulationDataSerializeTags.
+                                                             filterMachiningCalculationOption).ToString(),
+                    typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption));
+            simData.suspensionCalculationOption = (fmSuspensionCalculator.fmSuspensionCalculationOptions)
+                StringToEnum(
+                    fmSerializeTools.DeserializeProperty(input,
+                                                         fmFilterSimulationDataSerializeTags.
+                                                             suspensionCalculationOption).ToString(),
+                    typeof(fmSuspensionCalculator.fmSuspensionCalculationOptions));
+            int parametersCount = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmFilterSimulationDataSerializeTags.parametersSize));
+            for (int i = 0; i < parametersCount; ++i)
+            {
+                fmCalculationBaseParameter p = DeserializeCalculationBaseParameter(input);
+                simData.parameters[p.globalParameter] = p;
+            }
+            input.ReadLine();
+            return simData;
         }
     }
 
@@ -574,6 +637,23 @@ namespace FilterSimulation.fmFilterObjects
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationSerializeTags.m_checked, m_checked, 7);
             m_data.Serialize(output);
             output.WriteLine("                        " + fmFilterSimulationSerializeTags.End);
+        }
+
+        internal static fmFilterSimulation Deserialize(System.IO.TextReader input, fmFilterSimSerie parentSerie)
+        {
+            input.ReadLine();
+            fmFilterSimulation sim = new fmFilterSimulation(parentSerie, "_noname");
+            sim.m_checked = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmFilterSimulationSerializeTags.m_checked));
+            fmFilterSimulationData simData = fmFilterSimulationData.Deserialize(input);
+            sim.Name = simData.name;
+            sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
+            sim.SuspensionCalculationOption = simData.suspensionCalculationOption;
+            foreach (var p in simData.parameters.Values)
+            {
+                sim.Parameters[p.globalParameter] = p;
+            }
+            input.ReadLine();
+            return sim;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace FilterSimulation.fmFilterObjects
@@ -54,6 +55,22 @@ namespace FilterSimulation.fmFilterObjects
             fmSerializeTools.SerializeProperty(output, fmMachineSerializeTags.symbol, symbol, 7);
             fmSerializeTools.SerializeProperty(output, fmMachineSerializeTags.name, name, 7);
             output.WriteLine("                        " + fmMachineSerializeTags.End);
+        }
+
+        internal static fmFilterSimMachineType Deserialize(System.IO.TextReader input)
+        {
+            input.ReadLine();
+            string symbol = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmMachineSerializeTags.symbol));
+            string name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmMachineSerializeTags.name));
+            input.ReadLine();
+            foreach (var mt in filterTypesList)
+            {
+                if (mt.symbol == symbol && mt.name == name)
+                {
+                    return mt;
+                }
+            }
+            throw new Exception("Deserialization failed: unknown machine type.");
         }
     }
 }

@@ -51,6 +51,22 @@ namespace FilterSimulation.fmFilterObjects
             }
             output.WriteLine("            " + fmSuspensionDataSerializeTags.End);
         }
+
+        internal static fmFilterSimSuspensionData Deserialize(System.IO.TextReader input, fmFilterSimSuspension parentSuspension)
+        {
+            input.ReadLine();
+            fmFilterSimSuspensionData susData = new fmFilterSimSuspensionData();
+            susData.name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSuspensionDataSerializeTags.name));
+            susData.material = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSuspensionDataSerializeTags.material));
+            susData.customer = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSuspensionDataSerializeTags.customer));
+            int seriesListSize = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmSuspensionDataSerializeTags.seriesListSize));
+            for (int i = 0; i < seriesListSize; ++i)
+            {
+                fmFilterSimSerie serie = fmFilterSimSerie.Deserialize(input, parentSuspension);
+            }
+            input.ReadLine();
+            return susData;
+        }
     }
 
     public class fmFilterSimSuspension
@@ -222,6 +238,19 @@ namespace FilterSimulation.fmFilterObjects
             fmSerializeTools.SerializeProperty(output, fmSuspensionSerializeTags.m_checked, m_checked, 3);
             m_data.Serialize(output);
             output.WriteLine("        " + fmSuspensionSerializeTags.End);
+        }
+
+        internal static fmFilterSimSuspension Deserialize(System.IO.TextReader input, fmFilterSimProject parentProject)
+        {
+            input.ReadLine();
+            bool m_checked = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmSuspensionSerializeTags.m_checked));
+            fmFilterSimSuspension sus = new fmFilterSimSuspension(parentProject, "_noname", "_unknown_material", "_unknown_customer");
+            fmFilterSimSuspensionData data = fmFilterSimSuspensionData.Deserialize(input, sus);
+            sus.Name = data.name;
+            sus.Material = data.material;
+            sus.Customer = data.customer;
+            input.ReadLine();
+            return sus;
         }
     }
 }

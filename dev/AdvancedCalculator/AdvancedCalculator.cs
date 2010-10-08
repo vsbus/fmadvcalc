@@ -51,6 +51,7 @@ namespace AdvancedCalculator
         // ReSharper restore InconsistentNaming
         {
             Text = string.Format("AdvancedCalculator (v.{0})", Config.Version);
+            LoadFromDisk();
         }
 
         // ReSharper disable InconsistentNaming
@@ -68,9 +69,48 @@ namespace AdvancedCalculator
 
         private void sAVEONDISKToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveOnDisk();
+        }
+
+        private void SaveOnDisk()
+        {
             TextWriter output = new StreamWriter("fmdata.dat");
             filterSimulationWithTablesAndGraphs1.Serialize(output);
             output.Close();
+        }
+
+        private void lOADFROMDISKToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFromDisk();
+        }
+
+        private void LoadFromDisk()
+        {
+            TextReader input = null;
+            try
+            {
+                input = new StreamReader("fmdata.dat");
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            try
+            {
+                filterSimulationWithTablesAndGraphs1.Deserialize(input);
+            }
+            catch (Exception e)
+            {
+                ;
+            }
+
+            input.Close();
+        }
+
+        private void fmAdvancedCalculator_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SaveOnDisk();
         }
     }
 }

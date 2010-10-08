@@ -384,5 +384,15 @@ namespace FilterSimulationWithTablesAndGraphs
             m_fSolution.Keep();
             m_fSolution.Serialize(output);
         }
+
+        public void Deserialize(TextReader input)
+        {
+            m_fSolution = fmFilterSimSolution.Deserialize(input);
+            if (m_fSolution.projects.Count > 0)
+            {
+                m_fSolution.currentObjects.Project = m_fSolution.projects[0];
+            }
+            DisplaySolution(m_fSolution);
+        }
     }
 }

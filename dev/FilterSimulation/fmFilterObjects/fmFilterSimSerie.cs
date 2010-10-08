@@ -55,6 +55,23 @@ namespace FilterSimulation.fmFilterObjects
             }
             output.WriteLine("                    " + fmSimSerieDataSerializeTags.End);
         }
+
+        internal static fmFilterSimSerieData Deserialize(System.IO.TextReader input, fmFilterSimSuspension parentSuspension, fmFilterSimSerie parentSerie)
+        {
+            input.ReadLine();
+            fmFilterSimSerieData serieData = new fmFilterSimSerieData();
+            serieData.name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSimSerieDataSerializeTags.name));
+            serieData.machineName = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSimSerieDataSerializeTags.machineName));
+            serieData.machine = fmFilterSimMachineType.Deserialize(input);
+            serieData.filterMedium = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSimSerieDataSerializeTags.filterMedium));
+            int simListSize = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmSimSerieDataSerializeTags.simListSize));
+            for (int i = 0; i < simListSize; ++i)
+            {
+                fmFilterSimulation sim = fmFilterSimulation.Deserialize(input, parentSerie);
+            }
+            input.ReadLine();
+            return serieData;
+        }
     }
 
     public class fmFilterSimSerie
@@ -93,6 +110,11 @@ namespace FilterSimulation.fmFilterObjects
         public fmFilterSimMachineType MachineType
         {
             get { return m_data.machine; }
+            set
+            {
+                Modified |= m_data.machine != value;
+                m_data.machine = value;
+            }
         }
         
         public string FilterMedium
@@ -248,6 +270,20 @@ namespace FilterSimulation.fmFilterObjects
             fmSerializeTools.SerializeProperty(output, fmSimSerieSerializeTags.m_checked, m_checked, 5);
             m_data.Serialize(output);
             output.WriteLine("                " + fmSimSerieSerializeTags.End);
+        }
+
+        internal static fmFilterSimSerie Deserialize(System.IO.TextReader input, fmFilterSimSuspension parentSuspension)
+        {
+            input.ReadLine();
+            bool m_checked = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmSimSerieSerializeTags.m_checked));
+            fmFilterSimSerie serie = new fmFilterSimSerie(parentSuspension, "_noname", null, "_no_fiter_medium", "_noname_machine");
+            fmFilterSimSerieData m_data = fmFilterSimSerieData.Deserialize(input, parentSuspension, serie);
+            serie.Name = m_data.name;
+            serie.MachineType = m_data.machine;
+            serie.MachineName = m_data.machineName;
+            serie.FilterMedium = m_data.filterMedium;
+            input.ReadLine();
+            return serie;
         }
     }
 }
