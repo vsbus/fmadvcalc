@@ -69,35 +69,35 @@ namespace FilterSimulation.fmFilterObjects
 
         public fmFilterSimulationData()
         {
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_f));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_f, true));
 
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_f));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_s));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_f, true));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_s, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_sus));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Cm));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Cm, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Cv));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.C));
 
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps0));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps0, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.kappa0));
-            
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ne));
 
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Pc0));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ne, true));
+
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Pc0, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rc0));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.a0));
-            
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.nc));
 
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hce0));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.nc, true));
+
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hce0, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Rm0));
 
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.A));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.A, true));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp, true));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sf, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sr));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.n));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tc));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tc, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tf));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tr));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hc));

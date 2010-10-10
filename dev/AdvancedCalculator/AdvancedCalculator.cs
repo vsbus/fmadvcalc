@@ -51,7 +51,7 @@ namespace AdvancedCalculator
         // ReSharper restore InconsistentNaming
         {
             Text = string.Format("AdvancedCalculator (v.{0})", Config.Version);
-            LoadFromDisk();
+            LoadFromDisk("fmdata.dat");
         }
 
         // ReSharper disable InconsistentNaming
@@ -69,27 +69,37 @@ namespace AdvancedCalculator
 
         private void sAVEONDISKToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveOnDisk();
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Data files (*.dat)|*.dat";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                SaveOnDisk(sfd.FileName);
+            }
         }
 
-        private void SaveOnDisk()
+        private void SaveOnDisk(string fileName)
         {
-            TextWriter output = new StreamWriter("fmdata.dat");
+            TextWriter output = new StreamWriter(fileName);
             filterSimulationWithTablesAndGraphs1.Serialize(output);
             output.Close();
         }
 
         private void lOADFROMDISKToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LoadFromDisk();
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Data files (*.dat)|*.dat";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                LoadFromDisk(ofd.FileName);
+            }
         }
 
-        private void LoadFromDisk()
+        private void LoadFromDisk(string fileName)
         {
             TextReader input = null;
             try
             {
-                input = new StreamReader("fmdata.dat");
+                input = new StreamReader(fileName);
             }
             catch (Exception e)
             {
@@ -110,7 +120,7 @@ namespace AdvancedCalculator
 
         private void fmAdvancedCalculator_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SaveOnDisk();
+            SaveOnDisk("fmdata.dat");
         }
     }
 }
