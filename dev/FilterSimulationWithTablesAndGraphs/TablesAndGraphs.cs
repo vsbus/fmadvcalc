@@ -266,6 +266,11 @@ namespace FilterSimulationWithTablesAndGraphs
                     int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
                     row.Cells[idx].Value = tempSim.parameters[param].value / param.unitFamily.CurrentUnit.Coef;
                 }
+
+                if (m_externalCurrentActiveSimulation == m_internalSelectedSimList[i].externalSimulation)
+                {
+                    selectedSimulationParametersTable.CurrentCell = row.Cells[0];
+                }
             }
 
             BindBackColorToSelectedSimulationsTable();
