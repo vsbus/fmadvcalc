@@ -334,11 +334,12 @@ namespace FilterSimulationWithTablesAndGraphs
             foreach (DataGridViewColumn col in selectedSimulationParametersTable.Columns)
             {
                 string parName = GetParameterNameFromHeader(col.HeaderText);
+                fmGlobalParameter curXParameter = listBoxXAxis.Text == "" ? null : fmGlobalParameter.parametersByName[listBoxXAxis.Text];
                 if (fmGlobalParameter.parametersByName.ContainsKey(parName))
                 {
                     fmGlobalParameter par = fmGlobalParameter.parametersByName[parName];
                     col.Visible = false;
-                    if (inputs.Contains(par))
+                    if (par != curXParameter && inputs.Contains(par))
                     {
                         foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                             if (simData.internalSimulationData.parameters[par] is fmCalculationVariableParameter
