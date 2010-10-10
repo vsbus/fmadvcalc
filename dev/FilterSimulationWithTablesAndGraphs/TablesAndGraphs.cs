@@ -415,6 +415,8 @@ namespace FilterSimulationWithTablesAndGraphs
                             ((fmCalculationVariableParameter)simData.internalSimulationData.parameters[p.globalParameter]).isInputed = ((fmCalculationVariableParameter)p).isInputed;
                         }
                     }
+                    simData.internalSimulationData.filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
+                    simData.internalSimulationData.suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
                     simData.internalSimulationData.UpdateIsInputed(inputedParameter);
                 }
             }
