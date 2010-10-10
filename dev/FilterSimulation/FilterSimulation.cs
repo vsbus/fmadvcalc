@@ -253,67 +253,56 @@ namespace FilterSimulation
 
                 if (dgv == projectDataGrid)
                 {
-                    if (projectDataGrid.CurrentRow != null)
+                    if (projectDataGrid.CurrentCell == null
+                        || projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value == null)
                     {
-                        if (projectDataGrid.CurrentCell == null
-                            || projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value == null)
-                        {
-                            m_displayingTables = false;
-                            return;
-                        }
-
-                        var projectGuid = (Guid)projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value;
-                        m_fSolution.currentColumns.project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Index;
-                        m_fSolution.currentObjects.Project = m_fSolution.FindProject(projectGuid);
+                        m_displayingTables = false;
+                        return;
                     }
+
+                    Guid projectGuid = (Guid)projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value;
+                    m_fSolution.currentColumns.project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Index;
+
+                    m_fSolution.currentObjects.Project = m_fSolution.FindProject(projectGuid);
                 }
                 else if (dgv == suspensionDataGrid)
                 {
-                    if (suspensionDataGrid.CurrentRow != null)
+                    if (suspensionDataGrid.CurrentCell == null
+                        || suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value == null)
                     {
-                        if (suspensionDataGrid.CurrentCell == null
-                            || suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value == null)
-                        {
-                            m_displayingTables = false;
-                            return;
-                        }
-
-                        var suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value;
-                        m_fSolution.currentColumns.suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Index;
-                        m_fSolution.currentObjects.Suspension = m_fSolution.FindSuspension(suspensionGuid);
+                        m_displayingTables = false;
+                        return;
                     }
+
+                    Guid suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value;
+                    m_fSolution.currentColumns.suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Index;
+                    m_fSolution.currentObjects.Suspension = m_fSolution.FindSuspension(suspensionGuid);
                 }
                 else if (dgv == simSeriesDataGrid)
                 {
-                    if (simSeriesDataGrid.CurrentRow != null)
+                    if (simSeriesDataGrid.CurrentCell == null
+                        || simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value == null)
                     {
-                        if (simSeriesDataGrid.CurrentCell == null
-                            || simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value == null)
-                        {
-                            m_displayingTables = false;
-                            return;
-                        }
-
-                        var simSeriesGuid = (Guid)simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value;
-                        m_fSolution.currentColumns.simSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Index;
-                        m_fSolution.currentObjects.Serie = m_fSolution.FindSerie(simSeriesGuid);
+                        m_displayingTables = false;
+                        return;
                     }
+
+                    Guid simSeriesGuid = (Guid)simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value;
+                    m_fSolution.currentColumns.simSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Index;
+                    m_fSolution.currentObjects.Serie = m_fSolution.FindSerie(simSeriesGuid);
                 }
                 else if (dgv == simulationDataGrid)
                 {
-                    if (simulationDataGrid.CurrentRow != null)
+                    if (simulationDataGrid.CurrentCell == null
+                        || simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value == null)
                     {
-                        if (simulationDataGrid.CurrentCell == null
-                            || simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value == null)
-                        {
-                            m_displayingTables = false;
-                            return;
-                        }
-
-                        var simulationGuid = (Guid)simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value;
-                        m_fSolution.currentColumns.simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Index;
-                        m_fSolution.currentObjects.Simulation = m_fSolution.FindSimulation(simulationGuid);
+                        m_displayingTables = false;
+                        return;
                     }
+
+                    Guid simulationGuid = (Guid)simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value;
+                    m_fSolution.currentColumns.simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Index;
+                    m_fSolution.currentObjects.Simulation = m_fSolution.FindSimulation(simulationGuid);
                 }
 
                 DisplaySolution(m_fSolution);
