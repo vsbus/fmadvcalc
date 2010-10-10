@@ -129,7 +129,7 @@ namespace AdvancedCalculator
         private void fmAdvancedCalculator_FormClosed(object sender, FormClosedEventArgs e)
         {
             DialogResult dres = MessageBox.Show("Do you want to exit without saving?", "Confirmation", MessageBoxButtons.YesNo);
-            if (dres == DialogResult.Yes)
+            if (dres == DialogResult.No)
             {
                 SaveOnDisk();
             }
