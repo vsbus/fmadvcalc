@@ -102,6 +102,7 @@ namespace FilterSimulation
             this.UnlimitedFlagColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.UnlimitedFlagColumn.HeaderText = "Unlimited";
             this.UnlimitedFlagColumn.Name = "UnlimitedFlagColumn";
+            this.UnlimitedFlagColumn.Visible = false;
             this.UnlimitedFlagColumn.Width = 56;
             // 
             // MinRangeColumn
@@ -120,7 +121,7 @@ namespace FilterSimulation
             this.MaxRangeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.MaxRangeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // ParameterIntervalOption
+            // fmParameterIntervalOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

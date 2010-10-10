@@ -13,7 +13,7 @@ namespace FilterSimulation
 {
     public partial class fmFilterSimulationControl
     {
-        static void SetRowBackColor(DataGridViewRow row, Color col)
+        public static void SetRowBackColor(DataGridViewRow row, Color col)
         {
             if (row.Cells[0].Style.BackColor != col)
             {
