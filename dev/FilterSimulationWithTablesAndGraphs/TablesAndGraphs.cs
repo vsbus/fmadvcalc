@@ -334,19 +334,23 @@ namespace FilterSimulationWithTablesAndGraphs
             foreach (DataGridViewColumn col in selectedSimulationParametersTable.Columns)
             {
                 string parName = GetParameterNameFromHeader(col.HeaderText);
-                fmGlobalParameter curXParameter = listBoxXAxis.Text == "" ? null : fmGlobalParameter.parametersByName[listBoxXAxis.Text];
                 if (fmGlobalParameter.parametersByName.ContainsKey(parName))
                 {
                     fmGlobalParameter par = fmGlobalParameter.parametersByName[parName];
                     col.Visible = false;
-                    if (par != curXParameter && inputs.Contains(par))
+                    if (inputs.Contains(par))
                     {
                         foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                             if (simData.internalSimulationData.parameters[par] is fmCalculationVariableParameter
                                 && ((fmCalculationVariableParameter)simData.internalSimulationData.parameters[par]).isInputed)
                             {
-                                col.Visible = true;
-                                break;
+                                fmFilterMachiningBlock fmb = new fmFilterMachiningBlock();
+                                fmb.SetCalculationOptionAndUpdateCellsStyle(simData.internalSimulationData.filterMachiningCalculationOption);
+                                if (fmb.GetParameterByName(parName).group != fmb.GetParameterByName(listBoxXAxis.Text).group)
+                                {
+                                    col.Visible = true;
+                                    break;
+                                }
                             }
                     }
                 }
