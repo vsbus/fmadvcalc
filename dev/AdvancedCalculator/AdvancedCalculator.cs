@@ -69,11 +69,18 @@ namespace AdvancedCalculator
 
         private void sAVEONDISKToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveOnDisk();
+        }
+
+        private void SaveOnDisk()
+        {
             SaveFileDialog sfd = new SaveFileDialog();
+            sfd.InitialDirectory = Directory.GetCurrentDirectory();
             sfd.Filter = "Data files (*.dat)|*.dat";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 SaveOnDisk(sfd.FileName);
+                SaveOnDisk("fmdata.dat");
             }
         }
 
@@ -87,6 +94,7 @@ namespace AdvancedCalculator
         private void lOADFROMDISKToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.InitialDirectory = Directory.GetCurrentDirectory();
             ofd.Filter = "Data files (*.dat)|*.dat";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -120,7 +128,16 @@ namespace AdvancedCalculator
 
         private void fmAdvancedCalculator_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SaveOnDisk("fmdata.dat");
+            DialogResult dres = MessageBox.Show("Do you want to exit without saving?", "Confirmation", MessageBoxButtons.YesNo);
+            if (dres == DialogResult.Yes)
+            {
+                SaveOnDisk();
+            }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

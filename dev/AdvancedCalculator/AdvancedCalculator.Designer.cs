@@ -40,6 +40,7 @@ namespace AdvancedCalculator
             this.rangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.yaxisParametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterSimulationWithTablesAndGraphs1 = new FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +60,8 @@ namespace AdvancedCalculator
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sAVEONDISKToolStripMenuItem,
             this.lOADFROMDISKToolStripMenuItem,
-            this.saveAllToolStripMenuItem});
+            this.saveAllToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -68,21 +70,21 @@ namespace AdvancedCalculator
             // 
             this.sAVEONDISKToolStripMenuItem.Name = "sAVEONDISKToolStripMenuItem";
             this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.sAVEONDISKToolStripMenuItem.Text = "SAVE ON DISK";
+            this.sAVEONDISKToolStripMenuItem.Text = "Save As...";
             this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.sAVEONDISKToolStripMenuItem_Click);
             // 
             // lOADFROMDISKToolStripMenuItem
             // 
             this.lOADFROMDISKToolStripMenuItem.Name = "lOADFROMDISKToolStripMenuItem";
-            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.lOADFROMDISKToolStripMenuItem.Text = "LOAD FROM DISK";
+            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lOADFROMDISKToolStripMenuItem.Text = "Open...";
             this.lOADFROMDISKToolStripMenuItem.Click += new System.EventHandler(this.lOADFROMDISKToolStripMenuItem_Click);
             // 
             // saveAllToolStripMenuItem
             // 
             this.saveAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAllToolStripMenuItem.Image")));
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAllToolStripMenuItem.Text = "Save All";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
@@ -133,6 +135,13 @@ namespace AdvancedCalculator
             this.filterSimulationWithTablesAndGraphs1.Size = new System.Drawing.Size(931, 645);
             this.filterSimulationWithTablesAndGraphs1.TabIndex = 2;
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
             // fmAdvancedCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,6 +174,7 @@ namespace AdvancedCalculator
         private System.Windows.Forms.ToolStripMenuItem yaxisParametersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sAVEONDISKToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lOADFROMDISKToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 
 
 
