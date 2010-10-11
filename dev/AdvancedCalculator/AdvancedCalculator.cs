@@ -7,6 +7,8 @@ namespace AdvancedCalculator
 {
     public partial class fmAdvancedCalculator : Form
     {
+        private string m_Caption = string.Format("AdvancedCalculator (v.{0})", Config.Version);
+
         public fmAdvancedCalculator()
         {
             InitializeComponent();
@@ -50,8 +52,9 @@ namespace AdvancedCalculator
         private void AdvancedCalculator_Load(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            Text = string.Format("AdvancedCalculator (v.{0})", Config.Version);
-            LoadFromDisk("fmdata.dat");
+            Text = m_Caption;
+            string fileName = Directory.GetCurrentDirectory() + "\\fmdata.dat";
+            LoadFromDisk(fileName);
         }
 
         // ReSharper disable InconsistentNaming
@@ -80,6 +83,7 @@ namespace AdvancedCalculator
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 SaveOnDisk(sfd.FileName);
+                Text = m_Caption + " [" + sfd.FileName + "]";
                 SaveOnDisk("fmdata.dat");
             }
         }
@@ -117,6 +121,7 @@ namespace AdvancedCalculator
             try
             {
                 filterSimulationWithTablesAndGraphs1.Deserialize(input);
+                Text = m_Caption + " [" + fileName + "]";
             }
             catch (Exception e)
             {
