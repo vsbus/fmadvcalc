@@ -318,6 +318,10 @@ namespace FilterSimulationWithTablesAndGraphs
                         if (((fmCalculationVariableParameter)tempSim.parameters[param]).isInputed)
                             cellForeColor = Color.Blue;
                     }
+                    if (cellForeColor == Color.Black)
+                    {
+                        row.Cells[idx].Value = "-";
+                    }
                     row.Cells[idx].Style.ForeColor = cellForeColor;
                 }
             }
