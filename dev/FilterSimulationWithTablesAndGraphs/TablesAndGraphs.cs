@@ -348,7 +348,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             if (simData.internalSimulationData.parameters[par] is fmCalculationVariableParameter
                                 && ((fmCalculationVariableParameter)simData.internalSimulationData.parameters[par]).isInputed)
                             {
-                                fmFilterMachiningBlock fmb = new fmFilterMachiningBlock();
+                                var fmb = new fmFilterMachiningBlock();
                                 fmb.SetCalculationOptionAndUpdateCellsStyle(simData.internalSimulationData.filterMachiningCalculationOption);
                                 var xParameter = fmb.GetParameterByName(listBoxXAxis.Text);
                                 if (xParameter == null || fmb.GetParameterByName(parName).group != xParameter.group)
@@ -724,7 +724,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     string scaleString = dispArray.Scale.value == 1 ? "" : " * " + (1 / dispArray.Scale);
                     LineItem curve = fmZedGraphControl1.GraphPane.AddCurve(dispArray.Parameter.name + scaleString + " (" + dispArray.Parameter.UnitName + ")",
                         m_displayingResults.XParameter.ValuesInDoubles,
-                        dispArray.ScaledValuesInDoubles,
+                        RemoveNoise(dispArray.ScaledValuesInDoubles),
                         dispArray.Color,
                         SymbolType.None);
                     curve.Line.Width = dispArray.Bold ? 2 : 1;
@@ -773,6 +773,31 @@ namespace FilterSimulationWithTablesAndGraphs
             fmZedGraphControl1.GraphPane.Title.Text = "";
             fmZedGraphControl1.GraphPane.AxisChange();
             fmZedGraphControl1.Refresh();
+        }
+
+        private static double[] RemoveNoise(double[] points)
+        {
+            var p = new double[points.Length];
+            for (int i = 0; i < p.Length; ++i)
+            {
+                p[i] = points[i];
+            }
+
+            double maxAbsValue = 0;
+            for (int i = 0; i < p.Length; ++i)
+            {
+                maxAbsValue = Math.Max(maxAbsValue, Math.Abs(p[i]));
+            }
+            double eps = maxAbsValue > 1 ? 1e-9*maxAbsValue : 1e-9;
+            for (int i = 1; i < p.Length; ++i)
+            {
+                if (Math.Abs(p[i] - p[0]) <= eps)
+                {
+                    p[i] = p[0];
+                }
+            }
+
+            return p;
         }
 
         private void BindCalculatedResultsToChartAndTable()
