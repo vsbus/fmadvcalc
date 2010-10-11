@@ -343,7 +343,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // useDefaultRangesButton
             // 
-            this.useDefaultRangesButton.Location = new System.Drawing.Point(147, 3);
+            this.useDefaultRangesButton.Location = new System.Drawing.Point(191, 3);
             this.useDefaultRangesButton.Name = "useDefaultRangesButton";
             this.useDefaultRangesButton.Size = new System.Drawing.Size(58, 20);
             this.useDefaultRangesButton.TabIndex = 3;
@@ -355,9 +355,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.maxXValueTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.maxXValueTextBox.ForeColor = System.Drawing.Color.Black;
-            this.maxXValueTextBox.Location = new System.Drawing.Point(103, 3);
+            this.maxXValueTextBox.Location = new System.Drawing.Point(125, 3);
             this.maxXValueTextBox.Name = "maxXValueTextBox";
-            this.maxXValueTextBox.Size = new System.Drawing.Size(38, 20);
+            this.maxXValueTextBox.Size = new System.Drawing.Size(60, 20);
             this.maxXValueTextBox.TabIndex = 1;
             this.maxXValueTextBox.TextChanged += new System.EventHandler(this.minMaxXValueTextBox_TextChanged);
             // 
@@ -367,7 +367,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.minXValueTextBox.ForeColor = System.Drawing.Color.Black;
             this.minXValueTextBox.Location = new System.Drawing.Point(59, 3);
             this.minXValueTextBox.Name = "minXValueTextBox";
-            this.minXValueTextBox.Size = new System.Drawing.Size(38, 20);
+            this.minXValueTextBox.Size = new System.Drawing.Size(60, 20);
             this.minXValueTextBox.TabIndex = 0;
             this.minXValueTextBox.TextChanged += new System.EventHandler(this.minMaxXValueTextBox_TextChanged);
             // 

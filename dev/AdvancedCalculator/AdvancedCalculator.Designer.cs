@@ -170,12 +170,12 @@ namespace AdvancedCalculator
         private System.Windows.Forms.ToolStripMenuItem unitsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem precisionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rangesToolStripMenuItem;
-        private FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs filterSimulationWithTablesAndGraphs1;
         private System.Windows.Forms.ToolStripMenuItem yaxisParametersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sAVEONDISKToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lOADFROMDISKToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-
+        private FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs filterSimulationWithTablesAndGraphs1;
+        
 
 
 
