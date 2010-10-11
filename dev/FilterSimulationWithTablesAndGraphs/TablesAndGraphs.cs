@@ -346,7 +346,8 @@ namespace FilterSimulationWithTablesAndGraphs
                             {
                                 fmFilterMachiningBlock fmb = new fmFilterMachiningBlock();
                                 fmb.SetCalculationOptionAndUpdateCellsStyle(simData.internalSimulationData.filterMachiningCalculationOption);
-                                if (fmb.GetParameterByName(parName).group != fmb.GetParameterByName(listBoxXAxis.Text).group)
+                                var xParameter = fmb.GetParameterByName(listBoxXAxis.Text);
+                                if (xParameter == null || fmb.GetParameterByName(parName).group != xParameter.group)
                                 {
                                     col.Visible = true;
                                     break;
