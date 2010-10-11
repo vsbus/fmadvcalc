@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4C76F538-29C4-4595-B2DF-DBAC9F80D652}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -44,6 +44,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="fmCheckedListBoxWithCheckboxes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="fmCheckedListBoxWithCheckboxes.Designer.cs">
+      <DependentUpon>fmCheckedListBoxWithCheckboxes.cs</DependentUpon>
+    </Compile>
     <Compile Include="fmCheckedListBoxWithListiongOfSelectedItems.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -71,6 +77,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="fmCheckedListBoxWithCheckboxes.resx">
+      <DependentUpon>fmCheckedListBoxWithCheckboxes.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="fmCheckedListBoxWithListiongOfSelectedItems.resx">
       <SubType>Designer</SubType>
       <DependentUpon>fmCheckedListBoxWithListiongOfSelectedItems.cs</DependentUpon>

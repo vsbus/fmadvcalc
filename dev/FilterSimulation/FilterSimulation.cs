@@ -215,12 +215,6 @@ namespace FilterSimulation
                                                     fmGlobalParameter.Ms,
                                                     fmGlobalParameter.Vs,
                                                     fmGlobalParameter.Msus,
-                                                    fmGlobalParameter.eps,
-                                                    fmGlobalParameter.kappa,
-                                                    fmGlobalParameter.Pc,
-                                                    fmGlobalParameter.rc,
-                                                    fmGlobalParameter.a,
-                                                    fmGlobalParameter.Rm
                                                };
         }
 
