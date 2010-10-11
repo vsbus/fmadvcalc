@@ -36,16 +36,16 @@ namespace FilterSimulation
             this.UnlimitedFlagColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.MinRangeColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.MaxRangeColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ParamGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
-            this.buttonOK.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonOK.Location = new System.Drawing.Point(413, 0);
+            this.buttonOK.Location = new System.Drawing.Point(329, 0);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 26);
+            this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 1;
             this.buttonOK.Text = "OK";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -54,6 +54,7 @@ namespace FilterSimulation
             // panel1
             // 
             this.panel1.Controls.Add(this.buttonOK);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 455);
             this.panel1.Name = "panel1";
@@ -103,7 +104,6 @@ namespace FilterSimulation
             this.UnlimitedFlagColumn.HeaderText = "Unlimited";
             this.UnlimitedFlagColumn.Name = "UnlimitedFlagColumn";
             this.UnlimitedFlagColumn.Visible = false;
-            this.UnlimitedFlagColumn.Width = 56;
             // 
             // MinRangeColumn
             // 
@@ -120,6 +120,16 @@ namespace FilterSimulation
             this.MaxRangeColumn.Name = "MaxRangeColumn";
             this.MaxRangeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.MaxRangeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(410, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Cancel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // fmParameterIntervalOption
             // 
@@ -146,6 +156,7 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewCheckBoxColumn UnlimitedFlagColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn MinRangeColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn MaxRangeColumn;
+        private System.Windows.Forms.Button button1;
 
 
 
