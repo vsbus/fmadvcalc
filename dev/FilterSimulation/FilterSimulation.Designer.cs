@@ -44,6 +44,7 @@ namespace FilterSimulation
             this.suspensionParametersAndCalcOptionsPanel = new System.Windows.Forms.Panel();
             this.suspensionParametersPanel = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.calculateLimitsCheckBox = new System.Windows.Forms.CheckBox();
             this.commonCalcBlockDataGrid = new fmDataGrid.fmDataGrid();
             this.commonCalcBlockParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commonCalcBlockUnitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -223,7 +224,6 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calculateLimitsCheckBox = new System.Windows.Forms.CheckBox();
             this.panelLeft.SuspendLayout();
             this.suspensionParametersAndCalcOptionsPanel.SuspendLayout();
             this.suspensionParametersPanel.SuspendLayout();
@@ -366,6 +366,17 @@ namespace FilterSimulation
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(880, 179);
             this.panel6.TabIndex = 17;
+            // 
+            // calculateLimitsCheckBox
+            // 
+            this.calculateLimitsCheckBox.AutoSize = true;
+            this.calculateLimitsCheckBox.Location = new System.Drawing.Point(582, 0);
+            this.calculateLimitsCheckBox.Name = "calculateLimitsCheckBox";
+            this.calculateLimitsCheckBox.Size = new System.Drawing.Size(52, 17);
+            this.calculateLimitsCheckBox.TabIndex = 14;
+            this.calculateLimitsCheckBox.Text = "Limits";
+            this.calculateLimitsCheckBox.UseVisualStyleBackColor = true;
+            this.calculateLimitsCheckBox.CheckedChanged += new System.EventHandler(this.calculateLimitsCheckBox_CheckedChanged);
             // 
             // commonCalcBlockDataGrid
             // 
@@ -2035,19 +2046,6 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
-            // 
-            // calculateLimitsCheckBox
-            // 
-            this.calculateLimitsCheckBox.AutoSize = true;
-            this.calculateLimitsCheckBox.Checked = true;
-            this.calculateLimitsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.calculateLimitsCheckBox.Location = new System.Drawing.Point(582, 0);
-            this.calculateLimitsCheckBox.Name = "calculateLimitsCheckBox";
-            this.calculateLimitsCheckBox.Size = new System.Drawing.Size(52, 17);
-            this.calculateLimitsCheckBox.TabIndex = 14;
-            this.calculateLimitsCheckBox.Text = "Limits";
-            this.calculateLimitsCheckBox.UseVisualStyleBackColor = true;
-            this.calculateLimitsCheckBox.CheckedChanged += new System.EventHandler(this.calculateLimitsCheckBox_CheckedChanged);
             // 
             // fmFilterSimulationControl
             // 

@@ -176,6 +176,8 @@ namespace FilterSimulation
             UpdateCurrentObjectAndDisplaySolution(projectDataGrid);
 
             InitializeHeaderCheckBox();
+
+            LimitsCalculationOnOff();
         }
 
         private void CreateDefaultListOfParametersForDisplaying()
@@ -412,7 +414,14 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
 
         private void calculateLimitsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            LimitsCalculationOnOff();
+        }
+
+        private void LimitsCalculationOnOff()
+        {
             m_commonFilterMachiningBlock.IsLimitsDisplaying = calculateLimitsCheckBox.Checked;
+            commonCalcBlockMinLocalColumn.Visible = calculateLimitsCheckBox.Checked;
+            commonCalcBlockMaxLocalColumn.Visible = calculateLimitsCheckBox.Checked;
             m_commonFilterMachiningBlock.CalculateAndDisplay();
         }
     }
