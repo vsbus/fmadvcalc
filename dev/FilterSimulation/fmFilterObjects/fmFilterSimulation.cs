@@ -334,7 +334,7 @@ namespace FilterSimulation.fmFilterObjects
                 parameter = new fmCalculationConstantParameter(fmGlobalParameter.parametersByName[name]);
             }
             bool defined = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.defined));
-            double value = Convert.ToDouble(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.value));
+            double value = fmSerializeTools.ToDouble(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.value));
             parameter.value = new fmValue(value, defined);
             input.ReadLine();
             return parameter;

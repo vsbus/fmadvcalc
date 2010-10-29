@@ -25,5 +25,13 @@ namespace FilterSimulation.fmFilterObjects
             object value = a[1].Trim();
             return value;
         }
+
+        public static double ToDouble(object p)
+        {
+            string s = p.ToString();
+            s = s.Replace(',', System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator[0]);
+            s = s.Replace('.', System.Globalization.NumberFormatInfo.CurrentInfo.NumberDecimalSeparator[0]);
+            return Convert.ToDouble(s);
+        }
     }
 }
