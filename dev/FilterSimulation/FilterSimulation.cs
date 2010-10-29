@@ -313,7 +313,7 @@ namespace FilterSimulation
         }
 
         // ReSharper disable InconsistentNaming
-        private static void simulationDataGrid_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        private void simulationDataGrid_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
         // ReSharper restore InconsistentNaming
         {
             var dg = sender as fmDataGrid.fmDataGrid;
@@ -408,6 +408,12 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
                 DisplaySolution(m_fSolution);
             }
+        }
+
+        private void calculateLimitsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            m_commonFilterMachiningBlock.IsLimitsDisplaying = calculateLimitsCheckBox.Checked;
+            m_commonFilterMachiningBlock.CalculateAndDisplay();
         }
     }
 }

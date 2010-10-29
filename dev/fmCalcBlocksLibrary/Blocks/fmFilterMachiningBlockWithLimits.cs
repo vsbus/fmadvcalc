@@ -10,6 +10,14 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmFilterMachiningBlockWithLimits : fmFilterMachiningBlock
     {
+        private bool m_isLimitsDisplaying = true;
+
+        public bool IsLimitsDisplaying
+        {
+            get { return m_isLimitsDisplaying; }
+            set { m_isLimitsDisplaying = value; }
+        }
+
         public void DoCalculationsLimitsClue()
         {
             var filterMachinigCalculator =
@@ -56,7 +64,6 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
-        
         private class fmIsOutOfRanges : fmCalculationLibrary.NumericalMethods.fmFunction
         {
             private readonly fmFilterMachiningBlockWithLimits m_block;
@@ -82,7 +89,7 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             base.ReWriteParameters();
 
-            if (processOnChange)
+            if (processOnChange && m_isLimitsDisplaying)
             {
                 processOnChange = false;
 

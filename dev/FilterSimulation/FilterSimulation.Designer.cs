@@ -117,39 +117,6 @@ namespace FilterSimulation
             this.projectCreateButton = new System.Windows.Forms.Button();
             this.simulationPanel = new System.Windows.Forms.Panel();
             this.simulationDataGrid = new fmDataGrid.fmDataGrid();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.simulationDeleteButton = new System.Windows.Forms.Button();
-            this.simulationRestoreButton = new System.Windows.Forms.Button();
-            this.simulationKeepButton = new System.Windows.Forms.Button();
-            this.simulationDuplicateButton = new System.Windows.Forms.Button();
-            this.simulationCreateButton = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.panelRight = new System.Windows.Forms.Panel();
-            this.panelTop = new System.Windows.Forms.Panel();
-            this.panelMain = new System.Windows.Forms.Panel();
-            this.splitter5 = new System.Windows.Forms.Splitter();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.simulationProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -223,6 +190,40 @@ namespace FilterSimulation
             this.simulation_PcColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_rcColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_aColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.simulationDeleteButton = new System.Windows.Forms.Button();
+            this.simulationRestoreButton = new System.Windows.Forms.Button();
+            this.simulationKeepButton = new System.Windows.Forms.Button();
+            this.simulationDuplicateButton = new System.Windows.Forms.Button();
+            this.simulationCreateButton = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.panelRight = new System.Windows.Forms.Panel();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.splitter5 = new System.Windows.Forms.Splitter();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.calculateLimitsCheckBox = new System.Windows.Forms.CheckBox();
             this.panelLeft.SuspendLayout();
             this.suspensionParametersAndCalcOptionsPanel.SuspendLayout();
             this.suspensionParametersPanel.SuspendLayout();
@@ -356,6 +357,7 @@ namespace FilterSimulation
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.calculateLimitsCheckBox);
             this.panel6.Controls.Add(this.commonCalcBlockDataGrid);
             this.panel6.Controls.Add(this.eps0Kappa0Pc0Rc0Alpha0DataGrid);
             this.panel6.Controls.Add(this.liquidDataGrid);
@@ -1309,297 +1311,10 @@ namespace FilterSimulation
             this.simulationDataGrid.Size = new System.Drawing.Size(976, 156);
             this.simulationDataGrid.TabIndex = 0;
             this.simulationDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellValueChanged);
-            this.simulationDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(simulationDataGrid_SortCompare);
+            this.simulationDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.simulationDataGrid_SortCompare);
             this.simulationDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellEndEdit);
             this.simulationDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellClick);
             this.simulationDataGrid.CurrentCellChanged += new System.EventHandler(this.simulationDataGrid_CurrentCellChanged);
-            // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.simulationDeleteButton);
-            this.panel5.Controls.Add(this.simulationRestoreButton);
-            this.panel5.Controls.Add(this.simulationKeepButton);
-            this.panel5.Controls.Add(this.simulationDuplicateButton);
-            this.panel5.Controls.Add(this.simulationCreateButton);
-            this.panel5.Controls.Add(this.byCheckingSimulationsCheckBox);
-            this.panel5.Controls.Add(this.fullSimulationInfoCheckBox);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(976, 20);
-            this.panel5.TabIndex = 11;
-            // 
-            // simulationDeleteButton
-            // 
-            this.simulationDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationDeleteButton.FlatAppearance.BorderSize = 0;
-            this.simulationDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simulationDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationDeleteButton.Image")));
-            this.simulationDeleteButton.Location = new System.Drawing.Point(228, 0);
-            this.simulationDeleteButton.Name = "simulationDeleteButton";
-            this.simulationDeleteButton.Size = new System.Drawing.Size(20, 20);
-            this.simulationDeleteButton.TabIndex = 10;
-            this.simulationDeleteButton.Text = " ";
-            this.simulationDeleteButton.UseVisualStyleBackColor = true;
-            this.simulationDeleteButton.Click += new System.EventHandler(this.simulationDeleteButton_Click);
-            // 
-            // simulationRestoreButton
-            // 
-            this.simulationRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationRestoreButton.FlatAppearance.BorderSize = 0;
-            this.simulationRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simulationRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationRestoreButton.Image")));
-            this.simulationRestoreButton.Location = new System.Drawing.Point(208, 0);
-            this.simulationRestoreButton.Name = "simulationRestoreButton";
-            this.simulationRestoreButton.Size = new System.Drawing.Size(20, 20);
-            this.simulationRestoreButton.TabIndex = 9;
-            this.simulationRestoreButton.Text = " ";
-            this.simulationRestoreButton.UseVisualStyleBackColor = true;
-            this.simulationRestoreButton.Click += new System.EventHandler(this.simulationRestoreButton_Click);
-            // 
-            // simulationKeepButton
-            // 
-            this.simulationKeepButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationKeepButton.FlatAppearance.BorderSize = 0;
-            this.simulationKeepButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simulationKeepButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationKeepButton.Image")));
-            this.simulationKeepButton.Location = new System.Drawing.Point(188, 0);
-            this.simulationKeepButton.Name = "simulationKeepButton";
-            this.simulationKeepButton.Size = new System.Drawing.Size(20, 20);
-            this.simulationKeepButton.TabIndex = 8;
-            this.simulationKeepButton.Text = " ";
-            this.simulationKeepButton.UseVisualStyleBackColor = true;
-            this.simulationKeepButton.Click += new System.EventHandler(this.simulationKeepButton_Click);
-            // 
-            // simulationDuplicateButton
-            // 
-            this.simulationDuplicateButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationDuplicateButton.FlatAppearance.BorderSize = 0;
-            this.simulationDuplicateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simulationDuplicateButton.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
-            this.simulationDuplicateButton.Location = new System.Drawing.Point(168, 0);
-            this.simulationDuplicateButton.Name = "simulationDuplicateButton";
-            this.simulationDuplicateButton.Size = new System.Drawing.Size(20, 20);
-            this.simulationDuplicateButton.TabIndex = 7;
-            this.simulationDuplicateButton.Text = " ";
-            this.simulationDuplicateButton.UseVisualStyleBackColor = true;
-            this.simulationDuplicateButton.Click += new System.EventHandler(this.simulationDuplicateButton_Click);
-            // 
-            // simulationCreateButton
-            // 
-            this.simulationCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationCreateButton.FlatAppearance.BorderSize = 0;
-            this.simulationCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simulationCreateButton.Image = global::FilterSimulation.Properties.Resources.page_white;
-            this.simulationCreateButton.Location = new System.Drawing.Point(148, 0);
-            this.simulationCreateButton.Name = "simulationCreateButton";
-            this.simulationCreateButton.Size = new System.Drawing.Size(20, 20);
-            this.simulationCreateButton.TabIndex = 11;
-            this.simulationCreateButton.UseVisualStyleBackColor = true;
-            this.simulationCreateButton.Click += new System.EventHandler(this.simulationCreateButton_Click);
-            // 
-            // button4
-            // 
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(500, -437);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(20, 20);
-            this.button4.TabIndex = 5;
-            this.button4.Text = " ";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.suspensionDeleteButton_Click);
-            // 
-            // button3
-            // 
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(424, -438);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(20, 20);
-            this.button3.TabIndex = 3;
-            this.button3.Text = " ";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.keepSuspensionButton_Click);
-            // 
-            // button2
-            // 
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(462, -438);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(20, 20);
-            this.button2.TabIndex = 4;
-            this.button2.Text = " ";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.suspensionRestoreButton_Click);
-            // 
-            // button1
-            // 
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(386, -438);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(20, 20);
-            this.button1.TabIndex = 2;
-            this.button1.Text = " ";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.suspensionCreateButton_Click);
-            // 
-            // panelRight
-            // 
-            this.panelRight.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelRight.Location = new System.Drawing.Point(0, 432);
-            this.panelRight.Name = "panelRight";
-            this.panelRight.Size = new System.Drawing.Size(980, 0);
-            this.panelRight.TabIndex = 8;
-            // 
-            // panelTop
-            // 
-            this.panelTop.Controls.Add(this.panelRight);
-            this.panelTop.Controls.Add(this.panelLeft);
-            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(980, 432);
-            this.panelTop.TabIndex = 34;
-            // 
-            // panelMain
-            // 
-            this.panelMain.Controls.Add(this.simulationPanel);
-            this.panelMain.Controls.Add(this.splitter5);
-            this.panelMain.Controls.Add(this.panelTop);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(0, 0);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(980, 615);
-            this.panelMain.TabIndex = 35;
-            // 
-            // splitter5
-            // 
-            this.splitter5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter5.Location = new System.Drawing.Point(0, 432);
-            this.splitter5.Name = "splitter5";
-            this.splitter5.Size = new System.Drawing.Size(980, 3);
-            this.splitter5.TabIndex = 35;
-            this.splitter5.TabStop = false;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn1.HeaderText = "Guid";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Project Name";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 160;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn3.HeaderText = "Guid";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn3.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Material";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Customer";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Suspension Name";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Width = 160;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Machine Type Symbol";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Machine Type Name";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn9.HeaderText = "Guid";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            this.dataGridViewTextBoxColumn9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dataGridViewTextBoxColumn9.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.HeaderText = "Series Name";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "Machine Name";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.HeaderText = "Filter Medium";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.HeaderText = "Last Modified Date";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn14.HeaderText = "Guid";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            this.dataGridViewTextBoxColumn14.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.HeaderText = "Simulation Name";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.HeaderText = "SimSeries";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            this.dataGridViewTextBoxColumn16.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.HeaderText = "Suspension";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            this.dataGridViewTextBoxColumn17.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.HeaderText = "Filter Medium";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            this.dataGridViewTextBoxColumn18.Visible = false;
             // 
             // simulationGuidColumn
             // 
@@ -1608,7 +1323,6 @@ namespace FilterSimulation
             this.simulationGuidColumn.Name = "simulationGuidColumn";
             this.simulationGuidColumn.ReadOnly = true;
             this.simulationGuidColumn.Visible = false;
-            this.simulationGuidColumn.Width = 35;
             // 
             // simulationCheckedColumn
             // 
@@ -2035,18 +1749,319 @@ namespace FilterSimulation
             this.simulation_aColumn.Name = "simulation_aColumn";
             this.simulation_aColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // FilterSimulation
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.simulationDeleteButton);
+            this.panel5.Controls.Add(this.simulationRestoreButton);
+            this.panel5.Controls.Add(this.simulationKeepButton);
+            this.panel5.Controls.Add(this.simulationDuplicateButton);
+            this.panel5.Controls.Add(this.simulationCreateButton);
+            this.panel5.Controls.Add(this.byCheckingSimulationsCheckBox);
+            this.panel5.Controls.Add(this.fullSimulationInfoCheckBox);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(0, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(976, 20);
+            this.panel5.TabIndex = 11;
+            // 
+            // simulationDeleteButton
+            // 
+            this.simulationDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationDeleteButton.FlatAppearance.BorderSize = 0;
+            this.simulationDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simulationDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationDeleteButton.Image")));
+            this.simulationDeleteButton.Location = new System.Drawing.Point(228, 0);
+            this.simulationDeleteButton.Name = "simulationDeleteButton";
+            this.simulationDeleteButton.Size = new System.Drawing.Size(20, 20);
+            this.simulationDeleteButton.TabIndex = 10;
+            this.simulationDeleteButton.Text = " ";
+            this.simulationDeleteButton.UseVisualStyleBackColor = true;
+            this.simulationDeleteButton.Click += new System.EventHandler(this.simulationDeleteButton_Click);
+            // 
+            // simulationRestoreButton
+            // 
+            this.simulationRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationRestoreButton.FlatAppearance.BorderSize = 0;
+            this.simulationRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simulationRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationRestoreButton.Image")));
+            this.simulationRestoreButton.Location = new System.Drawing.Point(208, 0);
+            this.simulationRestoreButton.Name = "simulationRestoreButton";
+            this.simulationRestoreButton.Size = new System.Drawing.Size(20, 20);
+            this.simulationRestoreButton.TabIndex = 9;
+            this.simulationRestoreButton.Text = " ";
+            this.simulationRestoreButton.UseVisualStyleBackColor = true;
+            this.simulationRestoreButton.Click += new System.EventHandler(this.simulationRestoreButton_Click);
+            // 
+            // simulationKeepButton
+            // 
+            this.simulationKeepButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationKeepButton.FlatAppearance.BorderSize = 0;
+            this.simulationKeepButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simulationKeepButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationKeepButton.Image")));
+            this.simulationKeepButton.Location = new System.Drawing.Point(188, 0);
+            this.simulationKeepButton.Name = "simulationKeepButton";
+            this.simulationKeepButton.Size = new System.Drawing.Size(20, 20);
+            this.simulationKeepButton.TabIndex = 8;
+            this.simulationKeepButton.Text = " ";
+            this.simulationKeepButton.UseVisualStyleBackColor = true;
+            this.simulationKeepButton.Click += new System.EventHandler(this.simulationKeepButton_Click);
+            // 
+            // simulationDuplicateButton
+            // 
+            this.simulationDuplicateButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationDuplicateButton.FlatAppearance.BorderSize = 0;
+            this.simulationDuplicateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simulationDuplicateButton.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
+            this.simulationDuplicateButton.Location = new System.Drawing.Point(168, 0);
+            this.simulationDuplicateButton.Name = "simulationDuplicateButton";
+            this.simulationDuplicateButton.Size = new System.Drawing.Size(20, 20);
+            this.simulationDuplicateButton.TabIndex = 7;
+            this.simulationDuplicateButton.Text = " ";
+            this.simulationDuplicateButton.UseVisualStyleBackColor = true;
+            this.simulationDuplicateButton.Click += new System.EventHandler(this.simulationDuplicateButton_Click);
+            // 
+            // simulationCreateButton
+            // 
+            this.simulationCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationCreateButton.FlatAppearance.BorderSize = 0;
+            this.simulationCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simulationCreateButton.Image = global::FilterSimulation.Properties.Resources.page_white;
+            this.simulationCreateButton.Location = new System.Drawing.Point(148, 0);
+            this.simulationCreateButton.Name = "simulationCreateButton";
+            this.simulationCreateButton.Size = new System.Drawing.Size(20, 20);
+            this.simulationCreateButton.TabIndex = 11;
+            this.simulationCreateButton.UseVisualStyleBackColor = true;
+            this.simulationCreateButton.Click += new System.EventHandler(this.simulationCreateButton_Click);
+            // 
+            // button4
+            // 
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
+            this.button4.Location = new System.Drawing.Point(500, -437);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(20, 20);
+            this.button4.TabIndex = 5;
+            this.button4.Text = " ";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.suspensionDeleteButton_Click);
+            // 
+            // button3
+            // 
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(424, -438);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(20, 20);
+            this.button3.TabIndex = 3;
+            this.button3.Text = " ";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.keepSuspensionButton_Click);
+            // 
+            // button2
+            // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Location = new System.Drawing.Point(462, -438);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(20, 20);
+            this.button2.TabIndex = 4;
+            this.button2.Text = " ";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.suspensionRestoreButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(386, -438);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(20, 20);
+            this.button1.TabIndex = 2;
+            this.button1.Text = " ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.suspensionCreateButton_Click);
+            // 
+            // panelRight
+            // 
+            this.panelRight.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelRight.Location = new System.Drawing.Point(0, 432);
+            this.panelRight.Name = "panelRight";
+            this.panelRight.Size = new System.Drawing.Size(980, 0);
+            this.panelRight.TabIndex = 8;
+            // 
+            // panelTop
+            // 
+            this.panelTop.Controls.Add(this.panelRight);
+            this.panelTop.Controls.Add(this.panelLeft);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(980, 432);
+            this.panelTop.TabIndex = 34;
+            // 
+            // panelMain
+            // 
+            this.panelMain.Controls.Add(this.simulationPanel);
+            this.panelMain.Controls.Add(this.splitter5);
+            this.panelMain.Controls.Add(this.panelTop);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(980, 615);
+            this.panelMain.TabIndex = 35;
+            // 
+            // splitter5
+            // 
+            this.splitter5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.splitter5.Location = new System.Drawing.Point(0, 432);
+            this.splitter5.Name = "splitter5";
+            this.splitter5.Size = new System.Drawing.Size(980, 3);
+            this.splitter5.TabIndex = 35;
+            this.splitter5.TabStop = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn1.HeaderText = "Guid";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Project Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 160;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn3.HeaderText = "Guid";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn3.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Material";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Customer";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Suspension Name";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 160;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Machine Type Symbol";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.HeaderText = "Machine Type Name";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn9.HeaderText = "Guid";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            this.dataGridViewTextBoxColumn9.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dataGridViewTextBoxColumn9.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.HeaderText = "Series Name";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.HeaderText = "Machine Name";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.HeaderText = "Filter Medium";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.HeaderText = "Last Modified Date";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn14.HeaderText = "Guid";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            this.dataGridViewTextBoxColumn14.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.HeaderText = "Simulation Name";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.HeaderText = "SimSeries";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            this.dataGridViewTextBoxColumn16.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.HeaderText = "Suspension";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            this.dataGridViewTextBoxColumn17.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.HeaderText = "Filter Medium";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
+            this.dataGridViewTextBoxColumn18.Visible = false;
+            // 
+            // calculateLimitsCheckBox
+            // 
+            this.calculateLimitsCheckBox.AutoSize = true;
+            this.calculateLimitsCheckBox.Checked = true;
+            this.calculateLimitsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.calculateLimitsCheckBox.Location = new System.Drawing.Point(582, 0);
+            this.calculateLimitsCheckBox.Name = "calculateLimitsCheckBox";
+            this.calculateLimitsCheckBox.Size = new System.Drawing.Size(52, 17);
+            this.calculateLimitsCheckBox.TabIndex = 14;
+            this.calculateLimitsCheckBox.Text = "Limits";
+            this.calculateLimitsCheckBox.UseVisualStyleBackColor = true;
+            this.calculateLimitsCheckBox.CheckedChanged += new System.EventHandler(this.calculateLimitsCheckBox_CheckedChanged);
+            // 
+            // fmFilterSimulationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelMain);
-            this.Name = "FilterSimulation";
+            this.Name = "fmFilterSimulationControl";
             this.Size = new System.Drawing.Size(980, 615);
             this.Load += new System.EventHandler(this.FilterSimulation_Load);
             this.panelLeft.ResumeLayout(false);
             this.suspensionParametersAndCalcOptionsPanel.ResumeLayout(false);
             this.suspensionParametersPanel.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).EndInit();
@@ -2269,5 +2284,6 @@ namespace FilterSimulation
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_PcColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_rcColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_aColumn;
+        private System.Windows.Forms.CheckBox calculateLimitsCheckBox;
     }
 }
