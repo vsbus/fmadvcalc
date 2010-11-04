@@ -1,0 +1,51 @@
+digraph A {
+
+	Constants [label = "Constants:\nrho, eps0, Pc0\nnc, ne", color = grey];
+
+	A [color = blue];
+	Qf [color = blue];
+	Qs [color = blue];
+	Qsus [color = blue];
+	Qc [color = blue];
+	Qmf [color = blue];
+	Qms [color = blue];
+	Qmsus [color = blue];
+	Qmc [color = blue];
+
+	Dp [color = magenta];
+
+	tr [color = green];
+	sr [color = green];
+	sf [color = green];
+
+	tf [color = red];
+	tc [color = red];
+	n [color = red];
+	Qsus_d [color = red, label = "Qsus,d"];
+	hc [color = red];
+	tf [color = red];
+	Mf [color = red];
+	Ms [color = red];
+	Msus [color = red];
+	Mc [color = red];
+	Vf [color = red];
+	Vs [color = red];
+	Vsus [color = red];
+	Vc [color = red];
+	mf [color = red];
+	ms [color = red];
+	msus [color = red];
+	mc [color = red];
+	vf [color = red];
+	vs [color = red];
+	vsus [color = red];
+	vc [color = red];
+
+
+	A -> Qp;
+	Dp -> Qp;
+	Pc -> Qp;
+	constants -> Qp;
+	hc -> Qp;
+}
+
