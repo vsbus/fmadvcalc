@@ -17,8 +17,8 @@ digraph A {
 	sr [color = green];
 	sf [color = green, shape = rectangle];
 
-	tf [color = red];
 	tc [color = red, shape = rectangle];
+	tf [color = red];
 	n [color = red];
 	hc [color = red];
 	tf [color = red];
