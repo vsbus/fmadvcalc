@@ -1,0 +1,80 @@
+digraph A {
+	Constants [label = "Constants:\nrho, eps0, Pc0\nnc, ne", color = grey];
+
+	A [color = blue, shape = rectangle];
+	Qf [color = blue];
+	Qs [color = blue];
+	Qsus [color = blue];
+	Qcake [color = blue];
+	Qmf [color = blue];
+	Qms [color = blue];
+	Qmsus [color = blue];
+	Qmcake [color = blue];
+
+	Dp [color = magenta, shape = rectangle];
+
+	tr [color = green];
+	sr [color = green];
+	sf [color = green, shape = rectangle];
+
+	tf [color = red];
+	tc [color = red, shape = rectangle];
+	n [color = red];
+	hc [color = red];
+	tf [color = red];
+	Mf [color = red];
+	Ms [color = red];
+	Msus [color = red];
+	Mcake [color = red];
+	Vf [color = red];
+	Vs [color = red];
+	Vsus [color = red];
+	Vcake [color = red];
+	mf [color = red];
+	ms [color = red];
+	msus [color = red];
+	mcake [color = red];
+	vf [color = red];
+	vs [color = red];
+	vsus [color = red];
+	vcake [color = red];
+
+
+	tc -> n;
+	tc -> tf;
+	tc -> tr;
+	tc -> sr;
+	tf -> hc;
+	hc -> vcake;
+	vcake -> vf;
+      vf -> vsus;
+	vsus -> vs;
+
+	vf -> mcake;
+	vf -> mf;
+	vsus -> msus;
+	vs -> ms;
+
+	vcake -> Vcake;
+	vf -> Vf;
+	vsus -> Vsus;
+	vs -> Vs;
+
+	mcake -> Mcake;
+	mf -> Mf;
+	msus -> Msus;
+	ms -> Ms;
+
+	Msus -> Qmsus;
+	Qmsus -> Qms;
+	Mf -> Qmf;
+	Mcake -> Qmcake;
+
+	Vsus -> Qsus;
+	Qms -> Qs;
+	Vf -> Qf;
+	Vcake -> Qcake;
+
+	
+}
+
