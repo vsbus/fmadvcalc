@@ -196,7 +196,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         RHOSUS_CALCULATED,
                     filterMachiningCalculationOption =
                         fmCalculatorsLibrary.fmFilterMachiningCalculator.
-                        fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL
+                        fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST
                 };
 
                 if (GetCurrentActiveSelectedSimulationData() != null)
@@ -274,7 +274,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         RHOSUS_CALCULATED,
                     filterMachiningCalculationOption =
                         fmCalculatorsLibrary.fmFilterMachiningCalculator.
-                        fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL
+                        fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST
                 };
 
                 if (GetCurrentActiveLocalParameters() != null)

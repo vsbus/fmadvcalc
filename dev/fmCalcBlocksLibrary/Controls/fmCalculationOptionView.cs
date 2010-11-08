@@ -49,7 +49,8 @@ namespace fmCalcBlocksLibrary.Controls
         private void CreateTree()
         {
             var globalNode = new TreeNode("Global");
-            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL));
+            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST));
+            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST));
             Nodes.Add(globalNode);
             
             var standartNode = new TreeNode("Standart");
@@ -66,7 +67,7 @@ namespace fmCalcBlocksLibrary.Controls
             optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1));
             Nodes.Add(optimizationNode);
 
-            SetSelectedOption(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL);
+            SetSelectedOption(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST);
 
             TreeView_AfterSelect(this, new TreeViewEventArgs(SelectedLeaf));
         }

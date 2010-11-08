@@ -31,6 +31,17 @@ namespace fmCalculationLibrary.Equations
             return fmValue.Sqrt(hce * hce + 2 * Pc * kappa * Dp * tf / etaf) - hce;
         }
 
+        static public fmValue Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf_QpConst(
+            fmValue hce,
+            fmValue Pc,
+            fmValue kappa,
+            fmValue Dp,
+            fmValue tf,
+            fmValue etaf)
+        {
+            return 0.5 * (fmValue.Sqrt(hce * hce + 4 * Pc * kappa * Dp * tf / etaf) - hce);
+        }
+
         public static fmValue Eval_M_From_rho_V(fmValue rho, fmValue V)
         {
             return rho * V;
@@ -126,6 +137,11 @@ namespace fmCalculationLibrary.Equations
         public static fmValue Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(fmValue eta_f, fmValue hc, fmValue hce, fmValue Pc, fmValue kappa, fmValue Dp)
         {
             return eta_f * (hc * hc + 2 * hc * hce) / (2 * Pc * kappa * Dp);
+        }
+
+        public static fmValue Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp_QpConst(fmValue eta_f, fmValue hc, fmValue hce, fmValue Pc, fmValue kappa, fmValue Dp)
+        {
+            return eta_f * hc * (hc + hce) / (Pc * kappa * Dp);
         }
 
         public static fmValue Eval_Qmsus_From_Qms_Cm(fmValue Qms, fmValue Cm)
@@ -430,6 +446,13 @@ namespace fmCalculationLibrary.Equations
         public static fmValue Eval_tr_From_sr_tc(fmValue sr, fmValue tc)
         {
             return sr * tc;
+        }
+
+        public static fmValue Eval_Qsus_d_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(
+            fmValue A, fmValue Dp, fmValue Pc, fmValue eta_f, fmValue Cv, fmValue eps, fmValue hc, fmValue hce)
+        {
+            fmValue one = new fmValue(1.0);
+            return A * Dp * Pc / (eta_f * (one - Cv / (one - eps)) * (hc + hce));
         }
         // ReSharper restore InconsistentNaming
     }
