@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace fmCalculationLibrary.Equations
@@ -453,6 +454,11 @@ namespace fmCalculationLibrary.Equations
         {
             fmValue one = new fmValue(1.0);
             return A * Dp * Pc / (eta_f * (one - Cv / (one - eps)) * (hc + hce));
+        }
+        public static fmValue Eval_Qf_From_Qsusd_eps_Cv(fmValue Qsusd, fmValue eps, fmValue Cv)
+        {
+            fmValue one = new fmValue(1.0);
+            return Qsusd * (one - eps - Cv) / (one - eps);
         }
         // ReSharper restore InconsistentNaming
     }

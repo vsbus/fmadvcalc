@@ -961,14 +961,14 @@ namespace fmCalcBlocksLibrary.Blocks
             table[Qs] = AQ_group;
             table[Qmc] = AQ_group;
             table[Qc] = AQ_group;
-
+            table[Qsus_d] = AQ_group;
+            
             table[Dp] = Dp_group;
 
             table[sf] = sf_sr_tr_group;
             table[sr] = sf_sr_tr_group;
             table[tr] = sf_sr_tr_group;
 
-            table[Qsus_d] = hc_MV_group;
             table[hc] = hc_MV_group;
             table[vc] = hc_MV_group;
             table[vf] = hc_MV_group;

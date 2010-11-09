@@ -1087,7 +1087,7 @@ namespace fmCalculatorsLibrary
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
             var Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
-
+            
             var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
             var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
             var Qf_d = variables[fmGlobalParameter.Qf_d];
@@ -1148,7 +1148,6 @@ namespace fmCalculatorsLibrary
             var isKnown_tf = tf.isInputed;
             var isKnown_tr = tr.isInputed;
             var isKnown_hc = hc.isInputed;
-            var isKnown_Qsus_d = Qsus_d.isInputed;
             var isKnown_Vsus = Vsus.isInputed;
             var isKnown_Mf = Mf.isInputed;
             var isKnown_Vf = Vf.isInputed;
@@ -1173,6 +1172,7 @@ namespace fmCalculatorsLibrary
             var isKnown_Qms = Qms.isInputed;
             var isKnown_Qmsus = Qmsus.isInputed;
             var isKnown_Qmc = Qmc.isInputed;
+            var isKnown_Qsusd = Qsus_d.isInputed;
             // ReSharper restore InconsistentNaming
 
             #region A0
@@ -1276,12 +1276,6 @@ namespace fmCalculatorsLibrary
                 isKnown_hc = true;
             }
 
-            if (isKnown_Qsus_d)
-            {
-                hc.value = fmFilterMachiningEquations.Eval_hc_From_Dp_Pc_etaf_Cv_eps_Qsusd_A_hce();
-                isKnown_hc = true;
-            }
-
             if (isKnown_hc)
             {
                 tf.value = fmFilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp_QpConst(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
@@ -1374,6 +1368,11 @@ namespace fmCalculatorsLibrary
                 Qf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
+            if (isKnown_Qsusd)
+            {
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qsus_d.value, eps.value, Cv.value);
+                isKnown_Qf = true;
+            }
             #endregion
             #region G
             if (isKnown_Qc && isKnown_Vc)
@@ -1441,7 +1440,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_tr) tr.value = fmFilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
             if (!isKnown_sr) sr.value = fmFilterMachiningEquations.Eval_sr_From_tc_tr(tc.value, tr.value);
             if (!isKnown_hc) hc.value = fmFilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf_QpConst(hce.value, Pc.value, kappa.value, Dp.value, tf.value, eta_f.value);
-            
+
             if (!isKnown_vc) vc.value = hc.value;
             if (!isKnown_vf) vf.value = fmFilterMachiningEquations.Eval_vf_From_vc_kappa(vc.value, kappa.value);
             if (!isKnown_vsus) vsus.value = fmFilterMachiningEquations.Eval_vsus_From_vf_kappa(vf.value, kappa.value);
@@ -1473,10 +1472,12 @@ namespace fmCalculatorsLibrary
             if (!isKnown_A && isKnown_Vc)
             {
                 A.value = fmFilterMachiningEquations.Eval_A_From_V_v(Vc.value, vc.value);
-                isKnown_A = true;
+                /*
+                                isKnown_A = true;
+                */
             }
 
-            if (!isKnown_Qsus_d) Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(A.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hc.value, hce.value);
+            if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(A.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hc.value, hce.value);
 
             if (!isKnown_Vc) Vc.value = fmFilterMachiningEquations.Eval_V_From_v_A(vc.value, A.value);
             if (!isKnown_Vf) Vf.value = fmFilterMachiningEquations.Eval_V_From_v_A(vf.value, A.value);
