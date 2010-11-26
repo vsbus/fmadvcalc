@@ -473,16 +473,16 @@ namespace fmCalculationLibrary.Equations
             fmValue C1 = eta * d * d / (16 * kappa * Pc * Dp);
             fmValue hcd = hc / r;
             fmValue hced = hce / r;
-            fmValue tf = C1 * fmValue.Sqr(1 + hcd) * (2 * fmValue.Log(1 + hcd) - 1 + 2 * hced);
+            fmValue tf = C1 * (fmValue.Sqr(1 + hcd) * (2 * fmValue.Log(1 + hcd) - 1 + 2 * hced) + 1 - 2 * hced);
             return tf;
         }
 
         public static fmValue EvalCandle_hc_From_tf_hce_kappa_Pc_Dp_etaf_r(fmValue tf, fmValue hce, fmValue kappa, fmValue Pc, fmValue Dp, fmValue etaf, fmValue r)
         {
             fmValue hced = hce / r;
-            fmValue C = (2 * hced - 1) / 4;
+            fmValue C = 2 * hced - 1;
             fmValue td = kappa * Pc * Dp * tf / (etaf * r * r);
-            fmValue x = fmValue.Exp(0.5 * fmValue.LambertW(4 * td * fmValue.Exp(4 * C)) - 2 * C);
+            fmValue x = fmValue.Exp(0.5 * fmValue.LambertW((4 * td + C) * fmValue.Exp(C)) - 0.5 * C);
             fmValue hcd = x - 1;
             fmValue hc = hcd * r;
             return hc;
