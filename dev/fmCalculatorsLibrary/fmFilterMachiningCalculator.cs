@@ -2158,14 +2158,13 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_vc)
             {
-                hc.value = vc.value;
-                //hc.value = fmFilterMachiningEquations.EvalCandle_hc_vc(vf.value, kappa.value);
+                hc.value = fmFilterMachiningEquations.EvalCandle_hc_From_vc_r(vc.value, r0.value);
                 isKnown_hc = true;
             }
 
             if (isKnown_hc)
             {
-                tf.value = fmFilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
+                tf.value = fmFilterMachiningEquations.EvalCandle_tf_From_r_eta_kappa_Pc_Dp_hc_hce(r0.value, eta_f.value, kappa.value, Pc.value, Dp.value, hc.value, hce.value);
                 isKnown_tf = true;
             }
             #endregion
@@ -2321,9 +2320,9 @@ namespace fmCalculatorsLibrary
             if (!isKnown_tf) tf.value = fmFilterMachiningEquations.Eval_tf_From_sf_tc(sf.value, tc.value);
             if (!isKnown_tr) tr.value = fmFilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
             if (!isKnown_sr) sr.value = fmFilterMachiningEquations.Eval_sr_From_tc_tr(tc.value, tr.value);
-            if (!isKnown_hc) hc.value = fmFilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(hce.value, Pc.value, kappa.value, Dp.value, tf.value, eta_f.value);
+            if (!isKnown_hc) hc.value = fmFilterMachiningEquations.EvalCandle_hc_From_tf_hce_kappa_Pc_Dp_etaf_r(tf.value, hce.value, kappa.value, Pc.value, Dp.value, eta_f.value, r0.value);
 
-            if (!isKnown_vc) vc.value = hc.value;
+            if (!isKnown_vc) vc.value = fmFilterMachiningEquations.EvalCandle_vc_From_hc_r(hc.value, r0.value);
             if (!isKnown_vf) vf.value = fmFilterMachiningEquations.Eval_vf_From_vc_kappa(vc.value, kappa.value);
             if (!isKnown_vsus) vsus.value = fmFilterMachiningEquations.Eval_vsus_From_vf_kappa(vf.value, kappa.value);
             if (!isKnown_vs) vs.value = fmFilterMachiningEquations.Eval_vs_From_vsus_rho_Cm(vsus.value, rho_sus.value, rho_s.value, Cm.value);

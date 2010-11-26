@@ -263,6 +263,22 @@ namespace fmCalculationLibrary
             return op;
         }
 
+        public static fmValue LambertW(fmValue x)
+        {
+            if (x.value < 0 || x.defined == false)
+            {
+                return new fmValue();
+            }
+            double y = 0.5 * x.value, dy = 0.5 * y;
+            while (dy > 1e-9)
+            {
+                double f = y * Math.Exp(y);
+                if (f > x.value) y -= dy; else y += dy;
+                dy *= 0.5;
+            }
+            return new fmValue(y);
+        }
+
         public static fmValue Exp(fmValue op)
         {
             var res = new fmValue {defined = op.defined};
