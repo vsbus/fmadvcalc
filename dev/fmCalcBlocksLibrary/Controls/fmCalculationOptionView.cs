@@ -52,6 +52,10 @@ namespace fmCalcBlocksLibrary.Controls
             globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST));
             globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST));
             Nodes.Add(globalNode);
+
+            var candleNode = new TreeNode("Candle");
+            candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST));
+            Nodes.Add(candleNode);
             
             var standartNode = new TreeNode("Standart");
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3));
