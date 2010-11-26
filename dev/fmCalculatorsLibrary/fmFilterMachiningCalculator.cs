@@ -1939,6 +1939,7 @@ namespace fmCalculatorsLibrary
         {
             // ReSharper disable InconsistentNaming
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            var r0 = variables[fmGlobalParameter.r0] as fmCalculationVariableParameter;
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
             var sf = variables[fmGlobalParameter.sf] as fmCalculationVariableParameter;
             var sr = variables[fmGlobalParameter.sr] as fmCalculationVariableParameter;

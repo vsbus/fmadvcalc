@@ -35,7 +35,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.epsKappaBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.nTcTfBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.sfSrTrBox = new fmControls.fmCheckedListBoxWithCheckboxes();
-            this.aDpBox = new fmControls.fmCheckedListBoxWithCheckboxes();
+            this.aRDpBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.qmSmallBox_dif = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.qSmallBox_dif = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.qmBigBox_dif = new fmControls.fmCheckedListBoxWithCheckboxes();
@@ -78,7 +78,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel2.Controls.Add(this.epsKappaBox);
             this.panel2.Controls.Add(this.nTcTfBox);
             this.panel2.Controls.Add(this.sfSrTrBox);
-            this.panel2.Controls.Add(this.aDpBox);
+            this.panel2.Controls.Add(this.aRDpBox);
             this.panel2.Controls.Add(this.qmSmallBox_dif);
             this.panel2.Controls.Add(this.qSmallBox_dif);
             this.panel2.Controls.Add(this.qmBigBox_dif);
@@ -131,11 +131,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // aDpBox
             // 
-            this.aDpBox.CaptionText = "";
-            this.aDpBox.Location = new System.Drawing.Point(12, 12);
-            this.aDpBox.Name = "aDpBox";
-            this.aDpBox.Size = new System.Drawing.Size(106, 54);
-            this.aDpBox.TabIndex = 15;
+            this.aRDpBox.CaptionText = "";
+            this.aRDpBox.Location = new System.Drawing.Point(12, 12);
+            this.aRDpBox.Name = "aDpBox";
+            this.aRDpBox.Size = new System.Drawing.Size(106, 54);
+            this.aRDpBox.TabIndex = 15;
             // 
             // qmSmallBox_dif
             // 
@@ -268,7 +268,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmControls.fmCheckedListBoxWithCheckboxes epsKappaBox;
         private fmControls.fmCheckedListBoxWithCheckboxes nTcTfBox;
         private fmControls.fmCheckedListBoxWithCheckboxes sfSrTrBox;
-        private fmControls.fmCheckedListBoxWithCheckboxes aDpBox;
+        private fmControls.fmCheckedListBoxWithCheckboxes aRDpBox;
         private fmControls.fmCheckedListBoxWithCheckboxes hcBox;
     }
 }

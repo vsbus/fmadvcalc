@@ -154,6 +154,9 @@ namespace FilterSimulation
             sim.Parameters[fmGlobalParameter.A].value = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
             ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.A]).isInputed = true;
 
+            sim.Parameters[fmGlobalParameter.r0].value = new fmValue(0.1 * fmUnitFamily.LengthFamily.CurrentUnit.Coef);
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.r0]).isInputed = true;
+
             sim.Parameters[fmGlobalParameter.Dp].value = new fmValue(1 * fmUnitFamily.PressureFamily.CurrentUnit.Coef);
             ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.Dp]).isInputed = true;
 
@@ -185,6 +188,7 @@ namespace FilterSimulation
             parametersToDisplay = new List<fmGlobalParameter>
                                                {
                                                     fmGlobalParameter.A,
+                                                    fmGlobalParameter.r0,
                                                     fmGlobalParameter.Dp,
                                                     fmGlobalParameter.sf,
                                                     fmGlobalParameter.sr,

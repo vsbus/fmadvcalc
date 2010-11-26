@@ -279,6 +279,7 @@ namespace FilterSimulation
                 {
                     sim.filterMachiningBlock = new fmFilterMachiningBlock(
                         row.Cells[simulationFilterAreaColumn.Index],
+                        row.Cells[simulationFilterRadiusColumn.Index],
                         row.Cells[simulation_DpColumn.Index],
                         row.Cells[simulation_sfColumn.Index],
                         row.Cells[simulation_srColumn.Index],
@@ -802,6 +803,7 @@ namespace FilterSimulation
                 WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce0", epsKappaUnits.Index, fmGlobalParameter.hce0.unitFamily);
 
                 WriteUnitToHeader(simulationDataGrid.Columns[simulationFilterAreaColumn.Index].HeaderCell, fmGlobalParameter.A.unitFamily);
+                WriteUnitToHeader(simulationDataGrid.Columns[simulationFilterRadiusColumn.Index].HeaderCell, fmGlobalParameter.r0.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_DpColumn.Index].HeaderCell, fmGlobalParameter.Dp.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_nColumn.Index].HeaderCell, fmGlobalParameter.n.unitFamily);
                 WriteUnitToHeader(simulationDataGrid.Columns[simulation_tcColumn.Index].HeaderCell, fmGlobalParameter.tc.unitFamily);
