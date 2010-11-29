@@ -31,14 +31,17 @@ namespace fmCalculatorsLibrary
             
             // Global
             // 
-            [Description("global(Dp = const): (A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
+            //(A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)
+            [Description("Dp = const (Pressure leaf)")]
             STANDART_AND_DESIGN_GLOBAL_DP_CONST,
-            [Description("global(Qp = const): (A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
+            //(A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            [Description("Qp = const (Pressure leaf)")]
             STANDART_AND_DESIGN_GLOBAL_QP_CONST,
 
             // Candle
             //
-            [Description("candle(Dp = const): (A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
+            //(A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)
+            [Description("Dp = const (Candle)")]
             CANDLE_DP_CONST
         }
 

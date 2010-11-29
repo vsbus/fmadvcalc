@@ -48,28 +48,31 @@ namespace fmCalcBlocksLibrary.Controls
 
         private void CreateTree()
         {
-            var globalNode = new TreeNode("Global");
+            var globalNode = new TreeNode("Pressure leaf filters");
             globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST));
             globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST));
             Nodes.Add(globalNode);
 
-            var candleNode = new TreeNode("Candle");
+            var candleNode = new TreeNode("Candle filter");
             candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST));
             Nodes.Add(candleNode);
-            
+
+            var otherNode = new TreeNode("Other...");
+            Nodes.Add(otherNode);
+
             var standartNode = new TreeNode("Standart");
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3));
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4));
             standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8));
-            Nodes.Add(standartNode);
+            otherNode.Nodes.Add(standartNode);
 
             var designNode = new TreeNode("Design");
             designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1));
-            Nodes.Add(designNode);
+            otherNode.Nodes.Add(designNode);
 
             var optimizationNode = new TreeNode("Optimization");
             optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1));
-            Nodes.Add(optimizationNode);
+            otherNode.Nodes.Add(optimizationNode);
 
             SetSelectedOption(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST);
 
