@@ -138,7 +138,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
                 //[Description("candle: (A, Q), Dp, (sf, sr, tr), (Qsus_d, hc, V, M, tf, n, tc)")]
                 case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST:
-                    result.Add(fmGlobalParameter.r0);
+                    result.Add(fmGlobalParameter.d0);
                     
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
@@ -210,7 +210,7 @@ namespace fmCalcBlocksLibrary.Blocks
     {
         // ReSharper disable InconsistentNaming
         private readonly fmBlockVariableParameter A;
-        private readonly fmBlockVariableParameter r0;
+        private readonly fmBlockVariableParameter d0;
         private readonly fmBlockVariableParameter Dp;
         private readonly fmBlockVariableParameter sf;
         private readonly fmBlockVariableParameter sr;
@@ -311,7 +311,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup hc_group = new fmBlockParameterGroup(Color.FromArgb(250, 190, 220));
         private readonly fmBlockParameterGroup Q_group = new fmBlockParameterGroup(Color.FromArgb(190, 240, 240));
         private readonly fmBlockParameterGroup AQ_group = new fmBlockParameterGroup(Color.FromArgb(170, 245, 210));
-        private readonly fmBlockParameterGroup r0_group = new fmBlockParameterGroup(Color.FromArgb(170, 210, 245));
+        private readonly fmBlockParameterGroup d0_group = new fmBlockParameterGroup(Color.FromArgb(170, 210, 245));
 
         private readonly fmBlockConstantParameter hce;
 
@@ -339,10 +339,10 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return A.value; }
             set { A.value = value; }
         }
-        public fmValue r0_Value
+        public fmValue d0_Value
         {
-            get { return r0.value; }
-            set { r0.value = value; }
+            get { return d0.value; }
+            set { d0.value = value; }
         }
         public fmValue Dp_Value
         {
@@ -735,7 +735,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmFilterMachiningBlock(
             // ReSharper disable InconsistentNaming
             DataGridViewCell A_Cell,
-            DataGridViewCell r0_Cell,
+            DataGridViewCell d0_Cell,
             DataGridViewCell Dp_Cell,
             DataGridViewCell sf_Cell,
             DataGridViewCell sr_Cell,
@@ -802,7 +802,7 @@ namespace fmCalcBlocksLibrary.Blocks
         // ReSharper restore InconsistentNaming
         {
             AddParameter(ref A, fmGlobalParameter.A, A_Cell, true);
-            AddParameter(ref r0, fmGlobalParameter.r0, r0_Cell, true);
+            AddParameter(ref d0, fmGlobalParameter.d0, d0_Cell, true);
 
             AddParameter(ref Dp, fmGlobalParameter.Dp, Dp_Cell, true);
 
@@ -1004,7 +1004,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 table[p] = null;
 
             //[Description("global: (A, Q), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
-            table[r0] = r0_group;
+            table[d0] = d0_group;
             
             table[A] = AQ_group;
             table[Qmsus] = AQ_group;

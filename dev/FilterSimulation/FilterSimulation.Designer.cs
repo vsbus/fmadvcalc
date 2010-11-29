@@ -161,7 +161,7 @@ namespace FilterSimulation
             this.simulationSimSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationFilterAreaColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.simulationFilterRadiusColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.simulationFilterDiameterColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_DpColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_sfColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_srColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
@@ -1241,7 +1241,7 @@ namespace FilterSimulation
             this.simulationSimSeriesNameColumn,
             this.simulationNameColumn,
             this.simulationFilterAreaColumn,
-            this.simulationFilterRadiusColumn,
+            this.simulationFilterDiameterColumn,
             this.simulation_DpColumn,
             this.simulation_sfColumn,
             this.simulation_srColumn,
@@ -1683,9 +1683,9 @@ namespace FilterSimulation
             // 
             // simulationFilterRadiusColumn
             // 
-            this.simulationFilterRadiusColumn.HeaderText = "r0";
-            this.simulationFilterRadiusColumn.Name = "simulationFilterRadiusColumn";
-            this.simulationFilterRadiusColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.simulationFilterDiameterColumn.HeaderText = "d0";
+            this.simulationFilterDiameterColumn.Name = "simulationFilterRadiusColumn";
+            this.simulationFilterDiameterColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // simulation_DpColumn
             // 
@@ -2229,7 +2229,7 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationSimSeriesNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationNameColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulationFilterAreaColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulationFilterRadiusColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulationFilterDiameterColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_DpColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_sfColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_srColumn;

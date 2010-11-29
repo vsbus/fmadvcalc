@@ -168,7 +168,7 @@ namespace FilterSimulationWithTablesAndGraphs
             row.Cells["AdditionalParametersCheckBoxColumn"].Value = true;
             var fmb = new fmFilterMachiningBlock(
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.A.name)],
-                row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.r0.name)],
+                row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.d0.name)],
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Dp.name)],
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.sf.name)],
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.sr.name)],

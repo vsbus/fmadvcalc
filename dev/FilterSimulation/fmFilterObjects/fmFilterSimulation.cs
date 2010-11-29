@@ -93,7 +93,7 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Rm0));
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.A, true));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.r0, true));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.d0, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sf, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sr));

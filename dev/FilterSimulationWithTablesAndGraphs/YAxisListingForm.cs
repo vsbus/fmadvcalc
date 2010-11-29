@@ -74,9 +74,9 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(qSmallBox_dif, fmGlobalParameter.qsus_d);
             AddParameter(qSmallBox_dif, fmGlobalParameter.qc_d);
 
-            AddParameter(aRDpBox, fmGlobalParameter.A);
-            AddParameter(aRDpBox, fmGlobalParameter.r0);
-            AddParameter(aRDpBox, fmGlobalParameter.Dp);
+            AddParameter(ad0DpBox, fmGlobalParameter.A);
+            AddParameter(ad0DpBox, fmGlobalParameter.d0);
+            AddParameter(ad0DpBox, fmGlobalParameter.Dp);
 
             AddParameter(sfSrTrBox, fmGlobalParameter.sf);
             AddParameter(sfSrTrBox, fmGlobalParameter.sr);

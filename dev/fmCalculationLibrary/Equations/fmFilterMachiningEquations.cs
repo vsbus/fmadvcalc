@@ -462,14 +462,15 @@ namespace fmCalculationLibrary.Equations
         }
         // ReSharper restore InconsistentNaming
 
-        public static fmValue EvalCandle_hc_From_vc_r(fmValue vc, fmValue r)
+        public static fmValue EvalCandle_hc_From_vc_d(fmValue vc, fmValue d)
         {
+            fmValue r = d / 2;
             return fmValue.Sqrt(r * r + 2 * vc * r) - r;
         }
 
-        public static fmValue EvalCandle_tf_From_r_eta_kappa_Pc_Dp_hc_hce(fmValue r, fmValue eta, fmValue kappa, fmValue Pc, fmValue Dp, fmValue hc, fmValue hce)
+        public static fmValue EvalCandle_tf_From_d_eta_kappa_Pc_Dp_hc_hce(fmValue d, fmValue eta, fmValue kappa, fmValue Pc, fmValue Dp, fmValue hc, fmValue hce)
         {
-            fmValue d = r * 2;
+            fmValue r = d / 2;
             fmValue C1 = eta * d * d / (16 * kappa * Pc * Dp);
             fmValue hcd = hc / r;
             fmValue hced = hce / r;
@@ -477,8 +478,9 @@ namespace fmCalculationLibrary.Equations
             return tf;
         }
 
-        public static fmValue EvalCandle_hc_From_tf_hce_kappa_Pc_Dp_etaf_r(fmValue tf, fmValue hce, fmValue kappa, fmValue Pc, fmValue Dp, fmValue etaf, fmValue r)
+        public static fmValue EvalCandle_hc_From_tf_hce_kappa_Pc_Dp_etaf_d(fmValue tf, fmValue hce, fmValue kappa, fmValue Pc, fmValue Dp, fmValue etaf, fmValue d)
         {
+            fmValue r = d / 2;
             fmValue hced = hce / r;
             fmValue C = 2 * hced - 1;
             fmValue td = kappa * Pc * Dp * tf / (etaf * r * r);
@@ -488,9 +490,9 @@ namespace fmCalculationLibrary.Equations
             return hc;
         }
 
-        public static fmValue EvalCandle_vc_From_hc_r(fmValue hc, fmValue r)
+        public static fmValue EvalCandle_vc_From_hc_d(fmValue hc, fmValue d)
         {
-            return hc * (2 * r + hc) / (2 * r);
+            return hc * (d + hc) / d;
         }
     }
 }

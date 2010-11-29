@@ -21,7 +21,7 @@ namespace fmCalculationLibrary
 
         // ReSharper disable InconsistentNaming
         public static fmGlobalParameter A;
-        public static fmGlobalParameter r0;
+        public static fmGlobalParameter d0;
         public static fmGlobalParameter Dp;
         public static fmGlobalParameter sf;
         public static fmGlobalParameter sr;
@@ -140,7 +140,7 @@ namespace fmCalculationLibrary
             AddParameter(ref Rm0, new fmGlobalParameter("Rm0", fmUnitFamily.FilterMediumResistanceFamily, new fmRange(0, 10e10)));
             
             AddParameter(ref A, new fmGlobalParameter("A", fmUnitFamily.AreaFamily, new fmRange(0.01, 200)));
-            AddParameter(ref r0, new fmGlobalParameter("r0", fmUnitFamily.LengthFamily, new fmRange(0.01, 200)));
+            AddParameter(ref d0, new fmGlobalParameter("d0", fmUnitFamily.LengthFamily, new fmRange(0.01, 200)));
             AddParameter(ref Dp, new fmGlobalParameter("Dp", fmUnitFamily.PressureFamily, new fmRange(0.1 * 1e5, 6 * 1e5)));
             AddParameter(ref sf, new fmGlobalParameter("sf", fmUnitFamily.ConcentrationFamily, new fmRange(0.05, 1)));
             AddParameter(ref sr, new fmGlobalParameter("sr", fmUnitFamily.ConcentrationFamily, new fmRange(0.05, 1)));
