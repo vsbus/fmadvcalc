@@ -95,7 +95,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     break;
 
-                //[Description("global: (A, Q), Dp, (sf, sr, tr), (Qsus_d, hc, V, M, tf, n, tc)")]
+                //[Description("global: (A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
                 case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
@@ -106,14 +106,14 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qs);
                     result.Add(fmGlobalParameter.Qmc);
                     result.Add(fmGlobalParameter.Qc);
-
+                    result.Add(fmGlobalParameter.Qsus_d);
+                    
                     result.Add(fmGlobalParameter.Dp);
 
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.sr);
                     result.Add(fmGlobalParameter.tr);
 
-                    result.Add(fmGlobalParameter.Qsus_d);
                     result.Add(fmGlobalParameter.hc);
                     result.Add(fmGlobalParameter.vc);
                     result.Add(fmGlobalParameter.vf);
@@ -136,7 +136,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     break;
 
-                //[Description("candle: (A, Q), Dp, (sf, sr, tr), (Qsus_d, hc, V, M, tf, n, tc)")]
+                //(A, Q), d0, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)
                 case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST:
                     result.Add(fmGlobalParameter.d0);
                     
@@ -150,6 +150,49 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qmc);
                     result.Add(fmGlobalParameter.Qc);
 
+                    result.Add(fmGlobalParameter.Dp);
+
+                    result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.sr);
+                    result.Add(fmGlobalParameter.tr);
+
+                    result.Add(fmGlobalParameter.hc);
+                    result.Add(fmGlobalParameter.vc);
+                    result.Add(fmGlobalParameter.vf);
+                    result.Add(fmGlobalParameter.vs);
+                    result.Add(fmGlobalParameter.vsus);
+                    result.Add(fmGlobalParameter.Vc);
+                    result.Add(fmGlobalParameter.Vf);
+                    result.Add(fmGlobalParameter.Vs);
+                    result.Add(fmGlobalParameter.Vsus);
+                    result.Add(fmGlobalParameter.mc);
+                    result.Add(fmGlobalParameter.mf);
+                    result.Add(fmGlobalParameter.ms);
+                    result.Add(fmGlobalParameter.msus);
+                    result.Add(fmGlobalParameter.Mc);
+                    result.Add(fmGlobalParameter.Mf);
+                    result.Add(fmGlobalParameter.Ms);
+                    result.Add(fmGlobalParameter.Msus);
+                    result.Add(fmGlobalParameter.tf);
+                    result.Add(fmGlobalParameter.n);
+                    result.Add(fmGlobalParameter.tc);
+                    break;
+
+                //(A, Q, Qsus_d), d0, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_QP_CONST:
+                    result.Add(fmGlobalParameter.d0);
+
+                    result.Add(fmGlobalParameter.A);
+                    result.Add(fmGlobalParameter.Qmsus);
+                    result.Add(fmGlobalParameter.Qsus);
+                    result.Add(fmGlobalParameter.Qmf);
+                    result.Add(fmGlobalParameter.Qf);
+                    result.Add(fmGlobalParameter.Qms);
+                    result.Add(fmGlobalParameter.Qs);
+                    result.Add(fmGlobalParameter.Qmc);
+                    result.Add(fmGlobalParameter.Qc);
+                    result.Add(fmGlobalParameter.Qsus_d);
+                    
                     result.Add(fmGlobalParameter.Dp);
 
                     result.Add(fmGlobalParameter.sf);
@@ -947,6 +990,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 SetGroupsOfStandartAndDesignGlobalDpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST]);
                 SetGroupsOfStandartQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST]);
                 SetGroupsOfCandleDpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST]);
+                SetGroupsOfCandleQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_QP_CONST]);
 
                 SetGroupsOfOptimization1(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1]);
             }
@@ -1044,12 +1088,58 @@ namespace fmCalcBlocksLibrary.Blocks
             table[tc] = hc_MV_group;
         }
 
+        private void SetGroupsOfCandleQpConst(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockVariableParameter p in parameters)
+                table[p] = null;
+
+            //(A, Q, Qsus_d), d0, Dp, (sf, tr), (hc, V, M, tf, n, tc)
+            table[d0] = d0_group;
+            
+            table[A] = AQ_group;
+            table[Qmsus] = AQ_group;
+            table[Qsus] = AQ_group;
+            table[Qmf] = AQ_group;
+            table[Qf] = AQ_group;
+            table[Qms] = AQ_group;
+            table[Qs] = AQ_group;
+            table[Qmc] = AQ_group;
+            table[Qc] = AQ_group;
+            table[Qsus_d] = AQ_group;
+
+            table[Dp] = Dp_group;
+
+            table[sf] = sf_sr_tr_group;
+            table[sr] = sf_sr_tr_group;
+            table[tr] = sf_sr_tr_group;
+
+            table[hc] = hc_MV_group;
+            table[vc] = hc_MV_group;
+            table[vf] = hc_MV_group;
+            table[vs] = hc_MV_group;
+            table[vsus] = hc_MV_group;
+            table[Vc] = hc_MV_group;
+            table[Vf] = hc_MV_group;
+            table[Vs] = hc_MV_group;
+            table[Vsus] = hc_MV_group;
+            table[mc] = hc_MV_group;
+            table[mf] = hc_MV_group;
+            table[ms] = hc_MV_group;
+            table[msus] = hc_MV_group;
+            table[Mc] = hc_MV_group;
+            table[Mf] = hc_MV_group;
+            table[Ms] = hc_MV_group;
+            table[Msus] = hc_MV_group;
+            table[tf] = hc_MV_group;
+            table[n] = hc_MV_group;
+            table[tc] = hc_MV_group;
+        }
         private void SetGroupsOfStandartQpConst(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
             foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
-            //[Description("global: (A, Q), Dp, (sf, tr), (Qsus_d, hc, V, M, tf, n, tc)")]
+            //[Description("global: (A, Q, Qsus_d), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
             table[A] = AQ_group;
             table[Qmsus] = AQ_group;
             table[Qsus] = AQ_group;

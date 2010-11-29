@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using fmCalculationLibrary.NumericalMethods;
 
 namespace fmCalculationLibrary.Equations
 {
@@ -493,6 +494,51 @@ namespace fmCalculationLibrary.Equations
         public static fmValue EvalCandle_vc_From_hc_d(fmValue hc, fmValue d)
         {
             return hc * (d + hc) / d;
+        }
+
+        public static fmValue EvalCandle_From_d_hc_hce_eta_Cv_kappa_Pc_Dp_QpConst(fmValue d, fmValue hc, fmValue hce, fmValue eta, fmValue Cv, fmValue kappa, fmValue Pc, fmValue Dp)
+        {
+            fmValue r = d / 2;
+            fmValue hcd = hc / r;
+            fmValue hced = hce / r;
+            fmValue C1 = d * d * eta / (8 * Cv * (1 + kappa) * Pc * Dp);
+            fmValue tf = C1 * hcd * (2 + hcd) * (fmValue.Log(1 + hcd) + hced);
+            return tf;
+        }
+
+        private class fmCandleHcEquationWithQpConst : fmFunction
+        {
+            private fmValue C1;
+            private fmValue C2;
+            private fmValue y;
+            public fmCandleHcEquationWithQpConst(fmValue C1, fmValue C2, fmValue y) 
+            {
+                this.C1 = C1;
+                this.C2 = C2;
+                this.y = y;
+            }
+            public override fmValue Eval(fmValue x)
+            {
+                return C1 * x * (2 + x) * (fmValue.Log(1 + x) + C2) - y;
+            }
+        };
+
+        public static fmValue EvalCandle_hc_From_hce_d_eta_Cv_kappa_Pc_Dp_tf_QpConst(fmValue hce, fmValue d, fmValue eta, fmValue Cv, fmValue kappa, fmValue Pc, fmValue Dp, fmValue tf)
+        {
+            fmValue r = d / 2;
+            fmValue hced = hce / r;
+            fmCandleHcEquationWithQpConst func = new fmCandleHcEquationWithQpConst(d * d * eta / (8 * Cv * (1 + kappa) * Pc * Dp), hced, tf);
+            fmValue hcd = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(func, new fmValue(0), new fmValue(1e9), 60);
+            fmValue hc = hcd * r;
+            return hc;
+        }
+
+        public static fmValue EvalCandle_Qsus_d_From_d_hc_hce_A_kappa_Pc_Dp_eta_QpConst(fmValue d, fmValue hc, fmValue hce, fmValue A, fmValue kappa, fmValue Pc, fmValue Dp, fmValue eta)
+        {
+            fmValue r = d / 2;
+            fmValue hcd = hc / r;
+            fmValue hced = hce / r;
+            return 2 * A * (1 + kappa) * Pc * Dp / (d * eta * (fmValue.Log(1 + hcd) + hced));
         }
     }
 }

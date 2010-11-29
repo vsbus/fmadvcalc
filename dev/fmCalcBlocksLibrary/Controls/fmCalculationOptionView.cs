@@ -55,6 +55,7 @@ namespace fmCalcBlocksLibrary.Controls
 
             var candleNode = new TreeNode("Candle filter");
             candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST));
+            candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_QP_CONST));
             Nodes.Add(candleNode);
 
             var otherNode = new TreeNode("Other...");
