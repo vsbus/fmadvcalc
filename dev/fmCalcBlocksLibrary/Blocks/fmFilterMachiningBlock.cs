@@ -940,6 +940,24 @@ namespace fmCalcBlocksLibrary.Blocks
             processOnChange = true;
         }
 
+        override protected void ReWriteParameters()
+        {
+            base.ReWriteParameters();
+            
+            if (processOnChange)
+            {
+                processOnChange = false;
+                bool candleOption = calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST
+                    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_QP_CONST;
+                if (candleOption == false)
+                {
+                    fmBlockVariableParameter d0 = GetParameterByName(fmGlobalParameter.d0.name);
+                    if (d0.cell != null) d0.cell.Value = "-";
+                }
+                processOnChange = true;
+            }
+        }
+
         public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption newCalculationOption)
         {
             calculationOption = newCalculationOption;
