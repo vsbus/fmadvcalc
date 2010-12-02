@@ -729,6 +729,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         RemoveNoise(dispArray.ScaledValuesInDoubles),
                         dispArray.Color,
                         SymbolType.None);
+                    curve.Line.IsAntiAlias = true;
                     curve.Line.Width = dispArray.Bold ? 2 : 1;
                     curve.IsY2Axis = dispArray.IsY2Axis;
                 }

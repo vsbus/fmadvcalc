@@ -41,7 +41,8 @@ namespace fmDataGrid
                     && CurrentCell.RowIndex != -1
                     && CurrentCell.ColumnIndex != -1)
                 {
-                    int delta = (int)(m.WParam) >> 16;
+                    int x = (int)(((long)m.WParam >> 16) & ((1 << 16) - 1));
+                    int delta = x < (1 << 15) ? x : x - (1 << 16);
 
                     if (delta > 0)
                     {

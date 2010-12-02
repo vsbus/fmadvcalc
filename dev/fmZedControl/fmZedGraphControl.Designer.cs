@@ -104,6 +104,7 @@ namespace fmZedGraph
             p.Z = curve.Points[iPt].Z + 3;
             list.Add(curve.Points[iPt]);
             LineItem myCurve = gp.AddCurve("",list, curve.Color, ((LineItem) curve).Symbol.Type);
+            myCurve.Line.IsAntiAlias = true;
             myCurve.Label.IsVisible = false;
             myCurve.Symbol.Fill = new Fill(curve.Color);
             myCurve.IsY2Axis = curve.IsY2Axis;
@@ -378,24 +379,28 @@ namespace fmZedGraph
         public LineItem AddCurve(string label, double[] x, double[] y, Color color)
         {
             LineItem curve = this.GraphPane.AddCurve(label, x, y, color);
+            curve.Line.IsAntiAlias = true;
             originalCurvesCount += 1;
             return curve;
         }
         public LineItem AddCurve(string label, double[] x, double[] y, Color color, SymbolType symbolType)
         {
             LineItem curve = this.GraphPane.AddCurve(label, x, y, color, symbolType);
+            curve.Line.IsAntiAlias = true;
             originalCurvesCount += 1;
             return curve;
         }
         public LineItem AddCurve(string label, IPointList points, Color color)
         {
             LineItem curve = this.GraphPane.AddCurve(label, points, color);
+            curve.Line.IsAntiAlias = true;
             originalCurvesCount += 1;
             return curve;
         }
         public LineItem AddCurve(string label, IPointList points, Color color, SymbolType symbolType)
         {
             LineItem curve = this.GraphPane.AddCurve(label, points, color, symbolType);
+            curve.Line.IsAntiAlias = true;
             originalCurvesCount += 1;
             return curve;
         }
