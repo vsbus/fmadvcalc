@@ -2102,7 +2102,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_hc)
             {
-                tf.value = fmFilterMachiningEquations.EvalCandle_From_d_hc_hce_eta_Cv_kappa_Pc_Dp_QpConst(d0.value, hc.value, hce.value, eta_f.value, Cv.value, kappa.value, Pc.value, Dp.value);
+                tf.value = fmFilterMachiningEquations.EvalCandle_tf_From_d_hc_hce_eta_Cv_kappa_Pc_Dp_QpConst(eps.value, d0.value, hc.value, hce.value, eta_f.value, Cv.value, kappa.value, Pc.value, Dp.value);
                 isKnown_tf = true;
             }
             #endregion
@@ -2263,7 +2263,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_tf) tf.value = fmFilterMachiningEquations.Eval_tf_From_sf_tc(sf.value, tc.value);
             if (!isKnown_tr) tr.value = fmFilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
             if (!isKnown_sr) sr.value = fmFilterMachiningEquations.Eval_sr_From_tc_tr(tc.value, tr.value);
-            if (!isKnown_hc) hc.value = fmFilterMachiningEquations.EvalCandle_hc_From_hce_d_eta_Cv_kappa_Pc_Dp_tf_QpConst(hce.value, d0.value, eta_f.value, Cv.value, kappa.value, Pc.value, Dp.value, tf.value);
+            if (!isKnown_hc) hc.value = fmFilterMachiningEquations.EvalCandle_hc_From_hce_d_eta_Cv_kappa_Pc_Dp_tf_QpConst(eps.value, hce.value, d0.value, eta_f.value, Cv.value, kappa.value, Pc.value, Dp.value, tf.value);
             
             if (!isKnown_vc) vc.value = fmFilterMachiningEquations.EvalCandle_vc_From_hc_d(hc.value, d0.value);
             if (!isKnown_vf) vf.value = fmFilterMachiningEquations.Eval_vf_From_vc_kappa(vc.value, kappa.value);

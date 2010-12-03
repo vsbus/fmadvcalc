@@ -496,12 +496,12 @@ namespace fmCalculationLibrary.Equations
             return hc * (d + hc) / d;
         }
 
-        public static fmValue EvalCandle_From_d_hc_hce_eta_Cv_kappa_Pc_Dp_QpConst(fmValue d, fmValue hc, fmValue hce, fmValue eta, fmValue Cv, fmValue kappa, fmValue Pc, fmValue Dp)
+        public static fmValue EvalCandle_tf_From_d_hc_hce_eta_Cv_kappa_Pc_Dp_QpConst(fmValue eps, fmValue d, fmValue hc, fmValue hce, fmValue eta, fmValue Cv, fmValue kappa, fmValue Pc, fmValue Dp)
         {
             fmValue r = d / 2;
             fmValue hcd = hc / r;
             fmValue hced = hce / r;
-            fmValue C1 = d * d * eta / (8 * Cv * (1 + kappa) * Pc * Dp);
+            fmValue C1 = (1 - eps) * d * d * eta / (8 * Cv * (1 + kappa) * Pc * Dp);
             fmValue tf = C1 * hcd * (2 + hcd) * (fmValue.Log(1 + hcd) + hced);
             return tf;
         }
@@ -523,11 +523,11 @@ namespace fmCalculationLibrary.Equations
             }
         };
 
-        public static fmValue EvalCandle_hc_From_hce_d_eta_Cv_kappa_Pc_Dp_tf_QpConst(fmValue hce, fmValue d, fmValue eta, fmValue Cv, fmValue kappa, fmValue Pc, fmValue Dp, fmValue tf)
+        public static fmValue EvalCandle_hc_From_hce_d_eta_Cv_kappa_Pc_Dp_tf_QpConst(fmValue eps, fmValue hce, fmValue d, fmValue eta, fmValue Cv, fmValue kappa, fmValue Pc, fmValue Dp, fmValue tf)
         {
             fmValue r = d / 2;
             fmValue hced = hce / r;
-            fmCandleHcEquationWithQpConst func = new fmCandleHcEquationWithQpConst(d * d * eta / (8 * Cv * (1 + kappa) * Pc * Dp), hced, tf);
+            fmCandleHcEquationWithQpConst func = new fmCandleHcEquationWithQpConst((1 - eps) * d * d * eta / (8 * Cv * (1 + kappa) * Pc * Dp), hced, tf);
             fmValue hcd = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(func, new fmValue(0), new fmValue(1e9), 60);
             fmValue hc = hcd * r;
             return hc;
