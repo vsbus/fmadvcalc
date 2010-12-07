@@ -250,6 +250,7 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             if (calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST
                 || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST
+                || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP
                 || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST
                 || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_QP_CONST)
             {
