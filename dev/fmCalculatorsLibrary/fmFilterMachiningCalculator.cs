@@ -32,23 +32,23 @@ namespace fmCalculatorsLibrary
             // Global
             // 
             //(A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)
-            [Description("Dp = const (Pressure leaf)")]
-            STANDART_AND_DESIGN_GLOBAL_DP_CONST,
+            [Description("Dp = const (Plain)")]
+            PLAIN_DP_CONST,
             //(A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
-            [Description("Qp = const (Pressure leaf)")]
-            STANDART_AND_DESIGN_GLOBAL_QP_CONST,
+            [Description("Qp = const (Plain)")]
+            PLAIN_QP_CONST,
 
             // Candle
             //
             //(A, Q), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)
-            [Description("Dp = const (Candle)")]
+            [Description("Dp = const (Cylindrical)")]
             CANDLE_DP_CONST,
             //(A, Q, Qsus_d), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
-            [Description("Qp = const (Candle)")]
+            [Description("Qp = const (Cylindrical)")]
             CANDLE_QP_CONST
         }
 
-        public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST;
+        public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
 
         public fmFilterMachiningCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
 
@@ -57,8 +57,8 @@ namespace fmCalculatorsLibrary
             return calculationOption == fmFilterMachiningCalculationOption.STANDART3
               || calculationOption == fmFilterMachiningCalculationOption.STANDART4
               || calculationOption == fmFilterMachiningCalculationOption.STANDART8
-              || calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST
-              || calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST
+              || calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_CONST
+              || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST
               || calculationOption == fmFilterMachiningCalculationOption.CANDLE_DP_CONST
               || calculationOption == fmFilterMachiningCalculationOption.CANDLE_QP_CONST;
         }
@@ -66,8 +66,8 @@ namespace fmCalculatorsLibrary
         private static bool IsDesignKindOption(fmFilterMachiningCalculationOption calculationOption)
         {
             return calculationOption == fmFilterMachiningCalculationOption.DESIGN1
-                || calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST
-                || calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST;
+                || calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_CONST
+                || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST;
         }
 
         private static bool IsOptimizationKindOption(fmFilterMachiningCalculationOption calculationOption)
@@ -92,11 +92,11 @@ namespace fmCalculatorsLibrary
 
         public void DoCalculationsLimitsClue()
         {
-            if (calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST)
+            if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_CONST)
             {
                 DoSubCalculationsStandartAndDesignGlobalDpConst_OnlyLimitClueParams();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST)
             {
                 DoSubCalculationsStandartAndDesignGlobalQpConst_OnlyLimitClueParams();
             }
@@ -1685,11 +1685,11 @@ namespace fmCalculatorsLibrary
         }
         override public void DoCalculations()
         {
-            if (calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST)
+            if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_CONST)
             {
                 DoSubCalculationsStandartAndDesignGlobalDpConst();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST)
             {
                 DoSubCalculationsStandartAndDesignGlobalQpConst();
             }

@@ -56,7 +56,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("global: (A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
-                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
                     result.Add(fmGlobalParameter.Qsus);
@@ -96,7 +96,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("global: (A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
-                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
                     result.Add(fmGlobalParameter.Qsus);
@@ -935,7 +935,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref Cm, fmGlobalParameter.Cm);
             AddConstantParameter(ref Cv, fmGlobalParameter.Cv);
 
-            SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST);
+            SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
 
             processOnChange = true;
         }
@@ -1005,8 +1005,8 @@ namespace fmCalcBlocksLibrary.Blocks
                 SetGroupsOfStandart8(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8]);
 
                 SetGroupsOfDesign1(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1]);
-                SetGroupsOfStandartAndDesignGlobalDpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST]);
-                SetGroupsOfStandartQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST]);
+                SetGroupsOfStandartAndDesignGlobalDpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST]);
+                SetGroupsOfStandartQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST]);
                 SetGroupsOfCandleDpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST]);
                 SetGroupsOfCandleQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_QP_CONST]);
 

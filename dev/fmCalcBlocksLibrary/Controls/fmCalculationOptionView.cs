@@ -48,12 +48,12 @@ namespace fmCalcBlocksLibrary.Controls
 
         private void CreateTree()
         {
-            var globalNode = new TreeNode("Pressure leaf filters");
-            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST));
-            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_QP_CONST));
+            var globalNode = new TreeNode("Plain area (Pressure leaf)");
+            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST));
+            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST));
             Nodes.Add(globalNode);
 
-            var candleNode = new TreeNode("Candle filter");
+            var candleNode = new TreeNode("Cylindrical (Candle filter)");
             candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST));
             candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_QP_CONST));
             Nodes.Add(candleNode);
@@ -75,7 +75,7 @@ namespace fmCalcBlocksLibrary.Controls
             optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1));
             otherNode.Nodes.Add(optimizationNode);
 
-            SetSelectedOption(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART_AND_DESIGN_GLOBAL_DP_CONST);
+            SetSelectedOption(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
 
             TreeView_AfterSelect(this, new TreeViewEventArgs(SelectedLeaf));
         }
