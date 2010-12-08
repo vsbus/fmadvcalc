@@ -324,6 +324,10 @@ namespace FilterSimulationWithTablesAndGraphs
                     {
                         row.Cells[idx].Value = "-";
                     }
+                    else if (row.Cells[idx].Value.ToString() == "-")
+                    {
+                        row.Cells[idx].Value = tempSim.parameters[param].ValueInUnits;
+                    }
                     row.Cells[idx].Style.ForeColor = cellForeColor;
                 }
             }
