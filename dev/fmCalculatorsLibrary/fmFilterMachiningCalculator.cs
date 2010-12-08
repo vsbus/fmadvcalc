@@ -1920,8 +1920,12 @@ namespace fmCalculatorsLibrary
                     default:
                        throw new Exception("Unhandled area kind.");
                 }
-                fmValue res = fmc.variables[fmGlobalParameter.Qsus_d].value - QpValue;
-                return res;
+                fmValue curQpValue = fmc.variables[fmGlobalParameter.Qsus_d].value;
+                if (curQpValue.defined == false)
+                {
+                    return new fmValue(-1);
+                }
+                return curQpValue - QpValue;
             }
         };
 
