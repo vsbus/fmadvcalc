@@ -2,7 +2,6 @@ digraph A {
 	Constants [label = "Constants:\nrho, eps0, Pc0\nnc, ne", color = grey];
 
 	Dp [color = magenta, shape = rectangle];
-	Qp [color = magenta];
 
 	A [color = blue, shape = rectangle];
 	Qf [color = blue];
@@ -13,6 +12,7 @@ digraph A {
 	Qms [color = blue];
 	Qmsus [color = blue];
 	Qmcake [color = blue];
+	Qp [label = "Qsus,d", color = blue];
 
 	tr [color = green];
 	sr [color = green];
@@ -38,10 +38,94 @@ digraph A {
 	vs [color = red];
 	vsus [color = red];
 	vcake [color = red];
+/*
+	Msus -> msus [color = green, label = 1];
+	Ms -> ms [color = green, label = 1];
+	Mcake -> mcake [color = green, label = 1];
+	Mf -> mf [color = green, label = 1];
+	Vsus -> vsus [color = green, label = 1];
+	Vs -> vs [color = green, label = 1];
+	Vcake -> vcake [color = green, label = 1];
+	Vf -> vf [color = green, label = 1];
 
-	A -> Qp;
-	Dp -> Qp;
+	ms -> vs [color = yellow, label = 2];
+	vs -> vsus [color = yellow, label = 2];
+	msus -> vsus [color = yellow, label = 2];
+	vsus -> vf [color = yellow, label = 2];
+	mc -> vf [color = yellow, label = 2];
+	mf -> vf [color = yellow, label = 2];
+	vf -> vcake [color = yellow, label = 2];
+	vcake -> hc [color = yellow, label = 2];
+	hc -> tf [color = yellow, label = 2];
+
+	Ms -> Vs [color = pink, label = 3];
+	Vs -> Vsus [color = pink, label = 3];
+	Msus -> Vsus [color = pink, label = 3];
+	Vsus -> Vf [color = pink, label = 3];
+	Mf -> Vf [color = pink, label = 3];
+	Mcake -> Vf [color = pink, label = 3];
+	Vf -> Vc [color = pink, label = 3];
+	Vcake -> Vf [color = pink, label = 3];
+*/
+	Qms -> Qs [color = magenta, label = 4];
+	Qmsus -> Qsus [color = magenta, label = 4];
+	Qs -> Qsus [color = magenta, label = 4];
+	Qsus -> Qcake [color = magenta, label = 4];
+	Qmcake -> Qcake [color = magenta, label = 4];
+	
+	Qmf -> Qf [color = grey, label = 5];
+/*
+	Qcake -> tc [color = red, label = 6];
+	Vcake -> tc [color = red, label = 6];
+	Qf -> tf [color = red, label = 6];
+	Vf -> tf [color = red, label = 6];
+*/
+/*
+	tf -> tc [color = blue, label = 7];
+
+	n -> tc [color = purple, label = 8];
+
+	sr -> tr [color = violet, label = 9];
+	tr -> sf [color = violet, label = 9];
+*/
+	tc -> n;
+	tc -> tf;
+	tc -> tr;
+	tc -> sr;
+	tf -> hc;
+	hc -> vcake;
+	vcake -> vf;
+      vf -> vsus;
+	vsus -> vs;
+
+	vf -> mcake;
+	vf -> mf;
+	vsus -> msus;
+	vs -> ms;
+
+	vcake -> Vcake;
+	vf -> Vf;
+	vsus -> Vsus;
+	vs -> Vs;
+
+	mcake -> Mcake;
+	mf -> Mf;
+	msus -> Msus;
+	ms -> Ms;
+
+	Msus -> Qmsus;
+	Qmsus -> Qms;
+	Mf -> Qmf;
+	Mcake -> Qmcake;
+
+	Vsus -> Qsus;
+	Qms -> Qs;
+	Vf -> Qf;
+	Vcake -> Qcake;
+
 	hc -> Qp;
+	Dp -> Qp;
+	A -> Qp;
 }
 
 
