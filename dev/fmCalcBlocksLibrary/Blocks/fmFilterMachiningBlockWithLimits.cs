@@ -190,7 +190,10 @@ namespace fmCalcBlocksLibrary.Blocks
                                   fmGlobalParameter.sf,
                                   fmGlobalParameter.tc
                               };
-
+            var machineAdditionalParams = new List<fmGlobalParameter>
+                              {
+                                  fmGlobalParameter.d0
+                              };
             var index = new Dictionary<fmGlobalParameter,int>();
 
             var pList = new List<fmCalculationBaseParameter>();
@@ -203,7 +206,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     bool isInputed = varList.Contains(p.globalParameter);
                     pList.Add(new fmCalculationVariableParameter(p.globalParameter, p.value, isInputed));
                     index[p.globalParameter] = i;
-                    if (isInputed == false)
+                    if (machineAdditionalParams.Contains(p.globalParameter) == false && isInputed == false)
                     {
                         p.globalParameter.chartDefaultXRange.MinValue = 1e100;
                         p.globalParameter.chartDefaultXRange.MaxValue = -1e100;
@@ -232,14 +235,16 @@ namespace fmCalcBlocksLibrary.Blocks
                 {
                     if (p is fmCalculationVariableParameter)
                     {
-                        if (p.value.defined && p.globalParameter.chartDefaultXRange.MaxValue < p.value.value)
+                        if (machineAdditionalParams.Contains(p.globalParameter) == false)
                         {
-                            p.globalParameter.chartDefaultXRange.MaxValue = p.value.value;
-                        }
-
-                        if (p.value.defined && p.globalParameter.chartDefaultXRange.MinValue > p.value.value)
-                        {
-                            p.globalParameter.chartDefaultXRange.MinValue = Math.Max(0, p.value.value);
+                            if (p.value.defined && p.globalParameter.chartDefaultXRange.MaxValue < p.value.value)
+                            {
+                                p.globalParameter.chartDefaultXRange.MaxValue = p.value.value;
+                            }
+                            if (p.value.defined && p.globalParameter.chartDefaultXRange.MinValue > p.value.value)
+                            {
+                                p.globalParameter.chartDefaultXRange.MinValue = Math.Max(0, p.value.value);
+                            }
                         }
                     }
                 }
