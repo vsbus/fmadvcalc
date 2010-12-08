@@ -59,8 +59,7 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             if (enteredParameter != null)
                 foreach (fmBlockVariableParameter p in parameters)
-                    if (p.group != null
-                            && p.group == enteredParameter.group)
+                    if (p.group != null && p.group == enteredParameter.group)
                         p.IsInputed = p == enteredParameter;
         }
 
