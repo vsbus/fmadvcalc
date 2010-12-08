@@ -55,8 +55,8 @@ namespace fmCalcBlocksLibrary.Controls
             Nodes.Add(globalNode);
 
             var candleNode = new TreeNode("Cylindrical (Candle filter)");
-            candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_DP_CONST));
-            candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CANDLE_QP_CONST));
+            candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST));
+            candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST));
             Nodes.Add(candleNode);
 
             var otherNode = new TreeNode("Other...");

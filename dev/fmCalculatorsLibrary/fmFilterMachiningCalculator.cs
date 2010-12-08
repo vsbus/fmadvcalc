@@ -45,10 +45,10 @@ namespace fmCalculatorsLibrary
             //
             //(A, Q), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)
             [Description("Dp = const (Cylindrical)")]
-            CANDLE_DP_CONST,
+            CYLINDRICAL_DP_CONST,
             //(A, Q, Qsus_d), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
             [Description("Qp = const (Cylindrical)")]
-            CANDLE_QP_CONST
+            CYLINDRICAL_QP_CONST
         }
 
         public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
@@ -63,8 +63,8 @@ namespace fmCalculatorsLibrary
               || calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_CONST
               || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST
               || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP
-              || calculationOption == fmFilterMachiningCalculationOption.CANDLE_DP_CONST
-              || calculationOption == fmFilterMachiningCalculationOption.CANDLE_QP_CONST;
+              || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
+              || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST;
         }
 
         private static bool IsDesignKindOption(fmFilterMachiningCalculationOption calculationOption)
@@ -109,11 +109,11 @@ namespace fmCalculatorsLibrary
             {
                 DoSubCalculationsStandartAndDesignGlobalQpConstVolumetricPump_OnlyLimitClueParams();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.CANDLE_DP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST)
             {
                 DoSubCalculationsStandartCandleDpConst_OnlyLimitClueParams();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.CANDLE_QP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST)
             {
                 DoSubCalculationsStandartCandleQpConst_OnlyLimitClueParams();
             }
@@ -1711,11 +1711,11 @@ namespace fmCalculatorsLibrary
             {
                 DoSubCalculationsStandartAndDesignGlobalQpConstVolumetricPump();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.CANDLE_DP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST)
             {
                 DoSubCalculationsStandartCandleDpConst();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.CANDLE_QP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST)
             {
                 DoSubCalculationsStandartCandleQpConst();
             }
