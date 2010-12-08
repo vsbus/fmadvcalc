@@ -48,7 +48,10 @@ namespace fmCalculatorsLibrary
             CYLINDRICAL_DP_CONST,
             //(A, Q, Qsus_d), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
             [Description("Qp = const (Cylindrical)")]
-            CYLINDRICAL_QP_CONST
+            CYLINDRICAL_QP_CONST,
+            //(A, Q), d, (Dp, Qp), (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            [Description("Qp = const (Cylindrical, volumetric pump)")]
+            CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP
         }
 
         public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
@@ -64,7 +67,8 @@ namespace fmCalculatorsLibrary
               || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST
               || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP
               || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
-              || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST;
+              || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
+              || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP;
         }
 
         private static bool IsDesignKindOption(fmFilterMachiningCalculationOption calculationOption)
@@ -99,23 +103,27 @@ namespace fmCalculatorsLibrary
         {
             if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_CONST)
             {
-                DoSubCalculationsStandartAndDesignGlobalDpConst_OnlyLimitClueParams();
+                DoSubCalculationsPlainDpConst_OnlyLimitClueParams();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST)
             {
-                DoSubCalculationsStandartAndDesignGlobalQpConst_OnlyLimitClueParams();
+                DoSubCalculationsPlainQpConst_OnlyLimitClueParams();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP)
             {
-                DoSubCalculationsStandartAndDesignGlobalQpConstVolumetricPump_OnlyLimitClueParams();
+                DoSubCalculationsPlainQpConstVolumetricPump_OnlyLimitClueParams();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST)
             {
-                DoSubCalculationsStandartCandleDpConst_OnlyLimitClueParams();
+                DoSubCalculationsCylindricalDpConst_OnlyLimitClueParams();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST)
             {
-                DoSubCalculationsStandartCandleQpConst_OnlyLimitClueParams();
+                DoSubCalculationsCylindricalQpConst_OnlyLimitClueParams();
+            }
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP)
+            {
+                DoSubCalculationsCylindricalQpConstVolumetricPump_OnlyLimitClueParams();
             }
             else 
             {
@@ -123,12 +131,41 @@ namespace fmCalculatorsLibrary
             }
         }
 
-        private void DoSubCalculationsStandartAndDesignGlobalQpConstVolumetricPump_OnlyLimitClueParams()
+        private void DoSubCalculationsCylindricalQpConstVolumetricPump_OnlyLimitClueParams()
         {
-            DoSubCalculationsStandartAndDesignGlobalQpConstVolumetricPump();
+            DoSubCalculationsCylindricalQpConstVolumetricPump();
         }
 
-        private void DoSubCalculationsStandartCandleQpConst_OnlyLimitClueParams()
+        private void DoSubCalculationsCylindricalQpConstVolumetricPump()
+        {
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            if (Dp.isInputed)
+            {
+                DoSubCalculationsCylindricalQpConst();
+            }
+            else
+            {
+                Dp.isInputed = true;
+                Qp.isInputed = false;
+
+                fmValue qpValue = Qp.value;
+                QpCalculatorHelperForDpInput qpCalc = new QpCalculatorHelperForDpInput(this, qpValue, QpCalculatorHelperForDpInput.AreaKind.CYLINDRICAL);
+                Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, new fmValue(0), new fmValue(1e18), 80);
+                qpCalc.Eval(Dp.value);
+                Qp.value = qpValue;
+
+                Dp.isInputed = false;
+                Qp.isInputed = true;
+            }
+        }
+
+        private void DoSubCalculationsPlainQpConstVolumetricPump_OnlyLimitClueParams()
+        {
+            DoSubCalculationsPlainQpConstVolumetricPump();
+        }
+
+        private void DoSubCalculationsCylindricalQpConst_OnlyLimitClueParams()
         {
             // ReSharper disable InconsistentNaming
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
@@ -526,7 +563,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.EvalCandle_Qsus_d_From_d_hc_hce_A_kappa_Pc_Dp_eta_QpConst(d0.value, hc.value, hce.value, A.value, kappa.value, Pc.value, Dp.value, eta_f.value);
         }
 
-        private void DoSubCalculationsStandartAndDesignGlobalQpConst_OnlyLimitClueParams()
+        private void DoSubCalculationsPlainQpConst_OnlyLimitClueParams()
         {
             // ReSharper disable InconsistentNaming
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
@@ -922,7 +959,7 @@ namespace fmCalculatorsLibrary
 
             if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(A.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hc.value, hce.value);
         }
-        private void DoSubCalculationsStandartCandleDpConst_OnlyLimitClueParams()
+        private void DoSubCalculationsCylindricalDpConst_OnlyLimitClueParams()
         {
             // ReSharper disable InconsistentNaming
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
@@ -1310,7 +1347,7 @@ namespace fmCalculatorsLibrary
                 */
             }
         }
-        private void DoSubCalculationsStandartAndDesignGlobalDpConst_OnlyLimitClueParams()
+        private void DoSubCalculationsPlainDpConst_OnlyLimitClueParams()
         {
             // ReSharper disable InconsistentNaming
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
@@ -1701,23 +1738,27 @@ namespace fmCalculatorsLibrary
         {
             if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_CONST)
             {
-                DoSubCalculationsStandartAndDesignGlobalDpConst();
+                DoSubCalculationsPlainDpConst();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST)
             {
-                DoSubCalculationsStandartAndDesignGlobalQpConst();
+                DoSubCalculationsPlainQpConst();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP)
             {
-                DoSubCalculationsStandartAndDesignGlobalQpConstVolumetricPump();
+                DoSubCalculationsPlainQpConstVolumetricPump();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST)
             {
-                DoSubCalculationsStandartCandleDpConst();
+                DoSubCalculationsCylindricaleDpConst();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST)
             {
-                DoSubCalculationsStandartCandleQpConst();
+                DoSubCalculationsCylindricalQpConst();
+            }
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP)
+            {
+                DoSubCalculationsCylindricalQpConstVolumetricPump();
             }
             else
             {
@@ -1849,31 +1890,48 @@ namespace fmCalculatorsLibrary
             }
         }
 
-        private class QpConstVolumetricPumpCalculatorHelperForDpInput : fmCalculationLibrary.NumericalMethods.fmFunction
+        private class QpCalculatorHelperForDpInput : fmCalculationLibrary.NumericalMethods.fmFunction
         {
+            public enum AreaKind
+            {
+                PLAIN,
+                CYLINDRICAL
+            }
             fmFilterMachiningCalculator fmc;
             fmValue QpValue;
-            public QpConstVolumetricPumpCalculatorHelperForDpInput(fmFilterMachiningCalculator fmc, fmValue QpValue)
+            AreaKind areaKind;
+            public QpCalculatorHelperForDpInput(fmFilterMachiningCalculator fmc, fmValue QpValue, AreaKind areaKind)
             {
                 this.fmc = fmc;
                 this.QpValue = QpValue;
+                this.areaKind = areaKind;
             }
             override public fmValue Eval(fmValue x)
             {
                 fmc.variables[fmGlobalParameter.Dp].value = x;
-                fmc.DoSubCalculationsStandartAndDesignGlobalQpConstVolumetricPump();
+                switch (areaKind) 
+                {
+                    case AreaKind.PLAIN:
+                       fmc.DoSubCalculationsPlainQpConstVolumetricPump();
+                       break;
+                    case AreaKind.CYLINDRICAL:
+                       fmc.DoSubCalculationsCylindricalQpConstVolumetricPump();
+                       break;
+                    default:
+                       throw new Exception("Unhandled area kind.");
+                }
                 fmValue res = fmc.variables[fmGlobalParameter.Qsus_d].value - QpValue;
                 return res;
             }
         };
 
-        private void DoSubCalculationsStandartAndDesignGlobalQpConstVolumetricPump()
+        private void DoSubCalculationsPlainQpConstVolumetricPump()
         {
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
             var Qp = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
             if (Dp.isInputed)
             {
-                DoSubCalculationsStandartAndDesignGlobalQpConst();
+                DoSubCalculationsPlainQpConst();
             }
             else
             {
@@ -1881,7 +1939,7 @@ namespace fmCalculatorsLibrary
                 Qp.isInputed = false;
 
                 fmValue qpValue = Qp.value;
-                QpConstVolumetricPumpCalculatorHelperForDpInput qpCalc = new QpConstVolumetricPumpCalculatorHelperForDpInput(this, qpValue);
+                QpCalculatorHelperForDpInput qpCalc = new QpCalculatorHelperForDpInput(this, qpValue, QpCalculatorHelperForDpInput.AreaKind.PLAIN);
                 Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, new fmValue(0), new fmValue(1e18), 80);
                 qpCalc.Eval(Dp.value);
                 Qp.value = qpValue;
@@ -1932,7 +1990,7 @@ namespace fmCalculatorsLibrary
             DoSubCalculationsDesign1();
         }
 
-        private void DoSubCalculationsStandartCandleQpConst()
+        private void DoSubCalculationsCylindricalQpConst()
         {
             // ReSharper disable InconsistentNaming
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
@@ -2409,7 +2467,7 @@ namespace fmCalculatorsLibrary
             qmc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmc.value, A.value);
             qmc_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmc_d.value, A.value);
         }
-        private void DoSubCalculationsStandartAndDesignGlobalQpConst()
+        private void DoSubCalculationsPlainQpConst()
         {
             // ReSharper disable InconsistentNaming
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
@@ -2885,7 +2943,7 @@ namespace fmCalculatorsLibrary
             qmc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmc.value, A.value);
             qmc_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmc_d.value, A.value);
         }
-        private void DoSubCalculationsStandartCandleDpConst()
+        private void DoSubCalculationsCylindricaleDpConst()
         {
             // ReSharper disable InconsistentNaming
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
@@ -3355,7 +3413,7 @@ namespace fmCalculatorsLibrary
             qmc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmc.value, A.value);
             qmc_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmc_d.value, A.value);
         }
-        private void DoSubCalculationsStandartAndDesignGlobalDpConst()
+        private void DoSubCalculationsPlainDpConst()
         {
             // ReSharper disable InconsistentNaming
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
