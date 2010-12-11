@@ -1921,11 +1921,7 @@ namespace fmCalculatorsLibrary
                        throw new Exception("Unhandled area kind.");
                 }
                 fmValue curQpValue = fmc.variables[fmGlobalParameter.Qsus_d].value;
-                if (curQpValue.defined == false)
-                {
-                    return new fmValue(-1);
-                }
-                return curQpValue - QpValue;
+                return QpValue - curQpValue;
             }
         };
 
@@ -1944,7 +1940,21 @@ namespace fmCalculatorsLibrary
 
                 fmValue qpValue = Qp.value;
                 QpCalculatorHelperForDpInput qpCalc = new QpCalculatorHelperForDpInput(this, qpValue, QpCalculatorHelperForDpInput.AreaKind.PLAIN);
-                Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, new fmValue(0), new fmValue(1e18), 80);
+                fmValue left = new fmValue(0);
+                fmValue leftValue = qpCalc.Eval(left);
+                fmValue eps = new fmValue(1e-9);
+                if (leftValue.defined == false)
+                {
+                    left = eps;
+                    leftValue = qpCalc.Eval(left);
+                }
+                fmValue right = new fmValue(1e18);
+                fmValue rightValue = qpCalc.Eval(right);
+                if (fmValue.Sign(leftValue, eps) == fmValue.Sign(rightValue, eps))
+                {
+                    left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindBreakInUnimodalFunction(qpCalc, left, right, 80);
+                }
+                Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, left, right, 80);
                 qpCalc.Eval(Dp.value);
                 Qp.value = qpValue;
 

@@ -53,6 +53,7 @@
     <Compile Include="MeasureUnits\fmUnit.cs" />
     <Compile Include="AGLibrary\normaldistr.cs" />
     <Compile Include="Equations\fmPcrcaEquations.cs" />
+    <Compile Include="NumericalMethods\fmTernaryMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Equations\fmRmhceEquations.cs" />
     <Compile Include="Equations\fmSuspensionEquations.cs" />

@@ -396,7 +396,7 @@ namespace fmCalculationLibrary
             return Less(b, a);
         }
 
-        internal static fmValue Sign(fmValue beginValue, fmValue eps)
+        public static fmValue Sign(fmValue beginValue, fmValue eps)
         {
             return new fmValue(Math.Abs(beginValue.value) <= eps.value ? 0 : beginValue.value > 0 ? 1 : -1, beginValue.defined && eps.defined);
         }
