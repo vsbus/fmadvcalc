@@ -146,17 +146,7 @@ namespace fmCalculatorsLibrary
             }
             else
             {
-                Dp.isInputed = true;
-                Qp.isInputed = false;
-
-                fmValue qpValue = Qp.value;
-                QpCalculatorHelperForDpInput qpCalc = new QpCalculatorHelperForDpInput(this, qpValue, QpCalculatorHelperForDpInput.AreaKind.CYLINDRICAL);
-                Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, new fmValue(0), new fmValue(1e18), 80);
-                qpCalc.Eval(Dp.value);
-                Qp.value = qpValue;
-
-                Dp.isInputed = false;
-                Qp.isInputed = true;
+                DoSubCalculationsVolumetricPumpQpInput(QpCalculatorHelperForDpInput.AreaKind.CYLINDRICAL);
             }
         }
 
@@ -1924,6 +1914,19 @@ namespace fmCalculatorsLibrary
                 return QpValue - curQpValue;
             }
         };
+        private class QpDefinedCalculatorHelperForDpInput : fmCalculationLibrary.NumericalMethods.fmFunction
+        {
+            QpCalculatorHelperForDpInput qpCalc;
+            public QpDefinedCalculatorHelperForDpInput(QpCalculatorHelperForDpInput qpCalc)
+            {
+                this.qpCalc = qpCalc;
+            }
+            override public fmValue Eval(fmValue x)
+            {
+                fmValue val = qpCalc.Eval(x);
+                return new fmValue(val.defined ? 0 : -1);
+            }
+        };
 
         private void DoSubCalculationsPlainQpConstVolumetricPump()
         {
@@ -1935,32 +1938,40 @@ namespace fmCalculatorsLibrary
             }
             else
             {
-                Dp.isInputed = true;
-                Qp.isInputed = false;
-
-                fmValue qpValue = Qp.value;
-                QpCalculatorHelperForDpInput qpCalc = new QpCalculatorHelperForDpInput(this, qpValue, QpCalculatorHelperForDpInput.AreaKind.PLAIN);
-                fmValue left = new fmValue(0);
-                fmValue leftValue = qpCalc.Eval(left);
-                fmValue eps = new fmValue(1e-9);
-                if (leftValue.defined == false)
-                {
-                    left = eps;
-                    leftValue = qpCalc.Eval(left);
-                }
-                fmValue right = new fmValue(1e18);
-                fmValue rightValue = qpCalc.Eval(right);
-                if (fmValue.Sign(leftValue, eps) == fmValue.Sign(rightValue, eps))
-                {
-                    left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindBreakInUnimodalFunction(qpCalc, left, right, 80);
-                }
-                Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, left, right, 80);
-                qpCalc.Eval(Dp.value);
-                Qp.value = qpValue;
-
-                Dp.isInputed = false;
-                Qp.isInputed = true;
+                DoSubCalculationsVolumetricPumpQpInput(QpCalculatorHelperForDpInput.AreaKind.PLAIN);
             }
+        }
+
+        private void DoSubCalculationsVolumetricPumpQpInput(QpCalculatorHelperForDpInput.AreaKind areaKind)
+        {
+            var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+
+            Dp.isInputed = true;
+            Qp.isInputed = false;
+
+            fmValue qpValue = Qp.value;
+            QpCalculatorHelperForDpInput qpCalc = new QpCalculatorHelperForDpInput(this, qpValue, areaKind);
+            fmValue left = new fmValue(0);
+            fmValue leftValue = qpCalc.Eval(left);
+            fmValue eps = new fmValue(1e-9);
+            fmValue right = new fmValue(1e18);
+            if (leftValue.defined == false)
+            {
+                QpDefinedCalculatorHelperForDpInput qdDefCalc = new QpDefinedCalculatorHelperForDpInput(qpCalc);
+                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qdDefCalc, left, right, 80);
+            }
+            fmValue rightValue = qpCalc.Eval(right);
+            if (fmValue.Sign(leftValue, eps) == fmValue.Sign(rightValue, eps))
+            {
+                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindBreakInUnimodalFunction(qpCalc, left, right, 80);
+            }
+            Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, left, right, 80);
+            qpCalc.Eval(Dp.value);
+            Qp.value = qpValue;
+
+            Dp.isInputed = false;
+            Qp.isInputed = true;
         }
 
         private void DoCalculationsStandart()

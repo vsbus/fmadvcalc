@@ -35,8 +35,13 @@ namespace fmCalculationLibrary.NumericalMethods
             {
                 if (beginValue.value == 0)
                 {
-                    beginRes = beginArg;
-                    endRes = endArg;
+                    if (function.Eval(beginArg).value == 0)
+                    {
+                        beginRes = endRes = endArg;
+                        return true;
+                    }
+                    beginRes = beginArg + eps;
+                    endRes = beginArg + eps;
                     return true;
                 }
                 if (function.Eval(endArg).value == 0)
