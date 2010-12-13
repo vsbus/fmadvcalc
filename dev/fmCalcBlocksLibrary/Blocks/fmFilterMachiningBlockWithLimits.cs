@@ -94,93 +94,199 @@ namespace fmCalcBlocksLibrary.Blocks
                 processOnChange = false;
 
                 CalculateAbsRanges();
-
-                for (int i = 0; i < parameters.Count; ++i)
-                {
-                    if (parameters[i].cell == null)
-                    {
-                        continue;
-                    }
-
-                    DataGridView dataGrid = parameters[i].cell.DataGridView;
-                    int rowIndex = parameters[i].cell.RowIndex;
-                    int colIndex = parameters[i].cell.ColumnIndex;
-                    double coef = parameters[i].globalParameter.unitFamily.CurrentUnit.Coef;
-
-                    dataGrid[colIndex - 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.MinValue / coef;
-                    dataGrid[colIndex + 2, rowIndex].Value = parameters[i].globalParameter.chartDefaultXRange.MaxValue / coef;
-
-                    DataGridViewCell minLimitCell = dataGrid[colIndex - 1, rowIndex];
-                    DataGridViewCell maxLimitCell = dataGrid[colIndex + 1, rowIndex];
-
-                    if (parameters[i].group == null)
-                    {
-                        minLimitCell.Value = "";
-                        maxLimitCell.Value = "";
-
-                        if (fmValue.Greater(new fmValue(parameters[i].globalParameter.chartDefaultXRange.MinValue), parameters[i].value)
-                            || fmValue.Less(new fmValue(parameters[i].globalParameter.chartDefaultXRange.MaxValue), parameters[i].value))
-                        {
-                            minLimitCell.Style.ForeColor = Color.Black;
-                            maxLimitCell.Style.ForeColor = Color.Black;
-                            minLimitCell.Style.BackColor = Color.Pink;
-                            maxLimitCell.Style.BackColor = Color.Pink;
-                        }
-                        else
-                        {
-                            minLimitCell.Style.ForeColor = Color.Black;
-                            maxLimitCell.Style.ForeColor = Color.Black;
-                            minLimitCell.Style.BackColor = Color.White;
-                            maxLimitCell.Style.BackColor = Color.White;
-                        }
-                    }
-                    else
-                    {
-                        fmValue minValue, maxValue;
-
-                        GetMinMaxLimitsOfIncompleteInputs(parameters[i], out minValue, out maxValue);
-                        //minValue = maxValue = new fmValue();
-
-                        if (minValue.value > maxValue.value)
-                        {
-                            minValue = maxValue = new fmValue();
-                        }
-
-                        minLimitCell.Value = (minValue / coef).ToString();
-                        maxLimitCell.Value = (maxValue / coef).ToString();
-
-                        if (minValue.defined 
-                            && parameters[i].value.defined 
-                            && minValue > parameters[i].value)
-                        {
-                            minLimitCell.Style.ForeColor = Color.Black;
-                            minLimitCell.Style.BackColor = Color.Red;
-                        }
-                        else
-                        {
-                            minLimitCell.Style.ForeColor = Color.Black;
-                            minLimitCell.Style.BackColor = Color.White;
-                        }
-
-                        if (maxValue.defined
-                            && parameters[i].value.defined
-                            && maxValue < parameters[i].value)
-                        {
-                            maxLimitCell.Style.ForeColor = Color.Black;
-                            maxLimitCell.Style.BackColor = Color.Red;
-                        }
-                        else
-                        {
-                            maxLimitCell.Style.ForeColor = Color.Black;
-                            maxLimitCell.Style.BackColor = Color.White;
-                        }
-                    }
-                }
+                
+                Dictionary<fmGlobalParameter, fmValue> minValue = new Dictionary<fmGlobalParameter, fmValue>();
+                Dictionary<fmGlobalParameter, fmValue> maxValue = new Dictionary<fmGlobalParameter, fmValue>();
+                
+                List<fmBlockVariableParameter> clueParams = GetClueParamsList();
+                
+                CalculateClueParamsLimits(clueParams, minValue, maxValue);
+                CalculateAllParamsLimits(clueParams, minValue, maxValue);
+                
+                WriteLimitsToUI(minValue, maxValue);
 
                 processOnChange = true;
             }
         }
 
+        private void CalculateAllParamsLimits(List<fmBlockVariableParameter> clueParams, Dictionary<fmGlobalParameter, fmValue> minValue, Dictionary<fmGlobalParameter, fmValue> maxValue)
+        {
+            foreach (fmBlockVariableParameter clueParameter in clueParams)
+            {
+                List<fmValue> keepedValues;
+                List<fmBlockVariableParameter> keepedInputInfo;
+                KeepValuesAndInputInfo(out keepedValues, out keepedInputInfo);
+                UpdateIsInputed(clueParameter);
+                
+                var naInputs = new List<fmBlockVariableParameter>();
+                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.name), naInputs);
+                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.Dp.name), naInputs);
+                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.name), naInputs);
+                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.tc.name), naInputs);
+                var d0 = GetParameterByName(fmGlobalParameter.d0.name);
+                if (d0.group != null)
+                {
+                    CheckNAAndAdd(d0, naInputs);
+                }
+
+                for (int i = 0; i < 2; ++i)
+                {
+                    clueParameter.value = (i == 0 ? minValue : maxValue)[clueParameter.globalParameter];
+                    for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
+                    {
+                        for (int j = 0; j < naInputs.Count; ++j)
+                        {
+                            naInputs[j].value = ((mask & (1 << j)) != 0
+                                ? new fmValue(naInputs[j].globalParameter.chartDefaultXRange.MaxValue)
+                                : new fmValue(naInputs[j].globalParameter.chartDefaultXRange.MinValue));
+                        }
+                        DoCalculations();
+                        foreach (fmBlockVariableParameter parameter in parameters)
+                        {
+                            if (parameter.group == clueParameter.group)
+                            {
+                                fmGlobalParameter p = parameter.globalParameter;
+                                if (minValue.ContainsKey(p) == false)
+                                {
+                                    minValue[p] = new fmValue();
+                                }
+                                if (maxValue.ContainsKey(p) == false)
+                                {
+                                    maxValue[p] = new fmValue();
+                                }
+                                if (minValue[p].defined == false || minValue[p] > parameter.value)
+                                {
+                                    minValue[p] = parameter.value;
+                                }
+                                if (maxValue[p].defined == false || maxValue[p] < parameter.value)
+                                {
+                                    maxValue[p] = parameter.value;
+                                }
+                            }
+                        }
+                    }
+                }
+                RestoreValuesAndInputInfo(keepedValues, keepedInputInfo);
+            }
+        }
+
+        private void WriteLimitsToUI(Dictionary<fmGlobalParameter, fmValue> minValue, Dictionary<fmGlobalParameter, fmValue> maxValue)
+        {
+            foreach (var parameter in parameters)
+            {
+                if (parameter.cell == null)
+                {
+                    continue;
+                }
+                DataGridView dataGrid = parameter.cell.DataGridView;
+                int rowIndex = parameter.cell.RowIndex;
+                int colIndex = parameter.cell.ColumnIndex;
+                double coef = parameter.globalParameter.unitFamily.CurrentUnit.Coef;
+
+                dataGrid[colIndex - 2, rowIndex].Value = parameter.globalParameter.chartDefaultXRange.MinValue / coef;
+                dataGrid[colIndex + 2, rowIndex].Value = parameter.globalParameter.chartDefaultXRange.MaxValue / coef;
+
+                DataGridViewCell minLimitCell = dataGrid[colIndex - 1, rowIndex];
+                DataGridViewCell maxLimitCell = dataGrid[colIndex + 1, rowIndex];
+
+                if (parameter.group == null)
+                {
+                    minLimitCell.Value = "";
+                    maxLimitCell.Value = "";
+
+                    if (fmValue.Greater(new fmValue(parameter.globalParameter.chartDefaultXRange.MinValue), parameter.value)
+                        || fmValue.Less(new fmValue(parameter.globalParameter.chartDefaultXRange.MaxValue), parameter.value))
+                    {
+                        minLimitCell.Style.ForeColor = Color.Black;
+                        maxLimitCell.Style.ForeColor = Color.Black;
+                        minLimitCell.Style.BackColor = Color.Pink;
+                        maxLimitCell.Style.BackColor = Color.Pink;
+                    }
+                    else
+                    {
+                        minLimitCell.Style.ForeColor = Color.Black;
+                        maxLimitCell.Style.ForeColor = Color.Black;
+                        minLimitCell.Style.BackColor = Color.White;
+                        maxLimitCell.Style.BackColor = Color.White;
+                    }
+                }
+                else
+                {
+                    if (minValue.ContainsKey(parameter.globalParameter) == false)
+                    {
+                        minValue[parameter.globalParameter] = new fmValue();
+                    }
+                    if (maxValue.ContainsKey(parameter.globalParameter) == false)
+                    {
+                        maxValue[parameter.globalParameter] = new fmValue();
+                    }
+                    minLimitCell.Value = (minValue[parameter.globalParameter] / coef).ToString();
+                    maxLimitCell.Value = (maxValue[parameter.globalParameter] / coef).ToString();
+
+                    if (minValue[parameter.globalParameter].defined
+                        && parameter.value.defined
+                        && minValue[parameter.globalParameter] > parameter.value)
+                    {
+                        minLimitCell.Style.ForeColor = Color.Black;
+                        minLimitCell.Style.BackColor = Color.Red;
+                    }
+                    else
+                    {
+                        minLimitCell.Style.ForeColor = Color.Black;
+                        minLimitCell.Style.BackColor = Color.White;
+                    }
+
+                    if (maxValue[parameter.globalParameter].defined
+                        && parameter.value.defined
+                        && maxValue[parameter.globalParameter] < parameter.value)
+                    {
+                        maxLimitCell.Style.ForeColor = Color.Black;
+                        maxLimitCell.Style.BackColor = Color.Red;
+                    }
+                    else
+                    {
+                        maxLimitCell.Style.ForeColor = Color.Black;
+                        maxLimitCell.Style.BackColor = Color.White;
+                    }
+                }
+            }
+        }
+        private void CalculateClueParamsLimits(List<fmBlockVariableParameter> clueParams, Dictionary<fmGlobalParameter, fmValue> minValue, Dictionary<fmGlobalParameter, fmValue> maxValue)
+        {
+            foreach (var parameter in clueParams)
+            {
+                if (parameter.cell == null)
+                {
+                    continue;
+                }
+                if (parameter.group != null)
+                {
+                    fmValue minVal, maxVal;
+                    GetMinMaxLimitsOfIncompleteInputs(parameter, out minVal, out maxVal);
+                    if (minVal.value > maxVal.value)
+                    {
+                        minVal = maxVal = new fmValue();
+                    }
+                    minValue[parameter.globalParameter] = minVal;
+                    maxValue[parameter.globalParameter] = maxVal;
+                }
+            }
+        }
+        private List<fmBlockVariableParameter> GetClueParamsList()
+        {
+            List<fmBlockVariableParameter> clueParams = new List<fmBlockVariableParameter>(new fmBlockVariableParameter[] {
+                    GetParameterByName(fmGlobalParameter.A.name),
+                    GetParameterByName(fmGlobalParameter.Dp.name),
+                    GetParameterByName(fmGlobalParameter.hc.name),
+                    GetParameterByName(fmGlobalParameter.sf.name)
+                });
+            var d0 = GetParameterByName(fmGlobalParameter.d0.name);
+            if (d0.group != null)
+            {
+                clueParams.Add(GetParameterByName(fmGlobalParameter.d0.name));
+            }
+            return clueParams;
+        }
         private void CalculateAbsRanges()
         {
             var varList = new List<fmGlobalParameter>
@@ -260,20 +366,9 @@ namespace fmCalcBlocksLibrary.Blocks
                 || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
                 || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP)
             {
-                var keepedValues = new List<fmValue>();
-                for (int i = 0; i < parameters.Count; ++i)
-                {
-                    keepedValues.Add(parameters[i].value);
-                }
-
-                var keepedInputInfo = new List<fmBlockVariableParameter>();
-                foreach (fmBlockVariableParameter p in parameters)
-                {
-                    if (p.IsInputed)
-                    {
-                        keepedInputInfo.Add(p);
-                    }
-                }
+                List<fmValue> keepedValues;
+                List<fmBlockVariableParameter> keepedInputInfo;
+                KeepValuesAndInputInfo(out keepedValues, out keepedInputInfo);
 
                 UpdateIsInputed(parameter);
                 parameter.value = new fmValue();
@@ -318,16 +413,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     }
                 }
 
-                for (int i = 0; i < Parameters.Count; ++i)
-                {
-                    parameters[i].value = keepedValues[i];
-                }
-
-                foreach (fmBlockVariableParameter p in keepedInputInfo)
-                {
-                    UpdateIsInputed(p);
-                }
-
+                RestoreValuesAndInputInfo(keepedValues, keepedInputInfo);
                 return;
             }
             else
@@ -373,6 +459,37 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
 
                 return;
+            }
+        }
+
+        private void KeepValuesAndInputInfo(out List<fmValue> keepedValues, out List<fmBlockVariableParameter> keepedInputInfo)
+        {
+            keepedValues = new List<fmValue>();
+            for (int i = 0; i < parameters.Count; ++i)
+            {
+                keepedValues.Add(parameters[i].value);
+            }
+
+            keepedInputInfo = new List<fmBlockVariableParameter>();
+            foreach (fmBlockVariableParameter p in parameters)
+            {
+                if (p.IsInputed)
+                {
+                    keepedInputInfo.Add(p);
+                }
+            }
+        }
+
+        private void RestoreValuesAndInputInfo(List<fmValue> keepedValues, List<fmBlockVariableParameter> keepedInputInfo)
+        {
+            for (int i = 0; i < Parameters.Count; ++i)
+            {
+                parameters[i].value = keepedValues[i];
+            }
+
+            foreach (fmBlockVariableParameter p in keepedInputInfo)
+            {
+                UpdateIsInputed(p);
             }
         }
 
