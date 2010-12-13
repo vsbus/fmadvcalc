@@ -375,6 +375,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
                 var naInputs = new List<fmBlockVariableParameter>();
                 CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.name), naInputs);
+                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.d0.name), naInputs);
                 CheckNAAndAdd(GetParameterByName(fmGlobalParameter.Dp.name), naInputs);
                 CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.name), naInputs);
                 CheckNAAndAdd(GetParameterByName(fmGlobalParameter.tc.name), naInputs);
@@ -495,7 +496,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private void CheckNAAndAdd(fmBlockVariableParameter p, List<fmBlockVariableParameter> naInputs)
         {
-            if (FindGroupRepresetator(p.group).value.defined == false)
+            if (p.group != null && FindGroupRepresetator(p.group).value.defined == false)
             {
                 naInputs.Add(p);
                 UpdateIsInputed(p);
