@@ -117,17 +117,8 @@ namespace fmCalcBlocksLibrary.Blocks
                 List<fmBlockVariableParameter> keepedInputInfo;
                 KeepValuesAndInputInfo(out keepedValues, out keepedInputInfo);
                 UpdateIsInputed(clueParameter);
-                
-                var naInputs = new List<fmBlockVariableParameter>();
-                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.name), naInputs);
-                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.Dp.name), naInputs);
-                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.name), naInputs);
-                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.tc.name), naInputs);
-                var d0 = GetParameterByName(fmGlobalParameter.d0.name);
-                if (d0.group != null)
-                {
-                    CheckNAAndAdd(d0, naInputs);
-                }
+
+                var naInputs = GetNAInputsList(clueParameter);
 
                 for (int i = 0; i < 2; ++i)
                 {
@@ -373,14 +364,8 @@ namespace fmCalcBlocksLibrary.Blocks
                 UpdateIsInputed(parameter);
                 parameter.value = new fmValue();
 
-                var naInputs = new List<fmBlockVariableParameter>();
-                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.name), naInputs);
-                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.d0.name), naInputs);
-                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.Dp.name), naInputs);
-                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.name), naInputs);
-                CheckNAAndAdd(GetParameterByName(fmGlobalParameter.tc.name), naInputs);
+                var naInputs = GetNAInputsList(parameter);
 
-                naInputs.Remove(FindGroupRepresetator(parameter.group));
                 bool result = false;
                 minValue = maxValue = new fmValue();
 
@@ -463,6 +448,21 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
+        private List<fmBlockVariableParameter> GetNAInputsList(fmBlockVariableParameter parameter)
+        {
+            var naInputs = new List<fmBlockVariableParameter>();
+            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.name), naInputs);
+            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.Dp.name), naInputs);
+            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.name), naInputs);
+            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.tc.name), naInputs);
+            var d0 = GetParameterByName(fmGlobalParameter.d0.name);
+            if (d0.group != null)
+            {
+                CheckNAAndAdd(d0, naInputs);
+            }
+            naInputs.Remove(FindGroupRepresetator(parameter.group));
+            return naInputs;
+        }
         private void KeepValuesAndInputInfo(out List<fmValue> keepedValues, out List<fmBlockVariableParameter> keepedInputInfo)
         {
             keepedValues = new List<fmValue>();
