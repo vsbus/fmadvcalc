@@ -162,9 +162,11 @@ namespace FilterSimulation
 
             sim.Parameters[fmGlobalParameter.tr].value = new fmValue(10 * fmUnitFamily.TimeFamily.CurrentUnit.Coef);
             ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.tr]).isInputed = true;
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.sf]).isInputed = false;
 
             sim.Parameters[fmGlobalParameter.n].value = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
             ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.n]).isInputed = true;
+            ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.hc]).isInputed = false;
             // END DEBUG CODE
 
             fProj.Keep();
