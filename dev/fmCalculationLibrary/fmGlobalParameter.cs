@@ -16,7 +16,7 @@ namespace fmCalculationLibrary
             get { return unitFamily.CurrentUnit.Name; }
         }
 
-        public fmRange chartDefaultXRange;
+        public fmDefaultParameterRange defaultXRange;
         public fmRange chartCurretXRange;
 
         // ReSharper disable InconsistentNaming
@@ -211,11 +211,11 @@ namespace fmCalculationLibrary
         {
             this.name = name;
             this.unitFamily = unitFamily;
-            chartDefaultXRange = minMaxRange.isUnlimited ? new fmRange() : new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
+            defaultXRange = minMaxRange.isUnlimited ? new fmDefaultParameterRange() : new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
             chartCurretXRange = minMaxRange.isUnlimited ? new fmRange() : new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
         }
-        
-        public fmGlobalParameter(string name, fmUnitFamily unitFamily) : this(name, unitFamily, new fmRange()) { }
+
+        public fmGlobalParameter(string name, fmUnitFamily unitFamily) : this(name, unitFamily, new fmDefaultParameterRange()) { }
     }
 
 

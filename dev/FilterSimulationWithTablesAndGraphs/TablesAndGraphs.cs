@@ -466,7 +466,7 @@ namespace FilterSimulationWithTablesAndGraphs
             m_loadingXRange = true;
             fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
-            fmRange defaultRange = xParameter.chartDefaultXRange;
+            fmRange defaultRange = xParameter.defaultXRange;
             fmRange range = xParameter.chartCurretXRange;
             range.MinValue = defaultRange.MinValue;
             range.MaxValue = defaultRange.MaxValue;

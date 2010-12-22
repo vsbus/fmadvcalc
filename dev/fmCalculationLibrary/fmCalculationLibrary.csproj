@@ -43,6 +43,7 @@
     <Compile Include="Equations\fmEpsKappaEquations.cs" />
     <Compile Include="Equations\fmFilterMachiningEquations.cs" />
     <Compile Include="Equations\fmEquationsCEPI.cs" />
+    <Compile Include="fmDefaultParameterRange.cs" />
     <Compile Include="fmGlobalParameter.cs" />
     <Compile Include="fmRange.cs" />
     <Compile Include="NumericalMethods\fmBisectionMethod.cs" />
