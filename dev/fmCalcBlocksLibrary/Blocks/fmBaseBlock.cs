@@ -34,7 +34,6 @@ namespace fmCalcBlocksLibrary.Blocks
         public event Event ValuesChanged;
         public event fmBlockParameterEventHandler ValuesChangedByUser;
 
-
         abstract public void DoCalculations();
 
         virtual protected void ReWriteParameters()
@@ -165,10 +164,18 @@ namespace fmCalcBlocksLibrary.Blocks
             return null;
         }
 
-        protected void SetParameterCellBackColor(fmBlockVariableParameter parameter, Color backColor)
+        public void UpdateCellsBackColor()
         {
-            if (parameter.cell != null)
-                parameter.cell.Style.BackColor = backColor;
+            foreach (fmBlockVariableParameter p in parameters)
+            {
+                if (p.cell != null)
+                {
+                    Color color = p.group == null
+                                     ? Color.White
+                                     : p.group.color;
+                    p.cell.Style.BackColor = color;
+                }
+            }
         }
     }
 }

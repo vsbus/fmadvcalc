@@ -43,10 +43,14 @@
     <Compile Include="BlockParameter\Event.cs" />
     <Compile Include="BlockParameter\fmBlockBaseParameter.cs" />
     <Compile Include="BlockParameter\fmBlockConstantParameter.cs" />
+    <Compile Include="BlockParameter\fmBlockLimitParameter.cs" />
+    <Compile Include="BlockParameter\fmBlockLimitsParameter.cs" />
     <Compile Include="BlockParameter\fmBlockParameterEventArgs.cs" />
     <Compile Include="BlockParameter\fmBlockParameterGroup.cs" />
     <Compile Include="Blocks\fmBaseBlock.cs" />
+    <Compile Include="Blocks\fmBaseLimitsBlock.cs" />
     <Compile Include="Blocks\fmFilterMachiningBlockWithLimits.cs" />
+    <Compile Include="Blocks\fmSimulationLimitsBlock.cs" />
     <Compile Include="Controls\fmCalculationOptionView.cs">
       <SubType>Component</SubType>
     </Compile>

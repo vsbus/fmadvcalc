@@ -841,20 +841,6 @@ namespace fmCalcBlocksLibrary.Blocks
             return result;
         }
 
-        public void UpdateCellsBackColor()
-        {
-            foreach (fmBlockVariableParameter p in parameters)
-            {
-                if (p.cell != null)
-                {
-                    Color color = p.group == null
-                                     ? Color.White
-                                     : p.group.color;
-                    p.cell.Style.BackColor = color;
-                }
-            }
-        }
-
         public fmFilterMachiningBlock()
             : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
         {
