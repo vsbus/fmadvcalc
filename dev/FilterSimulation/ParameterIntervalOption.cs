@@ -44,13 +44,13 @@ namespace FilterSimulation
                                        {
                                            p.name,
                                            p.unitFamily.CurrentUnit.Name,
-                                           p.defaultXRange.isUnlimited,
+                                           p.validRange.isUnlimited,
                                        });
 
-                if (p.defaultXRange.isUnlimited == false)
+                if (p.validRange.isUnlimited == false)
                 {
-                    ParamGrid["MinRangeColumn", rowIndex].Value = new fmValue(p.defaultXRange.MinValue / p.unitFamily.CurrentUnit.Coef).ToString();
-                    ParamGrid["MaxRangeColumn", rowIndex].Value = new fmValue(p.defaultXRange.MaxValue / p.unitFamily.CurrentUnit.Coef).ToString();
+                    ParamGrid["MinRangeColumn", rowIndex].Value = new fmValue(p.validRange.MinValue / p.unitFamily.CurrentUnit.Coef).ToString();
+                    ParamGrid["MaxRangeColumn", rowIndex].Value = new fmValue(p.validRange.MaxValue / p.unitFamily.CurrentUnit.Coef).ToString();
                 }
 
                 fmFilterSimulationControl.SetRowBackColor(ParamGrid.Rows[rowIndex], Color.LightBlue);
@@ -68,19 +68,19 @@ namespace FilterSimulation
             Dictionary<fmGlobalParameter, int> rowId = new Dictionary<fmGlobalParameter, int>();
             foreach (fmBlockVariableParameter p in pList)
             {
-                if (p.globalParameter.defaultXRange != null)
+                if (p.globalParameter.validRange != null)
                 {
                     int rowIndex = ParamGrid.Rows.Add(new object[]
                                            {
                                                p.globalParameter.name,
                                                p.globalParameter.unitFamily.CurrentUnit.Name,
-                                               p.globalParameter.defaultXRange.isUnlimited,
+                                               p.globalParameter.validRange.isUnlimited,
                                            });
                     rowId[p.globalParameter] = rowIndex;
-                    //if (p.globalParameter.defaultXRange.isUnlimited == false)
+                    //if (p.globalParameter.validRange.isUnlimited == false)
                     //{
-                    //    ParamGrid["MinRangeColumn", rowIndex].Value = p.globalParameter.defaultXRange.MinValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
-                    //    ParamGrid["MaxRangeColumn", rowIndex].Value = p.globalParameter.defaultXRange.MaxValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
+                    //    ParamGrid["MinRangeColumn", rowIndex].Value = p.globalParameter.validRange.MinValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
+                    //    ParamGrid["MaxRangeColumn", rowIndex].Value = p.globalParameter.validRange.MaxValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
                     //}
 
                     fmFilterSimulationControl.SetRowBackColor(ParamGrid.Rows[rowIndex], Color.LightGreen);
@@ -96,9 +96,9 @@ namespace FilterSimulation
                 );
             foreach (var p in smb.Parameters)
             {
-                p.pMin.value = new fmValue(p.globalParameter.defaultXRange.MinValue);
-                p.pMax.value = new fmValue(p.globalParameter.defaultXRange.MaxValue);
-                p.IsInputed = p.globalParameter.defaultXRange.IsInputed;
+                p.pMin.value = new fmValue(p.globalParameter.validRange.MinValue);
+                p.pMax.value = new fmValue(p.globalParameter.validRange.MaxValue);
+                p.IsInputed = p.globalParameter.validRange.IsInputed;
             }
             smb.Display();
         }
@@ -116,13 +116,13 @@ namespace FilterSimulation
 
                 if ((bool)ParamGrid.Rows[i].Cells["UnlimitedFlagColumn"].Value == false)
                 {
-                    p.defaultXRange.isUnlimited = false;
-                    p.defaultXRange.MinValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).value * p.unitFamily.CurrentUnit.Coef;
-                    p.defaultXRange.MaxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).value * p.unitFamily.CurrentUnit.Coef;
+                    p.validRange.isUnlimited = false;
+                    p.validRange.MinValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).value * p.unitFamily.CurrentUnit.Coef;
+                    p.validRange.MaxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).value * p.unitFamily.CurrentUnit.Coef;
                 }
                 else
                 {
-                    p.defaultXRange.isUnlimited = true;
+                    p.validRange.isUnlimited = true;
                 }
             }
             Close();

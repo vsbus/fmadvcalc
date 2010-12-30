@@ -104,7 +104,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void useDefaultRangesButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            LoadDefaultXRange();
+            LoadvalidRange();
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();

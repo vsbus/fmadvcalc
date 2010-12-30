@@ -457,7 +457,7 @@ namespace FilterSimulationWithTablesAndGraphs
             m_loadingXRange = false;
         }
 
-        private void LoadDefaultXRange()
+        private void LoadvalidRange()
         {
             if (listBoxXAxis.Text == "")
             {
@@ -466,7 +466,7 @@ namespace FilterSimulationWithTablesAndGraphs
             m_loadingXRange = true;
             fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
-            fmRange defaultRange = xParameter.defaultXRange;
+            fmRange defaultRange = xParameter.validRange;
             fmRange range = xParameter.chartCurretXRange;
             range.MinValue = defaultRange.MinValue;
             range.MaxValue = defaultRange.MaxValue;
