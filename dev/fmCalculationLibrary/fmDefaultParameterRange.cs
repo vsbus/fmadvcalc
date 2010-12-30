@@ -7,7 +7,7 @@ namespace fmCalculationLibrary
     public class fmDefaultParameterRange : fmRange
     {
         private bool m_inputed;
-        public bool Inputed
+        public bool IsInputed
         {
             get { return m_inputed; }
             set { m_inputed = value; }

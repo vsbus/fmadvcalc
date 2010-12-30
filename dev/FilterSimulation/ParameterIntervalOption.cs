@@ -62,8 +62,10 @@ namespace FilterSimulation
                                 fmb.GetParameterByName(fmGlobalParameter.A.name),
                                 fmb.GetParameterByName(fmGlobalParameter.Dp.name),
                                 fmb.GetParameterByName(fmGlobalParameter.sf.name),
-                                fmb.GetParameterByName(fmGlobalParameter.tc.name)
+                                fmb.GetParameterByName(fmGlobalParameter.tc.name),
+                                fmb.GetParameterByName(fmGlobalParameter.hc.name)
                             };
+            Dictionary<fmGlobalParameter, int> rowId = new Dictionary<fmGlobalParameter, int>();
             foreach (fmBlockVariableParameter p in pList)
             {
                 if (p.globalParameter.defaultXRange != null)
@@ -74,16 +76,31 @@ namespace FilterSimulation
                                                p.globalParameter.unitFamily.CurrentUnit.Name,
                                                p.globalParameter.defaultXRange.isUnlimited,
                                            });
-
-                    if (p.globalParameter.defaultXRange.isUnlimited == false)
-                    {
-                        ParamGrid["MinRangeColumn", rowIndex].Value = p.globalParameter.defaultXRange.MinValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
-                        ParamGrid["MaxRangeColumn", rowIndex].Value = p.globalParameter.defaultXRange.MaxValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
-                    }
+                    rowId[p.globalParameter] = rowIndex;
+                    //if (p.globalParameter.defaultXRange.isUnlimited == false)
+                    //{
+                    //    ParamGrid["MinRangeColumn", rowIndex].Value = p.globalParameter.defaultXRange.MinValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
+                    //    ParamGrid["MaxRangeColumn", rowIndex].Value = p.globalParameter.defaultXRange.MaxValue / p.globalParameter.unitFamily.CurrentUnit.Coef;
+                    //}
 
                     fmFilterSimulationControl.SetRowBackColor(ParamGrid.Rows[rowIndex], Color.LightGreen);
                 }
             }
+
+            fmSimulationLimitsBlock smb = new fmSimulationLimitsBlock(
+                ParamGrid[3, rowId[fmGlobalParameter.A]], ParamGrid[4, rowId[fmGlobalParameter.A]], 
+                ParamGrid[3, rowId[fmGlobalParameter.Dp]], ParamGrid[4, rowId[fmGlobalParameter.Dp]], 
+                ParamGrid[3, rowId[fmGlobalParameter.sf]], ParamGrid[4, rowId[fmGlobalParameter.sf]], 
+                ParamGrid[3, rowId[fmGlobalParameter.tc]], ParamGrid[4, rowId[fmGlobalParameter.tc]], 
+                ParamGrid[3, rowId[fmGlobalParameter.hc]], ParamGrid[4, rowId[fmGlobalParameter.hc]]
+                );
+            foreach (var p in smb.Parameters)
+            {
+                p.pMin.value = new fmValue(p.globalParameter.defaultXRange.MinValue);
+                p.pMax.value = new fmValue(p.globalParameter.defaultXRange.MaxValue);
+                p.IsInputed = p.globalParameter.defaultXRange.IsInputed;
+            }
+            smb.Display();
         }
 
 // ReSharper disable InconsistentNaming

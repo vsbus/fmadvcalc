@@ -39,6 +39,11 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
+        public void Display()
+        {
+            ReWriteParameters();
+        }
+
         public void UpdateIsInputed(fmBlockLimitsParameter enteredParameter)
         {
             if (enteredParameter != null)
