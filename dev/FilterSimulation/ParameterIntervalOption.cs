@@ -9,6 +9,8 @@ namespace FilterSimulation
 {
     public partial class fmParameterIntervalOption : Form
     {
+        private fmSimulationLimitsBlock smb;
+
         public fmParameterIntervalOption()
         {
             InitializeComponent();
@@ -44,13 +46,13 @@ namespace FilterSimulation
                                        {
                                            p.name,
                                            p.unitFamily.CurrentUnit.Name,
-                                           p.validRange.isUnlimited,
+                                           p.specifiedRange.isUnlimited,
                                        });
 
-                if (p.validRange.isUnlimited == false)
+                if (p.specifiedRange.isUnlimited == false)
                 {
-                    ParamGrid["MinRangeColumn", rowIndex].Value = new fmValue(p.validRange.MinValue / p.unitFamily.CurrentUnit.Coef).ToString();
-                    ParamGrid["MaxRangeColumn", rowIndex].Value = new fmValue(p.validRange.MaxValue / p.unitFamily.CurrentUnit.Coef).ToString();
+                    ParamGrid["MinRangeColumn", rowIndex].Value = new fmValue(p.specifiedRange.MinValue / p.unitFamily.CurrentUnit.Coef).ToString();
+                    ParamGrid["MaxRangeColumn", rowIndex].Value = new fmValue(p.specifiedRange.MaxValue / p.unitFamily.CurrentUnit.Coef).ToString();
                 }
 
                 fmFilterSimulationControl.SetRowBackColor(ParamGrid.Rows[rowIndex], Color.LightBlue);
@@ -68,13 +70,13 @@ namespace FilterSimulation
             Dictionary<fmGlobalParameter, int> rowId = new Dictionary<fmGlobalParameter, int>();
             foreach (fmBlockVariableParameter p in pList)
             {
-                if (p.globalParameter.validRange != null)
+                if (p.globalParameter.specifiedRange != null)
                 {
                     int rowIndex = ParamGrid.Rows.Add(new object[]
                                            {
                                                p.globalParameter.name,
                                                p.globalParameter.unitFamily.CurrentUnit.Name,
-                                               p.globalParameter.validRange.isUnlimited,
+                                               p.globalParameter.specifiedRange.isUnlimited,
                                            });
                     rowId[p.globalParameter] = rowIndex;
                     //if (p.globalParameter.validRange.isUnlimited == false)
@@ -87,7 +89,7 @@ namespace FilterSimulation
                 }
             }
 
-            fmSimulationLimitsBlock smb = new fmSimulationLimitsBlock(
+            smb = new fmSimulationLimitsBlock(
                 ParamGrid[3, rowId[fmGlobalParameter.A]], ParamGrid[4, rowId[fmGlobalParameter.A]], 
                 ParamGrid[3, rowId[fmGlobalParameter.Dp]], ParamGrid[4, rowId[fmGlobalParameter.Dp]], 
                 ParamGrid[3, rowId[fmGlobalParameter.sf]], ParamGrid[4, rowId[fmGlobalParameter.sf]], 
@@ -96,9 +98,9 @@ namespace FilterSimulation
                 );
             foreach (var p in smb.Parameters)
             {
-                p.pMin.value = new fmValue(p.globalParameter.validRange.MinValue);
-                p.pMax.value = new fmValue(p.globalParameter.validRange.MaxValue);
-                p.IsInputed = p.globalParameter.validRange.IsInputed;
+                p.pMin.value = new fmValue(p.globalParameter.specifiedRange.MinValue);
+                p.pMax.value = new fmValue(p.globalParameter.specifiedRange.MaxValue);
+                p.IsInputed = p.globalParameter.specifiedRange.IsInputed;
             }
             smb.Display();
         }
@@ -107,6 +109,11 @@ namespace FilterSimulation
         private void buttonOK_Click(object sender, System.EventArgs e)
 // ReSharper restore InconsistentNaming
         {
+            foreach (var p in fmGlobalParameter.parameters)
+            {
+                p.specifiedRange.IsInputed = false;
+            }
+
             for (int i = 0; i < ParamGrid.Rows.Count; ++i)
             {
                 fmBlockVariableParameter v = new fmFilterMachiningBlock().GetParameterByName(ParamGrid.Rows[i].Cells["ParameterNameColumn"].Value.ToString());
@@ -114,15 +121,19 @@ namespace FilterSimulation
                     ? fmGlobalParameter.parametersByName[ParamGrid.Rows[i].Cells["ParameterNameColumn"].Value.ToString()]
                     : v.globalParameter;
 
+                var parInBlock = smb.GetParameterByName(p.name);
+                p.specifiedRange.IsInputed = parInBlock.IsInputed;
                 if ((bool)ParamGrid.Rows[i].Cells["UnlimitedFlagColumn"].Value == false)
                 {
-                    p.validRange.isUnlimited = false;
-                    p.validRange.MinValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).value * p.unitFamily.CurrentUnit.Coef;
-                    p.validRange.MaxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).value * p.unitFamily.CurrentUnit.Coef;
+                    p.specifiedRange.isUnlimited = false;
+                    //p.specifiedRange.MinValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MinRangeColumn"].Value).value * p.unitFamily.CurrentUnit.Coef;
+                    //p.specifiedRange.MaxValue = fmValue.ObjectToValue(ParamGrid.Rows[i].Cells["MaxRangeColumn"].Value).value * p.unitFamily.CurrentUnit.Coef;
+                    p.specifiedRange.MinValue = parInBlock.pMin.value.value;
+                    p.specifiedRange.MaxValue = parInBlock.pMax.value.value;
                 }
                 else
                 {
-                    p.validRange.isUnlimited = true;
+                    p.specifiedRange.isUnlimited = true;
                 }
             }
             Close();

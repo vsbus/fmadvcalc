@@ -280,13 +280,22 @@ namespace fmCalcBlocksLibrary.Blocks
         }
         private void CalculateAbsRanges()
         {
-            var varList = new List<fmGlobalParameter>
+            var varList = new List<fmGlobalParameter>();
+            //{
+            //  fmGlobalParameter.A,
+            //  fmGlobalParameter.Dp,
+            //  fmGlobalParameter.sf,
+            //  fmGlobalParameter.tc
+            //};
+            foreach (var p in fmGlobalParameter.parameters)
             {
-              fmGlobalParameter.A,
-              fmGlobalParameter.Dp,
-              fmGlobalParameter.sf,
-              fmGlobalParameter.tc
-            };
+                if (p.specifiedRange.IsInputed)
+                {
+                    p.validRange.MinValue = p.specifiedRange.MinValue;
+                    p.validRange.MaxValue = p.specifiedRange.MaxValue;
+                    varList.Add(p);
+                }
+            }
             var machineAdditionalParams = new List<fmGlobalParameter>
             {
                 fmGlobalParameter.d0

@@ -16,6 +16,7 @@ namespace fmCalculationLibrary
             get { return unitFamily.CurrentUnit.Name; }
         }
 
+        public fmDefaultParameterRange specifiedRange;
         public fmDefaultParameterRange validRange;
         public fmRange chartCurretXRange;
 
@@ -211,6 +212,7 @@ namespace fmCalculationLibrary
         {
             this.name = name;
             this.unitFamily = unitFamily;
+            specifiedRange = minMaxRange.isUnlimited ? new fmDefaultParameterRange() : new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
             validRange = minMaxRange.isUnlimited ? new fmDefaultParameterRange() : new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
             chartCurretXRange = minMaxRange.isUnlimited ? new fmRange() : new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
         }
