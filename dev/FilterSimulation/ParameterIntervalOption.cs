@@ -65,6 +65,7 @@ namespace FilterSimulation
                                 fmb.GetParameterByName(fmGlobalParameter.Dp.name),
                                 fmb.GetParameterByName(fmGlobalParameter.sf.name),
                                 fmb.GetParameterByName(fmGlobalParameter.tc.name),
+                                fmb.GetParameterByName(fmGlobalParameter.n.name),
                                 fmb.GetParameterByName(fmGlobalParameter.hc.name)
                             };
             Dictionary<fmGlobalParameter, int> rowId = new Dictionary<fmGlobalParameter, int>();
@@ -93,7 +94,8 @@ namespace FilterSimulation
                 ParamGrid[3, rowId[fmGlobalParameter.A]], ParamGrid[4, rowId[fmGlobalParameter.A]], 
                 ParamGrid[3, rowId[fmGlobalParameter.Dp]], ParamGrid[4, rowId[fmGlobalParameter.Dp]], 
                 ParamGrid[3, rowId[fmGlobalParameter.sf]], ParamGrid[4, rowId[fmGlobalParameter.sf]], 
-                ParamGrid[3, rowId[fmGlobalParameter.tc]], ParamGrid[4, rowId[fmGlobalParameter.tc]], 
+                ParamGrid[3, rowId[fmGlobalParameter.tc]], ParamGrid[4, rowId[fmGlobalParameter.tc]],
+                ParamGrid[3, rowId[fmGlobalParameter.n]], ParamGrid[4, rowId[fmGlobalParameter.n]], 
                 ParamGrid[3, rowId[fmGlobalParameter.hc]], ParamGrid[4, rowId[fmGlobalParameter.hc]]
                 );
             foreach (var p in smb.Parameters)

@@ -24,13 +24,15 @@ namespace SampleForLimitsBlock
             fmDataGrid1.Rows[1].Cells[0].Value = "Dp";
             fmDataGrid1.Rows[2].Cells[0].Value = "sf";
             fmDataGrid1.Rows[3].Cells[0].Value = "tc";
-            fmDataGrid1.Rows[4].Cells[0].Value = "hc";
+            fmDataGrid1.Rows[4].Cells[0].Value = "tc";
+            fmDataGrid1.Rows[5].Cells[0].Value = "hc";
             fmSimulationLimitsBlock fslb = new fmSimulationLimitsBlock(
                 fmDataGrid1.Rows[0].Cells[2], fmDataGrid1.Rows[0].Cells[3],
                 fmDataGrid1.Rows[1].Cells[2], fmDataGrid1.Rows[1].Cells[3],
                 fmDataGrid1.Rows[2].Cells[2], fmDataGrid1.Rows[2].Cells[3],
                 fmDataGrid1.Rows[3].Cells[2], fmDataGrid1.Rows[3].Cells[3],
-                fmDataGrid1.Rows[4].Cells[2], fmDataGrid1.Rows[4].Cells[3]);
+                fmDataGrid1.Rows[4].Cells[2], fmDataGrid1.Rows[4].Cells[3],
+                fmDataGrid1.Rows[5].Cells[2], fmDataGrid1.Rows[5].Cells[3]);
         }
     }
 }
