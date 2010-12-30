@@ -206,6 +206,11 @@ namespace fmCalculationLibrary
             AddParameter(ref rc, new fmGlobalParameter("rc", fmUnitFamily.CakeResistanceRcFamily, new fmRange(0.03e+13, 1000e+13)));
             AddParameter(ref a, new fmGlobalParameter("a", fmUnitFamily.CakeResistanceAFamily, new fmRange(0.03e+10, 1000e+10)));
             AddParameter(ref Rm, new fmGlobalParameter("Rm", fmUnitFamily.FilterMediumResistanceFamily));
+
+            A.specifiedRange.IsInputed = true;
+            Dp.specifiedRange.IsInputed = true;
+            sf.specifiedRange.IsInputed = true;
+            tc.specifiedRange.IsInputed = true;
         }
 
         public fmGlobalParameter(string name, fmUnitFamily unitFamily, fmRange minMaxRange)

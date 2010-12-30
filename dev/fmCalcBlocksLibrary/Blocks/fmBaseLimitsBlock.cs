@@ -128,12 +128,9 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public void UpdateCellBackColor(DataGridViewCell cell, fmBlockParameterGroup group)
         {
-            if (cell != null)
+            if (cell != null && group != null && group.transparent == false)
             {
-                Color color = group == null
-                                 ? Color.White
-                                 : group.color;
-                cell.Style.BackColor = color;
+                cell.Style.BackColor = group.color;
             }
         }
 

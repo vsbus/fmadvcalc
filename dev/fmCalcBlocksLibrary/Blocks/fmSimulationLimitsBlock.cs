@@ -16,7 +16,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockLimitsParameter tc;
         private readonly fmBlockLimitsParameter hc;
 
-        private readonly fmBlockParameterGroup tc_hc_group = new fmBlockParameterGroup(Color.FromArgb(238, 218, 238));
+        private readonly fmBlockParameterGroup tc_hc_group = new fmBlockParameterGroup(Color.FromArgb(238, 218, 238), true);
 
         public fmValue A_min_value
         {
