@@ -29,12 +29,12 @@ namespace FilterSimulation
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationControl));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             this.byCheckingProjectsCheckBox = new System.Windows.Forms.CheckBox();
             this.byCheckingSuspensionsCheckBox = new System.Windows.Forms.CheckBox();
             this.byCheckingSimSeriesCheckBox = new System.Windows.Forms.CheckBox();
@@ -57,8 +57,6 @@ namespace FilterSimulation
             this.epsKappaParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.epsKappaUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.liquidDataGrid = new fmDataGrid.fmDataGrid();
-            this.liquidParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.liquidParameterUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.simulationOptionsGroupBox = new System.Windows.Forms.Panel();
             this.calculationOptionChangeButton = new System.Windows.Forms.Button();
@@ -225,6 +223,9 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.liquidParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.liquidParameterUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLeft.SuspendLayout();
             this.suspensionParametersAndCalcOptionsPanel.SuspendLayout();
             this.suspensionParametersPanel.SuspendLayout();
@@ -252,6 +253,7 @@ namespace FilterSimulation
             this.panel5.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelMain.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // byCheckingProjectsCheckBox
@@ -360,8 +362,7 @@ namespace FilterSimulation
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel6.Controls.Add(this.calculateLimitsCheckBox);
             this.panel6.Controls.Add(this.commonCalcBlockDataGrid);
-            this.panel6.Controls.Add(this.eps0Kappa0Pc0Rc0Alpha0DataGrid);
-            this.panel6.Controls.Add(this.liquidDataGrid);
+            this.panel6.Controls.Add(this.panel7);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(100, 0);
             this.panel6.Name = "panel6";
@@ -371,7 +372,7 @@ namespace FilterSimulation
             // calculateLimitsCheckBox
             // 
             this.calculateLimitsCheckBox.AutoSize = true;
-            this.calculateLimitsCheckBox.Location = new System.Drawing.Point(608, 1);
+            this.calculateLimitsCheckBox.Location = new System.Drawing.Point(462, 1);
             this.calculateLimitsCheckBox.Name = "calculateLimitsCheckBox";
             this.calculateLimitsCheckBox.Size = new System.Drawing.Size(52, 17);
             this.calculateLimitsCheckBox.TabIndex = 14;
@@ -398,7 +399,7 @@ namespace FilterSimulation
             this.commonCalcBlockDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.commonCalcBlockDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.commonCalcBlockDataGrid.HighLightCurrentRow = false;
-            this.commonCalcBlockDataGrid.Location = new System.Drawing.Point(355, 0);
+            this.commonCalcBlockDataGrid.Location = new System.Drawing.Point(205, 0);
             this.commonCalcBlockDataGrid.Name = "commonCalcBlockDataGrid";
             this.commonCalcBlockDataGrid.RowHeadersVisible = false;
             this.commonCalcBlockDataGrid.RowTemplate.Height = 18;
@@ -469,14 +470,14 @@ namespace FilterSimulation
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.epsKappaParameterName,
             this.epsKappaUnits});
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Dock = System.Windows.Forms.DockStyle.Left;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.HighLightCurrentRow = false;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Location = new System.Drawing.Point(161, 0);
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Location = new System.Drawing.Point(0, 134);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Name = "eps0Kappa0Pc0Rc0Alpha0DataGrid";
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowHeadersVisible = false;
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowTemplate.Height = 16;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Size = new System.Drawing.Size(194, 175);
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Size = new System.Drawing.Size(205, 41);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.TabIndex = 12;
             // 
             // epsKappaParameterName
@@ -506,33 +507,15 @@ namespace FilterSimulation
             this.liquidDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.liquidParameterName,
             this.liquidParameterUnits});
-            this.liquidDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
+            this.liquidDataGrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.liquidDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.liquidDataGrid.HighLightCurrentRow = false;
             this.liquidDataGrid.Location = new System.Drawing.Point(0, 0);
             this.liquidDataGrid.Name = "liquidDataGrid";
             this.liquidDataGrid.RowHeadersVisible = false;
             this.liquidDataGrid.RowTemplate.Height = 16;
-            this.liquidDataGrid.Size = new System.Drawing.Size(161, 175);
+            this.liquidDataGrid.Size = new System.Drawing.Size(205, 134);
             this.liquidDataGrid.TabIndex = 5;
-            // 
-            // liquidParameterName
-            // 
-            this.liquidParameterName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.liquidParameterName.HeaderText = "Parameter";
-            this.liquidParameterName.Name = "liquidParameterName";
-            this.liquidParameterName.ReadOnly = true;
-            this.liquidParameterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.liquidParameterName.Width = 61;
-            // 
-            // liquidParameterUnits
-            // 
-            this.liquidParameterUnits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.liquidParameterUnits.HeaderText = "Units";
-            this.liquidParameterUnits.Name = "liquidParameterUnits";
-            this.liquidParameterUnits.ReadOnly = true;
-            this.liquidParameterUnits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.liquidParameterUnits.Width = 37;
             // 
             // splitter6
             // 
@@ -661,14 +644,14 @@ namespace FilterSimulation
             this.simSeriesDataGrid.HighLightCurrentRow = true;
             this.simSeriesDataGrid.Location = new System.Drawing.Point(0, 20);
             this.simSeriesDataGrid.Name = "simSeriesDataGrid";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.simSeriesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.simSeriesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.simSeriesDataGrid.RowHeadersVisible = false;
             this.simSeriesDataGrid.RowTemplate.Height = 18;
             this.simSeriesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -877,14 +860,14 @@ namespace FilterSimulation
             this.suspensionDataGrid.HighLightCurrentRow = true;
             this.suspensionDataGrid.Location = new System.Drawing.Point(0, 20);
             this.suspensionDataGrid.Name = "suspensionDataGrid";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.suspensionDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.suspensionDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.suspensionDataGrid.RowHeadersVisible = false;
             this.suspensionDataGrid.RowTemplate.Height = 18;
             this.suspensionDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -1042,14 +1025,14 @@ namespace FilterSimulation
             this.machineTypesDataGrid.HighLightCurrentRow = false;
             this.machineTypesDataGrid.Location = new System.Drawing.Point(-1, 20);
             this.machineTypesDataGrid.Name = "machineTypesDataGrid";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.machineTypesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.machineTypesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.machineTypesDataGrid.RowHeadersVisible = false;
             this.machineTypesDataGrid.RowTemplate.Height = 18;
             this.machineTypesDataGrid.Size = new System.Drawing.Size(113, 56);
@@ -1101,14 +1084,14 @@ namespace FilterSimulation
             this.projectDataGrid.HighLightCurrentRow = true;
             this.projectDataGrid.Location = new System.Drawing.Point(0, 20);
             this.projectDataGrid.Name = "projectDataGrid";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.projectDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.projectDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.projectDataGrid.RowHeadersVisible = false;
             this.projectDataGrid.RowTemplate.Height = 18;
             this.projectDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -1310,14 +1293,14 @@ namespace FilterSimulation
             this.simulationDataGrid.HighLightCurrentRow = true;
             this.simulationDataGrid.Location = new System.Drawing.Point(0, 20);
             this.simulationDataGrid.Name = "simulationDataGrid";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.simulationDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.simulationDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.simulationDataGrid.RowHeadersVisible = false;
             this.simulationDataGrid.RowTemplate.Height = 18;
             this.simulationDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -2055,6 +2038,34 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
             // 
+            // panel7
+            // 
+            this.panel7.Controls.Add(this.eps0Kappa0Pc0Rc0Alpha0DataGrid);
+            this.panel7.Controls.Add(this.liquidDataGrid);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(0, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(205, 175);
+            this.panel7.TabIndex = 15;
+            // 
+            // liquidParameterName
+            // 
+            this.liquidParameterName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.liquidParameterName.HeaderText = "Parameter";
+            this.liquidParameterName.Name = "liquidParameterName";
+            this.liquidParameterName.ReadOnly = true;
+            this.liquidParameterName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.liquidParameterName.Width = 61;
+            // 
+            // liquidParameterUnits
+            // 
+            this.liquidParameterUnits.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.liquidParameterUnits.HeaderText = "Units";
+            this.liquidParameterUnits.Name = "liquidParameterUnits";
+            this.liquidParameterUnits.ReadOnly = true;
+            this.liquidParameterUnits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.liquidParameterUnits.Width = 65;
+            // 
             // fmFilterSimulationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2096,6 +2107,7 @@ namespace FilterSimulation
             this.panel5.PerformLayout();
             this.panelTop.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -2162,8 +2174,6 @@ namespace FilterSimulation
         protected System.Windows.Forms.Panel suspensionParametersPanel;
         protected System.Windows.Forms.Splitter splitter4;
         protected System.Windows.Forms.Button simSeriesDuplicateButton;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterName;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterUnits;
         protected fmDataGrid.fmDataGrid eps0Kappa0Pc0Rc0Alpha0DataGrid;
         protected System.Windows.Forms.RadioButton meterialInputSerieRadioButton;
         protected System.Windows.Forms.RadioButton meterialInputSimualationRadioButton;
@@ -2292,5 +2302,8 @@ namespace FilterSimulation
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_PcColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_rcColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_aColumn;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterUnits;
     }
 }
