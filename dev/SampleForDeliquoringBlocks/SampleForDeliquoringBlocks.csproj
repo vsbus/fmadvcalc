@@ -84,6 +84,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\fmCalcBlocksLibrary\fmCalcBlocksLibrary.csproj">
+      <Project>{A9AFDCE0-9E84-4AF7-86A9-71A9D528721F}</Project>
+      <Name>fmCalcBlocksLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\fmDataGrid\fmDataGrid.csproj">
       <Project>{30A5CD2D-C64C-402B-A957-3885E498A97C}</Project>
       <Name>fmDataGrid</Name>

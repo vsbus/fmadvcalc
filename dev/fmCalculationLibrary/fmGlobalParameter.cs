@@ -103,6 +103,12 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter C;
         public static fmGlobalParameter eta_f;
         public static fmGlobalParameter nc;
+        #region Deliquoring
+        public static fmGlobalParameter Dp_d;
+        public static fmGlobalParameter eps0_d;
+        public static fmGlobalParameter eps_d;
+        public static fmGlobalParameter ne_d;
+        #endregion
         // ReSharper restore InconsistentNaming
 
         public static List<fmGlobalParameter> parameters = new List<fmGlobalParameter>();
@@ -206,6 +212,13 @@ namespace fmCalculationLibrary
             AddParameter(ref rc, new fmGlobalParameter("rc", fmUnitFamily.CakeResistanceRcFamily, new fmRange(0.03e+13, 1000e+13)));
             AddParameter(ref a, new fmGlobalParameter("a", fmUnitFamily.CakeResistanceAFamily, new fmRange(0.03e+10, 1000e+10)));
             AddParameter(ref Rm, new fmGlobalParameter("Rm", fmUnitFamily.FilterMediumResistanceFamily));
+
+            #region Deliquoring
+            AddParameter(ref Dp_d, new fmGlobalParameter("Dpd", fmUnitFamily.PressureFamily));
+            AddParameter(ref eps0_d, new fmGlobalParameter("eps0d", fmUnitFamily.ConcentrationFamily));
+            AddParameter(ref eps_d, new fmGlobalParameter("epsd", fmUnitFamily.ConcentrationFamily));
+            AddParameter(ref ne_d, new fmGlobalParameter("ned", fmUnitFamily.NoUnitFamily));
+            #endregion
 
             A.specifiedRange.IsInputed = true;
             Dp.specifiedRange.IsInputed = true;
