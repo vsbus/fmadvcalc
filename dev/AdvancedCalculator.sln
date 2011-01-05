@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleForBlocks", "SampleFo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleForLimitsBlock", "SampleForLimitsBlock\SampleForLimitsBlock.csproj", "{1A946535-8FA6-4481-907E-B113EFB84856}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleForDeliquoringBlocks", "SampleForDeliquoringBlocks\SampleForDeliquoringBlocks.csproj", "{C781AEC5-3394-4B47-A61F-05FAF8C36362}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,10 @@ Global
 		{1A946535-8FA6-4481-907E-B113EFB84856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A946535-8FA6-4481-907E-B113EFB84856}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A946535-8FA6-4481-907E-B113EFB84856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C781AEC5-3394-4B47-A61F-05FAF8C36362}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C781AEC5-3394-4B47-A61F-05FAF8C36362}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C781AEC5-3394-4B47-A61F-05FAF8C36362}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C781AEC5-3394-4B47-A61F-05FAF8C36362}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -89,16 +89,6 @@ namespace fmCalculationLibrary.Equations
             return tf / tc;
         }
 
-        public static fmValue Eval_eps_From_eps0_Dp_ne(fmValue eps0, fmValue Dp, fmValue ne)
-        {
-            return eps0 * fmValue.Pow(Dp / 1e5, -ne);
-        }
-
-        public static fmValue Eval_Pc_From_Pc0_Dp_nc(fmValue Pc0, fmValue Dp, fmValue nc)
-        {
-            return Pc0 * fmValue.Pow(Dp / 1e5, -nc);
-        }
-
         public static fmValue Eval_Dp_From_etaf_Cv_Pc0_nc_eps0_ne_hc_hce_tf(fmValue eta_f, fmValue Cv, fmValue Pc0, fmValue nc, fmValue eps0, fmValue ne, fmValue hc, fmValue hce, fmValue tf)
         {
             fmValue p1 = nc - 1;

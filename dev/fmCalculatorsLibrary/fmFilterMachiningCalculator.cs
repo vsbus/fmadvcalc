@@ -214,9 +214,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -611,9 +611,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -1007,9 +1007,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -1394,9 +1394,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -2100,9 +2100,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -2576,9 +2576,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -3053,9 +3053,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -3522,9 +3522,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0];
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -3946,9 +3946,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
             tf.value = fmFilterMachiningEquations.Eval_tf_From_etaf_hc_hce_Pc_kappa_Dp(eta_f.value, hc.value, hce.value, Pc.value, kappa.value, Dp.value);
@@ -4053,9 +4053,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -4149,9 +4149,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
@@ -4223,7 +4223,7 @@ namespace fmCalculatorsLibrary
                 if (hc.isInputed)
                 {
                     Dp.value = fmFilterMachiningEquations.Eval_Dp_From_etaf_Cv_Pc0_nc_eps0_ne_hc_hce_tf(eta_f.value, Cv.value, Pc0.value, nc.value, eps0.value, ne.value, hc.value, hce.value, tf.value);
-                    eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+                    eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
                     kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
                     Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
                     Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
@@ -4270,7 +4270,7 @@ namespace fmCalculatorsLibrary
                 else
                     throw GenerateExceptionForGroupWithoutInput(hc, Vf, Mf, Vsus, Msus, Vs, Ms);
 
-                Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+                Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
                 rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
                 a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
             }
@@ -4302,7 +4302,7 @@ namespace fmCalculatorsLibrary
             // ReSharper restore InconsistentNaming
 
             Dp.value = fmFilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vsus(nc.value, ne.value, eta_f.value, A.value, tf.value, Cv.value, eps0.value, Pc0.value, hce.value, Vsus.value);
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
             Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
@@ -4334,7 +4334,7 @@ namespace fmCalculatorsLibrary
             // ReSharper restore InconsistentNaming
 
             Dp.value = fmFilterMachiningEquations.Eval_Dp_From_nc_ne_etaf_A_tf_Cv_eps0_Pc0_hce_Vf(nc.value, ne.value, eta_f.value, A.value, tf.value, Cv.value, eps0.value, Pc0.value, hce.value, Vf.value);
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vf_kappa(A.value, Vf.value, kappa.value);
             Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
@@ -4414,9 +4414,9 @@ namespace fmCalculatorsLibrary
             var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             // ReSharper restore InconsistentNaming
 
-            eps.value = fmFilterMachiningEquations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
+            eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
-            Pc.value = fmFilterMachiningEquations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
+            Pc.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp.value, nc.value);
             rc.value = fmPcrcaEquations.Eval_rc_From_Pc(Pc.value);
             a.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(Pc.value, eps.value, rho_s.value);
 
