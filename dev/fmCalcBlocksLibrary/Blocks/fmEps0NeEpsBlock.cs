@@ -59,7 +59,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref Dp, fmGlobalParameter.Dp, Dp_Cell, true);
             AddParameter(ref eps0, fmGlobalParameter.eps0, eps0_Cell, true);
             AddParameter(ref ne, fmGlobalParameter.ne, ne_Cell, true);
-            AddParameter(ref eps, fmGlobalParameter.eps, eps_Cell, true);
+            AddParameter(ref eps, fmGlobalParameter.eps, eps_Cell, false);
 
             Dp.group = Dp_group;
 

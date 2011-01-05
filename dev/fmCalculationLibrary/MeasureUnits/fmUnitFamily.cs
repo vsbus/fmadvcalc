@@ -29,6 +29,7 @@ namespace fmCalculationLibrary.MeasureUnits
         public static fmUnitFamily SpecificVolumeFamily = new fmUnitFamily();
         public static fmUnitFamily SpecificFlowRateVolume = new fmUnitFamily();
         public static fmUnitFamily SpecificFlowRateMass = new fmUnitFamily();
+        public static fmUnitFamily SurfaceTensionFamily = new fmUnitFamily();
         // ReSharper restore InconsistentNaming
         
         private int m_currentIndex;
@@ -102,6 +103,9 @@ namespace fmCalculationLibrary.MeasureUnits
 
             SpecificFlowRateMass.units.Add(new fmUnit("kg/m2min", 1.0/60));
             SpecificFlowRateMass.units.Add(new fmUnit("kg/m2s", 1));
+
+            SurfaceTensionFamily.units.Add(new fmUnit("N/m", 1));
+            SurfaceTensionFamily.units.Add(new fmUnit("10-3 N/m", 1e-3));
         }
 
         public fmUnit CurrentUnit

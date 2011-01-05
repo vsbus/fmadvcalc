@@ -113,6 +113,11 @@ namespace fmCalculationLibrary
 
         public static fmValue ObjectToValue(object obj)
         {
+            if (obj == null)
+            {
+                return new fmValue();
+            }
+
             if (obj.GetType() == typeof(string))
             {
                 return StringToValue(Convert.ToString(obj));

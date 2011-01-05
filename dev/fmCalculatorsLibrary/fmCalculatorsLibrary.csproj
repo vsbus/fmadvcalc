@@ -50,6 +50,7 @@
     <Compile Include="fmPcrcaCalculator.cs" />
     <Compile Include="fmRm0hceCalculator.cs" />
     <Compile Include="fmRmhceCalculator.cs" />
+    <Compile Include="fmSigmaPke0PkePcdRcdAlphadCalculator.cs" />
     <Compile Include="fmSuspensionCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

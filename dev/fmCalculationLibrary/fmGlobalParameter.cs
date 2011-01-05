@@ -21,6 +21,7 @@ namespace fmCalculationLibrary
         public fmRange chartCurretXRange;
 
         // ReSharper disable InconsistentNaming
+        #region CakeFormation
         public static fmGlobalParameter A;
         public static fmGlobalParameter d0;
         public static fmGlobalParameter Dp;
@@ -103,11 +104,18 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter C;
         public static fmGlobalParameter eta_f;
         public static fmGlobalParameter nc;
+        #endregion
         #region Deliquoring
         public static fmGlobalParameter Dp_d;
         public static fmGlobalParameter eps0_d;
         public static fmGlobalParameter eps_d;
         public static fmGlobalParameter ne_d;
+        public static fmGlobalParameter sigma;
+        public static fmGlobalParameter pke0;
+        public static fmGlobalParameter pke;
+        public static fmGlobalParameter pc_d;
+        public static fmGlobalParameter rc_d;
+        public static fmGlobalParameter alpha_d;
         #endregion
         // ReSharper restore InconsistentNaming
 
@@ -218,6 +226,12 @@ namespace fmCalculationLibrary
             AddParameter(ref eps0_d, new fmGlobalParameter("eps0d", fmUnitFamily.ConcentrationFamily));
             AddParameter(ref eps_d, new fmGlobalParameter("epsd", fmUnitFamily.ConcentrationFamily));
             AddParameter(ref ne_d, new fmGlobalParameter("ned", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref sigma, new fmGlobalParameter("sigma", fmUnitFamily.SurfaceTensionFamily));
+            AddParameter(ref pke0, new fmGlobalParameter("pke0", fmUnitFamily.PressureFamily));
+            AddParameter(ref pke, new fmGlobalParameter("pke", fmUnitFamily.PressureFamily));
+            AddParameter(ref pc_d, new fmGlobalParameter("pcd", fmUnitFamily.PermeabilityFamily));
+            AddParameter(ref rc_d, new fmGlobalParameter("rcd", fmUnitFamily.CakeResistanceRcFamily));
+            AddParameter(ref alpha_d, new fmGlobalParameter("alphad", fmUnitFamily.CakeResistanceAFamily));
             #endregion
 
             A.specifiedRange.IsInputed = true;

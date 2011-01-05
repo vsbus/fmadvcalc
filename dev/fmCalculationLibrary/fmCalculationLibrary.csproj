@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="AGLibrary\ap.cs" />
     <Compile Include="AGLibrary\autogk61.cs" />
+    <Compile Include="Equations\fmDeliquoringEquations.cs" />
     <Compile Include="Equations\fmEpsKappaEquations.cs" />
     <Compile Include="Equations\fmEpsPcFrom0Equations.cs" />
     <Compile Include="Equations\fmFilterMachiningEquations.cs" />
