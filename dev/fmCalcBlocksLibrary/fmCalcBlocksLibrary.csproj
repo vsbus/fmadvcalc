@@ -53,6 +53,7 @@
     <Compile Include="Blocks\fmFilterMachiningBlockWithLimits.cs" />
     <Compile Include="Blocks\fmSigmaPke0PkePcdRcdAlphadBlock.cs" />
     <Compile Include="Blocks\fmSimulationLimitsBlock.cs" />
+    <Compile Include="Blocks\fmSremTettaAdAgDHRmMmolefReqBlock.cs" />
     <Compile Include="Controls\fmCalculationOptionView.cs">
       <SubType>Component</SubType>
     </Compile>

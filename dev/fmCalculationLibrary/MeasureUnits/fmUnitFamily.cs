@@ -30,6 +30,9 @@ namespace fmCalculationLibrary.MeasureUnits
         public static fmUnitFamily SpecificFlowRateVolume = new fmUnitFamily();
         public static fmUnitFamily SpecificFlowRateMass = new fmUnitFamily();
         public static fmUnitFamily SurfaceTensionFamily = new fmUnitFamily();
+        public static fmUnitFamily TemperatureCelsius = new fmUnitFamily();
+        public static fmUnitFamily EvaporationEnthalpyFamily = new fmUnitFamily();
+        public static fmUnitFamily MolarMassFamily = new fmUnitFamily();
         // ReSharper restore InconsistentNaming
         
         private int m_currentIndex;
@@ -106,6 +109,12 @@ namespace fmCalculationLibrary.MeasureUnits
 
             SurfaceTensionFamily.units.Add(new fmUnit("N/m", 1));
             SurfaceTensionFamily.units.Add(new fmUnit("10-3 N/m", 1e-3));
+
+            TemperatureCelsius.units.Add(new fmUnit("C°", 1));
+
+            EvaporationEnthalpyFamily.units.Add(new fmUnit("KJ/mole", 1e3));
+            
+            MolarMassFamily.units.Add(new fmUnit("g/mole", 1e-3));
         }
 
         public fmUnit CurrentUnit

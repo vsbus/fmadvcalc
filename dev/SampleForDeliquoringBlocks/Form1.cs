@@ -29,7 +29,7 @@ namespace SampleForDeliquoringBlocks
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            fmDataGrid1.RowCount = 20;
+            fmDataGrid1.RowCount = 40;
 
             WriteParameter(0, fmGlobalParameter.Dp);
             WriteParameter(1, fmGlobalParameter.Dp_d);
@@ -60,6 +60,33 @@ namespace SampleForDeliquoringBlocks
                 fmDataGrid1.Rows[10].Cells[2]);
 
             WriteParameter(11, fmGlobalParameter.Srem);
+            WriteParameter(12, fmGlobalParameter.ad1);
+            WriteParameter(13, fmGlobalParameter.ad2);
+            WriteParameter(14, fmGlobalParameter.Tetta);
+            WriteParameter(15, fmGlobalParameter.eta_g);
+            WriteParameter(16, fmGlobalParameter.ag1);
+            WriteParameter(17, fmGlobalParameter.ag2);
+            WriteParameter(18, fmGlobalParameter.ag3);
+            WriteParameter(19, fmGlobalParameter.Tetta_boil);
+            WriteParameter(20, fmGlobalParameter.DH);
+            WriteParameter(21, fmGlobalParameter.Mmole);
+            WriteParameter(22, fmGlobalParameter.f);
+            WriteParameter(23, fmGlobalParameter.peq);
+
+            var block3 = new fmSremTettaAdAgDHRmMmolefReqBlock(
+                fmDataGrid1.Rows[11].Cells[2],
+                fmDataGrid1.Rows[12].Cells[2],
+                fmDataGrid1.Rows[13].Cells[2],
+                fmDataGrid1.Rows[14].Cells[2],
+                fmDataGrid1.Rows[15].Cells[2],
+                fmDataGrid1.Rows[16].Cells[2],
+                fmDataGrid1.Rows[17].Cells[2],
+                fmDataGrid1.Rows[18].Cells[2],
+                fmDataGrid1.Rows[19].Cells[2],
+                fmDataGrid1.Rows[20].Cells[2],
+                fmDataGrid1.Rows[21].Cells[2],
+                fmDataGrid1.Rows[22].Cells[2],
+                fmDataGrid1.Rows[23].Cells[2]);
         }
 
         private void timer1_Tick(object sender, EventArgs e)

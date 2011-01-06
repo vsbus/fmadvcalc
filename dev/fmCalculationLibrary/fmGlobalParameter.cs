@@ -116,6 +116,19 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter pc_d;
         public static fmGlobalParameter rc_d;
         public static fmGlobalParameter alpha_d;
+        public static fmGlobalParameter Srem;
+        public static fmGlobalParameter ad1;
+        public static fmGlobalParameter ad2;
+        public static fmGlobalParameter Tetta;
+        public static fmGlobalParameter eta_g;
+        public static fmGlobalParameter ag1;
+        public static fmGlobalParameter ag2;
+        public static fmGlobalParameter ag3;
+        public static fmGlobalParameter Tetta_boil;
+        public static fmGlobalParameter DH;
+        public static fmGlobalParameter Mmole;
+        public static fmGlobalParameter f;
+        public static fmGlobalParameter peq;
         #endregion
         // ReSharper restore InconsistentNaming
 
@@ -232,6 +245,19 @@ namespace fmCalculationLibrary
             AddParameter(ref pc_d, new fmGlobalParameter("pcd", fmUnitFamily.PermeabilityFamily));
             AddParameter(ref rc_d, new fmGlobalParameter("rcd", fmUnitFamily.CakeResistanceRcFamily));
             AddParameter(ref alpha_d, new fmGlobalParameter("alphad", fmUnitFamily.CakeResistanceAFamily));
+            AddParameter(ref Srem, new fmGlobalParameter("Srem", fmUnitFamily.ConcentrationFamily));
+            AddParameter(ref ad1, new fmGlobalParameter("ad1", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref ad2, new fmGlobalParameter("ad2", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Tetta, new fmGlobalParameter("Tetta", fmUnitFamily.TemperatureCelsius));
+            AddParameter(ref eta_g, new fmGlobalParameter("eta_g", fmUnitFamily.ViscosityFamily));
+            AddParameter(ref ag1, new fmGlobalParameter("ag1", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref ag2, new fmGlobalParameter("ag2", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref ag3, new fmGlobalParameter("ag3", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Tetta_boil, new fmGlobalParameter("Tetta_boil", fmUnitFamily.TemperatureCelsius));
+            AddParameter(ref DH, new fmGlobalParameter("DH", fmUnitFamily.EvaporationEnthalpyFamily));
+            AddParameter(ref Mmole, new fmGlobalParameter("Mmole", fmUnitFamily.MolarMassFamily));
+            AddParameter(ref f, new fmGlobalParameter("f", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref peq, new fmGlobalParameter("peq", fmUnitFamily.PressureFamily));
             #endregion
 
             A.specifiedRange.IsInputed = true;
