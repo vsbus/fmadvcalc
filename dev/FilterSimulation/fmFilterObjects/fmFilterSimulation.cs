@@ -162,6 +162,9 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vc));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mc));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vs));
+
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps_d));
         }
 
         public List<fmGlobalParameter> GetParametersThatCanBeInputedList()
@@ -409,6 +412,7 @@ namespace FilterSimulation.fmFilterObjects
         public fmPc0Rc0A0WithncBlock pc0Rc0A0Block;
         public fmRm0HceBlock rm0HceBlock;
         public fmEps0NeEpsBlock deliquoringEps0NeEpsBlock;
+        public fmSigmaPke0PkePcdRcdAlphadBlock deliquoringSigmaPkeBlock;
         public fmFilterMachiningBlock filterMachiningBlock;
 
         public Guid Guid { get; set; }
