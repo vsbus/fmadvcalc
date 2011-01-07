@@ -100,6 +100,7 @@ namespace FilterSimulation
             DisplayMachineTypes();
             CreateLiquidTable();
             CreateEps0Kappa0Pc0Rc0Alpha0Rm0HceTable();
+            CreateDeliquoringMaterialParametersTable();
             UpdateUnitsAndData();
             fullSimulationInfoCheckBox_CheckedChanged(null, new EventArgs());
 
@@ -183,6 +184,35 @@ namespace FilterSimulation
             InitializeHeaderCheckBox();
 
             LimitsCalculationOnOff();
+        }
+
+        private void CreateDeliquoringMaterialParametersTable()
+        {
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { null, null });   // for simulation Guid
+            deliquoringMaterialParametersDataGrid.Rows[0].Visible = false;
+
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.eps0_d.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.ne_d.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.eps_d.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.sigma.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.pke0.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.pke.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.pc_d.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.rc_d.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.alpha_d.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.Srem.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.ad1.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.ad2.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.Tetta.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.eta_g.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.ag1.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.ag2.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.ag3.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.Tetta_boil.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.DH.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.Mmole.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.f.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.peq.name, "" });
         }
 
         private void CreateDefaultListOfParametersForDisplaying()

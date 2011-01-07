@@ -100,8 +100,8 @@ namespace FilterSimulation
             }
 
             DataGridViewColumn liquidCol = m_fSolution.currentObjects.Simulation == null ? null : FindColumnByGuid(liquidDataGrid.Columns, m_fSolution.currentObjects.Simulation.Guid, 0);
-            DataGridViewColumn epsKappaCol = m_fSolution.currentObjects.Simulation == null ? null : FindColumnByGuid(eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns, m_fSolution.currentObjects.Simulation.Guid, 0);
             HideExtraMaterialColumns(liquidDataGrid, liquidCol);
+            DataGridViewColumn epsKappaCol = m_fSolution.currentObjects.Simulation == null ? null : FindColumnByGuid(eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns, m_fSolution.currentObjects.Simulation.Guid, 0);
             HideExtraMaterialColumns(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaCol);
 
             HideExtraRowsInTables(true, true, true, true);
