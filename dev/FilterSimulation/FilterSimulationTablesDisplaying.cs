@@ -750,23 +750,37 @@ namespace FilterSimulation
             }
         }
 
-        static void WriteUnitToHeader(DataGridViewCell cell, fmUnitFamily unitFamily)
+        static void WriteUnitToHeader(DataGridView dg)
         {
-            string parName = cell.Value.ToString().Split('(')[0];
-            for (int i = parName.Length - 1; ; --i)
+            foreach (DataGridViewColumn col in dg.Columns)
             {
-                if (i < 0 || parName[i] != ' ')
+                object obj = col.HeaderCell.Value;
+                if (obj != null)
                 {
-                    parName = parName.Substring(0, i + 1);
-                    break;
+                    string parName = obj.ToString().Split('(')[0].Trim();
+                    if (fmGlobalParameter.parametersByName.ContainsKey(parName))
+                    {
+                        fmGlobalParameter p = fmGlobalParameter.parametersByName[parName];
+                        col.HeaderCell.Value = p.name + " (" + p.unitFamily.CurrentUnit.Name + ")";
+                    }
                 }
             }
-            cell.Value = parName + " (" + unitFamily.CurrentUnit.Name + ")";
         }
 
-        static void WriteUnitsToTable(DataGridView dg, int parameterColumnNameIndex, string parameterName, int unitColumnNameIndex, fmUnitFamily unitFamily)
+        static void WriteUnitsToTable(DataGridView dg, int parameterColumnNameIndex, int unitColumnNameIndex)
         {
-            FindRowByValueInColumn(dg, parameterColumnNameIndex, parameterName).Cells[unitColumnNameIndex].Value = unitFamily.CurrentUnit.Name;
+            foreach (DataGridViewRow row in dg.Rows)
+            {
+                object obj = row.Cells[parameterColumnNameIndex].Value;
+                if (obj != null)
+                {
+                    fmGlobalParameter p = fmGlobalParameter.parametersByName[obj.ToString()];
+                    if (p != null)
+                    {
+                        row.Cells[unitColumnNameIndex].Value = p.unitFamily.CurrentUnit.Name;
+                    }
+                }
+            }
         }
 
         static DataGridViewRow FindRowByValueInColumn(DataGridView dg, int columnIndex, string stringValue)
@@ -784,90 +798,10 @@ namespace FilterSimulation
         {
             StopAllBlockProcessing();
             {
-                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "eta_f", liquidParameterUnits.Index, fmGlobalParameter.eta_f.unitFamily);
-                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "rho_f", liquidParameterUnits.Index, fmGlobalParameter.rho_f.unitFamily);
-                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "rho_s", liquidParameterUnits.Index, fmGlobalParameter.rho_s.unitFamily);
-                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "rho_sus", liquidParameterUnits.Index, fmGlobalParameter.rho_sus.unitFamily);
-                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "Cm", liquidParameterUnits.Index, fmGlobalParameter.Cm.unitFamily);
-                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "Cv", liquidParameterUnits.Index, fmGlobalParameter.Cv.unitFamily);
-                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, "C", liquidParameterUnits.Index, fmGlobalParameter.C.unitFamily);
-
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "eps0", epsKappaUnits.Index, fmGlobalParameter.eps.unitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "kappa0", epsKappaUnits.Index, fmGlobalParameter.kappa.unitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "ne", epsKappaUnits.Index, fmGlobalParameter.ne.unitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Pc0", epsKappaUnits.Index, fmGlobalParameter.Pc.unitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "rc0", epsKappaUnits.Index, fmGlobalParameter.rc.unitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "a0", epsKappaUnits.Index, fmGlobalParameter.a.unitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "nc", epsKappaUnits.Index, fmGlobalParameter.nc.unitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "Rm0", epsKappaUnits.Index, fmGlobalParameter.Rm.unitFamily);
-                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, "hce0", epsKappaUnits.Index, fmGlobalParameter.hce0.unitFamily);
-
-                WriteUnitToHeader(simulationDataGrid.Columns[simulationFilterAreaColumn.Index].HeaderCell, fmGlobalParameter.A.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulationFilterDiameterColumn.Index].HeaderCell, fmGlobalParameter.d0.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_DpColumn.Index].HeaderCell, fmGlobalParameter.Dp.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_nColumn.Index].HeaderCell, fmGlobalParameter.n.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_tcColumn.Index].HeaderCell, fmGlobalParameter.tc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_tfColumn.Index].HeaderCell, fmGlobalParameter.tf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_trColumn.Index].HeaderCell, fmGlobalParameter.tr.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_hc_over_tfColumn.Index].HeaderCell, fmGlobalParameter.hc_over_tf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_dhc_over_dtColumn.Index].HeaderCell, fmGlobalParameter.dhc_over_dt.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_hcColumn.Index].HeaderCell, fmGlobalParameter.hc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_MfColumn.Index].HeaderCell, fmGlobalParameter.Mf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_VfColumn.Index].HeaderCell, fmGlobalParameter.Vf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_mf_Column.Index].HeaderCell, fmGlobalParameter.mf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_vf_Column.Index].HeaderCell, fmGlobalParameter.vf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_ms_Column.Index].HeaderCell, fmGlobalParameter.ms.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_vs_Column.Index].HeaderCell, fmGlobalParameter.vs.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_msus_Column.Index].HeaderCell, fmGlobalParameter.msus.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_vsus_Column.Index].HeaderCell, fmGlobalParameter.vsus.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_mc_Column.Index].HeaderCell, fmGlobalParameter.mc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_vc_Column.Index].HeaderCell, fmGlobalParameter.vc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsusColumn.Index].HeaderCell, fmGlobalParameter.Msus.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_VsusColumn.Index].HeaderCell, fmGlobalParameter.Vsus.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_VsColumn.Index].HeaderCell, fmGlobalParameter.Vs.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_VcColumn.Index].HeaderCell, fmGlobalParameter.Vc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_McColumn.Index].HeaderCell, fmGlobalParameter.Mc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_MsColumn.Index].HeaderCell, fmGlobalParameter.Ms.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QfColumn.Index].HeaderCell, fmGlobalParameter.Qf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_Qf_dColumn.Index].HeaderCell, fmGlobalParameter.Qf_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_Qs_dColumn.Index].HeaderCell, fmGlobalParameter.Qs_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_Qc_dColumn.Index].HeaderCell, fmGlobalParameter.Qc_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_Qsus_dColumn.Index].HeaderCell, fmGlobalParameter.Qsus_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QsColumn.Index].HeaderCell, fmGlobalParameter.Qs.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QcColumn.Index].HeaderCell, fmGlobalParameter.Qc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QsusColumn.Index].HeaderCell, fmGlobalParameter.Qsus.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QmsusColumn.Index].HeaderCell, fmGlobalParameter.Qmsus.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_Qmsus_dColumn.Index].HeaderCell, fmGlobalParameter.Qmsus_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QmsColumn.Index].HeaderCell, fmGlobalParameter.Qms.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_Qms_dColumn.Index].HeaderCell, fmGlobalParameter.Qms_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QmfColumn.Index].HeaderCell, fmGlobalParameter.Qmf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_Qmf_dColumn.Index].HeaderCell, fmGlobalParameter.Qmf_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_QmcColumn.Index].HeaderCell, fmGlobalParameter.Qmc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_Qmc_dColumn.Index].HeaderCell, fmGlobalParameter.Qmc_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qf_Column.Index].HeaderCell, fmGlobalParameter.qf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qf_d_Column.Index].HeaderCell, fmGlobalParameter.qf_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qs_d_Column.Index].HeaderCell, fmGlobalParameter.qs_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qc_d_Column.Index].HeaderCell, fmGlobalParameter.qc_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qsus_d_Column.Index].HeaderCell, fmGlobalParameter.qsus_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qs_Column.Index].HeaderCell, fmGlobalParameter.qs.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qc_Column.Index].HeaderCell, fmGlobalParameter.qc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qsus_Column.Index].HeaderCell, fmGlobalParameter.qsus.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qmsus_Column.Index].HeaderCell, fmGlobalParameter.qmsus.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qmsus_d_Column.Index].HeaderCell, fmGlobalParameter.qmsus_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qms_Column.Index].HeaderCell, fmGlobalParameter.qms.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qms_d_Column.Index].HeaderCell, fmGlobalParameter.qms_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qmf_Column.Index].HeaderCell, fmGlobalParameter.qmf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qmf_d_Column.Index].HeaderCell, fmGlobalParameter.qmf_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qmc_Column.Index].HeaderCell, fmGlobalParameter.qmc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_qmc_d_Column.Index].HeaderCell, fmGlobalParameter.qmc_d.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_sfColumn.Index].HeaderCell, fmGlobalParameter.sf.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_srColumn.Index].HeaderCell, fmGlobalParameter.sr.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_epsColumn.Index].HeaderCell, fmGlobalParameter.eps.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_kappaColumn.Index].HeaderCell, fmGlobalParameter.kappa.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_PcColumn.Index].HeaderCell, fmGlobalParameter.Pc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_rcColumn.Index].HeaderCell, fmGlobalParameter.rc.unitFamily);
-                WriteUnitToHeader(simulationDataGrid.Columns[simulation_aColumn.Index].HeaderCell, fmGlobalParameter.a.unitFamily);
-
+                WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, liquidParameterUnits.Index);
+                WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, epsKappaUnits.Index);
+                WriteUnitToHeader(simulationDataGrid);
+                
                 UpdateUnitsOfCommonFilterMachiningBlock();
             }
             ResumeAllBlockProcessing();
