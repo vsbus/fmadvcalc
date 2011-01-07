@@ -103,6 +103,8 @@ namespace FilterSimulation
             HideExtraMaterialColumns(liquidDataGrid, liquidCol);
             DataGridViewColumn epsKappaCol = m_fSolution.currentObjects.Simulation == null ? null : FindColumnByGuid(eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns, m_fSolution.currentObjects.Simulation.Guid, 0);
             HideExtraMaterialColumns(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaCol);
+            DataGridViewColumn deliqMaterialCol = m_fSolution.currentObjects.Simulation == null ? null : FindColumnByGuid(deliquoringMaterialParametersDataGrid.Columns, m_fSolution.currentObjects.Simulation.Guid, 0);
+            HideExtraMaterialColumns(deliquoringMaterialParametersDataGrid, deliqMaterialCol);
 
             HideExtraRowsInTables(true, true, true, true);
         }
@@ -158,6 +160,7 @@ namespace FilterSimulation
             {
                 FindColumnByGuid(liquidDataGrid.Columns, sim.Guid, 0);
                 FindColumnByGuid(eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns, sim.Guid, 0);
+                FindColumnByGuid(deliquoringMaterialParametersDataGrid.Columns, sim.Guid, 0);
             }
         }
 
@@ -272,6 +275,19 @@ namespace FilterSimulation
 
                     sim.rm0HceBlock.ValuesChanged += rmHceBlock_ValuesChanged;
                     sim.rm0HceBlock.ValuesChangedByUser += rm0HceBlock_ValuesChangedByUser;
+                }
+
+                DataGridViewColumn deliquoringMaterialCol = FindColumnByGuid(deliquoringMaterialParametersDataGrid.Columns, sim.Guid, 0);
+                if (sim.deliquoringEps0NeEpsBlock == null)
+                {
+                    sim.deliquoringEps0NeEpsBlock = new fmEps0NeEpsBlock(
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Dp_d.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps0_d.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ne_d.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps_d.name).Cells[deliquoringMaterialCol.Index]);
+
+                    sim.deliquoringEps0NeEpsBlock.ValuesChanged += susBlock_ValuesChanged;
+                    sim.deliquoringEps0NeEpsBlock.ValuesChangedByUser += susBlock_ValuesChangedByUser;
                 }
 
                 DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, simulationGuidColumn.Index);
@@ -800,6 +816,7 @@ namespace FilterSimulation
             {
                 WriteUnitsToTable(liquidDataGrid, liquidParameterName.Index, liquidParameterUnits.Index);
                 WriteUnitsToTable(eps0Kappa0Pc0Rc0Alpha0DataGrid, epsKappaParameterName.Index, epsKappaUnits.Index);
+                WriteUnitsToTable(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, deliquoringMaterialParametersUnitsColumn.Index);
                 WriteUnitToHeader(simulationDataGrid);
                 
                 UpdateUnitsOfCommonFilterMachiningBlock();
@@ -828,6 +845,7 @@ namespace FilterSimulation
                 sim.filterMachiningBlock.CalculateAndDisplay();
                 sim.pc0Rc0A0Block.CalculateAndDisplay();
                 sim.rm0HceBlock.CalculateAndDisplay();
+                sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
             }
         }
 
@@ -840,6 +858,7 @@ namespace FilterSimulation
                 sim.filterMachiningBlock.ResumeProcessing();
                 sim.pc0Rc0A0Block.ResumeProcessing();
                 sim.rm0HceBlock.ResumeProcessing();
+                sim.deliquoringEps0NeEpsBlock.ResumeProcessing();
             }
         }
 
@@ -852,6 +871,7 @@ namespace FilterSimulation
                 sim.filterMachiningBlock.StopProcessing();
                 sim.pc0Rc0A0Block.StopProcessing();
                 sim.rm0HceBlock.StopProcessing();
+                sim.deliquoringEps0NeEpsBlock.StopProcessing();
             }
         }
 
@@ -875,10 +895,9 @@ namespace FilterSimulation
             sim.Data.suspensionCalculationOption = sim.susBlock.calculationOption;
 
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.eps0Kappa0Block);
-
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.pc0Rc0A0Block);
-
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
+            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
 
             sim.eps0Kappa0Block.CalculateAndDisplay();
         }

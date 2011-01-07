@@ -408,6 +408,7 @@ namespace FilterSimulation.fmFilterObjects
         public fmEps0Kappa0WithneBlock eps0Kappa0Block;
         public fmPc0Rc0A0WithncBlock pc0Rc0A0Block;
         public fmRm0HceBlock rm0HceBlock;
+        public fmEps0NeEpsBlock deliquoringEps0NeEpsBlock;
         public fmFilterMachiningBlock filterMachiningBlock;
 
         public Guid Guid { get; set; }
