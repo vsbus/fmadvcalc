@@ -24,7 +24,7 @@ namespace SampleForDeliquoringBlocks
             fmDataGrid1.Rows[rowIndex].Cells[1].Value = p.unitFamily.CurrentUnit.Name;
         }
 
-        private fmEps0NeEpsBlock block1;
+        private fmEps0dNedEpsdBlock block1;
         private fmSigmaPke0PkePcdRcdAlphadBlock block2;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,7 +38,7 @@ namespace SampleForDeliquoringBlocks
             WriteParameter(3, fmGlobalParameter.ne_d);
             WriteParameter(4, fmGlobalParameter.eps_d);
 
-            block1 = new fmEps0NeEpsBlock(
+            block1 = new fmEps0dNedEpsdBlock(
                 fmDataGrid1.Rows[1].Cells[2],
                 fmDataGrid1.Rows[2].Cells[2],
                 fmDataGrid1.Rows[3].Cells[2],
@@ -94,7 +94,7 @@ namespace SampleForDeliquoringBlocks
             block2.Dp_Value = fmValue.ObjectToValue(fmDataGrid1.Rows[0].Cells[2].Value);
             block2.Dpd_Value = block1.Dp_Value;
             block2.nc_Value = new fmValue(0.2);
-            block2.eps_d_Value = block1.eps_Value;
+            block2.eps_d_Value = block1.epsd_Value;
             block2.rho_s_Value = new fmValue(1000);
             block2.CalculateAndDisplay();
         }

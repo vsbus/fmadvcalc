@@ -163,8 +163,33 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mc));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vs));
 
+            #region Deliquoring
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps0_d));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ne_d));
+
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sigma));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.pke0));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.pke));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.pc_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rc_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.alpha_d));
+
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Srem));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ad1));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ad2));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Tetta));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_g));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ag1));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ag2));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ag3));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Tetta_boil));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.DH));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mmole));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.f));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.peq));
+            #endregion
         }
 
         public List<fmGlobalParameter> GetParametersThatCanBeInputedList()
@@ -411,7 +436,7 @@ namespace FilterSimulation.fmFilterObjects
         public fmEps0Kappa0WithneBlock eps0Kappa0Block;
         public fmPc0Rc0A0WithncBlock pc0Rc0A0Block;
         public fmRm0HceBlock rm0HceBlock;
-        public fmEps0NeEpsBlock deliquoringEps0NeEpsBlock;
+        public fmEps0dNedEpsdBlock deliquoringEps0NeEpsBlock;
         public fmSigmaPke0PkePcdRcdAlphadBlock deliquoringSigmaPkeBlock;
         public fmFilterMachiningBlock filterMachiningBlock;
 

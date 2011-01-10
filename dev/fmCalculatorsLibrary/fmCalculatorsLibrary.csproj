@@ -42,8 +42,8 @@
     <Compile Include="fmCalculationBaseParameter.cs" />
     <Compile Include="fmCalculationConstantParameter.cs" />
     <Compile Include="fmCalculationVariableParameter.cs" />
+    <Compile Include="fmEps0dNedEpsdCalculator.cs" />
     <Compile Include="fmEps0Kappa0Calculator.cs" />
-    <Compile Include="fmEps0NeEpsCalculator.cs" />
     <Compile Include="fmEpsKappaCalculator.cs" />
     <Compile Include="fmFilterMachiningCalculator.cs" />
     <Compile Include="fmPc0rc0a0Calculator.cs" />

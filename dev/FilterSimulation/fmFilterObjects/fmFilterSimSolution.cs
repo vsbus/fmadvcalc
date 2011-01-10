@@ -261,5 +261,21 @@ namespace FilterSimulation.fmFilterObjects
             }
             return solution;
         }
+
+        internal fmFilterSimulation FindSimulation(fmSigmaPke0PkePcdRcdAlphadBlock deliquoringSigmaPkeBlock)
+        {
+            foreach (fmFilterSimulation sim in GetAllSimulations())
+                if (sim.deliquoringSigmaPkeBlock == deliquoringSigmaPkeBlock)
+                    return sim;
+            return null;
+        }
+
+        internal fmFilterSimulation FindSimulation(fmEps0dNedEpsdBlock deliquoringEps0NeEpsBlock)
+        {
+            foreach (fmFilterSimulation sim in GetAllSimulations())
+                if (sim.deliquoringEps0NeEpsBlock == deliquoringEps0NeEpsBlock)
+                    return sim;
+            return null;
+        }
     }
 }

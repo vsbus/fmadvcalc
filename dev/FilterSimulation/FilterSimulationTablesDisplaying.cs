@@ -280,14 +280,14 @@ namespace FilterSimulation
                 DataGridViewColumn deliquoringMaterialCol = FindColumnByGuid(deliquoringMaterialParametersDataGrid.Columns, sim.Guid, 0);
                 if (sim.deliquoringEps0NeEpsBlock == null)
                 {
-                    sim.deliquoringEps0NeEpsBlock = new fmEps0NeEpsBlock(
+                    sim.deliquoringEps0NeEpsBlock = new fmEps0dNedEpsdBlock(
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Dp_d.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps0_d.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ne_d.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps_d.name).Cells[deliquoringMaterialCol.Index]);
 
-                    sim.deliquoringEps0NeEpsBlock.ValuesChanged += susBlock_ValuesChanged;
-                    sim.deliquoringEps0NeEpsBlock.ValuesChangedByUser += susBlock_ValuesChangedByUser;
+                    sim.deliquoringEps0NeEpsBlock.ValuesChanged += deliquoringEps0NeEpsBlock_ValuesChanged;
+                    sim.deliquoringEps0NeEpsBlock.ValuesChangedByUser += deliquoringEps0NeEpsBlock_ValuesChangedByUser;
                 }
                 if (sim.deliquoringSigmaPkeBlock == null)
                 {
@@ -300,8 +300,8 @@ namespace FilterSimulation
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.alpha_d.name).Cells[deliquoringMaterialCol.Index]);
 
 
-                    sim.deliquoringSigmaPkeBlock.ValuesChanged += susBlock_ValuesChanged;
-                    sim.deliquoringSigmaPkeBlock.ValuesChangedByUser += susBlock_ValuesChangedByUser;
+                    sim.deliquoringSigmaPkeBlock.ValuesChanged += deliquoringSigmaPkeBlock_ValuesChanged;
+                    sim.deliquoringSigmaPkeBlock.ValuesChangedByUser += deliquoringSigmaPkeBlock_ValuesChangedByUser;
                 }
 
                 DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, simulationGuidColumn.Index);
@@ -385,6 +385,8 @@ namespace FilterSimulation
 
                 if (sim == sol.currentObjects.Simulation)
                 {
+                    sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
+                    sim.deliquoringSigmaPkeBlock.CalculateAndDisplay();
                     sim.filterMachiningBlock.CalculateAndDisplay();
                     sim.rm0HceBlock.CalculateAndDisplay();
                     sim.pc0Rc0A0Block.CalculateAndDisplay();
@@ -392,6 +394,30 @@ namespace FilterSimulation
                     sim.susBlock.CalculateAndDisplay();
                 }
             }
+        }
+
+        // ReSharper disable InconsistentNaming
+        void deliquoringSigmaPkeBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+        // ReSharper restore InconsistentNaming
+        {
+            displayingSolution = true;
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.currentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.currentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.deliquoringSigmaPkeBlock, m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock);
+            displayingSolution = false;
+        }
+
+        // ReSharper disable InconsistentNaming
+        void deliquoringEps0NeEpsBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+        // ReSharper restore InconsistentNaming
+        {
+            displayingSolution = true;
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.currentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.currentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.deliquoringEps0NeEpsBlock, m_fSolution.currentObjects.Simulation.deliquoringEps0NeEpsBlock);
+            displayingSolution = false;
         }
 
         // ReSharper disable InconsistentNaming
@@ -941,6 +967,47 @@ namespace FilterSimulation
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
             sim.pc0Rc0A0Block.CalculateAndDisplay();
         }
+
+        // ReSharper disable InconsistentNaming
+        void deliquoringSigmaPkeBlock_ValuesChanged(object sender)
+        // ReSharper restore InconsistentNaming
+        {
+            var deliquoringSigmaPkeBlock = sender as fmSigmaPke0PkePcdRcdAlphadBlock;
+            fmFilterSimulation sim = m_fSolution.FindSimulation(deliquoringSigmaPkeBlock);
+
+            if (sim == null) // when we keep or restore simulations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
+            {
+                if (deliquoringSigmaPkeBlock != null)
+                {
+                    deliquoringMaterialParametersDataGrid.CellValueChanged -= deliquoringSigmaPkeBlock.CellValueChanged;
+                    deliquoringSigmaPkeBlock.ValuesChanged -= deliquoringSigmaPkeBlock_ValuesChanged;
+                }
+                return;
+            }
+            fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSigmaPkeBlock, sim);
+            //sim.filterMachiningBlock.CalculateAndDisplay();
+        }
+
+        // ReSharper disable InconsistentNaming
+        void deliquoringEps0NeEpsBlock_ValuesChanged(object sender)
+        // ReSharper restore InconsistentNaming
+        {
+            var deliquoringEps0NeEpsBlock = sender as fmEps0dNedEpsdBlock;
+            fmFilterSimulation sim = m_fSolution.FindSimulation(deliquoringEps0NeEpsBlock);
+
+            if (sim == null) // when we keep or restore simulations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
+            {
+                if (deliquoringEps0NeEpsBlock != null)
+                {
+                    deliquoringMaterialParametersDataGrid.CellValueChanged -= deliquoringEps0NeEpsBlock.CellValueChanged;
+                    deliquoringEps0NeEpsBlock.ValuesChanged -= deliquoringEps0NeEpsBlock_ValuesChanged;
+                }
+                return;
+            }
+            fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringEps0NeEpsBlock, sim);
+            //sim.filterMachiningBlock.CalculateAndDisplay();
+        }
+
 // ReSharper disable InconsistentNaming
         void rmHceBlock_ValuesChanged(object sender)
 // ReSharper restore InconsistentNaming
