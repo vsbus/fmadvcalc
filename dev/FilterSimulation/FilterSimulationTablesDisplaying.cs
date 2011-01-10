@@ -286,8 +286,8 @@ namespace FilterSimulation
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ne_d.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps_d.name).Cells[deliquoringMaterialCol.Index]);
 
-                    sim.deliquoringEps0NeEpsBlock.ValuesChanged += deliquoringEps0NeEpsBlock_ValuesChanged;
-                    sim.deliquoringEps0NeEpsBlock.ValuesChangedByUser += deliquoringEps0NeEpsBlock_ValuesChangedByUser;
+                    sim.deliquoringEps0NeEpsBlock.ValuesChanged += deliquoringEps0dNedEpsdBlock_ValuesChanged;
+                    sim.deliquoringEps0NeEpsBlock.ValuesChangedByUser += deliquoringEps0dNedEpsdBlock_ValuesChangedByUser;
                 }
                 if (sim.deliquoringSigmaPkeBlock == null)
                 {
@@ -382,6 +382,8 @@ namespace FilterSimulation
                 CopySimulationValuesToPc0rc0a0ncBlock(sim);
                 CopySimulationValuesToRmHceBlock(sim);
                 CopySimulationValuesToFilterMachining(sim);
+                CopySimulationValuesToDeliquoringEps0dNedEpsdBlock(sim);
+                CopySimulationValuesToDeliquoringSigmaBlock(sim);
 
                 if (sim == sol.currentObjects.Simulation)
                 {
@@ -394,6 +396,16 @@ namespace FilterSimulation
                     sim.susBlock.CalculateAndDisplay();
                 }
             }
+        }
+
+        private void CopySimulationValuesToDeliquoringSigmaBlock(fmFilterSimulation sim)
+        {
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
+        }
+
+        private void CopySimulationValuesToDeliquoringEps0dNedEpsdBlock(fmFilterSimulation sim)
+        {
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
         }
 
         // ReSharper disable InconsistentNaming
@@ -409,7 +421,7 @@ namespace FilterSimulation
         }
 
         // ReSharper disable InconsistentNaming
-        void deliquoringEps0NeEpsBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+        void deliquoringEps0dNedEpsdBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         // ReSharper restore InconsistentNaming
         {
             displayingSolution = true;
@@ -989,7 +1001,7 @@ namespace FilterSimulation
         }
 
         // ReSharper disable InconsistentNaming
-        void deliquoringEps0NeEpsBlock_ValuesChanged(object sender)
+        void deliquoringEps0dNedEpsdBlock_ValuesChanged(object sender)
         // ReSharper restore InconsistentNaming
         {
             var deliquoringEps0NeEpsBlock = sender as fmEps0dNedEpsdBlock;
@@ -1000,7 +1012,7 @@ namespace FilterSimulation
                 if (deliquoringEps0NeEpsBlock != null)
                 {
                     deliquoringMaterialParametersDataGrid.CellValueChanged -= deliquoringEps0NeEpsBlock.CellValueChanged;
-                    deliquoringEps0NeEpsBlock.ValuesChanged -= deliquoringEps0NeEpsBlock_ValuesChanged;
+                    deliquoringEps0NeEpsBlock.ValuesChanged -= deliquoringEps0dNedEpsdBlock_ValuesChanged;
                 }
                 return;
             }
