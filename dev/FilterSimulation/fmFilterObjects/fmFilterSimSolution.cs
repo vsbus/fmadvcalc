@@ -277,5 +277,13 @@ namespace FilterSimulation.fmFilterObjects
                     return sim;
             return null;
         }
+
+        internal fmFilterSimulation FindSimulation(fmSremTettaAdAgDHRmMmoleFPeqBlock deliquoringSremTettaAdAgDHRmMmoleFPeqBlock)
+        {
+            foreach (fmFilterSimulation sim in GetAllSimulations())
+                if (sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock == deliquoringSremTettaAdAgDHRmMmoleFPeqBlock)
+                    return sim;
+            return null;
+        }
     }
 }

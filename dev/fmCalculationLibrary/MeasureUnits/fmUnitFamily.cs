@@ -112,7 +112,7 @@ namespace fmCalculationLibrary.MeasureUnits
 
             TemperatureCelsius.units.Add(new fmUnit("C°", 1));
 
-            EvaporationEnthalpyFamily.units.Add(new fmUnit("KJ/mole", 1e3));
+            EvaporationEnthalpyFamily.units.Add(new fmUnit("KJ/mole", 1));
             
             MolarMassFamily.units.Add(new fmUnit("g/mole", 1e-3));
         }

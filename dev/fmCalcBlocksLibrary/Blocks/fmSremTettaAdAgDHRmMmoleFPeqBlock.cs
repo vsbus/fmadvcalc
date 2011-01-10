@@ -4,10 +4,11 @@ using System.Text;
 using fmCalcBlocksLibrary.BlockParameter;
 using System.Windows.Forms;
 using fmCalculationLibrary;
+using fmCalculatorsLibrary;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmSremTettaAdAgDHRmMmolefReqBlock : fmBaseBlock
+    public class fmSremTettaAdAgDHRmMmoleFPeqBlock : fmBaseBlock
     {
         private readonly fmBlockVariableParameter Srem;
         private readonly fmBlockVariableParameter ad1;
@@ -23,14 +24,17 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter f;
         private readonly fmBlockVariableParameter peq;
 
+        private readonly fmBlockConstantParameter pke;
+        private readonly fmBlockConstantParameter rhof;
+
         override public void DoCalculations()
         {
-            //var fmSremTettaAdAgDHRmMmolefReqCalculator = new fmSremTettaAdAgDHRmMmolefReqCalculator(AllParameters);
-            //fmSremTettaAdAgDHRmMmolefReqCalculator.DoCalculations();
+            var fmSremTettaAdAgDHRmMmoleFPeqCalculator = new fmSremTettaAdAgDHRmMmoleFPeqCalculator(AllParameters);
+            fmSremTettaAdAgDHRmMmoleFPeqCalculator.DoCalculations();
         }
 
         // ReSharper disable InconsistentNaming
-        public fmSremTettaAdAgDHRmMmolefReqBlock(
+        public fmSremTettaAdAgDHRmMmoleFPeqBlock(
             DataGridViewCell Srem_Cell,
             DataGridViewCell ad1_Cell,
             DataGridViewCell ad2_Cell,
@@ -59,9 +63,12 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref Mmole, fmGlobalParameter.Mmole, Mmole_Cell, true);
             AddParameter(ref f, fmGlobalParameter.f, f_Cell, true);
             AddParameter(ref peq, fmGlobalParameter.peq, peq_Cell, true);
+            
+            AddConstantParameter(ref pke, fmGlobalParameter.pke);
+            AddConstantParameter(ref rhof, fmGlobalParameter.rho_f);
 
             processOnChange = true;
         }
-        public fmSremTettaAdAgDHRmMmolefReqBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null) { }
+        public fmSremTettaAdAgDHRmMmoleFPeqBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null) { }
     }
 }

@@ -37,7 +37,7 @@ namespace fmCalculationLibrary
         {
             var result = new fmValue(0, defined);
 
-            if (value == 0)
+            if (value == 0 || double.IsInfinity(value))
             {
                 return result;
             }

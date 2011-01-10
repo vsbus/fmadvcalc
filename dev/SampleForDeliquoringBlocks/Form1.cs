@@ -73,7 +73,7 @@ namespace SampleForDeliquoringBlocks
             WriteParameter(22, fmGlobalParameter.f);
             WriteParameter(23, fmGlobalParameter.peq);
 
-            var block3 = new fmSremTettaAdAgDHRmMmolefReqBlock(
+            var block3 = new fmSremTettaAdAgDHRmMmoleFPeqBlock(
                 fmDataGrid1.Rows[11].Cells[2],
                 fmDataGrid1.Rows[12].Cells[2],
                 fmDataGrid1.Rows[13].Cells[2],

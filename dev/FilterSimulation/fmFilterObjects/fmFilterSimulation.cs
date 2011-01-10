@@ -436,10 +436,11 @@ namespace FilterSimulation.fmFilterObjects
         public fmEps0Kappa0WithneBlock eps0Kappa0Block;
         public fmPc0Rc0A0WithncBlock pc0Rc0A0Block;
         public fmRm0HceBlock rm0HceBlock;
+        public fmFilterMachiningBlock filterMachiningBlock;
         public fmEps0dNedEpsdBlock deliquoringEps0NeEpsBlock;
         public fmSigmaPke0PkePcdRcdAlphadBlock deliquoringSigmaPkeBlock;
-        public fmFilterMachiningBlock filterMachiningBlock;
-
+        public fmSremTettaAdAgDHRmMmoleFPeqBlock deliquoringSremTettaAdAgDHMmoleFPeqBlock;
+        
         public Guid Guid { get; set; }
 
         public string Name

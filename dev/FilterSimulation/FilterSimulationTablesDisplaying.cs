@@ -303,6 +303,27 @@ namespace FilterSimulation
                     sim.deliquoringSigmaPkeBlock.ValuesChanged += deliquoringSigmaPkeBlock_ValuesChanged;
                     sim.deliquoringSigmaPkeBlock.ValuesChangedByUser += deliquoringSigmaPkeBlock_ValuesChangedByUser;
                 }
+                if (sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock == null)
+                {
+                    sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock = new fmSremTettaAdAgDHRmMmoleFPeqBlock(
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Srem.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ad1.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ad2.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Tetta.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eta_g.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ag1.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ag2.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ag3.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Tetta_boil.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.DH.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Mmole.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.f.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.peq.name).Cells[deliquoringMaterialCol.Index]);
+
+
+                    sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.ValuesChanged += deliquoringSremTettaAdAgDHMmoleFPeqBlock_ValuesChanged;
+                    sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.ValuesChangedByUser += deliquoringSremTettaAdAgDHMmoleFPeqBlock_ValuesChangedByUser;
+                }
 
                 DataGridViewRow row = FindRowByGuid(simulationDataGrid.Rows, sim.Guid, simulationGuidColumn.Index);
                 if (sim.filterMachiningBlock == null)
@@ -384,11 +405,13 @@ namespace FilterSimulation
                 CopySimulationValuesToFilterMachining(sim);
                 CopySimulationValuesToDeliquoringEps0dNedEpsdBlock(sim);
                 CopySimulationValuesToDeliquoringSigmaBlock(sim);
+                CopySimulationValuesToDeliquoringSremBlock(sim);
 
                 if (sim == sol.currentObjects.Simulation)
                 {
-                    sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
+                    sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
                     sim.deliquoringSigmaPkeBlock.CalculateAndDisplay();
+                    sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
                     sim.filterMachiningBlock.CalculateAndDisplay();
                     sim.rm0HceBlock.CalculateAndDisplay();
                     sim.pc0Rc0A0Block.CalculateAndDisplay();
@@ -396,6 +419,11 @@ namespace FilterSimulation
                     sim.susBlock.CalculateAndDisplay();
                 }
             }
+        }
+
+        private void CopySimulationValuesToDeliquoringSremBlock(fmFilterSimulation sim)
+        {
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
         }
 
         private void CopySimulationValuesToDeliquoringSigmaBlock(fmFilterSimulation sim)
@@ -406,6 +434,18 @@ namespace FilterSimulation
         private void CopySimulationValuesToDeliquoringEps0dNedEpsdBlock(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
+        }
+
+        // ReSharper disable InconsistentNaming
+        void deliquoringSremTettaAdAgDHMmoleFPeqBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+        // ReSharper restore InconsistentNaming
+        {
+            displayingSolution = true;
+            foreach (fmFilterSimulation sim in m_fSolution.GetAllSimulations())
+                if (meterialInputSerieRadioButton.Checked && sim.Parent == m_fSolution.currentObjects.Simulation.Parent
+                    || meterialInputSuspensionRadioButton.Checked && sim.Parent.Parent == m_fSolution.currentObjects.Simulation.Parent.Parent)
+                    CopyBlockParameters(sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock, m_fSolution.currentObjects.Simulation.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
+            displayingSolution = false;
         }
 
         // ReSharper disable InconsistentNaming
@@ -899,6 +939,7 @@ namespace FilterSimulation
                 sim.rm0HceBlock.CalculateAndDisplay();
                 sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
                 sim.deliquoringSigmaPkeBlock.CalculateAndDisplay();
+                sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
             }
         }
 
@@ -913,6 +954,7 @@ namespace FilterSimulation
                 sim.rm0HceBlock.ResumeProcessing();
                 sim.deliquoringEps0NeEpsBlock.ResumeProcessing();
                 sim.deliquoringSigmaPkeBlock.StopProcessing();
+                sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.StopProcessing();
             }
         }
 
@@ -927,6 +969,7 @@ namespace FilterSimulation
                 sim.rm0HceBlock.StopProcessing();
                 sim.deliquoringEps0NeEpsBlock.StopProcessing();
                 sim.deliquoringSigmaPkeBlock.StopProcessing();
+                sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.StopProcessing();
             }
         }
 
@@ -954,6 +997,7 @@ namespace FilterSimulation
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
+            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
 
             sim.eps0Kappa0Block.CalculateAndDisplay();
         }
@@ -981,6 +1025,28 @@ namespace FilterSimulation
         }
 
         // ReSharper disable InconsistentNaming
+        void deliquoringSremTettaAdAgDHMmoleFPeqBlock_ValuesChanged(object sender)
+        // ReSharper restore InconsistentNaming
+        {
+            var deliquoringSremTettaAdAgDHRmMmoleFPeqBlock = sender as fmSremTettaAdAgDHRmMmoleFPeqBlock;
+            fmFilterSimulation sim = m_fSolution.FindSimulation(deliquoringSremTettaAdAgDHRmMmoleFPeqBlock);
+
+            if (sim == null) // when we keep or restore simulations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
+            {
+                if (deliquoringSremTettaAdAgDHRmMmoleFPeqBlock != null)
+                {
+                    deliquoringMaterialParametersDataGrid.CellValueChanged -= deliquoringSremTettaAdAgDHRmMmoleFPeqBlock.CellValueChanged;
+                    deliquoringSremTettaAdAgDHRmMmoleFPeqBlock.ValuesChanged -= deliquoringSremTettaAdAgDHMmoleFPeqBlock_ValuesChanged;
+                }
+                return;
+            }
+            fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock, sim);
+
+            //fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
+            //sm.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
+        }
+
+        // ReSharper disable InconsistentNaming
         void deliquoringSigmaPkeBlock_ValuesChanged(object sender)
         // ReSharper restore InconsistentNaming
         {
@@ -997,7 +1063,9 @@ namespace FilterSimulation
                 return;
             }
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSigmaPkeBlock, sim);
-            //sim.filterMachiningBlock.CalculateAndDisplay();
+
+            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
+            sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
         }
 
         // ReSharper disable InconsistentNaming
@@ -1039,7 +1107,9 @@ namespace FilterSimulation
                 return;
             }
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.rm0HceBlock, sim);
+
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
+            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
             sim.filterMachiningBlock.CalculateAndDisplay();
         }
         // ReSharper disable InconsistentNaming
