@@ -965,7 +965,7 @@ namespace FilterSimulation
             var epsKappaBlock = sender as fmEps0Kappa0Block;
             fmFilterSimulation sim = m_fSolution.FindSimulation(epsKappaBlock);
 
-            if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
+            if (sim == null) // when we keep or restore simulations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
                 if (epsKappaBlock != null)
                 {
@@ -1017,7 +1017,9 @@ namespace FilterSimulation
                 return;
             }
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringEps0NeEpsBlock, sim);
-            //sim.filterMachiningBlock.CalculateAndDisplay();
+
+            fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
+            sim.deliquoringSigmaPkeBlock.CalculateAndDisplay();
         }
 
 // ReSharper disable InconsistentNaming
@@ -1027,7 +1029,7 @@ namespace FilterSimulation
             var rmHceBlock = sender as fmRm0HceBlock;
             fmFilterSimulation sim = m_fSolution.FindSimulation(rmHceBlock);
 
-            if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
+            if (sim == null) // when we keep or restore simulations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
                 if (rmHceBlock != null)
                 {
@@ -1047,7 +1049,7 @@ namespace FilterSimulation
             var pcrcaBlock = sender as fmPc0Rc0A0Block;
             fmFilterSimulation sim = m_fSolution.FindSimulation(pcrcaBlock);
 
-            if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
+            if (sim == null) // when we keep or restore simulations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
                 if (pcrcaBlock != null)
                 {
@@ -1069,7 +1071,7 @@ namespace FilterSimulation
             var filterMachiningBlock = sender as fmFilterMachiningBlock;
             fmFilterSimulation sim = m_fSolution.FindSimulation(filterMachiningBlock);
 
-            if (sim == null) // when we keep or restore simukations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
+            if (sim == null) // when we keep or restore simulations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
                 if (filterMachiningBlock != null)
                 {
@@ -1083,6 +1085,9 @@ namespace FilterSimulation
             {
                 sim.FilterMachiningCalculationOption = filterMachiningBlock.calculationOption;
                 fmFilterSimulation.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
+
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
+                fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
             }
 
             DisplaySolution(m_fSolution);
