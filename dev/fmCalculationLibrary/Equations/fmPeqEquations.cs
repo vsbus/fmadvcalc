@@ -17,5 +17,11 @@ namespace fmCalculationLibrary.Equations
             fmValue deg2 = -pke / (rhof * Rm * T);
             return p0 * fmValue.Exp(deg1 + deg2);
         }
+
+        public static fmValue Eval_Rm_From_Mmole(fmValue Mmole)
+        {
+            fmValue R0 = new fmValue(8.314);
+            return R0 / Mmole;
+        }
     }
 }
