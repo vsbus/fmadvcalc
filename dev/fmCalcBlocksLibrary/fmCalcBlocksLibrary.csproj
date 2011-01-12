@@ -49,6 +49,7 @@
     <Compile Include="BlockParameter\fmBlockParameterGroup.cs" />
     <Compile Include="Blocks\fmBaseBlock.cs" />
     <Compile Include="Blocks\fmBaseLimitsBlock.cs" />
+    <Compile Include="Blocks\fmDeliquoringSimualtionBlock.cs" />
     <Compile Include="Blocks\fmEps0dNedEpsdBlock.cs" />
     <Compile Include="Blocks\fmFilterMachiningBlockWithLimits.cs" />
     <Compile Include="Blocks\fmSigmaPke0PkePcdRcdAlphadBlock.cs" />

@@ -24,8 +24,16 @@ namespace SampleForDeliquoringBlocks
             fmDataGrid1.Rows[rowIndex].Cells[1].Value = p.unitFamily.CurrentUnit.Name;
         }
 
+        private void WriteParameter2(int rowIndex, fmGlobalParameter p)
+        {
+            fmDataGrid1.Rows[rowIndex].Cells[0 + 3].Value = p.name;
+            fmDataGrid1.Rows[rowIndex].Cells[1 + 3].Value = p.unitFamily.CurrentUnit.Name;
+        }
+
         private fmEps0dNedEpsdBlock block1;
         private fmSigmaPke0PkePcdRcdAlphadBlock block2;
+        private fmSremTettaAdAgDHRmMmoleFPeqBlock block3;
+        private fmDeliquoringSimualtionBlock block4;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -73,7 +81,7 @@ namespace SampleForDeliquoringBlocks
             WriteParameter(22, fmGlobalParameter.f);
             WriteParameter(23, fmGlobalParameter.peq);
 
-            var block3 = new fmSremTettaAdAgDHRmMmoleFPeqBlock(
+            block3 = new fmSremTettaAdAgDHRmMmoleFPeqBlock(
                 fmDataGrid1.Rows[11].Cells[2],
                 fmDataGrid1.Rows[12].Cells[2],
                 fmDataGrid1.Rows[13].Cells[2],
@@ -87,6 +95,63 @@ namespace SampleForDeliquoringBlocks
                 fmDataGrid1.Rows[21].Cells[2],
                 fmDataGrid1.Rows[22].Cells[2],
                 fmDataGrid1.Rows[23].Cells[2]);
+
+            WriteParameter2(0, fmGlobalParameter.hcd);
+            WriteParameter2(1, fmGlobalParameter.sd);
+            WriteParameter2(2, fmGlobalParameter.td);
+            WriteParameter2(3, fmGlobalParameter.K);
+            WriteParameter2(4, fmGlobalParameter.Smech);
+            WriteParameter2(5, fmGlobalParameter.S);
+            WriteParameter2(6, fmGlobalParameter.Rfmech);
+            WriteParameter2(7, fmGlobalParameter.Rf);
+            WriteParameter2(8, fmGlobalParameter.Rf_star);
+            WriteParameter2(9, fmGlobalParameter.Qgi);
+            WriteParameter2(10, fmGlobalParameter.Qg);
+            WriteParameter2(11, fmGlobalParameter.vg);
+            WriteParameter2(12, fmGlobalParameter.Mfd);
+            WriteParameter2(13, fmGlobalParameter.Vfd);
+            WriteParameter2(14, fmGlobalParameter.Mlcd);
+            WriteParameter2(15, fmGlobalParameter.Vlcd);
+            WriteParameter2(16, fmGlobalParameter.Mcd);
+            WriteParameter2(17, fmGlobalParameter.Vcd);
+            WriteParameter2(18, fmGlobalParameter.rho_bulk);
+            WriteParameter2(19, fmGlobalParameter.Qmfid);
+            WriteParameter2(20, fmGlobalParameter.Qfid);
+            WriteParameter2(21, fmGlobalParameter.Qmcd);
+            WriteParameter2(22, fmGlobalParameter.Qcd);
+            WriteParameter2(23, fmGlobalParameter.qmfid);
+            WriteParameter2(24, fmGlobalParameter.qfid);
+            WriteParameter2(25, fmGlobalParameter.qmcd);
+            WriteParameter2(26, fmGlobalParameter.qcd);
+
+            block4 = new fmDeliquoringSimualtionBlock(
+                fmDataGrid1.Rows[0].Cells[5],
+                fmDataGrid1.Rows[1].Cells[5],
+                fmDataGrid1.Rows[2].Cells[5],
+                fmDataGrid1.Rows[3].Cells[5],
+                fmDataGrid1.Rows[4].Cells[5],
+                fmDataGrid1.Rows[5].Cells[5],
+                fmDataGrid1.Rows[6].Cells[5],
+                fmDataGrid1.Rows[7].Cells[5],
+                fmDataGrid1.Rows[8].Cells[5],
+                fmDataGrid1.Rows[9].Cells[5],
+                fmDataGrid1.Rows[10].Cells[5],
+                fmDataGrid1.Rows[11].Cells[5],
+                fmDataGrid1.Rows[12].Cells[5],
+                fmDataGrid1.Rows[13].Cells[5],
+                fmDataGrid1.Rows[14].Cells[5],
+                fmDataGrid1.Rows[15].Cells[5],
+                fmDataGrid1.Rows[16].Cells[5],
+                fmDataGrid1.Rows[17].Cells[5],
+                fmDataGrid1.Rows[18].Cells[5],
+                fmDataGrid1.Rows[19].Cells[5],
+                fmDataGrid1.Rows[20].Cells[5],
+                fmDataGrid1.Rows[21].Cells[5],
+                fmDataGrid1.Rows[22].Cells[5],
+                fmDataGrid1.Rows[23].Cells[5],
+                fmDataGrid1.Rows[24].Cells[5],
+                fmDataGrid1.Rows[25].Cells[5],
+                fmDataGrid1.Rows[26].Cells[5]);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -97,6 +162,11 @@ namespace SampleForDeliquoringBlocks
             block2.eps_d_Value = block1.epsd_Value;
             block2.rho_s_Value = new fmValue(1000);
             block2.CalculateAndDisplay();
+
+            block4.hc_Value = new fmValue(20);
+            block4.eps_Value = new fmValue(0.3);
+            block4.epsd_Value = block1.epsd_Value;
+            block4.CalculateAndDisplay();
         }
     }
 }

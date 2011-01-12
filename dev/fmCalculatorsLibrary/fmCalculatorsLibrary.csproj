@@ -42,6 +42,7 @@
     <Compile Include="fmCalculationBaseParameter.cs" />
     <Compile Include="fmCalculationConstantParameter.cs" />
     <Compile Include="fmCalculationVariableParameter.cs" />
+    <Compile Include="fmDeliquoringSimualtionCalculator.cs" />
     <Compile Include="fmEps0dNedEpsdCalculator.cs" />
     <Compile Include="fmEps0Kappa0Calculator.cs" />
     <Compile Include="fmEpsKappaCalculator.cs" />

@@ -129,6 +129,34 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter Mmole;
         public static fmGlobalParameter f;
         public static fmGlobalParameter peq;
+
+        public static fmGlobalParameter hcd;
+        public static fmGlobalParameter sd;
+        public static fmGlobalParameter td;
+        public static fmGlobalParameter K;
+        public static fmGlobalParameter Smech;
+        public static fmGlobalParameter S;
+        public static fmGlobalParameter Rfmech;
+        public static fmGlobalParameter Rf;
+        public static fmGlobalParameter Rf_star;
+        public static fmGlobalParameter Qgi;
+        public static fmGlobalParameter Qg;
+        public static fmGlobalParameter vg;
+        public static fmGlobalParameter Mfd;
+        public static fmGlobalParameter Vfd;
+        public static fmGlobalParameter Mlcd;
+        public static fmGlobalParameter Vlcd;
+        public static fmGlobalParameter Mcd;
+        public static fmGlobalParameter Vcd;
+        public static fmGlobalParameter rho_bulk;
+        public static fmGlobalParameter Qmfid;
+        public static fmGlobalParameter Qfid;
+        public static fmGlobalParameter Qmcd;
+        public static fmGlobalParameter Qcd;
+        public static fmGlobalParameter qmfid;
+        public static fmGlobalParameter qfid;
+        public static fmGlobalParameter qmcd;
+        public static fmGlobalParameter qcd;
         #endregion
         // ReSharper restore InconsistentNaming
 
@@ -258,6 +286,35 @@ namespace fmCalculationLibrary
             AddParameter(ref Mmole, new fmGlobalParameter("Mmole", fmUnitFamily.MolarMassFamily));
             AddParameter(ref f, new fmGlobalParameter("f", fmUnitFamily.NoUnitFamily));
             AddParameter(ref peq, new fmGlobalParameter("peq", fmUnitFamily.PressureFamily));
+
+            AddParameter(ref hcd, new fmGlobalParameter("hcd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref sd, new fmGlobalParameter("sd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref td, new fmGlobalParameter("td", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref K, new fmGlobalParameter("K", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Smech, new fmGlobalParameter("Smech", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref S, new fmGlobalParameter("S", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Rfmech, new fmGlobalParameter("Rfmech", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Rf, new fmGlobalParameter("Rf", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Rf_star, new fmGlobalParameter("Rf*", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Qgi, new fmGlobalParameter("Qgi", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Qg, new fmGlobalParameter("Qg", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref vg, new fmGlobalParameter("vg", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Mfd, new fmGlobalParameter("Mfd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Vfd, new fmGlobalParameter("Vfd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Mlcd, new fmGlobalParameter("Mlcd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Vlcd, new fmGlobalParameter("Vlcd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Mcd, new fmGlobalParameter("Mcd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Vcd, new fmGlobalParameter("Vcd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref rho_bulk, new fmGlobalParameter("rho_bulk", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Qmfid, new fmGlobalParameter("Qmfid", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Qfid, new fmGlobalParameter("Qfid", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Qmcd, new fmGlobalParameter("Qmcd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref Qcd, new fmGlobalParameter("Qcd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref qmfid, new fmGlobalParameter("qmfid", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref qfid, new fmGlobalParameter("qfid", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref qmcd, new fmGlobalParameter("qmcd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref qcd, new fmGlobalParameter("qcd", fmUnitFamily.NoUnitFamily));
+
             #endregion
 
             A.specifiedRange.IsInputed = true;

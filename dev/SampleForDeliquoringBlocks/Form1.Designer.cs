@@ -30,10 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.fmDataGrid1 = new fmDataGrid.fmDataGrid();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.fmDataGrid1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,15 +48,24 @@
             this.fmDataGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
-            this.Column3});
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
             this.fmDataGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fmDataGrid1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.fmDataGrid1.HighLightCurrentRow = false;
             this.fmDataGrid1.Location = new System.Drawing.Point(0, 0);
             this.fmDataGrid1.Name = "fmDataGrid1";
             this.fmDataGrid1.RowTemplate.Height = 18;
-            this.fmDataGrid1.Size = new System.Drawing.Size(418, 553);
+            this.fmDataGrid1.Size = new System.Drawing.Size(691, 553);
             this.fmDataGrid1.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Column1
             // 
@@ -70,17 +82,26 @@
             this.Column3.HeaderText = "Value";
             this.Column3.Name = "Column3";
             // 
-            // timer1
+            // Column4
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.Column4.HeaderText = "Parameter";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Units";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Value";
+            this.Column6.Name = "Column6";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(418, 553);
+            this.ClientSize = new System.Drawing.Size(691, 553);
             this.Controls.Add(this.fmDataGrid1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -93,10 +114,13 @@
         #endregion
 
         private fmDataGrid.fmDataGrid fmDataGrid1;
+        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn Column3;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn Column6;
     }
 }
 
