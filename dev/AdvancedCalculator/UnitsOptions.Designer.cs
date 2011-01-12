@@ -31,16 +31,16 @@ namespace AdvancedCalculator
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.TimeUnitItem = new fmUnitItem();
-            this.PressureUnitItem = new fmUnitItem();
-            this.ViscosityUnitItem = new fmUnitItem();
-            this.DensityUnitItem = new fmUnitItem();
-            this.FrequencyUnitItem = new fmUnitItem();
-            this.VolumeUnitItem = new fmUnitItem();
-            this.MassUnitItem = new fmUnitItem();
-            this.AreaUnitItem = new fmUnitItem();
-            this.LengthUnitItem = new fmUnitItem();
-            this.ConcentrationUnitItem = new fmUnitItem();
+            this.TimeUnitItem = new fmFilterSimulationControl.fmUnitItem();
+            this.PressureUnitItem = new fmFilterSimulationControl.fmUnitItem();
+            this.ViscosityUnitItem = new fmFilterSimulationControl.fmUnitItem();
+            this.DensityUnitItem = new fmFilterSimulationControl.fmUnitItem();
+            this.FrequencyUnitItem = new fmFilterSimulationControl.fmUnitItem();
+            this.VolumeUnitItem = new fmFilterSimulationControl.fmUnitItem();
+            this.MassUnitItem = new fmFilterSimulationControl.fmUnitItem();
+            this.AreaUnitItem = new fmFilterSimulationControl.fmUnitItem();
+            this.LengthUnitItem = new fmFilterSimulationControl.fmUnitItem();
+            this.ConcentrationUnitItem = new fmFilterSimulationControl.fmUnitItem();
             this.OKButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +62,6 @@ namespace AdvancedCalculator
             this.groupBox1.Size = new System.Drawing.Size(215, 376);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             // 
             // TimeUnitItem
             // 
@@ -154,7 +153,7 @@ namespace AdvancedCalculator
             this.OKButton.UseVisualStyleBackColor = true;
             this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
-            // UnitsOptions
+            // fmUnitsOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

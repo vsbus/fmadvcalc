@@ -107,8 +107,8 @@ namespace fmCalculationLibrary.MeasureUnits
             SpecificFlowRateMass.units.Add(new fmUnit("kg/m2min", 1.0/60));
             SpecificFlowRateMass.units.Add(new fmUnit("kg/m2s", 1));
 
+            SurfaceTensionFamily.units.Add(new fmUnit("miliN/m", 1e-3));
             SurfaceTensionFamily.units.Add(new fmUnit("N/m", 1));
-            SurfaceTensionFamily.units.Add(new fmUnit("10-3 N/m", 1e-3));
 
             TemperatureCelsius.units.Add(new fmUnit("C°", 1));
 
