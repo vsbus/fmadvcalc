@@ -10,12 +10,6 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmSigmaPke0PkePcdRcdAlphadBlock : fmBaseBlock
     {
-        private readonly fmBlockConstantParameter Dp;
-        private readonly fmBlockConstantParameter Dpd;
-        private readonly fmBlockConstantParameter nc;
-        private readonly fmBlockConstantParameter eps_d;
-        private readonly fmBlockConstantParameter rho_s;
-
         private readonly fmBlockVariableParameter sigma;
         private readonly fmBlockVariableParameter pke0;
         private readonly fmBlockVariableParameter pke;
@@ -23,6 +17,13 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter rcd;
         private readonly fmBlockVariableParameter alphad;
 
+        private readonly fmBlockConstantParameter Dp;
+        private readonly fmBlockConstantParameter Dpd;
+        private readonly fmBlockConstantParameter nc;
+        private readonly fmBlockConstantParameter eps_d;
+        private readonly fmBlockConstantParameter rho_s;
+        private readonly fmBlockConstantParameter Pc0;
+        
         public fmValue Dp_Value
         {
             get { return Dp.value; }
@@ -79,6 +80,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref nc, fmGlobalParameter.nc);
             AddConstantParameter(ref eps_d, fmGlobalParameter.eps_d);
             AddConstantParameter(ref rho_s, fmGlobalParameter.rho_s);
+            AddConstantParameter(ref Pc0, fmGlobalParameter.Pc0);
 
             sigma.group = sigma_group;
             pke0.group = pke0_group;

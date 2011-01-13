@@ -16,6 +16,7 @@ namespace fmCalculatorsLibrary
             var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
             var eps_d = variables[fmGlobalParameter.eps_d] as fmCalculationConstantParameter;
             var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
             
             var sigma = variables[fmGlobalParameter.sigma] as fmCalculationVariableParameter;
             var pke0 = variables[fmGlobalParameter.pke0] as fmCalculationVariableParameter;
@@ -28,8 +29,7 @@ namespace fmCalculatorsLibrary
                 ? Dpd.value
                 : Dpf.value;
 
-            fmValue Pc0 = new fmValue(1e-13);
-            pcd.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0, Dp, nc.value);
+            pcd.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp, nc.value);
             rcd.value = fmPcrcaEquations.Eval_rc_From_Pc(pcd.value);
             alphad.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(pcd.value, eps_d.value, rho_s.value);
             pke.value = fmDeliquoringEquations.Eval_pke_From_pke0_sigma_Pc(pke0.value, sigma.value, pcd.value);
