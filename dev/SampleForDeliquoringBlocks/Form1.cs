@@ -104,7 +104,6 @@ namespace SampleForDeliquoringBlocks
             WriteParameter2(5, fmGlobalParameter.S);
             WriteParameter2(6, fmGlobalParameter.Rfmech);
             WriteParameter2(7, fmGlobalParameter.Rf);
-            WriteParameter2(8, fmGlobalParameter.Rf_star);
             WriteParameter2(9, fmGlobalParameter.Qgi);
             WriteParameter2(10, fmGlobalParameter.Qg);
             WriteParameter2(11, fmGlobalParameter.vg);
@@ -163,9 +162,29 @@ namespace SampleForDeliquoringBlocks
             block2.rho_s_Value = new fmValue(1000);
             block2.CalculateAndDisplay();
 
-            block4.hc_Value = new fmValue(20);
+            block4.hc_Value = new fmValue(20e-3);
             block4.eps_Value = new fmValue(0.3);
             block4.epsd_Value = block1.epsd_Value;
+            block4.A_Value = new fmValue(1.0);
+            block4.ad1_Value = new fmValue(0.1);
+            block4.ad2_Value = new fmValue(0.2);
+            block4.ag1_Value = new fmValue(0.31);
+            block4.ag2_Value = new fmValue(0.32);
+            block4.ag3_Value = new fmValue(0.33);
+            block4.Dpd_Value = block1.Dp_Value;
+            block4.etaf_Value = new fmValue(1);
+            block4.etag_Value = new fmValue(2);
+            block4.f_Value = new fmValue(1.1);
+            block4.hce_Value = new fmValue(5e-3);
+            block4.Mmole_Value = new fmValue(18);
+            block4.pcd_Value = new fmValue(0.1);
+            block4.peq_Value = new fmValue(0.2);
+            block4.pke_Value = new fmValue(0.3);
+            block4.rhof_Value = new fmValue(1000);
+            block4.rhos_Value = new fmValue(2250);
+            block4.Srem_Value = new fmValue(0.5);
+            block4.tc_Value = new fmValue(100);
+            block4.Tetta_Value = new fmValue(20);
             block4.CalculateAndDisplay();
         }
     }

@@ -41,6 +41,28 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter hc;
         private readonly fmBlockConstantParameter eps;
         private readonly fmBlockConstantParameter epsd;
+        private readonly fmBlockConstantParameter tc;
+        private readonly fmBlockConstantParameter pcd;
+        private readonly fmBlockConstantParameter Dpd;
+        private readonly fmBlockConstantParameter pke;
+        private readonly fmBlockConstantParameter etaf;
+        private readonly fmBlockConstantParameter hce;
+        private readonly fmBlockConstantParameter Srem;
+        private readonly fmBlockConstantParameter ad1;
+        private readonly fmBlockConstantParameter ad2;
+        private readonly fmBlockConstantParameter A;
+        private readonly fmBlockConstantParameter peq;
+        private readonly fmBlockConstantParameter Mmole;
+        private readonly fmBlockConstantParameter Tetta;
+        private readonly fmBlockConstantParameter ag1;
+        private readonly fmBlockConstantParameter ag2;
+        private readonly fmBlockConstantParameter ag3;
+        private readonly fmBlockConstantParameter f;
+        private readonly fmBlockConstantParameter etag;
+        private readonly fmBlockConstantParameter rhof;
+        private readonly fmBlockConstantParameter rhos;
+
+        private readonly fmBlockParameterGroup second_group = new fmBlockParameterGroup();
 
         public fmValue hc_Value
         {
@@ -57,6 +79,27 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return epsd.value; }
             set { epsd.value = value; }
         }
+
+        public fmValue tc_Value {get {return tc.value;} set {tc.value = value;}}
+        public fmValue pcd_Value {get {return pcd.value;} set {pcd.value = value;}}
+        public fmValue Dpd_Value {get {return Dpd.value;} set {Dpd.value = value;}}
+        public fmValue pke_Value {get {return pke.value;} set {pke.value = value;}}
+        public fmValue etaf_Value {get {return etaf.value;} set {etaf.value = value;}}
+        public fmValue hce_Value {get {return hce.value;} set {hce.value = value;}}
+        public fmValue Srem_Value {get {return Srem.value;} set {Srem.value = value;}}
+        public fmValue ad1_Value {get {return ad1.value;} set {ad1.value = value;}}
+        public fmValue ad2_Value {get {return ad2.value;} set {ad2.value = value;}}
+        public fmValue A_Value {get {return A.value;} set {A.value = value;}}
+        public fmValue peq_Value {get {return peq.value;} set {peq.value = value;}}
+        public fmValue Mmole_Value {get {return Mmole.value;} set {Mmole.value = value;}}
+        public fmValue Tetta_Value {get {return Tetta.value;} set {Tetta.value = value;}}
+        public fmValue ag1_Value {get {return ag1.value;} set {ag1.value = value;}}
+        public fmValue ag2_Value {get {return ag2.value;} set {ag2.value = value;}}
+        public fmValue ag3_Value {get {return ag3.value;} set {ag3.value = value;}}
+        public fmValue f_Value {get {return f.value;} set {f.value = value;}}
+        public fmValue etag_Value {get {return etag.value;} set {etag.value = value;}}
+        public fmValue rhof_Value {get {return rhof.value;} set {rhof.value = value;}}
+        public fmValue rhos_Value {get {return rhos.value;} set {rhos.value = value;}}
 
         override public void DoCalculations()
         {
@@ -103,7 +146,6 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref S, fmGlobalParameter.S, S_Cell, false);
             AddParameter(ref Rfmech, fmGlobalParameter.Rfmech, Rfmech_Cell, false);
             AddParameter(ref Rf, fmGlobalParameter.Rf, Rf_Cell, false);
-            AddParameter(ref Rf_star, fmGlobalParameter.Rf_star, Rf_star_Cell, false);
             AddParameter(ref Qgi, fmGlobalParameter.Qgi, Qgi_Cell, false);
             AddParameter(ref Qg, fmGlobalParameter.Qg, Qg_Cell, false);
             AddParameter(ref vg, fmGlobalParameter.vg, vg_Cell, false);
@@ -126,6 +168,34 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref hc, fmGlobalParameter.hc);
             AddConstantParameter(ref eps, fmGlobalParameter.eps);
             AddConstantParameter(ref epsd, fmGlobalParameter.eps_d);
+            AddConstantParameter(ref tc, fmGlobalParameter.tc);
+            AddConstantParameter(ref pcd, fmGlobalParameter.pc_d);
+            AddConstantParameter(ref Dpd, fmGlobalParameter.Dp_d);
+            AddConstantParameter(ref pke, fmGlobalParameter.pke);
+            AddConstantParameter(ref etaf, fmGlobalParameter.eta_f);
+            AddConstantParameter(ref hce, fmGlobalParameter.hce0);
+            AddConstantParameter(ref Srem, fmGlobalParameter.Srem);
+            AddConstantParameter(ref ad1, fmGlobalParameter.ad1);
+            AddConstantParameter(ref ad2, fmGlobalParameter.ad2);
+            AddConstantParameter(ref A, fmGlobalParameter.A);
+            AddConstantParameter(ref peq, fmGlobalParameter.peq);
+            AddConstantParameter(ref Mmole, fmGlobalParameter.Mmole);
+            AddConstantParameter(ref Tetta, fmGlobalParameter.Tetta);
+            AddConstantParameter(ref ag1, fmGlobalParameter.ag1);
+            AddConstantParameter(ref ag2, fmGlobalParameter.ag2);
+            AddConstantParameter(ref ag3, fmGlobalParameter.ag3);
+            AddConstantParameter(ref f, fmGlobalParameter.f);
+            AddConstantParameter(ref etag, fmGlobalParameter.eta_g);
+            AddConstantParameter(ref rhof, fmGlobalParameter.rho_f);
+            AddConstantParameter(ref rhos, fmGlobalParameter.rho_s);
+
+            foreach (fmBlockVariableParameter p in parameters)
+            {
+                if (p.globalParameter != fmGlobalParameter.hcd)
+                {
+                    p.group = second_group;
+                }
+            }
 
             processOnChange = true;
         }

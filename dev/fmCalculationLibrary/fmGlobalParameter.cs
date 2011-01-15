@@ -138,7 +138,6 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter S;
         public static fmGlobalParameter Rfmech;
         public static fmGlobalParameter Rf;
-        public static fmGlobalParameter Rf_star;
         public static fmGlobalParameter Qgi;
         public static fmGlobalParameter Qg;
         public static fmGlobalParameter vg;
@@ -295,7 +294,6 @@ namespace fmCalculationLibrary
             AddParameter(ref S, new fmGlobalParameter("S", fmUnitFamily.NoUnitFamily));
             AddParameter(ref Rfmech, new fmGlobalParameter("Rfmech", fmUnitFamily.NoUnitFamily));
             AddParameter(ref Rf, new fmGlobalParameter("Rf", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Rf_star, new fmGlobalParameter("Rf*", fmUnitFamily.NoUnitFamily));
             AddParameter(ref Qgi, new fmGlobalParameter("Qgi", fmUnitFamily.NoUnitFamily));
             AddParameter(ref Qg, new fmGlobalParameter("Qg", fmUnitFamily.NoUnitFamily));
             AddParameter(ref vg, new fmGlobalParameter("vg", fmUnitFamily.NoUnitFamily));
