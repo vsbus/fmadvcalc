@@ -57,6 +57,7 @@ namespace FilterSimulation
             this.deliquoringMaterialParametersParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliquoringMaterialParametersUnitsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelMaterialParameters = new System.Windows.Forms.Panel();
+            this.calculationOptionChangeButton = new System.Windows.Forms.Button();
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid = new fmDataGrid.fmDataGrid();
             this.epsKappaParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.epsKappaUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,7 +69,6 @@ namespace FilterSimulation
             this.meterialInputSerieRadioButton = new System.Windows.Forms.RadioButton();
             this.meterialInputSimualationRadioButton = new System.Windows.Forms.RadioButton();
             this.splitter6 = new System.Windows.Forms.Splitter();
-            this.calculationOptionChangeButton = new System.Windows.Forms.Button();
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.secondFromTopPanel = new System.Windows.Forms.Panel();
             this.simSeriesPanel = new System.Windows.Forms.Panel();
@@ -506,6 +506,17 @@ namespace FilterSimulation
             this.panelMaterialParameters.Size = new System.Drawing.Size(205, 244);
             this.panelMaterialParameters.TabIndex = 15;
             // 
+            // calculationOptionChangeButton
+            // 
+            this.calculationOptionChangeButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.calculationOptionChangeButton.Location = new System.Drawing.Point(0, 328);
+            this.calculationOptionChangeButton.Name = "calculationOptionChangeButton";
+            this.calculationOptionChangeButton.Size = new System.Drawing.Size(205, 23);
+            this.calculationOptionChangeButton.TabIndex = 15;
+            this.calculationOptionChangeButton.Text = "Calculation Option";
+            this.calculationOptionChangeButton.UseVisualStyleBackColor = true;
+            this.calculationOptionChangeButton.Click += new System.EventHandler(this.calculationOptionChangeButton_Click);
+            // 
             // eps0Kappa0Pc0Rc0Alpha0DataGrid
             // 
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.AllowUserToAddRows = false;
@@ -525,7 +536,7 @@ namespace FilterSimulation
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Name = "eps0Kappa0Pc0Rc0Alpha0DataGrid";
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowHeadersVisible = false;
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowTemplate.Height = 16;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Size = new System.Drawing.Size(205, 160);
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Size = new System.Drawing.Size(205, 168);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.TabIndex = 12;
             // 
             // epsKappaParameterName
@@ -637,17 +648,6 @@ namespace FilterSimulation
             this.splitter6.Size = new System.Drawing.Size(3, 248);
             this.splitter6.TabIndex = 16;
             this.splitter6.TabStop = false;
-            // 
-            // calculationOptionChangeButton
-            // 
-            this.calculationOptionChangeButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.calculationOptionChangeButton.Location = new System.Drawing.Point(0, 320);
-            this.calculationOptionChangeButton.Name = "calculationOptionChangeButton";
-            this.calculationOptionChangeButton.Size = new System.Drawing.Size(205, 23);
-            this.calculationOptionChangeButton.TabIndex = 15;
-            this.calculationOptionChangeButton.Text = "Calculation Option";
-            this.calculationOptionChangeButton.UseVisualStyleBackColor = true;
-            this.calculationOptionChangeButton.Click += new System.EventHandler(this.calculationOptionChangeButton_Click);
             // 
             // splitter4
             // 

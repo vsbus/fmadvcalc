@@ -179,7 +179,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.topPanel.Controls.Add(this.tablesAndGraphsTopLeftPanel);
             this.topPanel.Controls.Add(this.splitter10);
-            this.topPanel.Size = new System.Drawing.Size(800, 196);
+            this.topPanel.Size = new System.Drawing.Size(800, 115);
             this.topPanel.Controls.SetChildIndex(this.projectPanel, 0);
             this.topPanel.Controls.SetChildIndex(this.splitter1, 0);
             this.topPanel.Controls.SetChildIndex(this.suspensionPanel, 0);
@@ -190,32 +190,32 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // projectPanel
             // 
-            this.projectPanel.Size = new System.Drawing.Size(170, 196);
+            this.projectPanel.Size = new System.Drawing.Size(170, 115);
             // 
             // suspensionPanel
             // 
             this.suspensionPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.suspensionPanel.Size = new System.Drawing.Size(293, 196);
+            this.suspensionPanel.Size = new System.Drawing.Size(293, 115);
             // 
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Left;
             this.splitter2.Location = new System.Drawing.Point(466, 0);
-            this.splitter2.Size = new System.Drawing.Size(3, 196);
+            this.splitter2.Size = new System.Drawing.Size(3, 115);
             // 
             // machinePanel
             // 
             this.machinePanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.machinePanel.Location = new System.Drawing.Point(469, 0);
-            this.machinePanel.Size = new System.Drawing.Size(131, 196);
+            this.machinePanel.Size = new System.Drawing.Size(131, 115);
             // 
             // splitter1
             // 
-            this.splitter1.Size = new System.Drawing.Size(3, 196);
+            this.splitter1.Size = new System.Drawing.Size(3, 115);
             // 
             // splitter3
             // 
-            this.splitter3.Location = new System.Drawing.Point(0, 196);
+            this.splitter3.Location = new System.Drawing.Point(0, 115);
             this.splitter3.Size = new System.Drawing.Size(800, 3);
             // 
             // secondFromTopPanel
@@ -223,19 +223,19 @@ namespace FilterSimulationWithTablesAndGraphs
             this.secondFromTopPanel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.secondFromTopPanel.Controls.Add(this.GridPanel);
             this.secondFromTopPanel.Controls.Add(this.splitter11);
-            this.secondFromTopPanel.Location = new System.Drawing.Point(0, 199);
-            this.secondFromTopPanel.Size = new System.Drawing.Size(800, 126);
+            this.secondFromTopPanel.Location = new System.Drawing.Point(0, 118);
+            this.secondFromTopPanel.Size = new System.Drawing.Size(800, 112);
             this.secondFromTopPanel.Controls.SetChildIndex(this.simSeriesPanel, 0);
             this.secondFromTopPanel.Controls.SetChildIndex(this.splitter11, 0);
             this.secondFromTopPanel.Controls.SetChildIndex(this.GridPanel, 0);
             // 
             // suspensionParametersPanel
             // 
-            this.suspensionParametersPanel.Size = new System.Drawing.Size(800, 272);
+            this.suspensionParametersPanel.Size = new System.Drawing.Size(800, 367);
             // 
             // splitter4
             // 
-            this.splitter4.Location = new System.Drawing.Point(0, 325);
+            this.splitter4.Location = new System.Drawing.Point(0, 230);
             this.splitter4.Size = new System.Drawing.Size(800, 3);
             // 
             // simSeriesDuplicateButton
@@ -245,8 +245,8 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // suspensionParametersAndCalcOptionsPanel
             // 
-            this.suspensionParametersAndCalcOptionsPanel.Location = new System.Drawing.Point(0, 328);
-            this.suspensionParametersAndCalcOptionsPanel.Size = new System.Drawing.Size(800, 272);
+            this.suspensionParametersAndCalcOptionsPanel.Location = new System.Drawing.Point(0, 233);
+            this.suspensionParametersAndCalcOptionsPanel.Size = new System.Drawing.Size(800, 367);
             // 
             // simulationPanel
             // 
@@ -300,7 +300,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.simSeriesPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.simSeriesPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simSeriesPanel.Size = new System.Drawing.Size(466, 126);
+            this.simSeriesPanel.Size = new System.Drawing.Size(466, 112);
             // 
             // panel4
             // 
@@ -482,7 +482,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.selectedSimulationParametersTable.Name = "selectedSimulationParametersTable";
             this.selectedSimulationParametersTable.RowHeadersVisible = false;
             this.selectedSimulationParametersTable.RowTemplate.Height = 18;
-            this.selectedSimulationParametersTable.Size = new System.Drawing.Size(327, 101);
+            this.selectedSimulationParametersTable.Size = new System.Drawing.Size(327, 87);
             this.selectedSimulationParametersTable.TabIndex = 10;
             this.selectedSimulationParametersTable.Visible = false;
             this.selectedSimulationParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
@@ -504,7 +504,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.GridPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridPanel.Location = new System.Drawing.Point(469, 0);
             this.GridPanel.Name = "GridPanel";
-            this.GridPanel.Size = new System.Drawing.Size(331, 126);
+            this.GridPanel.Size = new System.Drawing.Size(331, 112);
             this.GridPanel.TabIndex = 10;
             // 
             // additionalParametersTable
@@ -525,7 +525,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.additionalParametersTable.Name = "additionalParametersTable";
             this.additionalParametersTable.RowHeadersVisible = false;
             this.additionalParametersTable.RowTemplate.Height = 18;
-            this.additionalParametersTable.Size = new System.Drawing.Size(327, 101);
+            this.additionalParametersTable.Size = new System.Drawing.Size(327, 87);
             this.additionalParametersTable.TabIndex = 5;
             this.additionalParametersTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellContentClick);
             this.additionalParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
@@ -564,7 +564,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.splitter10.Location = new System.Drawing.Point(600, 0);
             this.splitter10.Name = "splitter10";
-            this.splitter10.Size = new System.Drawing.Size(3, 196);
+            this.splitter10.Size = new System.Drawing.Size(3, 115);
             this.splitter10.TabIndex = 4;
             this.splitter10.TabStop = false;
             // 
@@ -576,7 +576,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.tablesAndGraphsTopLeftPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablesAndGraphsTopLeftPanel.Location = new System.Drawing.Point(603, 0);
             this.tablesAndGraphsTopLeftPanel.Name = "tablesAndGraphsTopLeftPanel";
-            this.tablesAndGraphsTopLeftPanel.Size = new System.Drawing.Size(197, 196);
+            this.tablesAndGraphsTopLeftPanel.Size = new System.Drawing.Size(197, 115);
             this.tablesAndGraphsTopLeftPanel.TabIndex = 7;
             // 
             // listBoxYAxis
@@ -586,7 +586,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis.FormattingEnabled = true;
             this.listBoxYAxis.Location = new System.Drawing.Point(78, 0);
             this.listBoxYAxis.Name = "listBoxYAxis";
-            this.listBoxYAxis.Size = new System.Drawing.Size(119, 169);
+            this.listBoxYAxis.Size = new System.Drawing.Size(119, 79);
             this.listBoxYAxis.TabIndex = 4;
             this.listBoxYAxis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listBoxYAxis_ItemCheck);
             // 
@@ -596,14 +596,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxXAxis.FormattingEnabled = true;
             this.listBoxXAxis.Location = new System.Drawing.Point(0, 0);
             this.listBoxXAxis.Name = "listBoxXAxis";
-            this.listBoxXAxis.Size = new System.Drawing.Size(78, 173);
+            this.listBoxXAxis.Size = new System.Drawing.Size(78, 82);
             this.listBoxXAxis.TabIndex = 1;
             this.listBoxXAxis.SelectedIndexChanged += new System.EventHandler(this.listBoxX_SelectedIndexChanged);
             // 
             // calculationOptionTandCChangeButton
             // 
             this.calculationOptionTandCChangeButton.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.calculationOptionTandCChangeButton.Location = new System.Drawing.Point(0, 173);
+            this.calculationOptionTandCChangeButton.Location = new System.Drawing.Point(0, 92);
             this.calculationOptionTandCChangeButton.Name = "calculationOptionTandCChangeButton";
             this.calculationOptionTandCChangeButton.Size = new System.Drawing.Size(197, 23);
             this.calculationOptionTandCChangeButton.TabIndex = 3;
@@ -615,7 +615,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.splitter11.Location = new System.Drawing.Point(466, 0);
             this.splitter11.Name = "splitter11";
-            this.splitter11.Size = new System.Drawing.Size(3, 126);
+            this.splitter11.Size = new System.Drawing.Size(3, 112);
             this.splitter11.TabIndex = 9;
             this.splitter11.TabStop = false;
             // 
