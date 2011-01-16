@@ -189,6 +189,33 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mmole));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.f));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.peq));
+
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.td));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.K));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Smech));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.S));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Rfmech));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Rf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qgi));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qg));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.vg));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mfd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vfd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mlcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vlcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_bulk));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmfid));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qfid));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmfid));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qfid));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qcd));
             #endregion
         }
 

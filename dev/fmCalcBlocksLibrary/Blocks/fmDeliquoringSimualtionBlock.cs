@@ -5,6 +5,7 @@ using fmCalcBlocksLibrary.BlockParameter;
 using System.Windows.Forms;
 using fmCalculationLibrary;
 using fmCalculatorsLibrary;
+using System.Drawing;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
@@ -62,7 +63,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter rhof;
         private readonly fmBlockConstantParameter rhos;
 
-        private readonly fmBlockParameterGroup second_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup second_group = new fmBlockParameterGroup(Color.FromArgb(250, 220, 220));
 
         public fmValue hc_Value
         {
@@ -197,6 +198,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
             }
 
+            UpdateCellsBackColor();
             processOnChange = true;
         }
 

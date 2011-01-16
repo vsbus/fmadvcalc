@@ -75,5 +75,56 @@ namespace fmCalculationLibrary.Equations
         {
             return 1 / (((1 - epsd) * rhos) / (epsd * rhof * S) + 1);
         }
+
+        public static fmValue Eval_pmOverPn_vacuum_From_Dpd(fmValue Dpd)
+        {
+            fmValue pN = new fmValue(1e5);
+            return 1 - Dpd / (2 * pN);
+        }
+
+        public static fmValue Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(fmValue A, fmValue pcd, fmValue pmoverpn, fmValue Dpd, fmValue etag, fmValue hcd, fmValue hce, fmValue Tetta, fmValue ag1, fmValue ag2)
+        {
+            fmValue bar = new fmValue(1e5);
+            fmValue Tn = new fmValue(273);
+            fmValue T = Tetta + Tn;
+            return A * pcd * pmoverpn * Dpd * Tn / (etag * (hcd + hce) * T) * (ag1 + ag2 * fmValue.Log(Dpd / bar));
+        }
+
+        public static fmValue Eval_Qgi_From_Qgimax_ag3_K(fmValue Qgimax, fmValue ag3, fmValue K)
+        {
+            return Qgimax * (1 - fmValue.Exp(-ag3 * K));
+        }
+
+        public static fmValue Eval_Qgt_From_Qgimax_ag3_K(fmValue Qgimax, fmValue ag3, fmValue K)
+        {
+            return Qgimax * (1 - (1 - fmValue.Exp(-ag3 * K)) / (ag3 * K));
+        }
+
+        public static fmValue Eval_Qg_From_Qgt_td_tc(fmValue Qgt, fmValue td, fmValue tc)
+        {
+            return Qgt * td / tc;
+        }
+
+        public static fmValue Eval_vg_From_Qgt_td_Ms(fmValue Qgt, fmValue td, fmValue Ms)
+        {
+            return Qgt * td / Ms;
+        }
+
+        public static fmValue Eval_Vfd_From_Vcd_epsd_Smech(fmValue Vcd, fmValue epsd, fmValue Smech)
+        {
+            return Vcd * epsd * (1 - Smech);
+        }
+
+        public static fmValue Eval_Vlcd_From_Vcd_epsd_S(fmValue Vcd, fmValue epsd, fmValue S)
+        {
+            return Vcd * epsd * S;
+        }
+
+        public static fmValue Eval_Qfid_From_Vcd_ad1_ad2_Srem_K_pcd_Dpd_pke_etaf_hcd_hce(
+            fmValue Vcd, fmValue ad1, fmValue ad2, fmValue Srem, fmValue K, fmValue pcd,
+            fmValue Dpd, fmValue pke, fmValue etaf, fmValue hcd, fmValue hce)
+        {
+            return Vcd * ad1 * ad2 * (1 - Srem) * fmValue.Pow(1 + ad2 * K, -ad1 - 1) * pcd * (Dpd - pke) / (etaf * hcd * (hcd + hce));
+        }
     }
 }

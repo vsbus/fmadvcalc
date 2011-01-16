@@ -286,32 +286,32 @@ namespace fmCalculationLibrary
             AddParameter(ref f, new fmGlobalParameter("f", fmUnitFamily.NoUnitFamily));
             AddParameter(ref peq, new fmGlobalParameter("peq", fmUnitFamily.PressureFamily));
 
-            AddParameter(ref hcd, new fmGlobalParameter("hcd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref sd, new fmGlobalParameter("sd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref td, new fmGlobalParameter("td", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref hcd, new fmGlobalParameter("hcd", fmUnitFamily.LengthFamily));
+            AddParameter(ref sd, new fmGlobalParameter("sd", fmUnitFamily.ConcentrationFamily));
+            AddParameter(ref td, new fmGlobalParameter("td", fmUnitFamily.TimeFamily));
             AddParameter(ref K, new fmGlobalParameter("K", fmUnitFamily.NoUnitFamily));
             AddParameter(ref Smech, new fmGlobalParameter("Smech", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref S, new fmGlobalParameter("S", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Rfmech, new fmGlobalParameter("Rfmech", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Rf, new fmGlobalParameter("Rf", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Qgi, new fmGlobalParameter("Qgi", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Qg, new fmGlobalParameter("Qg", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref vg, new fmGlobalParameter("vg", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Mfd, new fmGlobalParameter("Mfd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Vfd, new fmGlobalParameter("Vfd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Mlcd, new fmGlobalParameter("Mlcd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Vlcd, new fmGlobalParameter("Vlcd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Mcd, new fmGlobalParameter("Mcd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Vcd, new fmGlobalParameter("Vcd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref rho_bulk, new fmGlobalParameter("rho_bulk", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Qmfid, new fmGlobalParameter("Qmfid", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Qfid, new fmGlobalParameter("Qfid", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Qmcd, new fmGlobalParameter("Qmcd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref Qcd, new fmGlobalParameter("Qcd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref qmfid, new fmGlobalParameter("qmfid", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref qfid, new fmGlobalParameter("qfid", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref qmcd, new fmGlobalParameter("qmcd", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref qcd, new fmGlobalParameter("qcd", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref S, new fmGlobalParameter("S", fmUnitFamily.ConcentrationFamily));
+            AddParameter(ref Rfmech, new fmGlobalParameter("Rfmech", fmUnitFamily.ConcentrationFamily));
+            AddParameter(ref Rf, new fmGlobalParameter("Rf", fmUnitFamily.ConcentrationFamily));
+            AddParameter(ref Qgi, new fmGlobalParameter("Qgi", fmUnitFamily.FlowRateVolume));
+            AddParameter(ref Qg, new fmGlobalParameter("Qg", fmUnitFamily.FlowRateVolume));
+            AddParameter(ref vg, new fmGlobalParameter("vg", fmUnitFamily.SpecificVolumeFamily));
+            AddParameter(ref Mfd, new fmGlobalParameter("Mfd", fmUnitFamily.MassFamily));
+            AddParameter(ref Vfd, new fmGlobalParameter("Vfd", fmUnitFamily.VolumeFamily));
+            AddParameter(ref Mlcd, new fmGlobalParameter("Mlcd", fmUnitFamily.MassFamily));
+            AddParameter(ref Vlcd, new fmGlobalParameter("Vlcd", fmUnitFamily.VolumeFamily));
+            AddParameter(ref Mcd, new fmGlobalParameter("Mcd", fmUnitFamily.MassFamily));
+            AddParameter(ref Vcd, new fmGlobalParameter("Vcd", fmUnitFamily.VolumeFamily));
+            AddParameter(ref rho_bulk, new fmGlobalParameter("rho_bulk", fmUnitFamily.DensityFamily));
+            AddParameter(ref Qmfid, new fmGlobalParameter("Qmfid", fmUnitFamily.FlowRateMass));
+            AddParameter(ref Qfid, new fmGlobalParameter("Qfid", fmUnitFamily.FlowRateMass));
+            AddParameter(ref Qmcd, new fmGlobalParameter("Qmcd", fmUnitFamily.FlowRateMass));
+            AddParameter(ref Qcd, new fmGlobalParameter("Qcd", fmUnitFamily.FlowRateMass));
+            AddParameter(ref qmfid, new fmGlobalParameter("qmfid", fmUnitFamily.SpecificFlowRateMass));
+            AddParameter(ref qfid, new fmGlobalParameter("qfid", fmUnitFamily.SpecificFlowRateVolume));
+            AddParameter(ref qmcd, new fmGlobalParameter("qmcd", fmUnitFamily.SpecificFlowRateMass));
+            AddParameter(ref qcd, new fmGlobalParameter("qcd", fmUnitFamily.SpecificFlowRateVolume));
 
             #endregion
 

@@ -44,11 +44,6 @@ namespace fmCalculationLibrary.Equations
             return 0.5 * (fmValue.Sqrt(hce * hce + 4 * Pc * kappa * Dp * tf / etaf) - hce);
         }
 
-        public static fmValue Eval_M_From_rho_V(fmValue rho, fmValue V)
-        {
-            return rho * V;
-        }
-
         public static fmValue Eval_Ms_From_Msus_Cm(fmValue Msus, fmValue Cm)
         {
             return Msus * Cm;

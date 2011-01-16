@@ -1849,14 +1849,14 @@ namespace fmCalculatorsLibrary
                 mc.value = fmFilterMachiningEquations.Eval_m_From_M_A(Mc.value, A.value);
                 vc.value = fmFilterMachiningEquations.Eval_v_From_V_A(Vc.value, A.value);
                 Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
-                Qmsus_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Qsus_d.value);
+                Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
                 Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
                 Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
-                Qms_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, Qs_d.value);
+                Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
                 Qmf.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mf.value, tf.value);
                 Qf.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vf.value, tf.value);
                 Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-                Qmf_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value);
+                Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
                 Qmc.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mc.value, tc.value);
                 Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
                 Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
@@ -2414,9 +2414,9 @@ namespace fmCalculatorsLibrary
             if (!isKnown_vs) vs.value = fmFilterMachiningEquations.Eval_vs_From_vsus_rho_Cm(vsus.value, rho_sus.value, rho_s.value, Cm.value);
 
             if (!isKnown_mc) mc.value = fmFilterMachiningEquations.Eval_mc_From_vf_kappa_rho(vf.value, kappa.value, rho_sus.value, rho_f.value);
-            if (!isKnown_mf) mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, vf.value);
-            if (!isKnown_msus) msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, vsus.value);
-            if (!isKnown_ms) ms.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, vs.value);
+            if (!isKnown_mf) mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, vf.value);
+            if (!isKnown_msus) msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, vsus.value);
+            if (!isKnown_ms) ms.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, vs.value);
 
             if (isKnown_Qf && !isKnown_Vf)
             {
@@ -2468,11 +2468,11 @@ namespace fmCalculatorsLibrary
 
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmsus_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Qsus_d.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
-            Qms_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, Qs_d.value);
+            Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmf_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value);
+            Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
             Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
@@ -2890,9 +2890,9 @@ namespace fmCalculatorsLibrary
             if (!isKnown_vs) vs.value = fmFilterMachiningEquations.Eval_vs_From_vsus_rho_Cm(vsus.value, rho_sus.value, rho_s.value, Cm.value);
 
             if (!isKnown_mc) mc.value = fmFilterMachiningEquations.Eval_mc_From_vf_kappa_rho(vf.value, kappa.value, rho_sus.value, rho_f.value);
-            if (!isKnown_mf) mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, vf.value);
-            if (!isKnown_msus) msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, vsus.value);
-            if (!isKnown_ms) ms.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, vs.value);
+            if (!isKnown_mf) mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, vf.value);
+            if (!isKnown_msus) msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, vsus.value);
+            if (!isKnown_ms) ms.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, vs.value);
 
             if (isKnown_Qf && !isKnown_Vf)
             {
@@ -2944,11 +2944,11 @@ namespace fmCalculatorsLibrary
 
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmsus_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Qsus_d.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
-            Qms_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, Qs_d.value);
+            Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmf_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value);
+            Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
             Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
@@ -3361,9 +3361,9 @@ namespace fmCalculatorsLibrary
             if (!isKnown_vs) vs.value = fmFilterMachiningEquations.Eval_vs_From_vsus_rho_Cm(vsus.value, rho_sus.value, rho_s.value, Cm.value);
 
             if (!isKnown_mc) mc.value = fmFilterMachiningEquations.Eval_mc_From_vf_kappa_rho(vf.value, kappa.value, rho_sus.value, rho_f.value);
-            if (!isKnown_mf) mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, vf.value);
-            if (!isKnown_msus) msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, vsus.value);
-            if (!isKnown_ms) ms.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, vs.value);
+            if (!isKnown_mf) mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, vf.value);
+            if (!isKnown_msus) msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, vsus.value);
+            if (!isKnown_ms) ms.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, vs.value);
 
             if (isKnown_Qf && !isKnown_Vf)
             {
@@ -3414,11 +3414,11 @@ namespace fmCalculatorsLibrary
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
             Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
-            Qmsus_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Qsus_d.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
-            Qms_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, Qs_d.value);
+            Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmf_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value);
+            Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
             Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
@@ -3830,9 +3830,9 @@ namespace fmCalculatorsLibrary
             if (!isKnown_vs) vs.value = fmFilterMachiningEquations.Eval_vs_From_vsus_rho_Cm(vsus.value, rho_sus.value, rho_s.value, Cm.value);
 
             if (!isKnown_mc) mc.value = fmFilterMachiningEquations.Eval_mc_From_vf_kappa_rho(vf.value, kappa.value, rho_sus.value, rho_f.value);
-            if (!isKnown_mf) mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, vf.value);
-            if (!isKnown_msus) msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, vsus.value);
-            if (!isKnown_ms) ms.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, vs.value);
+            if (!isKnown_mf) mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, vf.value);
+            if (!isKnown_msus) msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, vsus.value);
+            if (!isKnown_ms) ms.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, vs.value);
 
             if (isKnown_Qf && !isKnown_Vf)
             {
@@ -3883,11 +3883,11 @@ namespace fmCalculatorsLibrary
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
             Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
-            Qmsus_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Qsus_d.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
-            Qms_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_s.value, Qs_d.value);
+            Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmf_d.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Qf_d.value);
+            Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
             Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
@@ -3994,9 +3994,9 @@ namespace fmCalculatorsLibrary
             A.value = fmFilterMachiningEquations.Eval_A_From_Qms_eps_rhos_hc_n(Qms.value, eps.value, rho_s.value, hc.value, n.value);
             sf.value = fmFilterMachiningEquations.Eval_sf_From_tf_tc(tf.value, tc.value);
             Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
-            Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+            Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
             Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
-            Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+            Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
             Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
             Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
         }
@@ -4099,9 +4099,9 @@ namespace fmCalculatorsLibrary
                 throw GenerateExceptionForGroupWithoutInput(sf, tr);
 
             Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
-            Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+            Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
             Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
-            Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+            Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
             Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
             Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
         }
@@ -4179,9 +4179,9 @@ namespace fmCalculatorsLibrary
             hc.value = fmFilterMachiningEquations.Eval_hc_From_hce_Pc_kappa_Dp_tf_etaf(hce.value, Pc.value, kappa.value,
                                                                                      Dp.value, tf.value, eta_f.value);
             Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
-            Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+            Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
             Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
-            Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+            Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
             Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
             Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
         }
@@ -4226,15 +4226,15 @@ namespace fmCalculatorsLibrary
                     eps.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp.value, ne.value);
                     kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
                     Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
-                    Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                     Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
-                    Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
                     Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
                 }
                 else if (Vf.isInputed)
                 {
-                    Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
                     Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
@@ -4248,7 +4248,7 @@ namespace fmCalculatorsLibrary
                 }
                 else if (Vsus.isInputed)
                 {
-                    Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
                     Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
@@ -4306,7 +4306,7 @@ namespace fmCalculatorsLibrary
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
             Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
-            Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+            Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
         }
 
         // ReSharper disable InconsistentNaming
@@ -4338,7 +4338,7 @@ namespace fmCalculatorsLibrary
             kappa.value = fmEpsKappaEquations.Eval_kappa_From_eps_Cv(eps.value, Cv.value);
             hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vf_kappa(A.value, Vf.value, kappa.value);
             Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
-            Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+            Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
         }
 
         // ReSharper disable InconsistentNaming
@@ -4425,18 +4425,18 @@ namespace fmCalculatorsLibrary
                 if (hc.isInputed)
                 {
                     Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
-                    Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                     Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
-                    Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
                     Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
                 }
                 else if (Vf.isInputed)
                 {
                     hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vf_kappa(A.value, Vf.value, kappa.value);
-                    Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                     Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
-                    Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
                     Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
                 }
@@ -4445,16 +4445,16 @@ namespace fmCalculatorsLibrary
                     Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
                     hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vf_kappa(A.value, Vf.value, kappa.value);
                     Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
-                    Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
                     Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
                 }
                 else if (Vsus.isInputed)
                 {
-                    Msus.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_sus.value, Vsus.value);
+                    Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
                     Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
-                    Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
                     Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
                 }
@@ -4463,7 +4463,7 @@ namespace fmCalculatorsLibrary
                     Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
                     hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
                     Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
-                    Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
                     Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
                 }
@@ -4474,7 +4474,7 @@ namespace fmCalculatorsLibrary
                     Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
                     hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
                     Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
-                    Mf.value = fmFilterMachiningEquations.Eval_M_From_rho_V(rho_f.value, Vf.value);
+                    Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                 }
                 else
                     throw GenerateExceptionForGroupWithoutInput(hc, Vf, Mf, Vsus, Msus, Ms);

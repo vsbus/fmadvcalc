@@ -61,6 +61,7 @@ namespace fmCalculatorsLibrary
             var etag = variables[fmGlobalParameter.eta_g] as fmCalculationConstantParameter;
             var rhof = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
             var rhos = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            var Ms = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
 
             hcd.value = fmDeliquoringEquations.Eval_hcd_from_hcf_epsf_epsd(hc.value, eps.value, epsd.value);
 
@@ -76,7 +77,25 @@ namespace fmCalculatorsLibrary
             Rfmech.value = fmDeliquoringEquations.Eval_Rf_From_eps_rhos_rhof_S(epsd.value, rhos.value, rhof.value, Smech.value);
             Rf.value = fmDeliquoringEquations.Eval_Rf_From_eps_rhos_rhof_S(epsd.value, rhos.value, rhof.value, S.value);
             rho_bulk.value = fmDeliquoringEquations.Eval_rho_bulk_From_rhof_epsd_rhos_S(rhof.value, epsd.value, rhos.value, S.value);
-
+            Mcd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_bulk.value, Vcd.value);
+            fmValue pmoverpn = fmDeliquoringEquations.Eval_pmOverPn_vacuum_From_Dpd(Dpd.value);
+            fmValue Qgimax = fmDeliquoringEquations.Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(A.value, pcd.value, pmoverpn, Dpd.value, etag.value, hcd.value, hce.value, Tetta.value, ag1.value, ag2.value);
+            Qgi.value = fmDeliquoringEquations.Eval_Qgi_From_Qgimax_ag3_K(Qgimax, ag3.value, K.value);
+            fmValue Qgt = fmDeliquoringEquations.Eval_Qgt_From_Qgimax_ag3_K(Qgimax, ag3.value, K.value);
+            Qg.value = fmDeliquoringEquations.Eval_Qg_From_Qgt_td_tc(Qgt, td.value, tc.value);
+            vg.value = fmDeliquoringEquations.Eval_vg_From_Qgt_td_Ms(Qgt, td.value, Ms.value);
+            Vfd.value = fmDeliquoringEquations.Eval_Vfd_From_Vcd_epsd_Smech(Vcd.value, epsd.value, Smech.value);
+            Mfd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhof.value, Vfd.value);
+            Vlcd.value = fmDeliquoringEquations.Eval_Vlcd_From_Vcd_epsd_S(Vcd.value, epsd.value, S.value);
+            Mlcd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhof.value, Vlcd.value);
+            Qfid.value = fmDeliquoringEquations.Eval_Qfid_From_Vcd_ad1_ad2_Srem_K_pcd_Dpd_pke_etaf_hcd_hce(Vcd.value, ad1.value, ad2.value, Srem.value, K.value, pcd.value, Dpd.value, pke.value, etaf.value, hcd.value, hce.value);
+            Qmfid.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhof.value, Qfid.value);
+            Qcd.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vcd.value, tc.value);
+            Qmcd.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mcd.value, tc.value);
+            qmfid.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmfid.value, A.value);
+            qfid.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qfid.value, A.value);
+            qmcd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmcd.value, A.value);
+            qcd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qcd.value, A.value);
         }
     }
 }

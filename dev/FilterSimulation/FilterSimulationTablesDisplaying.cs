@@ -8,6 +8,7 @@ using fmCalcBlocksLibrary.BlockParameter;
 using fmCalcBlocksLibrary.Blocks;
 using fmCalculationLibrary.MeasureUnits;
 using fmCalculationLibrary;
+using fmCalculatorsLibrary;
 
 namespace FilterSimulation
 {
@@ -741,6 +742,7 @@ namespace FilterSimulation
                 SelectCurrentItemsInSolution(sol);
 
                 CopySimToCommonFilterMachiningBlock(sol.currentObjects.Simulation);
+                CopySimToCommonDeliquoringSimulationBlock(sol.currentObjects.Simulation);
 
                 ShowHideSelectedParametersInSimulationDataGrid();
 
@@ -767,6 +769,40 @@ namespace FilterSimulation
             return s[0].Trim();
         }
 
+        private void CopySimToCommonDeliquoringSimulationBlock(fmFilterSimulation sim)
+        {
+            if (sim != null)
+            {
+                if (m_commonDeliquoringSimulationBlock == null)
+                {
+                    InitCommonDeliquoringSimulationBlock();
+                }
+
+                if (m_commonDeliquoringSimulationBlock != null)
+                {
+                    //m_commonDeliquoringSimulationBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.calculationOption);
+
+                    //for (int i = 0; i < m_commonDeliquoringSimulationBlock.Parameters.Count; ++i)
+                    //{
+                    //    commonDeliquoringSimulationBlockDataGrid.Rows[i].Visible = m_commonDeliquoringSimulationBlock.Parameters[i].group != null
+                    //        && parametersToDisplay.Contains(m_commonDeliquoringSimulationBlock.Parameters[i].globalParameter);
+                    //}
+
+                    for (int i = 0; i < m_commonDeliquoringSimulationBlock.ConstantParameters.Count; ++i)
+                    {
+                        fmBlockConstantParameter par = m_commonDeliquoringSimulationBlock.ConstantParameters[i];
+                        par.value = sim.Parameters[par.globalParameter].value;
+                    }
+                    for (int i = 0; i < m_commonDeliquoringSimulationBlock.Parameters.Count; ++i)
+                    {
+                        fmBlockVariableParameter par = m_commonDeliquoringSimulationBlock.Parameters[i];
+                        par.value = sim.Parameters[par.globalParameter].value;
+                        par.isInputed = (sim.Parameters[par.globalParameter] as fmCalculationVariableParameter).isInputed;
+                    }
+                    m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
+                }
+            }
+        }
         private void CopySimToCommonFilterMachiningBlock(fmFilterSimulation sim)
         {
             if (sim != null)
@@ -800,6 +836,29 @@ namespace FilterSimulation
             }
         }
 
+
+        private void InitCommonDeliquoringSimulationBlock()
+        {
+            var voidBlock = new fmDeliquoringSimualtionBlock();
+            commonDeliquoringSimulationBlockDataGrid.RowCount = voidBlock.Parameters.Count;
+            var parToCell = new Dictionary<fmGlobalParameter, DataGridViewCell>();
+            for (int i = 0; i < voidBlock.Parameters.Count; ++i)
+            {
+                commonDeliquoringSimulationBlockDataGrid[commonDeliquoringSimulationBlockParameterNameColumn.Index, i].Value = voidBlock.Parameters[i].globalParameter.name;
+                parToCell[voidBlock.Parameters[i].globalParameter] = commonDeliquoringSimulationBlockDataGrid[commonDeliquoringSimulationBlockParameterValueColumn.Index, i];
+            }
+
+            m_commonDeliquoringSimulationBlock = new fmDeliquoringSimualtionBlock();
+            foreach (var p in m_commonDeliquoringSimulationBlock.Parameters)
+            {
+                m_commonDeliquoringSimulationBlock.AssignCell(p, parToCell[p.globalParameter]);
+            }
+            m_commonDeliquoringSimulationBlock.UpdateCellsBackColor();
+
+            m_commonDeliquoringSimulationBlock.ValuesChangedByUser += commonDeliquoringSimulationBlock_ValuesChangedByUser;
+
+            UpdateUnitsOfCommonDeliquoringSimulationBlock();
+        }
         private void InitCommonFilterMachiningBlock()
         {
             var voidBlock = new fmFilterMachiningBlock();
@@ -822,6 +881,19 @@ namespace FilterSimulation
             UpdateUnitsOfCommonFilterMachiningBlock();
         }
 
+// ReSharper disable InconsistentNaming
+        void commonDeliquoringSimulationBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+// ReSharper restore InconsistentNaming
+        {
+            foreach (fmBlockVariableParameter p in m_commonDeliquoringSimulationBlock.Parameters)
+            {
+                fmCalculationVariableParameter p2 = m_fSolution.currentObjects.Simulation.Parameters[p.globalParameter] as fmCalculationVariableParameter;
+                p2.value = p.value;
+                p2.isInputed = p.IsInputed;
+            }
+
+            //m_fSolution.currentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();
+        }
 // ReSharper disable InconsistentNaming
         void commonFilterMachiningBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
 // ReSharper restore InconsistentNaming
@@ -917,6 +989,16 @@ namespace FilterSimulation
             RewriteDataForAllBlocks();
         }
 
+        private void UpdateUnitsOfCommonDeliquoringSimulationBlock()
+        {
+            if (m_commonDeliquoringSimulationBlock != null)
+            {
+                for (int i = 0; i < m_commonDeliquoringSimulationBlock.Parameters.Count; ++i)
+                {
+                    commonDeliquoringSimulationBlockDataGrid[commonDeliquoringSimulationBlockUnitColumn.Index, i].Value = m_commonDeliquoringSimulationBlock.Parameters[i].globalParameter.UnitName;
+                }
+            }
+        }
         private void UpdateUnitsOfCommonFilterMachiningBlock()
         {
             if (m_commonFilterMachiningBlock != null)
@@ -1044,6 +1126,7 @@ namespace FilterSimulation
 
             //fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
             //sm.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
+            DisplaySolution(m_fSolution);
         }
 
         // ReSharper disable InconsistentNaming
@@ -1160,7 +1243,7 @@ namespace FilterSimulation
                 fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
             }
 
-            DisplaySolution(m_fSolution);
+            sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
         }
     }
 }
