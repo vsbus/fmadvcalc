@@ -311,7 +311,7 @@ namespace fmCalculatorsLibrary
             #region A
             if (isKnown_ms)
             {
-                vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, ms.value);
+                vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, ms.value);
                 isKnown_vs = true;
             }
 
@@ -323,7 +323,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_msus)
             {
-                vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, msus.value);
+                vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, msus.value);
                 isKnown_vsus = true;
             }
 
@@ -341,7 +341,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_mf)
             {
-                vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, mf.value);
+                vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, mf.value);
                 isKnown_vf = true;
             }
 
@@ -366,7 +366,7 @@ namespace fmCalculatorsLibrary
             #region D
             if (isKnown_Ms)
             {
-                Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 isKnown_Vs = true;
             }
 
@@ -378,7 +378,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Msus)
             {
-                Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                 isKnown_Vsus = true;
             }
 
@@ -390,7 +390,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Mf)
             {
-                Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                 isKnown_Vf = true;
             }
 
@@ -415,13 +415,13 @@ namespace fmCalculatorsLibrary
             #region E
             if (isKnown_Qms)
             {
-                Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 isKnown_Qs = true;
             }
 
             if (isKnown_Qmsus)
             {
-                Qsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Qmsus.value);
+                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
                 isKnown_Qsus = true;
             }
 
@@ -446,7 +446,7 @@ namespace fmCalculatorsLibrary
             #region F
             if (isKnown_Qmf)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Qmf.value);
+                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
             if (isKnown_Qsusd)
@@ -708,7 +708,7 @@ namespace fmCalculatorsLibrary
             #region A
             if (isKnown_ms)
             {
-                vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, ms.value);
+                vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, ms.value);
                 isKnown_vs = true;
             }
 
@@ -720,7 +720,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_msus)
             {
-                vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, msus.value);
+                vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, msus.value);
                 isKnown_vsus = true;
             }
 
@@ -738,7 +738,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_mf)
             {
-                vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, mf.value);
+                vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, mf.value);
                 isKnown_vf = true;
             }
 
@@ -763,7 +763,7 @@ namespace fmCalculatorsLibrary
             #region D
             if (isKnown_Ms)
             {
-                Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 isKnown_Vs = true;
             }
 
@@ -775,7 +775,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Msus)
             {
-                Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                 isKnown_Vsus = true;
             }
 
@@ -787,7 +787,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Mf)
             {
-                Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                 isKnown_Vf = true;
             }
 
@@ -812,13 +812,13 @@ namespace fmCalculatorsLibrary
             #region E
             if (isKnown_Qms)
             {
-                Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 isKnown_Qs = true;
             }
 
             if (isKnown_Qmsus)
             {
-                Qsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Qmsus.value);
+                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
                 isKnown_Qsus = true;
             }
 
@@ -843,7 +843,7 @@ namespace fmCalculatorsLibrary
             #region F
             if (isKnown_Qmf)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Qmf.value);
+                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
             if (isKnown_Qsusd)
@@ -1103,7 +1103,7 @@ namespace fmCalculatorsLibrary
             #region A
             if (isKnown_ms)
             {
-                vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, ms.value);
+                vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, ms.value);
                 isKnown_vs = true;
             }
 
@@ -1115,7 +1115,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_msus)
             {
-                vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, msus.value);
+                vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, msus.value);
                 isKnown_vsus = true;
             }
 
@@ -1133,7 +1133,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_mf)
             {
-                vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, mf.value);
+                vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, mf.value);
                 isKnown_vf = true;
             }
 
@@ -1158,7 +1158,7 @@ namespace fmCalculatorsLibrary
             #region D
             if (isKnown_Ms)
             {
-                Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 isKnown_Vs = true;
             }
 
@@ -1170,7 +1170,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Msus)
             {
-                Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                 isKnown_Vsus = true;
             }
 
@@ -1182,7 +1182,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Mf)
             {
-                Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                 isKnown_Vf = true;
             }
 
@@ -1207,13 +1207,13 @@ namespace fmCalculatorsLibrary
             #region E
             if (isKnown_Qms)
             {
-                Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 isKnown_Qs = true;
             }
 
             if (isKnown_Qmsus)
             {
-                Qsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Qmsus.value);
+                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
                 isKnown_Qsus = true;
             }
 
@@ -1238,7 +1238,7 @@ namespace fmCalculatorsLibrary
             #region F
             if (isKnown_Qmf)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Qmf.value);
+                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -1490,7 +1490,7 @@ namespace fmCalculatorsLibrary
             #region A
             if (isKnown_ms)
             {
-                vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, ms.value);
+                vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, ms.value);
                 isKnown_vs = true;
             }
 
@@ -1502,7 +1502,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_msus)
             {
-                vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, msus.value);
+                vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, msus.value);
                 isKnown_vsus = true;
             }
 
@@ -1520,7 +1520,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_mf)
             {
-                vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, mf.value);
+                vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, mf.value);
                 isKnown_vf = true;
             }
 
@@ -1545,7 +1545,7 @@ namespace fmCalculatorsLibrary
             #region D
             if (isKnown_Ms)
             {
-                Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 isKnown_Vs = true;
             }
 
@@ -1557,7 +1557,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Msus)
             {
-                Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                 isKnown_Vsus = true;
             }
 
@@ -1569,7 +1569,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Mf)
             {
-                Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                 isKnown_Vf = true;
             }
 
@@ -1594,13 +1594,13 @@ namespace fmCalculatorsLibrary
             #region E
             if (isKnown_Qms)
             {
-                Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 isKnown_Qs = true;
             }
 
             if (isKnown_Qmsus)
             {
-                Qsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Qmsus.value);
+                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
                 isKnown_Qsus = true;
             }
 
@@ -1625,7 +1625,7 @@ namespace fmCalculatorsLibrary
             #region F
             if (isKnown_Qmf)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Qmf.value);
+                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -1850,7 +1850,7 @@ namespace fmCalculatorsLibrary
                 vc.value = fmFilterMachiningEquations.Eval_v_From_V_A(Vc.value, A.value);
                 Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
                 Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
-                Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
                 Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
                 Qmf.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mf.value, tf.value);
@@ -2197,7 +2197,7 @@ namespace fmCalculatorsLibrary
             #region A
             if (isKnown_ms)
             {
-                vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, ms.value);
+                vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, ms.value);
                 isKnown_vs = true;
             }
 
@@ -2209,7 +2209,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_msus)
             {
-                vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, msus.value);
+                vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, msus.value);
                 isKnown_vsus = true;
             }
 
@@ -2227,7 +2227,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_mf)
             {
-                vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, mf.value);
+                vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, mf.value);
                 isKnown_vf = true;
             }
 
@@ -2252,7 +2252,7 @@ namespace fmCalculatorsLibrary
             #region D
             if (isKnown_Ms)
             {
-                Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 isKnown_Vs = true;
             }
 
@@ -2264,7 +2264,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Msus)
             {
-                Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                 isKnown_Vsus = true;
             }
 
@@ -2276,7 +2276,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Mf)
             {
-                Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                 isKnown_Vf = true;
             }
 
@@ -2301,13 +2301,13 @@ namespace fmCalculatorsLibrary
             #region E
             if (isKnown_Qms)
             {
-                Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 isKnown_Qs = true;
             }
 
             if (isKnown_Qmsus)
             {
-                Qsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Qmsus.value);
+                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
                 isKnown_Qsus = true;
             }
 
@@ -2332,7 +2332,7 @@ namespace fmCalculatorsLibrary
             #region F
             if (isKnown_Qmf)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Qmf.value);
+                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
             if (isKnown_Qsusd)
@@ -2462,7 +2462,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_Qmc) Qmc.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mc.value, tc.value);
 
             if (!isKnown_Qsus) Qsus.value = fmFilterMachiningEquations.Eval_Qsus_From_Vsus_tc(Vsus.value, tc.value);
-            if (!isKnown_Qs) Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+            if (!isKnown_Qs) Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
             if (!isKnown_Qf) Qf.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vf.value, tf.value);
             if (!isKnown_Qc) Qc.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vc.value, tc.value);
 
@@ -2673,7 +2673,7 @@ namespace fmCalculatorsLibrary
             #region A
             if (isKnown_ms)
             {
-                vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, ms.value);
+                vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, ms.value);
                 isKnown_vs = true;
             }
 
@@ -2685,7 +2685,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_msus)
             {
-                vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, msus.value);
+                vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, msus.value);
                 isKnown_vsus = true;
             }
 
@@ -2703,7 +2703,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_mf)
             {
-                vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, mf.value);
+                vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, mf.value);
                 isKnown_vf = true;
             }
 
@@ -2728,7 +2728,7 @@ namespace fmCalculatorsLibrary
             #region D
             if (isKnown_Ms)
             {
-                Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 isKnown_Vs = true;
             }
 
@@ -2740,7 +2740,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Msus)
             {
-                Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                 isKnown_Vsus = true;
             }
 
@@ -2752,7 +2752,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Mf)
             {
-                Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                 isKnown_Vf = true;
             }
 
@@ -2777,13 +2777,13 @@ namespace fmCalculatorsLibrary
             #region E
             if (isKnown_Qms)
             {
-                Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 isKnown_Qs = true;
             }
 
             if (isKnown_Qmsus)
             {
-                Qsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Qmsus.value);
+                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
                 isKnown_Qsus = true;
             }
 
@@ -2808,7 +2808,7 @@ namespace fmCalculatorsLibrary
             #region F
             if (isKnown_Qmf)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Qmf.value);
+                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
             if (isKnown_Qsusd)
@@ -2938,7 +2938,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_Qmc) Qmc.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mc.value, tc.value);
 
             if (!isKnown_Qsus) Qsus.value = fmFilterMachiningEquations.Eval_Qsus_From_Vsus_tc(Vsus.value, tc.value);
-            if (!isKnown_Qs) Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+            if (!isKnown_Qs) Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
             if (!isKnown_Qf) Qf.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vf.value, tf.value);
             if (!isKnown_Qc) Qc.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vc.value, tc.value);
 
@@ -3149,7 +3149,7 @@ namespace fmCalculatorsLibrary
             #region A
             if (isKnown_ms)
             {
-                vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, ms.value);
+                vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, ms.value);
                 isKnown_vs = true;
             }
 
@@ -3161,7 +3161,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_msus)
             {
-                vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, msus.value);
+                vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, msus.value);
                 isKnown_vsus = true;
             }
 
@@ -3179,7 +3179,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_mf)
             {
-                vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, mf.value);
+                vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, mf.value);
                 isKnown_vf = true;
             }
 
@@ -3204,7 +3204,7 @@ namespace fmCalculatorsLibrary
             #region D
             if (isKnown_Ms)
             {
-                Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 isKnown_Vs = true;
             }
 
@@ -3216,7 +3216,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Msus)
             {
-                Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                 isKnown_Vsus = true;
             }
 
@@ -3228,7 +3228,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Mf)
             {
-                Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                 isKnown_Vf = true;
             }
 
@@ -3253,13 +3253,13 @@ namespace fmCalculatorsLibrary
             #region E
             if (isKnown_Qms)
             {
-                Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 isKnown_Qs = true;
             }
 
             if (isKnown_Qmsus)
             {
-                Qsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Qmsus.value);
+                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
                 isKnown_Qsus = true;
             }
 
@@ -3284,7 +3284,7 @@ namespace fmCalculatorsLibrary
             #region F
             if (isKnown_Qmf)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Qmf.value);
+                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -3407,7 +3407,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_Qmc) Qmc.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mc.value, tc.value);
 
             if (!isKnown_Qsus) Qsus.value = fmFilterMachiningEquations.Eval_Qsus_From_Vsus_tc(Vsus.value, tc.value);
-            if (!isKnown_Qs) Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+            if (!isKnown_Qs) Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
             if (!isKnown_Qf) Qf.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vf.value, tf.value);
             if (!isKnown_Qc) Qc.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vc.value, tc.value);
 
@@ -3618,7 +3618,7 @@ namespace fmCalculatorsLibrary
             #region A
             if (isKnown_ms)
             {
-                vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, ms.value);
+                vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, ms.value);
                 isKnown_vs = true;
             }
 
@@ -3630,7 +3630,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_msus)
             {
-                vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, msus.value);
+                vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, msus.value);
                 isKnown_vsus = true;
             }
 
@@ -3648,7 +3648,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_mf)
             {
-                vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, mf.value);
+                vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, mf.value);
                 isKnown_vf = true;
             }
 
@@ -3673,7 +3673,7 @@ namespace fmCalculatorsLibrary
             #region D
             if (isKnown_Ms)
             {
-                Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 isKnown_Vs = true;
             }
             
@@ -3685,7 +3685,7 @@ namespace fmCalculatorsLibrary
             
             if (isKnown_Msus)
             {
-                Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                 isKnown_Vsus = true;
             }
 
@@ -3697,7 +3697,7 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Mf)
             {
-                Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                 isKnown_Vf = true;
             }
 
@@ -3722,13 +3722,13 @@ namespace fmCalculatorsLibrary
             #region E
             if (isKnown_Qms)
             {
-                Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 isKnown_Qs = true;
             }
             
             if (isKnown_Qmsus)
             {
-                Qsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Qmsus.value);
+                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
                 isKnown_Qsus = true;
             }
             
@@ -3753,7 +3753,7 @@ namespace fmCalculatorsLibrary
             #region F
             if (isKnown_Qmf)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Qmf.value);
+                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -3876,7 +3876,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_Qmc) Qmc.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mc.value, tc.value);
             
             if (!isKnown_Qsus) Qsus.value = fmFilterMachiningEquations.Eval_Qsus_From_Vsus_tc(Vsus.value, tc.value);
-            if (!isKnown_Qs) Qs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Qms.value);
+            if (!isKnown_Qs) Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
             if (!isKnown_Qf) Qf.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vf.value, tf.value);
             if (!isKnown_Qc) Qc.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vc.value, tc.value);
             
@@ -3998,7 +3998,7 @@ namespace fmCalculatorsLibrary
             Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
             Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
             Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-            Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+            Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
         }
 
         #region exceptionTools
@@ -4103,7 +4103,7 @@ namespace fmCalculatorsLibrary
             Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
             Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
             Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-            Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+            Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
         }
 
         private static Exception GenerateExceptionForGroupWithoutInput(params fmCalculationBaseParameter [] parameters)
@@ -4183,7 +4183,7 @@ namespace fmCalculatorsLibrary
             Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
             Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
             Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-            Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+            Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
         }
         private void DoSubCalculationsStandart456()
         {
@@ -4230,41 +4230,41 @@ namespace fmCalculatorsLibrary
                     Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
                     Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Vf.isInputed)
                 {
                     Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Mf.isInputed)
                 {
-                    Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                    Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVsus_From_MVf();
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Vsus.isInputed)
                 {
                     Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Msus.isInputed)
                 {
-                    Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                    Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Ms.isInputed)
                 {
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                     Msus.value = fmFilterMachiningEquations.Eval_Msus_From_Ms_Cm(Ms.value, Cm.value);
-                    Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                    Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                     DoSubCalculationsStandart4_Dp_eps_kappa_hc_MVf_From_MVsus();
                 }
                 else
@@ -4429,7 +4429,7 @@ namespace fmCalculatorsLibrary
                     Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
                     Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Vf.isInputed)
                 {
@@ -4438,16 +4438,16 @@ namespace fmCalculatorsLibrary
                     Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
                     Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Mf.isInputed)
                 {
-                    Vf.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_f.value, Mf.value);
+                    Vf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Mf.value);
                     hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vf_kappa(A.value, Vf.value, kappa.value);
                     Vsus.value = fmFilterMachiningEquations.Eval_Vsus_From_A_hc_kappa(A.value, hc.value, kappa.value);
                     Msus.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Vsus.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Vsus.isInputed)
                 {
@@ -4456,22 +4456,22 @@ namespace fmCalculatorsLibrary
                     Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
                     Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Msus.isInputed)
                 {
-                    Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                    Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                     hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
                     Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
                     Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);
                     Ms.value = fmFilterMachiningEquations.Eval_Ms_From_Msus_Cm(Msus.value, Cm.value);
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                 }
                 else if (Ms.isInputed)
                 {
-                    Vs.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_s.value, Ms.value);
+                    Vs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Ms.value);
                     Msus.value = fmFilterMachiningEquations.Eval_Msus_From_Ms_Cm(Ms.value, Cm.value);
-                    Vsus.value = fmFilterMachiningEquations.Eval_V_From_rho_M(rho_sus.value, Msus.value);
+                    Vsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Msus.value);
                     hc.value = fmFilterMachiningEquations.Eval_hc_From_A_Vsus_kappa(A.value, Vsus.value, kappa.value);
                     Vf.value = fmFilterMachiningEquations.Eval_Vf_From_A_hc_kappa(A.value, hc.value, kappa.value);
                     Mf.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Vf.value);

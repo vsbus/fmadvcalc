@@ -28,9 +28,19 @@ namespace fmCalculationLibrary.Equations
             return pcd * (Dpd - pke) / (epsd * etaf * hcd * (hcd + hce)) * td;
         }
 
+        public static fmValue Eval_td_From_pcd_Dpd_pke_epsd_etaf_hcd_hce_K(fmValue pcd, fmValue Dpd, fmValue pke, fmValue epsd, fmValue etaf, fmValue hcd, fmValue hce, fmValue K)
+        {
+            return K / (pcd * (Dpd - pke) / (epsd * etaf * hcd * (hcd + hce)));
+        }
+
         public static fmValue Eval_Smech_From_Srem_ad1_ad2_K(fmValue Srem, fmValue ad1, fmValue ad2, fmValue K)
         {
             return Srem + (1 - Srem) * fmValue.Pow(1 + ad2 * K, -ad1);
+        }
+
+        public static fmValue Eval_K_From_Srem_ad1_ad2_Smech(fmValue Srem, fmValue ad1, fmValue ad2, fmValue Smech)
+        {
+            return (fmValue.Pow((Smech - Srem) / (1 - Srem), -1 / ad1) - 1) / ad2;
         }
 
         public static fmValue Eval_Vcd_From_A_hcd(fmValue A, fmValue hcd)
@@ -71,6 +81,11 @@ namespace fmCalculationLibrary.Equations
             return rhof * (1 + (1 - epsd) * (rhos / rhof - 1) - epsd * (1 - S));
         }
 
+        public static fmValue Eval_S_From_eps_rhos_rhof_Rf(fmValue epsd, fmValue rhos, fmValue rhof, fmValue Rf)
+        {
+            return Rf * (1 - epsd) * rhos / ((1 - Rf) * epsd * rhof);
+        }
+
         public static fmValue Eval_Rf_From_eps_rhos_rhof_S(fmValue epsd, fmValue rhos, fmValue rhof, fmValue S)
         {
             return 1 / (((1 - epsd) * rhos) / (epsd * rhof * S) + 1);
@@ -88,6 +103,11 @@ namespace fmCalculationLibrary.Equations
             fmValue Tn = new fmValue(273);
             fmValue T = Tetta + Tn;
             return A * pcd * pmoverpn * Dpd * Tn / (etag * (hcd + hce) * T) * (ag1 + ag2 * fmValue.Log(Dpd / bar));
+        }
+
+        public static fmValue Eval_K_From_Qgimax_ag3_Qgi(fmValue Qgimax, fmValue ag3, fmValue Qgi)
+        {
+            return -fmValue.Log(1 - Qgi / Qgimax) / ag3;
         }
 
         public static fmValue Eval_Qgi_From_Qgimax_ag3_K(fmValue Qgimax, fmValue ag3, fmValue K)
@@ -110,6 +130,11 @@ namespace fmCalculationLibrary.Equations
             return Qgt * td / Ms;
         }
 
+        public static fmValue Eval_Smech_From_Vcd_epsd_Vfd(fmValue Vcd, fmValue epsd, fmValue Vfd)
+        {
+            return 1 - Vfd / (Vcd * epsd);
+        }
+
         public static fmValue Eval_Vfd_From_Vcd_epsd_Smech(fmValue Vcd, fmValue epsd, fmValue Smech)
         {
             return Vcd * epsd * (1 - Smech);
@@ -120,11 +145,23 @@ namespace fmCalculationLibrary.Equations
             return Vcd * epsd * S;
         }
 
+        public static fmValue Eval_K_From_Vcd_ad1_ad2_Srem_Qfid_pcd_Dpd_pke_etaf_hcd_hce(
+            fmValue Vcd, fmValue ad1, fmValue ad2, fmValue Srem, fmValue Qfid, fmValue pcd,
+            fmValue Dpd, fmValue pke, fmValue etaf, fmValue hcd, fmValue hce)
+        {
+            return (fmValue.Pow(Qfid * etaf * hcd * (hcd + hce) / (Vcd * ad1 * ad2 * (1 - Srem) * pcd * (Dpd - pke)), 1 / (ad1 + 1)) - 1) / ad2;
+        }
+
         public static fmValue Eval_Qfid_From_Vcd_ad1_ad2_Srem_K_pcd_Dpd_pke_etaf_hcd_hce(
             fmValue Vcd, fmValue ad1, fmValue ad2, fmValue Srem, fmValue K, fmValue pcd,
             fmValue Dpd, fmValue pke, fmValue etaf, fmValue hcd, fmValue hce)
         {
             return Vcd * ad1 * ad2 * (1 - Srem) * fmValue.Pow(1 + ad2 * K, -ad1 - 1) * pcd * (Dpd - pke) / (etaf * hcd * (hcd + hce));
+        }
+
+        public static fmValue Eval_sd_From_td_tc(fmValue td, fmValue tc)
+        {
+            return td / tc;
         }
     }
 }

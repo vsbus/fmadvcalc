@@ -227,11 +227,6 @@ namespace fmCalculationLibrary.Equations
             return SelectBestDpRoot(roots);
         }
 
-        public static fmValue Eval_V_From_rho_M(fmValue rho, fmValue M)
-        {
-            return M / rho;
-        }
-
         public static fmValue Eval_hc_From_A_Vsus_kappa(fmValue A, fmValue Vsus, fmValue kappa)
         {
             return Vsus * kappa / (A * (1 + kappa));
