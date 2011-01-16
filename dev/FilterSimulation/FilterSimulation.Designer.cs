@@ -44,6 +44,7 @@ namespace FilterSimulation
             this.suspensionParametersAndCalcOptionsPanel = new System.Windows.Forms.Panel();
             this.suspensionParametersPanel = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.calculateLimitsCheckBox = new System.Windows.Forms.CheckBox();
             this.commonCalcBlockDataGrid = new fmDataGrid.fmDataGrid();
             this.commonCalcBlockParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commonCalcBlockUnitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,21 +56,19 @@ namespace FilterSimulation
             this.deliquoringMaterialParametersDataGrid = new fmDataGrid.fmDataGrid();
             this.deliquoringMaterialParametersParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.deliquoringMaterialParametersUnitsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.calculateLimitsCheckBox = new System.Windows.Forms.CheckBox();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.panelMaterialParameters = new System.Windows.Forms.Panel();
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid = new fmDataGrid.fmDataGrid();
             this.epsKappaParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.epsKappaUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.liquidDataGrid = new fmDataGrid.fmDataGrid();
             this.liquidParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.liquidParameterUnits = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.splitter6 = new System.Windows.Forms.Splitter();
-            this.simulationOptionsGroupBox = new System.Windows.Forms.Panel();
-            this.calculationOptionChangeButton = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panelSimSerSusInput = new System.Windows.Forms.Panel();
             this.meterialInputSuspensionRadioButton = new System.Windows.Forms.RadioButton();
             this.meterialInputSerieRadioButton = new System.Windows.Forms.RadioButton();
             this.meterialInputSimualationRadioButton = new System.Windows.Forms.RadioButton();
+            this.splitter6 = new System.Windows.Forms.Splitter();
+            this.calculationOptionChangeButton = new System.Windows.Forms.Button();
             this.splitter4 = new System.Windows.Forms.Splitter();
             this.secondFromTopPanel = new System.Windows.Forms.Panel();
             this.simSeriesPanel = new System.Windows.Forms.Panel();
@@ -235,11 +234,10 @@ namespace FilterSimulation
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).BeginInit();
-            this.panel7.SuspendLayout();
+            this.panelMaterialParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).BeginInit();
-            this.simulationOptionsGroupBox.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.panelSimSerSusInput.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.simSeriesDataGrid)).BeginInit();
@@ -345,20 +343,19 @@ namespace FilterSimulation
             // 
             this.suspensionParametersAndCalcOptionsPanel.Controls.Add(this.suspensionParametersPanel);
             this.suspensionParametersAndCalcOptionsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.suspensionParametersAndCalcOptionsPanel.Location = new System.Drawing.Point(0, 253);
+            this.suspensionParametersAndCalcOptionsPanel.Location = new System.Drawing.Point(0, 184);
             this.suspensionParametersAndCalcOptionsPanel.Name = "suspensionParametersAndCalcOptionsPanel";
-            this.suspensionParametersAndCalcOptionsPanel.Size = new System.Drawing.Size(980, 179);
+            this.suspensionParametersAndCalcOptionsPanel.Size = new System.Drawing.Size(980, 248);
             this.suspensionParametersAndCalcOptionsPanel.TabIndex = 7;
             // 
             // suspensionParametersPanel
             // 
             this.suspensionParametersPanel.Controls.Add(this.panel6);
             this.suspensionParametersPanel.Controls.Add(this.splitter6);
-            this.suspensionParametersPanel.Controls.Add(this.simulationOptionsGroupBox);
             this.suspensionParametersPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.suspensionParametersPanel.Location = new System.Drawing.Point(0, 0);
             this.suspensionParametersPanel.Name = "suspensionParametersPanel";
-            this.suspensionParametersPanel.Size = new System.Drawing.Size(980, 179);
+            this.suspensionParametersPanel.Size = new System.Drawing.Size(980, 248);
             this.suspensionParametersPanel.TabIndex = 5;
             // 
             // panel6
@@ -367,12 +364,23 @@ namespace FilterSimulation
             this.panel6.Controls.Add(this.calculateLimitsCheckBox);
             this.panel6.Controls.Add(this.commonCalcBlockDataGrid);
             this.panel6.Controls.Add(this.deliquoringMaterialParametersDataGrid);
-            this.panel6.Controls.Add(this.panel7);
+            this.panel6.Controls.Add(this.panelMaterialParameters);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(100, 0);
+            this.panel6.Location = new System.Drawing.Point(3, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(880, 179);
+            this.panel6.Size = new System.Drawing.Size(977, 248);
             this.panel6.TabIndex = 17;
+            // 
+            // calculateLimitsCheckBox
+            // 
+            this.calculateLimitsCheckBox.AutoSize = true;
+            this.calculateLimitsCheckBox.Location = new System.Drawing.Point(666, 4);
+            this.calculateLimitsCheckBox.Name = "calculateLimitsCheckBox";
+            this.calculateLimitsCheckBox.Size = new System.Drawing.Size(52, 17);
+            this.calculateLimitsCheckBox.TabIndex = 14;
+            this.calculateLimitsCheckBox.Text = "Limits";
+            this.calculateLimitsCheckBox.UseVisualStyleBackColor = true;
+            this.calculateLimitsCheckBox.CheckedChanged += new System.EventHandler(this.calculateLimitsCheckBox_CheckedChanged);
             // 
             // commonCalcBlockDataGrid
             // 
@@ -397,7 +405,7 @@ namespace FilterSimulation
             this.commonCalcBlockDataGrid.Name = "commonCalcBlockDataGrid";
             this.commonCalcBlockDataGrid.RowHeadersVisible = false;
             this.commonCalcBlockDataGrid.RowTemplate.Height = 16;
-            this.commonCalcBlockDataGrid.Size = new System.Drawing.Size(292, 175);
+            this.commonCalcBlockDataGrid.Size = new System.Drawing.Size(292, 244);
             this.commonCalcBlockDataGrid.TabIndex = 13;
             // 
             // commonCalcBlockParameterNameColumn
@@ -471,7 +479,7 @@ namespace FilterSimulation
             this.deliquoringMaterialParametersDataGrid.Name = "deliquoringMaterialParametersDataGrid";
             this.deliquoringMaterialParametersDataGrid.RowHeadersVisible = false;
             this.deliquoringMaterialParametersDataGrid.RowTemplate.Height = 16;
-            this.deliquoringMaterialParametersDataGrid.Size = new System.Drawing.Size(205, 175);
+            this.deliquoringMaterialParametersDataGrid.Size = new System.Drawing.Size(205, 244);
             this.deliquoringMaterialParametersDataGrid.TabIndex = 16;
             // 
             // deliquoringMaterialParametersParameterNameColumn
@@ -486,26 +494,17 @@ namespace FilterSimulation
             this.deliquoringMaterialParametersUnitsColumn.Name = "deliquoringMaterialParametersUnitsColumn";
             this.deliquoringMaterialParametersUnitsColumn.Width = 65;
             // 
-            // calculateLimitsCheckBox
+            // panelMaterialParameters
             // 
-            this.calculateLimitsCheckBox.AutoSize = true;
-            this.calculateLimitsCheckBox.Location = new System.Drawing.Point(666, 4);
-            this.calculateLimitsCheckBox.Name = "calculateLimitsCheckBox";
-            this.calculateLimitsCheckBox.Size = new System.Drawing.Size(52, 17);
-            this.calculateLimitsCheckBox.TabIndex = 14;
-            this.calculateLimitsCheckBox.Text = "Limits";
-            this.calculateLimitsCheckBox.UseVisualStyleBackColor = true;
-            this.calculateLimitsCheckBox.CheckedChanged += new System.EventHandler(this.calculateLimitsCheckBox_CheckedChanged);
-            // 
-            // panel7
-            // 
-            this.panel7.Controls.Add(this.eps0Kappa0Pc0Rc0Alpha0DataGrid);
-            this.panel7.Controls.Add(this.liquidDataGrid);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(0, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(205, 175);
-            this.panel7.TabIndex = 15;
+            this.panelMaterialParameters.Controls.Add(this.calculationOptionChangeButton);
+            this.panelMaterialParameters.Controls.Add(this.eps0Kappa0Pc0Rc0Alpha0DataGrid);
+            this.panelMaterialParameters.Controls.Add(this.liquidDataGrid);
+            this.panelMaterialParameters.Controls.Add(this.panelSimSerSusInput);
+            this.panelMaterialParameters.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMaterialParameters.Location = new System.Drawing.Point(0, 0);
+            this.panelMaterialParameters.Name = "panelMaterialParameters";
+            this.panelMaterialParameters.Size = new System.Drawing.Size(205, 244);
+            this.panelMaterialParameters.TabIndex = 15;
             // 
             // eps0Kappa0Pc0Rc0Alpha0DataGrid
             // 
@@ -519,14 +518,14 @@ namespace FilterSimulation
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.epsKappaParameterName,
             this.epsKappaUnits});
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.HighLightCurrentRow = false;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Location = new System.Drawing.Point(0, 134);
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Location = new System.Drawing.Point(0, 160);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Name = "eps0Kappa0Pc0Rc0Alpha0DataGrid";
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowHeadersVisible = false;
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowTemplate.Height = 16;
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Size = new System.Drawing.Size(205, 41);
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Size = new System.Drawing.Size(205, 160);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.TabIndex = 12;
             // 
             // epsKappaParameterName
@@ -560,11 +559,11 @@ namespace FilterSimulation
             this.liquidDataGrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.liquidDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.liquidDataGrid.HighLightCurrentRow = false;
-            this.liquidDataGrid.Location = new System.Drawing.Point(0, 0);
+            this.liquidDataGrid.Location = new System.Drawing.Point(0, 21);
             this.liquidDataGrid.Name = "liquidDataGrid";
             this.liquidDataGrid.RowHeadersVisible = false;
             this.liquidDataGrid.RowTemplate.Height = 16;
-            this.liquidDataGrid.Size = new System.Drawing.Size(205, 134);
+            this.liquidDataGrid.Size = new System.Drawing.Size(205, 139);
             this.liquidDataGrid.TabIndex = 5;
             // 
             // liquidParameterName
@@ -585,54 +584,24 @@ namespace FilterSimulation
             this.liquidParameterUnits.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.liquidParameterUnits.Width = 65;
             // 
-            // splitter6
+            // panelSimSerSusInput
             // 
-            this.splitter6.Location = new System.Drawing.Point(97, 0);
-            this.splitter6.Name = "splitter6";
-            this.splitter6.Size = new System.Drawing.Size(3, 179);
-            this.splitter6.TabIndex = 16;
-            this.splitter6.TabStop = false;
-            // 
-            // simulationOptionsGroupBox
-            // 
-            this.simulationOptionsGroupBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.simulationOptionsGroupBox.Controls.Add(this.calculationOptionChangeButton);
-            this.simulationOptionsGroupBox.Controls.Add(this.panel4);
-            this.simulationOptionsGroupBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationOptionsGroupBox.Location = new System.Drawing.Point(0, 0);
-            this.simulationOptionsGroupBox.Name = "simulationOptionsGroupBox";
-            this.simulationOptionsGroupBox.Size = new System.Drawing.Size(97, 179);
-            this.simulationOptionsGroupBox.TabIndex = 15;
-            // 
-            // calculationOptionChangeButton
-            // 
-            this.calculationOptionChangeButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.calculationOptionChangeButton.Location = new System.Drawing.Point(0, 60);
-            this.calculationOptionChangeButton.Name = "calculationOptionChangeButton";
-            this.calculationOptionChangeButton.Size = new System.Drawing.Size(93, 38);
-            this.calculationOptionChangeButton.TabIndex = 15;
-            this.calculationOptionChangeButton.Text = "Calculation Option";
-            this.calculationOptionChangeButton.UseVisualStyleBackColor = true;
-            this.calculationOptionChangeButton.Click += new System.EventHandler(this.calculationOptionChangeButton_Click);
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.meterialInputSuspensionRadioButton);
-            this.panel4.Controls.Add(this.meterialInputSerieRadioButton);
-            this.panel4.Controls.Add(this.meterialInputSimualationRadioButton);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(93, 60);
-            this.panel4.TabIndex = 0;
+            this.panelSimSerSusInput.Controls.Add(this.meterialInputSuspensionRadioButton);
+            this.panelSimSerSusInput.Controls.Add(this.meterialInputSerieRadioButton);
+            this.panelSimSerSusInput.Controls.Add(this.meterialInputSimualationRadioButton);
+            this.panelSimSerSusInput.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSimSerSusInput.Location = new System.Drawing.Point(0, 0);
+            this.panelSimSerSusInput.Name = "panelSimSerSusInput";
+            this.panelSimSerSusInput.Size = new System.Drawing.Size(205, 21);
+            this.panelSimSerSusInput.TabIndex = 0;
             // 
             // meterialInputSuspensionRadioButton
             // 
             this.meterialInputSuspensionRadioButton.AutoSize = true;
-            this.meterialInputSuspensionRadioButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.meterialInputSuspensionRadioButton.Location = new System.Drawing.Point(0, 34);
+            this.meterialInputSuspensionRadioButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.meterialInputSuspensionRadioButton.Location = new System.Drawing.Point(87, 0);
             this.meterialInputSuspensionRadioButton.Name = "meterialInputSuspensionRadioButton";
-            this.meterialInputSuspensionRadioButton.Size = new System.Drawing.Size(93, 17);
+            this.meterialInputSuspensionRadioButton.Size = new System.Drawing.Size(118, 21);
             this.meterialInputSuspensionRadioButton.TabIndex = 2;
             this.meterialInputSuspensionRadioButton.Text = "suspension";
             this.meterialInputSuspensionRadioButton.UseVisualStyleBackColor = true;
@@ -641,10 +610,10 @@ namespace FilterSimulation
             // 
             this.meterialInputSerieRadioButton.AutoSize = true;
             this.meterialInputSerieRadioButton.Checked = true;
-            this.meterialInputSerieRadioButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.meterialInputSerieRadioButton.Location = new System.Drawing.Point(0, 17);
+            this.meterialInputSerieRadioButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.meterialInputSerieRadioButton.Location = new System.Drawing.Point(40, 0);
             this.meterialInputSerieRadioButton.Name = "meterialInputSerieRadioButton";
-            this.meterialInputSerieRadioButton.Size = new System.Drawing.Size(93, 17);
+            this.meterialInputSerieRadioButton.Size = new System.Drawing.Size(47, 21);
             this.meterialInputSerieRadioButton.TabIndex = 1;
             this.meterialInputSerieRadioButton.TabStop = true;
             this.meterialInputSerieRadioButton.Text = "serie";
@@ -653,18 +622,37 @@ namespace FilterSimulation
             // meterialInputSimualationRadioButton
             // 
             this.meterialInputSimualationRadioButton.AutoSize = true;
-            this.meterialInputSimualationRadioButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.meterialInputSimualationRadioButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.meterialInputSimualationRadioButton.Location = new System.Drawing.Point(0, 0);
             this.meterialInputSimualationRadioButton.Name = "meterialInputSimualationRadioButton";
-            this.meterialInputSimualationRadioButton.Size = new System.Drawing.Size(93, 17);
+            this.meterialInputSimualationRadioButton.Size = new System.Drawing.Size(40, 21);
             this.meterialInputSimualationRadioButton.TabIndex = 0;
             this.meterialInputSimualationRadioButton.Text = "sim";
             this.meterialInputSimualationRadioButton.UseVisualStyleBackColor = true;
             // 
+            // splitter6
+            // 
+            this.splitter6.Location = new System.Drawing.Point(0, 0);
+            this.splitter6.Name = "splitter6";
+            this.splitter6.Size = new System.Drawing.Size(3, 248);
+            this.splitter6.TabIndex = 16;
+            this.splitter6.TabStop = false;
+            // 
+            // calculationOptionChangeButton
+            // 
+            this.calculationOptionChangeButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.calculationOptionChangeButton.Location = new System.Drawing.Point(0, 320);
+            this.calculationOptionChangeButton.Name = "calculationOptionChangeButton";
+            this.calculationOptionChangeButton.Size = new System.Drawing.Size(205, 23);
+            this.calculationOptionChangeButton.TabIndex = 15;
+            this.calculationOptionChangeButton.Text = "Calculation Option";
+            this.calculationOptionChangeButton.UseVisualStyleBackColor = true;
+            this.calculationOptionChangeButton.Click += new System.EventHandler(this.calculationOptionChangeButton_Click);
+            // 
             // splitter4
             // 
             this.splitter4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter4.Location = new System.Drawing.Point(0, 250);
+            this.splitter4.Location = new System.Drawing.Point(0, 181);
             this.splitter4.Name = "splitter4";
             this.splitter4.Size = new System.Drawing.Size(980, 3);
             this.splitter4.TabIndex = 6;
@@ -675,9 +663,9 @@ namespace FilterSimulation
             this.secondFromTopPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.secondFromTopPanel.Controls.Add(this.simSeriesPanel);
             this.secondFromTopPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.secondFromTopPanel.Location = new System.Drawing.Point(0, 117);
+            this.secondFromTopPanel.Location = new System.Drawing.Point(0, 84);
             this.secondFromTopPanel.Name = "secondFromTopPanel";
-            this.secondFromTopPanel.Size = new System.Drawing.Size(980, 133);
+            this.secondFromTopPanel.Size = new System.Drawing.Size(980, 97);
             this.secondFromTopPanel.TabIndex = 4;
             // 
             // simSeriesPanel
@@ -687,7 +675,7 @@ namespace FilterSimulation
             this.simSeriesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simSeriesPanel.Location = new System.Drawing.Point(0, 0);
             this.simSeriesPanel.Name = "simSeriesPanel";
-            this.simSeriesPanel.Size = new System.Drawing.Size(976, 129);
+            this.simSeriesPanel.Size = new System.Drawing.Size(976, 93);
             this.simSeriesPanel.TabIndex = 8;
             // 
             // simSeriesDataGrid
@@ -723,7 +711,7 @@ namespace FilterSimulation
             this.simSeriesDataGrid.RowHeadersVisible = false;
             this.simSeriesDataGrid.RowTemplate.Height = 18;
             this.simSeriesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.simSeriesDataGrid.Size = new System.Drawing.Size(976, 109);
+            this.simSeriesDataGrid.Size = new System.Drawing.Size(976, 73);
             this.simSeriesDataGrid.TabIndex = 0;
             this.simSeriesDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellValueChanged);
             this.simSeriesDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellEndEdit);
@@ -880,7 +868,7 @@ namespace FilterSimulation
             // 
             this.splitter3.Cursor = System.Windows.Forms.Cursors.HSplit;
             this.splitter3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter3.Location = new System.Drawing.Point(0, 114);
+            this.splitter3.Location = new System.Drawing.Point(0, 81);
             this.splitter3.Name = "splitter3";
             this.splitter3.Size = new System.Drawing.Size(980, 3);
             this.splitter3.TabIndex = 1;
@@ -896,7 +884,7 @@ namespace FilterSimulation
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topPanel.Location = new System.Drawing.Point(0, 0);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(980, 114);
+            this.topPanel.Size = new System.Drawing.Size(980, 81);
             this.topPanel.TabIndex = 0;
             // 
             // suspensionPanel
@@ -907,7 +895,7 @@ namespace FilterSimulation
             this.suspensionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.suspensionPanel.Location = new System.Drawing.Point(173, 0);
             this.suspensionPanel.Name = "suspensionPanel";
-            this.suspensionPanel.Size = new System.Drawing.Size(690, 114);
+            this.suspensionPanel.Size = new System.Drawing.Size(690, 81);
             this.suspensionPanel.TabIndex = 2;
             // 
             // suspensionDataGrid
@@ -939,7 +927,7 @@ namespace FilterSimulation
             this.suspensionDataGrid.RowHeadersVisible = false;
             this.suspensionDataGrid.RowTemplate.Height = 18;
             this.suspensionDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.suspensionDataGrid.Size = new System.Drawing.Size(686, 90);
+            this.suspensionDataGrid.Size = new System.Drawing.Size(686, 57);
             this.suspensionDataGrid.TabIndex = 0;
             this.suspensionDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellValueChanged);
             this.suspensionDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellEndEdit);
@@ -1054,7 +1042,7 @@ namespace FilterSimulation
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Right;
             this.splitter2.Location = new System.Drawing.Point(863, 0);
             this.splitter2.Name = "splitter2";
-            this.splitter2.Size = new System.Drawing.Size(3, 114);
+            this.splitter2.Size = new System.Drawing.Size(3, 81);
             this.splitter2.TabIndex = 3;
             this.splitter2.TabStop = false;
             // 
@@ -1062,7 +1050,7 @@ namespace FilterSimulation
             // 
             this.splitter1.Location = new System.Drawing.Point(170, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 114);
+            this.splitter1.Size = new System.Drawing.Size(3, 81);
             this.splitter1.TabIndex = 1;
             this.splitter1.TabStop = false;
             // 
@@ -1073,7 +1061,7 @@ namespace FilterSimulation
             this.machinePanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.machinePanel.Location = new System.Drawing.Point(866, 0);
             this.machinePanel.Name = "machinePanel";
-            this.machinePanel.Size = new System.Drawing.Size(114, 114);
+            this.machinePanel.Size = new System.Drawing.Size(114, 81);
             this.machinePanel.TabIndex = 3;
             this.machinePanel.Resize += new System.EventHandler(this.machinePanel_Resize);
             // 
@@ -1133,7 +1121,7 @@ namespace FilterSimulation
             this.projectPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.projectPanel.Location = new System.Drawing.Point(0, 0);
             this.projectPanel.Name = "projectPanel";
-            this.projectPanel.Size = new System.Drawing.Size(170, 114);
+            this.projectPanel.Size = new System.Drawing.Size(170, 81);
             this.projectPanel.TabIndex = 0;
             // 
             // projectDataGrid
@@ -1163,7 +1151,7 @@ namespace FilterSimulation
             this.projectDataGrid.RowHeadersVisible = false;
             this.projectDataGrid.RowTemplate.Height = 18;
             this.projectDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.projectDataGrid.Size = new System.Drawing.Size(166, 90);
+            this.projectDataGrid.Size = new System.Drawing.Size(166, 57);
             this.projectDataGrid.TabIndex = 0;
             this.projectDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellValueChanged);
             this.projectDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellEndEdit);
@@ -2121,12 +2109,11 @@ namespace FilterSimulation
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).EndInit();
-            this.panel7.ResumeLayout(false);
+            this.panelMaterialParameters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).EndInit();
-            this.simulationOptionsGroupBox.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.panelSimSerSusInput.ResumeLayout(false);
+            this.panelSimSerSusInput.PerformLayout();
             this.secondFromTopPanel.ResumeLayout(false);
             this.simSeriesPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.simSeriesDataGrid)).EndInit();
@@ -2253,9 +2240,8 @@ namespace FilterSimulation
         protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineNameColumn;
         protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesLastModifiedDateColumn;
         protected System.Windows.Forms.Panel simSeriesPanel;
-        private System.Windows.Forms.Panel simulationOptionsGroupBox;
         private System.Windows.Forms.Button calculationOptionChangeButton;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panelSimSerSusInput;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Splitter splitter6;
         protected fmDataGrid.fmDataGrid commonCalcBlockDataGrid;
@@ -2343,7 +2329,7 @@ namespace FilterSimulation
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_PcColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_rcColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_aColumn;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panelMaterialParameters;
         private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterName;
         private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterUnits;
         private fmDataGrid.fmDataGrid deliquoringMaterialParametersDataGrid;
