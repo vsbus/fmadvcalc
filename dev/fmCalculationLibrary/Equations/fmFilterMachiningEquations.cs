@@ -520,5 +520,10 @@ namespace fmCalculationLibrary.Equations
             fmValue hced = hce / r;
             return 2 * A * (1 + kappa) * Pc * Dp / (d * eta * (fmValue.Log(1 + hcd) + hced));
         }
+
+        public static fmValue Eval_Q_From_q_A(fmValue q, fmValue A)
+        {
+            return q * A;
+        }
     }
 }

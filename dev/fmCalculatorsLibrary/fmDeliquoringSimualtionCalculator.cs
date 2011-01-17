@@ -93,7 +93,33 @@ namespace fmCalculatorsLibrary
 
             fmValue pmoverpn = fmDeliquoringEquations.Eval_pmOverPn_vacuum_From_Dpd(Dpd.value);
             fmValue Qgimax = fmDeliquoringEquations.Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(A.value, pcd.value, pmoverpn, Dpd.value, etag.value, hcd.value, hce.value, Tetta.value, ag1.value, ag2.value);
+            fmValue Const1 = fmDeliquoringEquations.Eval_Const1(epsd.value, etaf.value, hcd.value, hce.value, pcd.value, Dpd.value, pke.value);
 
+            if (isKnown_vg)
+            {
+                Qg.value = fmDeliquoringEquations.Eval_Qg_From_vg_tc_Ms(vg.value, tc.value, Ms.value);
+                isKnown_Qg = true;
+            }
+            if (isKnown_Qg)
+            {
+                K.value = fmDeliquoringEquations.Eval_K_From_Qg_Qgimax_AndOtherConstants(Qg.value, ag3.value, tc.value, Qgimax, Const1);
+                isKnown_K = true;
+            }
+            if (isKnown_qmfid)
+            {
+                Qmfid.value = fmFilterMachiningEquations.Eval_Q_From_q_A(qmfid.value, A.value);
+                isKnown_Qmfid = true;
+            }
+            if (isKnown_Qmfid)
+            {
+                Qfid.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Qmfid.value);
+                isKnown_Qfid = true;
+            }
+            if (isKnown_qfid)
+            {
+                Qfid.value = fmFilterMachiningEquations.Eval_Q_From_q_A(qfid.value, A.value);
+                isKnown_Qfid = true;
+            }
             if (isKnown_Qfid)
             {
                 K.value = fmDeliquoringEquations.Eval_K_From_Vcd_ad1_ad2_Srem_Qfid_pcd_Dpd_pke_etaf_hcd_hce(Vcd.value, ad1.value, ad2.value, Srem.value, Qfid.value, pcd.value, Dpd.value, pke.value, etaf.value, hcd.value, hce.value);

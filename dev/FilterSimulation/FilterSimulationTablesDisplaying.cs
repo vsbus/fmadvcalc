@@ -853,7 +853,7 @@ namespace FilterSimulation
             {
                 m_commonDeliquoringSimulationBlock.AssignCell(p, parToCell[p.globalParameter]);
             }
-            m_commonDeliquoringSimulationBlock.UpdateCellsBackColor();
+            m_commonDeliquoringSimulationBlock.UpdateCellsStyle();
 
             m_commonDeliquoringSimulationBlock.ValuesChangedByUser += commonDeliquoringSimulationBlock_ValuesChangedByUser;
 

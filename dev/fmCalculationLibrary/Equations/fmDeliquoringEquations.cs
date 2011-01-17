@@ -125,6 +125,11 @@ namespace fmCalculationLibrary.Equations
             return Qgt * td / tc;
         }
 
+        public static fmValue Eval_Qg_From_vg_tc_Ms(fmValue vg, fmValue tc, fmValue Ms)
+        {
+            return vg * Ms / tc;
+        }
+
         public static fmValue Eval_vg_From_Qgt_td_Ms(fmValue Qgt, fmValue td, fmValue Ms)
         {
             return Qgt * td / Ms;
@@ -149,7 +154,7 @@ namespace fmCalculationLibrary.Equations
             fmValue Vcd, fmValue ad1, fmValue ad2, fmValue Srem, fmValue Qfid, fmValue pcd,
             fmValue Dpd, fmValue pke, fmValue etaf, fmValue hcd, fmValue hce)
         {
-            return (fmValue.Pow(Qfid * etaf * hcd * (hcd + hce) / (Vcd * ad1 * ad2 * (1 - Srem) * pcd * (Dpd - pke)), 1 / (ad1 + 1)) - 1) / ad2;
+            return (fmValue.Pow(Qfid * etaf * hcd * (hcd + hce) / (Vcd * ad1 * ad2 * (1 - Srem) * pcd * (Dpd - pke)), -1 / (ad1 + 1)) - 1) / ad2;
         }
 
         public static fmValue Eval_Qfid_From_Vcd_ad1_ad2_Srem_K_pcd_Dpd_pke_etaf_hcd_hce(
@@ -162,6 +167,20 @@ namespace fmCalculationLibrary.Equations
         public static fmValue Eval_sd_From_td_tc(fmValue td, fmValue tc)
         {
             return td / tc;
+        }
+
+        public static fmValue Eval_K_From_Qg_Qgimax_AndOtherConstants
+            //(fmValue Qg, fmValue ag3, fmValue pcd, fmValue tc, fmValue Dpd, fmValue Qgimax, fmValue epsd, fmValue etaf, fmValue hcd, fmValue hce, fmValue pke)
+            (fmValue Qg, fmValue ag3, fmValue tc, fmValue Qgimax, fmValue Const1)
+        {
+            //fmValue X = (Qg * ag3 * pcd * tc * Dpd - Qg * ag3 * pcd * tc * pke + Qgimax * epsd * etaf * hcd * hcd + Qgimax * epsd * etaf * hcd * hce) / (hcd * Qgimax * epsd * etaf * (hcd + hce));
+            //return -fmValue.Log(X) / ag3;
+            return (fmValue.LambertW(-fmValue.Exp(-(Qg * ag3 * tc + Qgimax * Const1) / (Qgimax * Const1))) * Qgimax * Const1 + Qg * ag3 * tc + Qgimax * Const1) / (Qgimax * Const1 * ag3);
+        }
+
+        public static fmValue Eval_Const1(fmValue epsd, fmValue etaf, fmValue hcd, fmValue hce, fmValue pcd, fmValue Dpd, fmValue pke)
+        {
+            return epsd * etaf * hcd * (hcd + hce) / (pcd * (Dpd - pke));
         }
     }
 }

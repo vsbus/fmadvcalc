@@ -19,7 +19,6 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter S;
         private readonly fmBlockVariableParameter Rfmech;
         private readonly fmBlockVariableParameter Rf;
-        private readonly fmBlockVariableParameter Rf_star;
         private readonly fmBlockVariableParameter Qgi;
         private readonly fmBlockVariableParameter Qg;
         private readonly fmBlockVariableParameter vg;
@@ -190,16 +189,55 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref rhof, fmGlobalParameter.rho_f);
             AddConstantParameter(ref rhos, fmGlobalParameter.rho_s);
 
-            foreach (fmBlockVariableParameter p in parameters)
+//             foreach (fmBlockVariableParameter p in parameters)
+//             {
+//                 if (p.globalParameter != fmGlobalParameter.hcd
+//                     && p.globalParameter != fmGlobalParameter.Vcd)
+//                 {
+//                     p.group = second_group;
+//                 }
+//             }
+            vg.group = second_group;
+            Qg.group = second_group;
+            qmfid.group = second_group;
+            Qmfid.group = second_group;
+            qfid.group = second_group;
+            Qfid.group = second_group;
+            Mfd.group = second_group;
+            Vfd.group = second_group;
+            Qgi.group = second_group;
+            Rfmech.group = second_group;
+            Smech.group = second_group;
+            K.group = second_group;
+            td.group = second_group;
+            sd.group = second_group;
+
+            UpdateCellsStyle();
+            processOnChange = true;
+        }
+
+        public void UpdateCellsStyle()
+        {
+            var groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
+            foreach (fmBlockVariableParameter parameter in parameters)
+                if (parameter.group != null)
+                    groupUsed[parameter.group] = false;
+
+            foreach (fmBlockVariableParameter parameter in parameters)
             {
-                if (p.globalParameter != fmGlobalParameter.hcd)
+                parameter.IsInputed = parameter.group != null && !groupUsed[parameter.group];
+                if (parameter.group != null)
                 {
-                    p.group = second_group;
+                    groupUsed[parameter.group] = true;
+                }
+                if (parameter.cell != null)
+                {
+                    parameter.cell.ReadOnly = parameter.group == null;
                 }
             }
 
             UpdateCellsBackColor();
-            processOnChange = true;
+            ReWriteParameters();
         }
 
         public fmDeliquoringSimualtionBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) { }
