@@ -460,6 +460,10 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             m_commonFilterMachiningBlock.IsLimitsDisplaying = calculateLimitsCheckBox.Checked;
             commonCalcBlockMinLocalColumn.Visible = calculateLimitsCheckBox.Checked;
             commonCalcBlockMaxLocalColumn.Visible = calculateLimitsCheckBox.Checked;
+            commonCalcBlockDataGrid.Width = calculateLimitsCheckBox.Checked ? 260 : 160;
+            commonDeliquoringSimulationBlockMinColumn.Visible = calculateLimitsCheckBox.Checked;
+            commonDeliquoringSimulationBlockMaxColumn.Visible = calculateLimitsCheckBox.Checked;
+            commonDeliquoringSimulationBlockDataGrid.Width = calculateLimitsCheckBox.Checked ? 260 : 160;
             m_commonFilterMachiningBlock.CalculateAndDisplay();
         }
     }
