@@ -1,15 +1,16 @@
-using System;
-using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using fmCalculatorsLibrary;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalculationLibrary;
-using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Drawing;
-using fmCalculatorsLibrary;
 using fmCalcBlocksLibrary.Blocks.LimitsCalcs;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmFilterMachiningBlockWithLimits : fmFilterMachiningBlock
+    public class fmDeliquoringSimualtionBlockWithLimits : fmDeliquoringSimualtionBlock
     {
         private bool m_isLimitsDisplaying = true;
 
@@ -21,9 +22,9 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculationsLimitsClue()
         {
-            var filterMachinigCalculator =
-                new fmFilterMachiningCalculator(AllParameters) {calculationOption = calculationOption};
-            filterMachinigCalculator.DoCalculationsLimitsClue();
+            var deliquoringSimualtionCalculator =
+                new fmDeliquoringSimualtionCalculator(AllParameters) {};
+            deliquoringSimualtionCalculator.DoCalculations();
         }
 
         override protected void ReWriteParameters()
@@ -35,15 +36,15 @@ namespace fmCalcBlocksLibrary.Blocks
                 processOnChange = false;
 
                 CalculateAbsRanges();
-                
+
                 Dictionary<fmGlobalParameter, fmValue> minValue = new Dictionary<fmGlobalParameter, fmValue>();
                 Dictionary<fmGlobalParameter, fmValue> maxValue = new Dictionary<fmGlobalParameter, fmValue>();
-                
+
                 List<fmBlockVariableParameter> clueParams = GetClueParamsList();
-                
+
                 CalculateClueParamsLimits(clueParams, minValue, maxValue);
                 CalculateAllParamsLimits(clueParams, minValue, maxValue);
-                
+
                 WriteLimitsToUI(minValue, maxValue);
 
                 processOnChange = true;
@@ -207,59 +208,59 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private void GetMinMaxLimitsOfIncompleteInputs(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue)
         {
-            if (calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST
-                || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST
-                || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP
-                || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
-                || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
-                || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP)
-            {
-                List<fmValue> keepedValues;
-                List<fmBlockVariableParameter> keepedInputInfo;
-                KeepValuesAndInputInfo(out keepedValues, out keepedInputInfo);
+            //if (calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST
+            //    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST
+            //    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP
+            //    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
+            //    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
+            //    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP)
+            //{
+            //    List<fmValue> keepedValues;
+            //    List<fmBlockVariableParameter> keepedInputInfo;
+            //    KeepValuesAndInputInfo(out keepedValues, out keepedInputInfo);
 
-                UpdateIsInputed(parameter);
-                parameter.value = new fmValue();
+            //    UpdateIsInputed(parameter);
+            //    parameter.value = new fmValue();
 
-                var naInputs = GetNAInputsList(parameter);
+            //    var naInputs = GetNAInputsList(parameter);
 
-                bool result = false;
-                minValue = maxValue = new fmValue();
+            //    bool result = false;
+            //    minValue = maxValue = new fmValue();
 
-                for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
-                {
-                    for (int i = 0; i < naInputs.Count; ++i)
-                    {
-                        fmBlockVariableParameter p = naInputs[i];
-                        double minVal = p.globalParameter.validRange.MinValue;
-                        double maxVal = p.globalParameter.validRange.MaxValue;
-                        const double eps = 1e-8;
-                        minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
-                        maxVal = maxVal * (1 - eps);
-                        p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
-                    }
+            //    for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
+            //    {
+            //        for (int i = 0; i < naInputs.Count; ++i)
+            //        {
+            //            fmBlockVariableParameter p = naInputs[i];
+            //            double minVal = p.globalParameter.validRange.MinValue;
+            //            double maxVal = p.globalParameter.validRange.MaxValue;
+            //            const double eps = 1e-8;
+            //            minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
+            //            maxVal = maxVal * (1 - eps);
+            //            p.value = new fmValue((mask & (1 << i)) == 0 ? minVal : maxVal);
+            //        }
 
-                    fmValue curMin, curMax;
-                    if (fmLimitsBlockCalcs.GetMinMaxLimits(parameter, out curMin, out curMax, this))
-                    {
-                        if (result == false)
-                        {
-                            result = true;
-                            minValue = curMin;
-                            maxValue = curMax;
-                        }
-                        else
-                        {
-                            minValue = fmValue.Min(minValue, curMin);
-                            maxValue = fmValue.Max(maxValue, curMax);
-                        }
-                    }
-                }
+            //        fmValue curMin, curMax;
+            //        if (fmLimitsBlockCalcs.GetMinMaxLimits(parameter, out curMin, out curMax, this))
+            //        {
+            //            if (result == false)
+            //            {
+            //                result = true;
+            //                minValue = curMin;
+            //                maxValue = curMax;
+            //            }
+            //            else
+            //            {
+            //                minValue = fmValue.Min(minValue, curMin);
+            //                maxValue = fmValue.Max(maxValue, curMax);
+            //            }
+            //        }
+            //    }
 
-                RestoreValuesAndInputInfo(keepedValues, keepedInputInfo);
-                return;
-            }
-            else
+            //    RestoreValuesAndInputInfo(keepedValues, keepedInputInfo);
+            //    return;
+            //}
+            //else
             {
                 List<fmBlockVariableParameter> naInputs = GetNAInputsList();
                 naInputs.Remove(fmLimitsBlockCalcs.FindGroupRepresetator(parameters, parameter.group));
@@ -307,98 +308,72 @@ namespace fmCalcBlocksLibrary.Blocks
         private List<fmBlockVariableParameter> GetClueParamsList()
         {
             List<fmBlockVariableParameter> clueParams = new List<fmBlockVariableParameter>(new fmBlockVariableParameter[] {
-                    GetParameterByName(fmGlobalParameter.A.name),
-                    GetParameterByName(fmGlobalParameter.Dp.name),
-                    GetParameterByName(fmGlobalParameter.hc.name),
-                    GetParameterByName(fmGlobalParameter.sf.name)
+                    GetParameterByName(fmGlobalParameter.sd.name)
                 });
-            var d0 = GetParameterByName(fmGlobalParameter.d0.name);
-            if (d0.group != null)
-            {
-                clueParams.Add(GetParameterByName(fmGlobalParameter.d0.name));
-            }
             return clueParams;
         }
         private void CalculateAbsRanges()
         {
-            var varList = new List<fmGlobalParameter>();
+            //var varList = new List<fmGlobalParameter>();
+            //foreach (var p in fmGlobalParameter.parameters)
             //{
-            //  fmGlobalParameter.A,
-            //  fmGlobalParameter.Dp,
-            //  fmGlobalParameter.sf,
-            //  fmGlobalParameter.tc
-            //};
-            foreach (var p in fmGlobalParameter.parameters)
-            {
-                if (p.specifiedRange.IsInputed)
-                {
-                    p.validRange.MinValue = p.specifiedRange.MinValue;
-                    p.validRange.MaxValue = p.specifiedRange.MaxValue;
-                    varList.Add(p);
-                }
-            }
-            var machineAdditionalParams = new List<fmGlobalParameter>
-            {
-                fmGlobalParameter.d0
-            };
-            var index = new Dictionary<fmGlobalParameter,int>();
-            var pList = new List<fmCalculationBaseParameter>();
-            for (int i = 0; i < AllParameters.Count; ++i)
-            {
-                fmCalculationBaseParameter p = AllParameters[i];
-                if (p is fmBlockVariableParameter)
-                {
-                    bool isInputed = varList.Contains(p.globalParameter);
-                    pList.Add(new fmCalculationVariableParameter(p.globalParameter, p.value, isInputed));
-                    index[p.globalParameter] = i;
-                    if (machineAdditionalParams.Contains(p.globalParameter) == false && isInputed == false)
-                    {
-                        p.globalParameter.validRange.MinValue = 1e100;
-                        p.globalParameter.validRange.MaxValue = -1e100;
-                    }
-                }
-                else
-                {
-                    pList.Add(new fmCalculationConstantParameter(p.globalParameter, p.value));
-                }
-            }
+            //    if (p.specifiedRange.IsInputed)
+            //    {
+            //        p.validRange.MinValue = p.specifiedRange.MinValue;
+            //        p.validRange.MaxValue = p.specifiedRange.MaxValue;
+            //        varList.Add(p);
+            //    }
+            //}
+            //var index = new Dictionary<fmGlobalParameter, int>();
+            //var pList = new List<fmCalculationBaseParameter>();
+            //for (int i = 0; i < AllParameters.Count; ++i)
+            //{
+            //    fmCalculationBaseParameter p = AllParameters[i];
+            //    if (p is fmBlockVariableParameter)
+            //    {
+            //        bool isInputed = varList.Contains(p.globalParameter);
+            //        pList.Add(new fmCalculationVariableParameter(p.globalParameter, p.value, isInputed));
+            //        index[p.globalParameter] = i;
+            //        if (machineAdditionalParams.Contains(p.globalParameter) == false && isInputed == false)
+            //        {
+            //            p.globalParameter.validRange.MinValue = 1e100;
+            //            p.globalParameter.validRange.MaxValue = -1e100;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        pList.Add(new fmCalculationConstantParameter(p.globalParameter, p.value));
+            //    }
+            //}
 
-            var calc = new fmFilterMachiningCalculator(pList);
-            for (int mask = 0; mask < (1 << varList.Count); ++mask)
-            {
-                for (int i = 0; i < varList.Count; ++i)
-                {
-                    pList[index[varList[i]]].value = (mask & (1 << i)) != 0 
-                        ? new fmValue(varList[i].validRange.MaxValue) 
-                        : new fmValue(varList[i].validRange.MinValue);
-                }
-                calc.DoCalculations();
-                foreach (fmCalculationBaseParameter p in pList)
-                {
-                    if (p is fmCalculationVariableParameter 
-                        && machineAdditionalParams.Contains(p.globalParameter) == false)
-                    {
-                        if (p.value.defined && p.globalParameter.validRange.MaxValue < p.value.value)
-                            p.globalParameter.validRange.MaxValue = p.value.value;
-                        if (p.value.defined && p.globalParameter.validRange.MinValue > p.value.value)
-                            p.globalParameter.validRange.MinValue = Math.Max(0, p.value.value);
-                    }
-                }
-            }
+            //var calc = new fmFilterMachiningCalculator(pList);
+            //for (int mask = 0; mask < (1 << varList.Count); ++mask)
+            //{
+            //    for (int i = 0; i < varList.Count; ++i)
+            //    {
+            //        pList[index[varList[i]]].value = (mask & (1 << i)) != 0
+            //            ? new fmValue(varList[i].validRange.MaxValue)
+            //            : new fmValue(varList[i].validRange.MinValue);
+            //    }
+            //    calc.DoCalculations();
+            //    foreach (fmCalculationBaseParameter p in pList)
+            //    {
+            //        if (p is fmCalculationVariableParameter
+            //            && machineAdditionalParams.Contains(p.globalParameter) == false)
+            //        {
+            //            if (p.value.defined && p.globalParameter.validRange.MaxValue < p.value.value)
+            //                p.globalParameter.validRange.MaxValue = p.value.value;
+            //            if (p.value.defined && p.globalParameter.validRange.MinValue > p.value.value)
+            //                p.globalParameter.validRange.MinValue = Math.Max(0, p.value.value);
+            //        }
+            //    }
+            //}
         }
 
         private List<fmBlockVariableParameter> GetNAInputsList(fmBlockVariableParameter parameter)
         {
             var naInputs = new List<fmBlockVariableParameter>();
-            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.name), naInputs);
-            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.Dp.name), naInputs);
-            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.name), naInputs);
-            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.tc.name), naInputs);
-            var d0 = GetParameterByName(fmGlobalParameter.d0.name);
-            if (d0.group != null)
-            {
-                CheckNAAndAdd(d0, naInputs);
-            }
+            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sd.name), naInputs);
             naInputs.Remove(fmLimitsBlockCalcs.FindGroupRepresetator(parameters, parameter.group));
             return naInputs;
         }

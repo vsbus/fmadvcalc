@@ -35,6 +35,10 @@ namespace fmCalcBlocksLibrary.Blocks
         public event fmBlockParameterEventHandler ValuesChangedByUser;
 
         abstract public void DoCalculations();
+        virtual public void DoCalculationsLimitsClue()
+        {
+            DoCalculations();
+        }
 
         virtual protected void ReWriteParameters()
         {
