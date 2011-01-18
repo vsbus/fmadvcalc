@@ -94,7 +94,7 @@ namespace fmCalculationLibrary.Equations
         public static fmValue Eval_pmOverPn_vacuum_From_Dpd(fmValue Dpd)
         {
             fmValue pN = new fmValue(1e5);
-            return 1 - Dpd / (2 * pN);
+            return 1 + Dpd / (2 * pN);
         }
 
         public static fmValue Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(fmValue A, fmValue pcd, fmValue pmoverpn, fmValue Dpd, fmValue etag, fmValue hcd, fmValue hce, fmValue Tetta, fmValue ag1, fmValue ag2)

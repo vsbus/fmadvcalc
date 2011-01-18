@@ -171,6 +171,7 @@ namespace fmCalculationLibrary
 
         static fmGlobalParameter()
         {
+            #region Material Data
             AddParameter(ref eta_f, new fmGlobalParameter("eta_f", fmUnitFamily.ViscosityFamily, new fmRange(0, 1)));
             
             AddParameter(ref rho_f, new fmGlobalParameter("rho_f", fmUnitFamily.DensityFamily, new fmRange(600, 2500)));
@@ -193,7 +194,8 @@ namespace fmCalculationLibrary
             
             AddParameter(ref hce0, new fmGlobalParameter("hce0", fmUnitFamily.LengthFamily, new fmRange(0, 40)));
             AddParameter(ref Rm0, new fmGlobalParameter("Rm0", fmUnitFamily.FilterMediumResistanceFamily, new fmRange(0, 10e10)));
-            
+            #endregion
+            #region Cake Formation Data
             AddParameter(ref A, new fmGlobalParameter("A", fmUnitFamily.AreaFamily, new fmRange(0.01, 200)));
             AddParameter(ref d0, new fmGlobalParameter("d0", fmUnitFamily.LengthFamily, new fmRange(0.01, 200)));
             AddParameter(ref Dp, new fmGlobalParameter("Dp", fmUnitFamily.PressureFamily, new fmRange(0.1 * 1e5, 6 * 1e5)));
@@ -260,7 +262,7 @@ namespace fmCalculationLibrary
             AddParameter(ref rc, new fmGlobalParameter("rc", fmUnitFamily.CakeResistanceRcFamily, new fmRange(0.03e+13, 1000e+13)));
             AddParameter(ref a, new fmGlobalParameter("a", fmUnitFamily.CakeResistanceAFamily, new fmRange(0.03e+10, 1000e+10)));
             AddParameter(ref Rm, new fmGlobalParameter("Rm", fmUnitFamily.FilterMediumResistanceFamily));
-
+            #endregion
             #region Deliquoring
             AddParameter(ref Dp_d, new fmGlobalParameter("Dpd", fmUnitFamily.PressureFamily));
             AddParameter(ref eps0_d, new fmGlobalParameter("eps0d", fmUnitFamily.ConcentrationFamily));
@@ -294,8 +296,8 @@ namespace fmCalculationLibrary
             AddParameter(ref S, new fmGlobalParameter("S", fmUnitFamily.ConcentrationFamily));
             AddParameter(ref Rfmech, new fmGlobalParameter("Rfmech", fmUnitFamily.ConcentrationFamily));
             AddParameter(ref Rf, new fmGlobalParameter("Rf", fmUnitFamily.ConcentrationFamily));
-            AddParameter(ref Qgi, new fmGlobalParameter("Qgi", fmUnitFamily.FlowRateVolume));
-            AddParameter(ref Qg, new fmGlobalParameter("Qg", fmUnitFamily.FlowRateVolume));
+            AddParameter(ref Qgi, new fmGlobalParameter("Qgi", fmUnitFamily.GasFlowRateVolume));
+            AddParameter(ref Qg, new fmGlobalParameter("Qg", fmUnitFamily.GasFlowRateVolume));
             AddParameter(ref vg, new fmGlobalParameter("vg", fmUnitFamily.SpecificVolumeFamily));
             AddParameter(ref Mfd, new fmGlobalParameter("Mfd", fmUnitFamily.MassFamily));
             AddParameter(ref Vfd, new fmGlobalParameter("Vfd", fmUnitFamily.VolumeFamily));
