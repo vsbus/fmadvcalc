@@ -287,7 +287,7 @@ namespace fmCalculationLibrary
             AddParameter(ref peq, new fmGlobalParameter("peq", fmUnitFamily.PressureFamily));
 
             AddParameter(ref hcd, new fmGlobalParameter("hcd", fmUnitFamily.LengthFamily));
-            AddParameter(ref sd, new fmGlobalParameter("sd", fmUnitFamily.ConcentrationFamily));
+            AddParameter(ref sd, new fmGlobalParameter("sd", fmUnitFamily.ConcentrationFamily, new fmRange(0.01, 0.99)));
             AddParameter(ref td, new fmGlobalParameter("td", fmUnitFamily.TimeFamily));
             AddParameter(ref K, new fmGlobalParameter("K", fmUnitFamily.NoUnitFamily));
             AddParameter(ref Smech, new fmGlobalParameter("Smech", fmUnitFamily.NoUnitFamily));

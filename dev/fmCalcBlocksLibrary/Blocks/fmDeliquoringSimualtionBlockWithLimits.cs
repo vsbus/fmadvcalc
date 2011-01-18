@@ -305,7 +305,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 return;
             }
         }
-        private List<fmBlockVariableParameter> GetClueParamsList()
+        override public List<fmBlockVariableParameter> GetClueParamsList()
         {
             List<fmBlockVariableParameter> clueParams = new List<fmBlockVariableParameter>(new fmBlockVariableParameter[] {
                     GetParameterByName(fmGlobalParameter.sd.name)

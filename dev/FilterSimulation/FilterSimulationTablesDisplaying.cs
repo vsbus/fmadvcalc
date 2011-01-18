@@ -848,7 +848,7 @@ namespace FilterSimulation
                 parToCell[voidBlock.Parameters[i].globalParameter] = commonDeliquoringSimulationBlockDataGrid[commonDeliquoringSimulationBlockParameterValueColumn.Index, i];
             }
 
-            m_commonDeliquoringSimulationBlock = new fmDeliquoringSimualtionBlock();
+            m_commonDeliquoringSimulationBlock = new fmDeliquoringSimualtionBlockWithLimits();
             foreach (var p in m_commonDeliquoringSimulationBlock.Parameters)
             {
                 m_commonDeliquoringSimulationBlock.AssignCell(p, parToCell[p.globalParameter]);

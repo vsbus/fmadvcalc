@@ -191,7 +191,7 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.peq));
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hcd));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sd, true));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.td));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.K));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Smech));

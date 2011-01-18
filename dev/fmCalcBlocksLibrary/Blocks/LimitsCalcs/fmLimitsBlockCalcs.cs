@@ -136,10 +136,11 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 
             block.DoCalculationsLimitsClue();
 
-            result[fmGlobalParameter.A] = block.GetParameterByName(fmGlobalParameter.A.name).value;
-            result[fmGlobalParameter.Dp] = block.GetParameterByName(fmGlobalParameter.Dp.name).value;
-            result[fmGlobalParameter.sf] = block.GetParameterByName(fmGlobalParameter.sf.name).value;
-            result[fmGlobalParameter.tc] = block.GetParameterByName(fmGlobalParameter.tc.name).value;
+            var clueList = block.GetClueParamsList();
+            foreach (fmBlockVariableParameter p in clueList)
+            {
+                result[p.globalParameter] = block.GetParameterByName(p.globalParameter.name).value;
+            }
 
             parameter.IsInputed = false;
             groupInput.value = groupInputInitialValue;

@@ -39,6 +39,10 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             DoCalculations();
         }
+        virtual public List<fmBlockVariableParameter> GetClueParamsList() 
+        {
+            return new List<fmBlockVariableParameter>();
+        }
 
         virtual protected void ReWriteParameters()
         {

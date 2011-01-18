@@ -139,8 +139,8 @@ namespace fmCalcBlocksLibrary.Blocks
         // ReSharper restore InconsistentNaming
         {
             AddParameter(ref hcd, fmGlobalParameter.hcd, hcd_Cell, false);
-            AddParameter(ref sd, fmGlobalParameter.sd, sd_Cell, false);
-            AddParameter(ref td, fmGlobalParameter.td, td_Cell, true);
+            AddParameter(ref sd, fmGlobalParameter.sd, sd_Cell, true);
+            AddParameter(ref td, fmGlobalParameter.td, td_Cell, false);
             AddParameter(ref K, fmGlobalParameter.K, K_Cell, false);
             AddParameter(ref Smech, fmGlobalParameter.Smech, Smech_Cell, false);
             AddParameter(ref S, fmGlobalParameter.S, S_Cell, false);

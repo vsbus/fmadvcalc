@@ -15,7 +15,7 @@ namespace FilterSimulation
     {
         protected fmFilterSimSolution m_fSolution = new fmFilterSimSolution();
         private fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlockWithLimits m_commonFilterMachiningBlock;
-        private fmCalcBlocksLibrary.Blocks.fmDeliquoringSimualtionBlock m_commonDeliquoringSimulationBlock;
+        private fmCalcBlocksLibrary.Blocks.fmDeliquoringSimualtionBlockWithLimits m_commonDeliquoringSimulationBlock;
         private CheckBox m_ckBox;
         public List<fmGlobalParameter> parametersToDisplay;
 
