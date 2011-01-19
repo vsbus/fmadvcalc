@@ -191,6 +191,13 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 
         static public bool GetMinMaxLimits(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue, fmBaseBlock block)
         {
+            if (FindGroupRepresetator(block.Parameters, parameter.group) == null)
+            {
+                minValue = new fmValue();
+                maxValue = new fmValue();
+                return false;
+            }
+
             fmValue left, right;
             if (GetRangeWithDefinedResult(parameter, out left, out right, block) == false)
             {

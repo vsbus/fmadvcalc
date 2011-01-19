@@ -118,12 +118,12 @@ namespace FilterSimulation
 
             var fProj = new fmFilterSimProject(m_fSolution, "Prj1");
             var fProj2 = new fmFilterSimProject(m_fSolution, "Prj2");
-            var fSus = new fmFilterSimSuspension(fProj, "Susp1", "Juce", "BASF");
-            var fSus2 = new fmFilterSimSuspension(fProj2, "Susp2", "MaterialX", "Henkel");
-            new fmFilterSimSuspension(fProj, "Susp3", "Water", "somebody");
-            var fSimSerie = new fmFilterSimSerie(fSus, "serie0", fmFilterSimMachineType.nutche, "medium1", "karapty");
-            new fmFilterSimSerie(fSus2, "serie02", fmFilterSimMachineType.belt, "medium2", "izh");
-            var sim = new fmFilterSimulation(fSimSerie, "simulatioN");
+            var fSus = new fmFilterSimSuspension(fProj, "Susp1", "Mat1", "Cust1");
+            var fSus2 = new fmFilterSimSuspension(fProj2, "Susp2", "Mat2", "Cust2");
+            new fmFilterSimSuspension(fProj, "Susp3", "Mat3", "Cust3");
+            var fSimSerie = new fmFilterSimSerie(fSus, "serie0", fmFilterSimMachineType.nutche, "medium1", "machine0");
+            new fmFilterSimSerie(fSus2, "serie02", fmFilterSimMachineType.belt, "medium2", "machine9");
+            var sim = new fmFilterSimulation(fSimSerie, "sim01");
 
             // BEGIN DEBUG CODE
             sim.Parameters[fmGlobalParameter.eta_f].value = new fmValue(1 * fmUnitFamily.ViscosityFamily.CurrentUnit.Coef);

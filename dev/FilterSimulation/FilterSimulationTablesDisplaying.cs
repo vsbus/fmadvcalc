@@ -1035,8 +1035,8 @@ namespace FilterSimulation
                 sim.pc0Rc0A0Block.ResumeProcessing();
                 sim.rm0HceBlock.ResumeProcessing();
                 sim.deliquoringEps0NeEpsBlock.ResumeProcessing();
-                sim.deliquoringSigmaPkeBlock.StopProcessing();
-                sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.StopProcessing();
+                sim.deliquoringSigmaPkeBlock.ResumeProcessing();
+                sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.ResumeProcessing();
             }
         }
 

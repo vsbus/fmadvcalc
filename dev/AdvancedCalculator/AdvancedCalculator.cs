@@ -118,15 +118,17 @@ namespace AdvancedCalculator
                 return;
             }
 
-            try
+            //try
             {
                 filterSimulationWithTablesAndGraphs1.Deserialize(input);
                 Text = m_Caption + " [" + fileName + "]";
             }
+            /*
             catch (Exception e)
             {
                 ;
             }
+             * */
 
             input.Close();
         }

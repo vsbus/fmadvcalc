@@ -10,7 +10,20 @@ namespace fmCalcBlocksLibrary.Blocks
     {
         protected List<fmBlockVariableParameter> parameters = new List<fmBlockVariableParameter>();
         protected List<fmBlockConstantParameter> constantParameters = new List<fmBlockConstantParameter>();
-        protected bool processOnChange;
+        private bool m_processOnChange;
+        public int debugCounter = 0;
+        protected bool processOnChange
+        {
+            get 
+            { 
+                return m_processOnChange; 
+            }
+            set 
+            {
+                ++debugCounter;
+                m_processOnChange = value; 
+            }
+        }
 
         public List<fmBlockVariableParameter> Parameters
         {
