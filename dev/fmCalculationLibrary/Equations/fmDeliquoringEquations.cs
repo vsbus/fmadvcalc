@@ -182,5 +182,18 @@ namespace fmCalculationLibrary.Equations
         {
             return epsd * etaf * hcd * (hcd + hce) / (pcd * (Dpd - pke));
         }
+
+        public static fmValue Eval_Q_From_Qt_td_tc(fmValue Qt, fmValue td, fmValue tc)
+        {
+            return Qt * td / tc;
+        }
+
+        public static fmValue Eval_Qmevi_From_peq_Mmole_pmoverpn_ag3_K_f_Qgi(
+            fmValue peq, fmValue Mmole, fmValue pmoverpn, fmValue ag3, fmValue K, fmValue f, fmValue Qgi)
+        {
+            fmValue R0 = new fmValue(8.314);
+            fmValue Tn = new fmValue(273);
+            return peq * Mmole / (R0 * Tn * pmoverpn) * fmValue.Pow((1 - fmValue.Exp(-ag3 * K)) / (ag3 * K), f) * Qgi;
+        }
     }
 }

@@ -86,6 +86,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter etag;
         private readonly fmBlockConstantParameter rhof;
         private readonly fmBlockConstantParameter rhos;
+        private readonly fmBlockConstantParameter Ms;
 
         private readonly fmBlockParameterGroup second_group = new fmBlockParameterGroup(Color.FromArgb(250, 220, 220));
 
@@ -262,6 +263,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref etag, fmGlobalParameter.eta_g);
             AddConstantParameter(ref rhof, fmGlobalParameter.rho_f);
             AddConstantParameter(ref rhos, fmGlobalParameter.rho_s);
+            AddConstantParameter(ref Ms, fmGlobalParameter.Ms);
 
 //             foreach (fmBlockVariableParameter p in parameters)
 //             {

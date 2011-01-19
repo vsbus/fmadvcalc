@@ -96,6 +96,57 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(epsKappaBox, fmGlobalParameter.rc);
             AddParameter(epsKappaBox, fmGlobalParameter.a);
             AddParameter(epsKappaBox, fmGlobalParameter.Rm);
+
+            AddParameter(deliquoringBox, fmGlobalParameter.hcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.sd);
+            AddParameter(deliquoringBox, fmGlobalParameter.td);
+            AddParameter(deliquoringBox, fmGlobalParameter.K);
+            AddParameter(deliquoringBox, fmGlobalParameter.Smech);
+            AddParameter(deliquoringBox, fmGlobalParameter.S);
+            AddParameter(deliquoringBox, fmGlobalParameter.Rfmech);
+            AddParameter(deliquoringBox, fmGlobalParameter.Rf);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qgi);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qg);
+            AddParameter(deliquoringBox, fmGlobalParameter.vg);
+            AddParameter(deliquoringBox, fmGlobalParameter.Mfd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Vfd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Mlcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Vlcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Mcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Vcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.rho_bulk);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qmfid);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qfid);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qmcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.qmfid);
+            AddParameter(deliquoringBox, fmGlobalParameter.qfid);
+            AddParameter(deliquoringBox, fmGlobalParameter.qmcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.qcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qgt);
+            AddParameter(deliquoringBox, fmGlobalParameter.Vg);
+            AddParameter(deliquoringBox, fmGlobalParameter.Mev);
+            AddParameter(deliquoringBox, fmGlobalParameter.Vev);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qmftd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qmfd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qftd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qfd);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qmevi);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qmevt);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qmev);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qevi);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qevt);
+            AddParameter(deliquoringBox, fmGlobalParameter.Qev);
+            AddParameter(deliquoringBox, fmGlobalParameter.qmftd);
+            AddParameter(deliquoringBox, fmGlobalParameter.qmfd);
+            AddParameter(deliquoringBox, fmGlobalParameter.qftd);
+            AddParameter(deliquoringBox, fmGlobalParameter.qfd);
+            AddParameter(deliquoringBox, fmGlobalParameter.qmevi);
+            AddParameter(deliquoringBox, fmGlobalParameter.qmevt);
+            AddParameter(deliquoringBox, fmGlobalParameter.qmev);
+            AddParameter(deliquoringBox, fmGlobalParameter.qevi);
+            AddParameter(deliquoringBox, fmGlobalParameter.qevt);
+            AddParameter(deliquoringBox, fmGlobalParameter.qev);
         }
 
         private void AddParameter(fmControls.fmCheckedListBoxWithCheckboxes box, fmGlobalParameter parameter)
@@ -156,7 +207,5 @@ namespace FilterSimulationWithTablesAndGraphs
             DialogResult = DialogResult.OK;
             Close();
         }
-
-
     }
 }

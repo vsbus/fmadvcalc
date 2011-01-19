@@ -61,7 +61,32 @@ namespace fmCalculatorsLibrary
             var etag = variables[fmGlobalParameter.eta_g] as fmCalculationConstantParameter;
             var rhof = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
             var rhos = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
-            var Ms = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
+            var Ms = variables[fmGlobalParameter.Ms] as fmCalculationConstantParameter;
+
+            var Qgt = variables[fmGlobalParameter.Qgt] as fmCalculationVariableParameter;
+            var Vg = variables[fmGlobalParameter.Vg] as fmCalculationVariableParameter;
+            var Mev = variables[fmGlobalParameter.Mev] as fmCalculationVariableParameter;
+            var Vev = variables[fmGlobalParameter.Vev] as fmCalculationVariableParameter;
+            var Qmftd = variables[fmGlobalParameter.Qmftd] as fmCalculationVariableParameter;
+            var Qmfd = variables[fmGlobalParameter.Qmfd] as fmCalculationVariableParameter;
+            var Qftd = variables[fmGlobalParameter.Qftd] as fmCalculationVariableParameter;
+            var Qfd = variables[fmGlobalParameter.Qfd] as fmCalculationVariableParameter;
+            var Qmevi = variables[fmGlobalParameter.Qmevi] as fmCalculationVariableParameter;
+            var Qmevt = variables[fmGlobalParameter.Qmevt] as fmCalculationVariableParameter;
+            var Qmev = variables[fmGlobalParameter.Qmev] as fmCalculationVariableParameter;
+            var Qevi = variables[fmGlobalParameter.Qevi] as fmCalculationVariableParameter;
+            var Qevt = variables[fmGlobalParameter.Qevt] as fmCalculationVariableParameter;
+            var Qev = variables[fmGlobalParameter.Qev] as fmCalculationVariableParameter;
+            var qmftd = variables[fmGlobalParameter.qmftd] as fmCalculationVariableParameter;
+            var qmfd = variables[fmGlobalParameter.qmfd] as fmCalculationVariableParameter;
+            var qftd = variables[fmGlobalParameter.qftd] as fmCalculationVariableParameter;
+            var qfd = variables[fmGlobalParameter.qfd] as fmCalculationVariableParameter;
+            var qmevi = variables[fmGlobalParameter.qmevi] as fmCalculationVariableParameter;
+            var qmevt = variables[fmGlobalParameter.qmevt] as fmCalculationVariableParameter;
+            var qmev = variables[fmGlobalParameter.qmev] as fmCalculationVariableParameter;
+            var qevi = variables[fmGlobalParameter.qevi] as fmCalculationVariableParameter;
+            var qevt = variables[fmGlobalParameter.qevt] as fmCalculationVariableParameter;
+            var qev = variables[fmGlobalParameter.qev] as fmCalculationVariableParameter;
 
             hcd.value = fmDeliquoringEquations.Eval_hcd_from_hcf_epsf_epsd(hc.value, eps.value, epsd.value);
 
@@ -167,17 +192,17 @@ namespace fmCalculatorsLibrary
             if (!isKnown_Smech) Smech.value = fmDeliquoringEquations.Eval_Smech_From_Srem_ad1_ad2_K(Srem.value, ad1.value, ad2.value, K.value);
             fmValue Vgmaxev = fmDeliquoringEquations.Eval_Vgmaxev_From_A_pcd_Dpd_etag_hcd_hce_ag1_ag2_td(A.value, pcd.value, Dpd.value, etag.value, hcd.value, hce.value, ag1.value, ag2.value, td.value);
             fmValue Vgev = fmDeliquoringEquations.Eval_Vgev_From_Vgmaxev_ag3_K(Vgmaxev, ag3.value, K.value);
-            fmValue Mev = fmDeliquoringEquations.Eval_Mev_From_peq_Mmole_Tetta_Vgev_ag3_K_f(peq.value, Mmole.value, Tetta.value, Vgev, ag3.value, K.value, f.value);
-            fmValue Sev = fmDeliquoringEquations.Eval_Sev_From_Mev_rhof_epsd_Vcd(Mev, rhof.value, epsd.value, Vcd.value);
+            Mev.value = fmDeliquoringEquations.Eval_Mev_From_peq_Mmole_Tetta_Vgev_ag3_K_f(peq.value, Mmole.value, Tetta.value, Vgev, ag3.value, K.value, f.value);
+            fmValue Sev = fmDeliquoringEquations.Eval_Sev_From_Mev_rhof_epsd_Vcd(Mev.value, rhof.value, epsd.value, Vcd.value);
             if (!isKnown_S) S.value = fmDeliquoringEquations.Eval_S_From_Smech_Sev(Smech.value, Sev);
             if (!isKnown_Rfmech) Rfmech.value = fmDeliquoringEquations.Eval_Rf_From_eps_rhos_rhof_S(epsd.value, rhos.value, rhof.value, Smech.value);
             if (!isKnown_Rf) Rf.value = fmDeliquoringEquations.Eval_Rf_From_eps_rhos_rhof_S(epsd.value, rhos.value, rhof.value, S.value);
             if (!isKnown_rho_bulk) rho_bulk.value = fmDeliquoringEquations.Eval_rho_bulk_From_rhof_epsd_rhos_S(rhof.value, epsd.value, rhos.value, S.value);
             if (!isKnown_Mcd) Mcd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_bulk.value, Vcd.value);
             if (!isKnown_Qgi) Qgi.value = fmDeliquoringEquations.Eval_Qgi_From_Qgimax_ag3_K(Qgimax, ag3.value, K.value);
-            fmValue Qgt = fmDeliquoringEquations.Eval_Qgt_From_Qgimax_ag3_K(Qgimax, ag3.value, K.value);
-            if (!isKnown_Qg) Qg.value = fmDeliquoringEquations.Eval_Qg_From_Qgt_td_tc(Qgt, td.value, tc.value);
-            if (!isKnown_vg) vg.value = fmDeliquoringEquations.Eval_vg_From_Qgt_td_Ms(Qgt, td.value, Ms.value);
+            Qgt.value = fmDeliquoringEquations.Eval_Qgt_From_Qgimax_ag3_K(Qgimax, ag3.value, K.value);
+            if (!isKnown_Qg) Qg.value = fmDeliquoringEquations.Eval_Qg_From_Qgt_td_tc(Qgt.value, td.value, tc.value);
+            if (!isKnown_vg) vg.value = fmDeliquoringEquations.Eval_vg_From_Qgt_td_Ms(Qgt.value, td.value, Ms.value);
             if (!isKnown_Vfd) Vfd.value = fmDeliquoringEquations.Eval_Vfd_From_Vcd_epsd_Smech(Vcd.value, epsd.value, Smech.value);
             if (!isKnown_Mfd) Mfd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhof.value, Vfd.value);
             if (!isKnown_Vlcd) Vlcd.value = fmDeliquoringEquations.Eval_Vlcd_From_Vcd_epsd_S(Vcd.value, epsd.value, S.value);
@@ -190,6 +215,29 @@ namespace fmCalculatorsLibrary
             if (!isKnown_qfid) qfid.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qfid.value, A.value);
             if (!isKnown_qmcd) qmcd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmcd.value, A.value);
             if (!isKnown_qcd) qcd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qcd.value, A.value);
+
+            Vg.value = fmFilterMachiningEquations.Eval_V_From_Q_t(Qgt.value, td.value);
+            Vev.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Mev.value);
+            Qftd.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vfd.value, td.value);
+            Qmftd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhof.value, Qftd.value);
+            Qfd.value = fmDeliquoringEquations.Eval_Q_From_Qt_td_tc(Qftd.value, td.value, tc.value);
+            Qmfd.value = fmDeliquoringEquations.Eval_Q_From_Qt_td_tc(Qmftd.value, td.value, tc.value);
+            Qmevi.value = fmDeliquoringEquations.Eval_Qmevi_From_peq_Mmole_pmoverpn_ag3_K_f_Qgi(peq.value, Mmole.value, pmoverpn, ag3.value, K.value, f.value, Qgi.value);
+            Qevi.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Qmevi.value);
+            Qmevt.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mev.value, td.value);
+            Qmev.value = fmDeliquoringEquations.Eval_Q_From_Qt_td_tc(Qmevt.value, td.value, tc.value);
+            Qevt.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Qmevt.value);
+            Qev.value = fmDeliquoringEquations.Eval_Q_From_Qt_td_tc(Qevt.value, td.value, tc.value);
+            qmftd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmftd.value, A.value);
+            qmfd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmfd.value, A.value);
+            qftd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qftd.value, A.value);
+            qfd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qfd.value, A.value);
+            qmevi.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmevi.value, A.value);
+            qmevt.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmevt.value, A.value);
+            qmev.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmev.value, A.value);
+            qevi.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qevi.value, A.value);
+            qevt.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qevt.value, A.value);
+            qev.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qev.value, A.value);
         }
     }
 }

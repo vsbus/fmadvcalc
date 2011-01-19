@@ -1071,6 +1071,15 @@ namespace FilterSimulationWithTablesAndGraphs
                         };
                         filterMachiningCalculator.DoCalculations();
 
+                        var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values);
+                        eps0dNedEpsdCalculator.DoCalculations();
+
+                        var sigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(tempSim.parameters.Values);
+                        sigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
+
+                        var deliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(tempSim.parameters.Values);
+                        deliquoringSimualtionCalculator.DoCalculations();
+
                         simData.calculatedDataList.Add(tempSim);
                     }
                 }
