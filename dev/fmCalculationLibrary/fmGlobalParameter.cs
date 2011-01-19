@@ -156,6 +156,31 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter qfid;
         public static fmGlobalParameter qmcd;
         public static fmGlobalParameter qcd;
+
+        public static fmGlobalParameter Qgt;
+        public static fmGlobalParameter Vg;
+        public static fmGlobalParameter Mev;
+        public static fmGlobalParameter Vev;
+        public static fmGlobalParameter Qmftd;
+        public static fmGlobalParameter Qmfd;
+        public static fmGlobalParameter Qftd;
+        public static fmGlobalParameter Qfd;
+        public static fmGlobalParameter Qmevi;
+        public static fmGlobalParameter Qmevt;
+        public static fmGlobalParameter Qmev;
+        public static fmGlobalParameter Qevi;
+        public static fmGlobalParameter Qevt;
+        public static fmGlobalParameter Qev;
+        public static fmGlobalParameter qmftd;
+        public static fmGlobalParameter qmfd;
+        public static fmGlobalParameter qftd;
+        public static fmGlobalParameter qfd;
+        public static fmGlobalParameter qmevi;
+        public static fmGlobalParameter qmevt;
+        public static fmGlobalParameter qmev;
+        public static fmGlobalParameter qevi;
+        public static fmGlobalParameter qevt;
+        public static fmGlobalParameter qev;
         #endregion
         // ReSharper restore InconsistentNaming
 
@@ -315,6 +340,30 @@ namespace fmCalculationLibrary
             AddParameter(ref qmcd, new fmGlobalParameter("qmcd", fmUnitFamily.SpecificFlowRateMass));
             AddParameter(ref qcd, new fmGlobalParameter("qcd", fmUnitFamily.SpecificFlowRateVolume));
 
+            AddParameter(ref Qgt, new fmGlobalParameter("Qgt", fmUnitFamily.GasFlowRateVolume));
+            AddParameter(ref Vg, new fmGlobalParameter("Vg", fmUnitFamily.VolumeFamily));
+            AddParameter(ref Mev, new fmGlobalParameter("Mev", fmUnitFamily.MassFamily));
+            AddParameter(ref Vev, new fmGlobalParameter("Vev", fmUnitFamily.VolumeFamily));
+            AddParameter(ref Qmftd, new fmGlobalParameter("Qmftd", fmUnitFamily.FlowRateMass));
+            AddParameter(ref Qmfd, new fmGlobalParameter("Qmfd", fmUnitFamily.FlowRateMass));
+            AddParameter(ref Qftd, new fmGlobalParameter("Qftd", fmUnitFamily.FlowRateVolume));
+            AddParameter(ref Qfd, new fmGlobalParameter("Qfd", fmUnitFamily.FlowRateVolume));
+            AddParameter(ref Qmevi, new fmGlobalParameter("Qmevi", fmUnitFamily.FlowRateMass));
+            AddParameter(ref Qmevt, new fmGlobalParameter("Qmevt", fmUnitFamily.FlowRateMass));
+            AddParameter(ref Qmev, new fmGlobalParameter("Qmev", fmUnitFamily.FlowRateMass));
+            AddParameter(ref Qevi, new fmGlobalParameter("Qevi", fmUnitFamily.FlowRateVolume));
+            AddParameter(ref Qevt, new fmGlobalParameter("Qevt", fmUnitFamily.FlowRateVolume));
+            AddParameter(ref Qev, new fmGlobalParameter("Qev", fmUnitFamily.FlowRateVolume));
+            AddParameter(ref qmftd, new fmGlobalParameter("qmftd", fmUnitFamily.SpecificFlowRateMass));
+            AddParameter(ref qmfd, new fmGlobalParameter("qmfd", fmUnitFamily.SpecificFlowRateMass));
+            AddParameter(ref qftd, new fmGlobalParameter("qftd", fmUnitFamily.SpecificFlowRateVolume));
+            AddParameter(ref qfd, new fmGlobalParameter("qfd", fmUnitFamily.SpecificFlowRateVolume));
+            AddParameter(ref qmevi, new fmGlobalParameter("qmevi", fmUnitFamily.SpecificFlowRateMass));
+            AddParameter(ref qmevt, new fmGlobalParameter("qmevt", fmUnitFamily.SpecificFlowRateMass));
+            AddParameter(ref qmev, new fmGlobalParameter("qmev", fmUnitFamily.SpecificFlowRateMass));
+            AddParameter(ref qevi, new fmGlobalParameter("qevi", fmUnitFamily.SpecificFlowRateVolume));
+            AddParameter(ref qevt, new fmGlobalParameter("qevt", fmUnitFamily.SpecificFlowRateVolume));
+            AddParameter(ref qev, new fmGlobalParameter("qev", fmUnitFamily.SpecificFlowRateVolume));
             #endregion
 
             A.specifiedRange.IsInputed = true;

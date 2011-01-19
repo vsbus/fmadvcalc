@@ -102,7 +102,7 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tf));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.tr));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hc));
-            
+
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mf));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Ms));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Msus));
@@ -118,7 +118,7 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.a));
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vsus));
-            
+
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.hc_over_tf));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.dhc_over_dt));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qf));
@@ -216,8 +216,33 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qfid));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmcd));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qcd));
+
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qgt));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vg));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mev));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vev));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmftd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmfd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qftd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qfd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmevi));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmevt));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmev));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qevi));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qevt));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qev));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmftd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmfd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qftd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qfd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmevi));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmevt));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmev));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qevi));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qevt));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qev));
             #endregion
-        }
+        }                                         
 
         public List<fmGlobalParameter> GetParametersThatCanBeInputedList()
         {

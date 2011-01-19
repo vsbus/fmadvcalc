@@ -38,6 +38,31 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter qmcd;
         private readonly fmBlockVariableParameter qcd;
 
+        private readonly fmBlockVariableParameter Qgt;
+        private readonly fmBlockVariableParameter Vg;
+        private readonly fmBlockVariableParameter Mev;
+        private readonly fmBlockVariableParameter Vev;
+        private readonly fmBlockVariableParameter Qmftd;
+        private readonly fmBlockVariableParameter Qmfd;
+        private readonly fmBlockVariableParameter Qftd;
+        private readonly fmBlockVariableParameter Qfd;
+        private readonly fmBlockVariableParameter Qmevi;
+        private readonly fmBlockVariableParameter Qmevt;
+        private readonly fmBlockVariableParameter Qmev;
+        private readonly fmBlockVariableParameter Qevi;
+        private readonly fmBlockVariableParameter Qevt;
+        private readonly fmBlockVariableParameter Qev;
+        private readonly fmBlockVariableParameter qmftd;
+        private readonly fmBlockVariableParameter qmfd;
+        private readonly fmBlockVariableParameter qftd;
+        private readonly fmBlockVariableParameter qfd;
+        private readonly fmBlockVariableParameter qmevi;
+        private readonly fmBlockVariableParameter qmevt;
+        private readonly fmBlockVariableParameter qmev;
+        private readonly fmBlockVariableParameter qevi;
+        private readonly fmBlockVariableParameter qevt;
+        private readonly fmBlockVariableParameter qev;
+
         private readonly fmBlockConstantParameter hc;
         private readonly fmBlockConstantParameter eps;
         private readonly fmBlockConstantParameter epsd;
@@ -135,7 +160,31 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell qmfid_Cell,
             DataGridViewCell qfid_Cell,
             DataGridViewCell qmcd_Cell,
-            DataGridViewCell qcd_Cell)
+            DataGridViewCell qcd_Cell,
+            DataGridViewCell Qgt_Cell,
+            DataGridViewCell Vg_Cell,
+            DataGridViewCell Mev_Cell,
+            DataGridViewCell Vev_Cell,
+            DataGridViewCell Qmftd_Cell,
+            DataGridViewCell Qmfd_Cell,
+            DataGridViewCell Qftd_Cell,
+            DataGridViewCell Qfd_Cell,
+            DataGridViewCell Qmevi_Cell,
+            DataGridViewCell Qmevt_Cell,
+            DataGridViewCell Qmev_Cell,
+            DataGridViewCell Qevi_Cell,
+            DataGridViewCell Qevt_Cell,
+            DataGridViewCell Qev_Cell,
+            DataGridViewCell qmftd_Cell,
+            DataGridViewCell qmfd_Cell,
+            DataGridViewCell qftd_Cell,
+            DataGridViewCell qfd_Cell,
+            DataGridViewCell qmevi_Cell,
+            DataGridViewCell qmevt_Cell,
+            DataGridViewCell qmev_Cell,
+            DataGridViewCell qevi_Cell,
+            DataGridViewCell qevt_Cell,
+            DataGridViewCell qev_Cell)
         // ReSharper restore InconsistentNaming
         {
             AddParameter(ref hcd, fmGlobalParameter.hcd, hcd_Cell, false);
@@ -164,6 +213,31 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref qfid, fmGlobalParameter.qfid, qfid_Cell, false);
             AddParameter(ref qmcd, fmGlobalParameter.qmcd, qmcd_Cell, false);
             AddParameter(ref qcd, fmGlobalParameter.qcd, qcd_Cell, false);
+
+            AddParameter(ref Qgt, fmGlobalParameter.Qgt, Qgt_Cell, false);
+            AddParameter(ref Vg, fmGlobalParameter.Vg, Vg_Cell, false);
+            AddParameter(ref Mev, fmGlobalParameter.Mev, Mev_Cell, false);
+            AddParameter(ref Vev, fmGlobalParameter.Vev, Vev_Cell, false);
+            AddParameter(ref Qmftd, fmGlobalParameter.Qmftd, Qmftd_Cell, false);
+            AddParameter(ref Qmfd, fmGlobalParameter.Qmfd, Qmfd_Cell, false);
+            AddParameter(ref Qftd, fmGlobalParameter.Qftd, Qftd_Cell, false);
+            AddParameter(ref Qfd, fmGlobalParameter.Qfd, Qfd_Cell, false);
+            AddParameter(ref Qmevi, fmGlobalParameter.Qmevi, Qmevi_Cell, false);
+            AddParameter(ref Qmevt, fmGlobalParameter.Qmevt, Qmevt_Cell, false);
+            AddParameter(ref Qmev, fmGlobalParameter.Qmev, Qmev_Cell, false);
+            AddParameter(ref Qevi, fmGlobalParameter.Qevi, Qevi_Cell, false);
+            AddParameter(ref Qevt, fmGlobalParameter.Qevt, Qevt_Cell, false);
+            AddParameter(ref Qev, fmGlobalParameter.Qev, Qev_Cell, false);
+            AddParameter(ref qmftd, fmGlobalParameter.qmftd, qmftd_Cell, false);
+            AddParameter(ref qmfd, fmGlobalParameter.qmfd, qmfd_Cell, false);
+            AddParameter(ref qftd, fmGlobalParameter.qftd, qftd_Cell, false);
+            AddParameter(ref qfd, fmGlobalParameter.qfd, qfd_Cell, false);
+            AddParameter(ref qmevi, fmGlobalParameter.qmevi, qmevi_Cell, false);
+            AddParameter(ref qmevt, fmGlobalParameter.qmevt, qmevt_Cell, false);
+            AddParameter(ref qmev, fmGlobalParameter.qmev, qmev_Cell, false);
+            AddParameter(ref qevi, fmGlobalParameter.qevi, qevi_Cell, false);
+            AddParameter(ref qevt, fmGlobalParameter.qevt, qevt_Cell, false);
+            AddParameter(ref qev, fmGlobalParameter.qev, qev_Cell, false);
             
             AddConstantParameter(ref hc, fmGlobalParameter.hc);
             AddConstantParameter(ref eps, fmGlobalParameter.eps);
@@ -240,6 +314,6 @@ namespace fmCalcBlocksLibrary.Blocks
             ReWriteParameters();
         }
 
-        public fmDeliquoringSimualtionBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) { }
+        public fmDeliquoringSimualtionBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) { }
     }
 }
