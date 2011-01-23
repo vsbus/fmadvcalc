@@ -27,6 +27,20 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter pke;
         private readonly fmBlockConstantParameter rhof;
 
+        private readonly fmBlockParameterGroup Srem_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup ad1_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup ad2_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup Tetta_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup eta_g_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup ag1_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup ag2_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup ag3_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup Tetta_boil_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup DH_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup Mmole_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup f_Group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup peq_Group = new fmBlockParameterGroup();
+
         override public void DoCalculations()
         {
             var fmSremTettaAdAgDHRmMmoleFPeqCalculator = new fmSremTettaAdAgDHRmMmoleFPeqCalculator(AllParameters);
@@ -66,6 +80,20 @@ namespace fmCalcBlocksLibrary.Blocks
             
             AddConstantParameter(ref pke, fmGlobalParameter.pke);
             AddConstantParameter(ref rhof, fmGlobalParameter.rho_f);
+
+            Srem.group = Srem_Group;
+            ad1.group = ad1_Group;
+            ad2.group = ad2_Group;
+            Tetta.group = Tetta_Group;
+            eta_g.group = eta_g_Group;
+            ag1.group = ag1_Group;
+            ag2.group = ag2_Group;
+            ag3.group = ag3_Group;
+            Tetta_boil.group = Tetta_boil_Group;
+            DH.group = DH_Group;
+            Mmole.group = Mmole_Group;
+            f.group = f_Group;
+            peq.group = peq_Group;
 
             processOnChange = true;
         }
