@@ -273,21 +273,29 @@ namespace fmCalcBlocksLibrary.Blocks
 //                     p.group = second_group;
 //                 }
 //             }
-            vg.group = second_group;
+            sd.group = second_group;
+            td.group = second_group;
+            K.group = second_group;
+            Smech.group = second_group;
+            S.group = second_group;
+            Rfmech.group = second_group;
+            Rf.group = second_group;
+            Qgi.group = second_group;
             Qg.group = second_group;
-            qmfid.group = second_group;
-            Qmfid.group = second_group;
-            qfid.group = second_group;
-            Qfid.group = second_group;
+            vg.group = second_group;
             Mfd.group = second_group;
             Vfd.group = second_group;
-            Qgi.group = second_group;
-            Rfmech.group = second_group;
-            Smech.group = second_group;
-            K.group = second_group;
-            td.group = second_group;
-            sd.group = second_group;
-            S.group = second_group;
+            Mlcd.group = second_group;
+            Vlcd.group = second_group;
+            rho_bulk.group = second_group;
+            Qmfid.group = second_group;
+            Qfid.group = second_group;
+            //Qmcd.group = second_group;
+            //Qcd.group = second_group;
+            qmfid.group = second_group;
+            qfid.group = second_group;
+            //qmcd.group = second_group;
+            //qcd.group = second_group;
 
             UpdateCellsStyle();
             processOnChange = true;

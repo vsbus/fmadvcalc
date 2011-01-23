@@ -266,5 +266,15 @@ namespace fmCalculationLibrary.Equations
             fmValue bar = new fmValue(1e5);
             return A * pcd * Dpd * (ag1 + ag2 * fmValue.Log(Dpd / bar)) / (etag * (hcd + hce));
         }
+
+        public static fmValue Eval_S_From_Vcd_epsd_Vlcd(fmValue Vcd, fmValue epsd, fmValue Vlcd)
+        {
+            return Vlcd / (Vcd * epsd);
+        }
+
+        public static fmValue Eval_S_From_rhof_epsd_rhos_rhobulk(fmValue rhof, fmValue epsd, fmValue rhos, fmValue rhobulk)
+        {
+            return (rhobulk - rhos + rhos * epsd) / (epsd * rhof);
+        }
     }
 }

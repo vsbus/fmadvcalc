@@ -125,6 +125,26 @@ namespace fmCalculatorsLibrary
             fmValue SC3 = fmDeliquoringEquations.Eval_SC3_From_A_pcd_Dpd_ag1_ag2_etag_hcd_hce(A.value, pcd.value, Dpd.value, ag1.value, ag2.value, etag.value, hcd.value, hce.value);
             fmValue Kmax = fmDeliquoringEquations.Eval_Kmax_From_Const1_tc(Const1, tc.value);
 
+            if (isKnown_rho_bulk)
+            {
+                S.value = fmDeliquoringEquations.Eval_S_From_rhof_epsd_rhos_rhobulk(rhof.value, epsd.value, rhos.value, rho_bulk.value);
+                isKnown_S = true;
+            }
+            if (isKnown_Mlcd)
+            {
+                Vlcd.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Mlcd.value);
+                isKnown_Vlcd = true;
+            }
+            if (isKnown_Vlcd)
+            {
+                S.value = fmDeliquoringEquations.Eval_S_From_Vcd_epsd_Vlcd(Vcd.value, epsd.value, Vlcd.value);
+                isKnown_S = true;
+            }
+            if (isKnown_Rf)
+            {
+                S.value = fmDeliquoringEquations.Eval_S_From_eps_rhos_rhof_Rf(epsd.value, rhos.value, rhof.value, Rf.value);
+                isKnown_S = true;
+            } 
             if (isKnown_S)
             {
                 K.value = fmDeliquoringEquations.Eval_K_From_Kmax_Srem_ad1_ad2_SC1_SC2_SC3_Const1_ag3_f_S(Kmax, Srem.value, ad1.value, ad2.value, SC1, SC2, SC3, Const1, ag3.value, f.value, S.value);
