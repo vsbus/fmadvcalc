@@ -287,6 +287,7 @@ namespace fmCalcBlocksLibrary.Blocks
             K.group = second_group;
             td.group = second_group;
             sd.group = second_group;
+            S.group = second_group;
 
             UpdateCellsStyle();
             processOnChange = true;

@@ -195,5 +195,76 @@ namespace fmCalculationLibrary.Equations
             fmValue Tn = new fmValue(273);
             return peq * Mmole / (R0 * Tn * pmoverpn) * fmValue.Pow((1 - fmValue.Exp(-ag3 * K)) / (ag3 * K), f) * Qgi;
         }
+
+        public static fmValue Eval_SC1_From_rhof_epsd_Vcd(fmValue rhof, fmValue epsd, fmValue Vcd)
+        {
+            return 1 / (rhof * epsd * Vcd);
+        }
+
+        public static fmValue Eval_SC2_From_peq_Mmole_Tetta(fmValue peq, fmValue Mmole, fmValue Tetta)
+        {
+            fmValue R0 = new fmValue(8.314);
+            fmValue T = Tetta + 273;
+            return peq * Mmole / (R0 * T);
+        }
+
+        public static fmValue Eval_S_From_Srem_ad1_ad2_SC1_SC2_SC3_Const1_ag3_f_K(fmValue Srem, fmValue ad1, fmValue ad2, fmValue SC1, fmValue SC2, fmValue SC3, fmValue Const1, fmValue ag3, fmValue f, fmValue K)
+        {
+            fmValue Smech = Srem + (1 - Srem) * fmValue.Pow(1 + ad2 * K, -ad1);
+            fmValue X = (1 - fmValue.Exp(-ag3 * K)) / (ag3 * K);
+            fmValue Sev = SC1 * SC2 * SC3 * Const1 * K * (1 - X) * fmValue.Pow(X, f);
+            return Smech - Sev;
+        }
+
+        class SCalcFunction : fmCalculationLibrary.NumericalMethods.fmFunction
+        {
+            private fmValue Srem;
+            private fmValue ad1;
+            private fmValue ad2;
+            private fmValue SC1;
+            private fmValue SC2;
+            private fmValue SC3;
+            private fmValue Const1;
+            private fmValue ag3;
+            private fmValue f;
+            private fmValue S;
+            public SCalcFunction(fmValue Srem, fmValue ad1, fmValue ad2,
+                          fmValue SC1, fmValue SC2, fmValue SC3, fmValue Const1,
+                          fmValue ag3, fmValue f, fmValue S)
+            {
+                this.Srem = Srem;
+                this.ad1 = ad1;
+                this.ad2 = ad2;
+                this.SC1 = SC1;
+                this.SC2 = SC2;
+                this.SC3 = SC3;
+                this.Const1 = Const1;
+                this.ag3 = ag3;
+                this.f = f;
+                this.S = S;
+            }
+
+            public override fmValue Eval(fmValue K)
+            {
+                return S - Eval_S_From_Srem_ad1_ad2_SC1_SC2_SC3_Const1_ag3_f_K(Srem, ad1, ad2, SC1, SC2, SC3, Const1, ag3, f, K);
+            }
+        }
+
+        public static fmValue Eval_K_From_Kmax_Srem_ad1_ad2_SC1_SC2_SC3_Const1_ag3_f_S(fmValue KMax, fmValue Srem, fmValue ad1, fmValue ad2, fmValue SC1, fmValue SC2, fmValue SC3, fmValue Const1, fmValue ag3, fmValue f, fmValue S)
+        {
+            SCalcFunction SFunc = new SCalcFunction(Srem, ad1, ad2, SC1, SC2, SC3, Const1, ag3, f, S);
+            return fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(SFunc, new fmValue(0), KMax, 30);
+        }
+
+        public static fmValue Eval_Kmax_From_Const1_tc(fmValue Const1, fmValue tc)
+        {
+            return tc / Const1;
+        }
+
+        public static fmValue Eval_SC3_From_A_pcd_Dpd_ag1_ag2_etag_hcd_hce(fmValue A, fmValue pcd, fmValue Dpd, fmValue ag1, fmValue ag2, fmValue etag, fmValue hcd, fmValue hce)
+        {
+            fmValue bar = new fmValue(1e5);
+            return A * pcd * Dpd * (ag1 + ag2 * fmValue.Log(Dpd / bar)) / (etag * (hcd + hce));
+        }
     }
 }
