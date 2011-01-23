@@ -27,7 +27,8 @@ namespace fmCalculationLibrary.MeasureUnits
         public static fmUnitFamily GasFlowRateVolume = new fmUnitFamily();
         public static fmUnitFamily SpeedFamily = new fmUnitFamily();
         public static fmUnitFamily SpecificMassFamily = new fmUnitFamily();
-        public static fmUnitFamily SpecificVolumeFamily = new fmUnitFamily();
+        public static fmUnitFamily VolumeInAreaFamily = new fmUnitFamily();
+        public static fmUnitFamily VolumeInMassFamily = new fmUnitFamily();
         public static fmUnitFamily SpecificFlowRateVolume = new fmUnitFamily();
         public static fmUnitFamily SpecificFlowRateMass = new fmUnitFamily();
         public static fmUnitFamily SurfaceTensionFamily = new fmUnitFamily();
@@ -101,8 +102,11 @@ namespace fmCalculationLibrary.MeasureUnits
 
             SpecificMassFamily.units.Add(new fmUnit("kg/m2", 1));
 
-            SpecificVolumeFamily.units.Add(new fmUnit("l/m2", 1e-3));
-            SpecificVolumeFamily.units.Add(new fmUnit("m3/m2", 1));
+            VolumeInAreaFamily.units.Add(new fmUnit("l/m2", 1e-3));
+            VolumeInAreaFamily.units.Add(new fmUnit("m3/m2", 1));
+
+            VolumeInMassFamily.units.Add(new fmUnit("l/kg", 1e-3));
+            VolumeInMassFamily.units.Add(new fmUnit("m3/kg", 1));
 
             SpecificFlowRateVolume.units.Add(new fmUnit("l/m2min", 1e-3/60));
             SpecificFlowRateVolume.units.Add(new fmUnit("m3/m2s", 1));

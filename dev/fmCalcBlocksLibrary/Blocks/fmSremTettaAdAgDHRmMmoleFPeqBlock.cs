@@ -39,7 +39,6 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup DH_Group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup Mmole_Group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup f_Group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup peq_Group = new fmBlockParameterGroup();
 
         override public void DoCalculations()
         {
@@ -76,7 +75,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref DH, fmGlobalParameter.DH, DH_Cell, true);
             AddParameter(ref Mmole, fmGlobalParameter.Mmole, Mmole_Cell, true);
             AddParameter(ref f, fmGlobalParameter.f, f_Cell, true);
-            AddParameter(ref peq, fmGlobalParameter.peq, peq_Cell, true);
+            AddParameter(ref peq, fmGlobalParameter.peq, peq_Cell, false);
             
             AddConstantParameter(ref pke, fmGlobalParameter.pke);
             AddConstantParameter(ref rhof, fmGlobalParameter.rho_f);
@@ -93,7 +92,8 @@ namespace fmCalcBlocksLibrary.Blocks
             DH.group = DH_Group;
             Mmole.group = Mmole_Group;
             f.group = f_Group;
-            peq.group = peq_Group;
+
+            peq.cell.ReadOnly = true;
 
             processOnChange = true;
         }

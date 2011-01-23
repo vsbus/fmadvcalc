@@ -236,13 +236,13 @@ namespace fmCalculationLibrary
             AddParameter(ref Mf, new fmGlobalParameter("Mf", fmUnitFamily.MassFamily, new fmRange(0.01, 10000)));
             AddParameter(ref Vf, new fmGlobalParameter("Vf", fmUnitFamily.VolumeFamily, new fmRange(0.01e-3, 10000e-3)));
             AddParameter(ref mf, new fmGlobalParameter("mf", fmUnitFamily.SpecificMassFamily, new fmRange(1, 100)));
-            AddParameter(ref vf, new fmGlobalParameter("vf", fmUnitFamily.SpecificVolumeFamily, new fmRange(1e-3, 100e-3)));
+            AddParameter(ref vf, new fmGlobalParameter("vf", fmUnitFamily.VolumeInAreaFamily, new fmRange(1e-3, 100e-3)));
             AddParameter(ref ms, new fmGlobalParameter("ms", fmUnitFamily.SpecificMassFamily, new fmRange(1, 20)));
-            AddParameter(ref vs, new fmGlobalParameter("vs", fmUnitFamily.SpecificVolumeFamily, new fmRange(1e-3, 20e-3)));
+            AddParameter(ref vs, new fmGlobalParameter("vs", fmUnitFamily.VolumeInAreaFamily, new fmRange(1e-3, 20e-3)));
             AddParameter(ref msus, new fmGlobalParameter("msus", fmUnitFamily.SpecificMassFamily, new fmRange(1, 100)));
-            AddParameter(ref vsus, new fmGlobalParameter("vsus", fmUnitFamily.SpecificVolumeFamily, new fmRange(1e-3, 100e-3)));
+            AddParameter(ref vsus, new fmGlobalParameter("vsus", fmUnitFamily.VolumeInAreaFamily, new fmRange(1e-3, 100e-3)));
             AddParameter(ref mc, new fmGlobalParameter("mc", fmUnitFamily.SpecificMassFamily, new fmRange(1, 50)));
-            AddParameter(ref vc, new fmGlobalParameter("vc", fmUnitFamily.SpecificVolumeFamily, new fmRange(1e-3, 50e-3)));
+            AddParameter(ref vc, new fmGlobalParameter("vc", fmUnitFamily.VolumeInAreaFamily, new fmRange(1e-3, 50e-3)));
             AddParameter(ref Msus, new fmGlobalParameter("Msus", fmUnitFamily.MassFamily, new fmRange(0.1, 20000)));
             AddParameter(ref Vsus, new fmGlobalParameter("Vsus", fmUnitFamily.VolumeFamily, new fmRange(0.1e-3, 20000e-3)));
             AddParameter(ref Vc, new fmGlobalParameter("Vc", fmUnitFamily.VolumeFamily, new fmRange(0.01e-3, 10000e-3)));
@@ -323,7 +323,7 @@ namespace fmCalculationLibrary
             AddParameter(ref Rf, new fmGlobalParameter("Rf", fmUnitFamily.ConcentrationFamily, new fmRange(0.01, 0.99)));
             AddParameter(ref Qgi, new fmGlobalParameter("Qgi", fmUnitFamily.GasFlowRateVolume, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
             AddParameter(ref Qg, new fmGlobalParameter("Qg", fmUnitFamily.GasFlowRateVolume, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
-            AddParameter(ref vg, new fmGlobalParameter("vg", fmUnitFamily.SpecificVolumeFamily, new fmRange(1e-3, 50e-3)));
+            AddParameter(ref vg, new fmGlobalParameter("vg", fmUnitFamily.VolumeInMassFamily, new fmRange(1e-3, 50e-3)));
             AddParameter(ref Mfd, new fmGlobalParameter("Mfd", fmUnitFamily.MassFamily, new fmRange(0.01, 5000)));
             AddParameter(ref Vfd, new fmGlobalParameter("Vfd", fmUnitFamily.VolumeFamily, new fmRange(0.01e-3, 10000e-3)));
             AddParameter(ref Mlcd, new fmGlobalParameter("Mlcd", fmUnitFamily.MassFamily, new fmRange(0.01, 5000)));
