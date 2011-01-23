@@ -1187,10 +1187,6 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     listBoxYAxis.SetItemChecked(outputNames.IndexOf(fmGlobalParameter.hc.name), true);
                 }
-                if (outputNames.Contains(fmGlobalParameter.qf.name))
-                {
-                    listBoxYAxis.SetItemChecked(outputNames.IndexOf(fmGlobalParameter.qf.name), true);
-                }
             }
         }
 

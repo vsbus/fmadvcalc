@@ -290,12 +290,8 @@ namespace fmCalcBlocksLibrary.Blocks
             rho_bulk.group = second_group;
             Qmfid.group = second_group;
             Qfid.group = second_group;
-            //Qmcd.group = second_group;
-            //Qcd.group = second_group;
             qmfid.group = second_group;
             qfid.group = second_group;
-            //qmcd.group = second_group;
-            //qcd.group = second_group;
 
             UpdateCellsStyle();
             processOnChange = true;
