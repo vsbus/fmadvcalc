@@ -64,6 +64,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter qev;
 
         private readonly fmBlockConstantParameter hc;
+        private readonly fmBlockConstantParameter sf;
         private readonly fmBlockConstantParameter eps;
         private readonly fmBlockConstantParameter epsd;
         private readonly fmBlockConstantParameter tc;
@@ -241,6 +242,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref qev, fmGlobalParameter.qev, qev_Cell, false);
             
             AddConstantParameter(ref hc, fmGlobalParameter.hc);
+            AddConstantParameter(ref sf, fmGlobalParameter.sf);
             AddConstantParameter(ref eps, fmGlobalParameter.eps);
             AddConstantParameter(ref epsd, fmGlobalParameter.eps_d);
             AddConstantParameter(ref tc, fmGlobalParameter.tc);

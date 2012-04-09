@@ -45,6 +45,17 @@ namespace fmCalcBlocksLibrary.Blocks
                 CalculateClueParamsLimits(clueParams, minValue, maxValue);
                 CalculateAllParamsLimits(clueParams, minValue, maxValue);
 
+                // here it is a hack. as sf + sd <= 100% we set sd_max = 100% - sf
+                foreach (fmBlockConstantParameter constantParameter in constantParameters)
+                {
+                    if (constantParameter.globalParameter == fmGlobalParameter.sf)
+                    {
+                        maxValue[fmGlobalParameter.sd] = fmValue.Min(maxValue[fmGlobalParameter.sd],
+                                                                     new fmValue(1) - constantParameter.value);
+                        break;
+                    }
+                }
+
                 WriteLimitsToUI(minValue, maxValue);
 
                 processOnChange = true;
