@@ -316,6 +316,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // fmZedGraphControl1
             // 
             this.fmZedGraphControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fmZedGraphControl1.IsAntiAlias = true;
             this.fmZedGraphControl1.Location = new System.Drawing.Point(0, 0);
             this.fmZedGraphControl1.Name = "fmZedGraphControl1";
             this.fmZedGraphControl1.ScrollGrace = 0;
