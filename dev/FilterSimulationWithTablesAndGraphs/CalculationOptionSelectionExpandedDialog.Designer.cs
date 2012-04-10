@@ -36,15 +36,21 @@ namespace FilterSimulationWithTablesAndGraphs
             this.allItemsRadioButton = new System.Windows.Forms.RadioButton();
             this.checkedItemsRadioButton = new System.Windows.Forms.RadioButton();
             this.currentItemRadioButton = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.calclulationOptionKindGroupBox.SuspendLayout();
             this.applyForGroupBox.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Location = new System.Drawing.Point(200, 0);
-            this.panel1.Size = new System.Drawing.Size(502, 235);
+            this.panel1.Size = new System.Drawing.Size(495, 290);
+            this.panel1.Controls.SetChildIndex(this.groupBox1, 0);
             // 
             // panel5
             // 
@@ -53,16 +59,17 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel5.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(200, 235);
+            this.panel5.Size = new System.Drawing.Size(200, 290);
             this.panel5.TabIndex = 4;
             // 
             // calclulationOptionKindGroupBox
             // 
             this.calclulationOptionKindGroupBox.Controls.Add(this.radioButton2);
             this.calclulationOptionKindGroupBox.Controls.Add(this.radioButton1);
-            this.calclulationOptionKindGroupBox.Location = new System.Drawing.Point(6, 125);
+            this.calclulationOptionKindGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.calclulationOptionKindGroupBox.Location = new System.Drawing.Point(0, 116);
             this.calclulationOptionKindGroupBox.Name = "calclulationOptionKindGroupBox";
-            this.calclulationOptionKindGroupBox.Size = new System.Drawing.Size(188, 100);
+            this.calclulationOptionKindGroupBox.Size = new System.Drawing.Size(200, 174);
             this.calclulationOptionKindGroupBox.TabIndex = 1;
             this.calclulationOptionKindGroupBox.TabStop = false;
             this.calclulationOptionKindGroupBox.Text = "Calclulation Option Kind";
@@ -96,9 +103,10 @@ namespace FilterSimulationWithTablesAndGraphs
             this.applyForGroupBox.Controls.Add(this.allItemsRadioButton);
             this.applyForGroupBox.Controls.Add(this.checkedItemsRadioButton);
             this.applyForGroupBox.Controls.Add(this.currentItemRadioButton);
-            this.applyForGroupBox.Location = new System.Drawing.Point(6, 3);
+            this.applyForGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.applyForGroupBox.Location = new System.Drawing.Point(0, 0);
             this.applyForGroupBox.Name = "applyForGroupBox";
-            this.applyForGroupBox.Size = new System.Drawing.Size(188, 116);
+            this.applyForGroupBox.Size = new System.Drawing.Size(200, 116);
             this.applyForGroupBox.TabIndex = 0;
             this.applyForGroupBox.TabStop = false;
             this.applyForGroupBox.Text = "Apply For";
@@ -138,19 +146,44 @@ namespace FilterSimulationWithTablesAndGraphs
             this.currentItemRadioButton.UseVisualStyleBackColor = true;
             this.currentItemRadioButton.CheckedChanged += new System.EventHandler(this.currentItemRadioButton_CheckedChanged);
             // 
-            // CalculationOptionSelectionExpandedDialog
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Location = new System.Drawing.Point(3, 231);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(484, 50);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Deliquoring Calculation Option";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(34, 19);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(134, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "hcd calculated from hc";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // fmCalculationOptionSelectionExpandedDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(702, 260);
+            this.ClientSize = new System.Drawing.Size(695, 315);
             this.Controls.Add(this.panel5);
             this.Name = "fmCalculationOptionSelectionExpandedDialog";
             this.Controls.SetChildIndex(this.panel5, 0);
             this.Controls.SetChildIndex(this.panel1, 0);
+            this.panel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.calclulationOptionKindGroupBox.ResumeLayout(false);
             this.calclulationOptionKindGroupBox.PerformLayout();
             this.applyForGroupBox.ResumeLayout(false);
             this.applyForGroupBox.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -165,5 +198,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private System.Windows.Forms.RadioButton allItemsRadioButton;
         private System.Windows.Forms.RadioButton checkedItemsRadioButton;
         private System.Windows.Forms.RadioButton currentItemRadioButton;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

@@ -775,7 +775,7 @@ namespace FilterSimulation
             {
                 if (m_commonDeliquoringSimulationBlock == null)
                 {
-                    InitCommonDeliquoringSimulationBlock();
+                    InitCommonDeliquoringSimulationBlock(sim.DeliquoringCalculationOption);
                 }
 
                 if (m_commonDeliquoringSimulationBlock != null)
@@ -787,6 +787,8 @@ namespace FilterSimulation
                     //    commonDeliquoringSimulationBlockDataGrid.Rows[i].Visible = m_commonDeliquoringSimulationBlock.Parameters[i].group != null
                     //        && parametersToDisplay.Contains(m_commonDeliquoringSimulationBlock.Parameters[i].globalParameter);
                     //}
+
+                    m_commonDeliquoringSimulationBlock.SetCalculationOptionAndUpdateCellsStyle(sim.DeliquoringCalculationOption);
 
                     for (int i = 0; i < m_commonDeliquoringSimulationBlock.ConstantParameters.Count; ++i)
                     {
@@ -837,9 +839,9 @@ namespace FilterSimulation
         }
 
 
-        private void InitCommonDeliquoringSimulationBlock()
+        private void InitCommonDeliquoringSimulationBlock(fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption calculationOption)
         {
-            var voidBlock = new fmDeliquoringSimualtionBlock();
+            var voidBlock = new fmDeliquoringSimualtionBlock() {calculationOption = calculationOption};
             commonDeliquoringSimulationBlockDataGrid.RowCount = voidBlock.Parameters.Count;
             var parToCell = new Dictionary<fmGlobalParameter, DataGridViewCell>();
             for (int i = 0; i < voidBlock.Parameters.Count; ++i)

@@ -12,12 +12,14 @@ namespace FilterSimulation.fmFilterObjects
         public string name;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption deliquoringCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.HcdCalculatedFromCakeFormation;
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
         {
             name = from.name;
             filterMachiningCalculationOption = from.filterMachiningCalculationOption;
+            deliquoringCalculationOption = from.deliquoringCalculationOption;
             suspensionCalculationOption = from.suspensionCalculationOption;
             CopyValuesFrom(from);
             CopyIsInputedFrom(from);
@@ -279,7 +281,10 @@ namespace FilterSimulation.fmFilterObjects
             result.AddRange(filterMachiningParametersList);
 
             {
-                fmDeliquoringSimualtionBlock deliqBlock = new fmDeliquoringSimualtionBlock();
+                var deliqBlock = new fmDeliquoringSimualtionBlock
+                                     {
+                                         calculationOption = deliquoringCalculationOption
+                                     };
                 foreach (fmBlockVariableParameter p in deliqBlock.Parameters)
                 {
                     if (p.group != null)
@@ -347,7 +352,11 @@ namespace FilterSimulation.fmFilterObjects
 
         public void UpdateIsInputed(fmGlobalParameter inputedParameter)
         {
-            var deliqSim = new fmDeliquoringSimualtionBlock();
+            var deliqSim = new fmDeliquoringSimualtionBlock()
+                               {
+                                   calculationOption = deliquoringCalculationOption
+                               }; 
+            deliqSim.UpdateGroups();
             UpdateIsInputedInParametersFromBlock(deliqSim, inputedParameter);
 
             var fmb = new fmFilterMachiningBlock
@@ -381,6 +390,7 @@ namespace FilterSimulation.fmFilterObjects
             public const string name = "name";
             public const string parametersSize = "parametersSize";
             public const string filterMachiningCalculationOption = "filterMachiningCalculationOption";
+            public const string deliquoringCalculationOption = "deliquoringCalculationOption";
             public const string suspensionCalculationOption = "suspensionCalculationOption";
             // ReSharper restore InconsistentNaming
         }
@@ -440,6 +450,7 @@ namespace FilterSimulation.fmFilterObjects
             output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.Begin);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.name, name, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.deliquoringCalculationOption, deliquoringCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.suspensionCalculationOption, suspensionCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.parametersSize, parameters.Count, 8);
             foreach (var p in parameters.Values)
@@ -473,6 +484,13 @@ namespace FilterSimulation.fmFilterObjects
                                                          fmFilterSimulationDataSerializeTags.
                                                              filterMachiningCalculationOption).ToString(),
                     typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption));
+            simData.deliquoringCalculationOption =
+                (fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption)
+                StringToEnum(
+                    fmSerializeTools.DeserializeProperty(input,
+                                                         fmFilterSimulationDataSerializeTags.
+                                                             deliquoringCalculationOption).ToString(),
+                    typeof(fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption));
             simData.suspensionCalculationOption = (fmSuspensionCalculator.fmSuspensionCalculationOptions)
                 StringToEnum(
                     fmSerializeTools.DeserializeProperty(input,
@@ -563,6 +581,19 @@ namespace FilterSimulation.fmFilterObjects
                     Modified = true;
                 }
                 m_data.filterMachiningCalculationOption = value; 
+            }
+        }
+
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption DeliquoringCalculationOption
+        {
+            get { return m_data.deliquoringCalculationOption; }
+            set
+            {
+                if (m_data.deliquoringCalculationOption != value)
+                {
+                    Modified = true;
+                }
+                m_data.deliquoringCalculationOption = value;
             }
         }
 
@@ -745,6 +776,7 @@ namespace FilterSimulation.fmFilterObjects
             fmFilterSimulationData simData = fmFilterSimulationData.Deserialize(input);
             sim.Name = simData.name;
             sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
+            sim.DeliquoringCalculationOption = simData.deliquoringCalculationOption;
             sim.SuspensionCalculationOption = simData.suspensionCalculationOption;
             foreach (var p in simData.parameters.Values)
             {

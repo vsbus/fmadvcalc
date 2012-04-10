@@ -436,16 +436,19 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         // ReSharper restore InconsistentNaming
         {
             var cosd = new fmCalculationOptionSelectionDialog
-            {
-                suspensionCalculationOption =
-                    m_fSolution.currentObjects.Simulation.Data.suspensionCalculationOption,
-                filterMachiningCalculationOption =
-                    m_fSolution.currentObjects.Simulation.Data.filterMachiningCalculationOption
-            };
+                           {
+                               suspensionCalculationOption =
+                                   m_fSolution.currentObjects.Simulation.Data.suspensionCalculationOption,
+                               filterMachiningCalculationOption =
+                                   m_fSolution.currentObjects.Simulation.Data.filterMachiningCalculationOption,
+                               deliquoringCalculationOption =
+                                   m_fSolution.currentObjects.Simulation.Data.deliquoringCalculationOption
+                            };
             if (cosd.ShowDialog() == DialogResult.OK)
             {
                 m_fSolution.currentObjects.Simulation.susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);
                 m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
+                m_fSolution.currentObjects.Simulation.DeliquoringCalculationOption = cosd.deliquoringCalculationOption;
                 DisplaySolution(m_fSolution);
             }
         }

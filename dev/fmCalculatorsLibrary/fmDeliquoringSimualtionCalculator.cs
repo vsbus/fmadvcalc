@@ -8,7 +8,15 @@ namespace fmCalculatorsLibrary
 {
     public class fmDeliquoringSimualtionCalculator : fmBaseCalculator
     {
+        public enum fmDeliquoringSimualtionCalculationOption
+        {
+            HcdInputed,
+            HcdCalculatedFromCakeFormation
+        }
+        public fmDeliquoringSimualtionCalculationOption calculationOption;
+
         public fmDeliquoringSimualtionCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+        
         override public void DoCalculations()
         {
             var hcd = variables[fmGlobalParameter.hcd] as fmCalculationVariableParameter;
@@ -88,7 +96,10 @@ namespace fmCalculatorsLibrary
             var qevt = variables[fmGlobalParameter.qevt] as fmCalculationVariableParameter;
             var qev = variables[fmGlobalParameter.qev] as fmCalculationVariableParameter;
 
-            hcd.value = fmDeliquoringEquations.Eval_hcd_from_hcf_epsf_epsd(hc.value, eps.value, epsd.value);
+            if (calculationOption == fmDeliquoringSimualtionCalculationOption.HcdCalculatedFromCakeFormation)
+            {
+                hcd.value = fmDeliquoringEquations.Eval_hcd_from_hcf_epsf_epsd(hc.value, eps.value, epsd.value);
+            }
 
             var isKnown_sd = sd.isInputed;
             var isKnown_td = td.isInputed;

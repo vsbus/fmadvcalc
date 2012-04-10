@@ -643,6 +643,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "fmFilterSimulationWithTablesAndGraphs";
             this.Size = new System.Drawing.Size(1275, 731);
+            this.Load += new System.EventHandler(this.fmFilterSimulationWithTablesAndGraphs_Load);
             this.panelLeft.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
             this.projectPanel.ResumeLayout(false);

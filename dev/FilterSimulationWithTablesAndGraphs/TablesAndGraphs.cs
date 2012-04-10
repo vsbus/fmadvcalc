@@ -437,6 +437,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         }
                     }
                     simData.internalSimulationData.filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
+                    simData.internalSimulationData.deliquoringCalculationOption = simData.externalSimulation.DeliquoringCalculationOption;
                     simData.internalSimulationData.suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
                     simData.internalSimulationData.UpdateIsInputed(inputedParameter);
                 }
@@ -1063,12 +1064,13 @@ namespace FilterSimulationWithTablesAndGraphs
                         var rm0HceCalculator = new fmRm0HceCalculator(tempSim.parameters.Values);
                         rm0HceCalculator.DoCalculations();
 
-                        var filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values)
-                        {
-                            calculationOption =
-                                simData.internalSimulationData.
-                                filterMachiningCalculationOption
-                        };
+                        var filterMachiningCalculator =
+                            new fmFilterMachiningCalculator(tempSim.parameters.Values)
+                                {
+                                    calculationOption =
+                                        simData.internalSimulationData.
+                                        filterMachiningCalculationOption
+                                };
                         filterMachiningCalculator.DoCalculations();
 
                         var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values);
@@ -1077,7 +1079,11 @@ namespace FilterSimulationWithTablesAndGraphs
                         var sigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(tempSim.parameters.Values);
                         sigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
 
-                        var deliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(tempSim.parameters.Values);
+                        var deliquoringSimualtionCalculator =
+                            new fmDeliquoringSimualtionCalculator(tempSim.parameters.Values)
+                                {
+                                    calculationOption = simData.internalSimulationData.deliquoringCalculationOption
+                                };
                         deliquoringSimualtionCalculator.DoCalculations();
 
                         simData.calculatedDataList.Add(tempSim);

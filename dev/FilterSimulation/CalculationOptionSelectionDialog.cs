@@ -7,6 +7,7 @@ namespace FilterSimulation
     public partial class fmCalculationOptionSelectionDialog : Form
     {
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption deliquoringCalculationOption;
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public fmCalculationOptionSelectionDialog()
@@ -28,6 +29,10 @@ namespace FilterSimulation
                                         fmSuspensionCalculator.fmSuspensionCalculationOptions.CM_CV_C_CALCULATED;
 
             fmCalculationOptionView1.SetSelectedOption(filterMachiningCalculationOption);
+
+            deliquoringCheckBox.Checked = deliquoringCalculationOption ==
+                                          fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.
+                                              HcdCalculatedFromCakeFormation;
         }
 
         // ReSharper disable InconsistentNaming
@@ -78,6 +83,16 @@ namespace FilterSimulation
         private void fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions(object sender, EventArgs e)
         {
             filterMachiningCalculationOption = fmCalculationOptionView1.GetSelectedOption();
+        }
+
+        private void deliquoringCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            deliquoringCalculationOption = deliquoringCheckBox.Checked
+                                               ? fmDeliquoringSimualtionCalculator.
+                                                     fmDeliquoringSimualtionCalculationOption.
+                                                     HcdCalculatedFromCakeFormation
+                                               : fmDeliquoringSimualtionCalculator.
+                                                     fmDeliquoringSimualtionCalculationOption.HcdInputed;
         }
         // ReSharper restore InconsistentNaming
 

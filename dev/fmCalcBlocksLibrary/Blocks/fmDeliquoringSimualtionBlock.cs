@@ -89,7 +89,10 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter rhos;
         private readonly fmBlockConstantParameter Ms;
 
+        private readonly fmBlockParameterGroup hcd_group = new fmBlockParameterGroup(Color.FromArgb(220, 250, 220));
         private readonly fmBlockParameterGroup second_group = new fmBlockParameterGroup(Color.FromArgb(250, 220, 220));
+
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption calculationOption;
 
         public fmValue hc_Value
         {
@@ -130,7 +133,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculations()
         {
-            var fmDeliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(AllParameters);
+            var fmDeliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(AllParameters)
+                                                        {calculationOption = calculationOption};
             fmDeliquoringSimualtionCalculator.DoCalculations();
         }
 
@@ -189,7 +193,7 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell qev_Cell)
         // ReSharper restore InconsistentNaming
         {
-            AddParameter(ref hcd, fmGlobalParameter.hcd, hcd_Cell, false);
+            AddParameter(ref hcd, fmGlobalParameter.hcd, hcd_Cell, true);
             AddParameter(ref sd, fmGlobalParameter.sd, sd_Cell, true);
             AddParameter(ref td, fmGlobalParameter.td, td_Cell, false);
             AddParameter(ref K, fmGlobalParameter.K, K_Cell, false);
@@ -275,6 +279,7 @@ namespace fmCalcBlocksLibrary.Blocks
 //                     p.group = second_group;
 //                 }
 //             }
+
             sd.group = second_group;
             td.group = second_group;
             K.group = second_group;
@@ -324,5 +329,27 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         public fmDeliquoringSimualtionBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) { }
+
+        public void UpdateGroups()
+        {
+            hcd.group = calculationOption ==
+                        fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.HcdInputed
+                            ? hcd_group
+                            : null;
+        }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption newCalculationOption)
+        {
+            calculationOption = newCalculationOption;
+            UpdateGroups();
+
+            hcd.IsInputed = calculationOption ==
+                            fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.HcdInputed;
+            hcd.cell.ReadOnly = calculationOption ==
+                            fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.HcdCalculatedFromCakeFormation;
+
+            UpdateCellsBackColor();
+            ReWriteParameters();
+        }
     }
 }
