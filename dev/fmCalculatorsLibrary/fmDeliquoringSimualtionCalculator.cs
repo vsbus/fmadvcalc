@@ -19,7 +19,6 @@ namespace fmCalculatorsLibrary
         
         override public void DoCalculations()
         {
-            var hcd = variables[fmGlobalParameter.hcd] as fmCalculationVariableParameter;
             var sd = variables[fmGlobalParameter.sd] as fmCalculationVariableParameter;
             var td = variables[fmGlobalParameter.td] as fmCalculationVariableParameter;
             var K = variables[fmGlobalParameter.K] as fmCalculationVariableParameter;
@@ -45,10 +44,9 @@ namespace fmCalculatorsLibrary
             var qfid = variables[fmGlobalParameter.qfid] as fmCalculationVariableParameter;
             var qmcd = variables[fmGlobalParameter.qmcd] as fmCalculationVariableParameter;
             var qcd = variables[fmGlobalParameter.qcd] as fmCalculationVariableParameter;
-            
-            var hc = variables[fmGlobalParameter.hc] as fmCalculationConstantParameter;
-            var eps = variables[fmGlobalParameter.eps] as fmCalculationConstantParameter;
+
             var epsd = variables[fmGlobalParameter.eps_d] as fmCalculationConstantParameter;
+            var hcd = variables[fmGlobalParameter.hcd] as fmCalculationConstantParameter;
             var tc = variables[fmGlobalParameter.tc] as fmCalculationConstantParameter;
             var pcd = variables[fmGlobalParameter.pc_d] as fmCalculationConstantParameter;
             var Dpd = variables[fmGlobalParameter.Dp_d] as fmCalculationConstantParameter;
@@ -95,11 +93,6 @@ namespace fmCalculatorsLibrary
             var qevi = variables[fmGlobalParameter.qevi] as fmCalculationVariableParameter;
             var qevt = variables[fmGlobalParameter.qevt] as fmCalculationVariableParameter;
             var qev = variables[fmGlobalParameter.qev] as fmCalculationVariableParameter;
-
-            if (calculationOption == fmDeliquoringSimualtionCalculationOption.HcdCalculatedFromCakeFormation)
-            {
-                hcd.value = fmDeliquoringEquations.Eval_hcd_from_hcf_epsf_epsd(hc.value, eps.value, epsd.value);
-            }
 
             var isKnown_sd = sd.isInputed;
             var isKnown_td = td.isInputed;

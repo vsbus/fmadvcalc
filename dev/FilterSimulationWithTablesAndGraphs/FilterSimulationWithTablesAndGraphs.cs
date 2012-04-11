@@ -266,13 +266,6 @@ namespace FilterSimulationWithTablesAndGraphs
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
                         simData.internalSimulationData.filterMachiningCalculationOption =
                             filterMachiningCalculationOption;
-
-                        var deliquoringBlock = new fmDeliquoringSimualtionBlock();
-                        fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, deliquoringBlock);
-                        deliquoringBlock.SetCalculationOptionAndUpdateCellsStyle(deliquoringCalculationOption);
-                        fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(deliquoringBlock, sim);
-                        simData.internalSimulationData.deliquoringCalculationOption =
-                            deliquoringCalculationOption;
                     }
                 }
 

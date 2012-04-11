@@ -11,7 +11,6 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmDeliquoringSimualtionBlock : fmBaseBlock
     {
-        private readonly fmBlockVariableParameter hcd;
         private readonly fmBlockVariableParameter sd;
         private readonly fmBlockVariableParameter td;
         private readonly fmBlockVariableParameter K;
@@ -64,6 +63,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter qev;
 
         private readonly fmBlockConstantParameter hc;
+        private readonly fmBlockConstantParameter hcd;
         private readonly fmBlockConstantParameter sf;
         private readonly fmBlockConstantParameter eps;
         private readonly fmBlockConstantParameter epsd;
@@ -89,10 +89,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter rhos;
         private readonly fmBlockConstantParameter Ms;
 
-        private readonly fmBlockParameterGroup hcd_group = new fmBlockParameterGroup(Color.FromArgb(220, 250, 220));
         private readonly fmBlockParameterGroup second_group = new fmBlockParameterGroup(Color.FromArgb(250, 220, 220));
-
-        public fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption calculationOption;
 
         public fmValue hc_Value
         {
@@ -133,14 +130,12 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculations()
         {
-            var fmDeliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(AllParameters)
-                                                        {calculationOption = calculationOption};
+            var fmDeliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(AllParameters);
             fmDeliquoringSimualtionCalculator.DoCalculations();
         }
 
         // ReSharper disable InconsistentNaming
         public fmDeliquoringSimualtionBlock(
-            DataGridViewCell hcd_Cell,
             DataGridViewCell sd_Cell,
             DataGridViewCell td_Cell,
             DataGridViewCell K_Cell,
@@ -193,7 +188,6 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell qev_Cell)
         // ReSharper restore InconsistentNaming
         {
-            AddParameter(ref hcd, fmGlobalParameter.hcd, hcd_Cell, true);
             AddParameter(ref sd, fmGlobalParameter.sd, sd_Cell, true);
             AddParameter(ref td, fmGlobalParameter.td, td_Cell, false);
             AddParameter(ref K, fmGlobalParameter.K, K_Cell, false);
@@ -246,6 +240,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref qev, fmGlobalParameter.qev, qev_Cell, false);
             
             AddConstantParameter(ref hc, fmGlobalParameter.hc);
+            AddConstantParameter(ref hcd, fmGlobalParameter.hcd);
             AddConstantParameter(ref sf, fmGlobalParameter.sf);
             AddConstantParameter(ref eps, fmGlobalParameter.eps);
             AddConstantParameter(ref epsd, fmGlobalParameter.eps_d);
@@ -328,28 +323,6 @@ namespace fmCalcBlocksLibrary.Blocks
             ReWriteParameters();
         }
 
-        public fmDeliquoringSimualtionBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) { }
-
-        public void UpdateGroups()
-        {
-            hcd.group = calculationOption ==
-                        fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.HcdInputed
-                            ? hcd_group
-                            : null;
-        }
-
-        public void SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption newCalculationOption)
-        {
-            calculationOption = newCalculationOption;
-            UpdateGroups();
-
-            hcd.IsInputed = calculationOption ==
-                            fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.HcdInputed;
-            hcd.cell.ReadOnly = calculationOption ==
-                            fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.HcdCalculatedFromCakeFormation;
-
-            UpdateCellsBackColor();
-            ReWriteParameters();
-        }
+        public fmDeliquoringSimualtionBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) { }
     }
 }

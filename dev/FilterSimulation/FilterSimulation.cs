@@ -193,6 +193,7 @@ namespace FilterSimulation
             deliquoringMaterialParametersDataGrid.Rows[0].Visible = false;
 
             deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.Dp_d.name, "" });
+            deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.hcd.name, "" });
             deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.eps0_d.name, "" });
             deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.ne_d.name, "" });
             deliquoringMaterialParametersDataGrid.Rows.Add(new object[] { fmGlobalParameter.eps_d.name, "" });

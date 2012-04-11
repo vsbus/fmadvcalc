@@ -283,6 +283,7 @@ namespace FilterSimulation
                 {
                     sim.deliquoringEps0NeEpsBlock = new fmEps0dNedEpsdBlock(
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Dp_d.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.hcd.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps0_d.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ne_d.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps_d.name).Cells[deliquoringMaterialCol.Index]);
@@ -775,7 +776,7 @@ namespace FilterSimulation
             {
                 if (m_commonDeliquoringSimulationBlock == null)
                 {
-                    InitCommonDeliquoringSimulationBlock(sim.DeliquoringCalculationOption);
+                    InitCommonDeliquoringSimulationBlock();
                 }
 
                 if (m_commonDeliquoringSimulationBlock != null)
@@ -787,8 +788,6 @@ namespace FilterSimulation
                     //    commonDeliquoringSimulationBlockDataGrid.Rows[i].Visible = m_commonDeliquoringSimulationBlock.Parameters[i].group != null
                     //        && parametersToDisplay.Contains(m_commonDeliquoringSimulationBlock.Parameters[i].globalParameter);
                     //}
-
-                    m_commonDeliquoringSimulationBlock.SetCalculationOptionAndUpdateCellsStyle(sim.DeliquoringCalculationOption);
 
                     for (int i = 0; i < m_commonDeliquoringSimulationBlock.ConstantParameters.Count; ++i)
                     {
@@ -839,9 +838,9 @@ namespace FilterSimulation
         }
 
 
-        private void InitCommonDeliquoringSimulationBlock(fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption calculationOption)
+        private void InitCommonDeliquoringSimulationBlock()
         {
-            var voidBlock = new fmDeliquoringSimualtionBlock() {calculationOption = calculationOption};
+            var voidBlock = new fmDeliquoringSimualtionBlock();
             commonDeliquoringSimulationBlockDataGrid.RowCount = voidBlock.Parameters.Count;
             var parToCell = new Dictionary<fmGlobalParameter, DataGridViewCell>();
             for (int i = 0; i < voidBlock.Parameters.Count; ++i)

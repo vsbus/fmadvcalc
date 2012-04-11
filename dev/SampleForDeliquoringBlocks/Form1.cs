@@ -50,7 +50,8 @@ namespace SampleForDeliquoringBlocks
                 fmDataGrid1.Rows[1].Cells[2],
                 fmDataGrid1.Rows[2].Cells[2],
                 fmDataGrid1.Rows[3].Cells[2],
-                fmDataGrid1.Rows[4].Cells[2]);
+                fmDataGrid1.Rows[4].Cells[2],
+                fmDataGrid1.Rows[5].Cells[2]);
 
             WriteParameter(5, fmGlobalParameter.sigma);
             WriteParameter(6, fmGlobalParameter.pke0);

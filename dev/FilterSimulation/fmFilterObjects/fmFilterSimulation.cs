@@ -281,10 +281,7 @@ namespace FilterSimulation.fmFilterObjects
             result.AddRange(filterMachiningParametersList);
 
             {
-                var deliqBlock = new fmDeliquoringSimualtionBlock
-                                     {
-                                         calculationOption = deliquoringCalculationOption
-                                     };
+                var deliqBlock = new fmDeliquoringSimualtionBlock();
                 foreach (fmBlockVariableParameter p in deliqBlock.Parameters)
                 {
                     if (p.group != null)
@@ -352,11 +349,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public void UpdateIsInputed(fmGlobalParameter inputedParameter)
         {
-            var deliqSim = new fmDeliquoringSimualtionBlock()
-                               {
-                                   calculationOption = deliquoringCalculationOption
-                               }; 
-            deliqSim.UpdateGroups();
+            var deliqSim = new fmDeliquoringSimualtionBlock(); 
             UpdateIsInputedInParametersFromBlock(deliqSim, inputedParameter);
 
             var fmb = new fmFilterMachiningBlock

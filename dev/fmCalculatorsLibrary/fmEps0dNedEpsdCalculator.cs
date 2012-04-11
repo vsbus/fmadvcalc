@@ -15,6 +15,10 @@ namespace fmCalculatorsLibrary
             var ne_d = variables[fmGlobalParameter.ne_d] as fmCalculationVariableParameter;
             var eps_d = variables[fmGlobalParameter.eps_d] as fmCalculationVariableParameter;
             var Dp_d = variables[fmGlobalParameter.Dp_d] as fmCalculationVariableParameter;
+            var hcd = variables[fmGlobalParameter.hcd] as fmCalculationVariableParameter;
+
+            var hc = variables[fmGlobalParameter.hc] as fmCalculationConstantParameter;
+            var eps = variables[fmGlobalParameter.eps] as fmCalculationConstantParameter;
 
             if (ne_d.isInputed)
             {
@@ -24,6 +28,8 @@ namespace fmCalculatorsLibrary
             {
                 ne_d.value = fmEpsPcFrom0Equations.Eval_ne_From_eps0_Dp_eps(eps0_d.value, Dp_d.value, eps_d.value);
             }
+
+            hcd.value = fmDeliquoringEquations.Eval_hcd_from_hcf_epsf_epsd(hc.value, eps.value, eps_d.value);
         }
     }
 }
