@@ -8,12 +8,12 @@ namespace fmCalculatorsLibrary
 {
     public class fmDeliquoringSimualtionCalculator : fmBaseCalculator
     {
-        public enum fmDeliquoringSimualtionCalculationOption
+        public enum fmDeliquoringHcdEpsdCalculationOption
         {
-            HcdInputed,
-            HcdCalculatedFromCakeFormation
+            InputedByUser,
+            CalculatedFromCakeFormation
         }
-        public fmDeliquoringSimualtionCalculationOption calculationOption;
+        public fmDeliquoringHcdEpsdCalculationOption calculationOption;
 
         public fmDeliquoringSimualtionCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         

@@ -437,7 +437,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         }
                     }
                     simData.internalSimulationData.filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
-                    simData.internalSimulationData.deliquoringCalculationOption = simData.externalSimulation.DeliquoringCalculationOption;
+                    simData.internalSimulationData.hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
                     simData.internalSimulationData.suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
                     simData.internalSimulationData.UpdateIsInputed(inputedParameter);
                 }
@@ -1082,7 +1082,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         var deliquoringSimualtionCalculator =
                             new fmDeliquoringSimualtionCalculator(tempSim.parameters.Values)
                                 {
-                                    calculationOption = simData.internalSimulationData.deliquoringCalculationOption
+                                    calculationOption = simData.internalSimulationData.hcdEpsdCalculationOption
                                 };
                         deliquoringSimualtionCalculator.DoCalculations();
 

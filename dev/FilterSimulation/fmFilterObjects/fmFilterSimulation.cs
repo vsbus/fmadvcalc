@@ -12,14 +12,14 @@ namespace FilterSimulation.fmFilterObjects
         public string name;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
-        public fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption deliquoringCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.HcdCalculatedFromCakeFormation;
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
         {
             name = from.name;
             filterMachiningCalculationOption = from.filterMachiningCalculationOption;
-            deliquoringCalculationOption = from.deliquoringCalculationOption;
+            hcdEpsdCalculationOption = from.hcdEpsdCalculationOption;
             suspensionCalculationOption = from.suspensionCalculationOption;
             CopyValuesFrom(from);
             CopyIsInputedFrom(from);
@@ -441,7 +441,7 @@ namespace FilterSimulation.fmFilterObjects
             output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.Begin);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.name, name, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.deliquoringCalculationOption, deliquoringCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.deliquoringCalculationOption, hcdEpsdCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.suspensionCalculationOption, suspensionCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.parametersSize, parameters.Count, 8);
             foreach (var p in parameters.Values)
@@ -475,13 +475,13 @@ namespace FilterSimulation.fmFilterObjects
                                                          fmFilterSimulationDataSerializeTags.
                                                              filterMachiningCalculationOption).ToString(),
                     typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption));
-            simData.deliquoringCalculationOption =
-                (fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption)
+            simData.hcdEpsdCalculationOption =
+                (fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption)
                 StringToEnum(
                     fmSerializeTools.DeserializeProperty(input,
                                                          fmFilterSimulationDataSerializeTags.
                                                              deliquoringCalculationOption).ToString(),
-                    typeof(fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption));
+                    typeof(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption));
             simData.suspensionCalculationOption = (fmSuspensionCalculator.fmSuspensionCalculationOptions)
                 StringToEnum(
                     fmSerializeTools.DeserializeProperty(input,
@@ -575,16 +575,16 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
-        public fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption DeliquoringCalculationOption
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption HcdEpsdCalculationOption
         {
-            get { return m_data.deliquoringCalculationOption; }
+            get { return m_data.hcdEpsdCalculationOption; }
             set
             {
-                if (m_data.deliquoringCalculationOption != value)
+                if (m_data.hcdEpsdCalculationOption != value)
                 {
                     Modified = true;
                 }
-                m_data.deliquoringCalculationOption = value;
+                m_data.hcdEpsdCalculationOption = value;
             }
         }
 
@@ -767,7 +767,7 @@ namespace FilterSimulation.fmFilterObjects
             fmFilterSimulationData simData = fmFilterSimulationData.Deserialize(input);
             sim.Name = simData.name;
             sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
-            sim.DeliquoringCalculationOption = simData.deliquoringCalculationOption;
+            sim.HcdEpsdCalculationOption = simData.hcdEpsdCalculationOption;
             sim.SuspensionCalculationOption = simData.suspensionCalculationOption;
             foreach (var p in simData.parameters.Values)
             {

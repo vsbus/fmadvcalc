@@ -18,6 +18,11 @@ namespace fmCalculationLibrary.Equations
             return (1 - epsf) / (1 - epsd) * hcf;
         }
 
+        public static fmValue Eval_epsd_from_hcf_epsf_hcd(fmValue hcf, fmValue epsf, fmValue hcd)
+        {
+            return 1 - (1 - epsf) * hcf / hcd;
+        }
+
         public static fmValue Eval_td_From_sd_tc(fmValue sd, fmValue tc)
         {
             return sd * tc;

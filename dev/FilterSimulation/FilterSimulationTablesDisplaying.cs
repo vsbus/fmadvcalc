@@ -1166,6 +1166,9 @@ namespace FilterSimulation
                 }
                 return;
             }
+
+            sim.HcdEpsdCalculationOption = deliquoringEps0NeEpsBlock.calculationOption;
+
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringEps0NeEpsBlock, sim);
 
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);

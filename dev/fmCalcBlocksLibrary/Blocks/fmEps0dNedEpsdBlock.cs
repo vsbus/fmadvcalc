@@ -21,8 +21,9 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter eps;
 
         private readonly fmBlockParameterGroup Dpd_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup epsd_ned_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup hcd_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup hcd_epsd_group = new fmBlockParameterGroup();
+
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption calculationOption;
 
         public fmValue epsd_Value
         {
@@ -44,6 +45,7 @@ namespace fmCalcBlocksLibrary.Blocks
         override public void DoCalculations()
         {
             var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(AllParameters);
+            eps0dNedEpsdCalculator.calculationOption = calculationOption;
             eps0dNedEpsdCalculator.DoCalculations();
         }
 
@@ -63,16 +65,47 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref ne, fmGlobalParameter.ne);
             AddConstantParameter(ref eps, fmGlobalParameter.eps);
 
+            calculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
+
             Dpd.group = Dpd_group;
 
             hcd.group = null;
             hcd.cell.ReadOnly = true;
 
-            epsd.group = epsd_ned_group;
+            epsd.group = null;
             epsd.cell.ReadOnly = true;
 
             processOnChange = true;
         }
         public fmEps0dNedEpsdBlock() : this(null, null, null) { }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption newCalculationOption)
+        {
+            calculationOption = newCalculationOption;
+            UpdateCellsColorsAndReadOnly();
+        }
+
+        private void UpdateCellsColorsAndReadOnly()
+        {
+            if (calculationOption == fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser)
+            {
+                epsd.IsInputed = true;
+                hcd.isInputed = false;
+                hcd.cell.ReadOnly = false;
+                hcd.group = hcd_epsd_group;
+                epsd.cell.ReadOnly = false;
+                epsd.group = hcd_epsd_group;
+            }
+            else
+            {
+                epsd.IsInputed = false;
+                hcd.isInputed = false;
+                hcd.cell.ReadOnly = true;
+                hcd.group = null;
+                epsd.cell.ReadOnly = true;
+                epsd.group = null;
+            }
+            CallValuesChanged();
+        }
     }
 }

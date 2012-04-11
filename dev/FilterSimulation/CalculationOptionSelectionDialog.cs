@@ -7,7 +7,7 @@ namespace FilterSimulation
     public partial class fmCalculationOptionSelectionDialog : Form
     {
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
-        public fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption deliquoringCalculationOption;
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption;
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public fmCalculationOptionSelectionDialog()
@@ -30,9 +30,9 @@ namespace FilterSimulation
 
             fmCalculationOptionView1.SetSelectedOption(filterMachiningCalculationOption);
 
-            deliquoringCheckBox.Checked = deliquoringCalculationOption ==
-                                          fmDeliquoringSimualtionCalculator.fmDeliquoringSimualtionCalculationOption.
-                                              HcdCalculatedFromCakeFormation;
+            deliquoringCheckBox.Checked = hcdEpsdCalculationOption ==
+                                          fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.
+                                              CalculatedFromCakeFormation;
         }
 
         // ReSharper disable InconsistentNaming
@@ -87,12 +87,12 @@ namespace FilterSimulation
 
         private void deliquoringCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            deliquoringCalculationOption = deliquoringCheckBox.Checked
+            hcdEpsdCalculationOption = deliquoringCheckBox.Checked
                                                ? fmDeliquoringSimualtionCalculator.
-                                                     fmDeliquoringSimualtionCalculationOption.
-                                                     HcdCalculatedFromCakeFormation
+                                                     fmDeliquoringHcdEpsdCalculationOption.
+                                                     CalculatedFromCakeFormation
                                                : fmDeliquoringSimualtionCalculator.
-                                                     fmDeliquoringSimualtionCalculationOption.HcdInputed;
+                                                     fmDeliquoringHcdEpsdCalculationOption.InputedByUser;
         }
         // ReSharper restore InconsistentNaming
 

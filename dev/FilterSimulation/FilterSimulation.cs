@@ -434,20 +434,26 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         private void calculationOptionChangeButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
+            if (m_fSolution.currentObjects.Simulation == null)
+            {
+                MessageBox.Show("Please select a simulation to get Calculation Option dialog.");
+                return;
+            }
+
             var cosd = new fmCalculationOptionSelectionDialog
                            {
                                suspensionCalculationOption =
                                    m_fSolution.currentObjects.Simulation.Data.suspensionCalculationOption,
                                filterMachiningCalculationOption =
                                    m_fSolution.currentObjects.Simulation.Data.filterMachiningCalculationOption,
-                               deliquoringCalculationOption =
-                                   m_fSolution.currentObjects.Simulation.Data.deliquoringCalculationOption
+                               hcdEpsdCalculationOption =
+                                   m_fSolution.currentObjects.Simulation.Data.hcdEpsdCalculationOption
                             };
             if (cosd.ShowDialog() == DialogResult.OK)
             {
                 m_fSolution.currentObjects.Simulation.susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);
                 m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
-                m_fSolution.currentObjects.Simulation.DeliquoringCalculationOption = cosd.deliquoringCalculationOption;
+                m_fSolution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.hcdEpsdCalculationOption);
                 DisplaySolution(m_fSolution);
             }
         }
