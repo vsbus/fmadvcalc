@@ -42,16 +42,12 @@ namespace SampleForDeliquoringBlocks
             WriteParameter(0, fmGlobalParameter.Dp);
             WriteParameter(1, fmGlobalParameter.Dp_d);
 
-            WriteParameter(2, fmGlobalParameter.eps0_d);
-            WriteParameter(3, fmGlobalParameter.ne_d);
-            WriteParameter(4, fmGlobalParameter.eps_d);
+            WriteParameter(2, fmGlobalParameter.eps_d);
 
             block1 = new fmEps0dNedEpsdBlock(
                 fmDataGrid1.Rows[1].Cells[2],
                 fmDataGrid1.Rows[2].Cells[2],
-                fmDataGrid1.Rows[3].Cells[2],
-                fmDataGrid1.Rows[4].Cells[2],
-                fmDataGrid1.Rows[5].Cells[2]);
+                fmDataGrid1.Rows[3].Cells[2]);
 
             WriteParameter(5, fmGlobalParameter.sigma);
             WriteParameter(6, fmGlobalParameter.pke0);

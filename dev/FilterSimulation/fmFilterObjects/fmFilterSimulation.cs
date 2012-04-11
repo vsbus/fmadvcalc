@@ -167,9 +167,7 @@ namespace FilterSimulation.fmFilterObjects
 
             #region Deliquoring
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp_d));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps0_d));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps_d));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.ne_d));
 
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sigma));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.pke0));

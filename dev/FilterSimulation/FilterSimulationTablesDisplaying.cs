@@ -284,8 +284,6 @@ namespace FilterSimulation
                     sim.deliquoringEps0NeEpsBlock = new fmEps0dNedEpsdBlock(
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Dp_d.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.hcd.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps0_d.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ne_d.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps_d.name).Cells[deliquoringMaterialCol.Index]);
 
                     sim.deliquoringEps0NeEpsBlock.ValuesChanged += deliquoringEps0dNedEpsdBlock_ValuesChanged;

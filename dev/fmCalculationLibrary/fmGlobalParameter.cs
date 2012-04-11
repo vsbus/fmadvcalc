@@ -107,9 +107,7 @@ namespace fmCalculationLibrary
         #endregion
         #region Deliquoring
         public static fmGlobalParameter Dp_d;
-        public static fmGlobalParameter eps0_d;
         public static fmGlobalParameter eps_d;
-        public static fmGlobalParameter ne_d;
         public static fmGlobalParameter sigma;
         public static fmGlobalParameter pke0;
         public static fmGlobalParameter pke;
@@ -290,9 +288,7 @@ namespace fmCalculationLibrary
             #endregion
             #region Deliquoring
             AddParameter(ref Dp_d, new fmGlobalParameter("Dpd", fmUnitFamily.PressureFamily));
-            AddParameter(ref eps0_d, new fmGlobalParameter("eps0d", fmUnitFamily.ConcentrationFamily));
             AddParameter(ref eps_d, new fmGlobalParameter("epsd", fmUnitFamily.ConcentrationFamily));
-            AddParameter(ref ne_d, new fmGlobalParameter("ned", fmUnitFamily.NoUnitFamily));
             AddParameter(ref sigma, new fmGlobalParameter("sigma", fmUnitFamily.SurfaceTensionFamily));
             AddParameter(ref pke0, new fmGlobalParameter("pke0", fmUnitFamily.PressureFamily));
             AddParameter(ref pke, new fmGlobalParameter("pke", fmUnitFamily.PressureFamily));

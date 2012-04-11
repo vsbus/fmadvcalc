@@ -29,7 +29,7 @@ Project Begin
                                 filterMachiningCalculationOption = PLAIN_DP_CONST
                                 deliquoringCalculationOption = HcdCalculatedFromCakeFormation
                                 suspensionCalculationOption = RHOSUS_CALCULATED
-                                parametersSize = 154
+                                parametersSize = 152
                                 Parameter Begin
                                     name = eta_f
                                     typeName = fmCalculationVariableParameter
@@ -605,25 +605,11 @@ Project Begin
                                     value = 200000
                                 Parameter End
                                 Parameter Begin
-                                    name = eps0d
-                                    typeName = fmCalculationVariableParameter
-                                    isInputed = True
-                                    defined = True
-                                    value = 0,5
-                                Parameter End
-                                Parameter Begin
                                     name = epsd
                                     typeName = fmCalculationVariableParameter
                                     isInputed = False
                                     defined = True
                                     value = 0,489710148793463
-                                Parameter End
-                                Parameter Begin
-                                    name = ned
-                                    typeName = fmCalculationVariableParameter
-                                    isInputed = True
-                                    defined = True
-                                    value = 0,03
                                 Parameter End
                                 Parameter Begin
                                     name = sigma
@@ -1117,7 +1103,7 @@ Project Begin
                                 filterMachiningCalculationOption = PLAIN_DP_CONST
                                 deliquoringCalculationOption = HcdCalculatedFromCakeFormation
                                 suspensionCalculationOption = RHOSUS_CALCULATED
-                                parametersSize = 154
+                                parametersSize = 152
                                 Parameter Begin
                                     name = eta_f
                                     typeName = fmCalculationVariableParameter
@@ -1693,25 +1679,11 @@ Project Begin
                                     value = 200000
                                 Parameter End
                                 Parameter Begin
-                                    name = eps0d
-                                    typeName = fmCalculationVariableParameter
-                                    isInputed = True
-                                    defined = True
-                                    value = 0,5
-                                Parameter End
-                                Parameter Begin
                                     name = epsd
                                     typeName = fmCalculationVariableParameter
                                     isInputed = False
                                     defined = True
                                     value = 0,489710148793463
-                                Parameter End
-                                Parameter Begin
-                                    name = ned
-                                    typeName = fmCalculationVariableParameter
-                                    isInputed = True
-                                    defined = True
-                                    value = 0,03
                                 Parameter End
                                 Parameter Begin
                                     name = sigma

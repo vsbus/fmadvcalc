@@ -11,30 +11,19 @@ namespace fmCalcBlocksLibrary.Blocks
     public class fmEps0dNedEpsdBlock : fmBaseBlock
     {
         // ReSharper disable InconsistentNaming
-        private readonly fmBlockVariableParameter eps0d;
-        private readonly fmBlockVariableParameter ned;
         private readonly fmBlockVariableParameter epsd;
         private readonly fmBlockVariableParameter Dpd;
         private readonly fmBlockVariableParameter hcd;
 
         private readonly fmBlockConstantParameter hc;
+        private readonly fmBlockConstantParameter eps0;
+        private readonly fmBlockConstantParameter ne;
         private readonly fmBlockConstantParameter eps;
 
         private readonly fmBlockParameterGroup Dpd_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup eps0d_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup epsd_ned_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup hcd_group = new fmBlockParameterGroup();
 
-        public fmValue eps0d_Value
-        {
-            get { return eps0d.value; }
-            set { eps0d.value = value; }
-        }
-        public fmValue ned_Value
-        {
-            get { return ned.value; }
-            set { ned.value = value; }
-        }
         public fmValue epsd_Value
         {
             get { return epsd.value; }
@@ -62,18 +51,16 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmEps0dNedEpsdBlock(
             DataGridViewCell Dpd_Cell,
             DataGridViewCell hcd_Cell,
-            DataGridViewCell eps0d_Cell,
-            DataGridViewCell ned_Cell,
             DataGridViewCell epsd_Cell)
         // ReSharper restore InconsistentNaming
         {
             AddParameter(ref Dpd, fmGlobalParameter.Dp_d, Dpd_Cell, true);
             AddParameter(ref hcd, fmGlobalParameter.hcd, hcd_Cell, false);
-            AddParameter(ref eps0d, fmGlobalParameter.eps0_d, eps0d_Cell, true);
-            AddParameter(ref ned, fmGlobalParameter.ne_d, ned_Cell, true);
             AddParameter(ref epsd, fmGlobalParameter.eps_d, epsd_Cell, false);
 
             AddConstantParameter(ref hc, fmGlobalParameter.hc);
+            AddConstantParameter(ref eps0, fmGlobalParameter.eps0);
+            AddConstantParameter(ref ne, fmGlobalParameter.ne);
             AddConstantParameter(ref eps, fmGlobalParameter.eps);
 
             Dpd.group = Dpd_group;
@@ -81,13 +68,11 @@ namespace fmCalcBlocksLibrary.Blocks
             hcd.group = null;
             hcd.cell.ReadOnly = true;
 
-            eps0d.group = eps0d_group;
-
-            ned.group = epsd_ned_group;
             epsd.group = epsd_ned_group;
+            epsd.cell.ReadOnly = true;
 
             processOnChange = true;
         }
-        public fmEps0dNedEpsdBlock() : this(null, null, null, null, null) { }
+        public fmEps0dNedEpsdBlock() : this(null, null, null) { }
     }
 }
