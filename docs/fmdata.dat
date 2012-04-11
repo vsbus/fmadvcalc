@@ -1,0 +1,2244 @@
+projectsCount = 2
+Project Begin
+    m_checked = True
+    ProjectData Begin
+        name = Prj1
+        susListSize = 2
+        Suspension Begin
+            m_checked = True
+            SuspensionData Begin
+                name = Susp1
+                material = Juce
+                customer = BASF
+                seriesListSize = 1
+                SimSerie Begin
+                    m_checked = True
+                    SimSerieData Begin
+                        name = serie0
+                        machineName = karapty
+                        Machine Begin
+                            symbol = NU
+                            name = Nutche
+                        Machine End
+                        filterMedium = medium1
+                        simListSize = 2
+                        FilterSimulation Begin
+                            m_checked = True
+                            FilterSimulationData Begin
+                                name = simulatioN
+                                filterMachiningCalculationOption = PLAIN_DP_CONST
+                                deliquoringCalculationOption = HcdCalculatedFromCakeFormation
+                                suspensionCalculationOption = RHOSUS_CALCULATED
+                                parametersSize = 154
+                                Parameter Begin
+                                    name = eta_f
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,001
+                                Parameter End
+                                Parameter Begin
+                                    name = rho_f
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 1000
+                                Parameter End
+                                Parameter Begin
+                                    name = rho_s
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 1500
+                                Parameter End
+                                Parameter Begin
+                                    name = rho_sus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1071,42857142857
+                                Parameter End
+                                Parameter Begin
+                                    name = Cm
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,2
+                                Parameter End
+                                Parameter Begin
+                                    name = Cv
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,142857142857143
+                                Parameter End
+                                Parameter Begin
+                                    name = C
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 214,285714285714
+                                Parameter End
+                                Parameter Begin
+                                    name = eps0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,5
+                                Parameter End
+                                Parameter Begin
+                                    name = kappa0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,399999999999999
+                                Parameter End
+                                Parameter Begin
+                                    name = ne
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,02
+                                Parameter End
+                                Parameter Begin
+                                    name = Pc0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 1E-13
+                                Parameter End
+                                Parameter Begin
+                                    name = rc0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 10000000000000
+                                Parameter End
+                                Parameter Begin
+                                    name = a0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 13333333333,3333
+                                Parameter End
+                                Parameter Begin
+                                    name = nc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,3
+                                Parameter End
+                                Parameter Begin
+                                    name = hce0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,005
+                                Parameter End
+                                Parameter Begin
+                                    name = Rm0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 50000000000
+                                Parameter End
+                                Parameter Begin
+                                    name = A
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = d0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Dp
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 100000
+                                Parameter End
+                                Parameter Begin
+                                    name = sf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,55
+                                Parameter End
+                                Parameter Begin
+                                    name = sr
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,45
+                                Parameter End
+                                Parameter Begin
+                                    name = n
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,022
+                                Parameter End
+                                Parameter Begin
+                                    name = tc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 45,4545454545455
+                                Parameter End
+                                Parameter Begin
+                                    name = tf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 25
+                                Parameter End
+                                Parameter Begin
+                                    name = tr
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 20,4545454545455
+                                Parameter End
+                                Parameter Begin
+                                    name = hc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,01
+                                Parameter End
+                                Parameter Begin
+                                    name = Mf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 25
+                                Parameter End
+                                Parameter Begin
+                                    name = Ms
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 7,50000000000001
+                                Parameter End
+                                Parameter Begin
+                                    name = Msus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 37,5
+                                Parameter End
+                                Parameter Begin
+                                    name = Qms
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,165
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,825
+                                Parameter End
+                                Parameter Begin
+                                    name = Qsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00077
+                                Parameter End
+                                Parameter Begin
+                                    name = eps
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,5
+                                Parameter End
+                                Parameter Begin
+                                    name = kappa
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,399999999999999
+                                Parameter End
+                                Parameter Begin
+                                    name = Pc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1E-13
+                                Parameter End
+                                Parameter Begin
+                                    name = rc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 10000000000000
+                                Parameter End
+                                Parameter Begin
+                                    name = a
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 13333333333,3333
+                                Parameter End
+                                Parameter Begin
+                                    name = Vsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,035
+                                Parameter End
+                                Parameter Begin
+                                    name = hc/tf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000399999999999999
+                                Parameter End
+                                Parameter Begin
+                                    name = dhc/dt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000266666666666666
+                                Parameter End
+                                Parameter Begin
+                                    name = Qf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,001
+                                Parameter End
+                                Parameter Begin
+                                    name = Qf,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000666666666666667
+                                Parameter End
+                                Parameter Begin
+                                    name = Qs
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00011
+                                Parameter End
+                                Parameter Begin
+                                    name = Qs,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000133333333333333
+                                Parameter End
+                                Parameter Begin
+                                    name = Qc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00022
+                                Parameter End
+                                Parameter Begin
+                                    name = Qc,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000266666666666666
+                                Parameter End
+                                Parameter Begin
+                                    name = Qsus,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000933333333333333
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmsus,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = Qms,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,2
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmf,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,666666666666667
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,275
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmc,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,333333333333333
+                                Parameter End
+                                Parameter Begin
+                                    name = qf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,001
+                                Parameter End
+                                Parameter Begin
+                                    name = qf,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000666666666666667
+                                Parameter End
+                                Parameter Begin
+                                    name = qs
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00011
+                                Parameter End
+                                Parameter Begin
+                                    name = qs,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000133333333333333
+                                Parameter End
+                                Parameter Begin
+                                    name = qc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00022
+                                Parameter End
+                                Parameter Begin
+                                    name = qc,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000266666666666666
+                                Parameter End
+                                Parameter Begin
+                                    name = qsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00077
+                                Parameter End
+                                Parameter Begin
+                                    name = qsus,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000933333333333333
+                                Parameter End
+                                Parameter Begin
+                                    name = qmsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,825
+                                Parameter End
+                                Parameter Begin
+                                    name = qmsus,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = qms
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,165
+                                Parameter End
+                                Parameter Begin
+                                    name = qms,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,2
+                                Parameter End
+                                Parameter Begin
+                                    name = qmf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = qmf,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,666666666666667
+                                Parameter End
+                                Parameter Begin
+                                    name = qmc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,275
+                                Parameter End
+                                Parameter Begin
+                                    name = qmc,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,333333333333333
+                                Parameter End
+                                Parameter Begin
+                                    name = Vf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,025
+                                Parameter End
+                                Parameter Begin
+                                    name = mf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 25
+                                Parameter End
+                                Parameter Begin
+                                    name = vf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,025
+                                Parameter End
+                                Parameter Begin
+                                    name = ms
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 7,50000000000001
+                                Parameter End
+                                Parameter Begin
+                                    name = vs
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00500000000000001
+                                Parameter End
+                                Parameter Begin
+                                    name = msus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 37,5
+                                Parameter End
+                                Parameter Begin
+                                    name = vsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,035
+                                Parameter End
+                                Parameter Begin
+                                    name = mc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 12,5
+                                Parameter End
+                                Parameter Begin
+                                    name = vc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,01
+                                Parameter End
+                                Parameter Begin
+                                    name = Vc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,01
+                                Parameter End
+                                Parameter Begin
+                                    name = Mc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 12,5
+                                Parameter End
+                                Parameter Begin
+                                    name = Vs
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00500000000000001
+                                Parameter End
+                                Parameter Begin
+                                    name = Dpd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 200000
+                                Parameter End
+                                Parameter Begin
+                                    name = eps0d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,5
+                                Parameter End
+                                Parameter Begin
+                                    name = epsd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,489710148793463
+                                Parameter End
+                                Parameter Begin
+                                    name = ned
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,03
+                                Parameter End
+                                Parameter Begin
+                                    name = sigma
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,072
+                                Parameter End
+                                Parameter Begin
+                                    name = pke0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 15000
+                                Parameter End
+                                Parameter Begin
+                                    name = pke
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 16643,5420810177
+                                Parameter End
+                                Parameter Begin
+                                    name = pcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 8,12252396356236E-14
+                                Parameter End
+                                Parameter Begin
+                                    name = rcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 12311444133449,2
+                                Parameter End
+                                Parameter Begin
+                                    name = alphad
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 16084249770,7787
+                                Parameter End
+                                Parameter Begin
+                                    name = Srem
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,05
+                                Parameter End
+                                Parameter Begin
+                                    name = ad1
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,1
+                                Parameter End
+                                Parameter Begin
+                                    name = ad2
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,2
+                                Parameter End
+                                Parameter Begin
+                                    name = Tetta
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 20
+                                Parameter End
+                                Parameter Begin
+                                    name = eta_g
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,002
+                                Parameter End
+                                Parameter Begin
+                                    name = ag1
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,31
+                                Parameter End
+                                Parameter Begin
+                                    name = ag2
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,32
+                                Parameter End
+                                Parameter Begin
+                                    name = ag3
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,33
+                                Parameter End
+                                Parameter Begin
+                                    name = Tetta_boil
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 100
+                                Parameter End
+                                Parameter Begin
+                                    name = DH
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 40000
+                                Parameter End
+                                Parameter Begin
+                                    name = Mmole
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,018
+                                Parameter End
+                                Parameter Begin
+                                    name = f
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,8
+                                Parameter End
+                                Parameter Begin
+                                    name = peq
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 2535,36051224168
+                                Parameter End
+                                Parameter Begin
+                                    name = hcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00979835281493044
+                                Parameter End
+                                Parameter Begin
+                                    name = sd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,2
+                                Parameter End
+                                Parameter Begin
+                                    name = td
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,909090909090911
+                                Parameter End
+                                Parameter Begin
+                                    name = K
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,190672899902224
+                                Parameter End
+                                Parameter Begin
+                                    name = Smech
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,996451229053554
+                                Parameter End
+                                Parameter Begin
+                                    name = S
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,996451197920641
+                                Parameter End
+                                Parameter Begin
+                                    name = Rfmech
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,389316684577597
+                                Parameter End
+                                Parameter Begin
+                                    name = Rf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,389316677149411
+                                Parameter End
+                                Parameter Begin
+                                    name = Qgi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 3,31717189912012E-05
+                                Parameter End
+                                Parameter Begin
+                                    name = Qg
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 3,3519568170542E-07
+                                Parameter End
+                                Parameter Begin
+                                    name = vg
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 2,03148898003285E-06
+                                Parameter End
+                                Parameter Begin
+                                    name = Mfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,0170282550604231
+                                Parameter End
+                                Parameter Begin
+                                    name = Vfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1,70282550604231E-05
+                                Parameter End
+                                Parameter Begin
+                                    name = Mlcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 4,78132441048331
+                                Parameter End
+                                Parameter Begin
+                                    name = Vlcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00478132441048331
+                                Parameter End
+                                Parameter Begin
+                                    name = Mcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 12,2813244104833
+                                Parameter End
+                                Parameter Begin
+                                    name = Vcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00979835281493044
+                                Parameter End
+                                Parameter Begin
+                                    name = rho_bulk
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1253,40704120895
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmfid
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,0183505215598111
+                                Parameter End
+                                Parameter Begin
+                                    name = Qfid
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1,8350521559811E-05
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,270189137030632
+                                Parameter End
+                                Parameter Begin
+                                    name = Qcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000215563761928469
+                                Parameter End
+                                Parameter Begin
+                                    name = qmfid
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,0183505215598111
+                                Parameter End
+                                Parameter Begin
+                                    name = qfid
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1,8350521559811E-05
+                                Parameter End
+                                Parameter Begin
+                                    name = qmcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,270189137030632
+                                Parameter End
+                                Parameter Begin
+                                    name = qcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000215563761928469
+                                Parameter End
+                                Parameter Begin
+                                    name = Qgt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1,6759784085271E-05
+                                Parameter End
+                                Parameter Begin
+                                    name = Vg
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Mev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1,49386698996931E-07
+                                Parameter End
+                                Parameter Begin
+                                    name = Vev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmftd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qftd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmevi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmevt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qevi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qevt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmftd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qftd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmevi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmevt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qevi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qevt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                            FilterSimulationData End
+                        FilterSimulation End
+                        FilterSimulation Begin
+                            m_checked = True
+                            FilterSimulationData Begin
+                                name = serie0-1
+                                filterMachiningCalculationOption = PLAIN_DP_CONST
+                                deliquoringCalculationOption = HcdCalculatedFromCakeFormation
+                                suspensionCalculationOption = RHOSUS_CALCULATED
+                                parametersSize = 154
+                                Parameter Begin
+                                    name = eta_f
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,001
+                                Parameter End
+                                Parameter Begin
+                                    name = rho_f
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 1000
+                                Parameter End
+                                Parameter Begin
+                                    name = rho_s
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 1500
+                                Parameter End
+                                Parameter Begin
+                                    name = rho_sus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1071,42857142857
+                                Parameter End
+                                Parameter Begin
+                                    name = Cm
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,2
+                                Parameter End
+                                Parameter Begin
+                                    name = Cv
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,142857142857143
+                                Parameter End
+                                Parameter Begin
+                                    name = C
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 214,285714285714
+                                Parameter End
+                                Parameter Begin
+                                    name = eps0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,5
+                                Parameter End
+                                Parameter Begin
+                                    name = kappa0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,399999999999999
+                                Parameter End
+                                Parameter Begin
+                                    name = ne
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,02
+                                Parameter End
+                                Parameter Begin
+                                    name = Pc0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 1E-13
+                                Parameter End
+                                Parameter Begin
+                                    name = rc0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 10000000000000
+                                Parameter End
+                                Parameter Begin
+                                    name = a0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 13333333333,3333
+                                Parameter End
+                                Parameter Begin
+                                    name = nc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,3
+                                Parameter End
+                                Parameter Begin
+                                    name = hce0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,005
+                                Parameter End
+                                Parameter Begin
+                                    name = Rm0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 50000000000
+                                Parameter End
+                                Parameter Begin
+                                    name = A
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = d0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Dp
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 100000
+                                Parameter End
+                                Parameter Begin
+                                    name = sf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,833333333333333
+                                Parameter End
+                                Parameter Begin
+                                    name = sr
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,166666666666667
+                                Parameter End
+                                Parameter Begin
+                                    name = n
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,0166666666666667
+                                Parameter End
+                                Parameter Begin
+                                    name = tc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 59,9999999999999
+                                Parameter End
+                                Parameter Begin
+                                    name = tf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 49,9999999999999
+                                Parameter End
+                                Parameter Begin
+                                    name = tr
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 10
+                                Parameter End
+                                Parameter Begin
+                                    name = hc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,0156155281280883
+                                Parameter End
+                                Parameter Begin
+                                    name = Mf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 39,0388203202207
+                                Parameter End
+                                Parameter Begin
+                                    name = Ms
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 11,7116460960662
+                                Parameter End
+                                Parameter Begin
+                                    name = Msus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 58,558230480331
+                                Parameter End
+                                Parameter Begin
+                                    name = Qms
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,195194101601104
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,975970508005518
+                                Parameter End
+                                Parameter Begin
+                                    name = Qsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000910905807471818
+                                Parameter End
+                                Parameter Begin
+                                    name = eps
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,5
+                                Parameter End
+                                Parameter Begin
+                                    name = kappa
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,400000000000001
+                                Parameter End
+                                Parameter Begin
+                                    name = Pc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 1E-13
+                                Parameter End
+                                Parameter Begin
+                                    name = rc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 10000000000000
+                                Parameter End
+                                Parameter Begin
+                                    name = a
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 13333333333,3333
+                                Parameter End
+                                Parameter Begin
+                                    name = Vsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,054654348448309
+                                Parameter End
+                                Parameter Begin
+                                    name = hc/tf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000312310562561767
+                                Parameter End
+                                Parameter Begin
+                                    name = dhc/dt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000194028500029067
+                                Parameter End
+                                Parameter Begin
+                                    name = Qf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000780776406404415
+                                Parameter End
+                                Parameter Begin
+                                    name = Qf,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000485071250072666
+                                Parameter End
+                                Parameter Begin
+                                    name = Qs
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000130129401067402
+                                Parameter End
+                                Parameter Begin
+                                    name = Qs,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 9,70142500145334E-05
+                                Parameter End
+                                Parameter Begin
+                                    name = Qc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000260258802134805
+                                Parameter End
+                                Parameter Begin
+                                    name = Qc,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000194028500029067
+                                Parameter End
+                                Parameter Begin
+                                    name = Qsus,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000679099750101733
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmsus,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,727606875108999
+                                Parameter End
+                                Parameter Begin
+                                    name = Qms,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,1455213750218
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,780776406404415
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmf,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,485071250072666
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,325323502668505
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmc,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,242535625036332
+                                Parameter End
+                                Parameter Begin
+                                    name = qf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000780776406404415
+                                Parameter End
+                                Parameter Begin
+                                    name = qf,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000485071250072666
+                                Parameter End
+                                Parameter Begin
+                                    name = qs
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000130129401067402
+                                Parameter End
+                                Parameter Begin
+                                    name = qs,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 9,70142500145334E-05
+                                Parameter End
+                                Parameter Begin
+                                    name = qc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000260258802134805
+                                Parameter End
+                                Parameter Begin
+                                    name = qc,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000194028500029067
+                                Parameter End
+                                Parameter Begin
+                                    name = qsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000910905807471818
+                                Parameter End
+                                Parameter Begin
+                                    name = qsus,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,000679099750101733
+                                Parameter End
+                                Parameter Begin
+                                    name = qmsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,975970508005518
+                                Parameter End
+                                Parameter Begin
+                                    name = qmsus,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,727606875108999
+                                Parameter End
+                                Parameter Begin
+                                    name = qms
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,195194101601104
+                                Parameter End
+                                Parameter Begin
+                                    name = qms,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,1455213750218
+                                Parameter End
+                                Parameter Begin
+                                    name = qmf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,780776406404415
+                                Parameter End
+                                Parameter Begin
+                                    name = qmf,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,485071250072666
+                                Parameter End
+                                Parameter Begin
+                                    name = qmc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,325323502668505
+                                Parameter End
+                                Parameter Begin
+                                    name = qmc,d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,242535625036332
+                                Parameter End
+                                Parameter Begin
+                                    name = Vf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,0390388203202207
+                                Parameter End
+                                Parameter Begin
+                                    name = mf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 39,0388203202207
+                                Parameter End
+                                Parameter Begin
+                                    name = vf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,0390388203202207
+                                Parameter End
+                                Parameter Begin
+                                    name = ms
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 11,7116460960662
+                                Parameter End
+                                Parameter Begin
+                                    name = vs
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00780776406404413
+                                Parameter End
+                                Parameter Begin
+                                    name = msus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 58,558230480331
+                                Parameter End
+                                Parameter Begin
+                                    name = vsus
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,054654348448309
+                                Parameter End
+                                Parameter Begin
+                                    name = mc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 19,5194101601103
+                                Parameter End
+                                Parameter Begin
+                                    name = vc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,0156155281280883
+                                Parameter End
+                                Parameter Begin
+                                    name = Vc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,0156155281280883
+                                Parameter End
+                                Parameter Begin
+                                    name = Mc
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 19,5194101601103
+                                Parameter End
+                                Parameter Begin
+                                    name = Vs
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00780776406404413
+                                Parameter End
+                                Parameter Begin
+                                    name = Dpd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 200000
+                                Parameter End
+                                Parameter Begin
+                                    name = eps0d
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,5
+                                Parameter End
+                                Parameter Begin
+                                    name = epsd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,489710148793463
+                                Parameter End
+                                Parameter Begin
+                                    name = ned
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,03
+                                Parameter End
+                                Parameter Begin
+                                    name = sigma
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,072
+                                Parameter End
+                                Parameter Begin
+                                    name = pke0
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 15000
+                                Parameter End
+                                Parameter Begin
+                                    name = pke
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 16643,5420810177
+                                Parameter End
+                                Parameter Begin
+                                    name = pcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 8,12252396356236E-14
+                                Parameter End
+                                Parameter Begin
+                                    name = rcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 12311444133449,2
+                                Parameter End
+                                Parameter Begin
+                                    name = alphad
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 16084249770,7787
+                                Parameter End
+                                Parameter Begin
+                                    name = Srem
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,05
+                                Parameter End
+                                Parameter Begin
+                                    name = ad1
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,1
+                                Parameter End
+                                Parameter Begin
+                                    name = ad2
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,2
+                                Parameter End
+                                Parameter Begin
+                                    name = Tetta
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 20
+                                Parameter End
+                                Parameter Begin
+                                    name = eta_g
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,002
+                                Parameter End
+                                Parameter Begin
+                                    name = ag1
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,31
+                                Parameter End
+                                Parameter Begin
+                                    name = ag2
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,32
+                                Parameter End
+                                Parameter Begin
+                                    name = ag3
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,33
+                                Parameter End
+                                Parameter Begin
+                                    name = Tetta_boil
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 100
+                                Parameter End
+                                Parameter Begin
+                                    name = DH
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 40000
+                                Parameter End
+                                Parameter Begin
+                                    name = Mmole
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,018
+                                Parameter End
+                                Parameter Begin
+                                    name = f
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,8
+                                Parameter End
+                                Parameter Begin
+                                    name = peq
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 2535,36051224168
+                                Parameter End
+                                Parameter Begin
+                                    name = hcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00302067127423769
+                                Parameter End
+                                Parameter Begin
+                                    name = sd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = True
+                                    defined = True
+                                    value = 0,5
+                                Parameter End
+                                Parameter Begin
+                                    name = td
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 2,99999999999999
+                                Parameter End
+                                Parameter Begin
+                                    name = K
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,300575326816447
+                                Parameter End
+                                Parameter Begin
+                                    name = Smech
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = S
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Rfmech
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = Rf
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = Qgi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qg
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = vg
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = Mfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Vfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Mlcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Vlcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Mcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 2,2966933112239
+                                Parameter End
+                                Parameter Begin
+                                    name = Vcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 0,00302067127423769
+                                Parameter End
+                                Parameter Begin
+                                    name = rho_bulk
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 760,325471629981
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmfid
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1000
+                                Parameter End
+                                Parameter Begin
+                                    name = Qfid
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = Qcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 5,03445212372949E-05
+                                Parameter End
+                                Parameter Begin
+                                    name = qmfid
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = qfid
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = qmcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 1
+                                Parameter End
+                                Parameter Begin
+                                    name = qcd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = True
+                                    value = 5,03445212372949E-05
+                                Parameter End
+                                Parameter Begin
+                                    name = Qgt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Vg
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Mev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Vev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmftd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qftd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmevi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmevt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qmev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qevi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qevt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = Qev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmftd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qftd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qfd
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmevi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmevt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qmev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qevi
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qevt
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                                Parameter Begin
+                                    name = qev
+                                    typeName = fmCalculationVariableParameter
+                                    isInputed = False
+                                    defined = False
+                                    value = 0
+                                Parameter End
+                            FilterSimulationData End
+                        FilterSimulation End
+                    SimSerieData End
+                SimSerie End
+            SuspensionData End
+        Suspension End
+        Suspension Begin
+            m_checked = True
+            SuspensionData Begin
+                name = Susp3
+                material = Water
+                customer = somebody
+                seriesListSize = 0
+            SuspensionData End
+        Suspension End
+    ProjectData End
+Project End
+Project Begin
+    m_checked = True
+    ProjectData Begin
+        name = Prj2
+        susListSize = 1
+        Suspension Begin
+            m_checked = True
+            SuspensionData Begin
+                name = Susp2
+                material = MaterialX
+                customer = Henkel
+                seriesListSize = 1
+                SimSerie Begin
+                    m_checked = True
+                    SimSerieData Begin
+                        name = serie02
+                        machineName = izh
+                        Machine Begin
+                            symbol = BE
+                            name = Belt
+                        Machine End
+                        filterMedium = medium2
+                        simListSize = 0
+                    SimSerieData End
+                SimSerie End
+            SuspensionData End
+        Suspension End
+    ProjectData End
+Project End
