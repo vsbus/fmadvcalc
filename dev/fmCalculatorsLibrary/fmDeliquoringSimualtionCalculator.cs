@@ -13,7 +13,6 @@ namespace fmCalculatorsLibrary
             InputedByUser,
             CalculatedFromCakeFormation
         }
-        public fmDeliquoringHcdEpsdCalculationOption calculationOption;
 
         public fmDeliquoringSimualtionCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         
@@ -51,7 +50,7 @@ namespace fmCalculatorsLibrary
             var pcd = variables[fmGlobalParameter.pc_d] as fmCalculationConstantParameter;
             var Dpd = variables[fmGlobalParameter.Dp_d] as fmCalculationConstantParameter;
             var pke = variables[fmGlobalParameter.pke] as fmCalculationConstantParameter;
-            var etaf = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            var etad = variables[fmGlobalParameter.eta_d] as fmCalculationConstantParameter;
             var hce = variables[fmGlobalParameter.hce0] as fmCalculationConstantParameter;
             var Srem = variables[fmGlobalParameter.Srem] as fmCalculationConstantParameter;
             var ad1 = variables[fmGlobalParameter.ad1] as fmCalculationConstantParameter;
@@ -65,7 +64,7 @@ namespace fmCalculatorsLibrary
             var ag3 = variables[fmGlobalParameter.ag3] as fmCalculationConstantParameter;
             var f = variables[fmGlobalParameter.f] as fmCalculationConstantParameter;
             var etag = variables[fmGlobalParameter.eta_g] as fmCalculationConstantParameter;
-            var rhof = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
+            var rhod = variables[fmGlobalParameter.rho_d] as fmCalculationConstantParameter;
             var rhos = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
             var Ms = variables[fmGlobalParameter.Ms] as fmCalculationConstantParameter;
 
@@ -122,21 +121,21 @@ namespace fmCalculatorsLibrary
 
             fmValue pmoverpn = fmDeliquoringEquations.Eval_pmOverPn_vacuum_From_Dpd(Dpd.value);
             fmValue Qgimax = fmDeliquoringEquations.Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(A.value, pcd.value, pmoverpn, Dpd.value, etag.value, hcd.value, hce.value, Tetta.value, ag1.value, ag2.value);
-            fmValue Const1 = fmDeliquoringEquations.Eval_Const1(epsd.value, etaf.value, hcd.value, hce.value, pcd.value, Dpd.value, pke.value);
+            fmValue Const1 = fmDeliquoringEquations.Eval_Const1(epsd.value, etad.value, hcd.value, hce.value, pcd.value, Dpd.value, pke.value);
             if (!isKnown_Vcd) Vcd.value = fmDeliquoringEquations.Eval_Vcd_From_A_hcd(A.value, hcd.value);
-            fmValue SC1 = fmDeliquoringEquations.Eval_SC1_From_rhof_epsd_Vcd(rhof.value, epsd.value, Vcd.value);
+            fmValue SC1 = fmDeliquoringEquations.Eval_SC1_From_rhof_epsd_Vcd(rhod.value, epsd.value, Vcd.value);
             fmValue SC2 = fmDeliquoringEquations.Eval_SC2_From_peq_Mmole_Tetta(peq.value, Mmole.value, Tetta.value);
             fmValue SC3 = fmDeliquoringEquations.Eval_SC3_From_A_pcd_Dpd_ag1_ag2_etag_hcd_hce(A.value, pcd.value, Dpd.value, ag1.value, ag2.value, etag.value, hcd.value, hce.value);
             fmValue Kmax = fmDeliquoringEquations.Eval_Kmax_From_Const1_tc(Const1, tc.value);
 
             if (isKnown_rho_bulk)
             {
-                S.value = fmDeliquoringEquations.Eval_S_From_rhof_epsd_rhos_rhobulk(rhof.value, epsd.value, rhos.value, rho_bulk.value);
+                S.value = fmDeliquoringEquations.Eval_S_From_rhof_epsd_rhos_rhobulk(rhod.value, epsd.value, rhos.value, rho_bulk.value);
                 isKnown_S = true;
             }
             if (isKnown_Mlcd)
             {
-                Vlcd.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Mlcd.value);
+                Vlcd.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhod.value, Mlcd.value);
                 isKnown_Vlcd = true;
             }
             if (isKnown_Vlcd)
@@ -146,7 +145,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Rf)
             {
-                S.value = fmDeliquoringEquations.Eval_S_From_eps_rhos_rhof_Rf(epsd.value, rhos.value, rhof.value, Rf.value);
+                S.value = fmDeliquoringEquations.Eval_S_From_eps_rhos_rhof_Rf(epsd.value, rhos.value, rhod.value, Rf.value);
                 isKnown_S = true;
             } 
             if (isKnown_S)
@@ -171,7 +170,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qmfid)
             {
-                Qfid.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Qmfid.value);
+                Qfid.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhod.value, Qmfid.value);
                 isKnown_Qfid = true;
             }
             if (isKnown_qfid)
@@ -181,12 +180,12 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qfid)
             {
-                K.value = fmDeliquoringEquations.Eval_K_From_Vcd_ad1_ad2_Srem_Qfid_pcd_Dpd_pke_etaf_hcd_hce(Vcd.value, ad1.value, ad2.value, Srem.value, Qfid.value, pcd.value, Dpd.value, pke.value, etaf.value, hcd.value, hce.value);
+                K.value = fmDeliquoringEquations.Eval_K_From_Vcd_ad1_ad2_Srem_Qfid_pcd_Dpd_pke_etaf_hcd_hce(Vcd.value, ad1.value, ad2.value, Srem.value, Qfid.value, pcd.value, Dpd.value, pke.value, etad.value, hcd.value, hce.value);
                 isKnown_K = true;
             }
             if (isKnown_Mfd)
             {
-                Vfd.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Mfd.value);
+                Vfd.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhod.value, Mfd.value);
                 isKnown_Vfd = true;
             }
             if (isKnown_Vfd)
@@ -201,7 +200,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Rfmech)
             {
-                Smech.value = fmDeliquoringEquations.Eval_S_From_eps_rhos_rhof_Rf(epsd.value, rhos.value, rhof.value, Rfmech.value);
+                Smech.value = fmDeliquoringEquations.Eval_S_From_eps_rhos_rhof_Rf(epsd.value, rhos.value, rhod.value, Rfmech.value);
                 isKnown_Smech = true;
             }
             if (isKnown_Smech)
@@ -211,7 +210,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_K)
             {
-                td.value = fmDeliquoringEquations.Eval_td_From_pcd_Dpd_pke_epsd_etaf_hcd_hce_K(pcd.value, Dpd.value, pke.value, epsd.value, etaf.value, hcd.value, hce.value, K.value);
+                td.value = fmDeliquoringEquations.Eval_td_From_pcd_Dpd_pke_epsd_etaf_hcd_hce_K(pcd.value, Dpd.value, pke.value, epsd.value, etad.value, hcd.value, hce.value, K.value);
                 isKnown_td = true;
             }
             if (isKnown_td)
@@ -222,26 +221,26 @@ namespace fmCalculatorsLibrary
 
             if (!isKnown_td) td.value = fmDeliquoringEquations.Eval_td_From_sd_tc(sd.value, tc.value);
             fmValue Vgmaxev = fmDeliquoringEquations.Eval_Vgmaxev_From_A_pcd_Dpd_etag_hcd_hce_ag1_ag2_td(A.value, pcd.value, Dpd.value, etag.value, hcd.value, hce.value, ag1.value, ag2.value, td.value);
-            if (!isKnown_K) K.value = fmDeliquoringEquations.Eval_K_From_pcd_Dpd_pke_epsd_etaf_hcd_hce_td(pcd.value, Dpd.value, pke.value, epsd.value, etaf.value, hcd.value, hce.value, td.value);
+            if (!isKnown_K) K.value = fmDeliquoringEquations.Eval_K_From_pcd_Dpd_pke_epsd_etaf_hcd_hce_td(pcd.value, Dpd.value, pke.value, epsd.value, etad.value, hcd.value, hce.value, td.value);
             if (!isKnown_Smech) Smech.value = fmDeliquoringEquations.Eval_Smech_From_Srem_ad1_ad2_K(Srem.value, ad1.value, ad2.value, K.value);
             fmValue Vgev = fmDeliquoringEquations.Eval_Vgev_From_Vgmaxev_ag3_K(Vgmaxev, ag3.value, K.value);
             Mev.value = fmDeliquoringEquations.Eval_Mev_From_peq_Mmole_Tetta_Vgev_ag3_K_f(peq.value, Mmole.value, Tetta.value, Vgev, ag3.value, K.value, f.value);
-            fmValue Sev = fmDeliquoringEquations.Eval_Sev_From_Mev_rhof_epsd_Vcd(Mev.value, rhof.value, epsd.value, Vcd.value);
+            fmValue Sev = fmDeliquoringEquations.Eval_Sev_From_Mev_rhof_epsd_Vcd(Mev.value, rhod.value, epsd.value, Vcd.value);
             if (!isKnown_S) S.value = fmDeliquoringEquations.Eval_S_From_Smech_Sev(Smech.value, Sev);
-            if (!isKnown_Rfmech) Rfmech.value = fmDeliquoringEquations.Eval_Rf_From_eps_rhos_rhof_S(epsd.value, rhos.value, rhof.value, Smech.value);
-            if (!isKnown_Rf) Rf.value = fmDeliquoringEquations.Eval_Rf_From_eps_rhos_rhof_S(epsd.value, rhos.value, rhof.value, S.value);
-            if (!isKnown_rho_bulk) rho_bulk.value = fmDeliquoringEquations.Eval_rho_bulk_From_rhof_epsd_rhos_S(rhof.value, epsd.value, rhos.value, S.value);
+            if (!isKnown_Rfmech) Rfmech.value = fmDeliquoringEquations.Eval_Rf_From_eps_rhos_rhof_S(epsd.value, rhos.value, rhod.value, Smech.value);
+            if (!isKnown_Rf) Rf.value = fmDeliquoringEquations.Eval_Rf_From_eps_rhos_rhof_S(epsd.value, rhos.value, rhod.value, S.value);
+            if (!isKnown_rho_bulk) rho_bulk.value = fmDeliquoringEquations.Eval_rho_bulk_From_rhof_epsd_rhos_S(rhod.value, epsd.value, rhos.value, S.value);
             if (!isKnown_Mcd) Mcd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_bulk.value, Vcd.value);
             if (!isKnown_Qgi) Qgi.value = fmDeliquoringEquations.Eval_Qgi_From_Qgimax_ag3_K(Qgimax, ag3.value, K.value);
             Qgt.value = fmDeliquoringEquations.Eval_Qgt_From_Qgimax_ag3_K(Qgimax, ag3.value, K.value);
             if (!isKnown_Qg) Qg.value = fmDeliquoringEquations.Eval_Qg_From_Qgt_td_tc(Qgt.value, td.value, tc.value);
             if (!isKnown_vg) vg.value = fmDeliquoringEquations.Eval_vg_From_Qgt_td_Ms(Qgt.value, td.value, Ms.value);
             if (!isKnown_Vfd) Vfd.value = fmDeliquoringEquations.Eval_Vfd_From_Vcd_epsd_Smech(Vcd.value, epsd.value, Smech.value);
-            if (!isKnown_Mfd) Mfd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhof.value, Vfd.value);
+            if (!isKnown_Mfd) Mfd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhod.value, Vfd.value);
             if (!isKnown_Vlcd) Vlcd.value = fmDeliquoringEquations.Eval_Vlcd_From_Vcd_epsd_S(Vcd.value, epsd.value, S.value);
-            if (!isKnown_Mlcd) Mlcd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhof.value, Vlcd.value);
-            if (!isKnown_Qfid) Qfid.value = fmDeliquoringEquations.Eval_Qfid_From_Vcd_ad1_ad2_Srem_K_pcd_Dpd_pke_etaf_hcd_hce(Vcd.value, ad1.value, ad2.value, Srem.value, K.value, pcd.value, Dpd.value, pke.value, etaf.value, hcd.value, hce.value);
-            if (!isKnown_Qmfid) Qmfid.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhof.value, Qfid.value);
+            if (!isKnown_Mlcd) Mlcd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhod.value, Vlcd.value);
+            if (!isKnown_Qfid) Qfid.value = fmDeliquoringEquations.Eval_Qfid_From_Vcd_ad1_ad2_Srem_K_pcd_Dpd_pke_etaf_hcd_hce(Vcd.value, ad1.value, ad2.value, Srem.value, K.value, pcd.value, Dpd.value, pke.value, etad.value, hcd.value, hce.value);
+            if (!isKnown_Qmfid) Qmfid.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhod.value, Qfid.value);
             if (!isKnown_Qcd) Qcd.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vcd.value, tc.value);
             if (!isKnown_Qmcd) Qmcd.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mcd.value, tc.value);
             if (!isKnown_qmfid) qmfid.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmfid.value, A.value);
@@ -250,16 +249,16 @@ namespace fmCalculatorsLibrary
             if (!isKnown_qcd) qcd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qcd.value, A.value);
 
             Vg.value = fmFilterMachiningEquations.Eval_V_From_Q_t(Qgt.value, td.value);
-            Vev.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Mev.value);
+            Vev.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhod.value, Mev.value);
             Qftd.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vfd.value, td.value);
-            Qmftd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhof.value, Qftd.value);
+            Qmftd.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rhod.value, Qftd.value);
             Qfd.value = fmDeliquoringEquations.Eval_Q_From_Qt_td_tc(Qftd.value, td.value, tc.value);
             Qmfd.value = fmDeliquoringEquations.Eval_Q_From_Qt_td_tc(Qmftd.value, td.value, tc.value);
             Qmevi.value = fmDeliquoringEquations.Eval_Qmevi_From_peq_Mmole_pmoverpn_ag3_K_f_Qgi(peq.value, Mmole.value, pmoverpn, ag3.value, K.value, f.value, Qgi.value);
-            Qevi.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Qmevi.value);
+            Qevi.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhod.value, Qmevi.value);
             Qmevt.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mev.value, td.value);
             Qmev.value = fmDeliquoringEquations.Eval_Q_From_Qt_td_tc(Qmevt.value, td.value, tc.value);
-            Qevt.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhof.value, Qmevt.value);
+            Qevt.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rhod.value, Qmevt.value);
             Qev.value = fmDeliquoringEquations.Eval_Q_From_Qt_td_tc(Qevt.value, td.value, tc.value);
             qmftd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmftd.value, A.value);
             qmfd.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmfd.value, A.value);

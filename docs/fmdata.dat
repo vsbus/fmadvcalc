@@ -27,7 +27,8 @@ Project Begin
                             FilterSimulationData Begin
                                 name = simulatioN
                                 filterMachiningCalculationOption = PLAIN_DP_CONST
-                                deliquoringCalculationOption = HcdCalculatedFromCakeFormation
+                                deliquoringCalculationOption = CalculatedFromCakeFormation
+				rhoDCalculationOption = EqualToRhoF
                                 suspensionCalculationOption = RHOSUS_CALCULATED
                                 parametersSize = 152
                                 Parameter Begin
@@ -1101,7 +1102,8 @@ Project Begin
                             FilterSimulationData Begin
                                 name = serie0-1
                                 filterMachiningCalculationOption = PLAIN_DP_CONST
-                                deliquoringCalculationOption = HcdCalculatedFromCakeFormation
+                                deliquoringCalculationOption = CalculatedFromCakeFormation
+				rhoDCalculationOption = EqualToRhoF
                                 suspensionCalculationOption = RHOSUS_CALCULATED
                                 parametersSize = 152
                                 Parameter Begin

@@ -71,7 +71,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter pcd;
         private readonly fmBlockConstantParameter Dpd;
         private readonly fmBlockConstantParameter pke;
-        private readonly fmBlockConstantParameter etaf;
+        private readonly fmBlockConstantParameter etad;
         private readonly fmBlockConstantParameter hce;
         private readonly fmBlockConstantParameter Srem;
         private readonly fmBlockConstantParameter ad1;
@@ -85,7 +85,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter ag3;
         private readonly fmBlockConstantParameter f;
         private readonly fmBlockConstantParameter etag;
-        private readonly fmBlockConstantParameter rhof;
+        private readonly fmBlockConstantParameter rhod;
         private readonly fmBlockConstantParameter rhos;
         private readonly fmBlockConstantParameter Ms;
 
@@ -111,7 +111,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmValue pcd_Value {get {return pcd.value;} set {pcd.value = value;}}
         public fmValue Dpd_Value {get {return Dpd.value;} set {Dpd.value = value;}}
         public fmValue pke_Value {get {return pke.value;} set {pke.value = value;}}
-        public fmValue etaf_Value {get {return etaf.value;} set {etaf.value = value;}}
+        public fmValue etad_Value {get {return etad.value;} set {etad.value = value;}}
         public fmValue hce_Value {get {return hce.value;} set {hce.value = value;}}
         public fmValue Srem_Value {get {return Srem.value;} set {Srem.value = value;}}
         public fmValue ad1_Value {get {return ad1.value;} set {ad1.value = value;}}
@@ -125,7 +125,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmValue ag3_Value {get {return ag3.value;} set {ag3.value = value;}}
         public fmValue f_Value {get {return f.value;} set {f.value = value;}}
         public fmValue etag_Value {get {return etag.value;} set {etag.value = value;}}
-        public fmValue rhof_Value {get {return rhof.value;} set {rhof.value = value;}}
+        public fmValue rhod_Value {get {return rhod.value;} set {rhod.value = value;}}
         public fmValue rhos_Value {get {return rhos.value;} set {rhos.value = value;}}
 
         override public void DoCalculations()
@@ -248,7 +248,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref pcd, fmGlobalParameter.pc_d);
             AddConstantParameter(ref Dpd, fmGlobalParameter.Dp_d);
             AddConstantParameter(ref pke, fmGlobalParameter.pke);
-            AddConstantParameter(ref etaf, fmGlobalParameter.eta_f);
+            AddConstantParameter(ref etad, fmGlobalParameter.eta_d);
             AddConstantParameter(ref hce, fmGlobalParameter.hce0);
             AddConstantParameter(ref Srem, fmGlobalParameter.Srem);
             AddConstantParameter(ref ad1, fmGlobalParameter.ad1);
@@ -262,7 +262,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref ag3, fmGlobalParameter.ag3);
             AddConstantParameter(ref f, fmGlobalParameter.f);
             AddConstantParameter(ref etag, fmGlobalParameter.eta_g);
-            AddConstantParameter(ref rhof, fmGlobalParameter.rho_f);
+            AddConstantParameter(ref rhod, fmGlobalParameter.rho_d);
             AddConstantParameter(ref rhos, fmGlobalParameter.rho_s);
             AddConstantParameter(ref Ms, fmGlobalParameter.Ms);
 

@@ -1146,6 +1146,9 @@ namespace FilterSimulation
                 }
                 return;
             }
+
+            sim.RhoDCalculationOption = deliquoringSigmaPkeBlock.rhoDCalculationOption;
+
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSigmaPkeBlock, sim);
 
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);

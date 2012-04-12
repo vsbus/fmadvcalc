@@ -27,6 +27,8 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter eps_d;
         private readonly fmBlockConstantParameter rho_s;
         private readonly fmBlockConstantParameter Pc0;
+
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption rhoDCalculationOption;
         
         public fmValue Dp_Value
         {
@@ -60,6 +62,7 @@ namespace fmCalcBlocksLibrary.Blocks
         override public void DoCalculations()
         {
             var fmSigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(AllParameters);
+            fmSigmaPke0PkePcdRcdAlphadCalculator.rhoDCalculationOption = rhoDCalculationOption;
             fmSigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
         }
 
@@ -93,6 +96,8 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref rho_s, fmGlobalParameter.rho_s);
             AddConstantParameter(ref Pc0, fmGlobalParameter.Pc0);
 
+            rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
+
             sigma.group = sigma_group;
             pke0.group = pke0_group;
 
@@ -104,6 +109,27 @@ namespace fmCalcBlocksLibrary.Blocks
             alphad.cell.ReadOnly = true;
 
             processOnChange = true;
+        }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption newCalculationOption)
+        {
+            rhoDCalculationOption = newCalculationOption;
+            UpdateCellsColorsAndReadOnly();
+        }
+
+        private void UpdateCellsColorsAndReadOnly()
+        {
+            if (rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.InputedByUser)
+            {
+                rhod.IsInputed = true;
+                rhod.cell.ReadOnly = false;
+            }
+            else
+            {
+                rhod.IsInputed = false;
+                rhod.cell.ReadOnly = true;
+            }
+            CallValuesChanged();
         }
 
         public fmSigmaPke0PkePcdRcdAlphadBlock() : this(null, null, null, null, null, null, null, null) { }

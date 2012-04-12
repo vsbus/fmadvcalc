@@ -13,6 +13,7 @@ namespace FilterSimulation.fmFilterObjects
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
@@ -20,6 +21,7 @@ namespace FilterSimulation.fmFilterObjects
             name = from.name;
             filterMachiningCalculationOption = from.filterMachiningCalculationOption;
             hcdEpsdCalculationOption = from.hcdEpsdCalculationOption;
+            rhoDCalculationOption = from.rhoDCalculationOption;
             suspensionCalculationOption = from.suspensionCalculationOption;
             CopyValuesFrom(from);
             CopyIsInputedFrom(from);
@@ -385,6 +387,7 @@ namespace FilterSimulation.fmFilterObjects
             public const string parametersSize = "parametersSize";
             public const string filterMachiningCalculationOption = "filterMachiningCalculationOption";
             public const string deliquoringCalculationOption = "deliquoringCalculationOption";
+            public const string rhoDCalculationOption = "rhoDCalculationOption";
             public const string suspensionCalculationOption = "suspensionCalculationOption";
             // ReSharper restore InconsistentNaming
         }
@@ -445,6 +448,7 @@ namespace FilterSimulation.fmFilterObjects
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.name, name, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.deliquoringCalculationOption, hcdEpsdCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.rhoDCalculationOption, rhoDCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.suspensionCalculationOption, suspensionCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.parametersSize, parameters.Count, 8);
             foreach (var p in parameters.Values)
@@ -485,6 +489,13 @@ namespace FilterSimulation.fmFilterObjects
                                                          fmFilterSimulationDataSerializeTags.
                                                              deliquoringCalculationOption).ToString(),
                     typeof(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption));
+            simData.rhoDCalculationOption =
+                (fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption)
+                StringToEnum(
+                    fmSerializeTools.DeserializeProperty(input,
+                                                         fmFilterSimulationDataSerializeTags.
+                                                             rhoDCalculationOption).ToString(),
+                    typeof(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption));
             simData.suspensionCalculationOption = (fmSuspensionCalculator.fmSuspensionCalculationOptions)
                 StringToEnum(
                     fmSerializeTools.DeserializeProperty(input,
@@ -588,6 +599,19 @@ namespace FilterSimulation.fmFilterObjects
                     Modified = true;
                 }
                 m_data.hcdEpsdCalculationOption = value;
+            }
+        }
+
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption RhoDCalculationOption
+        {
+            get { return m_data.rhoDCalculationOption; }
+            set
+            {
+                if (m_data.rhoDCalculationOption != value)
+                {
+                    Modified = true;
+                }
+                m_data.rhoDCalculationOption = value;
             }
         }
 
@@ -771,6 +795,7 @@ namespace FilterSimulation.fmFilterObjects
             sim.Name = simData.name;
             sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
             sim.HcdEpsdCalculationOption = simData.hcdEpsdCalculationOption;
+            sim.RhoDCalculationOption = simData.rhoDCalculationOption;
             sim.SuspensionCalculationOption = simData.suspensionCalculationOption;
             foreach (var p in simData.parameters.Values)
             {

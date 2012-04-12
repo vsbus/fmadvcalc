@@ -8,6 +8,13 @@ namespace fmCalculatorsLibrary
 {
     public class fmSigmaPke0PkePcdRcdAlphadCalculator : fmBaseCalculator
     {
+        public enum fmRhoDCalculationOption
+        {
+            InputedByUser,
+            EqualToRhoF
+        }
+        public fmRhoDCalculationOption rhoDCalculationOption;
+
         public fmSigmaPke0PkePcdRcdAlphadCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
@@ -30,7 +37,11 @@ namespace fmCalculatorsLibrary
             var alphad = variables[fmGlobalParameter.alpha_d] as fmCalculationVariableParameter;
 
             eta_d.value = eta_f.value;
-            rho_d.value = rho_f.value;
+
+            if (rhoDCalculationOption == fmRhoDCalculationOption.EqualToRhoF)
+            {
+                rho_d.value = rho_f.value;
+            }
 
             fmValue Dp = Dpf.value.defined == false || (Dpd.value.defined == true && Dpd.value > Dpf.value)
                 ? Dpd.value

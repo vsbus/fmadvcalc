@@ -8,6 +8,7 @@ namespace FilterSimulation
     {
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption;
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption rhoDCalculationOption;
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public fmCalculationOptionSelectionDialog()
@@ -33,6 +34,8 @@ namespace FilterSimulation
             deliquoringCheckBox.Checked = hcdEpsdCalculationOption ==
                                           fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.
                                               CalculatedFromCakeFormation;
+
+            rhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
         }
 
         // ReSharper disable InconsistentNaming
@@ -93,6 +96,17 @@ namespace FilterSimulation
                                                      CalculatedFromCakeFormation
                                                : fmDeliquoringSimualtionCalculator.
                                                      fmDeliquoringHcdEpsdCalculationOption.InputedByUser;
+        }
+
+        private void rhoDCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            rhoDCalculationOption = rhoDCheckBox.Checked
+                                               ? fmSigmaPke0PkePcdRcdAlphadCalculator.
+                                                     fmRhoDCalculationOption.
+                                                     EqualToRhoF
+                                               : fmSigmaPke0PkePcdRcdAlphadCalculator.
+                                                     fmRhoDCalculationOption.
+                                                     InputedByUser;
         }
         // ReSharper restore InconsistentNaming
 
