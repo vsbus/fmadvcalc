@@ -292,6 +292,8 @@ namespace FilterSimulation
                 if (sim.deliquoringSigmaPkeBlock == null)
                 {
                     sim.deliquoringSigmaPkeBlock = new fmSigmaPke0PkePcdRcdAlphadBlock(
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eta_d.name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.rho_d.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.sigma.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.pke0.name).Cells[deliquoringMaterialCol.Index],
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.pke.name).Cells[deliquoringMaterialCol.Index],

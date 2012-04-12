@@ -97,12 +97,14 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter hce0;
         public static fmGlobalParameter ne;
         public static fmGlobalParameter rho_f;
+        public static fmGlobalParameter rho_d;
         public static fmGlobalParameter rho_s;
         public static fmGlobalParameter rho_sus;
         public static fmGlobalParameter Cm;
         public static fmGlobalParameter Cv;
         public static fmGlobalParameter C;
         public static fmGlobalParameter eta_f;
+        public static fmGlobalParameter eta_d;
         public static fmGlobalParameter nc;
         #endregion
         #region Deliquoring
@@ -196,8 +198,10 @@ namespace fmCalculationLibrary
         {
             #region Material Data
             AddParameter(ref eta_f, new fmGlobalParameter("eta_f", fmUnitFamily.ViscosityFamily, new fmRange(0, 1)));
+            AddParameter(ref eta_d, new fmGlobalParameter("eta_d", fmUnitFamily.ViscosityFamily, new fmRange(0, 1)));
             
             AddParameter(ref rho_f, new fmGlobalParameter("rho_f", fmUnitFamily.DensityFamily, new fmRange(600, 2500)));
+            AddParameter(ref rho_d, new fmGlobalParameter("rho_d", fmUnitFamily.DensityFamily, new fmRange(600, 2500)));
             AddParameter(ref rho_s, new fmGlobalParameter("rho_s", fmUnitFamily.DensityFamily, new fmRange(1500, 5000)));
             AddParameter(ref rho_sus, new fmGlobalParameter("rho_sus", fmUnitFamily.DensityFamily, new fmRange(1000, 3000)));
             AddParameter(ref Cm, new fmGlobalParameter("Cm", fmUnitFamily.ConcentrationFamily, new fmRange(0, 1)));

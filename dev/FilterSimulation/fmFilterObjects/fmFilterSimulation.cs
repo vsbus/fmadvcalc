@@ -169,6 +169,9 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp_d));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps_d));
 
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eta_d));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_d));
+
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.sigma));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.pke0));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.pke));

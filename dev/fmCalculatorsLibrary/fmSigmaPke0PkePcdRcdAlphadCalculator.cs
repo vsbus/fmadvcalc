@@ -11,19 +11,26 @@ namespace fmCalculatorsLibrary
         public fmSigmaPke0PkePcdRcdAlphadCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
+            var eta_f = variables[fmGlobalParameter.eta_f] as fmCalculationConstantParameter;
+            var rho_f = variables[fmGlobalParameter.rho_f] as fmCalculationConstantParameter;
             var Dpf = variables[fmGlobalParameter.Dp] as fmCalculationConstantParameter;
             var Dpd = variables[fmGlobalParameter.Dp_d] as fmCalculationConstantParameter;
             var nc = variables[fmGlobalParameter.nc] as fmCalculationConstantParameter;
             var eps_d = variables[fmGlobalParameter.eps_d] as fmCalculationConstantParameter;
             var rho_s = variables[fmGlobalParameter.rho_s] as fmCalculationConstantParameter;
             var Pc0 = variables[fmGlobalParameter.Pc0] as fmCalculationConstantParameter;
-            
+
+            var eta_d = variables[fmGlobalParameter.eta_d] as fmCalculationVariableParameter;
+            var rho_d = variables[fmGlobalParameter.rho_d] as fmCalculationVariableParameter;
             var sigma = variables[fmGlobalParameter.sigma] as fmCalculationVariableParameter;
             var pke0 = variables[fmGlobalParameter.pke0] as fmCalculationVariableParameter;
             var pke = variables[fmGlobalParameter.pke] as fmCalculationVariableParameter;
             var pcd = variables[fmGlobalParameter.pc_d] as fmCalculationVariableParameter;
             var rcd = variables[fmGlobalParameter.rc_d] as fmCalculationVariableParameter;
             var alphad = variables[fmGlobalParameter.alpha_d] as fmCalculationVariableParameter;
+
+            eta_d.value = eta_f.value;
+            rho_d.value = rho_f.value;
 
             fmValue Dp = Dpf.value.defined == false || (Dpd.value.defined == true && Dpd.value > Dpf.value)
                 ? Dpd.value

@@ -10,6 +10,8 @@ namespace fmCalcBlocksLibrary.Blocks
 {
     public class fmSigmaPke0PkePcdRcdAlphadBlock : fmBaseBlock
     {
+        private readonly fmBlockVariableParameter etad;
+        private readonly fmBlockVariableParameter rhod;
         private readonly fmBlockVariableParameter sigma;
         private readonly fmBlockVariableParameter pke0;
         private readonly fmBlockVariableParameter pke;
@@ -17,6 +19,8 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter rcd;
         private readonly fmBlockVariableParameter alphad;
 
+        private readonly fmBlockConstantParameter eta_f;
+        private readonly fmBlockConstantParameter rho_f;
         private readonly fmBlockConstantParameter Dp;
         private readonly fmBlockConstantParameter Dpd;
         private readonly fmBlockConstantParameter nc;
@@ -49,7 +53,7 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return rho_s.value; }
             set { rho_s.value = value; }
         }
-        
+
         private readonly fmBlockParameterGroup sigma_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup pke0_group = new fmBlockParameterGroup();
 
@@ -61,6 +65,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
         // ReSharper disable InconsistentNaming
         public fmSigmaPke0PkePcdRcdAlphadBlock(
+            DataGridViewCell etad_Cell,
+            DataGridViewCell rhod_Cell,
             DataGridViewCell sigma_Cell,
             DataGridViewCell pke0_Cell,
             DataGridViewCell pke_Cell,
@@ -69,12 +75,17 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell alphad_Cell)
         // ReSharper restore InconsistentNaming
         {
+            AddParameter(ref etad, fmGlobalParameter.eta_d, etad_Cell, false);
+            AddParameter(ref rhod, fmGlobalParameter.rho_d, rhod_Cell, false);
             AddParameter(ref sigma, fmGlobalParameter.sigma, sigma_Cell, true);
             AddParameter(ref pke0, fmGlobalParameter.pke0, pke0_Cell, true);
             AddParameter(ref pke, fmGlobalParameter.pke, pke_Cell, false);
             AddParameter(ref pcd, fmGlobalParameter.pc_d, pcd_Cell, false);
             AddParameter(ref rcd, fmGlobalParameter.rc_d, rcd_Cell, false);
             AddParameter(ref alphad, fmGlobalParameter.alpha_d, alphad_Cell, false);
+            
+            AddConstantParameter(ref eta_f, fmGlobalParameter.eta_f);
+            AddConstantParameter(ref rho_f, fmGlobalParameter.rho_f);
             AddConstantParameter(ref Dp, fmGlobalParameter.Dp);
             AddConstantParameter(ref Dpd, fmGlobalParameter.Dp_d);
             AddConstantParameter(ref nc, fmGlobalParameter.nc);
@@ -85,6 +96,8 @@ namespace fmCalcBlocksLibrary.Blocks
             sigma.group = sigma_group;
             pke0.group = pke0_group;
 
+            etad.cell.ReadOnly = true;
+            rhod.cell.ReadOnly = true;
             pke.cell.ReadOnly = true;
             pcd.cell.ReadOnly = true;
             rcd.cell.ReadOnly = true;
@@ -93,6 +106,6 @@ namespace fmCalcBlocksLibrary.Blocks
             processOnChange = true;
         }
 
-        public fmSigmaPke0PkePcdRcdAlphadBlock() : this(null, null, null, null, null, null) { }
+        public fmSigmaPke0PkePcdRcdAlphadBlock() : this(null, null, null, null, null, null, null, null) { }
     }
 }
