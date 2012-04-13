@@ -439,6 +439,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     simData.internalSimulationData.filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
                     simData.internalSimulationData.hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
                     simData.internalSimulationData.rhoDCalculationOption = simData.externalSimulation.RhoDCalculationOption;
+                    simData.internalSimulationData.etaDCalculationOption = simData.externalSimulation.EtaDCalculationOption;
                     simData.internalSimulationData.suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
                     simData.internalSimulationData.UpdateIsInputed(inputedParameter);
                 }

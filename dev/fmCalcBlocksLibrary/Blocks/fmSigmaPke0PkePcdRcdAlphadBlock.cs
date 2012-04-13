@@ -29,6 +29,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter Pc0;
 
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption rhoDCalculationOption;
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption etaDCalculationOption;
         
         public fmValue Dp_Value
         {
@@ -63,6 +64,7 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             var fmSigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(AllParameters);
             fmSigmaPke0PkePcdRcdAlphadCalculator.rhoDCalculationOption = rhoDCalculationOption;
+            fmSigmaPke0PkePcdRcdAlphadCalculator.etaDCalculationOption = etaDCalculationOption;
             fmSigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
         }
 
@@ -97,6 +99,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref Pc0, fmGlobalParameter.Pc0);
 
             rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
+            etaDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.EqualToEtaF;
 
             sigma.group = sigma_group;
             pke0.group = pke0_group;
@@ -117,6 +120,12 @@ namespace fmCalcBlocksLibrary.Blocks
             UpdateCellsColorsAndReadOnly();
         }
 
+        public void SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption newCalculationOption)
+        {
+            etaDCalculationOption = newCalculationOption;
+            UpdateCellsColorsAndReadOnly();
+        }
+
         private void UpdateCellsColorsAndReadOnly()
         {
             if (rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.InputedByUser)
@@ -129,6 +138,18 @@ namespace fmCalcBlocksLibrary.Blocks
                 rhod.IsInputed = false;
                 rhod.cell.ReadOnly = true;
             }
+
+            if (etaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.InputedByUser)
+            {
+                etad.IsInputed = true;
+                etad.cell.ReadOnly = false;
+            }
+            else
+            {
+                etad.IsInputed = false;
+                etad.cell.ReadOnly = true;
+            }
+
             CallValuesChanged();
         }
 

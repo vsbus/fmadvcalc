@@ -29,6 +29,7 @@ Project Begin
                                 filterMachiningCalculationOption = PLAIN_DP_CONST
                                 deliquoringCalculationOption = CalculatedFromCakeFormation
 				rhoDCalculationOption = EqualToRhoF
+                                etaDCalculationOption = EqualToEtaF
                                 suspensionCalculationOption = RHOSUS_CALCULATED
                                 parametersSize = 152
                                 Parameter Begin
@@ -1104,6 +1105,7 @@ Project Begin
                                 filterMachiningCalculationOption = PLAIN_DP_CONST
                                 deliquoringCalculationOption = CalculatedFromCakeFormation
 				rhoDCalculationOption = EqualToRhoF
+                                etaDCalculationOption = EqualToEtaF
                                 suspensionCalculationOption = RHOSUS_CALCULATED
                                 parametersSize = 152
                                 Parameter Begin

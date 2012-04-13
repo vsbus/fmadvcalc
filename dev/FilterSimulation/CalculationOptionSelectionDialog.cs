@@ -9,6 +9,7 @@ namespace FilterSimulation
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption rhoDCalculationOption;
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption etaDCalculationOption;
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public fmCalculationOptionSelectionDialog()
@@ -36,6 +37,7 @@ namespace FilterSimulation
                                               CalculatedFromCakeFormation;
 
             rhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
+            etaDCheckBox.Checked = etaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.EqualToEtaF;
         }
 
         // ReSharper disable InconsistentNaming
@@ -106,6 +108,17 @@ namespace FilterSimulation
                                                      EqualToRhoF
                                                : fmSigmaPke0PkePcdRcdAlphadCalculator.
                                                      fmRhoDCalculationOption.
+                                                     InputedByUser;
+        }
+
+        private void etaDCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            etaDCalculationOption = etaDCheckBox.Checked
+                                               ? fmSigmaPke0PkePcdRcdAlphadCalculator.
+                                                     fmEtaDCalculationOption.
+                                                     EqualToEtaF
+                                               : fmSigmaPke0PkePcdRcdAlphadCalculator.
+                                                     fmEtaDCalculationOption.
                                                      InputedByUser;
         }
         // ReSharper restore InconsistentNaming
