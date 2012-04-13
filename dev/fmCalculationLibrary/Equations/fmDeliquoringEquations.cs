@@ -8,9 +8,18 @@ namespace fmCalculationLibrary.Equations
     {
         public static fmValue Eval_pke_From_pke0_sigma_Pc(fmValue pke0, fmValue sigma, fmValue Pc)
         {
-            fmValue sigma0 = new fmValue(72 * 1e-3);
-            fmValue Pc0 = new fmValue(1e-13);
-            return pke0 * sigma / sigma0 * fmValue.Sqrt(Pc0 / Pc);
+            var sigma0 = new fmValue(72 * 1e-3);
+            var Pc0 = new fmValue(1e-13);
+            fmValue C = sigma / sigma0 * fmValue.Sqrt(Pc0 / Pc);
+            return pke0 * C;
+        }
+
+        public static fmValue Eval_pke0_From_pke_sigma_Pc(fmValue pke, fmValue sigma, fmValue Pc)
+        {
+            var sigma0 = new fmValue(72 * 1e-3);
+            var Pc0 = new fmValue(1e-13);
+            fmValue C = sigma / sigma0 * fmValue.Sqrt(Pc0 / Pc);
+            return pke / C;
         }
 
         public static fmValue Eval_hcd_from_hcf_epsf_epsd(fmValue hcf, fmValue epsf, fmValue epsd)

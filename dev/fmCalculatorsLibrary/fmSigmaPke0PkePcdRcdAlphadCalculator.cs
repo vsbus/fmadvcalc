@@ -60,7 +60,14 @@ namespace fmCalculatorsLibrary
             pcd.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp, nc.value);
             rcd.value = fmPcrcaEquations.Eval_rc_From_Pc(pcd.value);
             alphad.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(pcd.value, eps_d.value, rho_s.value);
-            pke.value = fmDeliquoringEquations.Eval_pke_From_pke0_sigma_Pc(pke0.value, sigma.value, pcd.value);
+            if (pke0.isInputed)
+            {
+                pke.value = fmDeliquoringEquations.Eval_pke_From_pke0_sigma_Pc(pke0.value, sigma.value, pcd.value);                
+            }
+            else
+            {
+                pke0.value = fmDeliquoringEquations.Eval_pke0_From_pke_sigma_Pc(pke.value, sigma.value, pcd.value);                
+            }
         }
     }
 }

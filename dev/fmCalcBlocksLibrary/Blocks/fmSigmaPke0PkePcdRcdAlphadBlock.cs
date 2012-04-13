@@ -58,7 +58,7 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         private readonly fmBlockParameterGroup sigma_group = new fmBlockParameterGroup();
-        private readonly fmBlockParameterGroup pke0_group = new fmBlockParameterGroup();
+        private readonly fmBlockParameterGroup pke_group = new fmBlockParameterGroup();
 
         override public void DoCalculations()
         {
@@ -102,11 +102,11 @@ namespace fmCalcBlocksLibrary.Blocks
             etaDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.EqualToEtaF;
 
             sigma.group = sigma_group;
-            pke0.group = pke0_group;
+            pke0.group = pke_group;
+            pke.group = pke_group;
 
             etad.cell.ReadOnly = true;
             rhod.cell.ReadOnly = true;
-            pke.cell.ReadOnly = true;
             pcd.cell.ReadOnly = true;
             rcd.cell.ReadOnly = true;
             alphad.cell.ReadOnly = true;
