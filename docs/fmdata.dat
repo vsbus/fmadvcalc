@@ -30,6 +30,7 @@ Project Begin
                                 deliquoringCalculationOption = CalculatedFromCakeFormation
 				rhoDCalculationOption = EqualToRhoF
                                 etaDCalculationOption = EqualToEtaF
+                                PcDCalculationOption = Calculated
                                 suspensionCalculationOption = RHOSUS_CALCULATED
                                 parametersSize = 152
                                 Parameter Begin
@@ -1106,6 +1107,7 @@ Project Begin
                                 deliquoringCalculationOption = CalculatedFromCakeFormation
 				rhoDCalculationOption = EqualToRhoF
                                 etaDCalculationOption = EqualToEtaF
+                                PcDCalculationOption = Calculated
                                 suspensionCalculationOption = RHOSUS_CALCULATED
                                 parametersSize = 152
                                 Parameter Begin
