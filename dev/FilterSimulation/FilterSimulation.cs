@@ -256,6 +256,12 @@ namespace FilterSimulation
                                                     fmGlobalParameter.Ms,
                                                     fmGlobalParameter.Vs,
                                                     fmGlobalParameter.Msus,
+                                                    fmGlobalParameter.Qsus_d,
+                                                    fmGlobalParameter.qsus_d,
+                                                    fmGlobalParameter.t1,
+                                                    fmGlobalParameter.h1,
+                                                    fmGlobalParameter.t1_over_tf,
+                                                    fmGlobalParameter.h1_over_hc
                                                };
         }
 

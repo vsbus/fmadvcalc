@@ -51,6 +51,7 @@ namespace fmCalcBlocksLibrary.Controls
             var globalNode = new TreeNode("Plain area (Pressure leaf)");
             globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST));
             globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST));
+            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_QP_CONST));
             globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP));
             Nodes.Add(globalNode);
 

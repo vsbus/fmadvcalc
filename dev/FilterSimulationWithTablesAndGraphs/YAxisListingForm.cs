@@ -97,6 +97,11 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(epsKappaBox, fmGlobalParameter.a);
             AddParameter(epsKappaBox, fmGlobalParameter.Rm);
 
+            AddParameter(DpQpConstBox, fmGlobalParameter.t1);
+            AddParameter(DpQpConstBox, fmGlobalParameter.h1);
+            AddParameter(DpQpConstBox, fmGlobalParameter.t1_over_tf);
+            AddParameter(DpQpConstBox, fmGlobalParameter.h1_over_hc);
+
             AddParameter(deliquoringBox, fmGlobalParameter.hcd);
             AddParameter(deliquoringBox, fmGlobalParameter.sd);
             AddParameter(deliquoringBox, fmGlobalParameter.td);

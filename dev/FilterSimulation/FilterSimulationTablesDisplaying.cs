@@ -395,7 +395,11 @@ namespace FilterSimulation
                         row.Cells[simulation_kappaColumn.Index],
                         row.Cells[simulation_PcColumn.Index],
                         row.Cells[simulation_rcColumn.Index],
-                        row.Cells[simulation_aColumn.Index]);
+                        row.Cells[simulation_aColumn.Index],
+                        row.Cells[simulation_t1Column.Index],
+                        row.Cells[simulation_h1Column.Index],
+                        row.Cells[simulation_t1_over_tfColumn.Index],
+                        row.Cells[simulation_h1_over_hcColumn.Index]);
 
                     sim.filterMachiningBlock.ValuesChanged += filterMachiningBlock_ValuesChanged;
                 }

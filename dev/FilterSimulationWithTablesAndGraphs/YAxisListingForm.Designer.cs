@@ -31,6 +31,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel1 = new System.Windows.Forms.Panel();
             this.okButton = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.deliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.hcBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.epsKappaBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.nTcTfBox = new fmControls.fmCheckedListBoxWithCheckboxes();
@@ -48,7 +49,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.qBigBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.volumeBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.massBox = new fmControls.fmCheckedListBoxWithCheckboxes();
-            this.deliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
+            this.DpQpConstBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -59,13 +60,13 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 446);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(677, 23);
+            this.panel1.Size = new System.Drawing.Size(720, 23);
             this.panel1.TabIndex = 0;
             // 
             // okButton
             // 
             this.okButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.okButton.Location = new System.Drawing.Point(602, 0);
+            this.okButton.Location = new System.Drawing.Point(645, 0);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;
@@ -75,6 +76,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.DpQpConstBox);
             this.panel2.Controls.Add(this.deliquoringBox);
             this.panel2.Controls.Add(this.hcBox);
             this.panel2.Controls.Add(this.epsKappaBox);
@@ -96,8 +98,16 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(677, 446);
+            this.panel2.Size = new System.Drawing.Size(720, 446);
             this.panel2.TabIndex = 1;
+            // 
+            // deliquoringBox
+            // 
+            this.deliquoringBox.CaptionText = "Deliquoring";
+            this.deliquoringBox.Location = new System.Drawing.Point(473, 12);
+            this.deliquoringBox.Name = "deliquoringBox";
+            this.deliquoringBox.Size = new System.Drawing.Size(106, 176);
+            this.deliquoringBox.TabIndex = 20;
             // 
             // hcBox
             // 
@@ -235,19 +245,19 @@ namespace FilterSimulationWithTablesAndGraphs
             this.massBox.Size = new System.Drawing.Size(106, 85);
             this.massBox.TabIndex = 1;
             // 
-            // deliquoringBox
+            // DpQpConstBox
             // 
-            this.deliquoringBox.CaptionText = "Deliquoring";
-            this.deliquoringBox.Location = new System.Drawing.Point(473, 12);
-            this.deliquoringBox.Name = "deliquoringBox";
-            this.deliquoringBox.Size = new System.Drawing.Size(106, 176);
-            this.deliquoringBox.TabIndex = 20;
+            this.DpQpConstBox.CaptionText = "Dp+Qp=Const";
+            this.DpQpConstBox.Location = new System.Drawing.Point(585, 258);
+            this.DpQpConstBox.Name = "DpQpConstBox";
+            this.DpQpConstBox.Size = new System.Drawing.Size(106, 85);
+            this.DpQpConstBox.TabIndex = 21;
             // 
             // fmYAxisListingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 469);
+            this.ClientSize = new System.Drawing.Size(720, 469);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "fmYAxisListingForm";
@@ -281,5 +291,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmControls.fmCheckedListBoxWithCheckboxes ad0DpBox;
         private fmControls.fmCheckedListBoxWithCheckboxes hcBox;
         private fmControls.fmCheckedListBoxWithCheckboxes deliquoringBox;
+        private fmControls.fmCheckedListBoxWithCheckboxes DpQpConstBox;
     }
 }

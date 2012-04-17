@@ -52,6 +52,9 @@ namespace FilterSimulation
             this.commonDeliquoringSimulationBlockParameterValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.commonDeliquoringSimulationBlockMaxColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.commonDeliquoringSimulationBlockMaxAbsColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.deliquoringMaterialParametersDataGrid = new fmDataGrid.fmDataGrid();
+            this.deliquoringMaterialParametersParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.deliquoringMaterialParametersUnitsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commonCalcBlockDataGrid = new fmDataGrid.fmDataGrid();
             this.commonCalcBlockParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.commonCalcBlockUnitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,9 +64,6 @@ namespace FilterSimulation
             this.commonCalcBlockMaxLocalColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.commonCalcBlockMaxAbsColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.calculateLimitsCheckBox = new System.Windows.Forms.CheckBox();
-            this.deliquoringMaterialParametersDataGrid = new fmDataGrid.fmDataGrid();
-            this.deliquoringMaterialParametersParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deliquoringMaterialParametersUnitsColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelMaterialParameters = new System.Windows.Forms.Panel();
             this.calculationOptionChangeButton = new System.Windows.Forms.Button();
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid = new fmDataGrid.fmDataGrid();
@@ -203,6 +203,10 @@ namespace FilterSimulation
             this.simulation_PcColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_rcColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_aColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.simulation_t1Column = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.simulation_h1Column = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.simulation_t1_over_tfColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.simulation_h1_over_hcColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.simulationDeleteButton = new System.Windows.Forms.Button();
             this.simulationRestoreButton = new System.Windows.Forms.Button();
@@ -241,8 +245,8 @@ namespace FilterSimulation
             this.suspensionParametersPanel.SuspendLayout();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commonDeliquoringSimulationBlockDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).BeginInit();
             this.panelMaterialParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).BeginInit();
@@ -457,6 +461,40 @@ namespace FilterSimulation
             this.commonDeliquoringSimulationBlockMaxAbsColumn.Visible = false;
             this.commonDeliquoringSimulationBlockMaxAbsColumn.Width = 50;
             // 
+            // deliquoringMaterialParametersDataGrid
+            // 
+            this.deliquoringMaterialParametersDataGrid.AllowUserToAddRows = false;
+            this.deliquoringMaterialParametersDataGrid.AllowUserToDeleteRows = false;
+            this.deliquoringMaterialParametersDataGrid.AllowUserToResizeColumns = false;
+            this.deliquoringMaterialParametersDataGrid.AllowUserToResizeRows = false;
+            this.deliquoringMaterialParametersDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.deliquoringMaterialParametersDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.deliquoringMaterialParametersDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.deliquoringMaterialParametersDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.deliquoringMaterialParametersParameterNameColumn,
+            this.deliquoringMaterialParametersUnitsColumn});
+            this.deliquoringMaterialParametersDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
+            this.deliquoringMaterialParametersDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.deliquoringMaterialParametersDataGrid.HighLightCurrentRow = false;
+            this.deliquoringMaterialParametersDataGrid.Location = new System.Drawing.Point(497, 17);
+            this.deliquoringMaterialParametersDataGrid.Name = "deliquoringMaterialParametersDataGrid";
+            this.deliquoringMaterialParametersDataGrid.RowHeadersVisible = false;
+            this.deliquoringMaterialParametersDataGrid.RowTemplate.Height = 16;
+            this.deliquoringMaterialParametersDataGrid.Size = new System.Drawing.Size(205, 227);
+            this.deliquoringMaterialParametersDataGrid.TabIndex = 16;
+            // 
+            // deliquoringMaterialParametersParameterNameColumn
+            // 
+            this.deliquoringMaterialParametersParameterNameColumn.HeaderText = "Parameter";
+            this.deliquoringMaterialParametersParameterNameColumn.Name = "deliquoringMaterialParametersParameterNameColumn";
+            this.deliquoringMaterialParametersParameterNameColumn.Width = 61;
+            // 
+            // deliquoringMaterialParametersUnitsColumn
+            // 
+            this.deliquoringMaterialParametersUnitsColumn.HeaderText = "Units";
+            this.deliquoringMaterialParametersUnitsColumn.Name = "deliquoringMaterialParametersUnitsColumn";
+            this.deliquoringMaterialParametersUnitsColumn.Width = 65;
+            // 
             // commonCalcBlockDataGrid
             // 
             this.commonCalcBlockDataGrid.AllowUserToAddRows = false;
@@ -546,40 +584,6 @@ namespace FilterSimulation
             this.calculateLimitsCheckBox.Text = "Limits";
             this.calculateLimitsCheckBox.UseVisualStyleBackColor = true;
             this.calculateLimitsCheckBox.CheckedChanged += new System.EventHandler(this.calculateLimitsCheckBox_CheckedChanged);
-            // 
-            // deliquoringMaterialParametersDataGrid
-            // 
-            this.deliquoringMaterialParametersDataGrid.AllowUserToAddRows = false;
-            this.deliquoringMaterialParametersDataGrid.AllowUserToDeleteRows = false;
-            this.deliquoringMaterialParametersDataGrid.AllowUserToResizeColumns = false;
-            this.deliquoringMaterialParametersDataGrid.AllowUserToResizeRows = false;
-            this.deliquoringMaterialParametersDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.deliquoringMaterialParametersDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.deliquoringMaterialParametersDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.deliquoringMaterialParametersDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.deliquoringMaterialParametersParameterNameColumn,
-            this.deliquoringMaterialParametersUnitsColumn});
-            this.deliquoringMaterialParametersDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
-            this.deliquoringMaterialParametersDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.deliquoringMaterialParametersDataGrid.HighLightCurrentRow = false;
-            this.deliquoringMaterialParametersDataGrid.Location = new System.Drawing.Point(497, 17);
-            this.deliquoringMaterialParametersDataGrid.Name = "deliquoringMaterialParametersDataGrid";
-            this.deliquoringMaterialParametersDataGrid.RowHeadersVisible = false;
-            this.deliquoringMaterialParametersDataGrid.RowTemplate.Height = 16;
-            this.deliquoringMaterialParametersDataGrid.Size = new System.Drawing.Size(205, 227);
-            this.deliquoringMaterialParametersDataGrid.TabIndex = 16;
-            // 
-            // deliquoringMaterialParametersParameterNameColumn
-            // 
-            this.deliquoringMaterialParametersParameterNameColumn.HeaderText = "Parameter";
-            this.deliquoringMaterialParametersParameterNameColumn.Name = "deliquoringMaterialParametersParameterNameColumn";
-            this.deliquoringMaterialParametersParameterNameColumn.Width = 61;
-            // 
-            // deliquoringMaterialParametersUnitsColumn
-            // 
-            this.deliquoringMaterialParametersUnitsColumn.HeaderText = "Units";
-            this.deliquoringMaterialParametersUnitsColumn.Name = "deliquoringMaterialParametersUnitsColumn";
-            this.deliquoringMaterialParametersUnitsColumn.Width = 65;
             // 
             // panelMaterialParameters
             // 
@@ -1430,7 +1434,11 @@ namespace FilterSimulation
             this.simulation_kappaColumn,
             this.simulation_PcColumn,
             this.simulation_rcColumn,
-            this.simulation_aColumn});
+            this.simulation_aColumn,
+            this.simulation_t1Column,
+            this.simulation_h1Column,
+            this.simulation_t1_over_tfColumn,
+            this.simulation_h1_over_hcColumn});
             this.simulationDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simulationDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.simulationDataGrid.HighLightCurrentRow = true;
@@ -1894,6 +1902,30 @@ namespace FilterSimulation
             this.simulation_aColumn.Name = "simulation_aColumn";
             this.simulation_aColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // simulation_t1Column
+            // 
+            this.simulation_t1Column.HeaderText = "t1";
+            this.simulation_t1Column.Name = "simulation_t1Column";
+            this.simulation_t1Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_h1Column
+            // 
+            this.simulation_h1Column.HeaderText = "h1";
+            this.simulation_h1Column.Name = "simulation_h1Column";
+            this.simulation_h1Column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_t1_over_tfColumn
+            // 
+            this.simulation_t1_over_tfColumn.HeaderText = "t1/tf";
+            this.simulation_t1_over_tfColumn.Name = "simulation_t1_over_tfColumn";
+            this.simulation_t1_over_tfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // simulation_h1_over_hcColumn
+            // 
+            this.simulation_h1_over_hcColumn.HeaderText = "h1/hc";
+            this.simulation_h1_over_hcColumn.Name = "simulation_h1_over_hcColumn";
+            this.simulation_h1_over_hcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.simulationDeleteButton);
@@ -2195,8 +2227,8 @@ namespace FilterSimulation
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commonDeliquoringSimulationBlockDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).EndInit();
             this.panelMaterialParameters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).EndInit();
@@ -2343,7 +2375,20 @@ namespace FilterSimulation
         private System.Windows.Forms.CheckBox calculateLimitsCheckBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn epsKappaParameterName;
         private System.Windows.Forms.DataGridViewTextBoxColumn epsKappaUnits;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationGuidColumn;
+        private System.Windows.Forms.Panel panelMaterialParameters;
+        private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterUnits;
+        private fmDataGrid.fmDataGrid deliquoringMaterialParametersDataGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn deliquoringMaterialParametersParameterNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn deliquoringMaterialParametersUnitsColumn;
+        protected fmDataGrid.fmDataGrid commonDeliquoringSimulationBlockDataGrid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commonDeliquoringSimulationBlockParameterNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn commonDeliquoringSimulationBlockUnitColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockMinAbsColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockMinColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockParameterValueColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockMaxColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockMaxAbsColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn simulationCheckedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationProjectColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationSuspensionNameColumn;
@@ -2417,19 +2462,10 @@ namespace FilterSimulation
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_PcColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_rcColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_aColumn;
-        private System.Windows.Forms.Panel panelMaterialParameters;
-        private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterUnits;
-        private fmDataGrid.fmDataGrid deliquoringMaterialParametersDataGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn deliquoringMaterialParametersParameterNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn deliquoringMaterialParametersUnitsColumn;
-        protected fmDataGrid.fmDataGrid commonDeliquoringSimulationBlockDataGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commonDeliquoringSimulationBlockParameterNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commonDeliquoringSimulationBlockUnitColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockMinAbsColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockMinColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockParameterValueColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockMaxColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn commonDeliquoringSimulationBlockMaxAbsColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_t1Column;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_h1Column;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_t1_over_tfColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_h1_over_hcColumn;
+        protected System.Windows.Forms.DataGridViewTextBoxColumn simulationGuidColumn;
     }
 }

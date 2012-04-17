@@ -231,7 +231,11 @@ namespace FilterSimulationWithTablesAndGraphs
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.kappa.name)],
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.Pc.name)],
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.rc.name)],
-                row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.a.name)]);
+                row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.a.name)],
+                row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.t1.name)],
+                row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.h1.name)],
+                row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.t1_over_tf.name)],
+                row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.h1_over_hc.name)]);
             fmb.ValuesChangedByUser += fmb_ValuesChangedByUser;
             m_localInputParametersList.Add(new fmLocalInputParametersData(true, fmb, m_externalCurrentActiveSimulation.FilterMachiningCalculationOption));
 

@@ -171,6 +171,11 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Mc));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Vs));
 
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.t1));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.h1));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.t1_over_tf));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.h1_over_hc));
+
             #region Deliquoring
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Dp_d));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.eps_d));

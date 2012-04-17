@@ -177,6 +177,53 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     break;
 
+                //[Description("global: (A, Q), (Dp), (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)")]
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_QP_CONST:
+                    result.Add(fmGlobalParameter.A);
+                    result.Add(fmGlobalParameter.Qmsus);
+                    result.Add(fmGlobalParameter.Qsus);
+                    result.Add(fmGlobalParameter.Qmf);
+                    result.Add(fmGlobalParameter.Qf);
+                    result.Add(fmGlobalParameter.Qms);
+                    result.Add(fmGlobalParameter.Qs);
+                    result.Add(fmGlobalParameter.Qmc);
+                    result.Add(fmGlobalParameter.Qc);
+
+                    result.Add(fmGlobalParameter.Dp);
+
+                    result.Add(fmGlobalParameter.Qsus_d);
+                    result.Add(fmGlobalParameter.qsus_d);
+                    result.Add(fmGlobalParameter.t1_over_tf);
+                    result.Add(fmGlobalParameter.h1_over_hc);
+                    result.Add(fmGlobalParameter.t1);
+                    result.Add(fmGlobalParameter.h1);
+
+                    result.Add(fmGlobalParameter.sf);
+                    result.Add(fmGlobalParameter.sr);
+                    result.Add(fmGlobalParameter.tr);
+
+                    result.Add(fmGlobalParameter.hc);
+                    result.Add(fmGlobalParameter.vc);
+                    result.Add(fmGlobalParameter.vf);
+                    result.Add(fmGlobalParameter.vs);
+                    result.Add(fmGlobalParameter.vsus);
+                    result.Add(fmGlobalParameter.Vc);
+                    result.Add(fmGlobalParameter.Vf);
+                    result.Add(fmGlobalParameter.Vs);
+                    result.Add(fmGlobalParameter.Vsus);
+                    result.Add(fmGlobalParameter.mc);
+                    result.Add(fmGlobalParameter.mf);
+                    result.Add(fmGlobalParameter.ms);
+                    result.Add(fmGlobalParameter.msus);
+                    result.Add(fmGlobalParameter.Mc);
+                    result.Add(fmGlobalParameter.Mf);
+                    result.Add(fmGlobalParameter.Ms);
+                    result.Add(fmGlobalParameter.Msus);
+                    result.Add(fmGlobalParameter.tf);
+                    result.Add(fmGlobalParameter.n);
+                    result.Add(fmGlobalParameter.tc);
+                    break;
+
                 //(A, Q), d0, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)
                 case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST:
                     result.Add(fmGlobalParameter.d0);
@@ -401,6 +448,10 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter Pc;
         private readonly fmBlockVariableParameter rc;
         private readonly fmBlockVariableParameter a;
+        private readonly fmBlockVariableParameter t1;
+        private readonly fmBlockVariableParameter h1;
+        private readonly fmBlockVariableParameter t1_over_tf;
+        private readonly fmBlockVariableParameter h1_over_hc;
         // ReSharper restore InconsistentNaming
 
         /*
@@ -440,6 +491,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup AQ_group = new fmBlockParameterGroup(Color.FromArgb(170, 245, 210));
         private readonly fmBlockParameterGroup DpQp_group = new fmBlockParameterGroup(Color.FromArgb(250, 210, 150));
         private readonly fmBlockParameterGroup d0_group = new fmBlockParameterGroup(Color.FromArgb(170, 210, 245));
+        private readonly fmBlockParameterGroup Qp_group = new fmBlockParameterGroup(Color.FromArgb(245, 210, 170));
 
         private readonly fmBlockConstantParameter hce;
 
@@ -842,7 +894,15 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         public fmFilterMachiningBlock()
-            : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null)
+            : this(null, null, null, null, null, null, null, null,
+                    null, null, null, null, null, null, null, null,
+                    null, null, null, null, null, null, null, null,
+                    null, null, null, null, null, null, null, null,
+                    null, null, null, null, null, null, null, null,
+                    null, null, null, null, null, null, null, null,
+                    null, null, null, null, null, null, null, null,
+                    null, null, null, null, null, null, null, null,
+                    null, null, null, null, null)
         {
         }
 
@@ -912,7 +972,11 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell kappa_Cell,
             DataGridViewCell Pc_Cell,
             DataGridViewCell rc_Cell,
-            DataGridViewCell a_Cell)
+            DataGridViewCell a_Cell,
+            DataGridViewCell t1_Cell,
+            DataGridViewCell h1_Cell,
+            DataGridViewCell t1_over_tf_Cell,
+            DataGridViewCell h1_over_hc_Cell)
         // ReSharper restore InconsistentNaming
         {
             AddParameter(ref A, fmGlobalParameter.A, A_Cell, true);
@@ -976,6 +1040,10 @@ namespace fmCalcBlocksLibrary.Blocks
 
             AddParameter(ref qmsus_d, fmGlobalParameter.qmsus_d, qmsus_d_Cell, false);
             AddParameter(ref qsus_d, fmGlobalParameter.qsus_d, qsus_d_Cell, false);
+            AddParameter(ref t1, fmGlobalParameter.t1, t1_Cell, false);
+            AddParameter(ref h1, fmGlobalParameter.h1, h1_Cell, false);
+            AddParameter(ref t1_over_tf, fmGlobalParameter.t1_over_tf, t1_over_tf_Cell, false);
+            AddParameter(ref h1_over_hc, fmGlobalParameter.h1_over_hc, h1_over_hc_Cell, false);
             AddParameter(ref qmf_d, fmGlobalParameter.qmf_d, qmf_d_Cell, false);
             AddParameter(ref qf_d, fmGlobalParameter.qf_d, qf_d_Cell, false);
             AddParameter(ref qms_d, fmGlobalParameter.qms_d, qms_d_Cell, false);
@@ -1078,6 +1146,7 @@ namespace fmCalcBlocksLibrary.Blocks
                 SetGroupsOfDesign1(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1]);
                 SetGroupsOfStandartAndDesignGlobalDpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST]);
                 SetGroupsOfStandartQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST]);
+                SetGroupsOfStandartDpQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_QP_CONST]);
                 SetGroupsOfPlainQpConstVolumetricPump(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP]);
                 SetGroupsOfCandleDpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST]);
                 SetGroupsOfCandleQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST]);
@@ -1317,6 +1386,8 @@ namespace fmCalcBlocksLibrary.Blocks
             table[n] = hc_MV_group;
             table[tc] = hc_MV_group;
         }
+
+
         private void SetGroupsOfStandartQpConst(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
             foreach (fmBlockVariableParameter p in parameters)
@@ -1361,6 +1432,58 @@ namespace fmCalcBlocksLibrary.Blocks
             table[n] = hc_MV_group;
             table[tc] = hc_MV_group;
         }
+
+        private void SetGroupsOfStandartDpQpConst(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
+        {
+            foreach (fmBlockVariableParameter p in parameters)
+                table[p] = null;
+
+            //(A, Q), (Dp), (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            table[A] = AQ_group;
+            table[Qmsus] = AQ_group;
+            table[Qsus] = AQ_group;
+            table[Qmf] = AQ_group;
+            table[Qf] = AQ_group;
+            table[Qms] = AQ_group;
+            table[Qs] = AQ_group;
+            table[Qmc] = AQ_group;
+            table[Qc] = AQ_group;
+
+            table[Dp] = Dp_group;
+
+            table[Qsus_d] = Qp_group;
+            table[qsus_d] = Qp_group;
+            table[t1] = Qp_group;
+            table[h1] = Qp_group;
+            table[t1_over_tf] = Qp_group;
+            table[h1_over_hc] = Qp_group;
+
+            table[sf] = sf_sr_tr_group;
+            table[sr] = sf_sr_tr_group;
+            table[tr] = sf_sr_tr_group;
+
+            table[hc] = hc_MV_group;
+            table[vc] = hc_MV_group;
+            table[vf] = hc_MV_group;
+            table[vs] = hc_MV_group;
+            table[vsus] = hc_MV_group;
+            table[Vc] = hc_MV_group;
+            table[Vf] = hc_MV_group;
+            table[Vs] = hc_MV_group;
+            table[Vsus] = hc_MV_group;
+            table[mc] = hc_MV_group;
+            table[mf] = hc_MV_group;
+            table[ms] = hc_MV_group;
+            table[msus] = hc_MV_group;
+            table[Mc] = hc_MV_group;
+            table[Mf] = hc_MV_group;
+            table[Ms] = hc_MV_group;
+            table[Msus] = hc_MV_group;
+            table[tf] = hc_MV_group;
+            table[n] = hc_MV_group;
+            table[tc] = hc_MV_group;
+        }
+
         private void SetGroupsOfOptimization1(Dictionary<fmBlockVariableParameter, fmBlockParameterGroup> table)
         {
             foreach (fmBlockVariableParameter p in parameters)

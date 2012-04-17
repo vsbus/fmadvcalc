@@ -106,6 +106,10 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter eta_f;
         public static fmGlobalParameter eta_d;
         public static fmGlobalParameter nc;
+        public static fmGlobalParameter t1;
+        public static fmGlobalParameter h1;
+        public static fmGlobalParameter t1_over_tf;
+        public static fmGlobalParameter h1_over_hc;
         #endregion
         #region Deliquoring
         public static fmGlobalParameter Dp_d;
@@ -289,6 +293,10 @@ namespace fmCalculationLibrary
             AddParameter(ref rc, new fmGlobalParameter("rc", fmUnitFamily.CakeResistanceRcFamily, new fmRange(0.03e+13, 1000e+13)));
             AddParameter(ref a, new fmGlobalParameter("a", fmUnitFamily.CakeResistanceAFamily, new fmRange(0.03e+10, 1000e+10)));
             AddParameter(ref Rm, new fmGlobalParameter("Rm", fmUnitFamily.FilterMediumResistanceFamily));
+            AddParameter(ref t1, new fmGlobalParameter("t1", fmUnitFamily.TimeFamily));
+            AddParameter(ref h1, new fmGlobalParameter("h1", fmUnitFamily.LengthFamily));
+            AddParameter(ref t1_over_tf, new fmGlobalParameter("t1/tf", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref h1_over_hc, new fmGlobalParameter("h1/hc", fmUnitFamily.NoUnitFamily));
             #endregion
             #region Deliquoring
             AddParameter(ref Dp_d, new fmGlobalParameter("Dpd", fmUnitFamily.PressureFamily));
