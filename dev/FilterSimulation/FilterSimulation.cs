@@ -453,7 +453,9 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                                rhoDCalculationOption = 
                                    m_fSolution.currentObjects.Simulation.Data.rhoDCalculationOption,
                                etaDCalculationOption = 
-                                   m_fSolution.currentObjects.Simulation.Data.etaDCalculationOption
+                                   m_fSolution.currentObjects.Simulation.Data.etaDCalculationOption,
+                               PcDCalculationOption =
+                                   m_fSolution.currentObjects.Simulation.Data.PcDCalculationOption
                             };
             if (cosd.ShowDialog() == DialogResult.OK)
             {
@@ -462,6 +464,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 m_fSolution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.hcdEpsdCalculationOption);
                 m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.rhoDCalculationOption);
                 m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.etaDCalculationOption);
+                m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.PcDCalculationOption);
                 DisplaySolution(m_fSolution);
             }
         }

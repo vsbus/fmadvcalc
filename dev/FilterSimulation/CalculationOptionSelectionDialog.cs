@@ -10,6 +10,7 @@ namespace FilterSimulation
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption rhoDCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption etaDCalculationOption;
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption;
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public fmCalculationOptionSelectionDialog()
@@ -38,6 +39,7 @@ namespace FilterSimulation
 
             rhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
             etaDCheckBox.Checked = etaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.EqualToEtaF;
+            PcDCheckBox.Checked = PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
         }
 
         // ReSharper disable InconsistentNaming
@@ -119,6 +121,17 @@ namespace FilterSimulation
                                                      EqualToEtaF
                                                : fmSigmaPke0PkePcdRcdAlphadCalculator.
                                                      fmEtaDCalculationOption.
+                                                     InputedByUser;
+        }
+
+        private void PcDCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            PcDCalculationOption = PcDCheckBox.Checked
+                                               ? fmSigmaPke0PkePcdRcdAlphadCalculator.
+                                                     fmPcDCalculationOption.
+                                                     Calculated
+                                               : fmSigmaPke0PkePcdRcdAlphadCalculator.
+                                                     fmPcDCalculationOption.
                                                      InputedByUser;
         }
         // ReSharper restore InconsistentNaming

@@ -22,6 +22,13 @@ namespace fmCalculatorsLibrary
         }
         public fmEtaDCalculationOption etaDCalculationOption;
 
+        public enum fmPcDCalculationOption
+        {
+            InputedByUser,
+            Calculated
+        }
+        public fmPcDCalculationOption PcDCalculationOption;
+
         public fmSigmaPke0PkePcdRcdAlphadCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
         {
@@ -53,13 +60,33 @@ namespace fmCalculatorsLibrary
                 rho_d.value = rho_f.value;
             }
 
-            fmValue Dp = Dpf.value.defined == false || (Dpd.value.defined == true && Dpd.value > Dpf.value)
-                ? Dpd.value
-                : Dpf.value;
 
-            pcd.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp, nc.value);
-            rcd.value = fmPcrcaEquations.Eval_rc_From_Pc(pcd.value);
-            alphad.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(pcd.value, eps_d.value, rho_s.value);
+            if (PcDCalculationOption == fmPcDCalculationOption.Calculated)
+            {
+                fmValue Dp = fmValue.Max(Dpd.value, Dpf.value);
+                pcd.value = fmEpsPcFrom0Equations.Eval_Pc_From_Pc0_Dp_nc(Pc0.value, Dp, nc.value);
+                rcd.value = fmPcrcaEquations.Eval_rc_From_Pc(pcd.value);
+                alphad.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(pcd.value, eps_d.value, rho_s.value);
+            }
+            else
+            {
+                if (pcd.isInputed)
+                {
+                    rcd.value = fmPcrcaEquations.Eval_rc_From_Pc(pcd.value);
+                    alphad.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(pcd.value, eps_d.value, rho_s.value);
+                }
+                else if (rcd.isInputed)
+                {
+                    pcd.value = fmPcrcaEquations.Eval_Pc_From_rc(rcd.value);
+                    alphad.value = fmPcrcaEquations.Eval_a_From_Pc_eps_rho_s(pcd.value, eps_d.value, rho_s.value);
+                }
+                else if (alphad.isInputed)
+                {
+                    pcd.value = fmPcrcaEquations.Eval_Pc_From_a_eps_rho_s(alphad.value, eps_d.value, rho_s.value);
+                    rcd.value = fmPcrcaEquations.Eval_rc_From_Pc(pcd.value);
+                }
+            }
+
             if (pke0.isInputed)
             {
                 pke.value = fmDeliquoringEquations.Eval_pke_From_pke0_sigma_Pc(pke0.value, sigma.value, pcd.value);                

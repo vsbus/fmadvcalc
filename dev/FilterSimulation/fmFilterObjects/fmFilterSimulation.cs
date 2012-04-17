@@ -15,6 +15,7 @@ namespace FilterSimulation.fmFilterObjects
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption etaDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.EqualToEtaF;
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
 
         public void CopyFrom(fmFilterSimulationData from)
@@ -24,6 +25,7 @@ namespace FilterSimulation.fmFilterObjects
             hcdEpsdCalculationOption = from.hcdEpsdCalculationOption;
             rhoDCalculationOption = from.rhoDCalculationOption;
             etaDCalculationOption = from.etaDCalculationOption;
+            PcDCalculationOption = from.PcDCalculationOption;
             suspensionCalculationOption = from.suspensionCalculationOption;
             CopyValuesFrom(from);
             CopyIsInputedFrom(from);
@@ -391,6 +393,7 @@ namespace FilterSimulation.fmFilterObjects
             public const string deliquoringCalculationOption = "deliquoringCalculationOption";
             public const string rhoDCalculationOption = "rhoDCalculationOption";
             public const string etaDCalculationOption = "etaDCalculationOption";
+            public const string PcDCalculationOption = "PcDCalculationOption";
             public const string suspensionCalculationOption = "suspensionCalculationOption";
             // ReSharper restore InconsistentNaming
         }
@@ -453,6 +456,7 @@ namespace FilterSimulation.fmFilterObjects
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.deliquoringCalculationOption, hcdEpsdCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.rhoDCalculationOption, rhoDCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.etaDCalculationOption, etaDCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.PcDCalculationOption, PcDCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.suspensionCalculationOption, suspensionCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.parametersSize, parameters.Count, 8);
             foreach (var p in parameters.Values)
@@ -507,6 +511,13 @@ namespace FilterSimulation.fmFilterObjects
                                                          fmFilterSimulationDataSerializeTags.
                                                              etaDCalculationOption).ToString(),
                     typeof(fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption));
+            simData.PcDCalculationOption =
+                (fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption)
+                StringToEnum(
+                    fmSerializeTools.DeserializeProperty(input,
+                                                         fmFilterSimulationDataSerializeTags.
+                                                             PcDCalculationOption).ToString(),
+                    typeof(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption));
             simData.suspensionCalculationOption = (fmSuspensionCalculator.fmSuspensionCalculationOptions)
                 StringToEnum(
                     fmSerializeTools.DeserializeProperty(input,
@@ -636,6 +647,19 @@ namespace FilterSimulation.fmFilterObjects
                     Modified = true;
                 }
                 m_data.etaDCalculationOption = value;
+            }
+        }
+
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption
+        {
+            get { return m_data.PcDCalculationOption; }
+            set
+            {
+                if (m_data.PcDCalculationOption != value)
+                {
+                    Modified = true;
+                }
+                m_data.PcDCalculationOption = value;
             }
         }
 
@@ -821,6 +845,7 @@ namespace FilterSimulation.fmFilterObjects
             sim.HcdEpsdCalculationOption = simData.hcdEpsdCalculationOption;
             sim.RhoDCalculationOption = simData.rhoDCalculationOption;
             sim.EtaDCalculationOption = simData.etaDCalculationOption;
+            sim.PcDCalculationOption = simData.PcDCalculationOption;
             sim.SuspensionCalculationOption = simData.suspensionCalculationOption;
             foreach (var p in simData.parameters.Values)
             {

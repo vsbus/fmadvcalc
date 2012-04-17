@@ -15,6 +15,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter Dpd;
         private readonly fmBlockVariableParameter hcd;
 
+        private readonly fmBlockConstantParameter Dpf;
         private readonly fmBlockConstantParameter hc;
         private readonly fmBlockConstantParameter eps0;
         private readonly fmBlockConstantParameter ne;
@@ -60,6 +61,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref hcd, fmGlobalParameter.hcd, hcd_Cell, false);
             AddParameter(ref epsd, fmGlobalParameter.eps_d, epsd_Cell, false);
 
+            AddConstantParameter(ref Dpf, fmGlobalParameter.Dp);
             AddConstantParameter(ref hc, fmGlobalParameter.hc);
             AddConstantParameter(ref eps0, fmGlobalParameter.eps0);
             AddConstantParameter(ref ne, fmGlobalParameter.ne);
