@@ -525,5 +525,54 @@ namespace fmCalculationLibrary.Equations
         {
             return q * A;
         }
+
+        public static fmValue Eval_hc_From_h1_kappa_Pc_Dp_tf_t1_eta_hce_DpQpConst(
+            fmValue h1, fmValue kappa, fmValue pc, fmValue Dp, fmValue tf, fmValue t1, fmValue eta, fmValue hce)
+        {
+            fmValue A = fmValue.Sqr(h1 + hce);
+            fmValue B = 2 * kappa * pc * Dp * (tf + t1) / eta;
+            return fmValue.Sqrt(A + B) - hce;
+        }
+
+        public static fmValue Eval_tf_From_DpQpConst(fmValue t1, fmValue eta, fmValue kappa, fmValue pc, fmValue Dp, fmValue hc, fmValue h1, fmValue hce)
+        {
+            return t1 + eta * (hc - h1) * (hc + h1 + 2 * hce) / (2 * kappa * pc * Dp);
+        }
+
+        public static fmValue Eval_h1_From_qp_Dp_pc_hce_eta_cv_eps(fmValue qp, fmValue Dp, fmValue pc, fmValue hce, fmValue eta, fmValue cv, fmValue eps)
+        {
+            return Dp * pc / (eta * (1 - cv / (1 - eps)) * qp) - hce;
+        }
+
+        public static fmValue Eval_t1_From_h1_eta_hce_kappa_Pc_Dp(fmValue h1, fmValue eta, fmValue hce, fmValue kappa, fmValue pc, fmValue Dp)
+        {
+            return eta / (kappa * pc * Dp) * h1 * (h1 + hce);
+        }
+
+        public static fmValue Eval_h1_From_t1_eta_hce_kappa_Pc_Dp(fmValue t1, fmValue eta, fmValue hce, fmValue kappa, fmValue Pc, fmValue Dp)
+        {
+            return (fmValue.Sqrt(hce * hce + 4 * Dp * kappa * Pc * t1 / eta) - hce) /2;
+        }
+
+        public static fmValue Eval_h1_From_Hc_t1OverTf_hc_hce(fmValue t1OverTf, fmValue hc, fmValue hce)
+        {
+            fmValue C = (1 - t1OverTf) / t1OverTf;
+            fmValue S = fmValue.Sqr((1 + C) / (2 * C + 1)) * hce * hce + hc * (hc + 2 * hce) / (2 * C + 1);
+            return fmValue.Sqrt(S) - (1 + C) / (2 * C + 1) * hce;
+        }
+
+        public static fmValue Eval_t1_From_tf_h1OverHc_tf_eta_kappa_Pc_Dp_hce(fmValue h1OverHc, fmValue tf, fmValue eta, fmValue kappa, fmValue Pc, fmValue Dp, fmValue hce)
+        {
+            fmValue f = eta / (kappa * Pc * Dp);
+            fmValue C = h1OverHc / (h1OverHc * h1OverHc + 1);
+            fmValue A = C * C * hce * hce + 2 * C * h1OverHc * tf / f;
+            fmValue B = C * hce;
+            return fmValue.Sqrt(A) - B;
+        }
+
+        public static fmValue Eval_qp_From_h1_Dp_Pc_eta_cv_eps_hce(fmValue h1, fmValue Dp, fmValue Pc, fmValue eta, fmValue cv, fmValue eps, fmValue hce)
+        {
+            return Dp * Pc / (eta * (1 - cv / (1 - eps)) * (h1 + hce));
+        }
     }
 }
