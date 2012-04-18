@@ -3494,12 +3494,8 @@ namespace fmCalculatorsLibrary
             if (!isKnown_A && isKnown_Vc)
             {
                 A.value = fmFilterMachiningEquations.Eval_A_From_V_v(Vc.value, vc.value);
-                /*
-                                isKnown_A = true;
-                */
+                isKnown_A = true;
             }
-
-            if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(A.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hc.value, hce.value);
 
             if (!isKnown_Vc) Vc.value = fmFilterMachiningEquations.Eval_V_From_v_A(vc.value, A.value);
             if (!isKnown_Vf) Vf.value = fmFilterMachiningEquations.Eval_V_From_v_A(vf.value, A.value);
@@ -3533,7 +3529,6 @@ namespace fmCalculatorsLibrary
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
             qf_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf_d.value, A.value);
             qsus.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus.value, A.value);
-            qsus_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus_d.value, A.value);
             qs.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs.value, A.value);
             qs_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs_d.value, A.value);
             qc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qc.value, A.value);

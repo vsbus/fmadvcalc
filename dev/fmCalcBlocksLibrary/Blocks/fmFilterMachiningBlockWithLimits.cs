@@ -313,11 +313,19 @@ namespace fmCalcBlocksLibrary.Blocks
                     GetParameterByName(fmGlobalParameter.hc.name),
                     GetParameterByName(fmGlobalParameter.sf.name)
                 });
+            
             var d0 = GetParameterByName(fmGlobalParameter.d0.name);
             if (d0.group != null)
             {
-                clueParams.Add(GetParameterByName(fmGlobalParameter.d0.name));
+                clueParams.Add(d0);
             }
+            
+            var t1 = GetParameterByName(fmGlobalParameter.t1.name);
+            if (t1.group != null)
+            {
+                clueParams.Add(t1);
+            }
+            
             return clueParams;
         }
         private void CalculateAbsRanges()
