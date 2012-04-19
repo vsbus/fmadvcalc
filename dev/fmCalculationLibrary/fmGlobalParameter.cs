@@ -293,10 +293,10 @@ namespace fmCalculationLibrary
             AddParameter(ref rc, new fmGlobalParameter("rc", fmUnitFamily.CakeResistanceRcFamily, new fmRange(0.03e+13, 1000e+13)));
             AddParameter(ref a, new fmGlobalParameter("a", fmUnitFamily.CakeResistanceAFamily, new fmRange(0.03e+10, 1000e+10)));
             AddParameter(ref Rm, new fmGlobalParameter("Rm", fmUnitFamily.FilterMediumResistanceFamily));
-            AddParameter(ref t1, new fmGlobalParameter("t1", fmUnitFamily.TimeFamily));
-            AddParameter(ref h1, new fmGlobalParameter("h1", fmUnitFamily.LengthFamily));
-            AddParameter(ref t1_over_tf, new fmGlobalParameter("t1/tf", fmUnitFamily.NoUnitFamily));
-            AddParameter(ref h1_over_hc, new fmGlobalParameter("h1/hc", fmUnitFamily.NoUnitFamily));
+            AddParameter(ref t1, new fmGlobalParameter("t1", fmUnitFamily.TimeFamily, new fmRange(0, 12000)));
+            AddParameter(ref h1, new fmGlobalParameter("h1", fmUnitFamily.LengthFamily, new fmRange(0, 1)));
+            AddParameter(ref t1_over_tf, new fmGlobalParameter("t1/tf", fmUnitFamily.NoUnitFamily, new fmRange(0, 1)));
+            AddParameter(ref h1_over_hc, new fmGlobalParameter("h1/hc", fmUnitFamily.NoUnitFamily, new fmRange(0, 1)));
             #endregion
             #region Deliquoring
             AddParameter(ref Dp_d, new fmGlobalParameter("Dpd", fmUnitFamily.PressureFamily));

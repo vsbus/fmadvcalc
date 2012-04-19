@@ -28,68 +28,6 @@ namespace FilterSimulation
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Dp = const (Plain)");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Qp = const (Plain)");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Qp = const (Plain, volumetric pump)");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Plain area (Pressure leaf)", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Dp = const (Cylindrical)");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Qp = const (Cylindrical)");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Qp = const (Cylindrical, volumetric pump)");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Cylindrical (Candle filter)", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("3: A, Dp, (n/tc/tr), tf");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Standart", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10,
-            treeNode11});
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("1: Q, Dp, hc, (n/tc/tr)");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Design", new System.Windows.Forms.TreeNode[] {
-            treeNode13});
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("1: A, Q, Dp, (sf/tr)");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Optimization", new System.Windows.Forms.TreeNode[] {
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Other...", new System.Windows.Forms.TreeNode[] {
-            treeNode12,
-            treeNode14,
-            treeNode16});
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Dp = const (Plain)");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Qp = const (Plain)");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Qp = const (Plain, volumetric pump)");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Plain area (Pressure leaf)", new System.Windows.Forms.TreeNode[] {
-            treeNode18,
-            treeNode19,
-            treeNode20});
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Dp = const (Cylindrical)");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Qp = const (Cylindrical)");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Qp = const (Cylindrical, volumetric pump)");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("Cylindrical (Candle filter)", new System.Windows.Forms.TreeNode[] {
-            treeNode22,
-            treeNode23,
-            treeNode24});
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("3: A, Dp, (n/tc/tr), tf");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Standart", new System.Windows.Forms.TreeNode[] {
-            treeNode26,
-            treeNode27,
-            treeNode28});
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("1: Q, Dp, hc, (n/tc/tr)");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Design", new System.Windows.Forms.TreeNode[] {
-            treeNode30});
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("1: A, Q, Dp, (sf/tr)");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Optimization", new System.Windows.Forms.TreeNode[] {
-            treeNode32});
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Other...", new System.Windows.Forms.TreeNode[] {
-            treeNode29,
-            treeNode31,
-            treeNode33});
             this.rho_f_radioButton = new System.Windows.Forms.RadioButton();
             this.rho_s_radioButton = new System.Windows.Forms.RadioButton();
             this.rho_sus_radioButton = new System.Windows.Forms.RadioButton();
@@ -99,6 +37,7 @@ namespace FilterSimulation
             this.simulationCalculationOptionGroupBox = new System.Windows.Forms.GroupBox();
             this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.PcDCheckBox = new System.Windows.Forms.CheckBox();
             this.etaDCheckBox = new System.Windows.Forms.CheckBox();
             this.rhoDCheckBox = new System.Windows.Forms.CheckBox();
             this.deliquoringCheckBox = new System.Windows.Forms.CheckBox();
@@ -107,7 +46,6 @@ namespace FilterSimulation
             this.panel4 = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.PcDCheckBox = new System.Windows.Forms.CheckBox();
             this.suspensionGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.simulationCalculationOptionGroupBox.SuspendLayout();
@@ -204,109 +142,6 @@ namespace FilterSimulation
             this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
             this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
-            treeNode1.Name = "";
-            treeNode1.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode1.Text = "Dp = const (Plain)";
-            treeNode2.Name = "";
-            treeNode2.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode2.Text = "Qp = const (Plain)";
-            treeNode3.Name = "";
-            treeNode3.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode3.Text = "Qp = const (Plain, volumetric pump)";
-            treeNode4.Name = "";
-            treeNode4.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode4.Text = "Plain area (Pressure leaf)";
-            treeNode5.Name = "";
-            treeNode5.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode5.Text = "Dp = const (Cylindrical)";
-            treeNode6.Name = "";
-            treeNode6.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode6.Text = "Qp = const (Cylindrical)";
-            treeNode7.Name = "";
-            treeNode7.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode7.Text = "Qp = const (Cylindrical, volumetric pump)";
-            treeNode8.Name = "";
-            treeNode8.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode8.Text = "Cylindrical (Candle filter)";
-            treeNode9.Name = "";
-            treeNode9.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode9.Text = "3: A, Dp, (n/tc/tr), tf";
-            treeNode10.Name = "";
-            treeNode10.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode10.Text = "4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)";
-            treeNode11.Name = "";
-            treeNode11.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode11.Text = "8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)";
-            treeNode12.Name = "";
-            treeNode12.Text = "Standart";
-            treeNode13.Name = "";
-            treeNode13.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode13.Text = "1: Q, Dp, hc, (n/tc/tr)";
-            treeNode14.Name = "";
-            treeNode14.Text = "Design";
-            treeNode15.Name = "";
-            treeNode15.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode15.Text = "1: A, Q, Dp, (sf/tr)";
-            treeNode16.Name = "";
-            treeNode16.Text = "Optimization";
-            treeNode17.Name = "";
-            treeNode17.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode17.Text = "Other...";
-            treeNode18.Name = "";
-            treeNode18.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode18.Text = "Dp = const (Plain)";
-            treeNode19.Name = "";
-            treeNode19.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode19.Text = "Qp = const (Plain)";
-            treeNode20.Name = "";
-            treeNode20.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode20.Text = "Qp = const (Plain, volumetric pump)";
-            treeNode21.Name = "";
-            treeNode21.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode21.Text = "Plain area (Pressure leaf)";
-            treeNode22.Name = "";
-            treeNode22.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode22.Text = "Dp = const (Cylindrical)";
-            treeNode23.Name = "";
-            treeNode23.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode23.Text = "Qp = const (Cylindrical)";
-            treeNode24.Name = "";
-            treeNode24.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode24.Text = "Qp = const (Cylindrical, volumetric pump)";
-            treeNode25.Name = "";
-            treeNode25.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode25.Text = "Cylindrical (Candle filter)";
-            treeNode26.Name = "";
-            treeNode26.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode26.Text = "3: A, Dp, (n/tc/tr), tf";
-            treeNode27.Name = "";
-            treeNode27.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode27.Text = "4: A, (hc/Vf/Mf/Vsus/Msus/Ms), (sf/tr), (n/tc)";
-            treeNode28.Name = "";
-            treeNode28.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode28.Text = "8: A, Dp, (hc/Vf/Mf/Vsus/Msus/Ms), (n/tc/tr)";
-            treeNode29.Name = "";
-            treeNode29.Text = "Standart";
-            treeNode30.Name = "";
-            treeNode30.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode30.Text = "1: Q, Dp, hc, (n/tc/tr)";
-            treeNode31.Name = "";
-            treeNode31.Text = "Design";
-            treeNode32.Name = "";
-            treeNode32.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode32.Text = "1: A, Q, Dp, (sf/tr)";
-            treeNode33.Name = "";
-            treeNode33.Text = "Optimization";
-            treeNode34.Name = "";
-            treeNode34.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode34.Text = "Other...";
-            this.fmCalculationOptionView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode8,
-            treeNode17,
-            treeNode21,
-            treeNode25,
-            treeNode34});
             this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 167);
             this.fmCalculationOptionView1.TabIndex = 0;
             this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
@@ -324,6 +159,19 @@ namespace FilterSimulation
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deliquoring Calculation Option";
+            // 
+            // PcDCheckBox
+            // 
+            this.PcDCheckBox.AutoSize = true;
+            this.PcDCheckBox.Checked = true;
+            this.PcDCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.PcDCheckBox.Location = new System.Drawing.Point(17, 88);
+            this.PcDCheckBox.Name = "PcDCheckBox";
+            this.PcDCheckBox.Size = new System.Drawing.Size(191, 17);
+            this.PcDCheckBox.TabIndex = 3;
+            this.PcDCheckBox.Text = "Pcd calculated from max(Dpf, Dpd)";
+            this.PcDCheckBox.UseVisualStyleBackColor = true;
+            this.PcDCheckBox.CheckedChanged += new System.EventHandler(this.PcDCheckBox_CheckedChanged);
             // 
             // etaDCheckBox
             // 
@@ -414,19 +262,6 @@ namespace FilterSimulation
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 25);
             this.panel3.TabIndex = 2;
-            // 
-            // PcDCheckBox
-            // 
-            this.PcDCheckBox.AutoSize = true;
-            this.PcDCheckBox.Checked = true;
-            this.PcDCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.PcDCheckBox.Location = new System.Drawing.Point(17, 88);
-            this.PcDCheckBox.Name = "PcDCheckBox";
-            this.PcDCheckBox.Size = new System.Drawing.Size(191, 17);
-            this.PcDCheckBox.TabIndex = 3;
-            this.PcDCheckBox.Text = "Pcd calculated from max(Dpf, Dpd)";
-            this.PcDCheckBox.UseVisualStyleBackColor = true;
-            this.PcDCheckBox.CheckedChanged += new System.EventHandler(this.PcDCheckBox_CheckedChanged);
             // 
             // fmCalculationOptionSelectionDialog
             // 
