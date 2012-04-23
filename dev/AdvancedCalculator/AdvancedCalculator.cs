@@ -113,7 +113,7 @@ namespace AdvancedCalculator
             {
                 input = new StreamReader(fileName);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return;
             }
