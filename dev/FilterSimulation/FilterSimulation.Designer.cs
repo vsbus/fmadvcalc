@@ -404,7 +404,7 @@ namespace FilterSimulation
             this.commonDeliquoringSimulationBlockDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.commonDeliquoringSimulationBlockDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.commonDeliquoringSimulationBlockDataGrid.HighLightCurrentRow = false;
-            this.commonDeliquoringSimulationBlockDataGrid.Location = new System.Drawing.Point(702, 17);
+            this.commonDeliquoringSimulationBlockDataGrid.Location = new System.Drawing.Point(715, 17);
             this.commonDeliquoringSimulationBlockDataGrid.Name = "commonDeliquoringSimulationBlockDataGrid";
             this.commonDeliquoringSimulationBlockDataGrid.RowHeadersVisible = false;
             this.commonDeliquoringSimulationBlockDataGrid.RowTemplate.Height = 18;
@@ -476,7 +476,7 @@ namespace FilterSimulation
             this.deliquoringMaterialParametersDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.deliquoringMaterialParametersDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.deliquoringMaterialParametersDataGrid.HighLightCurrentRow = false;
-            this.deliquoringMaterialParametersDataGrid.Location = new System.Drawing.Point(497, 17);
+            this.deliquoringMaterialParametersDataGrid.Location = new System.Drawing.Point(510, 17);
             this.deliquoringMaterialParametersDataGrid.Name = "deliquoringMaterialParametersDataGrid";
             this.deliquoringMaterialParametersDataGrid.RowHeadersVisible = false;
             this.deliquoringMaterialParametersDataGrid.RowTemplate.Height = 16;
@@ -518,7 +518,7 @@ namespace FilterSimulation
             this.commonCalcBlockDataGrid.Name = "commonCalcBlockDataGrid";
             this.commonCalcBlockDataGrid.RowHeadersVisible = false;
             this.commonCalcBlockDataGrid.RowTemplate.Height = 16;
-            this.commonCalcBlockDataGrid.Size = new System.Drawing.Size(292, 227);
+            this.commonCalcBlockDataGrid.Size = new System.Drawing.Size(305, 227);
             this.commonCalcBlockDataGrid.TabIndex = 13;
             // 
             // commonCalcBlockParameterNameColumn

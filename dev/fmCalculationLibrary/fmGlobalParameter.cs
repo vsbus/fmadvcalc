@@ -295,8 +295,8 @@ namespace fmCalculationLibrary
             AddParameter(ref Rm, new fmGlobalParameter("Rm", fmUnitFamily.FilterMediumResistanceFamily));
             AddParameter(ref t1, new fmGlobalParameter("t1", fmUnitFamily.TimeFamily, new fmRange(0, 12000)));
             AddParameter(ref h1, new fmGlobalParameter("h1", fmUnitFamily.LengthFamily, new fmRange(0, 1)));
-            AddParameter(ref t1_over_tf, new fmGlobalParameter("t1/tf", fmUnitFamily.NoUnitFamily, new fmRange(0, 1)));
-            AddParameter(ref h1_over_hc, new fmGlobalParameter("h1/hc", fmUnitFamily.NoUnitFamily, new fmRange(0, 1)));
+            AddParameter(ref t1_over_tf, new fmGlobalParameter("t1/tf", fmUnitFamily.ConcentrationFamily, new fmRange(0, 1)));
+            AddParameter(ref h1_over_hc, new fmGlobalParameter("h1/hc", fmUnitFamily.ConcentrationFamily, new fmRange(0, 1)));
             #endregion
             #region Deliquoring
             AddParameter(ref Dp_d, new fmGlobalParameter("Dpd", fmUnitFamily.PressureFamily));
