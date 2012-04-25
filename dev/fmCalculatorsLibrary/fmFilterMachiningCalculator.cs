@@ -2800,16 +2800,16 @@ namespace fmCalculatorsLibrary
                 }
                 if (isKnown_t1OverTf)
                 {
-                    h1.value = fmFilterMachiningEquations.Eval_h1_From_Hc_t1OverTf_hc_hce(t1OverTf.value, hc.value, hce.value);
+                    h1.value = fmFilterMachiningEquations.EvalCandle_h1_From_t1OverTf_DpQpConst(t1OverTf.value, hc.value, eta_f.value, d0.value, kappa.value, Pc.value, Dp.value, hce.value, eps.value, Cv.value);
                     isKnown_h1 = true;
                 }
                 if (isKnown_h1 && !isKnown_t1)
                 {
-                    t1.value = fmFilterMachiningEquations.Eval_t1_From_h1_eta_hce_kappa_Pc_Dp(h1.value, eta_f.value, hce.value, kappa.value, Pc.value, Dp.value);
+                    t1.value = fmFilterMachiningEquations.EvalCandle_t1_From_h1_DpQpConst(h1.value, eps.value, d0.value, eta_f.value, hce.value, Cv.value, kappa.value, Pc.value, Dp.value);
                     isKnown_t1 = true;
                 }
 
-                tf.value = fmFilterMachiningEquations.Eval_tf_From_DpQpConst(t1.value, eta_f.value, kappa.value, Pc.value, Dp.value, hc.value, h1.value, hce.value);
+                tf.value = fmFilterMachiningEquations.EvalCandle_tf_From_t1_h1_hc_DpQpConst(t1.value, eta_f.value, d0.value, kappa.value, Pc.value, Dp.value, hc.value, h1.value, hce.value);
                 isKnown_tf = true;
             }
             #endregion
@@ -2986,7 +2986,7 @@ namespace fmCalculatorsLibrary
                 }
                 if (isKnown_h1OverHc)
                 {
-                    t1.value = fmFilterMachiningEquations.Eval_t1_From_tf_h1OverHc_tf_eta_kappa_Pc_Dp_hce(h1OverHc.value, tf.value, eta_f.value, kappa.value, Pc.value, Dp.value, hce.value);
+                    t1.value = fmFilterMachiningEquations.EvalCandle_t1_From_tf_h1OverHc_tf_DpQpConst(h1OverHc.value, tf.value, eta_f.value, kappa.value, Pc.value, Dp.value, hce.value);
                     isKnown_t1 = true;
                 }
                 if (isKnown_t1 && !isKnown_h1)
