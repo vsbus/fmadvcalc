@@ -2673,17 +2673,17 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_qsusd)
             {
-                h1.value = fmFilterMachiningEquations.Eval_h1_From_qp_Dp_pc_hce_eta_cv_eps(qsus_d.value, Dp.value, Pc.value, hce.value, eta_f.value, Cv.value, eps.value);
+                h1.value = fmFilterMachiningEquations.EvalCandle_h1_From_qp(qsus_d.value, hce.value, d0.value, kappa.value, Pc.value, Dp.value, eta_f.value);
                 isKnown_h1 = true;
             }
             if (isKnown_h1)
             {
-                t1.value = fmFilterMachiningEquations.Eval_t1_From_h1_eta_hce_kappa_Pc_Dp(h1.value, eta_f.value, hce.value, kappa.value, Pc.value, Dp.value);
+                t1.value = fmFilterMachiningEquations.EvalCandle_t1_From_h1_DpQpConst(h1.value, eps.value, d0.value, eta_f.value, hce.value, Cv.value, kappa.value, Pc.value, Dp.value);
                 isKnown_t1 = true;
             }
-            if (!isKnown_h1)
+            if (!isKnown_h1 && isKnown_t1)
             {
-                h1.value = fmFilterMachiningEquations.Eval_h1_From_t1_eta_hce_kappa_Pc_Dp(t1.value, eta_f.value, hce.value, kappa.value, Pc.value, Dp.value);
+                h1.value = fmFilterMachiningEquations.EvalCandle_h1_From_t1_DpQpConst(t1.value, d0.value, eta_f.value, hce.value, eps.value, kappa.value, Cv.value, Pc.value, Dp.value);
                 isKnown_h1 = true;
             }
 
@@ -2986,24 +2986,24 @@ namespace fmCalculatorsLibrary
                 }
                 if (isKnown_h1OverHc)
                 {
-                    t1.value = fmFilterMachiningEquations.EvalCandle_t1_From_tf_h1OverHc_tf_DpQpConst(h1OverHc.value, tf.value, eta_f.value, kappa.value, Pc.value, Dp.value, hce.value);
+                    t1.value = fmFilterMachiningEquations.EvalCandle_t1_From_tf_h1OverHc_tf_DpQpConst(tf.value, h1OverHc.value, eps.value, eta_f.value, d0.value, Cv.value, kappa.value, Pc.value, Dp.value, hce.value);
                     isKnown_t1 = true;
                 }
                 if (isKnown_t1 && !isKnown_h1)
                 {
-                    h1.value = fmFilterMachiningEquations.Eval_h1_From_t1_eta_hce_kappa_Pc_Dp(t1.value, eta_f.value, hce.value, kappa.value, Pc.value, Dp.value);
+                    h1.value = fmFilterMachiningEquations.EvalCandle_h1_From_t1_DpQpConst(t1.value, d0.value, eta_f.value, hce.value, eps.value, kappa.value, Cv.value, Pc.value, Dp.value);
                     isKnown_h1 = true;
                 }
             }
-            if (!isKnown_qsusd) qsus_d.value = fmFilterMachiningEquations.Eval_qp_From_h1_Dp_Pc_eta_cv_eps_hce(h1.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hce.value);
+            if (!isKnown_qsusd) qsus_d.value = fmFilterMachiningEquations.EvalCandle_qp_From_h1(kappa.value, Pc.value,Dp.value, d0.value, eta_f.value, h1.value, hce.value);
             if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.Eval_Q_From_q_A(qsus_d.value, A.value);
             if (!isKnown_t1OverTf) t1OverTf.value = t1.value / tf.value;
             if (!isKnown_tr) tr.value = fmFilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
             if (!isKnown_sr) sr.value = fmFilterMachiningEquations.Eval_sr_From_tc_tr(tc.value, tr.value);
-            if (!isKnown_hc) hc.value = fmFilterMachiningEquations.Eval_hc_From_h1_kappa_Pc_Dp_tf_t1_eta_hce_DpQpConst(h1.value, kappa.value, Pc.value, Dp.value, tf.value, t1.value, eta_f.value, hce.value);
+            if (!isKnown_hc) hc.value = fmFilterMachiningEquations.EvalCandle_hc_From_tf_hce_kappa_Pc_Dp_etaf_d(tf.value, hce.value, kappa.value, Pc.value, Dp.value, eta_f.value, d0.value);
             if (!isKnown_h1OverHc) h1OverHc.value = h1.value / hc.value;
 
-            if (!isKnown_vc) vc.value = hc.value;
+            if (!isKnown_vc) vc.value = fmFilterMachiningEquations.EvalCandle_vc_From_hc_d(hc.value, d0.value);
             if (!isKnown_vf) vf.value = fmFilterMachiningEquations.Eval_vf_From_vc_kappa(vc.value, kappa.value);
             if (!isKnown_vsus) vsus.value = fmFilterMachiningEquations.Eval_vsus_From_vf_kappa(vf.value, kappa.value);
             if (!isKnown_vs) vs.value = fmFilterMachiningEquations.Eval_vs_From_vsus_rho_Cm(vsus.value, rho_sus.value, rho_s.value, Cm.value);
@@ -3712,7 +3712,7 @@ namespace fmCalculatorsLibrary
                 t1.value = fmFilterMachiningEquations.Eval_t1_From_h1_eta_hce_kappa_Pc_Dp(h1.value, eta_f.value, hce.value, kappa.value, Pc.value, Dp.value);
                 isKnown_t1 = true;
             }
-            if (!isKnown_h1)
+            if (!isKnown_h1 && isKnown_t1)
             {
                 h1.value = fmFilterMachiningEquations.Eval_h1_From_t1_eta_hce_kappa_Pc_Dp(t1.value, eta_f.value, hce.value, kappa.value, Pc.value, Dp.value);
                 isKnown_h1 = true;

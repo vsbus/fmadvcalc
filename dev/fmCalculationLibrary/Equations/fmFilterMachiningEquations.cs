@@ -575,13 +575,13 @@ namespace fmCalculationLibrary.Equations
             return Dp * Pc / (eta * (1 - cv / (1 - eps)) * (h1 + hce));
         }
 
-        private class fmCandleH1EquationWithDpQpConst : fmFunction
+        private class fmCandleH1dFromT1OverTfEquationWithDpQpConst : fmFunction
         {
             private fmValue C1;
             private fmValue C3;
             private fmValue C4;
             private fmValue hced;
-            public fmCandleH1EquationWithDpQpConst(fmValue C1, fmValue C3, fmValue C4, fmValue hced)
+            public fmCandleH1dFromT1OverTfEquationWithDpQpConst(fmValue C1, fmValue C3, fmValue C4, fmValue hced)
             {
                 this.C1 = C1;
                 this.C3 = C3;
@@ -590,7 +590,7 @@ namespace fmCalculationLibrary.Equations
             }
             public override fmValue Eval(fmValue x)
             {
-                return C3 * x * (2 + x * (fmValue.Log(1 + x) + hced)) - C4 - C1 * fmValue.Sqr(1 + x) * (2 * fmValue.Log(1 + x) - 1 + 2 * hced);
+                return C3 * x * (2 + x) * (fmValue.Log(1 + x) + hced) - C4 + C1 * fmValue.Sqr(1 + x) * (2 * fmValue.Log(1 + x) - 1 + 2 * hced);
             }
         };
 
@@ -603,8 +603,8 @@ namespace fmCalculationLibrary.Equations
             fmValue hced = 2 * hce / d;
             fmValue C4 = C1 * (1 + hcd) * (1 + hcd) * (2 * fmValue.Log(1 + hcd) - 1 + 2 * hced);
             
-            var f = new fmCandleH1EquationWithDpQpConst(C1, C3, C4, hced);
-            fmValue h1d = fmBisectionMethod.FindRoot(f, new fmValue(0), hc, 60);
+            var f = new fmCandleH1dFromT1OverTfEquationWithDpQpConst(C1, C3, C4, hced);
+            fmValue h1d = fmBisectionMethod.FindRoot(f, new fmValue(0), 2 * hc / d * 2, 60);
             return h1d * d / 2;
         }
 
@@ -626,9 +626,81 @@ namespace fmCalculationLibrary.Equations
             return t1 + C * (A - B);
         }
 
-        public static fmValue EvalCandle_t1_From_tf_h1OverHc_tf_DpQpConst(fmValue fmValue, fmValue fmValue_2, fmValue fmValue_3, fmValue fmValue_4, fmValue fmValue_5, fmValue fmValue_6, fmValue fmValue_7)
+        private class fmCandleH1dFromH1OverHcEquationWithDpQpConst : fmFunction
         {
-            
-        
+            private fmValue C1;
+            private fmValue C2;
+            private fmValue tf;
+            private fmValue hced;
+            private fmValue h1OverHc;
+            public fmCandleH1dFromH1OverHcEquationWithDpQpConst(fmValue C1, fmValue C2, fmValue tf, fmValue hced, fmValue h1OverHc)
+            {
+                this.C1 = C1;
+                this.C2 = C2;
+                this.tf = tf;
+                this.hced = hced;
+                this.h1OverHc = h1OverHc;
+            }
+            public override fmValue Eval(fmValue h1d)
+            {
+                fmValue A = C1 * h1d * (2 + h1d) * (fmValue.Log(1 + h1d) + hced);
+                fmValue hcd = h1d / h1OverHc;
+                fmValue B = C2 * fmValue.Sqr(1 + hcd) * (2 * fmValue.Log(1 + hcd) - 1 + 2 * hced);
+                fmValue C = C2 * fmValue.Sqr(1 + h1d) * (2 * fmValue.Log(1 + h1d) - 1 + 2 * hced);
+                return A + B - C - tf;
+            }
+        };
+
+        public static fmValue EvalCandle_t1_From_tf_h1OverHc_tf_DpQpConst(fmValue tf, fmValue h1OverHc, fmValue eps, fmValue eta, fmValue d, fmValue cv, fmValue kappa, fmValue Pc, fmValue Dp, fmValue hce)
+        {
+            fmValue C1 = (1 - eps) * d * d * eta / (8 * cv * (1 + kappa) * Pc * Dp);
+            fmValue C2 = eta * d * d / (16 * kappa * Pc * Dp);
+            fmValue hced = 2 * hce / d;
+            var f = new fmCandleH1dFromH1OverHcEquationWithDpQpConst(C1, C2, tf, hced, h1OverHc);
+            fmValue h1d = fmBisectionMethod.FindRoot(f, new fmValue(0), (hced + 1) * 1000, 60);
+            fmValue h1 = h1d * d / 2;
+            return EvalCandle_t1_From_h1_DpQpConst(h1, eps, d, eta, hce, cv, kappa, Pc, Dp);
+        }
+
+        private class fmCandleH1dFromT1EquationWithDpQpConst : fmFunction
+        {
+            private fmValue C1;
+            private fmValue t1;
+            private fmValue hced;
+            public fmCandleH1dFromT1EquationWithDpQpConst(fmValue C1, fmValue t1, fmValue hced)
+            {
+                this.C1 = C1;
+                this.t1 = t1;
+                this.hced = hced;
+            }
+            public override fmValue Eval(fmValue h1d)
+            {
+                return t1 - C1 * h1d * (2 + h1d) * (fmValue.Log(1 + h1d) + hced);
+            }
+        };
+
+        public static fmValue EvalCandle_h1_From_t1_DpQpConst(fmValue t1, fmValue d, fmValue eta_f, fmValue hce, fmValue eps, fmValue kappa, fmValue cv, fmValue Pc, fmValue Dp)
+        {
+            fmValue hced = 2 * hce / d;
+            fmValue C1 = (1 - eps) * d * d * eta_f / (8 * cv * (1 + kappa) * Pc * Dp);
+            var f = new fmCandleH1dFromT1EquationWithDpQpConst(C1, t1, hced);
+            fmValue h1d = fmBisectionMethod.FindRoot(f, new fmValue(0), (hced + 1) * 1000, 60);
+            fmValue h1 = h1d * d / 2;
+            return h1;
+        }
+
+        public static fmValue EvalCandle_qp_From_h1(fmValue kappa, fmValue Pc, fmValue Dp, fmValue d, fmValue eta, fmValue h1, fmValue hce)
+        {
+            fmValue h1d = 2 * h1 / d;
+            fmValue hced = 2 * hce / d;
+            return 2 * (1 + kappa) * Pc * Dp / (d * eta * (fmValue.Log(1 + h1d) + hced));
+        }
+
+        public static fmValue EvalCandle_h1_From_qp(fmValue qp, fmValue hce, fmValue d, fmValue kappa, fmValue Pc, fmValue Dp, fmValue eta)
+        {
+            fmValue hced = 2 * hce / d;
+            fmValue h1d = fmValue.Exp(2 * (1 + kappa) * Pc * Dp / (d * eta * qp) - hced) - 1;
+            return h1d * d / 2;
+        }
     }
 }
