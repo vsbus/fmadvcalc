@@ -3000,7 +3000,7 @@ namespace fmCalculatorsLibrary
             if (!isKnown_t1OverTf) t1OverTf.value = t1.value / tf.value;
             if (!isKnown_tr) tr.value = fmFilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
             if (!isKnown_sr) sr.value = fmFilterMachiningEquations.Eval_sr_From_tc_tr(tc.value, tr.value);
-            if (!isKnown_hc) hc.value = fmFilterMachiningEquations.EvalCandle_hc_From_tf_hce_kappa_Pc_Dp_etaf_d(tf.value, hce.value, kappa.value, Pc.value, Dp.value, eta_f.value, d0.value);
+            if (!isKnown_hc) hc.value = fmFilterMachiningEquations.EvalCandle_hc_From_tf_t1_h1_DpQpConst(tf.value, t1.value, h1.value, eta_f.value, d0.value, kappa.value, Pc.value, Dp.value, hce.value);
             if (!isKnown_h1OverHc) h1OverHc.value = h1.value / hc.value;
 
             if (!isKnown_vc) vc.value = fmFilterMachiningEquations.EvalCandle_vc_From_hc_d(hc.value, d0.value);
