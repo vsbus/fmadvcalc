@@ -530,7 +530,7 @@ namespace fmCalculationLibrary.Equations
             fmValue h1, fmValue kappa, fmValue pc, fmValue Dp, fmValue tf, fmValue t1, fmValue eta, fmValue hce)
         {
             fmValue A = fmValue.Sqr(h1 + hce);
-            fmValue B = 2 * kappa * pc * Dp * (tf + t1) / eta;
+            fmValue B = 2 * kappa * pc * Dp * (tf - t1) / eta;
             return fmValue.Sqrt(A + B) - hce;
         }
 
@@ -567,7 +567,8 @@ namespace fmCalculationLibrary.Equations
             fmValue C = h1OverHc / (h1OverHc * h1OverHc + 1);
             fmValue A = C * C * hce * hce + 2 * C * h1OverHc * tf / f;
             fmValue B = C * hce;
-            return fmValue.Sqrt(A) - B;
+            fmValue h1 = fmValue.Sqrt(A) - B;
+            return h1 / h1OverHc;
         }
 
         public static fmValue Eval_qp_From_h1_Dp_Pc_eta_cv_eps_hce(fmValue h1, fmValue Dp, fmValue Pc, fmValue eta, fmValue cv, fmValue eps, fmValue hce)
