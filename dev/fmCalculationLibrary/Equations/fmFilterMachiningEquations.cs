@@ -561,14 +561,12 @@ namespace fmCalculationLibrary.Equations
             return fmValue.Sqrt(S) - (1 + C) / (2 * C + 1) * hce;
         }
 
-        public static fmValue Eval_t1_From_tf_h1OverHc_tf_eta_kappa_Pc_Dp_hce(fmValue h1OverHc, fmValue tf, fmValue eta, fmValue kappa, fmValue Pc, fmValue Dp, fmValue hce)
+        public static fmValue Eval_hc_From_h1OverHc_tf_DpQpConst(fmValue h1OverHc, fmValue tf, fmValue eta, fmValue kappa, fmValue Pc, fmValue Dp, fmValue hce)
         {
             fmValue f = eta / (kappa * Pc * Dp);
-            fmValue C = h1OverHc / (h1OverHc * h1OverHc + 1);
-            fmValue A = C * C * hce * hce + 2 * C * h1OverHc * tf / f;
-            fmValue B = C * hce;
-            fmValue h1 = fmValue.Sqrt(A) - B;
-            return h1 / h1OverHc;
+            fmValue A = fmValue.Sqrt(hce * hce + 2 * (1 + h1OverHc * h1OverHc) * tf / f);
+            fmValue hc = 1 / (1 + h1OverHc * h1OverHc) * (A - hce);
+            return hc;
         }
 
         public static fmValue Eval_qp_From_h1_Dp_Pc_eta_cv_eps_hce(fmValue h1, fmValue Dp, fmValue Pc, fmValue eta, fmValue cv, fmValue eps, fmValue hce)

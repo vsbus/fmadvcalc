@@ -4014,16 +4014,26 @@ namespace fmCalculatorsLibrary
                 {
                     t1.value = t1OverTf.value * tf.value;
                     isKnown_t1 = true;
+                    if (!isKnown_h1)
+                    {
+                        h1.value = fmFilterMachiningEquations.Eval_h1_From_t1_eta_hce_kappa_Pc_Dp(t1.value, eta_f.value, hce.value, kappa.value, Pc.value, Dp.value);
+                        isKnown_h1 = true;
+                    }
                 }
                 if (isKnown_h1OverHc)
                 {
-                    t1.value = fmFilterMachiningEquations.Eval_t1_From_tf_h1OverHc_tf_eta_kappa_Pc_Dp_hce(h1OverHc.value, tf.value, eta_f.value, kappa.value, Pc.value, Dp.value, hce.value);
-                    isKnown_t1 = true;
-                }
-                if (isKnown_t1 && !isKnown_h1)
-                {
-                    h1.value = fmFilterMachiningEquations.Eval_h1_From_t1_eta_hce_kappa_Pc_Dp(t1.value, eta_f.value, hce.value, kappa.value, Pc.value, Dp.value);
-                    isKnown_h1 = true;
+                    hc.value = fmFilterMachiningEquations.Eval_hc_From_h1OverHc_tf_DpQpConst(h1OverHc.value, tf.value, eta_f.value, kappa.value, Pc.value, Dp.value, hce.value);
+                    isKnown_hc = true;
+                    if (!isKnown_h1)
+                    {
+                        h1.value = h1OverHc.value * hc.value;
+                        isKnown_h1 = true;
+                        if (!isKnown_t1)
+                        {
+                            t1.value = fmFilterMachiningEquations.Eval_t1_From_h1_eta_hce_kappa_Pc_Dp(h1.value, eta_f.value, hce.value, kappa.value, Pc.value, Dp.value);
+                            isKnown_t1 = true;   
+                        }
+                    }
                 }
             }
             if (!isKnown_qsusd) qsus_d.value = fmFilterMachiningEquations.Eval_qp_From_h1_Dp_Pc_eta_cv_eps_hce(h1.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hce.value);
