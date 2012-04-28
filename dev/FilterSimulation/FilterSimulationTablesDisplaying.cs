@@ -35,8 +35,7 @@ namespace FilterSimulation
                 }
             }
 
-            DataGridViewCell currentCell = collection.Count > 0 ? collection[0].DataGridView.CurrentCell : null;
-            int insertionIndex = (currentCell != null) ? currentCell.RowIndex + 1 : collection.Count;
+            int insertionIndex = collection.Count;
             collection.Insert(insertionIndex, 1);
             return collection[insertionIndex];
         }

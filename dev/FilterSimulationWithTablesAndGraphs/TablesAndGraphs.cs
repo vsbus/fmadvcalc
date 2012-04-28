@@ -270,7 +270,10 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmGlobalParameter param in tempSim.parameters.Keys)
                 {
                     int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
-                    row.Cells[idx].Value = tempSim.parameters[param].value / param.unitFamily.CurrentUnit.Coef;
+                    if (idx != -1)
+                    {
+                        row.Cells[idx].Value = tempSim.parameters[param].value / param.unitFamily.CurrentUnit.Coef;
+                    }
                 }
 
                 if (m_externalCurrentActiveSimulation == m_internalSelectedSimList[i].externalSimulation)
@@ -300,9 +303,12 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmBlockVariableParameter param in tempBlock.Parameters)
                 {
                     int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.globalParameter.name);
-                    if (param.group != null)
+                    if (idx != -1)
                     {
-                        row.Cells[idx].Style.BackColor = param.group.color;
+                        if (param.group != null)
+                        {
+                            row.Cells[idx].Style.BackColor = param.group.color;
+                        }
                     }
                 }
             }
@@ -318,21 +324,24 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmGlobalParameter param in tempSim.parameters.Keys)
                 {
                     int idx = GetColumnIndexByHeader(selectedSimulationParametersTable, param.name);
-                    Color cellForeColor = Color.Black;
-                    if (tempSim.parameters[param] is fmCalculationVariableParameter)
+                    if (idx != -1)
                     {
-                        if (((fmCalculationVariableParameter)tempSim.parameters[param]).isInputed)
-                            cellForeColor = Color.Blue;
+                        Color cellForeColor = Color.Black;
+                        if (tempSim.parameters[param] is fmCalculationVariableParameter)
+                        {
+                            if (((fmCalculationVariableParameter)tempSim.parameters[param]).isInputed)
+                                cellForeColor = Color.Blue;
+                        }
+                        if (cellForeColor == Color.Black)
+                        {
+                            row.Cells[idx].Value = "-";
+                        }
+                        else if (row.Cells[idx].Value.ToString() == "-")
+                        {
+                            row.Cells[idx].Value = tempSim.parameters[param].ValueInUnits;
+                        }
+                        row.Cells[idx].Style.ForeColor = cellForeColor;
                     }
-                    if (cellForeColor == Color.Black)
-                    {
-                        row.Cells[idx].Value = "-";
-                    }
-                    else if (row.Cells[idx].Value.ToString() == "-")
-                    {
-                        row.Cells[idx].Value = tempSim.parameters[param].ValueInUnits;
-                    }
-                    row.Cells[idx].Style.ForeColor = cellForeColor;
                 }
             }
         }
