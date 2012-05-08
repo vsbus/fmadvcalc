@@ -457,6 +457,31 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void fmFilterSimulationWithTablesAndGraphs_Load(object sender, EventArgs e)
         {
+            if (m_XYDialog == null)
+            {
+                PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
+            }
+        }
+
+        private Form m_XYDialog;
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            m_XYDialog.ShowDialog();
+        }
+
+        private void PlaceTablesAndGraphsConfigurationPanelOnSeparateForm()
+        {
+            m_XYDialog = new Form();
+            tablesAndGraphsTopLeftPanel.Parent = m_XYDialog;
+            m_XYDialog.Height = tablesAndGraphsTopLeftPanel.Height + 60;
+            m_XYDialog.Width = tablesAndGraphsTopLeftPanel.Width + 20;
+            tablesAndGraphsTopLeftPanel.Dock = DockStyle.Fill;
+            tablesAndGraphsTopLeftPanel.Text = "Diagram Configuration";
+        }
+
+        private void GridPanel_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }
