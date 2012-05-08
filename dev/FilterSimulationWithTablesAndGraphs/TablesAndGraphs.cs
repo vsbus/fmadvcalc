@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using FilterSimulation.fmFilterObjects;
@@ -123,19 +124,19 @@ namespace FilterSimulationWithTablesAndGraphs
         private bool m_loadingXRange;
         private readonly fmDisplayingResults m_displayingResults = new fmDisplayingResults();
         private object m_highLightCaller;
-        
-        private static void FillListBox(ListBox listBox, List<string> strings)
+
+        private static void FillListBox(IList listBoxItems, List<string> strings)
         {
-            for (int i = listBox.Items.Count - 1; i >= 0; --i)
-                if (!strings.Contains(listBox.Items[i].ToString()))
-                    listBox.Items.RemoveAt(i);
+            for (int i = listBoxItems.Count - 1; i >= 0; --i)
+                if (!strings.Contains(listBoxItems[i].ToString()))
+                    listBoxItems.RemoveAt(i);
 
             for (int i = 0, j = 0; j < strings.Count; ++i, ++j)
             {
-                if (i == listBox.Items.Count
-                    || listBox.Items[i].ToString() != strings[j])
+                if (i == listBoxItems.Count
+                    || listBoxItems[i].ToString() != strings[j])
                 {
-                    listBox.Items.Insert(i, strings[j]);
+                    listBoxItems.Insert(i, strings[j]);
                 }
             }
         }
@@ -841,9 +842,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
             fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
             var yParameters = new List<fmGlobalParameter>();
-            foreach (string s in listBoxYAxis.CheckedItems)
+            foreach (ListViewItem item in listBoxYAxis.CheckedItems)
             {
-                yParameters.Add(fmGlobalParameter.parametersByName[s]);
+                yParameters.Add(fmGlobalParameter.parametersByName[item.Text]);
             }
 
             BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
@@ -1181,7 +1182,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 inputNames.Add(p.name);
             }
 
-            FillListBox(listBoxXAxis, inputNames);
+            FillListBox(listBoxXAxis.Items, inputNames);
             if (listBoxXAxis.Text == "" && inputNames.Contains(fmGlobalParameter.tf.name))
             {
                 listBoxXAxis.Text = fmGlobalParameter.tf.name;
@@ -1197,13 +1198,13 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
             }
 
-            FillListBox(listBoxYAxis, outputNames);
+            FillListBox(listBoxYAxis.Items, outputNames);
 
             if (listBoxYAxis.CheckedItems.Count == 0)
             {
                 if (outputNames.Contains(fmGlobalParameter.hc.name))
                 {
-                    listBoxYAxis.SetItemChecked(outputNames.IndexOf(fmGlobalParameter.hc.name), true);
+                    listBoxYAxis.Items[outputNames.IndexOf(fmGlobalParameter.hc.name)].Checked = true;
                 }
             }
         }

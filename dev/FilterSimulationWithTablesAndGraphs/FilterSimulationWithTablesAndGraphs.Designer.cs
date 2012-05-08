@@ -33,7 +33,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.useDefaultRangesButton = new System.Windows.Forms.Button();
             this.maxXValueTextBox = new fmDataGrid.fmNumericalTextBox();
             this.minXValueTextBox = new fmDataGrid.fmNumericalTextBox();
@@ -55,7 +55,8 @@ namespace FilterSimulationWithTablesAndGraphs
             this.button1 = new System.Windows.Forms.Button();
             this.splitter10 = new System.Windows.Forms.Splitter();
             this.tablesAndGraphsTopLeftPanel = new System.Windows.Forms.Panel();
-            this.listBoxYAxis = new System.Windows.Forms.CheckedListBox();
+            this.listBoxYAxis = new System.Windows.Forms.ListView();
+            this.label2 = new System.Windows.Forms.Label();
             this.listBoxXAxis = new System.Windows.Forms.ListBox();
             this.calculationOptionTandCChangeButton = new System.Windows.Forms.Button();
             this.splitter11 = new System.Windows.Forms.Splitter();
@@ -63,7 +64,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel8 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -442,7 +443,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.GridPanel.Name = "GridPanel";
             this.GridPanel.Size = new System.Drawing.Size(370, 148);
             this.GridPanel.TabIndex = 10;
-            this.GridPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.GridPanel_Paint);
             // 
             // additionalParametersTable
             // 
@@ -471,9 +471,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // DeleteButtonColumn
             // 
             this.DeleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = "Delete";
-            this.DeleteButtonColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = "Delete";
+            this.DeleteButtonColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.DeleteButtonColumn.HeaderText = "";
             this.DeleteButtonColumn.Name = "DeleteButtonColumn";
             this.DeleteButtonColumn.Width = 5;
@@ -526,12 +526,13 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // tablesAndGraphsTopLeftPanel
             // 
+            this.tablesAndGraphsTopLeftPanel.Controls.Add(this.label3);
+            this.tablesAndGraphsTopLeftPanel.Controls.Add(this.listBoxYAxis);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.label2);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.label1);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.useDefaultRangesButton);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.rowsQuantity);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.maxXValueTextBox);
-            this.tablesAndGraphsTopLeftPanel.Controls.Add(this.listBoxYAxis);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.listBoxXAxis);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.calculationOptionTandCChangeButton);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.minXValueTextBox);
@@ -543,16 +544,31 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // listBoxYAxis
             // 
-            this.listBoxYAxis.CheckOnClick = true;
-            this.listBoxYAxis.FormattingEnabled = true;
-            this.listBoxYAxis.Location = new System.Drawing.Point(112, 136);
+            this.listBoxYAxis.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBoxYAxis.CheckBoxes = true;
+            this.listBoxYAxis.Location = new System.Drawing.Point(112, 157);
             this.listBoxYAxis.Name = "listBoxYAxis";
-            this.listBoxYAxis.Size = new System.Drawing.Size(108, 199);
-            this.listBoxYAxis.TabIndex = 4;
+            this.listBoxYAxis.Size = new System.Drawing.Size(178, 171);
+            this.listBoxYAxis.TabIndex = 6;
+            this.listBoxYAxis.UseCompatibleStateImageBehavior = false;
+            this.listBoxYAxis.View = System.Windows.Forms.View.List;
             this.listBoxYAxis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listBoxYAxis_ItemCheck);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "X Axis Parameter";
             // 
             // listBoxXAxis
             // 
+            this.listBoxXAxis.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.listBoxXAxis.FormattingEnabled = true;
             this.listBoxXAxis.Location = new System.Drawing.Point(13, 64);
             this.listBoxXAxis.Name = "listBoxXAxis";
@@ -626,14 +642,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(374, 152);
             this.panel9.TabIndex = 11;
             // 
-            // label2
+            // label3
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 43);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "X Axis Parameter";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(109, 141);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Y Axis Parameters";
             // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
@@ -707,13 +723,14 @@ namespace FilterSimulationWithTablesAndGraphs
         private Label xRangeLabel;
         private Button useDefaultRangesButton;
         private Button calculationOptionTandCChangeButton;
-        private CheckedListBox listBoxYAxis;
         private Panel panel8;
         private SplitContainer splitContainer2;
         private Panel panel9;
         private Button button1;
         private Panel panel4;
         private Label label2;
+        private ListView listBoxYAxis;
+        private Label label3;
 
     }
 }

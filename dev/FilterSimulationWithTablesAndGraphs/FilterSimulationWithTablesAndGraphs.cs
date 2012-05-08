@@ -420,16 +420,18 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             var yParameters = new List<fmGlobalParameter>();
 
-            var clb = sender as CheckedListBox;
+            var clb = sender as ListView;
             if (clb != null)
+            {
                 for (int i = 0; i < clb.Items.Count; ++i)
                 {
                     if (i == e.Index && e.NewValue == CheckState.Checked
-                        || clb.GetItemChecked(i) && (e.NewValue == CheckState.Checked || i != e.Index))
+                        || clb.Items[i].Checked && (e.NewValue == CheckState.Checked || i != e.Index))
                     {
-                        yParameters.Add(fmGlobalParameter.parametersByName[clb.Items[i].ToString()]);
+                        yParameters.Add(fmGlobalParameter.parametersByName[clb.Items[i].Text]);
                     }
                 }
+            }
 
             if (listBoxXAxis.Text == "")
                 return;
@@ -467,7 +469,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void button1_Click(object sender, EventArgs e)
         {
-            m_XYDialog.ShowDialog();
+            m_XYDialog.Show();
+            m_XYDialog.Activate();
         }
 
         private void PlaceTablesAndGraphsConfigurationPanelOnSeparateForm()
@@ -478,11 +481,6 @@ namespace FilterSimulationWithTablesAndGraphs
             m_XYDialog.Width = tablesAndGraphsTopLeftPanel.Width + 20;
             tablesAndGraphsTopLeftPanel.Dock = DockStyle.Fill;
             tablesAndGraphsTopLeftPanel.Text = "Diagram Configuration";
-        }
-
-        private void GridPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
