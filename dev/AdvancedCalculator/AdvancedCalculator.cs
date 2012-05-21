@@ -79,6 +79,12 @@ namespace AdvancedCalculator
         {
             var sfd = new SaveFileDialog();
             sfd.Filter = "Data files (*.dat)|*.dat";
+            if (!m_currentFilename.EndsWith("fmdata.dat"))
+            {
+                sfd.FileName = m_currentFilename;
+                string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
+                sfd.InitialDirectory = path;
+            }
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 SaveOnDisk(sfd.FileName);
@@ -104,6 +110,7 @@ namespace AdvancedCalculator
             }
         }
 
+        private string m_currentFilename;
         private void LoadFromDisk(string fileName)
         {
             TextReader input = null;
@@ -118,6 +125,7 @@ namespace AdvancedCalculator
 
             //try
             {
+                m_currentFilename = fileName;
                 filterSimulationWithTablesAndGraphs1.Deserialize(input);
                 Text = m_Caption + " [" + fileName + "]";
             }
