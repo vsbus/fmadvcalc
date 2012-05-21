@@ -340,9 +340,9 @@ namespace fmCalculationLibrary
             AddParameter(ref Vcd, new fmGlobalParameter("Vcd", fmUnitFamily.VolumeFamily, new fmRange(0.01e-3, 10000e-3)));
             AddParameter(ref rho_bulk, new fmGlobalParameter("rho_bulk", fmUnitFamily.DensityFamily, new fmRange(1000, 3000)));
             AddParameter(ref Qmfid, new fmGlobalParameter("Qmfid", fmUnitFamily.FlowRateMass, new fmRange(0.1 / 3600, 1000000.0 / 3600)));
-            AddParameter(ref Qfid, new fmGlobalParameter("Qfid", fmUnitFamily.FlowRateMass, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
+            AddParameter(ref Qfid, new fmGlobalParameter("Qfid", fmUnitFamily.FlowRateVolume, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
             AddParameter(ref Qmcd, new fmGlobalParameter("Qmcd", fmUnitFamily.FlowRateMass, new fmRange(0.1 / 3600, 1000000.0 / 3600)));
-            AddParameter(ref Qcd, new fmGlobalParameter("Qcd", fmUnitFamily.FlowRateMass, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
+            AddParameter(ref Qcd, new fmGlobalParameter("Qcd", fmUnitFamily.FlowRateVolume, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
             AddParameter(ref qmfid, new fmGlobalParameter("qmfid", fmUnitFamily.SpecificFlowRateMass, new fmRange(0.1 / 60, 100.0 / 60)));
             AddParameter(ref qfid, new fmGlobalParameter("qfid", fmUnitFamily.SpecificFlowRateVolume, new fmRange(1.0e-3 / 60, 500.0e-3 / 60)));
             AddParameter(ref qmcd, new fmGlobalParameter("qmcd", fmUnitFamily.SpecificFlowRateMass, new fmRange(0.1 / 60, 100.0 / 60)));
