@@ -469,18 +469,30 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (m_XYDialog == null || m_XYDialog.IsDisposed)
+            {
+                PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
+            }
             m_XYDialog.Show();
             m_XYDialog.Activate();
         }
 
         private void PlaceTablesAndGraphsConfigurationPanelOnSeparateForm()
         {
+            int oldHeight = m_XYDialog == null ? 400 : m_XYDialog.Height;
+            int oldWidth = m_XYDialog == null ? 320 : m_XYDialog.Width;
             m_XYDialog = new Form();
+            m_XYDialog.Closing += new System.ComponentModel.CancelEventHandler(m_XYDialog_Closing);
+            m_XYDialog.Height = oldHeight;
+            m_XYDialog.Width = oldWidth;
             tablesAndGraphsTopLeftPanel.Parent = m_XYDialog;
-            m_XYDialog.Height = tablesAndGraphsTopLeftPanel.Height + 60;
-            m_XYDialog.Width = tablesAndGraphsTopLeftPanel.Width + 20;
             tablesAndGraphsTopLeftPanel.Dock = DockStyle.Fill;
             tablesAndGraphsTopLeftPanel.Text = "Diagram Configuration";
+        }
+
+        void m_XYDialog_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
         }
     }
 }
