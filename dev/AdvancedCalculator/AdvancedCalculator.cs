@@ -85,9 +85,12 @@ namespace AdvancedCalculator
         {
             var saveDialog = new SaveFileDialog();
             saveDialog.Filter = "Data files (*.dat)|*.dat";
-            saveDialog.FileName = m_currentFilename;
-            string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
-            saveDialog.InitialDirectory = path;
+            if (m_currentFilename != null)
+            {
+                saveDialog.FileName = m_currentFilename;
+                string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
+                saveDialog.InitialDirectory = path;
+            }
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 SaveOnDisk(saveDialog.FileName);
@@ -107,9 +110,12 @@ namespace AdvancedCalculator
         {
             var openDialog = new OpenFileDialog();
             openDialog.Filter = "Data files (*.dat)|*.dat";
-            openDialog.FileName = m_currentFilename;
-            string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
-            openDialog.InitialDirectory = path;
+            if (m_currentFilename != null)
+            {
+                openDialog.FileName = m_currentFilename;
+                string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
+                openDialog.InitialDirectory = path;
+            }
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
                 LoadFromDisk(openDialog.FileName);
