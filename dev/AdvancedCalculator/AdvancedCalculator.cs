@@ -70,15 +70,14 @@ namespace AdvancedCalculator
             }
         }
 
-        private void sAVEONDISKToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SAveondiskToolStripMenuItemClick(object sender, EventArgs e)
         {
             SaveOnDisk();
         }
 
         private void SaveOnDisk()
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.InitialDirectory = Directory.GetCurrentDirectory();
+            var sfd = new SaveFileDialog();
             sfd.Filter = "Data files (*.dat)|*.dat";
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -97,9 +96,8 @@ namespace AdvancedCalculator
 
         private void lOADFROMDISKToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.InitialDirectory = Directory.GetCurrentDirectory();
-            ofd.Filter = "Data files (*.dat)|*.dat";
+            var ofd = new OpenFileDialog();
+            ofd.Filter = "Data files (*.dat)|*.dat";   
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 LoadFromDisk(ofd.FileName);

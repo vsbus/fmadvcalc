@@ -71,7 +71,7 @@ namespace AdvancedCalculator
             this.sAVEONDISKToolStripMenuItem.Name = "sAVEONDISKToolStripMenuItem";
             this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.sAVEONDISKToolStripMenuItem.Text = "Save As...";
-            this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.sAVEONDISKToolStripMenuItem_Click);
+            this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.SAveondiskToolStripMenuItemClick);
             // 
             // lOADFROMDISKToolStripMenuItem
             // 
