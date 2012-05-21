@@ -454,7 +454,28 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 m_fSolution.currentObjects.Project = m_fSolution.projects[0];
             }
+
             DisplaySolution(m_fSolution);
+
+            {
+                bool isChecked = false;
+                for (int row = 0; row < projectDataGrid.Rows.Count; ++row)
+                {
+                    for (int col = 0; col < projectDataGrid.ColumnCount; ++col)
+                    {
+                        if (projectDataGrid[col, row].Visible)
+                        {
+                            isChecked = true;
+                            projectDataGrid.CurrentCell = projectDataGrid[col, row];
+                            break;
+                        }
+                    }
+                    if (isChecked)
+                    {
+                        break;
+                    }
+                }
+            }
         }
 
         private void fmFilterSimulationWithTablesAndGraphs_Load(object sender, EventArgs e)
