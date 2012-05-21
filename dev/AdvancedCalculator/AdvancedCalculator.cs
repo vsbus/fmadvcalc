@@ -149,11 +149,14 @@ namespace AdvancedCalculator
             {
                 SaveOnDisk();
             }
-            Registry.SetValue(
-                @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
-                "LastFile",
-                m_currentFilename,
-                RegistryValueKind.String);
+            if (m_currentFilename != null)
+            {
+                Registry.SetValue(
+                    @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
+                    "LastFile",
+                    m_currentFilename,
+                    RegistryValueKind.String);
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
