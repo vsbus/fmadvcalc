@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using FilterSimulationWithTablesAndGraphs;
+using Microsoft.Win32;
 
 namespace AdvancedCalculator
 {
@@ -53,7 +54,12 @@ namespace AdvancedCalculator
         // ReSharper restore InconsistentNaming
         {
             Text = m_Caption;
-            string fileName = Directory.GetCurrentDirectory() + "\\fmdata.dat";
+            string defaultFilename = Directory.GetCurrentDirectory() + "\\fmdata.dat";
+            object regValue = Registry.GetValue(
+                @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
+                "LastFile",
+                defaultFilename);
+            string fileName = regValue == null ? defaultFilename : regValue.ToString();
             LoadFromDisk(fileName);
         }
 
@@ -77,19 +83,16 @@ namespace AdvancedCalculator
 
         private void SaveOnDisk()
         {
-            var sfd = new SaveFileDialog();
-            sfd.Filter = "Data files (*.dat)|*.dat";
-            if (!m_currentFilename.EndsWith("fmdata.dat"))
+            var saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Data files (*.dat)|*.dat";
+            saveDialog.FileName = m_currentFilename;
+            string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
+            saveDialog.InitialDirectory = path;
+            if (saveDialog.ShowDialog() == DialogResult.OK)
             {
-                sfd.FileName = m_currentFilename;
-                string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
-                sfd.InitialDirectory = path;
-            }
-            if (sfd.ShowDialog() == DialogResult.OK)
-            {
-                SaveOnDisk(sfd.FileName);
-                Text = m_Caption + " [" + sfd.FileName + "]";
-                SaveOnDisk("fmdata.dat");
+                SaveOnDisk(saveDialog.FileName);
+                Text = m_Caption + " [" + saveDialog.FileName + "]";
+                m_currentFilename = saveDialog.FileName;
             }
         }
 
@@ -102,11 +105,14 @@ namespace AdvancedCalculator
 
         private void lOADFROMDISKToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ofd = new OpenFileDialog();
-            ofd.Filter = "Data files (*.dat)|*.dat";   
-            if (ofd.ShowDialog() == DialogResult.OK)
+            var openDialog = new OpenFileDialog();
+            openDialog.Filter = "Data files (*.dat)|*.dat";
+            openDialog.FileName = m_currentFilename;
+            string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
+            openDialog.InitialDirectory = path;
+            if (openDialog.ShowDialog() == DialogResult.OK)
             {
-                LoadFromDisk(ofd.FileName);
+                LoadFromDisk(openDialog.FileName);
             }
         }
 
@@ -123,18 +129,9 @@ namespace AdvancedCalculator
                 return;
             }
 
-            //try
-            {
-                m_currentFilename = fileName;
-                filterSimulationWithTablesAndGraphs1.Deserialize(input);
-                Text = m_Caption + " [" + fileName + "]";
-            }
-            /*
-            catch (Exception e)
-            {
-                ;
-            }
-             * */
+            m_currentFilename = fileName;
+            filterSimulationWithTablesAndGraphs1.Deserialize(input);
+            Text = m_Caption + " [" + fileName + "]";
 
             input.Close();
         }
@@ -146,6 +143,11 @@ namespace AdvancedCalculator
             {
                 SaveOnDisk();
             }
+            Registry.SetValue(
+                @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
+                "LastFile",
+                m_currentFilename,
+                RegistryValueKind.String);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

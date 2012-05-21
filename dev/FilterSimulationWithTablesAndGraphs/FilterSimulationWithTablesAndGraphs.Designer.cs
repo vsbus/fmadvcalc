@@ -55,6 +55,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.button1 = new System.Windows.Forms.Button();
             this.splitter10 = new System.Windows.Forms.Splitter();
             this.tablesAndGraphsTopLeftPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
             this.listBoxYAxis = new System.Windows.Forms.ListView();
             this.label2 = new System.Windows.Forms.Label();
             this.listBoxXAxis = new System.Windows.Forms.ListBox();
@@ -64,7 +65,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel8 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -537,10 +537,19 @@ namespace FilterSimulationWithTablesAndGraphs
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.calculationOptionTandCChangeButton);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.minXValueTextBox);
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.xRangeLabel);
-            this.tablesAndGraphsTopLeftPanel.Location = new System.Drawing.Point(8, 28);
+            this.tablesAndGraphsTopLeftPanel.Location = new System.Drawing.Point(18, 22);
             this.tablesAndGraphsTopLeftPanel.Name = "tablesAndGraphsTopLeftPanel";
-            this.tablesAndGraphsTopLeftPanel.Size = new System.Drawing.Size(301, 347);
+            this.tablesAndGraphsTopLeftPanel.Size = new System.Drawing.Size(334, 231);
             this.tablesAndGraphsTopLeftPanel.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(109, 141);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Y Axis Parameters";
             // 
             // listBoxYAxis
             // 
@@ -550,7 +559,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis.CheckBoxes = true;
             this.listBoxYAxis.Location = new System.Drawing.Point(112, 157);
             this.listBoxYAxis.Name = "listBoxYAxis";
-            this.listBoxYAxis.Size = new System.Drawing.Size(178, 171);
+            this.listBoxYAxis.Size = new System.Drawing.Size(211, 55);
             this.listBoxYAxis.TabIndex = 6;
             this.listBoxYAxis.UseCompatibleStateImageBehavior = false;
             this.listBoxYAxis.View = System.Windows.Forms.View.List;
@@ -572,7 +581,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxXAxis.FormattingEnabled = true;
             this.listBoxXAxis.Location = new System.Drawing.Point(13, 64);
             this.listBoxXAxis.Name = "listBoxXAxis";
-            this.listBoxXAxis.Size = new System.Drawing.Size(90, 264);
+            this.listBoxXAxis.Size = new System.Drawing.Size(90, 147);
             this.listBoxXAxis.TabIndex = 1;
             this.listBoxXAxis.SelectedIndexChanged += new System.EventHandler(this.listBoxX_SelectedIndexChanged);
             // 
@@ -641,15 +650,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(374, 152);
             this.panel9.TabIndex = 11;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(109, 141);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Y Axis Parameters";
             // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
