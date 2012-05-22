@@ -96,7 +96,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("global: (A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
-                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
                     result.Add(fmGlobalParameter.Qsus);
@@ -178,7 +178,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("global: (A, Q), (Dp), (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)")]
-                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_QP_CONST:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
                     result.Add(fmGlobalParameter.Qsus);
@@ -310,7 +310,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //[Description("global: (A, Q), d, Dp, (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)]
-                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_QP_CONST:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST:
                     result.Add(fmGlobalParameter.d0);
 
                     result.Add(fmGlobalParameter.A);
@@ -359,7 +359,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     break;
 
                 //(A, Q), d0, (Dp, Qp), (sf, sr, tr), (hc, V, M, tf, n, tc)")]
-                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP:
+                case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST:
                     result.Add(fmGlobalParameter.d0);
 
                     result.Add(fmGlobalParameter.A);
@@ -1136,8 +1136,8 @@ namespace fmCalcBlocksLibrary.Blocks
                 processOnChange = false;
                 bool candleOption = calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
                     || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
-                    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_QP_CONST
-                    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP;
+                    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST
+                    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST;
                 if (candleOption == false)
                 {
                     fmBlockVariableParameter d0 = GetParameterByName(fmGlobalParameter.d0.name);
@@ -1196,12 +1196,12 @@ namespace fmCalcBlocksLibrary.Blocks
                 SetGroupsOfDesign1(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1]);
                 SetGroupsOfStandartAndDesignGlobalDpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST]);
                 SetGroupsOfStandartQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST]);
-                SetGroupsOfStandartDpQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_QP_CONST]);
-                SetGroupsOfPlainQpConstVolumetricPump(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP]);
+                SetGroupsOfStandartDpQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST]);
+                SetGroupsOfPlainQpConstVolumetricPump(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST]);
                 SetGroupsOfCandleDpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST]);
                 SetGroupsOfCandleQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST]);
-                SetGroupsOfCandleDpQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_QP_CONST]);
-                SetGroupsOfCylindricalQpConstVolumetricPump(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP]);
+                SetGroupsOfCandleDpQpConst(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST]);
+                SetGroupsOfCylindricalQpConstVolumetricPump(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST]);
 
                 SetGroupsOfOptimization1(m_tables[fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1]);
             }

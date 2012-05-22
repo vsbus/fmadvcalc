@@ -143,9 +143,18 @@ namespace AdvancedCalculator
                 return;
             }
 
-            m_currentFilename = fileName;
-            filterSimulationWithTablesAndGraphs1.Deserialize(input);
-            Text = m_Caption + " [" + fileName + "]";
+            try
+            {
+                m_currentFilename = fileName;
+                filterSimulationWithTablesAndGraphs1.Deserialize(input);
+                Text = m_Caption + " [" + fileName + "]";
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("File " + m_currentFilename + " has wrong format and impossible to open", "Error");
+                m_currentFilename = null;
+                Text = m_Caption;
+            }
 
             input.Close();
         }

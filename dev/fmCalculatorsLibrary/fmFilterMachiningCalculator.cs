@@ -32,32 +32,34 @@ namespace fmCalculatorsLibrary
             // Global
             // 
             //(A, Q), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)
-            [Description("Dp = const (Plain)")]
+            [Description("Dp = const")]
             PLAIN_DP_CONST,
-            //(A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
-            [Description("Qp = const (Plain)")]
-            PLAIN_QP_CONST,
-            //(A, Q), (Dp), (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)]
-            [Description("Dp + Qp = const (Plain)")]
-            PLAIN_DP_QP_CONST,
             //(A, Q), (Dp, Qp), (sf, sr, tr), (hc, V, M, tf, n, tc)]
-            [Description("Qp = const (Plain, volumetric pump)")]
-            PLAIN_QP_CONST_VOLUMETRIC_PUMP,
+            [Description("Volumetric Pump (Qp = const)")]
+            PLAIN_VOLUMETRIC_PUMP_QP_CONST,
+            //(A, Q), (Dp), (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            [Description("Centripetal Pump (Qp = const & Dp = const)")]
+            PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST,
 
             // Candle
             //
             //(A, Q), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)
-            [Description("Dp = const (Cylindrical)")]
+            [Description("Dp = const (Cylindrical Area)")]
             CYLINDRICAL_DP_CONST,
+            //(A, Q), d, (Dp, Qp), (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            [Description("Volumetric Pump (Qp = const, Cylindrical Area)")]
+            CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST,
+            //(A, Q), d, Dp, (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            [Description("Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)")]
+            CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST,
+
+            //(A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            [Description("Qp = const (Plain)")]
+            PLAIN_QP_CONST,
             //(A, Q, Qsus_d), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
             [Description("Qp = const (Cylindrical)")]
-            CYLINDRICAL_QP_CONST,
-            //(A, Q), d, Dp, (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)]
-            [Description("Dp + Qp = const (Cylindrical)")]
-            CYLINDRICAL_DP_QP_CONST,
-            //(A, Q), d, (Dp, Qp), (sf, sr, tr), (hc, V, M, tf, n, tc)]
-            [Description("Qp = const (Cylindrical, volumetric pump)")]
-            CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP
+            CYLINDRICAL_QP_CONST
+
         }
 
         public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
@@ -71,12 +73,12 @@ namespace fmCalculatorsLibrary
               || calculationOption == fmFilterMachiningCalculationOption.STANDART8
               || calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_CONST
               || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST
-              || calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_QP_CONST
-              || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP
+              || calculationOption == fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST
+              || calculationOption == fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST
               || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
               || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
-              || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_QP_CONST
-              || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP;
+              || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST
+              || calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST;
         }
 
         private static bool IsDesignKindOption(fmFilterMachiningCalculationOption calculationOption)
@@ -84,8 +86,8 @@ namespace fmCalculatorsLibrary
             return calculationOption == fmFilterMachiningCalculationOption.DESIGN1
                 || calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_CONST
                 || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST
-                || calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_QP_CONST
-                || calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP;
+                || calculationOption == fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST
+                || calculationOption == fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST;
         }
 
         private static bool IsOptimizationKindOption(fmFilterMachiningCalculationOption calculationOption)
@@ -118,11 +120,11 @@ namespace fmCalculatorsLibrary
             {
                 DoSubCalculationsPlainQpConst_OnlyLimitClueParams();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_QP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST)
             {
                 DoSubCalculationsPlainDpQpConst_OnlyLimitClueParams();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP)
+            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST)
             {
                 DoSubCalculationsPlainQpConstVolumetricPump_OnlyLimitClueParams();
             }
@@ -134,11 +136,11 @@ namespace fmCalculatorsLibrary
             {
                 DoSubCalculationsCylindricalQpConst_OnlyLimitClueParams();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_QP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST)
             {
                 DoSubCalculationsCylindricalDpQpConst_OnlyLimitClueParams();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP)
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST)
             {
                 DoSubCalculationsCylindricalQpConstVolumetricPump_OnlyLimitClueParams();
             }
@@ -1761,11 +1763,11 @@ namespace fmCalculatorsLibrary
             {
                 DoSubCalculationsPlainQpConst();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_DP_QP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST)
             {
                 DoSubCalculationsPlainDpQpConst();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_QP_CONST_VOLUMETRIC_PUMP)
+            else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST)
             {
                 DoSubCalculationsPlainQpConstVolumetricPump();
             }
@@ -1777,11 +1779,11 @@ namespace fmCalculatorsLibrary
             {
                 DoSubCalculationsCylindricalQpConst();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_DP_QP_CONST)
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST)
             {
                 DoSubCalculationsCylindricalDpQpConst();
             }
-            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST_VOLUMETRIC_PUMP)
+            else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST)
             {
                 DoSubCalculationsCylindricalQpConstVolumetricPump();
             }
