@@ -158,7 +158,14 @@ namespace AdvancedCalculator
                                                     MessageBoxButtons.YesNo);
                 if (dres == DialogResult.Yes)
                 {
-                    SaveOnDisk();
+                    if (m_currentFilename != null)
+                    {
+                        SaveOnDisk(m_currentFilename);
+                    }
+                    else
+                    {
+                        SaveOnDisk();
+                    }
                 }
                 if (m_currentFilename != null)
                 {
