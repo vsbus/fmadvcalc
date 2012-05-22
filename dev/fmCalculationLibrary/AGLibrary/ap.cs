@@ -11,6 +11,16 @@ namespace fmCalculationLibrary
         public double x;
         public double y;
 
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public Complex(double _x)
         {
             x = _x;
