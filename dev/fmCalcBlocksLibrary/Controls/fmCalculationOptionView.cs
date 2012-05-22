@@ -60,25 +60,29 @@ namespace fmCalcBlocksLibrary.Controls
             candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST));
             Nodes.Add(candleNode);
 
-            var otherNode = new TreeNode("Other...");
-            Nodes.Add(otherNode);
+            // All other options should be hidden.
+            // But please keep the source code.
+            // Maybe later we want to use some of these other options. 
 
-            var standartNode = new TreeNode("Standart");
-            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3));
-            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4));
-            standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8));
-            otherNode.Nodes.Add(standartNode);
+            //var otherNode = new TreeNode("Other...");
+            //Nodes.Add(otherNode);
 
-            var designNode = new TreeNode("Design");
-            designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1));
-            otherNode.Nodes.Add(designNode);
+            //var standartNode = new TreeNode("Standart");
+            //standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3));
+            //standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4));
+            //standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8));
+            //otherNode.Nodes.Add(standartNode);
 
-            var optimizationNode = new TreeNode("Optimization");
-            optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1));
-            otherNode.Nodes.Add(optimizationNode);
+            //var designNode = new TreeNode("Design");
+            //designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1));
+            //otherNode.Nodes.Add(designNode);
 
-            otherNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST));
-            otherNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST));
+            //var optimizationNode = new TreeNode("Optimization");
+            //optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1));
+            //otherNode.Nodes.Add(optimizationNode);
+
+            //otherNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST));
+            //otherNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST));
 
             SetSelectedOption(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
 
