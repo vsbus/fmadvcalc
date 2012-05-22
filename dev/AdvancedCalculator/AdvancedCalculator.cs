@@ -8,7 +8,7 @@ namespace AdvancedCalculator
 {
     public partial class fmAdvancedCalculator : Form
     {
-        private string m_Caption = string.Format("AdvancedCalculator (v.{0})", Config.Version);
+        private string m_Caption = string.Format("FILTRAPLUS (v.{0})", Config.Version);
 
         public fmAdvancedCalculator()
         {
