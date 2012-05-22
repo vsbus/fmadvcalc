@@ -120,22 +120,4 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="saveAllToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAm5JREFUOE+lke1L
-        U2EYxus/6XtQH4I+9KFP/gOiURRiBoaGTmWIb/lWWul86QXUzTXbLIvsRYpE1FphNm9z4vv7Dlo2ajCX
-        bdmDc15dZ2EbmRB04D7Pfe5znovf8zv7Aez7r0sPMDRPSYltSvJaxuTS3RnJaHBL5nW35FvGxGgel3Om
-        ITlw+vFB/ds/KzpIrx+RLndQ2Mtz18foGl92p0/O1og++3vAmSsusb0OSKljXhXfnlQV7dOq8cmCKrBM
-        qIJWlnVC5TWPKZJoJDkcHxRNTLk2JHZnQPLN46pnIqQ4U31ur9rmqvffNsLKv64USTSSaLsC0uuHxdzj
-        k9QaUa0v/YpOQCegE9AJ6AR0AjoBnYAkIMnR6A/Qb2kmkZsvvJJmeq9s/WuKTkAnfAXQSXSNv0gCkuij
-        XwHJlW+ludsnxpZRZX/lU3QCOonuMdwa+b33RxhY56Hqnq4irdYVC0gsHxBLd0BymkbUje4ZRSegE2xu
-        RRDe2kYkso0t1mZYf46g+oEHSeVvYgEnLr+T3tGAnG9wKWv/Mo8wDDpB2T0PKjo8uNi+iOI78yhiFbbN
-        odA2h5QqZyzgSEZv66mqAUmqGFRNz9YUnYBOUHn/A2sFpe0aSuxLKGpbRIFtHkbLFE6W9cUCdn4LSTSS
-        aHQCOoEvGIR33c8KwPs1gE/s/d+DKLJOIyG3a3cASR6RRKMT0Ak+B32ociaiRXJgljz2yfgSWkWJ1YNj
-        mQ93B8SRgCR89MC1dhWzIQdmNxzs6zhbRrXDg+MXOvcOIMkgSZBhmkRu4wqy6peQbVqAoXYWWSY3ErI7
-        cSi1Y++AHZJ/WX8CaQnXbXGuYaIAAAAASUVORK5CYII=
-</value>
-  </data>
 </root>

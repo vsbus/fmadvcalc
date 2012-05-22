@@ -38,6 +38,14 @@ namespace AdvancedCalculator
         // ReSharper restore InconsistentNaming
         {
             filterSimulationWithTablesAndGraphs1.SaveAll();
+            if (m_currentFilename != null)
+            {
+                SaveOnDisk(m_currentFilename);
+            }
+            else
+            {
+                SaveOnDisk();
+            }
         }
 
         // ReSharper disable InconsistentNaming

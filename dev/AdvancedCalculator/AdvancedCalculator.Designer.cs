@@ -28,7 +28,6 @@ namespace AdvancedCalculator
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmAdvancedCalculator));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sAVEONDISKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,9 +57,9 @@ namespace AdvancedCalculator
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sAVEONDISKToolStripMenuItem,
             this.lOADFROMDISKToolStripMenuItem,
             this.saveAllToolStripMenuItem,
+            this.sAVEONDISKToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -69,29 +68,28 @@ namespace AdvancedCalculator
             // sAVEONDISKToolStripMenuItem
             // 
             this.sAVEONDISKToolStripMenuItem.Name = "sAVEONDISKToolStripMenuItem";
-            this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sAVEONDISKToolStripMenuItem.Text = "Save As...";
             this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.SAveondiskToolStripMenuItemClick);
             // 
             // lOADFROMDISKToolStripMenuItem
             // 
             this.lOADFROMDISKToolStripMenuItem.Name = "lOADFROMDISKToolStripMenuItem";
-            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.lOADFROMDISKToolStripMenuItem.Text = "Open...";
             this.lOADFROMDISKToolStripMenuItem.Click += new System.EventHandler(this.lOADFROMDISKToolStripMenuItem_Click);
             // 
             // saveAllToolStripMenuItem
             // 
-            this.saveAllToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAllToolStripMenuItem.Image")));
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
-            this.saveAllToolStripMenuItem.Text = "Save All";
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAllToolStripMenuItem.Text = "Save";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
