@@ -30,9 +30,9 @@ namespace AdvancedCalculator
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sAVEONDISKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lOADFROMDISKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sAVEONDISKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,34 +62,34 @@ namespace AdvancedCalculator
             this.sAVEONDISKToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.fileToolStripMenuItem.Text = "File";
-            // 
-            // sAVEONDISKToolStripMenuItem
-            // 
-            this.sAVEONDISKToolStripMenuItem.Name = "sAVEONDISKToolStripMenuItem";
-            this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.sAVEONDISKToolStripMenuItem.Text = "Save As...";
-            this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.SAveondiskToolStripMenuItemClick);
             // 
             // lOADFROMDISKToolStripMenuItem
             // 
             this.lOADFROMDISKToolStripMenuItem.Name = "lOADFROMDISKToolStripMenuItem";
-            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.lOADFROMDISKToolStripMenuItem.Text = "Open...";
             this.lOADFROMDISKToolStripMenuItem.Click += new System.EventHandler(this.lOADFROMDISKToolStripMenuItem_Click);
             // 
             // saveAllToolStripMenuItem
             // 
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.saveAllToolStripMenuItem.Text = "Save";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
+            // 
+            // sAVEONDISKToolStripMenuItem
+            // 
+            this.sAVEONDISKToolStripMenuItem.Name = "sAVEONDISKToolStripMenuItem";
+            this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.sAVEONDISKToolStripMenuItem.Text = "Save As...";
+            this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.SAveondiskToolStripMenuItemClick);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -101,34 +101,34 @@ namespace AdvancedCalculator
             this.rangesToolStripMenuItem,
             this.yaxisParametersToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // unitsToolStripMenuItem
             // 
             this.unitsToolStripMenuItem.Name = "unitsToolStripMenuItem";
-            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.unitsToolStripMenuItem.Text = "Units";
             this.unitsToolStripMenuItem.Click += new System.EventHandler(this.unitsToolStripMenuItem_Click);
             // 
             // precisionToolStripMenuItem
             // 
             this.precisionToolStripMenuItem.Name = "precisionToolStripMenuItem";
-            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.precisionToolStripMenuItem.Text = "Precision";
             this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
             // 
             // rangesToolStripMenuItem
             // 
             this.rangesToolStripMenuItem.Name = "rangesToolStripMenuItem";
-            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.rangesToolStripMenuItem.Text = "Ranges";
             this.rangesToolStripMenuItem.Click += new System.EventHandler(this.rangesToolStripMenuItem_Click);
             // 
             // yaxisParametersToolStripMenuItem
             // 
             this.yaxisParametersToolStripMenuItem.Name = "yaxisParametersToolStripMenuItem";
-            this.yaxisParametersToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.yaxisParametersToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.yaxisParametersToolStripMenuItem.Text = "Parameters to display";
             this.yaxisParametersToolStripMenuItem.Click += new System.EventHandler(this.yaxisParametersToolStripMenuItem_Click);
             // 
@@ -149,6 +149,7 @@ namespace AdvancedCalculator
             this.Controls.Add(this.menuStrip1);
             this.Name = "fmAdvancedCalculator";
             this.Text = "Advanced Calculator";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AdvancedCalculator_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fmAdvancedCalculator_FormClosed);
             this.menuStrip1.ResumeLayout(false);

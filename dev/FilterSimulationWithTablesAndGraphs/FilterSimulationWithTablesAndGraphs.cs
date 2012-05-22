@@ -507,9 +507,9 @@ namespace FilterSimulationWithTablesAndGraphs
             m_XYDialog.Closing += new System.ComponentModel.CancelEventHandler(m_XYDialog_Closing);
             m_XYDialog.Height = oldHeight;
             m_XYDialog.Width = oldWidth;
+            m_XYDialog.Text = "Diagram Configuration";
             tablesAndGraphsTopLeftPanel.Parent = m_XYDialog;
             tablesAndGraphsTopLeftPanel.Dock = DockStyle.Fill;
-            tablesAndGraphsTopLeftPanel.Text = "Diagram Configuration";
         }
 
         void m_XYDialog_Closing(object sender, System.ComponentModel.CancelEventArgs e)
