@@ -9,7 +9,6 @@ namespace FilterSimulation.fmFilterObjects
         public fmFilterSimMachineType machine;
         public string filterMedium;
         public List<fmFilterSimulation> simList;
-        public DateTime lastModifiedDate;
         public string machineName;
 
         public void CopyFrom(fmFilterSimSerieData from, fmFilterSimSerie ownerSimSerie)
@@ -26,7 +25,6 @@ namespace FilterSimulation.fmFilterObjects
                 simList.Add(newSim);
                 newSim.CopyFrom(sim);
             }
-            lastModifiedDate = from.lastModifiedDate;
         }
 
         private static class fmSimSerieDataSerializeTags
@@ -134,7 +132,6 @@ namespace FilterSimulation.fmFilterObjects
                 m_modified = value;
                 if (value)
                 {
-                    m_data.lastModifiedDate = DateTime.Now;
                     m_parentSuspension.Modified |= true;
                 }
             }
@@ -143,14 +140,6 @@ namespace FilterSimulation.fmFilterObjects
         {
             get { return m_checked; }
             set { m_checked = value; }
-        }
-        public DateTime LastModifiedDate
-        {
-            get { return m_data.lastModifiedDate; }
-            set 
-            {
-                m_data.lastModifiedDate = value; 
-            }
         }
         public string MachineName
         {
@@ -180,7 +169,6 @@ namespace FilterSimulation.fmFilterObjects
             m_data.filterMedium = filterMedium;
             m_data.machineName = machineName;
             m_data.simList = new List<fmFilterSimulation>();
-            m_data.lastModifiedDate = DateTime.Now;
             Keep();
         }
 
@@ -233,7 +221,6 @@ namespace FilterSimulation.fmFilterObjects
             m_data.CopyFrom(serie.m_data, this);
             m_backupData.CopyFrom(serie.m_backupData, this);
             Modified = serie.Modified;
-            LastModifiedDate = serie.LastModifiedDate;
         }
         public void AddSimulation(fmFilterSimulation sim)
         {

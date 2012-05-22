@@ -454,6 +454,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 m_fSolution.currentObjects.Project = m_fSolution.projects[0];
             }
+            m_fSolution.Keep();
 
             DisplaySolution(m_fSolution);
 
@@ -514,6 +515,18 @@ namespace FilterSimulationWithTablesAndGraphs
         void m_XYDialog_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
+        }
+
+        public bool IsModified()
+        {
+            foreach (var project in m_fSolution.projects)
+            {
+                if (project.Modified)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

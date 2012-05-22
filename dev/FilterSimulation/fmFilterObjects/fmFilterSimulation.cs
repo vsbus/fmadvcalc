@@ -812,7 +812,7 @@ namespace FilterSimulation.fmFilterObjects
         {
             foreach (fmBlockVariableParameter p in block.Parameters)
             {
-                if (sim.Parameters[p.globalParameter].value != p.value
+                if (fmValue.EpsCompare(sim.Parameters[p.globalParameter].value.value, p.value.value, 1e-9) != 0
                     || ((fmCalculationVariableParameter) sim.Parameters[p.globalParameter]).isInputed != p.IsInputed)
                 {
                     sim.Modified = true;

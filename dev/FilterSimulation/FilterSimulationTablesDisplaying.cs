@@ -201,7 +201,6 @@ namespace FilterSimulation
                 row.Cells[simSeriesFilterMediumColumn.Index].Value = serie.FilterMedium;
                 row.Cells[simSeriesMachineTypeNameColumn.Index].Value = serie.MachineType.name;
                 row.Cells[simSeriesMachineNameColumn.Index].Value = serie.MachineName;
-                row.Cells[simSeriesLastModifiedDateColumn.Index].Value = Convert.ToString(serie.LastModifiedDate);
             }
 
             foreach (DataGridViewRow row in simulationDataGrid.Rows)

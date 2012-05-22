@@ -152,18 +152,22 @@ namespace AdvancedCalculator
 
         private void fmAdvancedCalculator_FormClosed(object sender, FormClosedEventArgs e)
         {
-            DialogResult dres = MessageBox.Show("Would you like to save data before exit?", "Confirmation", MessageBoxButtons.YesNo);
-            if (dres == DialogResult.Yes)
+            if (filterSimulationWithTablesAndGraphs1.IsModified())
             {
-                SaveOnDisk();
-            }
-            if (m_currentFilename != null)
-            {
-                Registry.SetValue(
-                    @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
-                    "LastFile",
-                    m_currentFilename,
-                    RegistryValueKind.String);
+                DialogResult dres = MessageBox.Show("Would you like to save data before exit?", "Confirmation",
+                                                    MessageBoxButtons.YesNo);
+                if (dres == DialogResult.Yes)
+                {
+                    SaveOnDisk();
+                }
+                if (m_currentFilename != null)
+                {
+                    Registry.SetValue(
+                        @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
+                        "LastFile",
+                        m_currentFilename,
+                        RegistryValueKind.String);
+                }
             }
         }
 

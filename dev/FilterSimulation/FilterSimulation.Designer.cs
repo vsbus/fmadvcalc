@@ -150,15 +150,6 @@ namespace FilterSimulation
             this.machineTypeSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.machineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simSeriesDataGrid = new fmDataGrid.fmDataGrid();
-            this.simSeriesCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.simSeriesGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesMachineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesLastModifiedDateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.simSeriesDeleteButton = new System.Windows.Forms.Button();
             this.simSeriesRestoreButton = new System.Windows.Forms.Button();
@@ -231,6 +222,14 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.simSeriesCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.simSeriesGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesMachineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLeft.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
@@ -1288,8 +1287,7 @@ namespace FilterSimulation
             this.simSeriesSuspensionNameColumn,
             this.simSeriesFilterMediumColumn,
             this.simSeriesMachineTypeNameColumn,
-            this.simSeriesMachineNameColumn,
-            this.simSeriesLastModifiedDateColumn});
+            this.simSeriesMachineNameColumn});
             this.simSeriesDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simSeriesDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.simSeriesDataGrid.HighLightCurrentRow = true;
@@ -1312,69 +1310,6 @@ namespace FilterSimulation
             this.simSeriesDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellEndEdit);
             this.simSeriesDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellClick);
             this.simSeriesDataGrid.CurrentCellChanged += new System.EventHandler(this.simSeriesDataGrid_CurrentCellChanged);
-            // 
-            // simSeriesCheckedColumn
-            // 
-            this.simSeriesCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.simSeriesCheckedColumn.HeaderText = "";
-            this.simSeriesCheckedColumn.Name = "simSeriesCheckedColumn";
-            this.simSeriesCheckedColumn.Width = 5;
-            // 
-            // simSeriesGuidColumn
-            // 
-            this.simSeriesGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.simSeriesGuidColumn.HeaderText = "Guid";
-            this.simSeriesGuidColumn.Name = "simSeriesGuidColumn";
-            this.simSeriesGuidColumn.ReadOnly = true;
-            this.simSeriesGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.simSeriesGuidColumn.Visible = false;
-            // 
-            // simSeriesNameColumn
-            // 
-            this.simSeriesNameColumn.HeaderText = "Series Name";
-            this.simSeriesNameColumn.Name = "simSeriesNameColumn";
-            this.simSeriesNameColumn.Width = 75;
-            // 
-            // simSeriesProjectColumn
-            // 
-            this.simSeriesProjectColumn.HeaderText = "Project";
-            this.simSeriesProjectColumn.Name = "simSeriesProjectColumn";
-            this.simSeriesProjectColumn.ReadOnly = true;
-            this.simSeriesProjectColumn.Width = 75;
-            // 
-            // simSeriesSuspensionNameColumn
-            // 
-            this.simSeriesSuspensionNameColumn.HeaderText = "Suspension";
-            this.simSeriesSuspensionNameColumn.Name = "simSeriesSuspensionNameColumn";
-            this.simSeriesSuspensionNameColumn.ReadOnly = true;
-            this.simSeriesSuspensionNameColumn.Width = 150;
-            // 
-            // simSeriesFilterMediumColumn
-            // 
-            this.simSeriesFilterMediumColumn.HeaderText = "Filter Medium";
-            this.simSeriesFilterMediumColumn.Name = "simSeriesFilterMediumColumn";
-            this.simSeriesFilterMediumColumn.Width = 75;
-            // 
-            // simSeriesMachineTypeNameColumn
-            // 
-            this.simSeriesMachineTypeNameColumn.HeaderText = "Machine Type";
-            this.simSeriesMachineTypeNameColumn.Name = "simSeriesMachineTypeNameColumn";
-            this.simSeriesMachineTypeNameColumn.ReadOnly = true;
-            this.simSeriesMachineTypeNameColumn.Width = 75;
-            // 
-            // simSeriesMachineNameColumn
-            // 
-            this.simSeriesMachineNameColumn.HeaderText = "Machine Name";
-            this.simSeriesMachineNameColumn.Name = "simSeriesMachineNameColumn";
-            this.simSeriesMachineNameColumn.Visible = false;
-            this.simSeriesMachineNameColumn.Width = 75;
-            // 
-            // simSeriesLastModifiedDateColumn
-            // 
-            this.simSeriesLastModifiedDateColumn.HeaderText = "Last Modified Date";
-            this.simSeriesLastModifiedDateColumn.Name = "simSeriesLastModifiedDateColumn";
-            this.simSeriesLastModifiedDateColumn.ReadOnly = true;
-            this.simSeriesLastModifiedDateColumn.Width = 130;
             // 
             // panel3
             // 
@@ -2119,6 +2054,63 @@ namespace FilterSimulation
             this.mainSplitContainer.SplitterDistance = 555;
             this.mainSplitContainer.TabIndex = 36;
             // 
+            // simSeriesCheckedColumn
+            // 
+            this.simSeriesCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.simSeriesCheckedColumn.HeaderText = "";
+            this.simSeriesCheckedColumn.Name = "simSeriesCheckedColumn";
+            this.simSeriesCheckedColumn.Width = 5;
+            // 
+            // simSeriesGuidColumn
+            // 
+            this.simSeriesGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.simSeriesGuidColumn.HeaderText = "Guid";
+            this.simSeriesGuidColumn.Name = "simSeriesGuidColumn";
+            this.simSeriesGuidColumn.ReadOnly = true;
+            this.simSeriesGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.simSeriesGuidColumn.Visible = false;
+            this.simSeriesGuidColumn.Width = 35;
+            // 
+            // simSeriesNameColumn
+            // 
+            this.simSeriesNameColumn.HeaderText = "Series Name";
+            this.simSeriesNameColumn.Name = "simSeriesNameColumn";
+            this.simSeriesNameColumn.Width = 75;
+            // 
+            // simSeriesProjectColumn
+            // 
+            this.simSeriesProjectColumn.HeaderText = "Project";
+            this.simSeriesProjectColumn.Name = "simSeriesProjectColumn";
+            this.simSeriesProjectColumn.ReadOnly = true;
+            this.simSeriesProjectColumn.Width = 75;
+            // 
+            // simSeriesSuspensionNameColumn
+            // 
+            this.simSeriesSuspensionNameColumn.HeaderText = "Suspension";
+            this.simSeriesSuspensionNameColumn.Name = "simSeriesSuspensionNameColumn";
+            this.simSeriesSuspensionNameColumn.ReadOnly = true;
+            this.simSeriesSuspensionNameColumn.Width = 150;
+            // 
+            // simSeriesFilterMediumColumn
+            // 
+            this.simSeriesFilterMediumColumn.HeaderText = "Filter Medium";
+            this.simSeriesFilterMediumColumn.Name = "simSeriesFilterMediumColumn";
+            this.simSeriesFilterMediumColumn.Width = 75;
+            // 
+            // simSeriesMachineTypeNameColumn
+            // 
+            this.simSeriesMachineTypeNameColumn.HeaderText = "Machine Type";
+            this.simSeriesMachineTypeNameColumn.Name = "simSeriesMachineTypeNameColumn";
+            this.simSeriesMachineTypeNameColumn.ReadOnly = true;
+            this.simSeriesMachineTypeNameColumn.Width = 75;
+            // 
+            // simSeriesMachineNameColumn
+            // 
+            this.simSeriesMachineNameColumn.HeaderText = "Machine Name";
+            this.simSeriesMachineNameColumn.Name = "simSeriesMachineNameColumn";
+            this.simSeriesMachineNameColumn.Visible = false;
+            this.simSeriesMachineNameColumn.Width = 75;
+            // 
             // fmFilterSimulationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2243,15 +2235,6 @@ namespace FilterSimulation
         protected System.Windows.Forms.Panel panel5;
         protected System.Windows.Forms.ToolTip toolTip;
         protected System.Windows.Forms.Button simulationCreateButton;
-        protected System.Windows.Forms.DataGridViewCheckBoxColumn simSeriesCheckedColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesGuidColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesNameColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesProjectColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesSuspensionNameColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesFilterMediumColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineTypeNameColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineNameColumn;
-        protected System.Windows.Forms.DataGridViewTextBoxColumn simSeriesLastModifiedDateColumn;
         protected System.Windows.Forms.Panel simSeriesPanel;
         private System.Windows.Forms.Button calculationOptionChangeButton;
         private System.Windows.Forms.Panel panelSimSerSusInput;
@@ -2366,5 +2349,13 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn suspensionNameColumn;
         protected System.Windows.Forms.SplitContainer splitContainer1;
         protected System.Windows.Forms.SplitContainer mainSplitContainer;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn simSeriesCheckedColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesGuidColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesProjectColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesSuspensionNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesFilterMediumColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineTypeNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineNameColumn;
     }
 }
