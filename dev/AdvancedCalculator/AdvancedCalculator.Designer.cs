@@ -148,7 +148,7 @@ namespace AdvancedCalculator
             this.Controls.Add(this.filterSimulationWithTablesAndGraphs1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "fmAdvancedCalculator";
-            this.Text = "Advanced Calculator";
+            this.Text = "FILTRAPLUS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AdvancedCalculator_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fmAdvancedCalculator_FormClosed);
