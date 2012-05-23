@@ -8,7 +8,6 @@ namespace fmCalculatorsLibrary
     {
         public enum fmSuspensionCalculationOptions
         {
-            UNDEFINED,
             RHOF_CALCULATED,
             RHOS_CALCULATED,
             RHOSUS_CALCULATED,

@@ -87,7 +87,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
             processOnChange = true;
 
-            SetCalculationOptionAndUpdateCellsStyle(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+            SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
         }
         // ReSharper restore InconsistentNaming
 
@@ -96,6 +96,12 @@ namespace fmCalcBlocksLibrary.Blocks
                 null, null, null,
                 null, null, null)
         { }
+
+        public void SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            CallValuesChanged();
+        }
 
         public void SetCalculationOptionAndUpdateCellsStyle(fmSuspensionCalculator.fmSuspensionCalculationOptions newCalculationOption)
         {
@@ -158,8 +164,6 @@ namespace fmCalcBlocksLibrary.Blocks
                     SetCellReadOnlyFlag(Cv, true);
                     SetCellReadOnlyFlag(C, true);
                 }
-
-                CallValuesChanged();
             }
         }
     }

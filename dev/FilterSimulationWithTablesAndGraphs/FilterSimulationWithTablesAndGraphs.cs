@@ -272,7 +272,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                         var susBlock = new fmSuspensionBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, susBlock);
-                        susBlock.SetCalculationOptionAndUpdateCellsStyle(suspensionCalculationOption);
+                        susBlock.SetCalculationOptionAndRewrite(suspensionCalculationOption);
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(susBlock, sim);
                         sim.suspensionCalculationOption = suspensionCalculationOption;
 

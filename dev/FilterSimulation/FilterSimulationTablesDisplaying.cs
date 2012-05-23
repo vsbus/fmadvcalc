@@ -574,10 +574,10 @@ namespace FilterSimulation
         private static void CopySimulationValuesToSusBlock(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.susBlock);
-            //if (sim.susBlock.calculationOption != sim.SuspensionCalculationOption)
-            //{
-            //    sim.susBlock.SetCalculationOptionAndUpdateCellsStyle(sim.SuspensionCalculationOption);
-            //}
+            if (sim.susBlock.calculationOption != sim.SuspensionCalculationOption)
+            {
+                sim.susBlock.SetCalculationOptionAndUpdateCellsStyle(sim.SuspensionCalculationOption);
+            }
         }
 
         void UpdateColorsAndFontForSolution(fmFilterSimSolution sol)
@@ -1093,7 +1093,7 @@ namespace FilterSimulation
                 return;
             }
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.susBlock, sim);
-            sim.Data.suspensionCalculationOption = sim.susBlock.calculationOption;
+            sim.SuspensionCalculationOption = sim.susBlock.calculationOption;
 
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.eps0Kappa0Block);
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.pc0Rc0A0Block);
