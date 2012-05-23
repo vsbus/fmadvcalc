@@ -8,8 +8,7 @@ namespace FilterSimulation
     {
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption;
-        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption rhoDCalculationOption;
-        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption etaDCalculationOption;
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption rhoDCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption;
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
 
@@ -37,8 +36,7 @@ namespace FilterSimulation
                                               fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.
                                                   InputedByUser;
 
-            rhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
-            etaDCheckBox.Checked = etaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.EqualToEtaF;
+            etaDrhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser;
             PcDCheckBox.Checked = PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser;
         }
 
@@ -102,26 +100,15 @@ namespace FilterSimulation
                                                      CalculatedFromCakeFormation;
         }
 
-        private void rhoDCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void rhoDetaDCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            rhoDCalculationOption = rhoDCheckBox.Checked
+            rhoDCalculationOption = etaDrhoDCheckBox.Checked
                                                ? fmSigmaPke0PkePcdRcdAlphadCalculator.
-                                                     fmRhoDCalculationOption.
-                                                     EqualToRhoF
+                                                     fmRhoDEtaDCalculationOption.
+                                                     InputedByUser
                                                : fmSigmaPke0PkePcdRcdAlphadCalculator.
-                                                     fmRhoDCalculationOption.
-                                                     InputedByUser;
-        }
-
-        private void etaDCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            etaDCalculationOption = etaDCheckBox.Checked
-                                               ? fmSigmaPke0PkePcdRcdAlphadCalculator.
-                                                     fmEtaDCalculationOption.
-                                                     EqualToEtaF
-                                               : fmSigmaPke0PkePcdRcdAlphadCalculator.
-                                                     fmEtaDCalculationOption.
-                                                     InputedByUser;
+                                                     fmRhoDEtaDCalculationOption.
+                                                     EqualToRhoF;
         }
 
         private void PcDCheckBox_CheckedChanged(object sender, EventArgs e)

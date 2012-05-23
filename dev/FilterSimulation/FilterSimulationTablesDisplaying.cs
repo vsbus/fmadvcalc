@@ -1149,8 +1149,7 @@ namespace FilterSimulation
                 return;
             }
 
-            sim.RhoDCalculationOption = deliquoringSigmaPkeBlock.rhoDCalculationOption;
-            sim.EtaDCalculationOption = deliquoringSigmaPkeBlock.etaDCalculationOption;
+            sim.RhoDetaDCalculationOption = deliquoringSigmaPkeBlock.rhoDetaDCalculationOption;
             sim.PcDCalculationOption = deliquoringSigmaPkeBlock.PcDCalculationOption;
 
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSigmaPkeBlock, sim);

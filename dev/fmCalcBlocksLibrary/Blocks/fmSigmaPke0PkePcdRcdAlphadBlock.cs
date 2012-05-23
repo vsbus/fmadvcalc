@@ -28,8 +28,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter rho_s;
         private readonly fmBlockConstantParameter Pc0;
 
-        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption rhoDCalculationOption;
-        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption etaDCalculationOption;
+        public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption rhoDetaDCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption;
         
         public fmValue Dp_Value
@@ -66,8 +65,7 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             var fmSigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(AllParameters)
                                                            {
-                                                               rhoDCalculationOption = rhoDCalculationOption,
-                                                               etaDCalculationOption = etaDCalculationOption,
+                                                               rhoDetaDCalculationOption = rhoDetaDCalculationOption,
                                                                PcDCalculationOption = PcDCalculationOption
                                                            };
             fmSigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
@@ -103,8 +101,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref rho_s, fmGlobalParameter.rho_s);
             AddConstantParameter(ref Pc0, fmGlobalParameter.Pc0);
 
-            rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
-            etaDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.EqualToEtaF;
+            rhoDetaDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF;
             PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
 
             sigma.group = sigma_group;
@@ -124,15 +121,9 @@ namespace fmCalcBlocksLibrary.Blocks
             processOnChange = true;
         }
 
-        public void SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption newCalculationOption)
+        public void SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption newCalculationOption)
         {
-            rhoDCalculationOption = newCalculationOption;
-            UpdateCellsColorsAndReadOnly();
-        }
-
-        public void SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption newCalculationOption)
-        {
-            etaDCalculationOption = newCalculationOption;
+            rhoDetaDCalculationOption = newCalculationOption;
             UpdateCellsColorsAndReadOnly();
         }
 
@@ -144,24 +135,17 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private void UpdateCellsColorsAndReadOnly()
         {
-            if (rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.InputedByUser)
+            if (rhoDetaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser)
             {
                 rhod.IsInputed = true;
                 rhod.cell.ReadOnly = false;
-            }
-            else
-            {
-                rhod.IsInputed = false;
-                rhod.cell.ReadOnly = true;
-            }
-
-            if (etaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.InputedByUser)
-            {
                 etad.IsInputed = true;
                 etad.cell.ReadOnly = false;
             }
             else
             {
+                rhod.IsInputed = false;
+                rhod.cell.ReadOnly = true;
                 etad.IsInputed = false;
                 etad.cell.ReadOnly = true;
             }

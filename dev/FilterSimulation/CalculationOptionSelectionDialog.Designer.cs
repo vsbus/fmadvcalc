@@ -38,8 +38,7 @@ namespace FilterSimulation
             this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.PcDCheckBox = new System.Windows.Forms.CheckBox();
-            this.etaDCheckBox = new System.Windows.Forms.CheckBox();
-            this.rhoDCheckBox = new System.Windows.Forms.CheckBox();
+            this.etaDrhoDCheckBox = new System.Windows.Forms.CheckBox();
             this.CakeHeightInputCheckBox = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.okButton = new System.Windows.Forms.Button();
@@ -149,8 +148,7 @@ namespace FilterSimulation
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.PcDCheckBox);
-            this.groupBox1.Controls.Add(this.etaDCheckBox);
-            this.groupBox1.Controls.Add(this.rhoDCheckBox);
+            this.groupBox1.Controls.Add(this.etaDrhoDCheckBox);
             this.groupBox1.Controls.Add(this.CakeHeightInputCheckBox);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(190, 186);
@@ -171,31 +169,16 @@ namespace FilterSimulation
             this.PcDCheckBox.UseVisualStyleBackColor = true;
             this.PcDCheckBox.CheckedChanged += new System.EventHandler(this.PcDCheckBox_CheckedChanged);
             // 
-            // etaDCheckBox
+            // etaDrhoDCheckBox
             // 
-            this.etaDCheckBox.AutoSize = true;
-            this.etaDCheckBox.Checked = true;
-            this.etaDCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.etaDCheckBox.Location = new System.Drawing.Point(17, 65);
-            this.etaDCheckBox.Name = "etaDCheckBox";
-            this.etaDCheckBox.Size = new System.Drawing.Size(151, 17);
-            this.etaDCheckBox.TabIndex = 2;
-            this.etaDCheckBox.Text = "eta_d taken equal to eta_f";
-            this.etaDCheckBox.UseVisualStyleBackColor = true;
-            this.etaDCheckBox.CheckedChanged += new System.EventHandler(this.etaDCheckBox_CheckedChanged);
-            // 
-            // rhoDCheckBox
-            // 
-            this.rhoDCheckBox.AutoSize = true;
-            this.rhoDCheckBox.Checked = true;
-            this.rhoDCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.rhoDCheckBox.Location = new System.Drawing.Point(17, 88);
-            this.rhoDCheckBox.Name = "rhoDCheckBox";
-            this.rhoDCheckBox.Size = new System.Drawing.Size(151, 17);
-            this.rhoDCheckBox.TabIndex = 1;
-            this.rhoDCheckBox.Text = "rho_d taken equal to rho_f";
-            this.rhoDCheckBox.UseVisualStyleBackColor = true;
-            this.rhoDCheckBox.CheckedChanged += new System.EventHandler(this.rhoDCheckBox_CheckedChanged);
+            this.etaDrhoDCheckBox.AutoSize = true;
+            this.etaDrhoDCheckBox.Location = new System.Drawing.Point(17, 65);
+            this.etaDrhoDCheckBox.Name = "etaDrhoDCheckBox";
+            this.etaDrhoDCheckBox.Size = new System.Drawing.Size(134, 17);
+            this.etaDrhoDCheckBox.TabIndex = 2;
+            this.etaDrhoDCheckBox.Text = "Density/Viscosity Input";
+            this.etaDrhoDCheckBox.UseVisualStyleBackColor = true;
+            this.etaDrhoDCheckBox.CheckedChanged += new System.EventHandler(this.rhoDetaDCheckBox_CheckedChanged);
             // 
             // CakeHeightInputCheckBox
             // 
@@ -297,8 +280,7 @@ namespace FilterSimulation
         protected System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox CakeHeightInputCheckBox;
-        private System.Windows.Forms.CheckBox etaDCheckBox;
-        private System.Windows.Forms.CheckBox rhoDCheckBox;
+        private System.Windows.Forms.CheckBox etaDrhoDCheckBox;
         private System.Windows.Forms.CheckBox PcDCheckBox;
     }
 }

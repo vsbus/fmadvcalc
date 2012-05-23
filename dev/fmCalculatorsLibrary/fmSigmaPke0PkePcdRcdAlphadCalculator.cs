@@ -8,19 +8,12 @@ namespace fmCalculatorsLibrary
 {
     public class fmSigmaPke0PkePcdRcdAlphadCalculator : fmBaseCalculator
     {
-        public enum fmRhoDCalculationOption
+        public enum fmRhoDEtaDCalculationOption
         {
             InputedByUser,
             EqualToRhoF
         }
-        public fmRhoDCalculationOption rhoDCalculationOption;
-
-        public enum fmEtaDCalculationOption
-        {
-            InputedByUser,
-            EqualToEtaF
-        }
-        public fmEtaDCalculationOption etaDCalculationOption;
+        public fmRhoDEtaDCalculationOption rhoDetaDCalculationOption;
 
         public enum fmPcDCalculationOption
         {
@@ -50,13 +43,9 @@ namespace fmCalculatorsLibrary
             var rcd = variables[fmGlobalParameter.rc_d] as fmCalculationVariableParameter;
             var alphad = variables[fmGlobalParameter.alpha_d] as fmCalculationVariableParameter;
 
-            if (etaDCalculationOption == fmEtaDCalculationOption.EqualToEtaF)
+            if (rhoDetaDCalculationOption == fmRhoDEtaDCalculationOption.EqualToRhoF)
             {
                 eta_d.value = eta_f.value;
-            }
-
-            if (rhoDCalculationOption == fmRhoDCalculationOption.EqualToRhoF)
-            {
                 rho_d.value = rho_f.value;
             }
 
