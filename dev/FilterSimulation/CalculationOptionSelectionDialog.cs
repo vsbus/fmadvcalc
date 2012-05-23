@@ -39,7 +39,7 @@ namespace FilterSimulation
 
             rhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
             etaDCheckBox.Checked = etaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.EqualToEtaF;
-            PcDCheckBox.Checked = PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
+            PcDCheckBox.Checked = PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser;
         }
 
         // ReSharper disable InconsistentNaming
@@ -129,10 +129,10 @@ namespace FilterSimulation
             PcDCalculationOption = PcDCheckBox.Checked
                                                ? fmSigmaPke0PkePcdRcdAlphadCalculator.
                                                      fmPcDCalculationOption.
-                                                     Calculated
+                                                     InputedByUser
                                                : fmSigmaPke0PkePcdRcdAlphadCalculator.
                                                      fmPcDCalculationOption.
-                                                     InputedByUser;
+                                                     Calculated;
         }
         // ReSharper restore InconsistentNaming
 

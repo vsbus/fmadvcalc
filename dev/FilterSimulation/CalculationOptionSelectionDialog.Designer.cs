@@ -35,6 +35,7 @@ namespace FilterSimulation
             this.CmCvC_radioButton = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.simulationCalculationOptionGroupBox = new System.Windows.Forms.GroupBox();
+            this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.PcDCheckBox = new System.Windows.Forms.CheckBox();
             this.etaDCheckBox = new System.Windows.Forms.CheckBox();
@@ -45,7 +46,6 @@ namespace FilterSimulation
             this.panel4 = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.suspensionGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.simulationCalculationOptionGroupBox.SuspendLayout();
@@ -137,6 +137,15 @@ namespace FilterSimulation
             this.simulationCalculationOptionGroupBox.TabStop = false;
             this.simulationCalculationOptionGroupBox.Text = "Simulation calculation option";
             // 
+            // fmCalculationOptionView1
+            // 
+            this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
+            this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
+            this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 167);
+            this.fmCalculationOptionView1.TabIndex = 0;
+            this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.PcDCheckBox);
@@ -154,13 +163,11 @@ namespace FilterSimulation
             // PcDCheckBox
             // 
             this.PcDCheckBox.AutoSize = true;
-            this.PcDCheckBox.Checked = true;
-            this.PcDCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.PcDCheckBox.Location = new System.Drawing.Point(17, 88);
+            this.PcDCheckBox.Location = new System.Drawing.Point(17, 42);
             this.PcDCheckBox.Name = "PcDCheckBox";
-            this.PcDCheckBox.Size = new System.Drawing.Size(191, 17);
+            this.PcDCheckBox.Size = new System.Drawing.Size(190, 17);
             this.PcDCheckBox.TabIndex = 3;
-            this.PcDCheckBox.Text = "Pcd calculated from max(Dpf, Dpd)";
+            this.PcDCheckBox.Text = "Cake Permeability/resistance Input";
             this.PcDCheckBox.UseVisualStyleBackColor = true;
             this.PcDCheckBox.CheckedChanged += new System.EventHandler(this.PcDCheckBox_CheckedChanged);
             // 
@@ -169,7 +176,7 @@ namespace FilterSimulation
             this.etaDCheckBox.AutoSize = true;
             this.etaDCheckBox.Checked = true;
             this.etaDCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.etaDCheckBox.Location = new System.Drawing.Point(17, 42);
+            this.etaDCheckBox.Location = new System.Drawing.Point(17, 65);
             this.etaDCheckBox.Name = "etaDCheckBox";
             this.etaDCheckBox.Size = new System.Drawing.Size(151, 17);
             this.etaDCheckBox.TabIndex = 2;
@@ -182,7 +189,7 @@ namespace FilterSimulation
             this.rhoDCheckBox.AutoSize = true;
             this.rhoDCheckBox.Checked = true;
             this.rhoDCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.rhoDCheckBox.Location = new System.Drawing.Point(17, 65);
+            this.rhoDCheckBox.Location = new System.Drawing.Point(17, 88);
             this.rhoDCheckBox.Name = "rhoDCheckBox";
             this.rhoDCheckBox.Size = new System.Drawing.Size(151, 17);
             this.rhoDCheckBox.TabIndex = 1;
@@ -251,15 +258,6 @@ namespace FilterSimulation
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 25);
             this.panel3.TabIndex = 2;
-            // 
-            // fmCalculationOptionView1
-            // 
-            this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
-            this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
-            this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 167);
-            this.fmCalculationOptionView1.TabIndex = 0;
-            this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
             // 
             // fmCalculationOptionSelectionDialog
             // 
