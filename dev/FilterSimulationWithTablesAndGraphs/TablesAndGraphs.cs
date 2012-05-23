@@ -128,13 +128,31 @@ namespace FilterSimulationWithTablesAndGraphs
         private static void FillListBox(IList listBoxItems, List<string> strings)
         {
             for (int i = listBoxItems.Count - 1; i >= 0; --i)
-                if (!strings.Contains(listBoxItems[i].ToString()))
+            {
+                object item = listBoxItems[i];
+                string itemText = (item is ListViewItem) ? (item as ListViewItem).Text : item.ToString();
+                if (!strings.Contains(itemText))
                     listBoxItems.RemoveAt(i);
+            }
 
             for (int i = 0, j = 0; j < strings.Count; ++i, ++j)
             {
-                if (i == listBoxItems.Count
-                    || listBoxItems[i].ToString() != strings[j])
+                bool isAdd = false;
+                if (i == listBoxItems.Count)
+                {
+                    isAdd = true;
+                }
+                else
+                {
+                    object item = listBoxItems[i];
+                    string itemText = (item is ListViewItem) ? (item as ListViewItem).Text : item.ToString();
+                    if (itemText != strings[j])
+                    {
+                        isAdd = true;
+                    }
+                }
+                
+                if (isAdd)
                 {
                     listBoxItems.Insert(i, strings[j]);
                 }
