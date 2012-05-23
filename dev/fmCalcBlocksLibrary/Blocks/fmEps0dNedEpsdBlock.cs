@@ -81,6 +81,12 @@ namespace fmCalcBlocksLibrary.Blocks
         }
         public fmEps0dNedEpsdBlock() : this(null, null, null) { }
 
+        public void SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            CallValuesChanged();
+        }
+
         public void SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption newCalculationOption)
         {
             calculationOption = newCalculationOption;
@@ -107,7 +113,6 @@ namespace fmCalcBlocksLibrary.Blocks
                 epsd.cell.ReadOnly = true;
                 epsd.group = null;
             }
-            CallValuesChanged();
         }
     }
 }

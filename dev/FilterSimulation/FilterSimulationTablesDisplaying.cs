@@ -550,7 +550,9 @@ namespace FilterSimulation
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
             if (sim.filterMachiningBlock.calculationOption != sim.FilterMachiningCalculationOption)
+            {
                 sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.FilterMachiningCalculationOption);
+            }
         }
         private static void CopySimulationValuesToRmHceBlock(fmFilterSimulation sim)
         {
@@ -572,6 +574,10 @@ namespace FilterSimulation
         private static void CopySimulationValuesToSusBlock(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.susBlock);
+            //if (sim.susBlock.calculationOption != sim.SuspensionCalculationOption)
+            //{
+            //    sim.susBlock.SetCalculationOptionAndUpdateCellsStyle(sim.SuspensionCalculationOption);
+            //}
         }
 
         void UpdateColorsAndFontForSolution(fmFilterSimSolution sol)
@@ -829,7 +835,7 @@ namespace FilterSimulation
 
                 if (m_commonFilterMachiningBlock != null)
                 {
-                    m_commonFilterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.calculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.calculationOption);
 
                     for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                     {

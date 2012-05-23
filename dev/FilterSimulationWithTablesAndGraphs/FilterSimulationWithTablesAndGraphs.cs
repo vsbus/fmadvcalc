@@ -278,21 +278,21 @@ namespace FilterSimulationWithTablesAndGraphs
 
                         var filterMachiningBlock = new fmFilterMachiningBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, filterMachiningBlock);
-                        filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(filterMachiningCalculationOption);
+                        filterMachiningBlock.SetCalculationOptionAndRewriteData(filterMachiningCalculationOption);
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
                         simData.internalSimulationData.filterMachiningCalculationOption =
                             filterMachiningCalculationOption;
 
                         var eps0dNedEpsdBlock = new fmEps0dNedEpsdBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, eps0dNedEpsdBlock);
-                        eps0dNedEpsdBlock.SetCalculationOptionAndUpdateCellsStyle(hcdEpsdCalculationOption);
+                        eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(hcdEpsdCalculationOption);
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(eps0dNedEpsdBlock, sim);
                         simData.internalSimulationData.hcdEpsdCalculationOption = hcdEpsdCalculationOption;
 
                         var sigmaPke0PkePcdRcdAlphadBlock = new fmSigmaPke0PkePcdRcdAlphadBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, sigmaPke0PkePcdRcdAlphadBlock);
-                        sigmaPke0PkePcdRcdAlphadBlock.SetCalculationOptionAndUpdateCellsStyle(rhoDetaDCalculationOption);
-                        sigmaPke0PkePcdRcdAlphadBlock.SetCalculationOptionAndUpdateCellsStyle(PcDCalculationOption);
+                        sigmaPke0PkePcdRcdAlphadBlock.SetCalculationOptionAndRewrite(rhoDetaDCalculationOption);
+                        sigmaPke0PkePcdRcdAlphadBlock.SetCalculationOptionAndRewrite(PcDCalculationOption);
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(sigmaPke0PkePcdRcdAlphadBlock, sim);
                         simData.internalSimulationData.rhoDCalculationOption = rhoDetaDCalculationOption;
                         simData.internalSimulationData.PcDCalculationOption = PcDCalculationOption;
@@ -364,7 +364,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             throw new Exception("unknown Calculation option Kind");
                         }
 
-                        fmb.SetCalculationOptionAndUpdateCellsStyle(filterMachiningCalculationOption);
+                        fmb.SetCalculationOptionAndRewriteData(filterMachiningCalculationOption);
                     }
                 }
 

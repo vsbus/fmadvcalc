@@ -43,7 +43,7 @@ namespace SampleForBlocks
             m_fmBlock.rho_sus_Value = fmCalculationLibrary.Equations.fmSuspensionEquations.Eval_rho_sus_From_rho_f_rho_s_Cm(m_fmBlock.rho_f_Value, m_fmBlock.rho_s_Value, m_fmBlock.Cm_Value);
             m_fmBlock.Cv_Value = fmCalculationLibrary.Equations.fmSuspensionEquations.Eval_Cv_From_rho(m_fmBlock.rho_f_Value, m_fmBlock.rho_s_Value, m_fmBlock.rho_sus_Value);
             
-            m_fmBlock.SetCalculationOptionAndUpdateCellsStyle(fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
+            m_fmBlock.SetCalculationOptionAndRewriteData(fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
             
         }
 
@@ -95,7 +95,7 @@ namespace SampleForBlocks
             //cosd.suspensionCalculationOption = ;
             if (cosd.ShowDialog() == DialogResult.OK)
             {
-                m_fmBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
+                m_fmBlock.SetCalculationOptionAndRewriteData(cosd.filterMachiningCalculationOption);
                 m_fmBlock.CalculateAndDisplay();
             }
         }

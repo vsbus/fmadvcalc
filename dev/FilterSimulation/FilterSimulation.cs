@@ -464,10 +464,10 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             if (cosd.ShowDialog() == DialogResult.OK)
             {
                 m_fSolution.currentObjects.Simulation.susBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.suspensionCalculationOption);
-                m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
-                m_fSolution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.hcdEpsdCalculationOption);
-                m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.rhoDCalculationOption);
-                m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.PcDCalculationOption);
+                m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.filterMachiningCalculationOption);
+                m_fSolution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(cosd.hcdEpsdCalculationOption);
+                m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.rhoDCalculationOption);
+                m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.PcDCalculationOption);
                 DisplaySolution(m_fSolution);
             }
         }

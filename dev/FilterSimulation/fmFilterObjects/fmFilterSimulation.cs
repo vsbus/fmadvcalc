@@ -393,8 +393,8 @@ namespace FilterSimulation.fmFilterObjects
             public const string name = "name";
             public const string parametersSize = "parametersSize";
             public const string filterMachiningCalculationOption = "filterMachiningCalculationOption";
-            public const string deliquoringCalculationOption = "deliquoringCalculationOption";
-            public const string rhoDCalculationOption = "rhoDCalculationOption";
+            public const string hcdCalculationOption = "hcdCalculationOption";
+            public const string rhoDetaDCalculationOption = "rhoDetaDCalculationOption";
             public const string PcDCalculationOption = "PcDCalculationOption";
             public const string suspensionCalculationOption = "suspensionCalculationOption";
             // ReSharper restore InconsistentNaming
@@ -455,8 +455,8 @@ namespace FilterSimulation.fmFilterObjects
             output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.Begin);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.name, name, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.deliquoringCalculationOption, hcdEpsdCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.rhoDCalculationOption, rhoDCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.hcdCalculationOption, hcdEpsdCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.rhoDetaDCalculationOption, rhoDCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.PcDCalculationOption, PcDCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.suspensionCalculationOption, suspensionCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.parametersSize, parameters.Count, 8);
@@ -496,14 +496,14 @@ namespace FilterSimulation.fmFilterObjects
                 StringToEnum(
                     fmSerializeTools.DeserializeProperty(input,
                                                          fmFilterSimulationDataSerializeTags.
-                                                             deliquoringCalculationOption).ToString(),
+                                                             hcdCalculationOption).ToString(),
                     typeof(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption));
             simData.rhoDCalculationOption =
                 (fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption)
                 StringToEnum(
                     fmSerializeTools.DeserializeProperty(input,
                                                          fmFilterSimulationDataSerializeTags.
-                                                             rhoDCalculationOption).ToString(),
+                                                             rhoDetaDCalculationOption).ToString(),
                     typeof(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption));
             simData.PcDCalculationOption =
                 (fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption)
@@ -675,7 +675,7 @@ namespace FilterSimulation.fmFilterObjects
             m_data.name = name;
 
             var voidBlock = new fmFilterMachiningBlock();
-            voidBlock.SetCalculationOptionAndUpdateCellsStyle(Data.filterMachiningCalculationOption);
+            voidBlock.SetCalculationOptionAndRewriteData(Data.filterMachiningCalculationOption);
             foreach (fmBlockVariableParameter var in voidBlock.Parameters)
             {
                 ((fmCalculationVariableParameter) Data.parameters[var.globalParameter]).isInputed = var.isInputed;

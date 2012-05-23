@@ -258,7 +258,7 @@ namespace FilterSimulationWithTablesAndGraphs
             fmb.ValuesChangedByUser += fmb_ValuesChangedByUser;
             m_localInputParametersList.Add(new fmLocalInputParametersData(true, fmb, m_externalCurrentActiveSimulation.FilterMachiningCalculationOption));
 
-            fmb.SetCalculationOptionAndUpdateCellsStyle(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
+            fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(m_externalCurrentActiveSimulation, fmb);
             fmb.CalculateAndDisplay();
         }
@@ -387,7 +387,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                 && ((fmCalculationVariableParameter)simData.internalSimulationData.parameters[par]).isInputed)
                             {
                                 var fmb = new fmFilterMachiningBlock();
-                                fmb.SetCalculationOptionAndUpdateCellsStyle(simData.internalSimulationData.filterMachiningCalculationOption);
+                                fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.filterMachiningCalculationOption);
                                 var xParameter = fmb.GetParameterByName(listBoxXAxis.Text);
                                 if (xParameter == null || fmb.GetParameterByName(parName).group != xParameter.group)
                                 {

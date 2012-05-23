@@ -1122,7 +1122,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref Cm, fmGlobalParameter.Cm);
             AddConstantParameter(ref Cv, fmGlobalParameter.Cv);
 
-            SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
+            SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
 
             processOnChange = true;
         }
@@ -1145,6 +1145,12 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
                 processOnChange = true;
             }
+        }
+
+        public void SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            ReWriteParameters();
         }
 
         public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption newCalculationOption)
@@ -1173,7 +1179,6 @@ namespace fmCalcBlocksLibrary.Blocks
             }
 
             UpdateCellsBackColor();
-            ReWriteParameters();
         }
 
         Dictionary<fmFilterMachiningCalculator.fmFilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>> m_tables;

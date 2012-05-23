@@ -121,6 +121,18 @@ namespace fmCalcBlocksLibrary.Blocks
             processOnChange = true;
         }
 
+        public void SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            CallValuesChanged();
+        }
+
+        public void SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            CallValuesChanged();
+        }
+
         public void SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption newCalculationOption)
         {
             rhoDetaDCalculationOption = newCalculationOption;
@@ -168,8 +180,6 @@ namespace fmCalcBlocksLibrary.Blocks
                 rcd.cell.ReadOnly = true;
                 alphad.cell.ReadOnly = true;
             }
-
-            CallValuesChanged();
         }
 
         public fmSigmaPke0PkePcdRcdAlphadBlock() : this(null, null, null, null, null, null, null, null) { }
