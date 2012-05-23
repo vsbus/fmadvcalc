@@ -433,11 +433,23 @@ namespace FilterSimulation
         private void CopySimulationValuesToDeliquoringSigmaBlock(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
+            if (sim.deliquoringSigmaPkeBlock.rhoDetaDCalculationOption != sim.RhoDetaDCalculationOption)
+            {
+                sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(sim.RhoDetaDCalculationOption);
+            }
+            if (sim.deliquoringSigmaPkeBlock.PcDCalculationOption != sim.PcDCalculationOption)
+            {
+                sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(sim.PcDCalculationOption);
+            }
         }
 
         private void CopySimulationValuesToDeliquoringEps0dNedEpsdBlock(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
+            if (sim.deliquoringEps0NeEpsBlock.calculationOption != sim.HcdEpsdCalculationOption)
+            {
+                sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(sim.HcdEpsdCalculationOption);
+            }
         }
 
         // ReSharper disable InconsistentNaming

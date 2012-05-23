@@ -620,7 +620,10 @@ namespace FilterSimulation.fmFilterObjects
 
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption RhoDetaDCalculationOption
         {
-            get { return m_data.rhoDCalculationOption; }
+            get
+            {
+                return m_data.rhoDCalculationOption;
+            }
             set
             {
                 if (m_data.rhoDCalculationOption != value)
