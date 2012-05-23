@@ -987,9 +987,9 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid);
                 
                 UpdateUnitsOfCommonFilterMachiningBlock();
+                RewriteDataForAllBlocks();
             }
             ResumeAllBlockProcessing();
-            RewriteDataForAllBlocks();
         }
 
         private void UpdateUnitsOfCommonDeliquoringSimulationBlock()
