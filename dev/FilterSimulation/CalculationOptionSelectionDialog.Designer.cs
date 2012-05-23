@@ -35,17 +35,17 @@ namespace FilterSimulation
             this.CmCvC_radioButton = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.simulationCalculationOptionGroupBox = new System.Windows.Forms.GroupBox();
-            this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.PcDCheckBox = new System.Windows.Forms.CheckBox();
             this.etaDCheckBox = new System.Windows.Forms.CheckBox();
             this.rhoDCheckBox = new System.Windows.Forms.CheckBox();
-            this.deliquoringCheckBox = new System.Windows.Forms.CheckBox();
+            this.CakeHeightInputCheckBox = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.okButton = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.suspensionGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.simulationCalculationOptionGroupBox.SuspendLayout();
@@ -137,21 +137,12 @@ namespace FilterSimulation
             this.simulationCalculationOptionGroupBox.TabStop = false;
             this.simulationCalculationOptionGroupBox.Text = "Simulation calculation option";
             // 
-            // fmCalculationOptionView1
-            // 
-            this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
-            this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
-            this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 167);
-            this.fmCalculationOptionView1.TabIndex = 0;
-            this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.PcDCheckBox);
             this.groupBox1.Controls.Add(this.etaDCheckBox);
             this.groupBox1.Controls.Add(this.rhoDCheckBox);
-            this.groupBox1.Controls.Add(this.deliquoringCheckBox);
+            this.groupBox1.Controls.Add(this.CakeHeightInputCheckBox);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(190, 186);
             this.groupBox1.Name = "groupBox1";
@@ -199,18 +190,16 @@ namespace FilterSimulation
             this.rhoDCheckBox.UseVisualStyleBackColor = true;
             this.rhoDCheckBox.CheckedChanged += new System.EventHandler(this.rhoDCheckBox_CheckedChanged);
             // 
-            // deliquoringCheckBox
+            // CakeHeightInputCheckBox
             // 
-            this.deliquoringCheckBox.AutoSize = true;
-            this.deliquoringCheckBox.Checked = true;
-            this.deliquoringCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.deliquoringCheckBox.Location = new System.Drawing.Point(17, 19);
-            this.deliquoringCheckBox.Name = "deliquoringCheckBox";
-            this.deliquoringCheckBox.Size = new System.Drawing.Size(134, 17);
-            this.deliquoringCheckBox.TabIndex = 0;
-            this.deliquoringCheckBox.Text = "hcd calculated from hc";
-            this.deliquoringCheckBox.UseVisualStyleBackColor = true;
-            this.deliquoringCheckBox.CheckedChanged += new System.EventHandler(this.deliquoringCheckBox_CheckedChanged);
+            this.CakeHeightInputCheckBox.AutoSize = true;
+            this.CakeHeightInputCheckBox.Location = new System.Drawing.Point(17, 19);
+            this.CakeHeightInputCheckBox.Name = "CakeHeightInputCheckBox";
+            this.CakeHeightInputCheckBox.Size = new System.Drawing.Size(112, 17);
+            this.CakeHeightInputCheckBox.TabIndex = 0;
+            this.CakeHeightInputCheckBox.Text = "Cake Height Input";
+            this.CakeHeightInputCheckBox.UseVisualStyleBackColor = true;
+            this.CakeHeightInputCheckBox.CheckedChanged += new System.EventHandler(this.deliquoringCheckBox_CheckedChanged);
             // 
             // panel2
             // 
@@ -263,6 +252,15 @@ namespace FilterSimulation
             this.panel3.Size = new System.Drawing.Size(10, 25);
             this.panel3.TabIndex = 2;
             // 
+            // fmCalculationOptionView1
+            // 
+            this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
+            this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
+            this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 167);
+            this.fmCalculationOptionView1.TabIndex = 0;
+            this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
+            // 
             // fmCalculationOptionSelectionDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,7 +298,7 @@ namespace FilterSimulation
         private fmCalcBlocksLibrary.Controls.fmCalculationOptionView fmCalculationOptionView1;
         protected System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox deliquoringCheckBox;
+        private System.Windows.Forms.CheckBox CakeHeightInputCheckBox;
         private System.Windows.Forms.CheckBox etaDCheckBox;
         private System.Windows.Forms.CheckBox rhoDCheckBox;
         private System.Windows.Forms.CheckBox PcDCheckBox;

@@ -33,9 +33,9 @@ namespace FilterSimulation
 
             fmCalculationOptionView1.SetSelectedOption(filterMachiningCalculationOption);
 
-            deliquoringCheckBox.Checked = hcdEpsdCalculationOption ==
-                                          fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.
-                                              CalculatedFromCakeFormation;
+            CakeHeightInputCheckBox.Checked = hcdEpsdCalculationOption ==
+                                              fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.
+                                                  InputedByUser;
 
             rhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDCalculationOption.EqualToRhoF;
             etaDCheckBox.Checked = etaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmEtaDCalculationOption.EqualToEtaF;
@@ -94,12 +94,12 @@ namespace FilterSimulation
 
         private void deliquoringCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            hcdEpsdCalculationOption = deliquoringCheckBox.Checked
+            hcdEpsdCalculationOption = CakeHeightInputCheckBox.Checked
                                                ? fmDeliquoringSimualtionCalculator.
-                                                     fmDeliquoringHcdEpsdCalculationOption.
-                                                     CalculatedFromCakeFormation
+                                                     fmDeliquoringHcdEpsdCalculationOption.InputedByUser
                                                : fmDeliquoringSimualtionCalculator.
-                                                     fmDeliquoringHcdEpsdCalculationOption.InputedByUser;
+                                                     fmDeliquoringHcdEpsdCalculationOption.
+                                                     CalculatedFromCakeFormation;
         }
 
         private void rhoDCheckBox_CheckedChanged(object sender, EventArgs e)
