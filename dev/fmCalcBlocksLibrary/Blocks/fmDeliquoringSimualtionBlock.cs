@@ -199,7 +199,9 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref Qg, fmGlobalParameter.Qg, Qg_Cell, false);
             AddParameter(ref vg, fmGlobalParameter.vg, vg_Cell, false);
             AddParameter(ref Mfd, fmGlobalParameter.Mfd, Mfd_Cell, false);
+            AddParameter(ref Mev, fmGlobalParameter.Mev, Mev_Cell, false);
             AddParameter(ref Vfd, fmGlobalParameter.Vfd, Vfd_Cell, false);
+            AddParameter(ref Vev, fmGlobalParameter.Vev, Vev_Cell, false);
             AddParameter(ref Mlcd, fmGlobalParameter.Mlcd, Mlcd_Cell, false);
             AddParameter(ref Vlcd, fmGlobalParameter.Vlcd, Vlcd_Cell, false);
             AddParameter(ref Mcd, fmGlobalParameter.Mcd, Mcd_Cell, false);
@@ -216,8 +218,6 @@ namespace fmCalcBlocksLibrary.Blocks
 
             AddParameter(ref Qgt, fmGlobalParameter.Qgt, Qgt_Cell, false);
             AddParameter(ref Vg, fmGlobalParameter.Vg, Vg_Cell, false);
-            AddParameter(ref Mev, fmGlobalParameter.Mev, Mev_Cell, false);
-            AddParameter(ref Vev, fmGlobalParameter.Vev, Vev_Cell, false);
             AddParameter(ref Qmftd, fmGlobalParameter.Qmftd, Qmftd_Cell, false);
             AddParameter(ref Qmfd, fmGlobalParameter.Qmfd, Qmfd_Cell, false);
             AddParameter(ref Qftd, fmGlobalParameter.Qftd, Qftd_Cell, false);
