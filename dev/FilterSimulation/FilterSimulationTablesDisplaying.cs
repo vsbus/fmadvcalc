@@ -276,6 +276,15 @@ namespace FilterSimulation
                     sim.rm0HceBlock.ValuesChangedByUser += rm0HceBlock_ValuesChangedByUser;
                 }
 
+                if (sim == sol.currentObjects.Simulation)
+                {
+                    bool isUsedDeliquoring = sim.DeliquoringUsedCalculationOption ==
+                                             fmFilterMachiningCalculator.
+                                                 fmDeliquoringUsedCalculationOption.Used;
+                    deliquoringMaterialParametersDataGrid.Visible = isUsedDeliquoring;
+                    commonDeliquoringSimulationBlockDataGrid.Visible = isUsedDeliquoring;
+                }
+
                 DataGridViewColumn deliquoringMaterialCol = FindColumnByGuid(deliquoringMaterialParametersDataGrid.Columns, sim.Guid, 0);
                 if (sim.deliquoringEps0NeEpsBlock == null)
                 {
