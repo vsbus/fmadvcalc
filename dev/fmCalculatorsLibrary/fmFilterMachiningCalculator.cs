@@ -62,6 +62,19 @@ namespace fmCalculatorsLibrary
 
         }
 
+        public fmFilterMachiningCalculationOption filterMachiningCalculationOption =
+            fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
+
+
+        public enum fmDeliquoringUsedCalculationOption
+        {
+            NotUsed,
+            Used
+        }
+
+        public fmDeliquoringUsedCalculationOption deliquoringCalculationOption =
+            fmDeliquoringUsedCalculationOption.NotUsed;
+
         public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
 
         public fmFilterMachiningCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }

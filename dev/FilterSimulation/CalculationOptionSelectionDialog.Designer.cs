@@ -45,6 +45,7 @@ namespace FilterSimulation
             this.panel4 = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.deliquoringOptionCheckBox = new System.Windows.Forms.CheckBox();
             this.suspensionGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.simulationCalculationOptionGroupBox.SuspendLayout();
@@ -147,6 +148,7 @@ namespace FilterSimulation
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.deliquoringOptionCheckBox);
             this.groupBox1.Controls.Add(this.PcDCheckBox);
             this.groupBox1.Controls.Add(this.etaDrhoDCheckBox);
             this.groupBox1.Controls.Add(this.CakeHeightInputCheckBox);
@@ -161,7 +163,7 @@ namespace FilterSimulation
             // PcDCheckBox
             // 
             this.PcDCheckBox.AutoSize = true;
-            this.PcDCheckBox.Location = new System.Drawing.Point(17, 42);
+            this.PcDCheckBox.Location = new System.Drawing.Point(6, 79);
             this.PcDCheckBox.Name = "PcDCheckBox";
             this.PcDCheckBox.Size = new System.Drawing.Size(190, 17);
             this.PcDCheckBox.TabIndex = 3;
@@ -172,7 +174,7 @@ namespace FilterSimulation
             // etaDrhoDCheckBox
             // 
             this.etaDrhoDCheckBox.AutoSize = true;
-            this.etaDrhoDCheckBox.Location = new System.Drawing.Point(17, 65);
+            this.etaDrhoDCheckBox.Location = new System.Drawing.Point(6, 102);
             this.etaDrhoDCheckBox.Name = "etaDrhoDCheckBox";
             this.etaDrhoDCheckBox.Size = new System.Drawing.Size(134, 17);
             this.etaDrhoDCheckBox.TabIndex = 2;
@@ -183,7 +185,7 @@ namespace FilterSimulation
             // CakeHeightInputCheckBox
             // 
             this.CakeHeightInputCheckBox.AutoSize = true;
-            this.CakeHeightInputCheckBox.Location = new System.Drawing.Point(17, 19);
+            this.CakeHeightInputCheckBox.Location = new System.Drawing.Point(6, 56);
             this.CakeHeightInputCheckBox.Name = "CakeHeightInputCheckBox";
             this.CakeHeightInputCheckBox.Size = new System.Drawing.Size(112, 17);
             this.CakeHeightInputCheckBox.TabIndex = 0;
@@ -242,6 +244,17 @@ namespace FilterSimulation
             this.panel3.Size = new System.Drawing.Size(10, 25);
             this.panel3.TabIndex = 2;
             // 
+            // deliquoringOptionCheckBox
+            // 
+            this.deliquoringOptionCheckBox.AutoSize = true;
+            this.deliquoringOptionCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.deliquoringOptionCheckBox.Name = "deliquoringOptionCheckBox";
+            this.deliquoringOptionCheckBox.Size = new System.Drawing.Size(101, 17);
+            this.deliquoringOptionCheckBox.TabIndex = 4;
+            this.deliquoringOptionCheckBox.Text = "Use Deliquoring";
+            this.deliquoringOptionCheckBox.UseVisualStyleBackColor = true;
+            this.deliquoringOptionCheckBox.CheckedChanged += new System.EventHandler(this.deliquoringOptionCheckBox_CheckedChanged);
+            // 
             // fmCalculationOptionSelectionDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,5 +295,6 @@ namespace FilterSimulation
         private System.Windows.Forms.CheckBox CakeHeightInputCheckBox;
         private System.Windows.Forms.CheckBox etaDrhoDCheckBox;
         private System.Windows.Forms.CheckBox PcDCheckBox;
+        private System.Windows.Forms.CheckBox deliquoringOptionCheckBox;
     }
 }

@@ -549,9 +549,15 @@ namespace FilterSimulation
         private static void CopySimulationValuesToFilterMachining(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
-            if (sim.filterMachiningBlock.calculationOption != sim.FilterMachiningCalculationOption)
+
+            if (sim.filterMachiningBlock.filterMachiningCalculationOption != sim.FilterMachiningCalculationOption)
             {
                 sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.FilterMachiningCalculationOption);
+            }
+            
+            if (sim.filterMachiningBlock.deliquoringUsedCalculationOption != sim.DeliquoringUsedCalculationOption)
+            {
+                sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.DeliquoringUsedCalculationOption);
             }
         }
         private static void CopySimulationValuesToRmHceBlock(fmFilterSimulation sim)
@@ -801,7 +807,7 @@ namespace FilterSimulation
 
                 if (m_commonDeliquoringSimulationBlock != null)
                 {
-                    //m_commonDeliquoringSimulationBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.calculationOption);
+                    //m_commonDeliquoringSimulationBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.filterMachiningCalculationOption);
 
                     //for (int i = 0; i < m_commonDeliquoringSimulationBlock.Parameters.Count; ++i)
                     //{
@@ -835,7 +841,8 @@ namespace FilterSimulation
 
                 if (m_commonFilterMachiningBlock != null)
                 {
-                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.calculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.filterMachiningCalculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.deliquoringUsedCalculationOption);
 
                     for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                     {
@@ -1264,7 +1271,8 @@ namespace FilterSimulation
 
             if (filterMachiningBlock != null)
             {
-                sim.FilterMachiningCalculationOption = filterMachiningBlock.calculationOption;
+                sim.FilterMachiningCalculationOption = filterMachiningBlock.filterMachiningCalculationOption;
+                sim.DeliquoringUsedCalculationOption = filterMachiningBlock.deliquoringUsedCalculationOption;
                 fmFilterSimulation.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
 
                 fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);

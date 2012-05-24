@@ -559,7 +559,8 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter Cv;
         // ReSharper restore InconsistentNaming
 
-        public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calculationOption;
+        public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
+        public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
 
         #region accessors
         // ReSharper disable InconsistentNaming
@@ -924,7 +925,7 @@ namespace fmCalcBlocksLibrary.Blocks
         override public void DoCalculations()
         {
             var filterMachinigCalculator =
-                new fmFilterMachiningCalculator(AllParameters) { calculationOption = calculationOption };
+                new fmFilterMachiningCalculator(AllParameters) { calculationOption = filterMachiningCalculationOption };
             filterMachinigCalculator.DoCalculations();
         }
 
@@ -1134,10 +1135,10 @@ namespace fmCalcBlocksLibrary.Blocks
             if (processOnChange)
             {
                 processOnChange = false;
-                bool candleOption = calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
-                    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
-                    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST
-                    || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST;
+                bool candleOption = filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
+                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
+                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST
+                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST;
                 if (candleOption == false)
                 {
                     fmBlockVariableParameter d0 = GetParameterByName(fmGlobalParameter.d0.name);
@@ -1153,9 +1154,15 @@ namespace fmCalcBlocksLibrary.Blocks
             ReWriteParameters();
         }
 
+        public void SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            ReWriteParameters();
+        }
+
         public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption newCalculationOption)
         {
-            calculationOption = newCalculationOption;
+            filterMachiningCalculationOption = newCalculationOption;
             UpdateGroups();
             List<fmGlobalParameter> inputedParameters = fmCalculationOptionHelper.GetParametersListThatCanBeInput(newCalculationOption);
             var groupUsed = new Dictionary<fmBlockParameterGroup, bool>();
@@ -1179,6 +1186,11 @@ namespace fmCalcBlocksLibrary.Blocks
             }
 
             UpdateCellsBackColor();
+        }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption newCalculationOption)
+        {
+            deliquoringUsedCalculationOption = newCalculationOption;
         }
 
         Dictionary<fmFilterMachiningCalculator.fmFilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>> m_tables;
@@ -1678,7 +1690,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public void UpdateGroups()
         {
             foreach (fmBlockVariableParameter p in parameters)
-                p.group = WhatGroupOfParameterWithCalcOption(p, calculationOption);
+                p.group = WhatGroupOfParameterWithCalcOption(p, filterMachiningCalculationOption);
         }
 
         public void CopyParameters(fmFilterMachiningBlock filterMachiningBlock)

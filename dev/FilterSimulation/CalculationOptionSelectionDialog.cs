@@ -7,10 +7,11 @@ namespace FilterSimulation
     public partial class fmCalculationOptionSelectionDialog : Form
     {
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
+        public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
+        public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption rhoDCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption;
-        public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
 
         public fmCalculationOptionSelectionDialog()
         {
@@ -35,6 +36,9 @@ namespace FilterSimulation
             CakeHeightInputCheckBox.Checked = hcdEpsdCalculationOption ==
                                               fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.
                                                   InputedByUser;
+
+            deliquoringOptionCheckBox.Checked = deliquoringUsedCalculationOption ==
+                                                fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
 
             etaDrhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser;
             PcDCheckBox.Checked = PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser;
@@ -120,6 +124,15 @@ namespace FilterSimulation
                                                : fmSigmaPke0PkePcdRcdAlphadCalculator.
                                                      fmPcDCalculationOption.
                                                      Calculated;
+        }
+
+        private void deliquoringOptionCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            deliquoringUsedCalculationOption = deliquoringOptionCheckBox.Checked
+                                                   ? fmFilterMachiningCalculator.
+                                                         fmDeliquoringUsedCalculationOption.Used
+                                                   : fmFilterMachiningCalculator.
+                                                         fmDeliquoringUsedCalculationOption.NotUsed;
         }
         // ReSharper restore InconsistentNaming
 

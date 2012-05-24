@@ -259,6 +259,7 @@ namespace FilterSimulationWithTablesAndGraphs
             m_localInputParametersList.Add(new fmLocalInputParametersData(true, fmb, m_externalCurrentActiveSimulation.FilterMachiningCalculationOption));
 
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
+            fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(m_externalCurrentActiveSimulation, fmb);
             fmb.CalculateAndDisplay();
         }
@@ -315,7 +316,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 var tempBlock = new fmFilterMachiningBlock
                 {
-                    calculationOption = tempSim.filterMachiningCalculationOption
+                    filterMachiningCalculationOption = tempSim.filterMachiningCalculationOption,
+                    deliquoringUsedCalculationOption = tempSim.deliquoringUsedCalculationOption
                 };
                 tempBlock.UpdateGroups();
 
@@ -388,6 +390,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             {
                                 var fmb = new fmFilterMachiningBlock();
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.filterMachiningCalculationOption);
+                                fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.deliquoringUsedCalculationOption);
                                 var xParameter = fmb.GetParameterByName(listBoxXAxis.Text);
                                 if (xParameter == null || fmb.GetParameterByName(parName).group != xParameter.group)
                                 {
@@ -469,6 +472,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         }
                     }
                     simData.internalSimulationData.filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
+                    simData.internalSimulationData.deliquoringUsedCalculationOption = simData.externalSimulation.DeliquoringUsedCalculationOption;
                     simData.internalSimulationData.hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
                     simData.internalSimulationData.rhoDCalculationOption = simData.externalSimulation.RhoDetaDCalculationOption;
                     simData.internalSimulationData.PcDCalculationOption = simData.externalSimulation.PcDCalculationOption;
@@ -670,7 +674,7 @@ namespace FilterSimulationWithTablesAndGraphs
             var inputs = new List<fmGlobalParameter>();
             foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
             {
-                inputs = ParametersListsUnion(inputs, fmCalculationOptionHelper.GetParametersListThatCanBeInput(localParameters.filterMachiningBlock.calculationOption));
+                inputs = ParametersListsUnion(inputs, fmCalculationOptionHelper.GetParametersListThatCanBeInput(localParameters.filterMachiningBlock.filterMachiningCalculationOption));
             }
 
             foreach (DataGridViewColumn col in additionalParametersTable.Columns)
@@ -1147,7 +1151,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             {
                                 calculationOption =
                                     localParameters.filterMachiningBlock.
-                                    calculationOption
+                                    filterMachiningCalculationOption
                             };
                             filterMachiningCalculator.DoCalculations();
 
@@ -1244,7 +1248,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                     simInputParameters = ParametersListsIntersection(simInputParameters,
                                                               fmCalculationOptionHelper.GetParametersListThatCanBeInput(
-                                                                  localParameters.filterMachiningBlock.calculationOption));
+                                                                  localParameters.filterMachiningBlock.filterMachiningCalculationOption));
                 return simInputParameters;
             }
         }

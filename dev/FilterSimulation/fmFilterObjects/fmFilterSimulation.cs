@@ -12,6 +12,7 @@ namespace FilterSimulation.fmFilterObjects
         public string name;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
+        public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
@@ -21,6 +22,7 @@ namespace FilterSimulation.fmFilterObjects
         {
             name = from.name;
             filterMachiningCalculationOption = from.filterMachiningCalculationOption;
+            deliquoringUsedCalculationOption = from.deliquoringUsedCalculationOption;
             hcdEpsdCalculationOption = from.hcdEpsdCalculationOption;
             rhoDCalculationOption = from.rhoDCalculationOption;
             PcDCalculationOption = from.PcDCalculationOption;
@@ -364,7 +366,8 @@ namespace FilterSimulation.fmFilterObjects
 
             var fmb = new fmFilterMachiningBlock
                           {
-                              calculationOption = filterMachiningCalculationOption
+                              filterMachiningCalculationOption = filterMachiningCalculationOption,
+                              deliquoringUsedCalculationOption = deliquoringUsedCalculationOption
                           };
             fmb.UpdateGroups();
             UpdateIsInputedInParametersFromBlock(fmb, inputedParameter);
@@ -393,6 +396,7 @@ namespace FilterSimulation.fmFilterObjects
             public const string name = "name";
             public const string parametersSize = "parametersSize";
             public const string filterMachiningCalculationOption = "filterMachiningCalculationOption";
+            public const string deliquoringUsedCalculationOption = "deliquoringUsedCalculationOption";
             public const string hcdCalculationOption = "hcdCalculationOption";
             public const string rhoDetaDCalculationOption = "rhoDetaDCalculationOption";
             public const string PcDCalculationOption = "PcDCalculationOption";
@@ -455,6 +459,7 @@ namespace FilterSimulation.fmFilterObjects
             output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.Begin);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.name, name, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.deliquoringUsedCalculationOption, deliquoringUsedCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.hcdCalculationOption, hcdEpsdCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.rhoDetaDCalculationOption, rhoDCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.PcDCalculationOption, PcDCalculationOption, 8);
@@ -491,6 +496,13 @@ namespace FilterSimulation.fmFilterObjects
                                                          fmFilterSimulationDataSerializeTags.
                                                              filterMachiningCalculationOption).ToString(),
                     typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption));
+            simData.deliquoringUsedCalculationOption =
+                (fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption)
+                StringToEnum(
+                    fmSerializeTools.DeserializeProperty(input,
+                                                         fmFilterSimulationDataSerializeTags.
+                                                             deliquoringUsedCalculationOption).ToString(),
+                    typeof(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption));
             simData.hcdEpsdCalculationOption =
                 (fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption)
                 StringToEnum(
@@ -605,6 +617,19 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
+        public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption DeliquoringUsedCalculationOption
+        {
+            get { return m_data.deliquoringUsedCalculationOption; }
+            set
+            {
+                if (m_data.deliquoringUsedCalculationOption != value)
+                {
+                    Modified = true;
+                }
+                m_data.deliquoringUsedCalculationOption = value;
+            }
+        }
+
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption HcdEpsdCalculationOption
         {
             get { return m_data.hcdEpsdCalculationOption; }
@@ -676,6 +701,7 @@ namespace FilterSimulation.fmFilterObjects
 
             var voidBlock = new fmFilterMachiningBlock();
             voidBlock.SetCalculationOptionAndRewriteData(Data.filterMachiningCalculationOption);
+            voidBlock.SetCalculationOptionAndRewriteData(Data.deliquoringUsedCalculationOption);
             foreach (fmBlockVariableParameter var in voidBlock.Parameters)
             {
                 ((fmCalculationVariableParameter) Data.parameters[var.globalParameter]).isInputed = var.isInputed;
@@ -826,6 +852,7 @@ namespace FilterSimulation.fmFilterObjects
             fmFilterSimulationData simData = fmFilterSimulationData.Deserialize(input);
             sim.Name = simData.name;
             sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
+            sim.DeliquoringUsedCalculationOption = simData.deliquoringUsedCalculationOption;
             sim.HcdEpsdCalculationOption = simData.hcdEpsdCalculationOption;
             sim.RhoDetaDCalculationOption = simData.rhoDCalculationOption;
             sim.PcDCalculationOption = simData.PcDCalculationOption;

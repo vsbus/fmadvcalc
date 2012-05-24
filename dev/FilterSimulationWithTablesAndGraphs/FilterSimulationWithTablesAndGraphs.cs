@@ -206,7 +206,10 @@ namespace FilterSimulationWithTablesAndGraphs
                         Calculated,
                     filterMachiningCalculationOption =
                         fmFilterMachiningCalculator.
-                        fmFilterMachiningCalculationOption.PLAIN_DP_CONST
+                        fmFilterMachiningCalculationOption.PLAIN_DP_CONST,
+                    deliquoringUsedCalculationOption =
+                        fmFilterMachiningCalculator.
+                        fmDeliquoringUsedCalculationOption.NotUsed
                 };
 
                 if (GetCurrentActiveSelectedSimulationData() != null)
@@ -214,6 +217,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     fmSelectedSimulationData simData = GetCurrentActiveSelectedSimulationData();
                     cosd.suspensionCalculationOption = simData.internalSimulationData.suspensionCalculationOption;
                     cosd.filterMachiningCalculationOption = simData.internalSimulationData.filterMachiningCalculationOption;
+                    cosd.deliquoringUsedCalculationOption = simData.internalSimulationData.deliquoringUsedCalculationOption;
                     cosd.hcdEpsdCalculationOption = simData.internalSimulationData.hcdEpsdCalculationOption;
                     cosd.rhoDCalculationOption = simData.internalSimulationData.rhoDCalculationOption;
                     cosd.PcDCalculationOption = simData.internalSimulationData.PcDCalculationOption;
@@ -241,6 +245,8 @@ namespace FilterSimulationWithTablesAndGraphs
                             suspensionCalculationOption;
                         fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption
                             filterMachiningCalculationOption;
+                        fmCalculatorsLibrary.fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption
+                            deliquoringUsedCalculationOption;
                         fmCalculatorsLibrary.fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption
                             hcdEpsdCalculationOption;
                         fmCalculatorsLibrary.fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption
@@ -252,6 +258,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         {
                             suspensionCalculationOption = cosd.suspensionCalculationOption;
                             filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
+                            deliquoringUsedCalculationOption = cosd.deliquoringUsedCalculationOption;
                             hcdEpsdCalculationOption = cosd.hcdEpsdCalculationOption;
                             rhoDetaDCalculationOption = cosd.rhoDCalculationOption;
                             PcDCalculationOption = cosd.PcDCalculationOption;
@@ -261,6 +268,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         {
                             suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
                             filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
+                            deliquoringUsedCalculationOption = simData.externalSimulation.DeliquoringUsedCalculationOption;
                             hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
                             rhoDetaDCalculationOption = simData.externalSimulation.RhoDetaDCalculationOption;
                             PcDCalculationOption = simData.externalSimulation.PcDCalculationOption;
@@ -279,9 +287,12 @@ namespace FilterSimulationWithTablesAndGraphs
                         var filterMachiningBlock = new fmFilterMachiningBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, filterMachiningBlock);
                         filterMachiningBlock.SetCalculationOptionAndRewriteData(filterMachiningCalculationOption);
+                        filterMachiningBlock.SetCalculationOptionAndRewriteData(deliquoringUsedCalculationOption);
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
                         simData.internalSimulationData.filterMachiningCalculationOption =
                             filterMachiningCalculationOption;
+                        simData.internalSimulationData.deliquoringUsedCalculationOption =
+                            deliquoringUsedCalculationOption;
 
                         var eps0dNedEpsdBlock = new fmEps0dNedEpsdBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, eps0dNedEpsdBlock);
@@ -306,28 +317,31 @@ namespace FilterSimulationWithTablesAndGraphs
             else
             {
                 var cosd = new fmCalculationOptionSelectionExpandedDialog
-                {
-                    suspensionCalculationOption =
-                        fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions.
-                        RHOSUS_CALCULATED,
-                    hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.
-                        fmDeliquoringHcdEpsdCalculationOption.
-                        CalculatedFromCakeFormation,
-                    rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
-                        fmRhoDEtaDCalculationOption.
-                        EqualToRhoF,
-                    PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
-                        fmPcDCalculationOption.
-                        Calculated,
-                    filterMachiningCalculationOption =
-                        fmCalculatorsLibrary.fmFilterMachiningCalculator.
-                        fmFilterMachiningCalculationOption.PLAIN_DP_CONST
-                };
+                               {
+                                   suspensionCalculationOption =
+                                       fmSuspensionCalculator.fmSuspensionCalculationOptions.
+                                       RHOSUS_CALCULATED,
+                                   hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.
+                                       fmDeliquoringHcdEpsdCalculationOption.
+                                       CalculatedFromCakeFormation,
+                                   rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
+                                       fmRhoDEtaDCalculationOption.
+                                       EqualToRhoF,
+                                   PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
+                                       fmPcDCalculationOption.
+                                       Calculated,
+                                   filterMachiningCalculationOption =
+                                       fmFilterMachiningCalculator.
+                                       fmFilterMachiningCalculationOption.PLAIN_DP_CONST,
+                                   deliquoringUsedCalculationOption =
+                                       fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed
+                               };
 
                 if (GetCurrentActiveLocalParameters() != null)
                 {
                     fmLocalInputParametersData localParameters = GetCurrentActiveLocalParameters();
-                    cosd.filterMachiningCalculationOption = localParameters.filterMachiningBlock.calculationOption;
+                    cosd.filterMachiningCalculationOption = localParameters.filterMachiningBlock.filterMachiningCalculationOption;
+                    cosd.deliquoringUsedCalculationOption = localParameters.filterMachiningBlock.deliquoringUsedCalculationOption;
                 }
 
                 if (cosd.ShowDialog() == DialogResult.OK)
