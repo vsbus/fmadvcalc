@@ -33,7 +33,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.useDefaultRangesButton = new System.Windows.Forms.Button();
             this.maxXValueTextBox = new fmDataGrid.fmNumericalTextBox();
             this.minXValueTextBox = new fmDataGrid.fmNumericalTextBox();
@@ -56,8 +56,8 @@ namespace FilterSimulationWithTablesAndGraphs
             this.tablesAndGraphsTopLeftPanel = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.XYSplitContainer = new System.Windows.Forms.SplitContainer();
-            this.listBoxXAxis = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listBoxXAxis = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBoxYAxis = new System.Windows.Forms.ListView();
             this.panel11 = new System.Windows.Forms.Panel();
@@ -68,6 +68,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel8 = new System.Windows.Forms.Panel();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -103,6 +104,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.XYSplitContainer.Panel1.SuspendLayout();
             this.XYSplitContainer.Panel2.SuspendLayout();
             this.XYSplitContainer.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -203,11 +205,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // projectPanel
             // 
-            this.projectPanel.Size = new System.Drawing.Size(170, 115);
+            this.projectPanel.Size = new System.Drawing.Size(362, 115);
             // 
             // suspensionPanel
             // 
-            this.suspensionPanel.Size = new System.Drawing.Size(226, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(34, 115);
             // 
             // splitter2
             // 
@@ -248,11 +250,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
-            this.panel1.Size = new System.Drawing.Size(166, 20);
+            this.panel1.Size = new System.Drawing.Size(358, 20);
             // 
             // panel2
             // 
-            this.panel2.Size = new System.Drawing.Size(222, 20);
+            this.panel2.Size = new System.Drawing.Size(30, 20);
             // 
             // panel3
             // 
@@ -296,7 +298,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(400, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 170;
+            this.projectSuspensionSplitContainer.SplitterDistance = 362;
             // 
             // useDefaultRangesButton
             // 
@@ -488,9 +490,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // DeleteButtonColumn
             // 
             this.DeleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = "Delete";
-            this.DeleteButtonColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = "Delete";
+            this.DeleteButtonColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.DeleteButtonColumn.HeaderText = "";
             this.DeleteButtonColumn.Name = "DeleteButtonColumn";
             this.DeleteButtonColumn.Width = 5;
@@ -559,8 +561,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // XYSplitContainer.Panel1
             // 
-            this.XYSplitContainer.Panel1.Controls.Add(this.listBoxXAxis);
-            this.XYSplitContainer.Panel1.Controls.Add(this.label2);
+            this.XYSplitContainer.Panel1.Controls.Add(this.groupBox2);
             // 
             // XYSplitContainer.Panel2
             // 
@@ -570,25 +571,29 @@ namespace FilterSimulationWithTablesAndGraphs
             this.XYSplitContainer.SplitterDistance = 101;
             this.XYSplitContainer.TabIndex = 8;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.listBoxXAxis);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(101, 208);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "X Axis Parameter";
+            // 
             // listBoxXAxis
             // 
+            this.listBoxXAxis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
             this.listBoxXAxis.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxXAxis.FormattingEnabled = true;
-            this.listBoxXAxis.Location = new System.Drawing.Point(0, 13);
+            this.listBoxXAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxXAxis.Name = "listBoxXAxis";
-            this.listBoxXAxis.Size = new System.Drawing.Size(101, 186);
-            this.listBoxXAxis.TabIndex = 1;
+            this.listBoxXAxis.Size = new System.Drawing.Size(95, 189);
+            this.listBoxXAxis.TabIndex = 6;
+            this.listBoxXAxis.UseCompatibleStateImageBehavior = false;
+            this.listBoxXAxis.View = System.Windows.Forms.View.Details;
             this.listBoxXAxis.SelectedIndexChanged += new System.EventHandler(this.listBoxX_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "X Axis Parameter";
             // 
             // groupBox1
             // 
@@ -702,6 +707,11 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(374, 152);
             this.panel9.TabIndex = 11;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "X Parameter";
+            this.columnHeader1.Width = 80;
+            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -747,9 +757,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.tablesAndGraphsTopLeftPanel.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.XYSplitContainer.Panel1.ResumeLayout(false);
-            this.XYSplitContainer.Panel1.PerformLayout();
             this.XYSplitContainer.Panel2.ResumeLayout(false);
             this.XYSplitContainer.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
@@ -779,7 +789,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private System.Windows.Forms.Button buttonAddRow;
         private System.Windows.Forms.CheckBox UseParamsCheckBox;
         private System.Windows.Forms.Panel tablesAndGraphsTopLeftPanel;
-        private System.Windows.Forms.ListBox listBoxXAxis;
         private Splitter splitter11;
         private Splitter splitter6;
         private fmDataGrid.fmNumericalTextBox maxXValueTextBox;
@@ -792,13 +801,15 @@ namespace FilterSimulationWithTablesAndGraphs
         private Panel panel9;
         private Button button1;
         private Panel panel4;
-        private Label label2;
         private ListView listBoxYAxis;
         private Panel panel7;
         private Panel panel10;
         private SplitContainer XYSplitContainer;
         private Panel panel11;
         private GroupBox groupBox1;
+        private ListView listBoxXAxis;
+        private GroupBox groupBox2;
+        private ColumnHeader columnHeader1;
 
     }
 }

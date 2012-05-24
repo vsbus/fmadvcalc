@@ -124,9 +124,235 @@ namespace FilterSimulationWithTablesAndGraphs
         private bool m_loadingXRange;
         private readonly fmDisplayingResults m_displayingResults = new fmDisplayingResults();
         private object m_highLightCaller;
+        private Dictionary<string, Color> m_XYListBackColor;
 
-        private static void FillListBox(IList listBoxItems, List<string> strings)
+        void AddColors(Color color, fmGlobalParameter [] parameters)
         {
+            foreach (fmGlobalParameter p in parameters)
+            {
+                m_XYListBackColor.Add(p.name, color);
+            }
+        }
+
+        void InitXYListBackColor()
+        {
+            m_XYListBackColor = new Dictionary<string, Color>();
+
+            AddColors(Color.LightGreen, GetMaterialCakeParameters());
+            AddColors(Color.LightBlue, GetMachineSettingsCakeParameters());
+            AddColors(Color.LightYellow, GetMaterialDeliquoringParameters());
+            AddColors(Color.LightPink, GetMachineSettingsDeliquoringParameters());
+        }
+
+        private fmGlobalParameter[] GetMachineSettingsDeliquoringParameters()
+        {
+            return new[]
+                       {
+                           fmGlobalParameter.sd,
+                           fmGlobalParameter.td,
+                           fmGlobalParameter.K,
+                           fmGlobalParameter.Smech,
+                           fmGlobalParameter.S,
+                           fmGlobalParameter.Rfmech,
+                           fmGlobalParameter.Rf,
+                           fmGlobalParameter.Qgi,
+                           fmGlobalParameter.Qg,
+                           fmGlobalParameter.vg,
+                           fmGlobalParameter.Mfd,
+                           fmGlobalParameter.Mev,
+                           fmGlobalParameter.Vfd,
+                           fmGlobalParameter.Vev,
+                           fmGlobalParameter.Mlcd,
+                           fmGlobalParameter.Vlcd,
+                           fmGlobalParameter.Mcd,
+                           fmGlobalParameter.Vcd,
+                           fmGlobalParameter.rho_bulk,
+                           fmGlobalParameter.Qmfid,
+                           fmGlobalParameter.Qfid,
+                           fmGlobalParameter.Qmcd,
+                           fmGlobalParameter.Qcd,
+                           fmGlobalParameter.qmfid,
+                           fmGlobalParameter.qfid,
+                           fmGlobalParameter.qmcd,
+                           fmGlobalParameter.qcd,
+
+                           fmGlobalParameter.Qgt,
+                           fmGlobalParameter.Vg,
+                           fmGlobalParameter.Qmftd,
+                           fmGlobalParameter.Qmfd,
+                           fmGlobalParameter.Qftd,
+                           fmGlobalParameter.Qfd,
+                           fmGlobalParameter.Qmevi,
+                           fmGlobalParameter.Qmevt,
+                           fmGlobalParameter.Qmev,
+                           fmGlobalParameter.Qevi,
+                           fmGlobalParameter.Qevt,
+                           fmGlobalParameter.Qev,
+                           fmGlobalParameter.qmftd,
+                           fmGlobalParameter.qmfd,
+                           fmGlobalParameter.qftd,
+                           fmGlobalParameter.qfd,
+                           fmGlobalParameter.qmevi,
+                           fmGlobalParameter.qmevt,
+                           fmGlobalParameter.qmev,
+                           fmGlobalParameter.qevi,
+                           fmGlobalParameter.qevt,
+                           fmGlobalParameter.qev
+                       };
+        }
+
+        private fmGlobalParameter[] GetMaterialDeliquoringParameters()
+        {
+            return new[]
+                       {
+                            fmGlobalParameter.Dp_d, 
+                            fmGlobalParameter.hcd, 
+                            fmGlobalParameter.eps_d,
+                            fmGlobalParameter.eta_d,
+                            fmGlobalParameter.rho_d,
+                            fmGlobalParameter.sigma,
+                            fmGlobalParameter.pke0, 
+                            fmGlobalParameter.pke, 
+                            fmGlobalParameter.pc_d, 
+                            fmGlobalParameter.rc_d, 
+                            fmGlobalParameter.alpha_d,
+                            fmGlobalParameter.Srem, 
+                            fmGlobalParameter.ad1, 
+                            fmGlobalParameter.ad2, 
+                            fmGlobalParameter.Tetta,
+                            fmGlobalParameter.eta_g,
+                            fmGlobalParameter.ag1, 
+                            fmGlobalParameter.ag2, 
+                            fmGlobalParameter.ag3, 
+                            fmGlobalParameter.Tetta_boil,
+                            fmGlobalParameter.DH,
+                            fmGlobalParameter.Mmole,
+                            fmGlobalParameter.f, 
+                            fmGlobalParameter.peq
+                       };
+        }
+
+        private fmGlobalParameter[] GetMachineSettingsCakeParameters()
+        {
+            return new[]
+                       {
+                           fmGlobalParameter.A,
+                           fmGlobalParameter.d0,
+
+                           fmGlobalParameter.Dp,
+
+                           fmGlobalParameter.sf,
+                           fmGlobalParameter.sr,
+                           fmGlobalParameter.tr,
+                                            
+                           fmGlobalParameter.hc,
+                           fmGlobalParameter.tf,
+                           fmGlobalParameter.tc,
+                           fmGlobalParameter.n, 
+                                            
+                           fmGlobalParameter.Msus,
+                           fmGlobalParameter.Vsus,
+                           fmGlobalParameter.Mf,
+                           fmGlobalParameter.Vf,
+                           fmGlobalParameter.Ms,
+                           fmGlobalParameter.Vs,
+                           fmGlobalParameter.Mc,
+                           fmGlobalParameter.Vc,
+
+                           fmGlobalParameter.msus,
+                           fmGlobalParameter.vsus,
+                           fmGlobalParameter.mf,
+                           fmGlobalParameter.vf,
+                           fmGlobalParameter.ms,
+                           fmGlobalParameter.vs,
+                           fmGlobalParameter.mc,
+                           fmGlobalParameter.vc,
+
+                           fmGlobalParameter.Qmsus,
+                           fmGlobalParameter.Qsus, 
+                           fmGlobalParameter.Qmf,
+                           fmGlobalParameter.Qf, 
+                           fmGlobalParameter.Qms,
+                           fmGlobalParameter.Qs, 
+                           fmGlobalParameter.Qmc,
+                           fmGlobalParameter.Qc, 
+
+                           fmGlobalParameter.qmsus,
+                           fmGlobalParameter.qsus, 
+                           fmGlobalParameter.qmf, 
+                           fmGlobalParameter.qf, 
+                           fmGlobalParameter.qms, 
+                           fmGlobalParameter.qs, 
+                           fmGlobalParameter.qmc, 
+                           fmGlobalParameter.qc, 
+
+                           fmGlobalParameter.Qmsus_d,
+                           fmGlobalParameter.Qsus_d, 
+                           fmGlobalParameter.Qmf_d, 
+                           fmGlobalParameter.Qf_d, 
+                           fmGlobalParameter.Qms_d, 
+                           fmGlobalParameter.Qs_d, 
+                           fmGlobalParameter.Qmc_d, 
+                           fmGlobalParameter.Qc_d, 
+                           fmGlobalParameter.qmsus_d,
+                           fmGlobalParameter.qsus_d, 
+                           fmGlobalParameter.t1, 
+                           fmGlobalParameter.h1, 
+                           fmGlobalParameter.t1_over_tf, 
+                           fmGlobalParameter.h1_over_hc, 
+                           fmGlobalParameter.qmf_d,
+                           fmGlobalParameter.qf_d, 
+                           fmGlobalParameter.qms_d,
+                           fmGlobalParameter.qs_d, 
+                           fmGlobalParameter.qmc_d,
+                           fmGlobalParameter.qc_d, 
+                                            
+                           fmGlobalParameter.hc_over_tf, 
+                           fmGlobalParameter.dhc_over_dt,
+                                            
+                           fmGlobalParameter.eps, 
+                           fmGlobalParameter.kappa,
+                           fmGlobalParameter.Pc, 
+                           fmGlobalParameter.rc, 
+                           fmGlobalParameter.a
+                       };
+        }
+
+        private fmGlobalParameter[] GetMaterialCakeParameters()
+        {
+            return new[]
+                       {
+                           fmGlobalParameter.eta_f,
+
+                           fmGlobalParameter.rho_f,
+                           fmGlobalParameter.rho_s,
+                           fmGlobalParameter.rho_sus,
+                           fmGlobalParameter.Cm,
+                           fmGlobalParameter.Cv,
+                           fmGlobalParameter.C,
+
+                           fmGlobalParameter.ne,
+                           fmGlobalParameter.eps0,
+                           fmGlobalParameter.kappa0,
+
+                           fmGlobalParameter.nc,
+
+                           fmGlobalParameter.Pc0,
+                           fmGlobalParameter.rc0,
+                           fmGlobalParameter.a0,
+
+                           fmGlobalParameter.Rm0,
+                           fmGlobalParameter.hce0
+                       };
+        }
+
+        private void FillListBox(IList listBoxItems, List<string> strings)
+        {
+            if (m_XYListBackColor == null)
+            {
+                InitXYListBackColor();
+            }
+
             for (int i = listBoxItems.Count - 1; i >= 0; --i)
             {
                 object item = listBoxItems[i];
@@ -155,6 +381,16 @@ namespace FilterSimulationWithTablesAndGraphs
                 if (isAdd)
                 {
                     listBoxItems.Insert(i, strings[j]);
+
+                    if (m_XYListBackColor.ContainsKey(strings[j]))
+                    {
+                        Color color = m_XYListBackColor[strings[j]];
+                        object item = listBoxItems[i];
+                        if (item is ListViewItem)
+                        {
+                            (item as ListViewItem).BackColor = color;
+                        }
+                    }
                 }
             }
         }
@@ -391,7 +627,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                 var fmb = new fmFilterMachiningBlock();
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.filterMachiningCalculationOption);
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.deliquoringUsedCalculationOption);
-                                var xParameter = fmb.GetParameterByName(listBoxXAxis.Text);
+                                var xParameter = fmb.GetParameterByName(listBoxXAxis.SelectedItems[0].Text);
                                 if (xParameter == null || fmb.GetParameterByName(parName).group != xParameter.group)
                                 {
                                     col.Visible = true;
@@ -441,8 +677,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void SetXAxisParameterAsInputed()
         {
-            if (listBoxXAxis.Text != "")
-                UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.Text]);
+            if (listBoxXAxis.SelectedItems.Count == 0)
+                return;
+
+            if (listBoxXAxis.SelectedItems[0].Text != "")
+                UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.SelectedItems[0].Text]);
             BindForeColorToSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
             LoadCurrentXRange();
@@ -484,11 +723,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void LoadCurrentXRange()
         {
-            if (listBoxXAxis.Text == "")
+            if (listBoxXAxis.SelectedItems[0].Text == "")
                 return;
 
             m_loadingXRange = true;
-            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
+            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.SelectedItems[0].Text];
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
             fmRange range = xParameter.chartCurretXRange;
             minXValueTextBox.Text = (range.MinValue / coef).ToString();
@@ -498,12 +737,12 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void LoadvalidRange()
         {
-            if (listBoxXAxis.Text == "")
+            if (listBoxXAxis.SelectedItems[0].Text == "")
             {
                 return;
             }
             m_loadingXRange = true;
-            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
+            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.SelectedItems[0].Text];
             double coef = xParameter.unitFamily.CurrentUnit.Coef;
             fmRange defaultRange = xParameter.validRange;
             fmRange range = xParameter.chartCurretXRange;
@@ -535,8 +774,8 @@ namespace FilterSimulationWithTablesAndGraphs
             UpdateVisibilityOfColumnsInLocalParametrsTable();
             BindXYLists();
             LoadCurrentXRange();
-            if (listBoxXAxis.Text != "")
-                UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.Text]);
+            if (listBoxXAxis.SelectedItems[0].Text != "")
+                UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.SelectedItems[0].Text]);
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
@@ -662,8 +901,8 @@ namespace FilterSimulationWithTablesAndGraphs
             UpdateVisibilityOfColumnsInLocalParametrsTable();
             BindXYLists();
             LoadCurrentXRange();
-            if (listBoxXAxis.Text != "")
-                UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.Text]);
+            if (listBoxXAxis.SelectedItems[0].Text != "")
+                UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.SelectedItems[0].Text]);
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
@@ -854,14 +1093,14 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void BindCalculatedResultsToDisplayingResults()
         {
-            if (listBoxXAxis.Text == "")
+            if (listBoxXAxis.SelectedItems[0].Text == "")
             {
                 m_displayingResults.XParameter = null;
                 m_displayingResults.YParameters = null;
                 return;
             }
 
-            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
+            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.SelectedItems[0].Text];
             var yParameters = new List<fmGlobalParameter>();
             foreach (ListViewItem item in listBoxYAxis.CheckedItems)
             {
@@ -1058,12 +1297,12 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void RecalculateSimulationsWithIterationX()
         {
-            if (listBoxXAxis.Text == "")
+            if (listBoxXAxis.SelectedItems[0].Text == "")
             {
                 return;
             }
 
-            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.Text];
+            fmGlobalParameter xParameter = fmGlobalParameter.parametersByName[listBoxXAxis.SelectedItems[0].Text];
 
             if (!m_isUseLocalParams)
             {
@@ -1204,9 +1443,12 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             FillListBox(listBoxXAxis.Items, inputNames);
-            if (listBoxXAxis.Text == "" && inputNames.Contains(fmGlobalParameter.tf.name))
+            if (listBoxXAxis.SelectedItems.Count == 0 && inputNames.Contains(fmGlobalParameter.tf.name))
             {
-                listBoxXAxis.Text = fmGlobalParameter.tf.name;
+                foreach (ListViewItem item in listBoxXAxis.Items)
+                {
+                    item.Selected = item.Text == fmGlobalParameter.tf.name;
+                }
             }
 
             var outputNames = new List<string>();
