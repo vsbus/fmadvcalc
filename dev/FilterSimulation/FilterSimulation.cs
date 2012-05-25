@@ -27,24 +27,20 @@ namespace FilterSimulation
         private void SetUpToolTips()
         {
             toolTip.SetToolTip(projectCreateButton, "Create new project");
-            toolTip.SetToolTip(projectKeepButton, "Save project");
             toolTip.SetToolTip(projectRestoreButton, "Restore project");
             toolTip.SetToolTip(projectDeleteButton, "Delete project");
 
             toolTip.SetToolTip(suspensionCreateButton, "Create new suspension");
-            toolTip.SetToolTip(suspensionKeepButton, "Save suspension");
             toolTip.SetToolTip(suspensionRestoreButton, "Restore suspension");
             toolTip.SetToolTip(suspensionDeleteButton, "Delete suspension");
 
             toolTip.SetToolTip(simSeriesCreateButton, "Create new serie");
-            toolTip.SetToolTip(simSeriesKeepButton, "Save serie");
             toolTip.SetToolTip(simSeriesRestoreButton, "Restore serie");
             toolTip.SetToolTip(simSeriesDeleteButton, "Delete serie");
             toolTip.SetToolTip(simSeriesDuplicateButton, "Duplicate serie");
 
             toolTip.SetToolTip(simulationCreateButton, "Create new simulation");
             toolTip.SetToolTip(simulationDuplicateButton, "Duplicate simulation");
-            toolTip.SetToolTip(simulationKeepButton, "Save simulation");
             toolTip.SetToolTip(simulationRestoreButton, "Restore simulation");
             toolTip.SetToolTip(simulationDeleteButton, "Delete simulation");
         }

@@ -118,11 +118,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
-            // suspensionKeepButton
-            // 
-            this.suspensionKeepButton.FlatAppearance.BorderSize = 0;
-            this.toolTip.SetToolTip(this.suspensionKeepButton, "Save suspension");
-            // 
             // projectCreateButton
             // 
             this.projectCreateButton.FlatAppearance.BorderSize = 0;
@@ -137,11 +132,6 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.simSeriesCreateButton.FlatAppearance.BorderSize = 0;
             this.toolTip.SetToolTip(this.simSeriesCreateButton, "Create new serie");
-            // 
-            // projectKeepButton
-            // 
-            this.projectKeepButton.FlatAppearance.BorderSize = 0;
-            this.toolTip.SetToolTip(this.projectKeepButton, "Save project");
             // 
             // projectRestoreButton
             // 
@@ -163,11 +153,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.suspensionDeleteButton.FlatAppearance.BorderSize = 0;
             this.toolTip.SetToolTip(this.suspensionDeleteButton, "Delete suspension");
             // 
-            // simSeriesKeepButton
-            // 
-            this.simSeriesKeepButton.FlatAppearance.BorderSize = 0;
-            this.toolTip.SetToolTip(this.simSeriesKeepButton, "Save serie");
-            // 
             // simSeriesRestoreButton
             // 
             this.simSeriesRestoreButton.FlatAppearance.BorderSize = 0;
@@ -182,11 +167,6 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.simulationDuplicateButton.FlatAppearance.BorderSize = 0;
             this.toolTip.SetToolTip(this.simulationDuplicateButton, "Duplicate externalSimulation");
-            // 
-            // simulationKeepButton
-            // 
-            this.simulationKeepButton.FlatAppearance.BorderSize = 0;
-            this.toolTip.SetToolTip(this.simulationKeepButton, "Save externalSimulation");
             // 
             // simulationRestoreButton
             // 
