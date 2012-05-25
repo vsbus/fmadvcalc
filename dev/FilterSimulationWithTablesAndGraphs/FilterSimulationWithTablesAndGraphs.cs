@@ -550,5 +550,13 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             BindXYLists();
         }
+
+        private void deselectAllButton_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listBoxYAxis.Items)
+            {
+                item.Checked = false;
+            }
+        }
     }
 }
