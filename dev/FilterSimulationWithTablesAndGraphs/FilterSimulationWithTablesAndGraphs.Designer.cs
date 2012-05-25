@@ -58,17 +58,20 @@ namespace FilterSimulationWithTablesAndGraphs
             this.XYSplitContainer = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listBoxXAxis = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBoxYAxis = new System.Windows.Forms.ListView();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.calculationOptionTandCChangeButton = new System.Windows.Forms.Button();
+            this.deliquoringMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
+            this.cakeFormationMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
+            this.deliquoringMaterilParametersCheckBox = new System.Windows.Forms.CheckBox();
+            this.cakeFormationMaterilParametersCheckBox = new System.Windows.Forms.CheckBox();
             this.splitter11 = new System.Windows.Forms.Splitter();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.panel8 = new System.Windows.Forms.Panel();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -205,11 +208,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // projectPanel
             // 
-            this.projectPanel.Size = new System.Drawing.Size(362, 115);
+            this.projectPanel.Size = new System.Drawing.Size(170, 115);
             // 
             // suspensionPanel
             // 
-            this.suspensionPanel.Size = new System.Drawing.Size(34, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(226, 115);
             // 
             // splitter2
             // 
@@ -250,11 +253,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
-            this.panel1.Size = new System.Drawing.Size(358, 20);
+            this.panel1.Size = new System.Drawing.Size(166, 20);
             // 
             // panel2
             // 
-            this.panel2.Size = new System.Drawing.Size(30, 20);
+            this.panel2.Size = new System.Drawing.Size(222, 20);
             // 
             // panel3
             // 
@@ -298,7 +301,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(400, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 362;
+            this.projectSuspensionSplitContainer.SplitterDistance = 170;
             // 
             // useDefaultRangesButton
             // 
@@ -548,9 +551,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.panel10.Controls.Add(this.XYSplitContainer);
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(0, 34);
+            this.panel10.Location = new System.Drawing.Point(0, 115);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(305, 208);
+            this.panel10.Size = new System.Drawing.Size(305, 127);
             this.panel10.TabIndex = 9;
             // 
             // XYSplitContainer
@@ -567,7 +570,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.XYSplitContainer.Panel2.Controls.Add(this.groupBox1);
             this.XYSplitContainer.Panel2.Controls.Add(this.panel11);
-            this.XYSplitContainer.Size = new System.Drawing.Size(305, 208);
+            this.XYSplitContainer.Size = new System.Drawing.Size(305, 127);
             this.XYSplitContainer.SplitterDistance = 101;
             this.XYSplitContainer.TabIndex = 8;
             // 
@@ -577,7 +580,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(101, 208);
+            this.groupBox2.Size = new System.Drawing.Size(101, 127);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "X Axis Parameter";
@@ -589,11 +592,16 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxXAxis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxXAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxXAxis.Name = "listBoxXAxis";
-            this.listBoxXAxis.Size = new System.Drawing.Size(95, 189);
+            this.listBoxXAxis.Size = new System.Drawing.Size(95, 108);
             this.listBoxXAxis.TabIndex = 6;
             this.listBoxXAxis.UseCompatibleStateImageBehavior = false;
             this.listBoxXAxis.View = System.Windows.Forms.View.Details;
             this.listBoxXAxis.SelectedIndexChanged += new System.EventHandler(this.listBoxX_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "X Parameter";
+            this.columnHeader1.Width = 80;
             // 
             // groupBox1
             // 
@@ -601,7 +609,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 93);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 115);
+            this.groupBox1.Size = new System.Drawing.Size(200, 34);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Y Axis Parameters";
@@ -612,7 +620,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxYAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxYAxis.Name = "listBoxYAxis";
-            this.listBoxYAxis.Size = new System.Drawing.Size(194, 96);
+            this.listBoxYAxis.Size = new System.Drawing.Size(194, 15);
             this.listBoxYAxis.TabIndex = 6;
             this.listBoxYAxis.UseCompatibleStateImageBehavior = false;
             this.listBoxYAxis.View = System.Windows.Forms.View.List;
@@ -634,22 +642,61 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel7
             // 
-            this.panel7.Controls.Add(this.calculationOptionTandCChangeButton);
+            this.panel7.Controls.Add(this.deliquoringMachininglParametersCheckBox);
+            this.panel7.Controls.Add(this.cakeFormationMachininglParametersCheckBox);
+            this.panel7.Controls.Add(this.deliquoringMaterilParametersCheckBox);
+            this.panel7.Controls.Add(this.cakeFormationMaterilParametersCheckBox);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel7.Location = new System.Drawing.Point(0, 0);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(305, 34);
+            this.panel7.Size = new System.Drawing.Size(305, 115);
             this.panel7.TabIndex = 8;
             // 
-            // calculationOptionTandCChangeButton
+            // deliquoringMachininglParametersCheckBox
             // 
-            this.calculationOptionTandCChangeButton.Location = new System.Drawing.Point(3, 3);
-            this.calculationOptionTandCChangeButton.Name = "calculationOptionTandCChangeButton";
-            this.calculationOptionTandCChangeButton.Size = new System.Drawing.Size(128, 21);
-            this.calculationOptionTandCChangeButton.TabIndex = 3;
-            this.calculationOptionTandCChangeButton.Text = "Calculation Option";
-            this.calculationOptionTandCChangeButton.UseVisualStyleBackColor = true;
-            this.calculationOptionTandCChangeButton.Click += new System.EventHandler(this.calculationOptionTandCChangeButton_Click);
+            this.deliquoringMachininglParametersCheckBox.AutoSize = true;
+            this.deliquoringMachininglParametersCheckBox.Location = new System.Drawing.Point(81, 75);
+            this.deliquoringMachininglParametersCheckBox.Name = "deliquoringMachininglParametersCheckBox";
+            this.deliquoringMachininglParametersCheckBox.Size = new System.Drawing.Size(187, 17);
+            this.deliquoringMachininglParametersCheckBox.TabIndex = 3;
+            this.deliquoringMachininglParametersCheckBox.Text = "Deliquoring Machining Parameters";
+            this.deliquoringMachininglParametersCheckBox.UseVisualStyleBackColor = true;
+            this.deliquoringMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.deliquoringMachininglParametersCheckBox_CheckedChanged);
+            // 
+            // cakeFormationMachininglParametersCheckBox
+            // 
+            this.cakeFormationMachininglParametersCheckBox.AutoSize = true;
+            this.cakeFormationMachininglParametersCheckBox.Checked = true;
+            this.cakeFormationMachininglParametersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cakeFormationMachininglParametersCheckBox.Location = new System.Drawing.Point(81, 29);
+            this.cakeFormationMachininglParametersCheckBox.Name = "cakeFormationMachininglParametersCheckBox";
+            this.cakeFormationMachininglParametersCheckBox.Size = new System.Drawing.Size(208, 17);
+            this.cakeFormationMachininglParametersCheckBox.TabIndex = 2;
+            this.cakeFormationMachininglParametersCheckBox.Text = "Cake Formation Machining Parameters";
+            this.cakeFormationMachininglParametersCheckBox.UseVisualStyleBackColor = true;
+            this.cakeFormationMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.cakeFormationMachininglParametersCheckBox_CheckedChanged);
+            // 
+            // deliquoringMaterilParametersCheckBox
+            // 
+            this.deliquoringMaterilParametersCheckBox.AutoSize = true;
+            this.deliquoringMaterilParametersCheckBox.Location = new System.Drawing.Point(81, 52);
+            this.deliquoringMaterilParametersCheckBox.Name = "deliquoringMaterilParametersCheckBox";
+            this.deliquoringMaterilParametersCheckBox.Size = new System.Drawing.Size(175, 17);
+            this.deliquoringMaterilParametersCheckBox.TabIndex = 1;
+            this.deliquoringMaterilParametersCheckBox.Text = "Deliquoring Material Parameters";
+            this.deliquoringMaterilParametersCheckBox.UseVisualStyleBackColor = true;
+            this.deliquoringMaterilParametersCheckBox.CheckedChanged += new System.EventHandler(this.deliquoringMaterilParametersCheckBox_CheckedChanged);
+            // 
+            // cakeFormationMaterilParametersCheckBox
+            // 
+            this.cakeFormationMaterilParametersCheckBox.AutoSize = true;
+            this.cakeFormationMaterilParametersCheckBox.Location = new System.Drawing.Point(81, 6);
+            this.cakeFormationMaterilParametersCheckBox.Name = "cakeFormationMaterilParametersCheckBox";
+            this.cakeFormationMaterilParametersCheckBox.Size = new System.Drawing.Size(196, 17);
+            this.cakeFormationMaterilParametersCheckBox.TabIndex = 0;
+            this.cakeFormationMaterilParametersCheckBox.Text = "Cake Formation Material Parameters";
+            this.cakeFormationMaterilParametersCheckBox.UseVisualStyleBackColor = true;
+            this.cakeFormationMaterilParametersCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // splitter11
             // 
@@ -707,11 +754,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(374, 152);
             this.panel9.TabIndex = 11;
             // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "X Parameter";
-            this.columnHeader1.Width = 80;
-            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -764,6 +806,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             this.panel8.ResumeLayout(false);
             this.SimulationAndGraphSplitContainer.Panel1.ResumeLayout(false);
             this.SimulationAndGraphSplitContainer.Panel2.ResumeLayout(false);
@@ -795,7 +838,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmDataGrid.fmNumericalTextBox minXValueTextBox;
         private Label xRangeLabel;
         private Button useDefaultRangesButton;
-        private Button calculationOptionTandCChangeButton;
         private Panel panel8;
         private SplitContainer SimulationAndGraphSplitContainer;
         private Panel panel9;
@@ -810,6 +852,10 @@ namespace FilterSimulationWithTablesAndGraphs
         private ListView listBoxXAxis;
         private GroupBox groupBox2;
         private ColumnHeader columnHeader1;
+        private CheckBox cakeFormationMaterilParametersCheckBox;
+        private CheckBox deliquoringMachininglParametersCheckBox;
+        private CheckBox cakeFormationMachininglParametersCheckBox;
+        private CheckBox deliquoringMaterilParametersCheckBox;
 
     }
 }

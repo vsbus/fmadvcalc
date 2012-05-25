@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using fmCalculationLibrary;
@@ -528,6 +529,26 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
             }
             return false;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            BindXYLists();
+        }
+
+        private void cakeFormationMachininglParametersCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            BindXYLists();
+        }
+
+        private void deliquoringMaterilParametersCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            BindXYLists();
+        }
+
+        private void deliquoringMachininglParametersCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            BindXYLists();
         }
     }
 }

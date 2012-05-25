@@ -124,24 +124,78 @@ namespace FilterSimulationWithTablesAndGraphs
         private bool m_loadingXRange;
         private readonly fmDisplayingResults m_displayingResults = new fmDisplayingResults();
         private object m_highLightCaller;
-        private Dictionary<string, Color> m_XYListBackColor;
 
-        void AddColors(Color color, fmGlobalParameter [] parameters)
+        private enum parameterKind
+        {
+            MaterialCakeFormation,
+            MachiningSettingsCakeFormation,
+            MaterialDeliquoring,
+            MachiningSettingsDeliquoring
+        }
+
+        struct ParameterKindProperties
+        {
+            public Color Color { get; set; }
+            public CheckBox Checkbox { get; set; }
+        }
+
+        private Dictionary<string, parameterKind> m_XYListKind;
+
+        private Dictionary<parameterKind, ParameterKindProperties> m_parameterKindProperties;
+
+        void AddColors(parameterKind kind, fmGlobalParameter[] parameters)
         {
             foreach (fmGlobalParameter p in parameters)
             {
-                m_XYListBackColor.Add(p.name, color);
+                m_XYListKind.Add(p.name, kind);
             }
         }
 
-        void InitXYListBackColor()
+        void InitXYParametersProperties()
         {
-            m_XYListBackColor = new Dictionary<string, Color>();
+            m_parameterKindProperties = new Dictionary<parameterKind, ParameterKindProperties>()
+                                            {
+                                                {
+                                                    parameterKind.MaterialCakeFormation,
+                                                    new ParameterKindProperties()
+                                                        {
+                                                            Color = Color.LightGreen,
+                                                            Checkbox = cakeFormationMaterilParametersCheckBox
+                                                        }
+                                                    },
+                                                {
+                                                    parameterKind.MachiningSettingsCakeFormation,
+                                                    new ParameterKindProperties()
+                                                        {
+                                                            Color = Color.LightBlue,
+                                                            Checkbox = cakeFormationMachininglParametersCheckBox
+                                                        }
+                                                    },
+                                                {
+                                                    parameterKind.MaterialDeliquoring,
+                                                    new ParameterKindProperties()
+                                                        {
+                                                            Color = Color.LightYellow,
+                                                            Checkbox = deliquoringMaterilParametersCheckBox
+                                                        }
+                                                    },
+                                                {
+                                                    parameterKind.MachiningSettingsDeliquoring,
+                                                    new ParameterKindProperties()
+                                                        {
+                                                            Color = Color.LightPink,
+                                                            Checkbox = deliquoringMachininglParametersCheckBox
+                                                        }
+                                                    }
+                                            };
 
-            AddColors(Color.LightGreen, GetMaterialCakeParameters());
-            AddColors(Color.LightBlue, GetMachineSettingsCakeParameters());
-            AddColors(Color.LightYellow, GetMaterialDeliquoringParameters());
-            AddColors(Color.LightPink, GetMachineSettingsDeliquoringParameters());
+
+            m_XYListKind = new Dictionary<string, parameterKind>();
+
+            AddColors(parameterKind.MaterialCakeFormation, GetMaterialCakeParameters());
+            AddColors(parameterKind.MachiningSettingsCakeFormation, GetMachineSettingsCakeParameters());
+            AddColors(parameterKind.MaterialDeliquoring, GetMaterialDeliquoringParameters());
+            AddColors(parameterKind.MachiningSettingsDeliquoring, GetMachineSettingsDeliquoringParameters());
         }
 
         private fmGlobalParameter[] GetMachineSettingsDeliquoringParameters()
@@ -314,7 +368,8 @@ namespace FilterSimulationWithTablesAndGraphs
                            fmGlobalParameter.kappa,
                            fmGlobalParameter.Pc, 
                            fmGlobalParameter.rc, 
-                           fmGlobalParameter.a
+                           fmGlobalParameter.a,
+                           fmGlobalParameter.Rm
                        };
         }
 
@@ -348,9 +403,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void FillListBox(IList listBoxItems, List<string> strings)
         {
-            if (m_XYListBackColor == null)
+            if (m_XYListKind == null)
             {
-                InitXYListBackColor();
+                InitXYParametersProperties();
             }
 
             for (int i = listBoxItems.Count - 1; i >= 0; --i)
@@ -382,9 +437,9 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     listBoxItems.Insert(i, strings[j]);
 
-                    if (m_XYListBackColor.ContainsKey(strings[j]))
+                    if (m_XYListKind.ContainsKey(strings[j]))
                     {
-                        Color color = m_XYListBackColor[strings[j]];
+                        Color color = m_parameterKindProperties[m_XYListKind[strings[j]]].Color;
                         object item = listBoxItems[i];
                         if (item is ListViewItem)
                         {
@@ -627,7 +682,9 @@ namespace FilterSimulationWithTablesAndGraphs
                                 var fmb = new fmFilterMachiningBlock();
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.filterMachiningCalculationOption);
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.deliquoringUsedCalculationOption);
-                                var xParameter = fmb.GetParameterByName(listBoxXAxis.SelectedItems[0].Text);
+                                var xParameter = listBoxXAxis.SelectedItems.Count == 0
+                                                     ? null
+                                                     : fmb.GetParameterByName(listBoxXAxis.SelectedItems[0].Text);
                                 if (xParameter == null || fmb.GetParameterByName(parName).group != xParameter.group)
                                 {
                                     col.Visible = true;
@@ -723,7 +780,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void LoadCurrentXRange()
         {
-            if (listBoxXAxis.SelectedItems[0].Text == "")
+            if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
                 return;
 
             m_loadingXRange = true;
@@ -901,7 +958,7 @@ namespace FilterSimulationWithTablesAndGraphs
             UpdateVisibilityOfColumnsInLocalParametrsTable();
             BindXYLists();
             LoadCurrentXRange();
-            if (listBoxXAxis.SelectedItems[0].Text != "")
+            if (listBoxXAxis.SelectedItems.Count != 0 && listBoxXAxis.SelectedItems[0].Text != "")
                 UpdateIsInputed(fmGlobalParameter.parametersByName[listBoxXAxis.SelectedItems[0].Text]);
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
@@ -1093,7 +1150,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void BindCalculatedResultsToDisplayingResults()
         {
-            if (listBoxXAxis.SelectedItems[0].Text == "")
+            if (listBoxXAxis.SelectedItems.Count == 0 ||  listBoxXAxis.SelectedItems[0].Text == "")
             {
                 m_displayingResults.XParameter = null;
                 m_displayingResults.YParameters = null;
@@ -1297,7 +1354,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void RecalculateSimulationsWithIterationX()
         {
-            if (listBoxXAxis.SelectedItems[0].Text == "")
+            if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
             {
                 return;
             }
@@ -1433,13 +1490,22 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void BindXYLists()
         {
+            if (m_XYListKind == null)
+            {
+                InitXYParametersProperties();
+            }
+
             var inputNames = new List<string>();
 
             IEnumerable<fmGlobalParameter> simInputParameters = GetCommonInputParametersList();
 
             foreach (fmGlobalParameter p in simInputParameters)
             {
-                inputNames.Add(p.name);
+                CheckBox paramsCheckbox = m_parameterKindProperties[m_XYListKind[p.name]].Checkbox;
+                if (paramsCheckbox == null || paramsCheckbox.Checked)
+                {
+                    inputNames.Add(p.name);
+                }
             }
 
             FillListBox(listBoxXAxis.Items, inputNames);
@@ -1457,7 +1523,11 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 if (parametersToDisplay.Contains(p))
                 {
-                    outputNames.Add(p.name);
+                    CheckBox paramsCheckbox = m_parameterKindProperties[m_XYListKind[p.name]].Checkbox;
+                    if (paramsCheckbox == null || paramsCheckbox.Checked)
+                    {
+                        outputNames.Add(p.name);
+                    }
                 }
             }
 
