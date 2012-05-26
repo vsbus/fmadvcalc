@@ -42,6 +42,16 @@ namespace FilterSimulation
 
             etaDrhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser;
             PcDCheckBox.Checked = PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser;
+
+            ShowHideSecondaryDeliquoringCheckboxes();
+        }
+
+        private void ShowHideSecondaryDeliquoringCheckboxes()
+        {
+            bool isVisible = deliquoringOptionCheckBox.Checked;
+            CakeHeightInputCheckBox.Visible = isVisible;
+            PcDCheckBox.Visible = isVisible;
+            etaDrhoDCheckBox.Visible = isVisible;
         }
 
         // ReSharper disable InconsistentNaming
@@ -133,6 +143,8 @@ namespace FilterSimulation
                                                          fmDeliquoringUsedCalculationOption.Used
                                                    : fmFilterMachiningCalculator.
                                                          fmDeliquoringUsedCalculationOption.NotUsed;
+
+            ShowHideSecondaryDeliquoringCheckboxes();
         }
         // ReSharper restore InconsistentNaming
 

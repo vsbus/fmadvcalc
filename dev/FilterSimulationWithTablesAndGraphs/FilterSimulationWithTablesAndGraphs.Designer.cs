@@ -190,11 +190,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // projectPanel
             // 
-            this.projectPanel.Size = new System.Drawing.Size(222, 115);
+            this.projectPanel.Size = new System.Drawing.Size(170, 115);
             // 
             // suspensionPanel
             // 
-            this.suspensionPanel.Size = new System.Drawing.Size(174, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(226, 115);
             // 
             // splitter2
             // 
@@ -235,11 +235,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
-            this.panel1.Size = new System.Drawing.Size(218, 20);
+            this.panel1.Size = new System.Drawing.Size(166, 20);
             // 
             // panel2
             // 
-            this.panel2.Size = new System.Drawing.Size(170, 20);
+            this.panel2.Size = new System.Drawing.Size(222, 20);
             // 
             // panel3
             // 
@@ -283,7 +283,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(400, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 222;
+            this.projectSuspensionSplitContainer.SplitterDistance = 170;
             // 
             // useDefaultRangesButton
             // 
