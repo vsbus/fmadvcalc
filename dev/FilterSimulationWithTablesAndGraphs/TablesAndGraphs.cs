@@ -443,7 +443,15 @@ namespace FilterSimulationWithTablesAndGraphs
                         object item = listBoxItems[i];
                         if (item is ListViewItem)
                         {
-                            (item as ListViewItem).BackColor = color;
+                            var listViewItem = item as ListViewItem;
+                            if (listViewItem.ListView.View == View.List)
+                            {
+                                listViewItem.ForeColor = Color.FromArgb(color.R / 2, color.G / 2, color.B / 2);
+                            }
+                            else
+                            {
+                                listViewItem.BackColor = color;
+                            }
                         }
                     }
                 }
