@@ -46,6 +46,8 @@ namespace FilterSimulation
             this.panel4 = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.considerGasFlowrateCheckbox = new System.Windows.Forms.CheckBox();
+            this.considerEvaporationCheckBox = new System.Windows.Forms.CheckBox();
             this.suspensionGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.simulationCalculationOptionGroupBox.SuspendLayout();
@@ -98,7 +100,7 @@ namespace FilterSimulation
             this.suspensionGroupBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.suspensionGroupBox.Location = new System.Drawing.Point(0, 0);
             this.suspensionGroupBox.Name = "suspensionGroupBox";
-            this.suspensionGroupBox.Size = new System.Drawing.Size(190, 311);
+            this.suspensionGroupBox.Size = new System.Drawing.Size(190, 199);
             this.suspensionGroupBox.TabIndex = 1;
             this.suspensionGroupBox.TabStop = false;
             this.suspensionGroupBox.Text = "Suspension calculation option";
@@ -118,12 +120,12 @@ namespace FilterSimulation
             // panel1
             // 
             this.panel1.Controls.Add(this.simulationCalculationOptionGroupBox);
-            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Controls.Add(this.suspensionGroupBox);
+            this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(463, 311);
+            this.panel1.Size = new System.Drawing.Size(463, 380);
             this.panel1.TabIndex = 2;
             // 
             // simulationCalculationOptionGroupBox
@@ -132,7 +134,7 @@ namespace FilterSimulation
             this.simulationCalculationOptionGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simulationCalculationOptionGroupBox.Location = new System.Drawing.Point(190, 0);
             this.simulationCalculationOptionGroupBox.Name = "simulationCalculationOptionGroupBox";
-            this.simulationCalculationOptionGroupBox.Size = new System.Drawing.Size(273, 186);
+            this.simulationCalculationOptionGroupBox.Size = new System.Drawing.Size(273, 199);
             this.simulationCalculationOptionGroupBox.TabIndex = 2;
             this.simulationCalculationOptionGroupBox.TabStop = false;
             this.simulationCalculationOptionGroupBox.Text = "Simulation calculation option";
@@ -142,20 +144,22 @@ namespace FilterSimulation
             this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
             this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
-            this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 167);
+            this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 180);
             this.fmCalculationOptionView1.TabIndex = 0;
             this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.considerEvaporationCheckBox);
+            this.groupBox1.Controls.Add(this.considerGasFlowrateCheckbox);
             this.groupBox1.Controls.Add(this.deliquoringOptionCheckBox);
             this.groupBox1.Controls.Add(this.PcDCheckBox);
             this.groupBox1.Controls.Add(this.etaDrhoDCheckBox);
             this.groupBox1.Controls.Add(this.CakeHeightInputCheckBox);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(190, 186);
+            this.groupBox1.Location = new System.Drawing.Point(0, 199);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(273, 125);
+            this.groupBox1.Size = new System.Drawing.Size(463, 181);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deliquoring Calculation Option";
@@ -174,7 +178,7 @@ namespace FilterSimulation
             // PcDCheckBox
             // 
             this.PcDCheckBox.AutoSize = true;
-            this.PcDCheckBox.Location = new System.Drawing.Point(22, 65);
+            this.PcDCheckBox.Location = new System.Drawing.Point(193, 69);
             this.PcDCheckBox.Name = "PcDCheckBox";
             this.PcDCheckBox.Size = new System.Drawing.Size(190, 17);
             this.PcDCheckBox.TabIndex = 3;
@@ -185,7 +189,7 @@ namespace FilterSimulation
             // etaDrhoDCheckBox
             // 
             this.etaDrhoDCheckBox.AutoSize = true;
-            this.etaDrhoDCheckBox.Location = new System.Drawing.Point(22, 88);
+            this.etaDrhoDCheckBox.Location = new System.Drawing.Point(193, 92);
             this.etaDrhoDCheckBox.Name = "etaDrhoDCheckBox";
             this.etaDrhoDCheckBox.Size = new System.Drawing.Size(134, 17);
             this.etaDrhoDCheckBox.TabIndex = 2;
@@ -196,7 +200,7 @@ namespace FilterSimulation
             // CakeHeightInputCheckBox
             // 
             this.CakeHeightInputCheckBox.AutoSize = true;
-            this.CakeHeightInputCheckBox.Location = new System.Drawing.Point(22, 42);
+            this.CakeHeightInputCheckBox.Location = new System.Drawing.Point(193, 46);
             this.CakeHeightInputCheckBox.Name = "CakeHeightInputCheckBox";
             this.CakeHeightInputCheckBox.Size = new System.Drawing.Size(112, 17);
             this.CakeHeightInputCheckBox.TabIndex = 0;
@@ -211,7 +215,7 @@ namespace FilterSimulation
             this.panel2.Controls.Add(this.cancelButton);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 311);
+            this.panel2.Location = new System.Drawing.Point(0, 380);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(463, 25);
             this.panel2.TabIndex = 3;
@@ -255,11 +259,33 @@ namespace FilterSimulation
             this.panel3.Size = new System.Drawing.Size(10, 25);
             this.panel3.TabIndex = 2;
             // 
+            // considerGasFlowrateCheckbox
+            // 
+            this.considerGasFlowrateCheckbox.AutoSize = true;
+            this.considerGasFlowrateCheckbox.Checked = true;
+            this.considerGasFlowrateCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.considerGasFlowrateCheckbox.Location = new System.Drawing.Point(27, 46);
+            this.considerGasFlowrateCheckbox.Name = "considerGasFlowrateCheckbox";
+            this.considerGasFlowrateCheckbox.Size = new System.Drawing.Size(132, 17);
+            this.considerGasFlowrateCheckbox.TabIndex = 5;
+            this.considerGasFlowrateCheckbox.Text = "Consider Gas flow rate";
+            this.considerGasFlowrateCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // considerEvaporationCheckBox
+            // 
+            this.considerEvaporationCheckBox.AutoSize = true;
+            this.considerEvaporationCheckBox.Location = new System.Drawing.Point(52, 69);
+            this.considerEvaporationCheckBox.Name = "considerEvaporationCheckBox";
+            this.considerEvaporationCheckBox.Size = new System.Drawing.Size(127, 17);
+            this.considerEvaporationCheckBox.TabIndex = 6;
+            this.considerEvaporationCheckBox.Text = "Consider Evaporation";
+            this.considerEvaporationCheckBox.UseVisualStyleBackColor = true;
+            // 
             // fmCalculationOptionSelectionDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 336);
+            this.ClientSize = new System.Drawing.Size(463, 405);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Name = "fmCalculationOptionSelectionDialog";
@@ -296,5 +322,7 @@ namespace FilterSimulation
         private System.Windows.Forms.CheckBox etaDrhoDCheckBox;
         private System.Windows.Forms.CheckBox PcDCheckBox;
         private System.Windows.Forms.CheckBox deliquoringOptionCheckBox;
+        private System.Windows.Forms.CheckBox considerGasFlowrateCheckbox;
+        private System.Windows.Forms.CheckBox considerEvaporationCheckBox;
     }
 }

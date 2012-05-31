@@ -62,13 +62,14 @@ namespace AdvancedCalculator
         // ReSharper restore InconsistentNaming
         {
             Text = m_Caption;
-            string defaultFilename = Directory.GetCurrentDirectory() + "\\fmdata.dat";
             object regValue = Registry.GetValue(
                 @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
                 "LastFile",
-                defaultFilename);
-            string fileName = regValue == null ? defaultFilename : regValue.ToString();
-            LoadFromDisk(fileName);
+                "");
+            if (regValue != null)
+            {
+                LoadFromDisk(regValue.ToString());
+            }
         }
 
         // ReSharper disable InconsistentNaming
