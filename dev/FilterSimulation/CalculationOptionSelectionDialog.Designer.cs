@@ -185,6 +185,7 @@ namespace FilterSimulation
             this.considerGasFlowrateCheckbox.TabIndex = 5;
             this.considerGasFlowrateCheckbox.Text = "Consider Gas flow rate";
             this.considerGasFlowrateCheckbox.UseVisualStyleBackColor = true;
+            this.considerGasFlowrateCheckbox.CheckedChanged += new System.EventHandler(this.considerGasFlowrateCheckbox_CheckedChanged);
             // 
             // deliquoringOptionCheckBox
             // 

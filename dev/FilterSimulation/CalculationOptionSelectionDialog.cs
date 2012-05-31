@@ -52,6 +52,8 @@ namespace FilterSimulation
             CakeHeightInputCheckBox.Visible = isVisible;
             PcDCheckBox.Visible = isVisible;
             etaDrhoDCheckBox.Visible = isVisible;
+            considerGasFlowrateCheckbox.Visible = isVisible;
+            considerEvaporationCheckBox.Visible = isVisible && considerGasFlowrateCheckbox.Checked;
         }
 
         // ReSharper disable InconsistentNaming
@@ -144,6 +146,11 @@ namespace FilterSimulation
                                                    : fmFilterMachiningCalculator.
                                                          fmDeliquoringUsedCalculationOption.NotUsed;
 
+            ShowHideSecondaryDeliquoringCheckboxes();
+        }
+
+        private void considerGasFlowrateCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
             ShowHideSecondaryDeliquoringCheckboxes();
         }
         // ReSharper restore InconsistentNaming
