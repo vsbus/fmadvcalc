@@ -210,7 +210,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         fmFilterMachiningCalculationOption.PLAIN_DP_CONST,
                     deliquoringUsedCalculationOption =
                         fmFilterMachiningCalculator.
-                        fmDeliquoringUsedCalculationOption.NotUsed
+                        fmDeliquoringUsedCalculationOption.Used
                 };
 
                 if (GetCurrentActiveSelectedSimulationData() != null)
@@ -335,7 +335,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                        fmFilterMachiningCalculator.
                                        fmFilterMachiningCalculationOption.PLAIN_DP_CONST,
                                    deliquoringUsedCalculationOption =
-                                       fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed
+                                       fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used
                                };
 
                 if (GetCurrentActiveLocalParameters() != null)

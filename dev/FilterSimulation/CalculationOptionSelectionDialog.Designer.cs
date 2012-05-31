@@ -37,6 +37,8 @@ namespace FilterSimulation
             this.simulationCalculationOptionGroupBox = new System.Windows.Forms.GroupBox();
             this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.considerEvaporationCheckBox = new System.Windows.Forms.CheckBox();
+            this.considerGasFlowrateCheckbox = new System.Windows.Forms.CheckBox();
             this.deliquoringOptionCheckBox = new System.Windows.Forms.CheckBox();
             this.PcDCheckBox = new System.Windows.Forms.CheckBox();
             this.etaDrhoDCheckBox = new System.Windows.Forms.CheckBox();
@@ -46,8 +48,6 @@ namespace FilterSimulation
             this.panel4 = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.considerGasFlowrateCheckbox = new System.Windows.Forms.CheckBox();
-            this.considerEvaporationCheckBox = new System.Windows.Forms.CheckBox();
             this.suspensionGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.simulationCalculationOptionGroupBox.SuspendLayout();
@@ -164,9 +164,33 @@ namespace FilterSimulation
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deliquoring Calculation Option";
             // 
+            // considerEvaporationCheckBox
+            // 
+            this.considerEvaporationCheckBox.AutoSize = true;
+            this.considerEvaporationCheckBox.Location = new System.Drawing.Point(52, 69);
+            this.considerEvaporationCheckBox.Name = "considerEvaporationCheckBox";
+            this.considerEvaporationCheckBox.Size = new System.Drawing.Size(127, 17);
+            this.considerEvaporationCheckBox.TabIndex = 6;
+            this.considerEvaporationCheckBox.Text = "Consider Evaporation";
+            this.considerEvaporationCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // considerGasFlowrateCheckbox
+            // 
+            this.considerGasFlowrateCheckbox.AutoSize = true;
+            this.considerGasFlowrateCheckbox.Checked = true;
+            this.considerGasFlowrateCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.considerGasFlowrateCheckbox.Location = new System.Drawing.Point(27, 46);
+            this.considerGasFlowrateCheckbox.Name = "considerGasFlowrateCheckbox";
+            this.considerGasFlowrateCheckbox.Size = new System.Drawing.Size(132, 17);
+            this.considerGasFlowrateCheckbox.TabIndex = 5;
+            this.considerGasFlowrateCheckbox.Text = "Consider Gas flow rate";
+            this.considerGasFlowrateCheckbox.UseVisualStyleBackColor = true;
+            // 
             // deliquoringOptionCheckBox
             // 
             this.deliquoringOptionCheckBox.AutoSize = true;
+            this.deliquoringOptionCheckBox.Checked = true;
+            this.deliquoringOptionCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.deliquoringOptionCheckBox.Location = new System.Drawing.Point(6, 19);
             this.deliquoringOptionCheckBox.Name = "deliquoringOptionCheckBox";
             this.deliquoringOptionCheckBox.Size = new System.Drawing.Size(101, 17);
@@ -258,28 +282,6 @@ namespace FilterSimulation
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 25);
             this.panel3.TabIndex = 2;
-            // 
-            // considerGasFlowrateCheckbox
-            // 
-            this.considerGasFlowrateCheckbox.AutoSize = true;
-            this.considerGasFlowrateCheckbox.Checked = true;
-            this.considerGasFlowrateCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.considerGasFlowrateCheckbox.Location = new System.Drawing.Point(27, 46);
-            this.considerGasFlowrateCheckbox.Name = "considerGasFlowrateCheckbox";
-            this.considerGasFlowrateCheckbox.Size = new System.Drawing.Size(132, 17);
-            this.considerGasFlowrateCheckbox.TabIndex = 5;
-            this.considerGasFlowrateCheckbox.Text = "Consider Gas flow rate";
-            this.considerGasFlowrateCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // considerEvaporationCheckBox
-            // 
-            this.considerEvaporationCheckBox.AutoSize = true;
-            this.considerEvaporationCheckBox.Location = new System.Drawing.Point(52, 69);
-            this.considerEvaporationCheckBox.Name = "considerEvaporationCheckBox";
-            this.considerEvaporationCheckBox.Size = new System.Drawing.Size(127, 17);
-            this.considerEvaporationCheckBox.TabIndex = 6;
-            this.considerEvaporationCheckBox.Text = "Consider Evaporation";
-            this.considerEvaporationCheckBox.UseVisualStyleBackColor = true;
             // 
             // fmCalculationOptionSelectionDialog
             // 

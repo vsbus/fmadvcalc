@@ -73,7 +73,7 @@ namespace fmCalculatorsLibrary
         }
 
         public fmDeliquoringUsedCalculationOption deliquoringCalculationOption =
-            fmDeliquoringUsedCalculationOption.NotUsed;
+            fmDeliquoringUsedCalculationOption.Used;
 
         public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
 
