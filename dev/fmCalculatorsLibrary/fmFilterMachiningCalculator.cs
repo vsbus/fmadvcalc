@@ -72,8 +72,11 @@ namespace fmCalculatorsLibrary
             Used
         }
 
-        public fmDeliquoringUsedCalculationOption deliquoringCalculationOption =
-            fmDeliquoringUsedCalculationOption.Used;
+        public enum fmGasFlowrateUsedCalculationOption
+        {
+            NotConsider,
+            Consider
+        }
 
         public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
 

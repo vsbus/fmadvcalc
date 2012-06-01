@@ -559,6 +559,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
+            fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.GasFlowrateUsedCalculationOption);
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(m_externalCurrentActiveSimulation, fmb);
             fmb.CalculateAndDisplay();
         }
@@ -616,7 +617,8 @@ namespace FilterSimulationWithTablesAndGraphs
                 var tempBlock = new fmFilterMachiningBlock
                 {
                     filterMachiningCalculationOption = tempSim.filterMachiningCalculationOption,
-                    deliquoringUsedCalculationOption = tempSim.deliquoringUsedCalculationOption
+                    deliquoringUsedCalculationOption = tempSim.deliquoringUsedCalculationOption,
+                    gasFlowrateUsedCalculationOption = tempSim.gasFlowrateUsedCalculationOption
                 };
                 tempBlock.UpdateGroups();
 
@@ -690,6 +692,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                 var fmb = new fmFilterMachiningBlock();
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.filterMachiningCalculationOption);
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.deliquoringUsedCalculationOption);
+                                fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.gasFlowrateUsedCalculationOption);
                                 var xParameter = listBoxXAxis.SelectedItems.Count == 0
                                                      ? null
                                                      : fmb.GetParameterByName(listBoxXAxis.SelectedItems[0].Text);
@@ -777,6 +780,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                     simData.internalSimulationData.filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
                     simData.internalSimulationData.deliquoringUsedCalculationOption = simData.externalSimulation.DeliquoringUsedCalculationOption;
+                    simData.internalSimulationData.gasFlowrateUsedCalculationOption = simData.externalSimulation.GasFlowrateUsedCalculationOption;
                     simData.internalSimulationData.hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
                     simData.internalSimulationData.rhoDCalculationOption = simData.externalSimulation.RhoDetaDCalculationOption;
                     simData.internalSimulationData.PcDCalculationOption = simData.externalSimulation.PcDCalculationOption;

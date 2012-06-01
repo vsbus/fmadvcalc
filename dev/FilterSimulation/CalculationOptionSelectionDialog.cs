@@ -9,6 +9,7 @@ namespace FilterSimulation
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
         public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
+        public fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption gasFlowrateUsedCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption rhoDCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption;
@@ -39,6 +40,9 @@ namespace FilterSimulation
 
             deliquoringOptionCheckBox.Checked = deliquoringUsedCalculationOption ==
                                                 fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
+
+            considerGasFlowrateCheckbox.Checked = gasFlowrateUsedCalculationOption ==
+                                                fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
 
             etaDrhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser;
             PcDCheckBox.Checked = PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser;
@@ -151,6 +155,12 @@ namespace FilterSimulation
 
         private void considerGasFlowrateCheckbox_CheckedChanged(object sender, EventArgs e)
         {
+            gasFlowrateUsedCalculationOption = considerGasFlowrateCheckbox.Checked
+                                                   ? fmFilterMachiningCalculator.
+                                                         fmGasFlowrateUsedCalculationOption.Consider
+                                                   : fmFilterMachiningCalculator.
+                                                         fmGasFlowrateUsedCalculationOption.NotConsider;
+
             ShowHideSecondaryDeliquoringCheckboxes();
         }
         // ReSharper restore InconsistentNaming

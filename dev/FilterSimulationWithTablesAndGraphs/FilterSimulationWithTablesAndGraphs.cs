@@ -210,7 +210,10 @@ namespace FilterSimulationWithTablesAndGraphs
                         fmFilterMachiningCalculationOption.PLAIN_DP_CONST,
                     deliquoringUsedCalculationOption =
                         fmFilterMachiningCalculator.
-                        fmDeliquoringUsedCalculationOption.Used
+                        fmDeliquoringUsedCalculationOption.Used,
+                    gasFlowrateUsedCalculationOption =
+                        fmFilterMachiningCalculator.
+                        fmGasFlowrateUsedCalculationOption.Consider
                 };
 
                 if (GetCurrentActiveSelectedSimulationData() != null)
@@ -219,6 +222,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     cosd.suspensionCalculationOption = simData.internalSimulationData.suspensionCalculationOption;
                     cosd.filterMachiningCalculationOption = simData.internalSimulationData.filterMachiningCalculationOption;
                     cosd.deliquoringUsedCalculationOption = simData.internalSimulationData.deliquoringUsedCalculationOption;
+                    cosd.gasFlowrateUsedCalculationOption = simData.internalSimulationData.gasFlowrateUsedCalculationOption;
                     cosd.hcdEpsdCalculationOption = simData.internalSimulationData.hcdEpsdCalculationOption;
                     cosd.rhoDCalculationOption = simData.internalSimulationData.rhoDCalculationOption;
                     cosd.PcDCalculationOption = simData.internalSimulationData.PcDCalculationOption;
@@ -242,17 +246,19 @@ namespace FilterSimulationWithTablesAndGraphs
                     foreach (fmSelectedSimulationData simData in selectedList)
                     {
                         fmFilterSimulationData sim = simData.internalSimulationData;
-                        fmCalculatorsLibrary.fmSuspensionCalculator.fmSuspensionCalculationOptions
+                        fmSuspensionCalculator.fmSuspensionCalculationOptions
                             suspensionCalculationOption;
-                        fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption
+                        fmFilterMachiningCalculator.fmFilterMachiningCalculationOption
                             filterMachiningCalculationOption;
-                        fmCalculatorsLibrary.fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption
+                        fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption
                             deliquoringUsedCalculationOption;
-                        fmCalculatorsLibrary.fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption
+                        fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption
+                            gasFlowrateUsedCalculationOption;
+                        fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption
                             hcdEpsdCalculationOption;
-                        fmCalculatorsLibrary.fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption
+                        fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption
                             rhoDetaDCalculationOption;
-                        fmCalculatorsLibrary.fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption
+                        fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption
                             PcDCalculationOption;
 
                         if (cosd.CalculationOptionKind == fmCalculationOptionDialogExpandedCalculationOptionKind.NEW)
@@ -260,6 +266,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             suspensionCalculationOption = cosd.suspensionCalculationOption;
                             filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
                             deliquoringUsedCalculationOption = cosd.deliquoringUsedCalculationOption;
+                            gasFlowrateUsedCalculationOption = cosd.gasFlowrateUsedCalculationOption;
                             hcdEpsdCalculationOption = cosd.hcdEpsdCalculationOption;
                             rhoDetaDCalculationOption = cosd.rhoDCalculationOption;
                             PcDCalculationOption = cosd.PcDCalculationOption;
@@ -270,6 +277,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
                             filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
                             deliquoringUsedCalculationOption = simData.externalSimulation.DeliquoringUsedCalculationOption;
+                            gasFlowrateUsedCalculationOption = simData.externalSimulation.GasFlowrateUsedCalculationOption;
                             hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
                             rhoDetaDCalculationOption = simData.externalSimulation.RhoDetaDCalculationOption;
                             PcDCalculationOption = simData.externalSimulation.PcDCalculationOption;
@@ -289,11 +297,14 @@ namespace FilterSimulationWithTablesAndGraphs
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, filterMachiningBlock);
                         filterMachiningBlock.SetCalculationOptionAndRewriteData(filterMachiningCalculationOption);
                         filterMachiningBlock.SetCalculationOptionAndRewriteData(deliquoringUsedCalculationOption);
+                        filterMachiningBlock.SetCalculationOptionAndRewriteData(gasFlowrateUsedCalculationOption);
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
                         simData.internalSimulationData.filterMachiningCalculationOption =
                             filterMachiningCalculationOption;
                         simData.internalSimulationData.deliquoringUsedCalculationOption =
                             deliquoringUsedCalculationOption;
+                        simData.internalSimulationData.gasFlowrateUsedCalculationOption =
+                            gasFlowrateUsedCalculationOption;
 
                         var eps0dNedEpsdBlock = new fmEps0dNedEpsdBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, eps0dNedEpsdBlock);
@@ -335,7 +346,9 @@ namespace FilterSimulationWithTablesAndGraphs
                                        fmFilterMachiningCalculator.
                                        fmFilterMachiningCalculationOption.PLAIN_DP_CONST,
                                    deliquoringUsedCalculationOption =
-                                       fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used
+                                       fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used,
+                                   gasFlowrateUsedCalculationOption =
+                                       fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider
                                };
 
                 if (GetCurrentActiveLocalParameters() != null)
@@ -343,6 +356,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     fmLocalInputParametersData localParameters = GetCurrentActiveLocalParameters();
                     cosd.filterMachiningCalculationOption = localParameters.filterMachiningBlock.filterMachiningCalculationOption;
                     cosd.deliquoringUsedCalculationOption = localParameters.filterMachiningBlock.deliquoringUsedCalculationOption;
+                    cosd.gasFlowrateUsedCalculationOption = localParameters.filterMachiningBlock.gasFlowrateUsedCalculationOption;
                 }
 
                 if (cosd.ShowDialog() == DialogResult.OK)

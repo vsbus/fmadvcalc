@@ -91,7 +91,8 @@ namespace SampleForBlocks
             var cosd = new fmCalculationOptionSelectionDialog
                            {
                                filterMachiningCalculationOption = m_fmBlock.filterMachiningCalculationOption,
-                               deliquoringUsedCalculationOption = m_fmBlock.deliquoringUsedCalculationOption
+                               deliquoringUsedCalculationOption = m_fmBlock.deliquoringUsedCalculationOption,
+                               gasFlowrateUsedCalculationOption = m_fmBlock.gasFlowrateUsedCalculationOption
                            };
             //cosd.suspensionCalculationOption = ;
             if (cosd.ShowDialog() == DialogResult.OK)

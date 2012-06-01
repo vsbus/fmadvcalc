@@ -568,6 +568,11 @@ namespace FilterSimulation
             {
                 sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.DeliquoringUsedCalculationOption);
             }
+
+            if (sim.filterMachiningBlock.gasFlowrateUsedCalculationOption != sim.GasFlowrateUsedCalculationOption)
+            {
+                sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.GasFlowrateUsedCalculationOption);
+            }
         }
         private static void CopySimulationValuesToRmHceBlock(fmFilterSimulation sim)
         {
@@ -852,6 +857,7 @@ namespace FilterSimulation
                 {
                     m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.filterMachiningCalculationOption);
                     m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.deliquoringUsedCalculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.gasFlowrateUsedCalculationOption);
 
                     for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                     {
@@ -1282,6 +1288,7 @@ namespace FilterSimulation
             {
                 sim.FilterMachiningCalculationOption = filterMachiningBlock.filterMachiningCalculationOption;
                 sim.DeliquoringUsedCalculationOption = filterMachiningBlock.deliquoringUsedCalculationOption;
+                sim.GasFlowrateUsedCalculationOption = filterMachiningBlock.gasFlowrateUsedCalculationOption;
                 fmFilterSimulation.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
 
                 fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
