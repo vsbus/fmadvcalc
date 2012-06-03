@@ -422,6 +422,8 @@ namespace FilterSimulation
 
                 if (sim == sol.currentObjects.Simulation)
                 {
+                    ShowHideRowsDependingOnCalculationOptions(sim);
+
                     sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
                     sim.deliquoringSigmaPkeBlock.CalculateAndDisplay();
                     sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
@@ -430,6 +432,47 @@ namespace FilterSimulation
                     sim.pc0Rc0A0Block.CalculateAndDisplay();
                     sim.eps0Kappa0Block.CalculateAndDisplay();
                     sim.susBlock.CalculateAndDisplay();
+                }
+            }
+        }
+
+        private void ShowHideRowsDependingOnCalculationOptions(fmFilterSimulation sim)
+        {
+            {
+                bool isGas = sim.filterMachiningBlock.gasFlowrateUsedCalculationOption == fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
+                var materialParameters = new[] {
+                    fmGlobalParameter.Tetta,
+                    fmGlobalParameter.eta_g,
+                    fmGlobalParameter.ag1,
+                    fmGlobalParameter.ag2,
+                    fmGlobalParameter.ag3
+                };
+                var machiningParameters = new[] {
+                    fmGlobalParameter.Qgi,
+                    fmGlobalParameter.Qg,
+                    fmGlobalParameter.vg,
+                    fmGlobalParameter.Qgt,
+                    fmGlobalParameter.Vg
+                };
+                ShowHideRows(deliquoringMaterialParametersDataGrid,
+                    deliquoringMaterialParametersParameterNameColumn.Index,
+                    materialParameters,
+                    isGas);
+                ShowHideRows(commonDeliquoringSimulationBlockDataGrid,
+                    commonDeliquoringSimulationBlockParameterNameColumn.Index,
+                    machiningParameters,
+                    isGas);
+            }
+        }
+
+        private void ShowHideRows(DataGridView dataGrid, int parameterColumnIndex, fmGlobalParameter[] parameters, bool isVisible)
+        {
+            foreach (fmGlobalParameter p in parameters)
+            {
+                DataGridViewRow row = FindRowByValueInColumn(dataGrid, parameterColumnIndex, p.name);
+                if (row != null)
+                {
+                    row.Visible = isVisible;
                 }
             }
         }
