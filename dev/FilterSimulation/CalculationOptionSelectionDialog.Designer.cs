@@ -173,6 +173,7 @@ namespace FilterSimulation
             this.considerEvaporationCheckBox.TabIndex = 6;
             this.considerEvaporationCheckBox.Text = "Consider Evaporation";
             this.considerEvaporationCheckBox.UseVisualStyleBackColor = true;
+            this.considerEvaporationCheckBox.CheckedChanged += new System.EventHandler(this.considerEvaporationCheckBox_CheckedChanged);
             // 
             // considerGasFlowrateCheckbox
             // 

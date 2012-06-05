@@ -10,6 +10,7 @@ namespace FilterSimulation
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
         public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
         public fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption gasFlowrateUsedCalculationOption;
+        public fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption evaporationUsedCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption rhoDCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption;
@@ -43,6 +44,9 @@ namespace FilterSimulation
 
             considerGasFlowrateCheckbox.Checked = gasFlowrateUsedCalculationOption ==
                                                 fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
+
+            considerEvaporationCheckBox.Checked = evaporationUsedCalculationOption ==
+                                                fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.Consider;
 
             etaDrhoDCheckBox.Checked = rhoDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser;
             PcDCheckBox.Checked = PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser;
@@ -160,6 +164,17 @@ namespace FilterSimulation
                                                          fmGasFlowrateUsedCalculationOption.Consider
                                                    : fmFilterMachiningCalculator.
                                                          fmGasFlowrateUsedCalculationOption.NotConsider;
+
+            ShowHideSecondaryDeliquoringCheckboxes();
+        }
+
+        private void considerEvaporationCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            evaporationUsedCalculationOption = considerEvaporationCheckBox.Checked
+                                                  ? fmFilterMachiningCalculator.
+                                                        fmEvaporationUsedCalculationOption.Consider
+                                                  : fmFilterMachiningCalculator.
+                                                        fmEvaporationUsedCalculationOption.NotConsider;
 
             ShowHideSecondaryDeliquoringCheckboxes();
         }

@@ -92,7 +92,8 @@ namespace SampleForBlocks
                            {
                                filterMachiningCalculationOption = m_fmBlock.filterMachiningCalculationOption,
                                deliquoringUsedCalculationOption = m_fmBlock.deliquoringUsedCalculationOption,
-                               gasFlowrateUsedCalculationOption = m_fmBlock.gasFlowrateUsedCalculationOption
+                               gasFlowrateUsedCalculationOption = m_fmBlock.gasFlowrateUsedCalculationOption,
+                               evaporationUsedCalculationOption = m_fmBlock.evaporationUsedCalculationOption
                            };
             //cosd.suspensionCalculationOption = ;
             if (cosd.ShowDialog() == DialogResult.OK)

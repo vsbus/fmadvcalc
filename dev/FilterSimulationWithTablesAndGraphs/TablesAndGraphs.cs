@@ -560,6 +560,7 @@ namespace FilterSimulationWithTablesAndGraphs
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.GasFlowrateUsedCalculationOption);
+            fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.EvaporationUsedCalculationOption);
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(m_externalCurrentActiveSimulation, fmb);
             fmb.CalculateAndDisplay();
         }
@@ -618,7 +619,8 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     filterMachiningCalculationOption = tempSim.filterMachiningCalculationOption,
                     deliquoringUsedCalculationOption = tempSim.deliquoringUsedCalculationOption,
-                    gasFlowrateUsedCalculationOption = tempSim.gasFlowrateUsedCalculationOption
+                    gasFlowrateUsedCalculationOption = tempSim.gasFlowrateUsedCalculationOption,
+                    evaporationUsedCalculationOption = tempSim.evaporationUsedCalculationOption
                 };
                 tempBlock.UpdateGroups();
 
@@ -693,6 +695,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.filterMachiningCalculationOption);
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.deliquoringUsedCalculationOption);
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.gasFlowrateUsedCalculationOption);
+                                fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.evaporationUsedCalculationOption);
                                 var xParameter = listBoxXAxis.SelectedItems.Count == 0
                                                      ? null
                                                      : fmb.GetParameterByName(listBoxXAxis.SelectedItems[0].Text);
@@ -781,6 +784,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     simData.internalSimulationData.filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
                     simData.internalSimulationData.deliquoringUsedCalculationOption = simData.externalSimulation.DeliquoringUsedCalculationOption;
                     simData.internalSimulationData.gasFlowrateUsedCalculationOption = simData.externalSimulation.GasFlowrateUsedCalculationOption;
+                    simData.internalSimulationData.evaporationUsedCalculationOption = simData.externalSimulation.EvaporationUsedCalculationOption;
                     simData.internalSimulationData.hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
                     simData.internalSimulationData.rhoDCalculationOption = simData.externalSimulation.RhoDetaDCalculationOption;
                     simData.internalSimulationData.PcDCalculationOption = simData.externalSimulation.PcDCalculationOption;

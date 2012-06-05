@@ -562,6 +562,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
         public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
         public fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption gasFlowrateUsedCalculationOption;
+        public fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption evaporationUsedCalculationOption;
 
         #region accessors
         // ReSharper disable InconsistentNaming
@@ -1167,6 +1168,12 @@ namespace fmCalcBlocksLibrary.Blocks
             ReWriteParameters();
         }
 
+        public void SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            ReWriteParameters();
+        }
+
         public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption newCalculationOption)
         {
             filterMachiningCalculationOption = newCalculationOption;
@@ -1203,6 +1210,11 @@ namespace fmCalcBlocksLibrary.Blocks
         public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption newCalculationOption)
         {
             gasFlowrateUsedCalculationOption = newCalculationOption;
+        }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption newCalculationOption)
+        {
+            evaporationUsedCalculationOption = newCalculationOption;
         }
 
         Dictionary<fmFilterMachiningCalculator.fmFilterMachiningCalculationOption, Dictionary<fmBlockVariableParameter, fmBlockParameterGroup>> m_tables;

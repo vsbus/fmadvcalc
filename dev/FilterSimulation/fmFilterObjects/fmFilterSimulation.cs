@@ -14,6 +14,7 @@ namespace FilterSimulation.fmFilterObjects
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
         public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
         public fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption gasFlowrateUsedCalculationOption = fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
+        public fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption evaporationUsedCalculationOption = fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
@@ -25,6 +26,7 @@ namespace FilterSimulation.fmFilterObjects
             filterMachiningCalculationOption = from.filterMachiningCalculationOption;
             deliquoringUsedCalculationOption = from.deliquoringUsedCalculationOption;
             gasFlowrateUsedCalculationOption = from.gasFlowrateUsedCalculationOption;
+            evaporationUsedCalculationOption = from.evaporationUsedCalculationOption;
             hcdEpsdCalculationOption = from.hcdEpsdCalculationOption;
             rhoDCalculationOption = from.rhoDCalculationOption;
             PcDCalculationOption = from.PcDCalculationOption;
@@ -370,7 +372,8 @@ namespace FilterSimulation.fmFilterObjects
                           {
                               filterMachiningCalculationOption = filterMachiningCalculationOption,
                               deliquoringUsedCalculationOption = deliquoringUsedCalculationOption,
-                              gasFlowrateUsedCalculationOption = gasFlowrateUsedCalculationOption
+                              gasFlowrateUsedCalculationOption = gasFlowrateUsedCalculationOption,
+                              evaporationUsedCalculationOption = evaporationUsedCalculationOption
                           };
             fmb.UpdateGroups();
             UpdateIsInputedInParametersFromBlock(fmb, inputedParameter);
@@ -401,6 +404,7 @@ namespace FilterSimulation.fmFilterObjects
             public const string filterMachiningCalculationOption = "filterMachiningCalculationOption";
             public const string deliquoringUsedCalculationOption = "deliquoringUsedCalculationOption";
             public const string gasFlowrateUsedCalculationOption = "gasFlowrateUsedCalculationOption";
+            public const string evaporationUsedCalculationOption = "evaporationUsedCalculationOption";
             public const string hcdCalculationOption = "hcdCalculationOption";
             public const string rhoDetaDCalculationOption = "rhoDetaDCalculationOption";
             public const string PcDCalculationOption = "PcDCalculationOption";
@@ -465,6 +469,7 @@ namespace FilterSimulation.fmFilterObjects
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.deliquoringUsedCalculationOption, deliquoringUsedCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.gasFlowrateUsedCalculationOption, gasFlowrateUsedCalculationOption, 8);
+            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.evaporationUsedCalculationOption, evaporationUsedCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.hcdCalculationOption, hcdEpsdCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.rhoDetaDCalculationOption, rhoDCalculationOption, 8);
             fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.PcDCalculationOption, PcDCalculationOption, 8);
@@ -515,6 +520,13 @@ namespace FilterSimulation.fmFilterObjects
                                                          fmFilterSimulationDataSerializeTags.
                                                              gasFlowrateUsedCalculationOption).ToString(),
                     typeof(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption));
+            simData.evaporationUsedCalculationOption =
+                (fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption)
+                StringToEnum(
+                    fmSerializeTools.DeserializeProperty(input,
+                                                         fmFilterSimulationDataSerializeTags.
+                                                             evaporationUsedCalculationOption).ToString(),
+                    typeof(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption));
             simData.hcdEpsdCalculationOption =
                 (fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption)
                 StringToEnum(
@@ -655,6 +667,19 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
+        public fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption EvaporationUsedCalculationOption
+        {
+            get { return m_data.evaporationUsedCalculationOption; }
+            set
+            {
+                if (m_data.evaporationUsedCalculationOption != value)
+                {
+                    Modified = true;
+                }
+                m_data.evaporationUsedCalculationOption = value;
+            }
+        }
+
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption HcdEpsdCalculationOption
         {
             get { return m_data.hcdEpsdCalculationOption; }
@@ -728,6 +753,7 @@ namespace FilterSimulation.fmFilterObjects
             voidBlock.SetCalculationOptionAndRewriteData(Data.filterMachiningCalculationOption);
             voidBlock.SetCalculationOptionAndRewriteData(Data.deliquoringUsedCalculationOption);
             voidBlock.SetCalculationOptionAndRewriteData(Data.gasFlowrateUsedCalculationOption);
+            voidBlock.SetCalculationOptionAndRewriteData(Data.evaporationUsedCalculationOption);
             foreach (fmBlockVariableParameter var in voidBlock.Parameters)
             {
                 ((fmCalculationVariableParameter) Data.parameters[var.globalParameter]).isInputed = var.isInputed;
@@ -880,6 +906,7 @@ namespace FilterSimulation.fmFilterObjects
             sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
             sim.DeliquoringUsedCalculationOption = simData.deliquoringUsedCalculationOption;
             sim.GasFlowrateUsedCalculationOption = simData.gasFlowrateUsedCalculationOption;
+            sim.EvaporationUsedCalculationOption = simData.evaporationUsedCalculationOption;
             sim.HcdEpsdCalculationOption = simData.hcdEpsdCalculationOption;
             sim.RhoDetaDCalculationOption = simData.rhoDCalculationOption;
             sim.PcDCalculationOption = simData.PcDCalculationOption;

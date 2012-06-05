@@ -78,6 +78,12 @@ namespace fmCalculatorsLibrary
             Consider
         }
 
+        public enum fmEvaporationUsedCalculationOption
+        {
+            NotConsider,
+            Consider
+        }
+
         public fmFilterMachiningCalculationOption calculationOption = fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
 
         public fmFilterMachiningCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }

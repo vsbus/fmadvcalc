@@ -438,8 +438,9 @@ namespace FilterSimulation
 
         private void ShowHideRowsDependingOnCalculationOptions(fmFilterSimulation sim)
         {
+            bool isGas = sim.filterMachiningBlock.gasFlowrateUsedCalculationOption ==
+                         fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
             {
-                bool isGas = sim.filterMachiningBlock.gasFlowrateUsedCalculationOption == fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
                 var materialParameters = new[] {
                     fmGlobalParameter.Tetta,
                     fmGlobalParameter.eta_g,
@@ -462,6 +463,45 @@ namespace FilterSimulation
                     commonDeliquoringSimulationBlockParameterNameColumn.Index,
                     machiningParameters,
                     isGas);
+            }
+
+            bool isEvaporation = sim.filterMachiningBlock.evaporationUsedCalculationOption ==
+                         fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.Consider;
+            {
+                var materialParameters = new[] {
+                    fmGlobalParameter.Tetta_boil,
+                    fmGlobalParameter.DH,
+                    fmGlobalParameter.Mmole,
+                    fmGlobalParameter.f,
+                    fmGlobalParameter.peq
+                };
+                var machiningParameters = new[] {
+                    fmGlobalParameter.Smech,
+                    fmGlobalParameter.Rfmech,
+                    fmGlobalParameter.Mev,
+                    fmGlobalParameter.Vev,
+                    fmGlobalParameter.Qmevi,
+                    fmGlobalParameter.Qmevi,
+                    fmGlobalParameter.Qmevt,
+                    fmGlobalParameter.Qmev,
+                    fmGlobalParameter.Qevi,
+                    fmGlobalParameter.Qevt,
+                    fmGlobalParameter.Qev,
+                    fmGlobalParameter.qmevi,
+                    fmGlobalParameter.qmevt,
+                    fmGlobalParameter.qmev,
+                    fmGlobalParameter.qevi,
+                    fmGlobalParameter.qevt,
+                    fmGlobalParameter.qev
+                };
+                ShowHideRows(deliquoringMaterialParametersDataGrid,
+                    deliquoringMaterialParametersParameterNameColumn.Index,
+                    materialParameters,
+                    isGas && isEvaporation);
+                ShowHideRows(commonDeliquoringSimulationBlockDataGrid,
+                    commonDeliquoringSimulationBlockParameterNameColumn.Index,
+                    machiningParameters,
+                    isGas && isEvaporation);
             }
         }
 
@@ -615,6 +655,11 @@ namespace FilterSimulation
             if (sim.filterMachiningBlock.gasFlowrateUsedCalculationOption != sim.GasFlowrateUsedCalculationOption)
             {
                 sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.GasFlowrateUsedCalculationOption);
+            }
+
+            if (sim.filterMachiningBlock.evaporationUsedCalculationOption != sim.EvaporationUsedCalculationOption)
+            {
+                sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.EvaporationUsedCalculationOption);
             }
         }
         private static void CopySimulationValuesToRmHceBlock(fmFilterSimulation sim)
@@ -901,6 +946,7 @@ namespace FilterSimulation
                     m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.filterMachiningCalculationOption);
                     m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.deliquoringUsedCalculationOption);
                     m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.gasFlowrateUsedCalculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.evaporationUsedCalculationOption);
 
                     for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                     {
@@ -1332,6 +1378,7 @@ namespace FilterSimulation
                 sim.FilterMachiningCalculationOption = filterMachiningBlock.filterMachiningCalculationOption;
                 sim.DeliquoringUsedCalculationOption = filterMachiningBlock.deliquoringUsedCalculationOption;
                 sim.GasFlowrateUsedCalculationOption = filterMachiningBlock.gasFlowrateUsedCalculationOption;
+                sim.EvaporationUsedCalculationOption = filterMachiningBlock.evaporationUsedCalculationOption;
                 fmFilterSimulation.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
 
                 fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
