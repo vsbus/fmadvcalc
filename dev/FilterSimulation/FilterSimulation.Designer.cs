@@ -166,6 +166,7 @@ namespace FilterSimulation
             this.simSeriesMachineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.SelectMachineButton = new System.Windows.Forms.Button();
             this.simSeriesDeleteButton = new System.Windows.Forms.Button();
             this.simSeriesRestoreButton = new System.Windows.Forms.Button();
             this.simSeriesDuplicateButton = new System.Windows.Forms.Button();
@@ -1474,6 +1475,7 @@ namespace FilterSimulation
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.SelectMachineButton);
             this.panel3.Controls.Add(this.simSeriesDeleteButton);
             this.panel3.Controls.Add(this.simSeriesRestoreButton);
             this.panel3.Controls.Add(this.simSeriesDuplicateButton);
@@ -1484,6 +1486,19 @@ namespace FilterSimulation
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(426, 20);
             this.panel3.TabIndex = 7;
+            // 
+            // SelectMachineButton
+            // 
+            this.SelectMachineButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.SelectMachineButton.FlatAppearance.BorderSize = 0;
+            this.SelectMachineButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SelectMachineButton.Location = new System.Drawing.Point(165, 0);
+            this.SelectMachineButton.Name = "SelectMachineButton";
+            this.SelectMachineButton.Size = new System.Drawing.Size(108, 20);
+            this.SelectMachineButton.TabIndex = 7;
+            this.SelectMachineButton.Text = "Machine Type";
+            this.SelectMachineButton.UseVisualStyleBackColor = true;
+            this.SelectMachineButton.Click += new System.EventHandler(this.SelectMachineButton_Click);
             // 
             // simSeriesDeleteButton
             // 
@@ -2325,5 +2340,6 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineNameColumn;
         protected System.Windows.Forms.SplitContainer projectSuspensionSerieSplitContainer;
         protected System.Windows.Forms.SplitContainer projectSuspensionSplitContainer;
+        private System.Windows.Forms.Button SelectMachineButton;
     }
 }

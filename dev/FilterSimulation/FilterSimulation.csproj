@@ -88,6 +88,12 @@
     <Compile Include="fmUnitItem.Designer.cs">
       <DependentUpon>fmUnitItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="MachineTypeSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MachineTypeSelectionDialog.Designer.cs">
+      <DependentUpon>MachineTypeSelectionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ParameterIntervalOption.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,10 @@
     <EmbeddedResource Include="fmUnitItem.resx">
       <SubType>Designer</SubType>
       <DependentUpon>fmUnitItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MachineTypeSelectionDialog.resx">
+      <DependentUpon>MachineTypeSelectionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ParameterIntervalOption.resx">
       <SubType>Designer</SubType>

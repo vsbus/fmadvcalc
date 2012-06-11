@@ -498,5 +498,17 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             commonDeliquoringSimulationBlockDataGrid.Width = calculateLimitsCheckBox.Checked ? 268 : 168;
             m_commonFilterMachiningBlock.CalculateAndDisplay();
         }
+
+        private void SelectMachineButton_Click(object sender, EventArgs e)
+        {
+            var dialog = new MachineTypeSelectionDialog();
+            dialog.AssignSerie(m_fSolution.currentObjects.Serie);
+            dialog.ShowDialog();
+            if (dialog.DialogResult == DialogResult.OK)
+            {
+                m_fSolution.currentObjects.Serie.MachineType = dialog.GetSelectedType();
+                DisplaySolution(m_fSolution);
+            }
+        }
     }
 }
