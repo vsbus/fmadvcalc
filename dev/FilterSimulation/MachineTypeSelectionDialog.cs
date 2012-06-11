@@ -12,15 +12,7 @@ namespace FilterSimulation
     public partial class MachineTypeSelectionDialog : Form
     {
 
-        private readonly fmFilterSimMachineType[] m_machines = new fmFilterSimMachineType[]
-                                                        {
-                                                            fmFilterSimMachineType.belt,
-                                                            fmFilterSimMachineType.candle,
-                                                            fmFilterSimMachineType.filterPresses,
-                                                            fmFilterSimMachineType.nutche,
-                                                            fmFilterSimMachineType.pressureLeaf,
-                                                            fmFilterSimMachineType.rotary
-                                                        };
+        private readonly fmFilterSimMachineType[] m_machines = fmFilterSimMachineType.filterTypesList.ToArray();
 
         public MachineTypeSelectionDialog()
         {

@@ -17,12 +17,12 @@ namespace FilterSimulation.fmFilterObjects
         static fmFilterSimMachineType()
         {
             filterTypesList = new List<fmFilterSimMachineType>();
-            AddFilter(ref nutche, "NU", "Nutche");
-            AddFilter(ref rotary, "RO", "Rotary");
-            AddFilter(ref belt, "BE", "Belt");
-            AddFilter(ref pressureLeaf, "PLF", "Pressure Leaf");
-            AddFilter(ref candle, "CAF", "Candle");
-            AddFilter(ref filterPresses, "FPRESS", "Filter Presses");
+            AddFilter(ref belt,             "BE",       "Belt Filters");
+            AddFilter(ref rotary,           "RO",       "Rotary Filters");
+            AddFilter(ref nutche,           "NU",       "Nutche Filters");
+            AddFilter(ref pressureLeaf,     "PLF",      "Pressure Leaf Filters");
+            AddFilter(ref filterPresses,    "FPRESS",   "Filter Presses");
+            AddFilter(ref candle,           "CAF",      "Candle Filters");
         }
 
         public fmFilterSimMachineType(string symbol, string name)
