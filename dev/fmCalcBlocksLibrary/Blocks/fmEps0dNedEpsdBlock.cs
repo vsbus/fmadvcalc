@@ -24,7 +24,9 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup Dpd_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup hcd_epsd_group = new fmBlockParameterGroup();
 
-        public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption calculationOption;
+
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdCalculationOption;
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption dpdInputCalculationOption;
 
         public fmValue epsd_Value
         {
@@ -45,8 +47,11 @@ namespace fmCalcBlocksLibrary.Blocks
 
         override public void DoCalculations()
         {
-            var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(AllParameters);
-            eps0dNedEpsdCalculator.calculationOption = calculationOption;
+            var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(AllParameters)
+                                             {
+                                                 hcdCalculationOption = hcdCalculationOption,
+                                                 dpdInputCalculationOption = dpdInputCalculationOption
+                                             };
             eps0dNedEpsdCalculator.DoCalculations();
         }
 
@@ -67,15 +72,10 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref ne, fmGlobalParameter.ne);
             AddConstantParameter(ref eps, fmGlobalParameter.eps);
 
-            calculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
+            hcdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
+            dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation;
 
-            Dpd.group = Dpd_group;
-
-            hcd.group = null;
-            hcd.cell.ReadOnly = true;
-
-            epsd.group = null;
-            epsd.cell.ReadOnly = true;
+            UpdateCellsColorsAndReadOnly();
 
             processOnChange = true;
         }
@@ -87,15 +87,27 @@ namespace fmCalcBlocksLibrary.Blocks
             CallValuesChanged();
         }
 
+        public void SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            CallValuesChanged();
+        }
+
         public void SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption newCalculationOption)
         {
-            calculationOption = newCalculationOption;
+            hcdCalculationOption = newCalculationOption;
+            UpdateCellsColorsAndReadOnly();
+        }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption newCalculationOption)
+        {
+            dpdInputCalculationOption = newCalculationOption;
             UpdateCellsColorsAndReadOnly();
         }
 
         private void UpdateCellsColorsAndReadOnly()
         {
-            if (calculationOption == fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser)
+            if (hcdCalculationOption == fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser)
             {
                 epsd.IsInputed = true;
                 hcd.isInputed = false;
@@ -112,6 +124,19 @@ namespace fmCalcBlocksLibrary.Blocks
                 hcd.group = null;
                 epsd.cell.ReadOnly = true;
                 epsd.group = null;
+            }
+
+            if (dpdInputCalculationOption == fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser)
+            {
+                Dpd.IsInputed = true;
+                Dpd.cell.ReadOnly = false;
+                Dpd.group = Dpd_group;
+            }
+            else
+            {
+                Dpd.IsInputed = false;
+                Dpd.cell.ReadOnly = true;
+                Dpd.group = null;
             }
         }
     }

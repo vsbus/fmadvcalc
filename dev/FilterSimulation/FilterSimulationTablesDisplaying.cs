@@ -538,9 +538,13 @@ namespace FilterSimulation
         private void CopySimulationValuesToDeliquoringEps0dNedEpsdBlock(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
-            if (sim.deliquoringEps0NeEpsBlock.calculationOption != sim.HcdEpsdCalculationOption)
+            if (sim.deliquoringEps0NeEpsBlock.hcdCalculationOption != sim.HcdEpsdCalculationOption)
             {
                 sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(sim.HcdEpsdCalculationOption);
+            }
+            if (sim.deliquoringEps0NeEpsBlock.dpdInputCalculationOption != sim.DpdInputCalculationOption)
+            {
+                sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(sim.DpdInputCalculationOption);
             }
         }
 
@@ -1304,7 +1308,8 @@ namespace FilterSimulation
                 return;
             }
 
-            sim.HcdEpsdCalculationOption = deliquoringEps0NeEpsBlock.calculationOption;
+            sim.HcdEpsdCalculationOption = deliquoringEps0NeEpsBlock.hcdCalculationOption;
+            sim.DpdInputCalculationOption = deliquoringEps0NeEpsBlock.dpdInputCalculationOption;
 
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringEps0NeEpsBlock, sim);
 

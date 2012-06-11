@@ -12,6 +12,7 @@ namespace FilterSimulation
         public fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption gasFlowrateUsedCalculationOption;
         public fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption evaporationUsedCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdEpsdCalculationOption;
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption dpdInputCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption rhoDCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption;
 
@@ -38,6 +39,10 @@ namespace FilterSimulation
             CakeHeightInputCheckBox.Checked = hcdEpsdCalculationOption ==
                                               fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.
                                                   InputedByUser;
+
+            PressureDifferenceInputCheckbox.Checked = dpdInputCalculationOption ==
+                                                          fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.
+                                                              InputedByUser;
 
             deliquoringOptionCheckBox.Checked = deliquoringUsedCalculationOption ==
                                                 fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
@@ -122,6 +127,15 @@ namespace FilterSimulation
                                                : fmDeliquoringSimualtionCalculator.
                                                      fmDeliquoringHcdEpsdCalculationOption.
                                                      CalculatedFromCakeFormation;
+        }
+
+        private void PressureDifferenceInputCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            dpdInputCalculationOption = PressureDifferenceInputCheckbox.Checked
+                                               ? fmDeliquoringSimualtionCalculator.
+                                                     fmDeliquoringDpdInputOption.InputedByUser
+                                               : fmDeliquoringSimualtionCalculator.
+                                                     fmDeliquoringDpdInputOption.CalculatedFromCakeFormation;
         }
 
         private void rhoDetaDCheckBox_CheckedChanged(object sender, EventArgs e)

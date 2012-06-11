@@ -463,6 +463,8 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                                    m_fSolution.currentObjects.Simulation.Data.evaporationUsedCalculationOption,
                                hcdEpsdCalculationOption =
                                    m_fSolution.currentObjects.Simulation.Data.hcdEpsdCalculationOption,
+                               dpdInputCalculationOption =
+                                   m_fSolution.currentObjects.Simulation.Data.dpdInputCalculationOption,
                                rhoDCalculationOption = 
                                    m_fSolution.currentObjects.Simulation.Data.rhoDCalculationOption,
                                PcDCalculationOption =
@@ -476,6 +478,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.gasFlowrateUsedCalculationOption);
                 m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.evaporationUsedCalculationOption);
                 m_fSolution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(cosd.hcdEpsdCalculationOption);
+                m_fSolution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(cosd.dpdInputCalculationOption);
                 m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.rhoDCalculationOption);
                 m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.PcDCalculationOption);
                 DisplaySolution(m_fSolution);

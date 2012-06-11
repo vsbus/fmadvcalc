@@ -8,7 +8,8 @@ namespace fmCalculatorsLibrary
 {
     public class fmEps0dNedEpsdCalculator : fmBaseCalculator
     {
-        public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption calculationOption;
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdCalculationOption;
+        public fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption dpdInputCalculationOption;
 
         public fmEps0dNedEpsdCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         override public void DoCalculations()
@@ -23,7 +24,12 @@ namespace fmCalculatorsLibrary
             var ne = variables[fmGlobalParameter.ne] as fmCalculationConstantParameter;
             var eps = variables[fmGlobalParameter.eps] as fmCalculationConstantParameter;
 
-            if (calculationOption == fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation)
+            if (dpdInputCalculationOption == fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation)
+            {
+                Dp_d.value = Dp_f.value;
+            }
+
+            if (hcdCalculationOption == fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation)
             {
                 fmValue Dp = fmValue.Max(Dp_d.value, Dp_f.value);
                 eps_d.value = fmEpsPcFrom0Equations.Eval_eps_From_eps0_Dp_ne(eps0.value, Dp, ne.value);

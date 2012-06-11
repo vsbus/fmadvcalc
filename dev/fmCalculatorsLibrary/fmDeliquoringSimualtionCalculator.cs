@@ -14,6 +14,12 @@ namespace fmCalculatorsLibrary
             CalculatedFromCakeFormation
         }
 
+        public enum fmDeliquoringDpdInputOption
+        {
+            InputedByUser,
+            CalculatedFromCakeFormation
+        }
+
         public fmDeliquoringSimualtionCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
         
         override public void DoCalculations()

@@ -786,6 +786,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     simData.internalSimulationData.gasFlowrateUsedCalculationOption = simData.externalSimulation.GasFlowrateUsedCalculationOption;
                     simData.internalSimulationData.evaporationUsedCalculationOption = simData.externalSimulation.EvaporationUsedCalculationOption;
                     simData.internalSimulationData.hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
+                    simData.internalSimulationData.dpdInputCalculationOption = simData.externalSimulation.DpdInputCalculationOption;
                     simData.internalSimulationData.rhoDCalculationOption = simData.externalSimulation.RhoDetaDCalculationOption;
                     simData.internalSimulationData.PcDCalculationOption = simData.externalSimulation.PcDCalculationOption;
                     simData.internalSimulationData.suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;

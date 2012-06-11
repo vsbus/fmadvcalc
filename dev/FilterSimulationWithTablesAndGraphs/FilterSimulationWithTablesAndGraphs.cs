@@ -199,6 +199,9 @@ namespace FilterSimulationWithTablesAndGraphs
                     hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.
                         fmDeliquoringHcdEpsdCalculationOption.
                         CalculatedFromCakeFormation,
+                    dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.
+                        fmDeliquoringDpdInputOption.
+                        CalculatedFromCakeFormation,
                     rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
                         fmRhoDEtaDCalculationOption.
                         EqualToRhoF,
@@ -228,6 +231,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     cosd.gasFlowrateUsedCalculationOption = simData.internalSimulationData.gasFlowrateUsedCalculationOption;
                     cosd.evaporationUsedCalculationOption = simData.internalSimulationData.evaporationUsedCalculationOption;
                     cosd.hcdEpsdCalculationOption = simData.internalSimulationData.hcdEpsdCalculationOption;
+                    cosd.dpdInputCalculationOption = simData.internalSimulationData.dpdInputCalculationOption;
                     cosd.rhoDCalculationOption = simData.internalSimulationData.rhoDCalculationOption;
                     cosd.PcDCalculationOption = simData.internalSimulationData.PcDCalculationOption;
                 }
@@ -262,6 +266,8 @@ namespace FilterSimulationWithTablesAndGraphs
                             evaporationUsedCalculationOption;
                         fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption
                             hcdEpsdCalculationOption;
+                        fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption
+                            dpdInputCalculationOption;
                         fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption
                             rhoDetaDCalculationOption;
                         fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption
@@ -275,6 +281,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             gasFlowrateUsedCalculationOption = cosd.gasFlowrateUsedCalculationOption;
                             evaporationUsedCalculationOption = cosd.evaporationUsedCalculationOption;
                             hcdEpsdCalculationOption = cosd.hcdEpsdCalculationOption;
+                            dpdInputCalculationOption = cosd.dpdInputCalculationOption;
                             rhoDetaDCalculationOption = cosd.rhoDCalculationOption;
                             PcDCalculationOption = cosd.PcDCalculationOption;
                         }
@@ -287,6 +294,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             gasFlowrateUsedCalculationOption = simData.externalSimulation.GasFlowrateUsedCalculationOption;
                             evaporationUsedCalculationOption = simData.externalSimulation.EvaporationUsedCalculationOption;
                             hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
+                            dpdInputCalculationOption = simData.externalSimulation.DpdInputCalculationOption;
                             rhoDetaDCalculationOption = simData.externalSimulation.RhoDetaDCalculationOption;
                             PcDCalculationOption = simData.externalSimulation.PcDCalculationOption;
                         }
@@ -320,8 +328,10 @@ namespace FilterSimulationWithTablesAndGraphs
                         var eps0dNedEpsdBlock = new fmEps0dNedEpsdBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, eps0dNedEpsdBlock);
                         eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(hcdEpsdCalculationOption);
+                        eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(dpdInputCalculationOption);
                         fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(eps0dNedEpsdBlock, sim);
                         simData.internalSimulationData.hcdEpsdCalculationOption = hcdEpsdCalculationOption;
+                        simData.internalSimulationData.dpdInputCalculationOption = dpdInputCalculationOption;
 
                         var sigmaPke0PkePcdRcdAlphadBlock = new fmSigmaPke0PkePcdRcdAlphadBlock();
                         fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, sigmaPke0PkePcdRcdAlphadBlock);
@@ -346,6 +356,9 @@ namespace FilterSimulationWithTablesAndGraphs
                                        RHOSUS_CALCULATED,
                                    hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.
                                        fmDeliquoringHcdEpsdCalculationOption.
+                                       CalculatedFromCakeFormation,
+                                   dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.
+                                       fmDeliquoringDpdInputOption.
                                        CalculatedFromCakeFormation,
                                    rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
                                        fmRhoDEtaDCalculationOption.
