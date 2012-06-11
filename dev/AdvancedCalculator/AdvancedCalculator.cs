@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using FilterSimulation.fmFilterObjects;
 using FilterSimulationWithTablesAndGraphs;
 using Microsoft.Win32;
 
@@ -134,16 +135,10 @@ namespace AdvancedCalculator
         private string m_currentFilename;
         private void LoadFromDisk(string fileName)
         {
-            TextReader input = null;
-            try
-            {
-                input = new StreamReader(fileName);
-            }
-            catch (Exception)
-            {
+            if (CheckDatFileVersion(fileName) == false)
                 return;
-            }
 
+            TextReader input = new StreamReader(fileName);
             try
             {
                 m_currentFilename = fileName;
@@ -152,12 +147,32 @@ namespace AdvancedCalculator
             }
             catch (Exception)
             {
-                MessageBox.Show("File " + m_currentFilename + " has wrong format and impossible to open", "Error");
+                MessageBox.Show("File " + m_currentFilename + " has error in format and impossible to open", "Error");
                 m_currentFilename = null;
                 Text = m_Caption;
             }
 
             input.Close();
+        }
+
+        private bool CheckDatFileVersion(string fileName)
+        {
+            bool isValid = false;
+
+            try
+            {
+                TextReader input = new StreamReader(fileName);
+                isValid = fmFilterSimSolution.CheckDatFileVersion(input);
+            }
+            catch (Exception)
+            {
+            }
+
+            if (!isValid)
+            {
+                MessageBox.Show("File " + fileName + " was created with other program version with different format and is impossible to open.", "Open File Error");
+            }
+            return isValid;
         }
 
         private void fmAdvancedCalculator_FormClosed(object sender, FormClosedEventArgs e)

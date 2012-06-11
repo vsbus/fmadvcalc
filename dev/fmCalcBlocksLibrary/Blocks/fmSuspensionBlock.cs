@@ -54,7 +54,7 @@ namespace fmCalcBlocksLibrary.Blocks
         }
         // ReSharper restore InconsistentNaming
 
-        public fmSuspensionCalculator.fmSuspensionCalculationOptions calculationOption;
+        public fmSuspensionCalculator.fmSuspensionCalculationOptions calculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
 
         override public void DoCalculations()
         {

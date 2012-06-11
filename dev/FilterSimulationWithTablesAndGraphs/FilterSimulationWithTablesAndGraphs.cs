@@ -492,6 +492,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void Deserialize(TextReader input)
         {
+            fmFilterSimSolution.CheckDatFileVersion(input);
             m_fSolution = fmFilterSimSolution.Deserialize(input);
             if (m_fSolution.projects.Count > 0)
             {

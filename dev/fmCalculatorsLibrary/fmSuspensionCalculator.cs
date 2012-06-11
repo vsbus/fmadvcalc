@@ -13,7 +13,7 @@ namespace fmCalculatorsLibrary
             RHOSUS_CALCULATED,
             CM_CV_C_CALCULATED
         }
-        public fmSuspensionCalculationOptions calculationOption;
+        public fmSuspensionCalculationOptions calculationOption = fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
 
         public fmSuspensionCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
 

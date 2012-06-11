@@ -241,19 +241,36 @@ namespace FilterSimulation.fmFilterObjects
         {
             // ReSharper disable InconsistentNaming
             public const string projectsCount = "projectsCount";
+            public const string version = "Version";
             // ReSharper restore InconsistentNaming
         }
 
         public void Serialize(TextWriter output)
         {
+            SerializeVersion(output);
             fmSerializeTools.SerializeProperty(output, fmSolutionSerializeTags.projectsCount, projects.Count, 0);
             foreach (var prj in projects)
                 prj.Serialize(output);
         }
 
+        private static string GetCurrentVersion()
+        {
+            return "2012-06-11:rev453";
+        }
+
+        public static bool CheckDatFileVersion(TextReader input)
+        {
+            return GetCurrentVersion() == fmSerializeTools.DeserializeProperty(input, fmSolutionSerializeTags.version).ToString();
+        }
+
+        private void SerializeVersion(TextWriter output)
+        {
+            fmSerializeTools.SerializeProperty(output, fmSolutionSerializeTags.version, GetCurrentVersion(), 0);
+        }
+
         public static fmFilterSimSolution Deserialize(TextReader input)
         {
-            fmFilterSimSolution solution = new fmFilterSimSolution();
+            var solution = new fmFilterSimSolution();
             int projectsCount = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmSolutionSerializeTags.projectsCount));
             for (int i = 0; i < projectsCount; ++i)
             {
