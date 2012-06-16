@@ -28,20 +28,6 @@ namespace FilterSimulation
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Dp = const");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Volumetric Pump (Qp = const)");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Centripetal Pump (Qp = const & Dp = const)");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Plain Filter Area", new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10,
-            treeNode11});
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Dp = const (Cylindrical Area)");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Volumetric Pump (Qp = const, Cylindrical Area)");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Cylindrical Filter Area", new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode14,
-            treeNode15});
             this.rho_f_radioButton = new System.Windows.Forms.RadioButton();
             this.rho_s_radioButton = new System.Windows.Forms.RadioButton();
             this.rho_sus_radioButton = new System.Windows.Forms.RadioButton();
@@ -51,6 +37,7 @@ namespace FilterSimulation
             this.simulationCalculationOptionGroupBox = new System.Windows.Forms.GroupBox();
             this.fmCalculationOptionView1 = new fmCalcBlocksLibrary.Controls.fmCalculationOptionView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.PressureDifferenceInputCheckbox = new System.Windows.Forms.CheckBox();
             this.considerEvaporationCheckBox = new System.Windows.Forms.CheckBox();
             this.considerGasFlowrateCheckbox = new System.Windows.Forms.CheckBox();
             this.deliquoringOptionCheckBox = new System.Windows.Forms.CheckBox();
@@ -62,7 +49,6 @@ namespace FilterSimulation
             this.panel4 = new System.Windows.Forms.Panel();
             this.cancelButton = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.PressureDifferenceInputCheckbox = new System.Windows.Forms.CheckBox();
             this.suspensionGroupBox.SuspendLayout();
             this.panel1.SuspendLayout();
             this.simulationCalculationOptionGroupBox.SuspendLayout();
@@ -159,33 +145,6 @@ namespace FilterSimulation
             this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
             this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
-            treeNode9.Name = "";
-            treeNode9.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode9.Text = "Dp = const";
-            treeNode10.Name = "";
-            treeNode10.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode10.Text = "Volumetric Pump (Qp = const)";
-            treeNode11.Name = "";
-            treeNode11.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode11.Text = "Centripetal Pump (Qp = const & Dp = const)";
-            treeNode12.Name = "";
-            treeNode12.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode12.Text = "Plain Filter Area";
-            treeNode13.Name = "";
-            treeNode13.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode13.Text = "Dp = const (Cylindrical Area)";
-            treeNode14.Name = "";
-            treeNode14.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode14.Text = "Volumetric Pump (Qp = const, Cylindrical Area)";
-            treeNode15.Name = "";
-            treeNode15.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode15.Text = "Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)";
-            treeNode16.Name = "";
-            treeNode16.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode16.Text = "Cylindrical Filter Area";
-            this.fmCalculationOptionView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12,
-            treeNode16});
             this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 180);
             this.fmCalculationOptionView1.TabIndex = 0;
             this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
@@ -206,6 +165,17 @@ namespace FilterSimulation
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deliquoring Calculation Option";
+            // 
+            // PressureDifferenceInputCheckbox
+            // 
+            this.PressureDifferenceInputCheckbox.AutoSize = true;
+            this.PressureDifferenceInputCheckbox.Location = new System.Drawing.Point(193, 46);
+            this.PressureDifferenceInputCheckbox.Name = "PressureDifferenceInputCheckbox";
+            this.PressureDifferenceInputCheckbox.Size = new System.Drawing.Size(146, 17);
+            this.PressureDifferenceInputCheckbox.TabIndex = 7;
+            this.PressureDifferenceInputCheckbox.Text = "Pressure Difference Input";
+            this.PressureDifferenceInputCheckbox.UseVisualStyleBackColor = true;
+            this.PressureDifferenceInputCheckbox.CheckedChanged += new System.EventHandler(this.PressureDifferenceInputCheckbox_CheckedChanged);
             // 
             // considerEvaporationCheckBox
             // 
@@ -327,17 +297,6 @@ namespace FilterSimulation
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 25);
             this.panel3.TabIndex = 2;
-            // 
-            // PressureDifferenceInputCheckbox
-            // 
-            this.PressureDifferenceInputCheckbox.AutoSize = true;
-            this.PressureDifferenceInputCheckbox.Location = new System.Drawing.Point(193, 46);
-            this.PressureDifferenceInputCheckbox.Name = "PressureDifferenceInputCheckbox";
-            this.PressureDifferenceInputCheckbox.Size = new System.Drawing.Size(146, 17);
-            this.PressureDifferenceInputCheckbox.TabIndex = 7;
-            this.PressureDifferenceInputCheckbox.Text = "Pressure Difference Input";
-            this.PressureDifferenceInputCheckbox.UseVisualStyleBackColor = true;
-            this.PressureDifferenceInputCheckbox.CheckedChanged += new System.EventHandler(this.PressureDifferenceInputCheckbox_CheckedChanged);
             // 
             // fmCalculationOptionSelectionDialog
             // 
