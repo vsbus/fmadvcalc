@@ -262,7 +262,24 @@ namespace FilterSimulation
                                                     fmGlobalParameter.t1,
                                                     fmGlobalParameter.h1,
                                                     fmGlobalParameter.t1_over_tf,
-                                                    fmGlobalParameter.h1_over_hc
+                                                    fmGlobalParameter.h1_over_hc,
+
+                                                    fmGlobalParameter.sd,
+                                                    fmGlobalParameter.td,
+                                                    fmGlobalParameter.K,
+                                                    fmGlobalParameter.Smech,
+                                                    fmGlobalParameter.S,
+                                                    fmGlobalParameter.Rfmech,
+                                                    fmGlobalParameter.Rf,
+                                                    fmGlobalParameter.Qgi,
+                                                    fmGlobalParameter.Qg,
+                                                    fmGlobalParameter.vg,
+                                                    fmGlobalParameter.Mev,
+                                                    fmGlobalParameter.Mcd,
+                                                    fmGlobalParameter.Qmfid,
+                                                    fmGlobalParameter.Qfid,
+                                                    fmGlobalParameter.Qgt,
+                                                    fmGlobalParameter.Vg
                                                };
         }
 

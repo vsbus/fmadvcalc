@@ -943,6 +943,10 @@ namespace FilterSimulation
                         fmBlockVariableParameter par = m_commonDeliquoringSimulationBlock.Parameters[i];
                         par.value = sim.Parameters[par.globalParameter].value;
                         par.isInputed = (sim.Parameters[par.globalParameter] as fmCalculationVariableParameter).isInputed;
+						if (!parametersToDisplay.Contains(par.globalParameter))
+						{
+	                        commonDeliquoringSimulationBlockDataGrid.Rows[i].Visible = false;
+						}
                     }
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
                 }
