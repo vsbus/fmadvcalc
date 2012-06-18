@@ -267,19 +267,20 @@ namespace FilterSimulation
                                                     fmGlobalParameter.sd,
                                                     fmGlobalParameter.td,
                                                     fmGlobalParameter.K,
-                                                    fmGlobalParameter.Smech,
                                                     fmGlobalParameter.S,
-                                                    fmGlobalParameter.Rfmech,
                                                     fmGlobalParameter.Rf,
+                                                    fmGlobalParameter.Mev,
+                                                    fmGlobalParameter.Mf,
+                                                    fmGlobalParameter.Mc,
+                                                    fmGlobalParameter.Mlcd,
+                                                    fmGlobalParameter.rho_bulk,
                                                     fmGlobalParameter.Qgi,
                                                     fmGlobalParameter.Qg,
                                                     fmGlobalParameter.vg,
-                                                    fmGlobalParameter.Mev,
-                                                    fmGlobalParameter.Mcd,
-                                                    fmGlobalParameter.Qmfid,
-                                                    fmGlobalParameter.Qfid,
-                                                    fmGlobalParameter.Qgt,
-                                                    fmGlobalParameter.Vg
+                                                    fmGlobalParameter.Qmf,
+                                                    fmGlobalParameter.Qmc,
+                                                    fmGlobalParameter.qmf,
+                                                    fmGlobalParameter.qmc
                                                };
         }
 

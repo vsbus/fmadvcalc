@@ -438,93 +438,125 @@ namespace FilterSimulation
 
         private void ShowHideRowsDependingOnCalculationOptions(fmFilterSimulation sim)
         {
+            var isVisibleParameters = new Dictionary<fmGlobalParameter, bool>();
+
+            var deliquoringParameters = new List<fmGlobalParameter>();
+            deliquoringParameters.AddRange(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
+            foreach (fmGlobalParameter parameter in deliquoringParameters)
+            {
+                isVisibleParameters[parameter] = parametersToDisplay.Contains(parameter);
+            }
+
             bool isGas = sim.filterMachiningBlock.gasFlowrateUsedCalculationOption ==
                          fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
-            ShowHideRowsWithGasParameters(isGas);
+            if (!isGas)
+            {
+                MakeInvisibleGasParameters(isVisibleParameters);
+            }
 
             bool isEvaporation = sim.filterMachiningBlock.evaporationUsedCalculationOption ==
                          fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.Consider;
-            ShowHideRowsWithEvaporationParameters(isGas && isEvaporation);
+            if (!(isGas && isEvaporation))
+            {
+                MakeInvisibleEvaporationParameters(isVisibleParameters);
+            }
 
             bool isDpdInput = sim.deliquoringEps0NeEpsBlock.dpdInputCalculationOption ==
                               fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser;
-            ShowHideDeliquoringMaterialParametersRows(isDpdInput, fmGlobalParameter.Dp_d);
+            if (!isDpdInput)
+            {
+                isVisibleParameters[fmGlobalParameter.Dp_d] = false;
+            }
 
             bool isHcdInput = sim.deliquoringEps0NeEpsBlock.hcdCalculationOption ==
                               fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser;
-            ShowHideDeliquoringMaterialParametersRows(isHcdInput, fmGlobalParameter.hcd, fmGlobalParameter.eps_d);
+            if (!isHcdInput)
+            {
+                isVisibleParameters[fmGlobalParameter.hcd] = false;
+                isVisibleParameters[fmGlobalParameter.eps_d] = false;
+            }
 
             bool isRhoDEtaDInput = sim.RhoDetaDCalculationOption ==
                                    fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser;
-            ShowHideDeliquoringMaterialParametersRows(isRhoDEtaDInput, fmGlobalParameter.rho_d, fmGlobalParameter.eta_d);
-        }
+            if (!isRhoDEtaDInput)
+            {
+                isVisibleParameters[fmGlobalParameter.rho_d] = false;
+                isVisibleParameters[fmGlobalParameter.eta_d] = false;
+            }
 
-        private void ShowHideDeliquoringMaterialParametersRows(bool isVisible, params fmGlobalParameter[] parameters)
-        {
-            ShowHideRows(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index,
-                         parameters, isVisible);
-        }
-
-        private void ShowHideDeliquoringMachiningParametersRows(bool isVisible, params fmGlobalParameter[] parameters)
-        {
             ShowHideRows(commonDeliquoringSimulationBlockDataGrid,
                 commonDeliquoringSimulationBlockParameterNameColumn.Index,
-                parameters,
-                isVisible);
+                isVisibleParameters);
+
+            ShowHideRows(deliquoringMaterialParametersDataGrid,
+                deliquoringMaterialParametersParameterNameColumn.Index,
+                isVisibleParameters);
         }
 
-        private void ShowHideRowsWithEvaporationParameters(bool isVisible)
+        private void MakeInvisibleEvaporationParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters)
         {
-            ShowHideDeliquoringMaterialParametersRows(isVisible,
-                                                      fmGlobalParameter.Tetta_boil,
-                                                      fmGlobalParameter.DH,
-                                                      fmGlobalParameter.Mmole,
-                                                      fmGlobalParameter.f,
-                                                      fmGlobalParameter.peq);
-            ShowHideDeliquoringMachiningParametersRows(isVisible,
-                                                       fmGlobalParameter.Smech,
-                                                       fmGlobalParameter.Rfmech,
-                                                       fmGlobalParameter.Mev,
-                                                       fmGlobalParameter.Vev,
-                                                       fmGlobalParameter.Qmevi,
-                                                       fmGlobalParameter.Qmevi,
-                                                       fmGlobalParameter.Qmevt,
-                                                       fmGlobalParameter.Qmev,
-                                                       fmGlobalParameter.Qevi,
-                                                       fmGlobalParameter.Qevt,
-                                                       fmGlobalParameter.Qev,
-                                                       fmGlobalParameter.qmevi,
-                                                       fmGlobalParameter.qmevt,
-                                                       fmGlobalParameter.qmev,
-                                                       fmGlobalParameter.qevi,
-                                                       fmGlobalParameter.qevt,
-                                                       fmGlobalParameter.qev);
+            MakeInvisibleParameters(isVisibleParameters,
+                                    fmGlobalParameter.Tetta_boil,
+                                    fmGlobalParameter.DH,
+                                    fmGlobalParameter.Mmole,
+                                    fmGlobalParameter.f,
+                                    fmGlobalParameter.peq);
+            MakeInvisibleParameters(isVisibleParameters,
+                                    fmGlobalParameter.Smech,
+                                    fmGlobalParameter.Rfmech,
+                                    fmGlobalParameter.Mev,
+                                    fmGlobalParameter.Vev,
+                                    fmGlobalParameter.Qmevi,
+                                    fmGlobalParameter.Qmevi,
+                                    fmGlobalParameter.Qmevt,
+                                    fmGlobalParameter.Qmev,
+                                    fmGlobalParameter.Qevi,
+                                    fmGlobalParameter.Qevt,
+                                    fmGlobalParameter.Qev,
+                                    fmGlobalParameter.qmevi,
+                                    fmGlobalParameter.qmevt,
+                                    fmGlobalParameter.qmev,
+                                    fmGlobalParameter.qevi,
+                                    fmGlobalParameter.qevt,
+                                    fmGlobalParameter.qev);
         }
 
-        private void ShowHideRowsWithGasParameters(bool isVisible)
+        private void MakeInvisibleGasParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters)
         {
-            ShowHideDeliquoringMaterialParametersRows(isVisible,
-                                                      fmGlobalParameter.Tetta,
-                                                      fmGlobalParameter.eta_g,
-                                                      fmGlobalParameter.ag1,
-                                                      fmGlobalParameter.ag2,
-                                                      fmGlobalParameter.ag3);
-            ShowHideDeliquoringMachiningParametersRows(isVisible,
-                                                       fmGlobalParameter.Qgi,
-                                                       fmGlobalParameter.Qg,
-                                                       fmGlobalParameter.vg,
-                                                       fmGlobalParameter.Qgt,
-                                                       fmGlobalParameter.Vg);
+            MakeInvisibleParameters(isVisibleParameters,
+                                    fmGlobalParameter.Tetta,
+                                    fmGlobalParameter.eta_g,
+                                    fmGlobalParameter.ag1,
+                                    fmGlobalParameter.ag2,
+                                    fmGlobalParameter.ag3);
+            MakeInvisibleParameters(isVisibleParameters,
+                                    fmGlobalParameter.Qgi,
+                                    fmGlobalParameter.Qg,
+                                    fmGlobalParameter.vg,
+                                    fmGlobalParameter.Qgt,
+                                    fmGlobalParameter.Vg);
         }
 
-        private void ShowHideRows(DataGridView dataGrid, int parameterColumnIndex, fmGlobalParameter[] parameters, bool isVisible)
+        private void MakeInvisibleParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters,
+                                 params fmGlobalParameter[] parameters)
         {
             foreach (fmGlobalParameter p in parameters)
+            {
+                isVisibleParameters[p] = false;
+            }
+        }
+
+        private void ShowHideRows(
+            DataGridView dataGrid,
+            int parameterColumnIndex,
+            Dictionary<fmGlobalParameter, bool> isVisibleParameters)
+        {
+            foreach (fmGlobalParameter p in isVisibleParameters.Keys)
             {
                 DataGridViewRow row = FindRowByValueInColumn(dataGrid, parameterColumnIndex, p.name);
                 if (row != null)
                 {
-                    row.Visible = isVisible;
+                    row.Visible = isVisibleParameters[p];
                 }
             }
         }
@@ -925,14 +957,6 @@ namespace FilterSimulation
 
                 if (m_commonDeliquoringSimulationBlock != null)
                 {
-                    //m_commonDeliquoringSimulationBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.filterMachiningCalculationOption);
-
-                    //for (int i = 0; i < m_commonDeliquoringSimulationBlock.Parameters.Count; ++i)
-                    //{
-                    //    commonDeliquoringSimulationBlockDataGrid.Rows[i].Visible = m_commonDeliquoringSimulationBlock.Parameters[i].group != null
-                    //        && parametersToDisplay.Contains(m_commonDeliquoringSimulationBlock.Parameters[i].globalParameter);
-                    //}
-
                     for (int i = 0; i < m_commonDeliquoringSimulationBlock.ConstantParameters.Count; ++i)
                     {
                         fmBlockConstantParameter par = m_commonDeliquoringSimulationBlock.ConstantParameters[i];
@@ -943,10 +967,6 @@ namespace FilterSimulation
                         fmBlockVariableParameter par = m_commonDeliquoringSimulationBlock.Parameters[i];
                         par.value = sim.Parameters[par.globalParameter].value;
                         par.isInputed = (sim.Parameters[par.globalParameter] as fmCalculationVariableParameter).isInputed;
-						if (!parametersToDisplay.Contains(par.globalParameter))
-						{
-	                        commonDeliquoringSimulationBlockDataGrid.Rows[i].Visible = false;
-						}
                     }
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
                 }

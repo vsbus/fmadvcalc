@@ -188,6 +188,209 @@ namespace fmCalculationLibrary
         #endregion
         // ReSharper restore InconsistentNaming
 
+        static public fmGlobalParameter[] GetMachineSettingsDeliquoringParameters()
+        {
+            return new[]
+                       {
+                           sd,
+                           td,
+                           K,
+                           Smech,
+                           S,
+                           Rfmech,
+                           Rf,
+                           Qgi,
+                           Qg,
+                           vg,
+                           Mfd,
+                           Mev,
+                           Vfd,
+                           Vev,
+                           Mlcd,
+                           Vlcd,
+                           Mcd,
+                           Vcd,
+                           rho_bulk,
+                           Qmfid,
+                           Qfid,
+                           Qmcd,
+                           Qcd,
+                           qmfid,
+                           qfid,
+                           qmcd,
+                           qcd,
+
+                           Qgt,
+                           Vg,
+                           Qmftd,
+                           Qmfd,
+                           Qftd,
+                           Qfd,
+                           Qmevi,
+                           Qmevt,
+                           Qmev,
+                           Qevi,
+                           Qevt,
+                           Qev,
+                           qmftd,
+                           qmfd,
+                           qftd,
+                           qfd,
+                           qmevi,
+                           qmevt,
+                           qmev,
+                           qevi,
+                           qevt,
+                           qev
+                       };
+        }
+
+        static public fmGlobalParameter[] GetMaterialDeliquoringParameters()
+        {
+            return new[]
+                       {
+                            Dp_d, 
+                            hcd, 
+                            eps_d,
+                            eta_d,
+                            rho_d,
+                            sigma,
+                            pke0, 
+                            pke, 
+                            pc_d, 
+                            rc_d, 
+                            alpha_d,
+                            Srem, 
+                            ad1, 
+                            ad2, 
+                            Tetta,
+                            eta_g,
+                            ag1, 
+                            ag2, 
+                            ag3, 
+                            Tetta_boil,
+                            DH,
+                            Mmole,
+                            f, 
+                            peq
+                       };
+        }
+
+        static public fmGlobalParameter[] GetMachineSettingsCakeParameters()
+        {
+            return new[]
+                       {
+                           A,
+                           d0,
+
+                           Dp,
+
+                           sf,
+                           sr,
+                           tr,
+                           
+                           hc,
+                           tf,
+                           tc,
+                           n, 
+                           
+                           Msus,
+                           Vsus,
+                           Mf,
+                           Vf,
+                           Ms,
+                           Vs,
+                           Mc,
+                           Vc,
+
+                           msus,
+                           vsus,
+                           mf,
+                           vf,
+                           ms,
+                           vs,
+                           mc,
+                           vc,
+
+                           Qmsus,
+                           Qsus, 
+                           Qmf,
+                           Qf, 
+                           Qms,
+                           Qs, 
+                           Qmc,
+                           Qc, 
+
+                           qmsus,
+                           qsus, 
+                           qmf, 
+                           qf, 
+                           qms, 
+                           qs, 
+                           qmc, 
+                           qc, 
+
+                           Qmsus_d,
+                           Qsus_d, 
+                           Qmf_d, 
+                           Qf_d, 
+                           Qms_d, 
+                           Qs_d, 
+                           Qmc_d, 
+                           Qc_d, 
+                           qmsus_d,
+                           qsus_d, 
+                           t1, 
+                           h1, 
+                           t1_over_tf, 
+                           h1_over_hc, 
+                           qmf_d,
+                           qf_d, 
+                           qms_d,
+                           qs_d, 
+                           qmc_d,
+                           qc_d, 
+                           
+                           hc_over_tf, 
+                           dhc_over_dt,
+                           
+                           eps, 
+                           kappa,
+                           Pc, 
+                           rc, 
+                           a,
+                           Rm
+                       };
+        }
+
+        static public fmGlobalParameter[] GetMaterialCakeParameters()
+        {
+            return new[]
+                       {
+                           eta_f,
+
+                           rho_f,
+                           rho_s,
+                           rho_sus,
+                           Cm,
+                           Cv,
+                           C,
+
+                           ne,
+                           eps0,
+                           kappa0,
+
+                           nc,
+
+                           Pc0,
+                           rc0,
+                           a0,
+
+                           Rm0,
+                           hce0
+                       };
+        }
+
         public static List<fmGlobalParameter> parameters = new List<fmGlobalParameter>();
         public static Dictionary<string, fmGlobalParameter> parametersByName = new Dictionary<string, fmGlobalParameter>();
 
