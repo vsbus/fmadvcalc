@@ -166,10 +166,6 @@ namespace FilterSimulation
             ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.n]).isInputed = true;
             ((fmCalculationVariableParameter)sim.Parameters[fmGlobalParameter.hc]).isInputed = false;
 
-            sim.Parameters[fmGlobalParameter.Tetta_boil].value = new fmValue(1000);
-            sim.Parameters[fmGlobalParameter.DH].value = new fmValue(1000);
-            sim.Parameters[fmGlobalParameter.Mmole].value = new fmValue(18e-3);
-            sim.Parameters[fmGlobalParameter.f].value = new fmValue(1);
             // END DEBUG CODE
 
             fProj.Keep();
