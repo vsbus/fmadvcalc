@@ -102,6 +102,31 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(DpQpConstBox, fmGlobalParameter.t1_over_tf);
             AddParameter(DpQpConstBox, fmGlobalParameter.h1_over_hc);
 
+            AddParameter(deliquoringBox, fmGlobalParameter.Dp_d);
+            AddParameter(deliquoringBox, fmGlobalParameter.hcd);
+            AddParameter(deliquoringBox, fmGlobalParameter.eps_d);
+            AddParameter(deliquoringBox, fmGlobalParameter.eta_d);
+            AddParameter(deliquoringBox, fmGlobalParameter.rho_d);
+            AddParameter(deliquoringBox, fmGlobalParameter.sigma);
+            AddParameter(deliquoringBox, fmGlobalParameter.pke0);
+            AddParameter(deliquoringBox, fmGlobalParameter.pke);
+            AddParameter(deliquoringBox, fmGlobalParameter.pc_d);
+            AddParameter(deliquoringBox, fmGlobalParameter.rc_d);
+            AddParameter(deliquoringBox, fmGlobalParameter.alpha_d);
+            AddParameter(deliquoringBox, fmGlobalParameter.Srem);
+            AddParameter(deliquoringBox, fmGlobalParameter.ad1);
+            AddParameter(deliquoringBox, fmGlobalParameter.ad2);
+            AddParameter(deliquoringBox, fmGlobalParameter.Tetta);
+            AddParameter(deliquoringBox, fmGlobalParameter.eta_g);
+            AddParameter(deliquoringBox, fmGlobalParameter.ag1);
+            AddParameter(deliquoringBox, fmGlobalParameter.ag2);
+            AddParameter(deliquoringBox, fmGlobalParameter.ag3);
+            AddParameter(deliquoringBox, fmGlobalParameter.Tetta_boil);
+            AddParameter(deliquoringBox, fmGlobalParameter.DH);
+            AddParameter(deliquoringBox, fmGlobalParameter.Mmole);
+            AddParameter(deliquoringBox, fmGlobalParameter.f);
+            AddParameter(deliquoringBox, fmGlobalParameter.peq);
+
             AddParameter(deliquoringBox, fmGlobalParameter.hcd);
             AddParameter(deliquoringBox, fmGlobalParameter.sd);
             AddParameter(deliquoringBox, fmGlobalParameter.td);

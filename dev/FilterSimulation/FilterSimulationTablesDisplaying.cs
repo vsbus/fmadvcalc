@@ -441,6 +441,7 @@ namespace FilterSimulation
             var isVisibleParameters = new Dictionary<fmGlobalParameter, bool>();
 
             var deliquoringParameters = new List<fmGlobalParameter>();
+            deliquoringParameters.AddRange(fmGlobalParameter.GetMaterialDeliquoringParameters());
             deliquoringParameters.AddRange(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
             foreach (fmGlobalParameter parameter in deliquoringParameters)
             {
