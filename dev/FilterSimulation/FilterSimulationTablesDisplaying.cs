@@ -1157,6 +1157,7 @@ namespace FilterSimulation
                 WriteUnitToHeader(simulationDataGrid);
                 
                 UpdateUnitsOfCommonFilterMachiningBlock();
+                UpdateUnitsOfCommonDeliquoringSimulationBlock();
                 RewriteDataForAllBlocks();
             }
             ResumeAllBlockProcessing();
