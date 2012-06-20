@@ -1039,11 +1039,12 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref sf, fmGlobalParameter.sf, sf_Cell, true);
             AddParameter(ref sr, fmGlobalParameter.sr, sr_Cell, false);
             AddParameter(ref tr, fmGlobalParameter.tr, tr_Cell, false);
-            
-            AddParameter(ref hc, fmGlobalParameter.hc, hc_Cell, false);
+
             AddParameter(ref tf, fmGlobalParameter.tf, tf_Cell, false);
             AddParameter(ref tc, fmGlobalParameter.tc, tc_Cell, false);
             AddParameter(ref n, fmGlobalParameter.n, n_Cell, true);
+            
+            AddParameter(ref hc, fmGlobalParameter.hc, hc_Cell, false);
             
             AddParameter(ref Msus, fmGlobalParameter.Msus, Msus_Cell, false);
             AddParameter(ref Vsus, fmGlobalParameter.Vsus, Vsus_Cell, false);
