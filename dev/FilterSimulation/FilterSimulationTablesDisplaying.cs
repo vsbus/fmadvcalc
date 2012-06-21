@@ -569,7 +569,6 @@ namespace FilterSimulation
 
         private void CopySimulationValuesToDeliquoringSigmaBlock(fmFilterSimulation sim)
         {
-            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
             if (sim.deliquoringSigmaPkeBlock.rhoDetaDCalculationOption != sim.RhoDetaDCalculationOption)
             {
                 sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(sim.RhoDetaDCalculationOption);
@@ -578,11 +577,11 @@ namespace FilterSimulation
             {
                 sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(sim.PcDCalculationOption);
             }
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
         }
 
         private void CopySimulationValuesToDeliquoringEps0dNedEpsdBlock(fmFilterSimulation sim)
         {
-            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
             if (sim.deliquoringEps0NeEpsBlock.hcdCalculationOption != sim.HcdEpsdCalculationOption)
             {
                 sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(sim.HcdEpsdCalculationOption);
@@ -591,6 +590,7 @@ namespace FilterSimulation
             {
                 sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(sim.DpdInputCalculationOption);
             }
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringEps0NeEpsBlock);
         }
 
         // ReSharper disable InconsistentNaming
@@ -689,8 +689,6 @@ namespace FilterSimulation
 
         private static void CopySimulationValuesToFilterMachining(fmFilterSimulation sim)
         {
-            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
-
             if (sim.filterMachiningBlock.filterMachiningCalculationOption != sim.FilterMachiningCalculationOption)
             {
                 sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.FilterMachiningCalculationOption);
@@ -710,6 +708,8 @@ namespace FilterSimulation
             {
                 sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.EvaporationUsedCalculationOption);
             }
+
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.filterMachiningBlock);
         }
         private static void CopySimulationValuesToRmHceBlock(fmFilterSimulation sim)
         {
@@ -730,11 +730,12 @@ namespace FilterSimulation
 
         private static void CopySimulationValuesToSusBlock(fmFilterSimulation sim)
         {
-            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.susBlock);
             if (sim.susBlock.calculationOption != sim.SuspensionCalculationOption)
             {
                 sim.susBlock.SetCalculationOptionAndUpdateCellsStyle(sim.SuspensionCalculationOption);
             }
+
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.susBlock);
         }
 
         void UpdateColorsAndFontForSolution(fmFilterSimSolution sol)
