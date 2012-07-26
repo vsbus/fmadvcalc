@@ -52,19 +52,17 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
-        internal static fmFilterSimSuspensionData Deserialize(System.IO.TextReader input, fmFilterSimSuspension parentSuspension)
+        internal static fmFilterSimSuspensionData Deserialize(XmlNode xmlNode, fmFilterSimSuspension parentSuspension)
         {
-            input.ReadLine();
             fmFilterSimSuspensionData susData = new fmFilterSimSuspensionData();
-            susData.name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSuspensionDataSerializeTags.name));
-            susData.material = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSuspensionDataSerializeTags.material));
-            susData.customer = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSuspensionDataSerializeTags.customer));
-            int seriesListSize = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmSuspensionDataSerializeTags.seriesListSize));
-            for (int i = 0; i < seriesListSize; ++i)
+            susData.name = xmlNode.SelectSingleNode(fmSuspensionDataSerializeTags.name).InnerText;
+            susData.material = xmlNode.SelectSingleNode(fmSuspensionDataSerializeTags.material).InnerText;
+            susData.customer = xmlNode.SelectSingleNode(fmSuspensionDataSerializeTags.customer).InnerText;
+            XmlNodeList seriesList = xmlNode.SelectNodes("SimSerie");
+            foreach (XmlNode serieNode in seriesList)
             {
-                fmFilterSimSerie serie = fmFilterSimSerie.Deserialize(input, parentSuspension);
+                fmFilterSimSerie serie = fmFilterSimSerie.Deserialize(serieNode, parentSuspension);
             }
-            input.ReadLine();
             return susData;
         }
     }
@@ -240,16 +238,14 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
-        internal static fmFilterSimSuspension Deserialize(System.IO.TextReader input, fmFilterSimProject parentProject)
+        internal static fmFilterSimSuspension Deserialize(XmlNode suspensionNode, fmFilterSimProject parentProject)
         {
-            input.ReadLine();
-            bool m_checked = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmSuspensionSerializeTags.m_checked));
+            bool m_checked = Convert.ToBoolean(suspensionNode.SelectSingleNode(fmSuspensionSerializeTags.m_checked).InnerText);
             fmFilterSimSuspension sus = new fmFilterSimSuspension(parentProject, "_noname", "_unknown_material", "_unknown_customer");
-            fmFilterSimSuspensionData data = fmFilterSimSuspensionData.Deserialize(input, sus);
+            fmFilterSimSuspensionData data = fmFilterSimSuspensionData.Deserialize(suspensionNode.SelectSingleNode("SuspensionData"), sus);
             sus.Name = data.name;
             sus.Material = data.material;
             sus.Customer = data.customer;
-            input.ReadLine();
             return sus;
         }
     }

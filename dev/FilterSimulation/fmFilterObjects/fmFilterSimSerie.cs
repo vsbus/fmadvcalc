@@ -54,20 +54,18 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
-        internal static fmFilterSimSerieData Deserialize(System.IO.TextReader input, fmFilterSimSuspension parentSuspension, fmFilterSimSerie parentSerie)
+        internal static fmFilterSimSerieData Deserialize(XmlNode xmlNode, fmFilterSimSuspension parentSuspension, fmFilterSimSerie parentSerie)
         {
-            input.ReadLine();
             fmFilterSimSerieData serieData = new fmFilterSimSerieData();
-            serieData.name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSimSerieDataSerializeTags.name));
-            serieData.machineName = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSimSerieDataSerializeTags.machineName));
-            serieData.machine = fmFilterSimMachineType.Deserialize(input);
-            serieData.filterMedium = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmSimSerieDataSerializeTags.filterMedium));
-            int simListSize = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmSimSerieDataSerializeTags.simListSize));
-            for (int i = 0; i < simListSize; ++i)
+            serieData.name = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.name).InnerText;
+            serieData.machineName = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.machineName).InnerText;
+            serieData.machine = fmFilterSimMachineType.Deserialize(xmlNode.SelectSingleNode("Machine"));
+            serieData.filterMedium = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.filterMedium).InnerText;
+            XmlNodeList simList = xmlNode.SelectNodes("Simulation");
+            foreach (XmlNode simNode in simList)
             {
-                fmFilterSimulation sim = fmFilterSimulation.Deserialize(input, parentSerie);
+                fmFilterSimulation sim = fmFilterSimulation.Deserialize(simNode, parentSerie);
             }
-            input.ReadLine();
             return serieData;
         }
     }
@@ -259,17 +257,15 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
-        internal static fmFilterSimSerie Deserialize(System.IO.TextReader input, fmFilterSimSuspension parentSuspension)
+        internal static fmFilterSimSerie Deserialize(XmlNode xmlNode, fmFilterSimSuspension parentSuspension)
         {
-            input.ReadLine();
-            bool m_checked = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmSimSerieSerializeTags.m_checked));
+            bool m_checked = Convert.ToBoolean(xmlNode.SelectSingleNode(fmSimSerieSerializeTags.m_checked).InnerText);
             fmFilterSimSerie serie = new fmFilterSimSerie(parentSuspension, "_noname", null, "_no_fiter_medium", "_noname_machine");
-            fmFilterSimSerieData m_data = fmFilterSimSerieData.Deserialize(input, parentSuspension, serie);
+            fmFilterSimSerieData m_data = fmFilterSimSerieData.Deserialize(xmlNode.SelectSingleNode("Serie"), parentSuspension, serie);
             serie.Name = m_data.name;
             serie.MachineType = m_data.machine;
             serie.MachineName = m_data.machineName;
             serie.FilterMedium = m_data.filterMedium;
-            input.ReadLine();
             return serie;
         }
     }

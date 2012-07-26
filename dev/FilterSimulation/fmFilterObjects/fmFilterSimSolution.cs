@@ -262,9 +262,9 @@ namespace FilterSimulation.fmFilterObjects
             return "2012-06-11:rev453";
         }
 
-        public static bool CheckDatFileVersion(TextReader input)
+        public static bool CheckDatFileVersion(XmlNode node)
         {
-            return GetCurrentVersion() == fmSerializeTools.DeserializeProperty(input, fmSolutionSerializeTags.version).ToString();
+                return GetCurrentVersion() == node.SelectSingleNode("Version").InnerText;
         }
 
         private void SerializeVersion(XmlWriter writer)
@@ -272,13 +272,17 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteElementString(fmSolutionSerializeTags.version, GetCurrentVersion());
         }
 
-        public static fmFilterSimSolution Deserialize(TextReader input)
+        public static fmFilterSimSolution Deserialize(XmlNode node)
         {
             var solution = new fmFilterSimSolution();
-            int projectsCount = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmSolutionSerializeTags.projectsCount));
-            for (int i = 0; i < projectsCount; ++i)
+            node = node.SelectSingleNode("Projects_Data");
+            if (node != null)
             {
-                fmFilterSimProject.Deserialize(input, solution);
+                XmlNodeList projectNodes = node.SelectNodes("Project");
+                foreach (XmlNode projectNode in projectNodes)
+                {
+                    fmFilterSimProject.Deserialize(projectNode, solution);
+                }
             }
             return solution;
         }

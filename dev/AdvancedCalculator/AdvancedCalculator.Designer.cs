@@ -70,7 +70,7 @@ namespace AdvancedCalculator
             this.lOADFROMDISKToolStripMenuItem.Name = "lOADFROMDISKToolStripMenuItem";
             this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.lOADFROMDISKToolStripMenuItem.Text = "Open...";
-            this.lOADFROMDISKToolStripMenuItem.Click += new System.EventHandler(this.lOADFROMDISKToolStripMenuItem_Click);
+            this.lOADFROMDISKToolStripMenuItem.Click += new System.EventHandler(this.LoadFromDiskToolStripMenuItem_Click);
             // 
             // saveAllToolStripMenuItem
             // 
@@ -84,7 +84,7 @@ namespace AdvancedCalculator
             this.sAVEONDISKToolStripMenuItem.Name = "sAVEONDISKToolStripMenuItem";
             this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.sAVEONDISKToolStripMenuItem.Text = "Save As...";
-            this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.SAveondiskToolStripMenuItemClick);
+            this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.SaveOnDiskToolStripMenuItemClick);
             // 
             // exitToolStripMenuItem
             // 

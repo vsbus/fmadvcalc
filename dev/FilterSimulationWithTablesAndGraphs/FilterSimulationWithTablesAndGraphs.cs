@@ -491,10 +491,10 @@ namespace FilterSimulationWithTablesAndGraphs
             m_fSolution.Serialize(writer);
         }
 
-        public void Deserialize(TextReader input)
+        public void Deserialize(XmlNode node)
         {
-            fmFilterSimSolution.CheckDatFileVersion(input);
-            m_fSolution = fmFilterSimSolution.Deserialize(input);
+            fmFilterSimSolution.CheckDatFileVersion(node);
+            m_fSolution = fmFilterSimSolution.Deserialize(node);
             if (m_fSolution.projects.Count > 0)
             {
                 m_fSolution.currentObjects.Project = m_fSolution.projects[0];

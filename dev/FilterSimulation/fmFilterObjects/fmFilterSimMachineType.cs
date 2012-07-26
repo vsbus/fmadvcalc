@@ -58,12 +58,10 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
-        internal static fmFilterSimMachineType Deserialize(System.IO.TextReader input)
+        internal static fmFilterSimMachineType Deserialize(XmlNode xmlNode)
         {
-            input.ReadLine();
-            string symbol = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmMachineSerializeTags.symbol));
-            string name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmMachineSerializeTags.name));
-            input.ReadLine();
+            string symbol = xmlNode.SelectSingleNode(fmMachineSerializeTags.symbol).InnerText;
+            string name = xmlNode.SelectSingleNode(fmMachineSerializeTags.name).InnerText;
             foreach (var mt in filterTypesList)
             {
                 if (mt.symbol == symbol && mt.name == name)

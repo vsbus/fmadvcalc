@@ -7,17 +7,6 @@ namespace FilterSimulation.fmFilterObjects
 {
     public class fmSerializeTools
     {
-        internal static object DeserializeProperty(System.IO.TextReader input, string tag)
-        {
-            var a = input.ReadLine().Split('=');
-            if (a[0].Trim() != tag)
-            {
-                throw new Exception("Expected Tag was <" + tag + "> but recieved <" + a[0].Trim() + ">");
-            }
-            object value = a[1].Trim();
-            return value;
-        }
-
         public static double ToDouble(object p)
         {
             string s = p.ToString();

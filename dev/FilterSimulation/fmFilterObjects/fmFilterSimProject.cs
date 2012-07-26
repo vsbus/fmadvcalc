@@ -41,17 +41,15 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
-        internal static fmFilterSimProjectData Deserialize(System.IO.TextReader input, fmFilterSimProject parentProject)
+        internal static fmFilterSimProjectData Deserialize(XmlNode projectNode, fmFilterSimProject parentProject)
         {
-            input.ReadLine();
             fmFilterSimProjectData projectData = new fmFilterSimProjectData();
-            projectData.name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmProjectDataSerializeTags.name));
-            int susListSize = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmProjectDataSerializeTags.susListSize));
-            for (int i = 0; i < susListSize; ++i)
+            projectData.name = Convert.ToString(projectNode.SelectSingleNode(fmProjectDataSerializeTags.name).InnerText);
+            XmlNodeList suspensionList = projectNode.SelectNodes("Suspension");
+            foreach (XmlNode suspensionNode in suspensionList)
             {
-                fmFilterSimSuspension sus = fmFilterSimSuspension.Deserialize(input, parentProject);
+                fmFilterSimSuspension sus = fmFilterSimSuspension.Deserialize(suspensionNode, parentProject);
             }
-            input.ReadLine();
             return projectData;
         }
     }
@@ -205,16 +203,14 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
-        internal static fmFilterSimProject Deserialize(System.IO.TextReader input, fmFilterSimSolution parentSolution)
+        internal static fmFilterSimProject Deserialize(XmlNode projectNode, fmFilterSimSolution parentSolution)
         {
-            input.ReadLine(); // begin
-            bool m_checked = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmProjectSerializeTags.m_checked));
+            bool m_checked = Convert.ToBoolean(projectNode.SelectSingleNode(fmProjectSerializeTags.m_checked).InnerText);
             fmFilterSimProject project = new fmFilterSimProject(parentSolution, "_noname");
-            fmFilterSimProjectData projectData = fmFilterSimProjectData.Deserialize(input, project);
+            fmFilterSimProjectData projectData = fmFilterSimProjectData.Deserialize(projectNode, project);
             project.Checked = m_checked;
             project.Modified = false;
             project.Name = projectData.name;
-            input.ReadLine(); // end
             return project;
         }
     }

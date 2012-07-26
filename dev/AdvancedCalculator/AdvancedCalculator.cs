@@ -87,7 +87,7 @@ namespace AdvancedCalculator
             }
         }
 
-        private void SAveondiskToolStripMenuItemClick(object sender, EventArgs e)
+        private void SaveOnDiskToolStripMenuItemClick(object sender, EventArgs e)
         {
             SaveOnDisk();
         }
@@ -125,7 +125,7 @@ namespace AdvancedCalculator
             writer.Close();
         }
 
-        private void lOADFROMDISKToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadFromDiskToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var openDialog = new OpenFileDialog();
             openDialog.Filter = "Data files (*.dat)|*.dat";
@@ -144,14 +144,13 @@ namespace AdvancedCalculator
         private string m_currentFilename;
         private void LoadFromDisk(string fileName)
         {
-            if (CheckDatFileVersion(fileName) == false)
-                return;
-
-            TextReader input = new StreamReader(fileName);
             try
             {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(fileName + ".xml");
+
                 m_currentFilename = fileName;
-                filterSimulationWithTablesAndGraphs1.Deserialize(input);
+                filterSimulationWithTablesAndGraphs1.Deserialize(doc.SelectSingleNode("Filtraplus_Data_File"));
                 Text = m_Caption + " [" + fileName + "]";
             }
             catch (Exception)
@@ -160,28 +159,27 @@ namespace AdvancedCalculator
                 m_currentFilename = null;
                 Text = m_Caption;
             }
-
-            input.Close();
         }
 
         private bool CheckDatFileVersion(string fileName)
         {
-            bool isValid = false;
+            throw new Exception("");
+            //bool isValid = false;
 
-            try
-            {
-                TextReader input = new StreamReader(fileName);
-                isValid = fmFilterSimSolution.CheckDatFileVersion(input);
-            }
-            catch (Exception)
-            {
-            }
+            //try
+            //{
+            //    XmlReader reader = new StreamReader(fileName);
+            //    isValid = fmFilterSimSolution.CheckDatFileVersion(input);
+            //}
+            //catch (Exception)
+            //{
+            //}
 
-            if (!isValid)
-            {
-                MessageBox.Show("File " + fileName + " was created with other program version with different format and is impossible to open.", "Open File Error");
-            }
-            return isValid;
+            //if (!isValid)
+            //{
+            //    MessageBox.Show("File " + fileName + " was created with other program version with different format and is impossible to open.", "Open File Error");
+            //}
+            //return isValid;
         }
 
         private void fmAdvancedCalculator_FormClosed(object sender, FormClosedEventArgs e)

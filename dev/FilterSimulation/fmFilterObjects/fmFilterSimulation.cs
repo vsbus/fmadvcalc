@@ -443,26 +443,24 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
-        private static fmCalculationBaseParameter DeserializeCalculationBaseParameter(System.IO.TextReader input)
+        private static fmCalculationBaseParameter DeserializeCalculationBaseParameter(XmlNode xmlNode)
         {
-            input.ReadLine();
             fmCalculationBaseParameter parameter;
-            string name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.name));
-            string typeName = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.typeName));
-            if (typeName == typeof(fmCalculationVariableParameter).Name)
+            string name = xmlNode.SelectSingleNode(fmParameterSerializeTags.name).InnerText;
+            XmlNode isInputedNode = xmlNode.SelectSingleNode(fmParameterSerializeTags.isInputed);
+            if (isInputedNode != null)
             {
                 var varParam = new fmCalculationVariableParameter(fmGlobalParameter.parametersByName[name]);
-                varParam.isInputed = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.isInputed));
+                varParam.isInputed = Convert.ToBoolean(isInputedNode.InnerText);
                 parameter = varParam;
             }
             else
             {
                 parameter = new fmCalculationConstantParameter(fmGlobalParameter.parametersByName[name]);
             }
-            bool defined = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.defined));
-            double value = fmSerializeTools.ToDouble(fmSerializeTools.DeserializeProperty(input, fmParameterSerializeTags.value));
+            bool defined = Convert.ToBoolean(xmlNode.SelectSingleNode(fmParameterSerializeTags.defined).InnerText);
+            double value = fmSerializeTools.ToDouble(xmlNode.SelectSingleNode(fmParameterSerializeTags.value).InnerText);
             parameter.value = new fmValue(value, defined);
-            input.ReadLine();
             return parameter;
         }
 
@@ -498,80 +496,77 @@ namespace FilterSimulation.fmFilterObjects
             throw new Exception("There is no field " + s + " in enum " + t.Name);
         }
 
-        internal static fmFilterSimulationData Deserialize(System.IO.TextReader input)
+        internal static fmFilterSimulationData Deserialize(XmlNode xmlNode)
         {
-            input.ReadLine();
             fmFilterSimulationData simData = new fmFilterSimulationData();
-            simData.name = Convert.ToString(fmSerializeTools.DeserializeProperty(input, fmFilterSimulationDataSerializeTags.name));
+            simData.name = xmlNode.SelectSingleNode(fmFilterSimulationDataSerializeTags.name).InnerText;
             simData.filterMachiningCalculationOption =
                 (fmFilterMachiningCalculator.fmFilterMachiningCalculationOption)
                 StringToEnum(
-                    fmSerializeTools.DeserializeProperty(input,
-                                                         fmFilterSimulationDataSerializeTags.
-                                                             filterMachiningCalculationOption).ToString(),
+                    xmlNode.SelectSingleNode(fmFilterSimulationDataSerializeTags.
+                                                             filterMachiningCalculationOption).InnerText,
                     typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption));
             simData.deliquoringUsedCalculationOption =
                 (fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption)
                 StringToEnum(
-                    fmSerializeTools.DeserializeProperty(input,
+                    xmlNode.SelectSingleNode(
                                                          fmFilterSimulationDataSerializeTags.
-                                                             deliquoringUsedCalculationOption).ToString(),
+                                                             deliquoringUsedCalculationOption).InnerText,
                     typeof(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption));
             simData.gasFlowrateUsedCalculationOption =
                 (fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption)
                 StringToEnum(
-                    fmSerializeTools.DeserializeProperty(input,
+                    xmlNode.SelectSingleNode(
                                                          fmFilterSimulationDataSerializeTags.
-                                                             gasFlowrateUsedCalculationOption).ToString(),
+                                                             gasFlowrateUsedCalculationOption).InnerText,
                     typeof(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption));
             simData.evaporationUsedCalculationOption =
                 (fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption)
                 StringToEnum(
-                    fmSerializeTools.DeserializeProperty(input,
+                    xmlNode.SelectSingleNode(
                                                          fmFilterSimulationDataSerializeTags.
-                                                             evaporationUsedCalculationOption).ToString(),
+                                                             evaporationUsedCalculationOption).InnerText,
                     typeof(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption));
             simData.hcdEpsdCalculationOption =
                 (fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption)
                 StringToEnum(
-                    fmSerializeTools.DeserializeProperty(input,
+                    xmlNode.SelectSingleNode(
                                                          fmFilterSimulationDataSerializeTags.
-                                                             hcdCalculationOption).ToString(),
+                                                             hcdCalculationOption).InnerText,
                     typeof(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption));
             simData.dpdInputCalculationOption =
                 (fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption)
                 StringToEnum(
-                    fmSerializeTools.DeserializeProperty(input,
+                    xmlNode.SelectSingleNode(
                                                          fmFilterSimulationDataSerializeTags.
-                                                             dpdInputCalculationOption).ToString(),
+                                                             dpdInputCalculationOption).InnerText,
                     typeof(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption));
             simData.rhoDCalculationOption =
                 (fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption)
                 StringToEnum(
-                    fmSerializeTools.DeserializeProperty(input,
+                    xmlNode.SelectSingleNode(
                                                          fmFilterSimulationDataSerializeTags.
-                                                             rhoDetaDCalculationOption).ToString(),
+                                                             rhoDetaDCalculationOption).InnerText,
                     typeof(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption));
             simData.PcDCalculationOption =
                 (fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption)
                 StringToEnum(
-                    fmSerializeTools.DeserializeProperty(input,
+                    xmlNode.SelectSingleNode(
                                                          fmFilterSimulationDataSerializeTags.
-                                                             PcDCalculationOption).ToString(),
+                                                             PcDCalculationOption).InnerText,
                     typeof(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption));
             simData.suspensionCalculationOption = (fmSuspensionCalculator.fmSuspensionCalculationOptions)
                 StringToEnum(
-                    fmSerializeTools.DeserializeProperty(input,
+                    xmlNode.SelectSingleNode(
                                                          fmFilterSimulationDataSerializeTags.
-                                                             suspensionCalculationOption).ToString(),
+                                                             suspensionCalculationOption).InnerText,
                     typeof(fmSuspensionCalculator.fmSuspensionCalculationOptions));
-            int parametersCount = Convert.ToInt32(fmSerializeTools.DeserializeProperty(input, fmFilterSimulationDataSerializeTags.parametersSize));
-            for (int i = 0; i < parametersCount; ++i)
+            XmlNodeList parameterList = xmlNode.SelectNodes("Parameter");
+            foreach (XmlNode parameterNode in parameterList)
             {
-                fmCalculationBaseParameter p = DeserializeCalculationBaseParameter(input);
+                fmCalculationBaseParameter p = DeserializeCalculationBaseParameter(parameterNode);
                 simData.parameters[p.globalParameter] = p;
             }
-            input.ReadLine();
             return simData;
         }
     }
@@ -925,12 +920,11 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
-        internal static fmFilterSimulation Deserialize(System.IO.TextReader input, fmFilterSimSerie parentSerie)
+        internal static fmFilterSimulation Deserialize(XmlNode xmlNode, fmFilterSimSerie parentSerie)
         {
-            input.ReadLine();
             fmFilterSimulation sim = new fmFilterSimulation(parentSerie, "_noname");
-            sim.m_checked = Convert.ToBoolean(fmSerializeTools.DeserializeProperty(input, fmFilterSimulationSerializeTags.m_checked));
-            fmFilterSimulationData simData = fmFilterSimulationData.Deserialize(input);
+            sim.m_checked = Convert.ToBoolean(xmlNode.SelectSingleNode(fmFilterSimulationSerializeTags.m_checked).InnerText);
+            fmFilterSimulationData simData = fmFilterSimulationData.Deserialize(xmlNode.SelectSingleNode("FilterSimulationData"));
             sim.Name = simData.name;
             sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
             sim.DeliquoringUsedCalculationOption = simData.deliquoringUsedCalculationOption;
@@ -945,7 +939,6 @@ namespace FilterSimulation.fmFilterObjects
             {
                 sim.Parameters[p.globalParameter] = p;
             }
-            input.ReadLine();
             return sim;
         }
     }
