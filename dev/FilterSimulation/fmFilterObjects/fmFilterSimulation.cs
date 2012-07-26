@@ -4,6 +4,7 @@ using fmCalcBlocksLibrary.Blocks;
 using fmCalculationLibrary;
 using System.Collections.Generic;
 using fmCalculatorsLibrary;
+using System.Xml;
 
 namespace FilterSimulation.fmFilterObjects
 {
@@ -428,18 +429,18 @@ namespace FilterSimulation.fmFilterObjects
             // ReSharper restore InconsistentNaming
         }
 
-        internal void SerializeCalculationBaseParameter(System.IO.TextWriter output, fmCalculationBaseParameter p)
+        internal void SerializeCalculationBaseParameter(XmlWriter writer, fmCalculationBaseParameter p)
         {
-            output.WriteLine("                                " + fmParameterSerializeTags.Begin);
-            fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.name, p.globalParameter.name, 9);
-            fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.typeName, p.GetType().Name, 9);
+            writer.WriteStartElement("Parameter");
+            writer.WriteElementString(fmParameterSerializeTags.name, p.globalParameter.name);
+            //writer.WriteElementString(fmParameterSerializeTags.typeName, p.GetType().Name, 9);
             if (p is fmCalculationVariableParameter)
             {
-                fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.isInputed, (p as fmCalculationVariableParameter).isInputed, 9);
+                writer.WriteElementString(fmParameterSerializeTags.isInputed, (p as fmCalculationVariableParameter).isInputed.ToString());
             }
-            fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.defined, p.value.defined, 9);
-            fmSerializeTools.SerializeProperty(output, fmParameterSerializeTags.value, p.value.value, 9);
-            output.WriteLine("                                " + fmParameterSerializeTags.End);
+            writer.WriteElementString(fmParameterSerializeTags.defined, p.value.defined.ToString());
+            writer.WriteElementString(fmParameterSerializeTags.value, p.value.value.ToString());
+            writer.WriteEndElement();
         }
 
         private static fmCalculationBaseParameter DeserializeCalculationBaseParameter(System.IO.TextReader input)
@@ -465,25 +466,24 @@ namespace FilterSimulation.fmFilterObjects
             return parameter;
         }
 
-        internal void Serialize(System.IO.TextWriter output)
+        internal void Serialize(XmlWriter writer)
         {
-            output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.Begin);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.name, name, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.deliquoringUsedCalculationOption, deliquoringUsedCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.gasFlowrateUsedCalculationOption, gasFlowrateUsedCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.evaporationUsedCalculationOption, evaporationUsedCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.hcdCalculationOption, hcdEpsdCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.dpdInputCalculationOption, dpdInputCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.rhoDetaDCalculationOption, rhoDCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.PcDCalculationOption, PcDCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.suspensionCalculationOption, suspensionCalculationOption, 8);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationDataSerializeTags.parametersSize, parameters.Count, 8);
+            writer.WriteStartElement("FilterSimulationData");
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.name, name);
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.deliquoringUsedCalculationOption, deliquoringUsedCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.gasFlowrateUsedCalculationOption, gasFlowrateUsedCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.evaporationUsedCalculationOption, evaporationUsedCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.hcdCalculationOption, hcdEpsdCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.dpdInputCalculationOption, dpdInputCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.rhoDetaDCalculationOption, rhoDCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.PcDCalculationOption, PcDCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.suspensionCalculationOption, suspensionCalculationOption.ToString());
             foreach (var p in parameters.Values)
             {
-                SerializeCalculationBaseParameter(output, p);
+                SerializeCalculationBaseParameter(writer, p);
             }
-            output.WriteLine("                            " + fmFilterSimulationDataSerializeTags.End);
+            writer.WriteEndElement();
         }
 
         static object StringToEnum(string s, Type t)
@@ -917,12 +917,12 @@ namespace FilterSimulation.fmFilterObjects
             // ReSharper restore InconsistentNaming
         }
 
-        internal void Serialize(System.IO.TextWriter output)
+        internal void Serialize(XmlWriter writer)
         {
-            output.WriteLine("                        " + fmFilterSimulationSerializeTags.Begin);
-            fmSerializeTools.SerializeProperty(output, fmFilterSimulationSerializeTags.m_checked, m_checked, 7);
-            m_data.Serialize(output);
-            output.WriteLine("                        " + fmFilterSimulationSerializeTags.End);
+            writer.WriteStartElement("Simulation");
+            writer.WriteElementString(fmFilterSimulationSerializeTags.m_checked, m_checked.ToString());
+            m_data.Serialize(writer);
+            writer.WriteEndElement();
         }
 
         internal static fmFilterSimulation Deserialize(System.IO.TextReader input, fmFilterSimSerie parentSerie)

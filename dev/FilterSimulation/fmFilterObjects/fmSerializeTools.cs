@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace FilterSimulation.fmFilterObjects
 {
     public class fmSerializeTools
     {
-        public static void SerializeProperty(System.IO.TextWriter output, string tag, object value, int indent)
-        {
-            for (int i = 0; i < indent; ++i)
-            {
-                output.Write("    ");
-            }
-            output.WriteLine("{0} = {1}", tag, value);
-        }
-
         internal static object DeserializeProperty(System.IO.TextReader input, string tag)
         {
             var a = input.ReadLine().Split('=');

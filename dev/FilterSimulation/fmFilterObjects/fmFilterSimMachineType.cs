@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace FilterSimulation.fmFilterObjects
 {
@@ -49,12 +50,12 @@ namespace FilterSimulation.fmFilterObjects
             // ReSharper restore InconsistentNaming
         }
 
-        internal void Serialize(System.IO.TextWriter output)
+        internal void Serialize(XmlWriter writer)
         {
-            output.WriteLine("                        " + fmMachineSerializeTags.Begin);
-            fmSerializeTools.SerializeProperty(output, fmMachineSerializeTags.symbol, symbol, 7);
-            fmSerializeTools.SerializeProperty(output, fmMachineSerializeTags.name, name, 7);
-            output.WriteLine("                        " + fmMachineSerializeTags.End);
+            writer.WriteStartElement("Machine");
+            writer.WriteElementString(fmMachineSerializeTags.symbol, symbol);
+            writer.WriteElementString(fmMachineSerializeTags.name, name);
+            writer.WriteEndElement();
         }
 
         internal static fmFilterSimMachineType Deserialize(System.IO.TextReader input)

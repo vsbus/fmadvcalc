@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace FilterSimulation.fmFilterObjects
 {
@@ -39,19 +40,18 @@ namespace FilterSimulation.fmFilterObjects
             // ReSharper restore InconsistentNaming
         }
 
-        internal void Serialize(System.IO.TextWriter output)
+        internal void Serialize(XmlWriter writer)
         {
-            output.WriteLine("                    " + fmSimSerieDataSerializeTags.Begin);
-            fmSerializeTools.SerializeProperty(output, fmSimSerieDataSerializeTags.name, name, 6);
-            fmSerializeTools.SerializeProperty(output, fmSimSerieDataSerializeTags.machineName, machineName, 6);
-            machine.Serialize(output);
-            fmSerializeTools.SerializeProperty(output, fmSimSerieDataSerializeTags.filterMedium, filterMedium, 6);
-            fmSerializeTools.SerializeProperty(output, fmSimSerieDataSerializeTags.simListSize, simList.Count, 6);
+            writer.WriteStartElement("Serie");
+            writer.WriteElementString(fmSimSerieDataSerializeTags.name, name);
+            writer.WriteElementString(fmSimSerieDataSerializeTags.machineName, machineName);
+            machine.Serialize(writer);
+            writer.WriteElementString(fmSimSerieDataSerializeTags.filterMedium, filterMedium);
             foreach (var p in simList)
             {
-                p.Serialize(output);
+                p.Serialize(writer);
             }
-            output.WriteLine("                    " + fmSimSerieDataSerializeTags.End);
+            writer.WriteEndElement();
         }
 
         internal static fmFilterSimSerieData Deserialize(System.IO.TextReader input, fmFilterSimSuspension parentSuspension, fmFilterSimSerie parentSerie)
@@ -251,12 +251,12 @@ namespace FilterSimulation.fmFilterObjects
             // ReSharper restore InconsistentNaming
         }
 
-        internal void Serialize(System.IO.TextWriter output)
+        internal void Serialize(XmlWriter writer)
         {
-            output.WriteLine("                " + fmSimSerieSerializeTags.Begin);
-            fmSerializeTools.SerializeProperty(output, fmSimSerieSerializeTags.m_checked, m_checked, 5);
-            m_data.Serialize(output);
-            output.WriteLine("                " + fmSimSerieSerializeTags.End);
+            writer.WriteStartElement("SimSerie");
+            writer.WriteElementString(fmSimSerieSerializeTags.m_checked, m_checked.ToString());
+            m_data.Serialize(writer);
+            writer.WriteEndElement();
         }
 
         internal static fmFilterSimSerie Deserialize(System.IO.TextReader input, fmFilterSimSuspension parentSuspension)

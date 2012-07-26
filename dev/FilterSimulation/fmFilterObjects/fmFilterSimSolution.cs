@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using fmCalcBlocksLibrary.Blocks;
+using System.Xml;
 
 namespace FilterSimulation.fmFilterObjects
 {
@@ -245,12 +246,15 @@ namespace FilterSimulation.fmFilterObjects
             // ReSharper restore InconsistentNaming
         }
 
-        public void Serialize(TextWriter output)
+        public void Serialize(XmlWriter writer)
         {
-            SerializeVersion(output);
-            fmSerializeTools.SerializeProperty(output, fmSolutionSerializeTags.projectsCount, projects.Count, 0);
-            foreach (var prj in projects)
-                prj.Serialize(output);
+            SerializeVersion(writer);
+            writer.WriteStartElement("Projects_Data");
+            foreach (var project in projects)
+            {
+                project.Serialize(writer);
+            }
+            writer.WriteEndElement();
         }
 
         private static string GetCurrentVersion()
@@ -263,9 +267,9 @@ namespace FilterSimulation.fmFilterObjects
             return GetCurrentVersion() == fmSerializeTools.DeserializeProperty(input, fmSolutionSerializeTags.version).ToString();
         }
 
-        private void SerializeVersion(TextWriter output)
+        private void SerializeVersion(XmlWriter writer)
         {
-            fmSerializeTools.SerializeProperty(output, fmSolutionSerializeTags.version, GetCurrentVersion(), 0);
+            writer.WriteElementString(fmSolutionSerializeTags.version, GetCurrentVersion());
         }
 
         public static fmFilterSimSolution Deserialize(TextReader input)

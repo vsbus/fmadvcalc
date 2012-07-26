@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace FilterSimulation.fmFilterObjects
 {
@@ -31,16 +32,13 @@ namespace FilterSimulation.fmFilterObjects
             // ReSharper restore InconsistentNaming
         }
 
-        internal void Serialize(System.IO.TextWriter output)
+        internal void Serialize(XmlWriter writer)
         {
-            output.WriteLine("    " + fmProjectDataSerializeTags.Begin);
-            fmSerializeTools.SerializeProperty(output, fmProjectDataSerializeTags.name, name, 2);
-            fmSerializeTools.SerializeProperty(output, fmProjectDataSerializeTags.susListSize, susList.Count, 2);
+            writer.WriteElementString(fmProjectDataSerializeTags.name, name);
             foreach (var filterSimSuspension in susList)
             {
-                filterSimSuspension.Serialize(output);
+                filterSimSuspension.Serialize(writer);
             }
-            output.WriteLine("    " + fmProjectDataSerializeTags.End);
         }
 
         internal static fmFilterSimProjectData Deserialize(System.IO.TextReader input, fmFilterSimProject parentProject)
@@ -199,12 +197,12 @@ namespace FilterSimulation.fmFilterObjects
             // ReSharper restore InconsistentNaming
         }
 
-        internal void Serialize(System.IO.TextWriter output)
+        internal void Serialize(XmlWriter writer)
         {
-            output.WriteLine(fmProjectSerializeTags.Begin);
-            fmSerializeTools.SerializeProperty(output, fmProjectSerializeTags.m_checked, m_checked, 1);
-            m_data.Serialize(output);
-            output.WriteLine(fmProjectSerializeTags.End);
+            writer.WriteStartElement("Project");
+            writer.WriteElementString(fmProjectSerializeTags.m_checked, m_checked.ToString());
+            m_data.Serialize(writer);
+            writer.WriteEndElement();
         }
 
         internal static fmFilterSimProject Deserialize(System.IO.TextReader input, fmFilterSimSolution parentSolution)

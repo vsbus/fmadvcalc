@@ -7,6 +7,7 @@ using fmCalculationLibrary;
 using FilterSimulation.fmFilterObjects;
 using fmCalcBlocksLibrary.Blocks;
 using fmCalculatorsLibrary;
+using System.Xml;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
@@ -484,10 +485,10 @@ namespace FilterSimulationWithTablesAndGraphs
             BindCalculatedResultsToChartAndTable();
         }
 
-        public void Serialize(TextWriter output)
+        public void Serialize(XmlWriter writer)
         {
             m_fSolution.Keep();
-            m_fSolution.Serialize(output);
+            m_fSolution.Serialize(writer);
         }
 
         public void Deserialize(TextReader input)

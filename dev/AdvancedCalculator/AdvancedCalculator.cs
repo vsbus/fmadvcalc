@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using FilterSimulation.fmFilterObjects;
 using FilterSimulationWithTablesAndGraphs;
 using Microsoft.Win32;
+using System.Xml;
 
 namespace AdvancedCalculator
 {
@@ -111,9 +112,17 @@ namespace AdvancedCalculator
 
         private void SaveOnDisk(string fileName)
         {
-            TextWriter output = new StreamWriter(fileName);
-            filterSimulationWithTablesAndGraphs1.Serialize(output);
-            output.Close();
+            var xmlSettings = new XmlWriterSettings()
+            {
+                Indent = true
+            };
+            XmlWriter writer = XmlWriter.Create(fileName + ".xml", xmlSettings);
+            writer.WriteStartDocument();
+            writer.WriteStartElement("Filtraplus_Data_File");
+            filterSimulationWithTablesAndGraphs1.Serialize(writer);
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
         }
 
         private void lOADFROMDISKToolStripMenuItem_Click(object sender, EventArgs e)
