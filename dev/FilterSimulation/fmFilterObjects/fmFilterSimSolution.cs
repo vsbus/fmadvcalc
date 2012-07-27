@@ -240,16 +240,13 @@ namespace FilterSimulation.fmFilterObjects
 
         private static class fmSolutionSerializeTags
         {
-            // ReSharper disable InconsistentNaming
-            public const string projectsCount = "projectsCount";
-            public const string version = "Version";
-            // ReSharper restore InconsistentNaming
+            public const string ProjectsData = "Projects_Data";
+            public const string Version = "Version";
         }
 
         public void Serialize(XmlWriter writer)
         {
-            SerializeVersion(writer);
-            writer.WriteStartElement("Projects_Data");
+            writer.WriteStartElement(fmSolutionSerializeTags.ProjectsData);
             foreach (var project in projects)
             {
                 project.Serialize(writer);
@@ -257,28 +254,13 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
-        private static string GetCurrentVersion()
-        {
-            return "2012-06-11:rev453";
-        }
-
-        public static bool CheckDatFileVersion(XmlNode node)
-        {
-                return GetCurrentVersion() == node.SelectSingleNode("Version").InnerText;
-        }
-
-        private void SerializeVersion(XmlWriter writer)
-        {
-            writer.WriteElementString(fmSolutionSerializeTags.version, GetCurrentVersion());
-        }
-
         public static fmFilterSimSolution Deserialize(XmlNode node)
         {
             var solution = new fmFilterSimSolution();
-            node = node.SelectSingleNode("Projects_Data");
+            node = node.SelectSingleNode(fmSolutionSerializeTags.ProjectsData);
             if (node != null)
             {
-                XmlNodeList projectNodes = node.SelectNodes("Project");
+                XmlNodeList projectNodes = node.SelectNodes(fmFilterSimProject.fmProjectSerializeTags.Project);
                 foreach (XmlNode projectNode in projectNodes)
                 {
                     fmFilterSimProject.Deserialize(projectNode, solution);

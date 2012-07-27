@@ -70,7 +70,7 @@ namespace AdvancedCalculator
             this.lOADFROMDISKToolStripMenuItem.Name = "lOADFROMDISKToolStripMenuItem";
             this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.lOADFROMDISKToolStripMenuItem.Text = "Open...";
-            this.lOADFROMDISKToolStripMenuItem.Click += new System.EventHandler(this.LoadFromDiskToolStripMenuItem_Click);
+            this.lOADFROMDISKToolStripMenuItem.Click += new System.EventHandler(this.LoadFromDiskToolStripMenuItemClick);
             // 
             // saveAllToolStripMenuItem
             // 
@@ -91,7 +91,7 @@ namespace AdvancedCalculator
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
             // settingsToolStripMenuItem
             // 
@@ -151,7 +151,7 @@ namespace AdvancedCalculator
             this.Text = "FILTRAPLUS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AdvancedCalculator_Load);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fmAdvancedCalculator_FormClosed);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FmAdvancedCalculatorFormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

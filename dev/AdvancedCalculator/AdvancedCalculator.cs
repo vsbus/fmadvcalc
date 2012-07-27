@@ -1,7 +1,5 @@
 using System;
-using System.IO;
 using System.Windows.Forms;
-using FilterSimulation.fmFilterObjects;
 using FilterSimulationWithTablesAndGraphs;
 using Microsoft.Win32;
 using System.Xml;
@@ -10,7 +8,7 @@ namespace AdvancedCalculator
 {
     public partial class fmAdvancedCalculator : Form
     {
-        private string m_Caption = string.Format("FILTRAPLUS (v.{0})", Config.Version);
+        private readonly string m_caption = string.Format("FILTRAPLUS (v.{0})", Config.Version);
 
         public fmAdvancedCalculator()
         {
@@ -63,7 +61,7 @@ namespace AdvancedCalculator
         private void AdvancedCalculator_Load(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            Text = m_Caption;
+            Text = m_caption;
             object regValue = Registry.GetValue(
                 @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
                 "LastFile",
@@ -94,8 +92,7 @@ namespace AdvancedCalculator
 
         private void SaveOnDisk()
         {
-            var saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "Data files (*.dat)|*.dat";
+            var saveDialog = new SaveFileDialog {Filter = @"Data files (*.dat)|*.dat"};
             if (m_currentFilename != null)
             {
                 saveDialog.FileName = m_currentFilename;
@@ -105,30 +102,34 @@ namespace AdvancedCalculator
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 SaveOnDisk(saveDialog.FileName);
-                Text = m_Caption + " [" + saveDialog.FileName + "]";
+                Text = m_caption + @" [" + saveDialog.FileName + @"]";
                 m_currentFilename = saveDialog.FileName;
             }
         }
 
+        private static class fmFiltraplusSerializeTags
+        {
+            public const string FiltraplusDataFile = "Filtraplus_Data_File";
+        }
+
         private void SaveOnDisk(string fileName)
         {
-            var xmlSettings = new XmlWriterSettings()
-            {
-                Indent = true
-            };
-            XmlWriter writer = XmlWriter.Create(fileName + ".xml", xmlSettings);
+            var xmlSettings = new XmlWriterSettings
+                                  {
+                                      Indent = true
+                                  };
+            XmlWriter writer = XmlWriter.Create(fileName, xmlSettings);
             writer.WriteStartDocument();
-            writer.WriteStartElement("Filtraplus_Data_File");
+            writer.WriteStartElement(fmFiltraplusSerializeTags.FiltraplusDataFile);
             filterSimulationWithTablesAndGraphs1.Serialize(writer);
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();
         }
 
-        private void LoadFromDiskToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadFromDiskToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var openDialog = new OpenFileDialog();
-            openDialog.Filter = "Data files (*.dat)|*.dat";
+            var openDialog = new OpenFileDialog {Filter = @"Data files (*.dat)|*.dat"};
             if (m_currentFilename != null)
             {
                 openDialog.FileName = m_currentFilename;
@@ -146,47 +147,27 @@ namespace AdvancedCalculator
         {
             try
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load(fileName + ".xml");
+                var doc = new XmlDocument();
+                doc.Load(fileName);
 
                 m_currentFilename = fileName;
-                filterSimulationWithTablesAndGraphs1.Deserialize(doc.SelectSingleNode("Filtraplus_Data_File"));
-                Text = m_Caption + " [" + fileName + "]";
+                filterSimulationWithTablesAndGraphs1.Deserialize(
+                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
+                Text = m_caption + @" [" + fileName + @"]";
             }
             catch (Exception)
             {
-                MessageBox.Show("File " + m_currentFilename + " has error in format and impossible to open", "Error");
+                MessageBox.Show(@"File " + m_currentFilename + @" has error in format and impossible to open", @"Error");
                 m_currentFilename = null;
-                Text = m_Caption;
+                Text = m_caption;
             }
         }
 
-        private bool CheckDatFileVersion(string fileName)
-        {
-            throw new Exception("");
-            //bool isValid = false;
-
-            //try
-            //{
-            //    XmlReader reader = new StreamReader(fileName);
-            //    isValid = fmFilterSimSolution.CheckDatFileVersion(input);
-            //}
-            //catch (Exception)
-            //{
-            //}
-
-            //if (!isValid)
-            //{
-            //    MessageBox.Show("File " + fileName + " was created with other program version with different format and is impossible to open.", "Open File Error");
-            //}
-            //return isValid;
-        }
-
-        private void fmAdvancedCalculator_FormClosed(object sender, FormClosedEventArgs e)
+        private void FmAdvancedCalculatorFormClosed(object sender, FormClosedEventArgs e)
         {
             if (filterSimulationWithTablesAndGraphs1.IsModified())
             {
-                DialogResult dres = MessageBox.Show("Would you like to save data before exit?", "Confirmation",
+                DialogResult dres = MessageBox.Show(@"Would you like to save data before exit?", @"Confirmation",
                                                     MessageBoxButtons.YesNo);
                 if (dres == DialogResult.Yes)
                 {
@@ -210,7 +191,7 @@ namespace AdvancedCalculator
             }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItemClick(object sender, EventArgs e)
         {
             Close();
         }

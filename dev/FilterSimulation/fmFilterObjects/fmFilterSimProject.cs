@@ -43,9 +43,9 @@ namespace FilterSimulation.fmFilterObjects
 
         internal static fmFilterSimProjectData Deserialize(XmlNode projectNode, fmFilterSimProject parentProject)
         {
-            fmFilterSimProjectData projectData = new fmFilterSimProjectData();
-            projectData.name = Convert.ToString(projectNode.SelectSingleNode(fmProjectDataSerializeTags.name).InnerText);
-            XmlNodeList suspensionList = projectNode.SelectNodes("Suspension");
+            var projectData = new fmFilterSimProjectData();
+            fmSerializeTools.DeserializeStringProperty(ref projectData.name, projectNode, fmProjectDataSerializeTags.name);
+            XmlNodeList suspensionList = projectNode.SelectNodes(fmFilterSimSuspension.fmSuspensionSerializeTags.Suspension);
             foreach (XmlNode suspensionNode in suspensionList)
             {
                 fmFilterSimSuspension sus = fmFilterSimSuspension.Deserialize(suspensionNode, parentProject);
@@ -186,27 +186,25 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
-        private static class fmProjectSerializeTags
+        public static class fmProjectSerializeTags
         {
-            public const string Begin = "Project Begin";
-            public const string End = "Project End";
-            // ReSharper disable InconsistentNaming
-            public const string m_checked = "m_checked";
-            // ReSharper restore InconsistentNaming
+            public const string Project = "Project";
+            public const string Checked = "m_checked";
         }
 
         internal void Serialize(XmlWriter writer)
         {
-            writer.WriteStartElement("Project");
-            writer.WriteElementString(fmProjectSerializeTags.m_checked, m_checked.ToString());
+            writer.WriteStartElement(fmProjectSerializeTags.Project);
+            writer.WriteElementString(fmProjectSerializeTags.Checked, m_checked.ToString());
             m_data.Serialize(writer);
             writer.WriteEndElement();
         }
 
         internal static fmFilterSimProject Deserialize(XmlNode projectNode, fmFilterSimSolution parentSolution)
         {
-            bool m_checked = Convert.ToBoolean(projectNode.SelectSingleNode(fmProjectSerializeTags.m_checked).InnerText);
-            fmFilterSimProject project = new fmFilterSimProject(parentSolution, "_noname");
+            bool m_checked = false;
+            fmSerializeTools.DeserializeBoolProperty(ref m_checked, projectNode, fmProjectSerializeTags.Checked);
+            var project = new fmFilterSimProject(parentSolution, "_noname");
             fmFilterSimProjectData projectData = fmFilterSimProjectData.Deserialize(projectNode, project);
             project.Checked = m_checked;
             project.Modified = false;

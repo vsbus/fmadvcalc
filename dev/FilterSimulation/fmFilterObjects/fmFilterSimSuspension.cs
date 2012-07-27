@@ -27,24 +27,20 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
-        private static class fmSuspensionDataSerializeTags
+        public static class fmSuspensionDataSerializeTags
         {
-            public const string Begin = "SuspensionData Begin";
-            public const string End = "SuspensionData End";
-            // ReSharper disable InconsistentNaming
-            public const string name = "name";
-            public const string material = "material";
-            public const string customer = "customer";
-            public const string seriesListSize = "seriesListSize";
-            // ReSharper restore InconsistentNaming
+            public const string SuspensionData = "SuspensionData";
+            public const string Name = "name";
+            public const string Material = "material";
+            public const string Customer = "customer";
         }
 
         internal void Serialize(XmlWriter writer)
         {
-            writer.WriteStartElement("SuspensionData");
-            writer.WriteElementString(fmSuspensionDataSerializeTags.name, name);
-            writer.WriteElementString(fmSuspensionDataSerializeTags.material, material);
-            writer.WriteElementString(fmSuspensionDataSerializeTags.customer, customer);
+            writer.WriteStartElement(fmSuspensionDataSerializeTags.SuspensionData);
+            writer.WriteElementString(fmSuspensionDataSerializeTags.Name, name);
+            writer.WriteElementString(fmSuspensionDataSerializeTags.Material, material);
+            writer.WriteElementString(fmSuspensionDataSerializeTags.Customer, customer);
             foreach (var p in seriesList)
             {
                 p.Serialize(writer);
@@ -54,11 +50,11 @@ namespace FilterSimulation.fmFilterObjects
 
         internal static fmFilterSimSuspensionData Deserialize(XmlNode xmlNode, fmFilterSimSuspension parentSuspension)
         {
-            fmFilterSimSuspensionData susData = new fmFilterSimSuspensionData();
-            susData.name = xmlNode.SelectSingleNode(fmSuspensionDataSerializeTags.name).InnerText;
-            susData.material = xmlNode.SelectSingleNode(fmSuspensionDataSerializeTags.material).InnerText;
-            susData.customer = xmlNode.SelectSingleNode(fmSuspensionDataSerializeTags.customer).InnerText;
-            XmlNodeList seriesList = xmlNode.SelectNodes("SimSerie");
+            var susData = new fmFilterSimSuspensionData();
+            susData.name = xmlNode.SelectSingleNode(fmSuspensionDataSerializeTags.Name).InnerText;
+            susData.material = xmlNode.SelectSingleNode(fmSuspensionDataSerializeTags.Material).InnerText;
+            susData.customer = xmlNode.SelectSingleNode(fmSuspensionDataSerializeTags.Customer).InnerText;
+            XmlNodeList seriesList = xmlNode.SelectNodes(fmFilterSimSerie.fmSimSerieSerializeTags.SimSerie);
             foreach (XmlNode serieNode in seriesList)
             {
                 fmFilterSimSerie serie = fmFilterSimSerie.Deserialize(serieNode, parentSuspension);
@@ -221,28 +217,30 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
-        private static class fmSuspensionSerializeTags
+        public static class fmSuspensionSerializeTags
         {
-            public const string Begin = "Suspension Begin";
-            public const string End = "Suspension End";
-            // ReSharper disable InconsistentNaming
-            public const string m_checked = "m_checked";
-            // ReSharper restore InconsistentNaming
+            public const string Suspension = "Suspension";
+            public const string Checked = "m_checked";
         }
 
         internal void Serialize(XmlWriter writer)
         {
-            writer.WriteStartElement("Suspension");
-            writer.WriteElementString(fmSuspensionSerializeTags.m_checked, m_checked.ToString());
+            writer.WriteStartElement(fmSuspensionSerializeTags.Suspension);
+            writer.WriteElementString(fmSuspensionSerializeTags.Checked, m_checked.ToString());
             m_data.Serialize(writer);
             writer.WriteEndElement();
         }
 
         internal static fmFilterSimSuspension Deserialize(XmlNode suspensionNode, fmFilterSimProject parentProject)
         {
-            bool m_checked = Convert.ToBoolean(suspensionNode.SelectSingleNode(fmSuspensionSerializeTags.m_checked).InnerText);
-            fmFilterSimSuspension sus = new fmFilterSimSuspension(parentProject, "_noname", "_unknown_material", "_unknown_customer");
-            fmFilterSimSuspensionData data = fmFilterSimSuspensionData.Deserialize(suspensionNode.SelectSingleNode("SuspensionData"), sus);
+            bool m_checked = false;
+            fmSerializeTools.DeserializeBoolProperty(ref m_checked, suspensionNode, fmSuspensionSerializeTags.Checked);
+
+            var sus = new fmFilterSimSuspension(parentProject, "_noname", "_unknown_material", "_unknown_customer");
+            fmFilterSimSuspensionData data =
+                fmFilterSimSuspensionData.Deserialize(
+                    suspensionNode.SelectSingleNode(
+                        fmFilterSimSuspensionData.fmSuspensionDataSerializeTags.SuspensionData), sus);
             sus.Name = data.name;
             sus.Material = data.material;
             sus.Customer = data.customer;

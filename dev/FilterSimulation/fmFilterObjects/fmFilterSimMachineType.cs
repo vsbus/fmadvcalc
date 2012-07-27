@@ -40,28 +40,25 @@ namespace FilterSimulation.fmFilterObjects
         public static fmFilterSimMachineType candle;
         public static fmFilterSimMachineType filterPresses;
 
-        private static class fmMachineSerializeTags
+        public static class fmMachineSerializeTags
         {
-            public const string Begin = "Machine Begin";
-            public const string End = "Machine End";
-            // ReSharper disable InconsistentNaming
-            public const string symbol = "symbol";
-            public const string name = "name";
-            // ReSharper restore InconsistentNaming
+            public const string Machine = "Machine";
+            public const string Symbol = "symbol";
+            public const string Name = "name";
         }
 
         internal void Serialize(XmlWriter writer)
         {
-            writer.WriteStartElement("Machine");
-            writer.WriteElementString(fmMachineSerializeTags.symbol, symbol);
-            writer.WriteElementString(fmMachineSerializeTags.name, name);
+            writer.WriteStartElement(fmMachineSerializeTags.Machine);
+            writer.WriteElementString(fmMachineSerializeTags.Symbol, symbol);
+            writer.WriteElementString(fmMachineSerializeTags.Name, name);
             writer.WriteEndElement();
         }
 
         internal static fmFilterSimMachineType Deserialize(XmlNode xmlNode)
         {
-            string symbol = xmlNode.SelectSingleNode(fmMachineSerializeTags.symbol).InnerText;
-            string name = xmlNode.SelectSingleNode(fmMachineSerializeTags.name).InnerText;
+            string symbol = xmlNode.SelectSingleNode(fmMachineSerializeTags.Symbol).InnerText;
+            string name = xmlNode.SelectSingleNode(fmMachineSerializeTags.Name).InnerText;
             foreach (var mt in filterTypesList)
             {
                 if (mt.symbol == symbol && mt.name == name)

@@ -397,57 +397,48 @@ namespace FilterSimulation.fmFilterObjects
             UpdateIsInputedInParametersFromBlock(rmhceb, inputedParameter);
         }
 
-        private static class fmFilterSimulationDataSerializeTags
+        public static class fmFilterSimulationDataSerializeTags
         {
-            public const string Begin = "FilterSimulationData Begin";
-            public const string End = "FilterSimulationData End";
-            // ReSharper disable InconsistentNaming
-            public const string name = "name";
-            public const string parametersSize = "parametersSize";
-            public const string filterMachiningCalculationOption = "filterMachiningCalculationOption";
-            public const string deliquoringUsedCalculationOption = "deliquoringUsedCalculationOption";
-            public const string gasFlowrateUsedCalculationOption = "gasFlowrateUsedCalculationOption";
-            public const string evaporationUsedCalculationOption = "evaporationUsedCalculationOption";
-            public const string hcdCalculationOption = "hcdCalculationOption";
-            public const string dpdInputCalculationOption = "dpdInputCalculationOption";
-            public const string rhoDetaDCalculationOption = "rhoDetaDCalculationOption";
+            public const string FilterSimulationData = "FilterSimulationData";
+            public const string Name = "name";
+            public const string FilterMachiningCalculationOption = "filterMachiningCalculationOption";
+            public const string DeliquoringUsedCalculationOption = "deliquoringUsedCalculationOption";
+            public const string GasFlowrateUsedCalculationOption = "gasFlowrateUsedCalculationOption";
+            public const string EvaporationUsedCalculationOption = "evaporationUsedCalculationOption";
+            public const string HcdCalculationOption = "hcdCalculationOption";
+            public const string DpdInputCalculationOption = "dpdInputCalculationOption";
+            public const string RhoDetaDCalculationOption = "rhoDetaDCalculationOption";
             public const string PcDCalculationOption = "PcDCalculationOption";
-            public const string suspensionCalculationOption = "suspensionCalculationOption";
-            // ReSharper restore InconsistentNaming
+            public const string SuspensionCalculationOption = "suspensionCalculationOption";
         }
 
         private static class fmParameterSerializeTags
         {
-            public const string Begin = "Parameter Begin";
-            public const string End = "Parameter End";
-            // ReSharper disable InconsistentNaming
-            public const string name = "name";
-            public const string typeName = "typeName";
-            public const string isInputed = "isInputed";
-            public const string defined = "defined";
-            public const string value = "value";
-            // ReSharper restore InconsistentNaming
+            public const string Name = "name";
+            public const string IsInputed = "isInputed";
+            public const string Defined = "defined";
+            public const string Value = "value";
+            public const string Parameter = "Parameter";
         }
 
         internal void SerializeCalculationBaseParameter(XmlWriter writer, fmCalculationBaseParameter p)
         {
-            writer.WriteStartElement("Parameter");
-            writer.WriteElementString(fmParameterSerializeTags.name, p.globalParameter.name);
-            //writer.WriteElementString(fmParameterSerializeTags.typeName, p.GetType().Name, 9);
+            writer.WriteStartElement(fmParameterSerializeTags.Parameter);
+            writer.WriteElementString(fmParameterSerializeTags.Name, p.globalParameter.name);
             if (p is fmCalculationVariableParameter)
             {
-                writer.WriteElementString(fmParameterSerializeTags.isInputed, (p as fmCalculationVariableParameter).isInputed.ToString());
+                writer.WriteElementString(fmParameterSerializeTags.IsInputed, (p as fmCalculationVariableParameter).isInputed.ToString());
             }
-            writer.WriteElementString(fmParameterSerializeTags.defined, p.value.defined.ToString());
-            writer.WriteElementString(fmParameterSerializeTags.value, p.value.value.ToString());
+            writer.WriteElementString(fmParameterSerializeTags.Defined, p.value.defined.ToString());
+            writer.WriteElementString(fmParameterSerializeTags.Value, p.value.value.ToString());
             writer.WriteEndElement();
         }
 
         private static fmCalculationBaseParameter DeserializeCalculationBaseParameter(XmlNode xmlNode)
         {
             fmCalculationBaseParameter parameter;
-            string name = xmlNode.SelectSingleNode(fmParameterSerializeTags.name).InnerText;
-            XmlNode isInputedNode = xmlNode.SelectSingleNode(fmParameterSerializeTags.isInputed);
+            string name = xmlNode.SelectSingleNode(fmParameterSerializeTags.Name).InnerText;
+            XmlNode isInputedNode = xmlNode.SelectSingleNode(fmParameterSerializeTags.IsInputed);
             if (isInputedNode != null)
             {
                 var varParam = new fmCalculationVariableParameter(fmGlobalParameter.parametersByName[name]);
@@ -458,25 +449,25 @@ namespace FilterSimulation.fmFilterObjects
             {
                 parameter = new fmCalculationConstantParameter(fmGlobalParameter.parametersByName[name]);
             }
-            bool defined = Convert.ToBoolean(xmlNode.SelectSingleNode(fmParameterSerializeTags.defined).InnerText);
-            double value = fmSerializeTools.ToDouble(xmlNode.SelectSingleNode(fmParameterSerializeTags.value).InnerText);
+            bool defined = Convert.ToBoolean(xmlNode.SelectSingleNode(fmParameterSerializeTags.Defined).InnerText);
+            double value = fmSerializeTools.ToDouble(xmlNode.SelectSingleNode(fmParameterSerializeTags.Value).InnerText);
             parameter.value = new fmValue(value, defined);
             return parameter;
         }
 
         internal void Serialize(XmlWriter writer)
         {
-            writer.WriteStartElement("FilterSimulationData");
-            writer.WriteElementString(fmFilterSimulationDataSerializeTags.name, name);
-            writer.WriteElementString(fmFilterSimulationDataSerializeTags.filterMachiningCalculationOption, filterMachiningCalculationOption.ToString());
-            writer.WriteElementString(fmFilterSimulationDataSerializeTags.deliquoringUsedCalculationOption, deliquoringUsedCalculationOption.ToString());
-            writer.WriteElementString(fmFilterSimulationDataSerializeTags.gasFlowrateUsedCalculationOption, gasFlowrateUsedCalculationOption.ToString());
-            writer.WriteElementString(fmFilterSimulationDataSerializeTags.evaporationUsedCalculationOption, evaporationUsedCalculationOption.ToString());
-            writer.WriteElementString(fmFilterSimulationDataSerializeTags.hcdCalculationOption, hcdEpsdCalculationOption.ToString());
-            writer.WriteElementString(fmFilterSimulationDataSerializeTags.dpdInputCalculationOption, dpdInputCalculationOption.ToString());
-            writer.WriteElementString(fmFilterSimulationDataSerializeTags.rhoDetaDCalculationOption, rhoDCalculationOption.ToString());
+            writer.WriteStartElement(fmFilterSimulationDataSerializeTags.FilterSimulationData);
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.Name, name);
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.FilterMachiningCalculationOption, filterMachiningCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.DeliquoringUsedCalculationOption, deliquoringUsedCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.GasFlowrateUsedCalculationOption, gasFlowrateUsedCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.EvaporationUsedCalculationOption, evaporationUsedCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.HcdCalculationOption, hcdEpsdCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.DpdInputCalculationOption, dpdInputCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.RhoDetaDCalculationOption, rhoDCalculationOption.ToString());
             writer.WriteElementString(fmFilterSimulationDataSerializeTags.PcDCalculationOption, PcDCalculationOption.ToString());
-            writer.WriteElementString(fmFilterSimulationDataSerializeTags.suspensionCalculationOption, suspensionCalculationOption.ToString());
+            writer.WriteElementString(fmFilterSimulationDataSerializeTags.SuspensionCalculationOption, suspensionCalculationOption.ToString());
             foreach (var p in parameters.Values)
             {
                 SerializeCalculationBaseParameter(writer, p);
@@ -498,70 +489,76 @@ namespace FilterSimulation.fmFilterObjects
 
         internal static fmFilterSimulationData Deserialize(XmlNode xmlNode)
         {
-            fmFilterSimulationData simData = new fmFilterSimulationData();
-            simData.name = xmlNode.SelectSingleNode(fmFilterSimulationDataSerializeTags.name).InnerText;
-            simData.filterMachiningCalculationOption =
-                (fmFilterMachiningCalculator.fmFilterMachiningCalculationOption)
-                StringToEnum(
-                    xmlNode.SelectSingleNode(fmFilterSimulationDataSerializeTags.
-                                                             filterMachiningCalculationOption).InnerText,
-                    typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption));
-            simData.deliquoringUsedCalculationOption =
-                (fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption)
-                StringToEnum(
-                    xmlNode.SelectSingleNode(
-                                                         fmFilterSimulationDataSerializeTags.
-                                                             deliquoringUsedCalculationOption).InnerText,
-                    typeof(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption));
-            simData.gasFlowrateUsedCalculationOption =
-                (fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption)
-                StringToEnum(
-                    xmlNode.SelectSingleNode(
-                                                         fmFilterSimulationDataSerializeTags.
-                                                             gasFlowrateUsedCalculationOption).InnerText,
-                    typeof(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption));
-            simData.evaporationUsedCalculationOption =
-                (fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption)
-                StringToEnum(
-                    xmlNode.SelectSingleNode(
-                                                         fmFilterSimulationDataSerializeTags.
-                                                             evaporationUsedCalculationOption).InnerText,
-                    typeof(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption));
-            simData.hcdEpsdCalculationOption =
-                (fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption)
-                StringToEnum(
-                    xmlNode.SelectSingleNode(
-                                                         fmFilterSimulationDataSerializeTags.
-                                                             hcdCalculationOption).InnerText,
-                    typeof(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption));
-            simData.dpdInputCalculationOption =
-                (fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption)
-                StringToEnum(
-                    xmlNode.SelectSingleNode(
-                                                         fmFilterSimulationDataSerializeTags.
-                                                             dpdInputCalculationOption).InnerText,
-                    typeof(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption));
-            simData.rhoDCalculationOption =
-                (fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption)
-                StringToEnum(
-                    xmlNode.SelectSingleNode(
-                                                         fmFilterSimulationDataSerializeTags.
-                                                             rhoDetaDCalculationOption).InnerText,
-                    typeof(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption));
-            simData.PcDCalculationOption =
-                (fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption)
-                StringToEnum(
-                    xmlNode.SelectSingleNode(
-                                                         fmFilterSimulationDataSerializeTags.
-                                                             PcDCalculationOption).InnerText,
-                    typeof(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption));
-            simData.suspensionCalculationOption = (fmSuspensionCalculator.fmSuspensionCalculationOptions)
-                StringToEnum(
-                    xmlNode.SelectSingleNode(
-                                                         fmFilterSimulationDataSerializeTags.
-                                                             suspensionCalculationOption).InnerText,
-                    typeof(fmSuspensionCalculator.fmSuspensionCalculationOptions));
-            XmlNodeList parameterList = xmlNode.SelectNodes("Parameter");
+            var simData = new fmFilterSimulationData
+                              {
+                                  name = xmlNode.SelectSingleNode(fmFilterSimulationDataSerializeTags.Name).InnerText,
+                                  filterMachiningCalculationOption =
+                                      (fmFilterMachiningCalculator.fmFilterMachiningCalculationOption)
+                                      StringToEnum(
+                                          xmlNode.SelectSingleNode(fmFilterSimulationDataSerializeTags.
+                                                                       FilterMachiningCalculationOption).InnerText,
+                                          typeof (fmFilterMachiningCalculator.fmFilterMachiningCalculationOption)),
+                                  deliquoringUsedCalculationOption =
+                                      (fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption)
+                                      StringToEnum(
+                                          xmlNode.SelectSingleNode(
+                                              fmFilterSimulationDataSerializeTags.
+                                                  DeliquoringUsedCalculationOption).InnerText,
+                                          typeof (fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption)),
+                                  gasFlowrateUsedCalculationOption =
+                                      (fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption)
+                                      StringToEnum(
+                                          xmlNode.SelectSingleNode(
+                                              fmFilterSimulationDataSerializeTags.
+                                                  GasFlowrateUsedCalculationOption).InnerText,
+                                          typeof (fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption)),
+                                  evaporationUsedCalculationOption =
+                                      (fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption)
+                                      StringToEnum(
+                                          xmlNode.SelectSingleNode(
+                                              fmFilterSimulationDataSerializeTags.
+                                                  EvaporationUsedCalculationOption).InnerText,
+                                          typeof (fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption)),
+                                  hcdEpsdCalculationOption =
+                                      (fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption)
+                                      StringToEnum(
+                                          xmlNode.SelectSingleNode(
+                                              fmFilterSimulationDataSerializeTags.
+                                                  HcdCalculationOption).InnerText,
+                                          typeof (
+                                              fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption)),
+                                  dpdInputCalculationOption =
+                                      (fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption)
+                                      StringToEnum(
+                                          xmlNode.SelectSingleNode(
+                                              fmFilterSimulationDataSerializeTags.
+                                                  DpdInputCalculationOption).InnerText,
+                                          typeof (fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption)),
+                                  rhoDCalculationOption =
+                                      (fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption)
+                                      StringToEnum(
+                                          xmlNode.SelectSingleNode(
+                                              fmFilterSimulationDataSerializeTags.
+                                                  RhoDetaDCalculationOption).InnerText,
+                                          typeof (fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption)),
+                                  PcDCalculationOption = (fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption)
+                                                         StringToEnum(
+                                                             xmlNode.SelectSingleNode(
+                                                                 fmFilterSimulationDataSerializeTags.
+                                                                     PcDCalculationOption).InnerText,
+                                                             typeof (
+                                                                 fmSigmaPke0PkePcdRcdAlphadCalculator.
+                                                                 fmPcDCalculationOption)),
+                                  suspensionCalculationOption = (fmSuspensionCalculator.fmSuspensionCalculationOptions)
+                                                                StringToEnum(
+                                                                    xmlNode.SelectSingleNode(
+                                                                        fmFilterSimulationDataSerializeTags.
+                                                                            SuspensionCalculationOption).InnerText,
+                                                                    typeof (
+                                                                        fmSuspensionCalculator.
+                                                                        fmSuspensionCalculationOptions))
+                              };
+            XmlNodeList parameterList = xmlNode.SelectNodes(fmParameterSerializeTags.Parameter);
             foreach (XmlNode parameterNode in parameterList)
             {
                 fmCalculationBaseParameter p = DeserializeCalculationBaseParameter(parameterNode);
@@ -903,28 +900,30 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
-        private static class fmFilterSimulationSerializeTags
+        public static class fmFilterSimulationSerializeTags
         {
-            public const string Begin = "FilterSimulation Begin";
-            public const string End = "FilterSimulation End";
-            // ReSharper disable InconsistentNaming
-            public const string m_checked = "m_checked";
-            // ReSharper restore InconsistentNaming
+            public const string Simulation = "Simulation";
+            public const string Checked = "m_checked";
         }
 
         internal void Serialize(XmlWriter writer)
         {
-            writer.WriteStartElement("Simulation");
-            writer.WriteElementString(fmFilterSimulationSerializeTags.m_checked, m_checked.ToString());
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.Simulation);
+            writer.WriteElementString(fmFilterSimulationSerializeTags.Checked, m_checked.ToString());
             m_data.Serialize(writer);
             writer.WriteEndElement();
         }
 
         internal static fmFilterSimulation Deserialize(XmlNode xmlNode, fmFilterSimSerie parentSerie)
         {
-            fmFilterSimulation sim = new fmFilterSimulation(parentSerie, "_noname");
-            sim.m_checked = Convert.ToBoolean(xmlNode.SelectSingleNode(fmFilterSimulationSerializeTags.m_checked).InnerText);
-            fmFilterSimulationData simData = fmFilterSimulationData.Deserialize(xmlNode.SelectSingleNode("FilterSimulationData"));
+            var sim = new fmFilterSimulation(parentSerie, "_noname");
+            sim.m_checked = false;
+            fmSerializeTools.DeserializeBoolProperty(ref sim.m_checked, xmlNode, fmFilterSimulationSerializeTags.Checked);
+
+            fmFilterSimulationData simData =
+                fmFilterSimulationData.Deserialize(
+                    xmlNode.SelectSingleNode(
+                        fmFilterSimulationData.fmFilterSimulationDataSerializeTags.FilterSimulationData));
             sim.Name = simData.name;
             sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
             sim.DeliquoringUsedCalculationOption = simData.deliquoringUsedCalculationOption;

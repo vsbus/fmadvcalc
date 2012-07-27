@@ -493,7 +493,6 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void Deserialize(XmlNode node)
         {
-            fmFilterSimSolution.CheckDatFileVersion(node);
             m_fSolution = fmFilterSimSolution.Deserialize(node);
             if (m_fSolution.projects.Count > 0)
             {

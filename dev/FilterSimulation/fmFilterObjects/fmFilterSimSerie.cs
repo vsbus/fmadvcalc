@@ -28,25 +28,21 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
-        private static class fmSimSerieDataSerializeTags
+        public static class fmSimSerieDataSerializeTags
         {
-            public const string Begin = "SimSerieData Begin";
-            public const string End = "SimSerieData End";
-            // ReSharper disable InconsistentNaming
-            public const string name = "name";
-            public const string machineName = "machineName";
-            public const string filterMedium = "filterMedium";
-            public const string simListSize = "simListSize";
-            // ReSharper restore InconsistentNaming
+            public const string Serie = "Serie";
+            public const string Name = "name";
+            public const string MachineName = "machineName";
+            public const string FilterMedium = "filterMedium";
         }
 
         internal void Serialize(XmlWriter writer)
         {
-            writer.WriteStartElement("Serie");
-            writer.WriteElementString(fmSimSerieDataSerializeTags.name, name);
-            writer.WriteElementString(fmSimSerieDataSerializeTags.machineName, machineName);
+            writer.WriteStartElement(fmSimSerieDataSerializeTags.Serie);
+            writer.WriteElementString(fmSimSerieDataSerializeTags.Name, name);
+            writer.WriteElementString(fmSimSerieDataSerializeTags.MachineName, machineName);
             machine.Serialize(writer);
-            writer.WriteElementString(fmSimSerieDataSerializeTags.filterMedium, filterMedium);
+            writer.WriteElementString(fmSimSerieDataSerializeTags.FilterMedium, filterMedium);
             foreach (var p in simList)
             {
                 p.Serialize(writer);
@@ -56,12 +52,12 @@ namespace FilterSimulation.fmFilterObjects
 
         internal static fmFilterSimSerieData Deserialize(XmlNode xmlNode, fmFilterSimSuspension parentSuspension, fmFilterSimSerie parentSerie)
         {
-            fmFilterSimSerieData serieData = new fmFilterSimSerieData();
-            serieData.name = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.name).InnerText;
-            serieData.machineName = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.machineName).InnerText;
-            serieData.machine = fmFilterSimMachineType.Deserialize(xmlNode.SelectSingleNode("Machine"));
-            serieData.filterMedium = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.filterMedium).InnerText;
-            XmlNodeList simList = xmlNode.SelectNodes("Simulation");
+            var serieData = new fmFilterSimSerieData();
+            serieData.name = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.Name).InnerText;
+            serieData.machineName = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.MachineName).InnerText;
+            serieData.machine = fmFilterSimMachineType.Deserialize(xmlNode.SelectSingleNode(fmFilterSimMachineType.fmMachineSerializeTags.Machine));
+            serieData.filterMedium = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.FilterMedium).InnerText;
+            XmlNodeList simList = xmlNode.SelectNodes(fmFilterSimulation.fmFilterSimulationSerializeTags.Simulation);
             foreach (XmlNode simNode in simList)
             {
                 fmFilterSimulation sim = fmFilterSimulation.Deserialize(simNode, parentSerie);
@@ -240,28 +236,30 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
-        private static class fmSimSerieSerializeTags
+        public static class fmSimSerieSerializeTags
         {
-            public const string Begin = "SimSerie Begin";
-            public const string End = "SimSerie End";
-            // ReSharper disable InconsistentNaming
-            public const string m_checked = "m_checked";
-            // ReSharper restore InconsistentNaming
+            public const string SimSerie = "SimSerie";
+            public const string Checked = "m_checked";
         }
 
         internal void Serialize(XmlWriter writer)
         {
-            writer.WriteStartElement("SimSerie");
-            writer.WriteElementString(fmSimSerieSerializeTags.m_checked, m_checked.ToString());
+            writer.WriteStartElement(fmSimSerieSerializeTags.SimSerie);
+            writer.WriteElementString(fmSimSerieSerializeTags.Checked, m_checked.ToString());
             m_data.Serialize(writer);
             writer.WriteEndElement();
         }
 
         internal static fmFilterSimSerie Deserialize(XmlNode xmlNode, fmFilterSimSuspension parentSuspension)
         {
-            bool m_checked = Convert.ToBoolean(xmlNode.SelectSingleNode(fmSimSerieSerializeTags.m_checked).InnerText);
-            fmFilterSimSerie serie = new fmFilterSimSerie(parentSuspension, "_noname", null, "_no_fiter_medium", "_noname_machine");
-            fmFilterSimSerieData m_data = fmFilterSimSerieData.Deserialize(xmlNode.SelectSingleNode("Serie"), parentSuspension, serie);
+            bool m_checked = false;
+            fmSerializeTools.DeserializeBoolProperty(ref m_checked, xmlNode, fmSimSerieSerializeTags.Checked);
+
+            var serie = new fmFilterSimSerie(parentSuspension, "_noname", null, "_no_fiter_medium", "_noname_machine");
+            fmFilterSimSerieData m_data =
+                fmFilterSimSerieData.Deserialize(
+                    xmlNode.SelectSingleNode(fmFilterSimSerieData.fmSimSerieDataSerializeTags.Serie), parentSuspension,
+                    serie);
             serie.Name = m_data.name;
             serie.MachineType = m_data.machine;
             serie.MachineName = m_data.machineName;
