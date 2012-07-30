@@ -103,12 +103,19 @@ namespace FilterSimulation.fmFilterObjects
 
         internal static fmFilterSimSerieData Deserialize(XmlNode xmlNode, fmFilterSimSuspension parentSuspension, fmFilterSimSerie parentSerie)
         {
-            var serieData = new fmFilterSimSerieData();
-            serieData.name = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.Name).InnerText;
-            serieData.machineName = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.MachineName).InnerText;
-            serieData.machine = fmFilterSimMachineType.Deserialize(xmlNode.SelectSingleNode(fmFilterSimMachineType.fmMachineSerializeTags.Machine));
-            serieData.filterMedium = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.FilterMedium).InnerText;
-            serieData.parametersToDisplay = new List<fmGlobalParameter>();
+            var serieData = new fmFilterSimSerieData
+                                {
+                                    name = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.Name).InnerText,
+                                    machineName =
+                                        xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.MachineName).InnerText,
+                                    machine =
+                                        fmFilterSimMachineType.Deserialize(
+                                            xmlNode.SelectSingleNode(
+                                                fmFilterSimMachineType.fmMachineSerializeTags.Machine)),
+                                    filterMedium =
+                                        xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.FilterMedium).InnerText,
+                                    parametersToDisplay = new List<fmGlobalParameter>()
+                                };
             XmlNode parametersToDisplayNode = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.ParametersToDisplay);
             if (parametersToDisplayNode != null)
             {

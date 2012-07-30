@@ -30,20 +30,30 @@ namespace FilterSimulation
         {
             this.buttonOK = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ParamGrid = new fmDataGrid.fmDataGrid();
-            this.ParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnlimitedFlagColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.MinRangeColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.MaxRangeColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.button1 = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.MaterialParametersGrid = new FilterSimulation.TableWithParameterRanges();
+            this.CakeFormationGrid = new FilterSimulation.TableWithParameterRanges();
+            this.tableWithParameterRanges1 = new FilterSimulation.TableWithParameterRanges();
+            this.tableWithParameterRanges2 = new FilterSimulation.TableWithParameterRanges();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ParamGrid)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
             // 
-            this.buttonOK.Location = new System.Drawing.Point(329, 0);
+            this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOK.Location = new System.Drawing.Point(483, 6);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(75, 23);
             this.buttonOK.TabIndex = 1;
@@ -56,74 +66,15 @@ namespace FilterSimulation
             this.panel1.Controls.Add(this.buttonOK);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 455);
+            this.panel1.Location = new System.Drawing.Point(0, 475);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(488, 26);
+            this.panel1.Size = new System.Drawing.Size(651, 37);
             this.panel1.TabIndex = 2;
-            // 
-            // ParamGrid
-            // 
-            this.ParamGrid.AllowUserToAddRows = false;
-            this.ParamGrid.AllowUserToResizeRows = false;
-            this.ParamGrid.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.ParamGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ParamGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ParamGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ParameterNameColumn,
-            this.UnitColumn,
-            this.UnlimitedFlagColumn,
-            this.MinRangeColumn,
-            this.MaxRangeColumn});
-            this.ParamGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ParamGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.ParamGrid.HighLightCurrentRow = false;
-            this.ParamGrid.Location = new System.Drawing.Point(0, 0);
-            this.ParamGrid.Name = "ParamGrid";
-            this.ParamGrid.RowHeadersVisible = false;
-            this.ParamGrid.RowTemplate.Height = 18;
-            this.ParamGrid.Size = new System.Drawing.Size(488, 455);
-            this.ParamGrid.TabIndex = 0;
-            // 
-            // ParameterNameColumn
-            // 
-            this.ParameterNameColumn.DataPropertyName = "Name";
-            this.ParameterNameColumn.HeaderText = "Parameter";
-            this.ParameterNameColumn.Name = "ParameterNameColumn";
-            this.ParameterNameColumn.ReadOnly = true;
-            // 
-            // UnitColumn
-            // 
-            this.UnitColumn.DataPropertyName = "Unit";
-            this.UnitColumn.HeaderText = "Units";
-            this.UnitColumn.Name = "UnitColumn";
-            this.UnitColumn.ReadOnly = true;
-            // 
-            // UnlimitedFlagColumn
-            // 
-            this.UnlimitedFlagColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.UnlimitedFlagColumn.HeaderText = "Unlimited";
-            this.UnlimitedFlagColumn.Name = "UnlimitedFlagColumn";
-            this.UnlimitedFlagColumn.Visible = false;
-            // 
-            // MinRangeColumn
-            // 
-            this.MinRangeColumn.DataPropertyName = "MinValue";
-            this.MinRangeColumn.HeaderText = "minRange";
-            this.MinRangeColumn.Name = "MinRangeColumn";
-            this.MinRangeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.MinRangeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // MaxRangeColumn
-            // 
-            this.MaxRangeColumn.DataPropertyName = "MaxValue";
-            this.MaxRangeColumn.HeaderText = "maxRange";
-            this.MaxRangeColumn.Name = "MaxRangeColumn";
-            this.MaxRangeColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.MaxRangeColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(410, 0);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(564, 6);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -131,32 +82,126 @@ namespace FilterSimulation
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
+            this.splitContainer1.Size = new System.Drawing.Size(651, 475);
+            this.splitContainer1.SplitterDistance = 322;
+            this.splitContainer1.TabIndex = 6;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.MaterialParametersGrid);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.CakeFormationGrid);
+            this.splitContainer2.Size = new System.Drawing.Size(322, 475);
+            this.splitContainer2.SplitterDistance = 260;
+            this.splitContainer2.TabIndex = 3;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.tableWithParameterRanges1);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.tableWithParameterRanges2);
+            this.splitContainer3.Size = new System.Drawing.Size(325, 475);
+            this.splitContainer3.SplitterDistance = 260;
+            this.splitContainer3.TabIndex = 2;
+            // 
+            // MaterialParametersGrid
+            // 
+            this.MaterialParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MaterialParametersGrid.Location = new System.Drawing.Point(0, 0);
+            this.MaterialParametersGrid.Name = "MaterialParametersGrid";
+            this.MaterialParametersGrid.Size = new System.Drawing.Size(322, 260);
+            this.MaterialParametersGrid.TabIndex = 1;
+            // 
+            // CakeFormationGrid
+            // 
+            this.CakeFormationGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CakeFormationGrid.Location = new System.Drawing.Point(0, 0);
+            this.CakeFormationGrid.Name = "CakeFormationGrid";
+            this.CakeFormationGrid.Size = new System.Drawing.Size(322, 211);
+            this.CakeFormationGrid.TabIndex = 2;
+            // 
+            // tableWithParameterRanges1
+            // 
+            this.tableWithParameterRanges1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableWithParameterRanges1.Location = new System.Drawing.Point(0, 0);
+            this.tableWithParameterRanges1.Name = "tableWithParameterRanges1";
+            this.tableWithParameterRanges1.Size = new System.Drawing.Size(325, 260);
+            this.tableWithParameterRanges1.TabIndex = 0;
+            // 
+            // tableWithParameterRanges2
+            // 
+            this.tableWithParameterRanges2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableWithParameterRanges2.Location = new System.Drawing.Point(0, 0);
+            this.tableWithParameterRanges2.Name = "tableWithParameterRanges2";
+            this.tableWithParameterRanges2.Size = new System.Drawing.Size(325, 211);
+            this.tableWithParameterRanges2.TabIndex = 1;
+            // 
             // fmParameterIntervalOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 481);
-            this.Controls.Add(this.ParamGrid);
+            this.ClientSize = new System.Drawing.Size(651, 512);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel1);
             this.Name = "fmParameterIntervalOption";
             this.Text = "ParameterIntervalOption";
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ParamGrid)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            this.splitContainer3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private fmDataGrid.fmDataGrid ParamGrid;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ParameterNameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UnitColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn UnlimitedFlagColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn MinRangeColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn MaxRangeColumn;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private TableWithParameterRanges CakeFormationGrid;
+        private TableWithParameterRanges MaterialParametersGrid;
+        private TableWithParameterRanges tableWithParameterRanges2;
+        private TableWithParameterRanges tableWithParameterRanges1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.SplitContainer splitContainer3;
 
 
 
