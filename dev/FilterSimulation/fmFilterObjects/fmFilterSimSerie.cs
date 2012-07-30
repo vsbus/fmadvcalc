@@ -1,16 +1,56 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using fmCalculationLibrary;
 
 namespace FilterSimulation.fmFilterObjects
 {
-    struct fmFilterSimSerieData
+    class fmFilterSimSerieData
     {
         public string name;
         public fmFilterSimMachineType machine;
         public string filterMedium;
-        public List<fmFilterSimulation> simList;
         public string machineName;
+
+        public List<fmGlobalParameter> parametersToDisplay = new List<fmGlobalParameter>(new fmGlobalParameter[]
+                                                                                             {
+                                                                                                 fmGlobalParameter.A,
+                                                                                                 fmGlobalParameter.Dp,
+                                                                                                 fmGlobalParameter.sf,
+                                                                                                 fmGlobalParameter.tc,
+                                                                                                 fmGlobalParameter.hc,
+                                                                                                 fmGlobalParameter.Msus,
+                                                                                                 fmGlobalParameter.Qmsus,
+
+                                                                                                 fmGlobalParameter.Dp_d,
+                                                                                                 fmGlobalParameter.eps_d,
+                                                                                                 fmGlobalParameter.rho_d,
+                                                                                                 fmGlobalParameter.eta_d,
+                                                                                                 fmGlobalParameter.sigma,
+                                                                                                 fmGlobalParameter.pke0,
+                                                                                                 fmGlobalParameter.pke,
+                                                                                                 fmGlobalParameter.pc_d,
+                                                                                                 fmGlobalParameter.rc_d,
+                                                                                                 fmGlobalParameter.alpha_d,
+                                                                                                 fmGlobalParameter.Srem,
+                                                                                                 fmGlobalParameter.ad1,
+                                                                                                 fmGlobalParameter.ad2,
+                                                                                                 fmGlobalParameter.Tetta,
+                                                                                                 fmGlobalParameter.eta_g,
+                                                                                                 fmGlobalParameter.ag1,
+                                                                                                 fmGlobalParameter.ag2,
+                                                                                                 fmGlobalParameter.ag3,
+
+                                                                                                 fmGlobalParameter.sd,
+                                                                                                 fmGlobalParameter.td,
+                                                                                                 fmGlobalParameter.K,
+                                                                                                 fmGlobalParameter.S,
+                                                                                                 fmGlobalParameter.Rf,
+                                                                                                 fmGlobalParameter.Qgi,
+                                                                                                 fmGlobalParameter.Qg
+                                                                                             });
+        public List<fmFilterSimulation> simList;
+
 
         public void CopyFrom(fmFilterSimSerieData from, fmFilterSimSerie ownerSimSerie)
         {
@@ -18,6 +58,7 @@ namespace FilterSimulation.fmFilterObjects
             machine = from.machine;
             machineName = from.machineName;
             filterMedium = from.filterMedium;
+            parametersToDisplay = new List<fmGlobalParameter>(from.parametersToDisplay);
             simList = new List<fmFilterSimulation>();
             foreach (fmFilterSimulation sim in from.simList)
             {
@@ -28,12 +69,16 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
+        #region Serialization
+
         public static class fmSimSerieDataSerializeTags
         {
             public const string Serie = "Serie";
             public const string Name = "name";
             public const string MachineName = "machineName";
             public const string FilterMedium = "filterMedium";
+            public const string ParametersToDisplay = "ParametersToDisplay";
+            public const string GlobalParameter = "GlobalParameter";
         }
 
         internal void Serialize(XmlWriter writer)
@@ -43,6 +88,12 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteElementString(fmSimSerieDataSerializeTags.MachineName, machineName);
             machine.Serialize(writer);
             writer.WriteElementString(fmSimSerieDataSerializeTags.FilterMedium, filterMedium);
+            writer.WriteStartElement(fmSimSerieDataSerializeTags.ParametersToDisplay);
+            foreach (var p in parametersToDisplay)
+            {
+                writer.WriteElementString(fmSimSerieDataSerializeTags.GlobalParameter, p.name);
+            }
+            writer.WriteEndElement();
             foreach (var p in simList)
             {
                 p.Serialize(writer);
@@ -57,6 +108,17 @@ namespace FilterSimulation.fmFilterObjects
             serieData.machineName = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.MachineName).InnerText;
             serieData.machine = fmFilterSimMachineType.Deserialize(xmlNode.SelectSingleNode(fmFilterSimMachineType.fmMachineSerializeTags.Machine));
             serieData.filterMedium = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.FilterMedium).InnerText;
+            serieData.parametersToDisplay = new List<fmGlobalParameter>();
+            XmlNode parametersToDisplayNode = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.ParametersToDisplay);
+            if (parametersToDisplayNode != null)
+            {
+                XmlNodeList parameterNodeList =
+                    parametersToDisplayNode.SelectNodes(fmSimSerieDataSerializeTags.GlobalParameter);
+                foreach (XmlNode p in parameterNodeList)
+                {
+                    serieData.parametersToDisplay.Add(fmGlobalParameter.parametersByName[p.InnerText]);
+                }
+            }
             XmlNodeList simList = xmlNode.SelectNodes(fmFilterSimulation.fmFilterSimulationSerializeTags.Simulation);
             foreach (XmlNode simNode in simList)
             {
@@ -64,16 +126,15 @@ namespace FilterSimulation.fmFilterObjects
             }
             return serieData;
         }
+        #endregion
     }
 
     public class fmFilterSimSerie
     {
         private Guid m_guid;
         private fmFilterSimSuspension m_parentSuspension;
-        private fmFilterSimSerieData m_data;
-#pragma warning disable 649
-        private fmFilterSimSerieData m_backupData;
-#pragma warning restore 649
+        private fmFilterSimSerieData m_data = new fmFilterSimSerieData();
+        private fmFilterSimSerieData m_backupData = new fmFilterSimSerieData();
         private bool m_modified;
         private bool m_checked = true;
 
@@ -106,6 +167,15 @@ namespace FilterSimulation.fmFilterObjects
             {
                 Modified |= m_data.machine != value;
                 m_data.machine = value;
+            }
+        }
+        public List<fmGlobalParameter> ParametersToDisplay
+        {
+            get { return m_data.parametersToDisplay; }
+            set
+            {
+                Modified |= m_data.parametersToDisplay != value;
+                m_data.parametersToDisplay = value;
             }
         }
         
@@ -264,6 +334,7 @@ namespace FilterSimulation.fmFilterObjects
             serie.MachineType = m_data.machine;
             serie.MachineName = m_data.machineName;
             serie.FilterMedium = m_data.filterMedium;
+            serie.ParametersToDisplay = m_data.parametersToDisplay;
             return serie;
         }
     }

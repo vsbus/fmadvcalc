@@ -35,10 +35,10 @@ namespace AdvancedCalculator
             this.sAVEONDISKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unitsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.precisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rangesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.yaxisParametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unitsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rangesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.parametersToDisplayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterSimulationWithTablesAndGraphs1 = new FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -47,7 +47,10 @@ namespace AdvancedCalculator
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.unitsToolStripMenuItem1,
+            this.rangesToolStripMenuItem1,
+            this.parametersToDisplayToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(766, 24);
@@ -62,75 +65,72 @@ namespace AdvancedCalculator
             this.sAVEONDISKToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // lOADFROMDISKToolStripMenuItem
             // 
             this.lOADFROMDISKToolStripMenuItem.Name = "lOADFROMDISKToolStripMenuItem";
-            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.lOADFROMDISKToolStripMenuItem.Text = "Open...";
             this.lOADFROMDISKToolStripMenuItem.Click += new System.EventHandler(this.LoadFromDiskToolStripMenuItemClick);
             // 
             // saveAllToolStripMenuItem
             // 
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAllToolStripMenuItem.Text = "Save";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
             // sAVEONDISKToolStripMenuItem
             // 
             this.sAVEONDISKToolStripMenuItem.Name = "sAVEONDISKToolStripMenuItem";
-            this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.sAVEONDISKToolStripMenuItem.Text = "Save As...";
             this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.SaveOnDiskToolStripMenuItemClick);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.unitsToolStripMenuItem,
-            this.precisionToolStripMenuItem,
-            this.rangesToolStripMenuItem,
-            this.yaxisParametersToolStripMenuItem});
+            this.precisionToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // unitsToolStripMenuItem
-            // 
-            this.unitsToolStripMenuItem.Name = "unitsToolStripMenuItem";
-            this.unitsToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.unitsToolStripMenuItem.Text = "Units";
-            this.unitsToolStripMenuItem.Click += new System.EventHandler(this.unitsToolStripMenuItem_Click);
             // 
             // precisionToolStripMenuItem
             // 
             this.precisionToolStripMenuItem.Name = "precisionToolStripMenuItem";
-            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.precisionToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.precisionToolStripMenuItem.Text = "Precision";
             this.precisionToolStripMenuItem.Click += new System.EventHandler(this.precisionToolStripMenuItem_Click);
             // 
-            // rangesToolStripMenuItem
+            // unitsToolStripMenuItem1
             // 
-            this.rangesToolStripMenuItem.Name = "rangesToolStripMenuItem";
-            this.rangesToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.rangesToolStripMenuItem.Text = "Ranges";
-            this.rangesToolStripMenuItem.Click += new System.EventHandler(this.rangesToolStripMenuItem_Click);
+            this.unitsToolStripMenuItem1.Name = "unitsToolStripMenuItem1";
+            this.unitsToolStripMenuItem1.Size = new System.Drawing.Size(46, 20);
+            this.unitsToolStripMenuItem1.Text = "Units";
+            this.unitsToolStripMenuItem1.Click += new System.EventHandler(this.unitsToolStripMenuItem1_Click);
             // 
-            // yaxisParametersToolStripMenuItem
+            // rangesToolStripMenuItem1
             // 
-            this.yaxisParametersToolStripMenuItem.Name = "yaxisParametersToolStripMenuItem";
-            this.yaxisParametersToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.yaxisParametersToolStripMenuItem.Text = "Parameters to display";
-            this.yaxisParametersToolStripMenuItem.Click += new System.EventHandler(this.yaxisParametersToolStripMenuItem_Click);
+            this.rangesToolStripMenuItem1.Name = "rangesToolStripMenuItem1";
+            this.rangesToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
+            this.rangesToolStripMenuItem1.Text = "Ranges";
+            this.rangesToolStripMenuItem1.Click += new System.EventHandler(this.rangesToolStripMenuItem1_Click);
+            // 
+            // parametersToDisplayToolStripMenuItem
+            // 
+            this.parametersToDisplayToolStripMenuItem.Name = "parametersToDisplayToolStripMenuItem";
+            this.parametersToDisplayToolStripMenuItem.Size = new System.Drawing.Size(132, 20);
+            this.parametersToDisplayToolStripMenuItem.Text = "Parameters to display";
+            this.parametersToDisplayToolStripMenuItem.Click += new System.EventHandler(this.parametersToDisplayToolStripMenuItem_Click);
             // 
             // filterSimulationWithTablesAndGraphs1
             // 
@@ -165,14 +165,14 @@ namespace AdvancedCalculator
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unitsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem precisionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rangesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem yaxisParametersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sAVEONDISKToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lOADFROMDISKToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs filterSimulationWithTablesAndGraphs1;
+        private System.Windows.Forms.ToolStripMenuItem unitsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem rangesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem parametersToDisplayToolStripMenuItem;
         
 
 

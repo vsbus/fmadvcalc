@@ -303,7 +303,11 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            m_fSolution.currentObjects.Serie = new fmFilterSimSerie(currentSerie.Parent, currentSerie) { Name = currentSerie.Name + "d" };
+            m_fSolution.currentObjects.Serie = new fmFilterSimSerie(currentSerie.Parent, currentSerie)
+                                                   {
+                                                       Name = currentSerie.Name + "d",
+                                                       ParametersToDisplay = currentSerie.ParametersToDisplay
+                                                   };
             m_fSolution.currentObjects.Serie.Keep();
 
             DisplaySolution(m_fSolution);

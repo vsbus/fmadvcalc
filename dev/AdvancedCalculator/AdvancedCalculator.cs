@@ -16,15 +16,6 @@ namespace AdvancedCalculator
         }
 
         // ReSharper disable InconsistentNaming
-        private void unitsToolStripMenuItem_Click(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
-        {
-            var uoForm = new fmUnitsOptions();
-            uoForm.ShowDialog();
-            filterSimulationWithTablesAndGraphs1.UpdateAll();
-        }
-
-        // ReSharper disable InconsistentNaming
         private void precisionToolStripMenuItem_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
@@ -49,15 +40,6 @@ namespace AdvancedCalculator
         }
 
         // ReSharper disable InconsistentNaming
-        private void rangesToolStripMenuItem_Click(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
-        {
-            var proForm = new FilterSimulation.fmParameterIntervalOption();
-            proForm.ShowDialog();
-            filterSimulationWithTablesAndGraphs1.UpdateAll();
-        }
-
-        // ReSharper disable InconsistentNaming
         private void AdvancedCalculator_Load(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
@@ -69,19 +51,6 @@ namespace AdvancedCalculator
             if (regValue != null)
             {
                 LoadFromDisk(regValue.ToString());
-            }
-        }
-
-        // ReSharper disable InconsistentNaming
-        private void yaxisParametersToolStripMenuItem_Click(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
-        {
-            var yalForm = new fmYAxisListingForm();
-            yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.parametersToDisplay);
-            if (yalForm.ShowDialog() == DialogResult.OK)
-            {
-                filterSimulationWithTablesAndGraphs1.parametersToDisplay = yalForm.GetCheckedItems();
-                filterSimulationWithTablesAndGraphs1.UpdateAll();
             }
         }
 
@@ -194,6 +163,31 @@ namespace AdvancedCalculator
         private void ExitToolStripMenuItemClick(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void unitsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var uoForm = new fmUnitsOptions();
+            uoForm.ShowDialog();
+            filterSimulationWithTablesAndGraphs1.UpdateAll();
+        }
+
+        private void rangesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var proForm = new FilterSimulation.fmParameterIntervalOption();
+            proForm.ShowDialog();
+            filterSimulationWithTablesAndGraphs1.UpdateAll();
+        }
+
+        private void parametersToDisplayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var yalForm = new fmYAxisListingForm();
+            yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.GetCurrentSerieParametersToDisplay());
+            if (yalForm.ShowDialog() == DialogResult.OK)
+            {
+                filterSimulationWithTablesAndGraphs1.SetCurrentSerieParametersToDisplay(yalForm.GetCheckedItems());
+                filterSimulationWithTablesAndGraphs1.UpdateAll();
+            }
         }
     }
 }

@@ -600,5 +600,22 @@ namespace FilterSimulationWithTablesAndGraphs
                 item.Checked = false;
             }
         }
+
+        public void SetCurrentSerieParametersToDisplay(List<fmGlobalParameter> parametersToDisplayList)
+        {
+            if (m_fSolution.currentObjects.Serie != null)
+            {
+                m_fSolution.currentObjects.Serie.ParametersToDisplay = parametersToDisplayList;
+            }
+            parametersToDisplay = parametersToDisplayList;
+        }
+
+        public List<fmGlobalParameter> GetCurrentSerieParametersToDisplay()
+        {
+            if (m_fSolution.currentObjects.Serie == null)
+                return null;
+
+            return m_fSolution.currentObjects.Serie.ParametersToDisplay;
+        }
     }
 }

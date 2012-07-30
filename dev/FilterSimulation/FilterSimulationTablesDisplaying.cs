@@ -913,6 +913,11 @@ namespace FilterSimulation
             {
                 displayingSolution = true;
 
+                if (sol.currentObjects.Serie != null)
+                {
+                    parametersToDisplay = sol.currentObjects.Serie.ParametersToDisplay;
+                }
+
                 AddHideRowsForSolution(sol);
                 AssignNewCellsWithCalculationEngine(sol);
                 WriteDataForSolution(sol);
