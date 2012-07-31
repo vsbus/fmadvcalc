@@ -587,9 +587,9 @@ namespace fmCalculationLibrary
         {
             this.name = name;
             this.unitFamily = unitFamily;
-            specifiedRange = minMaxRange.isUnlimited ? new fmDefaultParameterRange() : new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
-            validRange = minMaxRange.isUnlimited ? new fmDefaultParameterRange() : new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
-            chartCurretXRange = minMaxRange.isUnlimited ? new fmRange() : new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
+            specifiedRange = new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
+            validRange = new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
+            chartCurretXRange = new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
         }
 
         public fmGlobalParameter(string name, fmUnitFamily unitFamily) : this(name, unitFamily, new fmDefaultParameterRange()) { }

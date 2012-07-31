@@ -153,6 +153,7 @@ namespace FilterSimulation
             var grids = new TableWithParameterRanges[]
                             {
                                 MaterialParametersGrid,
+                                deliquoringMaterialParameterGrid,
                                 CakeFormationGrid
                             };
 
@@ -169,7 +170,6 @@ namespace FilterSimulation
 
                     var parInBlock = smb.GetParameterByName(p.name);
                     p.specifiedRange.IsInputed = parInBlock != null && parInBlock.IsInputed;
-                    p.specifiedRange.isUnlimited = false;
                     p.specifiedRange.MinValue = fmValue.ObjectToValue(grid.RangeMinValueCell(i).Value).value *
                                                 p.unitFamily.CurrentUnit.Coef;
                     p.specifiedRange.MaxValue = fmValue.ObjectToValue(grid.RangeMaxValueCell(i).Value).value *

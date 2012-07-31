@@ -40,6 +40,7 @@
             // 
             this.fmDataGrid1.AllowUserToAddRows = false;
             this.fmDataGrid1.AllowUserToDeleteRows = false;
+            this.fmDataGrid1.AllowUserToResizeRows = false;
             this.fmDataGrid1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.fmDataGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.fmDataGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
