@@ -33,10 +33,10 @@ namespace FilterSimulation
             this.button1 = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.MaterialParametersGrid = new FilterSimulation.TableWithParameterRanges();
             this.CakeFormationGrid = new FilterSimulation.TableWithParameterRanges();
-            this.tableWithParameterRanges1 = new FilterSimulation.TableWithParameterRanges();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.deliquoringMaterialParameterGrid = new FilterSimulation.TableWithParameterRanges();
             this.tableWithParameterRanges2 = new FilterSimulation.TableWithParameterRanges();
             this.panel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -117,24 +117,6 @@ namespace FilterSimulation
             this.splitContainer2.SplitterDistance = 260;
             this.splitContainer2.TabIndex = 3;
             // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.tableWithParameterRanges1);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.tableWithParameterRanges2);
-            this.splitContainer3.Size = new System.Drawing.Size(325, 475);
-            this.splitContainer3.SplitterDistance = 260;
-            this.splitContainer3.TabIndex = 2;
-            // 
             // MaterialParametersGrid
             // 
             this.MaterialParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -151,13 +133,31 @@ namespace FilterSimulation
             this.CakeFormationGrid.Size = new System.Drawing.Size(322, 211);
             this.CakeFormationGrid.TabIndex = 2;
             // 
-            // tableWithParameterRanges1
+            // splitContainer3
             // 
-            this.tableWithParameterRanges1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableWithParameterRanges1.Location = new System.Drawing.Point(0, 0);
-            this.tableWithParameterRanges1.Name = "tableWithParameterRanges1";
-            this.tableWithParameterRanges1.Size = new System.Drawing.Size(325, 260);
-            this.tableWithParameterRanges1.TabIndex = 0;
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.deliquoringMaterialParameterGrid);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.tableWithParameterRanges2);
+            this.splitContainer3.Size = new System.Drawing.Size(325, 475);
+            this.splitContainer3.SplitterDistance = 260;
+            this.splitContainer3.TabIndex = 2;
+            // 
+            // deliquoringMaterialParameterGrid
+            // 
+            this.deliquoringMaterialParameterGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deliquoringMaterialParameterGrid.Location = new System.Drawing.Point(0, 0);
+            this.deliquoringMaterialParameterGrid.Name = "deliquoringMaterialParameterGrid";
+            this.deliquoringMaterialParameterGrid.Size = new System.Drawing.Size(325, 260);
+            this.deliquoringMaterialParameterGrid.TabIndex = 0;
             // 
             // tableWithParameterRanges2
             // 
@@ -199,7 +199,7 @@ namespace FilterSimulation
         private TableWithParameterRanges CakeFormationGrid;
         private TableWithParameterRanges MaterialParametersGrid;
         private TableWithParameterRanges tableWithParameterRanges2;
-        private TableWithParameterRanges tableWithParameterRanges1;
+        private TableWithParameterRanges deliquoringMaterialParameterGrid;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
 

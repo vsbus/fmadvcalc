@@ -19,53 +19,76 @@ namespace FilterSimulation
 
         private void BindDataGrid()
         {
+            FillTable(MaterialParametersGrid,
+                      Color.LightBlue,
+                      new List<fmGlobalParameter>
+                          {
+                              fmGlobalParameter.eta_f,
+                              fmGlobalParameter.rho_f,
+                              fmGlobalParameter.rho_s,
+                              fmGlobalParameter.rho_sus,
+                              fmGlobalParameter.Cm,
+                              fmGlobalParameter.Cv,
+                              fmGlobalParameter.C,
 
-            #region Material Parameters
+                              fmGlobalParameter.eps,
+                              fmGlobalParameter.kappa,
+                              fmGlobalParameter.ne,
+                              fmGlobalParameter.Pc0,
+                              fmGlobalParameter.rc0,
+                              fmGlobalParameter.a0,
+                              fmGlobalParameter.nc,
+                              fmGlobalParameter.hce0,
+                              fmGlobalParameter.Rm0
+                          });
 
-            var materialParametersList = new List<fmGlobalParameter>
-                            {
-                                fmGlobalParameter.eta_f,
-                                fmGlobalParameter.rho_f,
-                                fmGlobalParameter.rho_s,
-                                fmGlobalParameter.rho_sus,
-                                fmGlobalParameter.Cm,
-                                fmGlobalParameter.Cv,
-                                fmGlobalParameter.C,
-                                
-                                fmGlobalParameter.eps,
-                                fmGlobalParameter.kappa,
-                                fmGlobalParameter.ne,
-                                fmGlobalParameter.Pc0,
-                                fmGlobalParameter.rc0,
-                                fmGlobalParameter.a0,
-                                fmGlobalParameter.nc,
-                                fmGlobalParameter.hce0,
-                                fmGlobalParameter.Rm0
-                            };
-
-            foreach (fmGlobalParameter p in materialParametersList)
-            {
-                int rowIndex = MaterialParametersGrid.AddRow(p);
-
-                MaterialParametersGrid.RangeMinValueCell(rowIndex).Value = new fmValue(p.specifiedRange.MinValue / p.unitFamily.CurrentUnit.Coef).ToString();
-                MaterialParametersGrid.RangeMaxValueCell(rowIndex).Value = new fmValue(p.specifiedRange.MaxValue / p.unitFamily.CurrentUnit.Coef).ToString();
-                MaterialParametersGrid.SetRawBackColor(rowIndex, Color.LightBlue);
-            }
-
-            #endregion
+            FillTable(deliquoringMaterialParameterGrid,
+                      Color.LightPink,
+                      new List<fmGlobalParameter>
+                          {
+                              fmGlobalParameter.eta_d,
+                              fmGlobalParameter.rho_d,
+                              fmGlobalParameter.sigma,
+                              fmGlobalParameter.pke0,
+                              fmGlobalParameter.pke,
+                              fmGlobalParameter.eps_d,
+                              fmGlobalParameter.pc_d,
+                              fmGlobalParameter.rc_d,
+                              fmGlobalParameter.alpha_d,
+                              fmGlobalParameter.Srem,
+                              fmGlobalParameter.ad1,
+                              fmGlobalParameter.ad2,
+                              fmGlobalParameter.Tetta,
+                              fmGlobalParameter.eta_g,
+                              fmGlobalParameter.ag1,
+                              fmGlobalParameter.ag2,
+                              fmGlobalParameter.ag3,
+                              fmGlobalParameter.Tetta_boil,
+                              fmGlobalParameter.DH,
+                              fmGlobalParameter.f,
+                          });
 
             #region Cake Formation Parameters
 
-            var fmb = new fmFilterMachiningBlock();
-            var pList = new List<fmBlockVariableParameter>
+            var cakeFormationParametersList = new List<fmGlobalParameter>
                             {
-                                fmb.GetParameterByName(fmGlobalParameter.A.name),
-                                fmb.GetParameterByName(fmGlobalParameter.Dp.name),
-                                fmb.GetParameterByName(fmGlobalParameter.sf.name),
-                                fmb.GetParameterByName(fmGlobalParameter.tc.name),
-                                fmb.GetParameterByName(fmGlobalParameter.n.name),
-                                fmb.GetParameterByName(fmGlobalParameter.hc.name)
+                                fmGlobalParameter.A,
+                                fmGlobalParameter.Dp,
+                                fmGlobalParameter.hc,
+                                fmGlobalParameter.sf,
+                                fmGlobalParameter.sr,
+                                fmGlobalParameter.n,
+                                fmGlobalParameter.tc,
+                                fmGlobalParameter.tf,
+                                fmGlobalParameter.tr
                             };
+
+            var fmb = new fmFilterMachiningBlock();
+            var pList = new List<fmBlockVariableParameter>();
+            foreach (fmGlobalParameter parameter in cakeFormationParametersList)
+            {
+                pList.Add(fmb.GetParameterByName(parameter.name));
+            }
             var rowId = new Dictionary<fmGlobalParameter, int>();
             foreach (fmBlockVariableParameter p in pList)
             {
@@ -99,6 +122,23 @@ namespace FilterSimulation
             smb.Display();
 
             #endregion
+        }
+
+        private static void FillTable(
+            TableWithParameterRanges grid,
+            Color color,
+            IEnumerable<fmGlobalParameter> parametersList)
+        {
+            foreach (fmGlobalParameter p in parametersList)
+            {
+                int rowIndex = grid.AddRow(p);
+
+                grid.RangeMinValueCell(rowIndex).Value =
+                    new fmValue(p.specifiedRange.MinValue / p.unitFamily.CurrentUnit.Coef).ToString();
+                grid.RangeMaxValueCell(rowIndex).Value =
+                    new fmValue(p.specifiedRange.MaxValue / p.unitFamily.CurrentUnit.Coef).ToString();
+                grid.SetRawBackColor(rowIndex, color);
+            }
         }
 
 // ReSharper disable InconsistentNaming
