@@ -189,6 +189,44 @@ namespace FilterSimulation
             }
 
             #endregion
+
+            FillTable(moreParemetersGrid,
+                     Color.LightSkyBlue,
+                     new List<fmGlobalParameter>
+                          {
+                              fmGlobalParameter.Msus,
+                              fmGlobalParameter.Vsus,
+                              fmGlobalParameter.Mf,
+                              fmGlobalParameter.Vf,
+                              fmGlobalParameter.Ms,
+                              fmGlobalParameter.Vs,
+                              fmGlobalParameter.Mc,
+                              fmGlobalParameter.Vc,
+                              fmGlobalParameter.msus,
+                              fmGlobalParameter.vsus,
+                              fmGlobalParameter.mf,
+                              fmGlobalParameter.vf,
+                              fmGlobalParameter.ms,
+                              fmGlobalParameter.vs,
+                              fmGlobalParameter.mc,
+                              fmGlobalParameter.vc,
+                              fmGlobalParameter.Smech,
+                              fmGlobalParameter.S,
+                              fmGlobalParameter.Rfmech,
+                              fmGlobalParameter.Rf,
+                              fmGlobalParameter.Qgi,
+                              fmGlobalParameter.Qg,
+                              fmGlobalParameter.vg,
+                              fmGlobalParameter.Mfd,
+                              fmGlobalParameter.Vfd,
+                              fmGlobalParameter.Mlcd,
+                              fmGlobalParameter.Vlcd,
+                              fmGlobalParameter.rho_bulk,
+                              fmGlobalParameter.Qmfid,
+                              fmGlobalParameter.Qfid,
+                              fmGlobalParameter.qmfid,
+                              fmGlobalParameter.qfid
+                          });
         }
 
         private static void FillTable(
@@ -220,7 +258,8 @@ namespace FilterSimulation
                                 MaterialParametersGrid,
                                 deliquoringMaterialParameterGrid,
                                 deliquoringSettingsParametersGrid,
-                                CakeFormationGrid
+                                CakeFormationGrid,
+                                moreParemetersGrid
                             };
 
             foreach (TableWithParameterRanges grid in grids)
@@ -253,6 +292,21 @@ namespace FilterSimulation
         private void button1_Click(object sender, System.EventArgs e)
         {
             Close();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
+        {
+            ShowHideMoreParameters();
+        }
+
+        private void ShowHideMoreParameters()
+        {
+            splitContainer4.Panel2Collapsed = !checkBox1.Checked;
+        }
+
+        private void fmParameterIntervalOption_Load(object sender, System.EventArgs e)
+        {
+            ShowHideMoreParameters();
         }
     }
 }

@@ -34,10 +34,13 @@ namespace FilterSimulation
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.MaterialParametersGrid = new FilterSimulation.TableWithParameterRanges();
             this.CakeFormationGrid = new FilterSimulation.TableWithParameterRanges();
             this.deliquoringMaterialParameterGrid = new FilterSimulation.TableWithParameterRanges();
             this.deliquoringSettingsParametersGrid = new FilterSimulation.TableWithParameterRanges();
+            this.moreParemetersGrid = new FilterSimulation.TableWithParameterRanges();
             this.panel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -48,6 +51,9 @@ namespace FilterSimulation
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.splitContainer4.Panel1.SuspendLayout();
+            this.splitContainer4.Panel2.SuspendLayout();
+            this.splitContainer4.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonOK
@@ -63,6 +69,7 @@ namespace FilterSimulation
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.buttonOK);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -95,7 +102,7 @@ namespace FilterSimulation
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(651, 475);
+            this.splitContainer1.Size = new System.Drawing.Size(651, 215);
             this.splitContainer1.SplitterDistance = 322;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -113,8 +120,8 @@ namespace FilterSimulation
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.CakeFormationGrid);
-            this.splitContainer2.Size = new System.Drawing.Size(322, 475);
-            this.splitContainer2.SplitterDistance = 260;
+            this.splitContainer2.Size = new System.Drawing.Size(322, 215);
+            this.splitContainer2.SplitterDistance = 117;
             this.splitContainer2.TabIndex = 3;
             // 
             // splitContainer3
@@ -131,16 +138,45 @@ namespace FilterSimulation
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.deliquoringSettingsParametersGrid);
-            this.splitContainer3.Size = new System.Drawing.Size(325, 475);
-            this.splitContainer3.SplitterDistance = 260;
+            this.splitContainer3.Size = new System.Drawing.Size(325, 215);
+            this.splitContainer3.SplitterDistance = 117;
             this.splitContainer3.TabIndex = 2;
+            // 
+            // splitContainer4
+            // 
+            this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer4.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer4.Name = "splitContainer4";
+            this.splitContainer4.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer4.Panel1
+            // 
+            this.splitContainer4.Panel1.Controls.Add(this.splitContainer1);
+            // 
+            // splitContainer4.Panel2
+            // 
+            this.splitContainer4.Panel2.Controls.Add(this.moreParemetersGrid);
+            this.splitContainer4.Size = new System.Drawing.Size(651, 475);
+            this.splitContainer4.SplitterDistance = 215;
+            this.splitContainer4.TabIndex = 7;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(12, 6);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(136, 17);
+            this.checkBox1.TabIndex = 3;
+            this.checkBox1.Text = "Show More Parameters";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // MaterialParametersGrid
             // 
             this.MaterialParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MaterialParametersGrid.Location = new System.Drawing.Point(0, 0);
             this.MaterialParametersGrid.Name = "MaterialParametersGrid";
-            this.MaterialParametersGrid.Size = new System.Drawing.Size(322, 260);
+            this.MaterialParametersGrid.Size = new System.Drawing.Size(322, 117);
             this.MaterialParametersGrid.TabIndex = 1;
             // 
             // CakeFormationGrid
@@ -148,7 +184,7 @@ namespace FilterSimulation
             this.CakeFormationGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CakeFormationGrid.Location = new System.Drawing.Point(0, 0);
             this.CakeFormationGrid.Name = "CakeFormationGrid";
-            this.CakeFormationGrid.Size = new System.Drawing.Size(322, 211);
+            this.CakeFormationGrid.Size = new System.Drawing.Size(322, 94);
             this.CakeFormationGrid.TabIndex = 2;
             // 
             // deliquoringMaterialParameterGrid
@@ -156,7 +192,7 @@ namespace FilterSimulation
             this.deliquoringMaterialParameterGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deliquoringMaterialParameterGrid.Location = new System.Drawing.Point(0, 0);
             this.deliquoringMaterialParameterGrid.Name = "deliquoringMaterialParameterGrid";
-            this.deliquoringMaterialParameterGrid.Size = new System.Drawing.Size(325, 260);
+            this.deliquoringMaterialParameterGrid.Size = new System.Drawing.Size(325, 117);
             this.deliquoringMaterialParameterGrid.TabIndex = 0;
             // 
             // deliquoringSettingsParametersGrid
@@ -164,19 +200,29 @@ namespace FilterSimulation
             this.deliquoringSettingsParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deliquoringSettingsParametersGrid.Location = new System.Drawing.Point(0, 0);
             this.deliquoringSettingsParametersGrid.Name = "deliquoringSettingsParametersGrid";
-            this.deliquoringSettingsParametersGrid.Size = new System.Drawing.Size(325, 211);
+            this.deliquoringSettingsParametersGrid.Size = new System.Drawing.Size(325, 94);
             this.deliquoringSettingsParametersGrid.TabIndex = 1;
+            // 
+            // moreParemetersGrid
+            // 
+            this.moreParemetersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.moreParemetersGrid.Location = new System.Drawing.Point(0, 0);
+            this.moreParemetersGrid.Name = "moreParemetersGrid";
+            this.moreParemetersGrid.Size = new System.Drawing.Size(651, 256);
+            this.moreParemetersGrid.TabIndex = 0;
             // 
             // fmParameterIntervalOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(651, 512);
-            this.Controls.Add(this.splitContainer1);
+            this.Controls.Add(this.splitContainer4);
             this.Controls.Add(this.panel1);
             this.Name = "fmParameterIntervalOption";
             this.Text = "ParameterIntervalOption";
+            this.Load += new System.EventHandler(this.fmParameterIntervalOption_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
@@ -186,6 +232,9 @@ namespace FilterSimulation
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.ResumeLayout(false);
+            this.splitContainer4.Panel1.ResumeLayout(false);
+            this.splitContainer4.Panel2.ResumeLayout(false);
+            this.splitContainer4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -202,6 +251,9 @@ namespace FilterSimulation
         private TableWithParameterRanges deliquoringMaterialParameterGrid;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.SplitContainer splitContainer4;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private TableWithParameterRanges moreParemetersGrid;
 
 
 
