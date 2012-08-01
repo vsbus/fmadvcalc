@@ -343,7 +343,10 @@ namespace fmCalcBlocksLibrary.Blocks
                 {
                     p.ValidRange.MinValue = p.SpecifiedRange.MinValue;
                     p.ValidRange.MaxValue = p.SpecifiedRange.MaxValue;
-                    varList.Add(p);
+                    if (GetParameterByName(p.Name) != null)
+                    {
+                        varList.Add(p);
+                    }
                 }
             }
             var machineAdditionalParams = new List<fmGlobalParameter>

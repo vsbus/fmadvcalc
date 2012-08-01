@@ -318,8 +318,10 @@ namespace fmCalcBlocksLibrary.Blocks
         }
         override public List<fmBlockVariableParameter> GetClueParamsList()
         {
-            List<fmBlockVariableParameter> clueParams = new List<fmBlockVariableParameter>(new fmBlockVariableParameter[] {
-                    GetParameterByName(fmGlobalParameter.sd.Name)
+            var clueParams = new List<fmBlockVariableParameter>(new fmBlockVariableParameter[] {
+                    GetParameterByName(fmGlobalParameter.sd.Name),
+                    GetParameterByName(fmGlobalParameter.td.Name),
+                    GetParameterByName(fmGlobalParameter.K.Name)
                 });
             return clueParams;
         }

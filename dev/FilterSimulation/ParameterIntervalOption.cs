@@ -9,7 +9,8 @@ namespace FilterSimulation
 {
     public partial class fmParameterIntervalOption : Form
     {
-        private fmSimulationLimitsBlock smb;
+        private fmSimulationLimitsBlock cakeFormationLimitsBlock;
+        private fmDeliquoringLimitsBlock deliquoringLimitsBlock;
 
         public fmParameterIntervalOption()
         {
@@ -70,54 +71,122 @@ namespace FilterSimulation
 
             #region Cake Formation Parameters
 
-            var cakeFormationParametersList = new List<fmGlobalParameter>
-                            {
-                                fmGlobalParameter.A,
-                                fmGlobalParameter.Dp,
-                                fmGlobalParameter.hc,
-                                fmGlobalParameter.sf,
-                                fmGlobalParameter.sr,
-                                fmGlobalParameter.n,
-                                fmGlobalParameter.tc,
-                                fmGlobalParameter.tf,
-                                fmGlobalParameter.tr
-                            };
+            {
+                var cakeFormationParametersList = new List<fmGlobalParameter>
+                                                      {
+                                                          fmGlobalParameter.A,
+                                                          fmGlobalParameter.Dp,
+                                                          fmGlobalParameter.hc,
+                                                          fmGlobalParameter.sf,
+                                                          fmGlobalParameter.sr,
+                                                          fmGlobalParameter.n,
+                                                          fmGlobalParameter.tc,
+                                                          fmGlobalParameter.tf,
+                                                          fmGlobalParameter.tr
+                                                      };
 
-            var fmb = new fmFilterMachiningBlock();
-            var pList = new List<fmBlockVariableParameter>();
-            foreach (fmGlobalParameter parameter in cakeFormationParametersList)
-            {
-                pList.Add(fmb.GetParameterByName(parameter.Name));
-            }
-            var rowId = new Dictionary<fmGlobalParameter, int>();
-            foreach (fmBlockVariableParameter p in pList)
-            {
-                if (p.globalParameter.SpecifiedRange != null)
+                var fmb = new fmFilterMachiningBlock();
+                var pList = new List<fmBlockVariableParameter>();
+                foreach (fmGlobalParameter parameter in cakeFormationParametersList)
                 {
-                    int rowIndex = CakeFormationGrid.AddRow(p.globalParameter);
-                    rowId[p.globalParameter] = rowIndex;
-                    CakeFormationGrid.SetRawBackColor(rowIndex, Color.LightGreen);
+                    pList.Add(fmb.GetParameterByName(parameter.Name));
                 }
+                var rowId = new Dictionary<fmGlobalParameter, int>();
+                foreach (fmBlockVariableParameter p in pList)
+                {
+                    if (p.globalParameter.SpecifiedRange != null)
+                    {
+                        int rowIndex = CakeFormationGrid.AddRow(p.globalParameter);
+                        rowId[p.globalParameter] = rowIndex;
+                        CakeFormationGrid.SetRawBackColor(rowIndex, Color.LightGreen);
+                    }
+                }
+
+                cakeFormationLimitsBlock = new fmSimulationLimitsBlock(
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.A]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.A]),
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.Dp]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.Dp]),
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.sf]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.sf]),
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.sr]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.sr]),
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tc]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tc]),
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.n]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.n]),
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.hc]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.hc]),
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tf]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tf]),
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tr]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tr]));
+
+                foreach (var p in cakeFormationLimitsBlock.Parameters)
+                {
+                    p.pMin.value = new fmValue(p.globalParameter.SpecifiedRange.MinValue);
+                    p.pMax.value = new fmValue(p.globalParameter.SpecifiedRange.MaxValue);
+                    p.IsInputed = p.globalParameter.SpecifiedRange.IsInputed;
+                }
+                cakeFormationLimitsBlock.Display();
             }
 
-            smb = new fmSimulationLimitsBlock(
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.A]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.A]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.Dp]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.Dp]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.sf]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.sf]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.sr]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.sr]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tc]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tc]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.n]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.n]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.hc]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.hc]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tf]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tf]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tr]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tr]));
+            #endregion
 
-            foreach (var p in smb.Parameters)
+            #region Deliquoring Settings Parameters
+
             {
-                p.pMin.value = new fmValue(p.globalParameter.SpecifiedRange.MinValue);
-                p.pMax.value = new fmValue(p.globalParameter.SpecifiedRange.MaxValue);
-                p.IsInputed = p.globalParameter.SpecifiedRange.IsInputed;
+                var deliquoringSettingsParameters = new List<fmGlobalParameter>
+                                                        {
+                                                            fmGlobalParameter.Dp_d,
+                                                            fmGlobalParameter.hcd,
+                                                            fmGlobalParameter.sd,
+                                                            fmGlobalParameter.td,
+                                                            fmGlobalParameter.K
+                                                        };
+
+                var deliqBlock = new fmDeliquoringSimualtionBlock();
+                var pList = new List<fmBlockVariableParameter>();
+                foreach (fmGlobalParameter parameter in deliquoringSettingsParameters)
+                {
+                    fmBlockVariableParameter varPar = deliqBlock.GetParameterByName(parameter.Name);
+                    if (varPar == null)
+                    {
+                        varPar = new fmBlockVariableParameter(parameter, true);
+                    }
+                    pList.Add(varPar);
+                }
+                var rowId = new Dictionary<fmGlobalParameter, int>();
+                foreach (fmBlockVariableParameter p in pList)
+                {
+                    if (p.globalParameter.SpecifiedRange != null)
+                    {
+                        int rowIndex = deliquoringSettingsParametersGrid.AddRow(p.globalParameter);
+                        rowId[p.globalParameter] = rowIndex;
+                        deliquoringSettingsParametersGrid.SetRawBackColor(rowIndex, Color.LightGoldenrodYellow);
+                    }
+                }
+
+                deliquoringLimitsBlock = new fmDeliquoringLimitsBlock(
+                    deliquoringSettingsParametersGrid.RangeMinValueCell(rowId[fmGlobalParameter.Dp_d]),
+                    deliquoringSettingsParametersGrid.RangeMaxValueCell(rowId[fmGlobalParameter.Dp_d]),
+                    deliquoringSettingsParametersGrid.RangeMinValueCell(rowId[fmGlobalParameter.hcd]),
+                    deliquoringSettingsParametersGrid.RangeMaxValueCell(rowId[fmGlobalParameter.hcd]),
+                    deliquoringSettingsParametersGrid.RangeMinValueCell(rowId[fmGlobalParameter.sd]),
+                    deliquoringSettingsParametersGrid.RangeMaxValueCell(rowId[fmGlobalParameter.sd]),
+                    deliquoringSettingsParametersGrid.RangeMinValueCell(rowId[fmGlobalParameter.td]),
+                    deliquoringSettingsParametersGrid.RangeMaxValueCell(rowId[fmGlobalParameter.td]),
+                    deliquoringSettingsParametersGrid.RangeMinValueCell(rowId[fmGlobalParameter.K]),
+                    deliquoringSettingsParametersGrid.RangeMaxValueCell(rowId[fmGlobalParameter.K]));
+
+                foreach (var p in deliquoringLimitsBlock.Parameters)
+                {
+                    p.pMin.value = new fmValue(p.globalParameter.SpecifiedRange.MinValue);
+                    p.pMax.value = new fmValue(p.globalParameter.SpecifiedRange.MaxValue);
+                    p.IsInputed = p.globalParameter.SpecifiedRange.IsInputed;
+                }
+                deliquoringLimitsBlock.Display();
             }
-            smb.Display();
 
             #endregion
         }
@@ -150,6 +219,7 @@ namespace FilterSimulation
                             {
                                 MaterialParametersGrid,
                                 deliquoringMaterialParameterGrid,
+                                deliquoringSettingsParametersGrid,
                                 CakeFormationGrid
                             };
 
@@ -157,14 +227,20 @@ namespace FilterSimulation
             {
                 for (int i = 0; i < grid.RowCount; ++i)
                 {
-                    fmBlockVariableParameter v =
-                        new fmFilterMachiningBlock().GetParameterByName(grid.ParameterCell(i).Value.ToString());
-                    fmGlobalParameter p = (v == null)
-                                              ? fmGlobalParameter.ParametersByName[grid.ParameterCell(i).Value.ToString()]
-                                              : v.globalParameter;
-
-                    var parInBlock = smb.GetParameterByName(p.Name);
-                    p.SpecifiedRange.IsInputed = parInBlock != null && parInBlock.IsInputed;
+                    fmGlobalParameter p = fmGlobalParameter.ParametersByName[grid.ParameterCell(i).Value.ToString()];
+                    fmBlockLimitsParameter blockLimitParameter = null;
+                    
+                    if (blockLimitParameter == null)
+                    {
+                        blockLimitParameter = cakeFormationLimitsBlock.GetParameterByName(p.Name);
+                    }
+                    if (blockLimitParameter == null)
+                    {
+                        blockLimitParameter = deliquoringLimitsBlock.GetParameterByName(p.Name);
+                    }
+                    p.SpecifiedRange.IsInputed = blockLimitParameter != null
+                                                     ? blockLimitParameter.IsInputed
+                                                     : false;
                     p.SpecifiedRange.MinValue = fmValue.ObjectToValue(grid.RangeMinValueCell(i).Value).value *
                                                 p.UnitFamily.CurrentUnit.Coef;
                     p.SpecifiedRange.MaxValue = fmValue.ObjectToValue(grid.RangeMaxValueCell(i).Value).value *
