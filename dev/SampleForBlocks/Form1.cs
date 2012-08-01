@@ -25,7 +25,7 @@ namespace SampleForBlocks
             foreach (fmCalcBlocksLibrary.BlockParameter.fmBlockVariableParameter p in m_fmBlock.Parameters)
             {
                 int i = fmDataGrid1.Rows.Add();
-                fmDataGrid1["parameterNameColumn", i].Value = p.globalParameter.name;
+                fmDataGrid1["parameterNameColumn", i].Value = p.globalParameter.Name;
                 fmDataGrid1["unitsColumn", i].Value = p.globalParameter.UnitName;
                 m_fmBlock.AssignCell(p, fmDataGrid1["valueColumn", i]);
             }
@@ -55,18 +55,18 @@ namespace SampleForBlocks
                 {
                     fmDataGrid2.RowCount = i + 1;
                 }
-                fmDataGrid2.Rows[i].Cells[0].Value = m_fmBlock.Parameters[i].globalParameter.name;
+                fmDataGrid2.Rows[i].Cells[0].Value = m_fmBlock.Parameters[i].globalParameter.Name;
                 fmDataGrid2.Rows[i].Cells[1].Value = m_fmBlock.Parameters[i].globalParameter.UnitName;
-                double coef = m_fmBlock.Parameters[i].globalParameter.unitFamily.CurrentUnit.Coef;
-                fmDataGrid2.Rows[i].Cells[2].Value = m_fmBlock.Parameters[i].globalParameter.validRange.MinValue / coef;
+                double coef = m_fmBlock.Parameters[i].globalParameter.UnitFamily.CurrentUnit.Coef;
+                fmDataGrid2.Rows[i].Cells[2].Value = m_fmBlock.Parameters[i].globalParameter.ValidRange.MinValue / coef;
                 fmDataGrid2.Rows[i].Cells[3].Value = m_fmBlock.Parameters[i].ValueInUnits;
-                fmDataGrid2.Rows[i].Cells[4].Value = m_fmBlock.Parameters[i].globalParameter.validRange.MaxValue / coef;
+                fmDataGrid2.Rows[i].Cells[4].Value = m_fmBlock.Parameters[i].globalParameter.ValidRange.MaxValue / coef;
                 Color colorMin = m_fmBlock.Parameters[i].value.defined == false
-                    || m_fmBlock.Parameters[i].value.value < m_fmBlock.Parameters[i].globalParameter.validRange.MinValue
+                    || m_fmBlock.Parameters[i].value.value < m_fmBlock.Parameters[i].globalParameter.ValidRange.MinValue
                         ? Color.Pink
                         : Color.White;
                 Color colorMax = m_fmBlock.Parameters[i].value.defined == false
-                    || m_fmBlock.Parameters[i].value.value > m_fmBlock.Parameters[i].globalParameter.validRange.MaxValue
+                    || m_fmBlock.Parameters[i].value.value > m_fmBlock.Parameters[i].globalParameter.ValidRange.MaxValue
                         ? Color.Pink
                         : Color.White;
                 Color colorValue = colorMin != Color.White || colorMax != Color.White ? Color.Pink : Color.White;

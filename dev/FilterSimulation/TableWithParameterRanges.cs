@@ -19,7 +19,7 @@ namespace FilterSimulation
 
         internal int AddRow(fmCalculationLibrary.fmGlobalParameter p)
         {
-            return fmDataGrid1.Rows.Add(new[] { p.name, p.unitFamily.CurrentUnit.Name });
+            return fmDataGrid1.Rows.Add(new[] { p.Name, p.UnitFamily.CurrentUnit.Name });
         }
 
         internal void SetRawBackColor(int rowIndex, Color color)

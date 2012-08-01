@@ -12,94 +12,52 @@ namespace fmCalcBlocksLibrary.Blocks
     {
         private readonly fmBlockLimitsParameter A;
         private readonly fmBlockLimitsParameter Dp;
-        private readonly fmBlockLimitsParameter sf;
-        private readonly fmBlockLimitsParameter tc;
-        private readonly fmBlockLimitsParameter n;
+        
         private readonly fmBlockLimitsParameter hc;
+        private readonly fmBlockLimitsParameter n;
+        private readonly fmBlockLimitsParameter tc;
 
+        private readonly fmBlockLimitsParameter tf;
+        private readonly fmBlockLimitsParameter tr;
+        private readonly fmBlockLimitsParameter sf;
+        private readonly fmBlockLimitsParameter sr;
+        
         private readonly fmBlockParameterGroup tc_n_hc_group = new fmBlockParameterGroup(Color.FromArgb(238, 218, 238), true);
-
-        public fmValue A_min_value
-        {
-            get { return A.pMin.value; }
-            set { A.pMin.value = value; }
-        }
-        public fmValue Dp_min_value
-        {
-            get { return Dp.pMin.value; }
-            set { Dp.pMin.value = value; }
-        }
-        public fmValue sf_min_value
-        {
-            get { return sf.pMin.value; }
-            set { sf.pMin.value = value; }
-        }
-        public fmValue tc_min_value
-        {
-            get { return tc.pMin.value; }
-            set { tc.pMin.value = value; }
-        }
-        public fmValue n_min_value
-        {
-            get { return n.pMin.value; }
-            set { n.pMin.value = value; }
-        }
-        public fmValue hc_min_value
-        {
-            get { return hc.pMin.value; }
-            set { hc.pMin.value = value; }
-        }
-        public fmValue A_max_value
-        {
-            get { return A.pMax.value; }
-            set { A.pMax.value = value; }
-        }
-        public fmValue Dp_max_value
-        {
-            get { return Dp.pMax.value; }
-            set { Dp.pMax.value = value; }
-        }
-        public fmValue sf_max_value
-        {
-            get { return sf.pMax.value; }
-            set { sf.pMax.value = value; }
-        }
-        public fmValue tc_max_value
-        {
-            get { return tc.pMax.value; }
-            set { tc.pMax.value = value; }
-        }
-        public fmValue n_max_value
-        {
-            get { return n.pMax.value; }
-            set { n.pMax.value = value; }
-        }
-        public fmValue hc_max_value
-        {
-            get { return hc.pMax.value; }
-            set { hc.pMax.value = value; }
-        }
+        private readonly fmBlockParameterGroup tr_sf_sr_group = new fmBlockParameterGroup(Color.FromArgb(238, 238, 218), true);
 
         // ReSharper disable InconsistentNaming
         public fmSimulationLimitsBlock(
             DataGridViewCell A_min_Cell, DataGridViewCell A_max_Cell,
             DataGridViewCell Dp_min_Cell, DataGridViewCell Dp_max_Cell,
             DataGridViewCell sf_min_Cell, DataGridViewCell sf_max_Cell,
+            DataGridViewCell sr_min_Cell, DataGridViewCell sr_max_Cell,
             DataGridViewCell tc_min_Cell, DataGridViewCell tc_max_Cell,
             DataGridViewCell n_min_Cell, DataGridViewCell n_max_Cell,
-            DataGridViewCell hc_min_Cell, DataGridViewCell hc_max_Cell)
+            DataGridViewCell hc_min_Cell, DataGridViewCell hc_max_Cell,
+            DataGridViewCell tf_min_Cell, DataGridViewCell tf_max_Cell,
+            DataGridViewCell tr_min_Cell, DataGridViewCell tr_max_Cell)
         // ReSharper restore InconsistentNaming
         {
             AddParameter(ref A, fmGlobalParameter.A, A_min_Cell, A_max_Cell, true);
             AddParameter(ref Dp, fmGlobalParameter.Dp, Dp_min_Cell, Dp_max_Cell, true);
-            AddParameter(ref sf, fmGlobalParameter.sf, sf_min_Cell, sf_max_Cell, true);
+            
             AddParameter(ref tc, fmGlobalParameter.tc, tc_min_Cell, tc_max_Cell, true);
-            AddParameter(ref n, fmGlobalParameter.n, n_min_Cell, n_max_Cell, true);
+            AddParameter(ref n, fmGlobalParameter.n, n_min_Cell, n_max_Cell, false);
             AddParameter(ref hc, fmGlobalParameter.hc, hc_min_Cell, hc_max_Cell, false);
+            AddParameter(ref tf, fmGlobalParameter.tf, tf_min_Cell, tf_max_Cell, false);
 
+            AddParameter(ref sf, fmGlobalParameter.sf, sf_min_Cell, sf_max_Cell, true);
+            AddParameter(ref sr, fmGlobalParameter.sr, sr_min_Cell, sr_max_Cell, false);
+            AddParameter(ref tr, fmGlobalParameter.tr, tr_min_Cell, tr_max_Cell, false);
+            
             tc.group = tc_n_hc_group;
             n.group = tc_n_hc_group;
             hc.group = tc_n_hc_group;
+            tf.group = tc_n_hc_group;
+
+            tr.group = tr_sf_sr_group;
+            sf.group = tr_sf_sr_group;
+            sr.group = tr_sf_sr_group;
 
             UpdateCellsBackColor();
 

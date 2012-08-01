@@ -182,7 +182,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void AddParameter(fmControls.fmCheckedListBoxWithCheckboxes box, fmGlobalParameter parameter)
         {
             m_parameterBox[parameter] = box;
-            box.Items.Add(parameter.name);
+            box.Items.Add(parameter.Name);
         }
 
         public void CheckItems(List<fmCalculationLibrary.fmGlobalParameter> list)
@@ -197,7 +197,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             for (int i = 0; i < box.Items.Count; ++i)
             {
-                if (box.Items[i].ToString() == p.name)
+                if (box.Items[i].ToString() == p.Name)
                 {
                     box.SetItemChecked(i, true);
                 }
@@ -208,7 +208,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             for (int i = 0; i < box.Items.Count; ++i)
             {
-                if (box.Items[i].ToString() == p.name)
+                if (box.Items[i].ToString() == p.Name)
                 {
                     return box.GetItemChecked(i);
                 }
@@ -220,7 +220,7 @@ namespace FilterSimulationWithTablesAndGraphs
         public List<fmCalculationLibrary.fmGlobalParameter> GetCheckedItems()
         {
             var result = new List<fmCalculationLibrary.fmGlobalParameter>();
-            foreach (fmGlobalParameter p in fmGlobalParameter.parameters)
+            foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
             {
                 if (m_parameterBox.ContainsKey(p) && GetItemCheckedInBox(m_parameterBox[p], p))
                 {

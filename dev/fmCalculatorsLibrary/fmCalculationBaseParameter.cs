@@ -11,7 +11,7 @@ namespace fmCalculatorsLibrary
         {
             get
             {
-                return value/globalParameter.unitFamily.CurrentUnit.Coef;
+                return value/globalParameter.UnitFamily.CurrentUnit.Coef;
             }
         }
 

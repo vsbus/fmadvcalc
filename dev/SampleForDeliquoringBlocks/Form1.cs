@@ -20,14 +20,14 @@ namespace SampleForDeliquoringBlocks
 
         private void WriteParameter(int rowIndex, fmGlobalParameter p)
         {
-            fmDataGrid1.Rows[rowIndex].Cells[0].Value = p.name;
-            fmDataGrid1.Rows[rowIndex].Cells[1].Value = p.unitFamily.CurrentUnit.Name;
+            fmDataGrid1.Rows[rowIndex].Cells[0].Value = p.Name;
+            fmDataGrid1.Rows[rowIndex].Cells[1].Value = p.UnitFamily.CurrentUnit.Name;
         }
 
         private void WriteParameter2(int rowIndex, fmGlobalParameter p)
         {
-            fmDataGrid1.Rows[rowIndex].Cells[0 + 3].Value = p.name;
-            fmDataGrid1.Rows[rowIndex].Cells[1 + 3].Value = p.unitFamily.CurrentUnit.Name;
+            fmDataGrid1.Rows[rowIndex].Cells[0 + 3].Value = p.Name;
+            fmDataGrid1.Rows[rowIndex].Cells[1 + 3].Value = p.UnitFamily.CurrentUnit.Name;
         }
 
         private fmEps0dNedEpsdBlock block1;

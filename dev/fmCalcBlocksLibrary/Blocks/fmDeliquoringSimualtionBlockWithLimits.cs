@@ -81,8 +81,8 @@ namespace fmCalcBlocksLibrary.Blocks
                         for (int j = 0; j < naInputs.Count; ++j)
                         {
                             naInputs[j].value = ((mask & (1 << j)) != 0
-                                ? new fmValue(naInputs[j].globalParameter.validRange.MaxValue)
-                                : new fmValue(naInputs[j].globalParameter.validRange.MinValue));
+                                ? new fmValue(naInputs[j].globalParameter.ValidRange.MaxValue)
+                                : new fmValue(naInputs[j].globalParameter.ValidRange.MinValue));
                         }
                         DoCalculations();
                         foreach (fmBlockVariableParameter parameter in parameters)
@@ -125,10 +125,10 @@ namespace fmCalcBlocksLibrary.Blocks
                 DataGridView dataGrid = parameter.cell.DataGridView;
                 int rowIndex = parameter.cell.RowIndex;
                 int colIndex = parameter.cell.ColumnIndex;
-                double coef = parameter.globalParameter.unitFamily.CurrentUnit.Coef;
+                double coef = parameter.globalParameter.UnitFamily.CurrentUnit.Coef;
 
-                dataGrid[colIndex - 2, rowIndex].Value = parameter.globalParameter.validRange.MinValue / coef;
-                dataGrid[colIndex + 2, rowIndex].Value = parameter.globalParameter.validRange.MaxValue / coef;
+                dataGrid[colIndex - 2, rowIndex].Value = parameter.globalParameter.ValidRange.MinValue / coef;
+                dataGrid[colIndex + 2, rowIndex].Value = parameter.globalParameter.ValidRange.MaxValue / coef;
 
                 DataGridViewCell minLimitCell = dataGrid[colIndex - 1, rowIndex];
                 DataGridViewCell maxLimitCell = dataGrid[colIndex + 1, rowIndex];
@@ -138,8 +138,8 @@ namespace fmCalcBlocksLibrary.Blocks
                     minLimitCell.Value = "";
                     maxLimitCell.Value = "";
 
-                    if (fmValue.Greater(new fmValue(parameter.globalParameter.validRange.MinValue), parameter.value)
-                        || fmValue.Less(new fmValue(parameter.globalParameter.validRange.MaxValue), parameter.value))
+                    if (fmValue.Greater(new fmValue(parameter.globalParameter.ValidRange.MinValue), parameter.value)
+                        || fmValue.Less(new fmValue(parameter.globalParameter.ValidRange.MaxValue), parameter.value))
                     {
                         minLimitCell.Style.ForeColor = Color.Black;
                         maxLimitCell.Style.ForeColor = Color.Black;
@@ -283,8 +283,8 @@ namespace fmCalcBlocksLibrary.Blocks
                     for (int i = 0; i < naInputs.Count; ++i)
                     {
                         fmBlockVariableParameter p = naInputs[i];
-                        double minVal = p.globalParameter.validRange.MinValue;
-                        double maxVal = p.globalParameter.validRange.MaxValue;
+                        double minVal = p.globalParameter.ValidRange.MinValue;
+                        double maxVal = p.globalParameter.ValidRange.MaxValue;
                         const double eps = 1e-8;
                         minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
                         maxVal = maxVal * (1 - eps);
@@ -319,7 +319,7 @@ namespace fmCalcBlocksLibrary.Blocks
         override public List<fmBlockVariableParameter> GetClueParamsList()
         {
             List<fmBlockVariableParameter> clueParams = new List<fmBlockVariableParameter>(new fmBlockVariableParameter[] {
-                    GetParameterByName(fmGlobalParameter.sd.name)
+                    GetParameterByName(fmGlobalParameter.sd.Name)
                 });
             return clueParams;
         }
@@ -384,7 +384,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private List<fmBlockVariableParameter> GetNAInputsList(fmBlockVariableParameter parameter)
         {
             var naInputs = new List<fmBlockVariableParameter>();
-            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sd.name), naInputs);
+            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sd.Name), naInputs);
             naInputs.Remove(fmLimitsBlockCalcs.FindGroupRepresetator(parameters, parameter.group));
             return naInputs;
         }

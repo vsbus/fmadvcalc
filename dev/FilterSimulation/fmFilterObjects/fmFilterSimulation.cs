@@ -362,7 +362,7 @@ namespace FilterSimulation.fmFilterObjects
         private void UpdateIsInputedInParametersFromBlock(fmBaseBlock block, fmGlobalParameter inputedParameter)
         {
             CopyAllParametersFromSimulationToBlock(this, block);
-            block.UpdateIsInputed(block.GetParameterByName(inputedParameter.name));
+            block.UpdateIsInputed(block.GetParameterByName(inputedParameter.Name));
             CopyAllParametersFromBlockToSimulation(block, this);
         }
 
@@ -424,7 +424,7 @@ namespace FilterSimulation.fmFilterObjects
         internal void SerializeCalculationBaseParameter(XmlWriter writer, fmCalculationBaseParameter p)
         {
             writer.WriteStartElement(fmParameterSerializeTags.Parameter);
-            writer.WriteElementString(fmParameterSerializeTags.Name, p.globalParameter.name);
+            writer.WriteElementString(fmParameterSerializeTags.Name, p.globalParameter.Name);
             if (p is fmCalculationVariableParameter)
             {
                 writer.WriteElementString(fmParameterSerializeTags.IsInputed, (p as fmCalculationVariableParameter).isInputed.ToString());
@@ -441,13 +441,13 @@ namespace FilterSimulation.fmFilterObjects
             XmlNode isInputedNode = xmlNode.SelectSingleNode(fmParameterSerializeTags.IsInputed);
             if (isInputedNode != null)
             {
-                var varParam = new fmCalculationVariableParameter(fmGlobalParameter.parametersByName[name]);
+                var varParam = new fmCalculationVariableParameter(fmGlobalParameter.ParametersByName[name]);
                 varParam.isInputed = Convert.ToBoolean(isInputedNode.InnerText);
                 parameter = varParam;
             }
             else
             {
-                parameter = new fmCalculationConstantParameter(fmGlobalParameter.parametersByName[name]);
+                parameter = new fmCalculationConstantParameter(fmGlobalParameter.ParametersByName[name]);
             }
             bool defined = Convert.ToBoolean(xmlNode.SelectSingleNode(fmParameterSerializeTags.Defined).InnerText);
             double value = fmSerializeTools.ToDouble(xmlNode.SelectSingleNode(fmParameterSerializeTags.Value).InnerText);

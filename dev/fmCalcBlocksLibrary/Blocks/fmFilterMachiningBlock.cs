@@ -1144,7 +1144,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST;
                 if (candleOption == false)
                 {
-                    fmBlockVariableParameter d0 = GetParameterByName(fmGlobalParameter.d0.name);
+                    fmBlockVariableParameter d0 = GetParameterByName(fmGlobalParameter.d0.Name);
                     if (d0.cell != null) d0.cell.Value = "-";
                 }
                 processOnChange = true;

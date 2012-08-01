@@ -65,7 +65,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
                 for (int i = 0; i < parameters.Count; ++i)
                 {
-                    string newVal = (parameters[i].value / parameters[i].globalParameter.unitFamily.CurrentUnit.Coef).ToString();
+                    string newVal = (parameters[i].value / parameters[i].globalParameter.UnitFamily.CurrentUnit.Coef).ToString();
                     if (parameters[i].cell != null)
                         parameters[i].cell.Value = newVal;
                 }
@@ -113,7 +113,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     if (enteredParameter != null)
                     {
                         UpdateIsInputed(enteredParameter);
-                        enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.globalParameter.unitFamily.CurrentUnit.Coef;
+                        enteredParameter.value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.globalParameter.UnitFamily.CurrentUnit.Coef;
                     
                         if (ValuesChangedByUser != null)
                             ValuesChangedByUser(this, new fmBlockParameterEventArgs(parameterIndex));
@@ -162,7 +162,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmBlockVariableParameter GetParameterByName(string parameterName)
         {
             foreach (fmBlockVariableParameter parameter in parameters)
-                if (parameter.globalParameter.name == parameterName)
+                if (parameter.globalParameter.Name == parameterName)
                     return parameter;
             return null;
         }

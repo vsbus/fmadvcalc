@@ -23,16 +23,22 @@ namespace SampleForLimitsBlock
             fmDataGrid1.Rows[0].Cells[0].Value = "A";
             fmDataGrid1.Rows[1].Cells[0].Value = "Dp";
             fmDataGrid1.Rows[2].Cells[0].Value = "sf";
-            fmDataGrid1.Rows[3].Cells[0].Value = "tc";
+            fmDataGrid1.Rows[3].Cells[0].Value = "sr";
             fmDataGrid1.Rows[4].Cells[0].Value = "tc";
-            fmDataGrid1.Rows[5].Cells[0].Value = "hc";
-            fmSimulationLimitsBlock fslb = new fmSimulationLimitsBlock(
+            fmDataGrid1.Rows[5].Cells[0].Value = "n";
+            fmDataGrid1.Rows[6].Cells[0].Value = "hc";
+            fmDataGrid1.Rows[7].Cells[0].Value = "tf";
+            fmDataGrid1.Rows[8].Cells[0].Value = "tr";
+            var fslb = new fmSimulationLimitsBlock(
                 fmDataGrid1.Rows[0].Cells[2], fmDataGrid1.Rows[0].Cells[3],
                 fmDataGrid1.Rows[1].Cells[2], fmDataGrid1.Rows[1].Cells[3],
                 fmDataGrid1.Rows[2].Cells[2], fmDataGrid1.Rows[2].Cells[3],
                 fmDataGrid1.Rows[3].Cells[2], fmDataGrid1.Rows[3].Cells[3],
                 fmDataGrid1.Rows[4].Cells[2], fmDataGrid1.Rows[4].Cells[3],
-                fmDataGrid1.Rows[5].Cells[2], fmDataGrid1.Rows[5].Cells[3]);
+                fmDataGrid1.Rows[5].Cells[2], fmDataGrid1.Rows[5].Cells[3],
+                fmDataGrid1.Rows[6].Cells[2], fmDataGrid1.Rows[6].Cells[3],
+                fmDataGrid1.Rows[7].Cells[2], fmDataGrid1.Rows[7].Cells[3],
+                fmDataGrid1.Rows[8].Cells[2], fmDataGrid1.Rows[8].Cells[3]);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private void WriteParameterToCell(fmBlockLimitParameter parameter, fmGlobalParameter globalParameter)
         {
-            string newVal = (parameter.value / globalParameter.unitFamily.CurrentUnit.Coef).ToString();
+            string newVal = (parameter.value / globalParameter.UnitFamily.CurrentUnit.Coef).ToString();
             if (parameter.cell != null)
                 parameter.cell.Value = newVal;
         }
@@ -81,7 +81,7 @@ namespace fmCalcBlocksLibrary.Blocks
                         ((enteredParameter.pMin.cell == dataGrid.CurrentCell) 
                             ? enteredParameter.pMin 
                             : enteredParameter.pMax
-                            ).value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.globalParameter.unitFamily.CurrentUnit.Coef;
+                            ).value = fmValue.ObjectToValue(dataGrid.CurrentCell.Value) * enteredParameter.globalParameter.UnitFamily.CurrentUnit.Coef;
                         
                         ReWriteParameters();
                     }
@@ -121,7 +121,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmBlockLimitsParameter GetParameterByName(string parameterName)
         {
             foreach (var parameter in parameters)
-                if (parameter.globalParameter.name == parameterName)
+                if (parameter.globalParameter.Name == parameterName)
                     return parameter;
             return null;
         }

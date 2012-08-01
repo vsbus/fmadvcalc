@@ -5,20 +5,20 @@ namespace fmCalculationLibrary
 {
     public class fmGlobalParameter
     {
-        public string name;
-        public fmUnitFamily unitFamily;
+        public string Name;
+        public fmUnitFamily UnitFamily;
 
         //
         // Summary:
         //     Return name of current unit for parameter
         public string UnitName
         {
-            get { return unitFamily.CurrentUnit.Name; }
+            get { return UnitFamily.CurrentUnit.Name; }
         }
 
-        public fmDefaultParameterRange specifiedRange;
-        public fmDefaultParameterRange validRange;
-        public fmRange chartCurretXRange;
+        public fmDefaultParameterRange SpecifiedRange;
+        public fmDefaultParameterRange ValidRange;
+        public fmRange ChartCurretXRange;
 
         // ReSharper disable InconsistentNaming
         #region CakeFormation
@@ -391,14 +391,14 @@ namespace fmCalculationLibrary
                        };
         }
 
-        public static List<fmGlobalParameter> parameters = new List<fmGlobalParameter>();
-        public static Dictionary<string, fmGlobalParameter> parametersByName = new Dictionary<string, fmGlobalParameter>();
+        public static List<fmGlobalParameter> Parameters = new List<fmGlobalParameter>();
+        public static Dictionary<string, fmGlobalParameter> ParametersByName = new Dictionary<string, fmGlobalParameter>();
 
         static void AddParameter(ref fmGlobalParameter p1, fmGlobalParameter p2)
         {
             p1 = p2;
-            parameters.Add(p1);
-            parametersByName[p1.name] = p1;
+            Parameters.Add(p1);
+            ParametersByName[p1.Name] = p1;
         }
 
         static fmGlobalParameter()
@@ -577,19 +577,19 @@ namespace fmCalculationLibrary
             AddParameter(ref qev, new fmGlobalParameter("qev", fmUnitFamily.SpecificFlowRateVolume));
             #endregion
 
-            A.specifiedRange.IsInputed = true;
-            Dp.specifiedRange.IsInputed = true;
-            sf.specifiedRange.IsInputed = true;
-            tc.specifiedRange.IsInputed = true;
+            A.SpecifiedRange.IsInputed = true;
+            Dp.SpecifiedRange.IsInputed = true;
+            sf.SpecifiedRange.IsInputed = true;
+            tc.SpecifiedRange.IsInputed = true;
         }
 
         public fmGlobalParameter(string name, fmUnitFamily unitFamily, fmRange minMaxRange)
         {
-            this.name = name;
-            this.unitFamily = unitFamily;
-            specifiedRange = new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
-            validRange = new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
-            chartCurretXRange = new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
+            Name = name;
+            UnitFamily = unitFamily;
+            SpecifiedRange = new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
+            ValidRange = new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
+            ChartCurretXRange = new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
         }
 
         public fmGlobalParameter(string name, fmUnitFamily unitFamily) : this(name, unitFamily, new fmDefaultParameterRange()) { }

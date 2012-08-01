@@ -87,12 +87,12 @@ namespace FilterSimulation
             var pList = new List<fmBlockVariableParameter>();
             foreach (fmGlobalParameter parameter in cakeFormationParametersList)
             {
-                pList.Add(fmb.GetParameterByName(parameter.name));
+                pList.Add(fmb.GetParameterByName(parameter.Name));
             }
             var rowId = new Dictionary<fmGlobalParameter, int>();
             foreach (fmBlockVariableParameter p in pList)
             {
-                if (p.globalParameter.specifiedRange != null)
+                if (p.globalParameter.SpecifiedRange != null)
                 {
                     int rowIndex = CakeFormationGrid.AddRow(p.globalParameter);
                     rowId[p.globalParameter] = rowIndex;
@@ -101,23 +101,21 @@ namespace FilterSimulation
             }
 
             smb = new fmSimulationLimitsBlock(
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.A]),
-                CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.A]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.Dp]),
-                CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.Dp]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.sf]),
-                CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.sf]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tc]),
-                CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tc]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.n]),
-                CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.n]),
-                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.hc]),
-                CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.hc]));
+                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.A]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.A]),
+                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.Dp]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.Dp]),
+                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.sf]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.sf]),
+                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.sr]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.sr]),
+                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tc]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tc]),
+                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.n]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.n]),
+                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.hc]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.hc]),
+                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tf]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tf]),
+                CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tr]), CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tr]));
+
             foreach (var p in smb.Parameters)
             {
-                p.pMin.value = new fmValue(p.globalParameter.specifiedRange.MinValue);
-                p.pMax.value = new fmValue(p.globalParameter.specifiedRange.MaxValue);
-                p.IsInputed = p.globalParameter.specifiedRange.IsInputed;
+                p.pMin.value = new fmValue(p.globalParameter.SpecifiedRange.MinValue);
+                p.pMax.value = new fmValue(p.globalParameter.SpecifiedRange.MaxValue);
+                p.IsInputed = p.globalParameter.SpecifiedRange.IsInputed;
             }
             smb.Display();
 
@@ -134,18 +132,18 @@ namespace FilterSimulation
                 int rowIndex = grid.AddRow(p);
 
                 grid.RangeMinValueCell(rowIndex).Value =
-                    new fmValue(p.specifiedRange.MinValue / p.unitFamily.CurrentUnit.Coef).ToString();
+                    new fmValue(p.SpecifiedRange.MinValue / p.UnitFamily.CurrentUnit.Coef).ToString();
                 grid.RangeMaxValueCell(rowIndex).Value =
-                    new fmValue(p.specifiedRange.MaxValue / p.unitFamily.CurrentUnit.Coef).ToString();
+                    new fmValue(p.SpecifiedRange.MaxValue / p.UnitFamily.CurrentUnit.Coef).ToString();
                 grid.SetRawBackColor(rowIndex, color);
             }
         }
 
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
-            foreach (var p in fmGlobalParameter.parameters)
+            foreach (var p in fmGlobalParameter.Parameters)
             {
-                p.specifiedRange.IsInputed = false;
+                p.SpecifiedRange.IsInputed = false;
             }
 
             var grids = new TableWithParameterRanges[]
@@ -162,15 +160,15 @@ namespace FilterSimulation
                     fmBlockVariableParameter v =
                         new fmFilterMachiningBlock().GetParameterByName(grid.ParameterCell(i).Value.ToString());
                     fmGlobalParameter p = (v == null)
-                                              ? fmGlobalParameter.parametersByName[grid.ParameterCell(i).Value.ToString()]
+                                              ? fmGlobalParameter.ParametersByName[grid.ParameterCell(i).Value.ToString()]
                                               : v.globalParameter;
 
-                    var parInBlock = smb.GetParameterByName(p.name);
-                    p.specifiedRange.IsInputed = parInBlock != null && parInBlock.IsInputed;
-                    p.specifiedRange.MinValue = fmValue.ObjectToValue(grid.RangeMinValueCell(i).Value).value *
-                                                p.unitFamily.CurrentUnit.Coef;
-                    p.specifiedRange.MaxValue = fmValue.ObjectToValue(grid.RangeMaxValueCell(i).Value).value *
-                                                p.unitFamily.CurrentUnit.Coef;
+                    var parInBlock = smb.GetParameterByName(p.Name);
+                    p.SpecifiedRange.IsInputed = parInBlock != null && parInBlock.IsInputed;
+                    p.SpecifiedRange.MinValue = fmValue.ObjectToValue(grid.RangeMinValueCell(i).Value).value *
+                                                p.UnitFamily.CurrentUnit.Coef;
+                    p.SpecifiedRange.MaxValue = fmValue.ObjectToValue(grid.RangeMaxValueCell(i).Value).value *
+                                                p.UnitFamily.CurrentUnit.Coef;
                 }
             }
             Close();

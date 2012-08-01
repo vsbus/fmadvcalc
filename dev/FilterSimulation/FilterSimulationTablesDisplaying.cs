@@ -289,9 +289,9 @@ namespace FilterSimulation
                 if (sim.deliquoringEps0NeEpsBlock == null)
                 {
                     sim.deliquoringEps0NeEpsBlock = new fmEps0dNedEpsdBlock(
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Dp_d.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.hcd.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps_d.name).Cells[deliquoringMaterialCol.Index]);
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Dp_d.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.hcd.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eps_d.Name).Cells[deliquoringMaterialCol.Index]);
 
                     sim.deliquoringEps0NeEpsBlock.ValuesChanged += deliquoringEps0dNedEpsdBlock_ValuesChanged;
                     sim.deliquoringEps0NeEpsBlock.ValuesChangedByUser += deliquoringEps0dNedEpsdBlock_ValuesChangedByUser;
@@ -299,14 +299,14 @@ namespace FilterSimulation
                 if (sim.deliquoringSigmaPkeBlock == null)
                 {
                     sim.deliquoringSigmaPkeBlock = new fmSigmaPke0PkePcdRcdAlphadBlock(
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eta_d.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.rho_d.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.sigma.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.pke0.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.pke.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.pc_d.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.rc_d.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.alpha_d.name).Cells[deliquoringMaterialCol.Index]);
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eta_d.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.rho_d.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.sigma.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.pke0.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.pke.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.pc_d.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.rc_d.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.alpha_d.Name).Cells[deliquoringMaterialCol.Index]);
 
 
                     sim.deliquoringSigmaPkeBlock.ValuesChanged += deliquoringSigmaPkeBlock_ValuesChanged;
@@ -315,19 +315,19 @@ namespace FilterSimulation
                 if (sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock == null)
                 {
                     sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock = new fmSremTettaAdAgDHRmMmoleFPeqBlock(
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Srem.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ad1.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ad2.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Tetta.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eta_g.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ag1.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ag2.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ag3.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Tetta_boil.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.DH.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Mmole.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.f.name).Cells[deliquoringMaterialCol.Index],
-                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.peq.name).Cells[deliquoringMaterialCol.Index]);
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Srem.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ad1.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ad2.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Tetta.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.eta_g.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ag1.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ag2.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.ag3.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Tetta_boil.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.DH.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.Mmole.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.f.Name).Cells[deliquoringMaterialCol.Index],
+                        FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.peq.Name).Cells[deliquoringMaterialCol.Index]);
 
 
                     sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.ValuesChanged += deliquoringSremTettaAdAgDHMmoleFPeqBlock_ValuesChanged;
@@ -554,7 +554,7 @@ namespace FilterSimulation
         {
             foreach (fmGlobalParameter p in isVisibleParameters.Keys)
             {
-                DataGridViewRow row = FindRowByValueInColumn(dataGrid, parameterColumnIndex, p.name);
+                DataGridViewRow row = FindRowByValueInColumn(dataGrid, parameterColumnIndex, p.Name);
                 if (row != null)
                 {
                     row.Visible = isVisibleParameters[p];
@@ -939,9 +939,9 @@ namespace FilterSimulation
             foreach (DataGridViewColumn col in simulationDataGrid.Columns)
             {
                 string pName = GetParameterNameFromHeader(col.HeaderText);
-                if (fmGlobalParameter.parametersByName.ContainsKey(pName))
+                if (fmGlobalParameter.ParametersByName.ContainsKey(pName))
                 {
-                    var p = fmGlobalParameter.parametersByName[pName];
+                    var p = fmGlobalParameter.ParametersByName[pName];
                     col.Visible = parametersToDisplay.Contains(p);
                 }
             }
@@ -1023,7 +1023,7 @@ namespace FilterSimulation
             var parToCell = new Dictionary<fmGlobalParameter, DataGridViewCell>();
             for (int i = 0; i < voidBlock.Parameters.Count; ++i)
             {
-                commonDeliquoringSimulationBlockDataGrid[commonDeliquoringSimulationBlockParameterNameColumn.Index, i].Value = voidBlock.Parameters[i].globalParameter.name;
+                commonDeliquoringSimulationBlockDataGrid[commonDeliquoringSimulationBlockParameterNameColumn.Index, i].Value = voidBlock.Parameters[i].globalParameter.Name;
                 parToCell[voidBlock.Parameters[i].globalParameter] = commonDeliquoringSimulationBlockDataGrid[commonDeliquoringSimulationBlockParameterValueColumn.Index, i];
             }
 
@@ -1045,7 +1045,7 @@ namespace FilterSimulation
             var parToCell = new Dictionary<fmGlobalParameter, DataGridViewCell>();
             for (int i = 0; i < voidBlock.Parameters.Count; ++i)
             {
-                commonCalcBlockDataGrid[commonCalcBlockParameterNameColumn.Index, i].Value = voidBlock.Parameters[i].globalParameter.name;
+                commonCalcBlockDataGrid[commonCalcBlockParameterNameColumn.Index, i].Value = voidBlock.Parameters[i].globalParameter.Name;
                 parToCell[voidBlock.Parameters[i].globalParameter] = commonCalcBlockDataGrid[commonCalcBlockParameterValueColumn.Index, i];
             }
 
@@ -1079,7 +1079,7 @@ namespace FilterSimulation
         {
             foreach (fmBlockVariableParameter p in m_commonFilterMachiningBlock.Parameters)
             {
-                fmBlockVariableParameter p2 = m_fSolution.currentObjects.Simulation.filterMachiningBlock.GetParameterByName(p.globalParameter.name);
+                fmBlockVariableParameter p2 = m_fSolution.currentObjects.Simulation.filterMachiningBlock.GetParameterByName(p.globalParameter.Name);
                 p2.value = p.value;
                 p2.IsInputed = p.IsInputed;
             }
@@ -1117,10 +1117,10 @@ namespace FilterSimulation
                 if (obj != null)
                 {
                     string parName = obj.ToString().Split('(')[0].Trim();
-                    if (fmGlobalParameter.parametersByName.ContainsKey(parName))
+                    if (fmGlobalParameter.ParametersByName.ContainsKey(parName))
                     {
-                        fmGlobalParameter p = fmGlobalParameter.parametersByName[parName];
-                        col.HeaderCell.Value = p.name + " (" + p.unitFamily.CurrentUnit.Name + ")";
+                        fmGlobalParameter p = fmGlobalParameter.ParametersByName[parName];
+                        col.HeaderCell.Value = p.Name + " (" + p.UnitFamily.CurrentUnit.Name + ")";
                     }
                 }
             }
@@ -1133,10 +1133,10 @@ namespace FilterSimulation
                 object obj = row.Cells[parameterColumnNameIndex].Value;
                 if (obj != null)
                 {
-                    fmGlobalParameter p = fmGlobalParameter.parametersByName[obj.ToString()];
+                    fmGlobalParameter p = fmGlobalParameter.ParametersByName[obj.ToString()];
                     if (p != null)
                     {
-                        row.Cells[unitColumnNameIndex].Value = p.unitFamily.CurrentUnit.Name;
+                        row.Cells[unitColumnNameIndex].Value = p.UnitFamily.CurrentUnit.Name;
                     }
                 }
             }

@@ -5289,7 +5289,7 @@ namespace fmCalculatorsLibrary
         {
             string parametersSet = "";
             foreach (var p in parameters)
-                parametersSet += ", " + p.globalParameter.name;
+                parametersSet += ", " + p.globalParameter.Name;
             parametersSet = "{" + parametersSet.Substring(2) + "}";
             return new Exception("One of " + parametersSet + " must be inputed");
         }

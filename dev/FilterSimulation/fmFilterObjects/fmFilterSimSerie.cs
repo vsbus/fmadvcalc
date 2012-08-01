@@ -91,7 +91,7 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteStartElement(fmSimSerieDataSerializeTags.ParametersToDisplay);
             foreach (var p in parametersToDisplay)
             {
-                writer.WriteElementString(fmSimSerieDataSerializeTags.GlobalParameter, p.name);
+                writer.WriteElementString(fmSimSerieDataSerializeTags.GlobalParameter, p.Name);
             }
             writer.WriteEndElement();
             foreach (var p in simList)
@@ -123,7 +123,7 @@ namespace FilterSimulation.fmFilterObjects
                     parametersToDisplayNode.SelectNodes(fmSimSerieDataSerializeTags.GlobalParameter);
                 foreach (XmlNode p in parameterNodeList)
                 {
-                    serieData.parametersToDisplay.Add(fmGlobalParameter.parametersByName[p.InnerText]);
+                    serieData.parametersToDisplay.Add(fmGlobalParameter.ParametersByName[p.InnerText]);
                 }
             }
             XmlNodeList simList = xmlNode.SelectNodes(fmFilterSimulation.fmFilterSimulationSerializeTags.Simulation);

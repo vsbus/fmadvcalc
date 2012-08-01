@@ -41,7 +41,7 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 
         static private Dictionary<fmGlobalParameter, fmResultCheckStatus> GetResultStatus(fmBlockVariableParameter parameter, double valueToCheck, fmBaseBlock block)
         {
-            Dictionary<fmGlobalParameter, fmValue> resultValues = GetClueResultsWithSpecialParameterValue(parameter, valueToCheck, block);
+            Dictionary<fmGlobalParameter, fmValue> resultValues = GetResultsWithSpecialParameterValue(parameter, valueToCheck, block);
             var result = new Dictionary<fmGlobalParameter, fmResultCheckStatus>();
 
             foreach (fmGlobalParameter p in resultValues.Keys)
@@ -58,11 +58,11 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
                     {
                         result[p] = fmResultCheckStatus.NEGATIVE;
                     }
-                    else if (fmValue.EpsCompare(curValue.value, p.validRange.MaxValue, eps) > 0)
+                    else if (fmValue.EpsCompare(curValue.value, p.ValidRange.MaxValue, eps) > 0)
                     {
                         result[p] = fmResultCheckStatus.GREATER_THAN_MAXIMUM;
                     }
-                    else if (fmValue.EpsCompare(curValue.value, p.validRange.MinValue, eps) < 0)
+                    else if (fmValue.EpsCompare(curValue.value, p.ValidRange.MinValue, eps) < 0)
                     {
                         result[p] = fmResultCheckStatus.LESS_THAN_MINIMUM;
                     }
@@ -78,8 +78,8 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 
         static private Dictionary<fmGlobalParameter, fmResultBehaviorStatus> GetResultBehavior(fmBlockVariableParameter parameter, double x1, double x2, fmBaseBlock block)
         {
-            Dictionary<fmGlobalParameter, fmValue> result1 = GetClueResultsWithSpecialParameterValue(parameter, x1, block);
-            Dictionary<fmGlobalParameter, fmValue> result2 = GetClueResultsWithSpecialParameterValue(parameter, x2, block);
+            Dictionary<fmGlobalParameter, fmValue> result1 = GetResultsWithSpecialParameterValue(parameter, x1, block);
+            Dictionary<fmGlobalParameter, fmValue> result2 = GetResultsWithSpecialParameterValue(parameter, x2, block);
             var result = new Dictionary<fmGlobalParameter, fmResultBehaviorStatus>();
             foreach (fmGlobalParameter p in result1.Keys)
             {
@@ -116,7 +116,7 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
             return null;
         }
 
-        static private Dictionary<fmGlobalParameter, fmValue> GetClueResultsWithSpecialParameterValue(fmBlockVariableParameter parameter, double paramValue, fmBaseBlock block)
+        static private Dictionary<fmGlobalParameter, fmValue> GetResultsWithSpecialParameterValue(fmBlockVariableParameter parameter, double paramValue, fmBaseBlock block)
         {
             var result = new Dictionary<fmGlobalParameter, fmValue>();
             var parameters = block.Parameters;
@@ -134,12 +134,12 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 
             parameter.value = new fmValue(paramValue);
 
-            block.DoCalculationsLimitsClue();
+            block.DoCalculations();
 
             var clueList = block.GetClueParamsList();
             foreach (fmBlockVariableParameter p in clueList)
             {
-                result[p.globalParameter] = block.GetParameterByName(p.globalParameter.name).value;
+                result[p.globalParameter] = block.GetParameterByName(p.globalParameter.Name).value;
             }
 
             parameter.IsInputed = false;
@@ -383,8 +383,8 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 
             var isAllDefinedAndNotNegative = new fmIsAllDefinedAndNotNegative(block, parameter);
             var trueValue = new fmValue(1);
-            var minValue = new fmValue(parameter.globalParameter.validRange.MinValue);
-            var maxValue = new fmValue(parameter.globalParameter.validRange.MaxValue);
+            var minValue = new fmValue(parameter.globalParameter.ValidRange.MinValue);
+            var maxValue = new fmValue(parameter.globalParameter.ValidRange.MaxValue);
 
             if (isAllDefinedAndNotNegative.Eval(minValue) != trueValue)
             {
