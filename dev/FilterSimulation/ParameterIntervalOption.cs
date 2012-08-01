@@ -141,9 +141,7 @@ namespace FilterSimulation
             }
         }
 
-// ReSharper disable InconsistentNaming
         private void buttonOK_Click(object sender, System.EventArgs e)
-// ReSharper restore InconsistentNaming
         {
             foreach (var p in fmGlobalParameter.parameters)
             {
@@ -164,8 +162,7 @@ namespace FilterSimulation
                     fmBlockVariableParameter v =
                         new fmFilterMachiningBlock().GetParameterByName(grid.ParameterCell(i).Value.ToString());
                     fmGlobalParameter p = (v == null)
-                                              ? fmGlobalParameter.parametersByName[
-                                                  grid.ParameterCell(i).Value.ToString()]
+                                              ? fmGlobalParameter.parametersByName[grid.ParameterCell(i).Value.ToString()]
                                               : v.globalParameter;
 
                     var parInBlock = smb.GetParameterByName(p.name);
