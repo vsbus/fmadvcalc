@@ -600,25 +600,7 @@ namespace FilterSimulationWithTablesAndGraphs
             m_loadingXRange = true;
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
             double coef = xParameter.UnitFamily.CurrentUnit.Coef;
-            fmRange range = xParameter.ChartCurretXRange;
-            minXValueTextBox.Text = (range.MinValue / coef).ToString();
-            maxXValueTextBox.Text = (range.MaxValue / coef).ToString();
-            m_loadingXRange = false;
-        }
-
-        private void LoadvalidRange()
-        {
-            if (listBoxXAxis.SelectedItems[0].Text == "")
-            {
-                return;
-            }
-            m_loadingXRange = true;
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
-            double coef = xParameter.UnitFamily.CurrentUnit.Coef;
-            fmRange defaultRange = xParameter.ValidRange;
-            fmRange range = xParameter.ChartCurretXRange;
-            range.MinValue = defaultRange.MinValue;
-            range.MaxValue = defaultRange.MaxValue;
+            fmRange range = xParameter.SpecifiedRange;
             minXValueTextBox.Text = (range.MinValue / coef).ToString();
             maxXValueTextBox.Text = (range.MaxValue / coef).ToString();
             m_loadingXRange = false;

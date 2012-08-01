@@ -36,7 +36,6 @@ namespace FilterSimulationWithTablesAndGraphs
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            this.useDefaultRangesButton = new System.Windows.Forms.Button();
             this.maxXValueTextBox = new fmDataGrid.fmNumericalTextBox();
             this.minXValueTextBox = new fmDataGrid.fmNumericalTextBox();
             this.xRangeLabel = new System.Windows.Forms.Label();
@@ -190,11 +189,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // projectPanel
             // 
-            this.projectPanel.Size = new System.Drawing.Size(170, 115);
+            this.projectPanel.Size = new System.Drawing.Size(222, 115);
             // 
             // suspensionPanel
             // 
-            this.suspensionPanel.Size = new System.Drawing.Size(226, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(174, 115);
             // 
             // splitter2
             // 
@@ -235,11 +234,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
-            this.panel1.Size = new System.Drawing.Size(166, 20);
+            this.panel1.Size = new System.Drawing.Size(218, 20);
             // 
             // panel2
             // 
-            this.panel2.Size = new System.Drawing.Size(222, 20);
+            this.panel2.Size = new System.Drawing.Size(170, 20);
             // 
             // panel3
             // 
@@ -283,17 +282,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(400, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 170;
-            // 
-            // useDefaultRangesButton
-            // 
-            this.useDefaultRangesButton.Location = new System.Drawing.Point(131, 123);
-            this.useDefaultRangesButton.Name = "useDefaultRangesButton";
-            this.useDefaultRangesButton.Size = new System.Drawing.Size(60, 21);
-            this.useDefaultRangesButton.TabIndex = 3;
-            this.useDefaultRangesButton.Text = "Default";
-            this.useDefaultRangesButton.UseVisualStyleBackColor = true;
-            this.useDefaultRangesButton.Click += new System.EventHandler(this.useDefaultRangesButton_Click);
+            this.projectSuspensionSplitContainer.SplitterDistance = 222;
             // 
             // maxXValueTextBox
             // 
@@ -636,7 +625,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel11.Controls.Add(this.minXValueTextBox);
             this.panel11.Controls.Add(this.rowsQuantity);
             this.panel11.Controls.Add(this.maxXValueTextBox);
-            this.panel11.Controls.Add(this.useDefaultRangesButton);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Name = "panel11";
@@ -836,7 +824,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmDataGrid.fmNumericalTextBox maxXValueTextBox;
         private fmDataGrid.fmNumericalTextBox minXValueTextBox;
         private Label xRangeLabel;
-        private Button useDefaultRangesButton;
         private Panel panel8;
         private SplitContainer SimulationAndGraphSplitContainer;
         private Panel panel9;

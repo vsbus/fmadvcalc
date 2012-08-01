@@ -103,16 +103,6 @@ namespace FilterSimulationWithTablesAndGraphs
             BindCalculatedResultsToChartAndTable();
         }
 
-        // ReSharper disable InconsistentNaming
-        private void useDefaultRangesButton_Click(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
-        {
-            LoadvalidRange();
-            RecalculateSimulationsWithIterationX();
-            BindCalculatedResultsToDisplayingResults();
-            BindCalculatedResultsToChartAndTable();
-        }
-
         private void HighLightCurrentPoints(object sender)
         {
             HighLightCurrentPoints(sender, -1, true);
