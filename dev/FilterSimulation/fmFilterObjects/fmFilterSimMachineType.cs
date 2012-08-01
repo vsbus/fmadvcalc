@@ -75,7 +75,7 @@ namespace FilterSimulation.fmFilterObjects
                     return mt;
                 }
             }
-            throw new Exception("Deserialization failed: unknown machine type.");
+            return filterTypesList[0];
         }
     }
 }
