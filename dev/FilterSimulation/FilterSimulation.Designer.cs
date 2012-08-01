@@ -472,7 +472,7 @@ namespace FilterSimulation
             this.simulationDataGrid.Size = new System.Drawing.Size(976, 98);
             this.simulationDataGrid.TabIndex = 0;
             this.simulationDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellValueChanged);
-            this.simulationDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(this.simulationDataGrid_SortCompare);
+            this.simulationDataGrid.SortCompare += new System.Windows.Forms.DataGridViewSortCompareEventHandler(SimulationDataGridSortCompare);
             this.simulationDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellEndEdit);
             this.simulationDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellClick);
             this.simulationDataGrid.CurrentCellChanged += new System.EventHandler(this.simulationDataGrid_CurrentCellChanged);
@@ -1442,7 +1442,7 @@ namespace FilterSimulation
             this.SelectMachineButton.TabIndex = 7;
             this.SelectMachineButton.Text = "Filter Types";
             this.SelectMachineButton.UseVisualStyleBackColor = true;
-            this.SelectMachineButton.Click += new System.EventHandler(this.SelectMachineButton_Click);
+            this.SelectMachineButton.Click += new System.EventHandler(this.SelectMachineButtonClick);
             // 
             // simSeriesDeleteButton
             // 
@@ -1720,7 +1720,7 @@ namespace FilterSimulation
             this.calculateLimitsCheckBox.TabIndex = 14;
             this.calculateLimitsCheckBox.Text = "Limits";
             this.calculateLimitsCheckBox.UseVisualStyleBackColor = true;
-            this.calculateLimitsCheckBox.CheckedChanged += new System.EventHandler(this.calculateLimitsCheckBox_CheckedChanged);
+            this.calculateLimitsCheckBox.CheckedChanged += new System.EventHandler(this.CalculateLimitsCheckBoxCheckedChanged);
             // 
             // panelMaterialParameters
             // 

@@ -13,11 +13,11 @@ namespace FilterSimulation
 {
     public partial class fmFilterSimulationControl : UserControl
     {
-        protected fmFilterSimSolution m_fSolution = new fmFilterSimSolution();
+        protected fmFilterSimSolution Solution = new fmFilterSimSolution();
         private fmCalcBlocksLibrary.Blocks.fmFilterMachiningBlockWithLimits m_commonFilterMachiningBlock;
         private fmCalcBlocksLibrary.Blocks.fmDeliquoringSimualtionBlockWithLimits m_commonDeliquoringSimulationBlock;
         private CheckBox m_ckBox;
-        protected List<fmGlobalParameter> parametersToDisplay;
+        protected List<fmGlobalParameter> ParametersToDisplay;
 
         public fmFilterSimulationControl()
         {
@@ -112,13 +112,13 @@ namespace FilterSimulation
                 }
             }
 
-            var fProj = new fmFilterSimProject(m_fSolution, "Prj1");
-            var fProj2 = new fmFilterSimProject(m_fSolution, "Prj2");
+            var fProj = new fmFilterSimProject(Solution, "Prj1");
+            var fProj2 = new fmFilterSimProject(Solution, "Prj2");
             var fSus = new fmFilterSimSuspension(fProj, "Susp1", "Mat1", "Cust1");
             var fSus2 = new fmFilterSimSuspension(fProj2, "Susp2", "Mat2", "Cust2");
             new fmFilterSimSuspension(fProj, "Susp3", "Mat3", "Cust3");
-            var fSimSerie = new fmFilterSimSerie(fSus, "serie0", fmFilterSimMachineType.nutche, "medium1", "machine0");
-            new fmFilterSimSerie(fSus2, "serie02", fmFilterSimMachineType.belt, "medium2", "machine9");
+            var fSimSerie = new fmFilterSimSerie(fSus, "serie0", fmFilterSimMachineType.VacuumNutche, "medium1", "machine0");
+            new fmFilterSimSerie(fSus2, "serie02", fmFilterSimMachineType.BeltFilter, "medium2", "machine9");
             var sim = new fmFilterSimulation(fSimSerie, "sim01");
 
             // BEGIN DEBUG CODE
@@ -173,7 +173,7 @@ namespace FilterSimulation
 
             CreateDefaultListOfParametersForDisplaying();
 
-            DisplaySolution(m_fSolution);
+            DisplaySolution(Solution);
 
             projectDataGrid.CurrentCell = projectDataGrid.Rows[0].Cells[projectNameColumn.Index];
 
@@ -217,7 +217,7 @@ namespace FilterSimulation
 
         private void CreateDefaultListOfParametersForDisplaying()
         {
-            parametersToDisplay = new List<fmGlobalParameter>
+            ParametersToDisplay = new List<fmGlobalParameter>
                                                {
                                                     fmGlobalParameter.A,
                                                     fmGlobalParameter.d0,
@@ -325,12 +325,12 @@ namespace FilterSimulation
             {
                 m_displayingTables = true;
 
-                m_fSolution.currentObjects.Project = null;
+                Solution.currentObjects.Project = null;
 
-                m_fSolution.currentColumns.project = projectNameColumn.Index;
-                m_fSolution.currentColumns.suspension = suspensionNameColumn.Index;
-                m_fSolution.currentColumns.simSerie = simSeriesNameColumn.Index;
-                m_fSolution.currentColumns.simulation = simulationNameColumn.Index;
+                Solution.currentColumns.project = projectNameColumn.Index;
+                Solution.currentColumns.suspension = suspensionNameColumn.Index;
+                Solution.currentColumns.simSerie = simSeriesNameColumn.Index;
+                Solution.currentColumns.simulation = simulationNameColumn.Index;
 
                 if (dgv == projectDataGrid)
                 {
@@ -341,10 +341,10 @@ namespace FilterSimulation
                         return;
                     }
 
-                    Guid projectGuid = (Guid)projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value;
-                    m_fSolution.currentColumns.project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Index;
+                    var projectGuid = (Guid)projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value;
+                    Solution.currentColumns.project = projectDataGrid.Columns[projectDataGrid.CurrentCell.ColumnIndex].Index;
 
-                    m_fSolution.currentObjects.Project = m_fSolution.FindProject(projectGuid);
+                    Solution.currentObjects.Project = Solution.FindProject(projectGuid);
                 }
                 else if (dgv == suspensionDataGrid)
                 {
@@ -355,9 +355,9 @@ namespace FilterSimulation
                         return;
                     }
 
-                    Guid suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value;
-                    m_fSolution.currentColumns.suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Index;
-                    m_fSolution.currentObjects.Suspension = m_fSolution.FindSuspension(suspensionGuid);
+                    var suspensionGuid = (Guid)suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value;
+                    Solution.currentColumns.suspension = suspensionDataGrid.Columns[suspensionDataGrid.CurrentCell.ColumnIndex].Index;
+                    Solution.currentObjects.Suspension = Solution.FindSuspension(suspensionGuid);
                 }
                 else if (dgv == simSeriesDataGrid)
                 {
@@ -368,9 +368,9 @@ namespace FilterSimulation
                         return;
                     }
 
-                    Guid simSeriesGuid = (Guid)simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value;
-                    m_fSolution.currentColumns.simSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Index;
-                    m_fSolution.currentObjects.Serie = m_fSolution.FindSerie(simSeriesGuid);
+                    var simSeriesGuid = (Guid)simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value;
+                    Solution.currentColumns.simSerie = simSeriesDataGrid.Columns[simSeriesDataGrid.CurrentCell.ColumnIndex].Index;
+                    Solution.currentObjects.Serie = Solution.FindSerie(simSeriesGuid);
                 }
                 else if (dgv == simulationDataGrid)
                 {
@@ -381,12 +381,12 @@ namespace FilterSimulation
                         return;
                     }
 
-                    Guid simulationGuid = (Guid)simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value;
-                    m_fSolution.currentColumns.simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Index;
-                    m_fSolution.currentObjects.Simulation = m_fSolution.FindSimulation(simulationGuid);
+                    var simulationGuid = (Guid)simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value;
+                    Solution.currentColumns.simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Index;
+                    Solution.currentObjects.Simulation = Solution.FindSimulation(simulationGuid);
                 }
 
-                DisplaySolution(m_fSolution);
+                DisplaySolution(Solution);
 
                 m_displayingTables = false;
             }
@@ -395,13 +395,11 @@ namespace FilterSimulation
 
         public void SaveAll()
         {
-            m_fSolution.Keep();
-            DisplaySolution(m_fSolution);
+            Solution.Keep();
+            DisplaySolution(Solution);
         }
 
-        // ReSharper disable InconsistentNaming
-        private void simulationDataGrid_SortCompare(object sender, DataGridViewSortCompareEventArgs e)
-        // ReSharper restore InconsistentNaming
+        private static void SimulationDataGridSortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
             var dg = sender as fmDataGrid.fmDataGrid;
             // ReSharper disable InconsistentNaming
@@ -427,14 +425,14 @@ namespace FilterSimulation
         public void UpdateAll()
         {
             UpdateUnitsAndData();
-            DisplaySolution(m_fSolution);
+            DisplaySolution(Solution);
         }
 
         // ReSharper disable InconsistentNaming
         private void simulationCreateButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            fmFilterSimSerie parentSerie = m_fSolution.currentObjects.Serie;
+            fmFilterSimSerie parentSerie = Solution.currentObjects.Serie;
             if (parentSerie == null)
             {
                 MessageBox.Show(@"Please select serie in serie table", @"Error!", MessageBoxButtons.OK);
@@ -452,28 +450,28 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             for (int i = 1; ; ++i)
             {
                 simName = parentSerie.Name + "-" + i;
-                if (m_fSolution.FindSimulation(simName) == null)
+                if (Solution.FindSimulation(simName) == null)
                 {
                     break;
                 }
             }
 
-            if (m_fSolution.currentObjects.Simulation == null)
+            if (Solution.currentObjects.Simulation == null)
             {
-                m_fSolution.currentObjects.Simulation = new fmFilterSimulation(parentSerie, simName);
+                Solution.currentObjects.Simulation = new fmFilterSimulation(parentSerie, simName);
             }
             else
             {
-                fmFilterSimulation currentSimulation = m_fSolution.currentObjects.Simulation;
-                m_fSolution.currentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, simName);
-                m_fSolution.currentObjects.Simulation.CopySuspensionParameters(currentSimulation);
-                m_fSolution.currentObjects.Simulation.Keep();
+                fmFilterSimulation currentSimulation = Solution.currentObjects.Simulation;
+                Solution.currentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, simName);
+                Solution.currentObjects.Simulation.CopySuspensionParameters(currentSimulation);
+                Solution.currentObjects.Simulation.Keep();
             }
 
-            m_fSolution.currentColumns.simulation = simulationNameColumn.Index;
-            DisplaySolution(m_fSolution);
+            Solution.currentColumns.simulation = simulationNameColumn.Index;
+            DisplaySolution(Solution);
             SortTables();
-            SelectCurrentItemsInSolution(m_fSolution);
+            SelectCurrentItemsInSolution(Solution);
 
             simulationDataGrid.BeginEdit(true);
         }
@@ -482,49 +480,49 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         private void calculationOptionChangeButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            if (m_fSolution.currentObjects.Simulation == null)
+            if (Solution.currentObjects.Simulation == null)
             {
-                MessageBox.Show("Please select a simulation to get Calculation Option dialog.");
+                MessageBox.Show(@"Please select a simulation to get Calculation Option dialog.");
                 return;
             }
 
             var cosd = new fmCalculationOptionSelectionDialog
                            {
                                suspensionCalculationOption =
-                                   m_fSolution.currentObjects.Simulation.Data.suspensionCalculationOption,
+                                   Solution.currentObjects.Simulation.Data.suspensionCalculationOption,
                                filterMachiningCalculationOption =
-                                   m_fSolution.currentObjects.Simulation.Data.filterMachiningCalculationOption,
+                                   Solution.currentObjects.Simulation.Data.filterMachiningCalculationOption,
                                deliquoringUsedCalculationOption = 
-                                   m_fSolution.currentObjects.Simulation.Data.deliquoringUsedCalculationOption,
+                                   Solution.currentObjects.Simulation.Data.deliquoringUsedCalculationOption,
                                gasFlowrateUsedCalculationOption = 
-                                   m_fSolution.currentObjects.Simulation.Data.gasFlowrateUsedCalculationOption,
+                                   Solution.currentObjects.Simulation.Data.gasFlowrateUsedCalculationOption,
                                evaporationUsedCalculationOption =
-                                   m_fSolution.currentObjects.Simulation.Data.evaporationUsedCalculationOption,
+                                   Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption,
                                hcdEpsdCalculationOption =
-                                   m_fSolution.currentObjects.Simulation.Data.hcdEpsdCalculationOption,
+                                   Solution.currentObjects.Simulation.Data.hcdEpsdCalculationOption,
                                dpdInputCalculationOption =
-                                   m_fSolution.currentObjects.Simulation.Data.dpdInputCalculationOption,
+                                   Solution.currentObjects.Simulation.Data.dpdInputCalculationOption,
                                rhoDCalculationOption = 
-                                   m_fSolution.currentObjects.Simulation.Data.rhoDCalculationOption,
+                                   Solution.currentObjects.Simulation.Data.rhoDCalculationOption,
                                PcDCalculationOption =
-                                   m_fSolution.currentObjects.Simulation.Data.PcDCalculationOption
+                                   Solution.currentObjects.Simulation.Data.PcDCalculationOption
                             };
             if (cosd.ShowDialog() == DialogResult.OK)
             {
-                m_fSolution.currentObjects.Simulation.susBlock.SetCalculationOptionAndRewrite(cosd.suspensionCalculationOption);
-                m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.filterMachiningCalculationOption);
-                m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.deliquoringUsedCalculationOption);
-                m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.gasFlowrateUsedCalculationOption);
-                m_fSolution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.evaporationUsedCalculationOption);
-                m_fSolution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(cosd.hcdEpsdCalculationOption);
-                m_fSolution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(cosd.dpdInputCalculationOption);
-                m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.rhoDCalculationOption);
-                m_fSolution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.PcDCalculationOption);
-                DisplaySolution(m_fSolution);
+                Solution.currentObjects.Simulation.susBlock.SetCalculationOptionAndRewrite(cosd.suspensionCalculationOption);
+                Solution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.filterMachiningCalculationOption);
+                Solution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.deliquoringUsedCalculationOption);
+                Solution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.gasFlowrateUsedCalculationOption);
+                Solution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.evaporationUsedCalculationOption);
+                Solution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(cosd.hcdEpsdCalculationOption);
+                Solution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(cosd.dpdInputCalculationOption);
+                Solution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.rhoDCalculationOption);
+                Solution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.PcDCalculationOption);
+                DisplaySolution(Solution);
             }
         }
 
-        private void calculateLimitsCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void CalculateLimitsCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             LimitsCalculationOnOff();
         }
@@ -541,15 +539,15 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             m_commonFilterMachiningBlock.CalculateAndDisplay();
         }
 
-        private void SelectMachineButton_Click(object sender, EventArgs e)
+        private void SelectMachineButtonClick(object sender, EventArgs e)
         {
             var dialog = new MachineTypeSelectionDialog();
-            dialog.AssignSerie(m_fSolution.currentObjects.Serie);
+            dialog.AssignSerie(Solution.currentObjects.Serie);
             dialog.ShowDialog();
             if (dialog.DialogResult == DialogResult.OK)
             {
-                m_fSolution.currentObjects.Serie.MachineType = dialog.GetSelectedType();
-                DisplaySolution(m_fSolution);
+                Solution.currentObjects.Serie.MachineType = dialog.GetSelectedType();
+                DisplaySolution(Solution);
             }
         }
     }

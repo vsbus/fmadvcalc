@@ -477,20 +477,20 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void Serialize(XmlWriter writer)
         {
-            m_fSolution.Keep();
-            m_fSolution.Serialize(writer);
+            Solution.Keep();
+            Solution.Serialize(writer);
         }
 
         public void Deserialize(XmlNode node)
         {
-            m_fSolution = fmFilterSimSolution.Deserialize(node);
-            if (m_fSolution.projects.Count > 0)
+            Solution = fmFilterSimSolution.Deserialize(node);
+            if (Solution.projects.Count > 0)
             {
-                m_fSolution.currentObjects.Project = m_fSolution.projects[0];
+                Solution.currentObjects.Project = Solution.projects[0];
             }
-            m_fSolution.Keep();
+            Solution.Keep();
 
-            DisplaySolution(m_fSolution);
+            DisplaySolution(Solution);
 
             {
                 bool isChecked = false;
@@ -553,7 +553,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public bool IsModified()
         {
-            foreach (var project in m_fSolution.projects)
+            foreach (var project in Solution.projects)
             {
                 if (project.Modified)
                 {
@@ -593,19 +593,19 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void SetCurrentSerieParametersToDisplay(List<fmGlobalParameter> parametersToDisplayList)
         {
-            if (m_fSolution.currentObjects.Serie != null)
+            if (Solution.currentObjects.Serie != null)
             {
-                m_fSolution.currentObjects.Serie.ParametersToDisplay = parametersToDisplayList;
+                Solution.currentObjects.Serie.ParametersToDisplay = parametersToDisplayList;
             }
-            parametersToDisplay = parametersToDisplayList;
+            ParametersToDisplay = parametersToDisplayList;
         }
 
         public List<fmGlobalParameter> GetCurrentSerieParametersToDisplay()
         {
-            if (m_fSolution.currentObjects.Serie == null)
+            if (Solution.currentObjects.Serie == null)
                 return null;
 
-            return m_fSolution.currentObjects.Serie.ParametersToDisplay;
+            return Solution.currentObjects.Serie.ParametersToDisplay;
         }
     }
 }

@@ -22,18 +22,18 @@ namespace FilterSimulation
                 if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["projectNameColumn"].Index)
                 {
                     SetRowFontBoldOrRegular(row, FontStyle.Bold);
-                    prj = m_fSolution.FindProject((Guid)guidCellValue);
+                    prj = Solution.FindProject((Guid)guidCellValue);
                     prj.Name = Convert.ToString(row.Cells["projectNameColumn"].Value);
                 }
                 else if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["projectCheckedColumn"].Index)
                 {
                     if (guidCellValue != null)
                     {
-                        prj = m_fSolution.FindProject((Guid)guidCellValue);
+                        prj = Solution.FindProject((Guid)guidCellValue);
                         prj.Checked = (bool)row.Cells["projectCheckedColumn"].Value;
                     }
                 }
-                DisplaySolution(m_fSolution);
+                DisplaySolution(Solution);
 
             }
         }
@@ -53,7 +53,7 @@ namespace FilterSimulation
                 {
                     SetRowFontBoldOrRegular(row, FontStyle.Bold);
 
-                    sus = m_fSolution.FindSuspension((Guid)guidCellValue);
+                    sus = Solution.FindSuspension((Guid)guidCellValue);
 
                     if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["suspensionNameColumn"].Index)
                         sus.Name = Convert.ToString(row.Cells["suspensionNameColumn"].Value);
@@ -68,12 +68,12 @@ namespace FilterSimulation
                 {
                     if (guidCellValue != null)
                     {
-                        sus = m_fSolution.FindSuspension((Guid)guidCellValue);
+                        sus = Solution.FindSuspension((Guid)guidCellValue);
                         sus.Checked = (bool)row.Cells["suspensionCheckedColumn"].Value;
                     }
                 }
 
-                DisplaySolution(m_fSolution);
+                DisplaySolution(Solution);
             }
         }
         // ReSharper disable InconsistentNaming
@@ -90,7 +90,7 @@ namespace FilterSimulation
                 {
                     SetRowFontBoldOrRegular(row, FontStyle.Bold);
 
-                    serie = m_fSolution.FindSerie((Guid)guidCellValue);
+                    serie = Solution.FindSerie((Guid)guidCellValue);
 
                     if (e.ColumnIndex == ((fmDataGrid.fmDataGrid)sender).Columns["simSeriesNameColumn"].Index)
                         serie.Name = Convert.ToString(row.Cells["simSeriesNameColumn"].Value);
@@ -105,12 +105,12 @@ namespace FilterSimulation
                 {
                     if (guidCellValue != null)
                     {
-                        serie = m_fSolution.FindSerie((Guid)guidCellValue);
+                        serie = Solution.FindSerie((Guid)guidCellValue);
                         serie.Checked = (bool)row.Cells["simSeriesCheckedColumn"].Value;
                     }
                 }
 
-                DisplaySolution(m_fSolution);
+                DisplaySolution(Solution);
             }
         }
         // ReSharper disable InconsistentNaming
@@ -130,7 +130,7 @@ namespace FilterSimulation
                 {
                     SetRowFontBoldOrRegular(row, FontStyle.Bold);
 
-                    sim = m_fSolution.FindSimulation((Guid)guidCellValue);
+                    sim = Solution.FindSimulation((Guid)guidCellValue);
 
                     if (e.ColumnIndex == dataGrid.Columns["simulationNameColumn"].Index)
                         sim.Name = Convert.ToString(row.Cells["simulationNameColumn"].Value);
@@ -141,13 +141,13 @@ namespace FilterSimulation
                 {
                     if (guidCellValue != null)
                     {
-                        sim = m_fSolution.FindSimulation((Guid)guidCellValue);
+                        sim = Solution.FindSimulation((Guid)guidCellValue);
                         sim.Checked = (bool)row.Cells["simulationCheckedColumn"].Value;
                         dataGrid.EndEdit();
                     }
                 }
 
-                DisplaySolution(m_fSolution);
+                DisplaySolution(Solution);
             }
         }
         #endregion
@@ -178,28 +178,28 @@ namespace FilterSimulation
         {
             if (e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["projectCheckedColumn"].Index)
             {
-                DisplaySolution(m_fSolution);
+                DisplaySolution(Solution);
             }
         }
         private void suspensionDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["suspensionCheckedColumn"].Index)
             {
-                DisplaySolution(m_fSolution);
+                DisplaySolution(Solution);
             }
         }
         private void simSeriesDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex != (sender as fmDataGrid.fmDataGrid).Columns["simSeriesCheckedColumn"].Index)
             {
-                DisplaySolution(m_fSolution);
+                DisplaySolution(Solution);
             }
         }
         private void simulationDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex != ((fmDataGrid.fmDataGrid)sender).Columns["simulationCheckedColumn"].Index)
             {
-                DisplaySolution(m_fSolution);
+                DisplaySolution(Solution);
             }
         }
         // ReSharper restore InconsistentNaming
