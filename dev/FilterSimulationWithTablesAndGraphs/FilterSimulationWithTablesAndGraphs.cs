@@ -324,5 +324,13 @@ namespace FilterSimulationWithTablesAndGraphs
 
             return Solution.currentObjects.Serie.ParametersToDisplay;
         }
+
+        public string GetCurrentSerieMachineName()
+        {
+            if (Solution.currentObjects.Serie == null)
+                return "";
+
+            return Solution.currentObjects.Serie.MachineType.name;
+        }
     }
 }

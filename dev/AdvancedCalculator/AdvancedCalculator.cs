@@ -185,6 +185,7 @@ namespace AdvancedCalculator
         private void parametersToDisplayToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var yalForm = new fmYAxisListingForm();
+            yalForm.currentSerieMachineName = filterSimulationWithTablesAndGraphs1.GetCurrentSerieMachineName();
             yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.GetCurrentSerieParametersToDisplay());
             if (yalForm.ShowDialog() == DialogResult.OK)
             {
