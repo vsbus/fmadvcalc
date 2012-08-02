@@ -49,6 +49,8 @@ namespace FilterSimulation.fmFilterObjects
                                                                                                  fmGlobalParameter.Qgi,
                                                                                                  fmGlobalParameter.Qg
                                                                                              });
+
+        public Dictionary<fmGlobalParameter, fmDefaultParameterRange> ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
         public List<fmFilterSimulation> simList;
 
 
@@ -59,6 +61,13 @@ namespace FilterSimulation.fmFilterObjects
             machineName = from.machineName;
             filterMedium = from.filterMedium;
             parametersToDisplay = new List<fmGlobalParameter>(from.parametersToDisplay);
+
+            ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
+            foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in from.ranges)
+            {
+                ranges.Add(range.Key, range.Value);
+            }
+
             simList = new List<fmFilterSimulation>();
             foreach (fmFilterSimulation sim in from.simList)
             {
@@ -78,7 +87,12 @@ namespace FilterSimulation.fmFilterObjects
             public const string MachineName = "machineName";
             public const string FilterMedium = "filterMedium";
             public const string ParametersToDisplay = "ParametersToDisplay";
+            public const string Ranges = "Ranges";
             public const string GlobalParameter = "GlobalParameter";
+            public const string ParameterRange = "ParameterRange";
+            public const string RangeIsInputed = "RangeIsInputed";
+            public const string RangeMinValue = "RangeMinValue";
+            public const string RangeMaxValue = "RangeMaxValue";
         }
 
         internal void Serialize(XmlWriter writer)
@@ -88,12 +102,26 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteElementString(fmSimSerieDataSerializeTags.MachineName, machineName);
             machine.Serialize(writer);
             writer.WriteElementString(fmSimSerieDataSerializeTags.FilterMedium, filterMedium);
+            
             writer.WriteStartElement(fmSimSerieDataSerializeTags.ParametersToDisplay);
             foreach (var p in parametersToDisplay)
             {
                 writer.WriteElementString(fmSimSerieDataSerializeTags.GlobalParameter, p.Name);
             }
             writer.WriteEndElement();
+
+            writer.WriteStartElement(fmSimSerieDataSerializeTags.Ranges);
+            foreach (var p in ranges)
+            {
+                writer.WriteStartElement(fmSimSerieDataSerializeTags.ParameterRange);
+                writer.WriteElementString(fmSimSerieDataSerializeTags.GlobalParameter, p.Key.Name);
+                writer.WriteElementString(fmSimSerieDataSerializeTags.RangeIsInputed, p.Value.IsInputed.ToString());
+                writer.WriteElementString(fmSimSerieDataSerializeTags.RangeMinValue, p.Value.MinValue.ToString());
+                writer.WriteElementString(fmSimSerieDataSerializeTags.RangeMaxValue, p.Value.MaxValue.ToString());
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+
             foreach (var p in simList)
             {
                 p.Serialize(writer);
@@ -116,6 +144,7 @@ namespace FilterSimulation.fmFilterObjects
                                         xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.FilterMedium).InnerText,
                                     parametersToDisplay = new List<fmGlobalParameter>()
                                 };
+
             XmlNode parametersToDisplayNode = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.ParametersToDisplay);
             if (parametersToDisplayNode != null)
             {
@@ -126,6 +155,38 @@ namespace FilterSimulation.fmFilterObjects
                     serieData.parametersToDisplay.Add(fmGlobalParameter.ParametersByName[p.InnerText]);
                 }
             }
+
+            serieData.ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
+            XmlNode rangesNode = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.Ranges);
+            if (rangesNode != null)
+            {
+                XmlNodeList rangesParametersNodes = rangesNode.SelectNodes(fmSimSerieDataSerializeTags.ParameterRange);
+                foreach (XmlNode rangeNode in rangesParametersNodes)
+                {
+                    XmlNode parameterNameNode = rangeNode.SelectSingleNode(fmSimSerieDataSerializeTags.GlobalParameter);
+                    if (parameterNameNode != null)
+                    {
+                        var range = new fmDefaultParameterRange();
+                        XmlNode isInputedNode = rangeNode.SelectSingleNode(fmSimSerieDataSerializeTags.RangeIsInputed);
+                        if (isInputedNode != null)
+                        {
+                            range.IsInputed = Convert.ToBoolean(isInputedNode.InnerText);
+                        }
+                        XmlNode minValueNode = rangeNode.SelectSingleNode(fmSimSerieDataSerializeTags.RangeMinValue);
+                        if (minValueNode != null)
+                        {
+                            range.MinValue = Convert.ToDouble(minValueNode.InnerText);
+                        }
+                        XmlNode maxValueNode = rangeNode.SelectSingleNode(fmSimSerieDataSerializeTags.RangeMaxValue);
+                        if (maxValueNode != null)
+                        {
+                            range.MaxValue = Convert.ToDouble(maxValueNode.InnerText);
+                        }
+                        serieData.ranges.Add(fmGlobalParameter.ParametersByName[parameterNameNode.InnerText], range);
+                    }
+                }
+            }
+
             XmlNodeList simList = xmlNode.SelectNodes(fmFilterSimulation.fmFilterSimulationSerializeTags.Simulation);
             foreach (XmlNode simNode in simList)
             {
@@ -176,6 +237,7 @@ namespace FilterSimulation.fmFilterObjects
                 m_data.machine = value;
             }
         }
+
         public List<fmGlobalParameter> ParametersToDisplay
         {
             get { return m_data.parametersToDisplay; }
@@ -185,6 +247,17 @@ namespace FilterSimulation.fmFilterObjects
                 m_data.parametersToDisplay = value;
             }
         }
+
+        public Dictionary<fmGlobalParameter, fmDefaultParameterRange> Ranges
+        {
+            get { return m_data.ranges; }
+            set
+            {
+                Modified |= m_data.ranges != value;
+                m_data.ranges = value;
+            }
+        }
+
         
         public string FilterMedium
         {
@@ -342,6 +415,7 @@ namespace FilterSimulation.fmFilterObjects
             serie.MachineName = m_data.machineName;
             serie.FilterMedium = m_data.filterMedium;
             serie.ParametersToDisplay = m_data.parametersToDisplay;
+            serie.Ranges = m_data.ranges;
             return serie;
         }
     }

@@ -175,8 +175,11 @@ namespace AdvancedCalculator
         private void rangesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             var proForm = new FilterSimulation.fmParameterIntervalOption();
-            proForm.ShowDialog();
-            filterSimulationWithTablesAndGraphs1.UpdateAll();
+            if (proForm.ShowDialog() == DialogResult.OK)
+            {
+                filterSimulationWithTablesAndGraphs1.SetCurrentSerieRanges(proForm.GetRanges());
+                filterSimulationWithTablesAndGraphs1.UpdateAll();
+            }
         }
 
         private void parametersToDisplayToolStripMenuItem_Click(object sender, EventArgs e)

@@ -600,6 +600,18 @@ namespace FilterSimulationWithTablesAndGraphs
             ParametersToDisplay = parametersToDisplayList;
         }
 
+        public void SetCurrentSerieRanges(Dictionary<fmGlobalParameter, fmDefaultParameterRange> ranges)
+        {
+            if (Solution.currentObjects.Serie != null)
+            {
+                Solution.currentObjects.Serie.Ranges = ranges;
+            }
+            foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in ranges)
+            {
+                range.Key.SpecifiedRange = range.Value;
+            }
+        }
+
         public List<fmGlobalParameter> GetCurrentSerieParametersToDisplay()
         {
             if (Solution.currentObjects.Serie == null)

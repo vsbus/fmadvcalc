@@ -913,10 +913,8 @@ namespace FilterSimulation
             {
                 displayingSolution = true;
 
-                if (sol.currentObjects.Serie != null)
-                {
-                    ParametersToDisplay = sol.currentObjects.Serie.ParametersToDisplay;
-                }
+                ApplyCurrentSerieParametersToDisplay(sol);
+                ApplyCurrentSerieRanges(sol);
 
                 AddHideRowsForSolution(sol);
                 AssignNewCellsWithCalculationEngine(sol);
@@ -931,6 +929,25 @@ namespace FilterSimulation
                 ShowHideSelectedParametersInSimulationDataGrid();
 
                 displayingSolution = false;
+            }
+        }
+
+        private void ApplyCurrentSerieRanges(fmFilterSimSolution sol)
+        {
+            if (sol.currentObjects.Serie != null)
+            {
+                foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in sol.currentObjects.Serie.Ranges)
+                {
+                    range.Key.SpecifiedRange = range.Value;
+                }
+            }
+        }
+
+        private void ApplyCurrentSerieParametersToDisplay(fmFilterSimSolution sol)
+        {
+            if (sol.currentObjects.Serie != null)
+            {
+                ParametersToDisplay = sol.currentObjects.Serie.ParametersToDisplay;
             }
         }
 

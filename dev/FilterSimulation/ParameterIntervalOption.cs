@@ -248,9 +248,37 @@ namespace FilterSimulation
 
         private void buttonOK_Click(object sender, System.EventArgs e)
         {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
+        {
+            ShowHideMoreParameters();
+        }
+
+        private void ShowHideMoreParameters()
+        {
+            splitContainer4.Panel2Collapsed = !checkBox1.Checked;
+        }
+
+        private void fmParameterIntervalOption_Load(object sender, System.EventArgs e)
+        {
+            ShowHideMoreParameters();
+        }
+
+        public Dictionary<fmGlobalParameter, fmDefaultParameterRange> GetRanges()
+        {
+            var result = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
             foreach (var p in fmGlobalParameter.Parameters)
             {
-                p.SpecifiedRange.IsInputed = false;
+                result.Add(p, new fmDefaultParameterRange(0, 1, false));
             }
 
             var grids = new TableWithParameterRanges[]
@@ -268,7 +296,7 @@ namespace FilterSimulation
                 {
                     fmGlobalParameter p = fmGlobalParameter.ParametersByName[grid.ParameterCell(i).Value.ToString()];
                     fmBlockLimitsParameter blockLimitParameter = null;
-                    
+
                     if (blockLimitParameter == null)
                     {
                         blockLimitParameter = cakeFormationLimitsBlock.GetParameterByName(p.Name);
@@ -277,36 +305,17 @@ namespace FilterSimulation
                     {
                         blockLimitParameter = deliquoringLimitsBlock.GetParameterByName(p.Name);
                     }
-                    p.SpecifiedRange.IsInputed = blockLimitParameter != null
+                    result[p].IsInputed = blockLimitParameter != null
                                                      ? blockLimitParameter.IsInputed
                                                      : false;
-                    p.SpecifiedRange.MinValue = fmValue.ObjectToValue(grid.RangeMinValueCell(i).Value).value *
+                    result[p].MinValue = fmValue.ObjectToValue(grid.RangeMinValueCell(i).Value).value *
                                                 p.UnitFamily.CurrentUnit.Coef;
-                    p.SpecifiedRange.MaxValue = fmValue.ObjectToValue(grid.RangeMaxValueCell(i).Value).value *
+                    result[p].MaxValue = fmValue.ObjectToValue(grid.RangeMaxValueCell(i).Value).value *
                                                 p.UnitFamily.CurrentUnit.Coef;
                 }
             }
-            Close();
-        }
 
-        private void button1_Click(object sender, System.EventArgs e)
-        {
-            Close();
-        }
-
-        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
-        {
-            ShowHideMoreParameters();
-        }
-
-        private void ShowHideMoreParameters()
-        {
-            splitContainer4.Panel2Collapsed = !checkBox1.Checked;
-        }
-
-        private void fmParameterIntervalOption_Load(object sender, System.EventArgs e)
-        {
-            ShowHideMoreParameters();
+            return result;
         }
     }
 }
