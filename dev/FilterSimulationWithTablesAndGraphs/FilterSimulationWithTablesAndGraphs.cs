@@ -86,10 +86,6 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
                 double coef = xParameter.UnitFamily.CurrentUnit.Coef;
-                fmRange range = xParameter.ChartCurretXRange;
-
-                range.MinValue = minXValue * coef;
-                range.MaxValue = maxXValue * coef;
             }
         }
 

@@ -18,7 +18,6 @@ namespace fmCalculationLibrary
 
         public fmDefaultParameterRange SpecifiedRange;
         public fmDefaultParameterRange ValidRange;
-        public fmRange ChartCurretXRange;
 
         // ReSharper disable InconsistentNaming
         #region CakeFormation
@@ -589,7 +588,6 @@ namespace fmCalculationLibrary
             UnitFamily = unitFamily;
             SpecifiedRange = new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
             ValidRange = new fmDefaultParameterRange(minMaxRange.MinValue, minMaxRange.MaxValue);
-            ChartCurretXRange = new fmRange(minMaxRange.MinValue, minMaxRange.MaxValue);
         }
 
         public fmGlobalParameter(string name, fmUnitFamily unitFamily) : this(name, unitFamily, new fmDefaultParameterRange()) { }
