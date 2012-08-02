@@ -507,7 +507,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.button1.TabIndex = 5;
             this.button1.Text = "Configure Diagram";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1Click);
             // 
             // tablesAndGraphsTopLeftPanel
             // 
@@ -606,7 +606,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis.TabIndex = 6;
             this.listBoxYAxis.UseCompatibleStateImageBehavior = false;
             this.listBoxYAxis.View = System.Windows.Forms.View.List;
-            this.listBoxYAxis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listBoxYAxis_ItemCheck);
+            this.listBoxYAxis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ListBoxYAxisItemCheck);
             // 
             // columnHeader2
             // 
@@ -640,7 +640,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.deliquoringMachininglParametersCheckBox.TabIndex = 3;
             this.deliquoringMachininglParametersCheckBox.Text = "Deliquoring Machining Parameters";
             this.deliquoringMachininglParametersCheckBox.UseVisualStyleBackColor = true;
-            this.deliquoringMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.deliquoringMachininglParametersCheckBox_CheckedChanged);
+            this.deliquoringMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.DeliquoringMachininglParametersCheckBoxCheckedChanged);
             // 
             // deselectAllButton
             // 
@@ -650,7 +650,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.deselectAllButton.TabIndex = 4;
             this.deselectAllButton.Text = "Deselect All";
             this.deselectAllButton.UseVisualStyleBackColor = true;
-            this.deselectAllButton.Click += new System.EventHandler(this.deselectAllButton_Click);
+            this.deselectAllButton.Click += new System.EventHandler(this.DeselectAllButtonClick);
             // 
             // cakeFormationMaterilParametersCheckBox
             // 
@@ -661,7 +661,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.cakeFormationMaterilParametersCheckBox.TabIndex = 0;
             this.cakeFormationMaterilParametersCheckBox.Text = "Cake Formation Material Parameters";
             this.cakeFormationMaterilParametersCheckBox.UseVisualStyleBackColor = true;
-            this.cakeFormationMaterilParametersCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.cakeFormationMaterilParametersCheckBox.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
             // 
             // deliquoringMaterilParametersCheckBox
             // 
@@ -672,7 +672,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.deliquoringMaterilParametersCheckBox.TabIndex = 1;
             this.deliquoringMaterilParametersCheckBox.Text = "Deliquoring Material Parameters";
             this.deliquoringMaterilParametersCheckBox.UseVisualStyleBackColor = true;
-            this.deliquoringMaterilParametersCheckBox.CheckedChanged += new System.EventHandler(this.deliquoringMaterilParametersCheckBox_CheckedChanged);
+            this.deliquoringMaterilParametersCheckBox.CheckedChanged += new System.EventHandler(this.DeliquoringMaterilParametersCheckBoxCheckedChanged);
             // 
             // cakeFormationMachininglParametersCheckBox
             // 
@@ -685,7 +685,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.cakeFormationMachininglParametersCheckBox.TabIndex = 2;
             this.cakeFormationMachininglParametersCheckBox.Text = "Cake Formation Machining Parameters";
             this.cakeFormationMachininglParametersCheckBox.UseVisualStyleBackColor = true;
-            this.cakeFormationMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.cakeFormationMachininglParametersCheckBox_CheckedChanged);
+            this.cakeFormationMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.CakeFormationMachininglParametersCheckBoxCheckedChanged);
             // 
             // splitter11
             // 
@@ -749,7 +749,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "fmFilterSimulationWithTablesAndGraphs";
             this.Size = new System.Drawing.Size(1275, 731);
-            this.Load += new System.EventHandler(this.fmFilterSimulationWithTablesAndGraphs_Load);
+            this.Load += new System.EventHandler(this.FmFilterSimulationWithTablesAndGraphsLoad);
             this.panelLeft.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
             this.projectPanel.ResumeLayout(false);

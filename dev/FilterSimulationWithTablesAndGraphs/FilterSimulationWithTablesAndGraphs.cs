@@ -1,12 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using fmCalculationLibrary;
 using FilterSimulation.fmFilterObjects;
-using fmCalcBlocksLibrary.Blocks;
-using fmCalculatorsLibrary;
 using System.Xml;
 
 namespace FilterSimulationWithTablesAndGraphs
@@ -77,23 +73,10 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        private void ReadMinMaxXValues()
-        {
-            if (m_loadingXRange == false)
-            {
-                double minXValue = fmValue.StringToValue(minXValueTextBox.Text).value;
-                double maxXValue = fmValue.StringToValue(maxXValueTextBox.Text).value;
-
-                fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
-                double coef = xParameter.UnitFamily.CurrentUnit.Coef;
-            }
-        }
-
         // ReSharper disable InconsistentNaming
         private void minMaxXValueTextBox_TextChanged(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            ReadMinMaxXValues();
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
@@ -172,281 +155,7 @@ namespace FilterSimulationWithTablesAndGraphs
             HighLightCurrentPoints(sender, e.X, e.IsHighlight);
         }
 
-        // ReSharper disable InconsistentNaming
-        private void calculationOptionTandCChangeButton_Click(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
-        {
-            if (!m_isUseLocalParams)
-            {
-                var cosd = new fmCalculationOptionSelectionExpandedDialog
-                {
-                    suspensionCalculationOption =
-                        fmSuspensionCalculator.fmSuspensionCalculationOptions.
-                        RHOSUS_CALCULATED,
-                    hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.
-                        fmDeliquoringHcdEpsdCalculationOption.
-                        CalculatedFromCakeFormation,
-                    dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.
-                        fmDeliquoringDpdInputOption.
-                        CalculatedFromCakeFormation,
-                    rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
-                        fmRhoDEtaDCalculationOption.
-                        EqualToRhoF,
-                    PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
-                        fmPcDCalculationOption.
-                        Calculated,
-                    filterMachiningCalculationOption =
-                        fmFilterMachiningCalculator.
-                        fmFilterMachiningCalculationOption.PLAIN_DP_CONST,
-                    deliquoringUsedCalculationOption =
-                        fmFilterMachiningCalculator.
-                        fmDeliquoringUsedCalculationOption.Used,
-                    gasFlowrateUsedCalculationOption =
-                        fmFilterMachiningCalculator.
-                        fmGasFlowrateUsedCalculationOption.Consider,
-                    evaporationUsedCalculationOption =
-                        fmFilterMachiningCalculator.
-                        fmEvaporationUsedCalculationOption.NotConsider
-                };
-
-                if (GetCurrentActiveSelectedSimulationData() != null)
-                {
-                    fmSelectedSimulationData simData = GetCurrentActiveSelectedSimulationData();
-                    cosd.suspensionCalculationOption = simData.internalSimulationData.suspensionCalculationOption;
-                    cosd.filterMachiningCalculationOption = simData.internalSimulationData.filterMachiningCalculationOption;
-                    cosd.deliquoringUsedCalculationOption = simData.internalSimulationData.deliquoringUsedCalculationOption;
-                    cosd.gasFlowrateUsedCalculationOption = simData.internalSimulationData.gasFlowrateUsedCalculationOption;
-                    cosd.evaporationUsedCalculationOption = simData.internalSimulationData.evaporationUsedCalculationOption;
-                    cosd.hcdEpsdCalculationOption = simData.internalSimulationData.hcdEpsdCalculationOption;
-                    cosd.dpdInputCalculationOption = simData.internalSimulationData.dpdInputCalculationOption;
-                    cosd.rhoDCalculationOption = simData.internalSimulationData.rhoDCalculationOption;
-                    cosd.PcDCalculationOption = simData.internalSimulationData.PcDCalculationOption;
-                }
-
-                if (cosd.ShowDialog() == DialogResult.OK)
-                {
-                    var selectedList = new List<fmSelectedSimulationData>();
-
-                    foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
-                    {
-                        if (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.ALL
-                            || (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.CHECKED && simData.isChecked)
-                            || (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.CURRENT && simData.isCurrentActive))
-                        {
-                            selectedList.Add(simData);
-                        }
-                    }
-
-
-                    foreach (fmSelectedSimulationData simData in selectedList)
-                    {
-                        fmFilterSimulationData sim = simData.internalSimulationData;
-                        fmSuspensionCalculator.fmSuspensionCalculationOptions
-                            suspensionCalculationOption;
-                        fmFilterMachiningCalculator.fmFilterMachiningCalculationOption
-                            filterMachiningCalculationOption;
-                        fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption
-                            deliquoringUsedCalculationOption;
-                        fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption
-                            gasFlowrateUsedCalculationOption;
-                        fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption
-                            evaporationUsedCalculationOption;
-                        fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption
-                            hcdEpsdCalculationOption;
-                        fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption
-                            dpdInputCalculationOption;
-                        fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption
-                            rhoDetaDCalculationOption;
-                        fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption
-                            PcDCalculationOption;
-
-                        if (cosd.CalculationOptionKind == fmCalculationOptionDialogExpandedCalculationOptionKind.NEW)
-                        {
-                            suspensionCalculationOption = cosd.suspensionCalculationOption;
-                            filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
-                            deliquoringUsedCalculationOption = cosd.deliquoringUsedCalculationOption;
-                            gasFlowrateUsedCalculationOption = cosd.gasFlowrateUsedCalculationOption;
-                            evaporationUsedCalculationOption = cosd.evaporationUsedCalculationOption;
-                            hcdEpsdCalculationOption = cosd.hcdEpsdCalculationOption;
-                            dpdInputCalculationOption = cosd.dpdInputCalculationOption;
-                            rhoDetaDCalculationOption = cosd.rhoDCalculationOption;
-                            PcDCalculationOption = cosd.PcDCalculationOption;
-                        }
-                        else if (cosd.CalculationOptionKind ==
-                                 fmCalculationOptionDialogExpandedCalculationOptionKind.MOTHER_INITIAL)
-                        {
-                            suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
-                            filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
-                            deliquoringUsedCalculationOption = simData.externalSimulation.DeliquoringUsedCalculationOption;
-                            gasFlowrateUsedCalculationOption = simData.externalSimulation.GasFlowrateUsedCalculationOption;
-                            evaporationUsedCalculationOption = simData.externalSimulation.EvaporationUsedCalculationOption;
-                            hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
-                            dpdInputCalculationOption = simData.externalSimulation.DpdInputCalculationOption;
-                            rhoDetaDCalculationOption = simData.externalSimulation.RhoDetaDCalculationOption;
-                            PcDCalculationOption = simData.externalSimulation.PcDCalculationOption;
-                        }
-                        else
-                        {
-                            throw new Exception("unknown Calculation option Kind");
-                        }
-
-                        var susBlock = new fmSuspensionBlock();
-                        fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, susBlock);
-                        susBlock.SetCalculationOptionAndRewrite(suspensionCalculationOption);
-                        fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(susBlock, sim);
-                        sim.suspensionCalculationOption = suspensionCalculationOption;
-
-                        var filterMachiningBlock = new fmFilterMachiningBlock();
-                        fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, filterMachiningBlock);
-                        filterMachiningBlock.SetCalculationOptionAndRewriteData(filterMachiningCalculationOption);
-                        filterMachiningBlock.SetCalculationOptionAndRewriteData(deliquoringUsedCalculationOption);
-                        filterMachiningBlock.SetCalculationOptionAndRewriteData(gasFlowrateUsedCalculationOption);
-                        filterMachiningBlock.SetCalculationOptionAndRewriteData(evaporationUsedCalculationOption);
-                        fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(filterMachiningBlock, sim);
-                        simData.internalSimulationData.filterMachiningCalculationOption =
-                            filterMachiningCalculationOption;
-                        simData.internalSimulationData.deliquoringUsedCalculationOption =
-                            deliquoringUsedCalculationOption;
-                        simData.internalSimulationData.gasFlowrateUsedCalculationOption =
-                            gasFlowrateUsedCalculationOption;
-                        simData.internalSimulationData.evaporationUsedCalculationOption =
-                            evaporationUsedCalculationOption;
-
-                        var eps0dNedEpsdBlock = new fmEps0dNedEpsdBlock();
-                        fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, eps0dNedEpsdBlock);
-                        eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(hcdEpsdCalculationOption);
-                        eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(dpdInputCalculationOption);
-                        fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(eps0dNedEpsdBlock, sim);
-                        simData.internalSimulationData.hcdEpsdCalculationOption = hcdEpsdCalculationOption;
-                        simData.internalSimulationData.dpdInputCalculationOption = dpdInputCalculationOption;
-
-                        var sigmaPke0PkePcdRcdAlphadBlock = new fmSigmaPke0PkePcdRcdAlphadBlock();
-                        fmFilterSimulationData.CopyAllParametersFromSimulationToBlock(sim, sigmaPke0PkePcdRcdAlphadBlock);
-                        sigmaPke0PkePcdRcdAlphadBlock.SetCalculationOptionAndRewrite(rhoDetaDCalculationOption);
-                        sigmaPke0PkePcdRcdAlphadBlock.SetCalculationOptionAndRewrite(PcDCalculationOption);
-                        fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(sigmaPke0PkePcdRcdAlphadBlock, sim);
-                        simData.internalSimulationData.rhoDCalculationOption = rhoDetaDCalculationOption;
-                        simData.internalSimulationData.PcDCalculationOption = PcDCalculationOption;
-                    }
-                }
-
-                BindBackColorToSelectedSimulationsTable();
-                BindXYLists();
-                SetXAxisParameterAsInputed();
-            }
-            else
-            {
-                var cosd = new fmCalculationOptionSelectionExpandedDialog
-                               {
-                                   suspensionCalculationOption =
-                                       fmSuspensionCalculator.fmSuspensionCalculationOptions.
-                                       RHOSUS_CALCULATED,
-                                   hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.
-                                       fmDeliquoringHcdEpsdCalculationOption.
-                                       CalculatedFromCakeFormation,
-                                   dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.
-                                       fmDeliquoringDpdInputOption.
-                                       CalculatedFromCakeFormation,
-                                   rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
-                                       fmRhoDEtaDCalculationOption.
-                                       EqualToRhoF,
-                                   PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.
-                                       fmPcDCalculationOption.
-                                       Calculated,
-                                   filterMachiningCalculationOption =
-                                       fmFilterMachiningCalculator.
-                                       fmFilterMachiningCalculationOption.PLAIN_DP_CONST,
-                                   deliquoringUsedCalculationOption =
-                                       fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used,
-                                   gasFlowrateUsedCalculationOption =
-                                       fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider,
-                                   evaporationUsedCalculationOption =
-                                       fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider
-                               };
-
-                if (GetCurrentActiveLocalParameters() != null)
-                {
-                    fmLocalInputParametersData localParameters = GetCurrentActiveLocalParameters();
-                    cosd.filterMachiningCalculationOption = localParameters.filterMachiningBlock.filterMachiningCalculationOption;
-                    cosd.deliquoringUsedCalculationOption = localParameters.filterMachiningBlock.deliquoringUsedCalculationOption;
-                    cosd.gasFlowrateUsedCalculationOption = localParameters.filterMachiningBlock.gasFlowrateUsedCalculationOption;
-                    cosd.evaporationUsedCalculationOption = localParameters.filterMachiningBlock.evaporationUsedCalculationOption;
-                }
-
-                if (cosd.ShowDialog() == DialogResult.OK)
-                {
-                    var selectedList = new List<fmLocalInputParametersData>();
-
-                    foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
-                    {
-                        if (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.ALL
-                            || (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.CHECKED && localParameters.isChecked)
-                            || (cosd.ItemSelection == fmCalculationOptionDialogExpandedItemSelection.CURRENT && localParameters.isCurrentActive))
-                        {
-                            selectedList.Add(localParameters);
-                        }
-                    }
-
-                    foreach (fmLocalInputParametersData localParameters in selectedList)
-                    {
-                        fmFilterMachiningBlock fmb = localParameters.filterMachiningBlock;
-                        fmCalculatorsLibrary.fmFilterMachiningCalculator.fmFilterMachiningCalculationOption
-                            filterMachiningCalculationOption;
-
-                        if (cosd.CalculationOptionKind == fmCalculationOptionDialogExpandedCalculationOptionKind.NEW)
-                        {
-                            filterMachiningCalculationOption = cosd.filterMachiningCalculationOption;
-                        }
-                        else if (cosd.CalculationOptionKind ==
-                                 fmCalculationOptionDialogExpandedCalculationOptionKind.MOTHER_INITIAL)
-                        {
-                            filterMachiningCalculationOption = localParameters.initialFilterMachiningCalculationOption;
-                        }
-                        else
-                        {
-                            throw new Exception("unknown Calculation option Kind");
-                        }
-
-                        fmb.SetCalculationOptionAndRewriteData(filterMachiningCalculationOption);
-                    }
-                }
-
-                UpdateVisibilityOfColumnsInLocalParametrsTable();
-            }
-
-            BindXYLists();
-            RecalculateSimulationsWithIterationX();
-            BindCalculatedResultsToDisplayingResults();
-            BindCalculatedResultsToChartAndTable();
-        }
-
-        private fmLocalInputParametersData GetCurrentActiveLocalParameters()
-        {
-            foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
-            {
-                if (localParameters.isCurrentActive)
-                {
-                    return localParameters;
-                }
-            }
-            return null;
-        }
-
-        private fmSelectedSimulationData GetCurrentActiveSelectedSimulationData()
-        {
-            foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
-            {
-                if (simData.isCurrentActive)
-                {
-                    return simData;
-                }
-            }
-            return null;
-        }
-
-        // ReSharper disable InconsistentNaming
-        private void listBoxYAxis_ItemCheck(object sender, ItemCheckEventArgs e)
-        // ReSharper restore InconsistentNaming
+        private void ListBoxYAxisItemCheck(object sender, ItemCheckEventArgs e)
         {
             var yParameters = new List<fmGlobalParameter>();
 
@@ -509,36 +218,36 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        private void fmFilterSimulationWithTablesAndGraphs_Load(object sender, EventArgs e)
+        private void FmFilterSimulationWithTablesAndGraphsLoad(object sender, EventArgs e)
         {
-            if (m_XYDialog == null)
+            if (m_xyDialog == null)
             {
                 PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
             }
         }
 
-        private Form m_XYDialog;
+        private Form m_xyDialog;
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1Click(object sender, EventArgs e)
         {
-            if (m_XYDialog == null || m_XYDialog.IsDisposed)
+            if (m_xyDialog == null || m_xyDialog.IsDisposed)
             {
                 PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
             }
-            m_XYDialog.Show();
-            m_XYDialog.Activate();
+            m_xyDialog.Show();
+            m_xyDialog.Activate();
         }
 
         private void PlaceTablesAndGraphsConfigurationPanelOnSeparateForm()
         {
-            int oldHeight = m_XYDialog == null ? 400 : m_XYDialog.Height;
-            int oldWidth = m_XYDialog == null ? 320 : m_XYDialog.Width;
-            m_XYDialog = new Form();
-            m_XYDialog.Closing += new System.ComponentModel.CancelEventHandler(m_XYDialog_Closing);
-            m_XYDialog.Height = oldHeight;
-            m_XYDialog.Width = oldWidth;
-            m_XYDialog.Text = "Diagram Configuration";
-            tablesAndGraphsTopLeftPanel.Parent = m_XYDialog;
+            int oldHeight = m_xyDialog == null ? 400 : m_xyDialog.Height;
+            int oldWidth = m_xyDialog == null ? 320 : m_xyDialog.Width;
+            m_xyDialog = new Form();
+            m_xyDialog.Closing += m_XYDialog_Closing;
+            m_xyDialog.Height = oldHeight;
+            m_xyDialog.Width = oldWidth;
+            m_xyDialog.Text = @"Diagram Configuration";
+            tablesAndGraphsTopLeftPanel.Parent = m_xyDialog;
             tablesAndGraphsTopLeftPanel.Dock = DockStyle.Fill;
         }
 
@@ -559,27 +268,27 @@ namespace FilterSimulationWithTablesAndGraphs
             return false;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox1CheckedChanged(object sender, EventArgs e)
         {
             BindXYLists();
         }
 
-        private void cakeFormationMachininglParametersCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void CakeFormationMachininglParametersCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             BindXYLists();
         }
 
-        private void deliquoringMaterilParametersCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void DeliquoringMaterilParametersCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             BindXYLists();
         }
 
-        private void deliquoringMachininglParametersCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void DeliquoringMachininglParametersCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             BindXYLists();
         }
 
-        private void deselectAllButton_Click(object sender, EventArgs e)
+        private void DeselectAllButtonClick(object sender, EventArgs e)
         {
             foreach (ListViewItem item in listBoxYAxis.Items)
             {
