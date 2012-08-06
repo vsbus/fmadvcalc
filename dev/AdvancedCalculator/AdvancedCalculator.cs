@@ -41,11 +41,18 @@ namespace AdvancedCalculator
 
         private void AdvancedCalculatorLoad(object sender, EventArgs e)
         {
-            var doc = new XmlDocument();
-            doc.Load(FiltraplusConfigFilename);
-            filterSimulationWithTablesAndGraphs1.DeserializeConfiguration(
-                doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
+            try
+            {
+                var doc = new XmlDocument();
+                doc.Load(FiltraplusConfigFilename);
+                filterSimulationWithTablesAndGraphs1.DeserializeConfiguration(
+                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
+            }
+            catch
+            {
+            }
 
+            
             Text = m_caption;
             object regValue = Registry.GetValue(
                 @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
