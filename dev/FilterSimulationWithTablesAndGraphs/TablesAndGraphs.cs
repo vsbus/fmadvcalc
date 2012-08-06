@@ -121,7 +121,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private readonly List<fmLocalInputParametersData> m_localInputParametersList = new List<fmLocalInputParametersData>();
         private bool m_isUseLocalParams;
         private int m_rowsQuantity = 30;
-        private bool m_loadingXRange;
         private readonly fmDisplayingResults m_displayingResults = new fmDisplayingResults();
         private object m_highLightCaller;
 
@@ -597,13 +596,11 @@ namespace FilterSimulationWithTablesAndGraphs
             if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
                 return;
 
-            m_loadingXRange = true;
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
             double coef = xParameter.UnitFamily.CurrentUnit.Coef;
             fmRange range = xParameter.SpecifiedRange;
             minXValueTextBox.Text = (range.MinValue / coef).ToString();
             maxXValueTextBox.Text = (range.MaxValue / coef).ToString();
-            m_loadingXRange = false;
         }
 
         // ReSharper disable InconsistentNaming
