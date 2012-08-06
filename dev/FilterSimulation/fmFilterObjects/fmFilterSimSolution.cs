@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using fmCalcBlocksLibrary.Blocks;
 using System.Xml;
+using fmCalculationLibrary;
 
 namespace FilterSimulation.fmFilterObjects
 {

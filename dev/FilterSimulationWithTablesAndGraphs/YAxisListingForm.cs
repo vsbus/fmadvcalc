@@ -1,16 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
+using FilterSimulation;
 using fmCalculationLibrary;
 using fmControls;
-using FilterSimulation.fmFilterObjects;
+using fmMisc;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
     public partial class fmYAxisListingForm : Form
     {
-        private readonly Dictionary<fmGlobalParameter, fmControls.fmCheckedListBoxWithCheckboxes> m_parameterBox = new Dictionary<fmGlobalParameter, fmCheckedListBoxWithCheckboxes>();
-        public string currentSerieMachineName = "";
+        private readonly Dictionary<fmGlobalParameter, fmCheckedListBoxWithCheckboxes> m_parameterBox = new Dictionary<fmGlobalParameter, fmCheckedListBoxWithCheckboxes>();
+        public string CurrentSerieMachineName = "";
+
+        private Dictionary<fmShowHideSchema, List<fmGlobalParameter>> m_schemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
 
         public fmYAxisListingForm()
         {
@@ -182,13 +186,24 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(deliquoringBox, fmGlobalParameter.qfd);
         }
 
-        private void AddParameter(fmControls.fmCheckedListBoxWithCheckboxes box, fmGlobalParameter parameter)
+        private void AddParameter(fmCheckedListBoxWithCheckboxes box, fmGlobalParameter parameter)
         {
             m_parameterBox[parameter] = box;
             box.Items.Add(parameter.Name);
         }
 
-        public void CheckItems(List<fmCalculationLibrary.fmGlobalParameter> list)
+        public void UncheckAll()
+        {
+            foreach (fmCheckedListBoxWithCheckboxes box in m_parameterBox.Values)
+            {
+                for (int i = 0; i < box.Items.Count; ++i)
+                {
+                    box.SetItemChecked(i, false);
+                }
+            }
+        }
+
+        public void CheckItems(List<fmGlobalParameter> list)
         {
             foreach (fmGlobalParameter p in list)
             {
@@ -196,7 +211,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        private void CheckItemInBox(fmCheckedListBoxWithCheckboxes box, fmGlobalParameter p)
+        private static void CheckItemInBox(fmCheckedListBoxWithCheckboxes box, fmGlobalParameter p)
         {
             for (int i = 0; i < box.Items.Count; ++i)
             {
@@ -207,7 +222,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        private bool GetItemCheckedInBox(fmCheckedListBoxWithCheckboxes box, fmGlobalParameter p)
+        private static bool GetItemCheckedInBox(fmCheckedListBoxWithCheckboxes box, fmGlobalParameter p)
         {
             for (int i = 0; i < box.Items.Count; ++i)
             {
@@ -220,9 +235,9 @@ namespace FilterSimulationWithTablesAndGraphs
             throw new Exception("item was not found in box");
         }
 
-        public List<fmCalculationLibrary.fmGlobalParameter> GetCheckedItems()
+        public List<fmGlobalParameter> GetCheckedItems()
         {
-            var result = new List<fmCalculationLibrary.fmGlobalParameter>();
+            var result = new List<fmGlobalParameter>();
             foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
             {
                 if (m_parameterBox.ContainsKey(p) && GetItemCheckedInBox(m_parameterBox[p], p))
@@ -233,43 +248,76 @@ namespace FilterSimulationWithTablesAndGraphs
             return result;
         }
         
-        private void okButton_Click(object sender, EventArgs e)
+        private void OkButtonClick(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
 
-        private void fmYAxisListingForm_Load(object sender, EventArgs e)
+        private void FmYAxisListingFormLoad(object sender, EventArgs e)
         {
-            int selecedIdx = 0;
-            foreach (fmFilterSimMachineType filterType in fmFilterSimMachineType.filterTypesList)
+            foreach (Enum element in Enum.GetValues(typeof(fmShowHideSchema)))
             {
-                int idx = machinesComboBox.Items.Add(filterType.name);
-                if (filterType.name == currentSerieMachineName)
-                {
-                    selecedIdx = idx;
-                }
+                machinesComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
             }
-            machinesComboBox.SelectedIndex = selecedIdx;
+            takeButton.Enabled = false;
+            assignButton.Enabled = false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void Button3Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show(
-                @"Are you sure you want to assign new show/hide configuration for the selected machine type?",
-                @"Confirm",
-                MessageBoxButtons.YesNo);
-
-            if (dialogResult == DialogResult.Yes)
+            if (machinesComboBox.Text != "")
             {
-                
+                DialogResult dialogResult = MessageBox.Show(
+                    @"Are you sure you want to assign new show/hide configuration for the selected machine type?",
+                    @"Confirm",
+                    MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    var value = (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), machinesComboBox.Text);
+                    m_schemas[value] = GetCheckedItems();
+                }
             }
+        }
+
+        private void MachinesComboBoxSelectedIndexChanged(object sender, EventArgs e)
+        {
+            takeButton.Enabled = true;
+            assignButton.Enabled = true;
+        }
+
+        private void takeButton_Click(object sender, EventArgs e)
+        {
+            if (machinesComboBox.Text != "")
+            {
+                var value = (fmShowHideSchema)fmEnumUtils.GetEnum(typeof(fmShowHideSchema), machinesComboBox.Text);
+                if (m_schemas.ContainsKey(value))
+                {
+                    UncheckAll();
+                    CheckItems(m_schemas[value]);
+                }
+                else
+                {
+                    MessageBox.Show("Nothing assigned to selected type.");
+                }
+            }
+        }
+
+        public Dictionary<fmShowHideSchema, List<fmGlobalParameter>> GetShowHideSchemas()
+        {
+            return m_schemas;
+        }
+
+        public void SetShowHideSchemas(Dictionary<fmShowHideSchema, List<fmGlobalParameter>> dictionary)
+        {
+            m_schemas = dictionary;
         }
     }
 }

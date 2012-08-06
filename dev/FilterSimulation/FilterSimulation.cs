@@ -8,6 +8,8 @@ using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
 using fmCalculatorsLibrary;
 using Rectangle = System.Drawing.Rectangle;
+using System.Xml;
+using fmMisc;
 
 namespace FilterSimulation
 {
@@ -18,11 +20,58 @@ namespace FilterSimulation
         private fmCalcBlocksLibrary.Blocks.fmDeliquoringSimualtionBlockWithLimits m_commonDeliquoringSimulationBlock;
         private CheckBox m_ckBox;
         protected List<fmGlobalParameter> ParametersToDisplay;
+        public Dictionary<fmShowHideSchema, List<fmGlobalParameter>> ShowHideSchemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
 
         public fmFilterSimulationControl()
         {
             InitializeComponent();
         }
+
+        #region Serialization
+
+        private static class fmFilterSimulationSerializeTags
+        {
+            public const string ShowHideSchemas = "ShowHideSchemas";
+            public const string ShowHideSchema = "ShowHideSchema";
+            public const string ShowHideSchemaName = "ShowHideSchemaName";
+            public const string ShowHideParameter = "ShowHideParameter";
+        }
+
+        public void SerializeConfiguration(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.ShowHideSchemas);
+            foreach (KeyValuePair<fmShowHideSchema, List<fmGlobalParameter>> showHideSchema in ShowHideSchemas)
+            {
+                writer.WriteStartElement(fmFilterSimulationSerializeTags.ShowHideSchema);
+                writer.WriteElementString(fmFilterSimulationSerializeTags.ShowHideSchemaName, fmEnumUtils.GetEnumDescription(showHideSchema.Key));
+                foreach (fmGlobalParameter parameter in showHideSchema.Value)
+                {
+                    writer.WriteElementString(fmFilterSimulationSerializeTags.ShowHideParameter, parameter.Name);
+                }
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
+        public void DeserializeConfiguration(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ShowHideSchemas);
+            XmlNodeList schemasNodes = node.SelectNodes(fmFilterSimulationSerializeTags.ShowHideSchema);
+            foreach (XmlNode schemaNode in schemasNodes)
+            {
+                string schemaName =
+                    schemaNode.SelectSingleNode(fmFilterSimulationSerializeTags.ShowHideSchemaName).InnerText;
+                var parametersList = new List<fmGlobalParameter>();
+                XmlNodeList displayParamsList = schemaNode.SelectNodes(fmFilterSimulationSerializeTags.ShowHideParameter);
+                foreach (XmlNode parameterNode in displayParamsList)
+                {
+                    parametersList.Add(fmGlobalParameter.ParametersByName[parameterNode.InnerText]);
+                }
+                ShowHideSchemas[(fmShowHideSchema)fmEnumUtils.GetEnum(typeof(fmShowHideSchema), schemaName)] = parametersList;
+            }
+        }
+
+        #endregion
 
         private void SetUpToolTips()
         {

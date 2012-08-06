@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleForLimitsBlock", "Sam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleForDeliquoringBlocks", "SampleForDeliquoringBlocks\SampleForDeliquoringBlocks.csproj", "{C781AEC5-3394-4B47-A61F-05FAF8C36362}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fmMisc", "fmMisc\fmMisc.csproj", "{1F1A3827-D9AD-4A97-B7A1-CE0F1FDDE5D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,10 @@ Global
 		{C781AEC5-3394-4B47-A61F-05FAF8C36362}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C781AEC5-3394-4B47-A61F-05FAF8C36362}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C781AEC5-3394-4B47-A61F-05FAF8C36362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F1A3827-D9AD-4A97-B7A1-CE0F1FDDE5D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F1A3827-D9AD-4A97-B7A1-CE0F1FDDE5D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F1A3827-D9AD-4A97-B7A1-CE0F1FDDE5D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F1A3827-D9AD-4A97-B7A1-CE0F1FDDE5D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

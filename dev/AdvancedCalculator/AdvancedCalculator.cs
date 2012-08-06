@@ -39,10 +39,13 @@ namespace AdvancedCalculator
             }
         }
 
-        // ReSharper disable InconsistentNaming
-        private void AdvancedCalculator_Load(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
+        private void AdvancedCalculatorLoad(object sender, EventArgs e)
         {
+            var doc = new XmlDocument();
+            doc.Load(FiltraplusConfigFilename);
+            filterSimulationWithTablesAndGraphs1.DeserializeConfiguration(
+                doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
+
             Text = m_caption;
             object regValue = Registry.GetValue(
                 @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
@@ -79,6 +82,7 @@ namespace AdvancedCalculator
         private static class fmFiltraplusSerializeTags
         {
             public const string FiltraplusDataFile = "Filtraplus_Data_File";
+            public const string FiltraplusConfigFile = "Filtraplus_Config_File";
         }
 
         private void SaveOnDisk(string fileName)
@@ -90,7 +94,7 @@ namespace AdvancedCalculator
             XmlWriter writer = XmlWriter.Create(fileName, xmlSettings);
             writer.WriteStartDocument();
             writer.WriteStartElement(fmFiltraplusSerializeTags.FiltraplusDataFile);
-            filterSimulationWithTablesAndGraphs1.Serialize(writer);
+            filterSimulationWithTablesAndGraphs1.SerializeData(writer);
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();
@@ -120,13 +124,13 @@ namespace AdvancedCalculator
                 doc.Load(fileName);
 
                 m_currentFilename = fileName;
-                filterSimulationWithTablesAndGraphs1.Deserialize(
+                filterSimulationWithTablesAndGraphs1.DeserializeData(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
                 Text = m_caption + @" [" + fileName + @"]";
             }
             catch (Exception)
             {
-                MessageBox.Show(@"File " + m_currentFilename + @" has error in format and impossible to open", @"Error");
+                MessageBox.Show(@"File " + fileName + @" has an error in format and is impossible to open.", @"Error");
                 m_currentFilename = null;
                 Text = m_caption;
             }
@@ -134,6 +138,7 @@ namespace AdvancedCalculator
 
         private void FmAdvancedCalculatorFormClosed(object sender, FormClosedEventArgs e)
         {
+            SaveConfigurations();
             if (filterSimulationWithTablesAndGraphs1.IsModified())
             {
                 DialogResult dres = MessageBox.Show(@"Would you like to save data before exit?", @"Confirmation",
@@ -160,6 +165,23 @@ namespace AdvancedCalculator
             }
         }
 
+        private const string FiltraplusConfigFilename = "filtraplus.cfg";
+
+        private void SaveConfigurations()
+        {
+            var xmlSettings = new XmlWriterSettings
+            {
+                Indent = true
+            };
+            XmlWriter writer = XmlWriter.Create(FiltraplusConfigFilename, xmlSettings);
+            writer.WriteStartDocument();
+            writer.WriteStartElement(fmFiltraplusSerializeTags.FiltraplusConfigFile);
+            filterSimulationWithTablesAndGraphs1.SerializeConfiguration(writer);
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
+        }
+
         private void ExitToolStripMenuItemClick(object sender, EventArgs e)
         {
             Close();
@@ -172,7 +194,7 @@ namespace AdvancedCalculator
             filterSimulationWithTablesAndGraphs1.UpdateAll();
         }
 
-        private void rangesToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void RangesToolStripMenuItem1Click(object sender, EventArgs e)
         {
             var proForm = new FilterSimulation.fmParameterIntervalOption();
             if (proForm.ShowDialog() == DialogResult.OK)
@@ -182,14 +204,19 @@ namespace AdvancedCalculator
             }
         }
 
-        private void parametersToDisplayToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ParametersToDisplayToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var yalForm = new fmYAxisListingForm();
-            yalForm.currentSerieMachineName = filterSimulationWithTablesAndGraphs1.GetCurrentSerieMachineName();
+            var yalForm = new fmYAxisListingForm
+                              {
+                                  CurrentSerieMachineName =
+                                      filterSimulationWithTablesAndGraphs1.GetCurrentSerieMachineName()
+                              };
             yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.GetCurrentSerieParametersToDisplay());
+            yalForm.SetShowHideSchemas(filterSimulationWithTablesAndGraphs1.ShowHideSchemas);
             if (yalForm.ShowDialog() == DialogResult.OK)
             {
                 filterSimulationWithTablesAndGraphs1.SetCurrentSerieParametersToDisplay(yalForm.GetCheckedItems());
+                filterSimulationWithTablesAndGraphs1.ShowHideSchemas = yalForm.GetShowHideSchemas();
                 filterSimulationWithTablesAndGraphs1.UpdateAll();
             }
         }

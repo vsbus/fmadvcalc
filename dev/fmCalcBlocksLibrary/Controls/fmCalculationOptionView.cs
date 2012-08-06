@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using fmCalculatorsLibrary;
+using fmMisc;
 using FontStyle=System.Drawing.FontStyle;
 using System.Reflection;
 
@@ -34,30 +35,18 @@ namespace fmCalcBlocksLibrary.Controls
             }
         }
 
-        private static string GetEnumDescription(Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            string result = value.ToString();
-            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-            if (attributes.Length > 0)
-                result = attributes[0].Description;
-
-            return result;
-        }
-
         private void CreateTree()
         {
             var globalNode = new TreeNode("Plain Filter Area");
-            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST));
-            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST));
-            globalNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST));
+            globalNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST));
+            globalNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST));
+            globalNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST));
             Nodes.Add(globalNode);
 
             var candleNode = new TreeNode("Cylindrical Filter Area");
-            candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST));
-            candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST));
-            candleNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST));
+            candleNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST));
+            candleNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST));
+            candleNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST));
             Nodes.Add(candleNode);
 
             // All other options should be hidden.
@@ -68,21 +57,21 @@ namespace fmCalcBlocksLibrary.Controls
             //Nodes.Add(otherNode);
 
             //var standartNode = new TreeNode("Standart");
-            //standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3));
-            //standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4));
-            //standartNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8));
+            //standartNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART3));
+            //standartNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART4));
+            //standartNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.STANDART8));
             //otherNode.Nodes.Add(standartNode);
 
             //var designNode = new TreeNode("Design");
-            //designNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1));
+            //designNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.DESIGN1));
             //otherNode.Nodes.Add(designNode);
 
             //var optimizationNode = new TreeNode("Optimization");
-            //optimizationNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1));
+            //optimizationNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.OPTIMIZATION1));
             //otherNode.Nodes.Add(optimizationNode);
 
-            //otherNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST));
-            //otherNode.Nodes.Add(GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST));
+            //otherNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_QP_CONST));
+            //otherNode.Nodes.Add(fmEnumUtils.GetEnumDescription(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST));
 
             SetSelectedOption(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
 
@@ -139,7 +128,7 @@ namespace fmCalcBlocksLibrary.Controls
             }
 
             foreach (fmFilterMachiningCalculator.fmFilterMachiningCalculationOption option in Enum.GetValues(typeof(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption)))
-                if (GetEnumDescription(option) == SelectedLeaf.Text)
+                if (fmEnumUtils.GetEnumDescription(option) == SelectedLeaf.Text)
                     return option;
 
             throw new Exception("Calculation option for description [" + SelectedLeaf.Text + "] not found");
@@ -176,7 +165,7 @@ namespace fmCalcBlocksLibrary.Controls
             }
 
             foreach (TreeNode leaf in GetLeafs(Nodes))
-                if (GetEnumDescription(option) == leaf.Text)
+                if (fmEnumUtils.GetEnumDescription(option) == leaf.Text)
                 {
                     SelectedNode = SelectedLeaf = leaf;
                     for (TreeNode node = leaf; node != null; node = node.Parent)

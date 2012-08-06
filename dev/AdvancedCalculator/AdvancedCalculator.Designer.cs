@@ -123,14 +123,14 @@ namespace AdvancedCalculator
             this.rangesToolStripMenuItem1.Name = "rangesToolStripMenuItem1";
             this.rangesToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
             this.rangesToolStripMenuItem1.Text = "Ranges";
-            this.rangesToolStripMenuItem1.Click += new System.EventHandler(this.rangesToolStripMenuItem1_Click);
+            this.rangesToolStripMenuItem1.Click += new System.EventHandler(this.RangesToolStripMenuItem1Click);
             // 
             // parametersToDisplayToolStripMenuItem
             // 
             this.parametersToDisplayToolStripMenuItem.Name = "parametersToDisplayToolStripMenuItem";
             this.parametersToDisplayToolStripMenuItem.Size = new System.Drawing.Size(132, 20);
             this.parametersToDisplayToolStripMenuItem.Text = "Parameters to display";
-            this.parametersToDisplayToolStripMenuItem.Click += new System.EventHandler(this.parametersToDisplayToolStripMenuItem_Click);
+            this.parametersToDisplayToolStripMenuItem.Click += new System.EventHandler(this.ParametersToDisplayToolStripMenuItemClick);
             // 
             // filterSimulationWithTablesAndGraphs1
             // 
@@ -150,7 +150,7 @@ namespace AdvancedCalculator
             this.Name = "fmAdvancedCalculator";
             this.Text = "FILTRAPLUS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.AdvancedCalculator_Load);
+            this.Load += new System.EventHandler(this.AdvancedCalculatorLoad);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FmAdvancedCalculatorFormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

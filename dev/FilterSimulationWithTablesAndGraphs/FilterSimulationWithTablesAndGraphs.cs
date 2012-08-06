@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using FilterSimulation;
 using fmCalculationLibrary;
 using FilterSimulation.fmFilterObjects;
 using System.Xml;
@@ -180,13 +181,13 @@ namespace FilterSimulationWithTablesAndGraphs
             BindCalculatedResultsToChartAndTable();
         }
 
-        public void Serialize(XmlWriter writer)
+        public void SerializeData(XmlWriter writer)
         {
             Solution.Keep();
             Solution.Serialize(writer);
         }
 
-        public void Deserialize(XmlNode node)
+        public void DeserializeData(XmlNode node)
         {
             Solution = fmFilterSimSolution.Deserialize(node);
             if (Solution.projects.Count > 0)
