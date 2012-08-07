@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using FilterSimulation;
 using FilterSimulationWithTablesAndGraphs;
 using Microsoft.Win32;
 using System.Xml;
@@ -218,11 +219,15 @@ namespace AdvancedCalculator
                                   CurrentSerieMachineName =
                                       filterSimulationWithTablesAndGraphs1.GetCurrentSerieMachineName()
                               };
-            yalForm.CheckItems(filterSimulationWithTablesAndGraphs1.GetCurrentSerieParametersToDisplay());
+            fmParametersToDisplay parametersToDisplay =
+                filterSimulationWithTablesAndGraphs1.GetCurrentSerieParametersToDisplay();
+            yalForm.CheckItems(parametersToDisplay.ParametersList);
             yalForm.SetShowHideSchemas(filterSimulationWithTablesAndGraphs1.ShowHideSchemas);
+            yalForm.CheckScheme(parametersToDisplay.AssignedSchema);
             if (yalForm.ShowDialog() == DialogResult.OK)
             {
-                filterSimulationWithTablesAndGraphs1.SetCurrentSerieParametersToDisplay(yalForm.GetCheckedItems());
+                parametersToDisplay = new fmParametersToDisplay(yalForm.GetCheckedSchema(), yalForm.GetCheckedItems());
+                filterSimulationWithTablesAndGraphs1.SetCurrentSerieParametersToDisplay(parametersToDisplay);
                 filterSimulationWithTablesAndGraphs1.ShowHideSchemas = yalForm.GetShowHideSchemas();
                 filterSimulationWithTablesAndGraphs1.UpdateAll();
             }

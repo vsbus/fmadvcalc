@@ -476,7 +476,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.Controls.Add(this.panel1);
             this.Name = "fmYAxisListingForm";
             this.Text = "YAxisListingForm";
-            this.Load += new System.EventHandler(this.FmYAxisListingFormLoad);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

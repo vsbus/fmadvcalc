@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using fmCalculationLibrary;
+using fmMisc;
 
 namespace FilterSimulation.fmFilterObjects
 {
@@ -12,43 +13,7 @@ namespace FilterSimulation.fmFilterObjects
         public string filterMedium;
         public string machineName;
 
-        public List<fmGlobalParameter> parametersToDisplay = new List<fmGlobalParameter>(new fmGlobalParameter[]
-                                                                                             {
-                                                                                                 fmGlobalParameter.A,
-                                                                                                 fmGlobalParameter.Dp,
-                                                                                                 fmGlobalParameter.sf,
-                                                                                                 fmGlobalParameter.tc,
-                                                                                                 fmGlobalParameter.hc,
-                                                                                                 fmGlobalParameter.Msus,
-                                                                                                 fmGlobalParameter.Qmsus,
-
-                                                                                                 fmGlobalParameter.Dp_d,
-                                                                                                 fmGlobalParameter.eps_d,
-                                                                                                 fmGlobalParameter.rho_d,
-                                                                                                 fmGlobalParameter.eta_d,
-                                                                                                 fmGlobalParameter.sigma,
-                                                                                                 fmGlobalParameter.pke0,
-                                                                                                 fmGlobalParameter.pke,
-                                                                                                 fmGlobalParameter.pc_d,
-                                                                                                 fmGlobalParameter.rc_d,
-                                                                                                 fmGlobalParameter.alpha_d,
-                                                                                                 fmGlobalParameter.Srem,
-                                                                                                 fmGlobalParameter.ad1,
-                                                                                                 fmGlobalParameter.ad2,
-                                                                                                 fmGlobalParameter.Tetta,
-                                                                                                 fmGlobalParameter.eta_g,
-                                                                                                 fmGlobalParameter.ag1,
-                                                                                                 fmGlobalParameter.ag2,
-                                                                                                 fmGlobalParameter.ag3,
-
-                                                                                                 fmGlobalParameter.sd,
-                                                                                                 fmGlobalParameter.td,
-                                                                                                 fmGlobalParameter.K,
-                                                                                                 fmGlobalParameter.S,
-                                                                                                 fmGlobalParameter.Rf,
-                                                                                                 fmGlobalParameter.Qgi,
-                                                                                                 fmGlobalParameter.Qg
-                                                                                             });
+        public fmParametersToDisplay parametersToDisplay = new fmParametersToDisplay();
 
         public Dictionary<fmGlobalParameter, fmDefaultParameterRange> ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
         public List<fmFilterSimulation> simList;
@@ -60,7 +25,7 @@ namespace FilterSimulation.fmFilterObjects
             machine = from.machine;
             machineName = from.machineName;
             filterMedium = from.filterMedium;
-            parametersToDisplay = new List<fmGlobalParameter>(from.parametersToDisplay);
+            parametersToDisplay = new fmParametersToDisplay(from.parametersToDisplay);
 
             ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
             foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in from.ranges)
@@ -87,6 +52,7 @@ namespace FilterSimulation.fmFilterObjects
             public const string MachineName = "machineName";
             public const string FilterMedium = "filterMedium";
             public const string ParametersToDisplay = "ParametersToDisplay";
+            public const string AssignedShowHideSchema = "AssignedShowHideSchema";
             public const string Ranges = "Ranges";
             public const string GlobalParameter = "GlobalParameter";
             public const string ParameterRange = "ParameterRange";
@@ -104,7 +70,8 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteElementString(fmSimSerieDataSerializeTags.FilterMedium, filterMedium);
             
             writer.WriteStartElement(fmSimSerieDataSerializeTags.ParametersToDisplay);
-            foreach (var p in parametersToDisplay)
+            writer.WriteElementString(fmSimSerieDataSerializeTags.AssignedShowHideSchema, fmEnumUtils.GetEnumDescription(parametersToDisplay.AssignedSchema));
+            foreach (var p in parametersToDisplay.ParametersList)
             {
                 writer.WriteElementString(fmSimSerieDataSerializeTags.GlobalParameter, p.Name);
             }
@@ -142,17 +109,23 @@ namespace FilterSimulation.fmFilterObjects
                                                 fmFilterSimMachineType.fmMachineSerializeTags.Machine)),
                                     filterMedium =
                                         xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.FilterMedium).InnerText,
-                                    parametersToDisplay = new List<fmGlobalParameter>()
+                                    parametersToDisplay = new fmParametersToDisplay()
                                 };
 
             XmlNode parametersToDisplayNode = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.ParametersToDisplay);
             if (parametersToDisplayNode != null)
             {
+                XmlNode schemaNode = parametersToDisplayNode.SelectSingleNode(fmSimSerieDataSerializeTags.AssignedShowHideSchema);
+                if (schemaNode != null)
+                {
+                    serieData.parametersToDisplay.AssignedSchema =
+                        (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), schemaNode.InnerText);
+                }
                 XmlNodeList parameterNodeList =
                     parametersToDisplayNode.SelectNodes(fmSimSerieDataSerializeTags.GlobalParameter);
                 foreach (XmlNode p in parameterNodeList)
                 {
-                    serieData.parametersToDisplay.Add(fmGlobalParameter.ParametersByName[p.InnerText]);
+                    serieData.parametersToDisplay.ParametersList.Add(fmGlobalParameter.ParametersByName[p.InnerText]);
                 }
             }
 
@@ -238,7 +211,7 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
-        public List<fmGlobalParameter> ParametersToDisplay
+        public fmParametersToDisplay ParametersToDisplay
         {
             get { return m_data.parametersToDisplay; }
             set

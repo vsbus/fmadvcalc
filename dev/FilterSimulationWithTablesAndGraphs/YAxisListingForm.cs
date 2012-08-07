@@ -189,6 +189,12 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(qmDeliquoringBox, fmGlobalParameter.qmfid);
             AddParameter(qmDeliquoringBox, fmGlobalParameter.qmftd);
             AddParameter(qmDeliquoringBox, fmGlobalParameter.qmfd);
+
+            foreach (Enum element in Enum.GetValues(typeof(fmShowHideSchema)))
+            {
+                machinesComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
+            }
+            machinesComboBox.SelectedIndex = 0;
         }
 
         private void AddParameter(fmCheckedListBoxWithCheckboxes box, fmGlobalParameter parameter)
@@ -265,15 +271,6 @@ namespace FilterSimulationWithTablesAndGraphs
             Close();
         }
 
-        private void FmYAxisListingFormLoad(object sender, EventArgs e)
-        {
-            foreach (Enum element in Enum.GetValues(typeof(fmShowHideSchema)))
-            {
-                machinesComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
-            }
-            machinesComboBox.SelectedIndex = 0;
-        }
-
         private void Button3Click(object sender, EventArgs e)
         {
             if (machinesComboBox.Text != "")
@@ -320,6 +317,23 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 m_schemas.Add(pair.Key, pair.Value);
             }
+        }
+
+        public void CheckScheme(fmShowHideSchema schema)
+        {
+            for (int i = 0; i < machinesComboBox.Items.Count; ++i)
+            {
+                if (machinesComboBox.Items[i].ToString() == fmEnumUtils.GetEnumDescription(schema))
+                {
+                    machinesComboBox.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        public fmShowHideSchema GetCheckedSchema()
+        {
+            return (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), machinesComboBox.Text);
         }
     }
 }

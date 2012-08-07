@@ -1310,7 +1310,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
             {
-                if (ParametersToDisplay.Contains(p))
+                if (ParametersToDisplay.ParametersList.Contains(p))
                 {
                     CheckBox paramsCheckbox = m_parameterKindProperties[m_XYListKind[p.Name]].Checkbox;
                     if (paramsCheckbox == null || paramsCheckbox.Checked)

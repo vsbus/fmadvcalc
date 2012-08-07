@@ -297,7 +297,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        public void SetCurrentSerieParametersToDisplay(List<fmGlobalParameter> parametersToDisplayList)
+        public void SetCurrentSerieParametersToDisplay(fmParametersToDisplay parametersToDisplayList)
         {
             if (Solution.currentObjects.Serie != null)
             {
@@ -318,7 +318,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        public List<fmGlobalParameter> GetCurrentSerieParametersToDisplay()
+        public fmParametersToDisplay GetCurrentSerieParametersToDisplay()
         {
             if (Solution.currentObjects.Serie == null)
                 return null;

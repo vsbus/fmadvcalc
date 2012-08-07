@@ -445,7 +445,7 @@ namespace FilterSimulation
             deliquoringParameters.AddRange(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
             foreach (fmGlobalParameter parameter in deliquoringParameters)
             {
-                isVisibleParameters[parameter] = ParametersToDisplay.Contains(parameter);
+                isVisibleParameters[parameter] = ParametersToDisplay.ParametersList.Contains(parameter);
             }
 
             bool isGas = sim.filterMachiningBlock.gasFlowrateUsedCalculationOption ==
@@ -959,7 +959,7 @@ namespace FilterSimulation
                 if (fmGlobalParameter.ParametersByName.ContainsKey(pName))
                 {
                     var p = fmGlobalParameter.ParametersByName[pName];
-                    col.Visible = ParametersToDisplay.Contains(p);
+                    col.Visible = ParametersToDisplay.ParametersList.Contains(p);
                 }
             }
         }
@@ -1015,7 +1015,7 @@ namespace FilterSimulation
                     for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                     {
                         commonCalcBlockDataGrid.Rows[i].Visible = m_commonFilterMachiningBlock.Parameters[i].group != null
-                            && ParametersToDisplay.Contains(m_commonFilterMachiningBlock.Parameters[i].globalParameter);
+                            && ParametersToDisplay.ParametersList.Contains(m_commonFilterMachiningBlock.Parameters[i].globalParameter);
                     }
 
                     for (int i = 0; i < m_commonFilterMachiningBlock.ConstantParameters.Count; ++i)
