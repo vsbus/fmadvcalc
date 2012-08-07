@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Windows.Forms;
 using FilterSimulation;
 using fmCalculationLibrary;
@@ -304,7 +303,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
                 else
                 {
-                    MessageBox.Show("Nothing assigned to selected type.");
+                    MessageBox.Show(@"Nothing assigned to selected type.");
                 }
             }
         }
