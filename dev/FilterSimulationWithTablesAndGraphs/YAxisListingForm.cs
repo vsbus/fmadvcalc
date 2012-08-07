@@ -192,9 +192,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
             foreach (Enum element in Enum.GetValues(typeof(fmShowHideSchema)))
             {
-                machinesComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
+                filterTypeGroupComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
             }
-            machinesComboBox.SelectedIndex = 0;
+            filterTypeGroupComboBox.SelectedIndex = 0;
         }
 
         private void AddParameter(fmCheckedListBoxWithCheckboxes box, fmGlobalParameter parameter)
@@ -273,16 +273,16 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void Button3Click(object sender, EventArgs e)
         {
-            if (machinesComboBox.Text != "")
+            if (filterTypeGroupComboBox.Text != "")
             {
                 DialogResult dialogResult = MessageBox.Show(
-                    @"Are you sure you want to assign new show/hide configuration for the selected machine type?",
+                    @"Are you sure you want to assign new show/hide configuration for the selected Filter Type – Group?",
                     @"Confirm",
                     MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    var value = (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), machinesComboBox.Text);
+                    var value = (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), filterTypeGroupComboBox.Text);
                     m_schemas[value] = GetCheckedItems();
                 }
             }
@@ -290,9 +290,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void takeButton_Click(object sender, EventArgs e)
         {
-            if (machinesComboBox.Text != "")
+            if (filterTypeGroupComboBox.Text != "")
             {
-                var value = (fmShowHideSchema)fmEnumUtils.GetEnum(typeof(fmShowHideSchema), machinesComboBox.Text);
+                var value = (fmShowHideSchema)fmEnumUtils.GetEnum(typeof(fmShowHideSchema), filterTypeGroupComboBox.Text);
                 if (m_schemas.ContainsKey(value))
                 {
                     UncheckAll();
@@ -321,11 +321,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void CheckScheme(fmShowHideSchema schema)
         {
-            for (int i = 0; i < machinesComboBox.Items.Count; ++i)
+            for (int i = 0; i < filterTypeGroupComboBox.Items.Count; ++i)
             {
-                if (machinesComboBox.Items[i].ToString() == fmEnumUtils.GetEnumDescription(schema))
+                if (filterTypeGroupComboBox.Items[i].ToString() == fmEnumUtils.GetEnumDescription(schema))
                 {
-                    machinesComboBox.SelectedIndex = i;
+                    filterTypeGroupComboBox.SelectedIndex = i;
                     break;
                 }
             }
@@ -333,7 +333,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public fmShowHideSchema GetCheckedSchema()
         {
-            return (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), machinesComboBox.Text);
+            return (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), filterTypeGroupComboBox.Text);
         }
     }
 }

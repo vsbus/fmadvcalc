@@ -34,7 +34,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.button1 = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.machinesComboBox = new System.Windows.Forms.ComboBox();
+            this.filterTypeGroupComboBox = new System.Windows.Forms.ComboBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -86,7 +86,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.okButton);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.machinesComboBox);
+            this.panel1.Controls.Add(this.filterTypeGroupComboBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 636);
             this.panel1.Name = "panel1";
@@ -140,18 +140,18 @@ namespace FilterSimulationWithTablesAndGraphs
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Machine Type:";
+            this.label1.Text = "Filter Type – Group:";
             // 
-            // machinesComboBox
+            // filterTypeGroupComboBox
             // 
-            this.machinesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.machinesComboBox.FormattingEnabled = true;
-            this.machinesComboBox.Location = new System.Drawing.Point(18, 29);
-            this.machinesComboBox.Name = "machinesComboBox";
-            this.machinesComboBox.Size = new System.Drawing.Size(123, 21);
-            this.machinesComboBox.TabIndex = 0;
+            this.filterTypeGroupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.filterTypeGroupComboBox.FormattingEnabled = true;
+            this.filterTypeGroupComboBox.Location = new System.Drawing.Point(18, 29);
+            this.filterTypeGroupComboBox.Name = "filterTypeGroupComboBox";
+            this.filterTypeGroupComboBox.Size = new System.Drawing.Size(123, 21);
+            this.filterTypeGroupComboBox.TabIndex = 0;
             // 
             // panel2
             // 
@@ -524,7 +524,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private System.Windows.Forms.Button assignButton;
         private System.Windows.Forms.Button takeButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox machinesComboBox;
+        private System.Windows.Forms.ComboBox filterTypeGroupComboBox;
         private fmControls.fmCheckedListBoxWithCheckboxes qDeliquoringBox;
         private fmControls.fmCheckedListBoxWithCheckboxes massFlowrateDeliquoringBox;
         private fmControls.fmCheckedListBoxWithCheckboxes volumeFlowrateDeliquoringBox;
