@@ -54,10 +54,16 @@ namespace FilterSimulationWithTablesAndGraphs
             this.qmBigBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.sfSrTrBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gasParameters = new fmControls.fmCheckedListBoxWithCheckboxes();
+            this.qmDeliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
+            this.qDeliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
+            this.massFlowrateDeliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
+            this.volumeFlowrateDeliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
+            this.massDeliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
+            this.volumeDeliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
+            this.mainDeliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.materialDeliqouringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.evaporationsParameters = new fmControls.fmCheckedListBoxWithCheckboxes();
-            this.deliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
-            this.gasParameters = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.assignButton = new System.Windows.Forms.Button();
             this.takeButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -65,7 +71,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -76,18 +81,22 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.assignButton);
+            this.panel1.Controls.Add(this.takeButton);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.okButton);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.machinesComboBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 655);
+            this.panel1.Location = new System.Drawing.Point(0, 636);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(890, 43);
+            this.panel1.Size = new System.Drawing.Size(832, 64);
             this.panel1.TabIndex = 0;
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(803, 8);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(745, 29);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -97,8 +106,8 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // okButton
             // 
-            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(722, 8);
+            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.okButton.Location = new System.Drawing.Point(664, 29);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;
@@ -112,7 +121,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(890, 655);
+            this.panel2.Size = new System.Drawing.Size(832, 636);
             this.panel2.TabIndex = 1;
             // 
             // splitContainer2
@@ -124,15 +133,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.assignButton);
-            this.splitContainer2.Panel2.Controls.Add(this.takeButton);
-            this.splitContainer2.Panel2.Controls.Add(this.label1);
-            this.splitContainer2.Panel2.Controls.Add(this.machinesComboBox);
-            this.splitContainer2.Size = new System.Drawing.Size(890, 655);
-            this.splitContainer2.SplitterDistance = 707;
+            this.splitContainer2.Panel2Collapsed = true;
+            this.splitContainer2.Size = new System.Drawing.Size(832, 636);
+            this.splitContainer2.SplitterDistance = 834;
             this.splitContainer2.TabIndex = 23;
             // 
             // splitContainer1
@@ -150,8 +153,8 @@ namespace FilterSimulationWithTablesAndGraphs
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(682, 637);
-            this.splitContainer1.SplitterDistance = 370;
+            this.splitContainer1.Size = new System.Drawing.Size(807, 618);
+            this.splitContainer1.SplitterDistance = 368;
             this.splitContainer1.TabIndex = 22;
             // 
             // groupBox1
@@ -177,7 +180,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(370, 637);
+            this.groupBox1.Size = new System.Drawing.Size(368, 618);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cake Formation";
@@ -328,74 +331,128 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.gasParameters);
+            this.groupBox2.Controls.Add(this.qmDeliquoringBox);
+            this.groupBox2.Controls.Add(this.qDeliquoringBox);
+            this.groupBox2.Controls.Add(this.massFlowrateDeliquoringBox);
+            this.groupBox2.Controls.Add(this.volumeFlowrateDeliquoringBox);
+            this.groupBox2.Controls.Add(this.massDeliquoringBox);
+            this.groupBox2.Controls.Add(this.volumeDeliquoringBox);
+            this.groupBox2.Controls.Add(this.mainDeliquoringBox);
             this.groupBox2.Controls.Add(this.materialDeliqouringBox);
             this.groupBox2.Controls.Add(this.evaporationsParameters);
-            this.groupBox2.Controls.Add(this.deliquoringBox);
-            this.groupBox2.Controls.Add(this.gasParameters);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(308, 637);
+            this.groupBox2.Size = new System.Drawing.Size(435, 618);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Deliquoring";
+            // 
+            // gasParameters
+            // 
+            this.gasParameters.CaptionText = "Gas";
+            this.gasParameters.Location = new System.Drawing.Point(6, 407);
+            this.gasParameters.Name = "gasParameters";
+            this.gasParameters.Size = new System.Drawing.Size(125, 111);
+            this.gasParameters.TabIndex = 22;
+            // 
+            // qmDeliquoringBox
+            // 
+            this.qmDeliquoringBox.CaptionText = "qm";
+            this.qmDeliquoringBox.Location = new System.Drawing.Point(293, 524);
+            this.qmDeliquoringBox.Name = "qmDeliquoringBox";
+            this.qmDeliquoringBox.Size = new System.Drawing.Size(125, 86);
+            this.qmDeliquoringBox.TabIndex = 30;
+            // 
+            // qDeliquoringBox
+            // 
+            this.qDeliquoringBox.CaptionText = "q";
+            this.qDeliquoringBox.Location = new System.Drawing.Point(145, 524);
+            this.qDeliquoringBox.Name = "qDeliquoringBox";
+            this.qDeliquoringBox.Size = new System.Drawing.Size(125, 86);
+            this.qDeliquoringBox.TabIndex = 29;
+            // 
+            // massFlowrateDeliquoringBox
+            // 
+            this.massFlowrateDeliquoringBox.CaptionText = "Mass Flowrate";
+            this.massFlowrateDeliquoringBox.Location = new System.Drawing.Point(293, 432);
+            this.massFlowrateDeliquoringBox.Name = "massFlowrateDeliquoringBox";
+            this.massFlowrateDeliquoringBox.Size = new System.Drawing.Size(125, 86);
+            this.massFlowrateDeliquoringBox.TabIndex = 28;
+            // 
+            // volumeFlowrateDeliquoringBox
+            // 
+            this.volumeFlowrateDeliquoringBox.CaptionText = "Volume Flowrate";
+            this.volumeFlowrateDeliquoringBox.Location = new System.Drawing.Point(145, 432);
+            this.volumeFlowrateDeliquoringBox.Name = "volumeFlowrateDeliquoringBox";
+            this.volumeFlowrateDeliquoringBox.Size = new System.Drawing.Size(125, 86);
+            this.volumeFlowrateDeliquoringBox.TabIndex = 27;
+            // 
+            // massDeliquoringBox
+            // 
+            this.massDeliquoringBox.CaptionText = "Mass";
+            this.massDeliquoringBox.Location = new System.Drawing.Point(293, 338);
+            this.massDeliquoringBox.Name = "massDeliquoringBox";
+            this.massDeliquoringBox.Size = new System.Drawing.Size(125, 71);
+            this.massDeliquoringBox.TabIndex = 26;
+            // 
+            // volumeDeliquoringBox
+            // 
+            this.volumeDeliquoringBox.CaptionText = "Volume";
+            this.volumeDeliquoringBox.Location = new System.Drawing.Point(145, 338);
+            this.volumeDeliquoringBox.Name = "volumeDeliquoringBox";
+            this.volumeDeliquoringBox.Size = new System.Drawing.Size(125, 71);
+            this.volumeDeliquoringBox.TabIndex = 25;
+            // 
+            // mainDeliquoringBox
+            // 
+            this.mainDeliquoringBox.CaptionText = "Main Parameters";
+            this.mainDeliquoringBox.Location = new System.Drawing.Point(145, 19);
+            this.mainDeliquoringBox.Name = "mainDeliquoringBox";
+            this.mainDeliquoringBox.Size = new System.Drawing.Size(125, 288);
+            this.mainDeliquoringBox.TabIndex = 24;
             // 
             // materialDeliqouringBox
             // 
             this.materialDeliqouringBox.CaptionText = "Deliquoring Material";
             this.materialDeliqouringBox.Location = new System.Drawing.Point(6, 19);
             this.materialDeliqouringBox.Name = "materialDeliqouringBox";
-            this.materialDeliqouringBox.Size = new System.Drawing.Size(121, 288);
+            this.materialDeliqouringBox.Size = new System.Drawing.Size(125, 379);
             this.materialDeliqouringBox.TabIndex = 21;
             // 
             // evaporationsParameters
             // 
             this.evaporationsParameters.CaptionText = "Evaporation";
-            this.evaporationsParameters.Location = new System.Drawing.Point(6, 432);
+            this.evaporationsParameters.Location = new System.Drawing.Point(6, 524);
             this.evaporationsParameters.Name = "evaporationsParameters";
-            this.evaporationsParameters.Size = new System.Drawing.Size(121, 176);
+            this.evaporationsParameters.Size = new System.Drawing.Size(125, 86);
             this.evaporationsParameters.TabIndex = 23;
-            // 
-            // deliquoringBox
-            // 
-            this.deliquoringBox.CaptionText = "Deliquoring";
-            this.deliquoringBox.Location = new System.Drawing.Point(160, 19);
-            this.deliquoringBox.Name = "deliquoringBox";
-            this.deliquoringBox.Size = new System.Drawing.Size(125, 589);
-            this.deliquoringBox.TabIndex = 20;
-            // 
-            // gasParameters
-            // 
-            this.gasParameters.CaptionText = "Gas";
-            this.gasParameters.Location = new System.Drawing.Point(6, 313);
-            this.gasParameters.Name = "gasParameters";
-            this.gasParameters.Size = new System.Drawing.Size(121, 111);
-            this.gasParameters.TabIndex = 22;
             // 
             // assignButton
             // 
-            this.assignButton.Location = new System.Drawing.Point(92, 74);
+            this.assignButton.Location = new System.Drawing.Point(271, 29);
             this.assignButton.Name = "assignButton";
-            this.assignButton.Size = new System.Drawing.Size(75, 23);
+            this.assignButton.Size = new System.Drawing.Size(104, 23);
             this.assignButton.TabIndex = 3;
-            this.assignButton.Text = "Assign";
+            this.assignButton.Text = "Save As Default";
             this.assignButton.UseVisualStyleBackColor = true;
             this.assignButton.Click += new System.EventHandler(this.Button3Click);
             // 
             // takeButton
             // 
-            this.takeButton.Location = new System.Drawing.Point(11, 74);
+            this.takeButton.Location = new System.Drawing.Point(161, 29);
             this.takeButton.Name = "takeButton";
-            this.takeButton.Size = new System.Drawing.Size(75, 23);
+            this.takeButton.Size = new System.Drawing.Size(104, 23);
             this.takeButton.TabIndex = 2;
-            this.takeButton.Text = "<- Take";
+            this.takeButton.Text = "Load Default";
             this.takeButton.UseVisualStyleBackColor = true;
             this.takeButton.Click += new System.EventHandler(this.takeButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 31);
+            this.label1.Location = new System.Drawing.Point(15, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 1;
@@ -405,27 +462,25 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.machinesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.machinesComboBox.FormattingEnabled = true;
-            this.machinesComboBox.Location = new System.Drawing.Point(11, 47);
+            this.machinesComboBox.Location = new System.Drawing.Point(18, 29);
             this.machinesComboBox.Name = "machinesComboBox";
-            this.machinesComboBox.Size = new System.Drawing.Size(156, 21);
+            this.machinesComboBox.Size = new System.Drawing.Size(123, 21);
             this.machinesComboBox.TabIndex = 0;
-            this.machinesComboBox.SelectedIndexChanged += new System.EventHandler(this.MachinesComboBoxSelectedIndexChanged);
             // 
             // fmYAxisListingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(890, 698);
+            this.ClientSize = new System.Drawing.Size(832, 700);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "fmYAxisListingForm";
             this.Text = "YAxisListingForm";
             this.Load += new System.EventHandler(this.FmYAxisListingFormLoad);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
             this.splitContainer2.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -458,7 +513,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmControls.fmCheckedListBoxWithCheckboxes sfSrTrBox;
         private fmControls.fmCheckedListBoxWithCheckboxes ad0DpBox;
         private fmControls.fmCheckedListBoxWithCheckboxes hcBox;
-        private fmControls.fmCheckedListBoxWithCheckboxes deliquoringBox;
         private fmControls.fmCheckedListBoxWithCheckboxes DpQpConstBox;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private fmControls.fmCheckedListBoxWithCheckboxes materialDeliqouringBox;
@@ -472,5 +526,12 @@ namespace FilterSimulationWithTablesAndGraphs
         private System.Windows.Forms.Button takeButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox machinesComboBox;
+        private fmControls.fmCheckedListBoxWithCheckboxes qDeliquoringBox;
+        private fmControls.fmCheckedListBoxWithCheckboxes massFlowrateDeliquoringBox;
+        private fmControls.fmCheckedListBoxWithCheckboxes volumeFlowrateDeliquoringBox;
+        private fmControls.fmCheckedListBoxWithCheckboxes massDeliquoringBox;
+        private fmControls.fmCheckedListBoxWithCheckboxes volumeDeliquoringBox;
+        private fmControls.fmCheckedListBoxWithCheckboxes mainDeliquoringBox;
+        private fmControls.fmCheckedListBoxWithCheckboxes qmDeliquoringBox;
     }
 }

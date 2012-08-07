@@ -152,38 +152,44 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(evaporationsParameters, fmGlobalParameter.qevt);
             AddParameter(evaporationsParameters, fmGlobalParameter.qev);
 
-            AddParameter(deliquoringBox, fmGlobalParameter.Dp_d);
-            AddParameter(deliquoringBox, fmGlobalParameter.hcd);
-            AddParameter(deliquoringBox, fmGlobalParameter.sd);
-            AddParameter(deliquoringBox, fmGlobalParameter.td);
-            AddParameter(deliquoringBox, fmGlobalParameter.K);
-            AddParameter(deliquoringBox, fmGlobalParameter.Smech);
-            AddParameter(deliquoringBox, fmGlobalParameter.S);
-            AddParameter(deliquoringBox, fmGlobalParameter.Rfmech);
-            AddParameter(deliquoringBox, fmGlobalParameter.Rf);
-            AddParameter(deliquoringBox, fmGlobalParameter.Mfd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Vfd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Mlcd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Vlcd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Mcd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Vcd);
-            AddParameter(deliquoringBox, fmGlobalParameter.rho_bulk);
-            AddParameter(deliquoringBox, fmGlobalParameter.Qmfid);
-            AddParameter(deliquoringBox, fmGlobalParameter.Qfid);
-            AddParameter(deliquoringBox, fmGlobalParameter.Qmcd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Qcd);
-            AddParameter(deliquoringBox, fmGlobalParameter.qmfid);
-            AddParameter(deliquoringBox, fmGlobalParameter.qfid);
-            AddParameter(deliquoringBox, fmGlobalParameter.qmcd);
-            AddParameter(deliquoringBox, fmGlobalParameter.qcd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Qmftd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Qmfd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Qftd);
-            AddParameter(deliquoringBox, fmGlobalParameter.Qfd);
-            AddParameter(deliquoringBox, fmGlobalParameter.qmftd);
-            AddParameter(deliquoringBox, fmGlobalParameter.qmfd);
-            AddParameter(deliquoringBox, fmGlobalParameter.qftd);
-            AddParameter(deliquoringBox, fmGlobalParameter.qfd);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.Dp_d);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.hcd);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.sd);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.td);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.K);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.Smech);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.S);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.Rfmech);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.Rf);
+            AddParameter(mainDeliquoringBox, fmGlobalParameter.rho_bulk);
+
+            AddParameter(volumeDeliquoringBox, fmGlobalParameter.Vfd);
+            AddParameter(volumeDeliquoringBox, fmGlobalParameter.Vlcd);
+            AddParameter(volumeDeliquoringBox, fmGlobalParameter.Vcd);
+            
+            AddParameter(massDeliquoringBox, fmGlobalParameter.Mfd);
+            AddParameter(massDeliquoringBox, fmGlobalParameter.Mlcd);
+            AddParameter(massDeliquoringBox, fmGlobalParameter.Mcd);
+
+            AddParameter(volumeFlowrateDeliquoringBox, fmGlobalParameter.Qfd);
+            AddParameter(volumeFlowrateDeliquoringBox, fmGlobalParameter.Qftd);
+            AddParameter(volumeFlowrateDeliquoringBox, fmGlobalParameter.Qfid);
+            AddParameter(volumeFlowrateDeliquoringBox, fmGlobalParameter.Qcd);
+
+            AddParameter(massFlowrateDeliquoringBox, fmGlobalParameter.Qmfd);
+            AddParameter(massFlowrateDeliquoringBox, fmGlobalParameter.Qmftd);
+            AddParameter(massFlowrateDeliquoringBox, fmGlobalParameter.Qmfid);
+            AddParameter(massFlowrateDeliquoringBox, fmGlobalParameter.Qmcd);
+            
+            AddParameter(qDeliquoringBox, fmGlobalParameter.qcd);
+            AddParameter(qDeliquoringBox, fmGlobalParameter.qfid);
+            AddParameter(qDeliquoringBox, fmGlobalParameter.qftd);
+            AddParameter(qDeliquoringBox, fmGlobalParameter.qfd); 
+            
+            AddParameter(qmDeliquoringBox, fmGlobalParameter.qmcd);
+            AddParameter(qmDeliquoringBox, fmGlobalParameter.qmfid);
+            AddParameter(qmDeliquoringBox, fmGlobalParameter.qmftd);
+            AddParameter(qmDeliquoringBox, fmGlobalParameter.qmfd);
         }
 
         private void AddParameter(fmCheckedListBoxWithCheckboxes box, fmGlobalParameter parameter)
@@ -266,8 +272,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 machinesComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
             }
-            takeButton.Enabled = false;
-            assignButton.Enabled = false;
+            machinesComboBox.SelectedIndex = 0;
         }
 
         private void Button3Click(object sender, EventArgs e)
@@ -285,12 +290,6 @@ namespace FilterSimulationWithTablesAndGraphs
                     m_schemas[value] = GetCheckedItems();
                 }
             }
-        }
-
-        private void MachinesComboBoxSelectedIndexChanged(object sender, EventArgs e)
-        {
-            takeButton.Enabled = true;
-            assignButton.Enabled = true;
         }
 
         private void takeButton_Click(object sender, EventArgs e)
@@ -317,7 +316,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void SetShowHideSchemas(Dictionary<fmShowHideSchema, List<fmGlobalParameter>> dictionary)
         {
-            m_schemas = dictionary;
+            m_schemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
+            foreach (KeyValuePair<fmShowHideSchema, List<fmGlobalParameter>> pair in dictionary)
+            {
+                m_schemas.Add(pair.Key, pair.Value);
+            }
         }
     }
 }
