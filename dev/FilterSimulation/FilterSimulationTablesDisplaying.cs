@@ -338,8 +338,8 @@ namespace FilterSimulation
                 if (sim.filterMachiningBlock == null)
                 {
                     sim.filterMachiningBlock = new fmFilterMachiningBlock(
-                        row.Cells[simulationFilterAreaColumn.Index],
-                        row.Cells[simulationFilterDiameterColumn.Index],
+                        row.Cells[simulationGridColumns[fmGlobalParameter.A].Index],
+                        row.Cells[simulationGridColumns[fmGlobalParameter.d0].Index],
                         row.Cells[simulationGridColumns[fmGlobalParameter.Dp].Index],
                         row.Cells[simulationGridColumns[fmGlobalParameter.sf].Index],
                         row.Cells[simulationGridColumns[fmGlobalParameter.sr].Index],

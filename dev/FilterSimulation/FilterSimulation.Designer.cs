@@ -53,8 +53,6 @@ namespace FilterSimulation
             this.simulationMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationSimSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationFilterAreaColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.simulationFilterDiameterColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.panel5 = new System.Windows.Forms.Panel();
             this.simulationDeleteButton = new System.Windows.Forms.Button();
             this.simulationRestoreButton = new System.Windows.Forms.Button();
@@ -389,18 +387,6 @@ namespace FilterSimulation
             // 
             this.simulationNameColumn.HeaderText = "Simulation Name";
             this.simulationNameColumn.Name = "simulationNameColumn";
-            // 
-            // simulationFilterAreaColumn
-            // 
-            this.simulationFilterAreaColumn.HeaderText = "Filter Area";
-            this.simulationFilterAreaColumn.Name = "simulationFilterAreaColumn";
-            this.simulationFilterAreaColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulationFilterDiameterColumn
-            // 
-            this.simulationFilterDiameterColumn.HeaderText = "d0";
-            this.simulationFilterDiameterColumn.Name = "simulationFilterDiameterColumn";
-            this.simulationFilterDiameterColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // panel5
             // 
@@ -1716,8 +1702,6 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationSimSeriesNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationNameColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulationFilterAreaColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulationFilterDiameterColumn;
         protected System.Windows.Forms.DataGridViewTextBoxColumn simulationGuidColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn suspensionGuidColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn suspensionCheckedColumn;
