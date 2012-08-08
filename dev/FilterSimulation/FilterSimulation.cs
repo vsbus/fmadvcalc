@@ -21,10 +21,110 @@ namespace FilterSimulation
         private CheckBox m_ckBox;
         protected fmParametersToDisplay ParametersToDisplay;
         public Dictionary<fmShowHideSchema, List<fmGlobalParameter>> ShowHideSchemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
+        private Dictionary<fmGlobalParameter, DataGridViewColumn> simulationGridColumns = new Dictionary<fmGlobalParameter, DataGridViewColumn>();
 
         public fmFilterSimulationControl()
         {
             InitializeComponent();
+
+            InitializeSimulationGrid();
+        }
+
+        DataGridViewColumn AddSimulationGridColumn(fmGlobalParameter parameter)
+        {
+            var column = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn
+                                                   {
+                                                       HeaderText = parameter.Name,
+                                                       Name = "simulation_" + parameter.Name + "_Column",
+                                                       SortMode = DataGridViewColumnSortMode.Automatic
+                                                   };
+            simulationGridColumns[parameter] = column;
+            return column;
+        }
+
+        private void InitializeSimulationGrid()
+        {
+            simulationDataGrid.Columns.AddRange(new []
+                                                    {
+                                                        simulationGuidColumn,
+                                                        simulationCheckedColumn,
+                                                        simulationProjectColumn,
+                                                        simulationSuspensionNameColumn,
+                                                        simulationFilterMediumColumn,
+                                                        simulationMachineTypeColumn,
+                                                        simulationMachineNameColumn,
+                                                        simulationSimSeriesNameColumn,
+                                                        simulationNameColumn,
+                                                        simulationFilterAreaColumn,
+                                                        simulationFilterDiameterColumn,
+                                                        AddSimulationGridColumn(fmGlobalParameter.Dp),
+                                                        AddSimulationGridColumn(fmGlobalParameter.sf),
+                                                        AddSimulationGridColumn(fmGlobalParameter.sr),
+                                                        AddSimulationGridColumn(fmGlobalParameter.n),
+                                                        AddSimulationGridColumn(fmGlobalParameter.tc),
+                                                        AddSimulationGridColumn(fmGlobalParameter.tf),
+                                                        AddSimulationGridColumn(fmGlobalParameter.tr),
+                                                        simulation_hc_over_tfColumn,
+                                                        simulation_dhc_over_dtColumn,
+                                                        simulation_hcColumn,
+                                                        simulation_MfColumn,
+                                                        simulation_VfColumn,
+                                                        simulation_MsusColumn,
+                                                        simulation_VsusColumn,
+                                                        simulation_MsColumn,
+                                                        simulation_VsColumn,
+                                                        simulation_McColumn,
+                                                        simulation_VcColumn,
+                                                        simulation_mf_Column,
+                                                        simulation_vf_Column,
+                                                        simulation_msus_Column,
+                                                        simulation_vsus_Column,
+                                                        simulation_ms_Column,
+                                                        simulation_vs_Column,
+                                                        simulation_mc_Column,
+                                                        simulation_vc_Column,
+                                                        simulation_QsusColumn,
+                                                        simulation_Qsus_dColumn,
+                                                        simulation_QmsusColumn,
+                                                        simulation_Qmsus_dColumn,
+                                                        simulation_QmsColumn,
+                                                        simulation_Qms_dColumn,
+                                                        simulation_QmfColumn,
+                                                        simulation_Qmf_dColumn,
+                                                        simulation_QmcColumn,
+                                                        simulation_Qmc_dColumn,
+                                                        simulation_QfColumn,
+                                                        simulation_Qf_dColumn,
+                                                        simulation_QsColumn,
+                                                        simulation_Qs_dColumn,
+                                                        simulation_QcColumn,
+                                                        simulation_Qc_dColumn,
+                                                        simulation_qf_Column,
+                                                        simulation_qf_d_Column,
+                                                        simulation_qsus_Column,
+                                                        simulation_qsus_d_Column,
+                                                        simulation_qs_Column,
+                                                        simulation_qs_d_Column,
+                                                        simulation_qc_Column,
+                                                        simulation_qc_d_Column,
+                                                        simulation_qmf_Column,
+                                                        simulation_qmf_d_Column,
+                                                        simulation_qmsus_Column,
+                                                        simulation_qmsus_d_Column,
+                                                        simulation_qms_Column,
+                                                        simulation_qms_d_Column,
+                                                        simulation_qmc_Column,
+                                                        simulation_qmc_d_Column,
+                                                        simulation_epsColumn,
+                                                        simulation_kappaColumn,
+                                                        simulation_PcColumn,
+                                                        simulation_rcColumn,
+                                                        simulation_aColumn,
+                                                        simulation_t1Column,
+                                                        simulation_h1Column,
+                                                        simulation_t1_over_tfColumn,
+                                                        simulation_h1_over_hcColumn
+                                                    });
         }
 
         #region Serialization
@@ -449,14 +549,14 @@ namespace FilterSimulation
             DisplaySolution(Solution);
         }
 
-        private static void SimulationDataGridSortCompare(object sender, DataGridViewSortCompareEventArgs e)
+        private void SimulationDataGridSortCompare(object sender, DataGridViewSortCompareEventArgs e)
         {
             var dg = sender as fmDataGrid.fmDataGrid;
             // ReSharper disable InconsistentNaming
             if (dg != null)
             {
-                fmValue DpColumn = fmValue.StringToValue(dg.Rows[e.RowIndex1].Cells["simulation_DpColumn"].Value.ToString());
-                fmValue DpColumn_2 = fmValue.StringToValue(dg.Rows[e.RowIndex2].Cells["simulation_DpColumn"].Value.ToString());
+                fmValue DpColumn = fmValue.StringToValue(dg.Rows[e.RowIndex1].Cells[simulationGridColumns[fmGlobalParameter.Dp].Index].Value.ToString());
+                fmValue DpColumn_2 = fmValue.StringToValue(dg.Rows[e.RowIndex2].Cells[simulationGridColumns[fmGlobalParameter.Dp].Index].Value.ToString());
                 fmValue hcColumn = fmValue.StringToValue(dg.Rows[e.RowIndex1].Cells["simulation_hcColumn"].Value.ToString());
                 fmValue hcColumn_2 = fmValue.StringToValue(dg.Rows[e.RowIndex2].Cells["simulation_hcColumn"].Value.ToString());
                 // ReSharper restore InconsistentNaming

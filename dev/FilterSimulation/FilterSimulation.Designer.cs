@@ -55,13 +55,6 @@ namespace FilterSimulation
             this.simulationNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationFilterAreaColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulationFilterDiameterColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.simulation_DpColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.simulation_sfColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.simulation_srColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.simulation_nColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.simulation_tcColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.simulation_tfColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.simulation_trColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_hc_over_tfColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_dhc_over_dtColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.simulation_hcColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
@@ -374,85 +367,7 @@ namespace FilterSimulation
             this.simulationDataGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.simulationDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.simulationDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.simulationDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.simulationGuidColumn,
-            this.simulationCheckedColumn,
-            this.simulationProjectColumn,
-            this.simulationSuspensionNameColumn,
-            this.simulationFilterMediumColumn,
-            this.simulationMachineTypeColumn,
-            this.simulationMachineNameColumn,
-            this.simulationSimSeriesNameColumn,
-            this.simulationNameColumn,
-            this.simulationFilterAreaColumn,
-            this.simulationFilterDiameterColumn,
-            this.simulation_DpColumn,
-            this.simulation_sfColumn,
-            this.simulation_srColumn,
-            this.simulation_nColumn,
-            this.simulation_tcColumn,
-            this.simulation_tfColumn,
-            this.simulation_trColumn,
-            this.simulation_hc_over_tfColumn,
-            this.simulation_dhc_over_dtColumn,
-            this.simulation_hcColumn,
-            this.simulation_MfColumn,
-            this.simulation_VfColumn,
-            this.simulation_MsusColumn,
-            this.simulation_VsusColumn,
-            this.simulation_MsColumn,
-            this.simulation_VsColumn,
-            this.simulation_McColumn,
-            this.simulation_VcColumn,
-            this.simulation_mf_Column,
-            this.simulation_vf_Column,
-            this.simulation_msus_Column,
-            this.simulation_vsus_Column,
-            this.simulation_ms_Column,
-            this.simulation_vs_Column,
-            this.simulation_mc_Column,
-            this.simulation_vc_Column,
-            this.simulation_QsusColumn,
-            this.simulation_Qsus_dColumn,
-            this.simulation_QmsusColumn,
-            this.simulation_Qmsus_dColumn,
-            this.simulation_QmsColumn,
-            this.simulation_Qms_dColumn,
-            this.simulation_QmfColumn,
-            this.simulation_Qmf_dColumn,
-            this.simulation_QmcColumn,
-            this.simulation_Qmc_dColumn,
-            this.simulation_QfColumn,
-            this.simulation_Qf_dColumn,
-            this.simulation_QsColumn,
-            this.simulation_Qs_dColumn,
-            this.simulation_QcColumn,
-            this.simulation_Qc_dColumn,
-            this.simulation_qf_Column,
-            this.simulation_qf_d_Column,
-            this.simulation_qsus_Column,
-            this.simulation_qsus_d_Column,
-            this.simulation_qs_Column,
-            this.simulation_qs_d_Column,
-            this.simulation_qc_Column,
-            this.simulation_qc_d_Column,
-            this.simulation_qmf_Column,
-            this.simulation_qmf_d_Column,
-            this.simulation_qmsus_Column,
-            this.simulation_qmsus_d_Column,
-            this.simulation_qms_Column,
-            this.simulation_qms_d_Column,
-            this.simulation_qmc_Column,
-            this.simulation_qmc_d_Column,
-            this.simulation_epsColumn,
-            this.simulation_kappaColumn,
-            this.simulation_PcColumn,
-            this.simulation_rcColumn,
-            this.simulation_aColumn,
-            this.simulation_t1Column,
-            this.simulation_h1Column,
-            this.simulation_t1_over_tfColumn,
-            this.simulation_h1_over_hcColumn});
+            
             this.simulationDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simulationDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.simulationDataGrid.HighLightCurrentRow = true;
@@ -546,48 +461,6 @@ namespace FilterSimulation
             this.simulationFilterDiameterColumn.HeaderText = "d0";
             this.simulationFilterDiameterColumn.Name = "simulationFilterDiameterColumn";
             this.simulationFilterDiameterColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_DpColumn
-            // 
-            this.simulation_DpColumn.HeaderText = "Dp";
-            this.simulation_DpColumn.Name = "simulation_DpColumn";
-            this.simulation_DpColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_sfColumn
-            // 
-            this.simulation_sfColumn.HeaderText = "sf";
-            this.simulation_sfColumn.Name = "simulation_sfColumn";
-            this.simulation_sfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_srColumn
-            // 
-            this.simulation_srColumn.HeaderText = "sr";
-            this.simulation_srColumn.Name = "simulation_srColumn";
-            this.simulation_srColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_nColumn
-            // 
-            this.simulation_nColumn.HeaderText = "n";
-            this.simulation_nColumn.Name = "simulation_nColumn";
-            this.simulation_nColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_tcColumn
-            // 
-            this.simulation_tcColumn.HeaderText = "tc";
-            this.simulation_tcColumn.Name = "simulation_tcColumn";
-            this.simulation_tcColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_tfColumn
-            // 
-            this.simulation_tfColumn.HeaderText = "tf";
-            this.simulation_tfColumn.Name = "simulation_tfColumn";
-            this.simulation_tfColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // simulation_trColumn
-            // 
-            this.simulation_trColumn.HeaderText = "tr";
-            this.simulation_trColumn.Name = "simulation_trColumn";
-            this.simulation_trColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // simulation_hc_over_tfColumn
             // 
@@ -2256,13 +2129,6 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationNameColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulationFilterAreaColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulationFilterDiameterColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_DpColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_sfColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_srColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_nColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_tcColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_tfColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_trColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_hc_over_tfColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_dhc_over_dtColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn simulation_hcColumn;
