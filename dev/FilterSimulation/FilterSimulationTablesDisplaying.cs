@@ -219,6 +219,11 @@ namespace FilterSimulation
                 row.Cells[simulationNameColumn.Index].Value = sim.Name;
 
                 sim.filterMachiningBlock.CalculateAndDisplay();
+                
+                foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsDeliquoringParameters())
+                {
+                    row.Cells[simulationGridColumns[parameter].Index].Value = sim.Parameters[parameter].ValueInUnits;
+                }
             }
         }
 
@@ -438,6 +443,19 @@ namespace FilterSimulation
 
         private void ShowHideRowsDependingOnCalculationOptions(fmFilterSimulation sim)
         {
+            var isVisibleParameters = GetVisibleParamsDependingOnCalculationOptions(sim);
+
+            ShowHideRows(commonDeliquoringSimulationBlockDataGrid,
+                commonDeliquoringSimulationBlockParameterNameColumn.Index,
+                isVisibleParameters);
+
+            ShowHideRows(deliquoringMaterialParametersDataGrid,
+                deliquoringMaterialParametersParameterNameColumn.Index,
+                isVisibleParameters);
+        }
+
+        private Dictionary<fmGlobalParameter, bool> GetVisibleParamsDependingOnCalculationOptions(fmFilterSimulation sim)
+        {
             var isVisibleParameters = new Dictionary<fmGlobalParameter, bool>();
 
             var deliquoringParameters = new List<fmGlobalParameter>();
@@ -484,14 +502,7 @@ namespace FilterSimulation
                 isVisibleParameters[fmGlobalParameter.rho_d] = false;
                 isVisibleParameters[fmGlobalParameter.eta_d] = false;
             }
-
-            ShowHideRows(commonDeliquoringSimulationBlockDataGrid,
-                commonDeliquoringSimulationBlockParameterNameColumn.Index,
-                isVisibleParameters);
-
-            ShowHideRows(deliquoringMaterialParametersDataGrid,
-                deliquoringMaterialParametersParameterNameColumn.Index,
-                isVisibleParameters);
+            return isVisibleParameters;
         }
 
         private void MakeInvisibleEvaporationParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters)
@@ -1077,10 +1088,10 @@ namespace FilterSimulation
             UpdateUnitsOfCommonFilterMachiningBlock();
         }
 
-// ReSharper disable InconsistentNaming
         void commonDeliquoringSimulationBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
-// ReSharper restore InconsistentNaming
         {
+            m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
+
             foreach (fmBlockVariableParameter p in m_commonDeliquoringSimulationBlock.Parameters)
             {
                 fmCalculationVariableParameter p2 = Solution.currentObjects.Simulation.Parameters[p.globalParameter] as fmCalculationVariableParameter;
@@ -1088,8 +1099,9 @@ namespace FilterSimulation
                 p2.isInputed = p.IsInputed;
             }
 
-            //m_fSolution.currentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();
+            Solution.currentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();
         }
+
 // ReSharper disable InconsistentNaming
         void commonFilterMachiningBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
 // ReSharper restore InconsistentNaming
