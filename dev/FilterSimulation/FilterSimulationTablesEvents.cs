@@ -34,7 +34,6 @@ namespace FilterSimulation
                     }
                 }
                 DisplaySolution(Solution);
-
             }
         }
         // ReSharper disable InconsistentNaming

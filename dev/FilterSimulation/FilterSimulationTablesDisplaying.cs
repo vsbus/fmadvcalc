@@ -1100,7 +1100,7 @@ namespace FilterSimulation
             }
             m_commonDeliquoringSimulationBlock.UpdateCellsStyle();
 
-            m_commonDeliquoringSimulationBlock.ValuesChangedByUser += commonDeliquoringSimulationBlock_ValuesChangedByUser;
+            m_commonDeliquoringSimulationBlock.ValuesChanged += commonDeliquoringSimulationBlock_ValuesChanged;
 
             UpdateUnitsOfCommonDeliquoringSimulationBlock();
         }
@@ -1126,18 +1126,11 @@ namespace FilterSimulation
             UpdateUnitsOfCommonFilterMachiningBlock();
         }
 
-        void commonDeliquoringSimulationBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+        void commonDeliquoringSimulationBlock_ValuesChanged(object sender)
         {
-            m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
-
-            foreach (fmBlockVariableParameter p in m_commonDeliquoringSimulationBlock.Parameters)
-            {
-                fmCalculationVariableParameter p2 = Solution.currentObjects.Simulation.Parameters[p.globalParameter] as fmCalculationVariableParameter;
-                p2.value = p.value;
-                p2.isInputed = p.IsInputed;
-            }
-
-            Solution.currentObjects.Simulation.filterMachiningBlock.CalculateAndDisplay();
+            fmFilterSimulation sim = Solution.currentObjects.Simulation;
+            fmFilterSimulation.CopyAllParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, sim);
+            DisplaySolution(Solution);
         }
 
 // ReSharper disable InconsistentNaming
@@ -1371,9 +1364,15 @@ namespace FilterSimulation
             }
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock, sim);
 
-            //fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
-            //sm.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
-            DisplaySolution(Solution);
+            if (m_commonFilterMachiningBlock != null)
+            {
+                fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, m_commonDeliquoringSimulationBlock);
+                m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
+            }
+			else
+			{
+				DisplaySolution(Solution);
+			}
         }
 
         // ReSharper disable InconsistentNaming
