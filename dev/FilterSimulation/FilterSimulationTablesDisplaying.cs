@@ -500,21 +500,6 @@ namespace FilterSimulation
                 MakeInvisibleEvaporationParameters(isVisibleParameters);
             }
 
-            bool isDpdInput = sim.deliquoringEps0NeEpsBlock.dpdInputCalculationOption ==
-                              fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser;
-            if (!isDpdInput)
-            {
-                isVisibleParameters[fmGlobalParameter.Dp_d] = false;
-            }
-
-            bool isHcdInput = sim.deliquoringEps0NeEpsBlock.hcdCalculationOption ==
-                              fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser;
-            if (!isHcdInput)
-            {
-                isVisibleParameters[fmGlobalParameter.hcd] = false;
-                isVisibleParameters[fmGlobalParameter.eps_d] = false;
-            }
-
             bool isRhoDEtaDInput = sim.RhoDetaDCalculationOption ==
                                    fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser;
             if (!isRhoDEtaDInput)
@@ -1129,13 +1114,11 @@ namespace FilterSimulation
         void commonDeliquoringSimulationBlock_ValuesChanged(object sender)
         {
             fmFilterSimulation sim = Solution.currentObjects.Simulation;
-            fmFilterSimulation.CopyAllParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, sim);
+            fmFilterSimulation.CopyVariableParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, sim);
             DisplaySolution(Solution);
         }
 
-// ReSharper disable InconsistentNaming
         void commonFilterMachiningBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
-// ReSharper restore InconsistentNaming
         {
             foreach (fmBlockVariableParameter p in m_commonFilterMachiningBlock.Parameters)
             {
@@ -1364,9 +1347,9 @@ namespace FilterSimulation
             }
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock, sim);
 
-            if (m_commonFilterMachiningBlock != null)
+            if (m_commonDeliquoringSimulationBlock != null)
             {
-                fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, m_commonDeliquoringSimulationBlock);
+                fmFilterSimulation.CopyAllParametersFromSimulationToBlock(Solution.currentObjects.Simulation, m_commonDeliquoringSimulationBlock);
                 m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
             }
 			else
