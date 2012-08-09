@@ -220,7 +220,7 @@ namespace FilterSimulation
 
                 sim.filterMachiningBlock.CalculateAndDisplay();
                 
-                Dictionary<fmGlobalParameter, bool> visibleDeliqParams = GetVisibleParamsDependingOnCalculationOptions(sim);
+                Dictionary<fmGlobalParameter, bool> visibleDeliqParams = GetVisibleDeliquoringParamsDependingOnCalculationOptions(sim);
 
                 foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsDeliquoringParameters())
                 {
@@ -462,7 +462,22 @@ namespace FilterSimulation
 
         private void ShowHideRowsDependingOnCalculationOptions(fmFilterSimulation sim)
         {
-            var isVisibleParameters = GetVisibleParamsDependingOnCalculationOptions(sim);
+            Dictionary<fmGlobalParameter, bool> isVisibleParameters = GetVisibleDeliquoringParamsDependingOnCalculationOptions(sim);
+            List<fmGlobalParameter> visibleParametersList = new List<fmGlobalParameter>();
+            foreach (KeyValuePair<fmGlobalParameter, bool> pair in isVisibleParameters)
+            {
+                if (pair.Value)
+                {
+                    visibleParametersList.Add(pair.Key);
+                }
+            }
+            foreach (fmGlobalParameter parameter in visibleParametersList)
+            {
+                if (!sim.Parent.ParametersToDisplay.ParametersList.Contains(parameter))
+                {
+                    isVisibleParameters[parameter] = false;
+                }
+            }
 
             ShowHideRows(commonDeliquoringSimulationBlockDataGrid,
                 commonDeliquoringSimulationBlockParameterNameColumn.Index,
@@ -473,7 +488,7 @@ namespace FilterSimulation
                 isVisibleParameters);
         }
 
-        private Dictionary<fmGlobalParameter, bool> GetVisibleParamsDependingOnCalculationOptions(fmFilterSimulation sim)
+        private Dictionary<fmGlobalParameter, bool> GetVisibleDeliquoringParamsDependingOnCalculationOptions(fmFilterSimulation sim)
         {
             var isVisibleParameters = new Dictionary<fmGlobalParameter, bool>();
 
@@ -482,8 +497,7 @@ namespace FilterSimulation
             deliquoringParameters.AddRange(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
             foreach (fmGlobalParameter parameter in deliquoringParameters)
             {
-                isVisibleParameters[parameter] = sim.DeliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used
-                    && sim.Parent.ParametersToDisplay.ParametersList.Contains(parameter);
+                isVisibleParameters[parameter] = sim.DeliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
             }
 
             bool isGas = sim.filterMachiningBlock.gasFlowrateUsedCalculationOption ==
