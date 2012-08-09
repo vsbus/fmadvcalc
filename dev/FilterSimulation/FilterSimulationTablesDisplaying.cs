@@ -220,9 +220,13 @@ namespace FilterSimulation
 
                 sim.filterMachiningBlock.CalculateAndDisplay();
                 
+                Dictionary<fmGlobalParameter, bool> visibleDeliqParams = GetVisibleParamsDependingOnCalculationOptions(sim);
+
                 foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsDeliquoringParameters())
                 {
-                    row.Cells[simulationGridColumns[parameter].Index].Value = sim.Parameters[parameter].ValueInUnits;
+                    row.Cells[simulationGridColumns[parameter].Index].Value = visibleDeliqParams[parameter]
+                        ? sim.Parameters[parameter].ValueInUnits.ToString()
+                        : "-";
                 }
             }
         }
@@ -463,7 +467,8 @@ namespace FilterSimulation
             deliquoringParameters.AddRange(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
             foreach (fmGlobalParameter parameter in deliquoringParameters)
             {
-                isVisibleParameters[parameter] = ParametersToDisplay.ParametersList.Contains(parameter);
+                isVisibleParameters[parameter] = sim.DeliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used
+                    && sim.Parent.ParametersToDisplay.ParametersList.Contains(parameter);
             }
 
             bool isGas = sim.filterMachiningBlock.gasFlowrateUsedCalculationOption ==
@@ -964,13 +969,31 @@ namespace FilterSimulation
 
         private void ShowHideSelectedParametersInSimulationDataGrid()
         {
+            fmParametersToDisplay whatToDisplayNow = new fmParametersToDisplay();
+            if (Solution.currentObjects.Suspension != null)
+            {
+                foreach (fmFilterSimSerie serie in Solution.currentObjects.Suspension.SimSeriesList)
+                {
+                    if (m_byCheckingSimSeries && serie == Solution.currentObjects.Serie
+                        || !m_byCheckingSimSeries && serie.Checked)
+                    {
+                        foreach (fmGlobalParameter parameter in serie.ParametersToDisplay.ParametersList)
+                        {
+                            if (!whatToDisplayNow.ParametersList.Contains(parameter))
+                            {
+                                whatToDisplayNow.ParametersList.Add(parameter);
+                            }
+                        }
+                    }
+                }
+            }
             foreach (DataGridViewColumn col in simulationDataGrid.Columns)
             {
                 string pName = GetParameterNameFromHeader(col.HeaderText);
                 if (fmGlobalParameter.ParametersByName.ContainsKey(pName))
                 {
                     var p = fmGlobalParameter.ParametersByName[pName];
-                    col.Visible = ParametersToDisplay.ParametersList.Contains(p);
+                    col.Visible = whatToDisplayNow.ParametersList.Contains(p);
                 }
             }
         }
