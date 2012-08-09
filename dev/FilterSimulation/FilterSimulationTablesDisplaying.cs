@@ -224,9 +224,24 @@ namespace FilterSimulation
 
                 foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsDeliquoringParameters())
                 {
-                    row.Cells[simulationGridColumns[parameter].Index].Value = visibleDeliqParams[parameter]
-                        ? sim.Parameters[parameter].ValueInUnits.ToString()
-                        : "-";
+                    DataGridViewCell cell = row.Cells[simulationGridColumns[parameter].Index];
+                    cell.Style.ForeColor = Color.Black;
+                    if (visibleDeliqParams[parameter])
+                    {
+                        cell.Value = sim.Parameters[parameter].ValueInUnits.ToString();
+                        fmCalculationBaseParameter blockParameter = sim.Parameters[parameter];
+                        if (blockParameter is fmCalculationVariableParameter)
+                        {
+                            if ((blockParameter as fmCalculationVariableParameter).isInputed)
+                            {
+                                cell.Style.ForeColor = Color.Blue;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        cell.Value = "-";
+                    }
                 }
             }
         }

@@ -61,6 +61,7 @@ namespace FilterSimulation
             {
                 simulationDataGrid.Columns.Add(AddSimulationGridColumn(parameter));
             }
+
             foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsDeliquoringParameters())
             {
                 DataGridViewColumn column = AddSimulationGridColumn(parameter);
