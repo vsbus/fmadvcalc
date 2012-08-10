@@ -1099,10 +1099,18 @@ namespace FilterSimulation
             }
             m_commonDeliquoringSimulationBlock.UpdateCellsStyle();
 
-            m_commonDeliquoringSimulationBlock.ValuesChanged += commonDeliquoringSimulationBlock_ValuesChanged;
+            m_commonDeliquoringSimulationBlock.ValuesChangedByUser += commonDeliquoringSimulationBlock_ValuesChangedByUser;
 
             UpdateUnitsOfCommonDeliquoringSimulationBlock();
         }
+
+        private void commonDeliquoringSimulationBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+        {
+            fmFilterSimulation sim = Solution.currentObjects.Simulation;
+            fmFilterSimulation.CopyVariableParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, sim);
+            DisplaySolution(Solution);
+        }
+
         private void InitCommonFilterMachiningBlock()
         {
             var voidBlock = new fmFilterMachiningBlock();
@@ -1123,13 +1131,6 @@ namespace FilterSimulation
             m_commonFilterMachiningBlock.ValuesChangedByUser += commonFilterMachiningBlock_ValuesChangedByUser;
 
             UpdateUnitsOfCommonFilterMachiningBlock();
-        }
-
-        void commonDeliquoringSimulationBlock_ValuesChanged(object sender)
-        {
-            fmFilterSimulation sim = Solution.currentObjects.Simulation;
-            fmFilterSimulation.CopyVariableParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, sim);
-            DisplaySolution(Solution);
         }
 
         void commonFilterMachiningBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
@@ -1361,11 +1362,18 @@ namespace FilterSimulation
             }
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock, sim);
 
-            if (m_commonDeliquoringSimulationBlock != null
-                && Solution.currentObjects.Simulation != null)
+            if (m_commonDeliquoringSimulationBlock != null)
             {
-                fmFilterSimulation.CopyAllParametersFromSimulationToBlock(Solution.currentObjects.Simulation, m_commonDeliquoringSimulationBlock);
+                foreach (fmFilterSimulation simulation in Solution.GetAllSimulations())
+                {
+                    fmFilterSimulation.CopyAllParametersFromSimulationToBlock(simulation, m_commonDeliquoringSimulationBlock);
+                    m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
+                    fmFilterSimulation.CopyAllParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, simulation);
+                }
+                fmFilterSimulation.CopyAllParametersFromSimulationToBlock(
+                    Solution.currentObjects.Simulation, m_commonDeliquoringSimulationBlock);
                 m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
+                DisplaySolution(Solution);
             }
 			else
 			{
