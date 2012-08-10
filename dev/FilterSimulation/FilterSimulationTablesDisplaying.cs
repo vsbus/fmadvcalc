@@ -1370,15 +1370,15 @@ namespace FilterSimulation
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
                     fmFilterSimulation.CopyAllParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, simulation);
                 }
-                fmFilterSimulation.CopyAllParametersFromSimulationToBlock(
-                    Solution.currentObjects.Simulation, m_commonDeliquoringSimulationBlock);
-                m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
-                DisplaySolution(Solution);
+
+                if (Solution.currentObjects.Simulation != null)
+                {
+                    fmFilterSimulation.CopyAllParametersFromSimulationToBlock(
+                        Solution.currentObjects.Simulation, m_commonDeliquoringSimulationBlock);
+                    m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
+                }
             }
-			else
-			{
-				DisplaySolution(Solution);
-			}
+			DisplaySolution(Solution);
         }
 
         // ReSharper disable InconsistentNaming
