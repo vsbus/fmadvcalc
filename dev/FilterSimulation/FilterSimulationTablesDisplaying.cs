@@ -1361,7 +1361,8 @@ namespace FilterSimulation
             }
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock, sim);
 
-            if (m_commonDeliquoringSimulationBlock != null)
+            if (m_commonDeliquoringSimulationBlock != null
+                && Solution.currentObjects.Simulation != null)
             {
                 fmFilterSimulation.CopyAllParametersFromSimulationToBlock(Solution.currentObjects.Simulation, m_commonDeliquoringSimulationBlock);
                 m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
