@@ -155,7 +155,10 @@ namespace FilterSimulation.fmFilterObjects
                         {
                             range.MaxValue = Convert.ToDouble(maxValueNode.InnerText);
                         }
-                        serieData.ranges.Ranges.Add(fmGlobalParameter.ParametersByName[parameterNameNode.InnerText], range);
+                        if (fmGlobalParameter.ParametersByName.ContainsKey(parameterNameNode.InnerText))
+                        {
+                            serieData.ranges.Ranges.Add(fmGlobalParameter.ParametersByName[parameterNameNode.InnerText], range);
+                        }
                     }
                 }
             }

@@ -231,8 +231,8 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_bulk));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmfid));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qfid));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmcd));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmci));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qci));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmfid));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qfid));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmcd));
@@ -438,6 +438,10 @@ namespace FilterSimulation.fmFilterObjects
         {
             fmCalculationBaseParameter parameter;
             string name = xmlNode.SelectSingleNode(fmParameterSerializeTags.Name).InnerText;
+            if (!fmGlobalParameter.ParametersByName.ContainsKey(name))
+            {
+                return null;
+            }
             XmlNode isInputedNode = xmlNode.SelectSingleNode(fmParameterSerializeTags.IsInputed);
             if (isInputedNode != null)
             {
@@ -562,7 +566,10 @@ namespace FilterSimulation.fmFilterObjects
             foreach (XmlNode parameterNode in parameterList)
             {
                 fmCalculationBaseParameter p = DeserializeCalculationBaseParameter(parameterNode);
-                simData.parameters[p.globalParameter] = p;
+                if (p != null)
+                {
+                    simData.parameters[p.globalParameter] = p;
+                }
             }
             return simData;
         }

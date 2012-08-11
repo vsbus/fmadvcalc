@@ -43,8 +43,8 @@ namespace fmCalculatorsLibrary
             var rho_bulk = variables[fmGlobalParameter.rho_bulk] as fmCalculationVariableParameter;
             var Qmfid = variables[fmGlobalParameter.Qmfid] as fmCalculationVariableParameter;
             var Qfid = variables[fmGlobalParameter.Qfid] as fmCalculationVariableParameter;
-            var Qmcd = variables[fmGlobalParameter.Qmcd] as fmCalculationVariableParameter;
-            var Qcd = variables[fmGlobalParameter.Qcd] as fmCalculationVariableParameter;
+            var Qmcd = variables[fmGlobalParameter.Qmci] as fmCalculationVariableParameter;
+            var Qcd = variables[fmGlobalParameter.Qci] as fmCalculationVariableParameter;
             var qmfid = variables[fmGlobalParameter.qmfid] as fmCalculationVariableParameter;
             var qfid = variables[fmGlobalParameter.qfid] as fmCalculationVariableParameter;
             var qmcd = variables[fmGlobalParameter.qmcd] as fmCalculationVariableParameter;
