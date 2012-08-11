@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using FilterSimulation;
 using FilterSimulationWithTablesAndGraphs;
@@ -240,6 +241,11 @@ namespace AdvancedCalculator
                 filterSimulationWithTablesAndGraphs1.ShowHideSchemas = yalForm.GetShowHideSchemas();
                 filterSimulationWithTablesAndGraphs1.UpdateAll();
             }
+        }
+
+        private void calculatorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("FiltrationCalculator.exe");
         }
     }
 }
