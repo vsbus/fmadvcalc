@@ -206,6 +206,7 @@ namespace AdvancedCalculator
         {
             var proForm = new fmParameterIntervalOption();
             proForm.SetRanges(filterSimulationWithTablesAndGraphs1.GetCurrentSerieRanges().Ranges);
+            proForm.CheckScheme(filterSimulationWithTablesAndGraphs1.GetCurrentSerieRanges().AssignedSchema);
             proForm.SetRangesSchemas(filterSimulationWithTablesAndGraphs1.RangesSchemas);
             if (proForm.ShowDialog() == DialogResult.OK)
             {

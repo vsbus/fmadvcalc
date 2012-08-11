@@ -9,7 +9,9 @@ namespace FilterSimulation
     public enum fmRangesSchema
     {
         [Description("Rotary Vacuum Filters")]
-        RotaryVacuumFilters
+        RotaryVacuumFilters,
+        [Description("Rotary Pressure Filters")]
+        RotaryPressureFilters
     }
 
     public class fmRangesConfiguration

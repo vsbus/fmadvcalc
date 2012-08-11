@@ -393,5 +393,17 @@ namespace FilterSimulation
         {
             return new Dictionary<fmRangesSchema, RangesDictionary>(m_schemas);
         }
+
+        public void CheckScheme(fmRangesSchema schema)
+        {
+            for (int i = 0; i < filterTypeComboBox.Items.Count; ++i)
+            {
+                if (filterTypeComboBox.Items[i].ToString() == fmEnumUtils.GetEnumDescription(schema))
+                {
+                    filterTypeComboBox.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
     }
 }
