@@ -62,6 +62,7 @@ namespace FilterSimulation
         private void ShowHideSecondaryDeliquoringCheckboxes()
         {
             bool isVisible = deliquoringOptionCheckBox.Checked;
+            PressureDifferenceInputCheckbox.Visible = isVisible;
             CakeHeightInputCheckBox.Visible = isVisible;
             PcDCheckBox.Visible = isVisible;
             etaDrhoDCheckBox.Visible = isVisible;
