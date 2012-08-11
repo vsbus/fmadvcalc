@@ -173,12 +173,12 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(volumeFlowrateDeliquoringBox, fmGlobalParameter.Qfd);
             AddParameter(volumeFlowrateDeliquoringBox, fmGlobalParameter.Qftd);
             AddParameter(volumeFlowrateDeliquoringBox, fmGlobalParameter.Qfid);
-            AddParameter(volumeFlowrateDeliquoringBox, fmGlobalParameter.Qci);
+            AddParameter(volumeFlowrateDeliquoringBox, fmGlobalParameter.Qcd);
 
             AddParameter(massFlowrateDeliquoringBox, fmGlobalParameter.Qmfd);
             AddParameter(massFlowrateDeliquoringBox, fmGlobalParameter.Qmftd);
             AddParameter(massFlowrateDeliquoringBox, fmGlobalParameter.Qmfid);
-            AddParameter(massFlowrateDeliquoringBox, fmGlobalParameter.Qmci);
+            AddParameter(massFlowrateDeliquoringBox, fmGlobalParameter.Qmcd);
             
             AddParameter(qDeliquoringBox, fmGlobalParameter.qcd);
             AddParameter(qDeliquoringBox, fmGlobalParameter.qfid);

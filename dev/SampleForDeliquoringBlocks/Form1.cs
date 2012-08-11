@@ -115,8 +115,8 @@ namespace SampleForDeliquoringBlocks
             WriteParameter2(18, fmGlobalParameter.rho_bulk);
             WriteParameter2(19, fmGlobalParameter.Qmfid);
             WriteParameter2(20, fmGlobalParameter.Qfid);
-            WriteParameter2(21, fmGlobalParameter.Qmci);
-            WriteParameter2(22, fmGlobalParameter.Qci);
+            WriteParameter2(21, fmGlobalParameter.Qmcd);
+            WriteParameter2(22, fmGlobalParameter.Qcd);
             WriteParameter2(23, fmGlobalParameter.qmfid);
             WriteParameter2(24, fmGlobalParameter.qfid);
             WriteParameter2(25, fmGlobalParameter.qmcd);

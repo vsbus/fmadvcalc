@@ -231,8 +231,8 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.rho_bulk));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmfid));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qfid));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmci));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qci));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmcd));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qcd));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmfid));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qfid));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmcd));

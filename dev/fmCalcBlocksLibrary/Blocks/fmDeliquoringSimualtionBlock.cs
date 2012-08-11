@@ -209,8 +209,8 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref rho_bulk, fmGlobalParameter.rho_bulk, rho_bulk_Cell, false);
             AddParameter(ref Qmfid, fmGlobalParameter.Qmfid, Qmfid_Cell, false);
             AddParameter(ref Qfid, fmGlobalParameter.Qfid, Qfid_Cell, false);
-            AddParameter(ref Qmcd, fmGlobalParameter.Qmci, Qmcd_Cell, false);
-            AddParameter(ref Qcd, fmGlobalParameter.Qci, Qcd_Cell, false);
+            AddParameter(ref Qmcd, fmGlobalParameter.Qmcd, Qmcd_Cell, false);
+            AddParameter(ref Qcd, fmGlobalParameter.Qcd, Qcd_Cell, false);
             AddParameter(ref qmfid, fmGlobalParameter.qmfid, qmfid_Cell, false);
             AddParameter(ref qfid, fmGlobalParameter.qfid, qfid_Cell, false);
             AddParameter(ref qmcd, fmGlobalParameter.qmcd, qmcd_Cell, false);
