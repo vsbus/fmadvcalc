@@ -42,6 +42,7 @@ namespace AdvancedCalculator
             this.LengthUnitItem = new fmFilterSimulationControl.fmUnitItem();
             this.ConcentrationUnitItem = new fmFilterSimulationControl.fmUnitItem();
             this.OKButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -145,7 +146,7 @@ namespace AdvancedCalculator
             // 
             // OKButton
             // 
-            this.OKButton.Location = new System.Drawing.Point(153, 397);
+            this.OKButton.Location = new System.Drawing.Point(72, 397);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(75, 23);
             this.OKButton.TabIndex = 1;
@@ -153,11 +154,22 @@ namespace AdvancedCalculator
             this.OKButton.UseVisualStyleBackColor = true;
             this.OKButton.Click += new System.EventHandler(this.OKButton_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(153, 397);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Cancel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // fmUnitsOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(243, 432);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.groupBox1);
             this.Name = "fmUnitsOptions";
@@ -182,5 +194,6 @@ namespace AdvancedCalculator
         private fmUnitItem FrequencyUnitItem;
         private fmUnitItem VolumeUnitItem;
         private fmUnitItem MassUnitItem;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -19,5 +19,10 @@ namespace AdvancedCalculator
             fmValue.outputPrecision = (int)precisionUpDown.Value;
             Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

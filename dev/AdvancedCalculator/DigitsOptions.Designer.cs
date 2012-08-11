@@ -31,24 +31,25 @@ namespace AdvancedCalculator
             this.precisionUpDown = new System.Windows.Forms.NumericUpDown();
             this.OKbutton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.precisionUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // precisionUpDown
             // 
-            this.precisionUpDown.Location = new System.Drawing.Point(38, 43);
+            this.precisionUpDown.Location = new System.Drawing.Point(19, 40);
             this.precisionUpDown.Maximum = new decimal(new int[] {
-                                                                     10,
-                                                                     0,
-                                                                     0,
-                                                                     0});
+            10,
+            0,
+            0,
+            0});
             this.precisionUpDown.Name = "precisionUpDown";
             this.precisionUpDown.Size = new System.Drawing.Size(76, 20);
             this.precisionUpDown.TabIndex = 0;
             // 
             // OKbutton
             // 
-            this.OKbutton.Location = new System.Drawing.Point(152, 40);
+            this.OKbutton.Location = new System.Drawing.Point(120, 40);
             this.OKbutton.Name = "OKbutton";
             this.OKbutton.Size = new System.Drawing.Size(75, 23);
             this.OKbutton.TabIndex = 1;
@@ -65,11 +66,22 @@ namespace AdvancedCalculator
             this.label1.TabIndex = 2;
             this.label1.Text = "Enter number of displaying digits for numeric data";
             // 
-            // DigitsOptions
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(201, 40);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Cancel";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // fmDigitsOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(265, 88);
+            this.ClientSize = new System.Drawing.Size(288, 87);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.OKbutton);
             this.Controls.Add(this.precisionUpDown);
@@ -90,5 +102,6 @@ namespace AdvancedCalculator
         private System.Windows.Forms.NumericUpDown precisionUpDown;
         private System.Windows.Forms.Button OKbutton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }
