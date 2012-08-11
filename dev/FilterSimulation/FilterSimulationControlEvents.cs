@@ -74,10 +74,18 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
                 return;
             }
 
-            Solution.currentObjects.Suspension = new fmFilterSimSuspension(parentProject, "Unnamed suspension", "Unnamed material", "Unnamed customer");
+            int currentCol = -1;
+            if (suspensionDataGrid.CurrentCell != null)
+            {
+                currentCol = suspensionDataGrid.CurrentCell.ColumnIndex;
+            }
+            Solution.currentObjects.Suspension = new fmFilterSimSuspension(parentProject, "n/a", "n/a", "n/a");
             Solution.currentColumns.suspension = suspensionNameColumn.Index;
             DisplaySolution(Solution);
-            suspensionDataGrid.BeginEdit(true);
+            if (currentCol != -1 && suspensionDataGrid.CurrentCell != null)
+            {
+                suspensionDataGrid.CurrentCell = suspensionDataGrid[currentCol, suspensionDataGrid.CurrentCell.RowIndex];
+            }
         }
         // ReSharper disable InconsistentNaming
         private void suspensionRestoreButton_Click(object sender, EventArgs e)
