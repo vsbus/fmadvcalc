@@ -41,5 +41,10 @@ namespace FilterSimulation
         {
             return fmDataGrid1["ParameterColumn", rowIndex];
         }
+
+        internal void ClearRows()
+        {
+            fmDataGrid1.Rows.Clear();
+        }
     }
 }

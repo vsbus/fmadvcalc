@@ -7,9 +7,9 @@ using FilterSimulation.fmFilterObjects;
 using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
 using fmCalculatorsLibrary;
-using Rectangle = System.Drawing.Rectangle;
 using System.Xml;
 using fmMisc;
+using RangesDictionary = System.Collections.Generic.Dictionary<fmCalculationLibrary.fmGlobalParameter, fmCalculationLibrary.fmDefaultParameterRange>;
 
 namespace FilterSimulation
 {
@@ -21,6 +21,7 @@ namespace FilterSimulation
         private CheckBox m_ckBox;
         protected fmParametersToDisplay ParametersToDisplay;
         public Dictionary<fmShowHideSchema, List<fmGlobalParameter>> ShowHideSchemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
+        public Dictionary<fmRangesSchema, RangesDictionary> RangesSchemas = new Dictionary<fmRangesSchema, RangesDictionary>();
         private Dictionary<fmGlobalParameter, DataGridViewColumn> simulationGridColumns = new Dictionary<fmGlobalParameter, DataGridViewColumn>();
 
         public fmFilterSimulationControl()
@@ -78,9 +79,45 @@ namespace FilterSimulation
             public const string ShowHideSchema = "ShowHideSchema";
             public const string ShowHideSchemaName = "ShowHideSchemaName";
             public const string ShowHideParameter = "ShowHideParameter";
+
+            public const string RangesSchemas = "RangesSchemas";
+            public const string RangeSchema = "RangeSchema";
+            public const string RangeSchemaName = "RangeSchemaName";
+            public const string Range = "Range";
+            public const string RangeParameterName = "RangeParameterName";
+            public const string RangeMinValue = "RangeMinValue";
+            public const string RangeMaxValue = "RangeMaxValue";
+            public const string RangeIsInputed = "RangeIsInputed";
         }
 
         public void SerializeConfiguration(XmlWriter writer)
+        {
+            SerializeShowHideSchemas(writer);
+            SerializeRangesSchemas(writer);
+        }
+
+        private void SerializeRangesSchemas(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.RangesSchemas);
+            foreach (KeyValuePair<fmRangesSchema, RangesDictionary> rangeSchema in RangesSchemas)
+            {
+                writer.WriteStartElement(fmFilterSimulationSerializeTags.RangeSchema);
+                writer.WriteElementString(fmFilterSimulationSerializeTags.RangeSchemaName, fmEnumUtils.GetEnumDescription(rangeSchema.Key));
+                foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in rangeSchema.Value)
+                {
+                    writer.WriteStartElement(fmFilterSimulationSerializeTags.Range);
+                    writer.WriteElementString(fmFilterSimulationSerializeTags.RangeParameterName, range.Key.Name);
+                    writer.WriteElementString(fmFilterSimulationSerializeTags.RangeMinValue, range.Value.MinValue.ToString());
+                    writer.WriteElementString(fmFilterSimulationSerializeTags.RangeMaxValue, range.Value.MaxValue.ToString());
+                    writer.WriteElementString(fmFilterSimulationSerializeTags.RangeIsInputed, range.Value.IsInputed.ToString());
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
+        private void SerializeShowHideSchemas(XmlWriter writer)
         {
             writer.WriteStartElement(fmFilterSimulationSerializeTags.ShowHideSchemas);
             foreach (KeyValuePair<fmShowHideSchema, List<fmGlobalParameter>> showHideSchema in ShowHideSchemas)
@@ -97,6 +134,38 @@ namespace FilterSimulation
         }
 
         public void DeserializeConfiguration(XmlNode node)
+        {
+            DeserializeShowHideSchemas(node);
+            DeserializeRangesSchemas(node);
+        }
+
+        private void DeserializeRangesSchemas(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.RangesSchemas);
+            XmlNodeList schemasNodes = node.SelectNodes(fmFilterSimulationSerializeTags.RangeSchema);
+            foreach (XmlNode schemaNode in schemasNodes)
+            {
+                string schemaName =
+                    schemaNode.SelectSingleNode(fmFilterSimulationSerializeTags.RangeSchemaName).InnerText;
+                var rangesDictionary = new RangesDictionary();
+                XmlNodeList rangesList = schemaNode.SelectNodes(fmFilterSimulationSerializeTags.Range);
+                foreach (XmlNode rangeNode in rangesList)
+                {
+                    XmlNode parameterNode = rangeNode.SelectSingleNode(fmFilterSimulationSerializeTags.RangeParameterName);
+                    XmlNode minValueNode = rangeNode.SelectSingleNode(fmFilterSimulationSerializeTags.RangeMinValue);
+                    XmlNode maxValueNode = rangeNode.SelectSingleNode(fmFilterSimulationSerializeTags.RangeMaxValue);
+                    XmlNode IsInputedNode = rangeNode.SelectSingleNode(fmFilterSimulationSerializeTags.RangeIsInputed);
+                    rangesDictionary.Add(fmGlobalParameter.ParametersByName[parameterNode.InnerText],
+                                         new fmDefaultParameterRange(
+                                             Convert.ToDouble(minValueNode.InnerText),
+                                             Convert.ToDouble(maxValueNode.InnerText),
+                                             Convert.ToBoolean(IsInputedNode.InnerText)));
+                }
+                RangesSchemas[(fmRangesSchema)fmEnumUtils.GetEnum(typeof(fmRangesSchema), schemaName)] = rangesDictionary;
+            }
+        }
+
+        private void DeserializeShowHideSchemas(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ShowHideSchemas);
             XmlNodeList schemasNodes = node.SelectNodes(fmFilterSimulationSerializeTags.ShowHideSchema);

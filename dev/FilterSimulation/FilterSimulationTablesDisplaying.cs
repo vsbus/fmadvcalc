@@ -965,7 +965,7 @@ namespace FilterSimulation
         {
             if (sol.currentObjects.Serie != null)
             {
-                foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in sol.currentObjects.Serie.Ranges)
+                foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in sol.currentObjects.Serie.Ranges.Ranges)
                 {
                     range.Key.SpecifiedRange = range.Value;
                 }

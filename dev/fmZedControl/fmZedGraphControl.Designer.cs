@@ -176,8 +176,8 @@ namespace fmZedGraph
             List<CurveItem> result = new List<CurveItem>();
             foreach (CurveItem curve in GraphPane.CurveList)
             {
-                if (highLightedPoints != null
-                    && highLightedPoints.Contains(curve))
+                if (highLightedPoints != null && highLightedPoints.Contains(curve)
+                    || curve.Points.Count == 0)
                 {
                     continue;
                 }

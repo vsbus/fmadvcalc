@@ -306,13 +306,22 @@ namespace FilterSimulationWithTablesAndGraphs
             ParametersToDisplay = parametersToDisplayList;
         }
 
-        public void SetCurrentSerieRanges(Dictionary<fmGlobalParameter, fmDefaultParameterRange> ranges)
+        public fmRangesConfiguration GetCurrentSerieRanges()
+        {
+            if (Solution.currentObjects.Serie != null)
+            {
+                return new fmRangesConfiguration(Solution.currentObjects.Serie.Ranges);
+            }
+            return new fmRangesConfiguration();
+        }
+
+        public void SetCurrentSerieRanges(fmRangesConfiguration ranges)
         {
             if (Solution.currentObjects.Serie != null)
             {
                 Solution.currentObjects.Serie.Ranges = ranges;
             }
-            foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in ranges)
+            foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in ranges.Ranges)
             {
                 range.Key.SpecifiedRange = range.Value;
             }

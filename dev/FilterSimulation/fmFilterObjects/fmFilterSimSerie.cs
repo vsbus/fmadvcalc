@@ -15,7 +15,7 @@ namespace FilterSimulation.fmFilterObjects
 
         public fmParametersToDisplay parametersToDisplay = new fmParametersToDisplay();
 
-        public Dictionary<fmGlobalParameter, fmDefaultParameterRange> ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
+        public fmRangesConfiguration ranges = new fmRangesConfiguration();
         public List<fmFilterSimulation> simList;
 
 
@@ -27,10 +27,10 @@ namespace FilterSimulation.fmFilterObjects
             filterMedium = from.filterMedium;
             parametersToDisplay = new fmParametersToDisplay(from.parametersToDisplay);
 
-            ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
-            foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in from.ranges)
+            ranges = new fmRangesConfiguration();
+            foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in from.ranges.Ranges)
             {
-                ranges.Add(range.Key, range.Value);
+                ranges.Ranges.Add(range.Key, range.Value);
             }
 
             simList = new List<fmFilterSimulation>();
@@ -78,7 +78,7 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
 
             writer.WriteStartElement(fmSimSerieDataSerializeTags.Ranges);
-            foreach (var p in ranges)
+            foreach (var p in ranges.Ranges)
             {
                 writer.WriteStartElement(fmSimSerieDataSerializeTags.ParameterRange);
                 writer.WriteElementString(fmSimSerieDataSerializeTags.GlobalParameter, p.Key.Name);
@@ -129,7 +129,7 @@ namespace FilterSimulation.fmFilterObjects
                 }
             }
 
-            serieData.ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
+            serieData.ranges = new fmRangesConfiguration();
             XmlNode rangesNode = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.Ranges);
             if (rangesNode != null)
             {
@@ -155,7 +155,7 @@ namespace FilterSimulation.fmFilterObjects
                         {
                             range.MaxValue = Convert.ToDouble(maxValueNode.InnerText);
                         }
-                        serieData.ranges.Add(fmGlobalParameter.ParametersByName[parameterNameNode.InnerText], range);
+                        serieData.ranges.Ranges.Add(fmGlobalParameter.ParametersByName[parameterNameNode.InnerText], range);
                     }
                 }
             }
@@ -221,7 +221,7 @@ namespace FilterSimulation.fmFilterObjects
             }
         }
 
-        public Dictionary<fmGlobalParameter, fmDefaultParameterRange> Ranges
+        public fmRangesConfiguration Ranges
         {
             get { return m_data.ranges; }
             set

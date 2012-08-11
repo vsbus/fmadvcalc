@@ -190,6 +190,11 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(qmDeliquoringBox, fmGlobalParameter.qmftd);
             AddParameter(qmDeliquoringBox, fmGlobalParameter.qmfd);
 
+            FillFilterTypeCombobox();
+        }
+
+        private void FillFilterTypeCombobox()
+        {
             foreach (Enum element in Enum.GetValues(typeof(fmShowHideSchema)))
             {
                 filterTypeGroupComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
@@ -300,7 +305,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
                 else
                 {
-                    MessageBox.Show(@"Nothing assigned to selected type.");
+                    MessageBox.Show(@"Nothing assigned to the selected type.");
                 }
             }
         }

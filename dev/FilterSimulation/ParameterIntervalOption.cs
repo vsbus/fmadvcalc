@@ -1,9 +1,12 @@
+using System;
 using System.Windows.Forms;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalcBlocksLibrary.Blocks;
 using fmCalculationLibrary;
 using System.Collections.Generic;
 using System.Drawing;
+using fmMisc;
+using RangesDictionary = System.Collections.Generic.Dictionary<fmCalculationLibrary.fmGlobalParameter, fmCalculationLibrary.fmDefaultParameterRange>;
 
 namespace FilterSimulation
 {
@@ -11,17 +14,28 @@ namespace FilterSimulation
     {
         private fmSimulationLimitsBlock cakeFormationLimitsBlock;
         private fmDeliquoringLimitsBlock deliquoringLimitsBlock;
+        private Dictionary<fmRangesSchema, RangesDictionary> m_schemas = new Dictionary<fmRangesSchema, RangesDictionary>();
 
         public fmParameterIntervalOption()
         {
             InitializeComponent();
-            BindDataGrid();
+            FillFilterTypeCombobox();
         }
 
-        private void BindDataGrid()
+        private void FillFilterTypeCombobox()
+        {
+            foreach (Enum element in Enum.GetValues(typeof(fmRangesSchema)))
+            {
+                filterTypeComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
+            }
+            filterTypeComboBox.SelectedIndex = 0;
+        }
+
+        public void SetRanges(RangesDictionary ranges)
         {
             FillTable(MaterialParametersGrid,
                       Color.LightBlue,
+                      ranges,
                       new List<fmGlobalParameter>
                           {
                               fmGlobalParameter.eta_f,
@@ -45,6 +59,7 @@ namespace FilterSimulation
 
             FillTable(deliquoringMaterialParameterGrid,
                       Color.LightPink,
+                      ranges,
                       new List<fmGlobalParameter>
                           {
                               fmGlobalParameter.eta_d,
@@ -92,6 +107,7 @@ namespace FilterSimulation
                     pList.Add(fmb.GetParameterByName(parameter.Name));
                 }
                 var rowId = new Dictionary<fmGlobalParameter, int>();
+                CakeFormationGrid.ClearRows();
                 foreach (fmBlockVariableParameter p in pList)
                 {
                     if (p.globalParameter.SpecifiedRange != null)
@@ -124,9 +140,12 @@ namespace FilterSimulation
 
                 foreach (var p in cakeFormationLimitsBlock.Parameters)
                 {
-                    p.pMin.value = new fmValue(p.globalParameter.SpecifiedRange.MinValue);
-                    p.pMax.value = new fmValue(p.globalParameter.SpecifiedRange.MaxValue);
-                    p.IsInputed = p.globalParameter.SpecifiedRange.IsInputed;
+                    if (ranges.ContainsKey(p.globalParameter))
+                    {
+                        p.pMin.value = new fmValue(ranges[p.globalParameter].MinValue);
+                        p.pMax.value = new fmValue(ranges[p.globalParameter].MaxValue);
+                        p.IsInputed = ranges[p.globalParameter].IsInputed;
+                    }
                 }
                 cakeFormationLimitsBlock.Display();
             }
@@ -157,6 +176,7 @@ namespace FilterSimulation
                     pList.Add(varPar);
                 }
                 var rowId = new Dictionary<fmGlobalParameter, int>();
+                deliquoringSettingsParametersGrid.ClearRows();
                 foreach (fmBlockVariableParameter p in pList)
                 {
                     if (p.globalParameter.SpecifiedRange != null)
@@ -181,9 +201,12 @@ namespace FilterSimulation
 
                 foreach (var p in deliquoringLimitsBlock.Parameters)
                 {
-                    p.pMin.value = new fmValue(p.globalParameter.SpecifiedRange.MinValue);
-                    p.pMax.value = new fmValue(p.globalParameter.SpecifiedRange.MaxValue);
-                    p.IsInputed = p.globalParameter.SpecifiedRange.IsInputed;
+                    if (ranges.ContainsKey(p.globalParameter))
+                    {
+                        p.pMin.value = new fmValue(ranges[p.globalParameter].MinValue);
+                        p.pMax.value = new fmValue(ranges[p.globalParameter].MaxValue);
+                        p.IsInputed = ranges[p.globalParameter].IsInputed;
+                    }
                 }
                 deliquoringLimitsBlock.Display();
             }
@@ -192,6 +215,7 @@ namespace FilterSimulation
 
             FillTable(moreParemetersGrid,
                      Color.LightSkyBlue,
+                     ranges,
                      new List<fmGlobalParameter>
                           {
                               fmGlobalParameter.Msus,
@@ -232,17 +256,21 @@ namespace FilterSimulation
         private static void FillTable(
             TableWithParameterRanges grid,
             Color color,
+            RangesDictionary ranges,
             IEnumerable<fmGlobalParameter> parametersList)
         {
+            grid.ClearRows();
             foreach (fmGlobalParameter p in parametersList)
             {
                 int rowIndex = grid.AddRow(p);
-
-                grid.RangeMinValueCell(rowIndex).Value =
-                    new fmValue(p.SpecifiedRange.MinValue / p.UnitFamily.CurrentUnit.Coef).ToString();
-                grid.RangeMaxValueCell(rowIndex).Value =
-                    new fmValue(p.SpecifiedRange.MaxValue / p.UnitFamily.CurrentUnit.Coef).ToString();
                 grid.SetRawBackColor(rowIndex, color);
+                if (ranges.ContainsKey(p))
+                {
+                    grid.RangeMinValueCell(rowIndex).Value =
+                        new fmValue(ranges[p].MinValue / p.UnitFamily.CurrentUnit.Coef).ToString();
+                    grid.RangeMaxValueCell(rowIndex).Value =
+                        new fmValue(ranges[p].MaxValue / p.UnitFamily.CurrentUnit.Coef).ToString();
+                }
             }
         }
 
@@ -273,9 +301,9 @@ namespace FilterSimulation
             ShowHideMoreParameters();
         }
 
-        public Dictionary<fmGlobalParameter, fmDefaultParameterRange> GetRanges()
+        public RangesDictionary GetRanges()
         {
-            var result = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
+            var result = new RangesDictionary();
             foreach (var p in fmGlobalParameter.Parameters)
             {
                 result.Add(p, new fmDefaultParameterRange(0, 1, false));
@@ -316,6 +344,54 @@ namespace FilterSimulation
             }
 
             return result;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (filterTypeComboBox.Text != "")
+            {
+                var value = (fmRangesSchema)fmEnumUtils.GetEnum(typeof(fmRangesSchema), filterTypeComboBox.Text);
+                if (m_schemas.ContainsKey(value))
+                {
+                    SetRanges(m_schemas[value]);
+                }
+                else
+                {
+                    MessageBox.Show(@"Nothing assigned to the selected type.");
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (filterTypeComboBox.Text != "")
+            {
+                DialogResult dialogResult = MessageBox.Show(
+                    @"Are you sure you want to assign new show/hide configuration for the selected Filter Type – Group?",
+                    @"Confirm",
+                    MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    var value = (fmRangesSchema)fmEnumUtils.GetEnum(typeof(fmRangesSchema), filterTypeComboBox.Text);
+                    m_schemas[value] = GetRanges();
+                }
+            }
+        }
+
+        public fmRangesSchema GetRangesSchema()
+        {
+            return (fmRangesSchema)fmEnumUtils.GetEnum(typeof(fmRangesSchema), filterTypeComboBox.Text);
+        }
+
+        public void SetRangesSchemas(Dictionary<fmRangesSchema, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> dictionary)
+        {
+            m_schemas = new Dictionary<fmRangesSchema, RangesDictionary>(dictionary);
+        }
+
+        public Dictionary<fmRangesSchema, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> GetRangesSchemas()
+        {
+            return new Dictionary<fmRangesSchema, RangesDictionary>(m_schemas);
         }
     }
 }

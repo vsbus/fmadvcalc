@@ -95,9 +95,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // assignButton
             // 
-            this.assignButton.Location = new System.Drawing.Point(271, 29);
+            this.assignButton.Location = new System.Drawing.Point(265, 29);
             this.assignButton.Name = "assignButton";
-            this.assignButton.Size = new System.Drawing.Size(104, 23);
+            this.assignButton.Size = new System.Drawing.Size(98, 23);
             this.assignButton.TabIndex = 3;
             this.assignButton.Text = "Save As Default";
             this.assignButton.UseVisualStyleBackColor = true;
@@ -107,7 +107,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.takeButton.Location = new System.Drawing.Point(161, 29);
             this.takeButton.Name = "takeButton";
-            this.takeButton.Size = new System.Drawing.Size(104, 23);
+            this.takeButton.Size = new System.Drawing.Size(98, 23);
             this.takeButton.TabIndex = 2;
             this.takeButton.Text = "Load Default";
             this.takeButton.UseVisualStyleBackColor = true;

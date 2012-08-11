@@ -204,10 +204,18 @@ namespace AdvancedCalculator
 
         private void RangesToolStripMenuItem1Click(object sender, EventArgs e)
         {
-            var proForm = new FilterSimulation.fmParameterIntervalOption();
+            var proForm = new fmParameterIntervalOption();
+            proForm.SetRanges(filterSimulationWithTablesAndGraphs1.GetCurrentSerieRanges().Ranges);
+            proForm.SetRangesSchemas(filterSimulationWithTablesAndGraphs1.RangesSchemas);
             if (proForm.ShowDialog() == DialogResult.OK)
             {
-                filterSimulationWithTablesAndGraphs1.SetCurrentSerieRanges(proForm.GetRanges());
+                var rangesCfg = new fmRangesConfiguration
+                                    {
+                                        AssignedSchema = proForm.GetRangesSchema(),
+                                        Ranges = proForm.GetRanges()
+                                    };
+                filterSimulationWithTablesAndGraphs1.SetCurrentSerieRanges(rangesCfg);
+                filterSimulationWithTablesAndGraphs1.RangesSchemas = proForm.GetRangesSchemas();
                 filterSimulationWithTablesAndGraphs1.UpdateAll();
             }
         }
