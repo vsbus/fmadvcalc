@@ -145,7 +145,7 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qs_i));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qc));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qc_i));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qsus_i));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qp));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmsus_i));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qms_i));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.Qmf));
@@ -159,7 +159,7 @@ namespace FilterSimulation.fmFilterObjects
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qc));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qc_i));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qsus));
-            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qsus_i));
+            AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qp));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmsus));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qmsus_i));
             AddParameter(new fmCalculationVariableParameter(fmGlobalParameter.qms));

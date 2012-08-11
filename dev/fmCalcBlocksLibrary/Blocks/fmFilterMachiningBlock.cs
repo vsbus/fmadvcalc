@@ -95,7 +95,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     break;
 
-                //[Description("global: (A, Q, Qsus_i), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
+                //[Description("global: (A, Q, Qp), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
                 case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
@@ -106,7 +106,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qs);
                     result.Add(fmGlobalParameter.Qmc);
                     result.Add(fmGlobalParameter.Qc);
-                    result.Add(fmGlobalParameter.Qsus_i);
+                    result.Add(fmGlobalParameter.Qp);
                     
                     result.Add(fmGlobalParameter.Dp);
 
@@ -149,7 +149,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qc);
                     
                     result.Add(fmGlobalParameter.Dp);
-                    result.Add(fmGlobalParameter.Qsus_i);
+                    result.Add(fmGlobalParameter.Qp);
 
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.sr);
@@ -191,8 +191,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
                     result.Add(fmGlobalParameter.Dp);
 
-                    result.Add(fmGlobalParameter.Qsus_i);
-                    result.Add(fmGlobalParameter.qsus_i);
+                    result.Add(fmGlobalParameter.Qp);
+                    result.Add(fmGlobalParameter.qp);
                     result.Add(fmGlobalParameter.t1_over_tf);
                     result.Add(fmGlobalParameter.h1_over_hc);
                     result.Add(fmGlobalParameter.t1);
@@ -266,7 +266,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     break;
 
-                //(A, Q, Qsus_i), d0, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
+                //(A, Q, Qp), d0, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
                 case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST:
                     result.Add(fmGlobalParameter.d0);
 
@@ -279,7 +279,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qs);
                     result.Add(fmGlobalParameter.Qmc);
                     result.Add(fmGlobalParameter.Qc);
-                    result.Add(fmGlobalParameter.Qsus_i);
+                    result.Add(fmGlobalParameter.Qp);
                     
                     result.Add(fmGlobalParameter.Dp);
 
@@ -325,8 +325,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
                     result.Add(fmGlobalParameter.Dp);
 
-                    result.Add(fmGlobalParameter.Qsus_i);
-                    result.Add(fmGlobalParameter.qsus_i);
+                    result.Add(fmGlobalParameter.Qp);
+                    result.Add(fmGlobalParameter.qp);
                     result.Add(fmGlobalParameter.t1_over_tf);
                     result.Add(fmGlobalParameter.h1_over_hc);
                     result.Add(fmGlobalParameter.t1);
@@ -373,7 +373,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qc);
                     
                     result.Add(fmGlobalParameter.Dp);
-                    result.Add(fmGlobalParameter.Qsus_i);
+                    result.Add(fmGlobalParameter.Qp);
 
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.sr);
@@ -467,7 +467,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter Qc;
         private readonly fmBlockVariableParameter Qc_d;
         private readonly fmBlockVariableParameter Qsus;
-        private readonly fmBlockVariableParameter Qsus_d;
+        private readonly fmBlockVariableParameter Qp;
         private readonly fmBlockVariableParameter Qmsus;
         private readonly fmBlockVariableParameter Qmsus_d;
         private readonly fmBlockVariableParameter Qms;
@@ -483,7 +483,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockVariableParameter qc;
         private readonly fmBlockVariableParameter qc_d;
         private readonly fmBlockVariableParameter qsus;
-        private readonly fmBlockVariableParameter qsus_d;
+        private readonly fmBlockVariableParameter qp;
         private readonly fmBlockVariableParameter qmsus;
         private readonly fmBlockVariableParameter qmsus_d;
         private readonly fmBlockVariableParameter qms;
@@ -736,10 +736,10 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return Qsus.value; }
             set { Qsus.value = value; }
         }
-        public fmValue Qsus_d_Value
+        public fmValue Qp_Value
         {
-            get { return Qsus_d.value; }
-            set { Qsus_d.value = value; }
+            get { return Qp.value; }
+            set { Qp.value = value; }
         }
         public fmValue Qmsus_Value
         {
@@ -816,10 +816,10 @@ namespace fmCalcBlocksLibrary.Blocks
             get { return qsus.value; }
             set { qsus.value = value; }
         }
-        public fmValue qsus_d_Value
+        public fmValue qp_Value
         {
-            get { return qsus_d.value; }
-            set { qsus_d.value = value; }
+            get { return qp.value; }
+            set { qp.value = value; }
         }
         public fmValue qmsus_Value
         {
@@ -995,7 +995,7 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell Qc_Cell,
             DataGridViewCell Qc_d_Cell,
             DataGridViewCell Qsus_Cell,
-            DataGridViewCell Qsus_d_Cell,
+            DataGridViewCell Qp_Cell,
             DataGridViewCell Qmsus_Cell,
             DataGridViewCell Qmsus_d_Cell,
             DataGridViewCell Qms_Cell,
@@ -1011,7 +1011,7 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell qc_Cell,
             DataGridViewCell qc_d_Cell,
             DataGridViewCell qsus_Cell,
-            DataGridViewCell qsus_d_Cell,
+            DataGridViewCell qp_Cell,
             DataGridViewCell qmsus_Cell,
             DataGridViewCell qmsus_d_Cell,
             DataGridViewCell qms_Cell,
@@ -1083,7 +1083,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref qc, fmGlobalParameter.qc, qc_Cell, false);
 
             AddParameter(ref Qmsus_d, fmGlobalParameter.Qmsus_i, Qmsus_d_Cell, false);
-            AddParameter(ref Qsus_d, fmGlobalParameter.Qsus_i, Qsus_d_Cell, false);
+            AddParameter(ref Qp, fmGlobalParameter.Qp, Qp_Cell, false);
             AddParameter(ref Qmf_d, fmGlobalParameter.Qmf_i, Qmf_d_Cell, false);
             AddParameter(ref Qf_d, fmGlobalParameter.Qf_i, Qf_d_Cell, false);
             AddParameter(ref Qms_d, fmGlobalParameter.Qms_i, Qms_d_Cell, false);
@@ -1092,7 +1092,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref Qc_d, fmGlobalParameter.Qc_i, Qc_d_Cell, false);
 
             AddParameter(ref qmsus_d, fmGlobalParameter.qmsus_i, qmsus_d_Cell, false);
-            AddParameter(ref qsus_d, fmGlobalParameter.qsus_i, qsus_d_Cell, false);
+            AddParameter(ref qp, fmGlobalParameter.qp, qp_Cell, false);
             AddParameter(ref t1, fmGlobalParameter.t1, t1_Cell, false);
             AddParameter(ref h1, fmGlobalParameter.h1, h1_Cell, false);
             AddParameter(ref t1_over_tf, fmGlobalParameter.t1_over_tf, t1_over_tf_Cell, false);
@@ -1270,7 +1270,7 @@ namespace fmCalcBlocksLibrary.Blocks
             table[Qc] = AQ_group;
 
             table[Dp] = DpQp_group;
-            table[Qsus_d] = DpQp_group;
+            table[Qp] = DpQp_group;
 
             table[sf] = sf_sr_tr_group;
             table[sr] = sf_sr_tr_group;
@@ -1315,7 +1315,7 @@ namespace fmCalcBlocksLibrary.Blocks
             table[Qc] = AQ_group;
             
             table[Dp] = DpQp_group;
-            table[Qsus_d] = DpQp_group;
+            table[Qp] = DpQp_group;
 
             table[sf] = sf_sr_tr_group;
             table[sr] = sf_sr_tr_group;
@@ -1438,7 +1438,7 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
-            //(A, Q, Qsus_i), d0, Dp, (sf, tr), (hc, V, M, tf, n, tc)
+            //(A, Q, Qp), d0, Dp, (sf, tr), (hc, V, M, tf, n, tc)
             table[d0] = d0_group;
             
             table[A] = AQ_group;
@@ -1450,7 +1450,7 @@ namespace fmCalcBlocksLibrary.Blocks
             table[Qs] = AQ_group;
             table[Qmc] = AQ_group;
             table[Qc] = AQ_group;
-            table[Qsus_d] = AQ_group;
+            table[Qp] = AQ_group;
 
             table[Dp] = Dp_group;
 
@@ -1500,8 +1500,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
             table[Dp] = Dp_group;
 
-            table[Qsus_d] = Qp_group;
-            table[qsus_d] = Qp_group;
+            table[Qp] = Qp_group;
+            table[qp] = Qp_group;
             table[t1] = Qp_group;
             table[h1] = Qp_group;
             table[t1_over_tf] = Qp_group;
@@ -1538,7 +1538,7 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
-            //[Description("global: (A, Q, Qsus_i), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
+            //[Description("global: (A, Q, Qp), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
             table[A] = AQ_group;
             table[Qmsus] = AQ_group;
             table[Qsus] = AQ_group;
@@ -1548,7 +1548,7 @@ namespace fmCalcBlocksLibrary.Blocks
             table[Qs] = AQ_group;
             table[Qmc] = AQ_group;
             table[Qc] = AQ_group;
-            table[Qsus_d] = AQ_group;
+            table[Qp] = AQ_group;
             
             table[Dp] = Dp_group;
 
@@ -1596,8 +1596,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
             table[Dp] = Dp_group;
 
-            table[Qsus_d] = Qp_group;
-            table[qsus_d] = Qp_group;
+            table[Qp] = Qp_group;
+            table[qp] = Qp_group;
             table[t1] = Qp_group;
             table[h1] = Qp_group;
             table[t1_over_tf] = Qp_group;

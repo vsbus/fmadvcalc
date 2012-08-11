@@ -66,7 +66,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             AddParameter(qBigBox_dif, fmGlobalParameter.Qf_i);
             AddParameter(qBigBox_dif, fmGlobalParameter.Qs_i);
-            AddParameter(qBigBox_dif, fmGlobalParameter.Qsus_i);
+            AddParameter(qBigBox_dif, fmGlobalParameter.Qp);
             AddParameter(qBigBox_dif, fmGlobalParameter.Qc_i);
 
             AddParameter(qmSmallBox_dif, fmGlobalParameter.qmf_i);
@@ -76,7 +76,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             AddParameter(qSmallBox_dif, fmGlobalParameter.qf_i);
             AddParameter(qSmallBox_dif, fmGlobalParameter.qs_i);
-            AddParameter(qSmallBox_dif, fmGlobalParameter.qsus_i);
+            AddParameter(qSmallBox_dif, fmGlobalParameter.qp);
             AddParameter(qSmallBox_dif, fmGlobalParameter.qc_i);
 
             AddParameter(ad0DpBox, fmGlobalParameter.A);

@@ -53,10 +53,10 @@ namespace fmCalculatorsLibrary
             [Description("Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)")]
             CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST,
 
-            //(A, Q, Qsus_i), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            //(A, Q, Qp), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
             [Description("Qp = const (Plain)")]
             PLAIN_QP_CONST,
-            //(A, Q, Qsus_i), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            //(A, Q, Qp), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
             [Description("Qp = const (Cylindrical)")]
             CYLINDRICAL_QP_CONST
 
@@ -180,7 +180,7 @@ namespace fmCalculatorsLibrary
         private void DoSubCalculationsCylindricalQpConstVolumetricPump()
         {
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            var Qp = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
             if (Dp.isInputed)
             {
                 DoSubCalculationsCylindricalQpConst();
@@ -234,7 +234,7 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
@@ -294,7 +294,7 @@ namespace fmCalculatorsLibrary
             var isKnown_Qms = Qms.isInputed;
             var isKnown_Qmsus = Qmsus.isInputed;
             var isKnown_Qmc = Qmc.isInputed;
-            var isKnown_Qsusd = Qsus_d.isInputed;
+            var isKnown_Qsusd = Qp.isInputed;
             // ReSharper restore InconsistentNaming
 
             #region A0
@@ -492,7 +492,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qsus_d.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -591,7 +591,7 @@ namespace fmCalculatorsLibrary
                 */
             }
 
-            if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.EvalCandle_Qsus_d_From_d_hc_hce_A_kappa_Pc_Dp_eta_QpConst(d0.value, hc.value, hce.value, A.value, kappa.value, Pc.value, Dp.value, eta_f.value);
+            if (!isKnown_Qsusd) Qp.value = fmFilterMachiningEquations.EvalCandle_Qp_From_d_hc_hce_A_kappa_Pc_Dp_eta_QpConst(d0.value, hc.value, hce.value, A.value, kappa.value, Pc.value, Dp.value, eta_f.value);
         }
 
         private void DoSubCalculationsCylindricalDpQpConst_OnlyLimitClueParams()
@@ -641,7 +641,7 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
@@ -701,7 +701,7 @@ namespace fmCalculatorsLibrary
             var isKnown_Qms = Qms.isInputed;
             var isKnown_Qmsus = Qmsus.isInputed;
             var isKnown_Qmc = Qmc.isInputed;
-            var isKnown_Qsusd = Qsus_d.isInputed;
+            var isKnown_Qsusd = Qp.isInputed;
             // ReSharper restore InconsistentNaming
 
             #region A0
@@ -899,7 +899,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qsus_d.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -998,7 +998,7 @@ namespace fmCalculatorsLibrary
                 */
             }
 
-            if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(A.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hc.value, hce.value);
+            if (!isKnown_Qsusd) Qp.value = fmFilterMachiningEquations.Eval_Qp_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(A.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hc.value, hce.value);
         }
         private void DoSubCalculationsCylindricalDpConst_OnlyLimitClueParams()
         {
@@ -1843,7 +1843,7 @@ namespace fmCalculatorsLibrary
                 var Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
                 var Qc_d = variables[fmGlobalParameter.Qc_i] as fmCalculationVariableParameter;
                 var Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-                var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+                var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
                 var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
                 var Qmsus_d = variables[fmGlobalParameter.Qmsus_i] as fmCalculationVariableParameter;
                 var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
@@ -1859,7 +1859,7 @@ namespace fmCalculatorsLibrary
                 var qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
                 var qc_d = variables[fmGlobalParameter.qc_i] as fmCalculationVariableParameter;
                 var qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
-                var qsus_d = variables[fmGlobalParameter.qsus_i] as fmCalculationVariableParameter;
+                var qp = variables[fmGlobalParameter.qp] as fmCalculationVariableParameter;
                 var qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
                 var qmsus_d = variables[fmGlobalParameter.qmsus_i] as fmCalculationVariableParameter;
                 var qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
@@ -1907,8 +1907,8 @@ namespace fmCalculatorsLibrary
                 vs.value = fmFilterMachiningEquations.Eval_v_From_V_A(Vs.value, A.value);
                 mc.value = fmFilterMachiningEquations.Eval_m_From_M_A(Mc.value, A.value);
                 vc.value = fmFilterMachiningEquations.Eval_v_From_V_A(Vc.value, A.value);
-                Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
-                Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
+                Qp.value = fmFilterMachiningEquations.Eval_Qp_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
+                Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qp.value);
                 Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
                 Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
                 Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
@@ -1917,13 +1917,13 @@ namespace fmCalculatorsLibrary
                 Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
                 Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
                 Qmc.value = fmFilterMachiningEquations.Eval_Qm_From_M_t(Mc.value, tc.value);
-                Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
+                Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qp.value, Qf_d.value);
                 Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
                 Qc.value = fmFilterMachiningEquations.Eval_Q_From_V_t(Vc.value, tc.value);
                 qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
                 qf_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf_d.value, A.value);
                 qsus.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus.value, A.value);
-                qsus_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus_d.value, A.value);
+                qp.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qp.value, A.value);
                 qs.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs.value, A.value);
                 qs_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs_d.value, A.value);
                 qc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qc.value, A.value);
@@ -1969,7 +1969,7 @@ namespace fmCalculatorsLibrary
                     default:
                        throw new Exception("Unhandled area kind.");
                 }
-                fmValue curQpValue = fmc.variables[fmGlobalParameter.Qsus_i].value;
+                fmValue curQpValue = fmc.variables[fmGlobalParameter.Qp].value;
                 return QpValue - curQpValue;
             }
         };
@@ -1990,7 +1990,7 @@ namespace fmCalculatorsLibrary
         private void DoSubCalculationsPlainQpConstVolumetricPump()
         {
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            var Qp = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
             if (Dp.isInputed)
             {
                 DoSubCalculationsPlainQpConst();
@@ -2004,7 +2004,7 @@ namespace fmCalculatorsLibrary
         private void DoSubCalculationsVolumetricPumpQpInput(QpCalculatorHelperForDpInput.AreaKind areaKind)
         {
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            var Qp = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
 
             Dp.isInputed = true;
             Qp.isInputed = false;
@@ -2112,7 +2112,7 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
 
             var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
             var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
@@ -2130,7 +2130,7 @@ namespace fmCalculatorsLibrary
             var qc = variables[fmGlobalParameter.qc];
             var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
-            var qsus_d = variables[fmGlobalParameter.qsus_i];
+            var qp = variables[fmGlobalParameter.qp];
             var qmsus = variables[fmGlobalParameter.qmsus];
             var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
@@ -2198,7 +2198,7 @@ namespace fmCalculatorsLibrary
             var isKnown_Qms = Qms.isInputed;
             var isKnown_Qmsus = Qmsus.isInputed;
             var isKnown_Qmc = Qmc.isInputed;
-            var isKnown_Qsusd = Qsus_d.isInputed;
+            var isKnown_Qsusd = Qp.isInputed;
             // ReSharper restore InconsistentNaming
 
             #region A0
@@ -2396,7 +2396,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qsus_d.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -2503,7 +2503,7 @@ namespace fmCalculatorsLibrary
                 */
             }
 
-            if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.EvalCandle_Qsus_d_From_d_hc_hce_A_kappa_Pc_Dp_eta_QpConst(d0.value, hc.value, hce.value, A.value, kappa.value, Pc.value, Dp.value, eta_f.value);
+            if (!isKnown_Qsusd) Qp.value = fmFilterMachiningEquations.EvalCandle_Qp_From_d_hc_hce_A_kappa_Pc_Dp_eta_QpConst(d0.value, hc.value, hce.value, A.value, kappa.value, Pc.value, Dp.value, eta_f.value);
 
             if (!isKnown_Vc) Vc.value = fmFilterMachiningEquations.Eval_V_From_v_A(vc.value, A.value);
             if (!isKnown_Vf) Vf.value = fmFilterMachiningEquations.Eval_V_From_v_A(vf.value, A.value);
@@ -2527,17 +2527,17 @@ namespace fmCalculatorsLibrary
 
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qp.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
             Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
             Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
-            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
+            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qp.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
             qf_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf_d.value, A.value);
             qsus.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus.value, A.value);
-            qsus_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus_d.value, A.value);
+            qp.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qp.value, A.value);
             qs.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs.value, A.value);
             qs_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs_d.value, A.value);
             qc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qc.value, A.value);
@@ -2590,8 +2590,8 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
-            var qsus_d = variables[fmGlobalParameter.qsus_i] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
+            var qp = variables[fmGlobalParameter.qp] as fmCalculationVariableParameter;
             var t1 = variables[fmGlobalParameter.t1] as fmCalculationVariableParameter;
             var h1 = variables[fmGlobalParameter.h1] as fmCalculationVariableParameter;
             var t1OverTf = variables[fmGlobalParameter.t1_over_tf] as fmCalculationVariableParameter;
@@ -2680,8 +2680,8 @@ namespace fmCalculatorsLibrary
             var isKnown_Qms = Qms.isInputed;
             var isKnown_Qmsus = Qmsus.isInputed;
             var isKnown_Qmc = Qmc.isInputed;
-            var isKnown_Qsusd = Qsus_d.isInputed;
-            var isKnown_qsusd = qsus_d.isInputed;
+            var isKnown_Qsusd = Qp.isInputed;
+            var isKnown_qsusd = qp.isInputed;
             var isKnown_h1 = h1.isInputed;
             var isKnown_t1 = t1.isInputed;
             var isKnown_h1OverHc = h1OverHc.isInputed;
@@ -2692,12 +2692,12 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Qsusd)
             {
-                qsus_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus_d.value, A.value);
+                qp.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qp.value, A.value);
                 isKnown_qsusd = true;
             }
             if (isKnown_qsusd)
             {
-                h1.value = fmFilterMachiningEquations.EvalCandle_h1_From_qp(qsus_d.value, hce.value, d0.value, kappa.value, Pc.value, Dp.value, eta_f.value);
+                h1.value = fmFilterMachiningEquations.EvalCandle_h1_From_qp(qp.value, hce.value, d0.value, kappa.value, Pc.value, Dp.value, eta_f.value);
                 isKnown_h1 = true;
             }
             if (isKnown_h1)
@@ -2928,7 +2928,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qsus_d.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -3019,8 +3019,8 @@ namespace fmCalculatorsLibrary
                     isKnown_h1 = true;
                 }
             }
-            if (!isKnown_qsusd) qsus_d.value = fmFilterMachiningEquations.EvalCandle_qp_From_h1(kappa.value, Pc.value,Dp.value, d0.value, eta_f.value, h1.value, hce.value);
-            if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.Eval_Q_From_q_A(qsus_d.value, A.value);
+            if (!isKnown_qsusd) qp.value = fmFilterMachiningEquations.EvalCandle_qp_From_h1(kappa.value, Pc.value,Dp.value, d0.value, eta_f.value, h1.value, hce.value);
+            if (!isKnown_Qsusd) Qp.value = fmFilterMachiningEquations.Eval_Q_From_q_A(qp.value, A.value);
             if (!isKnown_t1OverTf) t1OverTf.value = t1.value / tf.value;
             if (!isKnown_tr) tr.value = fmFilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
             if (!isKnown_sr) sr.value = fmFilterMachiningEquations.Eval_sr_From_tc_tr(tc.value, tr.value);
@@ -3083,12 +3083,12 @@ namespace fmCalculatorsLibrary
 
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qp.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
             Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
             Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
-            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
+            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qp.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
             qf_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf_d.value, A.value);
@@ -3144,7 +3144,7 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
             
             var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
             var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
@@ -3162,7 +3162,7 @@ namespace fmCalculatorsLibrary
             var qc = variables[fmGlobalParameter.qc];
             var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
-            var qsus_d = variables[fmGlobalParameter.qsus_i];
+            var qp = variables[fmGlobalParameter.qp];
             var qmsus = variables[fmGlobalParameter.qmsus];
             var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
@@ -3230,7 +3230,7 @@ namespace fmCalculatorsLibrary
             var isKnown_Qms = Qms.isInputed;
             var isKnown_Qmsus = Qmsus.isInputed;
             var isKnown_Qmc = Qmc.isInputed;
-            var isKnown_Qsusd = Qsus_d.isInputed;
+            var isKnown_Qsusd = Qp.isInputed;
             // ReSharper restore InconsistentNaming
 
             #region A0
@@ -3428,7 +3428,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qsus_d.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -3535,7 +3535,7 @@ namespace fmCalculatorsLibrary
                 */
             }
 
-            if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(A.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hc.value, hce.value);
+            if (!isKnown_Qsusd) Qp.value = fmFilterMachiningEquations.Eval_Qp_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(A.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hc.value, hce.value);
 
             if (!isKnown_Vc) Vc.value = fmFilterMachiningEquations.Eval_V_From_v_A(vc.value, A.value);
             if (!isKnown_Vf) Vf.value = fmFilterMachiningEquations.Eval_V_From_v_A(vf.value, A.value);
@@ -3559,17 +3559,17 @@ namespace fmCalculatorsLibrary
 
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qp.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
             Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
             Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
-            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
+            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qp.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
             qf_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf_d.value, A.value);
             qsus.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus.value, A.value);
-            qsus_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus_d.value, A.value);
+            qp.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qp.value, A.value);
             qs.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs.value, A.value);
             qs_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs_d.value, A.value);
             qc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qc.value, A.value);
@@ -3621,8 +3621,8 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
-            var qsus_d = variables[fmGlobalParameter.qsus_i] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
+            var qp = variables[fmGlobalParameter.qp] as fmCalculationVariableParameter;
             var t1 = variables[fmGlobalParameter.t1] as fmCalculationVariableParameter;
             var h1 = variables[fmGlobalParameter.h1] as fmCalculationVariableParameter;
             var t1OverTf = variables[fmGlobalParameter.t1_over_tf] as fmCalculationVariableParameter;
@@ -3711,8 +3711,8 @@ namespace fmCalculatorsLibrary
             var isKnown_Qms = Qms.isInputed;
             var isKnown_Qmsus = Qmsus.isInputed;
             var isKnown_Qmc = Qmc.isInputed;
-            var isKnown_Qsusd = Qsus_d.isInputed;
-            var isKnown_qsusd = qsus_d.isInputed;
+            var isKnown_Qsusd = Qp.isInputed;
+            var isKnown_qsusd = qp.isInputed;
             var isKnown_h1 = h1.isInputed;
             var isKnown_t1 = t1.isInputed;
             var isKnown_h1OverHc = h1OverHc.isInputed;
@@ -3723,12 +3723,12 @@ namespace fmCalculatorsLibrary
 
             if (isKnown_Qsusd)
             {
-                qsus_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus_d.value, A.value);
+                qp.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qp.value, A.value);
                 isKnown_qsusd = true;
             }
             if (isKnown_qsusd)
             {
-                h1.value = fmFilterMachiningEquations.Eval_h1_From_qp_Dp_pc_hce_eta_cv_eps(qsus_d.value, Dp.value, Pc.value, hce.value, eta_f.value, Cv.value, eps.value);
+                h1.value = fmFilterMachiningEquations.Eval_h1_From_qp_Dp_pc_hce_eta_cv_eps(qp.value, Dp.value, Pc.value, hce.value, eta_f.value, Cv.value, eps.value);
                 isKnown_h1 = true;
             }
             if (isKnown_h1)
@@ -3959,7 +3959,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qsus_d.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -4060,8 +4060,8 @@ namespace fmCalculatorsLibrary
                     }
                 }
             }
-            if (!isKnown_qsusd) qsus_d.value = fmFilterMachiningEquations.Eval_qp_From_h1_Dp_Pc_eta_cv_eps_hce(h1.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hce.value);
-            if (!isKnown_Qsusd) Qsus_d.value = fmFilterMachiningEquations.Eval_Q_From_q_A(qsus_d.value, A.value);
+            if (!isKnown_qsusd) qp.value = fmFilterMachiningEquations.Eval_qp_From_h1_Dp_Pc_eta_cv_eps_hce(h1.value, Dp.value, Pc.value, eta_f.value, Cv.value, eps.value, hce.value);
+            if (!isKnown_Qsusd) Qp.value = fmFilterMachiningEquations.Eval_Q_From_q_A(qp.value, A.value);
             if (!isKnown_t1OverTf) t1OverTf.value = t1.value / tf.value;
             if (!isKnown_tr) tr.value = fmFilterMachiningEquations.Eval_tr_From_tc_tf(tc.value, tf.value);
             if (!isKnown_sr) sr.value = fmFilterMachiningEquations.Eval_sr_From_tc_tr(tc.value, tr.value);
@@ -4124,12 +4124,12 @@ namespace fmCalculatorsLibrary
 
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qp.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
             Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
             Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
-            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
+            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qp.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
             qf_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf_d.value, A.value);
@@ -4191,7 +4191,7 @@ namespace fmCalculatorsLibrary
             var Qf_d = variables[fmGlobalParameter.Qf_i];
             var Qs_d = variables[fmGlobalParameter.Qs_i];
             var Qc_d = variables[fmGlobalParameter.Qc_i];
-            var Qsus_d = variables[fmGlobalParameter.Qsus_i];
+            var Qp = variables[fmGlobalParameter.Qp];
             var Qmsus_d = variables[fmGlobalParameter.Qmsus_i];
             var Qms_d = variables[fmGlobalParameter.Qms_i];
             var Qmf_d = variables[fmGlobalParameter.Qmf_i];
@@ -4203,7 +4203,7 @@ namespace fmCalculatorsLibrary
             var qc = variables[fmGlobalParameter.qc];
             var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
-            var qsus_d = variables[fmGlobalParameter.qsus_i];
+            var qp = variables[fmGlobalParameter.qp];
             var qmsus = variables[fmGlobalParameter.qmsus];
             var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
@@ -4592,18 +4592,18 @@ namespace fmCalculatorsLibrary
 
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
-            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
+            Qp.value = fmFilterMachiningEquations.Eval_Qp_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qp.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
             Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
             Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
-            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
+            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qp.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
             qf_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf_d.value, A.value);
             qsus.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus.value, A.value);
-            qsus_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus_d.value, A.value);
+            qp.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qp.value, A.value);
             qs.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs.value, A.value);
             qs_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs_d.value, A.value);
             qc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qc.value, A.value);
@@ -4660,7 +4660,7 @@ namespace fmCalculatorsLibrary
             var Qf_d = variables[fmGlobalParameter.Qf_i];
             var Qs_d = variables[fmGlobalParameter.Qs_i];
             var Qc_d = variables[fmGlobalParameter.Qc_i];
-            var Qsus_d = variables[fmGlobalParameter.Qsus_i];
+            var Qp = variables[fmGlobalParameter.Qp];
             var Qmsus_d = variables[fmGlobalParameter.Qmsus_i];
             var Qms_d = variables[fmGlobalParameter.Qms_i];
             var Qmf_d = variables[fmGlobalParameter.Qmf_i];
@@ -4672,7 +4672,7 @@ namespace fmCalculatorsLibrary
             var qc = variables[fmGlobalParameter.qc];
             var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
-            var qsus_d = variables[fmGlobalParameter.qsus_i];
+            var qp = variables[fmGlobalParameter.qp];
             var qmsus = variables[fmGlobalParameter.qmsus];
             var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
@@ -5061,18 +5061,18 @@ namespace fmCalculatorsLibrary
             
             hc_over_tf.value = fmFilterMachiningEquations.Eval_hc_over_tf_From_hc_tf(hc.value, tf.value);
             dhc_over_dt.value = fmFilterMachiningEquations.Eval_dhc_over_dt_From_kappa_Dp_Pc_eta_hc_hce(kappa.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
-            Qsus_d.value = fmFilterMachiningEquations.Eval_Qsus_d_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
-            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qsus_d.value);
+            Qp.value = fmFilterMachiningEquations.Eval_Qp_From_eps_A_Cv_dhcdt(eps.value, A.value, Cv.value, dhc_over_dt.value);
+            Qmsus_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_sus.value, Qp.value);
             Qs_d.value = fmFilterMachiningEquations.Eval_Qs_d_From_eps_A_dhcdt(eps.value, A.value, dhc_over_dt.value);
             Qms_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_s.value, Qs_d.value);
             Qf_d.value = fmFilterMachiningEquations.Eval_Qf_d_From_A_Dp_Pc_eta_hc_hce(A.value, Dp.value, Pc.value, eta_f.value, hc.value, hce.value);
             Qmf_d.value = fmBasicEquations.Eval_Mass_From_rho_Volume(rho_f.value, Qf_d.value);
-            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qsus_d.value, Qf_d.value);
+            Qc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qp.value, Qf_d.value);
             Qmc_d.value = fmFilterMachiningEquations.Eval_Cake_From_Sus_Flow(Qmsus_d.value, Qmf_d.value);
             qf.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf.value, A.value);
             qf_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qf_d.value, A.value);
             qsus.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus.value, A.value);
-            qsus_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qsus_d.value, A.value);
+            qp.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qp.value, A.value);
             qs.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs.value, A.value);
             qs_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qs_d.value, A.value);
             qc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qc.value, A.value);

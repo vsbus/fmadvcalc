@@ -294,7 +294,7 @@ namespace fmCalculationLibrary.Equations
             return V / A;
         }
 
-        public static fmValue Eval_Qsus_d_From_eps_A_Cv_dhcdt(fmValue eps, fmValue A, fmValue Cv, fmValue dhc_dt)
+        public static fmValue Eval_Qp_From_eps_A_Cv_dhcdt(fmValue eps, fmValue A, fmValue Cv, fmValue dhc_dt)
         {
             var one = new fmValue(1.0);
             return (one - eps) * A / Cv * dhc_dt;
@@ -430,7 +430,7 @@ namespace fmCalculationLibrary.Equations
             return sr * tc;
         }
 
-        public static fmValue Eval_Qsus_d_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(
+        public static fmValue Eval_Qp_From_A_Dp_Pc_eta_f_Cv_eps_hc_hce_QpConst(
             fmValue A, fmValue Dp, fmValue Pc, fmValue eta_f, fmValue Cv, fmValue eps, fmValue hc, fmValue hce)
         {
             fmValue one = new fmValue(1.0);
@@ -513,7 +513,7 @@ namespace fmCalculationLibrary.Equations
             return hc;
         }
 
-        public static fmValue EvalCandle_Qsus_d_From_d_hc_hce_A_kappa_Pc_Dp_eta_QpConst(fmValue d, fmValue hc, fmValue hce, fmValue A, fmValue kappa, fmValue Pc, fmValue Dp, fmValue eta)
+        public static fmValue EvalCandle_Qp_From_d_hc_hce_A_kappa_Pc_Dp_eta_QpConst(fmValue d, fmValue hc, fmValue hce, fmValue A, fmValue kappa, fmValue Pc, fmValue Dp, fmValue eta)
         {
             fmValue r = d / 2;
             fmValue hcd = hc / r;

@@ -40,7 +40,7 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter Qc;
         public static fmGlobalParameter Qc_i;
         public static fmGlobalParameter Qsus;
-        public static fmGlobalParameter Qsus_i;
+        public static fmGlobalParameter Qp;
         public static fmGlobalParameter Qmsus;
         public static fmGlobalParameter Qmsus_i;
         public static fmGlobalParameter Qms;
@@ -56,7 +56,7 @@ namespace fmCalculationLibrary
         public static fmGlobalParameter qc;
         public static fmGlobalParameter qc_i;
         public static fmGlobalParameter qsus;
-        public static fmGlobalParameter qsus_i;
+        public static fmGlobalParameter qp;
         public static fmGlobalParameter qmsus;
         public static fmGlobalParameter qmsus_i;
         public static fmGlobalParameter qms;
@@ -331,7 +331,7 @@ namespace fmCalculationLibrary
                            qc,
 
                            Qmsus_i,
-                           Qsus_i,
+                           Qp,
                            Qmf_i,
                            Qf_i,
                            Qms_i,
@@ -339,7 +339,7 @@ namespace fmCalculationLibrary
                            Qmc_i,
                            Qc_i,
                            qmsus_i,
-                           qsus_i,
+                           qp,
                            t1,
                            h1,
                            t1_over_tf,
@@ -465,7 +465,7 @@ namespace fmCalculationLibrary
             AddParameter(ref Qc, new fmGlobalParameter("Qc", fmUnitFamily.FlowRateVolume, new fmRange(0.1e-3 / 3600, 1000000e-3 / 3600)));
             AddParameter(ref Qc_i, new fmGlobalParameter("Qc,i", fmUnitFamily.FlowRateVolume, new fmRange(0.1e-3 / 3600, 1000000e-3 / 3600)));
             AddParameter(ref Qsus, new fmGlobalParameter("Qsus", fmUnitFamily.FlowRateVolume, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
-            AddParameter(ref Qsus_i, new fmGlobalParameter("Qsus,i", fmUnitFamily.FlowRateVolume, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
+            AddParameter(ref Qp, new fmGlobalParameter("Qp", fmUnitFamily.FlowRateVolume, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
             AddParameter(ref Qmsus, new fmGlobalParameter("Qmsus", fmUnitFamily.FlowRateMass, new fmRange(0.1 / 3600, 5000000.0 / 3600)));
             AddParameter(ref Qmsus_i, new fmGlobalParameter("Qmsus,i", fmUnitFamily.FlowRateMass, new fmRange(0.1 / 3600, 5000000.0 / 3600)));
             AddParameter(ref Qms, new fmGlobalParameter("Qms", fmUnitFamily.FlowRateMass, new fmRange(0.1 / 3600, 1000000.0 / 3600)));
@@ -481,7 +481,7 @@ namespace fmCalculationLibrary
             AddParameter(ref qc, new fmGlobalParameter("qc", fmUnitFamily.SpecificFlowRateVolume, new fmRange(0.1e-3 / 60, 100.0e-3 / 60)));
             AddParameter(ref qc_i, new fmGlobalParameter("qc,i", fmUnitFamily.SpecificFlowRateVolume, new fmRange(0.1e-3 / 60, 100.0e-3 / 60)));
             AddParameter(ref qsus, new fmGlobalParameter("qsus", fmUnitFamily.SpecificFlowRateVolume, new fmRange(1.0e-3 / 60, 500.0e-3 / 60)));
-            AddParameter(ref qsus_i, new fmGlobalParameter("qsus,i", fmUnitFamily.SpecificFlowRateVolume, new fmRange(1.0e-3 / 60, 500.0e-3 / 60)));
+            AddParameter(ref qp, new fmGlobalParameter("qp", fmUnitFamily.SpecificFlowRateVolume, new fmRange(1.0e-3 / 60, 500.0e-3 / 60)));
             AddParameter(ref qmsus, new fmGlobalParameter("qmsus", fmUnitFamily.SpecificFlowRateMass, new fmRange(1.0 / 60, 500.0 / 60)));
             AddParameter(ref qmsus_i, new fmGlobalParameter("qmsus,i", fmUnitFamily.SpecificFlowRateMass, new fmRange(1.0 / 60, 500.0 / 60)));
             AddParameter(ref qms, new fmGlobalParameter("qms", fmUnitFamily.SpecificFlowRateMass, new fmRange(0.1 / 60, 100.0 / 60)));
