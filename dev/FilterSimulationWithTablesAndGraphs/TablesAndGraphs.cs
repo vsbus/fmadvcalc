@@ -19,6 +19,17 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmValue m_scale;
 
         public fmGlobalParameter Parameter { get; set; }
+        public string OwningSimulationName = "";
+
+        internal string GetTextForHeader()
+        {
+            string result = Parameter.Name + " (" + Parameter.UnitName + ")";
+            if (OwningSimulationName != "")
+            {
+                result += " [" + OwningSimulationName + "]";
+            }
+            return result;
+        }
 
         public fmValue[] Values
         {
@@ -817,15 +828,12 @@ namespace FilterSimulationWithTablesAndGraphs
 
             foreach (fmDisplayingYListOfArrays yArrays in m_displayingResults.YParameters)
             {
-                fmGlobalParameter yParameter = yArrays.Parameter;
-                string parameterNameAndUnits = yParameter.Name + " (" + yParameter.UnitName + ")";
-
                 foreach (fmDisplayingArray dispArray in yArrays.Arrays)
                 {
                     ++yCol;
                     if (coordinatesGrid.Columns.Count > yCol)
                     {
-                        coordinatesGrid.Columns[yCol].HeaderText = parameterNameAndUnits;
+                        coordinatesGrid.Columns[yCol].HeaderText = dispArray.GetTextForHeader();
                         coordinatesGrid.Columns[yCol].ReadOnly = true;
                         coordinatesGrid.Columns[yCol].Width = 50;
 
@@ -970,11 +978,12 @@ namespace FilterSimulationWithTablesAndGraphs
                     return;
                 }
 
-                var xArray = new fmDisplayingArray();
+                var xArray = new fmDisplayingArray
+                                 {
+                                     Parameter = xParameter,
+                                     Values = new fmValue[m_internalSelectedSimList[0].calculatedDataList.Count]
+                                 };
                 m_displayingResults.XParameter = xArray;
-
-                xArray.Parameter = xParameter;
-                xArray.Values = new fmValue[m_internalSelectedSimList[0].calculatedDataList.Count];
                 for (int i = 0; i < m_internalSelectedSimList[0].calculatedDataList.Count; ++i)
                 {
                     xArray.Values[i] =
@@ -999,9 +1008,12 @@ namespace FilterSimulationWithTablesAndGraphs
                         if (!simData.isChecked)
                             continue;
 
+                        string simName = simData.externalSimulation.Name;
+
                         var yArray = new fmDisplayingArray
                         {
                             Parameter = yParameter,
+                            OwningSimulationName = simName,
                             Values = new fmValue[simData.calculatedDataList.Count],
                             Scale = yParameters.Count > 2 ? degreeOffset[yParameter] : new fmValue(1),
                             IsY2Axis = colorId == 1 && yParameters.Count == 2,
@@ -1067,17 +1079,20 @@ namespace FilterSimulationWithTablesAndGraphs
 
                         foreach (List<fmFilterSimulationData> list in localParameters.calculatedDataLists)
                         {
+                            string simName = list.Count > 0 ? list[0].name : "";
                             var yArray = new fmDisplayingArray
-                            {
-                                Parameter = yParameter,
-                                Values = new fmValue[pointsCount],
-                                Scale = yParameters.Count > 2 ? degreeOffset[yParameter] : new fmValue(1),
-                                IsY2Axis = colorId == 1 && yParameters.Count == 2,
-                                Color = colors[colorId],
-                                Bold = additionalParametersTable.CurrentCell != null
-                                       && m_localInputParametersList.IndexOf(localParameters) ==
-                                       additionalParametersTable.CurrentCell.RowIndex
-                            };
+                                             {
+                                                 OwningSimulationName = simName,
+                                                 Parameter = yParameter,
+                                                 Values = new fmValue[pointsCount],
+                                                 Scale =
+                                                     yParameters.Count > 2 ? degreeOffset[yParameter] : new fmValue(1),
+                                                 IsY2Axis = colorId == 1 && yParameters.Count == 2,
+                                                 Color = colors[colorId],
+                                                 Bold = additionalParametersTable.CurrentCell != null
+                                                        && m_localInputParametersList.IndexOf(localParameters) ==
+                                                        additionalParametersTable.CurrentCell.RowIndex
+                                             };
 
                             for (int i = 0; i < list.Count; ++i)
                             {
