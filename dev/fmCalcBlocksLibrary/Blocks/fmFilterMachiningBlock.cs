@@ -95,7 +95,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     break;
 
-                //[Description("global: (A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
+                //[Description("global: (A, Q, Qsus_i), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
                 case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST:
                     result.Add(fmGlobalParameter.A);
                     result.Add(fmGlobalParameter.Qmsus);
@@ -106,7 +106,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qs);
                     result.Add(fmGlobalParameter.Qmc);
                     result.Add(fmGlobalParameter.Qc);
-                    result.Add(fmGlobalParameter.Qsus_d);
+                    result.Add(fmGlobalParameter.Qsus_i);
                     
                     result.Add(fmGlobalParameter.Dp);
 
@@ -149,7 +149,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qc);
                     
                     result.Add(fmGlobalParameter.Dp);
-                    result.Add(fmGlobalParameter.Qsus_d);
+                    result.Add(fmGlobalParameter.Qsus_i);
 
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.sr);
@@ -191,8 +191,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
                     result.Add(fmGlobalParameter.Dp);
 
-                    result.Add(fmGlobalParameter.Qsus_d);
-                    result.Add(fmGlobalParameter.qsus_d);
+                    result.Add(fmGlobalParameter.Qsus_i);
+                    result.Add(fmGlobalParameter.qsus_i);
                     result.Add(fmGlobalParameter.t1_over_tf);
                     result.Add(fmGlobalParameter.h1_over_hc);
                     result.Add(fmGlobalParameter.t1);
@@ -266,7 +266,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.tc);
                     break;
 
-                //(A, Q, Qsus_d), d0, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
+                //(A, Q, Qsus_i), d0, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)")]
                 case fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST:
                     result.Add(fmGlobalParameter.d0);
 
@@ -279,7 +279,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qs);
                     result.Add(fmGlobalParameter.Qmc);
                     result.Add(fmGlobalParameter.Qc);
-                    result.Add(fmGlobalParameter.Qsus_d);
+                    result.Add(fmGlobalParameter.Qsus_i);
                     
                     result.Add(fmGlobalParameter.Dp);
 
@@ -325,8 +325,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
                     result.Add(fmGlobalParameter.Dp);
 
-                    result.Add(fmGlobalParameter.Qsus_d);
-                    result.Add(fmGlobalParameter.qsus_d);
+                    result.Add(fmGlobalParameter.Qsus_i);
+                    result.Add(fmGlobalParameter.qsus_i);
                     result.Add(fmGlobalParameter.t1_over_tf);
                     result.Add(fmGlobalParameter.h1_over_hc);
                     result.Add(fmGlobalParameter.t1);
@@ -373,7 +373,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     result.Add(fmGlobalParameter.Qc);
                     
                     result.Add(fmGlobalParameter.Dp);
-                    result.Add(fmGlobalParameter.Qsus_d);
+                    result.Add(fmGlobalParameter.Qsus_i);
 
                     result.Add(fmGlobalParameter.sf);
                     result.Add(fmGlobalParameter.sr);
@@ -1082,27 +1082,27 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref qmc, fmGlobalParameter.qmc, qmc_Cell, false);
             AddParameter(ref qc, fmGlobalParameter.qc, qc_Cell, false);
 
-            AddParameter(ref Qmsus_d, fmGlobalParameter.Qmsus_d, Qmsus_d_Cell, false);
-            AddParameter(ref Qsus_d, fmGlobalParameter.Qsus_d, Qsus_d_Cell, false);
-            AddParameter(ref Qmf_d, fmGlobalParameter.Qmf_d, Qmf_d_Cell, false);
-            AddParameter(ref Qf_d, fmGlobalParameter.Qf_d, Qf_d_Cell, false);
-            AddParameter(ref Qms_d, fmGlobalParameter.Qms_d, Qms_d_Cell, false);
-            AddParameter(ref Qs_d, fmGlobalParameter.Qs_d, Qs_d_Cell, false);
-            AddParameter(ref Qmc_d, fmGlobalParameter.Qmc_d, Qmc_d_Cell, false);
-            AddParameter(ref Qc_d, fmGlobalParameter.Qc_d, Qc_d_Cell, false);
+            AddParameter(ref Qmsus_d, fmGlobalParameter.Qmsus_i, Qmsus_d_Cell, false);
+            AddParameter(ref Qsus_d, fmGlobalParameter.Qsus_i, Qsus_d_Cell, false);
+            AddParameter(ref Qmf_d, fmGlobalParameter.Qmf_i, Qmf_d_Cell, false);
+            AddParameter(ref Qf_d, fmGlobalParameter.Qf_i, Qf_d_Cell, false);
+            AddParameter(ref Qms_d, fmGlobalParameter.Qms_i, Qms_d_Cell, false);
+            AddParameter(ref Qs_d, fmGlobalParameter.Qs_i, Qs_d_Cell, false);
+            AddParameter(ref Qmc_d, fmGlobalParameter.Qmc_i, Qmc_d_Cell, false);
+            AddParameter(ref Qc_d, fmGlobalParameter.Qc_i, Qc_d_Cell, false);
 
-            AddParameter(ref qmsus_d, fmGlobalParameter.qmsus_d, qmsus_d_Cell, false);
-            AddParameter(ref qsus_d, fmGlobalParameter.qsus_d, qsus_d_Cell, false);
+            AddParameter(ref qmsus_d, fmGlobalParameter.qmsus_i, qmsus_d_Cell, false);
+            AddParameter(ref qsus_d, fmGlobalParameter.qsus_i, qsus_d_Cell, false);
             AddParameter(ref t1, fmGlobalParameter.t1, t1_Cell, false);
             AddParameter(ref h1, fmGlobalParameter.h1, h1_Cell, false);
             AddParameter(ref t1_over_tf, fmGlobalParameter.t1_over_tf, t1_over_tf_Cell, false);
             AddParameter(ref h1_over_hc, fmGlobalParameter.h1_over_hc, h1_over_hc_Cell, false);
-            AddParameter(ref qmf_d, fmGlobalParameter.qmf_d, qmf_d_Cell, false);
-            AddParameter(ref qf_d, fmGlobalParameter.qf_d, qf_d_Cell, false);
-            AddParameter(ref qms_d, fmGlobalParameter.qms_d, qms_d_Cell, false);
-            AddParameter(ref qs_d, fmGlobalParameter.qs_d, qs_d_Cell, false);
-            AddParameter(ref qmc_d, fmGlobalParameter.qmc_d, qmc_d_Cell, false);
-            AddParameter(ref qc_d, fmGlobalParameter.qc_d, qc_d_Cell, false);
+            AddParameter(ref qmf_d, fmGlobalParameter.qmf_i, qmf_d_Cell, false);
+            AddParameter(ref qf_d, fmGlobalParameter.qf_i, qf_d_Cell, false);
+            AddParameter(ref qms_d, fmGlobalParameter.qms_i, qms_d_Cell, false);
+            AddParameter(ref qs_d, fmGlobalParameter.qs_i, qs_d_Cell, false);
+            AddParameter(ref qmc_d, fmGlobalParameter.qmc_i, qmc_d_Cell, false);
+            AddParameter(ref qc_d, fmGlobalParameter.qc_i, qc_d_Cell, false);
 
             AddParameter(ref hc_over_tf, fmGlobalParameter.hc_over_tf, hc_over_tf_Cell, false);
             AddParameter(ref dhc_over_dt, fmGlobalParameter.dhc_over_dt, dhc_over_dt_Cell, false);
@@ -1438,7 +1438,7 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
-            //(A, Q, Qsus_d), d0, Dp, (sf, tr), (hc, V, M, tf, n, tc)
+            //(A, Q, Qsus_i), d0, Dp, (sf, tr), (hc, V, M, tf, n, tc)
             table[d0] = d0_group;
             
             table[A] = AQ_group;
@@ -1538,7 +1538,7 @@ namespace fmCalcBlocksLibrary.Blocks
             foreach (fmBlockVariableParameter p in parameters)
                 table[p] = null;
 
-            //[Description("global: (A, Q, Qsus_d), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
+            //[Description("global: (A, Q, Qsus_i), Dp, (sf, tr), (hc, V, M, tf, n, tc)")]
             table[A] = AQ_group;
             table[Qmsus] = AQ_group;
             table[Qsus] = AQ_group;

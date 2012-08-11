@@ -59,25 +59,25 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(qSmallBox, fmGlobalParameter.qsus);
             AddParameter(qSmallBox, fmGlobalParameter.qc);
 
-            AddParameter(qmBigBox_dif, fmGlobalParameter.Qmf_d);
-            AddParameter(qmBigBox_dif, fmGlobalParameter.Qms_d);
-            AddParameter(qmBigBox_dif, fmGlobalParameter.Qmsus_d);
-            AddParameter(qmBigBox_dif, fmGlobalParameter.Qmc_d);
+            AddParameter(qmBigBox_dif, fmGlobalParameter.Qmf_i);
+            AddParameter(qmBigBox_dif, fmGlobalParameter.Qms_i);
+            AddParameter(qmBigBox_dif, fmGlobalParameter.Qmsus_i);
+            AddParameter(qmBigBox_dif, fmGlobalParameter.Qmc_i);
 
-            AddParameter(qBigBox_dif, fmGlobalParameter.Qf_d);
-            AddParameter(qBigBox_dif, fmGlobalParameter.Qs_d);
-            AddParameter(qBigBox_dif, fmGlobalParameter.Qsus_d);
-            AddParameter(qBigBox_dif, fmGlobalParameter.Qc_d);
+            AddParameter(qBigBox_dif, fmGlobalParameter.Qf_i);
+            AddParameter(qBigBox_dif, fmGlobalParameter.Qs_i);
+            AddParameter(qBigBox_dif, fmGlobalParameter.Qsus_i);
+            AddParameter(qBigBox_dif, fmGlobalParameter.Qc_i);
 
-            AddParameter(qmSmallBox_dif, fmGlobalParameter.qmf_d);
-            AddParameter(qmSmallBox_dif, fmGlobalParameter.qms_d);
-            AddParameter(qmSmallBox_dif, fmGlobalParameter.qmsus_d);
-            AddParameter(qmSmallBox_dif, fmGlobalParameter.qmc_d);
+            AddParameter(qmSmallBox_dif, fmGlobalParameter.qmf_i);
+            AddParameter(qmSmallBox_dif, fmGlobalParameter.qms_i);
+            AddParameter(qmSmallBox_dif, fmGlobalParameter.qmsus_i);
+            AddParameter(qmSmallBox_dif, fmGlobalParameter.qmc_i);
 
-            AddParameter(qSmallBox_dif, fmGlobalParameter.qf_d);
-            AddParameter(qSmallBox_dif, fmGlobalParameter.qs_d);
-            AddParameter(qSmallBox_dif, fmGlobalParameter.qsus_d);
-            AddParameter(qSmallBox_dif, fmGlobalParameter.qc_d);
+            AddParameter(qSmallBox_dif, fmGlobalParameter.qf_i);
+            AddParameter(qSmallBox_dif, fmGlobalParameter.qs_i);
+            AddParameter(qSmallBox_dif, fmGlobalParameter.qsus_i);
+            AddParameter(qSmallBox_dif, fmGlobalParameter.qc_i);
 
             AddParameter(ad0DpBox, fmGlobalParameter.A);
             AddParameter(ad0DpBox, fmGlobalParameter.d0);

@@ -233,7 +233,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // qBigBox_dif
             // 
-            this.qBigBox_dif.CaptionText = "Q,d";
+            this.qBigBox_dif.CaptionText = "Q,i";
             this.qBigBox_dif.Location = new System.Drawing.Point(131, 432);
             this.qBigBox_dif.Name = "qBigBox_dif";
             this.qBigBox_dif.Size = new System.Drawing.Size(106, 85);
@@ -249,7 +249,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // qmBigBox_dif
             // 
-            this.qmBigBox_dif.CaptionText = "Qm,d";
+            this.qmBigBox_dif.CaptionText = "Qm,i";
             this.qmBigBox_dif.Location = new System.Drawing.Point(243, 432);
             this.qmBigBox_dif.Name = "qmBigBox_dif";
             this.qmBigBox_dif.Size = new System.Drawing.Size(106, 85);
@@ -281,7 +281,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // qSmallBox_dif
             // 
-            this.qSmallBox_dif.CaptionText = "q,d";
+            this.qSmallBox_dif.CaptionText = "q,i";
             this.qSmallBox_dif.Location = new System.Drawing.Point(131, 523);
             this.qSmallBox_dif.Name = "qSmallBox_dif";
             this.qSmallBox_dif.Size = new System.Drawing.Size(106, 85);
@@ -313,7 +313,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // qmSmallBox_dif
             // 
-            this.qmSmallBox_dif.CaptionText = "qm,d";
+            this.qmSmallBox_dif.CaptionText = "qm,i";
             this.qmSmallBox_dif.Location = new System.Drawing.Point(243, 523);
             this.qmSmallBox_dif.Name = "qmSmallBox_dif";
             this.qmSmallBox_dif.Size = new System.Drawing.Size(106, 85);

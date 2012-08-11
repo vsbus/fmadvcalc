@@ -53,10 +53,10 @@ namespace fmCalculatorsLibrary
             [Description("Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)")]
             CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST,
 
-            //(A, Q, Qsus_d), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            //(A, Q, Qsus_i), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
             [Description("Qp = const (Plain)")]
             PLAIN_QP_CONST,
-            //(A, Q, Qsus_d), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
+            //(A, Q, Qsus_i), d, Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
             [Description("Qp = const (Cylindrical)")]
             CYLINDRICAL_QP_CONST
 
@@ -180,7 +180,7 @@ namespace fmCalculatorsLibrary
         private void DoSubCalculationsCylindricalQpConstVolumetricPump()
         {
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            var Qp = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
             if (Dp.isInputed)
             {
                 DoSubCalculationsCylindricalQpConst();
@@ -234,7 +234,7 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
@@ -641,7 +641,7 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
@@ -1837,37 +1837,37 @@ namespace fmCalculatorsLibrary
                 var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt] as fmCalculationVariableParameter;
                 var hc = variables[fmGlobalParameter.hc] as fmCalculationVariableParameter;
                 var Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
-                var Qf_d = variables[fmGlobalParameter.Qf_d] as fmCalculationVariableParameter;
+                var Qf_d = variables[fmGlobalParameter.Qf_i] as fmCalculationVariableParameter;
                 var Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
-                var Qs_d = variables[fmGlobalParameter.Qs_d] as fmCalculationVariableParameter;
+                var Qs_d = variables[fmGlobalParameter.Qs_i] as fmCalculationVariableParameter;
                 var Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
-                var Qc_d = variables[fmGlobalParameter.Qc_d] as fmCalculationVariableParameter;
+                var Qc_d = variables[fmGlobalParameter.Qc_i] as fmCalculationVariableParameter;
                 var Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
-                var Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+                var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
                 var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
-                var Qmsus_d = variables[fmGlobalParameter.Qmsus_d] as fmCalculationVariableParameter;
+                var Qmsus_d = variables[fmGlobalParameter.Qmsus_i] as fmCalculationVariableParameter;
                 var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
-                var Qms_d = variables[fmGlobalParameter.Qms_d] as fmCalculationVariableParameter;
+                var Qms_d = variables[fmGlobalParameter.Qms_i] as fmCalculationVariableParameter;
                 var Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
-                var Qmf_d = variables[fmGlobalParameter.Qmf_d] as fmCalculationVariableParameter;
+                var Qmf_d = variables[fmGlobalParameter.Qmf_i] as fmCalculationVariableParameter;
                 var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-                var Qmc_d = variables[fmGlobalParameter.Qmc_d] as fmCalculationVariableParameter;
+                var Qmc_d = variables[fmGlobalParameter.Qmc_i] as fmCalculationVariableParameter;
                 var qf = variables[fmGlobalParameter.qf] as fmCalculationVariableParameter;
-                var qf_d = variables[fmGlobalParameter.qf_d] as fmCalculationVariableParameter;
+                var qf_d = variables[fmGlobalParameter.qf_i] as fmCalculationVariableParameter;
                 var qs = variables[fmGlobalParameter.qs] as fmCalculationVariableParameter;
-                var qs_d = variables[fmGlobalParameter.qs_d] as fmCalculationVariableParameter;
+                var qs_d = variables[fmGlobalParameter.qs_i] as fmCalculationVariableParameter;
                 var qc = variables[fmGlobalParameter.qc] as fmCalculationVariableParameter;
-                var qc_d = variables[fmGlobalParameter.qc_d] as fmCalculationVariableParameter;
+                var qc_d = variables[fmGlobalParameter.qc_i] as fmCalculationVariableParameter;
                 var qsus = variables[fmGlobalParameter.qsus] as fmCalculationVariableParameter;
-                var qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
+                var qsus_d = variables[fmGlobalParameter.qsus_i] as fmCalculationVariableParameter;
                 var qmsus = variables[fmGlobalParameter.qmsus] as fmCalculationVariableParameter;
-                var qmsus_d = variables[fmGlobalParameter.qmsus_d] as fmCalculationVariableParameter;
+                var qmsus_d = variables[fmGlobalParameter.qmsus_i] as fmCalculationVariableParameter;
                 var qms = variables[fmGlobalParameter.qms] as fmCalculationVariableParameter;
-                var qms_d = variables[fmGlobalParameter.qms_d] as fmCalculationVariableParameter;
+                var qms_d = variables[fmGlobalParameter.qms_i] as fmCalculationVariableParameter;
                 var qmf = variables[fmGlobalParameter.qmf] as fmCalculationVariableParameter;
-                var qmf_d = variables[fmGlobalParameter.qmf_d] as fmCalculationVariableParameter;
+                var qmf_d = variables[fmGlobalParameter.qmf_i] as fmCalculationVariableParameter;
                 var qmc = variables[fmGlobalParameter.qmc] as fmCalculationVariableParameter;
-                var qmc_d = variables[fmGlobalParameter.qmc_d] as fmCalculationVariableParameter;
+                var qmc_d = variables[fmGlobalParameter.qmc_i] as fmCalculationVariableParameter;
                 var Vsus = variables[fmGlobalParameter.Vsus] as fmCalculationVariableParameter;
                 var Mf = variables[fmGlobalParameter.Mf] as fmCalculationVariableParameter;
                 var Vf = variables[fmGlobalParameter.Vf] as fmCalculationVariableParameter;
@@ -1969,7 +1969,7 @@ namespace fmCalculatorsLibrary
                     default:
                        throw new Exception("Unhandled area kind.");
                 }
-                fmValue curQpValue = fmc.variables[fmGlobalParameter.Qsus_d].value;
+                fmValue curQpValue = fmc.variables[fmGlobalParameter.Qsus_i].value;
                 return QpValue - curQpValue;
             }
         };
@@ -1990,7 +1990,7 @@ namespace fmCalculatorsLibrary
         private void DoSubCalculationsPlainQpConstVolumetricPump()
         {
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            var Qp = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
             if (Dp.isInputed)
             {
                 DoSubCalculationsPlainQpConst();
@@ -2004,7 +2004,7 @@ namespace fmCalculatorsLibrary
         private void DoSubCalculationsVolumetricPumpQpInput(QpCalculatorHelperForDpInput.AreaKind areaKind)
         {
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            var Qp = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            var Qp = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
 
             Dp.isInputed = true;
             Qp.isInputed = false;
@@ -2112,33 +2112,33 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
 
             var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
             var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
-            var Qf_d = variables[fmGlobalParameter.Qf_d];
-            var Qs_d = variables[fmGlobalParameter.Qs_d];
-            var Qc_d = variables[fmGlobalParameter.Qc_d];
-            var Qmsus_d = variables[fmGlobalParameter.Qmsus_d];
-            var Qms_d = variables[fmGlobalParameter.Qms_d];
-            var Qmf_d = variables[fmGlobalParameter.Qmf_d];
-            var Qmc_d = variables[fmGlobalParameter.Qmc_d];
+            var Qf_d = variables[fmGlobalParameter.Qf_i];
+            var Qs_d = variables[fmGlobalParameter.Qs_i];
+            var Qc_d = variables[fmGlobalParameter.Qc_i];
+            var Qmsus_d = variables[fmGlobalParameter.Qmsus_i];
+            var Qms_d = variables[fmGlobalParameter.Qms_i];
+            var Qmf_d = variables[fmGlobalParameter.Qmf_i];
+            var Qmc_d = variables[fmGlobalParameter.Qmc_i];
             var qf = variables[fmGlobalParameter.qf];
-            var qf_d = variables[fmGlobalParameter.qf_d];
+            var qf_d = variables[fmGlobalParameter.qf_i];
             var qs = variables[fmGlobalParameter.qs];
-            var qs_d = variables[fmGlobalParameter.qs_d];
+            var qs_d = variables[fmGlobalParameter.qs_i];
             var qc = variables[fmGlobalParameter.qc];
-            var qc_d = variables[fmGlobalParameter.qc_d];
+            var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
-            var qsus_d = variables[fmGlobalParameter.qsus_d];
+            var qsus_d = variables[fmGlobalParameter.qsus_i];
             var qmsus = variables[fmGlobalParameter.qmsus];
-            var qmsus_d = variables[fmGlobalParameter.qmsus_d];
+            var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
-            var qms_d = variables[fmGlobalParameter.qms_d];
+            var qms_d = variables[fmGlobalParameter.qms_i];
             var qmf = variables[fmGlobalParameter.qmf];
-            var qmf_d = variables[fmGlobalParameter.qmf_d];
+            var qmf_d = variables[fmGlobalParameter.qmf_i];
             var qmc = variables[fmGlobalParameter.qmc];
-            var qmc_d = variables[fmGlobalParameter.qmc_d];
+            var qmc_d = variables[fmGlobalParameter.qmc_i];
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
@@ -2590,8 +2590,8 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
-            var qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
+            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+            var qsus_d = variables[fmGlobalParameter.qsus_i] as fmCalculationVariableParameter;
             var t1 = variables[fmGlobalParameter.t1] as fmCalculationVariableParameter;
             var h1 = variables[fmGlobalParameter.h1] as fmCalculationVariableParameter;
             var t1OverTf = variables[fmGlobalParameter.t1_over_tf] as fmCalculationVariableParameter;
@@ -2599,28 +2599,28 @@ namespace fmCalculatorsLibrary
             
             var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
             var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
-            var Qf_d = variables[fmGlobalParameter.Qf_d];
-            var Qs_d = variables[fmGlobalParameter.Qs_d];
-            var Qc_d = variables[fmGlobalParameter.Qc_d];
-            var Qmsus_d = variables[fmGlobalParameter.Qmsus_d];
-            var Qms_d = variables[fmGlobalParameter.Qms_d];
-            var Qmf_d = variables[fmGlobalParameter.Qmf_d];
-            var Qmc_d = variables[fmGlobalParameter.Qmc_d];
+            var Qf_d = variables[fmGlobalParameter.Qf_i];
+            var Qs_d = variables[fmGlobalParameter.Qs_i];
+            var Qc_d = variables[fmGlobalParameter.Qc_i];
+            var Qmsus_d = variables[fmGlobalParameter.Qmsus_i];
+            var Qms_d = variables[fmGlobalParameter.Qms_i];
+            var Qmf_d = variables[fmGlobalParameter.Qmf_i];
+            var Qmc_d = variables[fmGlobalParameter.Qmc_i];
             var qf = variables[fmGlobalParameter.qf];
-            var qf_d = variables[fmGlobalParameter.qf_d];
+            var qf_d = variables[fmGlobalParameter.qf_i];
             var qs = variables[fmGlobalParameter.qs];
-            var qs_d = variables[fmGlobalParameter.qs_d];
+            var qs_d = variables[fmGlobalParameter.qs_i];
             var qc = variables[fmGlobalParameter.qc];
-            var qc_d = variables[fmGlobalParameter.qc_d];
+            var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
             var qmsus = variables[fmGlobalParameter.qmsus];
-            var qmsus_d = variables[fmGlobalParameter.qmsus_d];
+            var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
-            var qms_d = variables[fmGlobalParameter.qms_d];
+            var qms_d = variables[fmGlobalParameter.qms_i];
             var qmf = variables[fmGlobalParameter.qmf];
-            var qmf_d = variables[fmGlobalParameter.qmf_d];
+            var qmf_d = variables[fmGlobalParameter.qmf_i];
             var qmc = variables[fmGlobalParameter.qmc];
-            var qmc_d = variables[fmGlobalParameter.qmc_d];
+            var qmc_d = variables[fmGlobalParameter.qmc_i];
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
@@ -3144,33 +3144,33 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
+            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
             
             var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
             var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
-            var Qf_d = variables[fmGlobalParameter.Qf_d];
-            var Qs_d = variables[fmGlobalParameter.Qs_d];
-            var Qc_d = variables[fmGlobalParameter.Qc_d];
-            var Qmsus_d = variables[fmGlobalParameter.Qmsus_d];
-            var Qms_d = variables[fmGlobalParameter.Qms_d];
-            var Qmf_d = variables[fmGlobalParameter.Qmf_d];
-            var Qmc_d = variables[fmGlobalParameter.Qmc_d];
+            var Qf_d = variables[fmGlobalParameter.Qf_i];
+            var Qs_d = variables[fmGlobalParameter.Qs_i];
+            var Qc_d = variables[fmGlobalParameter.Qc_i];
+            var Qmsus_d = variables[fmGlobalParameter.Qmsus_i];
+            var Qms_d = variables[fmGlobalParameter.Qms_i];
+            var Qmf_d = variables[fmGlobalParameter.Qmf_i];
+            var Qmc_d = variables[fmGlobalParameter.Qmc_i];
             var qf = variables[fmGlobalParameter.qf];
-            var qf_d = variables[fmGlobalParameter.qf_d];
+            var qf_d = variables[fmGlobalParameter.qf_i];
             var qs = variables[fmGlobalParameter.qs];
-            var qs_d = variables[fmGlobalParameter.qs_d];
+            var qs_d = variables[fmGlobalParameter.qs_i];
             var qc = variables[fmGlobalParameter.qc];
-            var qc_d = variables[fmGlobalParameter.qc_d];
+            var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
-            var qsus_d = variables[fmGlobalParameter.qsus_d];
+            var qsus_d = variables[fmGlobalParameter.qsus_i];
             var qmsus = variables[fmGlobalParameter.qmsus];
-            var qmsus_d = variables[fmGlobalParameter.qmsus_d];
+            var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
-            var qms_d = variables[fmGlobalParameter.qms_d];
+            var qms_d = variables[fmGlobalParameter.qms_i];
             var qmf = variables[fmGlobalParameter.qmf];
-            var qmf_d = variables[fmGlobalParameter.qmf_d];
+            var qmf_d = variables[fmGlobalParameter.qmf_i];
             var qmc = variables[fmGlobalParameter.qmc];
-            var qmc_d = variables[fmGlobalParameter.qmc_d];
+            var qmc_d = variables[fmGlobalParameter.qmc_i];
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
@@ -3621,8 +3621,8 @@ namespace fmCalculatorsLibrary
             var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
             var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
             var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
-            var Qsus_d = variables[fmGlobalParameter.Qsus_d] as fmCalculationVariableParameter;
-            var qsus_d = variables[fmGlobalParameter.qsus_d] as fmCalculationVariableParameter;
+            var Qsus_d = variables[fmGlobalParameter.Qsus_i] as fmCalculationVariableParameter;
+            var qsus_d = variables[fmGlobalParameter.qsus_i] as fmCalculationVariableParameter;
             var t1 = variables[fmGlobalParameter.t1] as fmCalculationVariableParameter;
             var h1 = variables[fmGlobalParameter.h1] as fmCalculationVariableParameter;
             var t1OverTf = variables[fmGlobalParameter.t1_over_tf] as fmCalculationVariableParameter;
@@ -3630,28 +3630,28 @@ namespace fmCalculatorsLibrary
             
             var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
             var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
-            var Qf_d = variables[fmGlobalParameter.Qf_d];
-            var Qs_d = variables[fmGlobalParameter.Qs_d];
-            var Qc_d = variables[fmGlobalParameter.Qc_d];
-            var Qmsus_d = variables[fmGlobalParameter.Qmsus_d];
-            var Qms_d = variables[fmGlobalParameter.Qms_d];
-            var Qmf_d = variables[fmGlobalParameter.Qmf_d];
-            var Qmc_d = variables[fmGlobalParameter.Qmc_d];
+            var Qf_d = variables[fmGlobalParameter.Qf_i];
+            var Qs_d = variables[fmGlobalParameter.Qs_i];
+            var Qc_d = variables[fmGlobalParameter.Qc_i];
+            var Qmsus_d = variables[fmGlobalParameter.Qmsus_i];
+            var Qms_d = variables[fmGlobalParameter.Qms_i];
+            var Qmf_d = variables[fmGlobalParameter.Qmf_i];
+            var Qmc_d = variables[fmGlobalParameter.Qmc_i];
             var qf = variables[fmGlobalParameter.qf];
-            var qf_d = variables[fmGlobalParameter.qf_d];
+            var qf_d = variables[fmGlobalParameter.qf_i];
             var qs = variables[fmGlobalParameter.qs];
-            var qs_d = variables[fmGlobalParameter.qs_d];
+            var qs_d = variables[fmGlobalParameter.qs_i];
             var qc = variables[fmGlobalParameter.qc];
-            var qc_d = variables[fmGlobalParameter.qc_d];
+            var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
             var qmsus = variables[fmGlobalParameter.qmsus];
-            var qmsus_d = variables[fmGlobalParameter.qmsus_d];
+            var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
-            var qms_d = variables[fmGlobalParameter.qms_d];
+            var qms_d = variables[fmGlobalParameter.qms_i];
             var qmf = variables[fmGlobalParameter.qmf];
-            var qmf_d = variables[fmGlobalParameter.qmf_d];
+            var qmf_d = variables[fmGlobalParameter.qmf_i];
             var qmc = variables[fmGlobalParameter.qmc];
-            var qmc_d = variables[fmGlobalParameter.qmc_d];
+            var qmc_d = variables[fmGlobalParameter.qmc_i];
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
@@ -4188,30 +4188,30 @@ namespace fmCalculatorsLibrary
 
             var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
             var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
-            var Qf_d = variables[fmGlobalParameter.Qf_d];
-            var Qs_d = variables[fmGlobalParameter.Qs_d];
-            var Qc_d = variables[fmGlobalParameter.Qc_d];
-            var Qsus_d = variables[fmGlobalParameter.Qsus_d];
-            var Qmsus_d = variables[fmGlobalParameter.Qmsus_d];
-            var Qms_d = variables[fmGlobalParameter.Qms_d];
-            var Qmf_d = variables[fmGlobalParameter.Qmf_d];
-            var Qmc_d = variables[fmGlobalParameter.Qmc_d];
+            var Qf_d = variables[fmGlobalParameter.Qf_i];
+            var Qs_d = variables[fmGlobalParameter.Qs_i];
+            var Qc_d = variables[fmGlobalParameter.Qc_i];
+            var Qsus_d = variables[fmGlobalParameter.Qsus_i];
+            var Qmsus_d = variables[fmGlobalParameter.Qmsus_i];
+            var Qms_d = variables[fmGlobalParameter.Qms_i];
+            var Qmf_d = variables[fmGlobalParameter.Qmf_i];
+            var Qmc_d = variables[fmGlobalParameter.Qmc_i];
             var qf = variables[fmGlobalParameter.qf];
-            var qf_d = variables[fmGlobalParameter.qf_d];
+            var qf_d = variables[fmGlobalParameter.qf_i];
             var qs = variables[fmGlobalParameter.qs];
-            var qs_d = variables[fmGlobalParameter.qs_d];
+            var qs_d = variables[fmGlobalParameter.qs_i];
             var qc = variables[fmGlobalParameter.qc];
-            var qc_d = variables[fmGlobalParameter.qc_d];
+            var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
-            var qsus_d = variables[fmGlobalParameter.qsus_d];
+            var qsus_d = variables[fmGlobalParameter.qsus_i];
             var qmsus = variables[fmGlobalParameter.qmsus];
-            var qmsus_d = variables[fmGlobalParameter.qmsus_d];
+            var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
-            var qms_d = variables[fmGlobalParameter.qms_d];
+            var qms_d = variables[fmGlobalParameter.qms_i];
             var qmf = variables[fmGlobalParameter.qmf];
-            var qmf_d = variables[fmGlobalParameter.qmf_d];
+            var qmf_d = variables[fmGlobalParameter.qmf_i];
             var qmc = variables[fmGlobalParameter.qmc];
-            var qmc_d = variables[fmGlobalParameter.qmc_d];
+            var qmc_d = variables[fmGlobalParameter.qmc_i];
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
@@ -4657,30 +4657,30 @@ namespace fmCalculatorsLibrary
             
             var hc_over_tf = variables[fmGlobalParameter.hc_over_tf];
             var dhc_over_dt = variables[fmGlobalParameter.dhc_over_dt];
-            var Qf_d = variables[fmGlobalParameter.Qf_d];
-            var Qs_d = variables[fmGlobalParameter.Qs_d];
-            var Qc_d = variables[fmGlobalParameter.Qc_d];
-            var Qsus_d = variables[fmGlobalParameter.Qsus_d];
-            var Qmsus_d = variables[fmGlobalParameter.Qmsus_d];
-            var Qms_d = variables[fmGlobalParameter.Qms_d];
-            var Qmf_d = variables[fmGlobalParameter.Qmf_d];
-            var Qmc_d = variables[fmGlobalParameter.Qmc_d];
+            var Qf_d = variables[fmGlobalParameter.Qf_i];
+            var Qs_d = variables[fmGlobalParameter.Qs_i];
+            var Qc_d = variables[fmGlobalParameter.Qc_i];
+            var Qsus_d = variables[fmGlobalParameter.Qsus_i];
+            var Qmsus_d = variables[fmGlobalParameter.Qmsus_i];
+            var Qms_d = variables[fmGlobalParameter.Qms_i];
+            var Qmf_d = variables[fmGlobalParameter.Qmf_i];
+            var Qmc_d = variables[fmGlobalParameter.Qmc_i];
             var qf = variables[fmGlobalParameter.qf];
-            var qf_d = variables[fmGlobalParameter.qf_d];
+            var qf_d = variables[fmGlobalParameter.qf_i];
             var qs = variables[fmGlobalParameter.qs];
-            var qs_d = variables[fmGlobalParameter.qs_d];
+            var qs_d = variables[fmGlobalParameter.qs_i];
             var qc = variables[fmGlobalParameter.qc];
-            var qc_d = variables[fmGlobalParameter.qc_d];
+            var qc_d = variables[fmGlobalParameter.qc_i];
             var qsus = variables[fmGlobalParameter.qsus];
-            var qsus_d = variables[fmGlobalParameter.qsus_d];
+            var qsus_d = variables[fmGlobalParameter.qsus_i];
             var qmsus = variables[fmGlobalParameter.qmsus];
-            var qmsus_d = variables[fmGlobalParameter.qmsus_d];
+            var qmsus_d = variables[fmGlobalParameter.qmsus_i];
             var qms = variables[fmGlobalParameter.qms];
-            var qms_d = variables[fmGlobalParameter.qms_d];
+            var qms_d = variables[fmGlobalParameter.qms_i];
             var qmf = variables[fmGlobalParameter.qmf];
-            var qmf_d = variables[fmGlobalParameter.qmf_d];
+            var qmf_d = variables[fmGlobalParameter.qmf_i];
             var qmc = variables[fmGlobalParameter.qmc];
-            var qmc_d = variables[fmGlobalParameter.qmc_d];
+            var qmc_d = variables[fmGlobalParameter.qmc_i];
 
             var eps = variables[fmGlobalParameter.eps];
             var kappa = variables[fmGlobalParameter.kappa];
