@@ -240,26 +240,23 @@ namespace fmCalculationLibrary
 
         public static fmValue operator /(fmValue op1, fmValue op2)
         {
-            var res = new fmValue
-                          {
-                              defined = op1.defined && op2.defined && (op2.value != 0.0)
-                          };
-            res.value = res.defined ? op1.value/op2.value : 1;
-            return res;
+            if (!op1.defined || !op2.defined)
+                return new fmValue();
+
+            if (op2.value == 0)
+                return new fmValue(0, op1.value == 0);    
+
+            return new fmValue(op1.value / op2.value);
         }
 
         public static fmValue operator /(fmValue op1, double op2)
         {
-            var res = new fmValue {defined = op1.defined && (op2 != 0.0)};
-            res.value = res.defined ? op1.value/op2 : 1;
-            return res;
+            return op1 / new fmValue(op2);
         }
 
         public static fmValue operator /(double op1, fmValue op2)
         {
-            var res = new fmValue {defined = op2.defined && (op2.value != 0.0)};
-            res.value = res.defined ? op1/op2.value : 1;
-            return res;
+            return new fmValue(op1) / op2;
         }
 
         public static fmValue Abs(fmValue op)
