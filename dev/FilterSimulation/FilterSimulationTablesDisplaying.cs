@@ -6,7 +6,6 @@ using FilterSimulation.fmFilterObjects;
 using System.ComponentModel;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalcBlocksLibrary.Blocks;
-using fmCalculationLibrary.MeasureUnits;
 using fmCalculationLibrary;
 using fmCalculatorsLibrary;
 
@@ -333,7 +332,7 @@ namespace FilterSimulation
                         FindRowByValueInColumn(deliquoringMaterialParametersDataGrid, deliquoringMaterialParametersParameterNameColumn.Index, fmGlobalParameter.alpha_d.Name).Cells[deliquoringMaterialCol.Index]);
 
 
-                    sim.deliquoringSigmaPkeBlock.ValuesChanged += deliquoringSigmaPkeBlock_ValuesChanged;
+                    sim.deliquoringSigmaPkeBlock.ValuesChanged += DeliquoringSigmaPkeBlockValuesChanged;
                     sim.deliquoringSigmaPkeBlock.ValuesChangedByUser += deliquoringSigmaPkeBlock_ValuesChangedByUser;
                 }
                 if (sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock == null)
@@ -440,7 +439,7 @@ namespace FilterSimulation
                 CopySimulationValuesToPc0rc0a0ncBlock(sim);
                 CopySimulationValuesToRmHceBlock(sim);
                 CopySimulationValuesToFilterMachining(sim);
-                CopySimulationValuesToDeliquoringEps0dNedEpsdBlock(sim);
+                CopySimulationValuesToDeliquoringEps0DNedEpsdBlock(sim);
                 CopySimulationValuesToDeliquoringSigmaBlock(sim);
                 CopySimulationValuesToDeliquoringSremBlock(sim);
 
@@ -463,7 +462,7 @@ namespace FilterSimulation
         private void ShowHideRowsDependingOnCalculationOptions(fmFilterSimulation sim)
         {
             Dictionary<fmGlobalParameter, bool> isVisibleParameters = GetVisibleDeliquoringParamsDependingOnCalculationOptions(sim);
-            List<fmGlobalParameter> visibleParametersList = new List<fmGlobalParameter>();
+            var visibleParametersList = new List<fmGlobalParameter>();
             foreach (KeyValuePair<fmGlobalParameter, bool> pair in isVisibleParameters)
             {
                 if (pair.Value)
@@ -488,7 +487,7 @@ namespace FilterSimulation
                 isVisibleParameters);
         }
 
-        private Dictionary<fmGlobalParameter, bool> GetVisibleDeliquoringParamsDependingOnCalculationOptions(fmFilterSimulation sim)
+        private static Dictionary<fmGlobalParameter, bool> GetVisibleDeliquoringParamsDependingOnCalculationOptions(fmFilterSimulation sim)
         {
             var isVisibleParameters = new Dictionary<fmGlobalParameter, bool>();
 
@@ -524,7 +523,7 @@ namespace FilterSimulation
             return isVisibleParameters;
         }
 
-        private void MakeInvisibleEvaporationParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters)
+        private static void MakeInvisibleEvaporationParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters)
         {
             MakeInvisibleParameters(isVisibleParameters,
                                     fmGlobalParameter.Tetta_boil,
@@ -552,7 +551,7 @@ namespace FilterSimulation
                                     fmGlobalParameter.qev);
         }
 
-        private void MakeInvisibleGasParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters)
+        private static void MakeInvisibleGasParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters)
         {
             MakeInvisibleParameters(isVisibleParameters,
                                     fmGlobalParameter.Tetta,
@@ -568,7 +567,7 @@ namespace FilterSimulation
                                     fmGlobalParameter.Vg);
         }
 
-        private void MakeInvisibleParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters,
+        private static void MakeInvisibleParameters(Dictionary<fmGlobalParameter, bool> isVisibleParameters,
                                  params fmGlobalParameter[] parameters)
         {
             foreach (fmGlobalParameter p in parameters)
@@ -577,7 +576,7 @@ namespace FilterSimulation
             }
         }
 
-        private void ShowHideRows(
+        private static void ShowHideRows(
             DataGridView dataGrid,
             int parameterColumnIndex,
             Dictionary<fmGlobalParameter, bool> isVisibleParameters)
@@ -592,12 +591,12 @@ namespace FilterSimulation
             }
         }
 
-        private void CopySimulationValuesToDeliquoringSremBlock(fmFilterSimulation sim)
+        private static void CopySimulationValuesToDeliquoringSremBlock(fmFilterSimulation sim)
         {
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
         }
 
-        private void CopySimulationValuesToDeliquoringSigmaBlock(fmFilterSimulation sim)
+        private static void CopySimulationValuesToDeliquoringSigmaBlock(fmFilterSimulation sim)
         {
             if (sim.deliquoringSigmaPkeBlock.rhoDetaDCalculationOption != sim.RhoDetaDCalculationOption)
             {
@@ -610,7 +609,7 @@ namespace FilterSimulation
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
         }
 
-        private void CopySimulationValuesToDeliquoringEps0dNedEpsdBlock(fmFilterSimulation sim)
+        private static void CopySimulationValuesToDeliquoringEps0DNedEpsdBlock(fmFilterSimulation sim)
         {
             if (sim.deliquoringEps0NeEpsBlock.hcdCalculationOption != sim.HcdEpsdCalculationOption)
             {
@@ -789,7 +788,7 @@ namespace FilterSimulation
                 }
 
             string prevVal = "";
-            bool cID = false;
+            bool cId = false;
 
             foreach (DataGridViewRow row in simSeriesDataGrid.Rows) if (row.Visible)
                 {
@@ -802,16 +801,16 @@ namespace FilterSimulation
                     }
 
                     string val = row.Cells[row.DataGridView.SortedColumn.Index].Value.ToString();
-                    cID ^= (prevVal == "" || prevVal != val);
+                    cId ^= (prevVal == "" || prevVal != val);
                     prevVal = val;
 
-                    Color rowColor = cID ? Color.White : Color.LightGray;
+                    Color rowColor = cId ? Color.White : Color.LightGray;
                     SetRowFontBoldOrRegular(row, serie.Modified ? FontStyle.Bold : FontStyle.Regular);
                     SetRowBackColor(row, rowColor);
                 }
 
             prevVal = "";
-            cID = false;
+            cId = false;
             foreach (DataGridViewRow row in simulationDataGrid.Rows) if (row.Visible)
                 {
                     var guid = (Guid)row.Cells[simulationGuidColumn.Index].Value;
@@ -823,7 +822,7 @@ namespace FilterSimulation
                     }
 
                     string val = row.Cells[row.DataGridView.SortedColumn.Index].Value.ToString();
-                    cID ^= (prevVal == "" || prevVal != val);
+                    cId ^= (prevVal == "" || prevVal != val);
                     prevVal = val;
 
                     SetRowFontBoldOrRegular(row, sim.Modified ? FontStyle.Bold : FontStyle.Regular);
@@ -962,7 +961,7 @@ namespace FilterSimulation
             }
         }
 
-        private void ApplyCurrentSerieRanges(fmFilterSimSolution sol)
+        private static void ApplyCurrentSerieRanges(fmFilterSimSolution sol)
         {
             if (sol.currentObjects.Serie != null)
             {
@@ -983,7 +982,7 @@ namespace FilterSimulation
 
         private void ShowHideSelectedParametersInSimulationDataGrid()
         {
-            fmParametersToDisplay whatToDisplayNow = new fmParametersToDisplay();
+            var whatToDisplayNow = new fmParametersToDisplay();
             if (Solution.currentObjects.Suspension != null)
             {
                 foreach (fmFilterSimSerie serie in Solution.currentObjects.Suspension.SimSeriesList)
@@ -1055,6 +1054,8 @@ namespace FilterSimulation
 
                 if (m_commonFilterMachiningBlock != null)
                 {
+                    commonCalcBlockParameterValueColumn.Visible = true;
+                    commonDeliquoringSimulationBlockParameterValueColumn.Visible = true;
                     m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.filterMachiningCalculationOption);
                     m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.deliquoringUsedCalculationOption);
                     m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.gasFlowrateUsedCalculationOption);
@@ -1078,6 +1079,11 @@ namespace FilterSimulation
                     m_commonFilterMachiningBlock.CalculateAndDisplay();
                 }
             }
+            else
+            {
+                commonCalcBlockParameterValueColumn.Visible = false;
+                commonDeliquoringSimulationBlockParameterValueColumn.Visible = false;
+            }
         }
 
 
@@ -1099,12 +1105,12 @@ namespace FilterSimulation
             }
             m_commonDeliquoringSimulationBlock.UpdateCellsStyle();
 
-            m_commonDeliquoringSimulationBlock.ValuesChangedByUser += commonDeliquoringSimulationBlock_ValuesChangedByUser;
+            m_commonDeliquoringSimulationBlock.ValuesChangedByUser += CommonDeliquoringSimulationBlockValuesChangedByUser;
 
             UpdateUnitsOfCommonDeliquoringSimulationBlock();
         }
 
-        private void commonDeliquoringSimulationBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+        private void CommonDeliquoringSimulationBlockValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         {
             fmFilterSimulation sim = Solution.currentObjects.Simulation;
             fmFilterSimulation.CopyVariableParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, sim);
@@ -1128,12 +1134,12 @@ namespace FilterSimulation
                 m_commonFilterMachiningBlock.AssignCell(p, parToCell[p.globalParameter]);
             }
 
-            m_commonFilterMachiningBlock.ValuesChangedByUser += commonFilterMachiningBlock_ValuesChangedByUser;
+            m_commonFilterMachiningBlock.ValuesChangedByUser += CommonFilterMachiningBlockValuesChangedByUser;
 
             UpdateUnitsOfCommonFilterMachiningBlock();
         }
 
-        void commonFilterMachiningBlock_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+        void CommonFilterMachiningBlockValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         {
             foreach (fmBlockVariableParameter p in m_commonFilterMachiningBlock.Parameters)
             {
@@ -1348,15 +1354,15 @@ namespace FilterSimulation
         void deliquoringSremTettaAdAgDHMmoleFPeqBlock_ValuesChanged(object sender)
         // ReSharper restore InconsistentNaming
         {
-            var deliquoringSremTettaAdAgDHRmMmoleFPeqBlock = sender as fmSremTettaAdAgDHRmMmoleFPeqBlock;
-            fmFilterSimulation sim = Solution.FindSimulation(deliquoringSremTettaAdAgDHRmMmoleFPeqBlock);
+            var deliquoringSremTettaAdAgDhRmMmoleFPeqBlock = sender as fmSremTettaAdAgDHRmMmoleFPeqBlock;
+            fmFilterSimulation sim = Solution.FindSimulation(deliquoringSremTettaAdAgDhRmMmoleFPeqBlock);
 
             if (sim == null) // when we keep or restore simulations we create new objects with new Guid, so susBlocks sometimes link to dead objects and we must to delete such links
             {
-                if (deliquoringSremTettaAdAgDHRmMmoleFPeqBlock != null)
+                if (deliquoringSremTettaAdAgDhRmMmoleFPeqBlock != null)
                 {
-                    deliquoringMaterialParametersDataGrid.CellValueChanged -= deliquoringSremTettaAdAgDHRmMmoleFPeqBlock.CellValueChanged;
-                    deliquoringSremTettaAdAgDHRmMmoleFPeqBlock.ValuesChanged -= deliquoringSremTettaAdAgDHMmoleFPeqBlock_ValuesChanged;
+                    deliquoringMaterialParametersDataGrid.CellValueChanged -= deliquoringSremTettaAdAgDhRmMmoleFPeqBlock.CellValueChanged;
+                    deliquoringSremTettaAdAgDhRmMmoleFPeqBlock.ValuesChanged -= deliquoringSremTettaAdAgDHMmoleFPeqBlock_ValuesChanged;
                 }
                 return;
             }
@@ -1381,9 +1387,7 @@ namespace FilterSimulation
 			DisplaySolution(Solution);
         }
 
-        // ReSharper disable InconsistentNaming
-        void deliquoringSigmaPkeBlock_ValuesChanged(object sender)
-        // ReSharper restore InconsistentNaming
+        void DeliquoringSigmaPkeBlockValuesChanged(object sender)
         {
             var deliquoringSigmaPkeBlock = sender as fmSigmaPke0PkePcdRcdAlphadBlock;
             fmFilterSimulation sim = Solution.FindSimulation(deliquoringSigmaPkeBlock);
@@ -1393,7 +1397,7 @@ namespace FilterSimulation
                 if (deliquoringSigmaPkeBlock != null)
                 {
                     deliquoringMaterialParametersDataGrid.CellValueChanged -= deliquoringSigmaPkeBlock.CellValueChanged;
-                    deliquoringSigmaPkeBlock.ValuesChanged -= deliquoringSigmaPkeBlock_ValuesChanged;
+                    deliquoringSigmaPkeBlock.ValuesChanged -= DeliquoringSigmaPkeBlockValuesChanged;
                 }
                 return;
             }
