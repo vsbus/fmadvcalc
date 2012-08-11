@@ -152,7 +152,7 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
 
             Solution.currentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, "Unnamed filter medium", "Unknown Machine Name");
             Solution.currentObjects.Simulation = curSim != null ? new fmFilterSimulation(Solution.currentObjects.Serie, curSim) : new fmFilterSimulation(Solution.currentObjects.Serie, "");
-            Solution.currentObjects.Simulation.Name = Solution.currentObjects.Serie.Name + "-1";
+            Solution.currentObjects.Simulation.SetName(Solution.currentObjects.Serie.GetName() + "-1");
             Solution.currentObjects.Serie.Keep();
             DisplaySolution(Solution);
             SortTables();
@@ -212,7 +212,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             string simName;
             for (int i = 1; ; ++i)
             {
-                simName = parentSerie.Name + "-" + i;
+                simName = parentSerie.GetName() + "-" + i;
                 if (Solution.FindSimulation(simName) == null)
                 {
                     break;
@@ -226,7 +226,8 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             else
             {
                 fmFilterSimulation currentSimulation = Solution.currentObjects.Simulation;
-                Solution.currentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, currentSimulation) { Name = simName };
+                Solution.currentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, currentSimulation);
+                Solution.currentObjects.Simulation.SetName(simName);
                 Solution.currentObjects.Simulation.Keep();
             }
 
@@ -313,9 +314,9 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
 
             Solution.currentObjects.Serie = new fmFilterSimSerie(currentSerie.Parent, currentSerie)
                                                    {
-                                                       Name = currentSerie.Name + "d",
                                                        ParametersToDisplay = currentSerie.ParametersToDisplay
                                                    };
+            Solution.currentObjects.Serie.SetName(currentSerie.GetName() + "d");
             Solution.currentObjects.Serie.Keep();
 
             DisplaySolution(Solution);

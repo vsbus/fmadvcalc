@@ -30,11 +30,11 @@ namespace FilterSimulation
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationControl));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationControl));
             this.byCheckingProjectsCheckBox = new System.Windows.Forms.CheckBox();
             this.byCheckingSuspensionsCheckBox = new System.Windows.Forms.CheckBox();
             this.byCheckingSimSeriesCheckBox = new System.Windows.Forms.CheckBox();
@@ -45,6 +45,11 @@ namespace FilterSimulation
             this.simSeriesPanel = new System.Windows.Forms.Panel();
             this.simulationDataGrid = new fmDataGrid.fmDataGrid();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.commentSimulationButton = new System.Windows.Forms.Button();
+            this.simulationDeleteButton = new System.Windows.Forms.Button();
+            this.simulationRestoreButton = new System.Windows.Forms.Button();
+            this.simulationDuplicateButton = new System.Windows.Forms.Button();
+            this.simulationCreateButton = new System.Windows.Forms.Button();
             this.splitter3 = new System.Windows.Forms.Splitter();
             this.topPanel = new System.Windows.Forms.Panel();
             this.projectSuspensionSerieSplitContainer = new System.Windows.Forms.SplitContainer();
@@ -55,6 +60,10 @@ namespace FilterSimulation
             this.projectCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.projectNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.commentProjectButton = new System.Windows.Forms.Button();
+            this.projectDeleteButton = new System.Windows.Forms.Button();
+            this.projectRestoreButton = new System.Windows.Forms.Button();
+            this.projectCreateButton = new System.Windows.Forms.Button();
             this.suspensionPanel = new System.Windows.Forms.Panel();
             this.suspensionDataGrid = new fmDataGrid.fmDataGrid();
             this.suspensionGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,6 +72,10 @@ namespace FilterSimulation
             this.suspensionCustomerColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.suspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.commentSuspensionButton = new System.Windows.Forms.Button();
+            this.suspensionDeleteButton = new System.Windows.Forms.Button();
+            this.suspensionRestoreButton = new System.Windows.Forms.Button();
+            this.suspensionCreateButton = new System.Windows.Forms.Button();
             this.machinePanel = new System.Windows.Forms.Panel();
             this.machineTypesDataGrid = new fmDataGrid.fmDataGrid();
             this.machineTypeCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -79,6 +92,11 @@ namespace FilterSimulation
             this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.SelectMachineButton = new System.Windows.Forms.Button();
+            this.commentSerieButton = new System.Windows.Forms.Button();
+            this.simSeriesDeleteButton = new System.Windows.Forms.Button();
+            this.simSeriesRestoreButton = new System.Windows.Forms.Button();
+            this.simSeriesDuplicateButton = new System.Windows.Forms.Button();
+            this.simSeriesCreateButton = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
             this.simulationGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -145,24 +163,6 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button4 = new System.Windows.Forms.Button();
-            this.simulationDeleteButton = new System.Windows.Forms.Button();
-            this.simulationRestoreButton = new System.Windows.Forms.Button();
-            this.simulationDuplicateButton = new System.Windows.Forms.Button();
-            this.simulationCreateButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.projectDeleteButton = new System.Windows.Forms.Button();
-            this.projectRestoreButton = new System.Windows.Forms.Button();
-            this.projectCreateButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.suspensionDeleteButton = new System.Windows.Forms.Button();
-            this.suspensionRestoreButton = new System.Windows.Forms.Button();
-            this.suspensionCreateButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.simSeriesDeleteButton = new System.Windows.Forms.Button();
-            this.simSeriesRestoreButton = new System.Windows.Forms.Button();
-            this.simSeriesDuplicateButton = new System.Windows.Forms.Button();
-            this.simSeriesCreateButton = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
@@ -335,7 +335,7 @@ namespace FilterSimulation
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.button4);
+            this.panel5.Controls.Add(this.commentSimulationButton);
             this.panel5.Controls.Add(this.simulationDeleteButton);
             this.panel5.Controls.Add(this.simulationRestoreButton);
             this.panel5.Controls.Add(this.simulationDuplicateButton);
@@ -347,6 +347,74 @@ namespace FilterSimulation
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(976, 20);
             this.panel5.TabIndex = 11;
+            // 
+            // commentSimulationButton
+            // 
+            this.commentSimulationButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.commentSimulationButton.FlatAppearance.BorderSize = 0;
+            this.commentSimulationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.commentSimulationButton.Image = ((System.Drawing.Image)(resources.GetObject("commentSimulationButton.Image")));
+            this.commentSimulationButton.Location = new System.Drawing.Point(228, 0);
+            this.commentSimulationButton.Name = "commentSimulationButton";
+            this.commentSimulationButton.Size = new System.Drawing.Size(20, 20);
+            this.commentSimulationButton.TabIndex = 12;
+            this.commentSimulationButton.UseVisualStyleBackColor = true;
+            this.commentSimulationButton.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // simulationDeleteButton
+            // 
+            this.simulationDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationDeleteButton.FlatAppearance.BorderSize = 0;
+            this.simulationDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simulationDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationDeleteButton.Image")));
+            this.simulationDeleteButton.Location = new System.Drawing.Point(208, 0);
+            this.simulationDeleteButton.Name = "simulationDeleteButton";
+            this.simulationDeleteButton.Size = new System.Drawing.Size(20, 20);
+            this.simulationDeleteButton.TabIndex = 10;
+            this.simulationDeleteButton.Text = " ";
+            this.simulationDeleteButton.UseVisualStyleBackColor = true;
+            this.simulationDeleteButton.Click += new System.EventHandler(this.simulationDeleteButton_Click);
+            // 
+            // simulationRestoreButton
+            // 
+            this.simulationRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationRestoreButton.FlatAppearance.BorderSize = 0;
+            this.simulationRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simulationRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationRestoreButton.Image")));
+            this.simulationRestoreButton.Location = new System.Drawing.Point(188, 0);
+            this.simulationRestoreButton.Name = "simulationRestoreButton";
+            this.simulationRestoreButton.Size = new System.Drawing.Size(20, 20);
+            this.simulationRestoreButton.TabIndex = 9;
+            this.simulationRestoreButton.Text = " ";
+            this.simulationRestoreButton.UseVisualStyleBackColor = true;
+            this.simulationRestoreButton.Click += new System.EventHandler(this.simulationRestoreButton_Click);
+            // 
+            // simulationDuplicateButton
+            // 
+            this.simulationDuplicateButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationDuplicateButton.FlatAppearance.BorderSize = 0;
+            this.simulationDuplicateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simulationDuplicateButton.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
+            this.simulationDuplicateButton.Location = new System.Drawing.Point(168, 0);
+            this.simulationDuplicateButton.Name = "simulationDuplicateButton";
+            this.simulationDuplicateButton.Size = new System.Drawing.Size(20, 20);
+            this.simulationDuplicateButton.TabIndex = 7;
+            this.simulationDuplicateButton.Text = " ";
+            this.simulationDuplicateButton.UseVisualStyleBackColor = true;
+            this.simulationDuplicateButton.Click += new System.EventHandler(this.simulationDuplicateButton_Click);
+            // 
+            // simulationCreateButton
+            // 
+            this.simulationCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationCreateButton.FlatAppearance.BorderSize = 0;
+            this.simulationCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simulationCreateButton.Image = global::FilterSimulation.Properties.Resources.page_white;
+            this.simulationCreateButton.Location = new System.Drawing.Point(148, 0);
+            this.simulationCreateButton.Name = "simulationCreateButton";
+            this.simulationCreateButton.Size = new System.Drawing.Size(20, 20);
+            this.simulationCreateButton.TabIndex = 11;
+            this.simulationCreateButton.UseVisualStyleBackColor = true;
+            this.simulationCreateButton.Click += new System.EventHandler(this.simulationCreateButton_Click);
             // 
             // splitter3
             // 
@@ -455,7 +523,6 @@ namespace FilterSimulation
             this.projectGuidColumn.ReadOnly = true;
             this.projectGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.projectGuidColumn.Visible = false;
-            this.projectGuidColumn.Width = 35;
             // 
             // projectCheckedColumn
             // 
@@ -471,7 +538,7 @@ namespace FilterSimulation
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button3);
+            this.panel1.Controls.Add(this.commentProjectButton);
             this.panel1.Controls.Add(this.projectDeleteButton);
             this.panel1.Controls.Add(this.projectRestoreButton);
             this.panel1.Controls.Add(this.projectCreateButton);
@@ -481,6 +548,59 @@ namespace FilterSimulation
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(173, 20);
             this.panel1.TabIndex = 6;
+            // 
+            // commentProjectButton
+            // 
+            this.commentProjectButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.commentProjectButton.FlatAppearance.BorderSize = 0;
+            this.commentProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.commentProjectButton.Image = ((System.Drawing.Image)(resources.GetObject("commentProjectButton.Image")));
+            this.commentProjectButton.Location = new System.Drawing.Point(145, 0);
+            this.commentProjectButton.Name = "commentProjectButton";
+            this.commentProjectButton.Size = new System.Drawing.Size(20, 20);
+            this.commentProjectButton.TabIndex = 6;
+            this.commentProjectButton.UseVisualStyleBackColor = true;
+            this.commentProjectButton.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // projectDeleteButton
+            // 
+            this.projectDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.projectDeleteButton.FlatAppearance.BorderSize = 0;
+            this.projectDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.projectDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("projectDeleteButton.Image")));
+            this.projectDeleteButton.Location = new System.Drawing.Point(125, 0);
+            this.projectDeleteButton.Name = "projectDeleteButton";
+            this.projectDeleteButton.Size = new System.Drawing.Size(20, 20);
+            this.projectDeleteButton.TabIndex = 5;
+            this.projectDeleteButton.UseVisualStyleBackColor = true;
+            this.projectDeleteButton.Click += new System.EventHandler(this.projectDelete_Click);
+            // 
+            // projectRestoreButton
+            // 
+            this.projectRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.projectRestoreButton.FlatAppearance.BorderSize = 0;
+            this.projectRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.projectRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("projectRestoreButton.Image")));
+            this.projectRestoreButton.Location = new System.Drawing.Point(105, 0);
+            this.projectRestoreButton.Name = "projectRestoreButton";
+            this.projectRestoreButton.Size = new System.Drawing.Size(20, 20);
+            this.projectRestoreButton.TabIndex = 3;
+            this.projectRestoreButton.UseVisualStyleBackColor = true;
+            this.projectRestoreButton.Click += new System.EventHandler(this.projectRestore_Click);
+            // 
+            // projectCreateButton
+            // 
+            this.projectCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.projectCreateButton.FlatAppearance.BorderSize = 0;
+            this.projectCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.projectCreateButton.Image = ((System.Drawing.Image)(resources.GetObject("projectCreateButton.Image")));
+            this.projectCreateButton.Location = new System.Drawing.Point(85, 0);
+            this.projectCreateButton.Name = "projectCreateButton";
+            this.projectCreateButton.Size = new System.Drawing.Size(20, 20);
+            this.projectCreateButton.TabIndex = 1;
+            this.projectCreateButton.Tag = "";
+            this.projectCreateButton.UseVisualStyleBackColor = true;
+            this.projectCreateButton.Click += new System.EventHandler(this.projectCreateButton_Click);
             // 
             // suspensionPanel
             // 
@@ -537,7 +657,6 @@ namespace FilterSimulation
             this.suspensionGuidColumn.ReadOnly = true;
             this.suspensionGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.suspensionGuidColumn.Visible = false;
-            this.suspensionGuidColumn.Width = 35;
             // 
             // suspensionCheckedColumn
             // 
@@ -566,7 +685,7 @@ namespace FilterSimulation
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.commentSuspensionButton);
             this.panel2.Controls.Add(this.suspensionDeleteButton);
             this.panel2.Controls.Add(this.suspensionRestoreButton);
             this.panel2.Controls.Add(this.suspensionCreateButton);
@@ -576,6 +695,61 @@ namespace FilterSimulation
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(358, 20);
             this.panel2.TabIndex = 6;
+            // 
+            // commentSuspensionButton
+            // 
+            this.commentSuspensionButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.commentSuspensionButton.FlatAppearance.BorderSize = 0;
+            this.commentSuspensionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.commentSuspensionButton.Image = ((System.Drawing.Image)(resources.GetObject("commentSuspensionButton.Image")));
+            this.commentSuspensionButton.Location = new System.Drawing.Point(145, 0);
+            this.commentSuspensionButton.Name = "commentSuspensionButton";
+            this.commentSuspensionButton.Size = new System.Drawing.Size(20, 20);
+            this.commentSuspensionButton.TabIndex = 6;
+            this.commentSuspensionButton.UseVisualStyleBackColor = true;
+            this.commentSuspensionButton.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // suspensionDeleteButton
+            // 
+            this.suspensionDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.suspensionDeleteButton.FlatAppearance.BorderSize = 0;
+            this.suspensionDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.suspensionDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("suspensionDeleteButton.Image")));
+            this.suspensionDeleteButton.Location = new System.Drawing.Point(125, 0);
+            this.suspensionDeleteButton.Name = "suspensionDeleteButton";
+            this.suspensionDeleteButton.Size = new System.Drawing.Size(20, 20);
+            this.suspensionDeleteButton.TabIndex = 5;
+            this.suspensionDeleteButton.Text = " ";
+            this.suspensionDeleteButton.UseVisualStyleBackColor = true;
+            this.suspensionDeleteButton.Click += new System.EventHandler(this.suspensionDeleteButton_Click);
+            // 
+            // suspensionRestoreButton
+            // 
+            this.suspensionRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.suspensionRestoreButton.FlatAppearance.BorderSize = 0;
+            this.suspensionRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.suspensionRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("suspensionRestoreButton.Image")));
+            this.suspensionRestoreButton.Location = new System.Drawing.Point(105, 0);
+            this.suspensionRestoreButton.Name = "suspensionRestoreButton";
+            this.suspensionRestoreButton.Size = new System.Drawing.Size(20, 20);
+            this.suspensionRestoreButton.TabIndex = 4;
+            this.suspensionRestoreButton.Text = " ";
+            this.suspensionRestoreButton.UseVisualStyleBackColor = true;
+            this.suspensionRestoreButton.Click += new System.EventHandler(this.suspensionRestoreButton_Click);
+            // 
+            // suspensionCreateButton
+            // 
+            this.suspensionCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.suspensionCreateButton.FlatAppearance.BorderSize = 0;
+            this.suspensionCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.suspensionCreateButton.Image = ((System.Drawing.Image)(resources.GetObject("suspensionCreateButton.Image")));
+            this.suspensionCreateButton.Location = new System.Drawing.Point(85, 0);
+            this.suspensionCreateButton.Name = "suspensionCreateButton";
+            this.suspensionCreateButton.Size = new System.Drawing.Size(20, 20);
+            this.suspensionCreateButton.TabIndex = 2;
+            this.suspensionCreateButton.Text = " ";
+            this.suspensionCreateButton.UseVisualStyleBackColor = true;
+            this.suspensionCreateButton.Click += new System.EventHandler(this.suspensionCreateButton_Click);
             // 
             // machinePanel
             // 
@@ -693,7 +867,6 @@ namespace FilterSimulation
             this.simSeriesGuidColumn.ReadOnly = true;
             this.simSeriesGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.simSeriesGuidColumn.Visible = false;
-            this.simSeriesGuidColumn.Width = 35;
             // 
             // simSeriesNameColumn
             // 
@@ -738,7 +911,7 @@ namespace FilterSimulation
             // panel3
             // 
             this.panel3.Controls.Add(this.SelectMachineButton);
-            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.commentSerieButton);
             this.panel3.Controls.Add(this.simSeriesDeleteButton);
             this.panel3.Controls.Add(this.simSeriesRestoreButton);
             this.panel3.Controls.Add(this.simSeriesDuplicateButton);
@@ -762,6 +935,74 @@ namespace FilterSimulation
             this.SelectMachineButton.Text = "Filter Types";
             this.SelectMachineButton.UseVisualStyleBackColor = true;
             this.SelectMachineButton.Click += new System.EventHandler(this.SelectMachineButtonClick);
+            // 
+            // commentSerieButton
+            // 
+            this.commentSerieButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.commentSerieButton.FlatAppearance.BorderSize = 0;
+            this.commentSerieButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.commentSerieButton.Image = ((System.Drawing.Image)(resources.GetObject("commentSerieButton.Image")));
+            this.commentSerieButton.Location = new System.Drawing.Point(165, 0);
+            this.commentSerieButton.Name = "commentSerieButton";
+            this.commentSerieButton.Size = new System.Drawing.Size(20, 20);
+            this.commentSerieButton.TabIndex = 8;
+            this.commentSerieButton.UseVisualStyleBackColor = true;
+            this.commentSerieButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // simSeriesDeleteButton
+            // 
+            this.simSeriesDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simSeriesDeleteButton.FlatAppearance.BorderSize = 0;
+            this.simSeriesDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simSeriesDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("simSeriesDeleteButton.Image")));
+            this.simSeriesDeleteButton.Location = new System.Drawing.Point(145, 0);
+            this.simSeriesDeleteButton.Name = "simSeriesDeleteButton";
+            this.simSeriesDeleteButton.Size = new System.Drawing.Size(20, 20);
+            this.simSeriesDeleteButton.TabIndex = 5;
+            this.simSeriesDeleteButton.Text = " ";
+            this.simSeriesDeleteButton.UseVisualStyleBackColor = true;
+            this.simSeriesDeleteButton.Click += new System.EventHandler(this.simSeriesDeleteButton_Click);
+            // 
+            // simSeriesRestoreButton
+            // 
+            this.simSeriesRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simSeriesRestoreButton.FlatAppearance.BorderSize = 0;
+            this.simSeriesRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simSeriesRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("simSeriesRestoreButton.Image")));
+            this.simSeriesRestoreButton.Location = new System.Drawing.Point(125, 0);
+            this.simSeriesRestoreButton.Name = "simSeriesRestoreButton";
+            this.simSeriesRestoreButton.Size = new System.Drawing.Size(20, 20);
+            this.simSeriesRestoreButton.TabIndex = 4;
+            this.simSeriesRestoreButton.Text = " ";
+            this.simSeriesRestoreButton.UseVisualStyleBackColor = true;
+            this.simSeriesRestoreButton.Click += new System.EventHandler(this.simSeriesRestoreButton_Click);
+            // 
+            // simSeriesDuplicateButton
+            // 
+            this.simSeriesDuplicateButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simSeriesDuplicateButton.FlatAppearance.BorderSize = 0;
+            this.simSeriesDuplicateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simSeriesDuplicateButton.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
+            this.simSeriesDuplicateButton.Location = new System.Drawing.Point(105, 0);
+            this.simSeriesDuplicateButton.Name = "simSeriesDuplicateButton";
+            this.simSeriesDuplicateButton.Size = new System.Drawing.Size(20, 20);
+            this.simSeriesDuplicateButton.TabIndex = 6;
+            this.simSeriesDuplicateButton.UseVisualStyleBackColor = true;
+            this.simSeriesDuplicateButton.Click += new System.EventHandler(this.duplicateSerieButton_Click);
+            // 
+            // simSeriesCreateButton
+            // 
+            this.simSeriesCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simSeriesCreateButton.FlatAppearance.BorderSize = 0;
+            this.simSeriesCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simSeriesCreateButton.Image = ((System.Drawing.Image)(resources.GetObject("simSeriesCreateButton.Image")));
+            this.simSeriesCreateButton.Location = new System.Drawing.Point(85, 0);
+            this.simSeriesCreateButton.Name = "simSeriesCreateButton";
+            this.simSeriesCreateButton.Size = new System.Drawing.Size(20, 20);
+            this.simSeriesCreateButton.TabIndex = 2;
+            this.simSeriesCreateButton.Text = " ";
+            this.simSeriesCreateButton.UseVisualStyleBackColor = true;
+            this.simSeriesCreateButton.Click += new System.EventHandler(this.simSerieCreate_Click);
             // 
             // splitter2
             // 
@@ -1356,246 +1597,6 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
             // 
-            // button4
-            // 
-            this.button4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(228, 0);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(20, 20);
-            this.button4.TabIndex = 12;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // simulationDeleteButton
-            // 
-            this.simulationDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationDeleteButton.FlatAppearance.BorderSize = 0;
-            this.simulationDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simulationDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationDeleteButton.Image")));
-            this.simulationDeleteButton.Location = new System.Drawing.Point(208, 0);
-            this.simulationDeleteButton.Name = "simulationDeleteButton";
-            this.simulationDeleteButton.Size = new System.Drawing.Size(20, 20);
-            this.simulationDeleteButton.TabIndex = 10;
-            this.simulationDeleteButton.Text = " ";
-            this.simulationDeleteButton.UseVisualStyleBackColor = true;
-            this.simulationDeleteButton.Click += new System.EventHandler(this.simulationDeleteButton_Click);
-            // 
-            // simulationRestoreButton
-            // 
-            this.simulationRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationRestoreButton.FlatAppearance.BorderSize = 0;
-            this.simulationRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simulationRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationRestoreButton.Image")));
-            this.simulationRestoreButton.Location = new System.Drawing.Point(188, 0);
-            this.simulationRestoreButton.Name = "simulationRestoreButton";
-            this.simulationRestoreButton.Size = new System.Drawing.Size(20, 20);
-            this.simulationRestoreButton.TabIndex = 9;
-            this.simulationRestoreButton.Text = " ";
-            this.simulationRestoreButton.UseVisualStyleBackColor = true;
-            this.simulationRestoreButton.Click += new System.EventHandler(this.simulationRestoreButton_Click);
-            // 
-            // simulationDuplicateButton
-            // 
-            this.simulationDuplicateButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationDuplicateButton.FlatAppearance.BorderSize = 0;
-            this.simulationDuplicateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simulationDuplicateButton.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
-            this.simulationDuplicateButton.Location = new System.Drawing.Point(168, 0);
-            this.simulationDuplicateButton.Name = "simulationDuplicateButton";
-            this.simulationDuplicateButton.Size = new System.Drawing.Size(20, 20);
-            this.simulationDuplicateButton.TabIndex = 7;
-            this.simulationDuplicateButton.Text = " ";
-            this.simulationDuplicateButton.UseVisualStyleBackColor = true;
-            this.simulationDuplicateButton.Click += new System.EventHandler(this.simulationDuplicateButton_Click);
-            // 
-            // simulationCreateButton
-            // 
-            this.simulationCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simulationCreateButton.FlatAppearance.BorderSize = 0;
-            this.simulationCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simulationCreateButton.Image = global::FilterSimulation.Properties.Resources.page_white;
-            this.simulationCreateButton.Location = new System.Drawing.Point(148, 0);
-            this.simulationCreateButton.Name = "simulationCreateButton";
-            this.simulationCreateButton.Size = new System.Drawing.Size(20, 20);
-            this.simulationCreateButton.TabIndex = 11;
-            this.simulationCreateButton.UseVisualStyleBackColor = true;
-            this.simulationCreateButton.Click += new System.EventHandler(this.simulationCreateButton_Click);
-            // 
-            // button3
-            // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(145, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(20, 20);
-            this.button3.TabIndex = 6;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // projectDeleteButton
-            // 
-            this.projectDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.projectDeleteButton.FlatAppearance.BorderSize = 0;
-            this.projectDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.projectDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("projectDeleteButton.Image")));
-            this.projectDeleteButton.Location = new System.Drawing.Point(125, 0);
-            this.projectDeleteButton.Name = "projectDeleteButton";
-            this.projectDeleteButton.Size = new System.Drawing.Size(20, 20);
-            this.projectDeleteButton.TabIndex = 5;
-            this.projectDeleteButton.UseVisualStyleBackColor = true;
-            this.projectDeleteButton.Click += new System.EventHandler(this.projectDelete_Click);
-            // 
-            // projectRestoreButton
-            // 
-            this.projectRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.projectRestoreButton.FlatAppearance.BorderSize = 0;
-            this.projectRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.projectRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("projectRestoreButton.Image")));
-            this.projectRestoreButton.Location = new System.Drawing.Point(105, 0);
-            this.projectRestoreButton.Name = "projectRestoreButton";
-            this.projectRestoreButton.Size = new System.Drawing.Size(20, 20);
-            this.projectRestoreButton.TabIndex = 3;
-            this.projectRestoreButton.UseVisualStyleBackColor = true;
-            this.projectRestoreButton.Click += new System.EventHandler(this.projectRestore_Click);
-            // 
-            // projectCreateButton
-            // 
-            this.projectCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.projectCreateButton.FlatAppearance.BorderSize = 0;
-            this.projectCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.projectCreateButton.Image = ((System.Drawing.Image)(resources.GetObject("projectCreateButton.Image")));
-            this.projectCreateButton.Location = new System.Drawing.Point(85, 0);
-            this.projectCreateButton.Name = "projectCreateButton";
-            this.projectCreateButton.Size = new System.Drawing.Size(20, 20);
-            this.projectCreateButton.TabIndex = 1;
-            this.projectCreateButton.Tag = "";
-            this.projectCreateButton.UseVisualStyleBackColor = true;
-            this.projectCreateButton.Click += new System.EventHandler(this.projectCreateButton_Click);
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(145, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(20, 20);
-            this.button2.TabIndex = 6;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // suspensionDeleteButton
-            // 
-            this.suspensionDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.suspensionDeleteButton.FlatAppearance.BorderSize = 0;
-            this.suspensionDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.suspensionDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("suspensionDeleteButton.Image")));
-            this.suspensionDeleteButton.Location = new System.Drawing.Point(125, 0);
-            this.suspensionDeleteButton.Name = "suspensionDeleteButton";
-            this.suspensionDeleteButton.Size = new System.Drawing.Size(20, 20);
-            this.suspensionDeleteButton.TabIndex = 5;
-            this.suspensionDeleteButton.Text = " ";
-            this.suspensionDeleteButton.UseVisualStyleBackColor = true;
-            this.suspensionDeleteButton.Click += new System.EventHandler(this.suspensionDeleteButton_Click);
-            // 
-            // suspensionRestoreButton
-            // 
-            this.suspensionRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.suspensionRestoreButton.FlatAppearance.BorderSize = 0;
-            this.suspensionRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.suspensionRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("suspensionRestoreButton.Image")));
-            this.suspensionRestoreButton.Location = new System.Drawing.Point(105, 0);
-            this.suspensionRestoreButton.Name = "suspensionRestoreButton";
-            this.suspensionRestoreButton.Size = new System.Drawing.Size(20, 20);
-            this.suspensionRestoreButton.TabIndex = 4;
-            this.suspensionRestoreButton.Text = " ";
-            this.suspensionRestoreButton.UseVisualStyleBackColor = true;
-            this.suspensionRestoreButton.Click += new System.EventHandler(this.suspensionRestoreButton_Click);
-            // 
-            // suspensionCreateButton
-            // 
-            this.suspensionCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.suspensionCreateButton.FlatAppearance.BorderSize = 0;
-            this.suspensionCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.suspensionCreateButton.Image = ((System.Drawing.Image)(resources.GetObject("suspensionCreateButton.Image")));
-            this.suspensionCreateButton.Location = new System.Drawing.Point(85, 0);
-            this.suspensionCreateButton.Name = "suspensionCreateButton";
-            this.suspensionCreateButton.Size = new System.Drawing.Size(20, 20);
-            this.suspensionCreateButton.TabIndex = 2;
-            this.suspensionCreateButton.Text = " ";
-            this.suspensionCreateButton.UseVisualStyleBackColor = true;
-            this.suspensionCreateButton.Click += new System.EventHandler(this.suspensionCreateButton_Click);
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(165, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(20, 20);
-            this.button1.TabIndex = 8;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // simSeriesDeleteButton
-            // 
-            this.simSeriesDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simSeriesDeleteButton.FlatAppearance.BorderSize = 0;
-            this.simSeriesDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simSeriesDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("simSeriesDeleteButton.Image")));
-            this.simSeriesDeleteButton.Location = new System.Drawing.Point(145, 0);
-            this.simSeriesDeleteButton.Name = "simSeriesDeleteButton";
-            this.simSeriesDeleteButton.Size = new System.Drawing.Size(20, 20);
-            this.simSeriesDeleteButton.TabIndex = 5;
-            this.simSeriesDeleteButton.Text = " ";
-            this.simSeriesDeleteButton.UseVisualStyleBackColor = true;
-            this.simSeriesDeleteButton.Click += new System.EventHandler(this.simSeriesDeleteButton_Click);
-            // 
-            // simSeriesRestoreButton
-            // 
-            this.simSeriesRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simSeriesRestoreButton.FlatAppearance.BorderSize = 0;
-            this.simSeriesRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simSeriesRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("simSeriesRestoreButton.Image")));
-            this.simSeriesRestoreButton.Location = new System.Drawing.Point(125, 0);
-            this.simSeriesRestoreButton.Name = "simSeriesRestoreButton";
-            this.simSeriesRestoreButton.Size = new System.Drawing.Size(20, 20);
-            this.simSeriesRestoreButton.TabIndex = 4;
-            this.simSeriesRestoreButton.Text = " ";
-            this.simSeriesRestoreButton.UseVisualStyleBackColor = true;
-            this.simSeriesRestoreButton.Click += new System.EventHandler(this.simSeriesRestoreButton_Click);
-            // 
-            // simSeriesDuplicateButton
-            // 
-            this.simSeriesDuplicateButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simSeriesDuplicateButton.FlatAppearance.BorderSize = 0;
-            this.simSeriesDuplicateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simSeriesDuplicateButton.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
-            this.simSeriesDuplicateButton.Location = new System.Drawing.Point(105, 0);
-            this.simSeriesDuplicateButton.Name = "simSeriesDuplicateButton";
-            this.simSeriesDuplicateButton.Size = new System.Drawing.Size(20, 20);
-            this.simSeriesDuplicateButton.TabIndex = 6;
-            this.simSeriesDuplicateButton.UseVisualStyleBackColor = true;
-            this.simSeriesDuplicateButton.Click += new System.EventHandler(this.duplicateSerieButton_Click);
-            // 
-            // simSeriesCreateButton
-            // 
-            this.simSeriesCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.simSeriesCreateButton.FlatAppearance.BorderSize = 0;
-            this.simSeriesCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simSeriesCreateButton.Image = ((System.Drawing.Image)(resources.GetObject("simSeriesCreateButton.Image")));
-            this.simSeriesCreateButton.Location = new System.Drawing.Point(85, 0);
-            this.simSeriesCreateButton.Name = "simSeriesCreateButton";
-            this.simSeriesCreateButton.Size = new System.Drawing.Size(20, 20);
-            this.simSeriesCreateButton.TabIndex = 2;
-            this.simSeriesCreateButton.Text = " ";
-            this.simSeriesCreateButton.UseVisualStyleBackColor = true;
-            this.simSeriesCreateButton.Click += new System.EventHandler(this.simSerieCreate_Click);
-            // 
             // fmFilterSimulationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1777,9 +1778,9 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesFilterMediumColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineTypeNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineNameColumn;
-        protected System.Windows.Forms.Button button4;
-        protected System.Windows.Forms.Button button3;
-        protected System.Windows.Forms.Button button2;
-        protected System.Windows.Forms.Button button1;
+        protected System.Windows.Forms.Button commentSimulationButton;
+        protected System.Windows.Forms.Button commentProjectButton;
+        protected System.Windows.Forms.Button commentSuspensionButton;
+        protected System.Windows.Forms.Button commentSerieButton;
     }
 }

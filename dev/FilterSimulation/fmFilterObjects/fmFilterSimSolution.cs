@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using FilterSimulation.fmFilterObjects.Interfaces;
 using fmCalcBlocksLibrary.Blocks;
 using System.Xml;
 using fmCalculationLibrary;
@@ -113,7 +114,7 @@ namespace FilterSimulation.fmFilterObjects
         {
             foreach (fmFilterSimSerie serie in GetAllSeries())
             {
-                if (serie.Name == serieName)
+                if (serie.GetName() == serieName)
                 {
                     return serie;
                 }
@@ -163,7 +164,7 @@ namespace FilterSimulation.fmFilterObjects
         public fmFilterSimulation FindSimulation(string simName)
         {
             foreach (fmFilterSimulation sim in GetAllSimulations())
-                if (sim.Name == simName)
+                if (sim.GetName() == simName)
                     return sim;
             return null;
         }

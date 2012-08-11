@@ -172,7 +172,7 @@ namespace FilterSimulation
                 if (proj == null) continue;
 
                 row.Cells[projectCheckedColumn.Index].Value = proj.Checked;
-                row.Cells[projectNameColumn.Index].Value = proj.Name;
+                row.Cells[projectNameColumn.Index].Value = proj.GetName();
             }
 
             foreach (DataGridViewRow row in suspensionDataGrid.Rows)
@@ -182,7 +182,7 @@ namespace FilterSimulation
                 if (sus == null) continue;
 
                 row.Cells[suspensionCheckedColumn.Index].Value = sus.Checked;
-                row.Cells[suspensionNameColumn.Index].Value = sus.Name;
+                row.Cells[suspensionNameColumn.Index].Value = sus.GetName();
                 row.Cells[suspensionMaterialColumn.Index].Value = sus.Material;
                 row.Cells[suspensionCustomerColumn.Index].Value = sus.Customer;
             }
@@ -194,9 +194,9 @@ namespace FilterSimulation
                 if (serie == null) continue;
 
                 row.Cells[simSeriesCheckedColumn.Index].Value = serie.Checked;
-                row.Cells[simSeriesNameColumn.Index].Value = serie.Name;
-                row.Cells[simSeriesProjectColumn.Index].Value = serie.Parent.Parent.Name;
-                row.Cells[simSeriesSuspensionNameColumn.Index].Value = serie.Parent.Material + " - " + serie.Parent.Customer + " - " + serie.Parent.Name;
+                row.Cells[simSeriesNameColumn.Index].Value = serie.GetName();
+                row.Cells[simSeriesProjectColumn.Index].Value = serie.Parent.Parent.GetName();
+                row.Cells[simSeriesSuspensionNameColumn.Index].Value = serie.Parent.Material + " - " + serie.Parent.Customer + " - " + serie.Parent.GetName();
                 row.Cells[simSeriesFilterMediumColumn.Index].Value = serie.FilterMedium;
                 row.Cells[simSeriesMachineTypeNameColumn.Index].Value = serie.MachineType.name;
                 row.Cells[simSeriesMachineNameColumn.Index].Value = serie.MachineName;
@@ -209,13 +209,13 @@ namespace FilterSimulation
                 if (sim == null) continue;
 
                 row.Cells[simulationCheckedColumn.Index].Value = sim.Checked;
-                row.Cells[simulationProjectColumn.Index].Value = sim.Parent.Parent.Parent.Name;
-                row.Cells[simulationSuspensionNameColumn.Index].Value = sim.Parent.Parent.Material + " - " + sim.Parent.Parent.Customer + " - " + sim.Parent.Parent.Name;
+                row.Cells[simulationProjectColumn.Index].Value = sim.Parent.Parent.Parent.GetName();
+                row.Cells[simulationSuspensionNameColumn.Index].Value = sim.Parent.Parent.Material + " - " + sim.Parent.Parent.Customer + " - " + sim.Parent.Parent.GetName();
                 row.Cells[simulationFilterMediumColumn.Index].Value = sim.Parent.FilterMedium;
                 row.Cells[simulationMachineTypeColumn.Index].Value = sim.Parent.MachineType.name;
                 row.Cells[simulationMachineNameColumn.Index].Value = sim.Parent.MachineName;
-                row.Cells[simulationSimSeriesNameColumn.Index].Value = sim.Parent.Name;
-                row.Cells[simulationNameColumn.Index].Value = sim.Name;
+                row.Cells[simulationSimSeriesNameColumn.Index].Value = sim.Parent.GetName();
+                row.Cells[simulationNameColumn.Index].Value = sim.GetName();
 
                 sim.filterMachiningBlock.CalculateAndDisplay();
                 

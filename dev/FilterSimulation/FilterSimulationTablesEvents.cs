@@ -23,7 +23,7 @@ namespace FilterSimulation
                 {
                     SetRowFontBoldOrRegular(row, FontStyle.Bold);
                     prj = Solution.FindProject((Guid)guidCellValue);
-                    prj.Name = Convert.ToString(row.Cells["projectNameColumn"].Value);
+                    prj.SetName(Convert.ToString(row.Cells["projectNameColumn"].Value));
                 }
                 else if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["projectCheckedColumn"].Index)
                 {
@@ -55,7 +55,7 @@ namespace FilterSimulation
                     sus = Solution.FindSuspension((Guid)guidCellValue);
 
                     if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["suspensionNameColumn"].Index)
-                        sus.Name = Convert.ToString(row.Cells["suspensionNameColumn"].Value);
+                        sus.SetName(Convert.ToString(row.Cells["suspensionNameColumn"].Value));
 
                     if (e.ColumnIndex == (sender as fmDataGrid.fmDataGrid).Columns["suspensionMaterialColumn"].Index)
                         sus.Material = Convert.ToString(row.Cells["suspensionMaterialColumn"].Value);
@@ -92,7 +92,7 @@ namespace FilterSimulation
                     serie = Solution.FindSerie((Guid)guidCellValue);
 
                     if (e.ColumnIndex == ((fmDataGrid.fmDataGrid)sender).Columns["simSeriesNameColumn"].Index)
-                        serie.Name = Convert.ToString(row.Cells["simSeriesNameColumn"].Value);
+                        serie.SetName(Convert.ToString(row.Cells["simSeriesNameColumn"].Value));
 
                     if (e.ColumnIndex == ((fmDataGrid.fmDataGrid)sender).Columns["simSeriesFilterMediumColumn"].Index)
                         serie.FilterMedium = Convert.ToString(row.Cells["simSeriesFilterMediumColumn"].Value);
@@ -132,7 +132,7 @@ namespace FilterSimulation
                     sim = Solution.FindSimulation((Guid)guidCellValue);
 
                     if (e.ColumnIndex == dataGrid.Columns["simulationNameColumn"].Index)
-                        sim.Name = Convert.ToString(row.Cells["simulationNameColumn"].Value);
+                        sim.SetName(Convert.ToString(row.Cells["simulationNameColumn"].Value));
                     else
                         return;
                 }

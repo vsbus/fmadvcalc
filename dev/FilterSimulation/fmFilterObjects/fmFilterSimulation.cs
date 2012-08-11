@@ -5,12 +5,14 @@ using fmCalculationLibrary;
 using System.Collections.Generic;
 using fmCalculatorsLibrary;
 using System.Xml;
+using FilterSimulation.fmFilterObjects.Interfaces;
 
 namespace FilterSimulation.fmFilterObjects
 {
     public class fmFilterSimulationData
     {
         public string name;
+        public string comments;
         public Dictionary<fmGlobalParameter, fmCalculationBaseParameter> parameters = new Dictionary<fmGlobalParameter, fmCalculationBaseParameter>();
         public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
         public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
@@ -25,6 +27,7 @@ namespace FilterSimulation.fmFilterObjects
         public void CopyFrom(fmFilterSimulationData from)
         {
             name = from.name;
+            comments = from.comments;
             filterMachiningCalculationOption = from.filterMachiningCalculationOption;
             deliquoringUsedCalculationOption = from.deliquoringUsedCalculationOption;
             gasFlowrateUsedCalculationOption = from.gasFlowrateUsedCalculationOption;
@@ -575,7 +578,7 @@ namespace FilterSimulation.fmFilterObjects
         }
     }
 
-    public class fmFilterSimulation
+    public class fmFilterSimulation : IComments
     {
         private fmFilterSimSerie m_parentSerie;
         private readonly fmFilterSimulationData m_data = new fmFilterSimulationData();
@@ -594,18 +597,6 @@ namespace FilterSimulation.fmFilterObjects
         
         public Guid Guid { get; set; }
 
-        public string Name
-        {
-            get { return m_data.name; }
-            set 
-            {
-                if (m_data.name != value)
-                {
-                    Modified = true;
-                }
-                m_data.name = value;
-            }
-        }
         public bool Modified
         {
             get { return m_modified; }
@@ -911,12 +902,14 @@ namespace FilterSimulation.fmFilterObjects
         {
             public const string Simulation = "Simulation";
             public const string Checked = "m_checked";
+            public const string Comments = "Comments";
         }
 
         internal void Serialize(XmlWriter writer)
         {
             writer.WriteStartElement(fmFilterSimulationSerializeTags.Simulation);
             writer.WriteElementString(fmFilterSimulationSerializeTags.Checked, m_checked.ToString());
+            writer.WriteElementString(fmFilterSimulationSerializeTags.Comments, GetComments());
             m_data.Serialize(writer);
             writer.WriteEndElement();
         }
@@ -931,7 +924,8 @@ namespace FilterSimulation.fmFilterObjects
                 fmFilterSimulationData.Deserialize(
                     xmlNode.SelectSingleNode(
                         fmFilterSimulationData.fmFilterSimulationDataSerializeTags.FilterSimulationData));
-            sim.Name = simData.name;
+            sim.SetName(simData.name);
+            sim.SetComments(xmlNode.SelectSingleNode(fmFilterSimulationSerializeTags.Comments).InnerText);
             sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
             sim.DeliquoringUsedCalculationOption = simData.deliquoringUsedCalculationOption;
             sim.GasFlowrateUsedCalculationOption = simData.gasFlowrateUsedCalculationOption;
@@ -947,5 +941,42 @@ namespace FilterSimulation.fmFilterObjects
             }
             return sim;
         }
+
+        #region IComments Members
+
+        public string GetComments()
+        {
+            return m_data.comments;
+        }
+
+        public void SetComments(string comments)
+        {
+            if (m_data.comments != comments)
+            {
+                Modified = true;
+            }
+            m_data.comments = comments;
+        }
+
+        #endregion
+
+        #region IName Members
+
+        public string GetName()
+        {
+            return m_data.name;
+        }
+
+
+        public void SetName(string name)
+        {
+            if (m_data.name != name)
+            {
+                Modified = true;
+            }
+            m_data.name = name;
+        }
+
+        #endregion
     }
 }

@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using FilterSimulation.fmFilterObjects;
+using FilterSimulation.fmFilterObjects.Interfaces;
 using fmCalculationLibrary;
 using fmCalculationLibrary.MeasureUnits;
 using fmCalculatorsLibrary;
 using System.Xml;
+using fmControls;
 using fmMisc;
 using RangesDictionary = System.Collections.Generic.Dictionary<fmCalculationLibrary.fmGlobalParameter, fmCalculationLibrary.fmDefaultParameterRange>;
 
@@ -611,7 +613,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             string simName;
             for (int i = 1; ; ++i)
             {
-                simName = parentSerie.Name + "-" + i;
+                simName = parentSerie.GetName() + "-" + i;
                 if (Solution.FindSimulation(simName) == null)
                 {
                     break;
@@ -711,6 +713,45 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 Solution.currentObjects.Serie.MachineType = dialog.GetSelectedType();
                 DisplaySolution(Solution);
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            RunCommentsWindow(Solution.currentObjects.Project, "Project");
+        }
+
+        private void RunCommentsWindow(IComments item, string itemIdName)
+        {
+            if (item == null)
+            {
+                MessageBox.Show("Impossible to open comments window when no " + itemIdName + " selected.");
+                return;
+            }
+
+            var commentWindow = new CommentsWindow();
+            commentWindow.SetCommentedObjectName(itemIdName + " " + item.GetName());
+            commentWindow.SetCommentText(item.GetComments());
+            if (commentWindow.ShowDialog() == DialogResult.OK)
+            {
+                item.SetComments(commentWindow.GetCommentText());
+            }
+
+            DisplaySolution(Solution);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            RunCommentsWindow(Solution.currentObjects.Suspension, "Suspension");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RunCommentsWindow(Solution.currentObjects.Serie, "Serie");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            RunCommentsWindow(Solution.currentObjects.Simulation, "Simulation");
         }
     }
 }

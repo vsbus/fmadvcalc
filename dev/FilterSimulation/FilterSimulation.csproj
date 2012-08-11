@@ -81,6 +81,8 @@
     <Compile Include="fmFilterObjects\fmFilterSimSuspension.cs" />
     <Compile Include="fmFilterObjects\fmFilterSimulation.cs" />
     <Compile Include="fmFilterObjects\fmSerializeTools.cs" />
+    <Compile Include="fmFilterObjects\Interfaces\IComments.cs" />
+    <Compile Include="fmFilterObjects\Interfaces\IName.cs" />
     <Compile Include="fmRangesSchema.cs" />
     <Compile Include="fmShowHideSchema.cs" />
     <Compile Include="fmSimCalcOptionControl.cs" />

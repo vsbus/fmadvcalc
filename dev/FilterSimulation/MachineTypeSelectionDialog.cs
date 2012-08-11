@@ -30,7 +30,7 @@ namespace FilterSimulation
 
         internal void AssignSerie(FilterSimulation.fmFilterObjects.fmFilterSimSerie serie)
         {
-            serieTextBox.Text = serie.Name + " - " + serie.Parent.Name;
+            serieTextBox.Text = serie.GetName() + " - " + serie.Parent.GetName();
             foreach (var item in machineTypesComboBox.Items)
             {
                 if (item.ToString() == serie.MachineType.name)

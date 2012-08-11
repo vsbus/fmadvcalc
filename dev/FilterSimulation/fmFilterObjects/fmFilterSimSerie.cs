@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using FilterSimulation.fmFilterObjects.Interfaces;
 using fmCalculationLibrary;
 using fmMisc;
 
@@ -12,6 +13,7 @@ namespace FilterSimulation.fmFilterObjects
         public fmFilterSimMachineType machine;
         public string filterMedium;
         public string machineName;
+        public string comments;
 
         public fmParametersToDisplay parametersToDisplay = new fmParametersToDisplay();
 
@@ -25,6 +27,7 @@ namespace FilterSimulation.fmFilterObjects
             machine = from.machine;
             machineName = from.machineName;
             filterMedium = from.filterMedium;
+            comments = from.comments;
             parametersToDisplay = new fmParametersToDisplay(from.parametersToDisplay);
 
             ranges = new fmRangesConfiguration();
@@ -173,7 +176,7 @@ namespace FilterSimulation.fmFilterObjects
         #endregion
     }
 
-    public class fmFilterSimSerie
+    public class fmFilterSimSerie : IComments
     {
         private Guid m_guid;
         private fmFilterSimSuspension m_parentSuspension;
@@ -194,15 +197,6 @@ namespace FilterSimulation.fmFilterObjects
         {
             get { return m_parentSuspension; }
             set { m_parentSuspension = value; }
-        }
-        public string Name
-        {
-            get { return m_data.name; }
-            set 
-            {
-                Modified |= m_data.name != value;
-                m_data.name = value; 
-            }
         }
         public fmFilterSimMachineType MachineType
         {
@@ -301,7 +295,7 @@ namespace FilterSimulation.fmFilterObjects
                 parentSuspension.AddSerie(this);
             }
 
-            m_data.name = toCopy.Name;
+            m_data.name = toCopy.GetName();
             m_data.machine = toCopy.MachineType;
             m_data.filterMedium = toCopy.FilterMedium;
             m_data.machineName = toCopy.MachineName;
@@ -366,12 +360,14 @@ namespace FilterSimulation.fmFilterObjects
         {
             public const string SimSerie = "SimSerie";
             public const string Checked = "m_checked";
+            public const string Comments = "Comments";
         }
 
         internal void Serialize(XmlWriter writer)
         {
             writer.WriteStartElement(fmSimSerieSerializeTags.SimSerie);
             writer.WriteElementString(fmSimSerieSerializeTags.Checked, m_checked.ToString());
+            writer.WriteElementString(fmSimSerieSerializeTags.Comments, GetComments());
             m_data.Serialize(writer);
             writer.WriteEndElement();
         }
@@ -386,7 +382,8 @@ namespace FilterSimulation.fmFilterObjects
                 fmFilterSimSerieData.Deserialize(
                     xmlNode.SelectSingleNode(fmFilterSimSerieData.fmSimSerieDataSerializeTags.Serie), parentSuspension,
                     serie);
-            serie.Name = m_data.name;
+            serie.SetName(m_data.name);
+            serie.SetComments(xmlNode.SelectSingleNode(fmSimSerieSerializeTags.Comments).InnerText);
             serie.MachineType = m_data.machine;
             serie.MachineName = m_data.machineName;
             serie.FilterMedium = m_data.filterMedium;
@@ -394,5 +391,35 @@ namespace FilterSimulation.fmFilterObjects
             serie.Ranges = m_data.ranges;
             return serie;
         }
+
+        #region IComments Members
+
+        public string GetComments()
+        {
+            return m_data.comments;
+        }
+
+        public void SetComments(string comments)
+        {
+            Modified |= m_data.comments != comments;
+            m_data.comments = comments;
+        }
+
+        #endregion
+
+        #region IName Members
+
+        public string GetName()
+        {
+            return m_data.name;
+        }
+
+        public void SetName(string name)
+        {
+            Modified |= m_data.name != name;
+            m_data.name = name;
+        }
+
+        #endregion
     }
 }

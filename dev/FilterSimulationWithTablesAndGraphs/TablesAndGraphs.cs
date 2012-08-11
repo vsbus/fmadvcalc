@@ -1008,7 +1008,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         if (!simData.isChecked)
                             continue;
 
-                        string simName = simData.externalSimulation.Name;
+                        string simName = simData.externalSimulation.GetName();
 
                         var yArray = new fmDisplayingArray
                         {

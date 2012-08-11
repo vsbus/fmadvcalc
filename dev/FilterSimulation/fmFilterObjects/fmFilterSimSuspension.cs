@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using FilterSimulation.fmFilterObjects.Interfaces;
 
 namespace FilterSimulation.fmFilterObjects
 {
@@ -9,6 +10,7 @@ namespace FilterSimulation.fmFilterObjects
         public string name;
         public string material;
         public string customer;
+        public string comments;
         public List<fmFilterSimSerie> seriesList;
 
         public void CopyFrom(fmFilterSimSuspensionData from, fmFilterSimSuspension ownerSuspension)
@@ -16,6 +18,7 @@ namespace FilterSimulation.fmFilterObjects
             name = from.name;
             material = from.material;
             customer = from.customer;
+            comments = from.comments;
             seriesList = new List<fmFilterSimSerie>();
             foreach (fmFilterSimSerie serie in from.seriesList)
             {
@@ -63,7 +66,7 @@ namespace FilterSimulation.fmFilterObjects
         }
     }
 
-    public class fmFilterSimSuspension
+    public class fmFilterSimSuspension : IComments
     {
         private Guid m_guid;
         private fmFilterSimProject m_parentProject;
@@ -82,15 +85,7 @@ namespace FilterSimulation.fmFilterObjects
         {
             get { return m_guid; }
         }
-        public string Name
-        {
-            get { return m_data.name; }
-            set
-            {
-                Modified |= m_data.name != value;
-                m_data.name = value;
-            }
-        }
+       
         public string Customer
         {
             get { return m_data.customer; }
@@ -221,12 +216,14 @@ namespace FilterSimulation.fmFilterObjects
         {
             public const string Suspension = "Suspension";
             public const string Checked = "m_checked";
+            public const string Comments = "Comments";
         }
 
         internal void Serialize(XmlWriter writer)
         {
             writer.WriteStartElement(fmSuspensionSerializeTags.Suspension);
             writer.WriteElementString(fmSuspensionSerializeTags.Checked, m_checked.ToString());
+            writer.WriteElementString(fmSuspensionSerializeTags.Comments, GetComments());
             m_data.Serialize(writer);
             writer.WriteEndElement();
         }
@@ -241,10 +238,41 @@ namespace FilterSimulation.fmFilterObjects
                 fmFilterSimSuspensionData.Deserialize(
                     suspensionNode.SelectSingleNode(
                         fmFilterSimSuspensionData.fmSuspensionDataSerializeTags.SuspensionData), sus);
-            sus.Name = data.name;
+            sus.SetName(data.name);
+            sus.SetComments(suspensionNode.SelectSingleNode(fmSuspensionSerializeTags.Comments).InnerText);
             sus.Material = data.material;
             sus.Customer = data.customer;
             return sus;
         }
+
+        #region IComments Members
+
+        public string GetComments()
+        {
+            return m_data.comments;
+        }
+
+        public void SetComments(string comments)
+        {
+            Modified |= m_data.comments != comments;
+            m_data.comments = comments;
+        }
+
+        #endregion
+
+        #region IName Members
+
+        public string GetName()
+        {
+             return m_data.name;
+        }
+        
+        public void SetName(string name)
+        {
+            Modified |= m_data.name != name;
+            m_data.name = name;
+        }
+
+        #endregion
     }
 }

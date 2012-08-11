@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using FilterSimulation.fmFilterObjects.Interfaces;
 
 namespace FilterSimulation.fmFilterObjects
 {
     struct fmFilterSimProjectData
     {
         public string name;
+        public string comments;
         public List<fmFilterSimSuspension> susList;
         public void CopyFrom(fmFilterSimProjectData from, fmFilterSimProject ownerProject)
         {
             name = from.name;
+            comments = from.comments;
             susList = new List<fmFilterSimSuspension>();
             foreach (fmFilterSimSuspension sus in from.susList)
             {
@@ -54,7 +57,7 @@ namespace FilterSimulation.fmFilterObjects
         }
     }
 
-    public class fmFilterSimProject
+    public class fmFilterSimProject : IComments
     {
         private readonly Guid m_guid;
         private readonly fmFilterSimSolution m_parentSolution;
@@ -74,15 +77,7 @@ namespace FilterSimulation.fmFilterObjects
             get { return m_guid; }
         }
 
-        public string Name
-        {
-            get { return m_data.name; }
-            set
-            {
-                Modified |= m_data.name != value;
-                m_data.name = value;
-            }
-        }
+      
 
         public bool Modified { get; set; }
 
@@ -190,12 +185,14 @@ namespace FilterSimulation.fmFilterObjects
         {
             public const string Project = "Project";
             public const string Checked = "m_checked";
+            public const string Comments = "Comments";
         }
 
         internal void Serialize(XmlWriter writer)
         {
             writer.WriteStartElement(fmProjectSerializeTags.Project);
             writer.WriteElementString(fmProjectSerializeTags.Checked, m_checked.ToString());
+            writer.WriteElementString(fmProjectSerializeTags.Comments, GetComments());
             m_data.Serialize(writer);
             writer.WriteEndElement();
         }
@@ -208,8 +205,39 @@ namespace FilterSimulation.fmFilterObjects
             fmFilterSimProjectData projectData = fmFilterSimProjectData.Deserialize(projectNode, project);
             project.Checked = m_checked;
             project.Modified = false;
-            project.Name = projectData.name;
+            project.SetName(projectData.name);
+            project.SetComments(projectNode.SelectSingleNode(fmProjectSerializeTags.Comments).InnerText);
             return project;
         }
+
+        #region IComments Members
+
+        public string GetComments()
+        {
+             return m_data.comments;
+        }
+
+        public void SetComments(string comments)
+        {
+            Modified |= m_data.comments != comments;
+            m_data.comments = comments;
+        }
+
+        #endregion
+
+        #region IName Members
+
+        public string GetName()
+        {
+              return m_data.name;
+        }
+
+        public void SetName(string name)
+        {
+            Modified |= m_data.name != name;
+            m_data.name = name;
+        }
+
+        #endregion
     }
 }
