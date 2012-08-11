@@ -10,7 +10,7 @@ namespace FilterSimulation
         // ReSharper disable InconsistentNaming
         private void projectCreateButton_Click(object sender, EventArgs e)
         {
-            Solution.currentObjects.Project = new fmFilterSimProject(Solution, "Unnamed project");
+            Solution.currentObjects.Project = new fmFilterSimProject(Solution, "n/a");
             Solution.currentColumns.project = projectNameColumn.Index;
             DisplaySolution(Solution);
             projectDataGrid.BeginEdit(true);
@@ -150,7 +150,7 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
 
             fmFilterSimulation curSim = Solution.currentObjects.Simulation;
 
-            Solution.currentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, "Unnamed filter medium", "Unknown Machine Name");
+            Solution.currentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, "n/a", "n/a");
             Solution.currentObjects.Simulation = curSim != null ? new fmFilterSimulation(Solution.currentObjects.Serie, curSim) : new fmFilterSimulation(Solution.currentObjects.Serie, "");
             Solution.currentObjects.Simulation.SetName(Solution.currentObjects.Serie.GetName() + "-1");
             Solution.currentObjects.Serie.Keep();
