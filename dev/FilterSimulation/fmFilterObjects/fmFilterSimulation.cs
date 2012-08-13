@@ -924,8 +924,13 @@ namespace FilterSimulation.fmFilterObjects
                 fmFilterSimulationData.Deserialize(
                     xmlNode.SelectSingleNode(
                         fmFilterSimulationData.fmFilterSimulationDataSerializeTags.FilterSimulationData));
+
             sim.SetName(simData.name);
-            sim.SetComments(xmlNode.SelectSingleNode(fmFilterSimulationSerializeTags.Comments).InnerText);
+            
+            string comments = "";
+            fmSerializeTools.DeserializeStringProperty(ref comments, xmlNode, fmFilterSimulationSerializeTags.Comments);
+            sim.SetComments(comments);
+            
             sim.FilterMachiningCalculationOption = simData.filterMachiningCalculationOption;
             sim.DeliquoringUsedCalculationOption = simData.deliquoringUsedCalculationOption;
             sim.GasFlowrateUsedCalculationOption = simData.gasFlowrateUsedCalculationOption;

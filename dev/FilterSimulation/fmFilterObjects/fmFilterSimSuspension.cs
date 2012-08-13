@@ -239,7 +239,11 @@ namespace FilterSimulation.fmFilterObjects
                     suspensionNode.SelectSingleNode(
                         fmFilterSimSuspensionData.fmSuspensionDataSerializeTags.SuspensionData), sus);
             sus.SetName(data.name);
-            sus.SetComments(suspensionNode.SelectSingleNode(fmSuspensionSerializeTags.Comments).InnerText);
+
+            string comments = "";
+            fmSerializeTools.DeserializeStringProperty(ref comments, suspensionNode, fmSuspensionSerializeTags.Comments);
+            sus.SetComments(comments);
+
             sus.Material = data.material;
             sus.Customer = data.customer;
             return sus;

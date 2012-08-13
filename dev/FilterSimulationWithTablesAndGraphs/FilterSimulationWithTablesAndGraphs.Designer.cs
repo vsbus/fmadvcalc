@@ -72,9 +72,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.splitter11 = new System.Windows.Forms.Splitter();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.panel8 = new System.Windows.Forms.Panel();
+            this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -114,13 +114,13 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox1.SuspendLayout();
             this.panel11.SuspendLayout();
             this.panel8.SuspendLayout();
+            this.RightSplitContainer.Panel1.SuspendLayout();
+            this.RightSplitContainer.Panel2.SuspendLayout();
+            this.RightSplitContainer.SuspendLayout();
             this.SimulationAndGraphSplitContainer.Panel1.SuspendLayout();
             this.SimulationAndGraphSplitContainer.Panel2.SuspendLayout();
             this.SimulationAndGraphSplitContainer.SuspendLayout();
             this.panel9.SuspendLayout();
-            this.RightSplitContainer.Panel1.SuspendLayout();
-            this.RightSplitContainer.Panel2.SuspendLayout();
-            this.RightSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // projectCreateButton
@@ -193,11 +193,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // projectPanel
             // 
-            this.projectPanel.Size = new System.Drawing.Size(290, 115);
+            this.projectPanel.Size = new System.Drawing.Size(175, 115);
             // 
             // suspensionPanel
             // 
-            this.suspensionPanel.Size = new System.Drawing.Size(106, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(221, 115);
             // 
             // splitter2
             // 
@@ -238,11 +238,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
-            this.panel1.Size = new System.Drawing.Size(286, 20);
+            this.panel1.Size = new System.Drawing.Size(171, 20);
             // 
             // panel2
             // 
-            this.panel2.Size = new System.Drawing.Size(102, 20);
+            this.panel2.Size = new System.Drawing.Size(217, 20);
             // 
             // panel3
             // 
@@ -286,7 +286,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(400, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 290;
+            this.projectSuspensionSplitContainer.SplitterDistance = 175;
             // 
             // commentSimulationButton
             // 
@@ -733,6 +733,24 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel8.Size = new System.Drawing.Size(374, 731);
             this.panel8.TabIndex = 36;
             // 
+            // RightSplitContainer
+            // 
+            this.RightSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.RightSplitContainer.Location = new System.Drawing.Point(0, 0);
+            this.RightSplitContainer.Name = "RightSplitContainer";
+            this.RightSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // RightSplitContainer.Panel1
+            // 
+            this.RightSplitContainer.Panel1.Controls.Add(this.SimulationAndGraphSplitContainer);
+            // 
+            // RightSplitContainer.Panel2
+            // 
+            this.RightSplitContainer.Panel2.Controls.Add(this.panel9);
+            this.RightSplitContainer.Size = new System.Drawing.Size(374, 731);
+            this.RightSplitContainer.SplitterDistance = 556;
+            this.RightSplitContainer.TabIndex = 1;
+            // 
             // SimulationAndGraphSplitContainer
             // 
             this.SimulationAndGraphSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -761,24 +779,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(374, 171);
             this.panel9.TabIndex = 11;
-            // 
-            // RightSplitContainer
-            // 
-            this.RightSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightSplitContainer.Location = new System.Drawing.Point(0, 0);
-            this.RightSplitContainer.Name = "RightSplitContainer";
-            this.RightSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // RightSplitContainer.Panel1
-            // 
-            this.RightSplitContainer.Panel1.Controls.Add(this.SimulationAndGraphSplitContainer);
-            // 
-            // RightSplitContainer.Panel2
-            // 
-            this.RightSplitContainer.Panel2.Controls.Add(this.panel9);
-            this.RightSplitContainer.Size = new System.Drawing.Size(374, 731);
-            this.RightSplitContainer.SplitterDistance = 556;
-            this.RightSplitContainer.TabIndex = 1;
             // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
@@ -832,13 +832,13 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel11.ResumeLayout(false);
             this.panel11.PerformLayout();
             this.panel8.ResumeLayout(false);
+            this.RightSplitContainer.Panel1.ResumeLayout(false);
+            this.RightSplitContainer.Panel2.ResumeLayout(false);
+            this.RightSplitContainer.ResumeLayout(false);
             this.SimulationAndGraphSplitContainer.Panel1.ResumeLayout(false);
             this.SimulationAndGraphSplitContainer.Panel2.ResumeLayout(false);
             this.SimulationAndGraphSplitContainer.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
-            this.RightSplitContainer.Panel1.ResumeLayout(false);
-            this.RightSplitContainer.Panel2.ResumeLayout(false);
-            this.RightSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

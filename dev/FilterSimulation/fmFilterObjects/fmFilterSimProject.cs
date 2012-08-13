@@ -206,7 +206,11 @@ namespace FilterSimulation.fmFilterObjects
             project.Checked = m_checked;
             project.Modified = false;
             project.SetName(projectData.name);
-            project.SetComments(projectNode.SelectSingleNode(fmProjectSerializeTags.Comments).InnerText);
+
+            string comments = "";
+            fmSerializeTools.DeserializeStringProperty(ref comments, projectNode, fmProjectSerializeTags.Comments);
+            project.SetComments(comments);
+
             return project;
         }
 

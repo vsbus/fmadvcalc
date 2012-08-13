@@ -144,6 +144,8 @@ namespace FilterSimulation
         private void DeserializeRangesSchemas(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationSerializeTags.RangesSchemas);
+            if (node == null)
+                return;
             XmlNodeList schemasNodes = node.SelectNodes(fmFilterSimulationSerializeTags.RangeSchema);
             foreach (XmlNode schemaNode in schemasNodes)
             {

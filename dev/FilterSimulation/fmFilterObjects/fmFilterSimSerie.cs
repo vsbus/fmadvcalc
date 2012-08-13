@@ -383,7 +383,11 @@ namespace FilterSimulation.fmFilterObjects
                     xmlNode.SelectSingleNode(fmFilterSimSerieData.fmSimSerieDataSerializeTags.Serie), parentSuspension,
                     serie);
             serie.SetName(m_data.name);
-            serie.SetComments(xmlNode.SelectSingleNode(fmSimSerieSerializeTags.Comments).InnerText);
+
+            string comments = "";
+            fmSerializeTools.DeserializeStringProperty(ref comments, xmlNode, fmSimSerieSerializeTags.Comments);
+            serie.SetComments(comments);
+
             serie.MachineType = m_data.machine;
             serie.MachineName = m_data.machineName;
             serie.FilterMedium = m_data.filterMedium;
