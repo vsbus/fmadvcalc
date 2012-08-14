@@ -1219,7 +1219,10 @@ namespace FilterSimulationWithTablesAndGraphs
                         var sigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(tempSim.parameters.Values);
                         sigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
 
-                        var deliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(tempSim.parameters.Values);
+                        bool isPlaneArea =
+                            fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
+                                simData.internalSimulationData.filterMachiningCalculationOption);
+                        var deliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(isPlaneArea, tempSim.parameters.Values);
                         deliquoringSimualtionCalculator.DoCalculations();
 
                         simData.calculatedDataList.Add(tempSim);

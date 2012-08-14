@@ -23,7 +23,7 @@ namespace fmCalcBlocksLibrary.Blocks
         override public void DoCalculationsLimitsClue()
         {
             var deliquoringSimualtionCalculator =
-                new fmDeliquoringSimualtionCalculator(AllParameters) {};
+                new fmDeliquoringSimualtionCalculator((bool)isPlaneArea, AllParameters);
             deliquoringSimualtionCalculator.DoCalculations();
         }
 

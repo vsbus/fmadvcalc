@@ -77,6 +77,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter ad1;
         private readonly fmBlockConstantParameter ad2;
         private readonly fmBlockConstantParameter A;
+        private readonly fmBlockConstantParameter d0;
         private readonly fmBlockConstantParameter peq;
         private readonly fmBlockConstantParameter Mmole;
         private readonly fmBlockConstantParameter Tetta;
@@ -116,7 +117,6 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmValue Srem_Value {get {return Srem.value;} set {Srem.value = value;}}
         public fmValue ad1_Value {get {return ad1.value;} set {ad1.value = value;}}
         public fmValue ad2_Value {get {return ad2.value;} set {ad2.value = value;}}
-        public fmValue A_Value {get {return A.value;} set {A.value = value;}}
         public fmValue peq_Value {get {return peq.value;} set {peq.value = value;}}
         public fmValue Mmole_Value {get {return Mmole.value;} set {Mmole.value = value;}}
         public fmValue Tetta_Value {get {return Tetta.value;} set {Tetta.value = value;}}
@@ -128,9 +128,11 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmValue rhod_Value {get {return rhod.value;} set {rhod.value = value;}}
         public fmValue rhos_Value {get {return rhos.value;} set {rhos.value = value;}}
 
+        public object isPlaneArea;
+
         override public void DoCalculations()
         {
-            var fmDeliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(AllParameters);
+            var fmDeliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator((bool)isPlaneArea, AllParameters);
             fmDeliquoringSimualtionCalculator.DoCalculations();
         }
 
@@ -143,7 +145,6 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell S_Cell,
             DataGridViewCell Rfmech_Cell,
             DataGridViewCell Rf_Cell,
-            DataGridViewCell Rf_star_Cell,
             DataGridViewCell Qgi_Cell,
             DataGridViewCell Qg_Cell,
             DataGridViewCell vg_Cell,
@@ -254,6 +255,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref ad1, fmGlobalParameter.ad1);
             AddConstantParameter(ref ad2, fmGlobalParameter.ad2);
             AddConstantParameter(ref A, fmGlobalParameter.A);
+            AddConstantParameter(ref d0, fmGlobalParameter.d0);
             AddConstantParameter(ref peq, fmGlobalParameter.peq);
             AddConstantParameter(ref Mmole, fmGlobalParameter.Mmole);
             AddConstantParameter(ref Tetta, fmGlobalParameter.Tetta);
@@ -323,6 +325,6 @@ namespace fmCalcBlocksLibrary.Blocks
             ReWriteParameters();
         }
 
-        public fmDeliquoringSimualtionBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) { }
+        public fmDeliquoringSimualtionBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) { }
     }
 }

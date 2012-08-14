@@ -20,7 +20,14 @@ namespace fmCalculatorsLibrary
             CalculatedFromCakeFormation
         }
 
-        public fmDeliquoringSimualtionCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+        private bool isPlaneArea = true;
+
+        public fmDeliquoringSimualtionCalculator(
+            bool isPlaneArea,
+            IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList)
+        {
+            this.isPlaneArea = isPlaneArea;
+        }
         
         override public void DoCalculations()
         {
@@ -62,6 +69,7 @@ namespace fmCalculatorsLibrary
             var ad1 = variables[fmGlobalParameter.ad1] as fmCalculationConstantParameter;
             var ad2 = variables[fmGlobalParameter.ad2] as fmCalculationConstantParameter;
             var A = variables[fmGlobalParameter.A] as fmCalculationConstantParameter;
+            var d0 = variables[fmGlobalParameter.d0] as fmCalculationConstantParameter;
             var peq = variables[fmGlobalParameter.peq] as fmCalculationConstantParameter;
             var Mmole = variables[fmGlobalParameter.Mmole] as fmCalculationConstantParameter;
             var Tetta = variables[fmGlobalParameter.Tetta] as fmCalculationConstantParameter;
@@ -128,7 +136,18 @@ namespace fmCalculatorsLibrary
             fmValue pmoverpn = fmDeliquoringEquations.Eval_pmOverPn_vacuum_From_Dpd(Dpd.value);
             fmValue Qgimax = fmDeliquoringEquations.Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(A.value, pcd.value, pmoverpn, Dpd.value, etag.value, hcd.value, hce.value, Tetta.value, ag1.value, ag2.value);
             fmValue Const1 = fmDeliquoringEquations.Eval_Const1(epsd.value, etad.value, hcd.value, hce.value, pcd.value, Dpd.value, pke.value);
-            if (!isKnown_Vcd) Vcd.value = fmDeliquoringEquations.Eval_Vcd_From_A_hcd(A.value, hcd.value);
+
+            if (!isKnown_Vcd)
+            {
+                if (isPlaneArea)
+                {
+                    Vcd.value = fmDeliquoringEquations.Eval_Vcd_From_A_hcd_plainArea(A.value, hcd.value);
+                }
+                else
+                {
+                    Vcd.value = fmDeliquoringEquations.Eval_Vcd_From_A_hcd_cylindricalArea(A.value, hcd.value, d0.value);
+                }
+            }
             fmValue SC1 = fmDeliquoringEquations.Eval_SC1_From_rhof_epsd_Vcd(rhod.value, epsd.value, Vcd.value);
             fmValue SC2 = fmDeliquoringEquations.Eval_SC2_From_peq_Mmole_Tetta(peq.value, Mmole.value, Tetta.value);
             fmValue SC3 = fmDeliquoringEquations.Eval_SC3_From_A_pcd_Dpd_ag1_ag2_etag_hcd_hce(A.value, pcd.value, Dpd.value, ag1.value, ag2.value, etag.value, hcd.value, hce.value);

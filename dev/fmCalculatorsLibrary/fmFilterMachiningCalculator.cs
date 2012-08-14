@@ -62,6 +62,19 @@ namespace fmCalculatorsLibrary
 
         }
 
+        public static bool IsPlainAreaCalculationOption(fmFilterMachiningCalculationOption option)
+        {
+            return option == fmFilterMachiningCalculationOption.DESIGN1
+                   || option == fmFilterMachiningCalculationOption.OPTIMIZATION1
+                   || option == fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST
+                   || option == fmFilterMachiningCalculationOption.PLAIN_DP_CONST
+                   || option == fmFilterMachiningCalculationOption.PLAIN_QP_CONST
+                   || option == fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST
+                   || option == fmFilterMachiningCalculationOption.STANDART3
+                   || option == fmFilterMachiningCalculationOption.STANDART4
+                   || option == fmFilterMachiningCalculationOption.STANDART8;
+        }
+
         public fmFilterMachiningCalculationOption filterMachiningCalculationOption =
             fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
 

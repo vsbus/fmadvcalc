@@ -57,7 +57,7 @@ namespace fmCalculationLibrary.Equations
             return (fmValue.Pow((Smech - Srem) / (1 - Srem), -1 / ad1) - 1) / ad2;
         }
 
-        public static fmValue Eval_Vcd_From_A_hcd(fmValue A, fmValue hcd)
+        public static fmValue Eval_Vcd_From_A_hcd_plainArea(fmValue A, fmValue hcd)
         {
             return A * hcd;
         }
@@ -289,6 +289,11 @@ namespace fmCalculationLibrary.Equations
         public static fmValue Eval_S_From_rhof_epsd_rhos_rhobulk(fmValue rhof, fmValue epsd, fmValue rhos, fmValue rhobulk)
         {
             return (rhobulk - rhos + rhos * epsd) / (epsd * rhof);
+        }
+
+        public static fmValue Eval_Vcd_From_A_hcd_cylindricalArea(fmValue A, fmValue hcd, fmValue d)
+        {
+            return A * hcd * (1 + hcd / d);
         }
     }
 }
