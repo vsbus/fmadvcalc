@@ -23,7 +23,7 @@ namespace FilterSimulation
         private CheckBox m_ckBox;
         protected fmParametersToDisplay ParametersToDisplay;
         public Dictionary<fmShowHideSchema, List<fmGlobalParameter>> ShowHideSchemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
-        public Dictionary<fmRangesSchema, RangesDictionary> RangesSchemas = new Dictionary<fmRangesSchema, RangesDictionary>();
+        public Dictionary<fmFilterSimMachineType, RangesDictionary> RangesSchemas = new Dictionary<fmFilterSimMachineType, RangesDictionary>();
         private Dictionary<fmGlobalParameter, DataGridViewColumn> simulationGridColumns = new Dictionary<fmGlobalParameter, DataGridViewColumn>();
 
         public fmFilterSimulationControl()
@@ -101,10 +101,10 @@ namespace FilterSimulation
         private void SerializeRangesSchemas(XmlWriter writer)
         {
             writer.WriteStartElement(fmFilterSimulationSerializeTags.RangesSchemas);
-            foreach (KeyValuePair<fmRangesSchema, RangesDictionary> rangeSchema in RangesSchemas)
+            foreach (KeyValuePair<fmFilterSimMachineType, RangesDictionary> rangeSchema in RangesSchemas)
             {
                 writer.WriteStartElement(fmFilterSimulationSerializeTags.RangeSchema);
-                writer.WriteElementString(fmFilterSimulationSerializeTags.RangeSchemaName, fmEnumUtils.GetEnumDescription(rangeSchema.Key));
+                writer.WriteElementString(fmFilterSimulationSerializeTags.RangeSchemaName, rangeSchema.Key.name);
                 foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in rangeSchema.Value)
                 {
                     writer.WriteStartElement(fmFilterSimulationSerializeTags.Range);
@@ -165,7 +165,7 @@ namespace FilterSimulation
                                              Convert.ToDouble(maxValueNode.InnerText),
                                              Convert.ToBoolean(IsInputedNode.InnerText)));
                 }
-                RangesSchemas[(fmRangesSchema)fmEnumUtils.GetEnum(typeof(fmRangesSchema), schemaName)] = rangesDictionary;
+                RangesSchemas[fmFilterSimMachineType.GetFilterTypeByName(schemaName)] = rangesDictionary;
             }
         }
 

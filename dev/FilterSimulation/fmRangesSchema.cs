@@ -2,21 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using FilterSimulation.fmFilterObjects;
 using fmCalculationLibrary;
 
 namespace FilterSimulation
 {
-    public enum fmRangesSchema
-    {
-        [Description("Rotary Vacuum Filters")]
-        RotaryVacuumFilters,
-        [Description("Rotary Pressure Filters")]
-        RotaryPressureFilters
-    }
-
     public class fmRangesConfiguration
     {
-        public fmRangesSchema AssignedSchema = fmRangesSchema.RotaryVacuumFilters;
+        public fmFilterSimMachineType AssignedMachineType = fmFilterSimMachineType.RotaryVacuumFilter;
 
         public Dictionary<fmGlobalParameter, fmDefaultParameterRange> Ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
 
@@ -26,7 +19,7 @@ namespace FilterSimulation
 
         public fmRangesConfiguration(fmRangesConfiguration other)
         {
-            AssignedSchema = other.AssignedSchema;
+            AssignedMachineType = other.AssignedMachineType;
             Ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>(other.Ranges);
         }
     }

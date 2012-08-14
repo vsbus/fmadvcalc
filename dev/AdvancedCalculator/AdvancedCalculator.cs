@@ -207,13 +207,13 @@ namespace AdvancedCalculator
         {
             var proForm = new fmParameterIntervalOption();
             proForm.SetRanges(filterSimulationWithTablesAndGraphs1.GetCurrentSerieRanges().Ranges);
-            proForm.CheckScheme(filterSimulationWithTablesAndGraphs1.GetCurrentSerieRanges().AssignedSchema);
+            proForm.CheckMachineType(filterSimulationWithTablesAndGraphs1.GetCurrentSerieRanges().AssignedMachineType);
             proForm.SetRangesSchemas(filterSimulationWithTablesAndGraphs1.RangesSchemas);
             if (proForm.ShowDialog() == DialogResult.OK)
             {
                 var rangesCfg = new fmRangesConfiguration
                                     {
-                                        AssignedSchema = proForm.GetRangesSchema(),
+                                        AssignedMachineType = proForm.GetRangesMachineType(),
                                         Ranges = proForm.GetRanges()
                                     };
                 filterSimulationWithTablesAndGraphs1.SetCurrentSerieRanges(rangesCfg);

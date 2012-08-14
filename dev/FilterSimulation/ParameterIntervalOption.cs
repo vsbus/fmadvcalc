@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using FilterSimulation.fmFilterObjects;
 using fmCalcBlocksLibrary.BlockParameter;
 using fmCalcBlocksLibrary.Blocks;
 using fmCalculationLibrary;
@@ -14,7 +15,7 @@ namespace FilterSimulation
     {
         private fmSimulationLimitsBlock cakeFormationLimitsBlock;
         private fmDeliquoringLimitsBlock deliquoringLimitsBlock;
-        private Dictionary<fmRangesSchema, RangesDictionary> m_schemas = new Dictionary<fmRangesSchema, RangesDictionary>();
+        private Dictionary<fmFilterSimMachineType, RangesDictionary> m_schemas = new Dictionary<fmFilterSimMachineType, RangesDictionary>();
 
         public fmParameterIntervalOption()
         {
@@ -24,9 +25,9 @@ namespace FilterSimulation
 
         private void FillFilterTypeCombobox()
         {
-            foreach (Enum element in Enum.GetValues(typeof(fmRangesSchema)))
+            foreach (fmFilterSimMachineType element in fmFilterSimMachineType.filterTypesList)
             {
-                filterTypeComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
+                filterTypeComboBox.Items.Add(element.name);
             }
             filterTypeComboBox.SelectedIndex = 0;
         }
@@ -350,7 +351,7 @@ namespace FilterSimulation
         {
             if (filterTypeComboBox.Text != "")
             {
-                var value = (fmRangesSchema)fmEnumUtils.GetEnum(typeof(fmRangesSchema), filterTypeComboBox.Text);
+                var value = fmFilterSimMachineType.GetFilterTypeByName(filterTypeComboBox.Text);
                 if (m_schemas.ContainsKey(value))
                 {
                     SetRanges(m_schemas[value]);
@@ -373,32 +374,32 @@ namespace FilterSimulation
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    var value = (fmRangesSchema)fmEnumUtils.GetEnum(typeof(fmRangesSchema), filterTypeComboBox.Text);
+                    var value = fmFilterSimMachineType.GetFilterTypeByName(filterTypeComboBox.Text);
                     m_schemas[value] = GetRanges();
                 }
             }
         }
 
-        public fmRangesSchema GetRangesSchema()
+        public fmFilterSimMachineType GetRangesMachineType()
         {
-            return (fmRangesSchema)fmEnumUtils.GetEnum(typeof(fmRangesSchema), filterTypeComboBox.Text);
+            return fmFilterSimMachineType.GetFilterTypeByName(filterTypeComboBox.Text);
         }
 
-        public void SetRangesSchemas(Dictionary<fmRangesSchema, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> dictionary)
+        public void SetRangesSchemas(Dictionary<fmFilterSimMachineType, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> dictionary)
         {
-            m_schemas = new Dictionary<fmRangesSchema, RangesDictionary>(dictionary);
+            m_schemas = new Dictionary<fmFilterSimMachineType, RangesDictionary>(dictionary);
         }
 
-        public Dictionary<fmRangesSchema, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> GetRangesSchemas()
+        public Dictionary<fmFilterSimMachineType, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> GetRangesSchemas()
         {
-            return new Dictionary<fmRangesSchema, RangesDictionary>(m_schemas);
+            return new Dictionary<fmFilterSimMachineType, RangesDictionary>(m_schemas);
         }
 
-        public void CheckScheme(fmRangesSchema schema)
+        public void CheckMachineType(fmFilterSimMachineType schema)
         {
             for (int i = 0; i < filterTypeComboBox.Items.Count; ++i)
             {
-                if (filterTypeComboBox.Items[i].ToString() == fmEnumUtils.GetEnumDescription(schema))
+                if (filterTypeComboBox.Items[i].ToString() == schema.name)
                 {
                     filterTypeComboBox.SelectedIndex = i;
                     break;

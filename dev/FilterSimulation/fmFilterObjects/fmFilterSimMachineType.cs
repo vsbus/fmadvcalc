@@ -77,5 +77,17 @@ namespace FilterSimulation.fmFilterObjects
             }
             return filterTypesList[0];
         }
+
+        internal static fmFilterSimMachineType GetFilterTypeByName(string p)
+        {
+            foreach (fmFilterSimMachineType machineType in filterTypesList)
+            {
+                if (machineType.name == p)
+                {
+                    return machineType;
+                }
+            }
+            return null;
+        }
     }
 }
