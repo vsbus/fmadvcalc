@@ -889,7 +889,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = m_displayingResults.YParameters[0].Arrays[0].Color;
                 }
             }
-            else if (m_displayingResults.YParameters.Count == 2)
+            else if (m_displayingResults.YParameters.Count == 2 && !KeepAllInY1CheckBox.Checked)
             {
                 fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = true;
 
@@ -1016,7 +1016,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             OwningSimulationName = simName,
                             Values = new fmValue[simData.calculatedDataList.Count],
                             Scale = yParameters.Count > 2 ? degreeOffset[yParameter] : new fmValue(1),
-                            IsY2Axis = colorId == 1 && yParameters.Count == 2,
+                            IsY2Axis = colorId == 1 && (yParameters.Count == 2 && !KeepAllInY1CheckBox.Checked),
                             Color = colors[colorId],
                             Bold = selectedSimulationParametersTable.CurrentCell != null
                                    &&
@@ -1087,7 +1087,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                                  Values = new fmValue[pointsCount],
                                                  Scale =
                                                      yParameters.Count > 2 ? degreeOffset[yParameter] : new fmValue(1),
-                                                 IsY2Axis = colorId == 1 && yParameters.Count == 2,
+                                                 IsY2Axis = colorId == 1 && (yParameters.Count == 2 && !KeepAllInY1CheckBox.Checked),
                                                  Color = colors[colorId],
                                                  Bold = additionalParametersTable.CurrentCell != null
                                                         && m_localInputParametersList.IndexOf(localParameters) ==

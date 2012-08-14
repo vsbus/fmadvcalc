@@ -64,6 +64,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis = new System.Windows.Forms.ListView();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.KeepAllInY1CheckBox = new System.Windows.Forms.CheckBox();
             this.deliquoringMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
             this.deselectAllButton = new System.Windows.Forms.Button();
             this.cakeFormationMaterilParametersCheckBox = new System.Windows.Forms.CheckBox();
@@ -185,19 +186,19 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panelLeft
             // 
-            this.panelLeft.Size = new System.Drawing.Size(897, 266);
+            this.panelLeft.Size = new System.Drawing.Size(822, 266);
             // 
             // topPanel
             // 
-            this.topPanel.Size = new System.Drawing.Size(897, 115);
+            this.topPanel.Size = new System.Drawing.Size(822, 115);
             // 
             // projectPanel
             // 
-            this.projectPanel.Size = new System.Drawing.Size(175, 115);
+            this.projectPanel.Size = new System.Drawing.Size(321, 115);
             // 
             // suspensionPanel
             // 
-            this.suspensionPanel.Size = new System.Drawing.Size(221, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(41, 115);
             // 
             // splitter2
             // 
@@ -207,19 +208,19 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // machinePanel
             // 
-            this.machinePanel.Size = new System.Drawing.Size(490, 115);
+            this.machinePanel.Size = new System.Drawing.Size(449, 115);
             // 
             // splitter3
             // 
             this.splitter3.Location = new System.Drawing.Point(0, 115);
-            this.splitter3.Size = new System.Drawing.Size(897, 3);
+            this.splitter3.Size = new System.Drawing.Size(822, 3);
             // 
             // secondFromTopPanel
             // 
             this.secondFromTopPanel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.secondFromTopPanel.Controls.Add(this.splitter11);
             this.secondFromTopPanel.Location = new System.Drawing.Point(0, 118);
-            this.secondFromTopPanel.Size = new System.Drawing.Size(897, 148);
+            this.secondFromTopPanel.Size = new System.Drawing.Size(822, 148);
             this.secondFromTopPanel.Controls.SetChildIndex(this.simSeriesPanel, 0);
             this.secondFromTopPanel.Controls.SetChildIndex(this.splitter11, 0);
             // 
@@ -230,27 +231,27 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panelTop
             // 
-            this.panelTop.Size = new System.Drawing.Size(897, 266);
+            this.panelTop.Size = new System.Drawing.Size(822, 266);
             // 
             // panelMain
             // 
-            this.panelMain.Size = new System.Drawing.Size(897, 731);
+            this.panelMain.Size = new System.Drawing.Size(822, 731);
             // 
             // panel1
             // 
-            this.panel1.Size = new System.Drawing.Size(171, 20);
+            this.panel1.Size = new System.Drawing.Size(317, 20);
             // 
             // panel2
             // 
-            this.panel2.Size = new System.Drawing.Size(217, 20);
+            this.panel2.Size = new System.Drawing.Size(37, 20);
             // 
             // panel3
             // 
-            this.panel3.Size = new System.Drawing.Size(486, 20);
+            this.panel3.Size = new System.Drawing.Size(445, 20);
             // 
             // panel5
             // 
-            this.panel5.Size = new System.Drawing.Size(893, 20);
+            this.panel5.Size = new System.Drawing.Size(818, 20);
             // 
             // simulationCreateButton
             // 
@@ -260,11 +261,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // simSeriesPanel
             // 
             this.simSeriesPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.simSeriesPanel.Size = new System.Drawing.Size(897, 148);
+            this.simSeriesPanel.Size = new System.Drawing.Size(822, 148);
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Size = new System.Drawing.Size(897, 731);
+            this.splitContainer1.Size = new System.Drawing.Size(822, 731);
             this.splitContainer1.SplitterDistance = 266;
             // 
             // mainSplitContainer
@@ -274,19 +275,19 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.mainSplitContainer.Panel2.Controls.Add(this.panel8);
             this.mainSplitContainer.Panel2Collapsed = false;
-            this.mainSplitContainer.Size = new System.Drawing.Size(1275, 731);
-            this.mainSplitContainer.SplitterDistance = 897;
+            this.mainSplitContainer.Size = new System.Drawing.Size(1480, 731);
+            this.mainSplitContainer.SplitterDistance = 822;
             // 
             // projectSuspensionSerieSplitContainer
             // 
             this.projectSuspensionSerieSplitContainer.Location = new System.Drawing.Point(3, 0);
-            this.projectSuspensionSerieSplitContainer.Size = new System.Drawing.Size(894, 115);
-            this.projectSuspensionSerieSplitContainer.SplitterDistance = 400;
+            this.projectSuspensionSerieSplitContainer.Size = new System.Drawing.Size(819, 115);
+            this.projectSuspensionSerieSplitContainer.SplitterDistance = 366;
             // 
             // projectSuspensionSplitContainer
             // 
-            this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(400, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 175;
+            this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(366, 115);
+            this.projectSuspensionSplitContainer.SplitterDistance = 321;
             // 
             // commentSimulationButton
             // 
@@ -346,7 +347,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.fmZedGraphControl1.ScrollMinX = 0;
             this.fmZedGraphControl1.ScrollMinY = 0;
             this.fmZedGraphControl1.ScrollMinY2 = 0;
-            this.fmZedGraphControl1.Size = new System.Drawing.Size(374, 373);
+            this.fmZedGraphControl1.Size = new System.Drawing.Size(654, 373);
             this.fmZedGraphControl1.TabIndex = 4;
             this.fmZedGraphControl1.HighLightedPointsChanged += new fmZedGraph.HighlightPointsEventHandler(this.fmZedGraphControl1_HighLightedPointsChanged);
             // 
@@ -391,7 +392,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.coordinatesGrid.RowHeadersVisible = false;
             this.coordinatesGrid.RowHeadersWidth = 15;
             this.coordinatesGrid.RowTemplate.Height = 18;
-            this.coordinatesGrid.Size = new System.Drawing.Size(374, 179);
+            this.coordinatesGrid.Size = new System.Drawing.Size(654, 179);
             this.coordinatesGrid.TabIndex = 0;
             this.coordinatesGrid.CurrentCellChanged += new System.EventHandler(this.coordinatesGrid_CurrentCellChanged);
             // 
@@ -431,7 +432,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.selectedSimulationParametersTable.Name = "selectedSimulationParametersTable";
             this.selectedSimulationParametersTable.RowHeadersVisible = false;
             this.selectedSimulationParametersTable.RowTemplate.Height = 18;
-            this.selectedSimulationParametersTable.Size = new System.Drawing.Size(366, 106);
+            this.selectedSimulationParametersTable.Size = new System.Drawing.Size(646, 106);
             this.selectedSimulationParametersTable.TabIndex = 10;
             this.selectedSimulationParametersTable.Visible = false;
             this.selectedSimulationParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
@@ -454,7 +455,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.GridPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridPanel.Location = new System.Drawing.Point(0, 0);
             this.GridPanel.Name = "GridPanel";
-            this.GridPanel.Size = new System.Drawing.Size(370, 167);
+            this.GridPanel.Size = new System.Drawing.Size(650, 167);
             this.GridPanel.TabIndex = 10;
             // 
             // additionalParametersTable
@@ -475,7 +476,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.additionalParametersTable.Name = "additionalParametersTable";
             this.additionalParametersTable.RowHeadersVisible = false;
             this.additionalParametersTable.RowTemplate.Height = 18;
-            this.additionalParametersTable.Size = new System.Drawing.Size(366, 106);
+            this.additionalParametersTable.Size = new System.Drawing.Size(646, 106);
             this.additionalParametersTable.TabIndex = 5;
             this.additionalParametersTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellContentClick);
             this.additionalParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
@@ -507,7 +508,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.ParamsControlsPanel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.ParamsControlsPanel4.Location = new System.Drawing.Point(0, 36);
             this.ParamsControlsPanel4.Name = "ParamsControlsPanel4";
-            this.ParamsControlsPanel4.Size = new System.Drawing.Size(366, 21);
+            this.ParamsControlsPanel4.Size = new System.Drawing.Size(646, 21);
             this.ParamsControlsPanel4.TabIndex = 11;
             // 
             // panel4
@@ -516,7 +517,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(366, 36);
+            this.panel4.Size = new System.Drawing.Size(646, 36);
             this.panel4.TabIndex = 12;
             // 
             // button1
@@ -534,7 +535,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.tablesAndGraphsTopLeftPanel.Controls.Add(this.panel10);
             this.tablesAndGraphsTopLeftPanel.Location = new System.Drawing.Point(18, 3);
             this.tablesAndGraphsTopLeftPanel.Name = "tablesAndGraphsTopLeftPanel";
-            this.tablesAndGraphsTopLeftPanel.Size = new System.Drawing.Size(341, 327);
+            this.tablesAndGraphsTopLeftPanel.Size = new System.Drawing.Size(556, 327);
             this.tablesAndGraphsTopLeftPanel.TabIndex = 7;
             // 
             // panel10
@@ -543,7 +544,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(0, 0);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(341, 327);
+            this.panel10.Size = new System.Drawing.Size(556, 327);
             this.panel10.TabIndex = 9;
             // 
             // XYSplitContainer
@@ -560,8 +561,8 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.XYSplitContainer.Panel2.Controls.Add(this.groupBox1);
             this.XYSplitContainer.Panel2.Controls.Add(this.panel11);
-            this.XYSplitContainer.Size = new System.Drawing.Size(341, 327);
-            this.XYSplitContainer.SplitterDistance = 112;
+            this.XYSplitContainer.Size = new System.Drawing.Size(556, 327);
+            this.XYSplitContainer.SplitterDistance = 182;
             this.XYSplitContainer.TabIndex = 8;
             // 
             // groupBox2
@@ -570,7 +571,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(112, 327);
+            this.groupBox2.Size = new System.Drawing.Size(182, 327);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "X Axis Parameter";
@@ -585,7 +586,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxXAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxXAxis.MultiSelect = false;
             this.listBoxXAxis.Name = "listBoxXAxis";
-            this.listBoxXAxis.Size = new System.Drawing.Size(106, 308);
+            this.listBoxXAxis.Size = new System.Drawing.Size(176, 308);
             this.listBoxXAxis.TabIndex = 6;
             this.listBoxXAxis.UseCompatibleStateImageBehavior = false;
             this.listBoxXAxis.View = System.Windows.Forms.View.Details;
@@ -602,7 +603,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 220);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(225, 107);
+            this.groupBox1.Size = new System.Drawing.Size(370, 107);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Y Axis Parameters";
@@ -622,7 +623,7 @@ namespace FilterSimulationWithTablesAndGraphs
             listViewGroup2});
             this.listBoxYAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxYAxis.Name = "listBoxYAxis";
-            this.listBoxYAxis.Size = new System.Drawing.Size(219, 88);
+            this.listBoxYAxis.Size = new System.Drawing.Size(364, 88);
             this.listBoxYAxis.TabIndex = 6;
             this.listBoxYAxis.UseCompatibleStateImageBehavior = false;
             this.listBoxYAxis.View = System.Windows.Forms.View.List;
@@ -635,6 +636,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.KeepAllInY1CheckBox);
             this.panel11.Controls.Add(this.deliquoringMachininglParametersCheckBox);
             this.panel11.Controls.Add(this.deselectAllButton);
             this.panel11.Controls.Add(this.cakeFormationMaterilParametersCheckBox);
@@ -648,8 +650,19 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(225, 220);
+            this.panel11.Size = new System.Drawing.Size(370, 220);
             this.panel11.TabIndex = 8;
+            // 
+            // KeepAllInY1CheckBox
+            // 
+            this.KeepAllInY1CheckBox.AutoSize = true;
+            this.KeepAllInY1CheckBox.Location = new System.Drawing.Point(223, 125);
+            this.KeepAllInY1CheckBox.Name = "KeepAllInY1CheckBox";
+            this.KeepAllInY1CheckBox.Size = new System.Drawing.Size(146, 17);
+            this.KeepAllInY1CheckBox.TabIndex = 5;
+            this.KeepAllInY1CheckBox.Text = "Keep all parameters in Y1";
+            this.KeepAllInY1CheckBox.UseVisualStyleBackColor = true;
+            this.KeepAllInY1CheckBox.CheckedChanged += new System.EventHandler(this.KeepAllInY1CheckBox_CheckedChanged);
             // 
             // deliquoringMachininglParametersCheckBox
             // 
@@ -730,7 +743,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(374, 731);
+            this.panel8.Size = new System.Drawing.Size(654, 731);
             this.panel8.TabIndex = 36;
             // 
             // RightSplitContainer
@@ -747,7 +760,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // RightSplitContainer.Panel2
             // 
             this.RightSplitContainer.Panel2.Controls.Add(this.panel9);
-            this.RightSplitContainer.Size = new System.Drawing.Size(374, 731);
+            this.RightSplitContainer.Size = new System.Drawing.Size(654, 731);
             this.RightSplitContainer.SplitterDistance = 556;
             this.RightSplitContainer.TabIndex = 1;
             // 
@@ -766,7 +779,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // SimulationAndGraphSplitContainer.Panel2
             // 
             this.SimulationAndGraphSplitContainer.Panel2.Controls.Add(this.coordinatesGrid);
-            this.SimulationAndGraphSplitContainer.Size = new System.Drawing.Size(374, 556);
+            this.SimulationAndGraphSplitContainer.Size = new System.Drawing.Size(654, 556);
             this.SimulationAndGraphSplitContainer.SplitterDistance = 373;
             this.SimulationAndGraphSplitContainer.TabIndex = 12;
             // 
@@ -777,7 +790,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(0, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(374, 171);
+            this.panel9.Size = new System.Drawing.Size(654, 171);
             this.panel9.TabIndex = 11;
             // 
             // fmFilterSimulationWithTablesAndGraphs
@@ -785,7 +798,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "fmFilterSimulationWithTablesAndGraphs";
-            this.Size = new System.Drawing.Size(1275, 731);
+            this.Size = new System.Drawing.Size(1480, 731);
             this.Load += new System.EventHandler(this.FmFilterSimulationWithTablesAndGraphsLoad);
             this.panelLeft.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
@@ -884,6 +897,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private Button deselectAllButton;
         private ColumnHeader columnHeader2;
         private SplitContainer RightSplitContainer;
+        private CheckBox KeepAllInY1CheckBox;
 
     }
 }

@@ -241,8 +241,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void PlaceTablesAndGraphsConfigurationPanelOnSeparateForm()
         {
-            int oldHeight = m_xyDialog == null ? 400 : m_xyDialog.Height;
-            int oldWidth = m_xyDialog == null ? 320 : m_xyDialog.Width;
+            int oldHeight = m_xyDialog == null ? 600 : m_xyDialog.Height;
+            int oldWidth = m_xyDialog == null ? 600 : m_xyDialog.Width;
             m_xyDialog = new Form();
             m_xyDialog.Closing += m_XYDialog_Closing;
             m_xyDialog.Height = oldHeight;
@@ -341,6 +341,13 @@ namespace FilterSimulationWithTablesAndGraphs
                 return "";
 
             return Solution.currentObjects.Serie.MachineType.name;
+        }
+
+        private void KeepAllInY1CheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
         }
     }
 }
