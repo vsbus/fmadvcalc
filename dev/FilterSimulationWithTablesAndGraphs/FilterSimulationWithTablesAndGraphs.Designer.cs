@@ -33,9 +33,9 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             this.maxXValueTextBox = new fmDataGrid.fmNumericalTextBox();
             this.minXValueTextBox = new fmDataGrid.fmNumericalTextBox();
             this.xRangeLabel = new System.Windows.Forms.Label();
@@ -76,6 +76,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.NoScalingCheckBox = new System.Windows.Forms.CheckBox();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -485,9 +486,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // DeleteButtonColumn
             // 
             this.DeleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = "Delete";
-            this.DeleteButtonColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = "Delete";
+            this.DeleteButtonColumn.DefaultCellStyle = dataGridViewCellStyle2;
             this.DeleteButtonColumn.HeaderText = "";
             this.DeleteButtonColumn.Name = "DeleteButtonColumn";
             this.DeleteButtonColumn.Width = 5;
@@ -614,13 +615,13 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.listBoxYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewGroup1.Header = "ListViewGroup";
-            listViewGroup1.Name = "listViewGroup1";
-            listViewGroup2.Header = "ListViewGroup";
-            listViewGroup2.Name = "listViewGroup2";
+            listViewGroup3.Header = "ListViewGroup";
+            listViewGroup3.Name = "listViewGroup1";
+            listViewGroup4.Header = "ListViewGroup";
+            listViewGroup4.Name = "listViewGroup2";
             this.listBoxYAxis.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2});
+            listViewGroup3,
+            listViewGroup4});
             this.listBoxYAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxYAxis.Name = "listBoxYAxis";
             this.listBoxYAxis.Size = new System.Drawing.Size(364, 88);
@@ -636,6 +637,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.NoScalingCheckBox);
             this.panel11.Controls.Add(this.KeepAllInY1CheckBox);
             this.panel11.Controls.Add(this.deliquoringMachininglParametersCheckBox);
             this.panel11.Controls.Add(this.deselectAllButton);
@@ -793,6 +795,17 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(654, 171);
             this.panel9.TabIndex = 11;
             // 
+            // NoScalingCheckBox
+            // 
+            this.NoScalingCheckBox.AutoSize = true;
+            this.NoScalingCheckBox.Location = new System.Drawing.Point(223, 148);
+            this.NoScalingCheckBox.Name = "NoScalingCheckBox";
+            this.NoScalingCheckBox.Size = new System.Drawing.Size(78, 17);
+            this.NoScalingCheckBox.TabIndex = 6;
+            this.NoScalingCheckBox.Text = "No Scaling";
+            this.NoScalingCheckBox.UseVisualStyleBackColor = true;
+            this.NoScalingCheckBox.CheckedChanged += new System.EventHandler(this.NoScalingCheckBox_CheckedChanged);
+            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -898,6 +911,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private ColumnHeader columnHeader2;
         private SplitContainer RightSplitContainer;
         private CheckBox KeepAllInY1CheckBox;
+        private CheckBox NoScalingCheckBox;
 
     }
 }

@@ -349,5 +349,12 @@ namespace FilterSimulationWithTablesAndGraphs
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
         }
+
+        private void NoScalingCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
+        }
     }
 }
