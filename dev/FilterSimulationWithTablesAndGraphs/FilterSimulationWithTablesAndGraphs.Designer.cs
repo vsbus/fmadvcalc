@@ -33,9 +33,9 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             this.maxXValueTextBox = new fmDataGrid.fmNumericalTextBox();
             this.minXValueTextBox = new fmDataGrid.fmNumericalTextBox();
             this.xRangeLabel = new System.Windows.Forms.Label();
@@ -43,6 +43,8 @@ namespace FilterSimulationWithTablesAndGraphs
             this.buttonAddRow = new System.Windows.Forms.Button();
             this.UseParamsCheckBox = new System.Windows.Forms.CheckBox();
             this.coordinatesGrid = new fmDataGrid.fmDataGrid();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.rowsQuantity = new fmDataGrid.fmNumericalTextBox();
             this.selectedSimulationParametersTable = new fmDataGrid.fmDataGrid();
@@ -64,6 +66,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis = new System.Windows.Forms.ListView();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.NoScalingCheckBox = new System.Windows.Forms.CheckBox();
             this.KeepAllInY1CheckBox = new System.Windows.Forms.CheckBox();
             this.deliquoringMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
             this.deselectAllButton = new System.Windows.Forms.Button();
@@ -76,7 +79,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.NoScalingCheckBox = new System.Windows.Forms.CheckBox();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -102,6 +104,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.projectSuspensionSplitContainer.Panel2.SuspendLayout();
             this.projectSuspensionSplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.coordinatesGrid)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.selectedSimulationParametersTable)).BeginInit();
             this.GridPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.additionalParametersTable)).BeginInit();
@@ -385,6 +388,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.coordinatesGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.coordinatesGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.coordinatesGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.coordinatesGrid.ContextMenuStrip = this.contextMenuStrip1;
             this.coordinatesGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.coordinatesGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.coordinatesGrid.HighLightCurrentRow = true;
@@ -396,6 +400,20 @@ namespace FilterSimulationWithTablesAndGraphs
             this.coordinatesGrid.Size = new System.Drawing.Size(654, 179);
             this.coordinatesGrid.TabIndex = 0;
             this.coordinatesGrid.CurrentCellChanged += new System.EventHandler(this.coordinatesGrid_CurrentCellChanged);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(103, 26);
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -486,9 +504,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // DeleteButtonColumn
             // 
             this.DeleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.NullValue = "Delete";
-            this.DeleteButtonColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = "Delete";
+            this.DeleteButtonColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.DeleteButtonColumn.HeaderText = "";
             this.DeleteButtonColumn.Name = "DeleteButtonColumn";
             this.DeleteButtonColumn.Width = 5;
@@ -615,13 +633,13 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.listBoxYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewGroup3.Header = "ListViewGroup";
-            listViewGroup3.Name = "listViewGroup1";
-            listViewGroup4.Header = "ListViewGroup";
-            listViewGroup4.Name = "listViewGroup2";
+            listViewGroup1.Header = "ListViewGroup";
+            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "ListViewGroup";
+            listViewGroup2.Name = "listViewGroup2";
             this.listBoxYAxis.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup3,
-            listViewGroup4});
+            listViewGroup1,
+            listViewGroup2});
             this.listBoxYAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxYAxis.Name = "listBoxYAxis";
             this.listBoxYAxis.Size = new System.Drawing.Size(364, 88);
@@ -654,6 +672,17 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(370, 220);
             this.panel11.TabIndex = 8;
+            // 
+            // NoScalingCheckBox
+            // 
+            this.NoScalingCheckBox.AutoSize = true;
+            this.NoScalingCheckBox.Location = new System.Drawing.Point(223, 148);
+            this.NoScalingCheckBox.Name = "NoScalingCheckBox";
+            this.NoScalingCheckBox.Size = new System.Drawing.Size(78, 17);
+            this.NoScalingCheckBox.TabIndex = 6;
+            this.NoScalingCheckBox.Text = "No Scaling";
+            this.NoScalingCheckBox.UseVisualStyleBackColor = true;
+            this.NoScalingCheckBox.CheckedChanged += new System.EventHandler(this.NoScalingCheckBox_CheckedChanged);
             // 
             // KeepAllInY1CheckBox
             // 
@@ -795,17 +824,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(654, 171);
             this.panel9.TabIndex = 11;
             // 
-            // NoScalingCheckBox
-            // 
-            this.NoScalingCheckBox.AutoSize = true;
-            this.NoScalingCheckBox.Location = new System.Drawing.Point(223, 148);
-            this.NoScalingCheckBox.Name = "NoScalingCheckBox";
-            this.NoScalingCheckBox.Size = new System.Drawing.Size(78, 17);
-            this.NoScalingCheckBox.TabIndex = 6;
-            this.NoScalingCheckBox.Text = "No Scaling";
-            this.NoScalingCheckBox.UseVisualStyleBackColor = true;
-            this.NoScalingCheckBox.CheckedChanged += new System.EventHandler(this.NoScalingCheckBox_CheckedChanged);
-            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -813,6 +831,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.Name = "fmFilterSimulationWithTablesAndGraphs";
             this.Size = new System.Drawing.Size(1480, 731);
             this.Load += new System.EventHandler(this.FmFilterSimulationWithTablesAndGraphsLoad);
+            this.Controls.SetChildIndex(this.mainSplitContainer, 0);
             this.panelLeft.ResumeLayout(false);
             this.topPanel.ResumeLayout(false);
             this.projectPanel.ResumeLayout(false);
@@ -842,6 +861,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.projectSuspensionSplitContainer.Panel2.ResumeLayout(false);
             this.projectSuspensionSplitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.coordinatesGrid)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.selectedSimulationParametersTable)).EndInit();
             this.GridPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.additionalParametersTable)).EndInit();
@@ -912,6 +932,8 @@ namespace FilterSimulationWithTablesAndGraphs
         private SplitContainer RightSplitContainer;
         private CheckBox KeepAllInY1CheckBox;
         private CheckBox NoScalingCheckBox;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem copyToolStripMenuItem;
 
     }
 }

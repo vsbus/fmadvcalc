@@ -356,5 +356,16 @@ namespace FilterSimulationWithTablesAndGraphs
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
         }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell curCell = coordinatesGrid.CurrentCell;
+            coordinatesGrid.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+            coordinatesGrid.SelectAll();
+            DataObject dataObj = coordinatesGrid.GetClipboardContent();
+            Clipboard.SetDataObject(dataObj, true);
+            coordinatesGrid.CurrentCell = curCell;
+            coordinatesGrid.ClearSelection();
+        }
     }
 }
