@@ -198,11 +198,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // projectPanel
             // 
-            this.projectPanel.Size = new System.Drawing.Size(321, 115);
+            this.projectPanel.Size = new System.Drawing.Size(170, 115);
             // 
             // suspensionPanel
             // 
-            this.suspensionPanel.Size = new System.Drawing.Size(41, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(192, 115);
             // 
             // splitter2
             // 
@@ -243,11 +243,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
-            this.panel1.Size = new System.Drawing.Size(317, 20);
+            this.panel1.Size = new System.Drawing.Size(166, 20);
             // 
             // panel2
             // 
-            this.panel2.Size = new System.Drawing.Size(37, 20);
+            this.panel2.Size = new System.Drawing.Size(188, 20);
             // 
             // panel3
             // 
@@ -291,7 +291,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(366, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 321;
+            this.projectSuspensionSplitContainer.SplitterDistance = 170;
             // 
             // commentSimulationButton
             // 
