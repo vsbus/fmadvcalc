@@ -267,7 +267,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void CreateColumnsInParametersTables()
         {
-            var allSimParams = new List<fmGlobalParameter>((new fmFilterSimulation()).Parameters.Keys);
+            var allSimParams = new List<fmGlobalParameter>();
+            allSimParams.AddRange(fmGlobalParameter.GetMachineSettingsCakeParameters());
+            allSimParams.AddRange(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
 
             foreach (fmGlobalParameter p in allSimParams)
             {
@@ -479,11 +481,13 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateVisibilityOfColumnsInSelectedSimulationsTable()
         {
+            var cakeFormationParameters =
+                new List<fmGlobalParameter>(fmGlobalParameter.GetMachineSettingsCakeParameters());
+            var deliquoringParameters =
+                new List<fmGlobalParameter>(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
             var inputs = new List<fmGlobalParameter>();
-            foreach (var p in new fmFilterMachiningBlock().Parameters)
-            {
-                inputs.Add(p.globalParameter);
-            }
+            inputs.AddRange(cakeFormationParameters);
+            inputs.AddRange(deliquoringParameters);
 
             foreach (DataGridViewColumn col in selectedSimulationParametersTable.Columns)
             {
@@ -495,7 +499,8 @@ namespace FilterSimulationWithTablesAndGraphs
                     if (inputs.Contains(par))
                     {
                         foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
-                            if (simData.internalSimulationData.parameters[par] is fmCalculationVariableParameter
+                            if (simData.internalSimulationData.parameters.ContainsKey(par)
+                                && simData.internalSimulationData.parameters[par] is fmCalculationVariableParameter
                                 && ((fmCalculationVariableParameter)simData.internalSimulationData.parameters[par]).isInputed)
                             {
                                 var fmb = new fmFilterMachiningBlock();
@@ -503,10 +508,26 @@ namespace FilterSimulationWithTablesAndGraphs
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.deliquoringUsedCalculationOption);
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.gasFlowrateUsedCalculationOption);
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.evaporationUsedCalculationOption);
-                                var xParameter = listBoxXAxis.SelectedItems.Count == 0
-                                                     ? null
-                                                     : fmb.GetParameterByName(listBoxXAxis.SelectedItems[0].Text);
-                                if (xParameter == null || fmb.GetParameterByName(parName).group != xParameter.group)
+
+                                var deliq = new fmDeliquoringSimualtionBlock();
+
+                                fmBlockVariableParameter xParameter = null;
+                                if (listBoxXAxis.SelectedItems.Count != 0)
+                                {
+                                    fmGlobalParameter p = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+                                    xParameter = (cakeFormationParameters.Contains(p)
+                                        ? (fmBaseBlock) fmb
+                                        : (fmBaseBlock) deliq).GetParameterByName(p.Name);
+                                }
+
+                                fmBlockVariableParameter yParameter = null;
+                                {
+                                    fmGlobalParameter p = fmGlobalParameter.ParametersByName[parName];
+                                    yParameter = (cakeFormationParameters.Contains(p)
+                                        ? (fmBaseBlock) fmb
+                                        : (fmBaseBlock) deliq).GetParameterByName(p.Name);
+                                }
+                                if (xParameter == null || yParameter.group != xParameter.group)
                                 {
                                     col.Visible = true;
                                     break;
