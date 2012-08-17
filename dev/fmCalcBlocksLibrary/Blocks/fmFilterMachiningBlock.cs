@@ -1177,6 +1177,15 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption newCalculationOption)
         {
+            var oldInputs = new List<fmBlockVariableParameter>();
+            foreach (fmBlockVariableParameter parameter in parameters)
+            {
+                if (parameter.isInputed)
+                {
+                    oldInputs.Add(parameter);
+                }
+            }
+
             filterMachiningCalculationOption = newCalculationOption;
             UpdateGroups();
             List<fmGlobalParameter> inputedParameters = fmCalculationOptionHelper.GetParametersListThatCanBeInput(newCalculationOption);
@@ -1188,16 +1197,42 @@ namespace fmCalcBlocksLibrary.Blocks
 
             foreach (fmBlockVariableParameter parameter in parameters)
             {
-                bool found = inputedParameters.Contains(parameter.globalParameter);
+                parameter.isInputed = false;
+            }
+
+            foreach (fmBlockVariableParameter parameter in oldInputs)
+            {
+                fmBlockParameterGroup group = parameter.group;
+                if (group != null && !groupUsed[group])
+                {
+                    groupUsed[group] = true;
+                    if (inputedParameters.Contains(parameter.globalParameter))
+                    {
+                        parameter.isInputed = true;
+                    }
+                }
+            }
+
+            foreach (fmBlockVariableParameter parameter in parameters)
+            {
                 bool notUsedGroup = parameter.group == null ? true : !groupUsed[parameter.group];
+                if (notUsedGroup)
+                {
+                    if (inputedParameters.Contains(parameter.globalParameter))
+                    {
+                        parameter.IsInputed = true;
+                    }
+                    if (parameter.group != null)
+                        groupUsed[parameter.group] = true;
+                }
+            }
 
-                parameter.IsInputed = found && notUsedGroup;
-
-                if (parameter.group != null)
-                    groupUsed[parameter.group] = true;
-
+            foreach (fmBlockVariableParameter parameter in parameters)
+            {
                 if (parameter.cell != null)
-                    parameter.cell.ReadOnly = !found;
+                {
+                    parameter.cell.ReadOnly = parameter.group == null;
+                }
             }
 
             UpdateCellsBackColor();
