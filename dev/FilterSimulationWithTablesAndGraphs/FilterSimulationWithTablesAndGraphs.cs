@@ -173,7 +173,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
             }
 
-            if (listBoxXAxis.SelectedItems[0].Text == "")
+            if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
                 return;
 
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
