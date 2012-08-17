@@ -115,31 +115,49 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 epsd.IsInputed = true;
                 hcd.isInputed = false;
-                hcd.cell.ReadOnly = false;
+                if (hcd.cell != null)
+                {
+                    hcd.cell.ReadOnly = false;
+                }
                 hcd.group = hcd_epsd_group;
-                epsd.cell.ReadOnly = false;
+                if (epsd.cell != null)
+                {
+                    epsd.cell.ReadOnly = false;
+                }
                 epsd.group = hcd_epsd_group;
             }
             else
             {
                 epsd.IsInputed = false;
                 hcd.isInputed = false;
-                hcd.cell.ReadOnly = true;
+                if (hcd.cell != null)
+                {
+                    hcd.cell.ReadOnly = true;
+                }
                 hcd.group = null;
-                epsd.cell.ReadOnly = true;
+                if (epsd.cell != null)
+                {
+                    epsd.cell.ReadOnly = true;
+                }
                 epsd.group = null;
             }
 
             if (dpdInputCalculationOption == fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser)
             {
                 Dpd.IsInputed = true;
-                Dpd.cell.ReadOnly = false;
+                if (Dpd.cell != null)
+                {
+                    Dpd.cell.ReadOnly = false;
+                }
                 Dpd.group = Dpd_group;
             }
             else
             {
                 Dpd.IsInputed = false;
-                Dpd.cell.ReadOnly = true;
+                if (Dpd.cell != null)
+                {
+                    Dpd.cell.ReadOnly = true;
+                }
                 Dpd.group = null;
             }
         }

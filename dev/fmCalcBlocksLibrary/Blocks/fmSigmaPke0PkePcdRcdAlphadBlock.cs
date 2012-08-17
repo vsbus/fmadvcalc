@@ -112,11 +112,14 @@ namespace fmCalcBlocksLibrary.Blocks
             rcd.group = pc_rc_alpha_group;
             alphad.group = pc_rc_alpha_group;
 
-            etad.cell.ReadOnly = true;
-            rhod.cell.ReadOnly = true;
-            pcd.cell.ReadOnly = true;
-            rcd.cell.ReadOnly = true;
-            alphad.cell.ReadOnly = true;
+            if (etad.cell != null)
+            {
+                etad.cell.ReadOnly = true;
+                rhod.cell.ReadOnly = true;
+                pcd.cell.ReadOnly = true;
+                rcd.cell.ReadOnly = true;
+                alphad.cell.ReadOnly = true;
+            }
 
             processOnChange = true;
         }

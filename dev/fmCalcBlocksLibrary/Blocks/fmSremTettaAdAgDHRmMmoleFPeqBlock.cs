@@ -93,7 +93,10 @@ namespace fmCalcBlocksLibrary.Blocks
             Mmole.group = Mmole_Group;
             f.group = f_Group;
 
-            peq.cell.ReadOnly = true;
+            if (peq.cell != null)
+            {
+                peq.cell.ReadOnly = true;
+            }
 
             processOnChange = true;
         }

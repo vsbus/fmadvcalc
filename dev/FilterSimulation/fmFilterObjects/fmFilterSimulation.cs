@@ -303,12 +303,22 @@ namespace FilterSimulation.fmFilterObjects
             result.AddRange(filterMachiningParametersList);
 
             {
-                var deliqBlock = new fmDeliquoringSimualtionBlock();
-                foreach (fmBlockVariableParameter p in deliqBlock.Parameters)
+                var deliquoringBlocks = new fmBaseBlock[]
+                                            {
+                                                new fmEps0dNedEpsdBlock(),
+                                                new fmSigmaPke0PkePcdRcdAlphadBlock(),
+                                                new fmSremTettaAdAgDHRmMmoleFPeqBlock(),
+                                                new fmDeliquoringSimualtionBlock()
+                                            };
+
+                foreach (fmBaseBlock deliquoringBlock in deliquoringBlocks)
                 {
-                    if (p.group != null)
+                    foreach (fmBlockVariableParameter p in deliquoringBlock.Parameters)
                     {
-                        result.Add(p.globalParameter);
+                        if (p.group != null)
+                        {
+                            result.Add(p.globalParameter);
+                        }
                     }
                 }
             }
