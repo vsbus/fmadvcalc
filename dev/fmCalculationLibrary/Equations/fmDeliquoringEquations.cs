@@ -22,9 +22,16 @@ namespace fmCalculationLibrary.Equations
             return pke / C;
         }
 
-        public static fmValue Eval_hcd_from_hcf_epsf_epsd(fmValue hcf, fmValue epsf, fmValue epsd)
+        public static fmValue Eval_hcd_from_hcf_epsf_epsd_plainArea(fmValue hcf, fmValue epsf, fmValue epsd)
         {
             return (1 - epsf) / (1 - epsd) * hcf;
+        }
+
+        public static fmValue Eval_hcd_from_hcf_epsf_epsd_cylindricalArea(fmValue hcf, fmValue epsf, fmValue epsd, fmValue d0)
+        {
+            fmValue hcdf = 2 * hcf / d0;
+            fmValue root = fmValue.Sqrt(1 + (1 - epsf) / (1 - epsd) * hcdf * (2 + hcdf));
+            return d0 / 2 * (root - 1);
         }
 
         public static fmValue Eval_epsd_from_hcf_epsf_hcd(fmValue hcf, fmValue epsf, fmValue hcd)

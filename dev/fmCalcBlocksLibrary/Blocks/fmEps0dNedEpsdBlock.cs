@@ -20,6 +20,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter eps0;
         private readonly fmBlockConstantParameter ne;
         private readonly fmBlockConstantParameter eps;
+        private readonly fmBlockConstantParameter d0;
 
         private readonly fmBlockParameterGroup Dpd_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup hcd_epsd_group = new fmBlockParameterGroup();
@@ -27,6 +28,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption dpdInputCalculationOption;
+        public object isPlainArea;
 
         public fmValue epsd_Value
         {
@@ -50,7 +52,8 @@ namespace fmCalcBlocksLibrary.Blocks
             var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(AllParameters)
                                              {
                                                  hcdCalculationOption = hcdCalculationOption,
-                                                 dpdInputCalculationOption = dpdInputCalculationOption
+                                                 dpdInputCalculationOption = dpdInputCalculationOption,
+                                                 isPlainArea = isPlainArea
                                              };
             eps0dNedEpsdCalculator.DoCalculations();
         }
@@ -71,6 +74,7 @@ namespace fmCalcBlocksLibrary.Blocks
             AddConstantParameter(ref eps0, fmGlobalParameter.eps0);
             AddConstantParameter(ref ne, fmGlobalParameter.ne);
             AddConstantParameter(ref eps, fmGlobalParameter.eps);
+            AddConstantParameter(ref d0, fmGlobalParameter.d0);
 
             hcdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
             dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation;

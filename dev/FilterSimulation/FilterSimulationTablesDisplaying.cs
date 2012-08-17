@@ -449,7 +449,12 @@ namespace FilterSimulation
 
                     sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
                     sim.deliquoringSigmaPkeBlock.CalculateAndDisplay();
+                    
+                    sim.deliquoringEps0NeEpsBlock.isPlainArea =
+                        fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
+                            sim.filterMachiningBlock.filterMachiningCalculationOption);
                     sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
+                    
                     sim.filterMachiningBlock.CalculateAndDisplay();
                     sim.rm0HceBlock.CalculateAndDisplay();
                     sim.pc0Rc0A0Block.CalculateAndDisplay();
@@ -1541,6 +1546,9 @@ namespace FilterSimulation
                 fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
             }
 
+            sim.deliquoringEps0NeEpsBlock.isPlainArea =
+                fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
+                    filterMachiningBlock.filterMachiningCalculationOption);
             sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
         }
     }
