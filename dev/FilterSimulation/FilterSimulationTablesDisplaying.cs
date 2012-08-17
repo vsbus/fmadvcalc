@@ -1042,7 +1042,8 @@ namespace FilterSimulation
                     m_commonDeliquoringSimulationBlock.deliquoringCalculatorOptions =
                         new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(
                             fmFilterMachiningCalculator.IsPlainAreaCalculationOption(sim.FilterMachiningCalculationOption),
-                            fmFilterSimMachineType.IsVacuumFilter(sim.Parent.MachineType));
+                            fmFilterSimMachineType.IsVacuumFilter(sim.Parent.MachineType),
+                            fmFilterSimMachineType.GetHcdCoefficient(sim.Parent.MachineType));
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
                 }
             }
@@ -1117,7 +1118,10 @@ namespace FilterSimulation
                                   FilterMachiningCalculationOption),
                 Solution.currentObjects.Serie == null
                     ? true
-                    : fmFilterSimMachineType.IsVacuumFilter(Solution.currentObjects.Serie.MachineType));
+                    : fmFilterSimMachineType.IsVacuumFilter(Solution.currentObjects.Serie.MachineType),
+                Solution.currentObjects.Serie == null
+                    ? 1
+                    : fmFilterSimMachineType.GetHcdCoefficient(Solution.currentObjects.Serie.MachineType));
             m_commonDeliquoringSimulationBlock.UpdateCellsStyle();
 
             m_commonDeliquoringSimulationBlock.ValuesChangedByUser += CommonDeliquoringSimulationBlockValuesChangedByUser;
@@ -1392,7 +1396,8 @@ namespace FilterSimulation
                         new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(
                             fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
                                 simulation.FilterMachiningCalculationOption),
-                            fmFilterSimMachineType.IsVacuumFilter(simulation.Parent.MachineType));
+                            fmFilterSimMachineType.IsVacuumFilter(simulation.Parent.MachineType),
+                            fmFilterSimMachineType.GetHcdCoefficient(simulation.Parent.MachineType));
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
                     fmFilterSimulation.CopyAllParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, simulation);
                 }
@@ -1405,7 +1410,8 @@ namespace FilterSimulation
                         .DeliquoringCalculatorOptions(
                         fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
                             Solution.currentObjects.Simulation.FilterMachiningCalculationOption),
-                        fmFilterSimMachineType.IsVacuumFilter(Solution.currentObjects.Serie.MachineType));
+                        fmFilterSimMachineType.IsVacuumFilter(Solution.currentObjects.Serie.MachineType),
+                        fmFilterSimMachineType.GetHcdCoefficient(Solution.currentObjects.Serie.MachineType));
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
                 }
             }

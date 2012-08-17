@@ -37,14 +37,14 @@ namespace fmCalculationLibrary.Equations
             return sd * tc;
         }
 
-        public static fmValue Eval_K_From_pcd_Dpd_pke_epsd_etaf_hcd_hce_td(fmValue pcd, fmValue Dpd, fmValue pke, fmValue epsd, fmValue etaf, fmValue hcd, fmValue hce, fmValue td)
+        public static fmValue Eval_K_From_pcd_Dpd_pke_epsd_etaf_hcd_hce_td(fmValue pcd, fmValue Dpd, fmValue pke, fmValue epsd, fmValue etaf, fmValue hcd, fmValue hce, fmValue td, fmValue hcdCoefficient)
         {
-            return pcd * (Dpd - pke) / (epsd * etaf * hcd * (hcd + hce)) * td;
+            return pcd * (Dpd - pke) / (epsd * etaf * (hcdCoefficient * hcd) * ((hcdCoefficient * hcd) + hce)) * td;
         }
 
-        public static fmValue Eval_td_From_pcd_Dpd_pke_epsd_etaf_hcd_hce_K(fmValue pcd, fmValue Dpd, fmValue pke, fmValue epsd, fmValue etaf, fmValue hcd, fmValue hce, fmValue K)
+        public static fmValue Eval_td_From_pcd_Dpd_pke_epsd_etaf_hcd_hce_K(fmValue pcd, fmValue Dpd, fmValue pke, fmValue epsd, fmValue etaf, fmValue hcd, fmValue hce, fmValue K, fmValue hcdCoefficient)
         {
-            return K / (pcd * (Dpd - pke) / (epsd * etaf * hcd * (hcd + hce)));
+            return K / (pcd * (Dpd - pke) / (epsd * etaf * (hcdCoefficient * hcd) * ((hcdCoefficient * hcd) + hce)));
         }
 
         public static fmValue Eval_Smech_From_Srem_ad1_ad2_K(fmValue Srem, fmValue ad1, fmValue ad2, fmValue K)
@@ -62,10 +62,10 @@ namespace fmCalculationLibrary.Equations
             return A * hcd;
         }
 
-        public static fmValue Eval_Vgmaxev_From_A_pcd_Dpd_etag_hcd_hce_ag1_ag2_td(fmValue A, fmValue pcd, fmValue Dpd, fmValue etag, fmValue hcd, fmValue hce, fmValue ag1, fmValue ag2, fmValue td)
+        public static fmValue Eval_Vgmaxev_From_A_pcd_Dpd_etag_hcd_hce_ag1_ag2_td(fmValue A, fmValue pcd, fmValue Dpd, fmValue etag, fmValue hcd, fmValue hce, fmValue ag1, fmValue ag2, fmValue td, fmValue hcdCoefficient)
         {
             fmValue bar = new fmValue(1e5);
-            return A * pcd * Dpd / (etag * (hcd + hce)) * (ag1 + ag2 * fmValue.Log(Dpd / bar)) * td;
+            return A * pcd * Dpd / (etag * ((hcdCoefficient * hcd) + hce)) * (ag1 + ag2 * fmValue.Log(Dpd / bar)) * td;
         }
 
         public static fmValue Eval_Vgev_From_Vgmaxev_ag3_K(fmValue Vgmaxev, fmValue ag3, fmValue K)
@@ -117,12 +117,12 @@ namespace fmCalculationLibrary.Equations
             return 1 - Dpd / (2 * pN);
         }
 
-        public static fmValue Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(fmValue A, fmValue pcd, fmValue pmoverpn, fmValue Dpd, fmValue etag, fmValue hcd, fmValue hce, fmValue Tetta, fmValue ag1, fmValue ag2)
+        public static fmValue Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(fmValue A, fmValue pcd, fmValue pmoverpn, fmValue Dpd, fmValue etag, fmValue hcd, fmValue hce, fmValue Tetta, fmValue ag1, fmValue ag2, fmValue hcdCoefficient)
         {
             fmValue bar = new fmValue(1e5);
             fmValue Tn = new fmValue(273);
             fmValue T = Tetta + Tn;
-            return A * pcd * pmoverpn * Dpd * Tn / (etag * (hcd + hce) * T) * (ag1 + ag2 * fmValue.Log(Dpd / bar));
+            return A * pcd * pmoverpn * Dpd * Tn / (etag * ((hcdCoefficient * hcd) + hce) * T) * (ag1 + ag2 * fmValue.Log(Dpd / bar));
         }
 
         public static fmValue Eval_K_From_Qgimax_ag3_Qgi(fmValue Qgimax, fmValue ag3, fmValue Qgi)
@@ -172,16 +172,17 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue Eval_K_From_Vcd_ad1_ad2_Srem_Qfid_pcd_Dpd_pke_etaf_hcd_hce(
             fmValue Vcd, fmValue ad1, fmValue ad2, fmValue Srem, fmValue Qfid, fmValue pcd,
-            fmValue Dpd, fmValue pke, fmValue etaf, fmValue hcd, fmValue hce)
+            fmValue Dpd, fmValue pke, fmValue etaf, fmValue hcd, fmValue hce, fmValue hcdCoefficient)
         {
-            return (fmValue.Pow(Qfid * etaf * hcd * (hcd + hce) / (Vcd * ad1 * ad2 * (1 - Srem) * pcd * (Dpd - pke)), -1 / (ad1 + 1)) - 1) / ad2;
+            return (fmValue.Pow(Qfid * etaf * (hcdCoefficient * hcd) * ((hcdCoefficient * hcd) + hce) / (Vcd * ad1 * ad2 * (1 - Srem) * pcd * (Dpd - pke)), -1 / (ad1 + 1)) - 1) / ad2;
         }
 
         public static fmValue Eval_Qfid_From_Vcd_ad1_ad2_Srem_K_pcd_Dpd_pke_etaf_hcd_hce(
             fmValue Vcd, fmValue ad1, fmValue ad2, fmValue Srem, fmValue K, fmValue pcd,
-            fmValue Dpd, fmValue pke, fmValue etaf, fmValue hcd, fmValue hce)
+            fmValue Dpd, fmValue pke, fmValue etaf, fmValue hcd, fmValue hce, fmValue hcdCoefficient)
         {
-            return Vcd * ad1 * ad2 * (1 - Srem) * fmValue.Pow(1 + ad2 * K, -ad1 - 1) * pcd * (Dpd - pke) / (etaf * hcd * (hcd + hce));
+            return Vcd * ad1 * ad2 * (1 - Srem) * fmValue.Pow(1 + ad2 * K, -ad1 - 1) * pcd * (Dpd - pke) /
+                   (etaf * (hcdCoefficient * hcd) * ((hcdCoefficient * hcd) + hce));
         }
 
         public static fmValue Eval_sd_From_td_tc(fmValue td, fmValue tc)
@@ -198,9 +199,9 @@ namespace fmCalculationLibrary.Equations
             return (fmValue.LambertW(-fmValue.Exp(-(Qg * ag3 * tc + Qgimax * Const1) / (Qgimax * Const1))) * Qgimax * Const1 + Qg * ag3 * tc + Qgimax * Const1) / (Qgimax * Const1 * ag3);
         }
 
-        public static fmValue Eval_Const1(fmValue epsd, fmValue etaf, fmValue hcd, fmValue hce, fmValue pcd, fmValue Dpd, fmValue pke)
+        public static fmValue Eval_Const1(fmValue epsd, fmValue etaf, fmValue hcd, fmValue hce, fmValue pcd, fmValue Dpd, fmValue pke, fmValue hcdCoefficient)
         {
-            return epsd * etaf * hcd * (hcd + hce) / (pcd * (Dpd - pke));
+            return epsd * etaf * (hcdCoefficient * hcd) * ((hcdCoefficient * hcd) + hce) / (pcd * (Dpd - pke));
         }
 
         public static fmValue Eval_Q_From_Qt_td_tc(fmValue Qt, fmValue td, fmValue tc)
@@ -281,10 +282,10 @@ namespace fmCalculationLibrary.Equations
             return tc / Const1;
         }
 
-        public static fmValue Eval_SC3_From_A_pcd_Dpd_ag1_ag2_etag_hcd_hce(fmValue A, fmValue pcd, fmValue Dpd, fmValue ag1, fmValue ag2, fmValue etag, fmValue hcd, fmValue hce)
+        public static fmValue Eval_SC3_From_A_pcd_Dpd_ag1_ag2_etag_hcd_hce(fmValue A, fmValue pcd, fmValue Dpd, fmValue ag1, fmValue ag2, fmValue etag, fmValue hcd, fmValue hce, fmValue hcdCoefficient)
         {
             fmValue bar = new fmValue(1e5);
-            return A * pcd * Dpd * (ag1 + ag2 * fmValue.Log(Dpd / bar)) / (etag * (hcd + hce));
+            return A * pcd * Dpd * (ag1 + ag2 * fmValue.Log(Dpd / bar)) / (etag * ((hcdCoefficient * hcd) + hce));
         }
 
         public static fmValue Eval_S_From_Vcd_epsd_Vlcd(fmValue Vcd, fmValue epsd, fmValue Vlcd)

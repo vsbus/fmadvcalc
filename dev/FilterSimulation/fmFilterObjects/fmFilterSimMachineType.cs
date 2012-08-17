@@ -101,5 +101,10 @@ namespace FilterSimulation.fmFilterObjects
                                                                      });
             return vacuumFilters.Contains(machineType);
         }
+
+        public static double GetHcdCoefficient(fmFilterSimMachineType machineType)
+        {
+            return machineType == FilterPress ? 2 : 1;
+        }
     }
 }

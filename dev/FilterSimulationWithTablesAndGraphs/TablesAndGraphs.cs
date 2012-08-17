@@ -1224,9 +1224,10 @@ namespace FilterSimulationWithTablesAndGraphs
                                 simData.internalSimulationData.filterMachiningCalculationOption);
                         bool isVacuumFilter =
                             fmFilterSimMachineType.IsVacuumFilter(simData.externalSimulation.Parent.MachineType);
+                        double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(simData.externalSimulation.Parent.MachineType);
                         var deliquoringSimualtionCalculator =
                             new fmDeliquoringSimualtionCalculator(
-                                new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlaneArea, isVacuumFilter),
+                                new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlaneArea, isVacuumFilter, hcdCoefficient),
                                 tempSim.parameters.Values);
                         deliquoringSimualtionCalculator.DoCalculations();
 
