@@ -610,8 +610,8 @@ namespace FilterSimulationWithTablesAndGraphs
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
             double coef = xParameter.UnitFamily.CurrentUnit.Coef;
             fmRange range = xParameter.SpecifiedRange;
-            minXValueTextBox.Text = (range.MinValue / coef).ToString();
-            maxXValueTextBox.Text = (range.MaxValue / coef).ToString();
+            minXValueTextBox.Text = new fmValue(range.MinValue / coef).ToString();
+            maxXValueTextBox.Text = new fmValue(range.MaxValue / coef).ToString();
         }
 
         // ReSharper disable InconsistentNaming
