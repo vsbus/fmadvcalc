@@ -96,7 +96,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 if (sender == coordinatesGrid)
                 {
-                    if (coordinatesGrid.CurrentCell != null)
+                    if (coordinatesGrid.CurrentCell != null && m_displayingResults.XParameter != null)
                     {
                         int index = coordinatesGrid.CurrentCell.RowIndex;
                         if (0 <= index && index < m_displayingResults.XParameter.Values.Length)
