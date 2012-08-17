@@ -1222,7 +1222,10 @@ namespace FilterSimulationWithTablesAndGraphs
                         bool isPlaneArea =
                             fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
                                 simData.internalSimulationData.filterMachiningCalculationOption);
-                        var deliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(isPlaneArea, tempSim.parameters.Values);
+                        var deliquoringSimualtionCalculator =
+                            new fmDeliquoringSimualtionCalculator(
+                                new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlaneArea),
+                                tempSim.parameters.Values);
                         deliquoringSimualtionCalculator.DoCalculations();
 
                         simData.calculatedDataList.Add(tempSim);

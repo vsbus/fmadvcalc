@@ -128,11 +128,11 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmValue rhod_Value {get {return rhod.value;} set {rhod.value = value;}}
         public fmValue rhos_Value {get {return rhos.value;} set {rhos.value = value;}}
 
-        public object isPlaneArea;
+        public fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions deliquoringCalculatorOptions;
 
         override public void DoCalculations()
         {
-            var fmDeliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator((bool)isPlaneArea, AllParameters);
+            var fmDeliquoringSimualtionCalculator = new fmDeliquoringSimualtionCalculator(deliquoringCalculatorOptions, AllParameters);
             fmDeliquoringSimualtionCalculator.DoCalculations();
         }
 

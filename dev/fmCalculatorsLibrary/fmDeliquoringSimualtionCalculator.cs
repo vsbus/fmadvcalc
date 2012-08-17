@@ -20,13 +20,28 @@ namespace fmCalculatorsLibrary
             CalculatedFromCakeFormation
         }
 
-        private bool isPlaneArea = true;
+        public class DeliquoringCalculatorOptions
+        {
+            private bool isPlaneArea;
+
+            public DeliquoringCalculatorOptions(bool isPlaneArea)
+            {
+                this.isPlaneArea = isPlaneArea;
+            }
+
+            public bool IsPlaneArea()
+            {
+                return isPlaneArea;
+            }
+        }
+
+        public DeliquoringCalculatorOptions CalculatorOptions;
 
         public fmDeliquoringSimualtionCalculator(
-            bool isPlaneArea,
+            DeliquoringCalculatorOptions calculatorOptions,
             IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList)
         {
-            this.isPlaneArea = isPlaneArea;
+            this.CalculatorOptions = calculatorOptions;
         }
         
         override public void DoCalculations()
@@ -139,7 +154,7 @@ namespace fmCalculatorsLibrary
 
             if (!isKnown_Vcd)
             {
-                if (isPlaneArea)
+                if (CalculatorOptions.IsPlaneArea())
                 {
                     Vcd.value = fmDeliquoringEquations.Eval_Vcd_From_A_hcd_plainArea(A.value, hcd.value);
                 }

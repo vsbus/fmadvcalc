@@ -1039,9 +1039,9 @@ namespace FilterSimulation
                         par.value = sim.Parameters[par.globalParameter].value;
                         par.isInputed = (sim.Parameters[par.globalParameter] as fmCalculationVariableParameter).isInputed;
                     }
-                    m_commonDeliquoringSimulationBlock.isPlaneArea =
-                        fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
-                            sim.FilterMachiningCalculationOption);
+                    m_commonDeliquoringSimulationBlock.deliquoringCalculatorOptions =
+                        new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(
+                            fmFilterMachiningCalculator.IsPlainAreaCalculationOption(sim.FilterMachiningCalculationOption));
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
                 }
             }
@@ -1106,12 +1106,14 @@ namespace FilterSimulation
             {
                 m_commonDeliquoringSimulationBlock.AssignCell(p, parToCell[p.globalParameter]);
             }
-            m_commonDeliquoringSimulationBlock.isPlaneArea = Solution.currentObjects.Simulation == null
-                                                                 ? true
-                                                                 : fmFilterMachiningCalculator.
-                                                                       IsPlainAreaCalculationOption(
-                                                                           Solution.currentObjects.Simulation.
-                                                                               FilterMachiningCalculationOption);
+            m_commonDeliquoringSimulationBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator.
+                DeliquoringCalculatorOptions(
+                Solution.currentObjects.Simulation == null
+                    ? true
+                    : fmFilterMachiningCalculator.
+                          IsPlainAreaCalculationOption(
+                              Solution.currentObjects.Simulation.
+                                  FilterMachiningCalculationOption));
             m_commonDeliquoringSimulationBlock.UpdateCellsStyle();
 
             m_commonDeliquoringSimulationBlock.ValuesChangedByUser += CommonDeliquoringSimulationBlockValuesChangedByUser;
@@ -1382,9 +1384,10 @@ namespace FilterSimulation
                 foreach (fmFilterSimulation simulation in Solution.GetAllSimulations())
                 {
                     fmFilterSimulation.CopyAllParametersFromSimulationToBlock(simulation, m_commonDeliquoringSimulationBlock);
-                    m_commonDeliquoringSimulationBlock.isPlaneArea =
-                        fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
-                            simulation.FilterMachiningCalculationOption);
+                    m_commonDeliquoringSimulationBlock.deliquoringCalculatorOptions =
+                        new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(
+                            fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
+                                simulation.FilterMachiningCalculationOption));
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
                     fmFilterSimulation.CopyAllParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, simulation);
                 }
@@ -1393,9 +1396,10 @@ namespace FilterSimulation
                 {
                     fmFilterSimulation.CopyAllParametersFromSimulationToBlock(
                         Solution.currentObjects.Simulation, m_commonDeliquoringSimulationBlock);
-                    m_commonDeliquoringSimulationBlock.isPlaneArea =
+                    m_commonDeliquoringSimulationBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator
+                        .DeliquoringCalculatorOptions(
                         fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
-                            Solution.currentObjects.Simulation.FilterMachiningCalculationOption);
+                            Solution.currentObjects.Simulation.FilterMachiningCalculationOption));
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
                 }
             }
