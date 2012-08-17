@@ -19,14 +19,14 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmValue m_scale;
 
         public fmGlobalParameter Parameter { get; set; }
-        public string OwningSimulationName = "";
+        public fmFilterSimulationData OwningSimulation;
 
         internal string GetTextForHeader()
         {
             string result = Parameter.Name + " (" + Parameter.UnitName + ")";
-            if (OwningSimulationName != "")
+            if (OwningSimulation != null)
             {
-                result += " [" + OwningSimulationName + "]";
+                result += " [" + OwningSimulation.name + "]";
             }
             return result;
         }
@@ -837,6 +837,10 @@ namespace FilterSimulationWithTablesAndGraphs
                     if (coordinatesGrid.Columns.Count > yCol)
                     {
                         coordinatesGrid.Columns[yCol].HeaderText = dispArray.GetTextForHeader();
+                        if (dispArray.OwningSimulation == m_externalCurrentActiveSimulation.Data)
+                        {
+                            coordinatesGrid.Columns[yCol].HeaderText = "* " + coordinatesGrid.Columns[yCol].HeaderText;
+                        }
                         coordinatesGrid.Columns[yCol].ReadOnly = true;
                         coordinatesGrid.Columns[yCol].Width = 50;
 
@@ -1011,12 +1015,10 @@ namespace FilterSimulationWithTablesAndGraphs
                         if (!simData.isChecked)
                             continue;
 
-                        string simName = simData.externalSimulation.GetName();
-
                         var yArray = new fmDisplayingArray
                         {
                             Parameter = yParameter,
-                            OwningSimulationName = simName,
+                            OwningSimulation = simData.externalSimulation.Data,
                             Values = new fmValue[simData.calculatedDataList.Count],
                             Scale = (!NoScalingCheckBox.Checked && yParameters.Count > 2) ? degreeOffset[yParameter] : new fmValue(1),
                             IsY2Axis = colorId == 1 && (yParameters.Count == 2 && !KeepAllInY1CheckBox.Checked),
@@ -1082,10 +1084,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
                         foreach (List<fmFilterSimulationData> list in localParameters.calculatedDataLists)
                         {
-                            string simName = list.Count > 0 ? list[0].name : "";
                             var yArray = new fmDisplayingArray
                                              {
-                                                 OwningSimulationName = simName,
+                                                 OwningSimulation = list[0],
                                                  Parameter = yParameter,
                                                  Values = new fmValue[pointsCount],
                                                  Scale =
