@@ -620,6 +620,9 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             AddRow();
             UpdateVisibilityOfColumnsInLocalParametrsTable();
+
+            additionalParametersTable.AutoResizeColumnHeadersHeight();
+            
             UpdateIsCurrentActiveProperty(additionalParametersTable.CurrentRow == null ? -1 : additionalParametersTable.CurrentRow.Index);
             BindXYLists();
             RecalculateSimulationsWithIterationX();
@@ -1240,7 +1243,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                 {
                     localParameters.calculatedDataLists = new List<List<fmFilterSimulationData>>();
-                    foreach (fmFilterSimulation sim in m_externalSimList)
+                    fmFilterSimulation sim = m_externalCurrentActiveSimulation;
                     {
                         double xStart = fmValue.StringToValue(minXValueTextBox.Text).value;
                         double xEnd = fmValue.StringToValue(maxXValueTextBox.Text).value;
