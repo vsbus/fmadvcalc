@@ -247,5 +247,12 @@ namespace AdvancedCalculator
         {
             Process.Start("FiltrationCalculator.exe");
         }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            m_currentFilename = null;
+            Text = m_caption;
+            filterSimulationWithTablesAndGraphs1.Clear();
+        }
     }
 }

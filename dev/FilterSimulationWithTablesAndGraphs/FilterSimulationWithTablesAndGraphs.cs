@@ -187,6 +187,12 @@ namespace FilterSimulationWithTablesAndGraphs
             Solution.Serialize(writer);
         }
 
+        public void Clear()
+        {
+            Solution = new fmFilterSimSolution();
+            DisplaySolution(Solution);
+        }
+
         public void DeserializeData(XmlNode node)
         {
             Solution = fmFilterSimSolution.Deserialize(node);
