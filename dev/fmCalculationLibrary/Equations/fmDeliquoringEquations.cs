@@ -105,10 +105,16 @@ namespace fmCalculationLibrary.Equations
             return 1 / (((1 - epsd) * rhos) / (epsd * rhof * S) + 1);
         }
 
-        public static fmValue Eval_pmOverPn_vacuum_From_Dpd(fmValue Dpd)
+        public static fmValue Eval_pmOverPn_vacuum_From_Dpd_PressureFilters(fmValue Dpd)
         {
             fmValue pN = new fmValue(1e5);
             return 1 + Dpd / (2 * pN);
+        }
+
+        public static fmValue Eval_pmOverPn_vacuum_From_Dpd_VacuumFilters(fmValue Dpd)
+        {
+            fmValue pN = new fmValue(1e5);
+            return 1 - Dpd / (2 * pN);
         }
 
         public static fmValue Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(fmValue A, fmValue pcd, fmValue pmoverpn, fmValue Dpd, fmValue etag, fmValue hcd, fmValue hce, fmValue Tetta, fmValue ag1, fmValue ag2)

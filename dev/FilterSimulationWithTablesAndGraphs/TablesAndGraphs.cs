@@ -1222,9 +1222,11 @@ namespace FilterSimulationWithTablesAndGraphs
                         bool isPlaneArea =
                             fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
                                 simData.internalSimulationData.filterMachiningCalculationOption);
+                        bool isVacuumFilter =
+                            fmFilterSimMachineType.IsVacuumFilter(simData.externalSimulation.Parent.MachineType);
                         var deliquoringSimualtionCalculator =
                             new fmDeliquoringSimualtionCalculator(
-                                new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlaneArea),
+                                new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlaneArea, isVacuumFilter),
                                 tempSim.parameters.Values);
                         deliquoringSimualtionCalculator.DoCalculations();
 

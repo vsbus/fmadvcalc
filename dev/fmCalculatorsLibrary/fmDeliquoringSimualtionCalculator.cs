@@ -23,15 +23,22 @@ namespace fmCalculatorsLibrary
         public class DeliquoringCalculatorOptions
         {
             private bool isPlaneArea;
+            private bool isVacuumFilter;
 
-            public DeliquoringCalculatorOptions(bool isPlaneArea)
+            public DeliquoringCalculatorOptions(bool isPlaneArea, bool isVacuumFilter)
             {
                 this.isPlaneArea = isPlaneArea;
+                this.isVacuumFilter = isVacuumFilter;
             }
 
             public bool IsPlaneArea()
             {
                 return isPlaneArea;
+            }
+
+            internal bool IsVacuumFilter()
+            {
+                return isVacuumFilter;
             }
         }
 
@@ -148,7 +155,15 @@ namespace fmCalculatorsLibrary
             var isKnown_qmcd = qmcd.isInputed;
             var isKnown_qcd = qcd.isInputed;
 
-            fmValue pmoverpn = fmDeliquoringEquations.Eval_pmOverPn_vacuum_From_Dpd(Dpd.value);
+            fmValue pmoverpn;
+            if (CalculatorOptions.IsVacuumFilter())
+            {
+                pmoverpn = fmDeliquoringEquations.Eval_pmOverPn_vacuum_From_Dpd_VacuumFilters(Dpd.value);
+            }
+            else
+            {
+                pmoverpn = fmDeliquoringEquations.Eval_pmOverPn_vacuum_From_Dpd_PressureFilters(Dpd.value);
+            }
             fmValue Qgimax = fmDeliquoringEquations.Eval_Qgimax_From_A_pcd_pmoverpn_Dpd_etag_hcd_hce_Tetta_ag1_ag2(A.value, pcd.value, pmoverpn, Dpd.value, etag.value, hcd.value, hce.value, Tetta.value, ag1.value, ag2.value);
             fmValue Const1 = fmDeliquoringEquations.Eval_Const1(epsd.value, etad.value, hcd.value, hce.value, pcd.value, Dpd.value, pke.value);
 

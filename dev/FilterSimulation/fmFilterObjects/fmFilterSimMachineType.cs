@@ -89,5 +89,17 @@ namespace FilterSimulation.fmFilterObjects
             }
             return null;
         }
+
+        public static bool IsVacuumFilter(fmFilterSimMachineType machineType)
+        {
+            var vacuumFilters = new List<fmFilterSimMachineType>(new[]
+                                                                     {
+                                                                         RotaryVacuumFilter,
+                                                                         BeltFilter,
+                                                                         VacuumNutche,
+                                                                         LabVacuumFilter
+                                                                     });
+            return vacuumFilters.Contains(machineType);
+        }
     }
 }
