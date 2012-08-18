@@ -63,6 +63,12 @@
     <Compile Include="Equations\fmRmhceEquations.cs" />
     <Compile Include="Equations\fmSuspensionEquations.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\fmMisc\fmMisc.csproj">
+      <Project>{1F1A3827-D9AD-4A97-B7A1-CE0F1FDDE5D6}</Project>
+      <Name>fmMisc</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

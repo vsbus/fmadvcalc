@@ -527,7 +527,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                         ? (fmBaseBlock) fmb
                                         : (fmBaseBlock) deliq).GetParameterByName(p.Name);
                                 }
-                                if (xParameter == null || yParameter.group != xParameter.group)
+                                if (xParameter == null || yParameter == null || yParameter.group != xParameter.group)
                                 {
                                     col.Visible = true;
                                     break;
@@ -1238,18 +1238,20 @@ namespace FilterSimulationWithTablesAndGraphs
                                 };
                         filterMachiningCalculator.DoCalculations();
 
-                        var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values);
-                        eps0dNedEpsdCalculator.DoCalculations();
-
-                        var sigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(tempSim.parameters.Values);
-                        sigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
-
                         bool isPlaneArea =
                             fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
                                 simData.internalSimulationData.filterMachiningCalculationOption);
                         bool isVacuumFilter =
                             fmFilterSimMachineType.IsVacuumFilter(simData.externalSimulation.Parent.MachineType);
                         double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(simData.externalSimulation.Parent.MachineType);
+
+                        var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values);
+                        eps0dNedEpsdCalculator.isPlainArea = isPlaneArea;
+                        eps0dNedEpsdCalculator.DoCalculations();
+
+                        var sigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(tempSim.parameters.Values);
+                        sigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
+
                         var deliquoringSimualtionCalculator =
                             new fmDeliquoringSimualtionCalculator(
                                 new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlaneArea, isVacuumFilter, hcdCoefficient),

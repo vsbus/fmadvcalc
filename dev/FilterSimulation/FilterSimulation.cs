@@ -161,8 +161,8 @@ namespace FilterSimulation
                     XmlNode IsInputedNode = rangeNode.SelectSingleNode(fmFilterSimulationSerializeTags.RangeIsInputed);
                     rangesDictionary.Add(fmGlobalParameter.ParametersByName[parameterNode.InnerText],
                                          new fmDefaultParameterRange(
-                                             Convert.ToDouble(minValueNode.InnerText),
-                                             Convert.ToDouble(maxValueNode.InnerText),
+                                             fmConvert.ToDouble(minValueNode.InnerText),
+                                             fmConvert.ToDouble(maxValueNode.InnerText),
                                              Convert.ToBoolean(IsInputedNode.InnerText)));
                 }
                 RangesSchemas[fmFilterSimMachineType.GetFilterTypeByName(schemaName)] = rangesDictionary;

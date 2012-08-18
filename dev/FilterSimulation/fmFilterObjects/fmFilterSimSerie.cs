@@ -151,12 +151,12 @@ namespace FilterSimulation.fmFilterObjects
                         XmlNode minValueNode = rangeNode.SelectSingleNode(fmSimSerieDataSerializeTags.RangeMinValue);
                         if (minValueNode != null)
                         {
-                            range.MinValue = Convert.ToDouble(minValueNode.InnerText);
+                            range.MinValue = fmConvert.ToDouble(minValueNode.InnerText);
                         }
                         XmlNode maxValueNode = rangeNode.SelectSingleNode(fmSimSerieDataSerializeTags.RangeMaxValue);
                         if (maxValueNode != null)
                         {
-                            range.MaxValue = Convert.ToDouble(maxValueNode.InnerText);
+                            range.MaxValue = fmConvert.ToDouble(maxValueNode.InnerText);
                         }
                         if (fmGlobalParameter.ParametersByName.ContainsKey(parameterNameNode.InnerText))
                         {

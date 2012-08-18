@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using fmMisc;
 
 namespace fmCalculationLibrary
 {
@@ -83,7 +84,7 @@ namespace fmCalculationLibrary
         {
             try
             {
-                Convert.ToDouble(s);
+                fmConvert.ToDouble(s);
                 return true;
             }
             catch (FormatException)
@@ -101,7 +102,7 @@ namespace fmCalculationLibrary
         public void ReadFromStream(StreamReader sr)
         {
             defined = Convert.ToBoolean(sr.ReadLine());
-            value = Convert.ToDouble(sr.ReadLine());
+            value = fmConvert.ToDouble(sr.ReadLine());
         }
 
         public static fmValue StringToValue(String s)
