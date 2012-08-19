@@ -490,6 +490,7 @@ namespace FilterSimulation
             if (m_displayingTables == false && displayingSolution == false && m_sortingTables == false)
             {
                 m_displayingTables = true;
+                displayingSolution = true;
 
                 Solution.currentObjects.Project = null;
 
@@ -551,6 +552,8 @@ namespace FilterSimulation
                     Solution.currentColumns.simulation = simulationDataGrid.Columns[simulationDataGrid.CurrentCell.ColumnIndex].Index;
                     Solution.currentObjects.Simulation = Solution.FindSimulation(simulationGuid);
                 }
+
+                displayingSolution = false;
 
                 DisplaySolution(Solution);
 
