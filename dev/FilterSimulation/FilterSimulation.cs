@@ -696,6 +696,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         private void LimitsCalculationOnOff()
         {
             m_commonFilterMachiningBlock.IsLimitsDisplaying = calculateLimitsCheckBox.Checked;
+            m_commonDeliquoringSimulationBlock.IsLimitsDisplaying = calculateLimitsCheckBox.Checked;
             commonCalcBlockMinLocalColumn.Visible = calculateLimitsCheckBox.Checked;
             commonCalcBlockMaxLocalColumn.Visible = calculateLimitsCheckBox.Checked;
             commonCalcBlockDataGrid.Width = calculateLimitsCheckBox.Checked ? 273 : 173;
