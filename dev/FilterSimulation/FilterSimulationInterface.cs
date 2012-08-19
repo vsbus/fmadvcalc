@@ -56,7 +56,8 @@ namespace FilterSimulation
             }
 
             Font newFont = new Font(row.DataGridView.Font, fs);
-            if (row.Cells[0].Style.Font == null || row.Cells[0].Style.Font.Style != fs)
+            bool isRegular = row.Cells[0].Style.Font == null || row.Cells[0].Style.Font.Style != FontStyle.Regular;
+            if (isRegular != (fs == FontStyle.Regular))
             {
                 foreach (DataGridViewCell cell in row.Cells)
                 {
