@@ -505,6 +505,7 @@ namespace FilterSimulation
                         || projectDataGrid.CurrentRow.Cells[projectGuidColumn.Index].Value == null)
                     {
                         m_displayingTables = false;
+                        displayingSolution = false;
                         return;
                     }
 
@@ -519,6 +520,7 @@ namespace FilterSimulation
                         || suspensionDataGrid.CurrentRow.Cells[suspensionGuidColumn.Index].Value == null)
                     {
                         m_displayingTables = false;
+                        displayingSolution = false;
                         return;
                     }
 
@@ -532,6 +534,7 @@ namespace FilterSimulation
                         || simSeriesDataGrid.CurrentRow.Cells[simSeriesGuidColumn.Index].Value == null)
                     {
                         m_displayingTables = false;
+                        displayingSolution = false;
                         return;
                     }
 
@@ -545,6 +548,7 @@ namespace FilterSimulation
                         || simulationDataGrid.CurrentRow.Cells[simulationGuidColumn.Index].Value == null)
                     {
                         m_displayingTables = false;
+                        displayingSolution = false;
                         return;
                     }
 
