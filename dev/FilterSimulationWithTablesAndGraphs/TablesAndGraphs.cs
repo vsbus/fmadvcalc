@@ -593,10 +593,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (m_isUseLocalParams)
             {
-                foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
-                {
-                    localParameters.filterMachiningBlock.UpdateIsInputed(localParameters.filterMachiningBlock.GetParameterByName(inputedParameter.Name));
-                }
+				// we shouldn't change input parameter by force
             }
             else
             {
@@ -795,10 +792,28 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateVisibilityOfColumnsInLocalParametrsTable()
         {
-            var inputs = new List<fmGlobalParameter>();
+            var possibleInputs = new List<fmGlobalParameter>();
             foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
             {
-                inputs = ParametersListsUnion(inputs, fmCalculationOptionHelper.GetParametersListThatCanBeInput(localParameters.filterMachiningBlock.filterMachiningCalculationOption));
+                possibleInputs = ParametersListsUnion(possibleInputs, fmCalculationOptionHelper.GetParametersListThatCanBeInput(localParameters.filterMachiningBlock.filterMachiningCalculationOption));
+            }
+            var displayInputs = new List<fmGlobalParameter>();
+            foreach (fmGlobalParameter p in possibleInputs)
+            {
+                bool isInput = false;
+                foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
+                {
+                    fmBlockVariableParameter blockPar = localParameters.filterMachiningBlock.GetParameterByName(p.Name);
+                    if (blockPar.isInputed)
+                    {
+                        isInput = true;
+                        break;
+                    }
+                }
+                if (isInput)
+                {
+                    displayInputs.Add(p);
+                }
             }
 
             foreach (DataGridViewColumn col in additionalParametersTable.Columns)
@@ -806,7 +821,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 string parName = GetParameterNameFromHeader(col.HeaderText);
                 if (fmGlobalParameter.ParametersByName.ContainsKey(parName))
                 {
-                    col.Visible = inputs.Contains(fmGlobalParameter.ParametersByName[parName]);
+                    col.Visible = displayInputs.Contains(fmGlobalParameter.ParametersByName[parName]);
                 }
             }
         }
@@ -1107,7 +1122,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         {
                             var yArray = new fmDisplayingArray
                                              {
-                                                 OwningSimulation = list[0],
+                                                 OwningSimulation = list.Count == 0 ? null : list[0],
                                                  Parameter = yParameter,
                                                  Values = new fmValue[pointsCount],
                                                  Scale =
@@ -1281,7 +1296,8 @@ namespace FilterSimulationWithTablesAndGraphs
                             var tempSim = new fmFilterSimulationData();
                             fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.filterMachiningBlock, tempSim);
                             tempSim.CopyMaterialParametersValuesFrom(sim.Data);
-                            tempSim.parameters[xParameter].value = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
+                            var xValue = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
+                            tempSim.parameters[xParameter].value = xValue;
 
                             var filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values)
                             {
@@ -1290,6 +1306,9 @@ namespace FilterSimulationWithTablesAndGraphs
                                     filterMachiningCalculationOption
                             };
                             filterMachiningCalculator.DoCalculations();
+
+                            // after calculation the x parameter may be restored if it wasn't input
+                            tempSim.parameters[xParameter].value = xValue;
 
                             calculatedDataList.Add(tempSim);
                         }
