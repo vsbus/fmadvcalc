@@ -113,14 +113,12 @@ namespace FilterSimulationWithTablesAndGraphs
         public bool isChecked;
         public bool isCurrentActive;
         public fmFilterMachiningBlock filterMachiningBlock;
-        public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption initialFilterMachiningCalculationOption;
         public List<List<fmFilterSimulationData>> calculatedDataLists = new List<List<fmFilterSimulationData>>();
-        public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock, fmFilterMachiningCalculator.fmFilterMachiningCalculationOption initialFilterMachiningCalculationOption)
+        public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock)
         {
             this.isChecked = isChecked;
             isCurrentActive = false;
             this.filterMachiningBlock = filterMachiningBlock;
-            this.initialFilterMachiningCalculationOption = initialFilterMachiningCalculationOption;
         }
     }
 
@@ -169,7 +167,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                                     parameterKind.MaterialCakeFormation,
                                                     new ParameterKindProperties()
                                                         {
-                                                            Color = Color.LightGreen,
+                                                            Color = Color.Green,
                                                             Checkbox = cakeFormationMaterilParametersCheckBox
                                                         }
                                                     },
@@ -177,7 +175,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                                     parameterKind.MachiningSettingsCakeFormation,
                                                     new ParameterKindProperties()
                                                         {
-                                                            Color = Color.LightBlue,
+                                                            Color = Color.BlueViolet,
                                                             Checkbox = cakeFormationMachininglParametersCheckBox
                                                         }
                                                     },
@@ -185,7 +183,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                                     parameterKind.MaterialDeliquoring,
                                                     new ParameterKindProperties()
                                                         {
-                                                            Color = Color.LightYellow,
+                                                            Color = Color.Coral,
                                                             Checkbox = deliquoringMaterilParametersCheckBox
                                                         }
                                                     },
@@ -193,7 +191,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                                     parameterKind.MachiningSettingsDeliquoring,
                                                     new ParameterKindProperties()
                                                         {
-                                                            Color = Color.LightPink,
+                                                            Color = Color.IndianRed,
                                                             Checkbox = deliquoringMachininglParametersCheckBox
                                                         }
                                                     }
@@ -253,11 +251,12 @@ namespace FilterSimulationWithTablesAndGraphs
                             var listViewItem = item as ListViewItem;
                             if (listViewItem.ListView.View == View.List)
                             {
-                                listViewItem.ForeColor = Color.FromArgb(color.R / 2, color.G / 2, color.B / 2);
+                                listViewItem.ForeColor = Color.FromArgb(color.R, color.G, color.B);
                             }
                             else
                             {
-                                listViewItem.BackColor = color;
+                                Color lightColor = Color.FromArgb((color.R + 255) / 2, (color.G + 255) / 2, (color.B + 255) / 2);
+                                listViewItem.BackColor = lightColor;
                             }
                         }
                     }
@@ -364,7 +363,8 @@ namespace FilterSimulationWithTablesAndGraphs
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.t1_over_tf.Name)],
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.h1_over_hc.Name)]);
             fmb.ValuesChangedByUser += fmb_ValuesChangedByUser;
-            m_localInputParametersList.Add(new fmLocalInputParametersData(true, fmb, m_externalCurrentActiveSimulation.FilterMachiningCalculationOption));
+            
+            m_localInputParametersList.Add(new fmLocalInputParametersData(true, fmb));
 
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
