@@ -60,7 +60,7 @@ namespace FilterSimulation
                                                         simulationNameColumn
                                                     });
 
-            foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsCakeParameters())
+            foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsCakeFormationParameters())
             {
                 simulationDataGrid.Columns.Add(AddSimulationGridColumn(parameter));
             }

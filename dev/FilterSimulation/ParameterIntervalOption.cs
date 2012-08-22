@@ -91,6 +91,7 @@ namespace FilterSimulation
                 var cakeFormationParametersList = new List<fmGlobalParameter>
                                                       {
                                                           fmGlobalParameter.A,
+                                                          fmGlobalParameter.d0,
                                                           fmGlobalParameter.Dp,
                                                           fmGlobalParameter.hc,
                                                           fmGlobalParameter.sf,

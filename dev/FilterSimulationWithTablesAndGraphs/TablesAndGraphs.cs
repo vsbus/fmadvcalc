@@ -201,7 +201,7 @@ namespace FilterSimulationWithTablesAndGraphs
             m_XYListKind = new Dictionary<string, parameterKind>();
 
             AddColors(parameterKind.MaterialCakeFormation, fmGlobalParameter.GetMaterialCakeParameters());
-            AddColors(parameterKind.MachiningSettingsCakeFormation, fmGlobalParameter.GetMachineSettingsCakeParameters());
+            AddColors(parameterKind.MachiningSettingsCakeFormation, fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
             AddColors(parameterKind.MaterialDeliquoring, fmGlobalParameter.GetMaterialDeliquoringParameters());
             AddColors(parameterKind.MachiningSettingsDeliquoring, fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
         }
@@ -267,7 +267,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void CreateColumnsInParametersTables()
         {
             var allSimParams = new List<fmGlobalParameter>();
-            allSimParams.AddRange(fmGlobalParameter.GetMachineSettingsCakeParameters());
+            allSimParams.AddRange(fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
             allSimParams.AddRange(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
 
             foreach (fmGlobalParameter p in allSimParams)
@@ -482,7 +482,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void UpdateVisibilityOfColumnsInSelectedSimulationsTable()
         {
             var cakeFormationParameters =
-                new List<fmGlobalParameter>(fmGlobalParameter.GetMachineSettingsCakeParameters());
+                new List<fmGlobalParameter>(fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
             var deliquoringParameters =
                 new List<fmGlobalParameter>(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
             var inputs = new List<fmGlobalParameter>();

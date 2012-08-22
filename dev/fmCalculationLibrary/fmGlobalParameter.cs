@@ -276,7 +276,7 @@ namespace fmCalculationLibrary
                        };
         }
 
-        static public fmGlobalParameter[] GetMachineSettingsCakeParameters()
+        static public fmGlobalParameter[] GetMachineSettingsCakeFormationParameters()
         {
             return new[]
                        {
@@ -285,6 +285,13 @@ namespace fmCalculationLibrary
 
                            Dp,
 
+                           Qp,
+                           qp,
+                           t1,
+                           h1,
+                           t1_over_tf,
+                           h1_over_hc,
+                           
                            sf,
                            sr,
                            tr,
@@ -331,7 +338,6 @@ namespace fmCalculationLibrary
                            qc,
 
                            Qmsus_i,
-                           Qp,
                            Qmf_i,
                            Qf_i,
                            Qms_i,
@@ -339,11 +345,6 @@ namespace fmCalculationLibrary
                            Qmc_i,
                            Qc_i,
                            qmsus_i,
-                           qp,
-                           t1,
-                           h1,
-                           t1_over_tf,
-                           h1_over_hc,
                            qmf_i,
                            qf_i,
                            qms_i,

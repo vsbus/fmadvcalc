@@ -242,9 +242,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // DpQpConstBox
             // 
             this.DpQpConstBox.CaptionText = "Dp+Qp=Const";
-            this.DpQpConstBox.Location = new System.Drawing.Point(6, 523);
+            this.DpQpConstBox.Location = new System.Drawing.Point(6, 497);
             this.DpQpConstBox.Name = "DpQpConstBox";
-            this.DpQpConstBox.Size = new System.Drawing.Size(106, 85);
+            this.DpQpConstBox.Size = new System.Drawing.Size(106, 111);
             this.DpQpConstBox.TabIndex = 21;
             // 
             // qmBigBox_dif
@@ -306,7 +306,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // epsKappaBox
             // 
             this.epsKappaBox.CaptionText = "";
-            this.epsKappaBox.Location = new System.Drawing.Point(6, 356);
+            this.epsKappaBox.Location = new System.Drawing.Point(6, 347);
             this.epsKappaBox.Name = "epsKappaBox";
             this.epsKappaBox.Size = new System.Drawing.Size(106, 148);
             this.epsKappaBox.TabIndex = 18;

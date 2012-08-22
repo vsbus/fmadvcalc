@@ -81,7 +81,7 @@ namespace FilterSimulation
             this.panel1.Controls.Add(this.buttonOK);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 586);
+            this.panel1.Location = new System.Drawing.Point(0, 606);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(651, 96);
             this.panel1.TabIndex = 2;
@@ -159,7 +159,7 @@ namespace FilterSimulation
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer1.Size = new System.Drawing.Size(651, 274);
+            this.splitContainer1.Size = new System.Drawing.Size(651, 283);
             this.splitContainer1.SplitterDistance = 322;
             this.splitContainer1.TabIndex = 6;
             // 
@@ -177,7 +177,7 @@ namespace FilterSimulation
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.CakeFormationGrid);
-            this.splitContainer2.Size = new System.Drawing.Size(322, 274);
+            this.splitContainer2.Size = new System.Drawing.Size(322, 283);
             this.splitContainer2.SplitterDistance = 182;
             this.splitContainer2.TabIndex = 3;
             // 
@@ -195,7 +195,7 @@ namespace FilterSimulation
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.deliquoringSettingsParametersGrid);
-            this.splitContainer3.Size = new System.Drawing.Size(325, 274);
+            this.splitContainer3.Size = new System.Drawing.Size(325, 283);
             this.splitContainer3.SplitterDistance = 182;
             this.splitContainer3.TabIndex = 2;
             // 
@@ -213,8 +213,8 @@ namespace FilterSimulation
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.moreParemetersGrid);
-            this.splitContainer4.Size = new System.Drawing.Size(651, 586);
-            this.splitContainer4.SplitterDistance = 274;
+            this.splitContainer4.Size = new System.Drawing.Size(651, 606);
+            this.splitContainer4.SplitterDistance = 283;
             this.splitContainer4.TabIndex = 7;
             // 
             // MaterialParametersGrid
@@ -230,7 +230,7 @@ namespace FilterSimulation
             this.CakeFormationGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.CakeFormationGrid.Location = new System.Drawing.Point(0, 0);
             this.CakeFormationGrid.Name = "CakeFormationGrid";
-            this.CakeFormationGrid.Size = new System.Drawing.Size(322, 88);
+            this.CakeFormationGrid.Size = new System.Drawing.Size(322, 97);
             this.CakeFormationGrid.TabIndex = 2;
             // 
             // deliquoringMaterialParameterGrid
@@ -246,7 +246,7 @@ namespace FilterSimulation
             this.deliquoringSettingsParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.deliquoringSettingsParametersGrid.Location = new System.Drawing.Point(0, 0);
             this.deliquoringSettingsParametersGrid.Name = "deliquoringSettingsParametersGrid";
-            this.deliquoringSettingsParametersGrid.Size = new System.Drawing.Size(325, 88);
+            this.deliquoringSettingsParametersGrid.Size = new System.Drawing.Size(325, 97);
             this.deliquoringSettingsParametersGrid.TabIndex = 1;
             // 
             // moreParemetersGrid
@@ -254,14 +254,14 @@ namespace FilterSimulation
             this.moreParemetersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.moreParemetersGrid.Location = new System.Drawing.Point(0, 0);
             this.moreParemetersGrid.Name = "moreParemetersGrid";
-            this.moreParemetersGrid.Size = new System.Drawing.Size(651, 308);
+            this.moreParemetersGrid.Size = new System.Drawing.Size(651, 319);
             this.moreParemetersGrid.TabIndex = 0;
             // 
             // fmParameterIntervalOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 682);
+            this.ClientSize = new System.Drawing.Size(651, 702);
             this.Controls.Add(this.splitContainer4);
             this.Controls.Add(this.panel1);
             this.Name = "fmParameterIntervalOption";

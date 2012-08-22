@@ -1033,8 +1033,15 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             AddParameter(ref A, fmGlobalParameter.A, A_Cell, true);
             AddParameter(ref d0, fmGlobalParameter.d0, d0_Cell, true);
-
+            
             AddParameter(ref Dp, fmGlobalParameter.Dp, Dp_Cell, true);
+
+            AddParameter(ref Qp, fmGlobalParameter.Qp, Qp_Cell, false);
+            AddParameter(ref qp, fmGlobalParameter.qp, qp_Cell, false);
+            AddParameter(ref t1, fmGlobalParameter.t1, t1_Cell, false);
+            AddParameter(ref h1, fmGlobalParameter.h1, h1_Cell, false);
+            AddParameter(ref t1_over_tf, fmGlobalParameter.t1_over_tf, t1_over_tf_Cell, false);
+            AddParameter(ref h1_over_hc, fmGlobalParameter.h1_over_hc, h1_over_hc_Cell, false);
 
             AddParameter(ref sf, fmGlobalParameter.sf, sf_Cell, true);
             AddParameter(ref sr, fmGlobalParameter.sr, sr_Cell, false);
@@ -1083,7 +1090,6 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref qc, fmGlobalParameter.qc, qc_Cell, false);
 
             AddParameter(ref Qmsus_d, fmGlobalParameter.Qmsus_i, Qmsus_d_Cell, false);
-            AddParameter(ref Qp, fmGlobalParameter.Qp, Qp_Cell, false);
             AddParameter(ref Qmf_d, fmGlobalParameter.Qmf_i, Qmf_d_Cell, false);
             AddParameter(ref Qf_d, fmGlobalParameter.Qf_i, Qf_d_Cell, false);
             AddParameter(ref Qms_d, fmGlobalParameter.Qms_i, Qms_d_Cell, false);
@@ -1092,11 +1098,6 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref Qc_d, fmGlobalParameter.Qc_i, Qc_d_Cell, false);
 
             AddParameter(ref qmsus_d, fmGlobalParameter.qmsus_i, qmsus_d_Cell, false);
-            AddParameter(ref qp, fmGlobalParameter.qp, qp_Cell, false);
-            AddParameter(ref t1, fmGlobalParameter.t1, t1_Cell, false);
-            AddParameter(ref h1, fmGlobalParameter.h1, h1_Cell, false);
-            AddParameter(ref t1_over_tf, fmGlobalParameter.t1_over_tf, t1_over_tf_Cell, false);
-            AddParameter(ref h1_over_hc, fmGlobalParameter.h1_over_hc, h1_over_hc_Cell, false);
             AddParameter(ref qmf_d, fmGlobalParameter.qmf_i, qmf_d_Cell, false);
             AddParameter(ref qf_d, fmGlobalParameter.qf_i, qf_d_Cell, false);
             AddParameter(ref qms_d, fmGlobalParameter.qms_i, qms_d_Cell, false);
