@@ -667,6 +667,10 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             m_isUseLocalParams = UseParamsCheckBox.Checked;
             additionalParametersTable.Visible = m_isUseLocalParams;
+            if (additionalParametersTable.Visible && additionalParametersTable.Rows.Count == 0)
+            {
+                buttonAddRow_Click(null, new EventArgs());
+            }
             buttonAddRow.Visible = m_isUseLocalParams;
             selectedSimulationParametersTable.Visible = !m_isUseLocalParams;
             selectedSimulationParametersTable.Dock = (!m_isUseLocalParams) ? DockStyle.Fill : DockStyle.None;
