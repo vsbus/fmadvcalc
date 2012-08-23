@@ -2032,6 +2032,7 @@ namespace fmCalculatorsLibrary
             {
                 QpDefinedCalculatorHelperForDpInput qdDefCalc = new QpDefinedCalculatorHelperForDpInput(qpCalc);
                 left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qdDefCalc, left, right, 80);
+                leftValue = qpCalc.Eval(left);
             }
             fmValue rightValue = qpCalc.Eval(right);
             if (fmValue.Sign(leftValue, eps) == fmValue.Sign(rightValue, eps))
