@@ -938,19 +938,22 @@ namespace FilterSimulationWithTablesAndGraphs
                     if (coordinatesGrid.Columns.Count > yCol)
                     {
                         coordinatesGrid.Columns[yCol].HeaderText = dispArray.GetTextForHeader();
-                        if (dispArray.OwningSimulation == m_externalCurrentActiveSimulation.Data)
+                        Color color = Color.Black;
+
+                        if (selectedSimulationParametersTable.CurrentCell != null
+                            && dispArray.OwningSimulation == m_internalSelectedSimList[selectedSimulationParametersTable.CurrentCell.RowIndex].internalSimulationData)
                         {
-                            coordinatesGrid.Columns[yCol].HeaderText = "* " + coordinatesGrid.Columns[yCol].HeaderText;
+                            color = Color.Blue;
                         }
                         coordinatesGrid.Columns[yCol].ReadOnly = true;
                         coordinatesGrid.Columns[yCol].Width = 50;
-
 
                         if (dispArray.Values.Length == coordinatesGrid.RowCount)
                         {
                             for (int i = 0; i < coordinatesGrid.RowCount; ++i)
                             {
                                 coordinatesGrid[yCol, i].Value = dispArray.Values[i];
+                                coordinatesGrid[yCol, i].Style.ForeColor = color;
                             }
                         }
                     }
@@ -1119,7 +1122,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         var yArray = new fmDisplayingArray
                         {
                             Parameter = yParameter,
-                            OwningSimulation = simData.externalSimulation.Data,
+                            OwningSimulation = simData.internalSimulationData,
                             Values = new fmValue[simData.calculatedDataList.Count],
                             Scale = (!NoScalingCheckBox.Checked && yParameters.Count > 2) ? degreeOffset[yParameter] : new fmValue(1),
                             IsY2Axis = colorId == 1 && (yParameters.Count == 2 && !KeepAllInY1CheckBox.Checked),
