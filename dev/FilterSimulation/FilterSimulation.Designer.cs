@@ -803,13 +803,13 @@ namespace FilterSimulation
             // 
             // machineTypeSymbolColumn
             // 
-            this.machineTypeSymbolColumn.HeaderText = "Machine Type Symbol";
+            this.machineTypeSymbolColumn.HeaderText = "Filter Type Symbol";
             this.machineTypeSymbolColumn.Name = "machineTypeSymbolColumn";
             this.machineTypeSymbolColumn.Visible = false;
             // 
             // machineTypeNameColumn
             // 
-            this.machineTypeNameColumn.HeaderText = "Machine Type";
+            this.machineTypeNameColumn.HeaderText = "Filter Type";
             this.machineTypeNameColumn.Name = "machineTypeNameColumn";
             this.machineTypeNameColumn.ReadOnly = true;
             // 
@@ -903,7 +903,7 @@ namespace FilterSimulation
             // 
             // simSeriesMachineNameColumn
             // 
-            this.simSeriesMachineNameColumn.HeaderText = "Machine Name";
+            this.simSeriesMachineNameColumn.HeaderText = "Filter Name";
             this.simSeriesMachineNameColumn.Name = "simSeriesMachineNameColumn";
             this.simSeriesMachineNameColumn.Visible = false;
             this.simSeriesMachineNameColumn.Width = 75;
@@ -1049,13 +1049,13 @@ namespace FilterSimulation
             // 
             // simulationMachineTypeColumn
             // 
-            this.simulationMachineTypeColumn.HeaderText = "Machine Type";
+            this.simulationMachineTypeColumn.HeaderText = "Filter Type";
             this.simulationMachineTypeColumn.Name = "simulationMachineTypeColumn";
             this.simulationMachineTypeColumn.ReadOnly = true;
             // 
             // simulationMachineNameColumn
             // 
-            this.simulationMachineNameColumn.HeaderText = "Machine Name";
+            this.simulationMachineNameColumn.HeaderText = "Filter Name";
             this.simulationMachineNameColumn.Name = "simulationMachineNameColumn";
             this.simulationMachineNameColumn.ReadOnly = true;
             // 
@@ -1523,12 +1523,12 @@ namespace FilterSimulation
             // 
             // dataGridViewTextBoxColumn7
             // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Machine Type Symbol";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Filter Type Symbol";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
             // dataGridViewTextBoxColumn8
             // 
-            this.dataGridViewTextBoxColumn8.HeaderText = "Machine Type Name";
+            this.dataGridViewTextBoxColumn8.HeaderText = "Filter Type Name";
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
             // 
@@ -1548,7 +1548,7 @@ namespace FilterSimulation
             // 
             // dataGridViewTextBoxColumn11
             // 
-            this.dataGridViewTextBoxColumn11.HeaderText = "Machine Name";
+            this.dataGridViewTextBoxColumn11.HeaderText = "Filter Name";
             this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             this.dataGridViewTextBoxColumn11.ReadOnly = true;
             // 

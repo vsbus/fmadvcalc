@@ -50,7 +50,7 @@ namespace FilterSimulation
                     return machine;
                 }
             }
-            throw new Exception("Invalid Machine Type seleced.");
+            throw new Exception("Invalid Filter Type seleced.");
         }
 
         private void button1_Click(object sender, EventArgs e)
