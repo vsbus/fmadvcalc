@@ -126,9 +126,9 @@ namespace fmCalculationLibrary.NumericalMethods
                 fmValue val2 = function.Eval(mid2);
 
                 if (!val1.defined)
-                    throw new Exception("Function given to FindBreakInUnimodalFunction not defind in point " + mid1.value);
+                    new fmValue();
                 if (!val2.defined)
-                    throw new Exception("Function given to FindBreakInUnimodalFunction not defind in point " + mid2.value);
+                    new fmValue();
 
                 if (fmValue.Sign(val1, eps) != initialSign)
                     return mid1;
