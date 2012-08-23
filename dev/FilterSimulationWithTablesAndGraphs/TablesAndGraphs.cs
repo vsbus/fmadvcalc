@@ -583,6 +583,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text]);
             BindForeColorToSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
+            UpdateVisibilityOfColumnsInLocalParametrsTable();
             LoadCurrentXRange();
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
@@ -593,7 +594,10 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (m_isUseLocalParams)
             {
-				// we shouldn't change input parameter by force
+                foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
+                {
+                    localParameters.filterMachiningBlock.UpdateIsInputed(localParameters.filterMachiningBlock.GetParameterByName(inputedParameter.Name));
+                }
             }
             else
             {
