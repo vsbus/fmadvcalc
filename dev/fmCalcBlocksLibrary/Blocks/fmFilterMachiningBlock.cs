@@ -540,7 +540,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup AQ_group = new fmBlockParameterGroup(Color.FromArgb(170, 245, 210));
         private readonly fmBlockParameterGroup DpQp_group = new fmBlockParameterGroup(Color.FromArgb(250, 210, 150));
         private readonly fmBlockParameterGroup d0_group = new fmBlockParameterGroup(Color.FromArgb(170, 210, 245));
-        private readonly fmBlockParameterGroup Qp_group = new fmBlockParameterGroup(Color.FromArgb(245, 210, 170));
+        private readonly fmBlockParameterGroup Qp_group = new fmBlockParameterGroup(Color.FromArgb(210, 170, 245));
 
         private readonly fmBlockConstantParameter hce;
 
