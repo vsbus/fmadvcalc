@@ -66,6 +66,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis = new System.Windows.Forms.ListView();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.startFromOriginCheckBox = new System.Windows.Forms.CheckBox();
             this.NoScalingCheckBox = new System.Windows.Forms.CheckBox();
             this.KeepAllInY1CheckBox = new System.Windows.Forms.CheckBox();
             this.deliquoringMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
@@ -655,6 +656,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.startFromOriginCheckBox);
             this.panel11.Controls.Add(this.NoScalingCheckBox);
             this.panel11.Controls.Add(this.KeepAllInY1CheckBox);
             this.panel11.Controls.Add(this.deliquoringMachininglParametersCheckBox);
@@ -672,6 +674,17 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(370, 220);
             this.panel11.TabIndex = 8;
+            // 
+            // startFromOriginCheckBox
+            // 
+            this.startFromOriginCheckBox.AutoSize = true;
+            this.startFromOriginCheckBox.Location = new System.Drawing.Point(223, 171);
+            this.startFromOriginCheckBox.Name = "startFromOriginCheckBox";
+            this.startFromOriginCheckBox.Size = new System.Drawing.Size(101, 17);
+            this.startFromOriginCheckBox.TabIndex = 7;
+            this.startFromOriginCheckBox.Text = "Start From (0, 0)";
+            this.startFromOriginCheckBox.UseVisualStyleBackColor = true;
+            this.startFromOriginCheckBox.CheckedChanged += new System.EventHandler(this.startFromOriginCheckBox_CheckedChanged);
             // 
             // NoScalingCheckBox
             // 
@@ -934,6 +947,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private CheckBox NoScalingCheckBox;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem copyToolStripMenuItem;
+        private CheckBox startFromOriginCheckBox;
 
     }
 }

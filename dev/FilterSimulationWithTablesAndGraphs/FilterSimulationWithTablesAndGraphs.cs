@@ -373,5 +373,12 @@ namespace FilterSimulationWithTablesAndGraphs
             coordinatesGrid.CurrentCell = curCell;
             coordinatesGrid.ClearSelection();
         }
+
+        private void startFromOriginCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
+        }
     }
 }

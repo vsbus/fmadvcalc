@@ -990,6 +990,18 @@ namespace FilterSimulationWithTablesAndGraphs
             fmZedGraphControl1.GraphPane.XAxis.Title.Text = xParameter.Name + " (" + xParameter.UnitName + ")";
             fmZedGraphControl1.GraphPane.Legend.IsVisible = false;
             fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = false;
+            if (startFromOriginCheckBox.Checked)
+            {
+                fmZedGraphControl1.GraphPane.YAxis.Scale.Min = 0;
+                fmZedGraphControl1.GraphPane.YAxis.Scale.MinAuto = false;
+                fmZedGraphControl1.GraphPane.Y2Axis.Scale.Min = 0;
+                fmZedGraphControl1.GraphPane.Y2Axis.Scale.MinAuto = false;
+            }
+            else
+            {
+                fmZedGraphControl1.GraphPane.YAxis.Scale.MinAuto = true;
+                fmZedGraphControl1.GraphPane.Y2Axis.Scale.MinAuto = true;
+            }
 
             if (m_displayingResults.YParameters.Count == 1)
             {
