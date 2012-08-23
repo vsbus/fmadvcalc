@@ -51,17 +51,9 @@ namespace FilterSimulation.fmFilterObjects
 
         public void CopyMaterialParametersValuesFrom(fmFilterSimulationData from)
         {
-            var materialParametersList = new[]
-                                                             {
-                                                                 fmGlobalParameter.eta_f, fmGlobalParameter.rho_f,
-                                                                 fmGlobalParameter.rho_s, fmGlobalParameter.rho_sus,
-                                                                 fmGlobalParameter.Cm, fmGlobalParameter.Cv,
-                                                                 fmGlobalParameter.C, fmGlobalParameter.eps0,
-                                                                 fmGlobalParameter.kappa0, fmGlobalParameter.ne,
-                                                                 fmGlobalParameter.Pc0, fmGlobalParameter.rc0,
-                                                                 fmGlobalParameter.a0, fmGlobalParameter.nc,
-                                                                 fmGlobalParameter.hce0, fmGlobalParameter.Rm0
-                                                             };
+            var materialParametersList = new List<fmGlobalParameter>();
+            materialParametersList.AddRange(fmGlobalParameter.GetMaterialCakeParameters());
+            materialParametersList.AddRange(fmGlobalParameter.GetMaterialDeliquoringParameters());
             foreach (fmGlobalParameter p in materialParametersList)
             {
                 parameters[p].value = from.parameters[p].value;

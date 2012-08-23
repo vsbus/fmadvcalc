@@ -113,12 +113,31 @@ namespace FilterSimulationWithTablesAndGraphs
         public bool isChecked;
         public bool isCurrentActive;
         public fmFilterMachiningBlock filterMachiningBlock;
+        public fmDeliquoringSimualtionBlock deliquoringBlock;
         public List<List<fmFilterSimulationData>> calculatedDataLists = new List<List<fmFilterSimulationData>>();
-        public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock)
+        public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock, fmDeliquoringSimualtionBlock deliquoringBlock)
         {
             this.isChecked = isChecked;
             isCurrentActive = false;
             this.filterMachiningBlock = filterMachiningBlock;
+            this.deliquoringBlock = deliquoringBlock;
+        }
+
+        internal List<fmGlobalParameter> GetParametersThatCanBeInput()
+        {
+            List<fmGlobalParameter> result = fmCalculationOptionHelper.GetParametersListThatCanBeInput(
+                filterMachiningBlock.filterMachiningCalculationOption);
+
+            var deliqVariables = new List<fmGlobalParameter>();
+            foreach (fmBlockVariableParameter varPar in deliquoringBlock.Parameters)
+            {
+                if (varPar.isInputed || varPar.group != null)
+                {
+                    result.Add(varPar.globalParameter);
+                }
+            }
+
+            return result;
         }
     }
 
@@ -362,20 +381,35 @@ namespace FilterSimulationWithTablesAndGraphs
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.h1.Name)],
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.t1_over_tf.Name)],
                 row.Cells[GetColumnIndexByHeader(additionalParametersTable, fmGlobalParameter.h1_over_hc.Name)]);
-            fmb.ValuesChangedByUser += fmb_ValuesChangedByUser;
-            
-            m_localInputParametersList.Add(new fmLocalInputParametersData(true, fmb));
-
+            fmb.ValuesChangedByUser += fmb_deliq_ValuesChangedByUser;
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.GasFlowrateUsedCalculationOption);
             fmb.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.EvaporationUsedCalculationOption);
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(m_externalCurrentActiveSimulation, fmb);
+
+            var deliqBlock = new fmDeliquoringSimualtionBlock();
+            foreach (var p in deliqBlock.Parameters)
+            {
+                deliqBlock.AssignCell(p, row.Cells[GetColumnIndexByHeader(additionalParametersTable, p.globalParameter.Name)]);
+            }
+
+            deliqBlock.ValuesChangedByUser += fmb_deliq_ValuesChangedByUser;
+            fmFilterSimulation.CopyAllParametersFromSimulationToBlock(m_externalCurrentActiveSimulation, deliqBlock);
+            
+            m_localInputParametersList.Add(new fmLocalInputParametersData(true, fmb, deliqBlock));
+
             fmb.CalculateAndDisplay();
+
+            bool isPlainArea = fmFilterMachiningCalculator.IsPlainAreaCalculationOption(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
+            bool isVacuumFilter = fmFilterSimMachineType.IsVacuumFilter(m_externalCurrentActiveSimulation.Parent.MachineType);
+            double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(m_externalCurrentActiveSimulation.Parent.MachineType);
+            deliqBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient);
+            deliqBlock.CalculateAndDisplay();
         }
 
         // ReSharper disable InconsistentNaming
-        void fmb_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
+        void fmb_deliq_ValuesChangedByUser(object sender, fmBlockParameterEventArgs e)
         // ReSharper restore InconsistentNaming
         {
             RecalculateSimulationsWithIterationX();
@@ -596,7 +630,17 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                 {
-                    localParameters.filterMachiningBlock.UpdateIsInputed(localParameters.filterMachiningBlock.GetParameterByName(inputedParameter.Name));
+                    var par = localParameters.filterMachiningBlock.GetParameterByName(inputedParameter.Name);
+                    if (par != null)
+                    {
+                        localParameters.filterMachiningBlock.UpdateIsInputed(par);
+                    }
+
+                    par = localParameters.deliquoringBlock.GetParameterByName(inputedParameter.Name);
+                    if (par != null)
+                    {
+                        localParameters.deliquoringBlock.UpdateIsInputed(par);
+                    }
                 }
             }
             else
@@ -803,15 +847,28 @@ namespace FilterSimulationWithTablesAndGraphs
             var possibleInputs = new List<fmGlobalParameter>();
             foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
             {
-                possibleInputs = ParametersListsUnion(possibleInputs, fmCalculationOptionHelper.GetParametersListThatCanBeInput(localParameters.filterMachiningBlock.filterMachiningCalculationOption));
+                possibleInputs = ParametersListsUnion(possibleInputs, localParameters.GetParametersThatCanBeInput());
             }
             var displayInputs = new List<fmGlobalParameter>();
             foreach (fmGlobalParameter p in possibleInputs)
             {
+                // we don't display x-parameter
+                if (p.Name == listBoxXAxis.SelectedItems[0].Text)
+                    continue;
+
                 bool isInput = false;
                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                 {
-                    fmBlockVariableParameter blockPar = localParameters.filterMachiningBlock.GetParameterByName(p.Name);
+                    fmBlockVariableParameter blockPar = null;
+                    if (blockPar == null)
+                    {
+                        blockPar = localParameters.filterMachiningBlock.GetParameterByName(p.Name);
+                    }
+                    if (blockPar == null)
+                    {
+                        blockPar = localParameters.deliquoringBlock.GetParameterByName(p.Name);
+                    }
+
                     if (blockPar.isInputed)
                     {
                         isInput = true;
@@ -1303,6 +1360,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         {
                             var tempSim = new fmFilterSimulationData();
                             fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.filterMachiningBlock, tempSim);
+                            fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.deliquoringBlock, tempSim);
                             tempSim.CopyMaterialParametersValuesFrom(sim.Data);
                             var xValue = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
                             tempSim.parameters[xParameter].value = xValue;
@@ -1314,6 +1372,13 @@ namespace FilterSimulationWithTablesAndGraphs
                                     filterMachiningCalculationOption
                             };
                             filterMachiningCalculator.DoCalculations();
+
+                            bool isPlainArea = fmFilterMachiningCalculator.IsPlainAreaCalculationOption(sim.FilterMachiningCalculationOption);
+                            bool isVacuumFilter = fmFilterSimMachineType.IsVacuumFilter(sim.Parent.MachineType);
+                            double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(sim.Parent.MachineType);
+                            var deliqSimulationCalculator = new fmDeliquoringSimualtionCalculator(new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient),
+                                tempSim.parameters.Values);
+                            deliqSimulationCalculator.DoCalculations();
 
                             // after calculation the x parameter may be restored if it wasn't input
                             tempSim.parameters[xParameter].value = xValue;
@@ -1426,8 +1491,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 var simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                     simInputParameters = ParametersListsIntersection(simInputParameters,
-                                                              fmCalculationOptionHelper.GetParametersListThatCanBeInput(
-                                                                  localParameters.filterMachiningBlock.filterMachiningCalculationOption));
+                        localParameters.GetParametersThatCanBeInput());
                 return simInputParameters;
             }
         }
