@@ -66,7 +66,7 @@ namespace fmCalculationLibrary.NumericalMethods
                 fmValue value = function.Eval(middle);
 
                 if (!value.defined)
-                    throw new Exception("Function given to BisectionMethod not defind in point " + middle.value);
+                    return false;
 
                 fmValue midSign = fmValue.Sign(value, eps);
                 if (midSign.value == 0 || midSign == endSign)

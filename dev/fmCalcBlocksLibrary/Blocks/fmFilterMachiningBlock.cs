@@ -1038,10 +1038,10 @@ namespace fmCalcBlocksLibrary.Blocks
 
             AddParameter(ref Qp, fmGlobalParameter.Qp, Qp_Cell, false);
             AddParameter(ref qp, fmGlobalParameter.qp, qp_Cell, false);
+            AddParameter(ref h1_over_hc, fmGlobalParameter.h1_over_hc, h1_over_hc_Cell, false);
+            AddParameter(ref t1_over_tf, fmGlobalParameter.t1_over_tf, t1_over_tf_Cell, false);
             AddParameter(ref t1, fmGlobalParameter.t1, t1_Cell, false);
             AddParameter(ref h1, fmGlobalParameter.h1, h1_Cell, false);
-            AddParameter(ref t1_over_tf, fmGlobalParameter.t1_over_tf, t1_over_tf_Cell, false);
-            AddParameter(ref h1_over_hc, fmGlobalParameter.h1_over_hc, h1_over_hc_Cell, false);
 
             AddParameter(ref sf, fmGlobalParameter.sf, sf_Cell, true);
             AddParameter(ref sr, fmGlobalParameter.sr, sr_Cell, false);
