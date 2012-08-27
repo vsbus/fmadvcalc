@@ -63,6 +63,12 @@ namespace FilterSimulationWithTablesAndGraphs
             return simList;
         }
 
+        protected override void UpdateUnitsAndData()
+        {
+            base.UpdateUnitsAndData();
+            UpdateUnitsInTablesAndGraphs();
+        }
+
         override protected void DisplaySolution(fmFilterSimSolution sol)
         {
             base.DisplaySolution(sol);
