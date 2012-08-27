@@ -1309,9 +1309,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
                         var suspensionCalculator = new fmSuspensionCalculator(tempSim.parameters.Values)
                         {
-                            calculationOption =
-                                simData.internalSimulationData.
-                                suspensionCalculationOption
+                            calculationOption = simData.
+                                internalSimulationData.suspensionCalculationOption
                         };
                         suspensionCalculator.DoCalculations();
 
@@ -1327,9 +1326,8 @@ namespace FilterSimulationWithTablesAndGraphs
                         var filterMachiningCalculator =
                             new fmFilterMachiningCalculator(tempSim.parameters.Values)
                                 {
-                                    calculationOption =
-                                        simData.internalSimulationData.
-                                        filterMachiningCalculationOption
+                                    calculationOption = simData.
+                                        internalSimulationData.filterMachiningCalculationOption
                                 };
                         filterMachiningCalculator.DoCalculations();
 
@@ -1340,8 +1338,14 @@ namespace FilterSimulationWithTablesAndGraphs
                             fmFilterSimMachineType.IsVacuumFilter(simData.externalSimulation.Parent.MachineType);
                         double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(simData.externalSimulation.Parent.MachineType);
 
-                        var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values);
-                        eps0dNedEpsdCalculator.isPlainArea = isPlaneArea;
+                        var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values)
+                        {
+                            dpdInputCalculationOption = simData.
+                                internalSimulationData.dpdInputCalculationOption,
+                            hcdCalculationOption = simData.
+                                internalSimulationData.hcdEpsdCalculationOption,
+                            isPlainArea = isPlaneArea
+                        };
                         eps0dNedEpsdCalculator.DoCalculations();
 
                         var sigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(tempSim.parameters.Values);
