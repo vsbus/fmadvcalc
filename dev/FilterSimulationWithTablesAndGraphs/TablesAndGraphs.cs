@@ -389,6 +389,7 @@ namespace FilterSimulationWithTablesAndGraphs
             fmFilterSimulation.CopyAllParametersFromSimulationToBlock(m_externalCurrentActiveSimulation, fmb);
 
             var deliqBlock = new fmDeliquoringSimualtionBlock();
+            deliqBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
             foreach (var p in deliqBlock.Parameters)
             {
                 deliqBlock.AssignCell(p, row.Cells[GetColumnIndexByHeader(additionalParametersTable, p.globalParameter.Name)]);
@@ -544,6 +545,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                 fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.evaporationUsedCalculationOption);
 
                                 var deliq = new fmDeliquoringSimualtionBlock();
+                                deliq.SetCalculationOptionAndRewriteData(simData.internalSimulationData.deliquoringUsedCalculationOption);
 
                                 fmBlockVariableParameter xParameter = null;
                                 if (listBoxXAxis.SelectedItems.Count != 0)

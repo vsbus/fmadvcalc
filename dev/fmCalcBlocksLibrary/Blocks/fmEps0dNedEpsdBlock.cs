@@ -26,6 +26,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup hcd_epsd_group = new fmBlockParameterGroup();
 
 
+        public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption hcdCalculationOption;
         public fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption dpdInputCalculationOption;
         public object isPlainArea;
@@ -85,6 +86,12 @@ namespace fmCalcBlocksLibrary.Blocks
         }
         public fmEps0dNedEpsdBlock() : this(null, null, null) { }
 
+        public void SetCalculationOptionAndRewrite(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            CallValuesChanged();
+        }
+
         public void SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption newCalculationOption)
         {
             SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
@@ -95,6 +102,12 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
             CallValuesChanged();
+        }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption newCalculationOption)
+        {
+            deliquoringUsedCalculationOption = newCalculationOption;
+            UpdateCellsColorsAndReadOnly();
         }
 
         public void SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption newCalculationOption)
@@ -111,6 +124,31 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private void UpdateCellsColorsAndReadOnly()
         {
+            if (deliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed)
+            {
+                hcd.isInputed = false;
+                if (hcd.cell != null)
+                {
+                    hcd.cell.ReadOnly = true;
+                }
+                hcd.group = null;
+                
+                epsd.isInputed = false;
+                if (epsd.cell != null)
+                {
+                    epsd.cell.ReadOnly = true;
+                }
+                epsd.group = null;
+
+                Dpd.IsInputed = false;
+                if (Dpd.cell != null)
+                {
+                    Dpd.cell.ReadOnly = true;
+                }
+                Dpd.group = null;
+                return;
+            }
+
             if (hcdCalculationOption == fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser)
             {
                 epsd.IsInputed = true;

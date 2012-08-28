@@ -129,6 +129,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmValue rhos_Value {get {return rhos.value;} set {rhos.value = value;}}
 
         public fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions deliquoringCalculatorOptions;
+        private fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
 
         override public void DoCalculations()
         {
@@ -277,28 +278,40 @@ namespace fmCalcBlocksLibrary.Blocks
 //                 }
 //             }
 
-            sd.group = second_group;
-            td.group = second_group;
-            K.group = second_group;
-            Smech.group = second_group;
-            S.group = second_group;
-            Rfmech.group = second_group;
-            Rf.group = second_group;
-            Qgi.group = second_group;
-            Qg.group = second_group;
-            vg.group = second_group;
-            Mfd.group = second_group;
-            Vfd.group = second_group;
-            Mlcd.group = second_group;
-            Vlcd.group = second_group;
-            rho_bulk.group = second_group;
-            Qmfid.group = second_group;
-            Qfid.group = second_group;
-            qmfid.group = second_group;
-            qfid.group = second_group;
+            deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
+ 
+            UpdateGroups();
+            
+            processOnChange = true;
+        }
+
+        private void UpdateGroups()
+        {
+            fmBlockParameterGroup group = deliquoringUsedCalculationOption ==
+                                          fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used
+                                              ? second_group
+                                              : null;
+            sd.group = group;
+            td.group = group;
+            K.group = group;
+            Smech.group = group;
+            S.group = group;
+            Rfmech.group = group;
+            Rf.group = group;
+            Qgi.group = group;
+            Qg.group = group;
+            vg.group = group;
+            Mfd.group = group;
+            Vfd.group = group;
+            Mlcd.group = group;
+            Vlcd.group = group;
+            rho_bulk.group = group;
+            Qmfid.group = group;
+            Qfid.group = group;
+            qmfid.group = group;
+            qfid.group = group;
 
             UpdateCellsStyle();
-            processOnChange = true;
         }
 
         public void UpdateCellsStyle()
@@ -326,5 +339,24 @@ namespace fmCalcBlocksLibrary.Blocks
         }
 
         public fmDeliquoringSimualtionBlock() : this(null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null) { }
+
+        public void SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption newCalculationOption)
+        {
+            if (deliquoringUsedCalculationOption != newCalculationOption)
+            {
+                SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+                ReWriteParameters();
+            }
+        }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption newCalculationOption)
+        {
+            if (deliquoringUsedCalculationOption != newCalculationOption)
+            {
+                deliquoringUsedCalculationOption = newCalculationOption;
+                UpdateGroups();
+            }
+        }
+
     }
 }

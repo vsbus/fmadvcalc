@@ -28,6 +28,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockConstantParameter rho_s;
         private readonly fmBlockConstantParameter Pc0;
 
+        public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption rhoDetaDCalculationOption;
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption;
         
@@ -124,6 +125,12 @@ namespace fmCalcBlocksLibrary.Blocks
             processOnChange = true;
         }
 
+        public void SetCalculationOptionAndRewrite(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption newCalculationOption)
+        {
+            SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
+            CallValuesChanged();
+        }
+
         public void SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption newCalculationOption)
         {
             SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
@@ -134,6 +141,12 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
             CallValuesChanged();
+        }
+
+        public void SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption newCalculationOption)
+        {
+            deliquoringUsedCalculationOption = newCalculationOption;
+            UpdateCellsColorsAndReadOnly();
         }
 
         public void SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption newCalculationOption)
@@ -150,6 +163,25 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private void UpdateCellsColorsAndReadOnly()
         {
+            if (deliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed)
+            {
+                rhod.isInputed = false;
+                rhod.cell.ReadOnly = true;
+                
+                etad.IsInputed = false;
+                etad.cell.ReadOnly = true;
+
+                pcd.IsInputed = false;
+                pcd.cell.ReadOnly = true;
+                
+                rcd.IsInputed = false;
+                rcd.cell.ReadOnly = true;
+                
+                alphad.IsInputed = false;
+                alphad.cell.ReadOnly = true;
+                return;
+            }
+
             if (rhoDetaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser)
             {
                 rhod.IsInputed = true;
