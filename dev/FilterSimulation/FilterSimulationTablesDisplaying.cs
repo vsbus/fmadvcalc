@@ -218,7 +218,35 @@ namespace FilterSimulation
                 row.Cells[simulationNameColumn.Index].Value = sim.GetName();
 
                 sim.filterMachiningBlock.CalculateAndDisplay();
-                
+
+                Dictionary<fmGlobalParameter, bool> visibleCakeFormationParams = GetVisibleCakeFormationParamsDependingOnCalculationOptions(sim);
+
+                foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsCakeFormationParameters())
+                {
+                    DataGridViewCell cell = row.Cells[simulationGridColumns[parameter].Index];
+                    cell.Style.ForeColor = Color.Black;
+                    if (visibleCakeFormationParams[parameter])
+                    {
+                        if (!sim.Parameters.ContainsKey(parameter))
+                            continue;
+
+                        cell.Value = sim.Parameters[parameter].ValueInUnits.ToString();
+                        fmCalculationBaseParameter blockParameter = sim.Parameters[parameter];
+                        if (blockParameter is fmCalculationVariableParameter)
+                        {
+                            if ((blockParameter as fmCalculationVariableParameter).isInputed)
+                            {
+                                cell.Style.ForeColor = Color.Blue;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        cell.Value = "-";
+                    }
+                }
+
+
                 Dictionary<fmGlobalParameter, bool> visibleDeliqParams = GetVisibleDeliquoringParamsDependingOnCalculationOptions(sim);
 
                 foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsDeliquoringParameters())
@@ -243,6 +271,43 @@ namespace FilterSimulation
                     }
                 }
             }
+        }
+
+        private Dictionary<fmGlobalParameter, bool> GetVisibleCakeFormationParamsDependingOnCalculationOptions(fmFilterSimulation sim)
+        {
+            var isVisibleParameters = new Dictionary<fmGlobalParameter, bool>();
+
+            var cakeFormationParameters = new List<fmGlobalParameter>();
+            cakeFormationParameters.AddRange(fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
+            foreach (fmGlobalParameter parameter in cakeFormationParameters)
+            {
+                isVisibleParameters[parameter] = true;
+            }
+
+            fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption = sim.FilterMachiningCalculationOption;
+            bool candleOption = filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
+                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
+                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST
+                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST;
+            if (!candleOption)
+            {
+                MakeInvisibleParameters(isVisibleParameters, fmGlobalParameter.d0);
+            }
+
+            bool isDpConst = filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST
+                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST;
+            if (isDpConst)
+            {
+                MakeInvisibleParameters(isVisibleParameters,
+                                        fmGlobalParameter.Qp,
+                                        fmGlobalParameter.qp,
+                                        fmGlobalParameter.h1,
+                                        fmGlobalParameter.t1,
+                                        fmGlobalParameter.h1_over_hc,
+                                        fmGlobalParameter.t1_over_tf);
+            }
+
+            return isVisibleParameters;
         }
 
         void AssignNewCellsWithCalculationEngine(fmFilterSimSolution sol)
@@ -1011,7 +1076,21 @@ namespace FilterSimulation
                 if (fmGlobalParameter.ParametersByName.ContainsKey(pName))
                 {
                     var p = fmGlobalParameter.ParametersByName[pName];
-                    col.Visible = whatToDisplayNow.ParametersList.Contains(p);
+                    bool isVisible = false;
+                    if (whatToDisplayNow.ParametersList.Contains(p))
+                    {
+                        bool isAllDashes = true;
+                        for (int rowIdx = 0; rowIdx < simulationDataGrid.RowCount; ++rowIdx)
+                        {
+                            if (simulationDataGrid.Rows[rowIdx].Visible
+                                && simulationDataGrid[col.Index, rowIdx].Value.ToString() != "-")
+                            {
+                                isAllDashes = false;
+                            }
+                        }
+                        isVisible = !isAllDashes;
+                    }
+                    col.Visible = isVisible;
                 }
             }
         }

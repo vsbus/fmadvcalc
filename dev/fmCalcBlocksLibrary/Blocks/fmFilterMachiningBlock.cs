@@ -1132,26 +1132,6 @@ namespace fmCalcBlocksLibrary.Blocks
             processOnChange = true;
         }
 
-        override protected void ReWriteParameters()
-        {
-            base.ReWriteParameters();
-            
-            if (processOnChange)
-            {
-                processOnChange = false;
-                bool candleOption = filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST
-                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_QP_CONST
-                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST
-                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST;
-                if (candleOption == false)
-                {
-                    fmBlockVariableParameter d0 = GetParameterByName(fmGlobalParameter.d0.Name);
-                    if (d0.cell != null) d0.cell.Value = "-";
-                }
-                processOnChange = true;
-            }
-        }
-
         public void SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption newCalculationOption)
         {
             SetCalculationOptionAndUpdateCellsStyle(newCalculationOption);
