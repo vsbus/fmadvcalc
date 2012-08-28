@@ -216,6 +216,7 @@ namespace FilterSimulation
                 row.Cells[simulationMachineNameColumn.Index].Value = sim.Parent.MachineName;
                 row.Cells[simulationSimSeriesNameColumn.Index].Value = sim.Parent.GetName();
                 row.Cells[simulationNameColumn.Index].Value = sim.GetName();
+                row.Cells[simulationCalculationOptionColumn.Index].Value = GetCalculationOptionDpQpShortcut(sim.FilterMachiningCalculationOption);
 
                 sim.filterMachiningBlock.CalculateAndDisplay();
 
@@ -271,6 +272,29 @@ namespace FilterSimulation
                     }
                 }
             }
+        }
+
+        private object GetCalculationOptionDpQpShortcut(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption calculationOption)
+        {
+            if (calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST
+                || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_DP_CONST)
+            {
+                return "Dp";
+            }
+
+            if (calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST
+                || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST)
+            {
+                return "Qp";
+            }
+
+            if (calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST
+                || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST)
+            {
+                return "Dp+Qp";
+            }
+
+            return "n/a";
         }
 
         private Dictionary<fmGlobalParameter, bool> GetVisibleCakeFormationParamsDependingOnCalculationOptions(fmFilterSimulation sim)

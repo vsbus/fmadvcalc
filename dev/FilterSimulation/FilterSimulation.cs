@@ -57,7 +57,8 @@ namespace FilterSimulation
                                                         simulationMachineTypeColumn,
                                                         simulationMachineNameColumn,
                                                         simulationSimSeriesNameColumn,
-                                                        simulationNameColumn
+                                                        simulationNameColumn,
+                                                        simulationCalculationOptionColumn
                                                     });
 
             foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsCakeFormationParameters())

@@ -107,6 +107,7 @@ namespace FilterSimulation
             this.simulationMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationSimSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationCalculationOptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
             this.commonDeliquoringSimulationBlockDataGrid = new fmDataGrid.fmDataGrid();
             this.commonDeliquoringSimulationBlockParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -1070,6 +1071,11 @@ namespace FilterSimulation
             this.simulationNameColumn.HeaderText = "Simulation Name";
             this.simulationNameColumn.Name = "simulationNameColumn";
             // 
+            // simulationCalculationOptionColumn
+            // 
+            this.simulationCalculationOptionColumn.HeaderText = "Calculation Option";
+            this.simulationCalculationOptionColumn.Name = "simulationCalculationOptionColumn";
+            // 
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -1759,6 +1765,7 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationMachineNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationSimSeriesNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simulationNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn simulationCalculationOptionColumn;
         protected System.Windows.Forms.DataGridViewTextBoxColumn simulationGuidColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn suspensionGuidColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn suspensionCheckedColumn;
