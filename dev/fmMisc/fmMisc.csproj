@@ -36,6 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="fmArrayUtils.cs" />
     <Compile Include="fmConvert.cs" />
     <Compile Include="fmEnumUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
