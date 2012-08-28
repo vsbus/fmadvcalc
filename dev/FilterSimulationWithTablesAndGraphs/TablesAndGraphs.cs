@@ -977,6 +977,9 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 foreach (fmDisplayingArray dispArray in yArrays.Arrays)
                 {
+                    if (m_displayingResults.XParameter.Values.Length != dispArray.Values.Length)
+                        continue;
+
                     string scaleString = dispArray.Scale.value == 1 ? "" : " * " + (1 / dispArray.Scale);
                     List<KeyValuePair<double[], double[]>> curvesData = GetCurvesDoubleArrays(m_displayingResults.XParameter, dispArray);
                     foreach (KeyValuePair<double[], double[]> pair in curvesData)
@@ -1047,6 +1050,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private List<KeyValuePair<double[], double[]>> GetCurvesDoubleArrays(fmDisplayingArray xArray, fmDisplayingArray yArray)
         {
+            if (xArray.Values.Length != yArray.Values.Length)
+            {
+                throw new Exception("xArray and yArray have different sizes.");
+            }
+
             var result = new List<KeyValuePair<double[], double[]>>();
             var curCurve = new List<KeyValuePair<double, double>>();
             for (int i = 0; i <= yArray.Values.Length; ++i)
@@ -1353,7 +1361,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         var tempSim = new fmFilterSimulationData();
                         tempSim.CopyIsInputedFrom(simData.internalSimulationData);
                         tempSim.CopyValuesFrom(simData.externalSimulation.Data);
-                        tempSim.parameters[xParameter].value = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
+                        tempSim.parameters[xParameter].value = new fmValue(x);
 
                         if (x < range.MinValue || x > range.MaxValue)
                         {
