@@ -940,9 +940,7 @@ namespace FilterSimulationWithTablesAndGraphs
             coordinatesGrid.ColumnCount = 1;
             for (int i = 0; i < yParametersCount; ++i)
             {
-                // ReSharper disable PossibleNullReferenceException
                 coordinatesGrid.ColumnCount += m_displayingResults.YParameters[i].Arrays.Count;
-                // ReSharper restore PossibleNullReferenceException
             }
 
             if (m_displayingResults.XParameter == null)
@@ -1036,6 +1034,24 @@ namespace FilterSimulationWithTablesAndGraphs
             fmZedGraphControl1.GraphPane.XAxis.Title.Text = xParameter.Name + " (" + xParameter.UnitName + ")";
             fmZedGraphControl1.GraphPane.Legend.IsVisible = false;
             fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = false;
+
+            bool isY2Involved = false;
+            foreach (fmDisplayingYListOfArrays yList in m_displayingResults.YParameters)
+            {
+                foreach (fmDisplayingArray displayingArray in yList.Arrays)
+                {
+                    if (displayingArray.IsY2Axis)
+                    {
+                        isY2Involved = true;
+                        break;
+                    }
+                }
+                if (isY2Involved)
+                {
+                    break;
+                }
+            }
+
             if (startFromOriginCheckBox.Checked)
             {
                 fmZedGraphControl1.GraphPane.YAxis.Scale.Min = 0;
@@ -1049,38 +1065,47 @@ namespace FilterSimulationWithTablesAndGraphs
                 fmZedGraphControl1.GraphPane.Y2Axis.Scale.MinAuto = true;
             }
 
-            if (m_displayingResults.YParameters.Count == 1)
-            {
-                fmGlobalParameter yParameter = m_displayingResults.YParameters[0].Parameter;
-                fmZedGraphControl1.GraphPane.YAxis.Title.Text = yParameter.Name + " (" + yParameter.UnitName + ")";
-                if (m_displayingResults.YParameters[0].Arrays.Count > 0)
-                {
-                    fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = m_displayingResults.YParameters[0].Arrays[0].Color;
-                }
-            }
-            else if (m_displayingResults.YParameters.Count == 2 && !KeepAllInY1CheckBox.Checked)
+            if (isY2Involved)
             {
                 fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = true;
-
-                fmGlobalParameter y1Parameter = m_displayingResults.YParameters[0].Parameter;
-                fmGlobalParameter y2Parameter = m_displayingResults.YParameters[1].Parameter;
-                fmZedGraphControl1.GraphPane.YAxis.Title.Text = y1Parameter.Name + " (" + y1Parameter.UnitName + ")";
-                if (m_displayingResults.YParameters[0].Arrays.Count > 0)
-                {
-                    fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = m_displayingResults.YParameters[0].Arrays[0].Color;
-                }
-
-                fmZedGraphControl1.GraphPane.Y2Axis.Title.Text = y2Parameter.Name + " (" + y2Parameter.UnitName + ")";
-                if (m_displayingResults.YParameters[1].Arrays.Count > 0)
-                {
-                    fmZedGraphControl1.GraphPane.Y2Axis.Title.FontSpec.FontColor = m_displayingResults.YParameters[1].Arrays[0].Color;
-                }
             }
-            else
-            {
-                fmZedGraphControl1.GraphPane.YAxis.Title.Text = "";
-                fmZedGraphControl1.GraphPane.Legend.IsVisible = true;
-            }
+
+            fmZedGraphControl1.GraphPane.YAxis.Title.Text = "";
+            fmZedGraphControl1.GraphPane.Legend.IsVisible = true;
+
+
+//             if (m_displayingResults.YParameters.Count == 1)
+//             {
+//                 fmGlobalParameter yParameter = m_displayingResults.YParameters[0].Parameter;
+//                 fmZedGraphControl1.GraphPane.YAxis.Title.Text = yParameter.Name + " (" + yParameter.UnitName + ")";
+//                 if (m_displayingResults.YParameters[0].Arrays.Count > 0)
+//                 {
+//                     fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = m_displayingResults.YParameters[0].Arrays[0].Color;
+//                 }
+//             }
+//             else if (isY2Involved)
+//             {
+//                 fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = true;
+// 
+//                 fmGlobalParameter y1Parameter = m_displayingResults.YParameters[0].Parameter;
+//                 fmGlobalParameter y2Parameter = m_displayingResults.YParameters[1].Parameter;
+//                 fmZedGraphControl1.GraphPane.YAxis.Title.Text = y1Parameter.Name + " (" + y1Parameter.UnitName + ")";
+//                 if (m_displayingResults.YParameters[0].Arrays.Count > 0)
+//                 {
+//                     fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = m_displayingResults.YParameters[0].Arrays[0].Color;
+//                 }
+// 
+//                 fmZedGraphControl1.GraphPane.Y2Axis.Title.Text = y2Parameter.Name + " (" + y2Parameter.UnitName + ")";
+//                 if (m_displayingResults.YParameters[1].Arrays.Count > 0)
+//                 {
+//                     fmZedGraphControl1.GraphPane.Y2Axis.Title.FontSpec.FontColor = m_displayingResults.YParameters[1].Arrays[0].Color;
+//                 }
+//             }
+//             else
+//             {
+//                 fmZedGraphControl1.GraphPane.YAxis.Title.Text = "";
+//                 fmZedGraphControl1.GraphPane.Legend.IsVisible = true;
+//             }
 
             fmZedGraphControl1.GraphPane.Title.Text = "";
             fmZedGraphControl1.GraphPane.AxisChange();
@@ -1165,9 +1190,15 @@ namespace FilterSimulationWithTablesAndGraphs
             var yParameters = (from ListViewItem item in listBoxYAxis.CheckedItems
                                select fmGlobalParameter.ParametersByName[item.Text]).ToList();
 
-            BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
+            var y2Parameters = (from ListViewItem item in listBoxY2Axis.CheckedItems
+                               select fmGlobalParameter.ParametersByName[item.Text]).ToList();
+
+            BindCalculatedResultsToDisplayingResults(xParameter, yParameters, y2Parameters);
         }
-        private void BindCalculatedResultsToDisplayingResults(fmGlobalParameter xParameter, List<fmGlobalParameter> yParameters)
+        private void BindCalculatedResultsToDisplayingResults(
+            fmGlobalParameter xParameter,
+            List<fmGlobalParameter> yParameters,
+            List<fmGlobalParameter> y2Parameters)
         {
             if (!m_isUseLocalParams)
             {
@@ -1213,8 +1244,8 @@ namespace FilterSimulationWithTablesAndGraphs
                             Parameter = yParameter,
                             OwningSimulation = simData.InternalSimulationData,
                             Values = new fmValue[simData.CalculatedDataList.Count],
-                            Scale = (!NoScalingCheckBox.Checked && yParameters.Count > 2) ? degreeOffset[yParameter] : new fmValue(1),
-                            IsY2Axis = colorId == 1 && (yParameters.Count == 2 && !KeepAllInY1CheckBox.Checked),
+                            Scale = !NoScalingCheckBox.Checked ? degreeOffset[yParameter] : new fmValue(1),
+                            IsY2Axis = y2Parameters.Contains(yParameter),
                             Color = colors[colorId],
                             Bold = selectedSimulationParametersTable.CurrentCell != null
                                    &&
@@ -1237,72 +1268,72 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             else
             {
-                m_displayingResults.YParameters = new List<fmDisplayingYListOfArrays>();
-
-                if (m_localInputParametersList.Count == 0
-                    || m_localInputParametersList[0].CalculatedDataLists.Count == 0)
-                {
-                    return;
-                }
-
-                var xArray = new fmDisplayingArray();
-                m_displayingResults.XParameter = xArray;
-
-                xArray.Parameter = xParameter;
-                int pointsCount = m_localInputParametersList[0].CalculatedDataLists[0].Count;
-                xArray.Values = new fmValue[pointsCount];
-                for (int i = 0; i < pointsCount; ++i)
-                {
-                    xArray.Values[i] =
-                        m_localInputParametersList[0].CalculatedDataLists[0][i].parameters[xParameter].ValueInUnits;
-                }
-
-                Dictionary<fmGlobalParameter, fmValue> degreeOffset = CreateDegreeOffsets(yParameters);
-
-                var colors = new[] { Color.Blue, Color.Green, Color.Red, Color.Black };
-                int colorId = 0;
-
-                foreach (fmGlobalParameter yParameter in yParameters)
-                {
-                    var yListOfArrays = new fmDisplayingYListOfArrays
-                    {
-                        Parameter = yParameter,
-                        Arrays = new List<fmDisplayingArray>()
-                    };
-
-                    foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
-                    {
-                        if (!localParameters.IsChecked)
-                            continue;
-
-                        foreach (List<fmFilterSimulationData> list in localParameters.CalculatedDataLists)
-                        {
-                            var yArray = new fmDisplayingArray
-                                             {
-                                                 OwningSimulation = list.Count == 0 ? null : list[0],
-                                                 Parameter = yParameter,
-                                                 Values = new fmValue[pointsCount],
-                                                 Scale =
-                                                     (!NoScalingCheckBox.Checked && yParameters.Count > 2) ? degreeOffset[yParameter] : new fmValue(1),
-                                                 IsY2Axis = colorId == 1 && (yParameters.Count == 2 && !KeepAllInY1CheckBox.Checked),
-                                                 Color = colors[colorId],
-                                                 Bold = additionalParametersTable.CurrentCell != null
-                                                        && m_localInputParametersList.IndexOf(localParameters) ==
-                                                        additionalParametersTable.CurrentCell.RowIndex
-                                             };
-
-                            for (int i = 0; i < list.Count; ++i)
-                            {
-                                yArray.Values[i] = list[i].parameters[yParameter].ValueInUnits;
-                            }
-
-                            yListOfArrays.Arrays.Add(yArray);
-                        }
-                    }
-
-                    if (++colorId == colors.Length) colorId = 0;
-                    m_displayingResults.YParameters.Add(yListOfArrays);
-                }
+//                 m_displayingResults.YParameters = new List<fmDisplayingYListOfArrays>();
+// 
+//                 if (m_localInputParametersList.Count == 0
+//                     || m_localInputParametersList[0].CalculatedDataLists.Count == 0)
+//                 {
+//                     return;
+//                 }
+// 
+//                 var xArray = new fmDisplayingArray();
+//                 m_displayingResults.XParameter = xArray;
+// 
+//                 xArray.Parameter = xParameter;
+//                 int pointsCount = m_localInputParametersList[0].CalculatedDataLists[0].Count;
+//                 xArray.Values = new fmValue[pointsCount];
+//                 for (int i = 0; i < pointsCount; ++i)
+//                 {
+//                     xArray.Values[i] =
+//                         m_localInputParametersList[0].CalculatedDataLists[0][i].parameters[xParameter].ValueInUnits;
+//                 }
+// 
+//                 Dictionary<fmGlobalParameter, fmValue> degreeOffset = CreateDegreeOffsets(yParameters);
+// 
+//                 var colors = new[] { Color.Blue, Color.Green, Color.Red, Color.Black };
+//                 int colorId = 0;
+// 
+//                 foreach (fmGlobalParameter yParameter in yParameters)
+//                 {
+//                     var yListOfArrays = new fmDisplayingYListOfArrays
+//                     {
+//                         Parameter = yParameter,
+//                         Arrays = new List<fmDisplayingArray>()
+//                     };
+// 
+//                     foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
+//                     {
+//                         if (!localParameters.IsChecked)
+//                             continue;
+// 
+//                         foreach (List<fmFilterSimulationData> list in localParameters.CalculatedDataLists)
+//                         {
+//                             var yArray = new fmDisplayingArray
+//                                              {
+//                                                  OwningSimulation = list.Count == 0 ? null : list[0],
+//                                                  Parameter = yParameter,
+//                                                  Values = new fmValue[pointsCount],
+//                                                  Scale =
+//                                                      !NoScalingCheckBox.Checked ? degreeOffset[yParameter] : new fmValue(1),
+//                                                  IsY2Axis = y2Parameters.Contains(yParameter),
+//                                                  Color = colors[colorId],
+//                                                  Bold = additionalParametersTable.CurrentCell != null
+//                                                         && m_localInputParametersList.IndexOf(localParameters) ==
+//                                                         additionalParametersTable.CurrentCell.RowIndex
+//                                              };
+// 
+//                             for (int i = 0; i < list.Count; ++i)
+//                             {
+//                                 yArray.Values[i] = list[i].parameters[yParameter].ValueInUnits;
+//                             }
+// 
+//                             yListOfArrays.Arrays.Add(yArray);
+//                         }
+//                     }
+// 
+//                     if (++colorId == colors.Length) colorId = 0;
+//                     m_displayingResults.YParameters.Add(yListOfArrays);
+//                 }
             }
         }
 
@@ -1608,6 +1639,29 @@ namespace FilterSimulationWithTablesAndGraphs
                     listBoxYAxis.Items[outputNames.IndexOf(fmGlobalParameter.hc.Name)].Checked = true;
                 }
             }
+
+            BindY2List(listBoxYAxis.CheckedItems);
+        }
+
+        private void BindY2List(System.Collections.ICollection yParameters)
+        {
+            var y2OutputNames = new List<string>();
+            foreach (object item in yParameters)
+            {
+                if (item is ListViewItem)
+                {
+                    y2OutputNames.Add(((ListViewItem)item).Text);                   
+                }
+                else if (item is fmGlobalParameter)
+                {
+                    y2OutputNames.Add(((fmGlobalParameter) item).Name);
+                }
+                else 
+                {
+                    y2OutputNames.Add(item.ToString());                    
+                }
+            }
+            FillListBox(listBoxY2Axis.Items, y2OutputNames);
         }
 
         private IEnumerable<fmGlobalParameter> GetCommonInputParametersList()

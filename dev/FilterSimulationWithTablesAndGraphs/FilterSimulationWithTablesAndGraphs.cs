@@ -161,31 +161,6 @@ namespace FilterSimulationWithTablesAndGraphs
             HighLightCurrentPoints(sender, e.X, e.IsHighlight);
         }
 
-        private void ListBoxYAxisItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            var yParameters = new List<fmGlobalParameter>();
-
-            var clb = sender as ListView;
-            if (clb != null)
-            {
-                for (int i = 0; i < clb.Items.Count; ++i)
-                {
-                    if (i == e.Index && e.NewValue == CheckState.Checked
-                        || clb.Items[i].Checked && (e.NewValue == CheckState.Checked || i != e.Index))
-                    {
-                        yParameters.Add(fmGlobalParameter.ParametersByName[clb.Items[i].Text]);
-                    }
-                }
-            }
-
-            if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
-                return;
-
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
-            BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
-            BindCalculatedResultsToChartAndTable();
-        }
-
         public void SerializeData(XmlWriter writer)
         {
             Solution.Keep();
@@ -397,6 +372,76 @@ namespace FilterSimulationWithTablesAndGraphs
                 row.Cells[2].Value = new fmValue(serie.Ranges.Ranges[xParameter].MaxValue / coef).ToString();
             }
             MinMaxXValueTextBoxTextChanged(sender, e);
+        }
+
+        private void ListBoxYAxisItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            var yParameters = new List<fmGlobalParameter>();
+
+            var clb = sender as ListView;
+            if (clb != null)
+            {
+                for (int i = 0; i < clb.Items.Count; ++i)
+                {
+                    if (i == e.Index && e.NewValue == CheckState.Checked
+                        || clb.Items[i].Checked && (e.NewValue == CheckState.Checked || i != e.Index))
+                    {
+                        yParameters.Add(fmGlobalParameter.ParametersByName[clb.Items[i].Text]);
+                    }
+                }
+            }
+
+            if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
+                return;
+
+            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+            BindY2List(yParameters);
+
+            var y2Parameters = new List<fmGlobalParameter>();
+            for (int i = 0; i < listBoxY2Axis.Items.Count; ++i)
+            {
+                if (listBoxY2Axis.Items[i].Checked)
+                {
+                    y2Parameters.Add(fmGlobalParameter.ParametersByName[listBoxY2Axis.Items[i].Text]);
+                }
+            }
+
+            BindCalculatedResultsToDisplayingResults(xParameter, yParameters, y2Parameters);
+            BindCalculatedResultsToChartAndTable();
+        }
+
+        private void ListBoxY2AxisItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            var yParameters = new List<fmGlobalParameter>();
+            for (int i = 0; i < listBoxYAxis.Items.Count; ++i)
+            {
+                if (listBoxYAxis.Items[i].Checked)
+                {
+                    yParameters.Add(fmGlobalParameter.ParametersByName[listBoxYAxis.Items[i].Text]);
+                }
+            }
+
+            var y2Parameters = new List<fmGlobalParameter>();
+
+            var clb = sender as ListView;
+            if (clb != null)
+            {
+                for (int i = 0; i < clb.Items.Count; ++i)
+                {
+                    if (i == e.Index && e.NewValue == CheckState.Checked
+                        || clb.Items[i].Checked && (e.NewValue == CheckState.Checked || i != e.Index))
+                    {
+                        y2Parameters.Add(fmGlobalParameter.ParametersByName[clb.Items[i].Text]);
+                    }
+                }
+            }
+
+            if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
+                return;
+
+            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+            BindCalculatedResultsToDisplayingResults(xParameter, yParameters, y2Parameters);
+            BindCalculatedResultsToChartAndTable();
         }
     }
 }
