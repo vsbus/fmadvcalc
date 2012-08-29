@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using FilterSimulation;
 using fmCalculationLibrary;
@@ -80,9 +81,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        // ReSharper disable InconsistentNaming
-        private void minMaxXValueTextBox_TextChanged(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
+        private void MinMaxXValueTextBoxTextChanged(object sender, EventArgs e)
         {
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
@@ -256,7 +255,7 @@ namespace FilterSimulationWithTablesAndGraphs
             int oldHeight = m_xyDialog == null ? 900 : m_xyDialog.Height;
             int oldWidth = m_xyDialog == null ? 600 : m_xyDialog.Width;
             m_xyDialog = new Form();
-            m_xyDialog.Closing += m_XYDialog_Closing;
+            m_xyDialog.Closing += MXyDialogClosing;
             m_xyDialog.Height = oldHeight;
             m_xyDialog.Width = oldWidth;
             m_xyDialog.Text = @"Diagram Configuration";
@@ -265,21 +264,14 @@ namespace FilterSimulationWithTablesAndGraphs
             tablesAndGraphsTopLeftPanel.Dock = DockStyle.Fill;
         }
 
-        void m_XYDialog_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        void MXyDialogClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
         }
 
         public bool IsModified()
         {
-            foreach (var project in Solution.projects)
-            {
-                if (project.Modified)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return Solution.projects.Any(project => project.Modified);
         }
 
         private void CheckBox1CheckedChanged(object sender, EventArgs e)
@@ -356,21 +348,21 @@ namespace FilterSimulationWithTablesAndGraphs
             return Solution.currentObjects.Serie.MachineType.name;
         }
 
-        private void KeepAllInY1CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void KeepAllInY1CheckBoxCheckedChanged(object sender, EventArgs e)
         {
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
         }
 
-        private void NoScalingCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void NoScalingCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
         }
 
-        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CopyToolStripMenuItemClick(object sender, EventArgs e)
         {
             DataGridViewCell curCell = coordinatesGrid.CurrentCell;
             coordinatesGrid.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
@@ -381,11 +373,30 @@ namespace FilterSimulationWithTablesAndGraphs
             coordinatesGrid.ClearSelection();
         }
 
-        private void startFromOriginCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void StartFromOriginCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
+        }
+
+        private void InvolvedSeriesDataGrid_CellValueChangedByUser(object sender, DataGridViewCellEventArgs e)
+        {
+            MinMaxXValueTextBoxTextChanged(sender, new EventArgs());
+        }
+
+        private void LoadDefaultRangle_Click(object sender, EventArgs e)
+        {
+            if (InvolvedSeriesDataGrid.CurrentCell != null)
+            {
+                DataGridViewRow row = InvolvedSeriesDataGrid.CurrentCell.OwningRow;
+                fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+                double coef = xParameter.UnitFamily.CurrentUnit.Coef;
+                fmFilterSimSerie serie = m_involvedSeries[row.Index];
+                row.Cells[1].Value = new fmValue(serie.Ranges.Ranges[xParameter].MinValue / coef).ToString();
+                row.Cells[2].Value = new fmValue(serie.Ranges.Ranges[xParameter].MaxValue / coef).ToString();
+            }
+            MinMaxXValueTextBoxTextChanged(sender, e);
         }
     }
 }
