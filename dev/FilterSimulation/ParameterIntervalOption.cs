@@ -123,6 +123,8 @@ namespace FilterSimulation
                 cakeFormationLimitsBlock = new fmSimulationLimitsBlock(
                     CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.A]),
                     CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.A]),
+                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.d0]),
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.d0]),
                     CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.Dp]),
                     CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.Dp]),
                     CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.sf]),

@@ -11,6 +11,8 @@ namespace fmCalcBlocksLibrary.Blocks
     public class fmSimulationLimitsBlock : fmBaseLimitsBlock
     {
         private readonly fmBlockLimitsParameter A;
+        private readonly fmBlockLimitsParameter d0;
+
         private readonly fmBlockLimitsParameter Dp;
         
         private readonly fmBlockLimitsParameter hc;
@@ -28,6 +30,7 @@ namespace fmCalcBlocksLibrary.Blocks
         // ReSharper disable InconsistentNaming
         public fmSimulationLimitsBlock(
             DataGridViewCell A_min_Cell, DataGridViewCell A_max_Cell,
+            DataGridViewCell d0_min_Cell, DataGridViewCell d0_max_Cell,
             DataGridViewCell Dp_min_Cell, DataGridViewCell Dp_max_Cell,
             DataGridViewCell sf_min_Cell, DataGridViewCell sf_max_Cell,
             DataGridViewCell sr_min_Cell, DataGridViewCell sr_max_Cell,
@@ -39,6 +42,8 @@ namespace fmCalcBlocksLibrary.Blocks
         // ReSharper restore InconsistentNaming
         {
             AddParameter(ref A, fmGlobalParameter.A, A_min_Cell, A_max_Cell, true);
+            AddParameter(ref d0, fmGlobalParameter.d0, d0_min_Cell, d0_max_Cell, true);
+
             AddParameter(ref Dp, fmGlobalParameter.Dp, Dp_min_Cell, Dp_max_Cell, true);
             
             AddParameter(ref tc, fmGlobalParameter.tc, tc_min_Cell, tc_max_Cell, true);
