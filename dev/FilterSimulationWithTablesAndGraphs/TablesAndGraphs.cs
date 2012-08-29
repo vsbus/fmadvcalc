@@ -95,42 +95,41 @@ namespace FilterSimulationWithTablesAndGraphs
     }
     public class fmSelectedSimulationData
     {
-        public bool isChecked;
-        public bool isCurrentActive;
-        public fmFilterSimulation externalSimulation;
-        public fmFilterSimulationData internalSimulationData;
-        public List<fmFilterSimulationData> calculatedDataList = new List<fmFilterSimulationData>();
+        public bool IsChecked;
+        public bool IsCurrentActive;
+        public fmFilterSimulation ExternalSimulation;
+        public fmFilterSimulationData InternalSimulationData;
+        public List<fmFilterSimulationData> CalculatedDataList = new List<fmFilterSimulationData>();
         public fmSelectedSimulationData(bool isChecked, fmFilterSimulation externalSimulation)
         {
-            this.isChecked = isChecked;
-            isCurrentActive = false;
-            this.externalSimulation = externalSimulation;
-            internalSimulationData = new fmFilterSimulationData();
-            internalSimulationData.CopyFrom(externalSimulation.Data);
+            IsChecked = isChecked;
+            IsCurrentActive = false;
+            ExternalSimulation = externalSimulation;
+            InternalSimulationData = new fmFilterSimulationData();
+            InternalSimulationData.CopyFrom(externalSimulation.Data);
         }
     }
     public class fmLocalInputParametersData
     {
-        public bool isChecked;
-        public bool isCurrentActive;
-        public fmFilterMachiningBlock filterMachiningBlock;
-        public fmDeliquoringSimualtionBlock deliquoringBlock;
-        public List<List<fmFilterSimulationData>> calculatedDataLists = new List<List<fmFilterSimulationData>>();
+        public bool IsChecked;
+        public bool IsCurrentActive;
+        public fmFilterMachiningBlock FilterMachiningBlock;
+        public fmDeliquoringSimualtionBlock DeliquoringBlock;
+        public List<List<fmFilterSimulationData>> CalculatedDataLists = new List<List<fmFilterSimulationData>>();
         public fmLocalInputParametersData(bool isChecked, fmFilterMachiningBlock filterMachiningBlock, fmDeliquoringSimualtionBlock deliquoringBlock)
         {
-            this.isChecked = isChecked;
-            isCurrentActive = false;
-            this.filterMachiningBlock = filterMachiningBlock;
-            this.deliquoringBlock = deliquoringBlock;
+            IsChecked = isChecked;
+            IsCurrentActive = false;
+            FilterMachiningBlock = filterMachiningBlock;
+            DeliquoringBlock = deliquoringBlock;
         }
 
         internal List<fmGlobalParameter> GetParametersThatCanBeInput()
         {
             List<fmGlobalParameter> result = fmCalculationOptionHelper.GetParametersListThatCanBeInput(
-                filterMachiningBlock.filterMachiningCalculationOption);
+                FilterMachiningBlock.filterMachiningCalculationOption);
 
-            var deliqVariables = new List<fmGlobalParameter>();
-            foreach (fmBlockVariableParameter varPar in deliquoringBlock.Parameters)
+            foreach (fmBlockVariableParameter varPar in DeliquoringBlock.Parameters)
             {
                 if (varPar.isInputed || varPar.group != null)
                 {
@@ -153,7 +152,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private readonly fmDisplayingResults m_displayingResults = new fmDisplayingResults();
         private object m_highLightCaller;
 
-        private enum parameterKind
+        private enum fmParameterKind
         {
             MaterialCakeFormation,
             MachiningSettingsCakeFormation,
@@ -161,55 +160,55 @@ namespace FilterSimulationWithTablesAndGraphs
             MachiningSettingsDeliquoring
         }
 
-        struct ParameterKindProperties
+        struct fmParameterKindProperties
         {
             public Color Color { get; set; }
             public CheckBox Checkbox { get; set; }
         }
 
-        private Dictionary<string, parameterKind> m_XYListKind;
+        private Dictionary<string, fmParameterKind> m_xyListKind;
 
-        private Dictionary<parameterKind, ParameterKindProperties> m_parameterKindProperties;
+        private Dictionary<fmParameterKind, fmParameterKindProperties> m_parameterKindProperties;
 
-        void AddColors(parameterKind kind, fmGlobalParameter[] parameters)
+        void AddColors(fmParameterKind kind, IEnumerable<fmGlobalParameter> parameters)
         {
             foreach (fmGlobalParameter p in parameters)
             {
-                m_XYListKind.Add(p.Name, kind);
+                m_xyListKind.Add(p.Name, kind);
             }
         }
 
-        void InitXYParametersProperties()
+        void InitXyParametersProperties()
         {
-            m_parameterKindProperties = new Dictionary<parameterKind, ParameterKindProperties>()
+            m_parameterKindProperties = new Dictionary<fmParameterKind, fmParameterKindProperties>
                                             {
                                                 {
-                                                    parameterKind.MaterialCakeFormation,
-                                                    new ParameterKindProperties()
+                                                    fmParameterKind.MaterialCakeFormation,
+                                                    new fmParameterKindProperties
                                                         {
                                                             Color = Color.Green,
                                                             Checkbox = cakeFormationMaterilParametersCheckBox
                                                         }
                                                     },
                                                 {
-                                                    parameterKind.MachiningSettingsCakeFormation,
-                                                    new ParameterKindProperties()
+                                                    fmParameterKind.MachiningSettingsCakeFormation,
+                                                    new fmParameterKindProperties
                                                         {
                                                             Color = Color.BlueViolet,
                                                             Checkbox = cakeFormationMachininglParametersCheckBox
                                                         }
                                                     },
                                                 {
-                                                    parameterKind.MaterialDeliquoring,
-                                                    new ParameterKindProperties()
+                                                    fmParameterKind.MaterialDeliquoring,
+                                                    new fmParameterKindProperties
                                                         {
                                                             Color = Color.Coral,
                                                             Checkbox = deliquoringMaterilParametersCheckBox
                                                         }
                                                     },
                                                 {
-                                                    parameterKind.MachiningSettingsDeliquoring,
-                                                    new ParameterKindProperties()
+                                                    fmParameterKind.MachiningSettingsDeliquoring,
+                                                    new fmParameterKindProperties
                                                         {
                                                             Color = Color.IndianRed,
                                                             Checkbox = deliquoringMachininglParametersCheckBox
@@ -218,19 +217,19 @@ namespace FilterSimulationWithTablesAndGraphs
                                             };
 
 
-            m_XYListKind = new Dictionary<string, parameterKind>();
+            m_xyListKind = new Dictionary<string, fmParameterKind>();
 
-            AddColors(parameterKind.MaterialCakeFormation, fmGlobalParameter.GetMaterialCakeParameters());
-            AddColors(parameterKind.MachiningSettingsCakeFormation, fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
-            AddColors(parameterKind.MaterialDeliquoring, fmGlobalParameter.GetMaterialDeliquoringParameters());
-            AddColors(parameterKind.MachiningSettingsDeliquoring, fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
+            AddColors(fmParameterKind.MaterialCakeFormation, fmGlobalParameter.GetMaterialCakeParameters());
+            AddColors(fmParameterKind.MachiningSettingsCakeFormation, fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
+            AddColors(fmParameterKind.MaterialDeliquoring, fmGlobalParameter.GetMaterialDeliquoringParameters());
+            AddColors(fmParameterKind.MachiningSettingsDeliquoring, fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
         }
 
         private void FillListBox(IList listBoxItems, List<string> strings)
         {
-            if (m_XYListKind == null)
+            if (m_xyListKind == null)
             {
-                InitXYParametersProperties();
+                InitXyParametersProperties();
             }
 
             for (int i = listBoxItems.Count - 1; i >= 0; --i)
@@ -262,9 +261,9 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     listBoxItems.Insert(i, strings[j]);
 
-                    if (m_XYListKind.ContainsKey(strings[j]))
+                    if (m_xyListKind.ContainsKey(strings[j]))
                     {
-                        Color color = m_parameterKindProperties[m_XYListKind[strings[j]]].Color;
+                        Color color = m_parameterKindProperties[m_xyListKind[strings[j]]].Color;
                         object item = listBoxItems[i];
                         if (item is ListViewItem)
                         {
@@ -425,13 +424,13 @@ namespace FilterSimulationWithTablesAndGraphs
 
             selectedSimulationParametersTable.Rows.Clear();
 
-            for (int i = 0; i < m_internalSelectedSimList.Count; i++)
+            foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
             {
-                fmFilterSimulationData tempSim = m_internalSelectedSimList[i].internalSimulationData;
+                fmFilterSimulationData tempSim = simData.InternalSimulationData;
 
                 DataGridViewRow row =
                     selectedSimulationParametersTable.Rows[selectedSimulationParametersTable.Rows.Add()];
-                row.Cells["SelectedSimulationParametersCheckBoxColumn"].Value = m_internalSelectedSimList[i].isChecked;
+                row.Cells["SelectedSimulationParametersCheckBoxColumn"].Value = simData.IsChecked;
 
                 foreach (fmGlobalParameter param in tempSim.parameters.Keys)
                 {
@@ -442,7 +441,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
 
-                if (m_externalCurrentActiveSimulation == m_internalSelectedSimList[i].externalSimulation)
+                if (m_externalCurrentActiveSimulation == simData.ExternalSimulation)
                 {
                     selectedSimulationParametersTable.CurrentCell = row.Cells[0];
                 }
@@ -457,7 +456,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             for (int i = 0; i < m_internalSelectedSimList.Count; i++)
             {
-                fmFilterSimulationData tempSim = m_internalSelectedSimList[i].internalSimulationData;
+                fmFilterSimulationData tempSim = m_internalSelectedSimList[i].InternalSimulationData;
                 DataGridViewRow row = selectedSimulationParametersTable.Rows[i];
 
                 var tempBlock = new fmFilterMachiningBlock
@@ -487,7 +486,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             for (int i = 0; i < m_internalSelectedSimList.Count; i++)
             {
-                fmFilterSimulationData tempSim = m_internalSelectedSimList[i].internalSimulationData;
+                fmFilterSimulationData tempSim = m_internalSelectedSimList[i].InternalSimulationData;
                 DataGridViewRow row = selectedSimulationParametersTable.Rows[i];
 
                 foreach (fmGlobalParameter param in tempSim.parameters.Keys)
@@ -535,33 +534,33 @@ namespace FilterSimulationWithTablesAndGraphs
                     if (inputs.Contains(par))
                     {
                         foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
-                            if (simData.internalSimulationData.parameters.ContainsKey(par)
-                                && simData.internalSimulationData.parameters[par] is fmCalculationVariableParameter
-                                && ((fmCalculationVariableParameter)simData.internalSimulationData.parameters[par]).isInputed)
+                            if (simData.InternalSimulationData.parameters.ContainsKey(par)
+                                && simData.InternalSimulationData.parameters[par] is fmCalculationVariableParameter
+                                && ((fmCalculationVariableParameter)simData.InternalSimulationData.parameters[par]).isInputed)
                             {
                                 var fmb = new fmFilterMachiningBlock();
-                                fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.filterMachiningCalculationOption);
-                                fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.deliquoringUsedCalculationOption);
-                                fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.gasFlowrateUsedCalculationOption);
-                                fmb.SetCalculationOptionAndRewriteData(simData.internalSimulationData.evaporationUsedCalculationOption);
+                                fmb.SetCalculationOptionAndRewriteData(simData.InternalSimulationData.filterMachiningCalculationOption);
+                                fmb.SetCalculationOptionAndRewriteData(simData.InternalSimulationData.deliquoringUsedCalculationOption);
+                                fmb.SetCalculationOptionAndRewriteData(simData.InternalSimulationData.gasFlowrateUsedCalculationOption);
+                                fmb.SetCalculationOptionAndRewriteData(simData.InternalSimulationData.evaporationUsedCalculationOption);
 
                                 var deliq = new fmDeliquoringSimualtionBlock();
-                                deliq.SetCalculationOptionAndRewriteData(simData.internalSimulationData.deliquoringUsedCalculationOption);
+                                deliq.SetCalculationOptionAndRewriteData(simData.InternalSimulationData.deliquoringUsedCalculationOption);
 
                                 fmBlockVariableParameter xParameter = null;
                                 if (listBoxXAxis.SelectedItems.Count != 0)
                                 {
                                     fmGlobalParameter p = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
                                     xParameter = (cakeFormationParameters.Contains(p)
-                                        ? (fmBaseBlock) fmb
+                                        ? fmb
                                         : (fmBaseBlock) deliq).GetParameterByName(p.Name);
                                 }
 
-                                fmBlockVariableParameter yParameter = null;
+                                fmBlockVariableParameter yParameter;
                                 {
                                     fmGlobalParameter p = fmGlobalParameter.ParametersByName[parName];
                                     yParameter = (cakeFormationParameters.Contains(p)
-                                        ? (fmBaseBlock) fmb
+                                        ? fmb
                                         : (fmBaseBlock) deliq).GetParameterByName(p.Name);
                                 }
                                 if (xParameter == null || yParameter == null || yParameter.group != xParameter.group)
@@ -633,16 +632,16 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                 {
-                    var par = localParameters.filterMachiningBlock.GetParameterByName(inputedParameter.Name);
+                    var par = localParameters.FilterMachiningBlock.GetParameterByName(inputedParameter.Name);
                     if (par != null)
                     {
-                        localParameters.filterMachiningBlock.UpdateIsInputed(par);
+                        localParameters.FilterMachiningBlock.UpdateIsInputed(par);
                     }
 
-                    par = localParameters.deliquoringBlock.GetParameterByName(inputedParameter.Name);
+                    par = localParameters.DeliquoringBlock.GetParameterByName(inputedParameter.Name);
                     if (par != null)
                     {
-                        localParameters.deliquoringBlock.UpdateIsInputed(par);
+                        localParameters.DeliquoringBlock.UpdateIsInputed(par);
                     }
                 }
             }
@@ -650,23 +649,23 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
-                    foreach (var p in simData.externalSimulation.Parameters.Values)
+                    foreach (var p in simData.ExternalSimulation.Parameters.Values)
                     {
                         if (p is fmCalculationVariableParameter)
                         {
-                            ((fmCalculationVariableParameter)simData.internalSimulationData.parameters[p.globalParameter]).isInputed = ((fmCalculationVariableParameter)p).isInputed;
+                            ((fmCalculationVariableParameter)simData.InternalSimulationData.parameters[p.globalParameter]).isInputed = ((fmCalculationVariableParameter)p).isInputed;
                         }
                     }
-                    simData.internalSimulationData.filterMachiningCalculationOption = simData.externalSimulation.FilterMachiningCalculationOption;
-                    simData.internalSimulationData.deliquoringUsedCalculationOption = simData.externalSimulation.DeliquoringUsedCalculationOption;
-                    simData.internalSimulationData.gasFlowrateUsedCalculationOption = simData.externalSimulation.GasFlowrateUsedCalculationOption;
-                    simData.internalSimulationData.evaporationUsedCalculationOption = simData.externalSimulation.EvaporationUsedCalculationOption;
-                    simData.internalSimulationData.hcdEpsdCalculationOption = simData.externalSimulation.HcdEpsdCalculationOption;
-                    simData.internalSimulationData.dpdInputCalculationOption = simData.externalSimulation.DpdInputCalculationOption;
-                    simData.internalSimulationData.rhoDCalculationOption = simData.externalSimulation.RhoDetaDCalculationOption;
-                    simData.internalSimulationData.PcDCalculationOption = simData.externalSimulation.PcDCalculationOption;
-                    simData.internalSimulationData.suspensionCalculationOption = simData.externalSimulation.SuspensionCalculationOption;
-                    simData.internalSimulationData.UpdateIsInputed(inputedParameter);
+                    simData.InternalSimulationData.filterMachiningCalculationOption = simData.ExternalSimulation.FilterMachiningCalculationOption;
+                    simData.InternalSimulationData.deliquoringUsedCalculationOption = simData.ExternalSimulation.DeliquoringUsedCalculationOption;
+                    simData.InternalSimulationData.gasFlowrateUsedCalculationOption = simData.ExternalSimulation.GasFlowrateUsedCalculationOption;
+                    simData.InternalSimulationData.evaporationUsedCalculationOption = simData.ExternalSimulation.EvaporationUsedCalculationOption;
+                    simData.InternalSimulationData.hcdEpsdCalculationOption = simData.ExternalSimulation.HcdEpsdCalculationOption;
+                    simData.InternalSimulationData.dpdInputCalculationOption = simData.ExternalSimulation.DpdInputCalculationOption;
+                    simData.InternalSimulationData.rhoDCalculationOption = simData.ExternalSimulation.RhoDetaDCalculationOption;
+                    simData.InternalSimulationData.PcDCalculationOption = simData.ExternalSimulation.PcDCalculationOption;
+                    simData.InternalSimulationData.suspensionCalculationOption = simData.ExternalSimulation.SuspensionCalculationOption;
+                    simData.InternalSimulationData.UpdateIsInputed(inputedParameter);
                 }
             }
         }
@@ -676,12 +675,12 @@ namespace FilterSimulationWithTablesAndGraphs
             if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
                 return;
 
-            List<fmFilterSimSerie> involvedSeries = new List<fmFilterSimSerie>();
+            var involvedSeries = new List<fmFilterSimSerie>();
             if (!m_isUseLocalParams)
             {
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
-                    fmFilterSimSerie serie = simData.externalSimulation.Parent;
+                    fmFilterSimSerie serie = simData.ExternalSimulation.Parent;
                     if (!involvedSeries.Contains(serie))
                     {
                         involvedSeries.Add(serie);
@@ -773,14 +772,14 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 for (int i = 0; i < m_internalSelectedSimList.Count; ++i)
                 {
-                    m_internalSelectedSimList[i].isCurrentActive = i == currentRowIndex;
+                    m_internalSelectedSimList[i].IsCurrentActive = i == currentRowIndex;
                 }
             }
             else
             {
                 for (int i = 0; i < m_localInputParametersList.Count; ++i)
                 {
-                    m_localInputParametersList[i].isCurrentActive = i == currentRowIndex;
+                    m_localInputParametersList[i].IsCurrentActive = i == currentRowIndex;
                 }
             }
         }
@@ -792,7 +791,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (selectedSimulationParametersTable.Columns[e.ColumnIndex].Name == "SelectedSimulationParametersCheckBoxColumn"
                 && m_internalSelectedSimList.Count > e.RowIndex)
             {
-                m_internalSelectedSimList[e.RowIndex].isChecked = (bool)selectedSimulationParametersTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                m_internalSelectedSimList[e.RowIndex].IsChecked = (bool)selectedSimulationParametersTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 BindCalculatedResultsToDisplayingResults();
                 BindCalculatedResultsToChartAndTable();
             }
@@ -805,7 +804,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (additionalParametersTable.Columns[e.ColumnIndex].Name == "AdditionalParametersCheckBoxColumn"
                 && m_localInputParametersList.Count > e.RowIndex)
             {
-                m_localInputParametersList[e.RowIndex].isChecked = (bool)additionalParametersTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                m_localInputParametersList[e.RowIndex].IsChecked = (bool)additionalParametersTable.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 RecalculateSimulationsWithIterationX();
                 BindCalculatedResultsToDisplayingResults();
                 BindCalculatedResultsToChartAndTable();
@@ -870,10 +869,9 @@ namespace FilterSimulationWithTablesAndGraphs
         private void UpdateVisibilityOfColumnsInLocalParametrsTable()
         {
             var possibleInputs = new List<fmGlobalParameter>();
-            foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
-            {
-                possibleInputs = ParametersListsUnion(possibleInputs, localParameters.GetParametersThatCanBeInput());
-            }
+            possibleInputs = m_localInputParametersList.Aggregate(
+                possibleInputs,
+                (current, localParameters) => ParametersListsUnion(current, localParameters.GetParametersThatCanBeInput()));
             var displayInputs = new List<fmGlobalParameter>();
             foreach (fmGlobalParameter p in possibleInputs)
             {
@@ -887,11 +885,11 @@ namespace FilterSimulationWithTablesAndGraphs
                     fmBlockVariableParameter blockPar = null;
                     if (blockPar == null)
                     {
-                        blockPar = localParameters.filterMachiningBlock.GetParameterByName(p.Name);
+                        blockPar = localParameters.FilterMachiningBlock.GetParameterByName(p.Name);
                     }
                     if (blockPar == null)
                     {
-                        blockPar = localParameters.deliquoringBlock.GetParameterByName(p.Name);
+                        blockPar = localParameters.DeliquoringBlock.GetParameterByName(p.Name);
                     }
 
                     if (blockPar.isInputed)
@@ -966,7 +964,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         Color color = Color.Black;
 
                         if (selectedSimulationParametersTable.CurrentCell != null
-                            && dispArray.OwningSimulation == m_internalSelectedSimList[selectedSimulationParametersTable.CurrentCell.RowIndex].internalSimulationData)
+                            && dispArray.OwningSimulation == m_internalSelectedSimList[selectedSimulationParametersTable.CurrentCell.RowIndex].InternalSimulationData)
                         {
                             color = Color.Blue;
                         }
@@ -1003,7 +1001,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         continue;
 
                     string scaleString = dispArray.Scale.value == 1 ? "" : " * " + (1 / dispArray.Scale);
-                    List<KeyValuePair<double[], double[]>> curvesData = GetCurvesDoubleArrays(m_displayingResults.XParameter, dispArray);
+                    IEnumerable<KeyValuePair<double[], double[]>> curvesData = GetCurvesDoubleArrays(m_displayingResults.XParameter, dispArray);
                     foreach (KeyValuePair<double[], double[]> pair in curvesData)
                     {
                         LineItem curve = fmZedGraphControl1.GraphPane.AddCurve(dispArray.Parameter.Name + scaleString + " (" + dispArray.Parameter.UnitName + ")",
@@ -1070,7 +1068,7 @@ namespace FilterSimulationWithTablesAndGraphs
             fmZedGraphControl1.Refresh();
         }
 
-        private List<KeyValuePair<double[], double[]>> GetCurvesDoubleArrays(fmDisplayingArray xArray, fmDisplayingArray yArray)
+        private static IEnumerable<KeyValuePair<double[], double[]>> GetCurvesDoubleArrays(fmDisplayingArray xArray, fmDisplayingArray yArray)
         {
             if (xArray.Values.Length != yArray.Values.Length)
             {
@@ -1145,11 +1143,8 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
-            var yParameters = new List<fmGlobalParameter>();
-            foreach (ListViewItem item in listBoxYAxis.CheckedItems)
-            {
-                yParameters.Add(fmGlobalParameter.ParametersByName[item.Text]);
-            }
+            var yParameters = (from ListViewItem item in listBoxYAxis.CheckedItems
+                               select fmGlobalParameter.ParametersByName[item.Text]).ToList();
 
             BindCalculatedResultsToDisplayingResults(xParameter, yParameters);
         }
@@ -1167,13 +1162,13 @@ namespace FilterSimulationWithTablesAndGraphs
                 var xArray = new fmDisplayingArray
                                  {
                                      Parameter = xParameter,
-                                     Values = new fmValue[m_internalSelectedSimList[0].calculatedDataList.Count]
+                                     Values = new fmValue[m_internalSelectedSimList[0].CalculatedDataList.Count]
                                  };
                 m_displayingResults.XParameter = xArray;
-                for (int i = 0; i < m_internalSelectedSimList[0].calculatedDataList.Count; ++i)
+                for (int i = 0; i < m_internalSelectedSimList[0].CalculatedDataList.Count; ++i)
                 {
                     xArray.Values[i] =
-                        m_internalSelectedSimList[0].calculatedDataList[i].parameters[xParameter].ValueInUnits;
+                        m_internalSelectedSimList[0].CalculatedDataList[i].parameters[xParameter].ValueInUnits;
                 }
 
                 Dictionary<fmGlobalParameter, fmValue> degreeOffset = CreateDegreeOffsets(yParameters);
@@ -1191,14 +1186,14 @@ namespace FilterSimulationWithTablesAndGraphs
 
                     foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                     {
-                        if (!simData.isChecked)
+                        if (!simData.IsChecked)
                             continue;
 
                         var yArray = new fmDisplayingArray
                         {
                             Parameter = yParameter,
-                            OwningSimulation = simData.internalSimulationData,
-                            Values = new fmValue[simData.calculatedDataList.Count],
+                            OwningSimulation = simData.InternalSimulationData,
+                            Values = new fmValue[simData.CalculatedDataList.Count],
                             Scale = (!NoScalingCheckBox.Checked && yParameters.Count > 2) ? degreeOffset[yParameter] : new fmValue(1),
                             IsY2Axis = colorId == 1 && (yParameters.Count == 2 && !KeepAllInY1CheckBox.Checked),
                             Color = colors[colorId],
@@ -1208,9 +1203,9 @@ namespace FilterSimulationWithTablesAndGraphs
                                    selectedSimulationParametersTable.CurrentCell.RowIndex
                         };
 
-                        for (int i = 0; i < simData.calculatedDataList.Count; ++i)
+                        for (int i = 0; i < simData.CalculatedDataList.Count; ++i)
                         {
-                            yArray.Values[i] = simData.calculatedDataList[i].parameters[yParameter].ValueInUnits;
+                            yArray.Values[i] = simData.CalculatedDataList[i].parameters[yParameter].ValueInUnits;
                         }
 
                         yListOfArrays.Arrays.Add(yArray);
@@ -1226,7 +1221,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 m_displayingResults.YParameters = new List<fmDisplayingYListOfArrays>();
 
                 if (m_localInputParametersList.Count == 0
-                    || m_localInputParametersList[0].calculatedDataLists.Count == 0)
+                    || m_localInputParametersList[0].CalculatedDataLists.Count == 0)
                 {
                     return;
                 }
@@ -1235,12 +1230,12 @@ namespace FilterSimulationWithTablesAndGraphs
                 m_displayingResults.XParameter = xArray;
 
                 xArray.Parameter = xParameter;
-                int pointsCount = m_localInputParametersList[0].calculatedDataLists[0].Count;
+                int pointsCount = m_localInputParametersList[0].CalculatedDataLists[0].Count;
                 xArray.Values = new fmValue[pointsCount];
                 for (int i = 0; i < pointsCount; ++i)
                 {
                     xArray.Values[i] =
-                        m_localInputParametersList[0].calculatedDataLists[0][i].parameters[xParameter].ValueInUnits;
+                        m_localInputParametersList[0].CalculatedDataLists[0][i].parameters[xParameter].ValueInUnits;
                 }
 
                 Dictionary<fmGlobalParameter, fmValue> degreeOffset = CreateDegreeOffsets(yParameters);
@@ -1258,10 +1253,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
                     foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                     {
-                        if (!localParameters.isChecked)
+                        if (!localParameters.IsChecked)
                             continue;
 
-                        foreach (List<fmFilterSimulationData> list in localParameters.calculatedDataLists)
+                        foreach (List<fmFilterSimulationData> list in localParameters.CalculatedDataLists)
                         {
                             var yArray = new fmDisplayingArray
                                              {
@@ -1302,9 +1297,9 @@ namespace FilterSimulationWithTablesAndGraphs
                 fmValue maxY = -fmValue.Infinity();
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
-                    for (int i = 0; i < simData.calculatedDataList.Count; ++i)
+                    for (int i = 0; i < simData.CalculatedDataList.Count; ++i)
                     {
-                        fmValue curVal = fmValue.Abs(simData.calculatedDataList[i].parameters[yParameter].ValueInUnits);
+                        fmValue curVal = fmValue.Abs(simData.CalculatedDataList[i].parameters[yParameter].ValueInUnits);
                         maxY = fmValue.Max(maxY, curVal);
                     }
                 }
@@ -1358,11 +1353,11 @@ namespace FilterSimulationWithTablesAndGraphs
                 var xEnds = new List<double>();
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
-                    if (!simData.externalSimulation.Parent.Ranges.Ranges.ContainsKey(xParameter))
+                    if (!simData.ExternalSimulation.Parent.Ranges.Ranges.ContainsKey(xParameter))
                     {
                         continue;
                     }
-                    fmDefaultParameterRange range = simData.externalSimulation.Parent.Ranges.Ranges[xParameter];
+                    fmDefaultParameterRange range = simData.ExternalSimulation.Parent.Ranges.Ranges[xParameter];
                     xStarts.Add(range.MinValue);
                     xEnds.Add(range.MaxValue);
                 }
@@ -1370,19 +1365,19 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
-                    if (!simData.externalSimulation.Parent.Ranges.Ranges.ContainsKey(xParameter))
+                    if (!simData.ExternalSimulation.Parent.Ranges.Ranges.ContainsKey(xParameter))
                     {
                         continue;
                     }
-                    fmDefaultParameterRange range = simData.externalSimulation.Parent.Ranges.Ranges[xParameter];
+                    fmDefaultParameterRange range = simData.ExternalSimulation.Parent.Ranges.Ranges[xParameter];
 
-                    simData.calculatedDataList = new List<fmFilterSimulationData>();
+                    simData.CalculatedDataList = new List<fmFilterSimulationData>();
 
                     foreach (double x in xList)
                     {
                         var tempSim = new fmFilterSimulationData();
-                        tempSim.CopyIsInputedFrom(simData.internalSimulationData);
-                        tempSim.CopyValuesFrom(simData.externalSimulation.Data);
+                        tempSim.CopyIsInputedFrom(simData.InternalSimulationData);
+                        tempSim.CopyValuesFrom(simData.ExternalSimulation.Data);
                         tempSim.parameters[xParameter].value = new fmValue(x);
 
                         if (x < range.MinValue || x > range.MaxValue)
@@ -1400,7 +1395,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             var suspensionCalculator = new fmSuspensionCalculator(tempSim.parameters.Values)
                                                            {
                                                                calculationOption = simData.
-                                                                   internalSimulationData.suspensionCalculationOption
+                                                                   InternalSimulationData.suspensionCalculationOption
                                                            };
                             suspensionCalculator.DoCalculations();
 
@@ -1417,27 +1412,27 @@ namespace FilterSimulationWithTablesAndGraphs
                                 new fmFilterMachiningCalculator(tempSim.parameters.Values)
                                     {
                                         calculationOption = simData.
-                                            internalSimulationData.filterMachiningCalculationOption
+                                            InternalSimulationData.filterMachiningCalculationOption
                                     };
                             filterMachiningCalculator.DoCalculations();
 
                             bool isPlaneArea =
                                 fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
-                                    simData.internalSimulationData.filterMachiningCalculationOption);
+                                    simData.InternalSimulationData.filterMachiningCalculationOption);
                             bool isVacuumFilter =
-                                fmFilterSimMachineType.IsVacuumFilter(simData.externalSimulation.Parent.MachineType);
+                                fmFilterSimMachineType.IsVacuumFilter(simData.ExternalSimulation.Parent.MachineType);
                             double hcdCoefficient =
-                                fmFilterSimMachineType.GetHcdCoefficient(simData.externalSimulation.Parent.MachineType);
+                                fmFilterSimMachineType.GetHcdCoefficient(simData.ExternalSimulation.Parent.MachineType);
 
-                            var eps0dNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values)
+                            var eps0DNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values)
                                                              {
                                                                  dpdInputCalculationOption = simData.
-                                                                     internalSimulationData.dpdInputCalculationOption,
+                                                                     InternalSimulationData.dpdInputCalculationOption,
                                                                  hcdCalculationOption = simData.
-                                                                     internalSimulationData.hcdEpsdCalculationOption,
+                                                                     InternalSimulationData.hcdEpsdCalculationOption,
                                                                  isPlainArea = isPlaneArea
                                                              };
-                            eps0dNedEpsdCalculator.DoCalculations();
+                            eps0DNedEpsdCalculator.DoCalculations();
 
                             var sigmaPke0PkePcdRcdAlphadCalculator =
                                 new fmSigmaPke0PkePcdRcdAlphadCalculator(tempSim.parameters.Values);
@@ -1452,7 +1447,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             deliquoringSimualtionCalculator.DoCalculations();
                         }
 
-                        simData.calculatedDataList.Add(tempSim);
+                        simData.CalculatedDataList.Add(tempSim);
                     }
                 }
             }
@@ -1545,9 +1540,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void BindXYLists()
         {
-            if (m_XYListKind == null)
+            if (m_xyListKind == null)
             {
-                InitXYParametersProperties();
+                InitXyParametersProperties();
             }
 
             var inputNames = new List<string>();
@@ -1556,7 +1551,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             foreach (fmGlobalParameter p in simInputParameters)
             {
-                CheckBox paramsCheckbox = m_parameterKindProperties[m_XYListKind[p.Name]].Checkbox;
+                CheckBox paramsCheckbox = m_parameterKindProperties[m_xyListKind[p.Name]].Checkbox;
                 if (paramsCheckbox == null || paramsCheckbox.Checked)
                 {
                     inputNames.Add(p.Name);
@@ -1578,7 +1573,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 if (ParametersToDisplay.ParametersList.Contains(p))
                 {
-                    CheckBox paramsCheckbox = m_parameterKindProperties[m_XYListKind[p.Name]].Checkbox;
+                    CheckBox paramsCheckbox = m_parameterKindProperties[m_xyListKind[p.Name]].Checkbox;
                     if (paramsCheckbox == null || paramsCheckbox.Checked)
                     {
                         outputNames.Add(p.Name);
@@ -1603,9 +1598,8 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 var simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
-                    //if (simData.isChecked)
                     simInputParameters = ParametersListsIntersection(simInputParameters,
-                                                                     simData.internalSimulationData.
+                                                                     simData.InternalSimulationData.
                                                                          GetParametersThatCanBeInputedList());
                 return simInputParameters;
             }
@@ -1621,20 +1615,12 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private static List<fmGlobalParameter> ParametersListsIntersection(List<fmGlobalParameter> a, List<fmGlobalParameter> b)
         {
-            var result = new List<fmGlobalParameter>();
-            foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
-                if (a.Contains(p) && b.Contains(p))
-                    result.Add(p);
-            return result;
+            return fmGlobalParameter.Parameters.Where(p => a.Contains(p) && b.Contains(p)).ToList();
         }
 
         private static List<fmGlobalParameter> ParametersListsUnion(List<fmGlobalParameter> a, List<fmGlobalParameter> b)
         {
-            var result = new List<fmGlobalParameter>();
-            foreach (fmGlobalParameter p in fmGlobalParameter.Parameters)
-                if (a.Contains(p) || b.Contains(p))
-                    result.Add(p);
-            return result;
+            return fmGlobalParameter.Parameters.Where(p => a.Contains(p) || b.Contains(p)).ToList();
         }
 
         private void UpdateInternalSelectedSimList(IEnumerable<fmFilterSimulation> simList)
@@ -1645,10 +1631,10 @@ namespace FilterSimulationWithTablesAndGraphs
                 fmSelectedSimulationData newSelectedSim = null;
                 foreach (fmSelectedSimulationData checkedSim in m_internalSelectedSimList)
                 {
-                    if (checkedSim.externalSimulation == sim)
+                    if (checkedSim.ExternalSimulation == sim)
                     {
                         newSelectedSim = checkedSim;
-                        newSelectedSim.internalSimulationData.CopyValuesFrom(sim.Data);
+                        newSelectedSim.InternalSimulationData.CopyValuesFrom(sim.Data);
                     }
                 }
                 if (newSelectedSim == null)
