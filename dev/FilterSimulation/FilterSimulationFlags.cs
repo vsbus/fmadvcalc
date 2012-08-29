@@ -7,7 +7,7 @@ namespace FilterSimulation
         private bool m_sortingTables;
         private bool m_byCheckingProjects;
         private bool m_byCheckingSuspensions;
-        private bool m_byCheckingSimSeries;
+        protected bool m_byCheckingSimSeries;
         protected bool byCheckingSimulations;
     }
 }

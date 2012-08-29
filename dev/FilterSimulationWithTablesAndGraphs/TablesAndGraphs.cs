@@ -676,11 +676,33 @@ namespace FilterSimulationWithTablesAndGraphs
             if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
                 return;
 
+            List<fmFilterSimSerie> involvedSeries = new List<fmFilterSimSerie>();
+            if (!m_isUseLocalParams)
+            {
+                foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
+                {
+                    fmFilterSimSerie serie = simData.externalSimulation.Parent;
+                    if (!involvedSeries.Contains(serie))
+                    {
+                        involvedSeries.Add(serie);
+                    }
+                }
+            }
+
+            InvolvedSeriesDataGrid.Rows.Clear();
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
-            double coef = xParameter.UnitFamily.CurrentUnit.Coef;
-            fmRange range = xParameter.SpecifiedRange;
-            minXValueTextBox.Text = new fmValue(range.MinValue / coef).ToString();
-            maxXValueTextBox.Text = new fmValue(range.MaxValue / coef).ToString();
+            foreach (fmFilterSimSerie serie in involvedSeries)
+            {
+                if (!serie.Ranges.Ranges.ContainsKey(xParameter))
+                    continue;
+
+                double coef = xParameter.UnitFamily.CurrentUnit.Coef;
+                int idx = InvolvedSeriesDataGrid.Rows.Add();
+                DataGridViewRow row = InvolvedSeriesDataGrid.Rows[idx];
+                row.Cells[0].Value = serie.GetName();
+                row.Cells[1].Value = new fmValue(serie.Ranges.Ranges[xParameter].MinValue / coef).ToString();
+                row.Cells[2].Value = new fmValue(serie.Ranges.Ranges[xParameter].MaxValue / coef).ToString();
+            }
         }
 
         // ReSharper disable InconsistentNaming
