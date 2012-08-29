@@ -474,6 +474,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.ClientSize = new System.Drawing.Size(832, 700);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "fmYAxisListingForm";
             this.Text = "YAxisListingForm";
             this.panel1.ResumeLayout(false);

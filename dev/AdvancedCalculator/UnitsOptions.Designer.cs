@@ -172,6 +172,7 @@ namespace AdvancedCalculator
             this.Controls.Add(this.button1);
             this.Controls.Add(this.OKButton);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "fmUnitsOptions";
             this.Text = "UnitsOptions";
             this.Load += new System.EventHandler(this.UnitsOptions_Load);

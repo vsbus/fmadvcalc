@@ -260,6 +260,7 @@ namespace FilterSimulationWithTablesAndGraphs
             m_xyDialog.Height = oldHeight;
             m_xyDialog.Width = oldWidth;
             m_xyDialog.Text = @"Diagram Configuration";
+            m_xyDialog.FormBorderStyle = FormBorderStyle.SizableToolWindow;
             tablesAndGraphsTopLeftPanel.Parent = m_xyDialog;
             tablesAndGraphsTopLeftPanel.Dock = DockStyle.Fill;
         }
