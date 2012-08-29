@@ -603,9 +603,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        // ReSharper disable InconsistentNaming
         private void listBoxX_SelectedIndexChanged(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
         {
             SetXAxisParameterAsInputed();
         }
@@ -617,9 +615,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
             if (listBoxXAxis.SelectedItems[0].Text != "")
                 UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text]);
+
             BindForeColorToSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInLocalParametrsTable();
+            m_involvedSeries = new List<fmFilterSimSerie>();
             LoadCurrentXRange();
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
