@@ -30,7 +30,6 @@ namespace AdvancedCalculator
         private void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            filterSimulationWithTablesAndGraphs1.SaveAll();
             if (m_currentFilename != null)
             {
                 SaveOnDisk(m_currentFilename);
@@ -96,6 +95,7 @@ namespace AdvancedCalculator
 
         private void SaveOnDisk(string fileName)
         {
+            filterSimulationWithTablesAndGraphs1.SaveAll();
             var xmlSettings = new XmlWriterSettings
                                   {
                                       Indent = true
