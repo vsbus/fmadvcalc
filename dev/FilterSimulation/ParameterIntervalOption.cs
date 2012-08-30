@@ -409,5 +409,17 @@ namespace FilterSimulation
                 }
             }
         }
+
+        public void CheckScheme(string machineName)
+        {
+            for (int i = 0; i < filterTypeComboBox.Items.Count; ++i)
+            {
+                if (filterTypeComboBox.Items[i].ToString() == machineName)
+                {
+                    filterTypeComboBox.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
     }
 }

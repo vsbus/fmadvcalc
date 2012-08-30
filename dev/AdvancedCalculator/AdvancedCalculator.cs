@@ -209,6 +209,7 @@ namespace AdvancedCalculator
             proForm.SetRanges(filterSimulationWithTablesAndGraphs1.GetCurrentSerieRanges().Ranges);
             proForm.CheckMachineType(filterSimulationWithTablesAndGraphs1.GetCurrentSerieRanges().AssignedMachineType);
             proForm.SetRangesSchemas(filterSimulationWithTablesAndGraphs1.RangesSchemas);
+            proForm.CheckScheme(filterSimulationWithTablesAndGraphs1.GetCurrentSerieMachineName());
             if (proForm.ShowDialog() == DialogResult.OK)
             {
                 var rangesCfg = new fmRangesConfiguration
