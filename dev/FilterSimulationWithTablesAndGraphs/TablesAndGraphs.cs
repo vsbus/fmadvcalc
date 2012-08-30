@@ -1063,6 +1063,9 @@ namespace FilterSimulationWithTablesAndGraphs
                 fmZedGraphControl1.GraphPane.Y2Axis.Scale.MinAuto = true;
             }
 
+            fmZedGraphControl1.GraphPane.YAxis.Type = yLogCheckBox.Checked ? AxisType.Log : AxisType.Linear;
+            fmZedGraphControl1.GraphPane.Y2Axis.Type = y2LogCheckBox.Checked ? AxisType.Log : AxisType.Linear;
+
             if (isY2Involved)
             {
                 fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = true;

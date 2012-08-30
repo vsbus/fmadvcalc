@@ -617,7 +617,20 @@ namespace FilterSimulationWithTablesAndGraphs
             if (y2Nodes != null)
                 foreach (XmlNode y2Node in y2Nodes)
                 {
-                    listBoxY2Axis.Items.Add(y2Node.InnerText).Checked = true;
+                    bool isFound = false;
+                    foreach (ListViewItem item in listBoxY2Axis.Items)
+                    {
+                        if (item.Text == y2Node.InnerText)
+                        {
+                            item.Checked = true;
+                            isFound = true;
+                            break;
+                        }
+                    }
+                    if (!isFound)
+                    {
+                        listBoxY2Axis.Items.Add(y2Node.InnerText).Checked = true;
+                    }
                 }
         }
 
