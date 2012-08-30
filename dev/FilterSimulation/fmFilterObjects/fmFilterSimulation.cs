@@ -295,9 +295,13 @@ namespace FilterSimulation.fmFilterObjects
             result.AddRange(filterMachiningParametersList);
 
             {
+                var eps0dNedEpsdBlock = new fmEps0dNedEpsdBlock();
+                eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(deliquoringUsedCalculationOption);
+                eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(hcdEpsdCalculationOption);
+                eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(dpdInputCalculationOption);
                 var deliquoringBlocks = new fmBaseBlock[]
                                             {
-                                                new fmEps0dNedEpsdBlock(),
+                                                eps0dNedEpsdBlock,
                                                 new fmSigmaPke0PkePcdRcdAlphadBlock(),
                                                 new fmSremTettaAdAgDHRmMmoleFPeqBlock(),
                                                 new fmDeliquoringSimualtionBlock()
