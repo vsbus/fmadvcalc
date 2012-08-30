@@ -333,13 +333,6 @@ namespace FilterSimulationWithTablesAndGraphs
             return Solution.currentObjects.Serie.MachineType.name;
         }
 
-        private void KeepAllInY1CheckBoxCheckedChanged(object sender, EventArgs e)
-        {
-            RecalculateSimulationsWithIterationX();
-            BindCalculatedResultsToDisplayingResults();
-            BindCalculatedResultsToChartAndTable();
-        }
-
         private void NoScalingCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             RecalculateSimulationsWithIterationX();

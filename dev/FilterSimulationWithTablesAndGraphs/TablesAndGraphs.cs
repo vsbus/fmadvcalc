@@ -616,6 +616,8 @@ namespace FilterSimulationWithTablesAndGraphs
             if (listBoxXAxis.SelectedItems[0].Text != "")
                 UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text]);
 
+            xRangeLabel.Text = "Ranges (X-Parameter: " + listBoxXAxis.SelectedItems[0].Text + ")";
+
             BindForeColorToSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInLocalParametrsTable();
