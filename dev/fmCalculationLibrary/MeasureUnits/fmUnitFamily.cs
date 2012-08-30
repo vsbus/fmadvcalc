@@ -65,7 +65,11 @@ namespace fmCalculationLibrary.MeasureUnits
             InitializeFamily(LengthFamily, "Length",
                 new fmUnit("mm", .001),
                 new fmUnit("cm", .01),
-                new fmUnit("m", 1.0));
+                new fmUnit("m", 1.0),
+                new fmUnit("in", 0.0254, true),
+                new fmUnit("ft", 0.3048, true),
+                new fmUnit("yd", 0.9144, true)
+                );
 
             InitializeFamily(FrequencyFamily, "Frequency", 
                 new fmUnit("min-1", 1.0/60),

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using fmFilterSimulationControl;
 using fmCalculationLibrary.MeasureUnits;
@@ -16,46 +18,96 @@ namespace AdvancedCalculator
         private void UnitsOptions_Load(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            BindUnitComboBox(AreaUnitItem, fmUnitFamily.AreaFamily);
-            BindUnitComboBox(TimeUnitItem, fmUnitFamily.TimeFamily);
-            BindUnitComboBox(LengthUnitItem, fmUnitFamily.LengthFamily);
-            BindUnitComboBox(ConcentrationUnitItem, fmUnitFamily.ConcentrationFamily);
-            BindUnitComboBox(TimeUnitItem, fmUnitFamily.TimeFamily);
-            BindUnitComboBox(PressureUnitItem, fmUnitFamily.PressureFamily);
-            BindUnitComboBox(ViscosityUnitItem, fmUnitFamily.ViscosityFamily);
-            BindUnitComboBox(DensityUnitItem, fmUnitFamily.DensityFamily);
-            BindUnitComboBox(FrequencyUnitItem, fmUnitFamily.FrequencyFamily);
-            BindUnitComboBox(VolumeUnitItem, fmUnitFamily.VolumeFamily);
-            BindUnitComboBox(MassUnitItem, fmUnitFamily.MassFamily);
+            BindAllUnitFamilies();
         }
 
-        private static void BindUnitComboBox(fmUnitItem unitItem, fmUnitFamily dataSource)
+        private void BindAllUnitFamilies()
         {
-            unitItem.UnitComboBox.DataSource = dataSource.units;
-            unitItem.UnitComboBox.ValueMember = "Name";
-            unitItem.UnitComboBox.SelectedItem = dataSource.CurrentUnit;
+            var families = new[]
+                               {
+                                   fmUnitFamily.LengthFamily,
+                                   fmUnitFamily.AreaFamily,
+                                   fmUnitFamily.MassFamily,
+                                   fmUnitFamily.VolumeFamily,
+                                   fmUnitFamily.SpecificMassFamily,
+                                   fmUnitFamily.VolumeInAreaFamily,
+                                   fmUnitFamily.FlowRateMass,
+                                   fmUnitFamily.FlowRateVolume,
+                                   fmUnitFamily.SpecificFlowRateMass,
+                                   fmUnitFamily.SpecificFlowRateVolume,
+                                   fmUnitFamily.GasFlowRateVolume,
+                                   fmUnitFamily.ViscosityFamily,
+                                   fmUnitFamily.DensityFamily,
+                                   fmUnitFamily.PressureFamily,
+                                   fmUnitFamily.FrequencyFamily,
+                                   fmUnitFamily.TimeFamily
+                               };
+            foreach (KeyValuePair<fmUnitFamily, fmUnitItem> pair in m_famityToItem)
+            {
+                pair.Value.Parent = null;
+            }
+            m_famityToItem.Clear();
+            foreach (fmUnitFamily unitFamily in families)
+            {
+                BindUnitComboBox(unitFamily);
+            }
+            panel1.AutoScroll = true;
+        }
+
+        private Dictionary<fmUnitFamily, fmUnitItem> m_famityToItem = new Dictionary<fmUnitFamily, fmUnitItem>();
+
+        private void BindUnitComboBox(fmUnitFamily dataSource)
+        {
+            const int heightStep = 32;
+            var unitItem = new fmUnitItem
+                               {
+                                   Location = new Point(16, 16 + m_famityToItem.Count * heightStep),
+                                   Parent = panel1,
+                                   Size = new Size(panel1.Width - 32, heightStep)
+                               };
+            unitItem.UnitComboBox.Items.Clear();
+            bool isSelected = false;
+            foreach (fmUnit unit in dataSource.units)
+            {
+                if (unit.IsUs && !showUSUnitsCheckBox.Checked)
+                {
+                    continue;
+                }
+                unitItem.UnitComboBox.Items.Add(unit.Name);
+                if (unit.Name == dataSource.CurrentUnit.Name)
+                {
+                    unitItem.UnitComboBox.SelectedIndex = unitItem.UnitComboBox.Items.Count - 1;
+                    isSelected = true;
+                }
+            }
+            if (!isSelected)
+            {
+                unitItem.UnitComboBox.Items.Add(dataSource.CurrentUnit.Name);
+                unitItem.UnitComboBox.SelectedIndex = unitItem.UnitComboBox.Items.Count - 1;
+            }
+            unitItem.UnitName = dataSource.Name;
+            m_famityToItem.Add(dataSource, unitItem);
         }
 
         // ReSharper disable InconsistentNaming
         private void OKButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
-            fmUnitFamily.AreaFamily.SetCurrentUnit(AreaUnitItem.UnitComboBox.Text);
-            fmUnitFamily.LengthFamily.SetCurrentUnit(LengthUnitItem.UnitComboBox.Text);
-            fmUnitFamily.ConcentrationFamily.SetCurrentUnit(ConcentrationUnitItem.UnitComboBox.Text);
-            fmUnitFamily.TimeFamily.SetCurrentUnit(TimeUnitItem.UnitComboBox.Text);
-            fmUnitFamily.PressureFamily.SetCurrentUnit(PressureUnitItem.UnitComboBox.Text);
-            fmUnitFamily.ViscosityFamily.SetCurrentUnit(ViscosityUnitItem.UnitComboBox.Text);
-            fmUnitFamily.DensityFamily.SetCurrentUnit(DensityUnitItem.UnitComboBox.Text);
-            fmUnitFamily.FrequencyFamily.SetCurrentUnit(FrequencyUnitItem.UnitComboBox.Text);
-            fmUnitFamily.VolumeFamily.SetCurrentUnit(VolumeUnitItem.UnitComboBox.Text);
-            fmUnitFamily.MassFamily.SetCurrentUnit(MassUnitItem.UnitComboBox.Text);
+            foreach (KeyValuePair<fmUnitFamily, fmUnitItem> pair in m_famityToItem)
+            {
+                pair.Key.SetCurrentUnit(pair.Value.UnitComboBox.Text);
+            }
             Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void showUSUnitsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            BindAllUnitFamilies();
         }
     }
 }
