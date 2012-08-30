@@ -602,7 +602,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxXAxis.TabIndex = 6;
             this.listBoxXAxis.UseCompatibleStateImageBehavior = false;
             this.listBoxXAxis.View = System.Windows.Forms.View.Details;
-            this.listBoxXAxis.SelectedIndexChanged += new System.EventHandler(this.listBoxX_SelectedIndexChanged);
+            this.listBoxXAxis.SelectedIndexChanged += new System.EventHandler(this.ListBoxXSelectedIndexChanged);
             // 
             // columnHeader1
             // 

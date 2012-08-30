@@ -603,7 +603,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        private void listBoxX_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBoxXSelectedIndexChanged(object sender, EventArgs e)
         {
             SetXAxisParameterAsInputed();
         }
@@ -616,7 +616,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (listBoxXAxis.SelectedItems[0].Text != "")
                 UpdateIsInputed(GetCurrentXAxisParameter());
 
-            xRangeLabel.Text = "Ranges (X-Parameter: " + listBoxXAxis.SelectedItems[0].Text + ")";
+            xRangeLabel.Text = @"Ranges (X-Parameter: " + listBoxXAxis.SelectedItems[0].Text + @")";
 
             BindForeColorToSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
@@ -1036,14 +1036,7 @@ namespace FilterSimulationWithTablesAndGraphs
             bool isY2Involved = false;
             foreach (fmDisplayingYListOfArrays yList in m_displayingResults.YParameters)
             {
-                foreach (fmDisplayingArray displayingArray in yList.Arrays)
-                {
-                    if (displayingArray.IsY2Axis)
-                    {
-                        isY2Involved = true;
-                        break;
-                    }
-                }
+                isY2Involved = yList.Arrays.Any(displayingArray => displayingArray.IsY2Axis);
                 if (isY2Involved)
                 {
                     break;
@@ -1198,7 +1191,7 @@ namespace FilterSimulationWithTablesAndGraphs
         }
         private void BindCalculatedResultsToDisplayingResults(
             fmGlobalParameter xParameter,
-            List<fmGlobalParameter> yParameters,
+            IEnumerable<fmGlobalParameter> yParameters,
             List<fmGlobalParameter> y2Parameters)
         {
             if (!m_isUseLocalParams)
