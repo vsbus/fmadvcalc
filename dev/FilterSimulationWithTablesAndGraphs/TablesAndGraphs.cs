@@ -407,6 +407,18 @@ namespace FilterSimulationWithTablesAndGraphs
             double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(m_externalCurrentActiveSimulation.Parent.MachineType);
             deliqBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient);
             deliqBlock.CalculateAndDisplay();
+
+            foreach (fmLocalInputParametersData localInputParametersData in m_localInputParametersList)
+            {
+                localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
+                localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
+                localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.GasFlowrateUsedCalculationOption);
+                localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.EvaporationUsedCalculationOption);
+                localInputParametersData.FilterMachiningBlock.CalculateAndDisplay();
+
+                localInputParametersData.DeliquoringBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient);
+                localInputParametersData.DeliquoringBlock.CalculateAndDisplay();
+            }
         }
 
         // ReSharper disable InconsistentNaming
@@ -761,6 +773,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 buttonAddRow_Click(null, new EventArgs());
             }
             buttonAddRow.Visible = m_isUseLocalParams;
+            buttonDeleteRow.Visible = m_isUseLocalParams;
             selectedSimulationParametersTable.Visible = !m_isUseLocalParams;
             selectedSimulationParametersTable.Dock = (!m_isUseLocalParams) ? DockStyle.Fill : DockStyle.None;
             additionalParametersTable.Dock = (m_isUseLocalParams) ? DockStyle.Fill : DockStyle.None;

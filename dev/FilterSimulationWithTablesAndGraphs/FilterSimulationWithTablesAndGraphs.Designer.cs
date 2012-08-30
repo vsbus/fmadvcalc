@@ -32,10 +32,9 @@ namespace FilterSimulationWithTablesAndGraphs
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
             this.xRangeLabel = new System.Windows.Forms.Label();
             this.fmZedGraphControl1 = new fmZedGraph.fmZedGraphControl();
             this.buttonAddRow = new System.Windows.Forms.Button();
@@ -49,8 +48,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.SelectedSimulationParametersCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.GridPanel = new System.Windows.Forms.Panel();
             this.additionalParametersTable = new fmDataGrid.fmDataGrid();
-            this.DeleteButtonColumn = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.AdditionalParametersCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ParamsControlsPanel4 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
@@ -87,6 +84,8 @@ namespace FilterSimulationWithTablesAndGraphs
             this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.AdditionalParametersCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.buttonDeleteRow = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -211,11 +210,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // projectPanel
             // 
-            this.projectPanel.Size = new System.Drawing.Size(170, 115);
+            this.projectPanel.Size = new System.Drawing.Size(258, 115);
             // 
             // suspensionPanel
             // 
-            this.suspensionPanel.Size = new System.Drawing.Size(192, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(104, 115);
             // 
             // splitter2
             // 
@@ -256,11 +255,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
-            this.panel1.Size = new System.Drawing.Size(166, 20);
+            this.panel1.Size = new System.Drawing.Size(254, 20);
             // 
             // panel2
             // 
-            this.panel2.Size = new System.Drawing.Size(188, 20);
+            this.panel2.Size = new System.Drawing.Size(100, 20);
             // 
             // panel3
             // 
@@ -304,7 +303,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(366, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 170;
+            this.projectSuspensionSplitContainer.SplitterDistance = 258;
             // 
             // commentSimulationButton
             // 
@@ -479,7 +478,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.additionalParametersTable.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.additionalParametersTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.additionalParametersTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.DeleteButtonColumn,
             this.AdditionalParametersCheckBoxColumn});
             this.additionalParametersTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.additionalParametersTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
@@ -494,27 +492,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.additionalParametersTable.CurrentCellChanged += new System.EventHandler(this.ParametersTable_CurrentCellChanged);
             this.additionalParametersTable.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellValueChangedByUser);
             // 
-            // DeleteButtonColumn
-            // 
-            this.DeleteButtonColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = "Delete";
-            this.DeleteButtonColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DeleteButtonColumn.HeaderText = "";
-            this.DeleteButtonColumn.Name = "DeleteButtonColumn";
-            this.DeleteButtonColumn.Width = 5;
-            // 
-            // AdditionalParametersCheckBoxColumn
-            // 
-            this.AdditionalParametersCheckBoxColumn.HeaderText = "";
-            this.AdditionalParametersCheckBoxColumn.IndeterminateValue = "";
-            this.AdditionalParametersCheckBoxColumn.Name = "AdditionalParametersCheckBoxColumn";
-            this.AdditionalParametersCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.AdditionalParametersCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.AdditionalParametersCheckBoxColumn.Width = 20;
-            // 
             // ParamsControlsPanel4
             // 
+            this.ParamsControlsPanel4.Controls.Add(this.buttonDeleteRow);
             this.ParamsControlsPanel4.Controls.Add(this.buttonAddRow);
             this.ParamsControlsPanel4.Controls.Add(this.UseParamsCheckBox);
             this.ParamsControlsPanel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -934,6 +914,27 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(654, 171);
             this.panel9.TabIndex = 11;
             // 
+            // AdditionalParametersCheckBoxColumn
+            // 
+            this.AdditionalParametersCheckBoxColumn.HeaderText = "";
+            this.AdditionalParametersCheckBoxColumn.IndeterminateValue = "";
+            this.AdditionalParametersCheckBoxColumn.Name = "AdditionalParametersCheckBoxColumn";
+            this.AdditionalParametersCheckBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.AdditionalParametersCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.AdditionalParametersCheckBoxColumn.Width = 20;
+            // 
+            // buttonDeleteRow
+            // 
+            this.buttonDeleteRow.Dock = System.Windows.Forms.DockStyle.Left;
+            this.buttonDeleteRow.FlatAppearance.BorderSize = 0;
+            this.buttonDeleteRow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDeleteRow.Image = ((System.Drawing.Image)(resources.GetObject("buttonDeleteRow.Image")));
+            this.buttonDeleteRow.Location = new System.Drawing.Point(145, 0);
+            this.buttonDeleteRow.Name = "buttonDeleteRow";
+            this.buttonDeleteRow.Size = new System.Drawing.Size(20, 21);
+            this.buttonDeleteRow.TabIndex = 10;
+            this.buttonDeleteRow.UseVisualStyleBackColor = true;
+            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1014,8 +1015,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmDataGrid.fmDataGrid selectedSimulationParametersTable;
         private System.Windows.Forms.DataGridViewCheckBoxColumn SelectedSimulationParametersCheckBoxColumn;
         private fmDataGrid.fmDataGrid additionalParametersTable;
-        private System.Windows.Forms.DataGridViewButtonColumn DeleteButtonColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn AdditionalParametersCheckBoxColumn;
         private System.Windows.Forms.Panel ParamsControlsPanel4;
         private System.Windows.Forms.Button buttonAddRow;
         private System.Windows.Forms.CheckBox UseParamsCheckBox;
@@ -1057,6 +1056,8 @@ namespace FilterSimulationWithTablesAndGraphs
         private GroupBox groupBox3;
         private CheckBox y2LogCheckBox;
         private CheckBox yLogCheckBox;
+        private DataGridViewCheckBoxColumn AdditionalParametersCheckBoxColumn;
+        private Button buttonDeleteRow;
 
     }
 }

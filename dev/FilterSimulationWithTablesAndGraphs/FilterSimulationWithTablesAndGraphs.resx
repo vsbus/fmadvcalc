@@ -132,13 +132,22 @@
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>107, 17</value>
   </metadata>
-  <metadata name="DeleteButtonColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="AdditionalParametersCheckBoxColumn.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonDeleteRow.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFfSURBVDhPpZMhS0RBFIUfGCwmk00QNghiUIMIyl0Q
+        bVo0aFEUxGDZYBLhgQaTxWA0WfwtYhAsBovFYrAIBjmec+fOvN2HbcO3M/fcc+6+nXlbAaiGIYWPVkVN
+        QCzqrPev6skjr2f94/ewWxPg4QpaibWfSlrLU5cBP3vLHsb9ha+qSRmi/X+eMuB7d9EIcHee4BDVoaee
+        viD6uVcGfG3NVcQIcHuaYEC1awqHHpq8zRl8bsx4wdUIcH2SUFBErZ484W0GfKx3ylVybwS4PBhAmnr5
+        cHPGg+/dyTKAeyPATQ8420lwL029PCBnPPi2NJFX4z49dm9zEGrqER+SMx58XRgXRlL4eM1R7VrU6oUm
+        b3MGL7NjRlJ4f8VRHXrqhS5P7pVrfJ4eTWHdN1FNyu/V3j3Rl9fr/Co/dUZqAmzPQysx7qt+pLU8zav8
+        OFVVpCYgFrW0NurJI29zBsP8nf8AifxvP7lyPoIAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="buttonAddRow.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
