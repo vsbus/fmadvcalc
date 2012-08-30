@@ -109,6 +109,11 @@ namespace FilterSimulation
             public const string UnitFamily = "UnitFamily";
             public const string UnitFamilyName = "UnitFamilyName";
             public const string CurrentUnitName = "CurrentUnitName";
+
+            public const string MeterialInputOption = "MeterialInputOption";
+            public const string MeterialInputSerieRadioButton = "MeterialInputSerieRadioButton";
+            public const string MeterialInputSimualationRadioButton = "MeterialInputSimualationRadioButton";
+            public const string MeterialInputSuspensionRadioButton = "MeterialInputSuspensionRadioButton";
         }
 
         public void SerializeConfiguration(XmlWriter writer)
@@ -124,8 +129,18 @@ namespace FilterSimulation
             SerializeByChecking(writer);
             writer.WriteElementString(fmFilterSimulationSerializeTags.FullInfo, fullSimulationInfoCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationSerializeTags.Limits, calculateLimitsCheckBox.Checked.ToString());
+            SerializeInputSuspensionSerieSimulation(writer);
             SerializePrecision(writer);
             SerializeUnits(writer);
+            writer.WriteEndElement();
+        }
+
+        private void SerializeInputSuspensionSerieSimulation(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.MeterialInputOption);
+            writer.WriteElementString(fmFilterSimulationSerializeTags.MeterialInputSerieRadioButton, meterialInputSerieRadioButton.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationSerializeTags.MeterialInputSimualationRadioButton, meterialInputSimualationRadioButton.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationSerializeTags.MeterialInputSuspensionRadioButton, meterialInputSuspensionRadioButton.Checked.ToString());
             writer.WriteEndElement();
         }
 
@@ -175,8 +190,38 @@ namespace FilterSimulation
                 fmFilterSimulationSerializeTags.Limits);
             calculateLimitsCheckBox.Checked = limitsChecked;
 
+            DeserializeInputSuspensionSerieSimulation(node);
+
             DeserializePrecision(node);
             DeserializeUnits(node);
+        }
+
+        private void DeserializeInputSuspensionSerieSimulation(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.MeterialInputOption);
+            if (node == null)
+            {
+                return;
+            }
+            bool isChecked = false;
+            fmSerializeTools.DeserializeBoolProperty(ref isChecked, node, fmFilterSimulationSerializeTags.MeterialInputSerieRadioButton);
+            if (isChecked)
+            {
+                meterialInputSerieRadioButton.Checked = true;
+                return;
+            }
+            fmSerializeTools.DeserializeBoolProperty(ref isChecked, node, fmFilterSimulationSerializeTags.MeterialInputSimualationRadioButton);
+            if (isChecked)
+            {
+                meterialInputSimualationRadioButton.Checked = true;
+                return;
+            }
+            fmSerializeTools.DeserializeBoolProperty(ref isChecked, node, fmFilterSimulationSerializeTags.MeterialInputSuspensionRadioButton);
+            if (isChecked)
+            {
+                meterialInputSuspensionRadioButton.Checked = true;
+                return;
+            }
         }
 
         private void DeserializeUnits(XmlNode node)
