@@ -186,25 +186,30 @@ namespace FilterSimulationWithTablesAndGraphs
         public void DeserializeData(XmlNode node)
         {
             Solution = fmFilterSimSolution.Deserialize(node);
-            if (Solution.projects.Count > 0)
+            if (Solution.projects.Count > 0 && Solution.currentObjects.Project == null)
             {
                 Solution.currentObjects.Project = Solution.projects[0];
             }
             Solution.Keep();
 
             DisplaySolution(Solution);
-
             {
                 bool isChecked = false;
-                for (int row = 0; row < projectDataGrid.Rows.Count; ++row)
+                for (int row = 0; row < simulationDataGrid.Rows.Count; ++row)
                 {
-                    for (int col = 0; col < projectDataGrid.ColumnCount; ++col)
+                    if ((Guid)simulationDataGrid[simulationGuidColumn.Index, row].Value == Solution.currentObjects.Simulation.Guid)
                     {
-                        if (projectDataGrid[col, row].Visible)
+                        for (int col = 0; col < simulationDataGrid.ColumnCount; ++col)
                         {
-                            isChecked = true;
-                            projectDataGrid.CurrentCell = projectDataGrid[col, row];
-                            break;
+                            if (simulationDataGrid[col, row].Visible)
+                            {
+                                isChecked = true;
+                                {
+                                    simulationDataGrid.CurrentCell = simulationDataGrid[col, row];
+                                    UpdateCurrentObjectAndDisplaySolution(simulationDataGrid);
+                                    break;
+                                }
+                            }
                         }
                     }
                     if (isChecked)

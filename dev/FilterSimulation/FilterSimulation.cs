@@ -687,7 +687,7 @@ namespace FilterSimulation
         }
         #endregion
 
-        private void UpdateCurrentObjectAndDisplaySolution(DataGridView dgv)
+        protected void UpdateCurrentObjectAndDisplaySolution(DataGridView dgv)
         {
             if (m_displayingTables == false && displayingSolution == false && m_sortingTables == false)
             {

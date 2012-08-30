@@ -244,6 +244,13 @@ namespace FilterSimulation.fmFilterObjects
         {
             public const string ProjectsData = "Projects_Data";
             public const string Version = "Version";
+
+            public const string CurrentSelectedSimulation = "CurrentSelectedSimulation";
+            public const string CurrentProject = "CurrentProject";
+            public const string CurrentSuspension = "CurrentSuspension";
+            public const string CurrentSimSerie = "CurrentSimSerie";
+            public const string CurrentSimulation = "CurrentSimulation";
+
         }
 
         public void Serialize(XmlWriter writer)
@@ -253,8 +260,20 @@ namespace FilterSimulation.fmFilterObjects
             {
                 project.Serialize(writer);
             }
+            SerializeCurrentSimulationSelection(writer);
             writer.WriteEndElement();
         }
+
+        private void SerializeCurrentSimulationSelection(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmSolutionSerializeTags.CurrentSelectedSimulation);
+            writer.WriteElementString(fmSolutionSerializeTags.CurrentProject, currentObjects.Project.GetName());
+            writer.WriteElementString(fmSolutionSerializeTags.CurrentSuspension, currentObjects.Suspension.GetName());
+            writer.WriteElementString(fmSolutionSerializeTags.CurrentSimSerie, currentObjects.Serie.GetName());
+            writer.WriteElementString(fmSolutionSerializeTags.CurrentSimulation, currentObjects.Simulation.GetName());
+            writer.WriteEndElement();
+        }
+
 
         public static fmFilterSimSolution Deserialize(XmlNode node)
         {
@@ -268,7 +287,38 @@ namespace FilterSimulation.fmFilterObjects
                     fmFilterSimProject.Deserialize(projectNode, solution);
                 }
             }
+            DeserializeCurrentSimulationSelection(node, solution);
             return solution;
+        }
+
+        private static void DeserializeCurrentSimulationSelection(XmlNode node, fmFilterSimSolution solution)
+        {
+            node = node.SelectSingleNode(fmSolutionSerializeTags.CurrentSelectedSimulation);
+            if (node == null)
+            {
+                return;
+            }
+            string projectName = node.SelectSingleNode(fmSolutionSerializeTags.CurrentProject).InnerText;
+            string suspensionName = node.SelectSingleNode(fmSolutionSerializeTags.CurrentSuspension).InnerText;
+            string serieName = node.SelectSingleNode(fmSolutionSerializeTags.CurrentSimSerie).InnerText;
+            string simulationName = node.SelectSingleNode(fmSolutionSerializeTags.CurrentSimulation).InnerText;
+            foreach (fmFilterSimulation simulation in solution.GetAllSimulations())
+            {
+                fmFilterSimSerie serie = simulation.Parent;
+                fmFilterSimSuspension suspension = serie.Parent;
+                fmFilterSimProject project = suspension.Parent;
+                if (simulation.GetName() == simulationName
+                    && serie.GetName() == serieName
+                    && suspension.GetName() == suspensionName
+                    && project.GetName() == projectName)
+                {
+                    solution.currentObjects.Project = project;
+                    solution.currentObjects.Suspension = suspension;
+                    solution.currentObjects.Serie = serie;
+                    solution.currentObjects.Simulation = simulation;
+                    break;
+                }
+            }
         }
 
         internal fmFilterSimulation FindSimulation(fmSigmaPke0PkePcdRcdAlphadBlock deliquoringSigmaPkeBlock)
