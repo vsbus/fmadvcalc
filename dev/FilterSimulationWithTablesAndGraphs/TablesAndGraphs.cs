@@ -658,24 +658,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateIsInputed(fmGlobalParameter inputedParameter)
         {
-            if (m_isUseLocalParams)
-            {
-                foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
-                {
-                    var par = localParameters.FilterMachiningBlock.GetParameterByName(inputedParameter.Name);
-                    if (par != null)
-                    {
-                        localParameters.FilterMachiningBlock.UpdateIsInputed(par);
-                    }
-
-                    par = localParameters.DeliquoringBlock.GetParameterByName(inputedParameter.Name);
-                    if (par != null)
-                    {
-                        localParameters.DeliquoringBlock.UpdateIsInputed(par);
-                    }
-                }
-            }
-            else
+            if (!m_isUseLocalParams)
             {
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
@@ -716,13 +699,13 @@ namespace FilterSimulationWithTablesAndGraphs
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
                     fmFilterSimSerie serie = simData.ExternalSimulation.Parent;
-                    if (!newInvolvedSeries.ContainsKey(serie) && serie.Ranges.Ranges.ContainsKey(xParameter))
-                    {
-                        newInvolvedSeries.Add(serie,
-                                              new fmRange(serie.Ranges.Ranges[xParameter].MinValue,
-                                                          serie.Ranges.Ranges[xParameter].MaxValue));
-                    }
+                    AddSerieToInvolvedSeriesList(newInvolvedSeries, serie, xParameter);
                 }
+            }
+            else
+            {
+                fmFilterSimSerie serie = m_externalCurrentActiveSimulation.Parent;
+                AddSerieToInvolvedSeriesList(newInvolvedSeries, serie, xParameter);
             }
 
             m_involvedSerieFromRow = new Dictionary<DataGridViewRow, fmFilterSimSerie>();
@@ -747,6 +730,16 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             m_involvedSeries = newInvolvedSeries;
+        }
+
+        private void AddSerieToInvolvedSeriesList(Dictionary<fmFilterSimSerie, fmRange> newInvolvedSeries, fmFilterSimSerie serie, fmGlobalParameter xParameter)
+        {
+            if (!newInvolvedSeries.ContainsKey(serie) && serie.Ranges.Ranges.ContainsKey(xParameter))
+            {
+                newInvolvedSeries.Add(serie,
+                                      new fmRange(serie.Ranges.Ranges[xParameter].MinValue,
+                                                  serie.Ranges.Ranges[xParameter].MaxValue));
+            }
         }
 
         // ReSharper disable InconsistentNaming
@@ -932,12 +925,15 @@ namespace FilterSimulationWithTablesAndGraphs
                 localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
                 localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.GasFlowrateUsedCalculationOption);
                 localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.EvaporationUsedCalculationOption);
-                foreach (fmBlockVariableParameter parameter in localInputParametersData.FilterMachiningBlock.Parameters)
+                foreach (fmCalculationBaseParameter parameter in localInputParametersData.FilterMachiningBlock.AllParameters)
                 {
                     var parameterInSimulation =
-                        (fmCalculationVariableParameter)
-                        m_externalCurrentActiveSimulation.Parameters[parameter.globalParameter];
-                    parameter.isInputed = parameterInSimulation.isInputed;
+                            (fmCalculationVariableParameter)
+                            m_externalCurrentActiveSimulation.Parameters[parameter.globalParameter];
+                    if (parameter is fmBlockVariableParameter)
+                    {
+                        ((fmBlockVariableParameter)parameter).isInputed = parameterInSimulation.isInputed;
+                    }
                     if (isFirstElement)
                     {
                         parameter.value = parameterInSimulation.value;
@@ -950,12 +946,15 @@ namespace FilterSimulationWithTablesAndGraphs
                 double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(m_externalCurrentActiveSimulation.Parent.MachineType);
                 localInputParametersData.DeliquoringBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient);
                 localInputParametersData.DeliquoringBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
-                foreach (fmBlockVariableParameter parameter in localInputParametersData.DeliquoringBlock.Parameters)
+                foreach (fmCalculationBaseParameter parameter in localInputParametersData.DeliquoringBlock.AllParameters)
                 {
                     var parameterInSimulation =
                         (fmCalculationVariableParameter)
                         m_externalCurrentActiveSimulation.Parameters[parameter.globalParameter];
-                    parameter.isInputed = parameterInSimulation.isInputed;
+                    if (parameter is fmBlockVariableParameter)
+                    {
+                        ((fmBlockVariableParameter)parameter).isInputed = parameterInSimulation.isInputed;
+                    }
                     if (isFirstElement)
                     {
                         parameter.value = parameterInSimulation.value;
@@ -1340,72 +1339,76 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             else
             {
-//                 m_displayingResults.YParameters = new List<fmDisplayingYListOfArrays>();
-// 
-//                 if (m_localInputParametersList.Count == 0
-//                     || m_localInputParametersList[0].CalculatedDataLists.Count == 0)
-//                 {
-//                     return;
-//                 }
-// 
-//                 var xArray = new fmDisplayingArray();
-//                 m_displayingResults.XParameter = xArray;
-// 
-//                 xArray.Parameter = xParameter;
-//                 int pointsCount = m_localInputParametersList[0].CalculatedDataLists[0].Count;
-//                 xArray.Values = new fmValue[pointsCount];
-//                 for (int i = 0; i < pointsCount; ++i)
-//                 {
-//                     xArray.Values[i] =
-//                         m_localInputParametersList[0].CalculatedDataLists[0][i].parameters[xParameter].ValueInUnits;
-//                 }
-// 
-//                 Dictionary<fmGlobalParameter, fmValue> degreeOffset = CreateDegreeOffsets(yParameters);
-// 
-//                 var colors = new[] { Color.Blue, Color.Green, Color.Red, Color.Black };
-//                 int colorId = 0;
-// 
-//                 foreach (fmGlobalParameter yParameter in yParameters)
-//                 {
-//                     var yListOfArrays = new fmDisplayingYListOfArrays
-//                     {
-//                         Parameter = yParameter,
-//                         Arrays = new List<fmDisplayingArray>()
-//                     };
-// 
-//                     foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
-//                     {
-//                         if (!localParameters.IsChecked)
-//                             continue;
-// 
-//                         foreach (List<fmFilterSimulationData> list in localParameters.CalculatedDataLists)
-//                         {
-//                             var yArray = new fmDisplayingArray
-//                                              {
-//                                                  OwningSimulation = list.Count == 0 ? null : list[0],
-//                                                  Parameter = yParameter,
-//                                                  Values = new fmValue[pointsCount],
-//                                                  Scale =
-//                                                      !NoScalingCheckBox.Checked ? degreeOffset[yParameter] : new fmValue(1),
-//                                                  IsY2Axis = y2Parameters.Contains(yParameter),
-//                                                  Color = colors[colorId],
-//                                                  Bold = additionalParametersTable.CurrentCell != null
-//                                                         && m_localInputParametersList.IndexOf(localParameters) ==
-//                                                         additionalParametersTable.CurrentCell.RowIndex
-//                                              };
-// 
-//                             for (int i = 0; i < list.Count; ++i)
-//                             {
-//                                 yArray.Values[i] = list[i].parameters[yParameter].ValueInUnits;
-//                             }
-// 
-//                             yListOfArrays.Arrays.Add(yArray);
-//                         }
-//                     }
-// 
-//                     if (++colorId == colors.Length) colorId = 0;
-//                     m_displayingResults.YParameters.Add(yListOfArrays);
-//                 }
+                m_displayingResults.YParameters = new List<fmDisplayingYListOfArrays>();
+
+                if (m_localInputParametersList.Count == 0 || m_localInputParametersList[0].CalculatedDataLists.Count == 0)
+                {
+                    return;
+                }
+
+                int pointsCount = m_localInputParametersList[0].CalculatedDataLists[0].Count;
+
+                var xArray = new fmDisplayingArray
+                {
+                    Parameter = xParameter,
+                    Values = new fmValue[pointsCount]
+                };
+                m_displayingResults.XParameter = xArray;
+                for (int i = 0; i < pointsCount; ++i)
+                {
+                    xArray.Values[i] =
+                        m_localInputParametersList[0].CalculatedDataLists[0][i].parameters[xParameter].ValueInUnits;
+                }
+
+                Dictionary<fmGlobalParameter, fmValue> degreeOffset = CreateDegreeOffsets(yParameters);
+
+                var colors = new[] { Color.Blue, Color.Green, Color.Red, Color.Black };
+                int colorId = 0;
+
+                foreach (fmGlobalParameter yParameter in yParameters)
+                {
+                    var yListOfArrays = new fmDisplayingYListOfArrays
+                    {
+                        Parameter = yParameter,
+                        Arrays = new List<fmDisplayingArray>()
+                    };
+
+
+
+
+                    foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
+                    {
+                        if (!localParameters.IsChecked)
+                            continue;
+
+                        foreach (List<fmFilterSimulationData> list in localParameters.CalculatedDataLists)
+                        {
+                            var yArray = new fmDisplayingArray
+                                             {
+                                                 OwningSimulation = list.Count == 0 ? null : list[0],
+                                                 Parameter = yParameter,
+                                                 Values = new fmValue[pointsCount],
+                                                 Scale =
+                                                     !NoScalingCheckBox.Checked ? degreeOffset[yParameter] : new fmValue(1),
+                                                 IsY2Axis = y2Parameters.Contains(yParameter),
+                                                 Color = colors[colorId],
+                                                 Bold = additionalParametersTable.CurrentCell != null
+                                                        && m_localInputParametersList.IndexOf(localParameters) ==
+                                                        additionalParametersTable.CurrentCell.RowIndex
+                                             };
+
+                            for (int i = 0; i < list.Count; ++i)
+                            {
+                                yArray.Values[i] = list[i].parameters[yParameter].ValueInUnits;
+                            }
+
+                            yListOfArrays.Arrays.Add(yArray);
+                        }
+                    }
+
+                    if (++colorId == colors.Length) colorId = 0;
+                    m_displayingResults.YParameters.Add(yListOfArrays);
+                }
             }
         }
 
@@ -1573,51 +1576,59 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             else
             {
-//                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
-//                 {
-//                     localParameters.calculatedDataLists = new List<List<fmFilterSimulationData>>();
-//                     fmFilterSimulation sim = m_externalCurrentActiveSimulation;
-//                     {
-//                         double xStart = fmValue.StringToValue(minXValueTextBox.Text).value;
-//                         double xEnd = fmValue.StringToValue(maxXValueTextBox.Text).value;
-// 
-//                         IEnumerable<double> xList = CreateXValues(xStart, xEnd, m_rowsQuantity);
-// 
-//                         var calculatedDataList = new List<fmFilterSimulationData>();
-// 
-//                         foreach (double x in xList)
-//                         {
-//                             var tempSim = new fmFilterSimulationData();
-//                             fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.filterMachiningBlock, tempSim);
-//                             fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.deliquoringBlock, tempSim);
-//                             tempSim.CopyMaterialParametersValuesFrom(sim.Data);
-//                             var xValue = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
-//                             tempSim.parameters[xParameter].value = xValue;
-// 
-//                             var filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values)
-//                             {
-//                                 calculationOption =
-//                                     localParameters.filterMachiningBlock.
-//                                     filterMachiningCalculationOption
-//                             };
-//                             filterMachiningCalculator.DoCalculations();
-// 
-//                             bool isPlainArea = fmFilterMachiningCalculator.IsPlainAreaCalculationOption(sim.FilterMachiningCalculationOption);
-//                             bool isVacuumFilter = fmFilterSimMachineType.IsVacuumFilter(sim.Parent.MachineType);
-//                             double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(sim.Parent.MachineType);
-//                             var deliqSimulationCalculator = new fmDeliquoringSimualtionCalculator(new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient),
-//                                 tempSim.parameters.Values);
-//                             deliqSimulationCalculator.DoCalculations();
-// 
-//                             // after calculation the x parameter may be restored if it wasn't input
-//                             tempSim.parameters[xParameter].value = xValue;
-// 
-//                             calculatedDataList.Add(tempSim);
-//                         }
-// 
-//                         localParameters.calculatedDataLists.Add(calculatedDataList);
-//                     }
-//                }
+                if (InvolvedSeriesDataGrid.Rows.Count == 0)
+                {
+                    return;
+                }
+                foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
+                {
+                    localParameters.CalculatedDataLists = new List<List<fmFilterSimulationData>>();
+                    fmFilterSimulation sim = m_externalCurrentActiveSimulation;
+                    {
+                        var xStarts = new List<double>();
+                        var xEnds = new List<double>();
+                        fmValue minValue = fmValue.ObjectToValue(InvolvedSeriesDataGrid[1, 0].Value);
+                        fmValue maxValue = fmValue.ObjectToValue(InvolvedSeriesDataGrid[2, 0].Value);
+                        xStarts.Add(minValue.value);
+                        xEnds.Add(maxValue.value);
+
+                        IEnumerable<double> xList = CreateXValues(xStarts, xEnds, m_rowsQuantity);
+
+                        var calculatedDataList = new List<fmFilterSimulationData>();
+
+                        foreach (double x in xList)
+                        {
+                            var tempSim = new fmFilterSimulationData();
+                            fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.FilterMachiningBlock, tempSim);
+                            fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.DeliquoringBlock, tempSim);
+                            tempSim.CopyMaterialParametersValuesFrom(sim.Data);
+                            var xValue = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
+                            tempSim.parameters[xParameter].value = xValue;
+
+                            var filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values)
+                            {
+                                calculationOption =
+                                    localParameters.FilterMachiningBlock.
+                                    filterMachiningCalculationOption
+                            };
+                            filterMachiningCalculator.DoCalculations();
+
+                            bool isPlainArea = fmFilterMachiningCalculator.IsPlainAreaCalculationOption(sim.FilterMachiningCalculationOption);
+                            bool isVacuumFilter = fmFilterSimMachineType.IsVacuumFilter(sim.Parent.MachineType);
+                            double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(sim.Parent.MachineType);
+                            var deliqSimulationCalculator = new fmDeliquoringSimualtionCalculator(new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient),
+                                tempSim.parameters.Values);
+                            deliqSimulationCalculator.DoCalculations();
+
+                            // after calculation the x parameter may be restored if it wasn't input
+                            tempSim.parameters[xParameter].value = xValue;
+
+                            calculatedDataList.Add(tempSim);
+                        }
+
+                        localParameters.CalculatedDataLists.Add(calculatedDataList);
+                    }
+               }
             }
         }
 
