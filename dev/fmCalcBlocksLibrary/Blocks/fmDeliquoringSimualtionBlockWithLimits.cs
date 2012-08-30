@@ -45,19 +45,22 @@ namespace fmCalcBlocksLibrary.Blocks
                 CalculateClueParamsLimits(clueParams, minValue, maxValue);
                 CalculateAllParamsLimits(clueParams, minValue, maxValue);
 
-                // here it is a hack. as sf + sd <= 100% we set sd_max = 100% - sf
-                foreach (fmBlockConstantParameter constantParameter in constantParameters)
+                if (minValue.Count > 0 || maxValue.Count > 0)
                 {
-                    if (constantParameter.globalParameter == fmGlobalParameter.sf)
+                    // here it is a hack. as sf + sd <= 100% we set sd_max = 100% - sf
+                    foreach (fmBlockConstantParameter constantParameter in constantParameters)
                     {
-                        maxValue[fmGlobalParameter.sd] = fmValue.Min(maxValue[fmGlobalParameter.sd],
-                                                                     new fmValue(1) - constantParameter.value);
-
-                        if (tc_Value.defined)
+                        if (constantParameter.globalParameter == fmGlobalParameter.sf)
                         {
-                            maxValue[fmGlobalParameter.td] = tc_Value * maxValue[fmGlobalParameter.sd];
+                            maxValue[fmGlobalParameter.sd] = fmValue.Min(maxValue[fmGlobalParameter.sd],
+                                                                         new fmValue(1) - constantParameter.value);
+
+                            if (tc_Value.defined)
+                            {
+                                maxValue[fmGlobalParameter.td] = tc_Value * maxValue[fmGlobalParameter.sd];
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
 
@@ -69,6 +72,11 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private void CalculateAllParamsLimits(List<fmBlockVariableParameter> clueParams, Dictionary<fmGlobalParameter, fmValue> minValue, Dictionary<fmGlobalParameter, fmValue> maxValue)
         {
+            if (minValue.Count == 0 && maxValue.Count == 0)
+            {
+                return;
+            }
+
             foreach (fmBlockVariableParameter clueParameter in clueParams)
             {
                 List<fmValue> keepedValues;
