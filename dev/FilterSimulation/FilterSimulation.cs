@@ -92,6 +92,8 @@ namespace FilterSimulation
             public const string RangeMaxValue = "RangeMaxValue";
             public const string RangeIsInputed = "RangeIsInputed";
 
+            public const string FullInfo = "FullInfo";
+
             public const string ProgramOptions = "ProgramOptions";
             public const string ByChecking = "ByChecking";
             public const string ByCheckingProjects = "ByCheckingProjects";
@@ -118,6 +120,7 @@ namespace FilterSimulation
         {
             writer.WriteStartElement(fmFilterSimulationSerializeTags.ProgramOptions);
             SerializeByChecking(writer);
+            writer.WriteElementString(fmFilterSimulationSerializeTags.FullInfo, fullSimulationInfoCheckBox.Checked.ToString());
             SerializePrecision(writer);
             SerializeUnits(writer);
             writer.WriteEndElement();
@@ -154,6 +157,12 @@ namespace FilterSimulation
                 return;
             }
             DeserializeByChecking(node);
+            
+            bool fullInfoChecked = fullSimulationInfoCheckBox.Checked;
+            fmSerializeTools.DeserializeBoolProperty(ref fullInfoChecked, node,
+                                                     fmFilterSimulationSerializeTags.FullInfo);
+            fullSimulationInfoCheckBox.Checked = fullInfoChecked;
+
             DeserializePrecision(node);
             DeserializeUnits(node);
         }
