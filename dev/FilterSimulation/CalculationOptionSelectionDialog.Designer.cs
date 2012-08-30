@@ -28,20 +28,6 @@ namespace FilterSimulation
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Dp = const");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Volumetric Pump (Qp = const)");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Centripetal Pump (Qp = const & Dp = const)");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Plain Filter Area", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Dp = const (Cylindrical Area)");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Volumetric Pump (Qp = const, Cylindrical Area)");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Cylindrical Filter Area", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7});
             this.rho_f_radioButton = new System.Windows.Forms.RadioButton();
             this.rho_s_radioButton = new System.Windows.Forms.RadioButton();
             this.rho_sus_radioButton = new System.Windows.Forms.RadioButton();
@@ -159,33 +145,6 @@ namespace FilterSimulation
             this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
             this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
-            treeNode1.Name = "";
-            treeNode1.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode1.Text = "Dp = const";
-            treeNode2.Name = "";
-            treeNode2.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode2.Text = "Volumetric Pump (Qp = const)";
-            treeNode3.Name = "";
-            treeNode3.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode3.Text = "Centripetal Pump (Qp = const & Dp = const)";
-            treeNode4.Name = "";
-            treeNode4.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode4.Text = "Plain Filter Area";
-            treeNode5.Name = "";
-            treeNode5.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode5.Text = "Dp = const (Cylindrical Area)";
-            treeNode6.Name = "";
-            treeNode6.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode6.Text = "Volumetric Pump (Qp = const, Cylindrical Area)";
-            treeNode7.Name = "";
-            treeNode7.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode7.Text = "Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)";
-            treeNode8.Name = "";
-            treeNode8.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode8.Text = "Cylindrical Filter Area";
-            this.fmCalculationOptionView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode8});
             this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 180);
             this.fmCalculationOptionView1.TabIndex = 0;
             this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);

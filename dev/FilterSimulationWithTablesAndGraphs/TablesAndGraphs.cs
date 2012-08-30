@@ -139,6 +139,21 @@ namespace FilterSimulationWithTablesAndGraphs
 
             return result;
         }
+
+        internal fmBlockVariableParameter GetParameterBlock(fmGlobalParameter p)
+        {
+            fmBlockVariableParameter blockPar = null;
+            if (blockPar == null)
+            {
+                blockPar = FilterMachiningBlock.GetParameterByName(p.Name);
+            }
+            if (blockPar == null)
+            {
+                blockPar = DeliquoringBlock.GetParameterByName(p.Name);
+            }
+            return blockPar;
+
+        }
     }
 
     public partial class fmFilterSimulationWithTablesAndGraphs
@@ -417,6 +432,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 localInputParametersData.FilterMachiningBlock.CalculateAndDisplay();
 
                 localInputParametersData.DeliquoringBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient);
+                localInputParametersData.DeliquoringBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
                 localInputParametersData.DeliquoringBlock.CalculateAndDisplay();
             }
         }
@@ -738,6 +754,11 @@ namespace FilterSimulationWithTablesAndGraphs
         // ReSharper restore InconsistentNaming
         {
             AddRow();
+            UpdateDiagramAfterLocalParametersRowsChanged();
+        }
+
+        private void UpdateDiagramAfterLocalParametersRowsChanged()
+        {
             UpdateVisibilityOfColumnsInLocalParametrsTable();
 
             additionalParametersTable.AutoResizeColumnHeadersHeight();
@@ -898,31 +919,75 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateVisibilityOfColumnsInLocalParametrsTable()
         {
+            if (m_localInputParametersList.Count == 0)
+            {
+                return;
+            }
+
+            foreach (fmLocalInputParametersData localInputParametersData in m_localInputParametersList)
+            {
+                bool isFirstElement = localInputParametersData == m_localInputParametersList[0];
+
+                localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
+                localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
+                localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.GasFlowrateUsedCalculationOption);
+                localInputParametersData.FilterMachiningBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.EvaporationUsedCalculationOption);
+                foreach (fmBlockVariableParameter parameter in localInputParametersData.FilterMachiningBlock.Parameters)
+                {
+                    var parameterInSimulation =
+                        (fmCalculationVariableParameter)
+                        m_externalCurrentActiveSimulation.Parameters[parameter.globalParameter];
+                    parameter.isInputed = parameterInSimulation.isInputed;
+                    if (isFirstElement)
+                    {
+                        parameter.value = parameterInSimulation.value;
+                    }
+                }
+                localInputParametersData.FilterMachiningBlock.CalculateAndDisplay();
+
+                bool isPlainArea = fmFilterMachiningCalculator.IsPlainAreaCalculationOption(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
+                bool isVacuumFilter = fmFilterSimMachineType.IsVacuumFilter(m_externalCurrentActiveSimulation.Parent.MachineType);
+                double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(m_externalCurrentActiveSimulation.Parent.MachineType);
+                localInputParametersData.DeliquoringBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient);
+                localInputParametersData.DeliquoringBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
+                foreach (fmBlockVariableParameter parameter in localInputParametersData.DeliquoringBlock.Parameters)
+                {
+                    var parameterInSimulation =
+                        (fmCalculationVariableParameter)
+                        m_externalCurrentActiveSimulation.Parameters[parameter.globalParameter];
+                    parameter.isInputed = parameterInSimulation.isInputed;
+                    if (isFirstElement)
+                    {
+                        parameter.value = parameterInSimulation.value;
+                    }
+                }
+                localInputParametersData.DeliquoringBlock.CalculateAndDisplay();
+            }
+            
+            foreach (DataGridViewCell cell in additionalParametersTable.Rows[0].Cells)
+            {
+                cell.ReadOnly = true;
+            }
+
             var possibleInputs = new List<fmGlobalParameter>();
             possibleInputs = m_localInputParametersList.Aggregate(
                 possibleInputs,
                 (current, localParameters) => ParametersListsUnion(current, localParameters.GetParametersThatCanBeInput()));
             var displayInputs = new List<fmGlobalParameter>();
+            fmGlobalParameter xParameter = GetCurrentXAxisParameter();
+            fmBlockVariableParameter xBlockPar = m_localInputParametersList[0].GetParameterBlock(xParameter);
+            fmBlockParameterGroup xGroup = xBlockPar.group;
             foreach (fmGlobalParameter p in possibleInputs)
             {
                 // we don't display x-parameter
-                if (p.Name == listBoxXAxis.SelectedItems[0].Text)
+                if (xGroup == m_localInputParametersList[0].GetParameterBlock(p).group)
                     continue;
 
                 bool isInput = false;
                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
                 {
-                    fmBlockVariableParameter blockPar = null;
-                    if (blockPar == null)
-                    {
-                        blockPar = localParameters.FilterMachiningBlock.GetParameterByName(p.Name);
-                    }
-                    if (blockPar == null)
-                    {
-                        blockPar = localParameters.DeliquoringBlock.GetParameterByName(p.Name);
-                    }
-
-                    if (blockPar.isInputed)
+                    fmBlockVariableParameter blockPar = localParameters.GetParameterBlock(p);
+                    if (blockPar.isInputed && blockPar.group != null && blockPar.group != xGroup)
                     {
                         isInput = true;
                         break;

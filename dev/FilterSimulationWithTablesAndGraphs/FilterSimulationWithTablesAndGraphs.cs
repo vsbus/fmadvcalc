@@ -508,6 +508,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private fmGlobalParameter GetCurrentXAxisParameter()
         {
+            if (listBoxXAxis.SelectedItems.Count == 0)
+            {
+                return null;
+            }
             return fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
         }
 
@@ -653,6 +657,21 @@ namespace FilterSimulationWithTablesAndGraphs
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
+        }
+
+        private void buttonDeleteRow_Click(object sender, EventArgs e)
+        {
+            int rowIdx = additionalParametersTable.CurrentCell.RowIndex;
+            if (rowIdx == 0)
+            {
+                MessageBox.Show(@"You can't remove first row because it is always connected with the current simulation.");
+            }
+            else
+            {
+                m_localInputParametersList.RemoveAt(rowIdx);
+                additionalParametersTable.Rows.RemoveAt(rowIdx);
+                UpdateDiagramAfterLocalParametersRowsChanged();
+            }
         }
     }
 }
