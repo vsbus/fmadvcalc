@@ -91,12 +91,37 @@ namespace FilterSimulation
             public const string RangeMinValue = "RangeMinValue";
             public const string RangeMaxValue = "RangeMaxValue";
             public const string RangeIsInputed = "RangeIsInputed";
+
+            public const string ProgramOptions = "ProgramOptions";
+            public const string ByChecking = "ByChecking";
+            public const string ByCheckingProjects = "ByCheckingProjects";
+            public const string ByCheckingSuspensions = "ByCheckingSuspensions";
+            public const string ByCheckingSimSeries = "ByCheckingSimSeries";
+            public const string ByCheckingSimulaions = "ByCheckingSimulaions";
         }
 
         public void SerializeConfiguration(XmlWriter writer)
         {
+            SerializeProgramOptions(writer);
             SerializeShowHideSchemas(writer);
             SerializeRangesSchemas(writer);
+        }
+
+        private void SerializeProgramOptions(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.ProgramOptions);
+            SerializeByChecking(writer);
+            writer.WriteEndElement();
+        }
+
+        private void SerializeByChecking(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.ByChecking);
+            writer.WriteElementString(fmFilterSimulationSerializeTags.ByCheckingProjects, m_byCheckingProjects.ToString());
+            writer.WriteElementString(fmFilterSimulationSerializeTags.ByCheckingSuspensions, m_byCheckingSuspensions.ToString());
+            writer.WriteElementString(fmFilterSimulationSerializeTags.ByCheckingSimSeries, m_byCheckingSimSeries.ToString());
+            writer.WriteElementString(fmFilterSimulationSerializeTags.ByCheckingSimulaions, byCheckingSimulations.ToString());
+            writer.WriteEndElement();
         }
 
         private void SerializeRangesSchemas(XmlWriter writer)
@@ -138,8 +163,38 @@ namespace FilterSimulation
 
         public void DeserializeConfiguration(XmlNode node)
         {
+            DeserializeProgramOptions(node);
             DeserializeShowHideSchemas(node);
             DeserializeRangesSchemas(node);
+        }
+
+        private void DeserializeProgramOptions(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ProgramOptions);
+            if (node == null)
+            {
+                return;
+            }
+            DeserializeByChecking(node);
+        }
+
+        private void DeserializeByChecking(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ByChecking);
+            if (node == null)
+            {
+                return;
+            }
+
+            fmSerializeTools.DeserializeBoolProperty(ref m_byCheckingProjects, node, fmFilterSimulationSerializeTags.ByCheckingProjects);
+            fmSerializeTools.DeserializeBoolProperty(ref m_byCheckingSuspensions, node, fmFilterSimulationSerializeTags.ByCheckingSuspensions);
+            fmSerializeTools.DeserializeBoolProperty(ref m_byCheckingSimSeries, node, fmFilterSimulationSerializeTags.ByCheckingSimSeries);
+            fmSerializeTools.DeserializeBoolProperty(ref byCheckingSimulations, node, fmFilterSimulationSerializeTags.ByCheckingSimulaions);
+
+            byCheckingProjectsCheckBox.Checked = m_byCheckingProjects;
+            byCheckingSuspensionsCheckBox.Checked = m_byCheckingSuspensions;
+            byCheckingSimSeriesCheckBox.Checked = m_byCheckingSimSeries;
+            byCheckingSimulationsCheckBox.Checked = byCheckingSimulations;
         }
 
         private void DeserializeRangesSchemas(XmlNode node)
