@@ -52,8 +52,10 @@ namespace fmCalcBlocksLibrary.Blocks
                     {
                         if (constantParameter.globalParameter == fmGlobalParameter.sf)
                         {
-                            maxValue[fmGlobalParameter.sd] = fmValue.Min(maxValue[fmGlobalParameter.sd],
-                                                                         new fmValue(1) - constantParameter.value);
+                            if (constantParameter.value.defined)
+                            {
+                                maxValue[fmGlobalParameter.sd] = 1 - constantParameter.value;
+                            }
 
                             if (tc_Value.defined)
                             {
