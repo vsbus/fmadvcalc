@@ -100,6 +100,11 @@ namespace FilterSimulation
             public const string ByCheckingSimulaions = "ByCheckingSimulaions";
 
             public const string Precision = "Precision";
+
+            public const string Units = "Units";
+            public const string UnitFamily = "UnitFamily";
+            public const string UnitFamilyName = "UnitFamilyName";
+            public const string CurrentUnitName = "CurrentUnitName";
         }
 
         public void SerializeConfiguration(XmlWriter writer)
@@ -114,6 +119,25 @@ namespace FilterSimulation
             writer.WriteStartElement(fmFilterSimulationSerializeTags.ProgramOptions);
             SerializeByChecking(writer);
             SerializePrecision(writer);
+            SerializeUnits(writer);
+            writer.WriteEndElement();
+        }
+
+        private void SerializeUnits(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.Units);
+            foreach (fmUnitFamily unitFamily in fmUnitFamily.families)
+            {
+                SerializeUnitFamily(writer, unitFamily);
+            }
+            writer.WriteEndElement();
+        }
+
+        private void SerializeUnitFamily(XmlWriter writer, fmUnitFamily unitFamily)
+        {
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.UnitFamily);
+            writer.WriteElementString(fmFilterSimulationSerializeTags.UnitFamilyName, unitFamily.Name);
+            writer.WriteElementString(fmFilterSimulationSerializeTags.CurrentUnitName, unitFamily.CurrentUnit.Name);
             writer.WriteEndElement();
         }
 
@@ -131,6 +155,36 @@ namespace FilterSimulation
             }
             DeserializeByChecking(node);
             DeserializePrecision(node);
+            DeserializeUnits(node);
+        }
+
+        private void DeserializeUnits(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.Units);
+            if (node == null)
+            {
+                return;
+            }
+            XmlNodeList unitsList = node.SelectNodes(fmFilterSimulationSerializeTags.UnitFamily);
+            foreach (XmlNode unitNode in unitsList)
+            {
+                DeserializeUnitFamily(unitNode);
+            }
+            UpdateUnitsAndData();
+        }
+
+        private void DeserializeUnitFamily(XmlNode unitNode)
+        {
+            string familyName = unitNode.SelectSingleNode(fmFilterSimulationSerializeTags.UnitFamilyName).InnerText;
+            string unitName = unitNode.SelectSingleNode(fmFilterSimulationSerializeTags.CurrentUnitName).InnerText;
+            foreach (fmUnitFamily unitFamily in fmUnitFamily.families)
+            {
+                if (unitFamily.Name == familyName)
+                {
+                    unitFamily.SetCurrentUnit(unitName);
+                    break;
+                }
+            }
         }
 
         private void DeserializePrecision(XmlNode node)
