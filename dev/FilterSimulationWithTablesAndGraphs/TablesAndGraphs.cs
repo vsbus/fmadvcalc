@@ -504,7 +504,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         {
                             row.Cells[idx].Value = "-";
                         }
-                        else if (row.Cells[idx].Value.ToString() == "-")
+                        else if (row.Cells[idx].Value != null && row.Cells[idx].Value.ToString() == "-")
                         {
                             row.Cells[idx].Value = tempSim.parameters[param].ValueInUnits;
                         }
@@ -550,7 +550,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                 fmBlockVariableParameter xParameter = null;
                                 if (listBoxXAxis.SelectedItems.Count != 0)
                                 {
-                                    fmGlobalParameter p = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+                                    fmGlobalParameter p = GetCurrentXAxisParameter();
                                     xParameter = (cakeFormationParameters.Contains(p)
                                         ? fmb
                                         : (fmBaseBlock) deliq).GetParameterByName(p.Name);
@@ -614,7 +614,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
 
             if (listBoxXAxis.SelectedItems[0].Text != "")
-                UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text]);
+                UpdateIsInputed(GetCurrentXAxisParameter());
 
             xRangeLabel.Text = "Ranges (X-Parameter: " + listBoxXAxis.SelectedItems[0].Text + ")";
 
@@ -680,7 +680,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
                 return;
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+            fmGlobalParameter xParameter = GetCurrentXAxisParameter();
 
             var newInvolvedSeries = new Dictionary<fmFilterSimSerie, fmRange>();
             if (!m_isUseLocalParams)
@@ -746,7 +746,7 @@ namespace FilterSimulationWithTablesAndGraphs
             BindXYLists();
             LoadCurrentXRange();
             if (listBoxXAxis.SelectedItems[0].Text != "")
-                UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text]);
+                UpdateIsInputed(GetCurrentXAxisParameter());
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
@@ -877,7 +877,7 @@ namespace FilterSimulationWithTablesAndGraphs
             BindXYLists();
             LoadCurrentXRange();
             if (listBoxXAxis.SelectedItems.Count != 0 && listBoxXAxis.SelectedItems[0].Text != "")
-                UpdateIsInputed(fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text]);
+                UpdateIsInputed(GetCurrentXAxisParameter());
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
@@ -1184,7 +1184,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
             }
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+            fmGlobalParameter xParameter = GetCurrentXAxisParameter();
             var yParameters = (from ListViewItem item in listBoxYAxis.CheckedItems
                                select fmGlobalParameter.ParametersByName[item.Text]).ToList();
 
@@ -1393,7 +1393,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 return;
             }
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+            fmGlobalParameter xParameter = GetCurrentXAxisParameter();
 
             if (!m_isUseLocalParams)
             {

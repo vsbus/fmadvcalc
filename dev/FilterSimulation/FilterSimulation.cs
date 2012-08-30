@@ -121,6 +121,7 @@ namespace FilterSimulation
             SerializeProgramOptions(writer);
             SerializeShowHideSchemas(writer);
             SerializeRangesSchemas(writer);
+            SerializeDiagramOptions(writer);
         }
 
         private void SerializeProgramOptions(XmlWriter writer)
@@ -133,6 +134,11 @@ namespace FilterSimulation
             SerializePrecision(writer);
             SerializeUnits(writer);
             writer.WriteEndElement();
+        }
+
+        virtual protected void SerializeDiagramOptions(XmlWriter writer)
+        {
+            throw new NotImplementedException();
         }
 
         private void SerializeInputSuspensionSerieSimulation(XmlWriter writer)
@@ -194,6 +200,11 @@ namespace FilterSimulation
 
             DeserializePrecision(node);
             DeserializeUnits(node);
+        }
+
+        protected virtual void DeserializeDiagramOptions(XmlNode node)
+        {
+            throw new NotImplementedException();
         }
 
         private void DeserializeInputSuspensionSerieSimulation(XmlNode node)
@@ -310,6 +321,7 @@ namespace FilterSimulation
             DeserializeProgramOptions(node);
             DeserializeShowHideSchemas(node);
             DeserializeRangesSchemas(node);
+            DeserializeDiagramOptions(node);
         }
 
         private void DeserializeByChecking(XmlNode node)

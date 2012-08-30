@@ -86,7 +86,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (InvolvedSeriesDataGrid.CurrentCell != null)
             {
                 DataGridViewRow row = InvolvedSeriesDataGrid.CurrentCell.OwningRow;
-                fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+                fmGlobalParameter xParameter = GetCurrentXAxisParameter();
                 double coef = xParameter.UnitFamily.CurrentUnit.Coef;
                 fmFilterSimSerie serie = m_involvedSerieFromRow[row];
                 m_involvedSeries[serie] = new fmRange(
@@ -368,7 +368,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (InvolvedSeriesDataGrid.CurrentCell != null)
             {
                 DataGridViewRow row = InvolvedSeriesDataGrid.CurrentCell.OwningRow;
-                fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+                fmGlobalParameter xParameter = GetCurrentXAxisParameter();
                 double coef = xParameter.UnitFamily.CurrentUnit.Coef;
                 fmFilterSimSerie serie = m_involvedSerieFromRow[row];
                 row.Cells[1].Value = new fmValue(serie.Ranges.Ranges[xParameter].MinValue / coef).ToString();
@@ -397,7 +397,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
                 return;
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+            fmGlobalParameter xParameter = GetCurrentXAxisParameter();
             BindY2List(yParameters);
 
             var y2Parameters = new List<fmGlobalParameter>();
@@ -442,9 +442,77 @@ namespace FilterSimulationWithTablesAndGraphs
             if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems[0].Text == "")
                 return;
 
-            fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+            fmGlobalParameter xParameter = GetCurrentXAxisParameter();
             BindCalculatedResultsToDisplayingResults(xParameter, yParameters, y2Parameters);
             BindCalculatedResultsToChartAndTable();
         }
+
+        #region Serialization
+
+        private static class fmFilterSimulationWithDiagramsSerializeTags
+        {
+            public const string DiagramOptions = "DiagramOptions";
+            public const string XParameterName = "XParameterName";
+            public const string Y1ParameterName = "Y1ParameterName";
+            public const string Y2ParameterName = "Y2ParameterName";
+        }
+
+        override protected void SerializeDiagramOptions(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.XParameterName, GetCurrentXAxisParameter().Name);
+            foreach (ListViewItem item in listBoxYAxis.Items)
+            {
+                if (item.Checked)
+                {
+                    writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.Y1ParameterName, item.Text);
+                }
+            }
+            foreach (ListViewItem item in listBoxY2Axis.Items)
+            {
+                if (item.Checked)
+                {
+                    writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.Y2ParameterName, item.Text);
+                }
+            }
+            writer.WriteEndElement();
+        }
+
+        private fmGlobalParameter GetCurrentXAxisParameter()
+        {
+            return fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+        }
+
+        override protected void DeserializeDiagramOptions(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
+            if (node == null)
+            {
+                return;
+            }
+            string xParameterName = "tf";
+            fmSerializeTools.DeserializeStringProperty(ref xParameterName, node, fmFilterSimulationWithDiagramsSerializeTags.XParameterName);
+            foreach (ListViewItem item in listBoxXAxis.Items)
+            {
+                if (item.Text == xParameterName)
+                {
+                    item.Selected = true;
+                }
+            }
+
+            XmlNodeList y1Nodes = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.Y1ParameterName);
+            foreach (XmlNode y1Node in y1Nodes)
+            {
+                listBoxYAxis.Items.Add(y1Node.InnerText).Checked = true;
+            }
+
+            XmlNodeList y2Nodes = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.Y2ParameterName);
+            foreach (XmlNode y2Node in y2Nodes)
+            {
+                listBoxY2Axis.Items.Add(y2Node.InnerText).Checked = true;
+            }
+        }
+
+        #endregion
     }
 }
