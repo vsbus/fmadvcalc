@@ -36,6 +36,10 @@ namespace AdvancedCalculator
             this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.showUSUnitsCheckBox = new System.Windows.Forms.CheckBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -46,7 +50,7 @@ namespace AdvancedCalculator
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(367, 559);
+            this.groupBox1.Size = new System.Drawing.Size(404, 562);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -55,13 +59,13 @@ namespace AdvancedCalculator
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 16);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(361, 540);
+            this.panel1.Size = new System.Drawing.Size(398, 543);
             this.panel1.TabIndex = 0;
             // 
             // OKButton
             // 
             this.OKButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.OKButton.Location = new System.Drawing.Point(199, 28);
+            this.OKButton.Location = new System.Drawing.Point(236, 109);
             this.OKButton.Name = "OKButton";
             this.OKButton.Size = new System.Drawing.Size(75, 23);
             this.OKButton.TabIndex = 1;
@@ -72,7 +76,7 @@ namespace AdvancedCalculator
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(280, 28);
+            this.button1.Location = new System.Drawing.Point(317, 109);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -82,13 +86,17 @@ namespace AdvancedCalculator
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.button3);
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Controls.Add(this.showUSUnitsCheckBox);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.OKButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 559);
+            this.panel2.Location = new System.Drawing.Point(0, 562);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(367, 63);
+            this.panel2.Size = new System.Drawing.Size(404, 144);
             this.panel2.TabIndex = 3;
             // 
             // showUSUnitsCheckBox
@@ -102,11 +110,47 @@ namespace AdvancedCalculator
             this.showUSUnitsCheckBox.UseVisualStyleBackColor = true;
             this.showUSUnitsCheckBox.CheckedChanged += new System.EventHandler(this.showUSUnitsCheckBox_CheckedChanged);
             // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(12, 50);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(136, 21);
+            this.comboBox1.TabIndex = 4;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 34);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Units Set:";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(168, 50);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(98, 23);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Load Default";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(272, 50);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(98, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Save As Default";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // fmUnitsOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 622);
+            this.ClientSize = new System.Drawing.Size(404, 706);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -128,5 +172,9 @@ namespace AdvancedCalculator
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.CheckBox showUSUnitsCheckBox;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }
