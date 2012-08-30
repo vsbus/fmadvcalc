@@ -96,6 +96,8 @@ namespace FilterSimulation
 
             public const string Limits = "Limits";
 
+            public const string IsUsUnitsUsed = "IsUsUnitsUsed";
+
             public const string ProgramOptions = "ProgramOptions";
             public const string ByChecking = "ByChecking";
             public const string ByCheckingProjects = "ByCheckingProjects";
@@ -130,6 +132,7 @@ namespace FilterSimulation
             SerializeByChecking(writer);
             writer.WriteElementString(fmFilterSimulationSerializeTags.FullInfo, fullSimulationInfoCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationSerializeTags.Limits, calculateLimitsCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationSerializeTags.IsUsUnitsUsed, m_isUsUnitsUsed.ToString());
             SerializeInputSuspensionSerieSimulation(writer);
             SerializePrecision(writer);
             SerializeUnits(writer);
@@ -195,6 +198,11 @@ namespace FilterSimulation
                 node,
                 fmFilterSimulationSerializeTags.Limits);
             calculateLimitsCheckBox.Checked = limitsChecked;
+
+            fmSerializeTools.DeserializeBoolProperty(
+                ref m_isUsUnitsUsed,
+                node,
+                fmFilterSimulationSerializeTags.IsUsUnitsUsed);
 
             DeserializeInputSuspensionSerieSimulation(node);
 
@@ -967,5 +975,21 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         {
             RunCommentsWindow(Solution.currentObjects.Simulation, "Simulation");
         }
+
+        #region US units flag
+
+        private bool m_isUsUnitsUsed = false;
+
+        public bool GetIsUsUnitsUsed()
+        {
+            return m_isUsUnitsUsed;
+        }
+
+        public void SetIsUsUnitsUsed(bool isUsUnitsUsed)
+        {
+            m_isUsUnitsUsed = isUsUnitsUsed;
+        }
+
+        #endregion
     }
 }

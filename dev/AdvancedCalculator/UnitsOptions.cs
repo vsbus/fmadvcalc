@@ -109,5 +109,15 @@ namespace AdvancedCalculator
         {
             BindAllUnitFamilies();
         }
+
+        internal void SetUsChecked(bool isUsChecked)
+        {
+            showUSUnitsCheckBox.Checked = isUsChecked;
+        }
+
+        internal bool GetUsChecked()
+        {
+            return showUSUnitsCheckBox.Checked;
+        }
     }
 }

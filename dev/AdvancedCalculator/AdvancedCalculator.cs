@@ -199,7 +199,9 @@ namespace AdvancedCalculator
         private void unitsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             var uoForm = new fmUnitsOptions();
+            uoForm.SetUsChecked(filterSimulationWithTablesAndGraphs1.GetIsUsUnitsUsed());
             uoForm.ShowDialog();
+            filterSimulationWithTablesAndGraphs1.SetIsUsUnitsUsed(uoForm.GetUsChecked());
             filterSimulationWithTablesAndGraphs1.UpdateAll();
         }
 
