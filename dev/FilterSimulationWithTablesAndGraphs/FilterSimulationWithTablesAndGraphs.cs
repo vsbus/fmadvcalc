@@ -6,6 +6,7 @@ using FilterSimulation;
 using fmCalculationLibrary;
 using FilterSimulation.fmFilterObjects;
 using System.Xml;
+using fmCalculationLibrary.MeasureUnits;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
@@ -672,6 +673,18 @@ namespace FilterSimulationWithTablesAndGraphs
                 additionalParametersTable.Rows.RemoveAt(rowIdx);
                 UpdateDiagramAfterLocalParametersRowsChanged();
             }
+        }
+
+        private fmUnitsSchema m_currentUnitSchema;
+
+        public fmUnitsSchema GetCurrentUnitsSchema()
+        {
+            return m_currentUnitSchema;
+        }
+
+        public void SetCurrentUnitsSchema(fmUnitsSchema unitsSchema)
+        {
+            m_currentUnitSchema = unitsSchema;
         }
     }
 }

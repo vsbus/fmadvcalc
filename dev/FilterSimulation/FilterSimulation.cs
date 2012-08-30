@@ -24,6 +24,7 @@ namespace FilterSimulation
         protected fmParametersToDisplay ParametersToDisplay;
         public Dictionary<fmShowHideSchema, List<fmGlobalParameter>> ShowHideSchemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
         public Dictionary<fmFilterSimMachineType, RangesDictionary> RangesSchemas = new Dictionary<fmFilterSimMachineType, RangesDictionary>();
+        public Dictionary<fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>> UnitsSchemas = new Dictionary<fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>>();
         private Dictionary<fmGlobalParameter, DataGridViewColumn> simulationGridColumns = new Dictionary<fmGlobalParameter, DataGridViewColumn>();
 
         public fmFilterSimulationControl()
@@ -116,6 +117,11 @@ namespace FilterSimulation
             public const string MeterialInputSerieRadioButton = "MeterialInputSerieRadioButton";
             public const string MeterialInputSimualationRadioButton = "MeterialInputSimualationRadioButton";
             public const string MeterialInputSuspensionRadioButton = "MeterialInputSuspensionRadioButton";
+
+            public const string UnitsSchemas = "UnitsSchemas";
+            public const string UnitsSchema = "UnitsSchema";
+            public const string UnitsSchemaName = "UnitsSchemaName";
+            public const string Unit = "Unit";
         }
 
         public void SerializeConfiguration(XmlWriter writer)
@@ -123,7 +129,27 @@ namespace FilterSimulation
             SerializeProgramOptions(writer);
             SerializeShowHideSchemas(writer);
             SerializeRangesSchemas(writer);
+            SerializeUnitsSchemas(writer);
             SerializeDiagramOptions(writer);
+        }
+
+        private void SerializeUnitsSchemas(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.UnitsSchemas);
+            foreach (KeyValuePair<fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>> unitsSchema in UnitsSchemas)
+            {
+                writer.WriteStartElement(fmFilterSimulationSerializeTags.UnitsSchema);
+                writer.WriteElementString(fmFilterSimulationSerializeTags.UnitsSchemaName, fmEnumUtils.GetEnumDescription(unitsSchema.Key));
+                foreach (KeyValuePair<fmUnitFamily, fmUnit> pair in unitsSchema.Value)
+                {
+                    writer.WriteStartElement(fmFilterSimulationSerializeTags.Unit);
+                    writer.WriteElementString(fmFilterSimulationSerializeTags.UnitFamilyName, pair.Key.Name);
+                    writer.WriteElementString(fmFilterSimulationSerializeTags.CurrentUnitName, pair.Value.Name);
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
         }
 
         private void SerializeProgramOptions(XmlWriter writer)
@@ -329,7 +355,32 @@ namespace FilterSimulation
             DeserializeProgramOptions(node);
             DeserializeShowHideSchemas(node);
             DeserializeRangesSchemas(node);
+            DeserializeUnitsSchemas(node);
             DeserializeDiagramOptions(node);
+        }
+
+        private void DeserializeUnitsSchemas(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.UnitsSchemas);
+            if (node == null)
+            {
+                return;
+            }
+            XmlNodeList schemasNodes = node.SelectNodes(fmFilterSimulationSerializeTags.UnitsSchema);
+            foreach (XmlNode schemaNode in schemasNodes)
+            {
+                string unitsSchemaName = schemaNode.SelectSingleNode(fmFilterSimulationSerializeTags.UnitsSchemaName).InnerText;
+                XmlNodeList unitList = schemaNode.SelectNodes(fmFilterSimulationSerializeTags.Unit);
+                var schema = new Dictionary<fmUnitFamily, fmUnit>();
+                foreach (XmlNode unitNode in unitList)
+                {
+                    string unitFamilyName = unitNode.SelectSingleNode(fmFilterSimulationSerializeTags.UnitFamilyName).InnerText;
+                    string currentUnitName = unitNode.SelectSingleNode(fmFilterSimulationSerializeTags.CurrentUnitName).InnerText;
+                    fmUnitFamily family = fmUnitFamily.GetFamilyByName(unitFamilyName);
+                    schema[family] = family.GetUnitByName(currentUnitName);
+                }
+                UnitsSchemas[(fmUnitsSchema)fmEnumUtils.GetEnum(typeof(fmUnitsSchema), unitsSchemaName)] = schema;
+            }
         }
 
         private void DeserializeByChecking(XmlNode node)

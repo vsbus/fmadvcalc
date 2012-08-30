@@ -188,5 +188,30 @@ namespace fmCalculationLibrary.MeasureUnits
 
             throw new Exception("No " + name + " units in unit family " + ToString());
         }
+
+        public fmUnit GetUnitByName(string name)
+        {
+            for (int i = 0; i < units.Count; ++i)
+            {
+                if (units[i].Name == name)
+                {
+                    return units[i];
+                }
+            }
+
+            throw new Exception("No " + name + " units in unit family " + ToString());
+        }
+
+        public static fmUnitFamily GetFamilyByName(string unitFamilyName)
+        {
+            foreach (fmUnitFamily family in families)
+            {
+                if (family.Name == unitFamilyName)
+                {
+                    return family;
+                }
+            }
+            throw new Exception("No unit family with name " + unitFamilyName + " found.");
+        }
     }
 }

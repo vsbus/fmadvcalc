@@ -14,6 +14,16 @@ namespace FilterSimulation
         BatchFilters
     }
 
+    public enum fmUnitsSchema
+    {
+        [Description("Industrial")]
+        Industrial,
+        [Description("Pilot")]
+        Pilot,
+        [Description("Laboratory")]
+        Laboratory
+    }
+
     public class fmParametersToDisplay
     {
         public fmShowHideSchema AssignedSchema = fmShowHideSchema.ContinuousFilters;

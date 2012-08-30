@@ -4,20 +4,29 @@ using System.Drawing;
 using System.Windows.Forms;
 using fmFilterSimulationControl;
 using fmCalculationLibrary.MeasureUnits;
+using FilterSimulation;
+using fmMisc;
 
 namespace AdvancedCalculator
 {
     public partial class fmUnitsOptions : Form
     {
+        private Dictionary<fmUnitFamily, fmUnitItem> m_famityToItem = new Dictionary<fmUnitFamily, fmUnitItem>();
+        private Dictionary<fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>> m_unitsSchemas;
+        private fmUnitsSchema m_currentSchema;
+
         public fmUnitsOptions()
         {
             InitializeComponent();
         }
 
-        //  ReSharper disable InconsistentNaming
         private void UnitsOptions_Load(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
         {
+            foreach (Enum element in Enum.GetValues(typeof(fmUnitsSchema)))
+            {
+                unitSchemaComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
+            }
+            unitSchemaComboBox.Text = fmEnumUtils.GetEnumDescription(m_currentSchema);
             BindAllUnitFamilies();
         }
 
@@ -53,8 +62,6 @@ namespace AdvancedCalculator
             }
             panel1.AutoScroll = true;
         }
-
-        private Dictionary<fmUnitFamily, fmUnitItem> m_famityToItem = new Dictionary<fmUnitFamily, fmUnitItem>();
 
         private void BindUnitComboBox(fmUnitFamily dataSource)
         {
@@ -97,6 +104,7 @@ namespace AdvancedCalculator
             {
                 pair.Key.SetCurrentUnit(pair.Value.UnitComboBox.Text);
             }
+            DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -118,6 +126,57 @@ namespace AdvancedCalculator
         internal bool GetUsChecked()
         {
             return showUSUnitsCheckBox.Checked;
+        }
+
+        internal void SetUnitsSchemas(Dictionary<FilterSimulation.fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>> unitsSchemas)
+        {
+            m_unitsSchemas = new Dictionary<FilterSimulation.fmUnitsSchema,Dictionary<fmUnitFamily,fmUnit>>(unitsSchemas);
+        }
+
+        internal void CheckScheme(fmUnitsSchema unitsSchema)
+        {
+            m_currentSchema = unitsSchema;
+        }
+
+        internal fmUnitsSchema GetCheckedUnitsSchema()
+        {
+            return m_currentSchema;
+        }
+
+        internal Dictionary<fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>> GetUnitsSchemas()
+        {
+            return m_unitsSchemas;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var unitSchema = (fmUnitsSchema)fmEnumUtils.GetEnum(typeof(fmUnitsSchema), unitSchemaComboBox.Text);
+            if (!m_unitsSchemas.ContainsKey(unitSchema))
+            {
+                MessageBox.Show("Nothing assigned to scheme " + unitSchemaComboBox.Text + " yet.");
+                return;
+            }
+            Dictionary<fmUnitFamily, fmUnit> schema = m_unitsSchemas[unitSchema];
+            foreach (fmUnitFamily unitFamily in schema.Keys)
+            {
+                m_famityToItem[unitFamily].UnitComboBox.Text = schema[unitFamily].Name;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var unitSchema = (fmUnitsSchema)fmEnumUtils.GetEnum(typeof(fmUnitsSchema), unitSchemaComboBox.Text);
+            var schema = new Dictionary<fmUnitFamily, fmUnit>();
+            foreach (fmUnitFamily unitFamily in m_famityToItem.Keys)
+            {
+                schema[unitFamily] = unitFamily.GetUnitByName(m_famityToItem[unitFamily].UnitComboBox.Text);
+            }
+            m_unitsSchemas[unitSchema] = schema;
+        }
+
+        private void unitSchemaComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            m_currentSchema = (fmUnitsSchema)fmEnumUtils.GetEnum(typeof(fmUnitsSchema), unitSchemaComboBox.Text);
         }
     }
 }

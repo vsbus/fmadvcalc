@@ -200,9 +200,15 @@ namespace AdvancedCalculator
         {
             var uoForm = new fmUnitsOptions();
             uoForm.SetUsChecked(filterSimulationWithTablesAndGraphs1.GetIsUsUnitsUsed());
-            uoForm.ShowDialog();
-            filterSimulationWithTablesAndGraphs1.SetIsUsUnitsUsed(uoForm.GetUsChecked());
-            filterSimulationWithTablesAndGraphs1.UpdateAll();
+            uoForm.SetUnitsSchemas(filterSimulationWithTablesAndGraphs1.UnitsSchemas);
+            uoForm.CheckScheme(filterSimulationWithTablesAndGraphs1.GetCurrentUnitsSchema());
+            if (uoForm.ShowDialog() == DialogResult.OK)
+            {
+                filterSimulationWithTablesAndGraphs1.SetIsUsUnitsUsed(uoForm.GetUsChecked());
+                filterSimulationWithTablesAndGraphs1.SetCurrentUnitsSchema(uoForm.GetCheckedUnitsSchema());
+                filterSimulationWithTablesAndGraphs1.UnitsSchemas = uoForm.GetUnitsSchemas();
+                filterSimulationWithTablesAndGraphs1.UpdateAll();
+            }
         }
 
         private void RangesToolStripMenuItem1Click(object sender, EventArgs e)

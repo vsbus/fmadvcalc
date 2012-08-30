@@ -96,6 +96,10 @@
       <Project>{30A5CD2D-C64C-402B-A957-3885E498A97C}</Project>
       <Name>fmDataGrid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\fmMisc\fmMisc.csproj">
+      <Project>{1F1A3827-D9AD-4A97-B7A1-CE0F1FDDE5D6}</Project>
+      <Name>fmMisc</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
