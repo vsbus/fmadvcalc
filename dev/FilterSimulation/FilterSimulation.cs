@@ -98,6 +98,8 @@ namespace FilterSimulation
             public const string ByCheckingSuspensions = "ByCheckingSuspensions";
             public const string ByCheckingSimSeries = "ByCheckingSimSeries";
             public const string ByCheckingSimulaions = "ByCheckingSimulaions";
+
+            public const string Precision = "Precision";
         }
 
         public void SerializeConfiguration(XmlWriter writer)
@@ -111,7 +113,29 @@ namespace FilterSimulation
         {
             writer.WriteStartElement(fmFilterSimulationSerializeTags.ProgramOptions);
             SerializeByChecking(writer);
+            SerializePrecision(writer);
             writer.WriteEndElement();
+        }
+
+        private void SerializePrecision(XmlWriter writer)
+        {
+            writer.WriteElementString(fmFilterSimulationSerializeTags.Precision, fmValue.outputPrecision.ToString());
+        }
+
+        private void DeserializeProgramOptions(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ProgramOptions);
+            if (node == null)
+            {
+                return;
+            }
+            DeserializeByChecking(node);
+            DeserializePrecision(node);
+        }
+
+        private void DeserializePrecision(XmlNode node)
+        {
+            fmSerializeTools.DeserializeIntProperty(ref fmValue.outputPrecision, node, fmFilterSimulationSerializeTags.Precision);
         }
 
         private void SerializeByChecking(XmlWriter writer)
@@ -166,16 +190,6 @@ namespace FilterSimulation
             DeserializeProgramOptions(node);
             DeserializeShowHideSchemas(node);
             DeserializeRangesSchemas(node);
-        }
-
-        private void DeserializeProgramOptions(XmlNode node)
-        {
-            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ProgramOptions);
-            if (node == null)
-            {
-                return;
-            }
-            DeserializeByChecking(node);
         }
 
         private void DeserializeByChecking(XmlNode node)

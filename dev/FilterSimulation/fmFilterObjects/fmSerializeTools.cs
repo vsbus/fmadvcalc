@@ -38,5 +38,17 @@ namespace FilterSimulation.fmFilterObjects
                 property = propertyNode.InnerText;
             }
         }
+
+        internal static void DeserializeIntProperty(
+            ref int property,
+            XmlNode currentNode,
+            string propertyKey)
+        {
+            XmlNode propertyNode = currentNode.SelectSingleNode(propertyKey);
+            if (propertyNode != null)
+            {
+                property = Convert.ToInt32(propertyNode.InnerText);
+            }
+        }
     }
 }
