@@ -619,7 +619,7 @@ namespace FilterSimulationWithTablesAndGraphs
             BindForeColorToSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInLocalParametrsTable();
-            m_involvedSeries = new List<fmFilterSimSerie>();
+            m_involvedSeries = new Dictionary<fmFilterSimSerie, fmRange>();
             LoadCurrentXRange();
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
@@ -670,7 +670,8 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        private List<fmFilterSimSerie> m_involvedSeries;
+        private Dictionary<fmFilterSimSerie, fmRange> m_involvedSeries;
+        private Dictionary<DataGridViewRow, fmFilterSimSerie> m_involvedSerieFromRow;
 
         private void LoadCurrentXRange()
         {
@@ -679,45 +680,40 @@ namespace FilterSimulationWithTablesAndGraphs
 
             fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
 
-            var newInvolvedSeries = new List<fmFilterSimSerie>();
+            var newInvolvedSeries = new Dictionary<fmFilterSimSerie, fmRange>();
             if (!m_isUseLocalParams)
             {
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
                     fmFilterSimSerie serie = simData.ExternalSimulation.Parent;
-                    if (!newInvolvedSeries.Contains(serie) && serie.Ranges.Ranges.ContainsKey(xParameter))
+                    if (!newInvolvedSeries.ContainsKey(serie) && serie.Ranges.Ranges.ContainsKey(xParameter))
                     {
-                        newInvolvedSeries.Add(serie);
+                        newInvolvedSeries.Add(serie,
+                                              new fmRange(serie.Ranges.Ranges[xParameter].MinValue,
+                                                          serie.Ranges.Ranges[xParameter].MaxValue));
                     }
                 }
             }
 
-            var newRows = new List<string[]>();
-            foreach (fmFilterSimSerie serie in newInvolvedSeries)
-            {
-                var row = new string[3];
-                row[0] = serie.GetName();
-                
-                if (m_involvedSeries.Contains(serie))
-                {
-                    int oldRowIdx = m_involvedSeries.IndexOf(serie);
-                    row[1] = InvolvedSeriesDataGrid[1, oldRowIdx].Value.ToString();
-                    row[2] = InvolvedSeriesDataGrid[2, oldRowIdx].Value.ToString();
-                }
-                else
-                {
-                    double coef = xParameter.UnitFamily.CurrentUnit.Coef;
-                    row[1] = new fmValue(serie.Ranges.Ranges[xParameter].MinValue / coef).ToString();
-                    row[2] = new fmValue(serie.Ranges.Ranges[xParameter].MaxValue / coef).ToString();
-                }
-
-                newRows.Add(row);
-            }
-
+            m_involvedSerieFromRow = new Dictionary<DataGridViewRow, fmFilterSimSerie>();
             InvolvedSeriesDataGrid.Rows.Clear();
-            foreach (var row in newRows)
+            var justSeries = new List<fmFilterSimSerie>(newInvolvedSeries.Keys);
+            foreach (fmFilterSimSerie serie in justSeries)
             {
-                InvolvedSeriesDataGrid.Rows.Add(row);
+                var strings = new string[3];
+                strings[0] = serie.GetName();
+                
+                if (m_involvedSeries.ContainsKey(serie))
+                {
+                    newInvolvedSeries[serie] = m_involvedSeries[serie];
+                }
+
+                var coef = new fmValue(xParameter.UnitFamily.CurrentUnit.Coef);
+                strings[1] = (newInvolvedSeries[serie].MinValue / coef).ToString();
+                strings[2] = (newInvolvedSeries[serie].MaxValue / coef).ToString();
+
+                int rowIdx = InvolvedSeriesDataGrid.Rows.Add(strings);
+                m_involvedSerieFromRow[InvolvedSeriesDataGrid.Rows[rowIdx]] = serie;
             }
 
             m_involvedSeries = newInvolvedSeries;
@@ -1401,12 +1397,10 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 var xStarts = new List<double>();
                 var xEnds = new List<double>();
-                var seriesRanges = new Dictionary<fmFilterSimSerie, fmRange>();
                 for (int i = 0; i < m_involvedSeries.Count; ++i)
                 {
                     fmValue minValue = fmValue.ObjectToValue(InvolvedSeriesDataGrid[1, i].Value);
                     fmValue maxValue = fmValue.ObjectToValue(InvolvedSeriesDataGrid[2, i].Value);
-                    seriesRanges[m_involvedSeries[i]] = new fmRange(minValue.value, maxValue.value);
                     xStarts.Add(minValue.value);
                     xEnds.Add(maxValue.value);
                 }
@@ -1414,11 +1408,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
-                    if (!seriesRanges.ContainsKey(simData.ExternalSimulation.Parent))
+                    if (!m_involvedSeries.ContainsKey(simData.ExternalSimulation.Parent))
                     {
                         continue;
                     }
-                    fmRange range = seriesRanges[simData.ExternalSimulation.Parent];
+                    fmRange range = m_involvedSeries[simData.ExternalSimulation.Parent];
 
                     simData.CalculatedDataList = new List<fmFilterSimulationData>();
 
@@ -1427,9 +1421,10 @@ namespace FilterSimulationWithTablesAndGraphs
                         var tempSim = new fmFilterSimulationData();
                         tempSim.CopyIsInputedFrom(simData.InternalSimulationData);
                         tempSim.CopyValuesFrom(simData.ExternalSimulation.Data);
-                        tempSim.parameters[xParameter].value = new fmValue(x);
+                        tempSim.parameters[xParameter].value = new fmValue(x) * xParameter.UnitFamily.CurrentUnit.Coef;
 
-                        if (x < range.MinValue || x > range.MaxValue)
+                        if (tempSim.parameters[xParameter].value.value < range.MinValue
+                            || tempSim.parameters[xParameter].value.value > range.MaxValue)
                         {
                             foreach (KeyValuePair<fmGlobalParameter, fmCalculationBaseParameter> pair in tempSim.parameters)
                             {

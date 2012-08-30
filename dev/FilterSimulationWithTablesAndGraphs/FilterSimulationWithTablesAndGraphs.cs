@@ -83,6 +83,16 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void MinMaxXValueTextBoxTextChanged(object sender, EventArgs e)
         {
+            if (InvolvedSeriesDataGrid.CurrentCell != null)
+            {
+                DataGridViewRow row = InvolvedSeriesDataGrid.CurrentCell.OwningRow;
+                fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
+                double coef = xParameter.UnitFamily.CurrentUnit.Coef;
+                fmFilterSimSerie serie = m_involvedSerieFromRow[row];
+                m_involvedSeries[serie] = new fmRange(
+                    (fmValue.ObjectToValue(row.Cells[1].Value) * coef).value,
+                    (fmValue.ObjectToValue(row.Cells[2].Value) * coef).value);
+            }
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
@@ -367,7 +377,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 DataGridViewRow row = InvolvedSeriesDataGrid.CurrentCell.OwningRow;
                 fmGlobalParameter xParameter = fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
                 double coef = xParameter.UnitFamily.CurrentUnit.Coef;
-                fmFilterSimSerie serie = m_involvedSeries[row.Index];
+                fmFilterSimSerie serie = m_involvedSerieFromRow[row];
                 row.Cells[1].Value = new fmValue(serie.Ranges.Ranges[xParameter].MinValue / coef).ToString();
                 row.Cells[2].Value = new fmValue(serie.Ranges.Ranges[xParameter].MaxValue / coef).ToString();
             }

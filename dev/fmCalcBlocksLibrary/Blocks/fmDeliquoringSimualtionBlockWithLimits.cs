@@ -37,8 +37,8 @@ namespace fmCalcBlocksLibrary.Blocks
 
                 CalculateAbsRanges();
 
-                Dictionary<fmGlobalParameter, fmValue> minValue = new Dictionary<fmGlobalParameter, fmValue>();
-                Dictionary<fmGlobalParameter, fmValue> maxValue = new Dictionary<fmGlobalParameter, fmValue>();
+                var minValue = new Dictionary<fmGlobalParameter, fmValue>();
+                var maxValue = new Dictionary<fmGlobalParameter, fmValue>();
 
                 List<fmBlockVariableParameter> clueParams = GetClueParamsList();
 
