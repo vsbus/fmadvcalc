@@ -455,6 +455,18 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string XParameterName = "XParameterName";
             public const string Y1ParameterName = "Y1ParameterName";
             public const string Y2ParameterName = "Y2ParameterName";
+
+            public const string RowsQuantity = "RowsQuantity";
+            public const string CakeFormationMaterilParametersCheckBox = "CakeFormationMaterilParametersCheckBox";
+            public const string CakeFormationMachininglParametersCheckBox = "CakeFormationMachininglParametersCheckBox";
+            public const string DeliquoringMaterilParametersCheckBox = "DeliquoringMaterilParametersCheckBox";
+            public const string DeliquoringMachininglParametersCheckBox = "DeliquoringMachininglParametersCheckBox";
+
+            public const string NoScalingCheckBox = "NoScalingCheckBox";
+            public const string StartFromOriginCheckBox = "StartFromOriginCheckBox";
+            public const string YLogCheckBox = "YLogCheckBox";
+            public const string Y2LogCheckBox = "Y2LogCheckBox";
+            public const string UseParamsCheckBox = "UseParamsCheckBox";
         }
 
         override protected void SerializeDiagramOptions(XmlWriter writer)
@@ -475,6 +487,17 @@ namespace FilterSimulationWithTablesAndGraphs
                     writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.Y2ParameterName, item.Text);
                 }
             }
+
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.RowsQuantity, rowsQuantity.Text);
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.CakeFormationMaterilParametersCheckBox, cakeFormationMaterilParametersCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.CakeFormationMachininglParametersCheckBox, cakeFormationMachininglParametersCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.DeliquoringMaterilParametersCheckBox, deliquoringMaterilParametersCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.DeliquoringMachininglParametersCheckBox, deliquoringMachininglParametersCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.NoScalingCheckBox, NoScalingCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.StartFromOriginCheckBox, startFromOriginCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.YLogCheckBox, yLogCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.Y2LogCheckBox, y2LogCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.UseParamsCheckBox, UseParamsCheckBox.Checked.ToString());
             writer.WriteEndElement();
         }
 
@@ -490,8 +513,91 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 return;
             }
+            
+            string temp = "";
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.RowsQuantity))
+            {
+                rowsQuantity.Text = temp;
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.CakeFormationMaterilParametersCheckBox))
+            {
+                cakeFormationMaterilParametersCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.CakeFormationMachininglParametersCheckBox))
+            {
+                cakeFormationMachininglParametersCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.DeliquoringMaterilParametersCheckBox))
+            {
+                deliquoringMaterilParametersCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.DeliquoringMachininglParametersCheckBox))
+            {
+                deliquoringMachininglParametersCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.NoScalingCheckBox))
+            {
+                NoScalingCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.StartFromOriginCheckBox))
+            {
+                startFromOriginCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.YLogCheckBox))
+            {
+                yLogCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.Y2LogCheckBox))
+            {
+                y2LogCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.UseParamsCheckBox))
+            {
+                UseParamsCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
             string xParameterName = "tf";
-            fmSerializeTools.DeserializeStringProperty(ref xParameterName, node, fmFilterSimulationWithDiagramsSerializeTags.XParameterName);
+            fmSerializeTools.DeserializeStringProperty(ref xParameterName, node,
+                                                       fmFilterSimulationWithDiagramsSerializeTags.XParameterName);
             foreach (ListViewItem item in listBoxXAxis.Items)
             {
                 if (item.Text == xParameterName)
@@ -501,18 +607,34 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             XmlNodeList y1Nodes = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.Y1ParameterName);
-            foreach (XmlNode y1Node in y1Nodes)
-            {
-                listBoxYAxis.Items.Add(y1Node.InnerText).Checked = true;
-            }
+            if (y1Nodes != null)
+                foreach (XmlNode y1Node in y1Nodes)
+                {
+                    listBoxYAxis.Items.Add(y1Node.InnerText).Checked = true;
+                }
 
             XmlNodeList y2Nodes = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.Y2ParameterName);
-            foreach (XmlNode y2Node in y2Nodes)
-            {
-                listBoxY2Axis.Items.Add(y2Node.InnerText).Checked = true;
-            }
+            if (y2Nodes != null)
+                foreach (XmlNode y2Node in y2Nodes)
+                {
+                    listBoxY2Axis.Items.Add(y2Node.InnerText).Checked = true;
+                }
         }
 
         #endregion
+
+        private void YLogCheckBoxCheckedChanged(object sender, EventArgs e)
+        {
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
+        }
+
+        private void Y2LogCheckBoxCheckedChanged(object sender, EventArgs e)
+        {
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
+        }
     }
 }

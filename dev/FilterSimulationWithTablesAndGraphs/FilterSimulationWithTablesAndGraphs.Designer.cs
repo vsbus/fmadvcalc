@@ -67,6 +67,8 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.listBoxY2Axis = new System.Windows.Forms.ListView();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.y2LogCheckBox = new System.Windows.Forms.CheckBox();
+            this.yLogCheckBox = new System.Windows.Forms.CheckBox();
             this.LoadDefaultRangle = new System.Windows.Forms.Button();
             this.InvolvedSeriesDataGrid = new fmDataGrid.fmDataGrid();
             this.SerieColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -686,6 +688,8 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.y2LogCheckBox);
+            this.panel11.Controls.Add(this.yLogCheckBox);
             this.panel11.Controls.Add(this.LoadDefaultRangle);
             this.panel11.Controls.Add(this.InvolvedSeriesDataGrid);
             this.panel11.Controls.Add(this.startFromOriginCheckBox);
@@ -703,6 +707,28 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(370, 220);
             this.panel11.TabIndex = 8;
+            // 
+            // y2LogCheckBox
+            // 
+            this.y2LogCheckBox.AutoSize = true;
+            this.y2LogCheckBox.Location = new System.Drawing.Point(244, 98);
+            this.y2LogCheckBox.Name = "y2LogCheckBox";
+            this.y2LogCheckBox.Size = new System.Drawing.Size(96, 17);
+            this.y2LogCheckBox.TabIndex = 11;
+            this.y2LogCheckBox.Text = "Y2 Logarithmic";
+            this.y2LogCheckBox.UseVisualStyleBackColor = true;
+            this.y2LogCheckBox.CheckedChanged += new System.EventHandler(this.Y2LogCheckBoxCheckedChanged);
+            // 
+            // yLogCheckBox
+            // 
+            this.yLogCheckBox.AutoSize = true;
+            this.yLogCheckBox.Location = new System.Drawing.Point(244, 75);
+            this.yLogCheckBox.Name = "yLogCheckBox";
+            this.yLogCheckBox.Size = new System.Drawing.Size(90, 17);
+            this.yLogCheckBox.TabIndex = 10;
+            this.yLogCheckBox.Text = "Y Logarithmic";
+            this.yLogCheckBox.UseVisualStyleBackColor = true;
+            this.yLogCheckBox.CheckedChanged += new System.EventHandler(this.YLogCheckBoxCheckedChanged);
             // 
             // LoadDefaultRangle
             // 
@@ -1029,6 +1055,8 @@ namespace FilterSimulationWithTablesAndGraphs
         private ListView listBoxY2Axis;
         private SplitContainer splitContainer2;
         private GroupBox groupBox3;
+        private CheckBox y2LogCheckBox;
+        private CheckBox yLogCheckBox;
 
     }
 }

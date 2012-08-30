@@ -15,7 +15,7 @@ namespace FilterSimulation.fmFilterObjects
             return Convert.ToDouble(s);
         }
 
-        public static void DeserializeBoolProperty(
+        public static bool DeserializeBoolProperty(
             ref bool property,
             XmlNode currentNode,
             string propertyKey)
@@ -24,10 +24,12 @@ namespace FilterSimulation.fmFilterObjects
             if (propertyNode != null)
             {
                 property = Convert.ToBoolean(propertyNode.InnerText);
+                return true;
             }
+            return false;
         }
 
-        public static void DeserializeStringProperty(
+        public static bool DeserializeStringProperty(
             ref string property,
             XmlNode currentNode,
             string propertyKey)
@@ -36,7 +38,9 @@ namespace FilterSimulation.fmFilterObjects
             if (propertyNode != null)
             {
                 property = propertyNode.InnerText;
+                return true;
             }
+            return false;
         }
 
         internal static void DeserializeIntProperty(
