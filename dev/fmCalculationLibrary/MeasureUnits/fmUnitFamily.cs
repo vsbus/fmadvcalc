@@ -58,6 +58,7 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("-", 1));
 
             InitializeFamily(MassFamily, "Mass (M)",
+                new fmUnit("t", 1e3),
                 new fmUnit("kg", 1), 
                 new fmUnit("g", .001),
                 new fmUnit("mg", .000001),
