@@ -18,15 +18,6 @@ namespace AdvancedCalculator
         }
 
         // ReSharper disable InconsistentNaming
-        private void precisionToolStripMenuItem_Click(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
-        {
-            var doForm = new fmDigitsOptions();
-            doForm.ShowDialog();
-            filterSimulationWithTablesAndGraphs1.UpdateAll();
-        }
-
-        // ReSharper disable InconsistentNaming
         private void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
@@ -262,6 +253,13 @@ namespace AdvancedCalculator
             m_currentFilename = null;
             Text = m_caption;
             filterSimulationWithTablesAndGraphs1.Clear();
+        }
+
+        private void calculationPrecisionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var doForm = new fmDigitsOptions();
+            doForm.ShowDialog();
+            filterSimulationWithTablesAndGraphs1.UpdateAll();
         }
     }
 }
