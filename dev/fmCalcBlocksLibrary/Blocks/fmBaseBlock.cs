@@ -63,24 +63,15 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 processOnChange = false;
 
-                bool wasChanged = false;
                 for (int i = 0; i < parameters.Count; ++i)
                 {
                     string newVal = (parameters[i].value / parameters[i].globalParameter.UnitFamily.CurrentUnit.Coef).ToString();
                     if (parameters[i].cell != null)
                     {
-                        object value = parameters[i].cell.Value;
-                        if (fmValue.ObjectToValue(value) != fmValue.StringToValue(newVal))
-                        {
-                            parameters[i].cell.Value = newVal;
-                            wasChanged = true;
-                        }
+                        parameters[i].cell.Value = newVal;
                     }
                 }
-                if (wasChanged)
-                {
-                    CallValuesChanged();
-                }
+                CallValuesChanged();
 
                 processOnChange = true;
             }
