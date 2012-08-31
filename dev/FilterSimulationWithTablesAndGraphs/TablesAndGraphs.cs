@@ -1569,6 +1569,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.FilterMachiningBlock, tempSim);
                             fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.DeliquoringBlock, tempSim);
                             tempSim.CopyMaterialParametersValuesFrom(sim.Data);
+                            tempSim.UpdateIsInputed(xParameter);
                             var xValue = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
                             tempSim.parameters[xParameter].value = xValue;
 
