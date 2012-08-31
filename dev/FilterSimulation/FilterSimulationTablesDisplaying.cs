@@ -1659,6 +1659,7 @@ namespace FilterSimulation
             sim.deliquoringEps0NeEpsBlock.isPlainArea =
                 fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
                     filterMachiningBlock.filterMachiningCalculationOption);
+            sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(sim.DeliquoringUsedCalculationOption);
             sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
         }
     }
