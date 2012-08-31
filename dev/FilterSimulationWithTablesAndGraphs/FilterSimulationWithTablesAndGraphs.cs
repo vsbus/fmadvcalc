@@ -470,6 +470,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             public const string NoScalingCheckBox = "NoScalingCheckBox";
             public const string StartFromOriginCheckBox = "StartFromOriginCheckBox";
+            public const string XLogCheckBox = "XLogCheckBox";
             public const string YLogCheckBox = "YLogCheckBox";
             public const string Y2LogCheckBox = "Y2LogCheckBox";
             public const string UseParamsCheckBox = "UseParamsCheckBox";
@@ -501,6 +502,7 @@ namespace FilterSimulationWithTablesAndGraphs
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.DeliquoringMachininglParametersCheckBox, deliquoringMachininglParametersCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.NoScalingCheckBox, NoScalingCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.StartFromOriginCheckBox, startFromOriginCheckBox.Checked.ToString());
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.XLogCheckBox, xLogCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.YLogCheckBox, yLogCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.Y2LogCheckBox, y2LogCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.UseParamsCheckBox, UseParamsCheckBox.Checked.ToString());
@@ -579,6 +581,14 @@ namespace FilterSimulationWithTablesAndGraphs
                 fmFilterSimulationWithDiagramsSerializeTags.StartFromOriginCheckBox))
             {
                 startFromOriginCheckBox.Checked = Convert.ToBoolean(temp);
+            }
+
+            if (fmSerializeTools.DeserializeStringProperty(
+                ref temp,
+                node,
+                fmFilterSimulationWithDiagramsSerializeTags.XLogCheckBox))
+            {
+                xLogCheckBox.Checked = Convert.ToBoolean(temp);
             }
 
             if (fmSerializeTools.DeserializeStringProperty(
@@ -685,6 +695,13 @@ namespace FilterSimulationWithTablesAndGraphs
         public void SetCurrentUnitsSchema(fmUnitsSchema unitsSchema)
         {
             m_currentUnitSchema = unitsSchema;
+        }
+
+        private void xLogCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            RecalculateSimulationsWithIterationX();
+            BindCalculatedResultsToDisplayingResults();
+            BindCalculatedResultsToChartAndTable();
         }
     }
 }

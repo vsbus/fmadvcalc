@@ -33,8 +33,8 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             this.xRangeLabel = new System.Windows.Forms.Label();
             this.fmZedGraphControl1 = new fmZedGraph.fmZedGraphControl();
             this.buttonAddRow = new System.Windows.Forms.Button();
@@ -86,6 +86,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.xLogCheckBox = new System.Windows.Forms.CheckBox();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -398,12 +399,12 @@ namespace FilterSimulationWithTablesAndGraphs
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(103, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(111, 26);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItemClick);
             // 
@@ -645,13 +646,13 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.listBoxYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewGroup1.Header = "ListViewGroup";
-            listViewGroup1.Name = "listViewGroup1";
-            listViewGroup2.Header = "ListViewGroup";
-            listViewGroup2.Name = "listViewGroup2";
+            listViewGroup3.Header = "ListViewGroup";
+            listViewGroup3.Name = "listViewGroup1";
+            listViewGroup4.Header = "ListViewGroup";
+            listViewGroup4.Name = "listViewGroup2";
             this.listBoxYAxis.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2});
+            listViewGroup3,
+            listViewGroup4});
             this.listBoxYAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxYAxis.Name = "listBoxYAxis";
             this.listBoxYAxis.Size = new System.Drawing.Size(245, 88);
@@ -690,6 +691,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel11
             // 
+            this.panel11.Controls.Add(this.xLogCheckBox);
             this.panel11.Controls.Add(this.y2LogCheckBox);
             this.panel11.Controls.Add(this.yLogCheckBox);
             this.panel11.Controls.Add(this.LoadDefaultRangle);
@@ -713,7 +715,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // y2LogCheckBox
             // 
             this.y2LogCheckBox.AutoSize = true;
-            this.y2LogCheckBox.Location = new System.Drawing.Point(244, 98);
+            this.y2LogCheckBox.Location = new System.Drawing.Point(255, 98);
             this.y2LogCheckBox.Name = "y2LogCheckBox";
             this.y2LogCheckBox.Size = new System.Drawing.Size(96, 17);
             this.y2LogCheckBox.TabIndex = 11;
@@ -724,7 +726,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // yLogCheckBox
             // 
             this.yLogCheckBox.AutoSize = true;
-            this.yLogCheckBox.Location = new System.Drawing.Point(244, 75);
+            this.yLogCheckBox.Location = new System.Drawing.Point(255, 75);
             this.yLogCheckBox.Name = "yLogCheckBox";
             this.yLogCheckBox.Size = new System.Drawing.Size(90, 17);
             this.yLogCheckBox.TabIndex = 10;
@@ -788,7 +790,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // startFromOriginCheckBox
             // 
             this.startFromOriginCheckBox.AutoSize = true;
-            this.startFromOriginCheckBox.Location = new System.Drawing.Point(244, 52);
+            this.startFromOriginCheckBox.Location = new System.Drawing.Point(255, 29);
             this.startFromOriginCheckBox.Name = "startFromOriginCheckBox";
             this.startFromOriginCheckBox.Size = new System.Drawing.Size(101, 17);
             this.startFromOriginCheckBox.TabIndex = 7;
@@ -799,7 +801,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // NoScalingCheckBox
             // 
             this.NoScalingCheckBox.AutoSize = true;
-            this.NoScalingCheckBox.Location = new System.Drawing.Point(244, 29);
+            this.NoScalingCheckBox.Location = new System.Drawing.Point(255, 6);
             this.NoScalingCheckBox.Name = "NoScalingCheckBox";
             this.NoScalingCheckBox.Size = new System.Drawing.Size(78, 17);
             this.NoScalingCheckBox.TabIndex = 6;
@@ -936,6 +938,17 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(654, 171);
             this.panel9.TabIndex = 11;
             // 
+            // xLogCheckBox
+            // 
+            this.xLogCheckBox.AutoSize = true;
+            this.xLogCheckBox.Location = new System.Drawing.Point(255, 52);
+            this.xLogCheckBox.Name = "xLogCheckBox";
+            this.xLogCheckBox.Size = new System.Drawing.Size(90, 17);
+            this.xLogCheckBox.TabIndex = 12;
+            this.xLogCheckBox.Text = "X Logarithmic";
+            this.xLogCheckBox.UseVisualStyleBackColor = true;
+            this.xLogCheckBox.CheckedChanged += new System.EventHandler(this.xLogCheckBox_CheckedChanged);
+            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1059,6 +1072,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private CheckBox yLogCheckBox;
         private DataGridViewCheckBoxColumn AdditionalParametersCheckBoxColumn;
         private Button buttonDeleteRow;
+        private CheckBox xLogCheckBox;
 
     }
 }

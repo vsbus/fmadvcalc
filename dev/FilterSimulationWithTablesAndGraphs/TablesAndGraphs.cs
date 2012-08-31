@@ -1133,6 +1133,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 fmZedGraphControl1.GraphPane.Y2Axis.Scale.MinAuto = true;
             }
 
+            fmZedGraphControl1.GraphPane.XAxis.Type = xLogCheckBox.Checked ? AxisType.Log : AxisType.Linear;
             fmZedGraphControl1.GraphPane.YAxis.Type = yLogCheckBox.Checked ? AxisType.Log : AxisType.Linear;
             fmZedGraphControl1.GraphPane.Y2Axis.Type = y2LogCheckBox.Checked ? AxisType.Log : AxisType.Linear;
 
@@ -1143,40 +1144,6 @@ namespace FilterSimulationWithTablesAndGraphs
 
             fmZedGraphControl1.GraphPane.YAxis.Title.Text = "";
             fmZedGraphControl1.GraphPane.Legend.IsVisible = true;
-
-
-//             if (m_displayingResults.YParameters.Count == 1)
-//             {
-//                 fmGlobalParameter yParameter = m_displayingResults.YParameters[0].Parameter;
-//                 fmZedGraphControl1.GraphPane.YAxis.Title.Text = yParameter.Name + " (" + yParameter.UnitName + ")";
-//                 if (m_displayingResults.YParameters[0].Arrays.Count > 0)
-//                 {
-//                     fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = m_displayingResults.YParameters[0].Arrays[0].Color;
-//                 }
-//             }
-//             else if (isY2Involved)
-//             {
-//                 fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = true;
-// 
-//                 fmGlobalParameter y1Parameter = m_displayingResults.YParameters[0].Parameter;
-//                 fmGlobalParameter y2Parameter = m_displayingResults.YParameters[1].Parameter;
-//                 fmZedGraphControl1.GraphPane.YAxis.Title.Text = y1Parameter.Name + " (" + y1Parameter.UnitName + ")";
-//                 if (m_displayingResults.YParameters[0].Arrays.Count > 0)
-//                 {
-//                     fmZedGraphControl1.GraphPane.YAxis.Title.FontSpec.FontColor = m_displayingResults.YParameters[0].Arrays[0].Color;
-//                 }
-// 
-//                 fmZedGraphControl1.GraphPane.Y2Axis.Title.Text = y2Parameter.Name + " (" + y2Parameter.UnitName + ")";
-//                 if (m_displayingResults.YParameters[1].Arrays.Count > 0)
-//                 {
-//                     fmZedGraphControl1.GraphPane.Y2Axis.Title.FontSpec.FontColor = m_displayingResults.YParameters[1].Arrays[0].Color;
-//                 }
-//             }
-//             else
-//             {
-//                 fmZedGraphControl1.GraphPane.YAxis.Title.Text = "";
-//                 fmZedGraphControl1.GraphPane.Legend.IsVisible = true;
-//             }
 
             fmZedGraphControl1.GraphPane.Title.Text = "";
             fmZedGraphControl1.GraphPane.AxisChange();
