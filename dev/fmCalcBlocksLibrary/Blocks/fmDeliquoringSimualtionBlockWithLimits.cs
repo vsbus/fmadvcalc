@@ -46,6 +46,22 @@ namespace fmCalcBlocksLibrary.Blocks
                 processOnChange = false;
 
                 CalculateAbsRanges();
+                {
+                    // here it is a hack. as sf + sd <= 100% we set sd_max = 100% - sf
+                    foreach (fmBlockConstantParameter constantParameter in constantParameters)
+                    {
+                        if (constantParameter.globalParameter == fmGlobalParameter.sf)
+                        {
+                            fmValue srValue = 1 - constantParameter.value;
+                            if (srValue.defined
+                                && fmGlobalParameter.sd.ValidRange.MaxValue > srValue.value)
+                            {
+                                fmGlobalParameter.sd.ValidRange.MaxValue = srValue.value;
+                            }
+                            break;
+                        }
+                    }
+                }
 
                 var minValue = new Dictionary<fmGlobalParameter, fmValue>();
                 var maxValue = new Dictionary<fmGlobalParameter, fmValue>();
@@ -54,31 +70,6 @@ namespace fmCalcBlocksLibrary.Blocks
 
                 CalculateClueParamsLimits(clueParams, minValue, maxValue);
                 CalculateAllParamsLimits(clueParams, minValue, maxValue);
-
-                if (minValue.Count > 0 || maxValue.Count > 0)
-                {
-                    // here it is a hack. as sf + sd <= 100% we set sd_max = 100% - sf
-                    foreach (fmBlockConstantParameter constantParameter in constantParameters)
-                    {
-                        if (constantParameter.globalParameter == fmGlobalParameter.sf)
-                        {
-                            fmValue srValue = 1 - constantParameter.value;
-                            if (maxValue[fmGlobalParameter.sd] > srValue)
-                            {
-                                if (constantParameter.value.defined)
-                                {
-                                    maxValue[fmGlobalParameter.sd] = srValue;
-                                }
-
-                                if (tc_Value.defined)
-                                {
-                                    maxValue[fmGlobalParameter.td] = tc_Value * maxValue[fmGlobalParameter.sd];
-                                }
-                            }
-                            break;
-                        }
-                    }
-                }
 
                 WriteLimitsToUI(minValue, maxValue);
 
