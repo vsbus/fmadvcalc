@@ -25,17 +25,17 @@ namespace SampleForLimitsBlock
             {
                 fmDataGrid1.Rows[i].Cells[0].Value = list[i];
             }
-            var fslb = new fmSimulationLimitsBlock(
-                fmDataGrid1.Rows[0].Cells[2], fmDataGrid1.Rows[0].Cells[3],
-                fmDataGrid1.Rows[1].Cells[2], fmDataGrid1.Rows[1].Cells[3],
-                fmDataGrid1.Rows[2].Cells[2], fmDataGrid1.Rows[2].Cells[3],
-                fmDataGrid1.Rows[3].Cells[2], fmDataGrid1.Rows[3].Cells[3],
-                fmDataGrid1.Rows[4].Cells[2], fmDataGrid1.Rows[4].Cells[3],
-                fmDataGrid1.Rows[5].Cells[2], fmDataGrid1.Rows[5].Cells[3],
-                fmDataGrid1.Rows[6].Cells[2], fmDataGrid1.Rows[6].Cells[3],
-                fmDataGrid1.Rows[7].Cells[2], fmDataGrid1.Rows[7].Cells[3],
-                fmDataGrid1.Rows[8].Cells[2], fmDataGrid1.Rows[8].Cells[3],
-                fmDataGrid1.Rows[9].Cells[2], fmDataGrid1.Rows[9].Cells[3]);
+            //var fslb = new fmSimulationLimitsBlock(
+            //    fmDataGrid1.Rows[0].Cells[2], fmDataGrid1.Rows[0].Cells[3],
+            //    fmDataGrid1.Rows[1].Cells[2], fmDataGrid1.Rows[1].Cells[3],
+            //    fmDataGrid1.Rows[2].Cells[2], fmDataGrid1.Rows[2].Cells[3],
+            //    fmDataGrid1.Rows[3].Cells[2], fmDataGrid1.Rows[3].Cells[3],
+            //    fmDataGrid1.Rows[4].Cells[2], fmDataGrid1.Rows[4].Cells[3],
+            //    fmDataGrid1.Rows[5].Cells[2], fmDataGrid1.Rows[5].Cells[3],
+            //    fmDataGrid1.Rows[6].Cells[2], fmDataGrid1.Rows[6].Cells[3],
+            //    fmDataGrid1.Rows[7].Cells[2], fmDataGrid1.Rows[7].Cells[3],
+            //    fmDataGrid1.Rows[8].Cells[2], fmDataGrid1.Rows[8].Cells[3],
+            //    fmDataGrid1.Rows[9].Cells[2], fmDataGrid1.Rows[9].Cells[3]);
         }
     }
 }

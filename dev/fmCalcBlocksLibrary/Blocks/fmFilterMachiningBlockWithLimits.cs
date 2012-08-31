@@ -326,10 +326,10 @@ namespace fmCalcBlocksLibrary.Blocks
                 clueParams.Add(d0);
             }
             
-            var t1 = GetParameterByName(fmGlobalParameter.t1.Name);
-            if (t1.group != null)
+            var t1_over_tf = GetParameterByName(fmGlobalParameter.t1_over_tf.Name);
+            if (t1_over_tf.group != null)
             {
-                clueParams.Add(t1);
+                clueParams.Add(t1_over_tf);
             }
             
             return clueParams;
@@ -376,6 +376,7 @@ namespace fmCalcBlocksLibrary.Blocks
             }
 
             var calc = new fmFilterMachiningCalculator(pList);
+            calc.calculationOption = filterMachiningCalculationOption;
             for (int mask = 0; mask < (1 << varList.Count); ++mask)
             {
                 for (int i = 0; i < varList.Count; ++i)
