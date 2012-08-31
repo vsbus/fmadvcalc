@@ -26,7 +26,7 @@ namespace fmCalcBlocksLibrary.Blocks
             filterMachinigCalculator.DoCalculationsLimitsClue();
         }
 
-        override protected void ReWriteParameters()
+        override public void ReWriteParameters()
         {
             base.ReWriteParameters();
 

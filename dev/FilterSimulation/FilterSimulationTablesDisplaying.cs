@@ -218,7 +218,15 @@ namespace FilterSimulation
                 row.Cells[simulationNameColumn.Index].Value = sim.GetName();
                 row.Cells[simulationCalculationOptionColumn.Index].Value = GetCalculationOptionDpQpShortcut(sim.FilterMachiningCalculationOption);
 
+                if (m_commonDeliquoringSimulationBlock != null)
+                {
+                    m_commonDeliquoringSimulationBlock.DisableLimitsCalculation();
+                }
                 sim.filterMachiningBlock.CalculateAndDisplay();
+                if (m_commonDeliquoringSimulationBlock != null)
+                {
+                    m_commonDeliquoringSimulationBlock.EnableLimitsCalculation();
+                }
 
                 Dictionary<fmGlobalParameter, bool> visibleCakeFormationParams = GetVisibleCakeFormationParamsDependingOnCalculationOptions(sim);
 
@@ -536,18 +544,18 @@ namespace FilterSimulation
                 {
                     ShowHideRowsDependingOnCalculationOptions(sim);
 
-                    sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
-                    sim.deliquoringSigmaPkeBlock.CalculateAndDisplay();
+                    //sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
+                    //sim.deliquoringSigmaPkeBlock.CalculateAndDisplay();
                     
                     sim.deliquoringEps0NeEpsBlock.isPlainArea =
                         fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
                             sim.filterMachiningBlock.filterMachiningCalculationOption);
                     sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
                     
-                    sim.filterMachiningBlock.CalculateAndDisplay();
-                    sim.rm0HceBlock.CalculateAndDisplay();
-                    sim.pc0Rc0A0Block.CalculateAndDisplay();
-                    sim.eps0Kappa0Block.CalculateAndDisplay();
+                    //sim.filterMachiningBlock.CalculateAndDisplay();
+                    //sim.rm0HceBlock.CalculateAndDisplay();
+                    //sim.pc0Rc0A0Block.CalculateAndDisplay();
+                    //sim.eps0Kappa0Block.CalculateAndDisplay();
                     sim.susBlock.CalculateAndDisplay();
                 }
             }
@@ -1170,10 +1178,10 @@ namespace FilterSimulation
                 {
                     commonCalcBlockParameterValueColumn.Visible = true;
                     commonDeliquoringSimulationBlockParameterValueColumn.Visible = true;
-                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.filterMachiningCalculationOption);
-                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.deliquoringUsedCalculationOption);
-                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.gasFlowrateUsedCalculationOption);
-                    m_commonFilterMachiningBlock.SetCalculationOptionAndRewriteData(sim.filterMachiningBlock.evaporationUsedCalculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.filterMachiningCalculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.deliquoringUsedCalculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.gasFlowrateUsedCalculationOption);
+                    m_commonFilterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(sim.filterMachiningBlock.evaporationUsedCalculationOption);
 
                     for (int i = 0; i < m_commonFilterMachiningBlock.Parameters.Count; ++i)
                     {
@@ -1512,7 +1520,9 @@ namespace FilterSimulation
                                 simulation.FilterMachiningCalculationOption),
                             fmFilterSimMachineType.IsVacuumFilter(simulation.Parent.MachineType),
                             fmFilterSimMachineType.GetHcdCoefficient(simulation.Parent.MachineType));
+                    m_commonDeliquoringSimulationBlock.DisableLimitsCalculation();
                     m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
+                    m_commonDeliquoringSimulationBlock.EnableLimitsCalculation();
                     fmFilterSimulation.CopyAllParametersFromBlockToSimulation(m_commonDeliquoringSimulationBlock, simulation);
                 }
 
@@ -1659,7 +1669,7 @@ namespace FilterSimulation
             sim.deliquoringEps0NeEpsBlock.isPlainArea =
                 fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
                     filterMachiningBlock.filterMachiningCalculationOption);
-            sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(sim.DeliquoringUsedCalculationOption);
+            sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(sim.DeliquoringUsedCalculationOption);
             sim.deliquoringEps0NeEpsBlock.CalculateAndDisplay();
         }
     }

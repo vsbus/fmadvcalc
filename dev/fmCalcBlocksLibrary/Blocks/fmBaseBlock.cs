@@ -57,19 +57,30 @@ namespace fmCalcBlocksLibrary.Blocks
             return new List<fmBlockVariableParameter>();
         }
 
-        virtual protected void ReWriteParameters()
+        virtual public void ReWriteParameters()
         {
             if (processOnChange)
             {
                 processOnChange = false;
 
+                bool wasChanged = false;
                 for (int i = 0; i < parameters.Count; ++i)
                 {
                     string newVal = (parameters[i].value / parameters[i].globalParameter.UnitFamily.CurrentUnit.Coef).ToString();
                     if (parameters[i].cell != null)
-                        parameters[i].cell.Value = newVal;
+                    {
+                        object value = parameters[i].cell.Value;
+                        if (fmValue.ObjectToValue(value) != fmValue.StringToValue(newVal))
+                        {
+                            parameters[i].cell.Value = newVal;
+                            wasChanged = true;
+                        }
+                    }
                 }
-                CallValuesChanged();
+                if (wasChanged)
+                {
+                    CallValuesChanged();
+                }
 
                 processOnChange = true;
             }

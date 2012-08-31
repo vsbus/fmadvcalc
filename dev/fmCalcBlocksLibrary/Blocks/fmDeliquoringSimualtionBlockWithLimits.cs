@@ -27,11 +27,21 @@ namespace fmCalcBlocksLibrary.Blocks
             deliquoringSimualtionCalculator.DoCalculations();
         }
 
-        override protected void ReWriteParameters()
+        private bool m_doLimitsCalculation = true;
+        public void DisableLimitsCalculation()
+        {
+            m_doLimitsCalculation = false;
+        }
+        public void EnableLimitsCalculation()
+        {
+            m_doLimitsCalculation = true;
+        }
+
+        override public void ReWriteParameters()
         {
             base.ReWriteParameters();
 
-            if (processOnChange && m_isLimitsDisplaying)
+            if (processOnChange && m_isLimitsDisplaying && m_doLimitsCalculation)
             {
                 processOnChange = false;
 
