@@ -32,45 +32,58 @@ namespace AdvancedCalculator
 
         private void BindAllUnitFamilies()
         {
-            var families = new[]
-                               {
-                                   fmUnitFamily.LengthFamily,
-                                   fmUnitFamily.AreaFamily,
-                                   fmUnitFamily.MassFamily,
-                                   fmUnitFamily.VolumeFamily,
-                                   fmUnitFamily.SpecificMassFamily,
-                                   fmUnitFamily.VolumeInAreaFamily,
-                                   fmUnitFamily.FlowRateMass,
-                                   fmUnitFamily.FlowRateVolume,
-                                   fmUnitFamily.SpecificFlowRateMass,
-                                   fmUnitFamily.SpecificFlowRateVolume,
-                                   fmUnitFamily.GasFlowRateVolume,
-                                   fmUnitFamily.ViscosityFamily,
-                                   fmUnitFamily.DensityFamily,
-                                   fmUnitFamily.PressureFamily,
-                                   fmUnitFamily.FrequencyFamily,
-                                   fmUnitFamily.TimeFamily
-                               };
             foreach (KeyValuePair<fmUnitFamily, fmUnitItem> pair in m_famityToItem)
             {
                 pair.Value.Parent = null;
             }
             m_famityToItem.Clear();
-            foreach (fmUnitFamily unitFamily in families)
-            {
-                BindUnitComboBox(unitFamily);
-            }
-            panel1.AutoScroll = true;
+
+            BindUnitsGroup(LengthAreaTimePanel,
+                fmUnitFamily.LengthFamily,
+                fmUnitFamily.AreaFamily,
+                fmUnitFamily.TimeFamily,
+                fmUnitFamily.FrequencyFamily);
+
+            BindUnitsGroup(massAndVolumePanel,
+                fmUnitFamily.MassFamily,
+                fmUnitFamily.VolumeFamily,
+                fmUnitFamily.SpecificMassFamily,
+                fmUnitFamily.VolumeInAreaFamily);
+
+            BindUnitsGroup(QPanel,
+                fmUnitFamily.FlowRateMass,
+                fmUnitFamily.FlowRateVolume,
+                fmUnitFamily.SpecificFlowRateMass,
+                fmUnitFamily.SpecificFlowRateVolume);
+
+            BindUnitsGroup(GasPanel,
+                fmUnitFamily.GasVolumeFamily,
+                fmUnitFamily.GasVolumeInMassFamily,
+                fmUnitFamily.GasFlowRateVolume);
+
+            BindUnitsGroup(RhoEtaPanel,
+                fmUnitFamily.DensityFamily,
+                fmUnitFamily.ViscosityFamily,
+                fmUnitFamily.PressureFamily);
         }
 
-        private void BindUnitComboBox(fmUnitFamily dataSource)
+        private void BindUnitsGroup(Control parentControl, params fmUnitFamily[] families)
         {
-            const int heightStep = 32;
+            for (int idx = 0; idx < families.Length; ++idx)
+            {
+                BindUnitComboBox(families[idx], parentControl, idx);
+            }
+            QPanel.AutoScroll = true;
+        }
+
+        private void BindUnitComboBox(fmUnitFamily dataSource, Control parentControl, int yIdx)
+        {
+            const int heightStep = 24;
             var unitItem = new fmUnitItem
                                {
-                                   Location = new Point(16, 16 + m_famityToItem.Count * heightStep),
-                                   Parent = panel1,
-                                   Size = new Size(panel1.Width - 32, heightStep)
+                                   Location = new Point(16, 8 + yIdx * heightStep),
+                                   Parent = parentControl,
+                                   Size = new Size(280, heightStep)
                                };
             unitItem.UnitComboBox.Items.Clear();
             bool isSelected = false;

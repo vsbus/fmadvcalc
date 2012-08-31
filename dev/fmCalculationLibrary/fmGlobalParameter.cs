@@ -535,7 +535,7 @@ namespace fmCalculationLibrary
             AddParameter(ref Rf, new fmGlobalParameter("Rf", fmUnitFamily.ConcentrationFamily, new fmRange(0.01, 0.99)));
             AddParameter(ref Qgi, new fmGlobalParameter("Qgi", fmUnitFamily.GasFlowRateVolume, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
             AddParameter(ref Qg, new fmGlobalParameter("Qg", fmUnitFamily.GasFlowRateVolume, new fmRange(0.1e-3 / 3600, 5000000e-3 / 3600)));
-            AddParameter(ref vg, new fmGlobalParameter("vg", fmUnitFamily.VolumeInMassFamily, new fmRange(1e-3, 50e-3)));
+            AddParameter(ref vg, new fmGlobalParameter("vg", fmUnitFamily.GasVolumeInMassFamily, new fmRange(1e-3, 50e-3)));
             AddParameter(ref Mfd, new fmGlobalParameter("Mfd", fmUnitFamily.MassFamily, new fmRange(0.01, 5000)));
             AddParameter(ref Vfd, new fmGlobalParameter("Vfd", fmUnitFamily.VolumeFamily, new fmRange(0.01e-3, 10000e-3)));
             AddParameter(ref Mlcd, new fmGlobalParameter("Mlcd", fmUnitFamily.MassFamily, new fmRange(0.01, 5000)));
@@ -553,7 +553,7 @@ namespace fmCalculationLibrary
             AddParameter(ref qcd, new fmGlobalParameter("qcd", fmUnitFamily.SpecificFlowRateVolume, new fmRange(1.0e-3 / 60, 500.0e-3 / 60)));
 
             AddParameter(ref Qgt, new fmGlobalParameter("Qgt", fmUnitFamily.GasFlowRateVolume));
-            AddParameter(ref Vg, new fmGlobalParameter("Vg", fmUnitFamily.VolumeFamily));
+            AddParameter(ref Vg, new fmGlobalParameter("Vg", fmUnitFamily.GasVolumeFamily));
             AddParameter(ref Mev, new fmGlobalParameter("Mev", fmUnitFamily.MassFamily));
             AddParameter(ref Vev, new fmGlobalParameter("Vev", fmUnitFamily.VolumeFamily));
             AddParameter(ref Qmftd, new fmGlobalParameter("Qmftd", fmUnitFamily.FlowRateMass));

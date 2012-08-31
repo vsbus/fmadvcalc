@@ -25,6 +25,8 @@ namespace fmCalculationLibrary.MeasureUnits
         public static fmUnitFamily FlowRateVolume = new fmUnitFamily();
         public static fmUnitFamily FlowRateMass = new fmUnitFamily();
         public static fmUnitFamily GasFlowRateVolume = new fmUnitFamily();
+        public static fmUnitFamily GasVolumeInMassFamily = new fmUnitFamily();
+        public static fmUnitFamily GasVolumeFamily = new fmUnitFamily();
         public static fmUnitFamily SpeedFamily = new fmUnitFamily();
         public static fmUnitFamily SpecificMassFamily = new fmUnitFamily();
         public static fmUnitFamily VolumeInAreaFamily = new fmUnitFamily();
@@ -55,20 +57,20 @@ namespace fmCalculationLibrary.MeasureUnits
             InitializeFamily(NoUnitFamily, "No Unit Family",
                 new fmUnit("-", 1));
 
-            InitializeFamily(MassFamily, "Mass",
+            InitializeFamily(MassFamily, "Mass (M)",
                 new fmUnit("kg", 1), 
                 new fmUnit("g", .001),
                 new fmUnit("mg", .000001),
                 new fmUnit("lb", PoundFactor, true));
 
-            InitializeFamily(VolumeFamily, "Volume",
+            InitializeFamily(VolumeFamily, "Volume (V)",
                 new fmUnit("l", .001),
                 new fmUnit("m3", 1),
                 new fmUnit("cm3", 1e-6),
                 new fmUnit("ft3", Math.Pow(FootFactor, 3), true),
                 new fmUnit("yd3", Math.Pow(YardFactor, 3), true));
 
-            InitializeFamily(AreaFamily, "Area",
+            InitializeFamily(AreaFamily, "Area (A)",
                 new fmUnit("m2", 1),
                 new fmUnit("cm2", 1e-4),
                 new fmUnit("ft2", Math.Pow(FootFactor, 2), true));
@@ -82,7 +84,7 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("yd", YardFactor, true)
                 );
 
-            InitializeFamily(FrequencyFamily, "Frequency", 
+            InitializeFamily(FrequencyFamily, "Frequency (n)", 
                 new fmUnit("h-1", 1.0/60/60),
                 new fmUnit("min-1", 1.0/60),
                 new fmUnit("s-1", 1));
@@ -94,11 +96,13 @@ namespace fmCalculationLibrary.MeasureUnits
             InitializeFamily(ConcentrationCFamily, "ConcentrationC",
                 new fmUnit("g/l", 1));
             
-            InitializeFamily(DensityFamily, "Density",
-                new fmUnit("kg/m3", 1));
+            InitializeFamily(DensityFamily, "Density (rho)",
+                new fmUnit("kg/m3", 1),
+                new fmUnit("g/cm3", 1e3));
 
-            InitializeFamily(ViscosityFamily, "Viscosity", 
-                new fmUnit("mPa s", 1e-3));
+            InitializeFamily(ViscosityFamily, "Viscosity (eta)", 
+                new fmUnit("mPa s", 1e-3),
+                new fmUnit("cP", 1e-3));
 
             InitializeFamily(PermeabilityFamily, "Permeability",
                 new fmUnit("10-13m2", 1e-13),
@@ -116,7 +120,7 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("10+10m-1", 1e10),
                 new fmUnit("m-1", 1));
 
-            InitializeFamily(PressureFamily, "Pressure", 
+            InitializeFamily(PressureFamily, "Pressure (Dp)", 
                 new fmUnit("bar", 1e5),
                 new fmUnit("Pa", 1),
                 new fmUnit("mmHg", mmHgFactor, true),
@@ -124,11 +128,12 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("inHg", mmHgFactor * 1000 * InchFactor, true),
                 new fmUnit("psi", PsiFactor, true));
 
-            InitializeFamily(TimeFamily, "Time", 
+            InitializeFamily(TimeFamily, "Time (t)", 
                 new fmUnit("s", 1),
-                new fmUnit("min", 60));
+                new fmUnit("min", 60),
+                new fmUnit("h", 3600));
 
-            InitializeFamily(FlowRateVolume, "FlowRateVolume", 
+            InitializeFamily(FlowRateVolume, "Flowrate Volume (Q)", 
                 new fmUnit("l/h", 1e-3/(60 * 60)),
                 new fmUnit("l/min", 1e-3/(60)),
                 new fmUnit("l/s", 1e-3),
@@ -142,7 +147,7 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("yd3/min", Math.Pow(YardFactor, 3)/60, true),
                 new fmUnit("yd3/h", Math.Pow(YardFactor, 3)/3600, true));
 
-            InitializeFamily(FlowRateMass, "FlowRateMass", 
+            InitializeFamily(FlowRateMass, "Flowrate Mass (Qm)", 
                 new fmUnit("t/h", 1000.0 / (60 * 60)),
                 new fmUnit("kg/h", 1.0 / (60 * 60)),
                 new fmUnit("kg/min", 1.0 / (60)),
@@ -151,20 +156,38 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("lb/min", PoundFactor/60, true),
                 new fmUnit("lb/h", PoundFactor/3600, true));
 
-            InitializeFamily(GasFlowRateVolume, "GasFlowRateVolume", 
+            InitializeFamily(GasFlowRateVolume, "Gas Flowrate Volume (Qg)", 
                 new fmUnit("m3/h", 1.0 / (60 * 60)));
+
+            InitializeFamily(GasVolumeInMassFamily, "Gas Volume In Mass (vg)",
+                new fmUnit("l/kg", 1e-3),
+                new fmUnit("m3/kg", 1),
+                new fmUnit("m3/t", 1e-3),
+                new fmUnit("l/lb", 1e-3 / PoundFactor, true),
+                new fmUnit("ft3/kg", Math.Pow(FootFactor, 3), true),
+                new fmUnit("ft3/lb", Math.Pow(FootFactor, 3) / PoundFactor, true),
+                new fmUnit("ft3/t", Math.Pow(FootFactor, 3) / 1000, true),
+                new fmUnit("yd3/kg", Math.Pow(YardFactor, 3), true),
+                new fmUnit("yd3/t", Math.Pow(YardFactor, 3) / 1000, true));
+
+            InitializeFamily(GasVolumeFamily, "Gas Volume (Vg)",
+                new fmUnit("ml", 1e-6),
+                new fmUnit("l", 1e-3),
+                new fmUnit("m3", 1),
+                new fmUnit("ft3", Math.Pow(FootFactor, 3), true),
+                new fmUnit("yd3", Math.Pow(YardFactor, 3), true));
 
             InitializeFamily(SpeedFamily, "Speed",
                 new fmUnit("mm/min", 1e-3/60),
                 new fmUnit("m/s", 1));
 
-            InitializeFamily(SpecificMassFamily, "SpecificMass",
+            InitializeFamily(SpecificMassFamily, "Specific Mass (m)",
                 new fmUnit("kg/m2", 1),
                 new fmUnit("t/m2", 1000),
                 new fmUnit("lb/m2", PoundFactor, true),
                 new fmUnit("lb/ft2", PoundFactor/Math.Pow(FootFactor,2), true));
 
-            InitializeFamily(VolumeInAreaFamily, "VolumeInArea",
+            InitializeFamily(VolumeInAreaFamily, "Volume In Area (v)",
                 new fmUnit("l/m2", 1e-3),
                 new fmUnit("m3/m2", 1),
                 new fmUnit("ft3/m2", Math.Pow(FootFactor,3), true),
@@ -175,7 +198,7 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("l/kg", 1e-3),
                 new fmUnit("m3/kg", 1));
 
-            InitializeFamily(SpecificFlowRateVolume, "SpecificFlowRateVolume",
+            InitializeFamily(SpecificFlowRateVolume, "Specific Flowrate Volume (q)",
                 new fmUnit("l/m2s", 1e-3),
                 new fmUnit("l/m2min", 1e-3/60),
                 new fmUnit("l/m2h", 1e-3/60/60),
@@ -195,7 +218,7 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("yd3/ft2min", Math.Pow(YardFactor,3)/Math.Pow(FootFactor, 2)/60, true),
                 new fmUnit("yd3/ft2s", Math.Pow(YardFactor,3)/Math.Pow(FootFactor, 2), true));
 
-            InitializeFamily(SpecificFlowRateMass, "Specific FlowRate Mass",
+            InitializeFamily(SpecificFlowRateMass, "Specific Flowrate Mass (qm)",
                 new fmUnit("t/m2h", 1000.0/60/60),
                 new fmUnit("kg/m2h", 1.0/60/60),
                 new fmUnit("kg/m2min", 1.0/60),
