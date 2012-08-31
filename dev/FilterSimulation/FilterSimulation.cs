@@ -976,7 +976,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             m_commonFilterMachiningBlock.CalculateAndDisplay();
         }
 
-        private void SelectMachineButtonClick(object sender, EventArgs e)
+        public void SelectMachineButtonClick(object sender, EventArgs e)
         {
             var dialog = new MachineTypeSelectionDialog();
             dialog.AssignSerie(Solution.currentObjects.Serie);

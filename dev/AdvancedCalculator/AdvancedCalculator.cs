@@ -261,5 +261,10 @@ namespace AdvancedCalculator
             doForm.ShowDialog();
             filterSimulationWithTablesAndGraphs1.UpdateAll();
         }
+
+        private void filterTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            filterSimulationWithTablesAndGraphs1.SelectMachineButtonClick(sender, e);
+        }
     }
 }

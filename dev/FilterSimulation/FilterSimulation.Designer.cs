@@ -91,7 +91,6 @@ namespace FilterSimulation
             this.simSeriesMachineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.SelectMachineButton = new System.Windows.Forms.Button();
             this.commentSerieButton = new System.Windows.Forms.Button();
             this.simSeriesDeleteButton = new System.Windows.Forms.Button();
             this.simSeriesRestoreButton = new System.Windows.Forms.Button();
@@ -911,7 +910,6 @@ namespace FilterSimulation
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.SelectMachineButton);
             this.panel3.Controls.Add(this.commentSerieButton);
             this.panel3.Controls.Add(this.simSeriesDeleteButton);
             this.panel3.Controls.Add(this.simSeriesRestoreButton);
@@ -923,19 +921,6 @@ namespace FilterSimulation
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(426, 20);
             this.panel3.TabIndex = 7;
-            // 
-            // SelectMachineButton
-            // 
-            this.SelectMachineButton.Dock = System.Windows.Forms.DockStyle.Left;
-            this.SelectMachineButton.FlatAppearance.BorderSize = 0;
-            this.SelectMachineButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SelectMachineButton.Location = new System.Drawing.Point(185, 0);
-            this.SelectMachineButton.Name = "SelectMachineButton";
-            this.SelectMachineButton.Size = new System.Drawing.Size(108, 20);
-            this.SelectMachineButton.TabIndex = 7;
-            this.SelectMachineButton.Text = "Filter Types";
-            this.SelectMachineButton.UseVisualStyleBackColor = true;
-            this.SelectMachineButton.Click += new System.EventHandler(this.SelectMachineButtonClick);
             // 
             // commentSerieButton
             // 
@@ -1776,7 +1761,6 @@ namespace FilterSimulation
         protected System.Windows.Forms.SplitContainer mainSplitContainer;
         protected System.Windows.Forms.SplitContainer projectSuspensionSerieSplitContainer;
         protected System.Windows.Forms.SplitContainer projectSuspensionSplitContainer;
-        private System.Windows.Forms.Button SelectMachineButton;
         private System.Windows.Forms.DataGridViewCheckBoxColumn simSeriesCheckedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesGuidColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesNameColumn;
