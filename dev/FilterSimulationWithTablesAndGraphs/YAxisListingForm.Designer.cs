@@ -241,7 +241,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // DpQpConstBox
             // 
-            this.DpQpConstBox.CaptionText = "Dp+Qp=Const";
+            this.DpQpConstBox.CaptionText = "Qp+Dp=Const";
             this.DpQpConstBox.Location = new System.Drawing.Point(6, 497);
             this.DpQpConstBox.Name = "DpQpConstBox";
             this.DpQpConstBox.Size = new System.Drawing.Size(106, 111);

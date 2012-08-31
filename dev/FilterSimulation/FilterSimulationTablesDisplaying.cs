@@ -291,7 +291,7 @@ namespace FilterSimulation
             if (calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST
                 || calculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST)
             {
-                return "Dp+Qp";
+                return "Qp+Dp";
             }
 
             return "n/a";
