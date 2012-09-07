@@ -1536,11 +1536,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
                             var deliquoringSimualtionCalculator =
                                 new fmDeliquoringSimualtionCalculator(
-                                    new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(
+                                    new fmCalculatorsLibrary.fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(
                                         isPlaneArea,
                                         isVacuumFilter,
                                         hcdCoefficient),
-                                    tempSim.parameters.Values);
+                                tempSim.parameters.Values);
                             deliquoringSimualtionCalculator.DoCalculations();
                         }
 

@@ -401,7 +401,6 @@ namespace FilterSimulation.fmFilterObjects
 
             var rmhceb = new fmRm0HceBlock();
             UpdateIsInputedInParametersFromBlock(rmhceb, inputedParameter);
-
             var sigmaPkePcdRcdBlock = new fmSigmaPke0PkePcdRcdAlphadBlock();
             UpdateIsInputedInParametersFromBlock(sigmaPkePcdRcdBlock, inputedParameter);
 

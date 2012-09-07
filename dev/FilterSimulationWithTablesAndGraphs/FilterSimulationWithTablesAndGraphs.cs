@@ -479,7 +479,8 @@ namespace FilterSimulationWithTablesAndGraphs
         override protected void SerializeDiagramOptions(XmlWriter writer)
         {
             writer.WriteStartElement(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
-            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.XParameterName, GetCurrentXAxisParameter().Name);
+            fmGlobalParameter xParameter = GetCurrentXAxisParameter();
+            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.XParameterName, xParameter == null ? "" : xParameter.Name);
             foreach (ListViewItem item in listBoxYAxis.Items)
             {
                 if (item.Checked)
