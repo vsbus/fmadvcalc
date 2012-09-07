@@ -3735,7 +3735,7 @@ namespace fmCalculatorsLibrary
 
             #region DpQp const A00
 
-            if (isKnown_Qsusd)
+            if (isKnown_Qsusd && isKnown_A)
             {
                 qp.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qp.value, A.value);
                 isKnown_qsusd = true;
@@ -4104,13 +4104,13 @@ namespace fmCalculatorsLibrary
                 isKnown_Vc = true;
             }
 
-            if (!isKnown_A && isKnown_Vf)
+            if (!isKnown_A && isKnown_Vf && isKnown_vf)
             {
                 A.value = fmFilterMachiningEquations.Eval_A_From_V_v(Vf.value, vf.value);
                 isKnown_A = true;
             }
 
-            if (!isKnown_A && isKnown_Vc)
+            if (!isKnown_A && isKnown_Vc && isKnown_vc)
             {
                 A.value = fmFilterMachiningEquations.Eval_A_From_V_v(Vc.value, vc.value);
                 isKnown_A = true;

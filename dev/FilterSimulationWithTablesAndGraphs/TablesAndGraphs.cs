@@ -25,7 +25,9 @@ namespace FilterSimulationWithTablesAndGraphs
         internal string GetTextForHeader()
         {
             string result = Parameter.Name + " (" + Parameter.UnitName + ")";
-            if (OwningSimulation != null)
+            if (OwningSimulation != null
+                && OwningSimulation.name != null
+                && OwningSimulation.name != "")
             {
                 result += " [" + OwningSimulation.name + "]";
             }
@@ -1055,8 +1057,11 @@ namespace FilterSimulationWithTablesAndGraphs
                         coordinatesGrid.Columns[yCol].HeaderText = dispArray.GetTextForHeader();
                         Color color = Color.Black;
 
+                        bool isCurrentSelectedCurve = dispArray.OwningSimulation == m_internalSelectedSimList[selectedSimulationParametersTable.CurrentCell.RowIndex].InternalSimulationData
+                            || (additionalParametersTable.CurrentCell != null
+                                && dispArray.OwningSimulation == m_localInputParametersList[additionalParametersTable.CurrentCell.RowIndex].CalculatedDataLists[0][0]);
                         if (selectedSimulationParametersTable.CurrentCell != null
-                            && dispArray.OwningSimulation == m_internalSelectedSimList[selectedSimulationParametersTable.CurrentCell.RowIndex].InternalSimulationData)
+                            && isCurrentSelectedCurve)
                         {
                             color = Color.Blue;
                         }
@@ -1109,6 +1114,7 @@ namespace FilterSimulationWithTablesAndGraphs
             fmZedGraphControl1.GraphPane.XAxis.Title.Text = xParameter.Name + " (" + xParameter.UnitName + ")";
             fmZedGraphControl1.GraphPane.Legend.IsVisible = false;
             fmZedGraphControl1.GraphPane.Y2Axis.IsVisible = false;
+            fmZedGraphControl1.IsAntiAlias = true;
 
             bool isY2Involved = false;
             foreach (fmDisplayingYListOfArrays yList in m_displayingResults.YParameters)
