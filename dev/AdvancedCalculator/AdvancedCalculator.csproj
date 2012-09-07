@@ -110,10 +110,8 @@
   </Target>
   -->
   <PropertyGroup>
-    <PreBuildEvent>SubWCRev "$(ProjectDir)\.." "$(ProjectDir)Properties\AssemblyInfo.template.cs" "$(ProjectDir)Properties\AssemblyInfo.cs"
-copy $(SolutionDir)fmFiltrationCalculator\FiltrationCalculator $(TargetDir)
-
-</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>

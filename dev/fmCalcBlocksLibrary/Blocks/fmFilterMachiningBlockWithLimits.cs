@@ -350,10 +350,6 @@ namespace fmCalcBlocksLibrary.Blocks
                     }
                 }
             }
-            var machineAdditionalParams = new List<fmGlobalParameter>
-            {
-                fmGlobalParameter.d0
-            };
             var index = new Dictionary<fmGlobalParameter,int>();
             var pList = new List<fmCalculationBaseParameter>();
             for (int i = 0; i < AllParameters.Count; ++i)
@@ -364,7 +360,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     bool isInputed = varList.Contains(p.globalParameter);
                     pList.Add(new fmCalculationVariableParameter(p.globalParameter, p.value, isInputed));
                     index[p.globalParameter] = i;
-                    if (machineAdditionalParams.Contains(p.globalParameter) == false && isInputed == false)
+                    if (isInputed == false)
                     {
                         p.globalParameter.ValidRange.MinValue = 1e100;
                         p.globalParameter.ValidRange.MaxValue = -1e100;
@@ -389,13 +385,16 @@ namespace fmCalcBlocksLibrary.Blocks
                 calc.DoCalculations();
                 foreach (fmCalculationBaseParameter p in pList)
                 {
-                    if (p is fmCalculationVariableParameter 
-                        && machineAdditionalParams.Contains(p.globalParameter) == false)
+                    if (p is fmCalculationVariableParameter)
                     {
                         if (p.value.defined && p.globalParameter.ValidRange.MaxValue < p.value.value)
+                        {
                             p.globalParameter.ValidRange.MaxValue = p.value.value;
+                        }
                         if (p.value.defined && p.globalParameter.ValidRange.MinValue > p.value.value)
+                        {
                             p.globalParameter.ValidRange.MinValue = Math.Max(0, p.value.value);
+                        }
                     }
                 }
             }

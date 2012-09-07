@@ -1059,7 +1059,31 @@ namespace FilterSimulation
 
                 ShowHideSelectedParametersInSimulationDataGrid();
 
+                SetCurrentCellInCommonTables();
+
                 displayingSolution = false;
+            }
+        }
+
+        private void SetCurrentCellInCommonTables()
+        {
+            if (commonCalcBlockDataGrid.CurrentCell == null)
+            {
+                if (commonCalcBlockDataGrid.RowCount >= 1
+                    && commonCalcBlockDataGrid.ColumnCount >= 5
+                    && commonCalcBlockDataGrid[4, 0].Visible)
+                {
+                    commonCalcBlockDataGrid.CurrentCell = commonCalcBlockDataGrid[4, 0];
+                }
+            }
+            if (commonDeliquoringSimulationBlockDataGrid.CurrentCell == null)
+            {
+                if (commonDeliquoringSimulationBlockDataGrid.RowCount >= 1
+                    && commonDeliquoringSimulationBlockDataGrid.ColumnCount >= 5
+                    && commonDeliquoringSimulationBlockDataGrid[4, 0].Visible)
+                {
+                    commonDeliquoringSimulationBlockDataGrid.CurrentCell = commonDeliquoringSimulationBlockDataGrid[4, 0];
+                }
             }
         }
 
