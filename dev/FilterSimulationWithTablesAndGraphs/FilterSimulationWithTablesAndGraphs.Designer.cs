@@ -33,8 +33,8 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             this.xRangeLabel = new System.Windows.Forms.Label();
             this.fmZedGraphControl1 = new fmZedGraph.fmZedGraphControl();
             this.buttonAddRow = new System.Windows.Forms.Button();
@@ -646,13 +646,13 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader2});
             this.listBoxYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewGroup3.Header = "ListViewGroup";
-            listViewGroup3.Name = "listViewGroup1";
-            listViewGroup4.Header = "ListViewGroup";
-            listViewGroup4.Name = "listViewGroup2";
+            listViewGroup1.Header = "ListViewGroup";
+            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "ListViewGroup";
+            listViewGroup2.Name = "listViewGroup2";
             this.listBoxYAxis.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup3,
-            listViewGroup4});
+            listViewGroup1,
+            listViewGroup2});
             this.listBoxYAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxYAxis.Name = "listBoxYAxis";
             this.listBoxYAxis.Size = new System.Drawing.Size(245, 88);
@@ -803,9 +803,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.startFromOriginCheckBox.AutoSize = true;
             this.startFromOriginCheckBox.Location = new System.Drawing.Point(255, 29);
             this.startFromOriginCheckBox.Name = "startFromOriginCheckBox";
-            this.startFromOriginCheckBox.Size = new System.Drawing.Size(101, 17);
+            this.startFromOriginCheckBox.Size = new System.Drawing.Size(67, 17);
             this.startFromOriginCheckBox.TabIndex = 7;
-            this.startFromOriginCheckBox.Text = "Start From (0, 0)";
+            this.startFromOriginCheckBox.Text = "Ymin = 0";
             this.startFromOriginCheckBox.UseVisualStyleBackColor = true;
             this.startFromOriginCheckBox.CheckedChanged += new System.EventHandler(this.StartFromOriginCheckBoxCheckedChanged);
             // 

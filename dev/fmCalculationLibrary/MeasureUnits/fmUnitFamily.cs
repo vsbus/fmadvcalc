@@ -158,7 +158,18 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("lb/h", PoundFactor/3600, true));
 
             InitializeFamily(GasFlowRateVolume, "Gas Flowrate Volume (Qg)", 
-                new fmUnit("m3/h", 1.0 / (60 * 60)));
+                new fmUnit("l/h", 1e-3 / (60 * 60)),
+                new fmUnit("l/min", 1e-3 / (60)),
+                new fmUnit("l/s", 1e-3),
+                new fmUnit("m3/s", 1),
+                new fmUnit("m3/min", 1.0 / 60),
+                new fmUnit("m3/h", 1.0 / 60 / 60),
+                new fmUnit("ft3/s", Math.Pow(FootFactor, 3), true),
+                new fmUnit("ft3/min", Math.Pow(FootFactor, 3) / 60, true),
+                new fmUnit("ft3/h", Math.Pow(FootFactor, 3) / 3600, true),
+                new fmUnit("yd3/s", Math.Pow(YardFactor, 3), true),
+                new fmUnit("yd3/min", Math.Pow(YardFactor, 3) / 60, true),
+                new fmUnit("yd3/h", Math.Pow(YardFactor, 3) / 3600, true));
 
             InitializeFamily(GasVolumeInMassFamily, "Gas Volume In Mass (vg)",
                 new fmUnit("l/kg", 1e-3),

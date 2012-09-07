@@ -1032,6 +1032,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 coordinatesGrid.Columns[0].HeaderText = parameterNameAndUnits;
                 coordinatesGrid.Columns[0].ReadOnly = true;
                 coordinatesGrid.Columns[0].Width = 50;
+                coordinatesGrid.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
                 coordinatesGrid.RowCount = m_displayingResults.XParameter.Values.Length;
                 for (int i = 0; i < coordinatesGrid.RowCount; ++i)
                 {
@@ -1067,6 +1068,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         }
                         coordinatesGrid.Columns[yCol].ReadOnly = true;
                         coordinatesGrid.Columns[yCol].Width = 50;
+                        coordinatesGrid.Columns[yCol].SortMode = DataGridViewColumnSortMode.NotSortable;
 
                         if (dispArray.Values.Length == coordinatesGrid.RowCount)
                         {
@@ -1140,6 +1142,8 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             fmZedGraphControl1.GraphPane.XAxis.Type = xLogCheckBox.Checked ? AxisType.Log : AxisType.Linear;
+            fmZedGraphControl1.GraphPane.XAxis.Scale.MinAuto = true;
+            fmZedGraphControl1.GraphPane.XAxis.Scale.MaxAuto = true;
             fmZedGraphControl1.GraphPane.YAxis.Type = yLogCheckBox.Checked ? AxisType.Log : AxisType.Linear;
             fmZedGraphControl1.GraphPane.Y2Axis.Type = y2LogCheckBox.Checked ? AxisType.Log : AxisType.Linear;
 
