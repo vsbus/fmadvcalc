@@ -24,15 +24,9 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockLimitsParameter sf;
         private readonly fmBlockLimitsParameter sr;
 
-        private readonly fmBlockLimitsParameter t1;
-        private readonly fmBlockLimitsParameter t1_over_tf;
-        private readonly fmBlockLimitsParameter h1;
-        private readonly fmBlockLimitsParameter h1_over_hc;
-        
         private readonly fmBlockParameterGroup tc_n_hc_group = new fmBlockParameterGroup(Color.FromArgb(238, 218, 238), true);
         private readonly fmBlockParameterGroup tr_sf_sr_group = new fmBlockParameterGroup(Color.FromArgb(238, 238, 218), true);
-        private readonly fmBlockParameterGroup t1h1_group = new fmBlockParameterGroup(Color.FromArgb(218, 238, 238), true);
-
+        
         // ReSharper disable InconsistentNaming
         public fmSimulationLimitsBlock(
             DataGridViewCell A_min_Cell, DataGridViewCell A_max_Cell,
@@ -44,11 +38,7 @@ namespace fmCalcBlocksLibrary.Blocks
             DataGridViewCell n_min_Cell, DataGridViewCell n_max_Cell,
             DataGridViewCell hc_min_Cell, DataGridViewCell hc_max_Cell,
             DataGridViewCell tf_min_Cell, DataGridViewCell tf_max_Cell,
-            DataGridViewCell tr_min_Cell, DataGridViewCell tr_max_Cell,
-            DataGridViewCell t1_min_Cell, DataGridViewCell t1_max_Cell,
-            DataGridViewCell t1_over_tf_min_Cell, DataGridViewCell t1_over_tf_max_Cell,
-            DataGridViewCell h1_min_Cell, DataGridViewCell h1_max_Cell,
-            DataGridViewCell h1_over_hc_min_Cell, DataGridViewCell h1_over_hc_max_Cell)
+            DataGridViewCell tr_min_Cell, DataGridViewCell tr_max_Cell)
         // ReSharper restore InconsistentNaming
         {
             AddParameter(ref A, fmGlobalParameter.A, A_min_Cell, A_max_Cell, true);
@@ -65,11 +55,6 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref sr, fmGlobalParameter.sr, sr_min_Cell, sr_max_Cell, false);
             AddParameter(ref tr, fmGlobalParameter.tr, tr_min_Cell, tr_max_Cell, false);
 
-            AddParameter(ref t1, fmGlobalParameter.t1, t1_min_Cell, t1_max_Cell, false);
-            AddParameter(ref t1_over_tf, fmGlobalParameter.t1_over_tf, t1_over_tf_min_Cell, t1_over_tf_max_Cell, false);
-            AddParameter(ref h1, fmGlobalParameter.h1, h1_min_Cell, h1_max_Cell, false);
-            AddParameter(ref h1_over_hc, fmGlobalParameter.h1_over_hc, h1_over_hc_min_Cell, h1_over_hc_max_Cell, false);
-            
             tc.group = tc_n_hc_group;
             n.group = tc_n_hc_group;
             hc.group = tc_n_hc_group;
@@ -78,11 +63,6 @@ namespace fmCalcBlocksLibrary.Blocks
             tr.group = tr_sf_sr_group;
             sf.group = tr_sf_sr_group;
             sr.group = tr_sf_sr_group;
-
-            t1.group = t1h1_group;
-            t1_over_tf.group = t1h1_group;
-            h1.group = t1h1_group;
-            h1_over_hc.group = t1h1_group;
 
             UpdateCellsBackColor();
 

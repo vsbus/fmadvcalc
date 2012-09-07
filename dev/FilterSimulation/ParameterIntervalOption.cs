@@ -99,11 +99,7 @@ namespace FilterSimulation
                                                           fmGlobalParameter.n,
                                                           fmGlobalParameter.tc,
                                                           fmGlobalParameter.tf,
-                                                          fmGlobalParameter.tr,
-                                                          fmGlobalParameter.t1,
-                                                          fmGlobalParameter.t1_over_tf,
-                                                          fmGlobalParameter.h1,
-                                                          fmGlobalParameter.h1_over_hc
+                                                          fmGlobalParameter.tr
                                                       };
 
                 var fmb = new fmFilterMachiningBlock();
@@ -144,15 +140,7 @@ namespace FilterSimulation
                     CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tf]),
                     CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tf]),
                     CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.tr]),
-                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tr]),
-                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.t1]),
-                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.t1]),
-                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.t1_over_tf]),
-                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.t1_over_tf]),
-                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.h1]),
-                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.h1]),
-                    CakeFormationGrid.RangeMinValueCell(rowId[fmGlobalParameter.h1_over_hc]),
-                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.h1_over_hc]));
+                    CakeFormationGrid.RangeMaxValueCell(rowId[fmGlobalParameter.tr]));
 
                 foreach (var p in cakeFormationLimitsBlock.Parameters)
                 {

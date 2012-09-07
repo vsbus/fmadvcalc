@@ -974,6 +974,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             commonDeliquoringSimulationBlockMaxColumn.Visible = calculateLimitsCheckBox.Checked;
             commonDeliquoringSimulationBlockDataGrid.Width = calculateLimitsCheckBox.Checked ? 268 : 168;
             m_commonFilterMachiningBlock.CalculateAndDisplay();
+            m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
         }
 
         public void SelectMachineButtonClick(object sender, EventArgs e)

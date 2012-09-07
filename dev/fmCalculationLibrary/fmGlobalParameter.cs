@@ -582,6 +582,7 @@ namespace fmCalculationLibrary
             Dp.SpecifiedRange.IsInputed = true;
             sf.SpecifiedRange.IsInputed = true;
             tc.SpecifiedRange.IsInputed = true;
+            t1_over_tf.SpecifiedRange.IsInputed = true;
         }
 
         public fmGlobalParameter(string name, fmUnitFamily unitFamily, fmRange minMaxRange)

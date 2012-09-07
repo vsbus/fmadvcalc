@@ -34,6 +34,7 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 processOnChange = false;
 
+                fmGlobalParameter.t1_over_tf.SpecifiedRange.IsInputed = true;
                 CalculateAbsRanges();
                 
                 Dictionary<fmGlobalParameter, fmValue> minValue = new Dictionary<fmGlobalParameter, fmValue>();
