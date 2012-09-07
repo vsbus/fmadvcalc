@@ -1070,6 +1070,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                         bool isCurrentSelectedCurve = dispArray.OwningSimulation == m_internalSelectedSimList[selectedSimulationParametersTable.CurrentCell.RowIndex].InternalSimulationData
                             || (additionalParametersTable.CurrentCell != null
+                                && m_localInputParametersList[additionalParametersTable.CurrentCell.RowIndex].CalculatedDataLists[0].Count > 0
                                 && dispArray.OwningSimulation == m_localInputParametersList[additionalParametersTable.CurrentCell.RowIndex].CalculatedDataLists[0][0]);
                         if (selectedSimulationParametersTable.CurrentCell != null
                             && isCurrentSelectedCurve)
@@ -1487,7 +1488,8 @@ namespace FilterSimulationWithTablesAndGraphs
                         var tempSim = new fmFilterSimulationData();
                         tempSim.CopyIsInputedFrom(simData.InternalSimulationData);
                         tempSim.CopyValuesFrom(simData.ExternalSimulation.Data);
-                        tempSim.parameters[xParameter].value = new fmValue(x) * xParameter.UnitFamily.CurrentUnit.Coef;
+                        var xValue = new fmValue(x) * xParameter.UnitFamily.CurrentUnit.Coef;
+                        tempSim.parameters[xParameter].value = xValue;
 
                         if (tempSim.parameters[xParameter].value.value < range.MinValue
                             || tempSim.parameters[xParameter].value.value > range.MaxValue)
@@ -1502,60 +1504,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         }
                         else
                         {
-                            var suspensionCalculator = new fmSuspensionCalculator(tempSim.parameters.Values)
-                                                           {
-                                                               calculationOption = simData.
-                                                                   InternalSimulationData.suspensionCalculationOption
-                                                           };
-                            suspensionCalculator.DoCalculations();
-
-                            var eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.parameters.Values);
-                            eps0Kappa0Calculator.DoCalculations();
-
-                            var pc0Rc0A0Calculator = new fmPc0Rc0A0Calculator(tempSim.parameters.Values);
-                            pc0Rc0A0Calculator.DoCalculations();
-
-                            var rm0HceCalculator = new fmRm0HceCalculator(tempSim.parameters.Values);
-                            rm0HceCalculator.DoCalculations();
-
-                            var filterMachiningCalculator =
-                                new fmFilterMachiningCalculator(tempSim.parameters.Values)
-                                    {
-                                        calculationOption = simData.
-                                            InternalSimulationData.filterMachiningCalculationOption
-                                    };
-                            filterMachiningCalculator.DoCalculations();
-
-                            bool isPlaneArea =
-                                fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
-                                    simData.InternalSimulationData.filterMachiningCalculationOption);
-                            bool isVacuumFilter =
-                                fmFilterSimMachineType.IsVacuumFilter(simData.ExternalSimulation.Parent.MachineType);
-                            double hcdCoefficient =
-                                fmFilterSimMachineType.GetHcdCoefficient(simData.ExternalSimulation.Parent.MachineType);
-
-                            var eps0DNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values)
-                                                             {
-                                                                 dpdInputCalculationOption = simData.
-                                                                     InternalSimulationData.dpdInputCalculationOption,
-                                                                 hcdCalculationOption = simData.
-                                                                     InternalSimulationData.hcdEpsdCalculationOption,
-                                                                 isPlainArea = isPlaneArea
-                                                             };
-                            eps0DNedEpsdCalculator.DoCalculations();
-
-                            var sigmaPke0PkePcdRcdAlphadCalculator =
-                                new fmSigmaPke0PkePcdRcdAlphadCalculator(tempSim.parameters.Values);
-                            sigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
-
-                            var deliquoringSimualtionCalculator =
-                                new fmDeliquoringSimualtionCalculator(
-                                    new fmCalculatorsLibrary.fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(
-                                        isPlaneArea,
-                                        isVacuumFilter,
-                                        hcdCoefficient),
-                                tempSim.parameters.Values);
-                            deliquoringSimualtionCalculator.DoCalculations();
+                            CalculateSimulationForGivenXValue(xParameter, xValue, simData.ExternalSimulation, tempSim);
                         }
 
                         simData.CalculatedDataList.Add(tempSim);
@@ -1592,25 +1541,8 @@ namespace FilterSimulationWithTablesAndGraphs
                             tempSim.CopyMaterialParametersValuesFrom(sim.Data);
                             tempSim.UpdateIsInputed(xParameter);
                             var xValue = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
-                            tempSim.parameters[xParameter].value = xValue;
 
-                            var filterMachiningCalculator = new fmFilterMachiningCalculator(tempSim.parameters.Values)
-                            {
-                                calculationOption =
-                                    localParameters.FilterMachiningBlock.
-                                    filterMachiningCalculationOption
-                            };
-                            filterMachiningCalculator.DoCalculations();
-
-                            bool isPlainArea = fmFilterMachiningCalculator.IsPlainAreaCalculationOption(sim.FilterMachiningCalculationOption);
-                            bool isVacuumFilter = fmFilterSimMachineType.IsVacuumFilter(sim.Parent.MachineType);
-                            double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(sim.Parent.MachineType);
-                            var deliqSimulationCalculator = new fmDeliquoringSimualtionCalculator(new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient),
-                                tempSim.parameters.Values);
-                            deliqSimulationCalculator.DoCalculations();
-
-                            // after calculation the x parameter may be restored if it wasn't input
-                            tempSim.parameters[xParameter].value = xValue;
+                            CalculateSimulationForGivenXValue(xParameter, xValue, sim, tempSim);
 
                             calculatedDataList.Add(tempSim);
                         }
@@ -1619,6 +1551,73 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                }
             }
+        }
+
+        private static void CalculateSimulationForGivenXValue(
+            fmGlobalParameter xParameter,
+            fmValue xValue,
+            fmFilterSimulation motherSimulation,
+            fmFilterSimulationData tempSim)
+        {
+            tempSim.parameters[xParameter].value = xValue;
+
+            var suspensionCalculator = new fmSuspensionCalculator(tempSim.parameters.Values)
+            {
+                calculationOption = motherSimulation.SuspensionCalculationOption
+            };
+            suspensionCalculator.DoCalculations();
+
+            var eps0Kappa0Calculator = new fmEps0Kappa0Calculator(tempSim.parameters.Values);
+            eps0Kappa0Calculator.DoCalculations();
+
+            var pc0Rc0A0Calculator = new fmPc0Rc0A0Calculator(tempSim.parameters.Values);
+            pc0Rc0A0Calculator.DoCalculations();
+
+            var rm0HceCalculator = new fmRm0HceCalculator(tempSim.parameters.Values);
+            rm0HceCalculator.DoCalculations();
+
+            var filterMachiningCalculator =
+                new fmFilterMachiningCalculator(tempSim.parameters.Values)
+                {
+                    calculationOption = motherSimulation.FilterMachiningCalculationOption
+                };
+            filterMachiningCalculator.DoCalculations();
+
+            bool isPlaneArea =
+                fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
+                    motherSimulation.FilterMachiningCalculationOption);
+            bool isVacuumFilter =
+                fmFilterSimMachineType.IsVacuumFilter(motherSimulation.Parent.MachineType);
+            double hcdCoefficient =
+                fmFilterSimMachineType.GetHcdCoefficient(motherSimulation.Parent.MachineType);
+
+            var eps0DNedEpsdCalculator = new fmEps0dNedEpsdCalculator(tempSim.parameters.Values)
+            {
+                dpdInputCalculationOption = motherSimulation.DpdInputCalculationOption,
+                hcdCalculationOption = motherSimulation.HcdEpsdCalculationOption,
+                isPlainArea = isPlaneArea
+            };
+            eps0DNedEpsdCalculator.DoCalculations();
+
+            var sigmaPke0PkePcdRcdAlphadCalculator =
+                new fmSigmaPke0PkePcdRcdAlphadCalculator(tempSim.parameters.Values)
+            {
+                rhoDetaDCalculationOption = motherSimulation.RhoDetaDCalculationOption,
+                PcDCalculationOption = motherSimulation.PcDCalculationOption
+            };
+            sigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
+
+            var deliquoringSimualtionCalculator =
+                new fmDeliquoringSimualtionCalculator(
+                    new fmCalculatorsLibrary.fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(
+                        isPlaneArea,
+                        isVacuumFilter,
+                        hcdCoefficient),
+                tempSim.parameters.Values);
+            deliquoringSimualtionCalculator.DoCalculations();
+
+            // after calculation the x parameter may be restored if it wasn't input
+            tempSim.parameters[xParameter].value = xValue;
         }
 
         private static IEnumerable<double> CreateXValues(List<double> xStarts, List<double> xEnds, int minimalNodesAmount)

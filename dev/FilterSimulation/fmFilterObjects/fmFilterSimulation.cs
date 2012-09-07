@@ -296,13 +296,18 @@ namespace FilterSimulation.fmFilterObjects
 
             {
                 var eps0dNedEpsdBlock = new fmEps0dNedEpsdBlock();
-                eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(deliquoringUsedCalculationOption);
-                eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(hcdEpsdCalculationOption);
-                eps0dNedEpsdBlock.SetCalculationOptionAndRewrite(dpdInputCalculationOption);
+                eps0dNedEpsdBlock.SetCalculationOptionAndUpdateCellsStyle(deliquoringUsedCalculationOption);
+                eps0dNedEpsdBlock.SetCalculationOptionAndUpdateCellsStyle(hcdEpsdCalculationOption);
+                eps0dNedEpsdBlock.SetCalculationOptionAndUpdateCellsStyle(dpdInputCalculationOption);
+
+                var sigmaPkePcdBlock = new fmSigmaPke0PkePcdRcdAlphadBlock();
+                sigmaPkePcdBlock.SetCalculationOptionAndUpdateCellsStyle(deliquoringUsedCalculationOption);
+                sigmaPkePcdBlock.SetCalculationOptionAndUpdateCellsStyle(rhoDCalculationOption);
+                sigmaPkePcdBlock.SetCalculationOptionAndUpdateCellsStyle(PcDCalculationOption);
                 var deliquoringBlocks = new fmBaseBlock[]
                                             {
                                                 eps0dNedEpsdBlock,
-                                                new fmSigmaPke0PkePcdRcdAlphadBlock(),
+                                                sigmaPkePcdBlock,
                                                 new fmSremTettaAdAgDHRmMmoleFPeqBlock(),
                                                 new fmDeliquoringSimualtionBlock()
                                             };

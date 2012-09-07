@@ -167,37 +167,38 @@ namespace fmCalcBlocksLibrary.Blocks
             if (deliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed)
             {
                 rhod.isInputed = false;
-                rhod.cell.ReadOnly = true;
+                CellCellReadOnly(rhod, true);
                 
                 etad.IsInputed = false;
-                etad.cell.ReadOnly = true;
+                CellCellReadOnly(etad, true);
 
                 pcd.group = null;
-                pcd.cell.ReadOnly = true;
+                CellCellReadOnly(pcd, true);
                 
                 rcd.group = null;
-                rcd.cell.ReadOnly = true;
+                CellCellReadOnly(rcd, true);
                 
                 alphad.group = null;
-                alphad.cell.ReadOnly = true;
+                CellCellReadOnly(alphad, true);
+
                 return;
             }
 
             if (rhoDetaDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser)
             {
                 rhod.IsInputed = true;
-                rhod.cell.ReadOnly = false;
+                CellCellReadOnly(rhod, false);
 
                 etad.IsInputed = true;
-                etad.cell.ReadOnly = false;
+                CellCellReadOnly(etad, false);
             }
             else
             {
                 rhod.IsInputed = false;
-                rhod.cell.ReadOnly = true;
+                CellCellReadOnly(rhod, true);
 
                 etad.IsInputed = false;
-                etad.cell.ReadOnly = true;
+                CellCellReadOnly(etad, true);
             }
 
             if (PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser)
@@ -205,18 +206,18 @@ namespace fmCalcBlocksLibrary.Blocks
                 pcd.group = pc_rc_alpha_group;
                 rcd.group = pc_rc_alpha_group;
                 alphad.group = pc_rc_alpha_group;
-                pcd.cell.ReadOnly = false;
-                rcd.cell.ReadOnly = false;
-                alphad.cell.ReadOnly = false;
+                CellCellReadOnly(pcd, false);
+                CellCellReadOnly(rcd, false);
+                CellCellReadOnly(alphad, false);
             }
             else
             {
                 pcd.group = null;
                 rcd.group = null;
                 alphad.group = null;
-                pcd.cell.ReadOnly = true;
-                rcd.cell.ReadOnly = true;
-                alphad.cell.ReadOnly = true;
+                CellCellReadOnly(pcd, true);
+                CellCellReadOnly(rcd, true);
+                CellCellReadOnly(alphad, true);
             }
         }
 

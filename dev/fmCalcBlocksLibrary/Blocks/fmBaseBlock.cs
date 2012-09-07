@@ -85,6 +85,14 @@ namespace fmCalcBlocksLibrary.Blocks
                         p.IsInputed = p == enteredParameter;
         }
 
+        protected void CellCellReadOnly(fmBlockVariableParameter p, bool value)
+        {
+            if (p.cell != null)
+            {
+                p.cell.ReadOnly = value;
+            }
+        }
+
         public void CalculateAndDisplay()
         {
             DoCalculations();
