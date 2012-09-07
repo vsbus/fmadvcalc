@@ -209,22 +209,13 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            string simName;
-            for (int i = 1; ; ++i)
-            {
-                simName = parentSerie.GetName() + "-" + i;
-                if (Solution.FindSimulation(simName) == null)
-                {
-                    break;
-                }
-            }
-
             if (Solution.currentObjects.Simulation == null)
             {
-                Solution.currentObjects.Simulation = new fmFilterSimulation(parentSerie, simName);
+                return;
             }
             else
             {
+                string simName = Solution.currentObjects.Simulation.GetName() + "c";
                 fmFilterSimulation currentSimulation = Solution.currentObjects.Simulation;
                 Solution.currentObjects.Simulation = new fmFilterSimulation(currentSimulation.Parent, currentSimulation);
                 Solution.currentObjects.Simulation.SetName(simName);
