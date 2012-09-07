@@ -230,7 +230,7 @@ namespace FilterSimulation
 
                 Dictionary<fmGlobalParameter, bool> visibleCakeFormationParams = GetVisibleCakeFormationParamsDependingOnCalculationOptions(sim);
 
-                foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsCakeFormationParameters())
+                foreach (fmGlobalParameter parameter in fmGlobalParameter.GetCakeFormationSettingParameters())
                 {
                     DataGridViewCell cell = row.Cells[simulationGridColumns[parameter].Index];
                     cell.Style.ForeColor = Color.Black;
@@ -258,7 +258,7 @@ namespace FilterSimulation
 
                 Dictionary<fmGlobalParameter, bool> visibleDeliqParams = GetVisibleDeliquoringParamsDependingOnCalculationOptions(sim);
 
-                foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsDeliquoringParameters())
+                foreach (fmGlobalParameter parameter in fmGlobalParameter.GetDeliquoringSettingParameters())
                 {
                     DataGridViewCell cell = row.Cells[simulationGridColumns[parameter].Index];
                     cell.Style.ForeColor = Color.Black;
@@ -310,7 +310,7 @@ namespace FilterSimulation
             var isVisibleParameters = new Dictionary<fmGlobalParameter, bool>();
 
             var cakeFormationParameters = new List<fmGlobalParameter>();
-            cakeFormationParameters.AddRange(fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
+            cakeFormationParameters.AddRange(fmGlobalParameter.GetCakeFormationSettingParameters());
             foreach (fmGlobalParameter parameter in cakeFormationParameters)
             {
                 isVisibleParameters[parameter] = true;
@@ -594,8 +594,8 @@ namespace FilterSimulation
             var isVisibleParameters = new Dictionary<fmGlobalParameter, bool>();
 
             var deliquoringParameters = new List<fmGlobalParameter>();
-            deliquoringParameters.AddRange(fmGlobalParameter.GetMaterialDeliquoringParameters());
-            deliquoringParameters.AddRange(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
+            deliquoringParameters.AddRange(fmGlobalParameter.GetDeliquoringMaterialParameters());
+            deliquoringParameters.AddRange(fmGlobalParameter.GetDeliquoringSettingParameters());
             foreach (fmGlobalParameter parameter in deliquoringParameters)
             {
                 isVisibleParameters[parameter] = sim.DeliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;

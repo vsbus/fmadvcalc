@@ -66,6 +66,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.listBoxY2Axis = new System.Windows.Forms.ListView();
             this.panel11 = new System.Windows.Forms.Panel();
+            this.xLogCheckBox = new System.Windows.Forms.CheckBox();
             this.y2LogCheckBox = new System.Windows.Forms.CheckBox();
             this.yLogCheckBox = new System.Windows.Forms.CheckBox();
             this.LoadDefaultRangle = new System.Windows.Forms.Button();
@@ -86,7 +87,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.xLogCheckBox = new System.Windows.Forms.CheckBox();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -712,6 +712,17 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel11.Size = new System.Drawing.Size(370, 220);
             this.panel11.TabIndex = 8;
             // 
+            // xLogCheckBox
+            // 
+            this.xLogCheckBox.AutoSize = true;
+            this.xLogCheckBox.Location = new System.Drawing.Point(255, 52);
+            this.xLogCheckBox.Name = "xLogCheckBox";
+            this.xLogCheckBox.Size = new System.Drawing.Size(90, 17);
+            this.xLogCheckBox.TabIndex = 12;
+            this.xLogCheckBox.Text = "X Logarithmic";
+            this.xLogCheckBox.UseVisualStyleBackColor = true;
+            this.xLogCheckBox.CheckedChanged += new System.EventHandler(this.xLogCheckBox_CheckedChanged);
+            // 
             // y2LogCheckBox
             // 
             this.y2LogCheckBox.AutoSize = true;
@@ -814,9 +825,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.deliquoringMachininglParametersCheckBox.AutoSize = true;
             this.deliquoringMachininglParametersCheckBox.Location = new System.Drawing.Point(13, 75);
             this.deliquoringMachininglParametersCheckBox.Name = "deliquoringMachininglParametersCheckBox";
-            this.deliquoringMachininglParametersCheckBox.Size = new System.Drawing.Size(187, 17);
+            this.deliquoringMachininglParametersCheckBox.Size = new System.Drawing.Size(171, 17);
             this.deliquoringMachininglParametersCheckBox.TabIndex = 3;
-            this.deliquoringMachininglParametersCheckBox.Text = "Deliquoring Machining Parameters";
+            this.deliquoringMachininglParametersCheckBox.Text = "Deliquoring Setting Parameters";
             this.deliquoringMachininglParametersCheckBox.UseVisualStyleBackColor = true;
             this.deliquoringMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.DeliquoringMachininglParametersCheckBoxCheckedChanged);
             // 
@@ -859,9 +870,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.cakeFormationMachininglParametersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cakeFormationMachininglParametersCheckBox.Location = new System.Drawing.Point(13, 29);
             this.cakeFormationMachininglParametersCheckBox.Name = "cakeFormationMachininglParametersCheckBox";
-            this.cakeFormationMachininglParametersCheckBox.Size = new System.Drawing.Size(208, 17);
+            this.cakeFormationMachininglParametersCheckBox.Size = new System.Drawing.Size(192, 17);
             this.cakeFormationMachininglParametersCheckBox.TabIndex = 2;
-            this.cakeFormationMachininglParametersCheckBox.Text = "Cake Formation Machining Parameters";
+            this.cakeFormationMachininglParametersCheckBox.Text = "Cake Formation Setting Parameters";
             this.cakeFormationMachininglParametersCheckBox.UseVisualStyleBackColor = true;
             this.cakeFormationMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.CakeFormationMachininglParametersCheckBoxCheckedChanged);
             // 
@@ -937,17 +948,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(654, 171);
             this.panel9.TabIndex = 11;
-            // 
-            // xLogCheckBox
-            // 
-            this.xLogCheckBox.AutoSize = true;
-            this.xLogCheckBox.Location = new System.Drawing.Point(255, 52);
-            this.xLogCheckBox.Name = "xLogCheckBox";
-            this.xLogCheckBox.Size = new System.Drawing.Size(90, 17);
-            this.xLogCheckBox.TabIndex = 12;
-            this.xLogCheckBox.Text = "X Logarithmic";
-            this.xLogCheckBox.UseVisualStyleBackColor = true;
-            this.xLogCheckBox.CheckedChanged += new System.EventHandler(this.xLogCheckBox_CheckedChanged);
             // 
             // fmFilterSimulationWithTablesAndGraphs
             // 

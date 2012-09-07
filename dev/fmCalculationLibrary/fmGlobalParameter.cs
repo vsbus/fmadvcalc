@@ -187,7 +187,7 @@ namespace fmCalculationLibrary
         #endregion
         // ReSharper restore InconsistentNaming
 
-        static public fmGlobalParameter[] GetMachineSettingsDeliquoringParameters()
+        static public fmGlobalParameter[] GetDeliquoringSettingParameters()
         {
             return new[]
                        {
@@ -248,7 +248,7 @@ namespace fmCalculationLibrary
                        };
         }
 
-        static public fmGlobalParameter[] GetMaterialDeliquoringParameters()
+        static public fmGlobalParameter[] GetDeliquoringMaterialParameters()
         {
             return new[]
                        {
@@ -276,7 +276,7 @@ namespace fmCalculationLibrary
                        };
         }
 
-        static public fmGlobalParameter[] GetMachineSettingsCakeFormationParameters()
+        static public fmGlobalParameter[] GetCakeFormationSettingParameters()
         {
             return new[]
                        {
@@ -364,7 +364,7 @@ namespace fmCalculationLibrary
                        };
         }
 
-        static public fmGlobalParameter[] GetMaterialCakeParameters()
+        static public fmGlobalParameter[] GetCakeFormationMaterialParameters()
         {
             return new[]
                        {

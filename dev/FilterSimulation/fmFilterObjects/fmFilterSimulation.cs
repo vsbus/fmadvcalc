@@ -52,8 +52,8 @@ namespace FilterSimulation.fmFilterObjects
         public void CopyMaterialParametersValuesFrom(fmFilterSimulationData from)
         {
             var materialParametersList = new List<fmGlobalParameter>();
-            materialParametersList.AddRange(fmGlobalParameter.GetMaterialCakeParameters());
-            materialParametersList.AddRange(fmGlobalParameter.GetMaterialDeliquoringParameters());
+            materialParametersList.AddRange(fmGlobalParameter.GetCakeFormationMaterialParameters());
+            materialParametersList.AddRange(fmGlobalParameter.GetDeliquoringMaterialParameters());
             foreach (fmGlobalParameter p in materialParametersList)
             {
                 parameters[p].value = from.parameters[p].value;
@@ -291,8 +291,8 @@ namespace FilterSimulation.fmFilterObjects
             result.Add(fmGlobalParameter.Rm0);
             result.Add(fmGlobalParameter.hce0);
             
-            List<fmGlobalParameter> filterMachiningParametersList = fmCalculationOptionHelper.GetParametersListThatCanBeInput(filterMachiningCalculationOption);
-            result.AddRange(filterMachiningParametersList);
+            List<fmGlobalParameter> filterSettingParametersList = fmCalculationOptionHelper.GetParametersListThatCanBeInput(filterMachiningCalculationOption);
+            result.AddRange(filterSettingParametersList);
 
             {
                 var eps0dNedEpsdBlock = new fmEps0dNedEpsdBlock();

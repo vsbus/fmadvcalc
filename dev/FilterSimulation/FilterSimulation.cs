@@ -62,12 +62,12 @@ namespace FilterSimulation
                                                         simulationCalculationOptionColumn
                                                     });
 
-            foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsCakeFormationParameters())
+            foreach (fmGlobalParameter parameter in fmGlobalParameter.GetCakeFormationSettingParameters())
             {
                 simulationDataGrid.Columns.Add(AddSimulationGridColumn(parameter));
             }
 
-            foreach (fmGlobalParameter parameter in fmGlobalParameter.GetMachineSettingsDeliquoringParameters())
+            foreach (fmGlobalParameter parameter in fmGlobalParameter.GetDeliquoringSettingParameters())
             {
                 DataGridViewColumn column = AddSimulationGridColumn(parameter);
                 column.ReadOnly = true;

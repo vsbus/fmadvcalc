@@ -236,10 +236,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
             m_xyListKind = new Dictionary<string, fmParameterKind>();
 
-            AddColors(fmParameterKind.MaterialCakeFormation, fmGlobalParameter.GetMaterialCakeParameters());
-            AddColors(fmParameterKind.MachiningSettingsCakeFormation, fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
-            AddColors(fmParameterKind.MaterialDeliquoring, fmGlobalParameter.GetMaterialDeliquoringParameters());
-            AddColors(fmParameterKind.MachiningSettingsDeliquoring, fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
+            AddColors(fmParameterKind.MaterialCakeFormation, fmGlobalParameter.GetCakeFormationMaterialParameters());
+            AddColors(fmParameterKind.MachiningSettingsCakeFormation, fmGlobalParameter.GetCakeFormationSettingParameters());
+            AddColors(fmParameterKind.MaterialDeliquoring, fmGlobalParameter.GetDeliquoringMaterialParameters());
+            AddColors(fmParameterKind.MachiningSettingsDeliquoring, fmGlobalParameter.GetDeliquoringSettingParameters());
         }
 
         private void FillListBox(IList listBoxItems, List<string> strings)
@@ -303,8 +303,8 @@ namespace FilterSimulationWithTablesAndGraphs
         private void CreateColumnsInParametersTables()
         {
             var allSimParams = new List<fmGlobalParameter>();
-            allSimParams.AddRange(fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
-            allSimParams.AddRange(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
+            allSimParams.AddRange(fmGlobalParameter.GetCakeFormationSettingParameters());
+            allSimParams.AddRange(fmGlobalParameter.GetDeliquoringSettingParameters());
 
             foreach (fmGlobalParameter p in allSimParams)
             {
@@ -547,9 +547,9 @@ namespace FilterSimulationWithTablesAndGraphs
         private void UpdateVisibilityOfColumnsInSelectedSimulationsTable()
         {
             var cakeFormationParameters =
-                new List<fmGlobalParameter>(fmGlobalParameter.GetMachineSettingsCakeFormationParameters());
+                new List<fmGlobalParameter>(fmGlobalParameter.GetCakeFormationSettingParameters());
             var deliquoringParameters =
-                new List<fmGlobalParameter>(fmGlobalParameter.GetMachineSettingsDeliquoringParameters());
+                new List<fmGlobalParameter>(fmGlobalParameter.GetDeliquoringSettingParameters());
             var inputs = new List<fmGlobalParameter>();
             inputs.AddRange(cakeFormationParameters);
             inputs.AddRange(deliquoringParameters);
