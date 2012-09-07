@@ -26,6 +26,7 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private readonly fmBlockParameterGroup tc_n_hc_group = new fmBlockParameterGroup(Color.FromArgb(238, 218, 238), true);
         private readonly fmBlockParameterGroup tr_sf_sr_group = new fmBlockParameterGroup(Color.FromArgb(238, 238, 218), true);
+        private readonly fmBlockParameterGroup d0_group = new fmBlockParameterGroup(Color.FromArgb(218, 238, 238), true);
         
         // ReSharper disable InconsistentNaming
         public fmSimulationLimitsBlock(
@@ -54,6 +55,8 @@ namespace fmCalcBlocksLibrary.Blocks
             AddParameter(ref sf, fmGlobalParameter.sf, sf_min_Cell, sf_max_Cell, true);
             AddParameter(ref sr, fmGlobalParameter.sr, sr_min_Cell, sr_max_Cell, false);
             AddParameter(ref tr, fmGlobalParameter.tr, tr_min_Cell, tr_max_Cell, false);
+
+            d0.group = d0_group;
 
             tc.group = tc_n_hc_group;
             n.group = tc_n_hc_group;
