@@ -62,6 +62,7 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup pke_group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup pc_rc_alpha_group = new fmBlockParameterGroup();
 
+
         override public void DoCalculations()
         {
             var fmSigmaPke0PkePcdRcdAlphadCalculator = new fmSigmaPke0PkePcdRcdAlphadCalculator(AllParameters)
@@ -171,13 +172,13 @@ namespace fmCalcBlocksLibrary.Blocks
                 etad.IsInputed = false;
                 etad.cell.ReadOnly = true;
 
-                pcd.IsInputed = false;
+                pcd.group = null;
                 pcd.cell.ReadOnly = true;
                 
-                rcd.IsInputed = false;
+                rcd.group = null;
                 rcd.cell.ReadOnly = true;
                 
-                alphad.IsInputed = false;
+                alphad.group = null;
                 alphad.cell.ReadOnly = true;
                 return;
             }
@@ -186,6 +187,7 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 rhod.IsInputed = true;
                 rhod.cell.ReadOnly = false;
+
                 etad.IsInputed = true;
                 etad.cell.ReadOnly = false;
             }
@@ -193,24 +195,25 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 rhod.IsInputed = false;
                 rhod.cell.ReadOnly = true;
+
                 etad.IsInputed = false;
                 etad.cell.ReadOnly = true;
             }
 
             if (PcDCalculationOption == fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser)
             {
-                pcd.IsInputed = true;
-                rcd.IsInputed = false;
-                alphad.IsInputed = false;
+                pcd.group = pc_rc_alpha_group;
+                rcd.group = pc_rc_alpha_group;
+                alphad.group = pc_rc_alpha_group;
                 pcd.cell.ReadOnly = false;
                 rcd.cell.ReadOnly = false;
                 alphad.cell.ReadOnly = false;
             }
             else
             {
-                pcd.IsInputed = false;
-                rcd.IsInputed = false;
-                alphad.IsInputed = false;
+                pcd.group = null;
+                rcd.group = null;
+                alphad.group = null;
                 pcd.cell.ReadOnly = true;
                 rcd.cell.ReadOnly = true;
                 alphad.cell.ReadOnly = true;

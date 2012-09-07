@@ -662,13 +662,13 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
-                    foreach (var p in simData.ExternalSimulation.Parameters.Values)
-                    {
-                        if (p is fmCalculationVariableParameter)
-                        {
-                            ((fmCalculationVariableParameter)simData.InternalSimulationData.parameters[p.globalParameter]).isInputed = ((fmCalculationVariableParameter)p).isInputed;
-                        }
-                    }
+                    //foreach (var p in simData.ExternalSimulation.Parameters.Values)
+                    //{
+                    //    if (p is fmCalculationVariableParameter)
+                    //    {
+                    //        ((fmCalculationVariableParameter)simData.InternalSimulationData.parameters[p.globalParameter]).isInputed = ((fmCalculationVariableParameter)p).isInputed;
+                    //    }
+                    //}
                     simData.InternalSimulationData.filterMachiningCalculationOption = simData.ExternalSimulation.FilterMachiningCalculationOption;
                     simData.InternalSimulationData.deliquoringUsedCalculationOption = simData.ExternalSimulation.DeliquoringUsedCalculationOption;
                     simData.InternalSimulationData.gasFlowrateUsedCalculationOption = simData.ExternalSimulation.GasFlowrateUsedCalculationOption;
@@ -1530,9 +1530,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
                             var deliquoringSimualtionCalculator =
                                 new fmDeliquoringSimualtionCalculator(
-                                    new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlaneArea,
-                                                                                                       isVacuumFilter,
-                                                                                                       hcdCoefficient),
+                                    new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(
+                                        isPlaneArea,
+                                        isVacuumFilter,
+                                        hcdCoefficient),
                                     tempSim.parameters.Values);
                             deliquoringSimualtionCalculator.DoCalculations();
                         }

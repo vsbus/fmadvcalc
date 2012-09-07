@@ -377,9 +377,6 @@ namespace FilterSimulation.fmFilterObjects
 
         public void UpdateIsInputed(fmGlobalParameter inputedParameter)
         {
-            var deliqSim = new fmDeliquoringSimualtionBlock(); 
-            UpdateIsInputedInParametersFromBlock(deliqSim, inputedParameter);
-
             var fmb = new fmFilterMachiningBlock
                           {
                               filterMachiningCalculationOption = filterMachiningCalculationOption,
@@ -404,6 +401,12 @@ namespace FilterSimulation.fmFilterObjects
 
             var rmhceb = new fmRm0HceBlock();
             UpdateIsInputedInParametersFromBlock(rmhceb, inputedParameter);
+
+            var sigmaPkePcdRcdBlock = new fmSigmaPke0PkePcdRcdAlphadBlock();
+            UpdateIsInputedInParametersFromBlock(sigmaPkePcdRcdBlock, inputedParameter);
+
+            var deliqSim = new fmDeliquoringSimualtionBlock();
+            UpdateIsInputedInParametersFromBlock(deliqSim, inputedParameter);
         }
 
         public static class fmFilterSimulationDataSerializeTags

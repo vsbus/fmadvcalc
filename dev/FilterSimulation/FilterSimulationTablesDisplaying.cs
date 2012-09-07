@@ -1588,8 +1588,12 @@ namespace FilterSimulation
             sim.DpdInputCalculationOption = deliquoringEps0NeEpsBlock.dpdInputCalculationOption;
 
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringEps0NeEpsBlock, sim);
-
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSigmaPkeBlock);
+
+            sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(sim.DeliquoringUsedCalculationOption);
+            sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(sim.PcDCalculationOption);
+            sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(sim.RhoDetaDCalculationOption);
+
             sim.deliquoringSigmaPkeBlock.CalculateAndDisplay();
         }
 
