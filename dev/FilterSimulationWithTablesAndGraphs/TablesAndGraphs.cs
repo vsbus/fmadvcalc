@@ -144,6 +144,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         internal fmBlockVariableParameter GetParameterBlock(fmGlobalParameter p)
         {
+            if (p == null)
+            {
+                return null;
+            }
             fmBlockVariableParameter blockPar = null;
             if (blockPar == null)
             {
@@ -773,8 +777,11 @@ namespace FilterSimulationWithTablesAndGraphs
             UpdateVisibilityOfColumnsInLocalParametrsTable();
             BindXYLists();
             LoadCurrentXRange();
-            if (listBoxXAxis.SelectedItems[0].Text != "")
+            if (listBoxXAxis.SelectedItems.Count > 0
+                && listBoxXAxis.SelectedItems[0].Text != "")
+            {
                 UpdateIsInputed(GetCurrentXAxisParameter());
+            }
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
@@ -977,12 +984,15 @@ namespace FilterSimulationWithTablesAndGraphs
             var displayInputs = new List<fmGlobalParameter>();
             fmGlobalParameter xParameter = GetCurrentXAxisParameter();
             fmBlockVariableParameter xBlockPar = m_localInputParametersList[0].GetParameterBlock(xParameter);
-            fmBlockParameterGroup xGroup = xBlockPar.group;
+            fmBlockParameterGroup xGroup = xBlockPar == null ? null : xBlockPar.group;
             foreach (fmGlobalParameter p in possibleInputs)
             {
                 // we don't display x-parameter
-                if (xGroup == m_localInputParametersList[0].GetParameterBlock(p).group)
+                if (xGroup != null
+                    && xGroup == m_localInputParametersList[0].GetParameterBlock(p).group)
+                {
                     continue;
+                }
 
                 bool isInput = false;
                 foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
@@ -1731,17 +1741,14 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 var simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
-                    simInputParameters = ParametersListsIntersection(simInputParameters,
-                                                                     simData.InternalSimulationData.
-                                                                         GetParametersThatCanBeInputedList());
+                    simInputParameters = ParametersListsIntersection(
+                        simInputParameters,
+                        simData.InternalSimulationData.GetParametersThatCanBeInputedList());
                 return simInputParameters;
             }
             else
             {
-                var simInputParameters = new List<fmGlobalParameter>(fmGlobalParameter.Parameters);
-                foreach (fmLocalInputParametersData localParameters in m_localInputParametersList)
-                    simInputParameters = ParametersListsIntersection(simInputParameters,
-                        localParameters.GetParametersThatCanBeInput());
+                var simInputParameters = m_externalCurrentActiveSimulation.Data.GetParametersThatCanBeInputedList();
                 return simInputParameters;
             }
         }
