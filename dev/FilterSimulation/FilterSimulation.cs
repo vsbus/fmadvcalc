@@ -1043,5 +1043,25 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         }
 
         #endregion
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            fmFilterSimSuspension currentSuspension = Solution.currentObjects.Suspension;
+
+            if (currentSuspension == null)
+            {
+                MessageBox.Show(@"Please select suspension in table", @"Error!", MessageBoxButtons.OK);
+                return;
+            }
+
+            Solution.currentObjects.Suspension = new fmFilterSimSuspension(currentSuspension.Parent, currentSuspension);
+            Solution.currentObjects.Suspension.SetName(currentSuspension.GetName() + "d");
+            Solution.currentObjects.Suspension.Keep();
+
+            DisplaySolution(Solution);
+            SortTables();
+
+            suspensionDataGrid.BeginEdit(true);
+        }
     }
 }

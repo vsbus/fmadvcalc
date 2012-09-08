@@ -143,6 +143,27 @@ namespace FilterSimulation.fmFilterObjects
             Keep();
         }
 
+        public fmFilterSimSuspension(fmFilterSimProject parentProject, fmFilterSimSuspension toCopy)
+        {
+            m_guid = Guid.NewGuid();
+            if (parentProject != null)
+            {
+                m_parentProject = parentProject;
+                parentProject.AddSuspension(this);
+            }
+
+            m_data.name = toCopy.GetName();
+            m_data.material = toCopy.Material;
+            m_data.customer = toCopy.Customer;
+            m_data.seriesList = new List<fmFilterSimSerie>();
+            foreach (fmFilterSimSerie serie in toCopy.SimSeriesList)
+            {
+                new fmFilterSimSerie(this, serie);
+            }
+            Keep();
+        }
+
+
         public void Keep()
         {
             foreach (fmFilterSimSerie ser in m_data.seriesList)

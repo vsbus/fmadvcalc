@@ -300,6 +300,10 @@ namespace FilterSimulation.fmFilterObjects
             m_data.filterMedium = toCopy.FilterMedium;
             m_data.machineName = toCopy.MachineName;
             m_data.simList = new List<fmFilterSimulation>();
+            m_data.comments = toCopy.GetComments();
+            m_data.parametersToDisplay = new fmParametersToDisplay(toCopy.ParametersToDisplay);
+            m_data.ranges = new fmRangesConfiguration(toCopy.Ranges);
+
             foreach (fmFilterSimulation sim in toCopy.SimulationsList)
             {
                 new fmFilterSimulation(this, sim);
