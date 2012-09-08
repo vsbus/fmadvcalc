@@ -1063,5 +1063,25 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
 
             suspensionDataGrid.BeginEdit(true);
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            fmFilterSimProject currentProject = Solution.currentObjects.Project;
+
+            if (currentProject == null)
+            {
+                MessageBox.Show(@"Please select project in table", @"Error!", MessageBoxButtons.OK);
+                return;
+            }
+
+            Solution.currentObjects.Project = new fmFilterSimProject(Solution, currentProject);
+            Solution.currentObjects.Project.SetName(currentProject.GetName() + "d");
+            Solution.currentObjects.Project.Keep();
+
+            DisplaySolution(Solution);
+            SortTables();
+
+            projectDataGrid.BeginEdit(true);
+        }
     }
 }

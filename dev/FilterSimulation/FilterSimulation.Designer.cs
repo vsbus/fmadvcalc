@@ -29,12 +29,12 @@ namespace FilterSimulation
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationControl));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.byCheckingProjectsCheckBox = new System.Windows.Forms.CheckBox();
             this.byCheckingSuspensionsCheckBox = new System.Windows.Forms.CheckBox();
             this.byCheckingSimSeriesCheckBox = new System.Windows.Forms.CheckBox();
@@ -164,6 +164,7 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button2 = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
@@ -315,14 +316,14 @@ namespace FilterSimulation
             this.simulationDataGrid.HighLightCurrentRow = true;
             this.simulationDataGrid.Location = new System.Drawing.Point(0, 20);
             this.simulationDataGrid.Name = "simulationDataGrid";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.simulationDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.simulationDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.simulationDataGrid.RowHeadersVisible = false;
             this.simulationDataGrid.RowTemplate.Height = 18;
             this.simulationDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -498,14 +499,14 @@ namespace FilterSimulation
             this.projectDataGrid.HighLightCurrentRow = true;
             this.projectDataGrid.Location = new System.Drawing.Point(0, 20);
             this.projectDataGrid.Name = "projectDataGrid";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.projectDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.projectDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.projectDataGrid.RowHeadersVisible = false;
             this.projectDataGrid.RowTemplate.Height = 18;
             this.projectDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -542,6 +543,7 @@ namespace FilterSimulation
             this.panel1.Controls.Add(this.commentProjectButton);
             this.panel1.Controls.Add(this.projectDeleteButton);
             this.panel1.Controls.Add(this.projectRestoreButton);
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.projectCreateButton);
             this.panel1.Controls.Add(this.byCheckingProjectsCheckBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -556,7 +558,7 @@ namespace FilterSimulation
             this.commentProjectButton.FlatAppearance.BorderSize = 0;
             this.commentProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.commentProjectButton.Image = ((System.Drawing.Image)(resources.GetObject("commentProjectButton.Image")));
-            this.commentProjectButton.Location = new System.Drawing.Point(145, 0);
+            this.commentProjectButton.Location = new System.Drawing.Point(165, 0);
             this.commentProjectButton.Name = "commentProjectButton";
             this.commentProjectButton.Size = new System.Drawing.Size(20, 20);
             this.commentProjectButton.TabIndex = 6;
@@ -569,7 +571,7 @@ namespace FilterSimulation
             this.projectDeleteButton.FlatAppearance.BorderSize = 0;
             this.projectDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.projectDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("projectDeleteButton.Image")));
-            this.projectDeleteButton.Location = new System.Drawing.Point(125, 0);
+            this.projectDeleteButton.Location = new System.Drawing.Point(145, 0);
             this.projectDeleteButton.Name = "projectDeleteButton";
             this.projectDeleteButton.Size = new System.Drawing.Size(20, 20);
             this.projectDeleteButton.TabIndex = 5;
@@ -582,7 +584,7 @@ namespace FilterSimulation
             this.projectRestoreButton.FlatAppearance.BorderSize = 0;
             this.projectRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.projectRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("projectRestoreButton.Image")));
-            this.projectRestoreButton.Location = new System.Drawing.Point(105, 0);
+            this.projectRestoreButton.Location = new System.Drawing.Point(125, 0);
             this.projectRestoreButton.Name = "projectRestoreButton";
             this.projectRestoreButton.Size = new System.Drawing.Size(20, 20);
             this.projectRestoreButton.TabIndex = 3;
@@ -632,14 +634,14 @@ namespace FilterSimulation
             this.suspensionDataGrid.HighLightCurrentRow = true;
             this.suspensionDataGrid.Location = new System.Drawing.Point(0, 20);
             this.suspensionDataGrid.Name = "suspensionDataGrid";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.suspensionDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.suspensionDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.suspensionDataGrid.RowHeadersVisible = false;
             this.suspensionDataGrid.RowTemplate.Height = 18;
             this.suspensionDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -795,14 +797,14 @@ namespace FilterSimulation
             this.machineTypesDataGrid.HighLightCurrentRow = false;
             this.machineTypesDataGrid.Location = new System.Drawing.Point(190, 26);
             this.machineTypesDataGrid.Name = "machineTypesDataGrid";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.machineTypesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.machineTypesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.machineTypesDataGrid.RowHeadersVisible = false;
             this.machineTypesDataGrid.RowTemplate.Height = 18;
             this.machineTypesDataGrid.Size = new System.Drawing.Size(157, 47);
@@ -849,14 +851,14 @@ namespace FilterSimulation
             this.simSeriesDataGrid.HighLightCurrentRow = true;
             this.simSeriesDataGrid.Location = new System.Drawing.Point(0, 20);
             this.simSeriesDataGrid.Name = "simSeriesDataGrid";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.simSeriesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.simSeriesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.simSeriesDataGrid.RowHeadersVisible = false;
             this.simSeriesDataGrid.RowTemplate.Height = 18;
             this.simSeriesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -1603,6 +1605,19 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
             // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
+            this.button2.Location = new System.Drawing.Point(105, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(20, 20);
+            this.button2.TabIndex = 7;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // fmFilterSimulationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1789,5 +1804,6 @@ namespace FilterSimulation
         protected System.Windows.Forms.Button commentSuspensionButton;
         protected System.Windows.Forms.Button commentSerieButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
