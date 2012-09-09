@@ -741,7 +741,7 @@ namespace FilterSimulation
         {
             foreach (fmFilterSimMachineType fmt in fmFilterSimMachineType.filterTypesList)
             {
-                AddMachineTypeRow(fmt.symbol, fmt.name);
+                AddMachineTypeRow(fmt.name, fmt.name);
             }
         }
         #endregion
@@ -1082,6 +1082,11 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             SortTables();
 
             projectDataGrid.BeginEdit(true);
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            SelectMachineButtonClick(sender, e);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace FilterSimulation
 {
     public class fmRangesConfiguration
     {
-        public fmFilterSimMachineType AssignedMachineType = fmFilterSimMachineType.RotaryVacuumFilter;
+        public fmFilterSimMachineType AssignedMachineType = fmFilterSimMachineType.VacuumDrumFilter;
 
         public Dictionary<fmGlobalParameter, fmDefaultParameterRange> Ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>();
 

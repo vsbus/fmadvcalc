@@ -220,18 +220,6 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
-        public fmFilterSimMachineType FindMachineType(string typeSymbol)
-        {
-            foreach (fmFilterSimMachineType fmt in fmFilterSimMachineType.filterTypesList)
-            {
-                if (fmt.symbol == typeSymbol)
-                {
-                    return fmt;
-                }
-            }
-            return null;
-        }
-
         public void Keep()
         {
             foreach (fmFilterSimProject prj in projects)

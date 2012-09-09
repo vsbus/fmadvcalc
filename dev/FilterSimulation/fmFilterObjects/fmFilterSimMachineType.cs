@@ -1,76 +1,89 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using System.Drawing;
 
 namespace FilterSimulation.fmFilterObjects
 {
     public class fmFilterSimMachineType
     {
-        public string symbol;
         public string name;
+        private bool m_isVacuum;
+        private fmMachineGroup m_machineGroup;
 
-        static private void AddFilter(ref fmFilterSimMachineType fmt, string symbol, string name)
+        static private fmFilterSimMachineType AddFilter(
+            string name,
+            bool isVacuum,
+            fmMachineGroup machineGroup)
         {
-            fmt = new fmFilterSimMachineType(symbol, name);
-            filterTypesList.Add(fmt);
+            var mahineType = new fmFilterSimMachineType(name, isVacuum, machineGroup);
+            filterTypesList.Add(mahineType);
+            return mahineType;
         }
+
+        public static fmFilterSimMachineType VacuumNutche;
+        public static fmFilterSimMachineType BeltFilter;
+        public static fmFilterSimMachineType VacuumDrumFilter;
+        public static fmFilterSimMachineType FilterPress;
 
         static fmFilterSimMachineType()
         {
             filterTypesList = new List<fmFilterSimMachineType>();
-            AddFilter(ref RotaryVacuumFilter, "RVF", "Rotary Vacuum Filter");
-            AddFilter(ref RotaryPressureFilter, "RPF", "Rotary Pressure Filter");
-            AddFilter(ref BeltFilter, "BE", "Belt Filter");
-            AddFilter(ref VacuumNutche, "VN", "Vacuum Nutche");
-            AddFilter(ref PressureNutche, "PN", "Pressure Nutche");
-            AddFilter(ref CandleFilter, "CAF", "Candle Filter");
-            AddFilter(ref PressureLeaf, "PLF", "Pressure Leaf Filter");
-            AddFilter(ref FilterPress, "FPRESS", "Filter Press");
-            AddFilter(ref LabVacuumFilter, "LVF", "Lab Vacuum Filter");
-            AddFilter(ref LabPressureFilter, "LPF", "Lab Pressure Filter");
+
+            var firstGroup = new fmMachineGroup(Color.LightBlue);
+            VacuumDrumFilter = AddFilter("Vacuum Drum Filter", true, firstGroup);
+            AddFilter("Vacuum Disc Filter", true, firstGroup);
+            AddFilter("Vacuum Pan Filter", true, firstGroup);
+            BeltFilter = AddFilter("Vacuum Belt Filter", true, firstGroup);
+
+            AddFilter("Rotary Pressure Filter", false, new fmMachineGroup(Color.LightPink));
+
+            var thirdGroup = new fmMachineGroup(Color.LightSeaGreen);
+            VacuumNutche = AddFilter("Vacuum Nutche", true, thirdGroup);
+            AddFilter("Pressure Nutche", false, thirdGroup);
+            AddFilter("Pneuma Press", false, thirdGroup);
+
+            var fourthGroup = new fmMachineGroup(Color.LemonChiffon);
+            AddFilter("Pressure Leaf Filter", false, fourthGroup);
+            AddFilter("Candle Filter", false, fourthGroup);
+
+            var fifthGroup = new fmMachineGroup(Color.Coral);
+            FilterPress = AddFilter("Filter Press", false, fifthGroup);
+            AddFilter("Filter Press Automat", false, fifthGroup);
+
+            var sixthGroup = new fmMachineGroup(Color.Goldenrod);
+            AddFilter("Lab Vacuum Filter", true, sixthGroup);
+            AddFilter("Lab Pressure Filter", false, sixthGroup);
         }
 
-        public fmFilterSimMachineType(string symbol, string name)
+        public fmFilterSimMachineType(string name, bool isVacuum, fmMachineGroup machineGroup)
         {
-            this.symbol = symbol;
             this.name = name;
+            m_isVacuum = isVacuum;
+            m_machineGroup = machineGroup;
         }
 
         public static List<fmFilterSimMachineType> filterTypesList;
-        public static fmFilterSimMachineType RotaryVacuumFilter;
-        public static fmFilterSimMachineType BeltFilter;
-        public static fmFilterSimMachineType PressureLeaf;
-        public static fmFilterSimMachineType CandleFilter;
-        public static fmFilterSimMachineType FilterPress;
-        public static fmFilterSimMachineType RotaryPressureFilter;
-        public static fmFilterSimMachineType VacuumNutche;
-        public static fmFilterSimMachineType PressureNutche;
-        public static fmFilterSimMachineType LabVacuumFilter;
-        public static fmFilterSimMachineType LabPressureFilter;
-            
 
         public static class fmMachineSerializeTags
         {
             public const string Machine = "Machine";
-            public const string Symbol = "symbol";
             public const string Name = "name";
         }
 
         internal void Serialize(XmlWriter writer)
         {
             writer.WriteStartElement(fmMachineSerializeTags.Machine);
-            writer.WriteElementString(fmMachineSerializeTags.Symbol, symbol);
             writer.WriteElementString(fmMachineSerializeTags.Name, name);
             writer.WriteEndElement();
         }
 
         internal static fmFilterSimMachineType Deserialize(XmlNode xmlNode)
         {
-            string symbol = xmlNode.SelectSingleNode(fmMachineSerializeTags.Symbol).InnerText;
             string name = xmlNode.SelectSingleNode(fmMachineSerializeTags.Name).InnerText;
             foreach (var mt in filterTypesList)
             {
-                if (mt.symbol == symbol && mt.name == name)
+                if (mt.name == name)
                 {
                     return mt;
                 }
@@ -90,21 +103,27 @@ namespace FilterSimulation.fmFilterObjects
             return null;
         }
 
-        public static bool IsVacuumFilter(fmFilterSimMachineType machineType)
-        {
-            var vacuumFilters = new List<fmFilterSimMachineType>(new[]
-                                                                     {
-                                                                         RotaryVacuumFilter,
-                                                                         BeltFilter,
-                                                                         VacuumNutche,
-                                                                         LabVacuumFilter
-                                                                     });
-            return vacuumFilters.Contains(machineType);
-        }
-
         public static double GetHcdCoefficient(fmFilterSimMachineType machineType)
         {
             return machineType == FilterPress ? 2 : 1;
+        }
+
+        public bool IsVacuum()
+        {
+            return m_isVacuum;
+        }
+    }
+
+    public class fmMachineGroup
+    {
+        private Color m_color;
+        public fmMachineGroup(Color color)
+        {
+            m_color = color;
+        }
+        public Color GetColor()
+        {
+            return m_color;
         }
     }
 }

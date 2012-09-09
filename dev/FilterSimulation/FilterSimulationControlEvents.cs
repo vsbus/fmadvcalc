@@ -131,7 +131,7 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            fmFilterSimMachineType machine = GetCurrentMachine();
+            fmFilterSimMachineType machine = fmFilterSimMachineType.filterTypesList[0];
             if (machine == null)
             {
                 MessageBox.Show(@"Please select machine in machine table", @"Error!", MessageBoxButtons.OK);

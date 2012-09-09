@@ -63,6 +63,7 @@ namespace FilterSimulation
             this.commentProjectButton = new System.Windows.Forms.Button();
             this.projectDeleteButton = new System.Windows.Forms.Button();
             this.projectRestoreButton = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.projectCreateButton = new System.Windows.Forms.Button();
             this.suspensionPanel = new System.Windows.Forms.Panel();
             this.suspensionDataGrid = new fmDataGrid.fmDataGrid();
@@ -92,6 +93,7 @@ namespace FilterSimulation
             this.simSeriesMachineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.commentSerieButton = new System.Windows.Forms.Button();
             this.simSeriesDeleteButton = new System.Windows.Forms.Button();
             this.simSeriesRestoreButton = new System.Windows.Forms.Button();
@@ -164,7 +166,6 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button2 = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
@@ -591,6 +592,19 @@ namespace FilterSimulation
             this.projectRestoreButton.UseVisualStyleBackColor = true;
             this.projectRestoreButton.Click += new System.EventHandler(this.projectRestore_Click);
             // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
+            this.button2.Location = new System.Drawing.Point(105, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(20, 20);
+            this.button2.TabIndex = 7;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // projectCreateButton
             // 
             this.projectCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
@@ -927,6 +941,7 @@ namespace FilterSimulation
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.button3);
             this.panel3.Controls.Add(this.commentSerieButton);
             this.panel3.Controls.Add(this.simSeriesDeleteButton);
             this.panel3.Controls.Add(this.simSeriesRestoreButton);
@@ -938,6 +953,19 @@ namespace FilterSimulation
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(426, 20);
             this.panel3.TabIndex = 7;
+            // 
+            // button3
+            // 
+            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(340, 0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(86, 20);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "Filter Types";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // commentSerieButton
             // 
@@ -1605,19 +1633,6 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
             // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
-            this.button2.Location = new System.Drawing.Point(105, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(20, 20);
-            this.button2.TabIndex = 7;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
             // fmFilterSimulationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1805,5 +1820,6 @@ namespace FilterSimulation
         protected System.Windows.Forms.Button commentSerieButton;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

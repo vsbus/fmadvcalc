@@ -424,7 +424,7 @@ namespace FilterSimulationWithTablesAndGraphs
             fmb.CalculateAndDisplay();
 
             bool isPlainArea = fmFilterMachiningCalculator.IsPlainAreaCalculationOption(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
-            bool isVacuumFilter = fmFilterSimMachineType.IsVacuumFilter(m_externalCurrentActiveSimulation.Parent.MachineType);
+            bool isVacuumFilter = m_externalCurrentActiveSimulation.Parent.MachineType.IsVacuum();
             double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(m_externalCurrentActiveSimulation.Parent.MachineType);
             deliqBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient);
             deliqBlock.CalculateAndDisplay();
@@ -951,7 +951,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 localInputParametersData.FilterMachiningBlock.CalculateAndDisplay();
 
                 bool isPlainArea = fmFilterMachiningCalculator.IsPlainAreaCalculationOption(m_externalCurrentActiveSimulation.FilterMachiningCalculationOption);
-                bool isVacuumFilter = fmFilterSimMachineType.IsVacuumFilter(m_externalCurrentActiveSimulation.Parent.MachineType);
+                bool isVacuumFilter = m_externalCurrentActiveSimulation.Parent.MachineType.IsVacuum();
                 double hcdCoefficient = fmFilterSimMachineType.GetHcdCoefficient(m_externalCurrentActiveSimulation.Parent.MachineType);
                 localInputParametersData.DeliquoringBlock.deliquoringCalculatorOptions = new fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(isPlainArea, isVacuumFilter, hcdCoefficient);
                 localInputParametersData.DeliquoringBlock.SetCalculationOptionAndRewriteData(m_externalCurrentActiveSimulation.DeliquoringUsedCalculationOption);
@@ -1587,7 +1587,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 fmFilterMachiningCalculator.IsPlainAreaCalculationOption(
                     motherSimulation.FilterMachiningCalculationOption);
             bool isVacuumFilter =
-                fmFilterSimMachineType.IsVacuumFilter(motherSimulation.Parent.MachineType);
+                motherSimulation.Parent.MachineType.IsVacuum();
             double hcdCoefficient =
                 fmFilterSimMachineType.GetHcdCoefficient(motherSimulation.Parent.MachineType);
 
