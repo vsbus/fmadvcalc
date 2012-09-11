@@ -87,11 +87,13 @@ namespace fmCalcBlocksLibrary.Blocks
                                 {
                                     maxValue[p] = new fmValue();
                                 }
-                                if (minValue[p].defined == false || minValue[p] > parameter.value)
+                                if (!minValue[p].defined
+                                    || parameter.value.defined && minValue[p] > parameter.value)
                                 {
                                     minValue[p] = parameter.value;
                                 }
-                                if (maxValue[p].defined == false || maxValue[p] < parameter.value)
+                                if (!maxValue[p].defined
+                                    || parameter.value.defined && maxValue[p] < parameter.value)
                                 {
                                     maxValue[p] = parameter.value;
                                 }
@@ -153,8 +155,20 @@ namespace fmCalcBlocksLibrary.Blocks
                     {
                         maxValue[parameter.globalParameter] = new fmValue();
                     }
-                    minLimitCell.Value = (minValue[parameter.globalParameter] / coef).ToString();
-                    maxLimitCell.Value = (maxValue[parameter.globalParameter] / coef).ToString();
+                    
+                    fmValue minValueInUnits = minValue[parameter.globalParameter] / coef;
+                    if (minValueInUnits.value < 0)
+                    {
+                        minValueInUnits.value = 0;
+                    }
+                    fmValue maxValueInUnits = maxValue[parameter.globalParameter] / coef;
+                    if (maxValueInUnits.value < 0)
+                    {
+                        maxValueInUnits.value = 0;
+                    }
+
+                    minLimitCell.Value = minValueInUnits.ToString();
+                    maxLimitCell.Value = maxValueInUnits.ToString();
 
                     if (minValue[parameter.globalParameter].defined
                         && parameter.value.defined
