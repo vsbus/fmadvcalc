@@ -113,9 +113,8 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
         }
         #endregion
         #region simSeries Buttons
-        // ReSharper disable InconsistentNaming
+
         private void simSerieCreate_Click(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
         {
             fmFilterSimSuspension parentSuspension = Solution.currentObjects.Suspension;
             if (parentSuspension == null)
@@ -131,12 +130,17 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
+            CreateNewSerie(parentSuspension);
+
+            DisplaySolution(Solution);
+            SortTables();
+
+            simSeriesDataGrid.BeginEdit(true);
+        }
+
+        private void CreateNewSerie(fmFilterSimSuspension parentSuspension)
+        {
             fmFilterSimMachineType machine = fmFilterSimMachineType.filterTypesList[0];
-            if (machine == null)
-            {
-                MessageBox.Show(@"Please select machine in machine table", @"Error!", MessageBoxButtons.OK);
-                return;
-            }
 
             string serieName;
             for (int i = 1; ; ++i)
@@ -149,15 +153,10 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             }
 
             fmFilterSimulation curSim = Solution.currentObjects.Simulation;
-
             Solution.currentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, "n/a", "n/a");
             Solution.currentObjects.Simulation = curSim != null ? new fmFilterSimulation(Solution.currentObjects.Serie, curSim) : new fmFilterSimulation(Solution.currentObjects.Serie, "");
             Solution.currentObjects.Simulation.SetName(Solution.currentObjects.Serie.GetName() + "-1");
             Solution.currentObjects.Serie.Keep();
-            DisplaySolution(Solution);
-            SortTables();
-
-            simSeriesDataGrid.BeginEdit(true);
         }
         // ReSharper disable InconsistentNaming
         private void simSeriesKeepButton_Click(object sender, EventArgs e)
