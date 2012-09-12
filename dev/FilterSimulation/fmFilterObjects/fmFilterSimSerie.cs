@@ -122,7 +122,7 @@ namespace FilterSimulation.fmFilterObjects
                 if (schemaNode != null)
                 {
                     serieData.parametersToDisplay.AssignedSchema =
-                        (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), schemaNode.InnerText);
+                        (fmFilterSimMachineType.FilterCycleType) fmEnumUtils.GetEnum(typeof (fmFilterSimMachineType.FilterCycleType), schemaNode.InnerText);
                 }
                 XmlNodeList parameterNodeList =
                     parametersToDisplayNode.SelectNodes(fmSimSerieDataSerializeTags.GlobalParameter);

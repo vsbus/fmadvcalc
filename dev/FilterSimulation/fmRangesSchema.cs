@@ -22,5 +22,13 @@ namespace FilterSimulation
             AssignedMachineType = other.AssignedMachineType;
             Ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>(other.Ranges);
         }
+
+        public fmRangesConfiguration(
+            fmFilterSimMachineType assignedMachineType,
+            Dictionary<fmGlobalParameter, fmDefaultParameterRange> ranges)
+        {
+            AssignedMachineType = assignedMachineType;
+            Ranges = new Dictionary<fmGlobalParameter, fmDefaultParameterRange>(ranges);
+        }
     }
 }

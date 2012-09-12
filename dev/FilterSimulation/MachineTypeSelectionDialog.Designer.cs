@@ -38,11 +38,13 @@
             // 
             // machineTypesComboBox
             // 
+            this.machineTypesComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.machineTypesComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.machineTypesComboBox.FormattingEnabled = true;
             this.machineTypesComboBox.Location = new System.Drawing.Point(15, 107);
             this.machineTypesComboBox.Name = "machineTypesComboBox";
-            this.machineTypesComboBox.Size = new System.Drawing.Size(266, 21);
+            this.machineTypesComboBox.Size = new System.Drawing.Size(249, 21);
             this.machineTypesComboBox.TabIndex = 0;
             // 
             // label1
@@ -56,10 +58,12 @@
             // 
             // serieTextBox
             // 
+            this.serieTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.serieTextBox.Enabled = false;
             this.serieTextBox.Location = new System.Drawing.Point(15, 45);
             this.serieTextBox.Name = "serieTextBox";
-            this.serieTextBox.Size = new System.Drawing.Size(266, 20);
+            this.serieTextBox.Size = new System.Drawing.Size(249, 20);
             this.serieTextBox.TabIndex = 2;
             // 
             // label2
@@ -73,7 +77,8 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(125, 152);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(108, 157);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -83,7 +88,8 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(206, 152);
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(189, 157);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 6;
@@ -95,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(293, 187);
+            this.ClientSize = new System.Drawing.Size(276, 192);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);

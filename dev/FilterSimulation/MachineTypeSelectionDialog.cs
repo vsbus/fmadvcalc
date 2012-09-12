@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using FilterSimulation.fmFilterObjects;
+using fmMisc;
 
 namespace FilterSimulation
 {
@@ -30,7 +31,8 @@ namespace FilterSimulation
 
         internal void AssignSerie(FilterSimulation.fmFilterObjects.fmFilterSimSerie serie)
         {
-            serieTextBox.Text = serie.GetName() + " - " + serie.Parent.GetName();
+            string parentName = serie.Parent == null ? "" : " - " + serie.Parent.GetName();
+            serieTextBox.Text = serie.GetName();
             foreach (var item in machineTypesComboBox.Items)
             {
                 if (item.ToString() == serie.MachineType.name)

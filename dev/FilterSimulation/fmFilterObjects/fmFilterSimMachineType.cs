@@ -18,10 +18,10 @@ namespace FilterSimulation.fmFilterObjects
 
         public enum FilterCycleType
         {
-            [Description("Continuous")]
-            Continuous,
-            [Description("Batch")]
-            Batch
+            [Description("Continuous Filters")]
+            ContinuousFilters,
+            [Description("Batch Filters")]
+            BatchFilters
         }
 
         public string name;
@@ -54,29 +54,44 @@ namespace FilterSimulation.fmFilterObjects
             filterTypesList = new List<fmFilterSimMachineType>();
 
             var firstGroup = new fmMachineGroup(Color.LightBlue);
-            VacuumDrumFilter = AddFilter("Vacuum Drum Filter", true, FilterCycleType.Continuous, firstGroup);
-            AddFilter("Vacuum Disc Filter", true, FilterCycleType.Continuous, firstGroup);
-            AddFilter("Vacuum Pan Filter", true, FilterCycleType.Continuous, firstGroup);
-            BeltFilter = AddFilter("Vacuum Belt Filter", true, FilterCycleType.Continuous, firstGroup);
+            VacuumDrumFilter = AddFilter(
+                "Vacuum Drum Filter",
+                true,
+                FilterCycleType.ContinuousFilters,
+                firstGroup);
+            AddFilter(
+                "Vacuum Disc Filter",
+                true,
+                FilterCycleType.ContinuousFilters,
+                firstGroup);
+            AddFilter("Vacuum Pan Filter",
+                true,
+                FilterCycleType.ContinuousFilters,
+                firstGroup);
+            BeltFilter = AddFilter(
+                "Vacuum Belt Filter",
+                true,
+                FilterCycleType.ContinuousFilters,
+                firstGroup);
 
-            AddFilter("Rotary Pressure Filter", false, FilterCycleType.Continuous, new fmMachineGroup(Color.LightPink));
+            AddFilter("Rotary Pressure Filter", false, FilterCycleType.ContinuousFilters, new fmMachineGroup(Color.LightPink));
 
             var thirdGroup = new fmMachineGroup(Color.LightSeaGreen);
-            VacuumNutche = AddFilter("Vacuum Nutche", true, FilterCycleType.Batch, thirdGroup);
-            AddFilter("Pressure Nutche", false, FilterCycleType.Batch, thirdGroup);
-            AddFilter("Pneuma Press", false, FilterCycleType.Batch, thirdGroup);
+            VacuumNutche = AddFilter("Vacuum Nutche", true, FilterCycleType.BatchFilters, thirdGroup);
+            AddFilter("Pressure Nutche", false, FilterCycleType.BatchFilters, thirdGroup);
+            AddFilter("Pneuma Press", false, FilterCycleType.BatchFilters, thirdGroup);
 
             var fourthGroup = new fmMachineGroup(Color.LemonChiffon);
-            AddFilter("Pressure Leaf Filter", false, FilterCycleType.Batch, fourthGroup);
-            AddFilter("Candle Filter", false, FilterCycleType.Batch, fourthGroup);
+            AddFilter("Pressure Leaf Filter", false, FilterCycleType.BatchFilters, fourthGroup);
+            AddFilter("Candle Filter", false, FilterCycleType.BatchFilters, fourthGroup);
 
             var fifthGroup = new fmMachineGroup(Color.Coral);
-            FilterPress = AddFilter("Filter Press", false, FilterCycleType.Batch, fifthGroup);
-            AddFilter("Filter Press Automat", false, FilterCycleType.Batch, fifthGroup);
+            FilterPress = AddFilter("Filter Press", false, FilterCycleType.BatchFilters, fifthGroup);
+            AddFilter("Filter Press Automat", false, FilterCycleType.BatchFilters, fifthGroup);
 
             var sixthGroup = new fmMachineGroup(Color.Goldenrod);
-            AddFilter("Lab Vacuum Filter", true, FilterCycleType.Batch, sixthGroup);
-            AddFilter("Lab Pressure Filter", false, FilterCycleType.Batch, sixthGroup);
+            AddFilter("Lab Vacuum Filter", true, FilterCycleType.BatchFilters, sixthGroup);
+            AddFilter("Lab Pressure Filter", false, FilterCycleType.BatchFilters, sixthGroup);
         }
 
         public fmFilterSimMachineType(
@@ -139,6 +154,11 @@ namespace FilterSimulation.fmFilterObjects
         public bool IsVacuum()
         {
             return m_filterPressureType == FilterPressureType.Vacuum;
+        }
+
+        public FilterCycleType GetFilterCycleType()
+        {
+            return m_filterCycleType;
         }
     }
 

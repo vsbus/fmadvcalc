@@ -5,6 +5,7 @@ using FilterSimulation;
 using fmCalculationLibrary;
 using fmControls;
 using fmMisc;
+using FilterSimulation.fmFilterObjects;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
@@ -13,7 +14,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private readonly Dictionary<fmGlobalParameter, fmCheckedListBoxWithCheckboxes> m_parameterBox = new Dictionary<fmGlobalParameter, fmCheckedListBoxWithCheckboxes>();
         public string CurrentSerieMachineName = "";
 
-        private Dictionary<fmShowHideSchema, List<fmGlobalParameter>> m_schemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
+        private Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> m_schemas = new Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>>();
 
         public fmYAxisListingForm()
         {
@@ -195,7 +196,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void FillFilterTypeCombobox()
         {
-            foreach (Enum element in Enum.GetValues(typeof(fmShowHideSchema)))
+            foreach (Enum element in Enum.GetValues(typeof(fmFilterSimMachineType.FilterCycleType)))
             {
                 filterTypeGroupComboBox.Items.Add(fmEnumUtils.GetEnumDescription(element));
             }
@@ -287,7 +288,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 if (dialogResult == DialogResult.Yes)
                 {
-                    var value = (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), filterTypeGroupComboBox.Text);
+                    var value = (fmFilterSimMachineType.FilterCycleType) fmEnumUtils.GetEnum(typeof (fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Text);
                     m_schemas[value] = GetCheckedItems();
                 }
             }
@@ -297,7 +298,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             if (filterTypeGroupComboBox.Text != "")
             {
-                var value = (fmShowHideSchema)fmEnumUtils.GetEnum(typeof(fmShowHideSchema), filterTypeGroupComboBox.Text);
+                var value = (fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Text);
                 if (m_schemas.ContainsKey(value))
                 {
                     UncheckAll();
@@ -310,21 +311,21 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        public Dictionary<fmShowHideSchema, List<fmGlobalParameter>> GetShowHideSchemas()
+        public Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> GetShowHideSchemas()
         {
             return m_schemas;
         }
 
-        public void SetShowHideSchemas(Dictionary<fmShowHideSchema, List<fmGlobalParameter>> dictionary)
+        public void SetShowHideSchemas(Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> dictionary)
         {
-            m_schemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
-            foreach (KeyValuePair<fmShowHideSchema, List<fmGlobalParameter>> pair in dictionary)
+            m_schemas = new Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>>();
+            foreach (KeyValuePair<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> pair in dictionary)
             {
                 m_schemas.Add(pair.Key, pair.Value);
             }
         }
 
-        public void CheckScheme(fmShowHideSchema schema)
+        public void CheckScheme(fmFilterSimMachineType.FilterCycleType schema)
         {
             for (int i = 0; i < filterTypeGroupComboBox.Items.Count; ++i)
             {
@@ -336,9 +337,9 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        public fmShowHideSchema GetCheckedSchema()
+        public fmFilterSimMachineType.FilterCycleType GetCheckedSchema()
         {
-            return (fmShowHideSchema) fmEnumUtils.GetEnum(typeof (fmShowHideSchema), filterTypeGroupComboBox.Text);
+            return (fmFilterSimMachineType.FilterCycleType) fmEnumUtils.GetEnum(typeof (fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Text);
         }
     }
 }

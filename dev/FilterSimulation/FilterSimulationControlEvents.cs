@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using FilterSimulation.fmFilterObjects;
+using fmMisc;
 
 namespace FilterSimulation
 {
@@ -130,7 +131,10 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            CreateNewSerie(parentSuspension);
+            if (!CreateNewSerie(parentSuspension))
+            {
+                return;
+            }
 
             DisplaySolution(Solution);
             SortTables();
@@ -138,10 +142,9 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             simSeriesDataGrid.BeginEdit(true);
         }
 
-        private void CreateNewSerie(fmFilterSimSuspension parentSuspension)
+        private bool CreateNewSerie(fmFilterSimSuspension parentSuspension)
         {
             fmFilterSimMachineType machine = fmFilterSimMachineType.filterTypesList[0];
-
             string serieName;
             for (int i = 1; ; ++i)
             {
@@ -151,12 +154,37 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
                     break;
                 }
             }
+            var fakeSerie = new fmFilterSimSerie(null, serieName, machine, "n/a", "n/a");
 
+            var dialog = new MachineTypeSelectionDialog();
+            dialog.AssignSerie(fakeSerie);
+            dialog.ShowDialog();
+            if (dialog.DialogResult != DialogResult.OK)
+            {
+                return false;
+            }
+            
+            machine = dialog.GetSelectedType();
             fmFilterSimulation curSim = Solution.currentObjects.Simulation;
             Solution.currentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, "n/a", "n/a");
-            Solution.currentObjects.Simulation = curSim != null ? new fmFilterSimulation(Solution.currentObjects.Serie, curSim) : new fmFilterSimulation(Solution.currentObjects.Serie, "");
+            Solution.currentObjects.Simulation = new fmFilterSimulation(Solution.currentObjects.Serie, "Sim");
             Solution.currentObjects.Simulation.SetName(Solution.currentObjects.Serie.GetName() + "-1");
+
+            fmFilterSimMachineType.FilterCycleType value = machine.GetFilterCycleType();
+            if (ShowHideSchemas.ContainsKey(value))
+            {
+                Solution.currentObjects.Serie.ParametersToDisplay =
+                    new fmParametersToDisplay(value, ShowHideSchemas[value]);
+            }
+            if (RangesSchemas.ContainsKey(machine))
+            {
+                Solution.currentObjects.Serie.Ranges = 
+                    new fmRangesConfiguration(machine, RangesSchemas[machine]);
+            }
+
             Solution.currentObjects.Serie.Keep();
+
+            return true;
         }
         // ReSharper disable InconsistentNaming
         private void simSeriesKeepButton_Click(object sender, EventArgs e)

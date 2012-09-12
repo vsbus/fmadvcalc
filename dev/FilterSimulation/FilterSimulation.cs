@@ -22,7 +22,7 @@ namespace FilterSimulation
         private fmCalcBlocksLibrary.Blocks.fmDeliquoringSimualtionBlockWithLimits m_commonDeliquoringSimulationBlock;
         private CheckBox m_ckBox;
         protected fmParametersToDisplay ParametersToDisplay;
-        public Dictionary<fmShowHideSchema, List<fmGlobalParameter>> ShowHideSchemas = new Dictionary<fmShowHideSchema, List<fmGlobalParameter>>();
+        public Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> ShowHideSchemas = new Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>>();
         public Dictionary<fmFilterSimMachineType, RangesDictionary> RangesSchemas = new Dictionary<fmFilterSimMachineType, RangesDictionary>();
         public Dictionary<fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>> UnitsSchemas = new Dictionary<fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>>();
         private Dictionary<fmGlobalParameter, DataGridViewColumn> simulationGridColumns = new Dictionary<fmGlobalParameter, DataGridViewColumn>();
@@ -337,7 +337,7 @@ namespace FilterSimulation
         private void SerializeShowHideSchemas(XmlWriter writer)
         {
             writer.WriteStartElement(fmFilterSimulationSerializeTags.ShowHideSchemas);
-            foreach (KeyValuePair<fmShowHideSchema, List<fmGlobalParameter>> showHideSchema in ShowHideSchemas)
+            foreach (KeyValuePair<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> showHideSchema in ShowHideSchemas)
             {
                 writer.WriteStartElement(fmFilterSimulationSerializeTags.ShowHideSchema);
                 writer.WriteElementString(fmFilterSimulationSerializeTags.ShowHideSchemaName, fmEnumUtils.GetEnumDescription(showHideSchema.Key));
@@ -444,7 +444,7 @@ namespace FilterSimulation
                 {
                     parametersList.Add(fmGlobalParameter.ParametersByName[parameterNode.InnerText]);
                 }
-                ShowHideSchemas[(fmShowHideSchema)fmEnumUtils.GetEnum(typeof(fmShowHideSchema), schemaName)] = parametersList;
+                ShowHideSchemas[(fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), schemaName)] = parametersList;
             }
         }
 
@@ -643,7 +643,7 @@ namespace FilterSimulation
 
         private void CreateDefaultListOfParametersForDisplaying()
         {
-            ParametersToDisplay = new fmParametersToDisplay(fmShowHideSchema.ContinuousFilters,
+            ParametersToDisplay = new fmParametersToDisplay(fmFilterSimMachineType.FilterCycleType.ContinuousFilters,
                                                             new[]
                                                                 {
                                                                     fmGlobalParameter.A,

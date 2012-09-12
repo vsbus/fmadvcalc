@@ -3,17 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using fmCalculationLibrary;
+using FilterSimulation.fmFilterObjects;
 
 namespace FilterSimulation
 {
-    public enum fmShowHideSchema
-    {
-        [Description("Continuous Filters")]
-        ContinuousFilters,
-        [Description("Batch Filters")]
-        BatchFilters
-    }
-
     public enum fmUnitsSchema
     {
         [Description("Industrial")]
@@ -26,7 +19,7 @@ namespace FilterSimulation
 
     public class fmParametersToDisplay
     {
-        public fmShowHideSchema AssignedSchema = fmShowHideSchema.ContinuousFilters;
+        public fmFilterSimMachineType.FilterCycleType AssignedSchema = fmFilterSimMachineType.FilterCycleType.ContinuousFilters;
 
         public List<fmGlobalParameter> ParametersList = new List<fmGlobalParameter>();
 
@@ -40,7 +33,7 @@ namespace FilterSimulation
             ParametersList = new List<fmGlobalParameter>(other.ParametersList);
         }
 
-        public fmParametersToDisplay(fmShowHideSchema schema, IEnumerable<fmGlobalParameter> parameters)
+        public fmParametersToDisplay(fmFilterSimMachineType.FilterCycleType schema, IEnumerable<fmGlobalParameter> parameters)
         {
             AssignedSchema = schema;
             ParametersList = new List<fmGlobalParameter>(parameters);
