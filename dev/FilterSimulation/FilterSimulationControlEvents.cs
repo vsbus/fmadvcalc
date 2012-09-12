@@ -57,9 +57,8 @@ namespace FilterSimulation
                 DisplaySolution(Solution);
             }
         }
-        // ReSharper disable InconsistentNaming
+        
         private void suspensionCreateButton_Click(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
         {
             fmFilterSimProject parentProject = Solution.currentObjects.Project;
             if (parentProject == null)

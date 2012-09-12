@@ -710,8 +710,11 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             else
             {
-                fmFilterSimSerie serie = m_externalCurrentActiveSimulation.Parent;
-                AddSerieToInvolvedSeriesList(newInvolvedSeries, serie, xParameter);
+                if (m_externalCurrentActiveSimulation != null)
+                {
+                    fmFilterSimSerie serie = m_externalCurrentActiveSimulation.Parent;
+                    AddSerieToInvolvedSeriesList(newInvolvedSeries, serie, xParameter);
+                }
             }
 
             m_involvedSerieFromRow = new Dictionary<DataGridViewRow, fmFilterSimSerie>();
@@ -921,7 +924,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void UpdateVisibilityOfColumnsInLocalParametrsTable()
         {
-            if (m_localInputParametersList.Count == 0)
+            if (m_localInputParametersList.Count == 0
+                || m_externalCurrentActiveSimulation == null)
             {
                 return;
             }
@@ -1068,7 +1072,8 @@ namespace FilterSimulationWithTablesAndGraphs
                         coordinatesGrid.Columns[yCol].HeaderText = dispArray.GetTextForHeader();
                         Color color = Color.Black;
 
-                        bool isCurrentSelectedCurve = dispArray.OwningSimulation == m_internalSelectedSimList[selectedSimulationParametersTable.CurrentCell.RowIndex].InternalSimulationData
+                        bool isCurrentSelectedCurve = (selectedSimulationParametersTable.CurrentCell != null
+                                && dispArray.OwningSimulation == m_internalSelectedSimList[selectedSimulationParametersTable.CurrentCell.RowIndex].InternalSimulationData)
                             || (additionalParametersTable.CurrentCell != null
                                 && m_localInputParametersList[additionalParametersTable.CurrentCell.RowIndex].CalculatedDataLists[0].Count > 0
                                 && dispArray.OwningSimulation == m_localInputParametersList[additionalParametersTable.CurrentCell.RowIndex].CalculatedDataLists[0][0]);
@@ -1675,6 +1680,10 @@ namespace FilterSimulationWithTablesAndGraphs
             var inputNames = new List<string>();
 
             IEnumerable<fmGlobalParameter> simInputParameters = GetCommonInputParametersList();
+            if (simInputParameters == null)
+            {
+                return;
+            }
 
             foreach (fmGlobalParameter p in simInputParameters)
             {
@@ -1755,6 +1764,10 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             else
             {
+                if (m_externalCurrentActiveSimulation == null)
+                {
+                    return null;
+                }
                 var simInputParameters = m_externalCurrentActiveSimulation.Data.GetParametersThatCanBeInputedList();
                 return simInputParameters;
             }
