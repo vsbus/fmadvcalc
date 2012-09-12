@@ -11,10 +11,18 @@ namespace FilterSimulation
         // ReSharper disable InconsistentNaming
         private void projectCreateButton_Click(object sender, EventArgs e)
         {
-            Solution.currentObjects.Project = new fmFilterSimProject(Solution, "n/a");
-            Solution.currentColumns.project = projectNameColumn.Index;
+            CreateNewProject();
+            CreateNewSuspension(Solution.currentObjects.Project);
+            CreateNewSerie(Solution.currentObjects.Suspension);
+            
             DisplaySolution(Solution);
             projectDataGrid.BeginEdit(true);
+        }
+
+        protected void CreateNewProject()
+        {
+            Solution.currentObjects.Project = new fmFilterSimProject(Solution, "n/a");
+            Solution.currentColumns.project = projectNameColumn.Index;
         }
         private void keepProject_Click(object sender, EventArgs e)
         {
@@ -79,13 +87,21 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
             {
                 currentCol = suspensionDataGrid.CurrentCell.ColumnIndex;
             }
-            Solution.currentObjects.Suspension = new fmFilterSimSuspension(parentProject, "n/a", "n/a", "n/a");
-            Solution.currentColumns.suspension = suspensionNameColumn.Index;
+            
+            CreateNewSuspension(parentProject);
+            CreateNewSerie(Solution.currentObjects.Suspension);
+
             DisplaySolution(Solution);
             if (currentCol != -1 && suspensionDataGrid.CurrentCell != null)
             {
                 suspensionDataGrid.CurrentCell = suspensionDataGrid[currentCol, suspensionDataGrid.CurrentCell.RowIndex];
             }
+        }
+
+        protected void CreateNewSuspension(fmFilterSimProject parentProject)
+        {
+            Solution.currentObjects.Suspension = new fmFilterSimSuspension(parentProject, "n/a", "n/a", "n/a");
+            Solution.currentColumns.suspension = suspensionNameColumn.Index;
         }
         // ReSharper disable InconsistentNaming
         private void suspensionRestoreButton_Click(object sender, EventArgs e)
@@ -141,7 +157,7 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             simSeriesDataGrid.BeginEdit(true);
         }
 
-        private bool CreateNewSerie(fmFilterSimSuspension parentSuspension)
+        protected bool CreateNewSerie(fmFilterSimSuspension parentSuspension)
         {
             fmFilterSimMachineType machine = fmFilterSimMachineType.filterTypesList[0];
             string serieName;
