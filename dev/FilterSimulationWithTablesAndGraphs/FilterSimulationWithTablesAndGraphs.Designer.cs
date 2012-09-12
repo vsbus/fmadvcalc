@@ -530,6 +530,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.button1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
@@ -993,6 +994,7 @@ namespace FilterSimulationWithTablesAndGraphs
             ((System.ComponentModel.ISupportInitialize)(this.additionalParametersTable)).EndInit();
             this.ParamsControlsPanel4.ResumeLayout(false);
             this.ParamsControlsPanel4.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.tablesAndGraphsTopLeftPanel.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.XYSplitContainer.Panel1.ResumeLayout(false);
