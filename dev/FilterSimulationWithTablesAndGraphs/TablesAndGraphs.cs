@@ -1114,11 +1114,19 @@ namespace FilterSimulationWithTablesAndGraphs
                     IEnumerable<KeyValuePair<double[], double[]>> curvesData = GetCurvesDoubleArrays(m_displayingResults.XParameter, dispArray);
                     foreach (KeyValuePair<double[], double[]> pair in curvesData)
                     {
-                        LineItem curve = fmZedGraphControl1.GraphPane.AddCurve(dispArray.Parameter.Name + scaleString + " (" + dispArray.Parameter.UnitName + ")",
-                            pair.Key, pair.Value, dispArray.Color, SymbolType.None);
+                        LineItem curve = fmZedGraphControl1.GraphPane.AddCurve(
+                            dispArray.Parameter.Name + scaleString + " (" + dispArray.Parameter.UnitName + ")",
+                            pair.Key,
+                            pair.Value,
+                            dispArray.Color,
+                            SymbolType.None);
                         curve.Line.IsAntiAlias = true;
                         curve.Line.Width = dispArray.Bold ? 2 : 1;
                         curve.IsY2Axis = dispArray.IsY2Axis;
+                        if (curve.IsY2Axis)
+                        {
+                            curve.Label.Text += " :Y2";
+                        }
                     }
                 }
             }
@@ -1536,8 +1544,8 @@ namespace FilterSimulationWithTablesAndGraphs
                         foreach (double x in xList)
                         {
                             var tempSim = new fmFilterSimulationData();
-                            fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.FilterMachiningBlock, tempSim);
-                            fmFilterSimulationData.CopyAllParametersFromBlockToSimulation(localParameters.DeliquoringBlock, tempSim);
+                            fmFilterSimulationData.CopyVariableParametersFromBlockToSimulation(localParameters.FilterMachiningBlock, tempSim);
+                            fmFilterSimulationData.CopyVariableParametersFromBlockToSimulation(localParameters.DeliquoringBlock, tempSim);
                             tempSim.CopyMaterialParametersValuesFrom(sim.Data);
                             tempSim.UpdateIsInputed(xParameter);
                             var xValue = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
