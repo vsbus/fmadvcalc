@@ -1620,6 +1620,9 @@ namespace FilterSimulationWithTablesAndGraphs
             };
             sigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
 
+            var sremTettaPeqCalculator = new fmSremTettaAdAgDHRmMmoleFPeqCalculator(tempSim.parameters.Values);
+            sremTettaPeqCalculator.DoCalculations();
+
             var deliquoringSimualtionCalculator =
                 new fmDeliquoringSimualtionCalculator(
                     new fmCalculatorsLibrary.fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions(

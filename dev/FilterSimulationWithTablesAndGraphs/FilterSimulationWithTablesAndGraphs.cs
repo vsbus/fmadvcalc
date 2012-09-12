@@ -676,6 +676,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void buttonDeleteRow_Click(object sender, EventArgs e)
         {
+            if (additionalParametersTable.CurrentCell == null)
+            {
+                additionalParametersTable.CurrentCell = additionalParametersTable[0, 0];
+            }
             int rowIdx = additionalParametersTable.CurrentCell.RowIndex;
             if (rowIdx == 0)
             {

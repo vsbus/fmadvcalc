@@ -126,7 +126,7 @@ namespace FilterSimulation
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(463, 380);
+            this.panel1.Size = new System.Drawing.Size(622, 380);
             this.panel1.TabIndex = 2;
             // 
             // simulationCalculationOptionGroupBox
@@ -135,7 +135,7 @@ namespace FilterSimulation
             this.simulationCalculationOptionGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simulationCalculationOptionGroupBox.Location = new System.Drawing.Point(190, 0);
             this.simulationCalculationOptionGroupBox.Name = "simulationCalculationOptionGroupBox";
-            this.simulationCalculationOptionGroupBox.Size = new System.Drawing.Size(273, 199);
+            this.simulationCalculationOptionGroupBox.Size = new System.Drawing.Size(432, 199);
             this.simulationCalculationOptionGroupBox.TabIndex = 2;
             this.simulationCalculationOptionGroupBox.TabStop = false;
             this.simulationCalculationOptionGroupBox.Text = "Simulation calculation option";
@@ -145,7 +145,7 @@ namespace FilterSimulation
             this.fmCalculationOptionView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fmCalculationOptionView1.Location = new System.Drawing.Point(3, 16);
             this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
-            this.fmCalculationOptionView1.Size = new System.Drawing.Size(267, 180);
+            this.fmCalculationOptionView1.Size = new System.Drawing.Size(426, 180);
             this.fmCalculationOptionView1.TabIndex = 0;
             this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
             // 
@@ -161,7 +161,7 @@ namespace FilterSimulation
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox1.Location = new System.Drawing.Point(0, 199);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(463, 181);
+            this.groupBox1.Size = new System.Drawing.Size(622, 181);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Deliquoring Calculation Option";
@@ -256,13 +256,13 @@ namespace FilterSimulation
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 380);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(463, 25);
+            this.panel2.Size = new System.Drawing.Size(622, 25);
             this.panel2.TabIndex = 3;
             // 
             // okButton
             // 
             this.okButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.okButton.Location = new System.Drawing.Point(293, 0);
+            this.okButton.Location = new System.Drawing.Point(452, 0);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 25);
             this.okButton.TabIndex = 1;
@@ -273,7 +273,7 @@ namespace FilterSimulation
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(368, 0);
+            this.panel4.Location = new System.Drawing.Point(527, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(10, 25);
             this.panel4.TabIndex = 3;
@@ -281,7 +281,7 @@ namespace FilterSimulation
             // cancelButton
             // 
             this.cancelButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cancelButton.Location = new System.Drawing.Point(378, 0);
+            this.cancelButton.Location = new System.Drawing.Point(537, 0);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(6);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 25);
@@ -293,7 +293,7 @@ namespace FilterSimulation
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(453, 0);
+            this.panel3.Location = new System.Drawing.Point(612, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(10, 25);
             this.panel3.TabIndex = 2;
@@ -302,7 +302,7 @@ namespace FilterSimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(463, 405);
+            this.ClientSize = new System.Drawing.Size(622, 405);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;

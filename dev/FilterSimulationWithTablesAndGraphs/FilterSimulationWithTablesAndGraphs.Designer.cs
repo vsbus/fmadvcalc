@@ -117,7 +117,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.GridPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.additionalParametersTable)).BeginInit();
             this.ParamsControlsPanel4.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.tablesAndGraphsTopLeftPanel.SuspendLayout();
             this.panel10.SuspendLayout();
             this.XYSplitContainer.Panel1.SuspendLayout();
@@ -169,11 +168,13 @@ namespace FilterSimulationWithTablesAndGraphs
             // suspensionRestoreButton
             // 
             this.suspensionRestoreButton.FlatAppearance.BorderSize = 0;
+            this.suspensionRestoreButton.Location = new System.Drawing.Point(105, 0);
             this.toolTip.SetToolTip(this.suspensionRestoreButton, "Restore suspension");
             // 
             // suspensionDeleteButton
             // 
             this.suspensionDeleteButton.FlatAppearance.BorderSize = 0;
+            this.suspensionDeleteButton.Location = new System.Drawing.Point(125, 0);
             this.toolTip.SetToolTip(this.suspensionDeleteButton, "Delete suspension");
             // 
             // simSeriesRestoreButton
@@ -317,6 +318,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // commentSuspensionButton
             // 
             this.commentSuspensionButton.FlatAppearance.BorderSize = 0;
+            this.commentSuspensionButton.Location = new System.Drawing.Point(145, 0);
             // 
             // commentSerieButton
             // 
@@ -528,7 +530,6 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.button1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
@@ -992,7 +993,6 @@ namespace FilterSimulationWithTablesAndGraphs
             ((System.ComponentModel.ISupportInitialize)(this.additionalParametersTable)).EndInit();
             this.ParamsControlsPanel4.ResumeLayout(false);
             this.ParamsControlsPanel4.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.tablesAndGraphsTopLeftPanel.ResumeLayout(false);
             this.panel10.ResumeLayout(false);
             this.XYSplitContainer.Panel1.ResumeLayout(false);

@@ -57,6 +57,12 @@ namespace FilterSimulation.fmFilterObjects
             foreach (fmGlobalParameter p in materialParametersList)
             {
                 parameters[p].value = from.parameters[p].value;
+                if ((parameters[p] is fmCalculationVariableParameter)
+                    && (from.parameters[p] is fmCalculationVariableParameter))
+                {
+                    ((fmCalculationVariableParameter)parameters[p]).isInputed
+                        = ((fmCalculationVariableParameter)from.parameters[p]).isInputed;
+                }
             }
         }
 
