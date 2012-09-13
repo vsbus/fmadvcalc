@@ -186,15 +186,34 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             Solution.currentObjects.Simulation.SetName(Solution.currentObjects.Serie.GetName() + "-1");
 
             fmFilterSimMachineType.FilterCycleType value = machine.GetFilterCycleType();
+            string errorMessage = "";
             if (ShowHideSchemas.ContainsKey(value))
             {
                 Solution.currentObjects.Serie.ParametersToDisplay =
                     new fmParametersToDisplay(value, ShowHideSchemas[value]);
             }
+            else
+            {
+                errorMessage += "Default parameters to display are not assigned to the selected filter type.";
+            }
+
             if (RangesSchemas.ContainsKey(machine))
             {
-                Solution.currentObjects.Serie.Ranges = 
+                Solution.currentObjects.Serie.Ranges =
                     new fmRangesConfiguration(machine, RangesSchemas[machine]);
+            }
+            else
+            {
+                if (errorMessage != "")
+                {
+                    errorMessage += "\n";
+                }
+                errorMessage += "Default ranges are not assigned to the selected filter type.";
+            }
+
+            if (errorMessage != "")
+            {
+                MessageBox.Show(errorMessage, "Warning.");
             }
 
             Solution.currentObjects.Serie.Keep();

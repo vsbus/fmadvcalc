@@ -668,13 +668,13 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
-                    //foreach (var p in simData.ExternalSimulation.Parameters.Values)
-                    //{
-                    //    if (p is fmCalculationVariableParameter)
-                    //    {
-                    //        ((fmCalculationVariableParameter)simData.InternalSimulationData.parameters[p.globalParameter]).isInputed = ((fmCalculationVariableParameter)p).isInputed;
-                    //    }
-                    //}
+                    foreach (var p in simData.ExternalSimulation.Parameters.Values)
+                    {
+                        if (p is fmCalculationVariableParameter)
+                        {
+                            ((fmCalculationVariableParameter)simData.InternalSimulationData.parameters[p.globalParameter]).isInputed = ((fmCalculationVariableParameter)p).isInputed;
+                        }
+                    }
                     simData.InternalSimulationData.filterMachiningCalculationOption = simData.ExternalSimulation.FilterMachiningCalculationOption;
                     simData.InternalSimulationData.deliquoringUsedCalculationOption = simData.ExternalSimulation.DeliquoringUsedCalculationOption;
                     simData.InternalSimulationData.gasFlowrateUsedCalculationOption = simData.ExternalSimulation.GasFlowrateUsedCalculationOption;
@@ -1552,6 +1552,19 @@ namespace FilterSimulationWithTablesAndGraphs
                             fmFilterSimulationData.CopyVariableParametersFromBlockToSimulation(localParameters.FilterMachiningBlock, tempSim);
                             fmFilterSimulationData.CopyVariableParametersFromBlockToSimulation(localParameters.DeliquoringBlock, tempSim);
                             tempSim.CopyMaterialParametersValuesFrom(sim.Data);
+                            var missedParametersToCopy = new[]
+                            {
+                                fmGlobalParameter.Dp_d,
+                                fmGlobalParameter.eps_d,
+                                fmGlobalParameter.hcd,
+                            };
+                            foreach (fmGlobalParameter parameter in missedParametersToCopy)
+                            {
+                                var target = (fmCalculationVariableParameter)tempSim.parameters[parameter];
+                                var source = (fmCalculationVariableParameter)sim.Data.parameters[parameter];
+                                target.isInputed = source.isInputed;
+                                target.value = source.value;
+                            }
                             tempSim.UpdateIsInputed(xParameter);
                             var xValue = new fmValue(x * xParameter.UnitFamily.CurrentUnit.Coef);
 
