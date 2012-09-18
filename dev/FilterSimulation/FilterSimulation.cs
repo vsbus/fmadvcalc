@@ -910,9 +910,12 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             simulationDataGrid.BeginEdit(true);
         }
 
-        // ReSharper disable InconsistentNaming
         private void calculationOptionChangeButton_Click(object sender, EventArgs e)
-        // ReSharper restore InconsistentNaming
+        {
+            RunCalculationOptionChangeDialog();
+        }
+
+        private void RunCalculationOptionChangeDialog()
         {
             if (Solution.currentObjects.Simulation == null)
             {
@@ -921,26 +924,26 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             }
 
             var cosd = new fmCalculationOptionSelectionDialog
-                           {
-                               suspensionCalculationOption =
-                                   Solution.currentObjects.Simulation.Data.suspensionCalculationOption,
-                               filterMachiningCalculationOption =
-                                   Solution.currentObjects.Simulation.Data.filterMachiningCalculationOption,
-                               deliquoringUsedCalculationOption = 
-                                   Solution.currentObjects.Simulation.Data.deliquoringUsedCalculationOption,
-                               gasFlowrateUsedCalculationOption = 
-                                   Solution.currentObjects.Simulation.Data.gasFlowrateUsedCalculationOption,
-                               evaporationUsedCalculationOption =
-                                   Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption,
-                               hcdEpsdCalculationOption =
-                                   Solution.currentObjects.Simulation.Data.hcdEpsdCalculationOption,
-                               dpdInputCalculationOption =
-                                   Solution.currentObjects.Simulation.Data.dpdInputCalculationOption,
-                               rhoDCalculationOption = 
-                                   Solution.currentObjects.Simulation.Data.rhoDCalculationOption,
-                               PcDCalculationOption =
-                                   Solution.currentObjects.Simulation.Data.PcDCalculationOption
-                            };
+            {
+                suspensionCalculationOption =
+                    Solution.currentObjects.Simulation.Data.suspensionCalculationOption,
+                filterMachiningCalculationOption =
+                    Solution.currentObjects.Simulation.Data.filterMachiningCalculationOption,
+                deliquoringUsedCalculationOption =
+                    Solution.currentObjects.Simulation.Data.deliquoringUsedCalculationOption,
+                gasFlowrateUsedCalculationOption =
+                    Solution.currentObjects.Simulation.Data.gasFlowrateUsedCalculationOption,
+                evaporationUsedCalculationOption =
+                    Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption,
+                hcdEpsdCalculationOption =
+                    Solution.currentObjects.Simulation.Data.hcdEpsdCalculationOption,
+                dpdInputCalculationOption =
+                    Solution.currentObjects.Simulation.Data.dpdInputCalculationOption,
+                rhoDCalculationOption =
+                    Solution.currentObjects.Simulation.Data.rhoDCalculationOption,
+                PcDCalculationOption =
+                    Solution.currentObjects.Simulation.Data.PcDCalculationOption
+            };
             if (cosd.ShowDialog() == DialogResult.OK)
             {
                 Solution.currentObjects.Simulation.susBlock.SetCalculationOptionAndRewrite(cosd.suspensionCalculationOption);
@@ -1087,6 +1090,11 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         private void button3_Click_1(object sender, EventArgs e)
         {
             SelectMachineButtonClick(sender, e);
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            RunCalculationOptionChangeDialog();
         }
     }
 }
