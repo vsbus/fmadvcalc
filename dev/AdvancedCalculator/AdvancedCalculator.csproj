@@ -72,6 +72,7 @@
       <DependentUpon>UnitsOptions.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Compile Include="ProtectionChecker.cs" />
     <Compile Include="UnitsOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +101,16 @@
       <Project>{1F1A3827-D9AD-4A97-B7A1-CE0F1FDDE5D6}</Project>
       <Name>fmMisc</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WIBUKEYLib">
+      <Guid>{00010000-0000-1012-8002-0000C06B5161}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

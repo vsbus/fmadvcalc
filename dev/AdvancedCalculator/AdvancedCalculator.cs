@@ -33,6 +33,11 @@ namespace AdvancedCalculator
 
         private void AdvancedCalculatorLoad(object sender, EventArgs e)
         {
+            if (!ProtectionChecker.CheckProtectionWithDialog())
+            {
+                Close();
+            }
+
             try
             {
                 var doc = new XmlDocument();
@@ -138,6 +143,9 @@ namespace AdvancedCalculator
 
         private void FmAdvancedCalculatorFormClosed(object sender, FormClosedEventArgs e)
         {
+            if (!ProtectionChecker.CheckProtection())
+                return;
+
             SaveConfigurations();
             if (filterSimulationWithTablesAndGraphs1.IsModified())
             {
@@ -265,6 +273,14 @@ namespace AdvancedCalculator
         private void filterTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             filterSimulationWithTablesAndGraphs1.SelectMachineButtonClick(sender, e);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (!ProtectionChecker.CheckProtectionWithDialog())
+            {
+                Close();
+            }
         }
     }
 }
