@@ -9,7 +9,8 @@ namespace AdvancedCalculator
     public static class ProtectionChecker
     {
         static bool m_checkProtectionDialogWorks;
-
+        static bool m_isProtectionDisabled = false;
+        
         public static bool CheckProtectionWithDialog()
         {
             if (m_checkProtectionDialogWorks)
@@ -42,7 +43,11 @@ namespace AdvancedCalculator
             };
 
             bool isKeyFound = false;
-
+            if (m_isProtectionDisabled)
+            {
+                isKeyFound = true;
+            }
+            
             foreach (int key in keys)
             {
                 if (ProtectionOK(key))
