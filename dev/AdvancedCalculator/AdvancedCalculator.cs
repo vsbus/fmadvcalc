@@ -55,9 +55,13 @@ namespace AdvancedCalculator
                 @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
                 "LastFile",
                 "");
-            if (regValue != null)
+            if (regValue != null && regValue.ToString() != "")
             {
                 LoadFromDisk(regValue.ToString());
+            }
+            else
+            {
+                CreateNewFile();
             }
         }
 
@@ -257,6 +261,11 @@ namespace AdvancedCalculator
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateNewFile();
+        }
+
+        private void CreateNewFile()
         {
             m_currentFilename = null;
             Text = m_caption;

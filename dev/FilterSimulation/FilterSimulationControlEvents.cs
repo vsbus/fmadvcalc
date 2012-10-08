@@ -185,12 +185,23 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             Solution.currentObjects.Simulation = new fmFilterSimulation(Solution.currentObjects.Serie, "Sim");
             Solution.currentObjects.Simulation.SetName(Solution.currentObjects.Serie.GetName() + "-1");
 
+            AssignParametersToDisplayAndRangesOfGivenMachineWithSerie(
+                Solution.currentObjects.Serie, machine);
+
+            Solution.currentObjects.Serie.Keep();
+
+            return true;
+        }
+
+        private void AssignParametersToDisplayAndRangesOfGivenMachineWithSerie(
+            fmFilterSimSerie serie,
+            fmFilterSimMachineType machine)
+        {
             fmFilterSimMachineType.FilterCycleType value = machine.GetFilterCycleType();
             string errorMessage = "";
             if (ShowHideSchemas.ContainsKey(value))
             {
-                Solution.currentObjects.Serie.ParametersToDisplay =
-                    new fmParametersToDisplay(value, ShowHideSchemas[value]);
+                serie.ParametersToDisplay = new fmParametersToDisplay(value, ShowHideSchemas[value]);
             }
             else
             {
@@ -199,8 +210,7 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
 
             if (RangesSchemas.ContainsKey(machine))
             {
-                Solution.currentObjects.Serie.Ranges =
-                    new fmRangesConfiguration(machine, RangesSchemas[machine]);
+                serie.Ranges = new fmRangesConfiguration(machine, RangesSchemas[machine]);
             }
             else
             {
@@ -215,10 +225,6 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             {
                 MessageBox.Show(errorMessage, "Warning.");
             }
-
-            Solution.currentObjects.Serie.Keep();
-
-            return true;
         }
         // ReSharper disable InconsistentNaming
         private void simSeriesKeepButton_Click(object sender, EventArgs e)
