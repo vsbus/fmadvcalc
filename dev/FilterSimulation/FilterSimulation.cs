@@ -947,16 +947,19 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             if (cosd.ShowDialog() == DialogResult.OK)
             {
                 Solution.currentObjects.Simulation.susBlock.SetCalculationOptionAndRewrite(cosd.suspensionCalculationOption);
+                
                 Solution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.filterMachiningCalculationOption);
                 Solution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.deliquoringUsedCalculationOption);
                 Solution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.gasFlowrateUsedCalculationOption);
-                Solution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.evaporationUsedCalculationOption);
+                Solution.currentObjects.Simulation.filterMachiningBlock.SetCalculationOptionAndRewriteData(cosd.evaporationUsedCalculationOption);
+                
                 Solution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.deliquoringUsedCalculationOption);
                 Solution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.hcdEpsdCalculationOption);
-                Solution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.dpdInputCalculationOption);
+                Solution.currentObjects.Simulation.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(cosd.dpdInputCalculationOption);
+                
                 Solution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.deliquoringUsedCalculationOption);
                 Solution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.rhoDCalculationOption);
-                Solution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.PcDCalculationOption);
+                Solution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.PcDCalculationOption);
                 DisplaySolution(Solution);
             }
         }
