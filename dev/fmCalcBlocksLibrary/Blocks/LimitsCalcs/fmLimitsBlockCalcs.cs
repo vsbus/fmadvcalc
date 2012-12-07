@@ -8,7 +8,7 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 {
     public class fmLimitsBlockCalcs
     {
-        private enum fmResultCheckStatus
+        public enum fmResultCheckStatus
         {
             N_A,
             NEGATIVE,
@@ -25,7 +25,7 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
             N_A
         }
 
-        static private bool IsGoodResultStatus(Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus)
+        public static bool IsGoodResultStatus(Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus)
         {
             bool goodPoint = true;
             foreach (fmResultCheckStatus status in resultSatus.Values)
@@ -42,6 +42,11 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
         static private Dictionary<fmGlobalParameter, fmResultCheckStatus> GetResultStatus(fmBlockVariableParameter parameter, double valueToCheck, fmBaseBlock block)
         {
             Dictionary<fmGlobalParameter, fmValue> resultValues = GetResultsWithSpecialParameterValue(parameter, valueToCheck, block);
+            return GetResultStatus(resultValues);
+        }
+
+        public static Dictionary<fmGlobalParameter, fmResultCheckStatus> GetResultStatus(Dictionary<fmGlobalParameter, fmValue> resultValues)
+        {
             var result = new Dictionary<fmGlobalParameter, fmResultCheckStatus>();
 
             foreach (fmGlobalParameter p in resultValues.Keys)
