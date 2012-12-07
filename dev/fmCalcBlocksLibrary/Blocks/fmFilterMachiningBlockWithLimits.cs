@@ -437,8 +437,24 @@ namespace fmCalcBlocksLibrary.Blocks
             var naInputs = new List<fmBlockVariableParameter>();
             CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.Name), naInputs);
             CheckNAAndAdd(GetParameterByName(fmGlobalParameter.Dp.Name), naInputs);
-            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.sf.Name), naInputs);
-            CheckNAAndAdd(GetParameterByName(fmGlobalParameter.tc.Name), naInputs);
+            var sfGroup = new[] {fmGlobalParameter.sf, fmGlobalParameter.sr, fmGlobalParameter.tr};
+            foreach (var p in sfGroup)
+            {
+                if (p.SpecifiedRange.IsInputed)
+                {
+                    CheckNAAndAdd(GetParameterByName(p.Name), naInputs);
+                    break;
+                }
+            }
+            var hcGroup = new[] {fmGlobalParameter.hc, fmGlobalParameter.n, fmGlobalParameter.tc, fmGlobalParameter.tf};
+            foreach (var p in hcGroup)
+            {
+                if (p.SpecifiedRange.IsInputed)
+                {
+                    CheckNAAndAdd(GetParameterByName(p.Name), naInputs);
+                    break;
+                }
+            }
             var d0 = GetParameterByName(fmGlobalParameter.d0.Name);
             if (d0.group != null)
             {
