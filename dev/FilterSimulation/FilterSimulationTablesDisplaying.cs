@@ -1139,6 +1139,7 @@ namespace FilterSimulation
                         for (int rowIdx = 0; rowIdx < simulationDataGrid.RowCount; ++rowIdx)
                         {
                             if (simulationDataGrid.Rows[rowIdx].Visible
+                                && simulationDataGrid[col.Index, rowIdx].Value != null
                                 && simulationDataGrid[col.Index, rowIdx].Value.ToString() != "-")
                             {
                                 isAllDashes = false;
