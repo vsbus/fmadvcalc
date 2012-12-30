@@ -2016,6 +2016,8 @@ namespace fmCalculatorsLibrary
 
         private void DoSubCalculationsVolumetricPumpQpInput(QpCalculatorHelperForDpInput.AreaKind areaKind)
         {
+            const int BinSearchIterations = 120;
+
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
             var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
 
@@ -2031,15 +2033,15 @@ namespace fmCalculatorsLibrary
             if (leftValue.defined == false)
             {
                 QpDefinedCalculatorHelperForDpInput qdDefCalc = new QpDefinedCalculatorHelperForDpInput(qpCalc);
-                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qdDefCalc, left, right, 80);
+                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qdDefCalc, left, right, BinSearchIterations);
                 leftValue = qpCalc.Eval(left);
             }
             fmValue rightValue = qpCalc.Eval(right);
             if (fmValue.Sign(leftValue, eps) == fmValue.Sign(rightValue, eps))
             {
-                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindBreakInUnimodalFunction(qpCalc, left, right, 80);
+                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindBreakInUnimodalFunction(qpCalc, left, right, BinSearchIterations);
             }
-            Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, left, right, 80);
+            Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, left, right, BinSearchIterations);
             qpCalc.Eval(Dp.value);
             Qp.value = qpValue;
 

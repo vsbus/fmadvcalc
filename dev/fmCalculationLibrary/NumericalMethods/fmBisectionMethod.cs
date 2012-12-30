@@ -25,8 +25,16 @@ namespace fmCalculationLibrary.NumericalMethods
                 eps = eps * fmValue.Abs(len);
             }
 
-            fmValue beginValue = function.Eval(beginArg + eps);
-            fmValue endValue = function.Eval(endArg - eps);
+            fmValue beginValue = function.Eval(beginArg);
+            if (!beginValue.defined)
+            {
+                beginValue = function.Eval(beginArg + eps);
+            }
+            fmValue endValue = function.Eval(endArg);
+            if (!endValue.defined)
+            {
+                endValue = function.Eval(endArg - eps);
+            }
             if (beginValue.defined == false || endValue.defined == false)
             {
                 return false;
@@ -63,6 +71,10 @@ namespace fmCalculationLibrary.NumericalMethods
             for (int i = 0; i < iterationsCount; ++i)
             {
                 fmValue middle = 0.5 * (left + right);
+                if (middle == left || middle == right)
+                {
+                    break;
+                }
                 fmValue value = function.Eval(middle);
 
                 if (!value.defined)
@@ -85,7 +97,12 @@ namespace fmCalculationLibrary.NumericalMethods
             fmValue endRes;
             if (FindRootRange(function, beginArg, endArg, iterationsCount, out beginRes, out endRes))
             {
-                return 0.5 * (beginRes + endRes);
+                fmValue mid = 0.5*(beginRes + endRes);
+                if (mid == beginRes)
+                {
+                    mid = endRes;
+                }
+                return mid;
             }
             return new fmValue();
         }
