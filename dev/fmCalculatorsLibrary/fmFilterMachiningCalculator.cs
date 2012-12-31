@@ -193,7 +193,6 @@ namespace fmCalculatorsLibrary
         private void DoSubCalculationsCylindricalQpConstVolumetricPump()
         {
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
-            var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
             if (Dp.isInputed)
             {
                 DoSubCalculationsCylindricalQpConst();
@@ -614,7 +613,7 @@ namespace fmCalculatorsLibrary
 
         private void DoSubCalculationsPlainDpQpConst_OnlyLimitClueParams()
         {
-            DoSubCalculationsPlainDpQpConst();
+            DoSubCalculationsPlainDpQpConstCentripetalPump();
         }
 
         private void DoSubCalculationsPlainQpConst_OnlyLimitClueParams()
@@ -1800,7 +1799,7 @@ namespace fmCalculatorsLibrary
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST)
             {
-                DoSubCalculationsPlainDpQpConst();
+                DoSubCalculationsPlainDpQpConstCentripetalPump();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST)
             {
@@ -1816,7 +1815,7 @@ namespace fmCalculatorsLibrary
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST)
             {
-                DoSubCalculationsCylindricalDpQpConst();
+                DoSubCalculationsCylindricalDpQpConstCentripetalPump();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST)
             {
@@ -1950,6 +1949,195 @@ namespace fmCalculatorsLibrary
                 qmc.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmc.value, A.value);
                 qmc_d.value = fmFilterMachiningEquations.Eval_q_From_Q_A(Qmc_d.value, A.value);
             }
+        }
+
+        private void DoSubCalculationsCylindricalDpQpConstCentripetalPump()
+        {
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            if (A.isInputed)
+            {
+                DoSubCalculationsCylindricalDpQpConst();
+            }
+            else
+            {
+                DoSubCalculationsCentripetalPumpQInput(QsusCalculatorHelperForAInput.AreaKind.CYLINDRICAL);
+            }
+        }
+
+        private void DoSubCalculationsPlainDpQpConstCentripetalPump()
+        {
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+            if (A.isInputed)
+            {
+                DoSubCalculationsPlainDpQpConst();
+            }
+            else
+            {
+                DoSubCalculationsCentripetalPumpQInput(QsusCalculatorHelperForAInput.AreaKind.PLAIN);
+            }
+        }
+
+        private class QsusCalculatorHelperForAInput : fmCalculationLibrary.NumericalMethods.fmFunction
+        {
+            public enum AreaKind
+            {
+                PLAIN,
+                CYLINDRICAL
+            }
+            fmFilterMachiningCalculator fmc;
+            fmValue QsusValue;
+            AreaKind areaKind;
+            public QsusCalculatorHelperForAInput(fmFilterMachiningCalculator fmc, fmValue QsusValue, AreaKind areaKind)
+            {
+                this.fmc = fmc;
+                this.QsusValue = QsusValue;
+                this.areaKind = areaKind;
+            }
+            override public fmValue Eval(fmValue x)
+            {
+                fmc.variables[fmGlobalParameter.A].value = x;
+                switch (areaKind)
+                {
+                    case AreaKind.PLAIN:
+                        fmc.DoSubCalculationsPlainDpQpConstCentripetalPump();
+                        break;
+                    case AreaKind.CYLINDRICAL:
+                        fmc.DoSubCalculationsCylindricalDpQpConstCentripetalPump();
+                        break;
+                    default:
+                        throw new Exception("Unhandled area kind.");
+                }
+                fmValue curQsusValue = fmc.variables[fmGlobalParameter.Qsus].value;
+                return QsusValue - curQsusValue;
+            }
+        };
+        private class QsusDefinedCalculatorHelperForAInput : fmCalculationLibrary.NumericalMethods.fmFunction
+        {
+            QsusCalculatorHelperForAInput qsusCalc;
+            public QsusDefinedCalculatorHelperForAInput(QsusCalculatorHelperForAInput qsusCalc)
+            {
+                this.qsusCalc = qsusCalc;
+            }
+            override public fmValue Eval(fmValue x)
+            {
+                fmValue val = qsusCalc.Eval(x);
+                return new fmValue(val.defined ? 1 : -1);
+            }
+        };
+
+        private void DoSubCalculationsCentripetalPumpQInput(QsusCalculatorHelperForAInput.AreaKind areaKind)
+        {
+            const int BinSearchIterations = 120;
+
+            var rho_sus = variables[fmGlobalParameter.rho_sus];
+            var rho_s = variables[fmGlobalParameter.rho_s];
+            var rho_f = variables[fmGlobalParameter.rho_f];
+            var kappa = variables[fmGlobalParameter.kappa];
+            var Cm = variables[fmGlobalParameter.Cm];
+
+            var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
+
+            var Qsus = variables[fmGlobalParameter.Qsus] as fmCalculationVariableParameter;
+            var Qs = variables[fmGlobalParameter.Qs] as fmCalculationVariableParameter;
+            var Qf = variables[fmGlobalParameter.Qf] as fmCalculationVariableParameter;
+            var Qc = variables[fmGlobalParameter.Qc] as fmCalculationVariableParameter;
+            var Qmsus = variables[fmGlobalParameter.Qmsus] as fmCalculationVariableParameter;
+            var Qms = variables[fmGlobalParameter.Qms] as fmCalculationVariableParameter;
+            var Qmf = variables[fmGlobalParameter.Qmf] as fmCalculationVariableParameter;
+            var Qmc = variables[fmGlobalParameter.Qmc] as fmCalculationVariableParameter;
+            
+            A.isInputed = true;
+            fmCalculationVariableParameter inputQ = null;
+            var arrayQ = new[]
+                             {
+                                 Qsus,
+                                 Qs,
+                                 Qf,
+                                 Qc,
+                                 Qmsus,
+                                 Qms,
+                                 Qmf,
+                                 Qmc
+                             };
+            foreach (fmCalculationVariableParameter qPar in arrayQ)
+            {
+                if (qPar.isInputed)
+                {
+                    inputQ = qPar;
+                    break;
+                }
+            }
+            fmValue inputQValue = inputQ.value;
+
+            if (Qmsus.isInputed)
+            {
+                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
+                Qmsus.isInputed = false;
+                Qsus.isInputed = true;
+            }
+            if (Qms.isInputed)
+            {
+                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
+                Qms.isInputed = false;
+                Qs.isInputed = true;
+            }
+            if (Qmf.isInputed)
+            {
+                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
+                Qmf.isInputed = false;
+                Qf.isInputed = true;
+            }
+            if (Qmc.isInputed)
+            {
+                Qc.value = fmFilterMachiningEquations.Eval_vc_From_mc_kappa_rho(Qmc.value, kappa.value, rho_sus.value, rho_f.value);
+                Qmc.isInputed = false;
+                Qc.isInputed = true;
+            }
+            if (Qs.isInputed)
+            {
+                Qsus.value = fmFilterMachiningEquations.Eval_vsus_From_vs_rho_Cm(Qs.value, rho_s.value, rho_sus.value, Cm.value);
+                Qs.isInputed = false;
+                Qsus.isInputed = true;
+            }
+            if (Qf.isInputed)
+            {
+                Qsus.value = fmFilterMachiningEquations.Eval_vsus_From_vf_kappa(Qf.value, kappa.value);
+                Qf.isInputed = false;
+                Qsus.isInputed = true;
+            }
+            if (Qsus.isInputed)
+            {
+                Qc.value = fmFilterMachiningEquations.Eval_vc_From_vsus_kappa(Qsus.value, kappa.value);
+                Qsus.isInputed = false;
+                Qc.isInputed = true;
+            }
+            A.isInputed = true;
+
+            fmValue QsusValue = Qsus.value;
+            var qsusCalc = new QsusCalculatorHelperForAInput(this, QsusValue, areaKind);
+            fmValue eps = new fmValue(1e-9);
+            fmValue left = eps;  // we can't calculate in A=0 because we do many divisions by A;
+            fmValue leftValue = qsusCalc.Eval(left);
+            fmValue right = new fmValue(1e4);
+            fmValue rightValue = qsusCalc.Eval(right);
+            if (rightValue.defined == false)
+            {
+                var qsusDefCalc = new QsusDefinedCalculatorHelperForAInput(qsusCalc);
+                fmValue beginRes, endRes;
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(qsusDefCalc, left, right, BinSearchIterations, out beginRes, out endRes);
+                right = beginRes;
+                rightValue = qsusCalc.Eval(right);
+            }
+            if (fmValue.Sign(leftValue, eps) == fmValue.Sign(rightValue, eps))
+            {
+                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindBreakInUnimodalFunction(qsusCalc, left, right, BinSearchIterations);
+            }
+            A.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qsusCalc, left, right, BinSearchIterations);
+            qsusCalc.Eval(A.value);
+            inputQ.value = inputQValue;
+
+            A.isInputed = false;
+            inputQ.isInputed = true;
         }
 
         private class QpCalculatorHelperForDpInput : fmCalculationLibrary.NumericalMethods.fmFunction
