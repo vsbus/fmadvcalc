@@ -29,12 +29,12 @@ namespace FilterSimulation
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationControl));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.byCheckingProjectsCheckBox = new System.Windows.Forms.CheckBox();
             this.byCheckingSuspensionsCheckBox = new System.Windows.Forms.CheckBox();
             this.byCheckingSimSeriesCheckBox = new System.Windows.Forms.CheckBox();
@@ -85,6 +85,14 @@ namespace FilterSimulation
             this.machineTypeSymbolColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.machineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simSeriesDataGrid = new fmDataGrid.fmDataGrid();
+            this.simSeriesCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.simSeriesGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesMachineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel3 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.commentSerieButton = new System.Windows.Forms.Button();
@@ -93,16 +101,7 @@ namespace FilterSimulation
             this.simSeriesDuplicateButton = new System.Windows.Forms.Button();
             this.simSeriesCreateButton = new System.Windows.Forms.Button();
             this.splitter2 = new System.Windows.Forms.Splitter();
-            this.simulationGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.simulationCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.simulationProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationMachineTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationSimSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simulationCalculationOptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel6 = new System.Windows.Forms.Panel();
             this.commonDeliquoringSimulationBlockDataGrid = new fmDataGrid.fmDataGrid();
             this.commonDeliquoringSimulationBlockParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,6 +122,7 @@ namespace FilterSimulation
             this.commonCalcBlockParameterValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.commonCalcBlockMaxLocalColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.commonCalcBlockMaxAbsColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.LimitsAndMessagePanel = new System.Windows.Forms.Panel();
             this.calculateLimitsCheckBox = new System.Windows.Forms.CheckBox();
             this.panelMaterialParameters = new System.Windows.Forms.Panel();
             this.calculationOptionChangeButton = new System.Windows.Forms.Button();
@@ -141,6 +141,15 @@ namespace FilterSimulation
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.simulationGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationMachineTypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationSimSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.simulationCalculationOptionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -159,14 +168,7 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesCheckedColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.simSeriesGuidColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesProjectColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesSuspensionNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesFilterMediumColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesMachineTypeNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.simSeriesMachineNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorMessageLabel = new System.Windows.Forms.Label();
             this.panelLeft.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
@@ -193,6 +195,7 @@ namespace FilterSimulation
             ((System.ComponentModel.ISupportInitialize)(this.commonDeliquoringSimulationBlockDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).BeginInit();
+            this.LimitsAndMessagePanel.SuspendLayout();
             this.panelMaterialParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).BeginInit();
@@ -318,14 +321,14 @@ namespace FilterSimulation
             this.simulationDataGrid.HighLightCurrentRow = true;
             this.simulationDataGrid.Location = new System.Drawing.Point(0, 20);
             this.simulationDataGrid.Name = "simulationDataGrid";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.simulationDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.simulationDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.simulationDataGrid.RowHeadersVisible = false;
             this.simulationDataGrid.RowTemplate.Height = 18;
             this.simulationDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -514,14 +517,14 @@ namespace FilterSimulation
             this.projectDataGrid.HighLightCurrentRow = true;
             this.projectDataGrid.Location = new System.Drawing.Point(0, 20);
             this.projectDataGrid.Name = "projectDataGrid";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.projectDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.projectDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.projectDataGrid.RowHeadersVisible = false;
             this.projectDataGrid.RowTemplate.Height = 18;
             this.projectDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -662,14 +665,14 @@ namespace FilterSimulation
             this.suspensionDataGrid.HighLightCurrentRow = true;
             this.suspensionDataGrid.Location = new System.Drawing.Point(0, 20);
             this.suspensionDataGrid.Name = "suspensionDataGrid";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.suspensionDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.suspensionDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.suspensionDataGrid.RowHeadersVisible = false;
             this.suspensionDataGrid.RowTemplate.Height = 18;
             this.suspensionDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -825,14 +828,14 @@ namespace FilterSimulation
             this.machineTypesDataGrid.HighLightCurrentRow = false;
             this.machineTypesDataGrid.Location = new System.Drawing.Point(190, 26);
             this.machineTypesDataGrid.Name = "machineTypesDataGrid";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.machineTypesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.machineTypesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.machineTypesDataGrid.RowHeadersVisible = false;
             this.machineTypesDataGrid.RowTemplate.Height = 18;
             this.machineTypesDataGrid.Size = new System.Drawing.Size(157, 47);
@@ -879,14 +882,14 @@ namespace FilterSimulation
             this.simSeriesDataGrid.HighLightCurrentRow = true;
             this.simSeriesDataGrid.Location = new System.Drawing.Point(0, 20);
             this.simSeriesDataGrid.Name = "simSeriesDataGrid";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.simSeriesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.simSeriesDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.simSeriesDataGrid.RowHeadersVisible = false;
             this.simSeriesDataGrid.RowTemplate.Height = 18;
             this.simSeriesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
@@ -896,6 +899,62 @@ namespace FilterSimulation
             this.simSeriesDataGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellEndEdit);
             this.simSeriesDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellClick);
             this.simSeriesDataGrid.CurrentCellChanged += new System.EventHandler(this.simSeriesDataGrid_CurrentCellChanged);
+            // 
+            // simSeriesCheckedColumn
+            // 
+            this.simSeriesCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.simSeriesCheckedColumn.HeaderText = "";
+            this.simSeriesCheckedColumn.Name = "simSeriesCheckedColumn";
+            this.simSeriesCheckedColumn.Width = 5;
+            // 
+            // simSeriesGuidColumn
+            // 
+            this.simSeriesGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.simSeriesGuidColumn.HeaderText = "Guid";
+            this.simSeriesGuidColumn.Name = "simSeriesGuidColumn";
+            this.simSeriesGuidColumn.ReadOnly = true;
+            this.simSeriesGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.simSeriesGuidColumn.Visible = false;
+            // 
+            // simSeriesNameColumn
+            // 
+            this.simSeriesNameColumn.HeaderText = "Series Name";
+            this.simSeriesNameColumn.Name = "simSeriesNameColumn";
+            this.simSeriesNameColumn.Width = 75;
+            // 
+            // simSeriesProjectColumn
+            // 
+            this.simSeriesProjectColumn.HeaderText = "Project";
+            this.simSeriesProjectColumn.Name = "simSeriesProjectColumn";
+            this.simSeriesProjectColumn.ReadOnly = true;
+            this.simSeriesProjectColumn.Width = 75;
+            // 
+            // simSeriesSuspensionNameColumn
+            // 
+            this.simSeriesSuspensionNameColumn.HeaderText = "Suspension";
+            this.simSeriesSuspensionNameColumn.Name = "simSeriesSuspensionNameColumn";
+            this.simSeriesSuspensionNameColumn.ReadOnly = true;
+            this.simSeriesSuspensionNameColumn.Width = 150;
+            // 
+            // simSeriesFilterMediumColumn
+            // 
+            this.simSeriesFilterMediumColumn.HeaderText = "Filter Medium";
+            this.simSeriesFilterMediumColumn.Name = "simSeriesFilterMediumColumn";
+            this.simSeriesFilterMediumColumn.Width = 75;
+            // 
+            // simSeriesMachineTypeNameColumn
+            // 
+            this.simSeriesMachineTypeNameColumn.HeaderText = "Filter Types";
+            this.simSeriesMachineTypeNameColumn.Name = "simSeriesMachineTypeNameColumn";
+            this.simSeriesMachineTypeNameColumn.ReadOnly = true;
+            this.simSeriesMachineTypeNameColumn.Width = 160;
+            // 
+            // simSeriesMachineNameColumn
+            // 
+            this.simSeriesMachineNameColumn.HeaderText = "Filter Name";
+            this.simSeriesMachineNameColumn.Name = "simSeriesMachineNameColumn";
+            this.simSeriesMachineNameColumn.Visible = false;
+            this.simSeriesMachineNameColumn.Width = 75;
             // 
             // panel3
             // 
@@ -1002,14 +1061,6 @@ namespace FilterSimulation
             this.splitter2.TabIndex = 3;
             this.splitter2.TabStop = false;
             // 
-            // simulationGuidColumn
-            // 
-            this.simulationGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.simulationGuidColumn.HeaderText = "Guid";
-            this.simulationGuidColumn.Name = "simulationGuidColumn";
-            this.simulationGuidColumn.ReadOnly = true;
-            this.simulationGuidColumn.Visible = false;
-            // 
             // simulationCheckedColumn
             // 
             this.simulationCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -1017,60 +1068,13 @@ namespace FilterSimulation
             this.simulationCheckedColumn.MinimumWidth = 20;
             this.simulationCheckedColumn.Name = "simulationCheckedColumn";
             // 
-            // simulationProjectColumn
-            // 
-            this.simulationProjectColumn.HeaderText = "Project";
-            this.simulationProjectColumn.Name = "simulationProjectColumn";
-            this.simulationProjectColumn.ReadOnly = true;
-            // 
-            // simulationSuspensionNameColumn
-            // 
-            this.simulationSuspensionNameColumn.HeaderText = "Suspension";
-            this.simulationSuspensionNameColumn.Name = "simulationSuspensionNameColumn";
-            this.simulationSuspensionNameColumn.ReadOnly = true;
-            this.simulationSuspensionNameColumn.Width = 150;
-            // 
-            // simulationFilterMediumColumn
-            // 
-            this.simulationFilterMediumColumn.HeaderText = "Filter Medium";
-            this.simulationFilterMediumColumn.Name = "simulationFilterMediumColumn";
-            this.simulationFilterMediumColumn.ReadOnly = true;
-            // 
-            // simulationMachineTypeColumn
-            // 
-            this.simulationMachineTypeColumn.HeaderText = "Filter Type";
-            this.simulationMachineTypeColumn.Name = "simulationMachineTypeColumn";
-            this.simulationMachineTypeColumn.ReadOnly = true;
-            // 
-            // simulationMachineNameColumn
-            // 
-            this.simulationMachineNameColumn.HeaderText = "Filter Name";
-            this.simulationMachineNameColumn.Name = "simulationMachineNameColumn";
-            this.simulationMachineNameColumn.ReadOnly = true;
-            // 
-            // simulationSimSeriesNameColumn
-            // 
-            this.simulationSimSeriesNameColumn.HeaderText = "SimSeries";
-            this.simulationSimSeriesNameColumn.Name = "simulationSimSeriesNameColumn";
-            this.simulationSimSeriesNameColumn.ReadOnly = true;
-            // 
-            // simulationNameColumn
-            // 
-            this.simulationNameColumn.HeaderText = "Simulation Name";
-            this.simulationNameColumn.Name = "simulationNameColumn";
-            // 
-            // simulationCalculationOptionColumn
-            // 
-            this.simulationCalculationOptionColumn.HeaderText = "Calculation Option";
-            this.simulationCalculationOptionColumn.Name = "simulationCalculationOptionColumn";
-            // 
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel6.Controls.Add(this.commonDeliquoringSimulationBlockDataGrid);
             this.panel6.Controls.Add(this.deliquoringMaterialParametersDataGrid);
             this.panel6.Controls.Add(this.commonCalcBlockDataGrid);
-            this.panel6.Controls.Add(this.calculateLimitsCheckBox);
+            this.panel6.Controls.Add(this.LimitsAndMessagePanel);
             this.panel6.Controls.Add(this.panelMaterialParameters);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
@@ -1097,11 +1101,11 @@ namespace FilterSimulation
             this.commonDeliquoringSimulationBlockDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.commonDeliquoringSimulationBlockDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.commonDeliquoringSimulationBlockDataGrid.HighLightCurrentRow = false;
-            this.commonDeliquoringSimulationBlockDataGrid.Location = new System.Drawing.Point(715, 17);
+            this.commonDeliquoringSimulationBlockDataGrid.Location = new System.Drawing.Point(715, 20);
             this.commonDeliquoringSimulationBlockDataGrid.Name = "commonDeliquoringSimulationBlockDataGrid";
             this.commonDeliquoringSimulationBlockDataGrid.RowHeadersVisible = false;
             this.commonDeliquoringSimulationBlockDataGrid.RowTemplate.Height = 18;
-            this.commonDeliquoringSimulationBlockDataGrid.Size = new System.Drawing.Size(292, 365);
+            this.commonDeliquoringSimulationBlockDataGrid.Size = new System.Drawing.Size(292, 362);
             this.commonDeliquoringSimulationBlockDataGrid.TabIndex = 17;
             // 
             // commonDeliquoringSimulationBlockParameterNameColumn
@@ -1169,11 +1173,11 @@ namespace FilterSimulation
             this.deliquoringMaterialParametersDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.deliquoringMaterialParametersDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.deliquoringMaterialParametersDataGrid.HighLightCurrentRow = false;
-            this.deliquoringMaterialParametersDataGrid.Location = new System.Drawing.Point(510, 17);
+            this.deliquoringMaterialParametersDataGrid.Location = new System.Drawing.Point(510, 20);
             this.deliquoringMaterialParametersDataGrid.Name = "deliquoringMaterialParametersDataGrid";
             this.deliquoringMaterialParametersDataGrid.RowHeadersVisible = false;
             this.deliquoringMaterialParametersDataGrid.RowTemplate.Height = 16;
-            this.deliquoringMaterialParametersDataGrid.Size = new System.Drawing.Size(205, 365);
+            this.deliquoringMaterialParametersDataGrid.Size = new System.Drawing.Size(205, 362);
             this.deliquoringMaterialParametersDataGrid.TabIndex = 16;
             // 
             // deliquoringMaterialParametersParameterNameColumn
@@ -1207,11 +1211,11 @@ namespace FilterSimulation
             this.commonCalcBlockDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.commonCalcBlockDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.commonCalcBlockDataGrid.HighLightCurrentRow = false;
-            this.commonCalcBlockDataGrid.Location = new System.Drawing.Point(205, 17);
+            this.commonCalcBlockDataGrid.Location = new System.Drawing.Point(205, 20);
             this.commonCalcBlockDataGrid.Name = "commonCalcBlockDataGrid";
             this.commonCalcBlockDataGrid.RowHeadersVisible = false;
             this.commonCalcBlockDataGrid.RowTemplate.Height = 16;
-            this.commonCalcBlockDataGrid.Size = new System.Drawing.Size(305, 365);
+            this.commonCalcBlockDataGrid.Size = new System.Drawing.Size(305, 362);
             this.commonCalcBlockDataGrid.TabIndex = 13;
             // 
             // commonCalcBlockParameterNameColumn
@@ -1266,13 +1270,23 @@ namespace FilterSimulation
             this.commonCalcBlockMaxAbsColumn.Visible = false;
             this.commonCalcBlockMaxAbsColumn.Width = 50;
             // 
+            // LimitsAndMessagePanel
+            // 
+            this.LimitsAndMessagePanel.Controls.Add(this.errorMessageLabel);
+            this.LimitsAndMessagePanel.Controls.Add(this.calculateLimitsCheckBox);
+            this.LimitsAndMessagePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LimitsAndMessagePanel.Location = new System.Drawing.Point(205, 0);
+            this.LimitsAndMessagePanel.Name = "LimitsAndMessagePanel";
+            this.LimitsAndMessagePanel.Size = new System.Drawing.Size(771, 20);
+            this.LimitsAndMessagePanel.TabIndex = 18;
+            // 
             // calculateLimitsCheckBox
             // 
             this.calculateLimitsCheckBox.AutoSize = true;
-            this.calculateLimitsCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.calculateLimitsCheckBox.Location = new System.Drawing.Point(205, 0);
+            this.calculateLimitsCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.calculateLimitsCheckBox.Location = new System.Drawing.Point(0, 0);
             this.calculateLimitsCheckBox.Name = "calculateLimitsCheckBox";
-            this.calculateLimitsCheckBox.Size = new System.Drawing.Size(771, 17);
+            this.calculateLimitsCheckBox.Size = new System.Drawing.Size(52, 20);
             this.calculateLimitsCheckBox.TabIndex = 14;
             this.calculateLimitsCheckBox.Text = "Limits";
             this.calculateLimitsCheckBox.UseVisualStyleBackColor = true;
@@ -1475,6 +1489,61 @@ namespace FilterSimulation
             this.mainSplitContainer.SplitterDistance = 555;
             this.mainSplitContainer.TabIndex = 36;
             // 
+            // simulationGuidColumn
+            // 
+            this.simulationGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.simulationGuidColumn.HeaderText = "Guid";
+            this.simulationGuidColumn.Name = "simulationGuidColumn";
+            this.simulationGuidColumn.ReadOnly = true;
+            this.simulationGuidColumn.Visible = false;
+            // 
+            // simulationProjectColumn
+            // 
+            this.simulationProjectColumn.HeaderText = "Project";
+            this.simulationProjectColumn.Name = "simulationProjectColumn";
+            this.simulationProjectColumn.ReadOnly = true;
+            // 
+            // simulationSuspensionNameColumn
+            // 
+            this.simulationSuspensionNameColumn.HeaderText = "Suspension";
+            this.simulationSuspensionNameColumn.Name = "simulationSuspensionNameColumn";
+            this.simulationSuspensionNameColumn.ReadOnly = true;
+            this.simulationSuspensionNameColumn.Width = 150;
+            // 
+            // simulationFilterMediumColumn
+            // 
+            this.simulationFilterMediumColumn.HeaderText = "Filter Medium";
+            this.simulationFilterMediumColumn.Name = "simulationFilterMediumColumn";
+            this.simulationFilterMediumColumn.ReadOnly = true;
+            // 
+            // simulationMachineTypeColumn
+            // 
+            this.simulationMachineTypeColumn.HeaderText = "Filter Type";
+            this.simulationMachineTypeColumn.Name = "simulationMachineTypeColumn";
+            this.simulationMachineTypeColumn.ReadOnly = true;
+            // 
+            // simulationMachineNameColumn
+            // 
+            this.simulationMachineNameColumn.HeaderText = "Filter Name";
+            this.simulationMachineNameColumn.Name = "simulationMachineNameColumn";
+            this.simulationMachineNameColumn.ReadOnly = true;
+            // 
+            // simulationSimSeriesNameColumn
+            // 
+            this.simulationSimSeriesNameColumn.HeaderText = "SimSeries";
+            this.simulationSimSeriesNameColumn.Name = "simulationSimSeriesNameColumn";
+            this.simulationSimSeriesNameColumn.ReadOnly = true;
+            // 
+            // simulationNameColumn
+            // 
+            this.simulationNameColumn.HeaderText = "Simulation Name";
+            this.simulationNameColumn.Name = "simulationNameColumn";
+            // 
+            // simulationCalculationOptionColumn
+            // 
+            this.simulationCalculationOptionColumn.HeaderText = "Calculation Option";
+            this.simulationCalculationOptionColumn.Name = "simulationCalculationOptionColumn";
+            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
@@ -1591,62 +1660,15 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
             // 
-            // simSeriesCheckedColumn
+            // errorMessageLabel
             // 
-            this.simSeriesCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.simSeriesCheckedColumn.HeaderText = "";
-            this.simSeriesCheckedColumn.Name = "simSeriesCheckedColumn";
-            this.simSeriesCheckedColumn.Width = 5;
-            // 
-            // simSeriesGuidColumn
-            // 
-            this.simSeriesGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.simSeriesGuidColumn.HeaderText = "Guid";
-            this.simSeriesGuidColumn.Name = "simSeriesGuidColumn";
-            this.simSeriesGuidColumn.ReadOnly = true;
-            this.simSeriesGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.simSeriesGuidColumn.Visible = false;
-            this.simSeriesGuidColumn.Width = 35;
-            // 
-            // simSeriesNameColumn
-            // 
-            this.simSeriesNameColumn.HeaderText = "Series Name";
-            this.simSeriesNameColumn.Name = "simSeriesNameColumn";
-            this.simSeriesNameColumn.Width = 75;
-            // 
-            // simSeriesProjectColumn
-            // 
-            this.simSeriesProjectColumn.HeaderText = "Project";
-            this.simSeriesProjectColumn.Name = "simSeriesProjectColumn";
-            this.simSeriesProjectColumn.ReadOnly = true;
-            this.simSeriesProjectColumn.Width = 75;
-            // 
-            // simSeriesSuspensionNameColumn
-            // 
-            this.simSeriesSuspensionNameColumn.HeaderText = "Suspension";
-            this.simSeriesSuspensionNameColumn.Name = "simSeriesSuspensionNameColumn";
-            this.simSeriesSuspensionNameColumn.ReadOnly = true;
-            this.simSeriesSuspensionNameColumn.Width = 150;
-            // 
-            // simSeriesFilterMediumColumn
-            // 
-            this.simSeriesFilterMediumColumn.HeaderText = "Filter Medium";
-            this.simSeriesFilterMediumColumn.Name = "simSeriesFilterMediumColumn";
-            this.simSeriesFilterMediumColumn.Width = 75;
-            // 
-            // simSeriesMachineTypeNameColumn
-            // 
-            this.simSeriesMachineTypeNameColumn.HeaderText = "Filter Types";
-            this.simSeriesMachineTypeNameColumn.Name = "simSeriesMachineTypeNameColumn";
-            this.simSeriesMachineTypeNameColumn.ReadOnly = true;
-            this.simSeriesMachineTypeNameColumn.Width = 160;
-            // 
-            // simSeriesMachineNameColumn
-            // 
-            this.simSeriesMachineNameColumn.HeaderText = "Filter Name";
-            this.simSeriesMachineNameColumn.Name = "simSeriesMachineNameColumn";
-            this.simSeriesMachineNameColumn.Visible = false;
-            this.simSeriesMachineNameColumn.Width = 75;
+            this.errorMessageLabel.AutoSize = true;
+            this.errorMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorMessageLabel.Location = new System.Drawing.Point(98, 2);
+            this.errorMessageLabel.Name = "errorMessageLabel";
+            this.errorMessageLabel.Size = new System.Drawing.Size(0, 13);
+            this.errorMessageLabel.TabIndex = 15;
             // 
             // fmFilterSimulationControl
             // 
@@ -1683,10 +1705,11 @@ namespace FilterSimulation
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commonDeliquoringSimulationBlockDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).EndInit();
+            this.LimitsAndMessagePanel.ResumeLayout(false);
+            this.LimitsAndMessagePanel.PerformLayout();
             this.panelMaterialParameters.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.liquidDataGrid)).EndInit();
@@ -1837,5 +1860,7 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesFilterMediumColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineTypeNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineNameColumn;
+        private System.Windows.Forms.Panel LimitsAndMessagePanel;
+        private System.Windows.Forms.Label errorMessageLabel;
     }
 }

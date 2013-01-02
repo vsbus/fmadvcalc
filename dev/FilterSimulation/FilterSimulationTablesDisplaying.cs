@@ -1061,9 +1061,31 @@ namespace FilterSimulation
 
                 SetCurrentCellInCommonTables();
 
+                ShowErrorMessage(sol);
+
                 displayingSolution = false;
             }
         }
+
+        private void ShowErrorMessage(fmFilterSimSolution sol)
+        {
+            errorMessageLabel.Text = "";
+            var sim = sol.currentObjects.Simulation;
+            if (sim != null)
+            {
+                if (sim.FilterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST)
+                {
+                    var Qp = sim.Parameters[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
+                    var A = sim.Parameters[fmGlobalParameter.A] as fmCalculationVariableParameter;
+                    var hc = sim.Parameters[fmGlobalParameter.hc] as fmCalculationVariableParameter;
+                    if (Qp.isInputed && !A.isInputed && !hc.isInputed)
+                    {
+                        errorMessageLabel.Text = "Combination of Input parameters isn't possible. Please enter DP or A or hc.";
+                    }
+                }
+            }
+        }
+
 
         private void SetCurrentCellInCommonTables()
         {
