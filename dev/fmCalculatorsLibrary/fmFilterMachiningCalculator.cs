@@ -2204,7 +2204,7 @@ namespace fmCalculatorsLibrary
 
         private void DoSubCalculationsVolumetricPumpQpInput(QpCalculatorHelperForDpInput.AreaKind areaKind)
         {
-            const int BinSearchIterations = 120;
+            const int BinSearchIterations = 50;
 
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
             var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
@@ -2213,14 +2213,14 @@ namespace fmCalculatorsLibrary
             Qp.isInputed = false;
 
             fmValue qpValue = Qp.value;
-            QpCalculatorHelperForDpInput qpCalc = new QpCalculatorHelperForDpInput(this, qpValue, areaKind);
+            var qpCalc = new QpCalculatorHelperForDpInput(this, qpValue, areaKind);
             fmValue left = new fmValue(0);
             fmValue leftValue = qpCalc.Eval(left);
             fmValue eps = new fmValue(1e-9);
-            fmValue right = new fmValue(1e18);
+            fmValue right = new fmValue(100e5);
             if (leftValue.defined == false)
             {
-                QpDefinedCalculatorHelperForDpInput qdDefCalc = new QpDefinedCalculatorHelperForDpInput(qpCalc);
+                var qdDefCalc = new QpDefinedCalculatorHelperForDpInput(qpCalc);
                 left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qdDefCalc, left, right, BinSearchIterations);
                 leftValue = qpCalc.Eval(left);
             }
