@@ -2214,14 +2214,16 @@ namespace fmCalculatorsLibrary
 
             fmValue qpValue = Qp.value;
             var qpCalc = new QpCalculatorHelperForDpInput(this, qpValue, areaKind);
-            fmValue left = new fmValue(0);
+            var left = new fmValue(0);
             fmValue leftValue = qpCalc.Eval(left);
-            fmValue eps = new fmValue(1e-9);
-            fmValue right = new fmValue(100e5);
+            var eps = new fmValue(1e-9);
+            var right = new fmValue(100e5);
             if (leftValue.defined == false)
             {
                 var qdDefCalc = new QpDefinedCalculatorHelperForDpInput(qpCalc);
-                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qdDefCalc, left, right, BinSearchIterations);
+                fmValue beginRes, endRes;
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(qdDefCalc, left, right, BinSearchIterations, out beginRes, out endRes);
+                left = endRes;
                 leftValue = qpCalc.Eval(left);
             }
             fmValue rightValue = qpCalc.Eval(right);
