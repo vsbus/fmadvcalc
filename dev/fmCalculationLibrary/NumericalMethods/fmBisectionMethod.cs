@@ -106,61 +106,91 @@ namespace fmCalculationLibrary.NumericalMethods
             }
             return new fmValue();
         }
-        public static fmValue FindBreakInUnimodalFunction(fmFunction function, fmValue beginArg, fmValue endArg, int iterationsCount)
+        public static bool FindBreakInUnimodalFunction(
+            fmFunction function, 
+            fmValue beginArg, 
+            fmValue endArg, 
+            int iterationsCount, 
+            out fmValue beginRes, 
+            out fmValue endRes)
         {
             if (beginArg.defined == false || endArg.defined == false)
-                return new fmValue();
-            
-            fmValue len = endArg - beginArg;
+            {
+                beginRes = new fmValue();
+                endRes = new fmValue();
+                return false;
+            }
+
             var eps = new fmValue(1e-8);
+            fmValue len = endArg - beginArg;
             if (len.value < 0)
             {
-                eps = -eps;
+                throw new Exception("FindBreakInUnimodalFunction got degenerate interval as input.");
             }
 
             fmValue beginValue = function.Eval(beginArg);
             fmValue endValue = function.Eval(endArg);
-            if (fmValue.Sign(beginValue, eps) * fmValue.Sign(endValue, eps) == new fmValue(-1))
+            if (fmValue.Sign(beginValue) * fmValue.Sign(endValue) == new fmValue(-1))
                 throw new Exception("Search limits represent different signs of values already");            
 
             beginValue = function.Eval(beginArg + eps);
             endValue = function.Eval(endArg - eps);
-            if (fmValue.Sign(beginValue, eps) * fmValue.Sign(endValue, eps) == new fmValue(-1))
+            if (fmValue.Sign(beginValue) * fmValue.Sign(endValue) == new fmValue(-1))
                 throw new Exception("Search limits represent different signs of values already");            
 
             if (beginValue.defined == false || endValue.defined == false)
-                return new fmValue();
+            {
+                beginRes = new fmValue();
+                endRes = new fmValue();
+                return false;
+            }
 
-            fmValue initialSign = fmValue.Sign(beginValue, eps);
+            fmValue initialSign = fmValue.Sign(beginValue);
             fmValue left = beginArg;
             fmValue right = endArg;
             for (int i = 0; i < iterationsCount; ++i)
             {
                 fmValue middle = 0.5 * (left + right);
+                if (middle == left || middle == right)
+                {
+                    break;
+                }
                 fmValue mid1 = middle - eps * (right - left);
                 fmValue mid2 = middle + eps * (right - left);
                 fmValue val1 = function.Eval(mid1);
                 fmValue val2 = function.Eval(mid2);
 
-                if (!val1.defined)
-                    new fmValue();
-                if (!val2.defined)
-                    new fmValue();
+                if (!val1.defined || !val2.defined)
+                {
+                    beginRes = new fmValue();
+                    endRes = new fmValue();
+                    return false;
+                }
 
-                if (fmValue.Sign(val1, eps) != initialSign)
-                    return mid1;
+                if (fmValue.Sign(val1) != initialSign)
+                {
+                    beginRes = mid1;
+                    endRes = mid1;
+                    return true;
+                }
 
-                if (fmValue.Sign(val2, eps) != initialSign)
-                    return mid2;
+                if (fmValue.Sign(val2) != initialSign)
+                {
+                    beginRes = mid2;
+                    endRes = mid2;
+                    return true;
+                }
 
 
-                if (fmValue.Sign(val1 - val2, eps) == initialSign)
+                if (fmValue.Sign(val1 - val2) == initialSign)
                     left = middle;
                 else
                     right = middle;
             }
 
-            return new fmValue();
+            beginRes = left;
+            endRes = right;
+            return false;
         }
     }
 }

@@ -158,6 +158,8 @@ namespace fmCalculatorsLibrary
             else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST)
             {
                 DoSubCalculationsPlainDpQpConst_OnlyLimitClueParams();
+                // TODO: Should be:
+                // DoSubCalculationsPlainQpConstCentripetalPump_OnlyLimitClueParams();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST)
             {
@@ -174,6 +176,8 @@ namespace fmCalculatorsLibrary
             else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST)
             {
                 DoSubCalculationsCylindricalDpQpConst_OnlyLimitClueParams();
+                // TODO: Should be:
+                // DoSubCalculationsCylindricalQpConstCentripetalPump_OnlyLimitClueParams();
             }
             else if (calculationOption == fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST)
             {
@@ -504,7 +508,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv_QpConst(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -911,7 +915,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv_QpConst(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -1960,7 +1964,7 @@ namespace fmCalculatorsLibrary
             }
             else
             {
-                DoSubCalculationsCentripetalPumpQInput(QsusCalculatorHelperForAInput.AreaKind.CYLINDRICAL);
+                DoSubCalculationsCentripetalPumpQInput(CalculatorHelper.AreaKind.CYLINDRICAL);
             }
         }
 
@@ -1973,29 +1977,38 @@ namespace fmCalculatorsLibrary
             }
             else
             {
-                DoSubCalculationsCentripetalPumpQInput(QsusCalculatorHelperForAInput.AreaKind.PLAIN);
+                DoSubCalculationsCentripetalPumpQInput(CalculatorHelper.AreaKind.PLAIN);
             }
         }
 
-        private class QsusCalculatorHelperForAInput : fmCalculationLibrary.NumericalMethods.fmFunction
+        private class CalculatorHelper : fmCalculationLibrary.NumericalMethods.fmFunction
         {
             public enum AreaKind
             {
                 PLAIN,
                 CYLINDRICAL
             }
-            fmFilterMachiningCalculator fmc;
-            fmValue QsusValue;
-            AreaKind areaKind;
-            public QsusCalculatorHelperForAInput(fmFilterMachiningCalculator fmc, fmValue QsusValue, AreaKind areaKind)
+            private fmFilterMachiningCalculator fmc;
+            private fmGlobalParameter inputParameter;
+            private fmGlobalParameter resultParameter;
+            private fmValue resultExpectedValue;
+            private AreaKind areaKind;
+            public CalculatorHelper(
+                fmFilterMachiningCalculator fmc, 
+                fmGlobalParameter inputParameter,
+                fmGlobalParameter resultParameter,
+                fmValue resultExpectedValue,
+                AreaKind areaKind)
             {
                 this.fmc = fmc;
-                this.QsusValue = QsusValue;
+                this.inputParameter = inputParameter;
+                this.resultParameter = resultParameter;
+                this.resultExpectedValue = resultExpectedValue;
                 this.areaKind = areaKind;
             }
             override public fmValue Eval(fmValue x)
             {
-                fmc.variables[fmGlobalParameter.A].value = x;
+                fmc.variables[inputParameter].value = x;
                 switch (areaKind)
                 {
                     case AreaKind.PLAIN:
@@ -2007,33 +2020,28 @@ namespace fmCalculatorsLibrary
                     default:
                         throw new Exception("Unhandled area kind.");
                 }
-                fmValue curQsusValue = fmc.variables[fmGlobalParameter.Qsus].value;
-                return QsusValue - curQsusValue;
+                fmValue resultActualValue = fmc.variables[resultParameter].value;
+                return resultExpectedValue - resultActualValue;
             }
         };
-        private class QsusDefinedCalculatorHelperForAInput : fmCalculationLibrary.NumericalMethods.fmFunction
+        private class IsDefinedResultCalculatorHelper : fmCalculationLibrary.NumericalMethods.fmFunction
         {
-            QsusCalculatorHelperForAInput qsusCalc;
-            public QsusDefinedCalculatorHelperForAInput(QsusCalculatorHelperForAInput qsusCalc)
+            CalculatorHelper calculatorHelper;
+            public IsDefinedResultCalculatorHelper(CalculatorHelper calculatorHelper)
             {
-                this.qsusCalc = qsusCalc;
+                this.calculatorHelper = calculatorHelper;
             }
             override public fmValue Eval(fmValue x)
             {
-                fmValue val = qsusCalc.Eval(x);
+                fmValue val = calculatorHelper.Eval(x);
                 return new fmValue(val.defined ? 1 : -1);
             }
         };
 
-        private void DoSubCalculationsCentripetalPumpQInput(QsusCalculatorHelperForAInput.AreaKind areaKind)
+        private void DoSubCalculationsCentripetalPumpQInput(CalculatorHelper.AreaKind areaKind)
         {
-            const int BinSearchIterations = 120;
-
-            var rho_sus = variables[fmGlobalParameter.rho_sus];
-            var rho_s = variables[fmGlobalParameter.rho_s];
-            var rho_f = variables[fmGlobalParameter.rho_f];
-            var kappa = variables[fmGlobalParameter.kappa];
-            var Cm = variables[fmGlobalParameter.Cm];
+            const int BinSearchIterations = 50;
+            const int TernarSearchIterations = 80;
 
             var A = variables[fmGlobalParameter.A] as fmCalculationVariableParameter;
 
@@ -2068,72 +2076,37 @@ namespace fmCalculatorsLibrary
                 }
             }
             fmValue inputQValue = inputQ.value;
-
-            if (Qmsus.isInputed)
-            {
-                Qsus.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_sus.value, Qmsus.value);
-                Qmsus.isInputed = false;
-                Qsus.isInputed = true;
-            }
-            if (Qms.isInputed)
-            {
-                Qs.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_s.value, Qms.value);
-                Qms.isInputed = false;
-                Qs.isInputed = true;
-            }
-            if (Qmf.isInputed)
-            {
-                Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
-                Qmf.isInputed = false;
-                Qf.isInputed = true;
-            }
-            if (Qmc.isInputed)
-            {
-                Qc.value = fmFilterMachiningEquations.Eval_vc_From_mc_kappa_rho(Qmc.value, kappa.value, rho_sus.value, rho_f.value);
-                Qmc.isInputed = false;
-                Qc.isInputed = true;
-            }
-            if (Qs.isInputed)
-            {
-                Qsus.value = fmFilterMachiningEquations.Eval_vsus_From_vs_rho_Cm(Qs.value, rho_s.value, rho_sus.value, Cm.value);
-                Qs.isInputed = false;
-                Qsus.isInputed = true;
-            }
-            if (Qf.isInputed)
-            {
-                Qsus.value = fmFilterMachiningEquations.Eval_vsus_From_vf_kappa(Qf.value, kappa.value);
-                Qf.isInputed = false;
-                Qsus.isInputed = true;
-            }
-            if (Qsus.isInputed)
-            {
-                Qc.value = fmFilterMachiningEquations.Eval_vc_From_vsus_kappa(Qsus.value, kappa.value);
-                Qsus.isInputed = false;
-                Qc.isInputed = true;
-            }
+            fmGlobalParameter inputQParameter = inputQ.globalParameter;
+            inputQ.isInputed = false;
             A.isInputed = true;
 
-            fmValue QsusValue = Qsus.value;
-            var qsusCalc = new QsusCalculatorHelperForAInput(this, QsusValue, areaKind);
-            fmValue eps = new fmValue(1e-9);
+            var qCalc = new CalculatorHelper(this, fmGlobalParameter.A, inputQParameter, inputQValue, areaKind);
+            var eps = new fmValue(1e-9);
             fmValue left = eps;  // we can't calculate in A=0 because we do many divisions by A;
-            fmValue leftValue = qsusCalc.Eval(left);
+            fmValue leftValue = qCalc.Eval(left);
             fmValue right = new fmValue(1e4);
-            fmValue rightValue = qsusCalc.Eval(right);
+            fmValue rightValue = qCalc.Eval(right);
             if (rightValue.defined == false)
             {
-                var qsusDefCalc = new QsusDefinedCalculatorHelperForAInput(qsusCalc);
+                var qsusDefCalc = new IsDefinedResultCalculatorHelper(qCalc);
                 fmValue beginRes, endRes;
-                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(qsusDefCalc, left, right, BinSearchIterations, out beginRes, out endRes);
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.
+                    FindRootRange(qsusDefCalc, left, right, BinSearchIterations, out beginRes, out endRes);
                 right = beginRes;
-                rightValue = qsusCalc.Eval(right);
+                rightValue = qCalc.Eval(right);
             }
-            if (fmValue.Sign(leftValue, eps) == fmValue.Sign(rightValue, eps))
+            if (fmValue.Sign(leftValue) == fmValue.Sign(rightValue))
             {
-                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindBreakInUnimodalFunction(qsusCalc, left, right, BinSearchIterations);
+                fmValue beginRes, endRes;
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.
+                    FindBreakInUnimodalFunction(qCalc, left, right, TernarSearchIterations, out beginRes, out endRes);
+                right = beginRes;
             }
-            A.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qsusCalc, left, right, BinSearchIterations);
-            qsusCalc.Eval(A.value);
+
+            A.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.
+                FindRoot(qCalc, left, right, BinSearchIterations);
+
+            qCalc.Eval(A.value);
             inputQ.value = inputQValue;
 
             A.isInputed = false;
@@ -2205,6 +2178,7 @@ namespace fmCalculatorsLibrary
         private void DoSubCalculationsVolumetricPumpQpInput(QpCalculatorHelperForDpInput.AreaKind areaKind)
         {
             const int BinSearchIterations = 50;
+            const int TernarSearchIterations = 80;
 
             var Dp = variables[fmGlobalParameter.Dp] as fmCalculationVariableParameter;
             var Qp = variables[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
@@ -2227,9 +2201,12 @@ namespace fmCalculatorsLibrary
                 leftValue = qpCalc.Eval(left);
             }
             fmValue rightValue = qpCalc.Eval(right);
-            if (fmValue.Sign(leftValue, eps) == fmValue.Sign(rightValue, eps))
+            if (fmValue.Sign(leftValue) == fmValue.Sign(rightValue))
             {
-                left = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindBreakInUnimodalFunction(qpCalc, left, right, BinSearchIterations);
+                fmValue beginRes, endRes;
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindBreakInUnimodalFunction(
+                    qpCalc, left, right, TernarSearchIterations, out beginRes, out endRes);
+                left = endRes;
             }
             Dp.value = fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRoot(qpCalc, left, right, BinSearchIterations);
             qpCalc.Eval(Dp.value);
@@ -2602,7 +2579,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv_QpConst(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -3134,7 +3111,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv_QpConst(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -3634,7 +3611,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_Qsusd)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv_QpConst(Qp.value, eps.value, Cv.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -4163,9 +4140,9 @@ namespace fmCalculatorsLibrary
                 Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
-            if (isKnown_Qsusd)
+            if (isKnown_hc && isKnown_tf && isKnown_A)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv(Qp.value, eps.value, Cv.value);
+                Qf.value = hc.value * A.value / (kappa.value * tf.value);
                 isKnown_Qf = true;
             }
             #endregion

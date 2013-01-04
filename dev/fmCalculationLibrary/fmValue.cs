@@ -404,6 +404,11 @@ namespace fmCalculationLibrary
             return new fmValue(Math.Abs(beginValue.value) <= eps.value ? 0 : beginValue.value > 0 ? 1 : -1, beginValue.defined && eps.defined);
         }
 
+        public static fmValue Sign(fmValue beginValue)
+        {
+            return Sign(beginValue, new fmValue(0));
+        }
+
         public fmValue RoundUp(fmValue x, int precision)
         {
             if (x.value == 0)

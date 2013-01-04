@@ -436,7 +436,7 @@ namespace fmCalculationLibrary.Equations
             fmValue one = new fmValue(1.0);
             return A * Dp * Pc / (eta_f * (one - Cv / (one - eps)) * (hc + hce));
         }
-        public static fmValue Eval_Qf_From_Qsusd_eps_Cv(fmValue Qsusd, fmValue eps, fmValue Cv)
+        public static fmValue Eval_Qf_From_Qsusd_eps_Cv_QpConst(fmValue Qsusd, fmValue eps, fmValue Cv)
         {
             fmValue one = new fmValue(1.0);
             return Qsusd * (one - eps - Cv) / (one - eps);
@@ -730,6 +730,11 @@ namespace fmCalculationLibrary.Equations
             fmValue hcd = fmBisectionMethod.FindRoot(f, new fmValue(0), (hced + 1) * 1000, 60);
             fmValue hc = hcd * d / 2;
             return hc;
+        }
+
+        public static fmValue Eval_vsus_From_vc_kappa(fmValue vc, fmValue kappa)
+        {
+            return vc*(1 + kappa)/kappa;
         }
     }
 }
