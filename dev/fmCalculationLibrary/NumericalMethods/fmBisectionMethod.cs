@@ -121,7 +121,6 @@ namespace fmCalculationLibrary.NumericalMethods
                 return false;
             }
 
-            var eps = new fmValue(1e-8);
             fmValue len = endArg - beginArg;
             if (len.value < 0)
             {
@@ -131,10 +130,19 @@ namespace fmCalculationLibrary.NumericalMethods
             fmValue beginValue = function.Eval(beginArg);
             fmValue endValue = function.Eval(endArg);
             if (fmValue.Sign(beginValue) * fmValue.Sign(endValue) == new fmValue(-1))
-                throw new Exception("Search limits represent different signs of values already");            
+                throw new Exception("Search limits represent different signs of values already");
 
-            beginValue = function.Eval(beginArg + eps);
-            endValue = function.Eval(endArg - eps);
+            var eps = new fmValue(1e-8);
+            beginValue = function.Eval(beginArg);
+            if (beginValue.value == 0)
+            {
+                beginValue = function.Eval(beginArg + eps);
+            }
+            endValue = function.Eval(endArg);
+            if (endValue.value == 0)
+            {
+                endValue = function.Eval(endArg - eps);
+            }
             if (fmValue.Sign(beginValue) * fmValue.Sign(endValue) == new fmValue(-1))
                 throw new Exception("Search limits represent different signs of values already");            
 
