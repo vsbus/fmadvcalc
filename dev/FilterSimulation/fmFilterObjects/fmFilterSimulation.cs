@@ -793,7 +793,7 @@ namespace FilterSimulation.fmFilterObjects
             }
 
             Data.parameters[fmGlobalParameter.Tetta_boil].value = new fmValue(1000);
-            Data.parameters[fmGlobalParameter.DH].value = new fmValue(1000);
+            Data.parameters[fmGlobalParameter.DH].value = new fmValue(1e6);
             Data.parameters[fmGlobalParameter.Mmole].value = new fmValue(18e-3);
             Data.parameters[fmGlobalParameter.f].value = new fmValue(1);
 
