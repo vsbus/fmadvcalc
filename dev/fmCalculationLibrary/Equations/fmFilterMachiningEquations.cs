@@ -736,5 +736,10 @@ namespace fmCalculationLibrary.Equations
         {
             return vc*(1 + kappa)/kappa;
         }
+
+        public static fmValue Eval_Qf_From_hc_A_tf_kappa_DpQpConst(fmValue hc, fmValue A, fmValue tf, fmValue kappa)
+        {
+            return hc * A / (kappa * tf);
+        }
     }
 }

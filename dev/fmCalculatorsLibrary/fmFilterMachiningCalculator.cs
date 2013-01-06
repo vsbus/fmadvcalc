@@ -3109,9 +3109,9 @@ namespace fmCalculatorsLibrary
                 Qf.value = fmBasicEquations.Eval_Volume_From_rho_Mass(rho_f.value, Qmf.value);
                 isKnown_Qf = true;
             }
-            if (isKnown_Qsusd)
+            if (isKnown_hc && isKnown_tf && isKnown_A)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_Qsusd_eps_Cv_QpConst(Qp.value, eps.value, Cv.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_hc_A_tf_kappa_DpQpConst(hc.value, A.value, tf.value, kappa.value);
                 isKnown_Qf = true;
             }
             #endregion
@@ -4142,7 +4142,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_hc && isKnown_tf && isKnown_A)
             {
-                Qf.value = hc.value * A.value / (kappa.value * tf.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_hc_A_tf_kappa_DpQpConst(hc.value, A.value, tf.value, kappa.value);
                 isKnown_Qf = true;
             }
             #endregion
