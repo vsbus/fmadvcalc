@@ -180,10 +180,13 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void Clear()
         {
-            Solution = new fmFilterSimSolution();
-            CreateNewProject();
-            CreateNewSuspension(Solution.currentObjects.Project);
-            CreateNewSerie(Solution.currentObjects.Suspension);
+            var newSolution = new fmFilterSimSolution();
+            CreateNewProject(newSolution);
+            CreateNewSuspension(newSolution, newSolution.currentObjects.Project);
+            if (CreateNewSerie(newSolution, newSolution.currentObjects.Suspension))
+            {
+                Solution = newSolution;
+            }
             DisplaySolution(Solution);
         }
 

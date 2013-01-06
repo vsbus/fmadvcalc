@@ -11,18 +11,18 @@ namespace FilterSimulation
         // ReSharper disable InconsistentNaming
         private void projectCreateButton_Click(object sender, EventArgs e)
         {
-            CreateNewProject();
-            CreateNewSuspension(Solution.currentObjects.Project);
-            CreateNewSerie(Solution.currentObjects.Suspension);
+            CreateNewProject(Solution);
+            CreateNewSuspension(Solution, Solution.currentObjects.Project);
+            CreateNewSerie(Solution, Solution.currentObjects.Suspension);
             
             DisplaySolution(Solution);
             projectDataGrid.BeginEdit(true);
         }
 
-        protected void CreateNewProject()
+        protected void CreateNewProject(fmFilterSimSolution solution)
         {
-            Solution.currentObjects.Project = new fmFilterSimProject(Solution, "n/a");
-            Solution.currentColumns.project = projectNameColumn.Index;
+            solution.currentObjects.Project = new fmFilterSimProject(solution, "n/a");
+            solution.currentColumns.project = projectNameColumn.Index;
         }
         private void keepProject_Click(object sender, EventArgs e)
         {
@@ -87,9 +87,9 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
             {
                 currentCol = suspensionDataGrid.CurrentCell.ColumnIndex;
             }
-            
-            CreateNewSuspension(parentProject);
-            CreateNewSerie(Solution.currentObjects.Suspension);
+
+            CreateNewSuspension(Solution, parentProject);
+            CreateNewSerie(Solution, Solution.currentObjects.Suspension);
 
             DisplaySolution(Solution);
             if (currentCol != -1 && suspensionDataGrid.CurrentCell != null)
@@ -98,10 +98,12 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
             }
         }
 
-        protected void CreateNewSuspension(fmFilterSimProject parentProject)
+        protected void CreateNewSuspension(
+            fmFilterSimSolution solution,
+            fmFilterSimProject parentProject)
         {
-            Solution.currentObjects.Suspension = new fmFilterSimSuspension(parentProject, "n/a", "n/a", "n/a");
-            Solution.currentColumns.suspension = suspensionNameColumn.Index;
+            solution.currentObjects.Suspension = new fmFilterSimSuspension(parentProject, "n/a", "n/a", "n/a");
+            solution.currentColumns.suspension = suspensionNameColumn.Index;
         }
         // ReSharper disable InconsistentNaming
         private void suspensionRestoreButton_Click(object sender, EventArgs e)
@@ -146,7 +148,7 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
-            if (!CreateNewSerie(parentSuspension))
+            if (!CreateNewSerie(Solution, parentSuspension))
             {
                 return;
             }
@@ -157,14 +159,14 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             simSeriesDataGrid.BeginEdit(true);
         }
 
-        protected bool CreateNewSerie(fmFilterSimSuspension parentSuspension)
+        protected bool CreateNewSerie(fmFilterSimSolution solution, fmFilterSimSuspension parentSuspension)
         {
             fmFilterSimMachineType machine = fmFilterSimMachineType.filterTypesList[0];
             string serieName;
             for (int i = 1; ; ++i)
             {
                 serieName = "S" + i;
-                if (Solution.FindSerie(serieName) == null)
+                if (solution.FindSerie(serieName) == null)
                 {
                     break;
                 }
@@ -180,15 +182,15 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             }
             
             machine = dialog.GetSelectedType();
-            fmFilterSimulation curSim = Solution.currentObjects.Simulation;
-            Solution.currentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, "n/a", "n/a");
-            Solution.currentObjects.Simulation = new fmFilterSimulation(Solution.currentObjects.Serie, "Sim");
-            Solution.currentObjects.Simulation.SetName(Solution.currentObjects.Serie.GetName() + "-1");
+            fmFilterSimulation curSim = solution.currentObjects.Simulation;
+            solution.currentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, "n/a", "n/a");
+            solution.currentObjects.Simulation = new fmFilterSimulation(solution.currentObjects.Serie, "Sim");
+            solution.currentObjects.Simulation.SetName(solution.currentObjects.Serie.GetName() + "-1");
 
             AssignParametersToDisplayAndRangesOfGivenMachineWithSerie(
-                Solution.currentObjects.Serie, machine);
+                solution.currentObjects.Serie, machine);
 
-            Solution.currentObjects.Serie.Keep();
+            solution.currentObjects.Serie.Keep();
 
             return true;
         }
@@ -227,14 +229,6 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             }
         }
         // ReSharper disable InconsistentNaming
-        private void simSeriesKeepButton_Click(object sender, EventArgs e)
-        {
-            if (Solution.currentObjects.Serie != null)
-            {
-                Solution.currentObjects.Serie.Keep();
-                DisplaySolution(Solution);
-            }
-        }
         private void simSeriesRestoreButton_Click(object sender, EventArgs e)
         {
             if (Solution.currentObjects.Serie != null)

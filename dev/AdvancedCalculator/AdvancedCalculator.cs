@@ -5,6 +5,7 @@ using FilterSimulation;
 using FilterSimulationWithTablesAndGraphs;
 using Microsoft.Win32;
 using System.Xml;
+using System.IO;
 
 namespace AdvancedCalculator
 {
@@ -57,12 +58,14 @@ namespace AdvancedCalculator
                 "");
             if (regValue != null && regValue.ToString() != "")
             {
-                LoadFromDisk(regValue.ToString());
+                string filename = regValue.ToString();
+                if (File.Exists(filename))
+                {
+                    LoadFromDisk(filename);
+                    return;
+                }
             }
-            else
-            {
-                CreateNewFile();
-            }
+            CreateNewFile();
         }
 
         private void SaveOnDiskToolStripMenuItemClick(object sender, EventArgs e)
