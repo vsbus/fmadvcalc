@@ -3111,7 +3111,7 @@ namespace fmCalculatorsLibrary
             }
             if (isKnown_hc && isKnown_tf && isKnown_A)
             {
-                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_hc_A_tf_kappa_DpQpConst(hc.value, A.value, tf.value, kappa.value);
+                Qf.value = fmFilterMachiningEquations.Eval_Qf_From_hc_A_d_tf_kappa_DpQpConst(hc.value, A.value, d0.value, tf.value, kappa.value);
                 isKnown_Qf = true;
             }
             #endregion

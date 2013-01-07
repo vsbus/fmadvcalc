@@ -18,13 +18,13 @@ namespace fmCalculationLibrary
 
         public fmValue(double x)
         {
-            defined = true;
+            defined = IsDefinedDouble(x);
             value = x;
         }
 
         public fmValue(double x, bool d)
         {
-            defined = d;
+            defined = d && IsDefinedDouble(x);
             value = x;
         }
 
@@ -38,7 +38,7 @@ namespace fmCalculationLibrary
         {
             var result = new fmValue(0, defined);
 
-            if (value == 0 || double.IsInfinity(value))
+            if (value == 0 || Double.IsInfinity(value))
             {
                 return result;
             }
@@ -298,9 +298,21 @@ namespace fmCalculationLibrary
 
         public static fmValue Exp(fmValue op)
         {
-            var res = new fmValue {defined = op.defined};
-            res.value = res.defined ? Math.Exp(op.value) : 1;
-            return res;
+            if (!op.defined)
+            {
+                return new fmValue();
+            }
+            double expValue = Math.Exp(op.value);
+            if (!IsDefinedDouble(expValue))
+            {
+                return new fmValue();
+            }
+            return new fmValue(expValue);
+        }
+
+        private static bool IsDefinedDouble(double expValue)
+        {
+            return !Double.IsInfinity(expValue) && !Double.IsNaN(expValue);
         }
 
         public static fmValue Log(fmValue op)
