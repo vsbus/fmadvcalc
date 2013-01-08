@@ -556,9 +556,10 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue Eval_h1_From_Hc_t1OverTf_hc_hce(fmValue t1OverTf, fmValue hc, fmValue hce)
         {
-            fmValue C = (1 - t1OverTf) / t1OverTf;
-            fmValue S = fmValue.Sqr((1 + C) / (2 * C + 1)) * hce * hce + hc * (hc + 2 * hce) / (2 * C + 1);
-            return fmValue.Sqrt(S) - (1 + C) / (2 * C + 1) * hce;
+            fmValue C0 = 1 / (2 - t1OverTf);
+            fmValue C1 = t1OverTf * C0;
+            fmValue S = fmValue.Sqr(C0) * hce * hce + hc * (hc + 2 * hce) * C1;
+            return  fmValue.Sqrt(S) - C0 * hce;
         }
 
         public static fmValue Eval_hc_From_h1OverHc_tf_DpQpConst(fmValue h1OverHc, fmValue tf, fmValue eta, fmValue kappa, fmValue Pc, fmValue Dp, fmValue hce)

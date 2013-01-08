@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using fmCalculationLibrary;
 using fmCalcBlocksLibrary.BlockParameter;
 
@@ -58,16 +57,15 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
                 }
                 else
                 {
-                    const double eps = 1e-9;
-                    if (fmValue.EpsCompare(curValue.value, 0, eps) < 0)
+                    if (curValue.value < 0)
                     {
                         result[p] = fmResultCheckStatus.NEGATIVE;
                     }
-                    else if (fmValue.EpsCompare(curValue.value, p.ValidRange.MaxValue, eps) > 0)
+                    else if (curValue.value > p.ValidRange.MaxValue)
                     {
                         result[p] = fmResultCheckStatus.GREATER_THAN_MAXIMUM;
                     }
-                    else if (fmValue.EpsCompare(curValue.value, p.ValidRange.MinValue, eps) < 0)
+                    else if (curValue.value < p.ValidRange.MinValue)
                     {
                         result[p] = fmResultCheckStatus.LESS_THAN_MINIMUM;
                     }
@@ -170,31 +168,36 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
             }
 
             var isOutOfRanges = new fmIsOutOfRanges(block, parameter);
-            var falseValue = new fmValue(0);
-            if (isOutOfRanges.Eval(left) == falseValue)
+            if (isOutOfRanges.Eval(left) == fmIsOutOfRanges.FalseValue)
             {
                 minValue = left;
             }
             else
             {
                 fmValue temp;
-                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isOutOfRanges, left, point, 40, out minValue, out temp);
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.
+                    FindRootRange(isOutOfRanges, left, point, 40, out temp, out minValue);
             }
 
-            if (isOutOfRanges.Eval(right) == falseValue)
+            if (isOutOfRanges.Eval(right) == fmIsOutOfRanges.FalseValue)
             {
                 maxValue = right;
             }
             else
             {
                 fmValue temp;
-                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isOutOfRanges, right, point, 40, out maxValue, out temp);
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.
+                    FindRootRange(isOutOfRanges, point, right, 40, out maxValue, out temp);
             }
 
             return true;
         }
 
-        static public bool GetMinMaxLimits(fmBlockVariableParameter parameter, out fmValue minValue, out fmValue maxValue, fmBaseBlock block)
+        static public bool GetMinMaxLimits(
+            fmBlockVariableParameter parameter, 
+            out fmValue minValue, 
+            out fmValue maxValue, 
+            fmBaseBlock block)
         {
             if (FindGroupRepresetator(block.Parameters, parameter.group) == null)
             {
@@ -218,15 +221,14 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
                 return false;
             }
 
-            var eps = new fmValue(1e-10);// *(maxValue - minValue);
-            minValue = minValue * (1 - eps);
-            maxValue = maxValue * (1 + eps);
-
             return true;
         }
 
         private class fmIsAllDefinedAndNotNegative : fmCalculationLibrary.NumericalMethods.fmFunction
         {
+            static public fmValue FalseValue = new fmValue(-1);
+            static public fmValue TrueValue = new fmValue(1);
+
             private readonly fmBaseBlock m_block;
             private readonly fmBlockVariableParameter m_xParameter;
             public fmIsAllDefinedAndNotNegative(fmBaseBlock block, fmBlockVariableParameter xParameter)
@@ -237,18 +239,23 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 
             public override fmValue Eval(fmValue x)
             {
-                Dictionary<fmGlobalParameter, fmResultCheckStatus> resultStatus = fmLimitsBlockCalcs.GetResultStatus(m_xParameter, x.value, m_block);
-                var result = new fmValue(1);
+                Dictionary<fmGlobalParameter, fmResultCheckStatus> resultStatus = GetResultStatus(m_xParameter, x.value, m_block);
                 foreach (fmResultCheckStatus status in resultStatus.Values)
+                {
                     if (status == fmResultCheckStatus.N_A || status == fmResultCheckStatus.NEGATIVE)
-                        result.value = 0;
-
-                return result;
+                    {
+                        return FalseValue;
+                    }
+                }
+                return TrueValue;
             }
         }
 
         private class fmIsOutOfRanges : fmCalculationLibrary.NumericalMethods.fmFunction
         {
+            static public fmValue FalseValue = new fmValue(-1);
+            static public fmValue TrueValue = new fmValue(1);
+
             private readonly fmBaseBlock m_block;
             private readonly fmBlockVariableParameter m_xParameter;
             public fmIsOutOfRanges(fmBaseBlock block, fmBlockVariableParameter xParameter)
@@ -261,10 +268,13 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
             {
                 Dictionary<fmGlobalParameter, fmResultCheckStatus> resultStatus = fmLimitsBlockCalcs.GetResultStatus(m_xParameter, x.value, m_block);
                 foreach (fmResultCheckStatus status in resultStatus.Values)
+                {
                     if (status != fmResultCheckStatus.INSIDE_RANGE)
-                        return new fmValue(1);
-
-                return new fmValue(0);
+                    {
+                        return TrueValue;
+                    }
+                }
+                return FalseValue;
             }
         }
 
@@ -387,11 +397,10 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
             // We use a fact that all results with min value of parameter are defined, otherwise we assume that there are no solution
 
             var isAllDefinedAndNotNegative = new fmIsAllDefinedAndNotNegative(block, parameter);
-            var trueValue = new fmValue(1);
             var minValue = new fmValue(parameter.globalParameter.ValidRange.MinValue);
             var maxValue = new fmValue(parameter.globalParameter.ValidRange.MaxValue);
 
-            if (isAllDefinedAndNotNegative.Eval(minValue) != trueValue)
+            if (isAllDefinedAndNotNegative.Eval(minValue) != fmIsAllDefinedAndNotNegative.TrueValue)
             {
                 const double eps = 1e-9;
                 if (minValue.value == 0)
@@ -404,29 +413,34 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
                 }
             }
 
-            if (isAllDefinedAndNotNegative.Eval(minValue) == trueValue)
+            if (isAllDefinedAndNotNegative.Eval(minValue) == fmIsAllDefinedAndNotNegative.TrueValue)
             {
                 left = minValue;
 
-                if (isAllDefinedAndNotNegative.Eval(maxValue) == trueValue)
+                if (isAllDefinedAndNotNegative.Eval(maxValue) == fmIsAllDefinedAndNotNegative.TrueValue)
                 {
                     right = maxValue;
                 }
                 else
                 {
                     fmValue temp;
-                    fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllDefinedAndNotNegative, left, maxValue, 30, out temp, out right);
+                    fmCalculationLibrary.NumericalMethods.fmBisectionMethod.
+                        FindRootRange(isAllDefinedAndNotNegative, left, maxValue, 30, out right, out temp);
                 }
 
                 return true;
             }
-            if (isAllDefinedAndNotNegative.Eval(maxValue) == trueValue)
+
+            if (isAllDefinedAndNotNegative.Eval(maxValue) == fmIsAllDefinedAndNotNegative.TrueValue)
             {
                 right = maxValue;
                 fmValue temp;
-                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.FindRootRange(isAllDefinedAndNotNegative, right, minValue, 30, out temp, out left);
+                fmCalculationLibrary.NumericalMethods.fmBisectionMethod.
+                    FindRootRange(isAllDefinedAndNotNegative, minValue, right, 30, out temp, out left);
+
                 return true;
             }
+
             left = new fmValue();
             right = new fmValue();
             return false;

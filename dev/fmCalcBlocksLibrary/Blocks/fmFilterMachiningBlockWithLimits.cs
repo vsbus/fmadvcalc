@@ -210,7 +210,10 @@ namespace fmCalcBlocksLibrary.Blocks
                 }
             }
         }
-        private void CalculateClueParamsLimits(List<fmBlockVariableParameter> clueParams, Dictionary<fmGlobalParameter, fmValue> minValue, Dictionary<fmGlobalParameter, fmValue> maxValue)
+        private void CalculateClueParamsLimits(
+            IEnumerable<fmBlockVariableParameter> clueParams, 
+            Dictionary<fmGlobalParameter, fmValue> minValue, 
+            Dictionary<fmGlobalParameter, fmValue> maxValue)
         {
             foreach (var parameter in clueParams)
             {
@@ -326,9 +329,6 @@ namespace fmCalcBlocksLibrary.Blocks
 
         private fmValue GetEdgeValue(double minVal, double maxVal, bool calculateMin)
         {
-            const double eps = 1e-9;
-            minVal = minVal == 0 ? Math.Min(maxVal, 1) * eps : minVal * (1 + eps);
-            maxVal = maxVal * (1 - eps);
             return new fmValue(calculateMin ? minVal : maxVal);
         }
 
