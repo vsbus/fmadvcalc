@@ -332,7 +332,14 @@ namespace FilterSimulation
             {
                 MakeInvisibleParameters(isVisibleParameters,
                                         fmGlobalParameter.Qp,
-                                        fmGlobalParameter.qp,
+                                        fmGlobalParameter.qp);
+            }
+
+            bool isDpQpConst = filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST
+                    || filterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST;
+            if (!isDpQpConst)
+            {
+                MakeInvisibleParameters(isVisibleParameters,
                                         fmGlobalParameter.h1,
                                         fmGlobalParameter.t1,
                                         fmGlobalParameter.h1_over_hc,
