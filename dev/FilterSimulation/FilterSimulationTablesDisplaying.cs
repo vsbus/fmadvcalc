@@ -1080,7 +1080,8 @@ namespace FilterSimulation
             var sim = sol.currentObjects.Simulation;
             if (sim != null)
             {
-                if (sim.FilterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST)
+                if (sim.FilterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_VOLUMETRIC_PUMP_QP_CONST ||
+                    sim.FilterMachiningCalculationOption == fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST)
                 {
                     var Qp = sim.Parameters[fmGlobalParameter.Qp] as fmCalculationVariableParameter;
                     var A = sim.Parameters[fmGlobalParameter.A] as fmCalculationVariableParameter;
