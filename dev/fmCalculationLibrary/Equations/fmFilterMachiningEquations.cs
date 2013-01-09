@@ -596,6 +596,11 @@ namespace fmCalculationLibrary.Equations
 
         public static fmValue EvalCandle_h1_From_t1OverTf_DpQpConst(fmValue t1OverTf, fmValue hc, fmValue eta, fmValue d, fmValue kappa, fmValue Pc, fmValue Dp, fmValue hce, fmValue eps, fmValue Cv)
         {
+            var zero = new fmValue(0);
+            if (t1OverTf == zero)
+            {
+                return zero;
+            }
             fmValue C1 = eta * d * d / (16 * kappa * Pc * Dp);
             fmValue C2 = (1 - eps)  * d * d * eta / (8 * Cv * (1 + kappa) * Pc * Dp);
             fmValue C3 = C2 * (1 / t1OverTf - 1);
