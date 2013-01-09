@@ -178,7 +178,7 @@ namespace FilterSimulationWithTablesAndGraphs
             Solution.Serialize(writer);
         }
 
-        public void Clear()
+        public bool Clear()
         {
             var newSolution = new fmFilterSimSolution();
             CreateNewProject(newSolution);
@@ -187,7 +187,12 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 Solution = newSolution;
             }
+            else
+            {
+                return false;
+            }
             DisplaySolution(Solution);
+            return true;
         }
 
         public void DeserializeData(XmlNode node)
