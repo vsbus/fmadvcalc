@@ -9,7 +9,7 @@ using fmCalcBlocksLibrary.Blocks.LimitsCalcs;
 
 namespace fmCalcBlocksLibrary.Blocks
 {
-    public class fmFilterMachiningBlockWithLimits : fmFilterMachiningBlock
+    public class fmFilterMachiningBlockWithLimits : fmFilterMachiningBlock, fmIBlockWithLimits
     {
         private bool m_isLimitsDisplaying = true;
 
@@ -43,77 +43,11 @@ namespace fmCalcBlocksLibrary.Blocks
                 List<fmBlockVariableParameter> clueParams = GetClueParamsList();
                 
                 CalculateClueParamsLimits(clueParams, minValue, maxValue);
-                CalculateAllParamsLimits(clueParams, minValue, maxValue);
+                fmParametersLimitsCalculator.Calculate(this, clueParams, minValue, maxValue);
                 
                 WriteLimitsToUI(minValue, maxValue);
 
                 processOnChange = true;
-            }
-        }
-
-        private void CalculateAllParamsLimits(IEnumerable<fmBlockVariableParameter> clueParams, Dictionary<fmGlobalParameter, fmValue> minValue, Dictionary<fmGlobalParameter, fmValue> maxValue)
-        {
-            foreach (fmBlockVariableParameter clueParameter in clueParams)
-            {
-                List<fmValue> keepedValues;
-                List<fmBlockVariableParameter> keepedInputInfo;
-                KeepValuesAndInputInfo(out keepedValues, out keepedInputInfo);
-                UpdateIsInputed(clueParameter);
-
-                var naInputs = GetNAInputsList(clueParameter);
-
-                for (int i = 0; i < 2; ++i)
-                {
-                    clueParameter.value = GetEdgeValue(minValue[clueParameter.globalParameter].value,
-                                                       maxValue[clueParameter.globalParameter].value,
-                                                       i == 0);
-                    for (int mask = 0; mask < (1 << naInputs.Count); ++mask)
-                    {
-                        for (int j = 0; j < naInputs.Count; ++j)
-                        {
-                            naInputs[j].value = GetEdgeValue(naInputs[j], (mask & (1 << j)) == 0);
-                        }
-
-                        DoCalculations();
-
-                        var valuesOfClueParameters = new Dictionary<fmGlobalParameter, fmValue>();
-                        foreach (fmBlockVariableParameter parameter in clueParams)
-                        {
-                            valuesOfClueParameters.Add(parameter.globalParameter, parameter.value);
-                        }
-                        if (!fmLimitsBlockCalcs.IsGoodResultStatus(fmLimitsBlockCalcs.GetResultStatus(valuesOfClueParameters)))
-                        {
-                            continue;
-                        }
-
-                        foreach (fmBlockVariableParameter parameter in parameters)
-                        {
-                            if (parameter.group == clueParameter.group)
-                            {
-                                fmGlobalParameter p = parameter.globalParameter;
-                                if (minValue.ContainsKey(p) == false)
-                                {
-                                    minValue[p] = new fmValue();
-                                }
-                                if (maxValue.ContainsKey(p) == false)
-                                {
-                                    maxValue[p] = new fmValue();
-                                }
-                                if (!minValue[p].defined
-                                    || parameter.value.defined && minValue[p] > parameter.value)
-                                {
-                                    minValue[p] = parameter.value;
-                                }
-                                if (!maxValue[p].defined
-                                    || parameter.value.defined && maxValue[p] < parameter.value)
-                                {
-                                    maxValue[p] = parameter.value;
-                                }
-                            }
-                        }
-                    }
-                }
-                RestoreValuesAndInputInfo(keepedValues, keepedInputInfo);
             }
         }
 
@@ -263,7 +197,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     for (int i = 0; i < naInputs.Count; ++i)
                     {
                         fmBlockVariableParameter p = naInputs[i];
-                        p.value = GetEdgeValue(p, (mask & (1 << i)) == 0);
+                        p.value = fmParametersLimitsCalculator.GetEdgeValue(p, (mask & (1 << i)) == 0);
                     }
 
                     fmValue curMin, curMax;
@@ -298,7 +232,7 @@ namespace fmCalcBlocksLibrary.Blocks
                     for (int i = 0; i < naInputs.Count; ++i)
                     {
                         fmBlockVariableParameter p = naInputs[i];
-                        p.value = GetEdgeValue(p, (mask & (1 << i)) == 0);
+                        p.value = fmParametersLimitsCalculator.GetEdgeValue(p, (mask & (1 << i)) == 0);
                     }
 
                     fmValue curMin, curMax;
@@ -325,18 +259,6 @@ namespace fmCalcBlocksLibrary.Blocks
 
                 return;
             }
-        }
-
-        private fmValue GetEdgeValue(double minVal, double maxVal, bool calculateMin)
-        {
-            return new fmValue(calculateMin ? minVal : maxVal);
-        }
-
-        private fmValue GetEdgeValue(fmBlockVariableParameter p, bool calculateMin)
-        {
-            double minVal = p.globalParameter.ValidRange.MinValue;
-            double maxVal = p.globalParameter.ValidRange.MaxValue;
-            return GetEdgeValue(minVal, maxVal, calculateMin);
         }
 
         override public List<fmBlockVariableParameter> GetClueParamsList()
@@ -432,7 +354,7 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
-        private List<fmBlockVariableParameter> GetNAInputsList(fmBlockVariableParameter parameter)
+        public List<fmBlockVariableParameter> GetNAInputsList(fmBlockVariableParameter parameter)
         {
             var naInputs = new List<fmBlockVariableParameter>();
             CheckNAAndAdd(GetParameterByName(fmGlobalParameter.A.Name), naInputs);
@@ -463,7 +385,7 @@ namespace fmCalcBlocksLibrary.Blocks
             naInputs.Remove(fmLimitsBlockCalcs.FindGroupRepresetator(parameters, parameter.group));
             return naInputs;
         }
-        private void KeepValuesAndInputInfo(out List<fmValue> keepedValues, out List<fmBlockVariableParameter> keepedInputInfo)
+        public void KeepValuesAndInputInfo(out List<fmValue> keepedValues, out List<fmBlockVariableParameter> keepedInputInfo)
         {
             keepedValues = new List<fmValue>();
             for (int i = 0; i < parameters.Count; ++i)
@@ -481,7 +403,7 @@ namespace fmCalcBlocksLibrary.Blocks
             }
         }
 
-        private void RestoreValuesAndInputInfo(List<fmValue> keepedValues, List<fmBlockVariableParameter> keepedInputInfo)
+        public void RestoreValuesAndInputInfo(List<fmValue> keepedValues, List<fmBlockVariableParameter> keepedInputInfo)
         {
             for (int i = 0; i < Parameters.Count; ++i)
             {
@@ -492,6 +414,11 @@ namespace fmCalcBlocksLibrary.Blocks
             {
                 UpdateIsInputed(p);
             }
+        }
+
+        public IEnumerable<fmBlockVariableParameter> GetParameters()
+        {
+            return Parameters;
         }
 
         private void CheckNAAndAdd(fmBlockVariableParameter p, List<fmBlockVariableParameter> naInputs)
