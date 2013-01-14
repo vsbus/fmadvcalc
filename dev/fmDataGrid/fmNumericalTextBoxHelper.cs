@@ -12,7 +12,15 @@ namespace fmDataGrid
                 {
                     key = (Keys)System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
                 }
-                else if (!char.IsDigit((char)key))
+                else if (key == (Keys)'-')
+                {
+                    // allow -
+                }
+                else if (char.IsDigit((char)key))
+                {
+                    // allow any digit
+                } 
+                else
                 {
                     key = Keys.None;
                 }
