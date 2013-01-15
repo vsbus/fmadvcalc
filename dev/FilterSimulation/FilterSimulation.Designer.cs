@@ -169,6 +169,7 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorMessageLabel = new System.Windows.Forms.Label();
+            this.newSimulationButton = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
@@ -1294,6 +1295,7 @@ namespace FilterSimulation
             // 
             // panelMaterialParameters
             // 
+            this.panelMaterialParameters.Controls.Add(this.newSimulationButton);
             this.panelMaterialParameters.Controls.Add(this.calculationOptionChangeButton);
             this.panelMaterialParameters.Controls.Add(this.eps0Kappa0Pc0Rc0Alpha0DataGrid);
             this.panelMaterialParameters.Controls.Add(this.liquidDataGrid);
@@ -1669,6 +1671,15 @@ namespace FilterSimulation
             this.errorMessageLabel.Name = "errorMessageLabel";
             this.errorMessageLabel.Size = new System.Drawing.Size(0, 13);
             this.errorMessageLabel.TabIndex = 15;
+            // newSimulationButton
+
+            this.newSimulationButton.Location = new System.Drawing.Point(0, 353);
+            this.newSimulationButton.Name = "newSimulationButton";
+            this.newSimulationButton.Size = new System.Drawing.Size(205, 23);
+            this.newSimulationButton.TabIndex = 16;
+            this.newSimulationButton.Text = "Create new simulation";
+            this.newSimulationButton.UseVisualStyleBackColor = true;
+            this.newSimulationButton.Click += new System.EventHandler(this.newSimulationButton_Click);
             // 
             // fmFilterSimulationControl
             // 
@@ -1862,5 +1873,6 @@ namespace FilterSimulation
         private System.Windows.Forms.DataGridViewTextBoxColumn simSeriesMachineNameColumn;
         private System.Windows.Forms.Panel LimitsAndMessagePanel;
         private System.Windows.Forms.Label errorMessageLabel;
+        private System.Windows.Forms.Button newSimulationButton;
     }
 }

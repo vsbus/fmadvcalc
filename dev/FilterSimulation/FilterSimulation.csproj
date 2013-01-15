@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D06514FC-2EC2-4D62-9583-9A4D8E8298E3}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -44,6 +44,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllCalculationSettingsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AllCalculationSettingsDialog.Designer.cs">
+      <DependentUpon>AllCalculationSettingsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="CalculationOptionSelectionDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,18 @@
     <Compile Include="MachineTypeSelectionDialog.Designer.cs">
       <DependentUpon>MachineTypeSelectionDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewNameDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewNameDialog.Designer.cs">
+      <DependentUpon>NewNameDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewSuspensionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewSuspensionDialog.Designer.cs">
+      <DependentUpon>NewSuspensionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="ParameterIntervalOption.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +128,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="StartMachineTypeSelectionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StartMachineTypeSelectionDialog.Designer.cs">
+      <DependentUpon>StartMachineTypeSelectionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="TableWithParameterRanges.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -119,6 +143,9 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AllCalculationSettingsDialog.resx">
+      <DependentUpon>AllCalculationSettingsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CalculationOptionSelectionDialog.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CalculationOptionSelectionDialog.cs</DependentUpon>
@@ -135,6 +162,12 @@
       <DependentUpon>MachineTypeSelectionDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewNameDialog.resx">
+      <DependentUpon>NewNameDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewSuspensionDialog.resx">
+      <DependentUpon>NewSuspensionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ParameterIntervalOption.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ParameterIntervalOption.cs</DependentUpon>
@@ -143,6 +176,9 @@
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StartMachineTypeSelectionDialog.resx">
+      <DependentUpon>StartMachineTypeSelectionDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TableWithParameterRanges.resx">
       <DependentUpon>TableWithParameterRanges.cs</DependentUpon>

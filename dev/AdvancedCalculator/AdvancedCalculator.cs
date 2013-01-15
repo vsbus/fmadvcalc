@@ -11,8 +11,6 @@ namespace AdvancedCalculator
 {
     public partial class fmAdvancedCalculator : Form
     {
-
-
         private readonly string m_caption = string.Format("FILTRAPLUS (v.{0})", Config.Version);
 
         public fmAdvancedCalculator()
@@ -272,11 +270,9 @@ namespace AdvancedCalculator
 
         private void CreateNewFile()
         {
-            if (filterSimulationWithTablesAndGraphs1.Clear())
-            {
-                m_currentFilename = null;
-                Text = m_caption;
-            }
+            m_currentFilename = null;
+            Text = m_caption;
+            filterSimulationWithTablesAndGraphs1.Clear();
         }
 
         private void calculationPrecisionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -297,6 +293,11 @@ namespace AdvancedCalculator
             {
                 Close();
             }
+        }
+
+        private void createNewSimulationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            filterSimulationWithTablesAndGraphs1.newSimulationButton_Click(sender, e);
         }
     }
 }

@@ -24,6 +24,18 @@ namespace FilterSimulation
             solution.currentObjects.Project = new fmFilterSimProject(solution, "n/a");
             solution.currentColumns.project = projectNameColumn.Index;
         }
+        protected void CreateNewProject(string name)
+        {
+            Solution.currentObjects.Project = new fmFilterSimProject(Solution, name);
+            Solution.currentColumns.project = projectNameColumn.Index;
+        }
+
+        protected void CreateNewProject(fmFilterSimSolution SomeSolution, string projectName)
+        {
+            SomeSolution.currentObjects.Project = new fmFilterSimProject(SomeSolution, projectName);
+            SomeSolution.currentColumns.project = projectNameColumn.Index;
+        }
+
         private void keepProject_Click(object sender, EventArgs e)
         {
             if (Solution.currentObjects.Project != null)
@@ -104,6 +116,11 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
         {
             solution.currentObjects.Suspension = new fmFilterSimSuspension(parentProject, "n/a", "n/a", "n/a");
             solution.currentColumns.suspension = suspensionNameColumn.Index;
+        }
+        protected void CreateNewSuspension(fmFilterSimProject parentProject, string SuspensionName, string MaterialName, string CustomerName)
+        {
+            Solution.currentObjects.Suspension = new fmFilterSimSuspension(parentProject, SuspensionName, MaterialName, CustomerName);
+            Solution.currentColumns.suspension = suspensionNameColumn.Index;
         }
         // ReSharper disable InconsistentNaming
         private void suspensionRestoreButton_Click(object sender, EventArgs e)
@@ -191,6 +208,20 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
                 solution.currentObjects.Serie, machine);
 
             solution.currentObjects.Serie.Keep();
+
+            return true;
+        }
+        protected bool CreateNewSerie(fmFilterSimSuspension parentSuspension, string serieName, string mediumName, string simulationName, fmFilterSimMachineType machine)
+        {
+            fmFilterSimulation curSim = Solution.currentObjects.Simulation;
+            Solution.currentObjects.Serie = new fmFilterSimSerie(parentSuspension, serieName, machine, mediumName, "n/a");
+            Solution.currentObjects.Simulation = new fmFilterSimulation(Solution.currentObjects.Serie, "Sim");
+            Solution.currentObjects.Simulation.SetName(simulationName);
+
+            AssignParametersToDisplayAndRangesOfGivenMachineWithSerie(
+                Solution.currentObjects.Serie, machine);
+
+            Solution.currentObjects.Serie.Keep();
 
             return true;
         }

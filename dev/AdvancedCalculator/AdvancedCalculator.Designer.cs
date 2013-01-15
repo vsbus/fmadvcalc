@@ -44,6 +44,7 @@ namespace AdvancedCalculator
             this.calculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterSimulationWithTablesAndGraphs1 = new FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.createNewSimulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +57,8 @@ namespace AdvancedCalculator
             this.unitsToolStripMenuItem1,
             this.rangesToolStripMenuItem1,
             this.filterTypesToolStripMenuItem,
-            this.calculatorToolStripMenuItem});
+            this.calculatorToolStripMenuItem,
+            this.createNewSimulationToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(766, 24);
@@ -166,6 +168,13 @@ namespace AdvancedCalculator
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // createNewSimulationToolStripMenuItem
+            // 
+            this.createNewSimulationToolStripMenuItem.Name = "createNewSimulationToolStripMenuItem";
+            this.createNewSimulationToolStripMenuItem.Size = new System.Drawing.Size(137, 20);
+            this.createNewSimulationToolStripMenuItem.Text = "Create new simulation";
+            this.createNewSimulationToolStripMenuItem.Click += new System.EventHandler(this.createNewSimulationToolStripMenuItem_Click);
+            // 
             // fmAdvancedCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -202,6 +211,7 @@ namespace AdvancedCalculator
         private System.Windows.Forms.ToolStripMenuItem calculationPrecisionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem filterTypesToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripMenuItem createNewSimulationToolStripMenuItem;
         
 
 

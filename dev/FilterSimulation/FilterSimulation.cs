@@ -983,6 +983,91 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             m_commonDeliquoringSimulationBlock.CalculateAndDisplay();
         }
 
+        public void RunCreateNewSimulationDialog()
+        {
+            var dialog = new StartMachineTypeSelectionDialog(Solution, false);
+            dialog.InitializeMachineTypesComboBox();
+            dialog.InitCalculationsSettingsWindow(this.GetCurrentSerieRanges(dialog.GetSelectedType()).Ranges, RangesSchemas, GetCurrentSerieParametersToDisplay(dialog.GetSelectedType().GetFilterCycleType()), ShowHideSchemas);
+            var currentSimulation = Solution.currentObjects.Simulation;
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                int iterationsProjCount = 0;
+                int iterationsSuspCount = 0;
+                foreach (var project in Solution.projects)
+                {
+                    if (project.GetName() == dialog.GetProjectName())
+                    {
+                        foreach (var suspension in project.SuspensionList)
+                        {
+                            if (suspension.GetName() == dialog.GetSuspensionName() && suspension.Customer == dialog.GetCustomerName() && suspension.Material == dialog.GetMaterialName())
+                            {
+                                foreach (var serie in suspension.m_data.seriesList)
+                                {
+                                    if (serie.GetName() == dialog.GetSerieName() && serie.FilterMedium == dialog.GetMediumName())
+                                    {
+                                        Solution.currentObjects.Simulation = new fmFilterSimulation(serie, dialog.GetSimulationName());
+                                        Solution.currentObjects.Simulation.CopySuspensionParameters(currentSimulation);
+
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        CreateNewSerie(suspension, dialog.GetSerieName(), dialog.GetMediumName(), dialog.GetSimulationName(), dialog.GetSelectedType());
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                                ++iterationsSuspCount;
+                        }
+
+                        if (iterationsSuspCount == project.SuspensionList.Count)
+                        {
+                            CreateNewSuspension(project, dialog.GetSuspensionName(), dialog.GetMaterialName(), dialog.GetCustomerName());
+                            CreateNewSerie(Solution.currentObjects.Suspension, dialog.GetSerieName(), dialog.GetMediumName(), dialog.GetSimulationName(), dialog.GetSelectedType());
+                        }
+
+                    }
+                    else
+                    {
+                        ++iterationsProjCount;
+                    }
+                }
+                if (iterationsProjCount == Solution.projects.Count)
+                {
+                    CreateNewProject(dialog.GetProjectName());
+                    CreateNewSuspension(Solution.currentObjects.Project, dialog.GetSuspensionName(), dialog.GetMaterialName(), dialog.GetCustomerName());
+                    CreateNewSerie(Solution.currentObjects.Suspension, dialog.GetSerieName(), dialog.GetMediumName(), dialog.GetSimulationName(), dialog.GetSelectedType());                    
+                }
+
+                Solution.currentColumns.simulation = simulationNameColumn.Index;
+                DisplaySolution(Solution);
+
+                var rangesCfg = new fmRangesConfiguration
+                {
+                    AssignedMachineType = dialog.GetRangesMachineType(),
+                    Ranges = dialog.GetRanges()
+                };
+
+                Solution.currentObjects.Serie.Ranges = rangesCfg;            
+                foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in rangesCfg.Ranges)
+                {
+                    range.Key.SpecifiedRange = range.Value;
+                }
+
+                RangesSchemas = dialog.GetRangesSchemas();
+
+                var parametersToDisplay = new fmParametersToDisplay(dialog.GetCheckedSchema(), dialog.GetCheckedItems());
+                SetCurrentSerieParametersToDisplayOrDefault(parametersToDisplay);
+                ShowHideSchemas = dialog.GetShowHideSchemas();
+
+                UpdateAll();
+
+                dialog.GetCalculationOptions(Solution.currentObjects.Simulation);
+            }
+        }
+
+
         public void SelectMachineButtonClick(object sender, EventArgs e)
         {
             var dialog = new MachineTypeSelectionDialog();
@@ -1098,6 +1183,33 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         private void button4_Click_1(object sender, EventArgs e)
         {
             RunCalculationOptionChangeDialog();
+        }
+
+        public void newSimulationButton_Click(object sender, EventArgs e)
+        {
+            RunCreateNewSimulationDialog();
+        }
+
+        public fmRangesConfiguration GetCurrentSerieRanges(fmFilterSimMachineType machine)
+        {
+            if (Solution.currentObjects.Serie != null)
+            {
+                return new fmRangesConfiguration(Solution.currentObjects.Serie.Ranges);
+            }
+            return new FilterSimulation.fmRangesConfiguration(machine, RangesSchemas[machine]);
+        }
+
+        public fmParametersToDisplay GetCurrentSerieParametersToDisplay(fmFilterSimMachineType.FilterCycleType value)
+        {
+            if (Solution.currentObjects.Serie == null)
+                return new fmParametersToDisplay(value, ShowHideSchemas[value]);
+
+            return Solution.currentObjects.Serie.ParametersToDisplay;
+        }
+        public void SetCurrentSerieParametersToDisplayOrDefault(fmParametersToDisplay parametersToDisplayList)
+        {
+            Solution.currentObjects.Serie.ParametersToDisplay = parametersToDisplayList;            
+            ParametersToDisplay = parametersToDisplayList;
         }
     }
 }

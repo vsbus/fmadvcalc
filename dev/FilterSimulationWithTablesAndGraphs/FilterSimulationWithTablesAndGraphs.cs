@@ -178,21 +178,46 @@ namespace FilterSimulationWithTablesAndGraphs
             Solution.Serialize(writer);
         }
 
-        public bool Clear()
+        public void Clear()
         {
-            var newSolution = new fmFilterSimSolution();
-            CreateNewProject(newSolution);
-            CreateNewSuspension(newSolution, newSolution.currentObjects.Project);
-            if (CreateNewSerie(newSolution, newSolution.currentObjects.Suspension))
+            var TempSolution = Solution;
+            Solution = new fmFilterSimSolution();
+            var dialog = new StartMachineTypeSelectionDialog(Solution, true);
+            dialog.InitializeMachineTypesComboBox();
+            dialog.InitCalculationsSettingsWindow(this.GetCurrentSerieRanges(dialog.GetSelectedType()).Ranges, RangesSchemas, GetCurrentSerieParametersToDisplay(dialog.GetSelectedType().GetFilterCycleType()), ShowHideSchemas);
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                Solution = newSolution;
+                CreateNewProject(dialog.GetProjectName());
+                CreateNewSuspension(Solution.currentObjects.Project, dialog.GetSuspensionName(), dialog.GetMaterialName(), dialog.GetCustomerName());
+                CreateNewSerie(Solution.currentObjects.Suspension, dialog.GetSerieName(), dialog.GetMediumName(), dialog.GetSimulationName(), dialog.GetSelectedType());
             }
             else
             {
-                return false;
+                Solution = TempSolution;
             }
             DisplaySolution(Solution);
-            return true;
+
+            var rangesCfg = new fmRangesConfiguration
+            {
+                AssignedMachineType = dialog.GetRangesMachineType(),
+                Ranges = dialog.GetRanges()
+            };
+
+            Solution.currentObjects.Serie.Ranges = rangesCfg;
+            foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in rangesCfg.Ranges)
+            {
+                range.Key.SpecifiedRange = range.Value;
+            }
+
+            RangesSchemas = dialog.GetRangesSchemas();
+
+            var parametersToDisplay = new fmParametersToDisplay(dialog.GetCheckedSchema(), dialog.GetCheckedItems());
+            SetCurrentSerieParametersToDisplayOrDefault(parametersToDisplay);
+            ShowHideSchemas = dialog.GetShowHideSchemas();
+
+            UpdateAll();
+
+            dialog.GetCalculationOptions(Solution.currentObjects.Simulation);
         }
 
         public void DeserializeData(XmlNode node)
