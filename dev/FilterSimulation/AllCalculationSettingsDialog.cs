@@ -39,7 +39,7 @@ namespace FilterSimulation
         public string CurrentSerieMachineName = "";
         private Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> m_schemas_param = new Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>>();
 
-        public struct ValuesForCaseIfCancelClicked
+        public class ValuesForCaseIfCancelClicked
         {
             public string machine;
             public RangesDictionary ranges;
