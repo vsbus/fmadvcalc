@@ -1001,7 +1001,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                         {
                             if (suspension.GetName() == dialog.GetSuspensionName() && suspension.Customer == dialog.GetCustomerName() && suspension.Material == dialog.GetMaterialName())
                             {
-                                foreach (var serie in suspension.m_data.seriesList)
+                                foreach (var serie in suspension.SimSeriesList)
                                 {
                                     if (serie.GetName() == dialog.GetSerieName() && serie.FilterMedium == dialog.GetMediumName())
                                     {

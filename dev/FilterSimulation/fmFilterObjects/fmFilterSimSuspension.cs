@@ -5,7 +5,7 @@ using FilterSimulation.fmFilterObjects.Interfaces;
 
 namespace FilterSimulation.fmFilterObjects
 {
-    public struct fmFilterSimSuspensionData
+    struct fmFilterSimSuspensionData
     {
         public string name;
         public string material;
@@ -70,7 +70,7 @@ namespace FilterSimulation.fmFilterObjects
     {
         private Guid m_guid;
         private fmFilterSimProject m_parentProject;
-        public fmFilterSimSuspensionData m_data;
+        private fmFilterSimSuspensionData m_data;
 #pragma warning disable 649
         private fmFilterSimSuspensionData m_backupData;
 #pragma warning restore 649
