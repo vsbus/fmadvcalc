@@ -34,6 +34,7 @@ namespace AdvancedCalculator
 
         private void AdvancedCalculatorLoad(object sender, EventArgs e)
         {
+            var doc = new XmlDocument();
             if (!ProtectionChecker.CheckProtectionWithDialog())
             {
                 Close();
@@ -41,9 +42,10 @@ namespace AdvancedCalculator
 
             try
             {
-                var doc = new XmlDocument();
                 doc.Load(FiltraplusConfigFilename);
                 filterSimulationWithTablesAndGraphs1.DeserializeConfiguration(
+                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
+                filterSimulationWithTablesAndGraphs1.LoadInterfaceAdjusting(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
             }
             catch
@@ -61,11 +63,18 @@ namespace AdvancedCalculator
                 string filename = regValue.ToString();
                 if (File.Exists(filename))
                 {
-                    LoadFromDisk(filename);
+                    LoadLastFileFromDisk(filename);
                     return;
                 }
             }
             CreateNewFile();
+            try
+            {
+                filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
+            }
+            catch
+            {
+            }
         }
 
         private void SaveOnDiskToolStripMenuItemClick(object sender, EventArgs e)
@@ -107,6 +116,8 @@ namespace AdvancedCalculator
             writer.WriteStartDocument();
             writer.WriteStartElement(fmFiltraplusSerializeTags.FiltraplusDataFile);
             filterSimulationWithTablesAndGraphs1.SerializeData(writer);
+            filterSimulationWithTablesAndGraphs1.SaveInterfaceAdjusting(writer);
+            filterSimulationWithTablesAndGraphs1.SerializeConfiguration(writer);
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();
@@ -129,6 +140,29 @@ namespace AdvancedCalculator
 
         private string m_currentFilename;
         private void LoadFromDisk(string fileName)
+        {
+            try
+            {
+                var doc = new XmlDocument();
+                doc.Load(fileName);
+
+                m_currentFilename = fileName;
+                filterSimulationWithTablesAndGraphs1.DeserializeData(
+                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
+                Text = m_caption + @" [" + fileName + @"]";
+                filterSimulationWithTablesAndGraphs1.LoadInterfaceAdjusting(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
+                filterSimulationWithTablesAndGraphs1.LoadConfiguration(
+                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));                
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(@"File " + fileName + @" has an error in format and is impossible to open.", @"Error");
+                m_currentFilename = null;
+                Text = m_caption;
+            }
+        }
+
+        private void LoadLastFileFromDisk(string fileName)
         {
             try
             {
@@ -192,6 +226,7 @@ namespace AdvancedCalculator
             writer.WriteStartDocument();
             writer.WriteStartElement(fmFiltraplusSerializeTags.FiltraplusConfigFile);
             filterSimulationWithTablesAndGraphs1.SerializeConfiguration(writer);
+            filterSimulationWithTablesAndGraphs1.SaveInterfaceAdjusting(writer);
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();
@@ -300,6 +335,26 @@ namespace AdvancedCalculator
         private void createNewSimulationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             filterSimulationWithTablesAndGraphs1.newSimulationButton_Click(sender, e);
+        }
+
+        private void newFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            newToolStripMenuItem_Click(sender, e);
+        }
+
+        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadFromDiskToolStripMenuItemClick(sender, e);
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveAllToolStripMenuItem_Click(sender, e);
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveOnDiskToolStripMenuItemClick(sender, e);
         }
     }
 }

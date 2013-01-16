@@ -241,6 +241,11 @@ namespace FilterSimulation
             throw new NotImplementedException();
         }
 
+        protected virtual void LoadDiagramOptions(XmlNode node)
+        {
+            throw new NotImplementedException();
+        }
+
         private void DeserializeInputSuspensionSerieSimulation(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationSerializeTags.MeterialInputOption);
@@ -352,11 +357,22 @@ namespace FilterSimulation
 
         public void DeserializeConfiguration(XmlNode node)
         {
+            DeserializeProgranOptionsShowHideRangesUnitsAndDiagramOptions(node);
+            DeserializeDiagramOptions(node);
+        }
+
+        public void LoadConfiguration(XmlNode node)
+        {
+            DeserializeProgranOptionsShowHideRangesUnitsAndDiagramOptions(node);
+            LoadDiagramOptions(node);
+        }
+
+        public void DeserializeProgranOptionsShowHideRangesUnitsAndDiagramOptions(XmlNode node)
+        {
             DeserializeProgramOptions(node);
             DeserializeShowHideSchemas(node);
             DeserializeRangesSchemas(node);
             DeserializeUnitsSchemas(node);
-            DeserializeDiagramOptions(node);
         }
 
         private void DeserializeUnitsSchemas(XmlNode node)

@@ -511,6 +511,9 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string YLogCheckBox = "YLogCheckBox";
             public const string Y2LogCheckBox = "Y2LogCheckBox";
             public const string UseParamsCheckBox = "UseParamsCheckBox";
+
+            public const string MinMax_Values_Of_The_XAxis_Parameter = "MinMax_Values_Of_The_XAxis_Parameter";            
+            public const string MinMax_Parameter = "MinMax_Parameter";            
         }
 
         override protected void SerializeDiagramOptions(XmlWriter writer)
@@ -544,6 +547,8 @@ namespace FilterSimulationWithTablesAndGraphs
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.YLogCheckBox, yLogCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.Y2LogCheckBox, y2LogCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.UseParamsCheckBox, UseParamsCheckBox.Checked.ToString());
+
+            SerializeMinMaxValuesOfTheXAxisParameter(writer);
             writer.WriteEndElement();
         }
 
@@ -556,6 +561,46 @@ namespace FilterSimulationWithTablesAndGraphs
             return fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text];
         }
 
+        private void SerializeMinMaxValuesOfTheXAxisParameter(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Values_Of_The_XAxis_Parameter);            
+            foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
+            {
+                writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Parameter, row.Cells[1].Value.ToString());
+                writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Parameter, row.Cells[2].Value.ToString());
+            }
+            writer.WriteEndElement();
+        }
+
+        public void LoadLastMinMaxValues(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
+            DeserializeMinMaxValuesOfTheXAxisParameter(node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Values_Of_The_XAxis_Parameter));
+        }
+
+        protected void DeserializeMinMaxValuesOfTheXAxisParameter(XmlNode node)
+        {
+            XmlNodeList MinMaxParameters = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Parameter);
+            if (MinMaxParameters != null)
+            {
+                int row = 0;
+                int column = 1;
+                foreach (XmlNode minmaxparamater in MinMaxParameters)
+                {
+                    InvolvedSeriesDataGrid.Rows[row].Cells[column].Value = minmaxparamater.InnerText.ToString();
+                    
+                    if (column == 1)
+                        ++column;
+                    else
+                    {
+                        ++row;
+                        --column;
+                    }
+                }
+            }
+            MinMaxXValueTextBoxTextChanged(null, new EventArgs());
+        }
+
         override protected void DeserializeDiagramOptions(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
@@ -563,7 +608,37 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 return;
             }
-            
+
+            DeserializePartOfDiagramOptions(node);
+
+            DeserializeXParameter(node);
+
+            DeserializeY1NodesForProgramStarting(node);
+
+            DeserializeY2Nodes(node);            
+        }
+
+        override protected void LoadDiagramOptions(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
+            if (node == null)
+            {
+                return;
+            }
+
+            DeserializePartOfDiagramOptions(node);
+
+            DeserializeXParameter(node);
+
+            DeserializeY1NodesForMenuOpen(node);
+
+            DeserializeY2Nodes(node);
+
+            DeserializeMinMaxValuesOfTheXAxisParameter(node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Values_Of_The_XAxis_Parameter));            
+        }
+
+        public void DeserializePartOfDiagramOptions(XmlNode node)
+        {
             string temp = "";
             if (fmSerializeTools.DeserializeStringProperty(
                 ref temp,
@@ -652,7 +727,10 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 UseParamsCheckBox.Checked = Convert.ToBoolean(temp);
             }
+        }
 
+        public void DeserializeXParameter(XmlNode node)
+        {
             string xParameterName = "tf";
             fmSerializeTools.DeserializeStringProperty(ref xParameterName, node,
                                                        fmFilterSimulationWithDiagramsSerializeTags.XParameterName);
@@ -663,14 +741,37 @@ namespace FilterSimulationWithTablesAndGraphs
                     item.Selected = true;
                 }
             }
+        }
 
+        public void DeserializeY1NodesForMenuOpen(XmlNode node)
+        {
+            XmlNodeList y1Nodes = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.Y1ParameterName);
+            if (y1Nodes != null)
+            {
+                foreach (ListViewItem item in listBoxYAxis.Items)
+                {
+                    item.Checked = false;
+                    foreach (XmlNode y1Node in y1Nodes)
+                    {
+                        if (item.Text == y1Node.InnerText)
+                            item.Checked = true;
+                    }
+                }
+            }
+        }
+
+        public void DeserializeY1NodesForProgramStarting(XmlNode node)
+        {
             XmlNodeList y1Nodes = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.Y1ParameterName);
             if (y1Nodes != null)
                 foreach (XmlNode y1Node in y1Nodes)
                 {
                     listBoxYAxis.Items.Add(y1Node.InnerText).Checked = true;
                 }
+        }
 
+        public void DeserializeY2Nodes(XmlNode node)
+        {
             XmlNodeList y2Nodes = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.Y2ParameterName);
             if (y2Nodes != null)
                 foreach (XmlNode y2Node in y2Nodes)
@@ -691,7 +792,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
         }
-
+        
         #endregion
 
         private void YLogCheckBoxCheckedChanged(object sender, EventArgs e)
@@ -744,6 +845,130 @@ namespace FilterSimulationWithTablesAndGraphs
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
+        }
+
+        private static class fmInterfaceAdjustingTags
+        {
+            public const string InterfaceAdjusting = "Interface_Adjusting";
+            public const string SplitterSizes = "Splitter_Sizes";            
+        }
+
+        public void SaveInterfaceAdjusting(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmInterfaceAdjustingTags.InterfaceAdjusting);
+            SaveSplitterDistances(writer);
+            writer.WriteEndElement();
+        }       
+
+        public void SaveSplitterDistances(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmInterfaceAdjustingTags.SplitterSizes);
+            writer.WriteElementString(projectSuspensionSplitContainer.Name, GetProjectSuspensionSplitContainerSplitterDistance());
+            writer.WriteElementString(projectSuspensionSerieSplitContainer.Name, GetProjectSuspensionSerieSplitContainerSplitterDistance());
+            writer.WriteElementString(mainSplitContainer.Name, GetMainSplitContainerSplitterDistance());
+            writer.WriteElementString(splitContainer1.Name, GetSplitContainer1SplitterDistance());
+            writer.WriteElementString(splitter3.Name, GetSplitter3SplitterDistance());
+            writer.WriteElementString(splitContainer2.Name, GetSplitContainer2SplitterDistance());
+            writer.WriteElementString(XYSplitContainer.Name, GetXYSplitContainerSplitterDistance());
+            writer.WriteElementString(RightSplitContainer.Name, GetRightSplitContainerSplitterDistance());
+            writer.WriteElementString(SimulationAndGraphSplitContainer.Name, GetSimulationAndGraphSplitContainerSplitterDistance());
+            writer.WriteEndElement();
+        }
+
+        public string GetProjectSuspensionSerieSplitContainerSplitterDistance()
+        {
+            return projectSuspensionSerieSplitContainer.SplitterDistance.ToString();            
+        }
+        public string GetProjectSuspensionSplitContainerSplitterDistance()
+        {
+            return projectSuspensionSplitContainer.SplitterDistance.ToString();
+        }
+        public string GetMainSplitContainerSplitterDistance()
+        {
+            return mainSplitContainer.SplitterDistance.ToString();
+        }
+        public string GetSplitter3SplitterDistance()
+        {
+            return splitter3.SplitPosition.ToString();
+        }
+        public string GetSplitContainer1SplitterDistance()
+        {
+            return splitContainer1.SplitterDistance.ToString();
+        }
+        public string GetSplitContainer2SplitterDistance()
+        {
+            return splitContainer2.SplitterDistance.ToString();
+        }
+        public string GetXYSplitContainerSplitterDistance()
+        {
+            return XYSplitContainer.SplitterDistance.ToString();
+        }
+        public string GetRightSplitContainerSplitterDistance()
+        {
+            return RightSplitContainer.SplitterDistance.ToString();
+        }
+        public string GetSimulationAndGraphSplitContainerSplitterDistance()
+        {
+            return SimulationAndGraphSplitContainer.SplitterDistance.ToString();
+        }
+
+        public void LoadInterfaceAdjusting(XmlNode node)
+        {
+            LoadSplitterDistances(node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting));
+        }
+
+        public void LoadSplitterDistances(XmlNode node)
+        {
+            SetSplitterDistances(node.SelectSingleNode(fmInterfaceAdjustingTags.SplitterSizes));
+        }
+
+        public void SetSplitterDistances(XmlNode node)
+        {
+            SetProjectSuspensionSerieSplitContainerSplitterDistance(node.SelectSingleNode(projectSuspensionSerieSplitContainer.Name));
+            SetProjectSuspensionSplitContainerSplitterDistance(node.SelectSingleNode(projectSuspensionSplitContainer.Name));            
+            SetMainSplitContainerSplitterDistance(node.SelectSingleNode(mainSplitContainer.Name));
+            SetSplitContainer1SplitterDistance(node.SelectSingleNode(splitContainer1.Name));
+            SetSplitter3SplitterDistance(node.SelectSingleNode(splitter3.Name));
+            SetXYSplitContainerSplitterDistance(node.SelectSingleNode(XYSplitContainer.Name));
+            SetSplitContainer2SplitterDistance(node.SelectSingleNode(splitContainer2.Name));            
+            SetRightSplitContainerSplitterDistance(node.SelectSingleNode(RightSplitContainer.Name));
+            SetSimulationAndGraphSplitContainerSplitterDistance(node.SelectSingleNode(SimulationAndGraphSplitContainer.Name));
+        }
+        public void SetProjectSuspensionSplitContainerSplitterDistance(XmlNode node)
+        {
+            projectSuspensionSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
+        }
+        public void SetProjectSuspensionSerieSplitContainerSplitterDistance(XmlNode node)
+        {
+            projectSuspensionSerieSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
+        }
+        public void SetMainSplitContainerSplitterDistance(XmlNode node)
+        {
+            mainSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
+        }
+        public void SetSplitContainer1SplitterDistance(XmlNode node)
+        {
+            splitContainer1.SplitterDistance = Convert.ToInt32(node.InnerText);
+        }
+        public void SetSplitter3SplitterDistance(XmlNode node)
+        {
+            splitter3.SplitPosition = Convert.ToInt32(node.InnerText);
+        }
+        public void SetSplitContainer2SplitterDistance(XmlNode node)
+        {
+            splitContainer2.SplitterDistance = Convert.ToInt32(node.InnerText);
+        }
+        public void SetXYSplitContainerSplitterDistance(XmlNode node)
+        {
+            XYSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
+        }
+        public void SetRightSplitContainerSplitterDistance(XmlNode node)
+        {
+            RightSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
+        }
+        public void SetSimulationAndGraphSplitContainerSplitterDistance(XmlNode node)
+        {
+            SimulationAndGraphSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
         }
     }
 }

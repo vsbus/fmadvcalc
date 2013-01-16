@@ -36,12 +36,16 @@ namespace AdvancedCalculator
             this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sAVEONDISKToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculationPrecisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.parametersToDisplayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unitsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.rangesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.filterTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterSimulationWithTablesAndGraphs1 = new FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.createNewSimulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +56,10 @@ namespace AdvancedCalculator
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.newFileToolStripMenuItem,
+            this.openFileToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
             this.calculationPrecisionToolStripMenuItem,
             this.parametersToDisplayToolStripMenuItem,
             this.unitsToolStripMenuItem1,
@@ -74,86 +82,115 @@ namespace AdvancedCalculator
             this.sAVEONDISKToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // lOADFROMDISKToolStripMenuItem
             // 
             this.lOADFROMDISKToolStripMenuItem.Name = "lOADFROMDISKToolStripMenuItem";
-            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.lOADFROMDISKToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.lOADFROMDISKToolStripMenuItem.Text = "Open...";
             this.lOADFROMDISKToolStripMenuItem.Click += new System.EventHandler(this.LoadFromDiskToolStripMenuItemClick);
             // 
             // saveAllToolStripMenuItem
             // 
             this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAllToolStripMenuItem.Text = "Save";
             this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
             // sAVEONDISKToolStripMenuItem
             // 
             this.sAVEONDISKToolStripMenuItem.Name = "sAVEONDISKToolStripMenuItem";
-            this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.sAVEONDISKToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sAVEONDISKToolStripMenuItem.Text = "Save As...";
             this.sAVEONDISKToolStripMenuItem.Click += new System.EventHandler(this.SaveOnDiskToolStripMenuItemClick);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
+            // 
+            // newFileToolStripMenuItem
+            // 
+            this.newFileToolStripMenuItem.Image = global::AdvancedCalculator.Properties.Resources.page_white;
+            this.newFileToolStripMenuItem.Name = "newFileToolStripMenuItem";
+            this.newFileToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.newFileToolStripMenuItem.Click += new System.EventHandler(this.newFileToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Image = global::AdvancedCalculator.Properties.Resources.disk;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Image = global::AdvancedCalculator.Properties.Resources.disk_multiple;
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // calculationPrecisionToolStripMenuItem
             // 
             this.calculationPrecisionToolStripMenuItem.Name = "calculationPrecisionToolStripMenuItem";
-            this.calculationPrecisionToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.calculationPrecisionToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
             this.calculationPrecisionToolStripMenuItem.Text = "Calculation Precision";
             this.calculationPrecisionToolStripMenuItem.Click += new System.EventHandler(this.calculationPrecisionToolStripMenuItem_Click);
             // 
             // parametersToDisplayToolStripMenuItem
             // 
             this.parametersToDisplayToolStripMenuItem.Name = "parametersToDisplayToolStripMenuItem";
-            this.parametersToDisplayToolStripMenuItem.Size = new System.Drawing.Size(123, 20);
+            this.parametersToDisplayToolStripMenuItem.Size = new System.Drawing.Size(132, 20);
             this.parametersToDisplayToolStripMenuItem.Text = "Parameters to display";
             this.parametersToDisplayToolStripMenuItem.Click += new System.EventHandler(this.ParametersToDisplayToolStripMenuItemClick);
             // 
             // unitsToolStripMenuItem1
             // 
             this.unitsToolStripMenuItem1.Name = "unitsToolStripMenuItem1";
-            this.unitsToolStripMenuItem1.Size = new System.Drawing.Size(43, 20);
+            this.unitsToolStripMenuItem1.Size = new System.Drawing.Size(46, 20);
             this.unitsToolStripMenuItem1.Text = "Units";
             this.unitsToolStripMenuItem1.Click += new System.EventHandler(this.unitsToolStripMenuItem1_Click);
             // 
             // rangesToolStripMenuItem1
             // 
             this.rangesToolStripMenuItem1.Name = "rangesToolStripMenuItem1";
-            this.rangesToolStripMenuItem1.Size = new System.Drawing.Size(55, 20);
+            this.rangesToolStripMenuItem1.Size = new System.Drawing.Size(57, 20);
             this.rangesToolStripMenuItem1.Text = "Ranges";
             this.rangesToolStripMenuItem1.Click += new System.EventHandler(this.RangesToolStripMenuItem1Click);
             // 
             // filterTypesToolStripMenuItem
             // 
             this.filterTypesToolStripMenuItem.Name = "filterTypesToolStripMenuItem";
-            this.filterTypesToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.filterTypesToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.filterTypesToolStripMenuItem.Text = "Filter Types";
             this.filterTypesToolStripMenuItem.Click += new System.EventHandler(this.filterTypesToolStripMenuItem_Click);
             // 
             // calculatorToolStripMenuItem
             // 
             this.calculatorToolStripMenuItem.Name = "calculatorToolStripMenuItem";
-            this.calculatorToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.calculatorToolStripMenuItem.Size = new System.Drawing.Size(73, 20);
             this.calculatorToolStripMenuItem.Text = "Calculator";
             this.calculatorToolStripMenuItem.Click += new System.EventHandler(this.calculatorToolStripMenuItem_Click);
             // 
+            // openFileToolStripMenuItem
+            // 
+            this.openFileToolStripMenuItem.Image = global::AdvancedCalculator.Properties.Resources.folder_open_16;
+            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+
+			// 
             // filterSimulationWithTablesAndGraphs1
             // 
             this.filterSimulationWithTablesAndGraphs1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -212,6 +249,10 @@ namespace AdvancedCalculator
         private System.Windows.Forms.ToolStripMenuItem filterTypesToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem createNewSimulationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         
 
 
