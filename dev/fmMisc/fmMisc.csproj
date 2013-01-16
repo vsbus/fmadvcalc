@@ -39,6 +39,7 @@
     <Compile Include="fmArrayUtils.cs" />
     <Compile Include="fmConvert.cs" />
     <Compile Include="fmEnumUtils.cs" />
+    <Compile Include="fmErrorLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

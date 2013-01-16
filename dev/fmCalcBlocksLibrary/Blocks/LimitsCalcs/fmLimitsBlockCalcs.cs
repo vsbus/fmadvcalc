@@ -341,8 +341,13 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 
                 Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus1 = GetResultStatus(parameter, mid1.value, block);
                 foreach (fmResultCheckStatus status in resultSatus1.Values)
+                {
                     if (status == fmResultCheckStatus.N_A)
-                        throw new Exception("resultSatus1 contains n/a in FindPointWithMeaningfulResult");
+                    {
+                        fmMisc.fmErrorLog.AddError("resultSatus1 contains n/a in FindPointWithMeaningfulResult");
+                        return new fmValue();
+                    }
+                }
 
                 if (IsGoodResultStatus(resultSatus1))
                 {
@@ -351,8 +356,13 @@ namespace fmCalcBlocksLibrary.Blocks.LimitsCalcs
 
                 Dictionary<fmGlobalParameter, fmResultCheckStatus> resultSatus2 = GetResultStatus(parameter, mid2.value, block);
                 foreach (fmResultCheckStatus status in resultSatus2.Values)
+                {
                     if (status == fmResultCheckStatus.N_A)
-                        throw new Exception("resultSatus2 contains n/a in FindPointWithMeaningfulResult");
+                    {
+                        fmMisc.fmErrorLog.AddError("resultSatus2 contains n/a in FindPointWithMeaningfulResult");
+                        return new fmValue();
+                    }
+                }
 
                 Dictionary<fmGlobalParameter, fmResultBehaviorStatus> resultBehavior = GetResultBehavior(parameter, mid1.value, mid2.value, block);
 
