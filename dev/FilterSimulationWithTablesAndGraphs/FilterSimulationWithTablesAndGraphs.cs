@@ -178,23 +178,22 @@ namespace FilterSimulationWithTablesAndGraphs
             Solution.Serialize(writer);
         }
 
-        public void Clear()
+        public bool Clear()
         {
-            var TempSolution = Solution;
+            var tempSolution = Solution;
             Solution = new fmFilterSimSolution();
             var dialog = new StartMachineTypeSelectionDialog(Solution, true);
             dialog.InitializeMachineTypesComboBox();
-            dialog.InitCalculationsSettingsWindow(this.GetCurrentSerieRanges(dialog.GetSelectedType()).Ranges, RangesSchemas, GetCurrentSerieParametersToDisplay(dialog.GetSelectedType().GetFilterCycleType()), ShowHideSchemas);
-            if (dialog.ShowDialog() == DialogResult.OK)
+            dialog.InitCalculationsSettingsWindow(GetCurrentSerieRanges(dialog.GetSelectedType()).Ranges, RangesSchemas, GetCurrentSerieParametersToDisplay(dialog.GetSelectedType().GetFilterCycleType()), ShowHideSchemas);
+            if (dialog.ShowDialog() != DialogResult.OK)
             {
-                CreateNewProject(dialog.GetProjectName());
-                CreateNewSuspension(Solution.currentObjects.Project, dialog.GetSuspensionName(), dialog.GetMaterialName(), dialog.GetCustomerName());
-                CreateNewSerie(Solution.currentObjects.Suspension, dialog.GetSerieName(), dialog.GetMediumName(), dialog.GetSimulationName(), dialog.GetSelectedType());
+                Solution = tempSolution;
+                return false;
             }
-            else
-            {
-                Solution = TempSolution;
-            }
+
+            CreateNewProject(dialog.GetProjectName());
+            CreateNewSuspension(Solution.currentObjects.Project, dialog.GetSuspensionName(), dialog.GetMaterialName(), dialog.GetCustomerName());
+            CreateNewSerie(Solution.currentObjects.Suspension, dialog.GetSerieName(), dialog.GetMediumName(), dialog.GetSimulationName(), dialog.GetSelectedType());
             DisplaySolution(Solution);
 
             var rangesCfg = new fmRangesConfiguration
@@ -218,6 +217,8 @@ namespace FilterSimulationWithTablesAndGraphs
             UpdateAll();
 
             dialog.GetCalculationOptions(Solution.currentObjects.Simulation);
+
+            return true;
         }
 
         public void DeserializeData(XmlNode node)

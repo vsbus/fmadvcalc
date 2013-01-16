@@ -121,7 +121,7 @@ namespace FilterSimulation
 
             foreach (var item in machineTypesComboBox.Items)
             {
-                try
+                if (Solution.currentObjects.Serie != null)
                 {
                     if (item.ToString() == Solution.currentObjects.Serie.MachineType.name)
                     {
@@ -129,8 +129,7 @@ namespace FilterSimulation
                         break;
                     }
                 }
-
-                catch
+                else
                 {
                     machineTypesComboBox.SelectedIndex = 0;
                 }

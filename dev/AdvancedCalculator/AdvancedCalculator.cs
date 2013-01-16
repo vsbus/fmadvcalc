@@ -270,9 +270,11 @@ namespace AdvancedCalculator
 
         private void CreateNewFile()
         {
-            m_currentFilename = null;
-            Text = m_caption;
-            filterSimulationWithTablesAndGraphs1.Clear();
+            if (filterSimulationWithTablesAndGraphs1.Clear())
+            {
+                m_currentFilename = null;
+                Text = m_caption;
+            }
         }
 
         private void calculationPrecisionToolStripMenuItem_Click(object sender, EventArgs e)
