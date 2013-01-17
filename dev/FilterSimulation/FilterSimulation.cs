@@ -357,17 +357,17 @@ namespace FilterSimulation
 
         public void DeserializeConfiguration(XmlNode node)
         {
-            DeserializeProgranOptionsShowHideRangesUnitsAndDiagramOptions(node);
+            DeserializeProgramOptionsShowHideRangesUnitsAndDiagramOptions(node);
             DeserializeDiagramOptionsFromConfigFile(node);
         }
 
         public void DeserializeConfigurationForMenuOpen(XmlNode node)
         {
-            DeserializeProgranOptionsShowHideRangesUnitsAndDiagramOptions(node);
+            DeserializeProgramOptionsShowHideRangesUnitsAndDiagramOptions(node);
             DeserializeDiagramOptionsFromDataFile(node);
         }
 
-        public void DeserializeProgranOptionsShowHideRangesUnitsAndDiagramOptions(XmlNode node)
+        public void DeserializeProgramOptionsShowHideRangesUnitsAndDiagramOptions(XmlNode node)
         {
             DeserializeProgramOptions(node);
             DeserializeShowHideSchemas(node);

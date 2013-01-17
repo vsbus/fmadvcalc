@@ -63,7 +63,7 @@ namespace AdvancedCalculator
                 string filename = regValue.ToString();
                 if (File.Exists(filename))
                 {
-                    LoadLastFileFromDisk(filename);
+                    LoadFromDisk(filename);
                     XmlNode cfgFileNode = doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile);
                     if (cfgFileNode != null)
                     {
@@ -151,26 +151,6 @@ namespace AdvancedCalculator
                 filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
                 filterSimulationWithTablesAndGraphs1.DeserializeConfigurationForMenuOpen(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));                
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(@"File " + fileName + @" has an error in format and is impossible to open.", @"Error");
-                m_currentFilename = null;
-                Text = m_caption;
-            }
-        }
-
-        private void LoadLastFileFromDisk(string fileName)
-        {
-            try
-            {
-                var doc = new XmlDocument();
-                doc.Load(fileName);
-
-                m_currentFilename = fileName;
-                filterSimulationWithTablesAndGraphs1.DeserializeData(
-                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
-                Text = m_caption + @" [" + fileName + @"]";
             }
             catch (Exception)
             {
