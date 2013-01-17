@@ -64,17 +64,12 @@ namespace AdvancedCalculator
                 if (File.Exists(filename))
                 {
                     LoadLastFileFromDisk(filename);
+                    if (doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile) != null)
+                        filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));                         
                     return;
                 }
             }
             CreateNewFile();
-            try
-            {
-                filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
-            }
-            catch
-            {
-            }
         }
 
         private void SaveOnDiskToolStripMenuItemClick(object sender, EventArgs e)

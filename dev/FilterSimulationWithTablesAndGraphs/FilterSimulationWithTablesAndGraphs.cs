@@ -601,7 +601,7 @@ namespace FilterSimulationWithTablesAndGraphs
             MinMaxXValueTextBoxTextChanged(null, new EventArgs());
         }
 
-        override protected void DeserializeDiagramOptions(XmlNode node)
+        override protected void DeserializeDiagramOptionsFromConfigFile(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
             if (node == null)
@@ -618,7 +618,7 @@ namespace FilterSimulationWithTablesAndGraphs
             DeserializeY2Nodes(node);            
         }
 
-        override protected void DeserializeDiagramOptionsForMenuOpen(XmlNode node)
+        override protected void DeserializeDiagramOptionsFromDataFile(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
             if (node == null)

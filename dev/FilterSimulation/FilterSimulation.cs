@@ -236,12 +236,12 @@ namespace FilterSimulation
             DeserializeUnits(node);
         }
 
-        protected virtual void DeserializeDiagramOptions(XmlNode node)
+        protected virtual void DeserializeDiagramOptionsFromConfigFile(XmlNode node)
         {
             throw new NotImplementedException();
         }
 
-        protected virtual void DeserializeDiagramOptionsForMenuOpen(XmlNode node)
+        protected virtual void DeserializeDiagramOptionsFromDataFile(XmlNode node)
         {
             throw new NotImplementedException();
         }
@@ -358,13 +358,13 @@ namespace FilterSimulation
         public void DeserializeConfiguration(XmlNode node)
         {
             DeserializeProgranOptionsShowHideRangesUnitsAndDiagramOptions(node);
-            DeserializeDiagramOptions(node);
+            DeserializeDiagramOptionsFromConfigFile(node);
         }
 
         public void DeserializeConfigurationForMenuOpen(XmlNode node)
         {
             DeserializeProgranOptionsShowHideRangesUnitsAndDiagramOptions(node);
-            DeserializeDiagramOptionsForMenuOpen(node);
+            DeserializeDiagramOptionsFromDataFile(node);
         }
 
         public void DeserializeProgranOptionsShowHideRangesUnitsAndDiagramOptions(XmlNode node)
