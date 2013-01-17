@@ -64,8 +64,11 @@ namespace AdvancedCalculator
                 if (File.Exists(filename))
                 {
                     LoadLastFileFromDisk(filename);
-                    if (doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile) != null)
-                        filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));                         
+                    XmlNode cfgFileNode = doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile);
+                    if (cfgFileNode != null)
+                    {
+                        filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(cfgFileNode);
+                    }                         
                     return;
                 }
             }
