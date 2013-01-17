@@ -618,7 +618,7 @@ namespace FilterSimulationWithTablesAndGraphs
             DeserializeY2Nodes(node);            
         }
 
-        override protected void LoadDiagramOptions(XmlNode node)
+        override protected void DeserializeDiagramOptionsForMenuOpen(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
             if (node == null)
@@ -853,7 +853,7 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string SplitterSizes = "Splitter_Sizes";            
         }
 
-        public void SaveInterfaceAdjusting(XmlWriter writer)
+        public void SerializeInterfaceAdjusting(XmlWriter writer)
         {
             writer.WriteStartElement(fmInterfaceAdjustingTags.InterfaceAdjusting);
             SaveSplitterDistances(writer);
@@ -912,7 +912,7 @@ namespace FilterSimulationWithTablesAndGraphs
             return SimulationAndGraphSplitContainer.SplitterDistance.ToString();
         }
 
-        public void LoadInterfaceAdjusting(XmlNode node)
+        public void DeserializeInterfaceAdjusting(XmlNode node)
         {
             LoadSplitterDistances(node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting));
         }

@@ -45,7 +45,7 @@ namespace AdvancedCalculator
                 doc.Load(FiltraplusConfigFilename);
                 filterSimulationWithTablesAndGraphs1.DeserializeConfiguration(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
-                filterSimulationWithTablesAndGraphs1.LoadInterfaceAdjusting(
+                filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
             }
             catch
@@ -116,7 +116,7 @@ namespace AdvancedCalculator
             writer.WriteStartDocument();
             writer.WriteStartElement(fmFiltraplusSerializeTags.FiltraplusDataFile);
             filterSimulationWithTablesAndGraphs1.SerializeData(writer);
-            filterSimulationWithTablesAndGraphs1.SaveInterfaceAdjusting(writer);
+            filterSimulationWithTablesAndGraphs1.SerializeInterfaceAdjusting(writer);
             filterSimulationWithTablesAndGraphs1.SerializeConfiguration(writer);
             writer.WriteEndElement();
             writer.WriteEndDocument();
@@ -150,8 +150,8 @@ namespace AdvancedCalculator
                 filterSimulationWithTablesAndGraphs1.DeserializeData(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
                 Text = m_caption + @" [" + fileName + @"]";
-                filterSimulationWithTablesAndGraphs1.LoadInterfaceAdjusting(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
-                filterSimulationWithTablesAndGraphs1.LoadConfiguration(
+                filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
+                filterSimulationWithTablesAndGraphs1.DeserializeConfigurationForMenuOpen(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));                
             }
             catch (Exception)
@@ -226,7 +226,7 @@ namespace AdvancedCalculator
             writer.WriteStartDocument();
             writer.WriteStartElement(fmFiltraplusSerializeTags.FiltraplusConfigFile);
             filterSimulationWithTablesAndGraphs1.SerializeConfiguration(writer);
-            filterSimulationWithTablesAndGraphs1.SaveInterfaceAdjusting(writer);
+            filterSimulationWithTablesAndGraphs1.SerializeInterfaceAdjusting(writer);
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();
