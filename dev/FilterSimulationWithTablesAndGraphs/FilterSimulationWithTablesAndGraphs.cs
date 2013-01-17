@@ -580,6 +580,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         protected void DeserializeMinMaxValuesOfTheXAxisParameter(XmlNode node)
         {
+            if (node == null)
+            {
+                return;
+            }
             XmlNodeList MinMaxParameters = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Parameter);
             if (MinMaxParameters != null)
             {
@@ -919,7 +923,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void LoadSplitterDistances(XmlNode node)
         {
-            SetSplitterDistances(node.SelectSingleNode(fmInterfaceAdjustingTags.SplitterSizes));
+            if (node != null)
+            {
+                SetSplitterDistances(node.SelectSingleNode(fmInterfaceAdjustingTags.SplitterSizes));
+            }
         }
 
         public void SetSplitterDistances(XmlNode node)

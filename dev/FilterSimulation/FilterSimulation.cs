@@ -449,6 +449,10 @@ namespace FilterSimulation
         private void DeserializeShowHideSchemas(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ShowHideSchemas);
+            if (node == null)
+            {
+                return;
+            }
             XmlNodeList schemasNodes = node.SelectNodes(fmFilterSimulationSerializeTags.ShowHideSchema);
             foreach (XmlNode schemaNode in schemasNodes)
             {
