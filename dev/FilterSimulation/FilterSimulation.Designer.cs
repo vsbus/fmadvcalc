@@ -1829,7 +1829,7 @@ namespace FilterSimulation
         private System.Windows.Forms.Panel panelMaterialParameters;
         private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterName;
         private System.Windows.Forms.DataGridViewTextBoxColumn liquidParameterUnits;
-        private fmDataGrid.fmDataGrid deliquoringMaterialParametersDataGrid;
+        protected fmDataGrid.fmDataGrid deliquoringMaterialParametersDataGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn deliquoringMaterialParametersParameterNameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn deliquoringMaterialParametersUnitsColumn;
         protected fmDataGrid.fmDataGrid commonDeliquoringSimulationBlockDataGrid;
