@@ -69,6 +69,7 @@ namespace AdvancedCalculator
             this.createNewSimulationToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.ShowItemToolTips = true;
             this.menuStrip1.Size = new System.Drawing.Size(766, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
@@ -125,13 +126,23 @@ namespace AdvancedCalculator
             this.newFileToolStripMenuItem.Image = global::AdvancedCalculator.Properties.Resources.page_white;
             this.newFileToolStripMenuItem.Name = "newFileToolStripMenuItem";
             this.newFileToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.newFileToolStripMenuItem.ToolTipText = "Create New File";
             this.newFileToolStripMenuItem.Click += new System.EventHandler(this.newFileToolStripMenuItem_Click);
+            // 
+            // openFileToolStripMenuItem
+            // 
+            this.openFileToolStripMenuItem.Image = global::AdvancedCalculator.Properties.Resources.folder_open_16;
+            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.openFileToolStripMenuItem.ToolTipText = "Open an Existing File";
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Image = global::AdvancedCalculator.Properties.Resources.disk;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.saveToolStripMenuItem.ToolTipText = "Save File";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
@@ -139,6 +150,7 @@ namespace AdvancedCalculator
             this.saveAsToolStripMenuItem.Image = global::AdvancedCalculator.Properties.Resources.disk_multiple;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.saveAsToolStripMenuItem.ToolTipText = "Save File As";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // calculationPrecisionToolStripMenuItem
@@ -183,14 +195,13 @@ namespace AdvancedCalculator
             this.calculatorToolStripMenuItem.Text = "Calculator";
             this.calculatorToolStripMenuItem.Click += new System.EventHandler(this.calculatorToolStripMenuItem_Click);
             // 
-            // openFileToolStripMenuItem
+            // createNewSimulationToolStripMenuItem
             // 
-            this.openFileToolStripMenuItem.Image = global::AdvancedCalculator.Properties.Resources.folder_open_16;
-            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
-            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
-
-			// 
+            this.createNewSimulationToolStripMenuItem.Name = "createNewSimulationToolStripMenuItem";
+            this.createNewSimulationToolStripMenuItem.Size = new System.Drawing.Size(137, 20);
+            this.createNewSimulationToolStripMenuItem.Text = "Create new simulation";
+            this.createNewSimulationToolStripMenuItem.Click += new System.EventHandler(this.createNewSimulationToolStripMenuItem_Click);
+            // 
             // filterSimulationWithTablesAndGraphs1
             // 
             this.filterSimulationWithTablesAndGraphs1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -204,13 +215,6 @@ namespace AdvancedCalculator
             this.timer1.Enabled = true;
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // createNewSimulationToolStripMenuItem
-            // 
-            this.createNewSimulationToolStripMenuItem.Name = "createNewSimulationToolStripMenuItem";
-            this.createNewSimulationToolStripMenuItem.Size = new System.Drawing.Size(137, 20);
-            this.createNewSimulationToolStripMenuItem.Text = "Create new simulation";
-            this.createNewSimulationToolStripMenuItem.Click += new System.EventHandler(this.createNewSimulationToolStripMenuItem_Click);
             // 
             // fmAdvancedCalculator
             // 

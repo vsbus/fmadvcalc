@@ -6,6 +6,7 @@ using FilterSimulationWithTablesAndGraphs;
 using Microsoft.Win32;
 using System.Xml;
 using System.IO;
+using TheCodeKing.ActiveButtons.Controls;
 
 namespace AdvancedCalculator
 {
@@ -16,6 +17,35 @@ namespace AdvancedCalculator
         public fmAdvancedCalculator()
         {
             InitializeComponent();
+        }
+
+        // hook the windows form load event
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            AddButton("About", AboutClick);
+        }
+
+        private void AboutClick(object sender, EventArgs e)
+        {
+            filterSimulationWithTablesAndGraphs1.ChangeCursor();
+        }
+
+        private void AddButton(string text, EventHandler handler)
+        {
+            // get an instance of IActiveMenu used to attach
+            // buttons to the form
+            IActiveMenu menu = ActiveMenu.GetInstance(this);
+
+            // define a new button
+            ActiveButton button = new ActiveButton();
+            button.Text = "?";
+            menu.ToolTip.SetToolTip(button, "Help");
+            button.Click += handler;
+
+            // add the button to the menu
+            menu.Items.Add(button);            
         }
 
         // ReSharper disable InconsistentNaming

@@ -170,6 +170,12 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.errorMessageLabel = new System.Windows.Forms.Label();
             this.newSimulationButton = new System.Windows.Forms.Button();
+            this.commonCalcBlockParameterValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.commonCalcBlockMinLocalColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.commonCalcBlockMinAbsColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.commonCalcBlockUnitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commonCalcBlockParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commonCalcBlockDataGrid = new fmDataGrid.fmDataGrid();
             this.panelLeft.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
@@ -195,7 +201,6 @@ namespace FilterSimulation
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commonDeliquoringSimulationBlockDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).BeginInit();
             this.LimitsAndMessagePanel.SuspendLayout();
             this.panelMaterialParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).BeginInit();
@@ -1718,7 +1723,6 @@ namespace FilterSimulation
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.commonDeliquoringSimulationBlockDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).EndInit();
             this.LimitsAndMessagePanel.ResumeLayout(false);
             this.LimitsAndMessagePanel.PerformLayout();
             this.panelMaterialParameters.ResumeLayout(false);

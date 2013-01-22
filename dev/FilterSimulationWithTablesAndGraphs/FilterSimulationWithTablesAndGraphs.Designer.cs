@@ -87,6 +87,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -951,11 +952,17 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(654, 171);
             this.panel9.TabIndex = 11;
             // 
+            // helpProvider1
+            // 
+            this.helpProvider1.HelpNamespace = "filtraplus.chm";
+            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
             this.Name = "fmFilterSimulationWithTablesAndGraphs";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Size = new System.Drawing.Size(1480, 731);
             this.Load += new System.EventHandler(this.FmFilterSimulationWithTablesAndGraphsLoad);
             this.Controls.SetChildIndex(this.mainSplitContainer, 0);
@@ -1075,6 +1082,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private DataGridViewCheckBoxColumn AdditionalParametersCheckBoxColumn;
         private Button buttonDeleteRow;
         private CheckBox xLogCheckBox;
+        private HelpProvider helpProvider1;
 
     }
 }
