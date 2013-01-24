@@ -42,24 +42,23 @@ namespace AdvancedCalculator
             this.showUSUnitsCheckBox = new System.Windows.Forms.CheckBox();
             this.topPanel = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.LengthAreaTimePanel = new System.Windows.Forms.Panel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.massAndVolumePanel = new System.Windows.Forms.Panel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.RhoEtaPanel = new System.Windows.Forms.Panel();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.GasPanel = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.LengthAreaTimePanel = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
@@ -72,6 +71,7 @@ namespace AdvancedCalculator
             this.splitContainer4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -83,7 +83,7 @@ namespace AdvancedCalculator
             this.groupBox1.Size = new System.Drawing.Size(337, 137);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Q";
+            this.groupBox1.Text = "Flow Rate Q,q";
             // 
             // QPanel
             // 
@@ -210,26 +210,6 @@ namespace AdvancedCalculator
             this.splitContainer1.SplitterDistance = 137;
             this.splitContainer1.TabIndex = 1;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.LengthAreaTimePanel);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(679, 127);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Length, Area, Time";
-            // 
-            // LengthAreaTimePanel
-            // 
-            this.LengthAreaTimePanel.AutoScroll = true;
-            this.LengthAreaTimePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LengthAreaTimePanel.Location = new System.Drawing.Point(3, 16);
-            this.LengthAreaTimePanel.Name = "LengthAreaTimePanel";
-            this.LengthAreaTimePanel.Size = new System.Drawing.Size(673, 108);
-            this.LengthAreaTimePanel.TabIndex = 0;
-            // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -311,18 +291,7 @@ namespace AdvancedCalculator
             this.groupBox3.Size = new System.Drawing.Size(338, 101);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "rho, eta";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.GasPanel);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox4.Location = new System.Drawing.Point(0, 0);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(337, 101);
-            this.groupBox4.TabIndex = 0;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Gas";
+            this.groupBox3.Text = "Density, Viscosity, Pressure";
             // 
             // RhoEtaPanel
             // 
@@ -333,6 +302,17 @@ namespace AdvancedCalculator
             this.RhoEtaPanel.Size = new System.Drawing.Size(332, 82);
             this.RhoEtaPanel.TabIndex = 0;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.GasPanel);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox4.Location = new System.Drawing.Point(0, 0);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(337, 101);
+            this.groupBox4.TabIndex = 0;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Gas Units";
+            // 
             // GasPanel
             // 
             this.GasPanel.AutoScroll = true;
@@ -341,6 +321,26 @@ namespace AdvancedCalculator
             this.GasPanel.Name = "GasPanel";
             this.GasPanel.Size = new System.Drawing.Size(331, 82);
             this.GasPanel.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.LengthAreaTimePanel);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(679, 127);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Length, Area, Time";
+            // 
+            // LengthAreaTimePanel
+            // 
+            this.LengthAreaTimePanel.AutoScroll = true;
+            this.LengthAreaTimePanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LengthAreaTimePanel.Location = new System.Drawing.Point(3, 16);
+            this.LengthAreaTimePanel.Name = "LengthAreaTimePanel";
+            this.LengthAreaTimePanel.Size = new System.Drawing.Size(673, 108);
+            this.LengthAreaTimePanel.TabIndex = 0;
             // 
             // fmUnitsOptions
             // 
@@ -360,7 +360,6 @@ namespace AdvancedCalculator
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.ResumeLayout(false);
@@ -373,6 +372,7 @@ namespace AdvancedCalculator
             this.splitContainer4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

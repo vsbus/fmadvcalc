@@ -39,8 +39,8 @@ namespace AdvancedCalculator
             m_famityToItem.Clear();
 
             BindUnitsGroup(LengthAreaTimePanel,
-                fmUnitFamily.LengthFamily,
                 fmUnitFamily.AreaFamily,
+                fmUnitFamily.LengthFamily,
                 fmUnitFamily.TimeFamily,
                 fmUnitFamily.FrequencyFamily);
 

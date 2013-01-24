@@ -199,7 +199,7 @@ namespace fmCalculationLibrary.MeasureUnits
                 new fmUnit("lb/m2", PoundFactor, true),
                 new fmUnit("lb/ft2", PoundFactor/Math.Pow(FootFactor,2), true));
 
-            InitializeFamily(VolumeInAreaFamily, "Volume In Area (v)",
+            InitializeFamily(VolumeInAreaFamily, "Specific Volume (v)",
                 new fmUnit("l/m2", 1e-3),
                 new fmUnit("m3/m2", 1),
                 new fmUnit("ft3/m2", Math.Pow(FootFactor,3), true),
