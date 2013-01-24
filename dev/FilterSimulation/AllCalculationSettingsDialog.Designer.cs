@@ -28,20 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Dp = const");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Volumetric Pump (Qp = const)");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Centripetal Pump (Qp = const & Dp = const)");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Plain Filter Area", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Dp = const (Cylindrical Area)");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Volumetric Pump (Qp = const, Cylindrical Area)");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Cylindrical Filter Area", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7});
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -63,7 +49,13 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.MaterialParametersGrid = new FilterSimulation.TableWithParameterRanges();
+            this.CakeFormationGrid = new FilterSimulation.TableWithParameterRanges();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.deliquoringMaterialParameterGrid = new FilterSimulation.TableWithParameterRanges();
+            this.deliquoringSettingsParametersGrid = new FilterSimulation.TableWithParameterRanges();
+            this.moreParemetersGrid = new FilterSimulation.TableWithParameterRanges();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
@@ -111,12 +103,6 @@
             this.evaporationsParameters = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.MaterialParametersGrid = new FilterSimulation.TableWithParameterRanges();
-            this.CakeFormationGrid = new FilterSimulation.TableWithParameterRanges();
-            this.deliquoringMaterialParameterGrid = new FilterSimulation.TableWithParameterRanges();
-            this.deliquoringSettingsParametersGrid = new FilterSimulation.TableWithParameterRanges();
-            this.moreParemetersGrid = new FilterSimulation.TableWithParameterRanges();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -130,6 +116,9 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
@@ -144,9 +133,6 @@
             this.splitContainer5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -198,33 +184,6 @@
             // 
             this.fmCalculationOptionView1.Location = new System.Drawing.Point(6, 19);
             this.fmCalculationOptionView1.Name = "fmCalculationOptionView1";
-            treeNode1.Name = "";
-            treeNode1.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode1.Text = "Dp = const";
-            treeNode2.Name = "";
-            treeNode2.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode2.Text = "Volumetric Pump (Qp = const)";
-            treeNode3.Name = "";
-            treeNode3.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode3.Text = "Centripetal Pump (Qp = const & Dp = const)";
-            treeNode4.Name = "";
-            treeNode4.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            treeNode4.Text = "Plain Filter Area";
-            treeNode5.Name = "";
-            treeNode5.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode5.Text = "Dp = const (Cylindrical Area)";
-            treeNode6.Name = "";
-            treeNode6.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode6.Text = "Volumetric Pump (Qp = const, Cylindrical Area)";
-            treeNode7.Name = "";
-            treeNode7.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode7.Text = "Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)";
-            treeNode8.Name = "";
-            treeNode8.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            treeNode8.Text = "Cylindrical Filter Area";
-            this.fmCalculationOptionView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode8});
             this.fmCalculationOptionView1.Size = new System.Drawing.Size(444, 262);
             this.fmCalculationOptionView1.TabIndex = 0;
             this.fmCalculationOptionView1.CheckedChangedForUpdatingCalculationOptions += new System.EventHandler(this.fmCalculationOptionView1_CheckedChangedForUpdatingCalculationOptions);
@@ -436,6 +395,40 @@
             this.splitContainer1.SplitterDistance = 408;
             this.splitContainer1.TabIndex = 6;
             // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.MaterialParametersGrid);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.CakeFormationGrid);
+            this.splitContainer2.Size = new System.Drawing.Size(408, 264);
+            this.splitContainer2.SplitterDistance = 167;
+            this.splitContainer2.TabIndex = 3;
+            // 
+            // MaterialParametersGrid
+            // 
+            this.MaterialParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MaterialParametersGrid.Location = new System.Drawing.Point(0, 0);
+            this.MaterialParametersGrid.Name = "MaterialParametersGrid";
+            this.MaterialParametersGrid.Size = new System.Drawing.Size(408, 167);
+            this.MaterialParametersGrid.TabIndex = 1;
+            // 
+            // CakeFormationGrid
+            // 
+            this.CakeFormationGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CakeFormationGrid.Location = new System.Drawing.Point(0, 0);
+            this.CakeFormationGrid.Name = "CakeFormationGrid";
+            this.CakeFormationGrid.Size = new System.Drawing.Size(408, 93);
+            this.CakeFormationGrid.TabIndex = 2;
+            // 
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -453,6 +446,30 @@
             this.splitContainer3.Size = new System.Drawing.Size(414, 264);
             this.splitContainer3.SplitterDistance = 167;
             this.splitContainer3.TabIndex = 2;
+            // 
+            // deliquoringMaterialParameterGrid
+            // 
+            this.deliquoringMaterialParameterGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deliquoringMaterialParameterGrid.Location = new System.Drawing.Point(0, 0);
+            this.deliquoringMaterialParameterGrid.Name = "deliquoringMaterialParameterGrid";
+            this.deliquoringMaterialParameterGrid.Size = new System.Drawing.Size(414, 167);
+            this.deliquoringMaterialParameterGrid.TabIndex = 0;
+            // 
+            // deliquoringSettingsParametersGrid
+            // 
+            this.deliquoringSettingsParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deliquoringSettingsParametersGrid.Location = new System.Drawing.Point(0, 0);
+            this.deliquoringSettingsParametersGrid.Name = "deliquoringSettingsParametersGrid";
+            this.deliquoringSettingsParametersGrid.Size = new System.Drawing.Size(414, 93);
+            this.deliquoringSettingsParametersGrid.TabIndex = 1;
+            // 
+            // moreParemetersGrid
+            // 
+            this.moreParemetersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.moreParemetersGrid.Location = new System.Drawing.Point(0, 0);
+            this.moreParemetersGrid.Name = "moreParemetersGrid";
+            this.moreParemetersGrid.Size = new System.Drawing.Size(826, 301);
+            this.moreParemetersGrid.TabIndex = 0;
             // 
             // panel2
             // 
@@ -912,64 +929,6 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.MaterialParametersGrid);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.CakeFormationGrid);
-            this.splitContainer2.Size = new System.Drawing.Size(408, 264);
-            this.splitContainer2.SplitterDistance = 167;
-            this.splitContainer2.TabIndex = 3;
-            // 
-            // MaterialParametersGrid
-            // 
-            this.MaterialParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MaterialParametersGrid.Location = new System.Drawing.Point(0, 0);
-            this.MaterialParametersGrid.Name = "MaterialParametersGrid";
-            this.MaterialParametersGrid.Size = new System.Drawing.Size(408, 167);
-            this.MaterialParametersGrid.TabIndex = 1;
-            // 
-            // CakeFormationGrid
-            // 
-            this.CakeFormationGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CakeFormationGrid.Location = new System.Drawing.Point(0, 0);
-            this.CakeFormationGrid.Name = "CakeFormationGrid";
-            this.CakeFormationGrid.Size = new System.Drawing.Size(408, 93);
-            this.CakeFormationGrid.TabIndex = 2;
-            // 
-            // deliquoringMaterialParameterGrid
-            // 
-            this.deliquoringMaterialParameterGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.deliquoringMaterialParameterGrid.Location = new System.Drawing.Point(0, 0);
-            this.deliquoringMaterialParameterGrid.Name = "deliquoringMaterialParameterGrid";
-            this.deliquoringMaterialParameterGrid.Size = new System.Drawing.Size(414, 167);
-            this.deliquoringMaterialParameterGrid.TabIndex = 0;
-            // 
-            // deliquoringSettingsParametersGrid
-            // 
-            this.deliquoringSettingsParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.deliquoringSettingsParametersGrid.Location = new System.Drawing.Point(0, 0);
-            this.deliquoringSettingsParametersGrid.Name = "deliquoringSettingsParametersGrid";
-            this.deliquoringSettingsParametersGrid.Size = new System.Drawing.Size(414, 93);
-            this.deliquoringSettingsParametersGrid.TabIndex = 1;
-            // 
-            // moreParemetersGrid
-            // 
-            this.moreParemetersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.moreParemetersGrid.Location = new System.Drawing.Point(0, 0);
-            this.moreParemetersGrid.Name = "moreParemetersGrid";
-            this.moreParemetersGrid.Size = new System.Drawing.Size(826, 301);
-            this.moreParemetersGrid.TabIndex = 0;
-            // 
             // AllCalculationSettingsDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -997,6 +956,9 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             this.splitContainer3.ResumeLayout(false);
@@ -1013,9 +975,6 @@
             this.splitContainer5.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

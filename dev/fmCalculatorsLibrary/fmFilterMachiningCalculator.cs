@@ -38,7 +38,7 @@ namespace fmCalculatorsLibrary
             [Description("Volumetric Pump (Qp = const)")]
             PLAIN_VOLUMETRIC_PUMP_QP_CONST,
             //(A, Q), (Dp), (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)]
-            [Description("Centripetal Pump (Qp = const & Dp = const)")]
+            [Description("Centrifugal Pump (Qp = const & Dp = const)")]
             PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST,
 
             // Candle
@@ -50,7 +50,7 @@ namespace fmCalculatorsLibrary
             [Description("Volumetric Pump (Qp = const, Cylindrical Area)")]
             CYLINDRICAL_VOLUMETRIC_PUMP_QP_CONST,
             //(A, Q), d, Dp, (Qp, qp, t1, h1), (sf, sr, tr), (hc, V, M, tf, n, tc)]
-            [Description("Centripetal Pump (Qp = const & Dp = const, Cylindrical Area)")]
+            [Description("Centrifugal Pump (Qp = const & Dp = const, Cylindrical Area)")]
             CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST,
 
             //(A, Q, Qp), Dp, (sf, sr, tr), (hc, V, M, tf, n, tc)]
