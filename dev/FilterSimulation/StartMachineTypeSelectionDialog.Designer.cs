@@ -135,7 +135,7 @@
             this.suspensionTextBox.Name = "suspensionTextBox";
             this.suspensionTextBox.Size = new System.Drawing.Size(100, 20);
             this.suspensionTextBox.TabIndex = 8;
-            this.suspensionTextBox.Text = "NewSuspension";
+            this.suspensionTextBox.Text = "NewCharge";
             this.suspensionTextBox.Visible = false;
             // 
             // filtermediumTextBox
@@ -171,7 +171,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 15;
-            this.label4.Text = "Suspension:";
+            this.label4.Text = "Charge:";
             // 
             // label5
             // 
@@ -353,7 +353,7 @@
             this.Controls.Add(this.serieTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "StartMachineTypeSelectionDialog";
-            this.Text = "Start Configurations";
+            this.Text = "Create New Simulation";
             this.ResumeLayout(false);
             this.PerformLayout();
 

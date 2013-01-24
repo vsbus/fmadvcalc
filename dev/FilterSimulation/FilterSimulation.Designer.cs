@@ -754,40 +754,6 @@ namespace FilterSimulation
             this.suspensionDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellClick);
             this.suspensionDataGrid.CurrentCellChanged += new System.EventHandler(this.suspensionDataGrid_CurrentCellChanged);
             // 
-            // suspensionGuidColumn
-            // 
-            this.suspensionGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.suspensionGuidColumn.HeaderText = "Guid";
-            this.suspensionGuidColumn.Name = "suspensionGuidColumn";
-            this.suspensionGuidColumn.ReadOnly = true;
-            this.suspensionGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.suspensionGuidColumn.Visible = false;
-            // 
-            // suspensionCheckedColumn
-            // 
-            this.suspensionCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.suspensionCheckedColumn.HeaderText = "";
-            this.suspensionCheckedColumn.Name = "suspensionCheckedColumn";
-            this.suspensionCheckedColumn.Width = 5;
-            // 
-            // suspensionMaterialColumn
-            // 
-            this.suspensionMaterialColumn.HeaderText = "Material";
-            this.suspensionMaterialColumn.Name = "suspensionMaterialColumn";
-            this.suspensionMaterialColumn.Width = 50;
-            // 
-            // suspensionCustomerColumn
-            // 
-            this.suspensionCustomerColumn.HeaderText = "Customer";
-            this.suspensionCustomerColumn.Name = "suspensionCustomerColumn";
-            this.suspensionCustomerColumn.Width = 60;
-            // 
-            // suspensionNameColumn
-            // 
-            this.suspensionNameColumn.HeaderText = "Suspension Name";
-            this.suspensionNameColumn.Name = "suspensionNameColumn";
-            this.suspensionNameColumn.Width = 80;
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.commentSuspensionButton);
@@ -1829,6 +1795,41 @@ namespace FilterSimulation
             // helpProvider1
             // 
             this.helpProvider1.HelpNamespace = "filtraplus.chm";
+            // 
+            // suspensionGuidColumn
+            // 
+            this.suspensionGuidColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.suspensionGuidColumn.HeaderText = "Guid";
+            this.suspensionGuidColumn.Name = "suspensionGuidColumn";
+            this.suspensionGuidColumn.ReadOnly = true;
+            this.suspensionGuidColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.suspensionGuidColumn.Visible = false;
+            this.suspensionGuidColumn.Width = 35;
+            // 
+            // suspensionCheckedColumn
+            // 
+            this.suspensionCheckedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.suspensionCheckedColumn.HeaderText = "";
+            this.suspensionCheckedColumn.Name = "suspensionCheckedColumn";
+            this.suspensionCheckedColumn.Width = 5;
+            // 
+            // suspensionMaterialColumn
+            // 
+            this.suspensionMaterialColumn.HeaderText = "Material";
+            this.suspensionMaterialColumn.Name = "suspensionMaterialColumn";
+            this.suspensionMaterialColumn.Width = 50;
+            // 
+            // suspensionCustomerColumn
+            // 
+            this.suspensionCustomerColumn.HeaderText = "Customer";
+            this.suspensionCustomerColumn.Name = "suspensionCustomerColumn";
+            this.suspensionCustomerColumn.Width = 60;
+            // 
+            // suspensionNameColumn
+            // 
+            this.suspensionNameColumn.HeaderText = "Charge";
+            this.suspensionNameColumn.Name = "suspensionNameColumn";
+            this.suspensionNameColumn.Width = 80;
             // 
             // fmFilterSimulationControl
             // 

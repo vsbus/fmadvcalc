@@ -99,7 +99,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(118, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "New Suspension Name";
+            this.label3.Text = "New Charge Name";
             // 
             // NewSuspensionNameTextBox
             // 
@@ -107,7 +107,7 @@
             this.NewSuspensionNameTextBox.Name = "NewSuspensionNameTextBox";
             this.NewSuspensionNameTextBox.Size = new System.Drawing.Size(260, 20);
             this.NewSuspensionNameTextBox.TabIndex = 3;
-            this.NewSuspensionNameTextBox.Text = "NewSusp";
+            this.NewSuspensionNameTextBox.Text = "NewCharge";
             // 
             // NewSuspensionDialog
             // 

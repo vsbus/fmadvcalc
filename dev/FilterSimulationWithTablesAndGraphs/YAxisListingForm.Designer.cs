@@ -476,7 +476,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "fmYAxisListingForm";
-            this.Text = "YAxisListingForm";
+            this.Text = "Parameters to Display";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
