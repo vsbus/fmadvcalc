@@ -200,38 +200,6 @@ namespace AdvancedCalculator
             }
         }
 
-        private void FmAdvancedCalculatorFormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (!ProtectionChecker.CheckProtection())
-                return;
-
-            SaveConfigurations();
-            if (filterSimulationWithTablesAndGraphs1.IsModified())
-            {
-                DialogResult dres = MessageBox.Show(@"Would you like to save data before exit?", @"Confirmation",
-                                                    MessageBoxButtons.YesNo);
-                if (dres == DialogResult.Yes)
-                {
-                    if (m_currentFilename != null)
-                    {
-                        SaveOnDisk(m_currentFilename);
-                    }
-                    else
-                    {
-                        SaveOnDisk();
-                    }
-                }
-            }
-            if (m_currentFilename != null)
-            {
-                Registry.SetValue(
-                    @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
-                    "LastFile",
-                    m_currentFilename,
-                    RegistryValueKind.String);
-            }
-        }
-
         private const string FiltraplusConfigFilename = "filtraplus.cfg";
 
         private void SaveConfigurations()
@@ -378,6 +346,43 @@ namespace AdvancedCalculator
         private void helpStripMenuItem1_Click(object sender, EventArgs e)
         {
             Help.ShowHelp(this, filterSimulationWithTablesAndGraphs1.helpProvider1.HelpNamespace, HelpNavigator.TableOfContents);
+        }
+
+        private void fmAdvancedCalculator_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!ProtectionChecker.CheckProtection())
+                return;
+
+            SaveConfigurations();
+            if (filterSimulationWithTablesAndGraphs1.IsModified())
+            {
+                DialogResult dres = MessageBox.Show(@"Would you like to save data before exit?", @"Confirmation", MessageBoxButtons.YesNoCancel);
+
+                if (dres == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+                if (dres == DialogResult.Yes)
+                {
+                    if (m_currentFilename != null)
+                    {
+                        SaveOnDisk(m_currentFilename);
+                    }
+                    else
+                    {
+                        SaveOnDisk();
+                    }
+                }
+            }
+            if (m_currentFilename != null)
+            {
+                Registry.SetValue(
+                    @"HKEY_CURRENT_USER\Software\NICIFOS\FiltraPlus",
+                    "LastFile",
+                    m_currentFilename,
+                    RegistryValueKind.String);
+            }
         }
     }
 }

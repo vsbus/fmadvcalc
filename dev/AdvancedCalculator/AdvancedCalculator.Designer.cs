@@ -47,9 +47,9 @@ namespace AdvancedCalculator
             this.rangesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.filterTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.filterSimulationWithTablesAndGraphs1 = new FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.helpStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -204,6 +204,13 @@ namespace AdvancedCalculator
             this.calculatorToolStripMenuItem.Text = "Calculator";
             this.calculatorToolStripMenuItem.Click += new System.EventHandler(this.calculatorToolStripMenuItem_Click);
             // 
+            // helpStripMenuItem1
+            // 
+            this.helpStripMenuItem1.Name = "helpStripMenuItem1";
+            this.helpStripMenuItem1.Size = new System.Drawing.Size(44, 20);
+            this.helpStripMenuItem1.Text = "Help";
+            this.helpStripMenuItem1.Click += new System.EventHandler(this.helpStripMenuItem1_Click);
+            // 
             // filterSimulationWithTablesAndGraphs1
             // 
             this.filterSimulationWithTablesAndGraphs1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -218,13 +225,6 @@ namespace AdvancedCalculator
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // helpStripMenuItem1
-            // 
-            this.helpStripMenuItem1.Name = "helpStripMenuItem1";
-            this.helpStripMenuItem1.Size = new System.Drawing.Size(44, 20);
-            this.helpStripMenuItem1.Text = "Help";
-            this.helpStripMenuItem1.Click += new System.EventHandler(this.helpStripMenuItem1_Click);
-            // 
             // fmAdvancedCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -236,7 +236,7 @@ namespace AdvancedCalculator
             this.Text = "FILTRAPLUS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.AdvancedCalculatorLoad);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FmAdvancedCalculatorFormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmAdvancedCalculator_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
