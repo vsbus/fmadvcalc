@@ -14,22 +14,28 @@ namespace AdvancedCalculator
     {
         private readonly string m_caption = string.Format("FILTRAPLUS (v.{0})", Config.Version);
 
+        private const int WM_SYSCOMMAND = 0x112;
+        private const int SC_CONTEXTHELP = 0xf180;
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
+
+        ActiveButton button = new ActiveButton();
+
+        private static class fmUrlStringsForElements
+        {
+            public const string Menu_Task_Bar = "Menu_Task_Bar.htm";
+        }
+
         public fmAdvancedCalculator()
         {
             InitializeComponent();
         }
-
-        // hook the windows form load event
+        
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
-            AddButton("About", AboutClick);
-        }
-
-        private void AboutClick(object sender, EventArgs e)
-        {
-            filterSimulationWithTablesAndGraphs1.ChangeCursor();
+            AddButton("Help", Help_Click);
         }
 
         private void AddButton(string text, EventHandler handler)
@@ -39,13 +45,18 @@ namespace AdvancedCalculator
             IActiveMenu menu = ActiveMenu.GetInstance(this);
 
             // define a new button
-            ActiveButton button = new ActiveButton();
             button.Text = "?";
             menu.ToolTip.SetToolTip(button, "Help");
             button.Click += handler;
 
             // add the button to the menu
             menu.Items.Add(button);            
+        }
+
+        private void Help_Click(object sender, EventArgs e)
+        {
+            button.Capture = false;
+            SendMessage(this.Handle, WM_SYSCOMMAND, (IntPtr)SC_CONTEXTHELP, IntPtr.Zero);
         }
 
         // ReSharper disable InconsistentNaming
@@ -75,8 +86,6 @@ namespace AdvancedCalculator
                 doc.Load(FiltraplusConfigFilename);
                 filterSimulationWithTablesAndGraphs1.DeserializeConfiguration(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
-                filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(
-                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile));
             }
             catch
             {
@@ -98,6 +107,7 @@ namespace AdvancedCalculator
                     if (cfgFileNode != null)
                     {
                         filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(cfgFileNode);
+                        filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(cfgFileNode);
                     }                         
                     return;
                 }
@@ -363,6 +373,11 @@ namespace AdvancedCalculator
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveOnDiskToolStripMenuItemClick(sender, e);
+        }
+
+        private void helpStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, filterSimulationWithTablesAndGraphs1.helpProvider1.HelpNamespace, HelpNavigator.TableOfContents);
         }
     }
 }

@@ -12,160 +12,13 @@ namespace FilterSimulationWithTablesAndGraphs
 {
     public partial class fmFilterSimulationWithTablesAndGraphs : FilterSimulation.fmFilterSimulationControl
     {
-        public bool isHelpRequested = false;
-
-        private static class fmUrlStringsForElements
-        {
-            public const string simulationDataGrid = "Simulations_Table.htm";
-            public const string projectDataGrid = "Project_Table.htm";
-            public const string simSeriesDataGrid = "Series_Table.htm";
-            public const string suspensionDataGrid = "Suspension_Table.htm";
-            public const string fmZedGraphControl1 = "Diagram.htm";
-            public const string coordinatesGrid = "Table_belonging_to_the_Diagram.htm";            
-            public const string liquidDataGrid = "General_Material_Parameters.htm";
-            public const string commonCalcBlockDataGrid = "Cake_Formation_Settings__Resul.htm";
-            public const string deliquoringMaterialParametersDataGrid = "Material_parameters_for_the_ca.htm";
-            public const string commonDeliquoringSimulationBlockDataGrid = "Settings__Result_Parameters_fo.htm";
-        }
-
         public fmFilterSimulationWithTablesAndGraphs()
         {
             InitializeComponent();
-            
+
             CreateColumnsInParametersTables();
             ReadUseParamsCheckBoxAndApply();
             rowsQuantity.Text = m_rowsQuantity.ToString();
-            simulationDataGrid.CellClick += new DataGridViewCellEventHandler(ShowHelpMessageForSimulationTable);
-            projectDataGrid.CellClick += new DataGridViewCellEventHandler(ShowHelpMessageForProjectTable);
-            suspensionDataGrid.CellClick += new DataGridViewCellEventHandler(ShowHelpMessageForSuspensionTable);
-            simSeriesDataGrid.CellClick += new DataGridViewCellEventHandler(ShowHelpMessageForSeriesTable);
-            liquidDataGrid.CellClick += new DataGridViewCellEventHandler(ShowHelpMessageForMaterialParamsTable);
-            commonCalcBlockDataGrid.CellClick += new DataGridViewCellEventHandler(ShowHelpMessageForCakeFormationTable);
-            deliquoringMaterialParametersDataGrid.CellClick += new DataGridViewCellEventHandler(ShowHelpMessageForCakeDeliquoringTable);
-            commonDeliquoringSimulationBlockDataGrid.CellClick += new DataGridViewCellEventHandler(ShowHelpMessageForCommonCakeDeliquoringTable);
-
-            //// BEGIN DEBUG CODE
-            //AddRow();
-            //fmLocalBlocks[0].A_Value = new fmValue(1 * fmUnitFamily.AreaFamily.CurrentUnit.Coef);
-            //fmLocalBlocks[0].Dp_Value = new fmValue(1 * fmUnitFamily.PressureFamily.CurrentUnit.Coef);
-            //fmLocalBlocks[0].sf_Value = new fmValue(30 * fmUnitFamily.ConcentrationFamily.CurrentUnit.Coef);
-            //fmLocalBlocks[0].n_Value = new fmValue(1 * fmUnitFamily.FrequencyFamily.CurrentUnit.Coef);
-            //// END DEBUG CODE
-        }
-
-        private void ShowHelpMessageForSimulationTable(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.simulationDataGrid);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        private void ShowHelpMessageForProjectTable(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.projectDataGrid);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        private void ShowHelpMessageForSuspensionTable(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.suspensionDataGrid);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        private void ShowHelpMessageForSeriesTable(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.simSeriesDataGrid);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        private void ShowHelpMessageForDiagram(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.fmZedGraphControl1);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        private void ShowHelpMessageForCoordinatesTable(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.coordinatesGrid);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        private void ShowHelpMessageForMaterialParamsTable(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.liquidDataGrid);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        private void ShowHelpMessageForCakeFormationTable(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.commonCalcBlockDataGrid);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        private void ShowHelpMessageForCakeDeliquoringTable(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.deliquoringMaterialParametersDataGrid);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        private void ShowHelpMessageForCommonCakeDeliquoringTable(object sender, EventArgs e)
-        {
-            if (isHelpRequested)
-            {
-                Help.ShowHelp(this, helpProvider1.HelpNamespace, fmUrlStringsForElements.commonDeliquoringSimulationBlockDataGrid);
-                isHelpRequested = false;
-                Cursor = Cursors.Default;
-            }
-        }
-
-        public void ChangeCursor()
-        {
-            if (!isHelpRequested)
-            {
-                Cursor = Cursors.Help;
-                isHelpRequested = true;
-            }
-
-            else
-            {
-                Cursor = Cursors.Default;
-                isHelpRequested = false;
-            }
         }
 
         private void DisplayCharts(fmFilterSimSolution sol)
@@ -1115,7 +968,6 @@ namespace FilterSimulationWithTablesAndGraphs
         public void SetSimulationAndGraphSplitContainerSplitterDistance(XmlNode node)
         {
             SimulationAndGraphSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
-        }
-        
+        }        
     }
 }

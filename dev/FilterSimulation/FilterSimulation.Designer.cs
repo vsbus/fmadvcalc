@@ -123,8 +123,10 @@ namespace FilterSimulation
             this.commonCalcBlockMaxLocalColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.commonCalcBlockMaxAbsColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.LimitsAndMessagePanel = new System.Windows.Forms.Panel();
+            this.errorMessageLabel = new System.Windows.Forms.Label();
             this.calculateLimitsCheckBox = new System.Windows.Forms.CheckBox();
             this.panelMaterialParameters = new System.Windows.Forms.Panel();
+            this.newSimulationButton = new System.Windows.Forms.Button();
             this.calculationOptionChangeButton = new System.Windows.Forms.Button();
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid = new fmDataGrid.fmDataGrid();
             this.epsKappaParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -168,14 +170,7 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.errorMessageLabel = new System.Windows.Forms.Label();
-            this.newSimulationButton = new System.Windows.Forms.Button();
-            this.commonCalcBlockParameterValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.commonCalcBlockMinLocalColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.commonCalcBlockMinAbsColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.commonCalcBlockUnitColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commonCalcBlockParameterNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commonCalcBlockDataGrid = new fmDataGrid.fmDataGrid();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.panelLeft.SuspendLayout();
             this.secondFromTopPanel.SuspendLayout();
             this.simSeriesPanel.SuspendLayout();
@@ -201,6 +196,7 @@ namespace FilterSimulation
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.commonDeliquoringSimulationBlockDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).BeginInit();
             this.LimitsAndMessagePanel.SuspendLayout();
             this.panelMaterialParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.eps0Kappa0Pc0Rc0Alpha0DataGrid)).BeginInit();
@@ -221,8 +217,11 @@ namespace FilterSimulation
             this.byCheckingProjectsCheckBox.Checked = true;
             this.byCheckingProjectsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.byCheckingProjectsCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.helpProvider1.SetHelpKeyword(this.byCheckingProjectsCheckBox, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.byCheckingProjectsCheckBox, System.Windows.Forms.HelpNavigator.Topic);
             this.byCheckingProjectsCheckBox.Location = new System.Drawing.Point(0, 0);
             this.byCheckingProjectsCheckBox.Name = "byCheckingProjectsCheckBox";
+            this.helpProvider1.SetShowHelp(this.byCheckingProjectsCheckBox, true);
             this.byCheckingProjectsCheckBox.Size = new System.Drawing.Size(85, 20);
             this.byCheckingProjectsCheckBox.TabIndex = 0;
             this.byCheckingProjectsCheckBox.Text = "by Checking";
@@ -235,8 +234,11 @@ namespace FilterSimulation
             this.byCheckingSuspensionsCheckBox.Checked = true;
             this.byCheckingSuspensionsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.byCheckingSuspensionsCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.helpProvider1.SetHelpKeyword(this.byCheckingSuspensionsCheckBox, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.byCheckingSuspensionsCheckBox, System.Windows.Forms.HelpNavigator.Topic);
             this.byCheckingSuspensionsCheckBox.Location = new System.Drawing.Point(0, 0);
             this.byCheckingSuspensionsCheckBox.Name = "byCheckingSuspensionsCheckBox";
+            this.helpProvider1.SetShowHelp(this.byCheckingSuspensionsCheckBox, true);
             this.byCheckingSuspensionsCheckBox.Size = new System.Drawing.Size(85, 20);
             this.byCheckingSuspensionsCheckBox.TabIndex = 1;
             this.byCheckingSuspensionsCheckBox.Text = "by Checking";
@@ -249,8 +251,11 @@ namespace FilterSimulation
             this.byCheckingSimSeriesCheckBox.Checked = true;
             this.byCheckingSimSeriesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.byCheckingSimSeriesCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.helpProvider1.SetHelpKeyword(this.byCheckingSimSeriesCheckBox, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.byCheckingSimSeriesCheckBox, System.Windows.Forms.HelpNavigator.Topic);
             this.byCheckingSimSeriesCheckBox.Location = new System.Drawing.Point(0, 0);
             this.byCheckingSimSeriesCheckBox.Name = "byCheckingSimSeriesCheckBox";
+            this.helpProvider1.SetShowHelp(this.byCheckingSimSeriesCheckBox, true);
             this.byCheckingSimSeriesCheckBox.Size = new System.Drawing.Size(85, 20);
             this.byCheckingSimSeriesCheckBox.TabIndex = 1;
             this.byCheckingSimSeriesCheckBox.Text = "by Checking";
@@ -261,8 +266,11 @@ namespace FilterSimulation
             // 
             this.fullSimulationInfoCheckBox.AutoSize = true;
             this.fullSimulationInfoCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.helpProvider1.SetHelpKeyword(this.fullSimulationInfoCheckBox, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.fullSimulationInfoCheckBox, System.Windows.Forms.HelpNavigator.Topic);
             this.fullSimulationInfoCheckBox.Location = new System.Drawing.Point(0, 0);
             this.fullSimulationInfoCheckBox.Name = "fullSimulationInfoCheckBox";
+            this.helpProvider1.SetShowHelp(this.fullSimulationInfoCheckBox, true);
             this.fullSimulationInfoCheckBox.Size = new System.Drawing.Size(63, 20);
             this.fullSimulationInfoCheckBox.TabIndex = 6;
             this.fullSimulationInfoCheckBox.Text = "Full Info";
@@ -275,8 +283,11 @@ namespace FilterSimulation
             this.byCheckingSimulationsCheckBox.Checked = true;
             this.byCheckingSimulationsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.byCheckingSimulationsCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.helpProvider1.SetHelpKeyword(this.byCheckingSimulationsCheckBox, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.byCheckingSimulationsCheckBox, System.Windows.Forms.HelpNavigator.Topic);
             this.byCheckingSimulationsCheckBox.Location = new System.Drawing.Point(63, 0);
             this.byCheckingSimulationsCheckBox.Name = "byCheckingSimulationsCheckBox";
+            this.helpProvider1.SetShowHelp(this.byCheckingSimulationsCheckBox, true);
             this.byCheckingSimulationsCheckBox.Size = new System.Drawing.Size(85, 20);
             this.byCheckingSimulationsCheckBox.TabIndex = 1;
             this.byCheckingSimulationsCheckBox.Text = "by Checking";
@@ -324,6 +335,8 @@ namespace FilterSimulation
             this.simulationDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.simulationDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simulationDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.helpProvider1.SetHelpKeyword(this.simulationDataGrid, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simulationDataGrid, System.Windows.Forms.HelpNavigator.Topic);
             this.simulationDataGrid.HighLightCurrentRow = true;
             this.simulationDataGrid.Location = new System.Drawing.Point(0, 20);
             this.simulationDataGrid.Name = "simulationDataGrid";
@@ -338,6 +351,7 @@ namespace FilterSimulation
             this.simulationDataGrid.RowHeadersVisible = false;
             this.simulationDataGrid.RowTemplate.Height = 18;
             this.simulationDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.helpProvider1.SetShowHelp(this.simulationDataGrid, true);
             this.simulationDataGrid.Size = new System.Drawing.Size(976, 98);
             this.simulationDataGrid.TabIndex = 0;
             this.simulationDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simulationDataGrid_CellValueChanged);
@@ -357,8 +371,11 @@ namespace FilterSimulation
             this.panel5.Controls.Add(this.byCheckingSimulationsCheckBox);
             this.panel5.Controls.Add(this.fullSimulationInfoCheckBox);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.helpProvider1.SetHelpKeyword(this.panel5, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.panel5, System.Windows.Forms.HelpNavigator.Topic);
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
+            this.helpProvider1.SetShowHelp(this.panel5, true);
             this.panel5.Size = new System.Drawing.Size(976, 20);
             this.panel5.TabIndex = 11;
             // 
@@ -366,8 +383,11 @@ namespace FilterSimulation
             // 
             this.button4.Dock = System.Windows.Forms.DockStyle.Left;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.helpProvider1.SetHelpKeyword(this.button4, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.button4, System.Windows.Forms.HelpNavigator.Topic);
             this.button4.Location = new System.Drawing.Point(248, 0);
             this.button4.Name = "button4";
+            this.helpProvider1.SetShowHelp(this.button4, true);
             this.button4.Size = new System.Drawing.Size(118, 20);
             this.button4.TabIndex = 13;
             this.button4.Text = "Calculation Option";
@@ -379,9 +399,12 @@ namespace FilterSimulation
             this.commentSimulationButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.commentSimulationButton.FlatAppearance.BorderSize = 0;
             this.commentSimulationButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.commentSimulationButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.commentSimulationButton, System.Windows.Forms.HelpNavigator.Topic);
             this.commentSimulationButton.Image = ((System.Drawing.Image)(resources.GetObject("commentSimulationButton.Image")));
             this.commentSimulationButton.Location = new System.Drawing.Point(228, 0);
             this.commentSimulationButton.Name = "commentSimulationButton";
+            this.helpProvider1.SetShowHelp(this.commentSimulationButton, true);
             this.commentSimulationButton.Size = new System.Drawing.Size(20, 20);
             this.commentSimulationButton.TabIndex = 12;
             this.commentSimulationButton.UseVisualStyleBackColor = true;
@@ -392,9 +415,12 @@ namespace FilterSimulation
             this.simulationDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.simulationDeleteButton.FlatAppearance.BorderSize = 0;
             this.simulationDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.simulationDeleteButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simulationDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
             this.simulationDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationDeleteButton.Image")));
             this.simulationDeleteButton.Location = new System.Drawing.Point(208, 0);
             this.simulationDeleteButton.Name = "simulationDeleteButton";
+            this.helpProvider1.SetShowHelp(this.simulationDeleteButton, true);
             this.simulationDeleteButton.Size = new System.Drawing.Size(20, 20);
             this.simulationDeleteButton.TabIndex = 10;
             this.simulationDeleteButton.Text = " ";
@@ -406,9 +432,12 @@ namespace FilterSimulation
             this.simulationRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.simulationRestoreButton.FlatAppearance.BorderSize = 0;
             this.simulationRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.simulationRestoreButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simulationRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
             this.simulationRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("simulationRestoreButton.Image")));
             this.simulationRestoreButton.Location = new System.Drawing.Point(188, 0);
             this.simulationRestoreButton.Name = "simulationRestoreButton";
+            this.helpProvider1.SetShowHelp(this.simulationRestoreButton, true);
             this.simulationRestoreButton.Size = new System.Drawing.Size(20, 20);
             this.simulationRestoreButton.TabIndex = 9;
             this.simulationRestoreButton.Text = " ";
@@ -420,9 +449,12 @@ namespace FilterSimulation
             this.simulationDuplicateButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.simulationDuplicateButton.FlatAppearance.BorderSize = 0;
             this.simulationDuplicateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.simulationDuplicateButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simulationDuplicateButton, System.Windows.Forms.HelpNavigator.Topic);
             this.simulationDuplicateButton.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
             this.simulationDuplicateButton.Location = new System.Drawing.Point(168, 0);
             this.simulationDuplicateButton.Name = "simulationDuplicateButton";
+            this.helpProvider1.SetShowHelp(this.simulationDuplicateButton, true);
             this.simulationDuplicateButton.Size = new System.Drawing.Size(20, 20);
             this.simulationDuplicateButton.TabIndex = 7;
             this.simulationDuplicateButton.Text = " ";
@@ -434,9 +466,12 @@ namespace FilterSimulation
             this.simulationCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.simulationCreateButton.FlatAppearance.BorderSize = 0;
             this.simulationCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.simulationCreateButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simulationCreateButton, System.Windows.Forms.HelpNavigator.Topic);
             this.simulationCreateButton.Image = global::FilterSimulation.Properties.Resources.page_white;
             this.simulationCreateButton.Location = new System.Drawing.Point(148, 0);
             this.simulationCreateButton.Name = "simulationCreateButton";
+            this.helpProvider1.SetShowHelp(this.simulationCreateButton, true);
             this.simulationCreateButton.Size = new System.Drawing.Size(20, 20);
             this.simulationCreateButton.TabIndex = 11;
             this.simulationCreateButton.UseVisualStyleBackColor = true;
@@ -502,8 +537,11 @@ namespace FilterSimulation
             this.projectPanel.Controls.Add(this.projectDataGrid);
             this.projectPanel.Controls.Add(this.panel1);
             this.projectPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.helpProvider1.SetHelpKeyword(this.projectPanel, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.projectPanel, System.Windows.Forms.HelpNavigator.Topic);
             this.projectPanel.Location = new System.Drawing.Point(0, 0);
             this.projectPanel.Name = "projectPanel";
+            this.helpProvider1.SetShowHelp(this.projectPanel, true);
             this.projectPanel.Size = new System.Drawing.Size(177, 100);
             this.projectPanel.TabIndex = 0;
             // 
@@ -520,6 +558,8 @@ namespace FilterSimulation
             this.projectNameColumn});
             this.projectDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.projectDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.helpProvider1.SetHelpKeyword(this.projectDataGrid, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.projectDataGrid, System.Windows.Forms.HelpNavigator.Topic);
             this.projectDataGrid.HighLightCurrentRow = true;
             this.projectDataGrid.Location = new System.Drawing.Point(0, 20);
             this.projectDataGrid.Name = "projectDataGrid";
@@ -534,6 +574,7 @@ namespace FilterSimulation
             this.projectDataGrid.RowHeadersVisible = false;
             this.projectDataGrid.RowTemplate.Height = 18;
             this.projectDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.helpProvider1.SetShowHelp(this.projectDataGrid, true);
             this.projectDataGrid.Size = new System.Drawing.Size(173, 76);
             this.projectDataGrid.TabIndex = 0;
             this.projectDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.projectDataGrid_CellValueChanged);
@@ -571,8 +612,11 @@ namespace FilterSimulation
             this.panel1.Controls.Add(this.projectCreateButton);
             this.panel1.Controls.Add(this.byCheckingProjectsCheckBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.helpProvider1.SetHelpKeyword(this.panel1, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.panel1, System.Windows.Forms.HelpNavigator.Topic);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
+            this.helpProvider1.SetShowHelp(this.panel1, true);
             this.panel1.Size = new System.Drawing.Size(173, 20);
             this.panel1.TabIndex = 6;
             // 
@@ -581,9 +625,12 @@ namespace FilterSimulation
             this.commentProjectButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.commentProjectButton.FlatAppearance.BorderSize = 0;
             this.commentProjectButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.commentProjectButton, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.commentProjectButton, System.Windows.Forms.HelpNavigator.Topic);
             this.commentProjectButton.Image = ((System.Drawing.Image)(resources.GetObject("commentProjectButton.Image")));
             this.commentProjectButton.Location = new System.Drawing.Point(165, 0);
             this.commentProjectButton.Name = "commentProjectButton";
+            this.helpProvider1.SetShowHelp(this.commentProjectButton, true);
             this.commentProjectButton.Size = new System.Drawing.Size(20, 20);
             this.commentProjectButton.TabIndex = 6;
             this.commentProjectButton.UseVisualStyleBackColor = true;
@@ -594,9 +641,12 @@ namespace FilterSimulation
             this.projectDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.projectDeleteButton.FlatAppearance.BorderSize = 0;
             this.projectDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.projectDeleteButton, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.projectDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
             this.projectDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("projectDeleteButton.Image")));
             this.projectDeleteButton.Location = new System.Drawing.Point(145, 0);
             this.projectDeleteButton.Name = "projectDeleteButton";
+            this.helpProvider1.SetShowHelp(this.projectDeleteButton, true);
             this.projectDeleteButton.Size = new System.Drawing.Size(20, 20);
             this.projectDeleteButton.TabIndex = 5;
             this.projectDeleteButton.UseVisualStyleBackColor = true;
@@ -607,9 +657,12 @@ namespace FilterSimulation
             this.projectRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.projectRestoreButton.FlatAppearance.BorderSize = 0;
             this.projectRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.projectRestoreButton, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.projectRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
             this.projectRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("projectRestoreButton.Image")));
             this.projectRestoreButton.Location = new System.Drawing.Point(125, 0);
             this.projectRestoreButton.Name = "projectRestoreButton";
+            this.helpProvider1.SetShowHelp(this.projectRestoreButton, true);
             this.projectRestoreButton.Size = new System.Drawing.Size(20, 20);
             this.projectRestoreButton.TabIndex = 3;
             this.projectRestoreButton.UseVisualStyleBackColor = true;
@@ -620,9 +673,12 @@ namespace FilterSimulation
             this.button2.Dock = System.Windows.Forms.DockStyle.Left;
             this.button2.FlatAppearance.BorderSize = 0;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.button2, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.button2, System.Windows.Forms.HelpNavigator.Topic);
             this.button2.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
             this.button2.Location = new System.Drawing.Point(105, 0);
             this.button2.Name = "button2";
+            this.helpProvider1.SetShowHelp(this.button2, true);
             this.button2.Size = new System.Drawing.Size(20, 20);
             this.button2.TabIndex = 7;
             this.button2.UseVisualStyleBackColor = true;
@@ -633,9 +689,12 @@ namespace FilterSimulation
             this.projectCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.projectCreateButton.FlatAppearance.BorderSize = 0;
             this.projectCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.projectCreateButton, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.projectCreateButton, System.Windows.Forms.HelpNavigator.Topic);
             this.projectCreateButton.Image = ((System.Drawing.Image)(resources.GetObject("projectCreateButton.Image")));
             this.projectCreateButton.Location = new System.Drawing.Point(85, 0);
             this.projectCreateButton.Name = "projectCreateButton";
+            this.helpProvider1.SetShowHelp(this.projectCreateButton, true);
             this.projectCreateButton.Size = new System.Drawing.Size(20, 20);
             this.projectCreateButton.TabIndex = 1;
             this.projectCreateButton.Tag = "";
@@ -648,8 +707,11 @@ namespace FilterSimulation
             this.suspensionPanel.Controls.Add(this.suspensionDataGrid);
             this.suspensionPanel.Controls.Add(this.panel2);
             this.suspensionPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.helpProvider1.SetHelpKeyword(this.suspensionPanel, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.suspensionPanel, System.Windows.Forms.HelpNavigator.Topic);
             this.suspensionPanel.Location = new System.Drawing.Point(0, 0);
             this.suspensionPanel.Name = "suspensionPanel";
+            this.helpProvider1.SetShowHelp(this.suspensionPanel, true);
             this.suspensionPanel.Size = new System.Drawing.Size(362, 100);
             this.suspensionPanel.TabIndex = 2;
             // 
@@ -668,6 +730,8 @@ namespace FilterSimulation
             this.suspensionNameColumn});
             this.suspensionDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.suspensionDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.helpProvider1.SetHelpKeyword(this.suspensionDataGrid, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.suspensionDataGrid, System.Windows.Forms.HelpNavigator.Topic);
             this.suspensionDataGrid.HighLightCurrentRow = true;
             this.suspensionDataGrid.Location = new System.Drawing.Point(0, 20);
             this.suspensionDataGrid.Name = "suspensionDataGrid";
@@ -682,6 +746,7 @@ namespace FilterSimulation
             this.suspensionDataGrid.RowHeadersVisible = false;
             this.suspensionDataGrid.RowTemplate.Height = 18;
             this.suspensionDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.helpProvider1.SetShowHelp(this.suspensionDataGrid, true);
             this.suspensionDataGrid.Size = new System.Drawing.Size(358, 76);
             this.suspensionDataGrid.TabIndex = 0;
             this.suspensionDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.suspensionDataGrid_CellValueChanged);
@@ -732,8 +797,11 @@ namespace FilterSimulation
             this.panel2.Controls.Add(this.suspensionCreateButton);
             this.panel2.Controls.Add(this.byCheckingSuspensionsCheckBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.helpProvider1.SetHelpKeyword(this.panel2, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.panel2, System.Windows.Forms.HelpNavigator.Topic);
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
+            this.helpProvider1.SetShowHelp(this.panel2, true);
             this.panel2.Size = new System.Drawing.Size(358, 20);
             this.panel2.TabIndex = 6;
             // 
@@ -742,9 +810,12 @@ namespace FilterSimulation
             this.commentSuspensionButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.commentSuspensionButton.FlatAppearance.BorderSize = 0;
             this.commentSuspensionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.commentSuspensionButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.commentSuspensionButton, System.Windows.Forms.HelpNavigator.Topic);
             this.commentSuspensionButton.Image = ((System.Drawing.Image)(resources.GetObject("commentSuspensionButton.Image")));
             this.commentSuspensionButton.Location = new System.Drawing.Point(165, 0);
             this.commentSuspensionButton.Name = "commentSuspensionButton";
+            this.helpProvider1.SetShowHelp(this.commentSuspensionButton, true);
             this.commentSuspensionButton.Size = new System.Drawing.Size(20, 20);
             this.commentSuspensionButton.TabIndex = 6;
             this.commentSuspensionButton.UseVisualStyleBackColor = true;
@@ -755,9 +826,12 @@ namespace FilterSimulation
             this.suspensionDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.suspensionDeleteButton.FlatAppearance.BorderSize = 0;
             this.suspensionDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.suspensionDeleteButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.suspensionDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
             this.suspensionDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("suspensionDeleteButton.Image")));
             this.suspensionDeleteButton.Location = new System.Drawing.Point(145, 0);
             this.suspensionDeleteButton.Name = "suspensionDeleteButton";
+            this.helpProvider1.SetShowHelp(this.suspensionDeleteButton, true);
             this.suspensionDeleteButton.Size = new System.Drawing.Size(20, 20);
             this.suspensionDeleteButton.TabIndex = 5;
             this.suspensionDeleteButton.Text = " ";
@@ -769,9 +843,12 @@ namespace FilterSimulation
             this.suspensionRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.suspensionRestoreButton.FlatAppearance.BorderSize = 0;
             this.suspensionRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.suspensionRestoreButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.suspensionRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
             this.suspensionRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("suspensionRestoreButton.Image")));
             this.suspensionRestoreButton.Location = new System.Drawing.Point(125, 0);
             this.suspensionRestoreButton.Name = "suspensionRestoreButton";
+            this.helpProvider1.SetShowHelp(this.suspensionRestoreButton, true);
             this.suspensionRestoreButton.Size = new System.Drawing.Size(20, 20);
             this.suspensionRestoreButton.TabIndex = 4;
             this.suspensionRestoreButton.Text = " ";
@@ -783,9 +860,12 @@ namespace FilterSimulation
             this.button1.Dock = System.Windows.Forms.DockStyle.Left;
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.button1, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.button1, System.Windows.Forms.HelpNavigator.Topic);
             this.button1.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
             this.button1.Location = new System.Drawing.Point(105, 0);
             this.button1.Name = "button1";
+            this.helpProvider1.SetShowHelp(this.button1, true);
             this.button1.Size = new System.Drawing.Size(20, 20);
             this.button1.TabIndex = 7;
             this.button1.UseVisualStyleBackColor = true;
@@ -796,9 +876,12 @@ namespace FilterSimulation
             this.suspensionCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.suspensionCreateButton.FlatAppearance.BorderSize = 0;
             this.suspensionCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.suspensionCreateButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.suspensionCreateButton, System.Windows.Forms.HelpNavigator.Topic);
             this.suspensionCreateButton.Image = ((System.Drawing.Image)(resources.GetObject("suspensionCreateButton.Image")));
             this.suspensionCreateButton.Location = new System.Drawing.Point(85, 0);
             this.suspensionCreateButton.Name = "suspensionCreateButton";
+            this.helpProvider1.SetShowHelp(this.suspensionCreateButton, true);
             this.suspensionCreateButton.Size = new System.Drawing.Size(20, 20);
             this.suspensionCreateButton.TabIndex = 2;
             this.suspensionCreateButton.Text = " ";
@@ -885,6 +968,8 @@ namespace FilterSimulation
             this.simSeriesMachineNameColumn});
             this.simSeriesDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simSeriesDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.helpProvider1.SetHelpKeyword(this.simSeriesDataGrid, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simSeriesDataGrid, System.Windows.Forms.HelpNavigator.Topic);
             this.simSeriesDataGrid.HighLightCurrentRow = true;
             this.simSeriesDataGrid.Location = new System.Drawing.Point(0, 20);
             this.simSeriesDataGrid.Name = "simSeriesDataGrid";
@@ -899,6 +984,7 @@ namespace FilterSimulation
             this.simSeriesDataGrid.RowHeadersVisible = false;
             this.simSeriesDataGrid.RowTemplate.Height = 18;
             this.simSeriesDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.helpProvider1.SetShowHelp(this.simSeriesDataGrid, true);
             this.simSeriesDataGrid.Size = new System.Drawing.Size(426, 76);
             this.simSeriesDataGrid.TabIndex = 0;
             this.simSeriesDataGrid.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.simSeriesDataGrid_CellValueChanged);
@@ -972,8 +1058,11 @@ namespace FilterSimulation
             this.panel3.Controls.Add(this.simSeriesCreateButton);
             this.panel3.Controls.Add(this.byCheckingSimSeriesCheckBox);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.helpProvider1.SetHelpKeyword(this.panel3, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.panel3, System.Windows.Forms.HelpNavigator.Topic);
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
+            this.helpProvider1.SetShowHelp(this.panel3, true);
             this.panel3.Size = new System.Drawing.Size(426, 20);
             this.panel3.TabIndex = 7;
             // 
@@ -982,8 +1071,11 @@ namespace FilterSimulation
             this.button3.Dock = System.Windows.Forms.DockStyle.Left;
             this.button3.FlatAppearance.BorderSize = 0;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.button3, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.button3, System.Windows.Forms.HelpNavigator.Topic);
             this.button3.Location = new System.Drawing.Point(185, 0);
             this.button3.Name = "button3";
+            this.helpProvider1.SetShowHelp(this.button3, true);
             this.button3.Size = new System.Drawing.Size(86, 20);
             this.button3.TabIndex = 9;
             this.button3.Text = "Filter Types";
@@ -995,9 +1087,12 @@ namespace FilterSimulation
             this.commentSerieButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.commentSerieButton.FlatAppearance.BorderSize = 0;
             this.commentSerieButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.commentSerieButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.commentSerieButton, System.Windows.Forms.HelpNavigator.Topic);
             this.commentSerieButton.Image = ((System.Drawing.Image)(resources.GetObject("commentSerieButton.Image")));
             this.commentSerieButton.Location = new System.Drawing.Point(165, 0);
             this.commentSerieButton.Name = "commentSerieButton";
+            this.helpProvider1.SetShowHelp(this.commentSerieButton, true);
             this.commentSerieButton.Size = new System.Drawing.Size(20, 20);
             this.commentSerieButton.TabIndex = 8;
             this.commentSerieButton.UseVisualStyleBackColor = true;
@@ -1008,9 +1103,12 @@ namespace FilterSimulation
             this.simSeriesDeleteButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.simSeriesDeleteButton.FlatAppearance.BorderSize = 0;
             this.simSeriesDeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.simSeriesDeleteButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simSeriesDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
             this.simSeriesDeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("simSeriesDeleteButton.Image")));
             this.simSeriesDeleteButton.Location = new System.Drawing.Point(145, 0);
             this.simSeriesDeleteButton.Name = "simSeriesDeleteButton";
+            this.helpProvider1.SetShowHelp(this.simSeriesDeleteButton, true);
             this.simSeriesDeleteButton.Size = new System.Drawing.Size(20, 20);
             this.simSeriesDeleteButton.TabIndex = 5;
             this.simSeriesDeleteButton.Text = " ";
@@ -1022,9 +1120,12 @@ namespace FilterSimulation
             this.simSeriesRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.simSeriesRestoreButton.FlatAppearance.BorderSize = 0;
             this.simSeriesRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.simSeriesRestoreButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simSeriesRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
             this.simSeriesRestoreButton.Image = ((System.Drawing.Image)(resources.GetObject("simSeriesRestoreButton.Image")));
             this.simSeriesRestoreButton.Location = new System.Drawing.Point(125, 0);
             this.simSeriesRestoreButton.Name = "simSeriesRestoreButton";
+            this.helpProvider1.SetShowHelp(this.simSeriesRestoreButton, true);
             this.simSeriesRestoreButton.Size = new System.Drawing.Size(20, 20);
             this.simSeriesRestoreButton.TabIndex = 4;
             this.simSeriesRestoreButton.Text = " ";
@@ -1036,9 +1137,12 @@ namespace FilterSimulation
             this.simSeriesDuplicateButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.simSeriesDuplicateButton.FlatAppearance.BorderSize = 0;
             this.simSeriesDuplicateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.simSeriesDuplicateButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simSeriesDuplicateButton, System.Windows.Forms.HelpNavigator.Topic);
             this.simSeriesDuplicateButton.Image = global::FilterSimulation.Properties.Resources.page_white_copy;
             this.simSeriesDuplicateButton.Location = new System.Drawing.Point(105, 0);
             this.simSeriesDuplicateButton.Name = "simSeriesDuplicateButton";
+            this.helpProvider1.SetShowHelp(this.simSeriesDuplicateButton, true);
             this.simSeriesDuplicateButton.Size = new System.Drawing.Size(20, 20);
             this.simSeriesDuplicateButton.TabIndex = 6;
             this.simSeriesDuplicateButton.UseVisualStyleBackColor = true;
@@ -1049,9 +1153,12 @@ namespace FilterSimulation
             this.simSeriesCreateButton.Dock = System.Windows.Forms.DockStyle.Left;
             this.simSeriesCreateButton.FlatAppearance.BorderSize = 0;
             this.simSeriesCreateButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.simSeriesCreateButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simSeriesCreateButton, System.Windows.Forms.HelpNavigator.Topic);
             this.simSeriesCreateButton.Image = ((System.Drawing.Image)(resources.GetObject("simSeriesCreateButton.Image")));
             this.simSeriesCreateButton.Location = new System.Drawing.Point(85, 0);
             this.simSeriesCreateButton.Name = "simSeriesCreateButton";
+            this.helpProvider1.SetShowHelp(this.simSeriesCreateButton, true);
             this.simSeriesCreateButton.Size = new System.Drawing.Size(20, 20);
             this.simSeriesCreateButton.TabIndex = 2;
             this.simSeriesCreateButton.Text = " ";
@@ -1106,11 +1213,14 @@ namespace FilterSimulation
             this.commonDeliquoringSimulationBlockMaxAbsColumn});
             this.commonDeliquoringSimulationBlockDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.commonDeliquoringSimulationBlockDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.helpProvider1.SetHelpKeyword(this.commonDeliquoringSimulationBlockDataGrid, "Settings__Result_Parameters_fo.htm");
+            this.helpProvider1.SetHelpNavigator(this.commonDeliquoringSimulationBlockDataGrid, System.Windows.Forms.HelpNavigator.Topic);
             this.commonDeliquoringSimulationBlockDataGrid.HighLightCurrentRow = false;
             this.commonDeliquoringSimulationBlockDataGrid.Location = new System.Drawing.Point(715, 20);
             this.commonDeliquoringSimulationBlockDataGrid.Name = "commonDeliquoringSimulationBlockDataGrid";
             this.commonDeliquoringSimulationBlockDataGrid.RowHeadersVisible = false;
             this.commonDeliquoringSimulationBlockDataGrid.RowTemplate.Height = 18;
+            this.helpProvider1.SetShowHelp(this.commonDeliquoringSimulationBlockDataGrid, true);
             this.commonDeliquoringSimulationBlockDataGrid.Size = new System.Drawing.Size(292, 362);
             this.commonDeliquoringSimulationBlockDataGrid.TabIndex = 17;
             // 
@@ -1178,11 +1288,14 @@ namespace FilterSimulation
             this.deliquoringMaterialParametersUnitsColumn});
             this.deliquoringMaterialParametersDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.deliquoringMaterialParametersDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.helpProvider1.SetHelpKeyword(this.deliquoringMaterialParametersDataGrid, "Material_parameters_for_the_ca.htm");
+            this.helpProvider1.SetHelpNavigator(this.deliquoringMaterialParametersDataGrid, System.Windows.Forms.HelpNavigator.Topic);
             this.deliquoringMaterialParametersDataGrid.HighLightCurrentRow = false;
             this.deliquoringMaterialParametersDataGrid.Location = new System.Drawing.Point(510, 20);
             this.deliquoringMaterialParametersDataGrid.Name = "deliquoringMaterialParametersDataGrid";
             this.deliquoringMaterialParametersDataGrid.RowHeadersVisible = false;
             this.deliquoringMaterialParametersDataGrid.RowTemplate.Height = 16;
+            this.helpProvider1.SetShowHelp(this.deliquoringMaterialParametersDataGrid, true);
             this.deliquoringMaterialParametersDataGrid.Size = new System.Drawing.Size(205, 362);
             this.deliquoringMaterialParametersDataGrid.TabIndex = 16;
             // 
@@ -1216,11 +1329,14 @@ namespace FilterSimulation
             this.commonCalcBlockMaxAbsColumn});
             this.commonCalcBlockDataGrid.Dock = System.Windows.Forms.DockStyle.Left;
             this.commonCalcBlockDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.helpProvider1.SetHelpKeyword(this.commonCalcBlockDataGrid, "Cake_Formation_Settings__Resul.htm");
+            this.helpProvider1.SetHelpNavigator(this.commonCalcBlockDataGrid, System.Windows.Forms.HelpNavigator.Topic);
             this.commonCalcBlockDataGrid.HighLightCurrentRow = false;
             this.commonCalcBlockDataGrid.Location = new System.Drawing.Point(205, 20);
             this.commonCalcBlockDataGrid.Name = "commonCalcBlockDataGrid";
             this.commonCalcBlockDataGrid.RowHeadersVisible = false;
             this.commonCalcBlockDataGrid.RowTemplate.Height = 16;
+            this.helpProvider1.SetShowHelp(this.commonCalcBlockDataGrid, true);
             this.commonCalcBlockDataGrid.Size = new System.Drawing.Size(305, 362);
             this.commonCalcBlockDataGrid.TabIndex = 13;
             // 
@@ -1286,12 +1402,25 @@ namespace FilterSimulation
             this.LimitsAndMessagePanel.Size = new System.Drawing.Size(771, 20);
             this.LimitsAndMessagePanel.TabIndex = 18;
             // 
+            // errorMessageLabel
+            // 
+            this.errorMessageLabel.AutoSize = true;
+            this.errorMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.errorMessageLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorMessageLabel.Location = new System.Drawing.Point(98, 2);
+            this.errorMessageLabel.Name = "errorMessageLabel";
+            this.errorMessageLabel.Size = new System.Drawing.Size(0, 13);
+            this.errorMessageLabel.TabIndex = 15;
+            // 
             // calculateLimitsCheckBox
             // 
             this.calculateLimitsCheckBox.AutoSize = true;
             this.calculateLimitsCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.helpProvider1.SetHelpKeyword(this.calculateLimitsCheckBox, "Cake_Formation_Settings__Resul.htm");
+            this.helpProvider1.SetHelpNavigator(this.calculateLimitsCheckBox, System.Windows.Forms.HelpNavigator.Topic);
             this.calculateLimitsCheckBox.Location = new System.Drawing.Point(0, 0);
             this.calculateLimitsCheckBox.Name = "calculateLimitsCheckBox";
+            this.helpProvider1.SetShowHelp(this.calculateLimitsCheckBox, true);
             this.calculateLimitsCheckBox.Size = new System.Drawing.Size(52, 20);
             this.calculateLimitsCheckBox.TabIndex = 14;
             this.calculateLimitsCheckBox.Text = "Limits";
@@ -1311,11 +1440,27 @@ namespace FilterSimulation
             this.panelMaterialParameters.Size = new System.Drawing.Size(205, 382);
             this.panelMaterialParameters.TabIndex = 15;
             // 
+            // newSimulationButton
+            // 
+            this.helpProvider1.SetHelpKeyword(this.newSimulationButton, "Create_New_Simulation.htm");
+            this.helpProvider1.SetHelpNavigator(this.newSimulationButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.newSimulationButton.Location = new System.Drawing.Point(0, 353);
+            this.newSimulationButton.Name = "newSimulationButton";
+            this.helpProvider1.SetShowHelp(this.newSimulationButton, true);
+            this.newSimulationButton.Size = new System.Drawing.Size(205, 23);
+            this.newSimulationButton.TabIndex = 16;
+            this.newSimulationButton.Text = "Create new simulation";
+            this.newSimulationButton.UseVisualStyleBackColor = true;
+            this.newSimulationButton.Click += new System.EventHandler(this.newSimulationButton_Click);
+            // 
             // calculationOptionChangeButton
             // 
             this.calculationOptionChangeButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.helpProvider1.SetHelpKeyword(this.calculationOptionChangeButton, "General_Material_Parameters.htm");
+            this.helpProvider1.SetHelpNavigator(this.calculationOptionChangeButton, System.Windows.Forms.HelpNavigator.Topic);
             this.calculationOptionChangeButton.Location = new System.Drawing.Point(0, 324);
             this.calculationOptionChangeButton.Name = "calculationOptionChangeButton";
+            this.helpProvider1.SetShowHelp(this.calculationOptionChangeButton, true);
             this.calculationOptionChangeButton.Size = new System.Drawing.Size(205, 23);
             this.calculationOptionChangeButton.TabIndex = 15;
             this.calculationOptionChangeButton.Text = "Calculation Option";
@@ -1336,11 +1481,13 @@ namespace FilterSimulation
             this.epsKappaUnits});
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.HighLightCurrentRow = false;
+            this.helpProvider1.SetHelpKeyword(this.eps0Kappa0Pc0Rc0Alpha0DataGrid, "General_Material_Parameters.htm");
+            this.eps0Kappa0Pc0Rc0Alpha0DataGrid.HighLightCurrentRow = true;
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Location = new System.Drawing.Point(0, 156);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Name = "eps0Kappa0Pc0Rc0Alpha0DataGrid";
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowHeadersVisible = false;
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.RowTemplate.Height = 16;
+            this.helpProvider1.SetShowHelp(this.eps0Kappa0Pc0Rc0Alpha0DataGrid, true);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.Size = new System.Drawing.Size(205, 168);
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid.TabIndex = 12;
             // 
@@ -1374,11 +1521,14 @@ namespace FilterSimulation
             this.liquidParameterUnits});
             this.liquidDataGrid.Dock = System.Windows.Forms.DockStyle.Top;
             this.liquidDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            this.helpProvider1.SetHelpKeyword(this.liquidDataGrid, "General_Material_Parameters.htm");
+            this.helpProvider1.SetHelpNavigator(this.liquidDataGrid, System.Windows.Forms.HelpNavigator.Topic);
             this.liquidDataGrid.HighLightCurrentRow = false;
             this.liquidDataGrid.Location = new System.Drawing.Point(0, 17);
             this.liquidDataGrid.Name = "liquidDataGrid";
             this.liquidDataGrid.RowHeadersVisible = false;
             this.liquidDataGrid.RowTemplate.Height = 16;
+            this.helpProvider1.SetShowHelp(this.liquidDataGrid, true);
             this.liquidDataGrid.Size = new System.Drawing.Size(205, 139);
             this.liquidDataGrid.TabIndex = 5;
             // 
@@ -1415,8 +1565,11 @@ namespace FilterSimulation
             // 
             this.meterialInputSuspensionRadioButton.AutoSize = true;
             this.meterialInputSuspensionRadioButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.helpProvider1.SetHelpKeyword(this.meterialInputSuspensionRadioButton, "General_Material_Parameters.htm");
+            this.helpProvider1.SetHelpNavigator(this.meterialInputSuspensionRadioButton, System.Windows.Forms.HelpNavigator.Topic);
             this.meterialInputSuspensionRadioButton.Location = new System.Drawing.Point(87, 0);
             this.meterialInputSuspensionRadioButton.Name = "meterialInputSuspensionRadioButton";
+            this.helpProvider1.SetShowHelp(this.meterialInputSuspensionRadioButton, true);
             this.meterialInputSuspensionRadioButton.Size = new System.Drawing.Size(118, 17);
             this.meterialInputSuspensionRadioButton.TabIndex = 2;
             this.meterialInputSuspensionRadioButton.Text = "suspension";
@@ -1427,8 +1580,11 @@ namespace FilterSimulation
             this.meterialInputSerieRadioButton.AutoSize = true;
             this.meterialInputSerieRadioButton.Checked = true;
             this.meterialInputSerieRadioButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.helpProvider1.SetHelpKeyword(this.meterialInputSerieRadioButton, "General_Material_Parameters.htm");
+            this.helpProvider1.SetHelpNavigator(this.meterialInputSerieRadioButton, System.Windows.Forms.HelpNavigator.Topic);
             this.meterialInputSerieRadioButton.Location = new System.Drawing.Point(40, 0);
             this.meterialInputSerieRadioButton.Name = "meterialInputSerieRadioButton";
+            this.helpProvider1.SetShowHelp(this.meterialInputSerieRadioButton, true);
             this.meterialInputSerieRadioButton.Size = new System.Drawing.Size(47, 17);
             this.meterialInputSerieRadioButton.TabIndex = 1;
             this.meterialInputSerieRadioButton.TabStop = true;
@@ -1439,8 +1595,11 @@ namespace FilterSimulation
             // 
             this.meterialInputSimualationRadioButton.AutoSize = true;
             this.meterialInputSimualationRadioButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.helpProvider1.SetHelpKeyword(this.meterialInputSimualationRadioButton, "General_Material_Parameters.htm");
+            this.helpProvider1.SetHelpNavigator(this.meterialInputSimualationRadioButton, System.Windows.Forms.HelpNavigator.Topic);
             this.meterialInputSimualationRadioButton.Location = new System.Drawing.Point(0, 0);
             this.meterialInputSimualationRadioButton.Name = "meterialInputSimualationRadioButton";
+            this.helpProvider1.SetShowHelp(this.meterialInputSimualationRadioButton, true);
             this.meterialInputSimualationRadioButton.Size = new System.Drawing.Size(40, 17);
             this.meterialInputSimualationRadioButton.TabIndex = 0;
             this.meterialInputSimualationRadioButton.Text = "sim";
@@ -1667,31 +1826,19 @@ namespace FilterSimulation
             this.dataGridViewTextBoxColumn18.ReadOnly = true;
             this.dataGridViewTextBoxColumn18.Visible = false;
             // 
-            // errorMessageLabel
+            // helpProvider1
             // 
-            this.errorMessageLabel.AutoSize = true;
-            this.errorMessageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.errorMessageLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorMessageLabel.Location = new System.Drawing.Point(98, 2);
-            this.errorMessageLabel.Name = "errorMessageLabel";
-            this.errorMessageLabel.Size = new System.Drawing.Size(0, 13);
-            this.errorMessageLabel.TabIndex = 15;
-            // newSimulationButton
-
-            this.newSimulationButton.Location = new System.Drawing.Point(0, 353);
-            this.newSimulationButton.Name = "newSimulationButton";
-            this.newSimulationButton.Size = new System.Drawing.Size(205, 23);
-            this.newSimulationButton.TabIndex = 16;
-            this.newSimulationButton.Text = "Create new simulation";
-            this.newSimulationButton.UseVisualStyleBackColor = true;
-            this.newSimulationButton.Click += new System.EventHandler(this.newSimulationButton_Click);
+            this.helpProvider1.HelpNamespace = "filtraplus.chm";
             // 
             // fmFilterSimulationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.mainSplitContainer);
+            this.helpProvider1.SetHelpKeyword(this, "MainWindow.htm");
+            this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
             this.Name = "fmFilterSimulationControl";
+            this.helpProvider1.SetShowHelp(this, true);
             this.Size = new System.Drawing.Size(980, 615);
             this.Load += new System.EventHandler(this.FilterSimulation_Load);
             this.panelLeft.ResumeLayout(false);
@@ -1723,6 +1870,7 @@ namespace FilterSimulation
             this.panel6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.commonDeliquoringSimulationBlockDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.deliquoringMaterialParametersDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.commonCalcBlockDataGrid)).EndInit();
             this.LimitsAndMessagePanel.ResumeLayout(false);
             this.LimitsAndMessagePanel.PerformLayout();
             this.panelMaterialParameters.ResumeLayout(false);
@@ -1878,5 +2026,6 @@ namespace FilterSimulation
         private System.Windows.Forms.Panel LimitsAndMessagePanel;
         private System.Windows.Forms.Label errorMessageLabel;
         private System.Windows.Forms.Button newSimulationButton;
+        public System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

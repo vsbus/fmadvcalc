@@ -87,7 +87,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -144,64 +143,130 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectCreateButton
             // 
             this.projectCreateButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.projectCreateButton, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.projectCreateButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.projectCreateButton, true);
             this.toolTip.SetToolTip(this.projectCreateButton, "Create new project");
             // 
             // suspensionCreateButton
             // 
             this.suspensionCreateButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.suspensionCreateButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.suspensionCreateButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.suspensionCreateButton, true);
             this.toolTip.SetToolTip(this.suspensionCreateButton, "Create new suspension");
             // 
             // simSeriesCreateButton
             // 
             this.simSeriesCreateButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.simSeriesCreateButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simSeriesCreateButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.simSeriesCreateButton, true);
             this.toolTip.SetToolTip(this.simSeriesCreateButton, "Create new serie");
             // 
             // projectRestoreButton
             // 
             this.projectRestoreButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.projectRestoreButton, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.projectRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.projectRestoreButton, true);
             this.toolTip.SetToolTip(this.projectRestoreButton, "Restore project");
             // 
             // projectDeleteButton
             // 
             this.projectDeleteButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.projectDeleteButton, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.projectDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.projectDeleteButton, true);
             this.toolTip.SetToolTip(this.projectDeleteButton, "Delete project");
             // 
             // suspensionRestoreButton
             // 
             this.suspensionRestoreButton.FlatAppearance.BorderSize = 0;
             this.suspensionRestoreButton.Location = new System.Drawing.Point(105, 0);
+			this.helpProvider1.SetHelpKeyword(this.suspensionRestoreButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.suspensionRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.suspensionRestoreButton, true);
             this.toolTip.SetToolTip(this.suspensionRestoreButton, "Restore suspension");
             // 
             // suspensionDeleteButton
             // 
             this.suspensionDeleteButton.FlatAppearance.BorderSize = 0;
             this.suspensionDeleteButton.Location = new System.Drawing.Point(125, 0);
+			this.helpProvider1.SetHelpKeyword(this.suspensionDeleteButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.suspensionDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.suspensionDeleteButton, true);
             this.toolTip.SetToolTip(this.suspensionDeleteButton, "Delete suspension");
             // 
             // simSeriesRestoreButton
             // 
             this.simSeriesRestoreButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.simSeriesRestoreButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simSeriesRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.simSeriesRestoreButton, true);
             this.toolTip.SetToolTip(this.simSeriesRestoreButton, "Restore serie");
             // 
             // simSeriesDeleteButton
             // 
             this.simSeriesDeleteButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.simSeriesDeleteButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simSeriesDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.simSeriesDeleteButton, true);
             this.toolTip.SetToolTip(this.simSeriesDeleteButton, "Delete serie");
             // 
             // simulationDuplicateButton
             // 
             this.simulationDuplicateButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.simulationDuplicateButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simulationDuplicateButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.simulationDuplicateButton, true);
             this.toolTip.SetToolTip(this.simulationDuplicateButton, "Duplicate externalSimulation");
             // 
             // simulationRestoreButton
             // 
             this.simulationRestoreButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.simulationRestoreButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simulationRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.simulationRestoreButton, true);
             this.toolTip.SetToolTip(this.simulationRestoreButton, "Restore externalSimulation");
             // 
             // simulationDeleteButton
             // 
             this.simulationDeleteButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.simulationDeleteButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simulationDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.simulationDeleteButton, true);
             this.toolTip.SetToolTip(this.simulationDeleteButton, "Delete externalSimulation");
+            // 
+            // byCheckingProjectsCheckBox
+            // 
+            this.helpProvider1.SetHelpKeyword(this.byCheckingProjectsCheckBox, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.byCheckingProjectsCheckBox, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.byCheckingProjectsCheckBox, true);
+            // 
+            // byCheckingSuspensionsCheckBox
+            // 
+            this.helpProvider1.SetHelpKeyword(this.byCheckingSuspensionsCheckBox, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.byCheckingSuspensionsCheckBox, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.byCheckingSuspensionsCheckBox, true);
+            // 
+            // byCheckingSimSeriesCheckBox
+            // 
+            this.helpProvider1.SetHelpKeyword(this.byCheckingSimSeriesCheckBox, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.byCheckingSimSeriesCheckBox, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.byCheckingSimSeriesCheckBox, true);
+            // 
+            // byCheckingSimulationsCheckBox
+            // 
+            this.helpProvider1.SetHelpKeyword(this.byCheckingSimulationsCheckBox, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.byCheckingSimulationsCheckBox, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.byCheckingSimulationsCheckBox, true);
+            // 
+            // fullSimulationInfoCheckBox
+            // 
+            this.helpProvider1.SetHelpKeyword(this.fullSimulationInfoCheckBox, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.fullSimulationInfoCheckBox, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.fullSimulationInfoCheckBox, true);
             // 
             // panelLeft
             // 
@@ -213,10 +278,16 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // projectPanel
             // 
+            this.helpProvider1.SetHelpKeyword(this.projectPanel, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.projectPanel, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.projectPanel, true);
             this.projectPanel.Size = new System.Drawing.Size(170, 115);
             // 
             // suspensionPanel
             // 
+            this.helpProvider1.SetHelpKeyword(this.suspensionPanel, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.suspensionPanel, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.suspensionPanel, true);
             this.suspensionPanel.Size = new System.Drawing.Size(192, 115);
             // 
             // splitter2
@@ -246,7 +317,28 @@ namespace FilterSimulationWithTablesAndGraphs
             // simSeriesDuplicateButton
             // 
             this.simSeriesDuplicateButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.simSeriesDuplicateButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simSeriesDuplicateButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.simSeriesDuplicateButton, true);
             this.toolTip.SetToolTip(this.simSeriesDuplicateButton, "Duplicate serie");
+            // 
+            // meterialInputSerieRadioButton
+            // 
+            this.helpProvider1.SetHelpKeyword(this.meterialInputSerieRadioButton, "General_Material_Parameters.htm");
+            this.helpProvider1.SetHelpNavigator(this.meterialInputSerieRadioButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.meterialInputSerieRadioButton, true);
+            // 
+            // meterialInputSimualationRadioButton
+            // 
+            this.helpProvider1.SetHelpKeyword(this.meterialInputSimualationRadioButton, "General_Material_Parameters.htm");
+            this.helpProvider1.SetHelpNavigator(this.meterialInputSimualationRadioButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.meterialInputSimualationRadioButton, true);
+            // 
+            // meterialInputSuspensionRadioButton
+            // 
+            this.helpProvider1.SetHelpKeyword(this.meterialInputSuspensionRadioButton, "General_Material_Parameters.htm");
+            this.helpProvider1.SetHelpNavigator(this.meterialInputSuspensionRadioButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.meterialInputSuspensionRadioButton, true);
             // 
             // panelTop
             // 
@@ -258,23 +350,38 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
+            this.helpProvider1.SetHelpKeyword(this.panel1, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.panel1, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.panel1, true);
             this.panel1.Size = new System.Drawing.Size(166, 20);
             // 
             // panel2
             // 
+            this.helpProvider1.SetHelpKeyword(this.panel2, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.panel2, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.panel2, true);
             this.panel2.Size = new System.Drawing.Size(188, 20);
             // 
             // panel3
             // 
+            this.helpProvider1.SetHelpKeyword(this.panel3, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.panel3, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.panel3, true);
             this.panel3.Size = new System.Drawing.Size(445, 20);
             // 
             // panel5
             // 
+            this.helpProvider1.SetHelpKeyword(this.panel5, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.panel5, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.panel5, true);
             this.panel5.Size = new System.Drawing.Size(818, 20);
             // 
             // simulationCreateButton
             // 
             this.simulationCreateButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.simulationCreateButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.simulationCreateButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.simulationCreateButton, true);
             this.toolTip.SetToolTip(this.simulationCreateButton, "Create new externalSimulation");
             // 
             // simSeriesPanel
@@ -311,19 +418,31 @@ namespace FilterSimulationWithTablesAndGraphs
             // commentSimulationButton
             // 
             this.commentSimulationButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.commentSimulationButton, "Simulations_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.commentSimulationButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.commentSimulationButton, true);
             // 
             // commentProjectButton
             // 
             this.commentProjectButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.commentProjectButton, "Project_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.commentProjectButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.commentProjectButton, true);
             // 
             // commentSuspensionButton
             // 
             this.commentSuspensionButton.FlatAppearance.BorderSize = 0;
             this.commentSuspensionButton.Location = new System.Drawing.Point(145, 0);
+			this.helpProvider1.SetHelpKeyword(this.commentSuspensionButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.commentSuspensionButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.commentSuspensionButton, true);
             // 
             // commentSerieButton
             // 
             this.commentSerieButton.FlatAppearance.BorderSize = 0;
+            this.helpProvider1.SetHelpKeyword(this.commentSerieButton, "Series_Table.htm");
+            this.helpProvider1.SetHelpNavigator(this.commentSerieButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.helpProvider1.SetShowHelp(this.commentSerieButton, true);
             // 
             // xRangeLabel
             // 
@@ -337,6 +456,8 @@ namespace FilterSimulationWithTablesAndGraphs
             // fmZedGraphControl1
             // 
             this.fmZedGraphControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.helpProvider1.SetHelpKeyword(this.fmZedGraphControl1, "Diagram.htm");
+            this.helpProvider1.SetHelpNavigator(this.fmZedGraphControl1, System.Windows.Forms.HelpNavigator.Topic);
             this.fmZedGraphControl1.IsAntiAlias = true;
             this.fmZedGraphControl1.Location = new System.Drawing.Point(0, 0);
             this.fmZedGraphControl1.Name = "fmZedGraphControl1";
@@ -347,6 +468,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.fmZedGraphControl1.ScrollMinX = 0;
             this.fmZedGraphControl1.ScrollMinY = 0;
             this.fmZedGraphControl1.ScrollMinY2 = 0;
+            this.helpProvider1.SetShowHelp(this.fmZedGraphControl1, true);
             this.fmZedGraphControl1.Size = new System.Drawing.Size(654, 373);
             this.fmZedGraphControl1.TabIndex = 4;
             this.fmZedGraphControl1.HighLightedPointsChanged += new fmZedGraph.HighlightPointsEventHandler(this.fmZedGraphControl1_HighLightedPointsChanged);
@@ -356,9 +478,12 @@ namespace FilterSimulationWithTablesAndGraphs
             this.buttonAddRow.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonAddRow.FlatAppearance.BorderSize = 0;
             this.buttonAddRow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.buttonAddRow, "Table_belonging_to_the_Diagram.htm");
+            this.helpProvider1.SetHelpNavigator(this.buttonAddRow, System.Windows.Forms.HelpNavigator.Topic);
             this.buttonAddRow.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddRow.Image")));
             this.buttonAddRow.Location = new System.Drawing.Point(125, 0);
             this.buttonAddRow.Name = "buttonAddRow";
+            this.helpProvider1.SetShowHelp(this.buttonAddRow, true);
             this.buttonAddRow.Size = new System.Drawing.Size(20, 21);
             this.buttonAddRow.TabIndex = 8;
             this.buttonAddRow.UseVisualStyleBackColor = true;
@@ -368,11 +493,14 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.UseParamsCheckBox.AutoSize = true;
             this.UseParamsCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.helpProvider1.SetHelpKeyword(this.UseParamsCheckBox, "Table_belonging_to_the_Diagram.htm");
+            this.helpProvider1.SetHelpNavigator(this.UseParamsCheckBox, System.Windows.Forms.HelpNavigator.Topic);
             this.UseParamsCheckBox.Location = new System.Drawing.Point(0, 0);
             this.UseParamsCheckBox.Name = "UseParamsCheckBox";
+            this.helpProvider1.SetShowHelp(this.UseParamsCheckBox, true);
             this.UseParamsCheckBox.Size = new System.Drawing.Size(125, 21);
             this.UseParamsCheckBox.TabIndex = 9;
-            this.UseParamsCheckBox.Text = "Use local parameters";
+            this.UseParamsCheckBox.Text = "Multiple Curves for Current Simulation";
             this.UseParamsCheckBox.UseVisualStyleBackColor = true;
             this.UseParamsCheckBox.CheckedChanged += new System.EventHandler(this.UseParamsCheckBox_CheckedChanged);
             // 
@@ -387,12 +515,15 @@ namespace FilterSimulationWithTablesAndGraphs
             this.coordinatesGrid.ContextMenuStrip = this.contextMenuStrip1;
             this.coordinatesGrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.coordinatesGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.helpProvider1.SetHelpKeyword(this.coordinatesGrid, "Table_belonging_to_the_Diagram.htm");
+            this.helpProvider1.SetHelpNavigator(this.coordinatesGrid, System.Windows.Forms.HelpNavigator.Topic);
             this.coordinatesGrid.HighLightCurrentRow = true;
             this.coordinatesGrid.Location = new System.Drawing.Point(0, 0);
             this.coordinatesGrid.Name = "coordinatesGrid";
             this.coordinatesGrid.RowHeadersVisible = false;
             this.coordinatesGrid.RowHeadersWidth = 15;
             this.coordinatesGrid.RowTemplate.Height = 18;
+            this.helpProvider1.SetShowHelp(this.coordinatesGrid, true);
             this.coordinatesGrid.Size = new System.Drawing.Size(654, 179);
             this.coordinatesGrid.TabIndex = 0;
             this.coordinatesGrid.CurrentCellChanged += new System.EventHandler(this.coordinatesGrid_CurrentCellChanged);
@@ -442,11 +573,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.SelectedSimulationParametersCheckBoxColumn});
             this.selectedSimulationParametersTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.selectedSimulationParametersTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.helpProvider1.SetHelpKeyword(this.selectedSimulationParametersTable, "Table_belonging_to_the_Diagram.htm");
+            this.helpProvider1.SetHelpNavigator(this.selectedSimulationParametersTable, System.Windows.Forms.HelpNavigator.Topic);
             this.selectedSimulationParametersTable.HighLightCurrentRow = true;
             this.selectedSimulationParametersTable.Location = new System.Drawing.Point(0, 57);
             this.selectedSimulationParametersTable.Name = "selectedSimulationParametersTable";
             this.selectedSimulationParametersTable.RowHeadersVisible = false;
             this.selectedSimulationParametersTable.RowTemplate.Height = 18;
+            this.helpProvider1.SetShowHelp(this.selectedSimulationParametersTable, true);
             this.selectedSimulationParametersTable.Size = new System.Drawing.Size(646, 106);
             this.selectedSimulationParametersTable.TabIndex = 10;
             this.selectedSimulationParametersTable.Visible = false;
@@ -485,11 +619,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.AdditionalParametersCheckBoxColumn});
             this.additionalParametersTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.additionalParametersTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.helpProvider1.SetHelpKeyword(this.additionalParametersTable, "Table_belonging_to_the_Diagram.htm");
+            this.helpProvider1.SetHelpNavigator(this.additionalParametersTable, System.Windows.Forms.HelpNavigator.Topic);
             this.additionalParametersTable.HighLightCurrentRow = true;
             this.additionalParametersTable.Location = new System.Drawing.Point(0, 57);
             this.additionalParametersTable.Name = "additionalParametersTable";
             this.additionalParametersTable.RowHeadersVisible = false;
             this.additionalParametersTable.RowTemplate.Height = 18;
+            this.helpProvider1.SetShowHelp(this.additionalParametersTable, true);
             this.additionalParametersTable.Size = new System.Drawing.Size(646, 106);
             this.additionalParametersTable.TabIndex = 5;
             this.additionalParametersTable.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.additionalParametersTable_CellContentClick);
@@ -521,9 +658,12 @@ namespace FilterSimulationWithTablesAndGraphs
             this.buttonDeleteRow.Dock = System.Windows.Forms.DockStyle.Left;
             this.buttonDeleteRow.FlatAppearance.BorderSize = 0;
             this.buttonDeleteRow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.helpProvider1.SetHelpKeyword(this.buttonDeleteRow, "Table_belonging_to_the_Diagram.htm");
+            this.helpProvider1.SetHelpNavigator(this.buttonDeleteRow, System.Windows.Forms.HelpNavigator.Topic);
             this.buttonDeleteRow.Image = ((System.Drawing.Image)(resources.GetObject("buttonDeleteRow.Image")));
             this.buttonDeleteRow.Location = new System.Drawing.Point(145, 0);
             this.buttonDeleteRow.Name = "buttonDeleteRow";
+            this.helpProvider1.SetShowHelp(this.buttonDeleteRow, true);
             this.buttonDeleteRow.Size = new System.Drawing.Size(20, 21);
             this.buttonDeleteRow.TabIndex = 10;
             this.buttonDeleteRow.UseVisualStyleBackColor = true;
@@ -952,14 +1092,11 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(654, 171);
             this.panel9.TabIndex = 11;
             // 
-            // helpProvider1
-            // 
-            this.helpProvider1.HelpNamespace = "filtraplus.chm";
-            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.helpProvider1.SetHelpKeyword(this, "MainWindow.htm");
             this.helpProvider1.SetHelpNavigator(this, System.Windows.Forms.HelpNavigator.Topic);
             this.Name = "fmFilterSimulationWithTablesAndGraphs";
             this.helpProvider1.SetShowHelp(this, true);
@@ -1082,7 +1219,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private DataGridViewCheckBoxColumn AdditionalParametersCheckBoxColumn;
         private Button buttonDeleteRow;
         private CheckBox xLogCheckBox;
-        private HelpProvider helpProvider1;
 
     }
 }
