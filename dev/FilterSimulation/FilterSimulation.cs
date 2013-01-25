@@ -393,7 +393,10 @@ namespace FilterSimulation
                     string unitFamilyName = unitNode.SelectSingleNode(fmFilterSimulationSerializeTags.UnitFamilyName).InnerText;
                     string currentUnitName = unitNode.SelectSingleNode(fmFilterSimulationSerializeTags.CurrentUnitName).InnerText;
                     fmUnitFamily family = fmUnitFamily.GetFamilyByName(unitFamilyName);
-                    schema[family] = family.GetUnitByName(currentUnitName);
+                    if (family != null)
+                    {
+                        schema[family] = family.GetUnitByName(currentUnitName);
+                    }
                 }
                 UnitsSchemas[(fmUnitsSchema)fmEnumUtils.GetEnum(typeof(fmUnitsSchema), unitsSchemaName)] = schema;
             }

@@ -307,7 +307,7 @@ namespace fmCalculationLibrary.MeasureUnits
                     return family;
                 }
             }
-            throw new Exception("No unit family with name " + unitFamilyName + " found.");
+            return null;
         }
     }
 }

@@ -129,7 +129,7 @@ namespace fmCalcBlocksLibrary.Blocks
         public fmValue rhos_Value {get {return rhos.value;} set {rhos.value = value;}}
 
         public fmDeliquoringSimualtionCalculator.DeliquoringCalculatorOptions deliquoringCalculatorOptions;
-        private fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
+        protected fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
 
         override public void DoCalculations()
         {

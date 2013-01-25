@@ -41,7 +41,10 @@ namespace fmCalcBlocksLibrary.Blocks
         {
             base.ReWriteParameters();
 
-            if (processOnChange && m_isLimitsDisplaying && m_doLimitsCalculation)
+            if (processOnChange &&
+                m_isLimitsDisplaying &&
+                m_doLimitsCalculation &&
+                deliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used)
             {
                 processOnChange = false;
 

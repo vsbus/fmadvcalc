@@ -13,7 +13,12 @@ namespace FilterSimulation
         {
             CreateNewProject(Solution);
             CreateNewSuspension(Solution, Solution.currentObjects.Project);
-            CreateNewSerie(Solution, Solution.currentObjects.Suspension);
+            if (!CreateNewSerie(Solution, Solution.currentObjects.Suspension))
+            {
+                Solution.currentObjects.Suspension.Delete();
+                Solution.currentObjects.Project.Delete();
+                return;
+            }
             
             DisplaySolution(Solution);
             projectDataGrid.BeginEdit(true);
@@ -101,7 +106,11 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
             }
 
             CreateNewSuspension(Solution, parentProject);
-            CreateNewSerie(Solution, Solution.currentObjects.Suspension);
+            if (!CreateNewSerie(Solution, Solution.currentObjects.Suspension))
+            {
+                Solution.currentObjects.Suspension.Delete();
+                return;
+            }
 
             DisplaySolution(Solution);
             if (currentCol != -1 && suspensionDataGrid.CurrentCell != null)
