@@ -792,10 +792,18 @@ namespace FilterSimulation.fmFilterObjects
                 ((fmCalculationVariableParameter) Data.parameters[var.globalParameter]).isInputed = var.isInputed;
             }
 
+
+            Data.parameters[fmGlobalParameter.eta_g].value = new fmValue(0.02);
+            Data.parameters[fmGlobalParameter.ag1].value = new fmValue(0);
+            Data.parameters[fmGlobalParameter.ag2].value = new fmValue(0);
+            Data.parameters[fmGlobalParameter.ag3].value = new fmValue(0);
+            Data.parameters[fmGlobalParameter.Tetta].value = new fmValue(20);
+
             Data.parameters[fmGlobalParameter.Tetta_boil].value = new fmValue(1000);
             Data.parameters[fmGlobalParameter.DH].value = new fmValue(1e6);
             Data.parameters[fmGlobalParameter.Mmole].value = new fmValue(18e-3);
             Data.parameters[fmGlobalParameter.f].value = new fmValue(1);
+
 
             Keep();
         }
