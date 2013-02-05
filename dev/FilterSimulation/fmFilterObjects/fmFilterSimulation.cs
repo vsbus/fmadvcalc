@@ -793,7 +793,7 @@ namespace FilterSimulation.fmFilterObjects
             }
 
 
-            Data.parameters[fmGlobalParameter.eta_g].value = new fmValue(0.02);
+            Data.parameters[fmGlobalParameter.eta_g].value = new fmValue(0.00002);
             Data.parameters[fmGlobalParameter.ag1].value = new fmValue(0);
             Data.parameters[fmGlobalParameter.ag2].value = new fmValue(0);
             Data.parameters[fmGlobalParameter.ag3].value = new fmValue(0);
