@@ -792,26 +792,31 @@ namespace FilterSimulation.fmFilterObjects
                 ((fmCalculationVariableParameter) Data.parameters[var.globalParameter]).isInputed = var.isInputed;
             }
 
-            Data.parameters[fmGlobalParameter.sigma].value = new fmValue(70e-3);
-            (Data.parameters[fmGlobalParameter.pke0] as fmCalculationVariableParameter).isInputed = true;
-            Data.parameters[fmGlobalParameter.pke0].value = new fmValue(0.25e5);
-            Data.parameters[fmGlobalParameter.Srem].value = new fmValue(0.1);
-            Data.parameters[fmGlobalParameter.ad1].value = new fmValue(0.5);
-            Data.parameters[fmGlobalParameter.ad2].value = new fmValue(5);
+            SetDefaultParameterValue(fmGlobalParameter.sigma, new fmValue(70e-3));
+            SetDefaultParameterValue(fmGlobalParameter.pke0, new fmValue(0.25e5));
+            SetDefaultParameterValue(fmGlobalParameter.Srem, new fmValue(0.1));
+            SetDefaultParameterValue(fmGlobalParameter.ad1, new fmValue(0.5));
+            SetDefaultParameterValue(fmGlobalParameter.ad2, new fmValue(5));
 
-            Data.parameters[fmGlobalParameter.Tetta].value = new fmValue(20);
-            Data.parameters[fmGlobalParameter.eta_g].value = new fmValue(0.00002);
-            Data.parameters[fmGlobalParameter.ag1].value = new fmValue(1);
-            Data.parameters[fmGlobalParameter.ag2].value = new fmValue(0);
-            Data.parameters[fmGlobalParameter.ag3].value = new fmValue(0.5);
+            SetDefaultParameterValue(fmGlobalParameter.Tetta, new fmValue(20));
+            SetDefaultParameterValue(fmGlobalParameter.eta_g, new fmValue(0.00002));
+            SetDefaultParameterValue(fmGlobalParameter.ag1, new fmValue(1));
+            SetDefaultParameterValue(fmGlobalParameter.ag2, new fmValue(0));
+            SetDefaultParameterValue(fmGlobalParameter.ag3, new fmValue(0.5));
             
-            Data.parameters[fmGlobalParameter.Tetta_boil].value = new fmValue(100);
-            Data.parameters[fmGlobalParameter.DH].value = new fmValue(40e3);
-            Data.parameters[fmGlobalParameter.Mmole].value = new fmValue(18e-3);
-            Data.parameters[fmGlobalParameter.f].value = new fmValue(0);
-
+            SetDefaultParameterValue(fmGlobalParameter.Tetta_boil, new fmValue(100));
+            SetDefaultParameterValue(fmGlobalParameter.DH, new fmValue(40e3));
+            SetDefaultParameterValue(fmGlobalParameter.Mmole, new fmValue(18e-3));
+            SetDefaultParameterValue(fmGlobalParameter.f, new fmValue(0));
 
             Keep();
+        }
+
+        private void SetDefaultParameterValue(fmGlobalParameter p, fmValue value)
+        {
+            var vp = Data.parameters[p] as fmCalculationVariableParameter;
+            vp.isInputed = true;
+            vp.value = value;
         }
 
         public fmFilterSimulation(fmFilterSimSerie parentSerie, fmFilterSimulation toCopy)
