@@ -29,6 +29,7 @@ namespace AdvancedCalculator
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmAdvancedCalculator));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -232,6 +233,7 @@ namespace AdvancedCalculator
             this.ClientSize = new System.Drawing.Size(843, 669);
             this.Controls.Add(this.filterSimulationWithTablesAndGraphs1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fmAdvancedCalculator";
             this.Text = "FILTRAPLUS";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
