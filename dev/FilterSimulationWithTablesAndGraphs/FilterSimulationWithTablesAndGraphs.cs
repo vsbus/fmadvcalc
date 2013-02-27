@@ -504,8 +504,8 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string Y2LogCheckBox = "Y2LogCheckBox";
             public const string UseParamsCheckBox = "UseParamsCheckBox";
 
-            public const string MinMax_Values_Of_The_XAxis_Parameter = "MinMax_Values_Of_The_XAxis_Parameter";            
-            public const string MinMax_Parameter = "MinMax_Parameter";            
+            public const string MinMaxValuesOfTheXAxisParameter = "MinMax_Values_Of_The_XAxis_Parameter";            
+            public const string MinMaxParameter = "MinMax_Parameter";            
         }
 
         override protected void SerializeDiagramOptions(XmlWriter writer)
@@ -555,11 +555,11 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void SerializeMinMaxValuesOfTheXAxisParameter(XmlWriter writer)
         {
-            writer.WriteStartElement(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Values_Of_The_XAxis_Parameter);            
+            writer.WriteStartElement(fmFilterSimulationWithDiagramsSerializeTags.MinMaxValuesOfTheXAxisParameter);            
             foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
             {
-                writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Parameter, row.Cells[1].Value.ToString());
-                writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Parameter, row.Cells[2].Value.ToString());
+                writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.MinMaxParameter, row.Cells[1].Value.ToString());
+                writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.MinMaxParameter, row.Cells[2].Value.ToString());
             }
             writer.WriteEndElement();
         }
@@ -567,7 +567,7 @@ namespace FilterSimulationWithTablesAndGraphs
         public void LoadLastMinMaxValues(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
-            DeserializeMinMaxValuesOfTheXAxisParameter(node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Values_Of_The_XAxis_Parameter));
+            DeserializeMinMaxValuesOfTheXAxisParameter(node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.MinMaxValuesOfTheXAxisParameter));
         }
 
         protected void DeserializeMinMaxValuesOfTheXAxisParameter(XmlNode node)
@@ -576,7 +576,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 return;
             }
-            XmlNodeList MinMaxParameters = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Parameter);
+            XmlNodeList MinMaxParameters = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.MinMaxParameter);
             if (MinMaxParameters != null)
             {
                 int row = 0;
@@ -630,7 +630,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
             DeserializeY2Nodes(node);
 
-            DeserializeMinMaxValuesOfTheXAxisParameter(node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.MinMax_Values_Of_The_XAxis_Parameter));            
+            DeserializeMinMaxValuesOfTheXAxisParameter(node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.MinMaxValuesOfTheXAxisParameter));            
         }
 
         public void DeserializePartOfDiagramOptions(XmlNode node)
