@@ -852,122 +852,73 @@ namespace FilterSimulationWithTablesAndGraphs
         public void SerializeInterfaceAdjusting(XmlWriter writer)
         {
             writer.WriteStartElement(fmInterfaceAdjustingTags.InterfaceAdjusting);
-            SaveSplitterDistances(writer);
+            SerializeSplitterDistances(writer);
             writer.WriteEndElement();
         }       
 
-        public void SaveSplitterDistances(XmlWriter writer)
+        public void SerializeSplitterDistances(XmlWriter writer)
         {
             writer.WriteStartElement(fmInterfaceAdjustingTags.SplitterSizes);
-            writer.WriteElementString(projectSuspensionSplitContainer.Name, GetProjectSuspensionSplitContainerSplitterDistance());
-            writer.WriteElementString(projectSuspensionSerieSplitContainer.Name, GetProjectSuspensionSerieSplitContainerSplitterDistance());
-            writer.WriteElementString(mainSplitContainer.Name, GetMainSplitContainerSplitterDistance());
-            writer.WriteElementString(splitContainer1.Name, GetSplitContainer1SplitterDistance());
+            SerializeSplitterDistance(writer, projectSuspensionSplitContainer);
+            SerializeSplitterDistance(writer, projectSuspensionSerieSplitContainer);
+            SerializeSplitterDistance(writer, mainSplitContainer);
+            SerializeSplitterDistance(writer, splitContainer1);
+            
             writer.WriteElementString(splitter3.Name, GetSplitter3SplitterDistance());
-            writer.WriteElementString(splitContainer2.Name, GetSplitContainer2SplitterDistance());
-            writer.WriteElementString(XYSplitContainer.Name, GetXYSplitContainerSplitterDistance());
-            writer.WriteElementString(RightSplitContainer.Name, GetRightSplitContainerSplitterDistance());
-            writer.WriteElementString(SimulationAndGraphSplitContainer.Name, GetSimulationAndGraphSplitContainerSplitterDistance());
+            
+            SerializeSplitterDistance(writer, splitContainer2);
+            SerializeSplitterDistance(writer, XYSplitContainer);
+            SerializeSplitterDistance(writer, RightSplitContainer);
+            SerializeSplitterDistance(writer, SimulationAndGraphSplitContainer);
             writer.WriteEndElement();
         }
 
-        public string GetProjectSuspensionSerieSplitContainerSplitterDistance()
+        private static void SerializeSplitterDistance(XmlWriter writer, SplitContainer splitContainer)
         {
-            return projectSuspensionSerieSplitContainer.SplitterDistance.ToString();            
+            writer.WriteElementString(splitContainer.Name, splitContainer.SplitterDistance.ToString());
         }
-        public string GetProjectSuspensionSplitContainerSplitterDistance()
-        {
-            return projectSuspensionSplitContainer.SplitterDistance.ToString();
-        }
-        public string GetMainSplitContainerSplitterDistance()
-        {
-            return mainSplitContainer.SplitterDistance.ToString();
-        }
+
         public string GetSplitter3SplitterDistance()
         {
             return splitter3.SplitPosition.ToString();
         }
-        public string GetSplitContainer1SplitterDistance()
-        {
-            return splitContainer1.SplitterDistance.ToString();
-        }
-        public string GetSplitContainer2SplitterDistance()
-        {
-            return splitContainer2.SplitterDistance.ToString();
-        }
-        public string GetXYSplitContainerSplitterDistance()
-        {
-            return XYSplitContainer.SplitterDistance.ToString();
-        }
-        public string GetRightSplitContainerSplitterDistance()
-        {
-            return RightSplitContainer.SplitterDistance.ToString();
-        }
-        public string GetSimulationAndGraphSplitContainerSplitterDistance()
-        {
-            return SimulationAndGraphSplitContainer.SplitterDistance.ToString();
-        }
 
         public void DeserializeInterfaceAdjusting(XmlNode node)
         {
-            LoadSplitterDistances(node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting));
+            DeserializeSplitterDistances(node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting));
         }
 
-        public void LoadSplitterDistances(XmlNode node)
+        public void DeserializeSplitterDistances(XmlNode node)
         {
             if (node != null)
             {
-                SetSplitterDistances(node.SelectSingleNode(fmInterfaceAdjustingTags.SplitterSizes));
+                node = node.SelectSingleNode(fmInterfaceAdjustingTags.SplitterSizes);
+                if (node == null)
+                {
+                    return;
+                }
+
+                DeserializeSplitContainerDistance(node, projectSuspensionSerieSplitContainer);
+                DeserializeSplitContainerDistance(node, projectSuspensionSplitContainer);
+                DeserializeSplitContainerDistance(node, mainSplitContainer);
+                DeserializeSplitContainerDistance(node, splitContainer1);
+
+                SetSplitter3SplitterDistance(node.SelectSingleNode(splitter3.Name));
+                
+                DeserializeSplitContainerDistance(node, XYSplitContainer);
+                DeserializeSplitContainerDistance(node, splitContainer2);
+                DeserializeSplitContainerDistance(node, RightSplitContainer);
+                DeserializeSplitContainerDistance(node, SimulationAndGraphSplitContainer);
             }
         }
 
-        public void SetSplitterDistances(XmlNode node)
+        private static void DeserializeSplitContainerDistance(XmlNode node, SplitContainer splitContainer)
         {
-            SetProjectSuspensionSerieSplitContainerSplitterDistance(node.SelectSingleNode(projectSuspensionSerieSplitContainer.Name));
-            SetProjectSuspensionSplitContainerSplitterDistance(node.SelectSingleNode(projectSuspensionSplitContainer.Name));            
-            SetMainSplitContainerSplitterDistance(node.SelectSingleNode(mainSplitContainer.Name));
-            SetSplitContainer1SplitterDistance(node.SelectSingleNode(splitContainer1.Name));
-            SetSplitter3SplitterDistance(node.SelectSingleNode(splitter3.Name));
-            SetXYSplitContainerSplitterDistance(node.SelectSingleNode(XYSplitContainer.Name));
-            SetSplitContainer2SplitterDistance(node.SelectSingleNode(splitContainer2.Name));            
-            SetRightSplitContainerSplitterDistance(node.SelectSingleNode(RightSplitContainer.Name));
-            SetSimulationAndGraphSplitContainerSplitterDistance(node.SelectSingleNode(SimulationAndGraphSplitContainer.Name));
-        }
-        public void SetProjectSuspensionSplitContainerSplitterDistance(XmlNode node)
-        {
-            projectSuspensionSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
-        }
-        public void SetProjectSuspensionSerieSplitContainerSplitterDistance(XmlNode node)
-        {
-            projectSuspensionSerieSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
-        }
-        public void SetMainSplitContainerSplitterDistance(XmlNode node)
-        {
-            mainSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
-        }
-        public void SetSplitContainer1SplitterDistance(XmlNode node)
-        {
-            splitContainer1.SplitterDistance = Convert.ToInt32(node.InnerText);
+            splitContainer.SplitterDistance = Convert.ToInt32(node.SelectSingleNode(splitContainer.Name).InnerText);
         }
         public void SetSplitter3SplitterDistance(XmlNode node)
         {
             splitter3.SplitPosition = Convert.ToInt32(node.InnerText);
         }
-        public void SetSplitContainer2SplitterDistance(XmlNode node)
-        {
-            splitContainer2.SplitterDistance = Convert.ToInt32(node.InnerText);
-        }
-        public void SetXYSplitContainerSplitterDistance(XmlNode node)
-        {
-            XYSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
-        }
-        public void SetRightSplitContainerSplitterDistance(XmlNode node)
-        {
-            RightSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
-        }
-        public void SetSimulationAndGraphSplitContainerSplitterDistance(XmlNode node)
-        {
-            SimulationAndGraphSplitContainer.SplitterDistance = Convert.ToInt32(node.InnerText);
-        }        
     }
 }
