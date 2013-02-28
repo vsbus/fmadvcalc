@@ -863,9 +863,7 @@ namespace FilterSimulationWithTablesAndGraphs
             SerializeSplitterDistance(writer, projectSuspensionSerieSplitContainer);
             SerializeSplitterDistance(writer, mainSplitContainer);
             SerializeSplitterDistance(writer, splitContainer1);
-            
-            writer.WriteElementString(splitter3.Name, GetSplitter3SplitterDistance());
-            
+            SerializeSplitterPosition(writer, splitter3);
             SerializeSplitterDistance(writer, splitContainer2);
             SerializeSplitterDistance(writer, XYSplitContainer);
             SerializeSplitterDistance(writer, RightSplitContainer);
@@ -878,9 +876,9 @@ namespace FilterSimulationWithTablesAndGraphs
             writer.WriteElementString(splitContainer.Name, splitContainer.SplitterDistance.ToString());
         }
 
-        public string GetSplitter3SplitterDistance()
+        private static void SerializeSplitterPosition(XmlWriter writer, Splitter splitter)
         {
-            return splitter3.SplitPosition.ToString();
+            writer.WriteElementString(splitter.Name, splitter.SplitPosition.ToString());
         }
 
         public void DeserializeInterfaceAdjusting(XmlNode node)
