@@ -9,7 +9,7 @@ namespace AdvancedCalculator
     public static class ProtectionChecker
     {
         static bool m_checkProtectionDialogWorks;
-        static bool m_isProtectionDisabled = false;
+        static bool m_isProtectionDisabled = true;
         
         public static bool CheckProtectionWithDialog()
         {
