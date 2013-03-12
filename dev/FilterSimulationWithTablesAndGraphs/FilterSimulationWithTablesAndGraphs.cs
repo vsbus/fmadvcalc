@@ -583,6 +583,10 @@ namespace FilterSimulationWithTablesAndGraphs
                 int column = 1;
                 foreach (XmlNode minmaxparamater in MinMaxParameters)
                 {
+                    if (InvolvedSeriesDataGrid.Rows.Count <= row)
+                    {
+                        continue;
+                    }
                     InvolvedSeriesDataGrid.Rows[row].Cells[column].Value = minmaxparamater.InnerText.ToString();
                     
                     if (column == 1)
