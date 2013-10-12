@@ -129,7 +129,8 @@ namespace fmCalculationLibrary.Equations
             fmValue bar = new fmValue(1e5);
             fmValue Tn = new fmValue(273);
             fmValue T = Tetta + Tn;
-            return A * pcd * pmoverpn * Dpd * Tn / (etag * ((hcdCoefficient * hcd) + hce) * T) * (ag1 + ag2 * fmValue.Log(Dpd / bar));
+            return A * pcd * pmoverpn * Dpd * T / (etag * ((hcdCoefficient * hcd) + hce) * Tn) * (ag1 + ag2 * fmValue.Log(Dpd / bar));
+
         }
 
         public static fmValue Eval_K_From_Qgimax_ag3_Qgi(fmValue Qgimax, fmValue ag3, fmValue Qgi)
