@@ -1269,6 +1269,7 @@ namespace FilterSimulation
             var voidBlock = new fmDeliquoringSimualtionBlock();
             commonDeliquoringSimulationBlockDataGrid.RowCount = voidBlock.Parameters.Count;
             var parToCell = new Dictionary<fmGlobalParameter, DataGridViewCell>();
+            var tmp = new List<bool>();
             for (int i = 0; i < voidBlock.Parameters.Count; ++i)
             {
                 commonDeliquoringSimulationBlockDataGrid[commonDeliquoringSimulationBlockParameterNameColumn.Index, i].Value = voidBlock.Parameters[i].globalParameter.Name;
@@ -1300,6 +1301,23 @@ namespace FilterSimulation
                     Solution.currentObjects.Simulation.DeliquoringUsedCalculationOption);
             }
             m_commonDeliquoringSimulationBlock.UpdateCellsStyle();
+
+            if (simulationDataGrid.Columns != null)
+            {
+                foreach (var p in m_commonDeliquoringSimulationBlock.Parameters)
+                {
+                    for (int i = fmGlobalParameter.GetCakeFormationSettingParameters().Length+10; i < simulationDataGrid.Columns.Count; ++i) //"+10" means number of first ten columns with guid, project name, suspension name etc...
+                    {
+                        if (simulationDataGrid.Columns[i].HeaderText.ToString().Contains(p.globalParameter.Name.ToString()))
+                        {
+                            var tstr = simulationDataGrid.Columns[i].ToString();
+                            int indexofsubstring = simulationDataGrid.Columns[i].HeaderText.ToString().IndexOf(p.globalParameter.Name.ToString());
+                            if (indexofsubstring == 0)
+                                simulationDataGrid.Columns[i].ReadOnly = p.cell.ReadOnly;
+                        }
+                    }
+                }
+            }
 
             m_commonDeliquoringSimulationBlock.ValuesChangedByUser += CommonDeliquoringSimulationBlockValuesChangedByUser;
 

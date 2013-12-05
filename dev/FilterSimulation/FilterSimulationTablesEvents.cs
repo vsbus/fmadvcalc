@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.Drawing;
 using FilterSimulation.fmFilterObjects;
+using fmCalculationLibrary;
 
 namespace FilterSimulation
 {
@@ -134,7 +135,16 @@ namespace FilterSimulation
                     if (e.ColumnIndex == dataGrid.Columns["simulationNameColumn"].Index)
                         sim.SetName(Convert.ToString(row.Cells["simulationNameColumn"].Value));
                     else
-                        return;
+                    {
+                        var tmp = fmGlobalParameter.GetCakeFormationSettingParameters().Length;
+                        if (e.ColumnIndex > tmp)
+                        {
+                            commonDeliquoringSimulationBlockDataGrid.ChangeDataGridText(dataGrid.CurrentCell.Value.ToString(), e.ColumnIndex);                               
+                        }
+                        else
+                            return;
+                    }
+                    
                 }
                 else if (e.ColumnIndex == dataGrid.Columns["simulationCheckedColumn"].Index)
                 {

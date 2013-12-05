@@ -18,6 +18,15 @@ namespace fmDataGrid
                 CellValueChangedByUser(this, new DataGridViewCellEventArgs(CurrentCell.ColumnIndex, CurrentCell.RowIndex));
         }
 
+        public void ChangeDataGridText(string text, int rowindex)
+        {
+            rowindex = rowindex - 83;
+            this.CurrentCell = this.Rows[rowindex].Cells[4];
+            this.Rows[rowindex].Cells[4].Value = text;
+            CellValueChangedByUser(this, new DataGridViewCellEventArgs(4, rowindex));           
+            
+        }
+
         private void fmCheckBoxClick(object sender, DataGridViewCellEventArgs e)
         {
             if ((sender as fmDataGrid).Columns[e.ColumnIndex].GetType() == (new DataGridViewCheckBoxColumn()).GetType())
