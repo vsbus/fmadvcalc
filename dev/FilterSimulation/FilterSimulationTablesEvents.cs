@@ -137,7 +137,7 @@ namespace FilterSimulation
                     else
                     {
                         var tmp = fmGlobalParameter.GetCakeFormationSettingParameters().Length;
-                        if (e.ColumnIndex > tmp)
+                        if (e.ColumnIndex == dataGrid.CurrentCell.ColumnIndex && e.ColumnIndex > tmp)
                         {
                             commonDeliquoringSimulationBlockDataGrid.ChangeDataGridText(dataGrid.CurrentCell.Value.ToString(), e.ColumnIndex);                               
                         }
