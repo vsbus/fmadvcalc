@@ -1099,6 +1099,36 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             if (dialog.DialogResult == DialogResult.OK)
             {
                 Solution.currentObjects.Serie.MachineType = dialog.GetSelectedType();
+
+                var value = Solution.currentObjects.Serie.MachineType;
+                
+                if (RangesSchemas.ContainsKey(value))
+                {
+                    var rangesCfg = new fmRangesConfiguration
+                    {
+                        AssignedMachineType = value,
+                        Ranges = RangesSchemas[value]
+                    };
+                    SetCurrentSerieRanges(rangesCfg);
+                }
+                else
+                {
+                    MessageBox.Show(@"No ranges assigned to the selected type.");
+                }
+
+                if (ShowHideSchemas.ContainsKey(value.GetFilterCycleType()))
+                {
+                    fmParametersToDisplay parametersToDisplay = new fmParametersToDisplay(value.GetFilterCycleType(), ShowHideSchemas[value.GetFilterCycleType()]);
+                    if (Solution.currentObjects.Serie != null)
+                    {
+                        SetCurrentSerieParametersToDisplayOrDefault(parametersToDisplay);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(@"No show/hide assigned to the selected type.");
+                }
+
                 DisplaySolution(Solution);
             }
         }
@@ -1233,6 +1263,18 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         {
             Solution.currentObjects.Serie.ParametersToDisplay = parametersToDisplayList;            
             ParametersToDisplay = parametersToDisplayList;
+        }
+
+        public void SetCurrentSerieRanges(fmRangesConfiguration ranges)
+        {
+            if (Solution.currentObjects.Serie != null)
+            {
+                Solution.currentObjects.Serie.Ranges = ranges;
+            }
+            foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in ranges.Ranges)
+            {
+                range.Key.SpecifiedRange = range.Value;
+            }
         }
     }
 }
