@@ -43,7 +43,7 @@ namespace FilterSimulation.fmFilterObjects
             return false;
         }
 
-        internal static void DeserializeIntProperty(
+        public static void DeserializeIntProperty(
             ref int property,
             XmlNode currentNode,
             string propertyKey)
