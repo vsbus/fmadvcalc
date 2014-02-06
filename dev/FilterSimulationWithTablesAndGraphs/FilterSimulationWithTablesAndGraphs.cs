@@ -7,6 +7,7 @@ using fmCalculationLibrary;
 using FilterSimulation.fmFilterObjects;
 using System.Xml;
 using fmCalculationLibrary.MeasureUnits;
+using System.Drawing;
 
 namespace FilterSimulationWithTablesAndGraphs
 {
@@ -19,6 +20,14 @@ namespace FilterSimulationWithTablesAndGraphs
             CreateColumnsInParametersTables();
             ReadUseParamsCheckBoxAndApply();
             rowsQuantity.Text = m_rowsQuantity.ToString();
+
+            SelfRef = this;
+        }
+
+        public static fmFilterSimulationWithTablesAndGraphs SelfRef
+        {
+            get;
+            set;
         }
 
         private void DisplayCharts(fmFilterSimSolution sol)
@@ -340,18 +349,7 @@ namespace FilterSimulationWithTablesAndGraphs
             return new fmRangesConfiguration();
         }
 
-        public void SetCurrentSerieRanges(fmRangesConfiguration ranges)
-        {
-            if (Solution.currentObjects.Serie != null)
-            {
-                Solution.currentObjects.Serie.Ranges = ranges;
-            }
-            foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in ranges.Ranges)
-            {
-                range.Key.SpecifiedRange = range.Value;
-            }
-        }
-
+        
         public fmParametersToDisplay GetCurrentSerieParametersToDisplay()
         {
             if (Solution.currentObjects.Serie == null)
@@ -920,5 +918,382 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             splitter.SplitPosition = Convert.ToInt32(node.SelectSingleNode(splitter.Name).InnerText);
         }
+
+        #region Diagram Templates
+
+        public const string DiagramTemplatesFilename = "diagrams.tpml";
+
+        public static class DiagramTemplatesSavingTags
+        {
+            public const string DiagramTemplatesFile = "Diagram_Templates_File";
+            public const string FiltrationCurves = "Filtration_Curves";
+            public const string DeliqCurves = "Deliq_Curves";
+            public const string MixedCurves = "Mixed_Curves";
+            public const string CurveName = "CurveName";
+            public const string RowsQuantity = "RowsQuantity";
+            public const string MinMaxParameter = "MinMax_Parameter";
+            public const string XParameterName = "XParameterName";
+            public const string Y1ParametersNames = "Y1ParameterName";
+            public const string Y2ParametersNames = "Y2ParameterName";
+            public const string TempCurve = "TempCurve";
+            public const string SerieName = "SerieName";
+            public const string SerieCustomer = "SerieCustomer";
+            public const string SerieMaterial = "SerieMaterial";
+            public const string SerieCharge = "SerieCharge";
+            public const string SerieProjectName = "SerieProjectName";
+            public const string SerieFilterType = "SerieFilterType";
+            public const string SerieFilterMedium = "SerieFilterMedium";
+        }
+
+        private DiagramTemplatesForm newDiagramTemplatesDialog = new DiagramTemplatesForm();
+        
+        private void btnLoadDiagramTemplatesButton_Click(object sender, EventArgs e)
+        {
+            string currentDiagramTemplateName = GetCurveTemplateName();
+            SaveCurrentDiagraSettingsForCancelation();
+            newDiagramTemplatesDialog.GetCurrentDiagramTemplateName(currentDiagramTemplateName);
+            newDiagramTemplatesDialog.ShowDialog();
+            if (newDiagramTemplatesDialog.DialogResult != DialogResult.OK)
+                LoadParametersFromDiagramTemplate(DiagramTemplatesSavingTags.TempCurve);           
+        }
+
+        private void SaveCurrentDiagraSettingsForCancelation()
+        {
+            if (GetCurrentXAxisParameter() == null || listBoxYAxis.CheckedItems.Count == 0)
+                return;
+            if (System.IO.File.Exists(DiagramTemplatesFilename))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(DiagramTemplatesFilename);
+
+                foreach (XmlNode xn in doc.GetElementsByTagName(DiagramTemplatesSavingTags.TempCurve))
+                {
+                    foreach (XmlNode name in xn.SelectNodes(DiagramTemplatesSavingTags.CurveName)) //deliting prev tmp
+                        name.ParentNode.RemoveChild(name);
+                        
+                    XmlNode addNode = doc.CreateElement(DiagramTemplatesSavingTags.CurveName);
+                    XmlAttribute xa = doc.CreateAttribute("id");
+                    xa.Value = DiagramTemplatesSavingTags.TempCurve;
+                    addNode.Attributes.Append(xa);
+                    SaveXParameterName(addNode, doc);
+                    SaveY1ParametersNames(addNode, doc);
+                    SaveY2ParametersNames(addNode, doc);
+                    SaveMinMaxValues(addNode, doc);
+                    xn.AppendChild(addNode);
+                }
+
+                doc.Save(DiagramTemplatesFilename);
+            }
+            else
+            {
+                var xmlSettings = new XmlWriterSettings
+                {
+                    Indent = true
+                };
+                XmlWriter writer = XmlWriter.Create(DiagramTemplatesFilename, xmlSettings);
+                writer.WriteStartDocument();
+                writer.WriteStartElement(DiagramTemplatesSavingTags.DiagramTemplatesFile);
+                SaveFiltrationCurvesTemplates(writer);
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+                writer.Close();
+                SaveCurrentDiagraSettingsForCancelation();
+            }
+        }
+        
+        private void btnSaveDiagramTemplatesButton_Click(object sender, EventArgs e)
+        {
+            SaveDiagramTemplate();
+        }
+
+        public void LoadParametersFromDiagramTemplate(string CurveName)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(DiagramTemplatesFilename);
+            foreach (XmlNode xn in doc.GetElementsByTagName(DiagramTemplatesSavingTags.CurveName ))
+            {
+                if (xn.Attributes["id"].Value == CurveName)
+                {
+                    DeserializeXParameter(xn);
+                    DeserializeY1NodesForMenuOpen(xn);
+                    DeserializeY2Nodes(xn);
+                    LoadRowsQuantity(xn);
+                    LoadTemplateMinMaxValuesOfTheXAxisParameter(xn);
+                    break;
+                }
+            }
+            doc.Save(DiagramTemplatesFilename);
+        }
+
+        protected void LoadTemplateMinMaxValuesOfTheXAxisParameter(XmlNode coreNode) //load min/max X values for serie with exact name, material, etc... 
+        {
+            if (coreNode == null)
+            {
+                return;
+            }
+
+            string SerieName;
+            string SerieCustomer;
+            string SerieMaterial;
+            string SerieCharge;
+            string SerieProjectName;
+            string SerieFilterType;
+            string SerieFilterMedium;
+
+            fmFilterSimSerie serie;
+
+            XmlNodeList SeriesParameters = coreNode.SelectNodes(DiagramTemplatesSavingTags.SerieName);
+
+            foreach (XmlNode node in SeriesParameters)
+            {
+                foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
+                {
+                    serie = m_involvedSerieFromRow[row];
+                    SerieName = node.Attributes["id"].Value;
+
+                    if (SerieName == serie.GetName())
+                    {
+                        SerieCustomer = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieCustomer).InnerText;
+                        SerieMaterial = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieMaterial).InnerText;
+                        SerieCharge = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieCharge).InnerText;
+                        SerieProjectName = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieProjectName).InnerText;
+                        SerieFilterType = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieFilterType).InnerText;
+                        SerieFilterMedium = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieFilterMedium).InnerText;
+
+                        if (SerieCharge == serie.Parent.GetName() && SerieCustomer == serie.Parent.Customer.ToString() && SerieMaterial == serie.Parent.Material.ToString() && SerieProjectName == serie.Parent.Parent.GetName() && SerieFilterType == serie.MachineType.name && SerieFilterMedium == serie.FilterMedium)
+                        {
+
+                            var tmpCell = InvolvedSeriesDataGrid.CurrentCell;
+                            InvolvedSeriesDataGrid.CurrentCell = null;
+                            
+                            XmlNodeList MinMaxParameters = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.MinMaxParameter);
+                            int column = 1;
+                            foreach (XmlNode minmaxparameter in MinMaxParameters)
+                            {
+                                row.Cells[column].Value = minmaxparameter.InnerText.ToString();
+                                InvolvedSeriesDataGrid.CurrentCell = row.Cells[column];
+                                ++column;
+                                
+                                MinMaxXValueTextBoxTextChanged(null, new EventArgs());
+                            }
+                            InvolvedSeriesDataGrid.CurrentCell = tmpCell;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void LoadRowsQuantity(XmlNode node)
+        {
+            fmSerializeTools.DeserializeIntProperty(ref m_rowsQuantity, node, DiagramTemplatesSavingTags.RowsQuantity);
+            rowsQuantity.Text = m_rowsQuantity.ToString();
+        }        
+
+        private void SaveDiagramTemplate() //Saving diagrams settings to the separate file like templates
+        {
+            if (GetCurrentXAxisParameter() == null || listBoxYAxis.CheckedItems.Count == 0)
+                return;
+            if (System.IO.File.Exists(DiagramTemplatesFilename))
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(DiagramTemplatesFilename);
+
+                foreach (XmlNode xn in doc.GetElementsByTagName(GetKindOfCurrentCurveTemplate()))
+                {
+                    foreach (XmlNode name in xn.SelectNodes(DiagramTemplatesSavingTags.CurveName)) //deliting templates with same name
+                        if (name.Attributes["id"].Value == GetCurveTemplateName())
+                        {
+                            DialogResult yndiagresult = MessageBox.Show("Curve template will be overwritten!", "Curve Template Saving Warning", MessageBoxButtons.OKCancel);
+                            if (yndiagresult == DialogResult.OK)
+                                name.ParentNode.RemoveChild(name);
+                            else
+                                return;
+                        }                                                                           //end of deliting
+
+                    XmlNode addNode = doc.CreateElement(DiagramTemplatesSavingTags.CurveName);
+                    XmlAttribute xa = doc.CreateAttribute("id");
+                    xa.Value = GetCurveTemplateName();
+                    addNode.Attributes.Append(xa);
+                    SaveRowsQuantity(addNode, doc);
+                    SaveXParameterName(addNode, doc);
+                    SaveY1ParametersNames(addNode, doc);
+                    SaveY2ParametersNames(addNode, doc);
+                    SaveMinMaxValues(addNode, doc);
+                    xn.AppendChild(addNode);
+                }
+                
+                doc.Save(DiagramTemplatesFilename);
+            }
+            else
+            {
+                var xmlSettings = new XmlWriterSettings
+                {
+                    Indent = true
+                };
+                XmlWriter writer = XmlWriter.Create(DiagramTemplatesFilename, xmlSettings);
+                writer.WriteStartDocument();
+                writer.WriteStartElement(DiagramTemplatesSavingTags.DiagramTemplatesFile);
+                SaveFiltrationCurvesTemplates(writer);
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+                writer.Close();
+                SaveDiagramTemplate();
+            }
+        }
+
+        private string GetKindOfCurrentCurveTemplate() //Filtration, Deliq or Mixed
+        {
+            int flag = 0;
+            if (m_xyListKind[GetCurrentXAxisParameter().Name] == fmParameterKind.MachiningSettingsCakeFormation || m_xyListKind[GetCurrentXAxisParameter().Name] == fmParameterKind.MaterialCakeFormation)
+            {
+                foreach (ListViewItem item in listBoxYAxis.Items)
+                {
+                    if (item.Checked && m_xyListKind[item.Text] != fmParameterKind.MachiningSettingsCakeFormation && m_xyListKind[item.Text] != fmParameterKind.MaterialCakeFormation)
+                        ++flag;
+                }
+
+                if (flag == 0)
+                    return DiagramTemplatesSavingTags.FiltrationCurves;
+                else
+                    return DiagramTemplatesSavingTags.MixedCurves;
+            }
+            else
+            {
+                foreach (ListViewItem item in listBoxYAxis.Items)
+                {
+                    if (item.Checked && m_xyListKind[item.Text] != fmParameterKind.MachiningSettingsCakeFormation && m_xyListKind[item.Text] != fmParameterKind.MaterialCakeFormation)
+                        ++flag;
+                }
+
+                if (flag == 0)
+                    return DiagramTemplatesSavingTags.MixedCurves;
+                else
+                    return DiagramTemplatesSavingTags.DeliqCurves;
+            }
+        }
+
+        private string GetCurveTemplateName()
+        {
+            string RightPart;
+            string LeftPart;            
+
+            fmGlobalParameter xParameter = GetCurrentXAxisParameter();
+            RightPart = "f(" + xParameter.Name + ")";
+
+            var color = m_xyListKind[xParameter.Name];
+
+            LeftPart = "";
+            foreach (ListViewItem item in listBoxYAxis.Items)
+            {
+                if (item.Checked)
+                {
+                   LeftPart = LeftPart + ", "+item.Text; 
+                }
+            }
+
+            LeftPart = LeftPart.Remove(0, 2);
+            return LeftPart+" = "+RightPart;
+
+        }
+
+        private void SaveFiltrationCurvesTemplates(XmlWriter writer)
+        {
+            writer.WriteStartElement(DiagramTemplatesSavingTags.FiltrationCurves);            
+            writer.WriteEndElement();
+            writer.WriteStartElement(DiagramTemplatesSavingTags.DeliqCurves );
+            writer.WriteEndElement();
+            writer.WriteStartElement(DiagramTemplatesSavingTags.MixedCurves);
+            writer.WriteEndElement();
+            writer.WriteStartElement(DiagramTemplatesSavingTags.TempCurve);
+            writer.WriteEndElement();
+        }
+
+        private void SaveXParameterName(XmlNode node,XmlDocument doc)
+        {
+            fmGlobalParameter xParameter = GetCurrentXAxisParameter();
+            XmlNode newNode = doc.CreateElement(DiagramTemplatesSavingTags.XParameterName);
+            newNode.InnerText = xParameter.Name ;
+            node.AppendChild(newNode);
+        }
+
+        private void SaveY1ParametersNames(XmlNode node, XmlDocument doc)
+        {
+            foreach (ListViewItem item in listBoxYAxis.Items)
+            {
+                if (item.Checked)
+                {
+                    XmlNode newNode = doc.CreateElement(DiagramTemplatesSavingTags.Y1ParametersNames);
+                    newNode.InnerText = item.Text;
+                    node.AppendChild(newNode);
+                }
+            }
+        }
+
+        private void SaveY2ParametersNames(XmlNode node, XmlDocument doc)
+        {
+            foreach (ListViewItem item in listBoxY2Axis.Items)
+            {
+                if (item.Checked)
+                {
+                    XmlNode newNode = doc.CreateElement(DiagramTemplatesSavingTags.Y2ParametersNames);
+                    newNode.InnerText = item.Text;
+                    node.AppendChild(newNode);
+                }
+            }
+        }
+
+        private void SaveRowsQuantity(XmlNode node, XmlDocument doc)
+        {
+            XmlNode newNode = doc.CreateElement(DiagramTemplatesSavingTags.RowsQuantity);
+            newNode.InnerText = m_rowsQuantity.ToString();
+            node.AppendChild(newNode);
+        }
+
+        private void SaveMinMaxValues(XmlNode node, XmlDocument doc)
+        {   
+            foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
+            {       
+                fmFilterSimSerie serie = m_involvedSerieFromRow[row];
+                XmlNode newNode3 = doc.CreateElement(DiagramTemplatesSavingTags.SerieName);
+
+                XmlAttribute IdAtr = doc.CreateAttribute("id");
+                IdAtr.Value = serie.GetName();
+                newNode3.Attributes.Append(IdAtr);
+                node.AppendChild(newNode3);
+
+                XmlNode newNode = doc.CreateElement(DiagramTemplatesSavingTags.MinMaxParameter);
+                newNode.InnerText = row.Cells[1].Value.ToString();
+                newNode3.AppendChild(newNode);
+                XmlNode newNode2 = doc.CreateElement(DiagramTemplatesSavingTags.MinMaxParameter);
+                newNode2.InnerText = row.Cells[2].Value.ToString();
+                newNode3.AppendChild(newNode2); 
+
+                XmlNode newNode4 = doc.CreateElement(DiagramTemplatesSavingTags.SerieCharge);
+                newNode4.InnerText = serie.Parent.GetName();
+                newNode3.AppendChild(newNode4);
+
+                XmlNode newNode5 = doc.CreateElement(DiagramTemplatesSavingTags.SerieCustomer);
+                newNode5.InnerText = serie.Parent.Customer.ToString();
+                newNode3.AppendChild(newNode5);
+
+                XmlNode newNode6 = doc.CreateElement(DiagramTemplatesSavingTags.SerieMaterial);
+                newNode6.InnerText = serie.Parent.Material.ToString();
+                newNode3.AppendChild(newNode6);
+
+                XmlNode newNode7 = doc.CreateElement(DiagramTemplatesSavingTags.SerieProjectName);
+                newNode7.InnerText = serie.Parent.Parent.GetName();
+                newNode3.AppendChild(newNode7);
+
+                XmlNode newNode8 = doc.CreateElement(DiagramTemplatesSavingTags.SerieFilterType);
+                newNode8.InnerText = serie.MachineType.name;
+                newNode3.AppendChild(newNode8);
+
+                XmlNode newNode9 = doc.CreateElement(DiagramTemplatesSavingTags.SerieFilterMedium);
+                newNode9.InnerText = serie.FilterMedium;
+                newNode3.AppendChild(newNode9);
+            }
+
+        }
+        #endregion
     }
 }

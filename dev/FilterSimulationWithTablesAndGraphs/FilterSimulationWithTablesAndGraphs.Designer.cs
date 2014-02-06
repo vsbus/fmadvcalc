@@ -52,6 +52,8 @@ namespace FilterSimulationWithTablesAndGraphs
             this.ParamsControlsPanel4 = new System.Windows.Forms.Panel();
             this.buttonDeleteRow = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btnLoadDiagramTemplatesButton = new System.Windows.Forms.Button();
+            this.btnSaveDiagramTemplatesButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tablesAndGraphsTopLeftPanel = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -117,6 +119,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.GridPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.additionalParametersTable)).BeginInit();
             this.ParamsControlsPanel4.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.tablesAndGraphsTopLeftPanel.SuspendLayout();
             this.panel10.SuspendLayout();
             this.XYSplitContainer.Panel1.SuspendLayout();
@@ -672,11 +675,35 @@ namespace FilterSimulationWithTablesAndGraphs
             // panel4
             // 
             this.panel4.Controls.Add(this.button1);
+			this.panel4.Controls.Add(this.btnLoadDiagramTemplatesButton);
+            this.panel4.Controls.Add(this.btnSaveDiagramTemplatesButton);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(646, 36);
             this.panel4.TabIndex = 12;
+            this.panel4.Controls.SetChildIndex(this.btnSaveDiagramTemplatesButton, 0);
+            this.panel4.Controls.SetChildIndex(this.btnLoadDiagramTemplatesButton, 0);
+            // 
+            // btnLoadDiagramTemplatesButton
+            // 
+            this.btnLoadDiagramTemplatesButton.Location = new System.Drawing.Point(135, 3);
+            this.btnLoadDiagramTemplatesButton.Name = "btnLoadDiagramTemplatesButton";
+            this.btnLoadDiagramTemplatesButton.Size = new System.Drawing.Size(121, 23);
+            this.btnLoadDiagramTemplatesButton.TabIndex = 13;
+            this.btnLoadDiagramTemplatesButton.Text = "Load Templates";
+            this.btnLoadDiagramTemplatesButton.UseVisualStyleBackColor = true;
+            this.btnLoadDiagramTemplatesButton.Click += new System.EventHandler(this.btnLoadDiagramTemplatesButton_Click);
+            // 
+            // btnSaveDiagramTemplatesButton
+            // 
+            this.btnSaveDiagramTemplatesButton.Location = new System.Drawing.Point(266, 3);
+            this.btnSaveDiagramTemplatesButton.Name = "btnSaveDiagramTemplatesButton";
+            this.btnSaveDiagramTemplatesButton.Size = new System.Drawing.Size(121, 23);
+            this.btnSaveDiagramTemplatesButton.TabIndex = 14;
+            this.btnSaveDiagramTemplatesButton.Text = "Save Templates";
+            this.btnSaveDiagramTemplatesButton.UseVisualStyleBackColor = true;
+            this.btnSaveDiagramTemplatesButton.Click += new System.EventHandler(this.btnSaveDiagramTemplatesButton_Click);
             // 
             // button1
             // 
@@ -1219,6 +1246,8 @@ namespace FilterSimulationWithTablesAndGraphs
         private DataGridViewCheckBoxColumn AdditionalParametersCheckBoxColumn;
         private Button buttonDeleteRow;
         private CheckBox xLogCheckBox;
+        private Button btnLoadDiagramTemplatesButton;
+        private Button btnSaveDiagramTemplatesButton;
 
     }
 }
