@@ -84,6 +84,12 @@ namespace FilterSimulation
             public const string ShowHideSchemaName = "ShowHideSchemaName";
             public const string ShowHideParameter = "ShowHideParameter";
 
+            public const string ParamtersOrder = "ParamtersOrder";
+            public const string ParamtersOrderNode = "ParamtersOrderNode";
+            public const string ParameterOrderName = "ParameterOrderName";
+            public const string ParameterOrderIndex = "ParameterOrderIndex";
+            public const string ParameterOrderSizes = "ParameterOrderSizes";
+
             public const string RangesSchemas = "RangesSchemas";
             public const string RangeSchema = "RangeSchema";
             public const string RangeSchemaName = "RangeSchemaName";
@@ -128,6 +134,7 @@ namespace FilterSimulation
         {
             SerializeProgramOptions(writer);
             SerializeShowHideSchemas(writer);
+            SerializeParametersOrder(writer);
             SerializeRangesSchemas(writer);
             SerializeUnitsSchemas(writer);
             SerializeDiagramOptions(writer);
@@ -371,6 +378,7 @@ namespace FilterSimulation
         {
             DeserializeProgramOptions(node);
             DeserializeShowHideSchemas(node);
+            DeserializeParametersOrder(node);
             DeserializeRangesSchemas(node);
             DeserializeUnitsSchemas(node);
         }
@@ -468,6 +476,60 @@ namespace FilterSimulation
                     parametersList.Add(fmGlobalParameter.ParametersByName[parameterNode.InnerText]);
                 }
                 ShowHideSchemas[(fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), schemaName)] = parametersList;
+            }
+        }
+
+        private void SerializeParametersOrder(XmlWriter writer) //Saving the order of parmeters in horispntal table
+        {
+            string parameterName;
+            int parameterIndex;
+            int columnSize;
+
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.ParamtersOrder);
+            foreach (DataGridViewColumn column in simulationDataGrid.Columns)
+            {
+                writer.WriteStartElement(fmFilterSimulationSerializeTags.ParamtersOrderNode);
+
+                parameterName = column.HeaderText.ToString();
+                parameterIndex = column.DisplayIndex;
+                columnSize = column.Width;
+
+                writer.WriteElementString(fmFilterSimulationSerializeTags.ParameterOrderName, parameterName);
+                writer.WriteElementString(fmFilterSimulationSerializeTags.ParameterOrderIndex, parameterIndex.ToString());
+                writer.WriteElementString(fmFilterSimulationSerializeTags.ParameterOrderSizes, columnSize.ToString());
+                
+                writer.WriteEndElement();
+            }              
+            writer.WriteEndElement();
+        }
+
+        private void DeserializeParametersOrder(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ParamtersOrder);
+            if (node == null)
+            {
+                return;
+            }
+
+            string parameterName;
+            int parameterIndex;
+            int columnSize;
+
+            XmlNodeList orderpairsNodes = node.SelectNodes(fmFilterSimulationSerializeTags.ParamtersOrderNode);
+            foreach (XmlNode orderpairsNode in orderpairsNodes)
+            {
+                parameterName = orderpairsNode.SelectSingleNode(fmFilterSimulationSerializeTags.ParameterOrderName).InnerText;
+                parameterIndex = Convert.ToInt32(orderpairsNode.SelectSingleNode(fmFilterSimulationSerializeTags.ParameterOrderIndex).InnerText);
+                columnSize = Convert.ToInt32(orderpairsNode.SelectSingleNode(fmFilterSimulationSerializeTags.ParameterOrderSizes).InnerText);
+
+                foreach (DataGridViewColumn column in simulationDataGrid.Columns)
+                {
+                    if (column.HeaderText == parameterName)
+                    {
+                        column.DisplayIndex = parameterIndex;
+                        column.Width = columnSize;
+                    }
+                }
             }
         }
 
