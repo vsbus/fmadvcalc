@@ -651,7 +651,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.ParamsControlsPanel4.Controls.Add(this.buttonAddRow);
             this.ParamsControlsPanel4.Controls.Add(this.UseParamsCheckBox);
             this.ParamsControlsPanel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ParamsControlsPanel4.Location = new System.Drawing.Point(0, 36);
+            this.ParamsControlsPanel4.Location = new System.Drawing.Point(0, 0);
             this.ParamsControlsPanel4.Name = "ParamsControlsPanel4";
             this.ParamsControlsPanel4.Size = new System.Drawing.Size(646, 21);
             this.ParamsControlsPanel4.TabIndex = 11;
@@ -664,7 +664,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpKeyword(this.buttonDeleteRow, "Table_belonging_to_the_Diagram.htm");
             this.helpProvider1.SetHelpNavigator(this.buttonDeleteRow, System.Windows.Forms.HelpNavigator.Topic);
             this.buttonDeleteRow.Image = ((System.Drawing.Image)(resources.GetObject("buttonDeleteRow.Image")));
-            this.buttonDeleteRow.Location = new System.Drawing.Point(145, 0);
+            this.buttonDeleteRow.Location = new System.Drawing.Point(221, 0);
             this.buttonDeleteRow.Name = "buttonDeleteRow";
             this.helpProvider1.SetShowHelp(this.buttonDeleteRow, true);
             this.buttonDeleteRow.Size = new System.Drawing.Size(20, 21);
@@ -677,8 +677,8 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel4.Controls.Add(this.button1);
 			this.panel4.Controls.Add(this.btnLoadDiagramTemplatesButton);
             this.panel4.Controls.Add(this.btnSaveDiagramTemplatesButton);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 127);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(646, 36);
             this.panel4.TabIndex = 12;
