@@ -88,14 +88,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.filterTypeGroupComboBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 636);
+            this.panel1.Location = new System.Drawing.Point(0, 618);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(832, 64);
+            this.panel1.Size = new System.Drawing.Size(832, 50);
             this.panel1.TabIndex = 0;
             // 
             // assignButton
             // 
-            this.assignButton.Location = new System.Drawing.Point(265, 29);
+            this.assignButton.Location = new System.Drawing.Point(265, 21);
             this.assignButton.Name = "assignButton";
             this.assignButton.Size = new System.Drawing.Size(98, 23);
             this.assignButton.TabIndex = 3;
@@ -105,7 +105,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // takeButton
             // 
-            this.takeButton.Location = new System.Drawing.Point(161, 29);
+            this.takeButton.Location = new System.Drawing.Point(161, 21);
             this.takeButton.Name = "takeButton";
             this.takeButton.Size = new System.Drawing.Size(98, 23);
             this.takeButton.TabIndex = 2;
@@ -116,7 +116,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(745, 29);
+            this.button1.Location = new System.Drawing.Point(745, 21);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -127,7 +127,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(664, 29);
+            this.okButton.Location = new System.Drawing.Point(664, 21);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 0;
@@ -138,7 +138,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 13);
+            this.label1.Location = new System.Drawing.Point(15, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 1;
@@ -148,7 +148,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.filterTypeGroupComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.filterTypeGroupComboBox.FormattingEnabled = true;
-            this.filterTypeGroupComboBox.Location = new System.Drawing.Point(18, 29);
+            this.filterTypeGroupComboBox.Location = new System.Drawing.Point(18, 21);
             this.filterTypeGroupComboBox.Name = "filterTypeGroupComboBox";
             this.filterTypeGroupComboBox.Size = new System.Drawing.Size(123, 21);
             this.filterTypeGroupComboBox.TabIndex = 0;
@@ -159,7 +159,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(832, 636);
+            this.panel2.Size = new System.Drawing.Size(832, 618);
             this.panel2.TabIndex = 1;
             // 
             // splitContainer2
@@ -172,7 +172,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.splitContainer2.Panel1.Controls.Add(this.splitContainer1);
             this.splitContainer2.Panel2Collapsed = true;
-            this.splitContainer2.Size = new System.Drawing.Size(832, 636);
+            this.splitContainer2.Size = new System.Drawing.Size(832, 618);
             this.splitContainer2.SplitterDistance = 807;
             this.splitContainer2.TabIndex = 23;
             // 
@@ -191,7 +191,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(807, 618);
+            this.splitContainer1.Size = new System.Drawing.Size(807, 600);
             this.splitContainer1.SplitterDistance = 368;
             this.splitContainer1.TabIndex = 22;
             // 
@@ -218,7 +218,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(368, 618);
+            this.groupBox1.Size = new System.Drawing.Size(368, 600);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cake Formation";
@@ -226,7 +226,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // ad0DpBox
             // 
             this.ad0DpBox.CaptionText = "";
-            this.ad0DpBox.Location = new System.Drawing.Point(6, 19);
+            this.ad0DpBox.Location = new System.Drawing.Point(6, 13);
             this.ad0DpBox.Name = "ad0DpBox";
             this.ad0DpBox.Size = new System.Drawing.Size(106, 85);
             this.ad0DpBox.TabIndex = 15;
@@ -234,7 +234,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qBigBox_dif
             // 
             this.qBigBox_dif.CaptionText = "Q,i";
-            this.qBigBox_dif.Location = new System.Drawing.Point(131, 432);
+            this.qBigBox_dif.Location = new System.Drawing.Point(131, 426);
             this.qBigBox_dif.Name = "qBigBox_dif";
             this.qBigBox_dif.Size = new System.Drawing.Size(106, 85);
             this.qBigBox_dif.TabIndex = 9;
@@ -242,7 +242,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // DpQpConstBox
             // 
             this.DpQpConstBox.CaptionText = "Qp+Dp=Const";
-            this.DpQpConstBox.Location = new System.Drawing.Point(6, 497);
+            this.DpQpConstBox.Location = new System.Drawing.Point(6, 486);
             this.DpQpConstBox.Name = "DpQpConstBox";
             this.DpQpConstBox.Size = new System.Drawing.Size(106, 111);
             this.DpQpConstBox.TabIndex = 21;
@@ -250,7 +250,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qmBigBox_dif
             // 
             this.qmBigBox_dif.CaptionText = "Qm,i";
-            this.qmBigBox_dif.Location = new System.Drawing.Point(243, 432);
+            this.qmBigBox_dif.Location = new System.Drawing.Point(243, 426);
             this.qmBigBox_dif.Name = "qmBigBox_dif";
             this.qmBigBox_dif.Size = new System.Drawing.Size(106, 85);
             this.qmBigBox_dif.TabIndex = 10;
@@ -258,7 +258,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // massBox
             // 
             this.massBox.CaptionText = "Mass";
-            this.massBox.Location = new System.Drawing.Point(243, 19);
+            this.massBox.Location = new System.Drawing.Point(243, 13);
             this.massBox.Name = "massBox";
             this.massBox.Size = new System.Drawing.Size(106, 85);
             this.massBox.TabIndex = 1;
@@ -266,7 +266,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qmSmallBox
             // 
             this.qmSmallBox.CaptionText = "qm";
-            this.qmSmallBox.Location = new System.Drawing.Point(243, 313);
+            this.qmSmallBox.Location = new System.Drawing.Point(243, 307);
             this.qmSmallBox.Name = "qmSmallBox";
             this.qmSmallBox.Size = new System.Drawing.Size(106, 85);
             this.qmSmallBox.TabIndex = 8;
@@ -274,7 +274,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // hcBox
             // 
             this.hcBox.CaptionText = "hc";
-            this.hcBox.Location = new System.Drawing.Point(6, 270);
+            this.hcBox.Location = new System.Drawing.Point(6, 264);
             this.hcBox.Name = "hcBox";
             this.hcBox.Size = new System.Drawing.Size(106, 71);
             this.hcBox.TabIndex = 19;
@@ -282,7 +282,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qSmallBox_dif
             // 
             this.qSmallBox_dif.CaptionText = "q,i";
-            this.qSmallBox_dif.Location = new System.Drawing.Point(131, 523);
+            this.qSmallBox_dif.Location = new System.Drawing.Point(131, 517);
             this.qSmallBox_dif.Name = "qSmallBox_dif";
             this.qSmallBox_dif.Size = new System.Drawing.Size(106, 85);
             this.qSmallBox_dif.TabIndex = 13;
@@ -290,7 +290,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // volumeBox
             // 
             this.volumeBox.CaptionText = "Volume";
-            this.volumeBox.Location = new System.Drawing.Point(131, 19);
+            this.volumeBox.Location = new System.Drawing.Point(131, 13);
             this.volumeBox.Name = "volumeBox";
             this.volumeBox.Size = new System.Drawing.Size(106, 85);
             this.volumeBox.TabIndex = 2;
@@ -298,7 +298,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qSmallBox
             // 
             this.qSmallBox.CaptionText = "q";
-            this.qSmallBox.Location = new System.Drawing.Point(131, 313);
+            this.qSmallBox.Location = new System.Drawing.Point(131, 307);
             this.qSmallBox.Name = "qSmallBox";
             this.qSmallBox.Size = new System.Drawing.Size(106, 85);
             this.qSmallBox.TabIndex = 7;
@@ -306,7 +306,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // epsKappaBox
             // 
             this.epsKappaBox.CaptionText = "";
-            this.epsKappaBox.Location = new System.Drawing.Point(6, 347);
+            this.epsKappaBox.Location = new System.Drawing.Point(6, 341);
             this.epsKappaBox.Name = "epsKappaBox";
             this.epsKappaBox.Size = new System.Drawing.Size(106, 148);
             this.epsKappaBox.TabIndex = 18;
@@ -314,7 +314,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qmSmallBox_dif
             // 
             this.qmSmallBox_dif.CaptionText = "qm,i";
-            this.qmSmallBox_dif.Location = new System.Drawing.Point(243, 523);
+            this.qmSmallBox_dif.Location = new System.Drawing.Point(243, 517);
             this.qmSmallBox_dif.Name = "qmSmallBox_dif";
             this.qmSmallBox_dif.Size = new System.Drawing.Size(106, 85);
             this.qmSmallBox_dif.TabIndex = 14;
@@ -322,7 +322,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qBigBox
             // 
             this.qBigBox.CaptionText = "Q";
-            this.qBigBox.Location = new System.Drawing.Point(131, 222);
+            this.qBigBox.Location = new System.Drawing.Point(131, 216);
             this.qBigBox.Name = "qBigBox";
             this.qBigBox.Size = new System.Drawing.Size(106, 85);
             this.qBigBox.TabIndex = 3;
@@ -330,7 +330,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // mBox
             // 
             this.mBox.CaptionText = "m";
-            this.mBox.Location = new System.Drawing.Point(243, 110);
+            this.mBox.Location = new System.Drawing.Point(243, 104);
             this.mBox.Name = "mBox";
             this.mBox.Size = new System.Drawing.Size(106, 85);
             this.mBox.TabIndex = 6;
@@ -338,7 +338,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // nTcTfBox
             // 
             this.nTcTfBox.CaptionText = "";
-            this.nTcTfBox.Location = new System.Drawing.Point(6, 201);
+            this.nTcTfBox.Location = new System.Drawing.Point(6, 195);
             this.nTcTfBox.Name = "nTcTfBox";
             this.nTcTfBox.Size = new System.Drawing.Size(106, 63);
             this.nTcTfBox.TabIndex = 17;
@@ -346,7 +346,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // vBox
             // 
             this.vBox.CaptionText = "v";
-            this.vBox.Location = new System.Drawing.Point(131, 110);
+            this.vBox.Location = new System.Drawing.Point(131, 104);
             this.vBox.Name = "vBox";
             this.vBox.Size = new System.Drawing.Size(106, 85);
             this.vBox.TabIndex = 5;
@@ -354,7 +354,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qmBigBox
             // 
             this.qmBigBox.CaptionText = "Qm";
-            this.qmBigBox.Location = new System.Drawing.Point(243, 222);
+            this.qmBigBox.Location = new System.Drawing.Point(243, 216);
             this.qmBigBox.Name = "qmBigBox";
             this.qmBigBox.Size = new System.Drawing.Size(106, 85);
             this.qmBigBox.TabIndex = 4;
@@ -362,7 +362,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // sfSrTrBox
             // 
             this.sfSrTrBox.CaptionText = "";
-            this.sfSrTrBox.Location = new System.Drawing.Point(6, 127);
+            this.sfSrTrBox.Location = new System.Drawing.Point(6, 121);
             this.sfSrTrBox.Name = "sfSrTrBox";
             this.sfSrTrBox.Size = new System.Drawing.Size(106, 68);
             this.sfSrTrBox.TabIndex = 16;
@@ -382,7 +382,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(435, 618);
+            this.groupBox2.Size = new System.Drawing.Size(435, 600);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Deliquoring";
@@ -390,7 +390,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // gasParameters
             // 
             this.gasParameters.CaptionText = "Gas";
-            this.gasParameters.Location = new System.Drawing.Point(145, 201);
+            this.gasParameters.Location = new System.Drawing.Point(145, 195);
             this.gasParameters.Name = "gasParameters";
             this.gasParameters.Size = new System.Drawing.Size(125, 111);
             this.gasParameters.TabIndex = 22;
@@ -398,7 +398,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qmDeliquoringBox
             // 
             this.qmDeliquoringBox.CaptionText = "qm";
-            this.qmDeliquoringBox.Location = new System.Drawing.Point(293, 522);
+            this.qmDeliquoringBox.Location = new System.Drawing.Point(293, 516);
             this.qmDeliquoringBox.Name = "qmDeliquoringBox";
             this.qmDeliquoringBox.Size = new System.Drawing.Size(125, 86);
             this.qmDeliquoringBox.TabIndex = 30;
@@ -406,7 +406,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // qDeliquoringBox
             // 
             this.qDeliquoringBox.CaptionText = "q";
-            this.qDeliquoringBox.Location = new System.Drawing.Point(145, 522);
+            this.qDeliquoringBox.Location = new System.Drawing.Point(145, 516);
             this.qDeliquoringBox.Name = "qDeliquoringBox";
             this.qDeliquoringBox.Size = new System.Drawing.Size(125, 86);
             this.qDeliquoringBox.TabIndex = 29;
@@ -414,7 +414,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // massFlowrateDeliquoringBox
             // 
             this.massFlowrateDeliquoringBox.CaptionText = "Mass Flowrate";
-            this.massFlowrateDeliquoringBox.Location = new System.Drawing.Point(293, 430);
+            this.massFlowrateDeliquoringBox.Location = new System.Drawing.Point(293, 424);
             this.massFlowrateDeliquoringBox.Name = "massFlowrateDeliquoringBox";
             this.massFlowrateDeliquoringBox.Size = new System.Drawing.Size(125, 86);
             this.massFlowrateDeliquoringBox.TabIndex = 28;
@@ -422,7 +422,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // volumeFlowrateDeliquoringBox
             // 
             this.volumeFlowrateDeliquoringBox.CaptionText = "Volume Flowrate";
-            this.volumeFlowrateDeliquoringBox.Location = new System.Drawing.Point(145, 430);
+            this.volumeFlowrateDeliquoringBox.Location = new System.Drawing.Point(145, 424);
             this.volumeFlowrateDeliquoringBox.Name = "volumeFlowrateDeliquoringBox";
             this.volumeFlowrateDeliquoringBox.Size = new System.Drawing.Size(125, 86);
             this.volumeFlowrateDeliquoringBox.TabIndex = 27;
@@ -430,7 +430,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // massDeliquoringBox
             // 
             this.massDeliquoringBox.CaptionText = "Mass";
-            this.massDeliquoringBox.Location = new System.Drawing.Point(293, 96);
+            this.massDeliquoringBox.Location = new System.Drawing.Point(293, 90);
             this.massDeliquoringBox.Name = "massDeliquoringBox";
             this.massDeliquoringBox.Size = new System.Drawing.Size(125, 71);
             this.massDeliquoringBox.TabIndex = 26;
@@ -438,7 +438,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // volumeDeliquoringBox
             // 
             this.volumeDeliquoringBox.CaptionText = "Volume";
-            this.volumeDeliquoringBox.Location = new System.Drawing.Point(293, 19);
+            this.volumeDeliquoringBox.Location = new System.Drawing.Point(293, 13);
             this.volumeDeliquoringBox.Name = "volumeDeliquoringBox";
             this.volumeDeliquoringBox.Size = new System.Drawing.Size(125, 71);
             this.volumeDeliquoringBox.TabIndex = 25;
@@ -446,7 +446,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // mainDeliquoringBox
             // 
             this.mainDeliquoringBox.CaptionText = "Main Parameters";
-            this.mainDeliquoringBox.Location = new System.Drawing.Point(145, 19);
+            this.mainDeliquoringBox.Location = new System.Drawing.Point(145, 13);
             this.mainDeliquoringBox.Name = "mainDeliquoringBox";
             this.mainDeliquoringBox.Size = new System.Drawing.Size(125, 176);
             this.mainDeliquoringBox.TabIndex = 24;
@@ -454,7 +454,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // materialDeliqouringBox
             // 
             this.materialDeliqouringBox.CaptionText = "Deliquoring Material";
-            this.materialDeliqouringBox.Location = new System.Drawing.Point(6, 19);
+            this.materialDeliqouringBox.Location = new System.Drawing.Point(6, 13);
             this.materialDeliqouringBox.Name = "materialDeliqouringBox";
             this.materialDeliqouringBox.Size = new System.Drawing.Size(125, 355);
             this.materialDeliqouringBox.TabIndex = 21;
@@ -462,7 +462,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // evaporationsParameters
             // 
             this.evaporationsParameters.CaptionText = "Evaporation";
-            this.evaporationsParameters.Location = new System.Drawing.Point(6, 373);
+            this.evaporationsParameters.Location = new System.Drawing.Point(6, 367);
             this.evaporationsParameters.Name = "evaporationsParameters";
             this.evaporationsParameters.Size = new System.Drawing.Size(125, 235);
             this.evaporationsParameters.TabIndex = 23;
@@ -471,7 +471,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 700);
+            this.ClientSize = new System.Drawing.Size(832, 668);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
