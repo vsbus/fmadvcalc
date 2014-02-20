@@ -268,7 +268,9 @@ namespace FilterSimulationWithTablesAndGraphs
         }
 
         private Form m_xyDialog;
-
+        int m_xyDialogHeight = 600; //default Config Diagrams form size
+        int m_xyDialogWidth = 600;
+        
         private void Button1Click(object sender, EventArgs e)
         {
             if (m_xyDialog == null || m_xyDialog.IsDisposed)
@@ -281,8 +283,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void PlaceTablesAndGraphsConfigurationPanelOnSeparateForm()
         {
-            int oldHeight = m_xyDialog == null ? 900 : m_xyDialog.Height;
-            int oldWidth = m_xyDialog == null ? 600 : m_xyDialog.Width;
+            int oldHeight = m_xyDialog == null ? m_xyDialogHeight : m_xyDialog.Height;
+            int oldWidth = m_xyDialog == null ? m_xyDialogWidth : m_xyDialog.Width;
             m_xyDialog = new Form();
             m_xyDialog.Closing += MXyDialogClosing;
             m_xyDialog.Height = oldHeight;
@@ -296,6 +298,8 @@ namespace FilterSimulationWithTablesAndGraphs
         void MXyDialogClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
+            m_xyDialogHeight = m_xyDialog.Height;
+            m_xyDialogWidth = m_xyDialog.Width;
         }
 
         public bool IsModified()
@@ -536,7 +540,7 @@ namespace FilterSimulationWithTablesAndGraphs
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.XLogCheckBox, xLogCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.YLogCheckBox, yLogCheckBox.Checked.ToString());
             writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.Y2LogCheckBox, y2LogCheckBox.Checked.ToString());
-            writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.UseParamsCheckBox, UseParamsCheckBox.Checked.ToString());
+            //writer.WriteElementString(fmFilterSimulationWithDiagramsSerializeTags.UseParamsCheckBox, UseParamsCheckBox.Checked.ToString());
 
             SerializeMinMaxValuesOfTheXAxisParameter(writer);
             writer.WriteEndElement();
@@ -723,7 +727,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 node,
                 fmFilterSimulationWithDiagramsSerializeTags.UseParamsCheckBox))
             {
-                UseParamsCheckBox.Checked = Convert.ToBoolean(temp);
+                //UseParamsCheckBox.Checked = Convert.ToBoolean(temp);
             }
         }
 
@@ -848,15 +852,28 @@ namespace FilterSimulationWithTablesAndGraphs
         private static class fmInterfaceAdjustingTags
         {
             public const string InterfaceAdjusting = "Interface_Adjusting";
-            public const string SplitterSizes = "Splitter_Sizes";            
+            public const string SplitterSizes = "Splitter_Sizes";
+
+            public const string ConfigureDiagramsWindowSize = "ConfigureDiagramsWindowSize";
+            public const string ConfigureDiagramsHeight = "ConfigureDiagramsHeight";
+            public const string ConfigureDiagramsWidth = "ConfigureDiagramsWidth";
         }
 
         public void SerializeInterfaceAdjusting(XmlWriter writer)
         {
             writer.WriteStartElement(fmInterfaceAdjustingTags.InterfaceAdjusting);
             SerializeSplitters(writer);
+            SerializeConfigureDiagramsWindowSize(writer);
             writer.WriteEndElement();
-        }       
+        }
+
+        private void SerializeConfigureDiagramsWindowSize(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmInterfaceAdjustingTags.ConfigureDiagramsWindowSize);
+            writer.WriteElementString(fmInterfaceAdjustingTags.ConfigureDiagramsHeight, m_xyDialogHeight.ToString());
+            writer.WriteElementString(fmInterfaceAdjustingTags.ConfigureDiagramsWidth, m_xyDialogWidth.ToString());
+            writer.WriteEndElement();
+        }
 
         public void SerializeSplitters(XmlWriter writer)
         {
@@ -885,7 +902,23 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void DeserializeInterfaceAdjusting(XmlNode node)
         {
-            DeserializeSplitters(node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting));
+            DeerializeConfigureDiagramsWindowSize(node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting));
+            DeserializeSplitters(node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting));            
+        }
+
+        private void DeerializeConfigureDiagramsWindowSize(XmlNode node)
+        {
+            if (node != null)
+            {
+                node = node.SelectSingleNode(fmInterfaceAdjustingTags.ConfigureDiagramsWindowSize);
+                if (node == null)
+                {
+                    return;
+                }
+
+                m_xyDialog.Height = Convert.ToInt32(node.SelectSingleNode(fmInterfaceAdjustingTags.ConfigureDiagramsHeight).InnerText);
+                m_xyDialog.Width = Convert.ToInt32(node.SelectSingleNode(fmInterfaceAdjustingTags.ConfigureDiagramsWidth).InnerText);
+            }
         }
 
         public void DeserializeSplitters(XmlNode node)
