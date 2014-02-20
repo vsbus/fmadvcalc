@@ -7,6 +7,7 @@ using Microsoft.Win32;
 using System.Xml;
 using System.IO;
 using TheCodeKing.ActiveButtons.Controls;
+using System.Drawing;
 
 namespace AdvancedCalculator
 {
@@ -35,6 +36,7 @@ namespace AdvancedCalculator
         {
             base.OnLoad(e);
 
+            HideWelcomePicture();
             AddButton("Help", Help_Click);
         }
 
@@ -75,6 +77,8 @@ namespace AdvancedCalculator
 
         private void AdvancedCalculatorLoad(object sender, EventArgs e)
         {
+            ShowWelcomePicture();
+
             var doc = new XmlDocument();
             if (!ProtectionChecker.CheckProtectionWithDialog())
             {
@@ -108,11 +112,77 @@ namespace AdvancedCalculator
                     {
                         filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(cfgFileNode);
                         filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(cfgFileNode);
-                    }                         
+                    }
                     return;
                 }
             }
             CreateNewFile();
+        }
+        private void ShowWelcomePicture()
+        {
+            filterSimulationWithTablesAndGraphs1.Visible = false;//hiding main object to see welcome message
+            
+            string welcomeString1 = "Welcome to";
+            string welcomeString2 = "FILTRAPLUS";
+            string welcomeString3 = "(Vers.  14.02.2014)";
+            string welcomeString4 = "Software for Industrial Filters";
+            string welcomeString5 = "Design - Performance Simulation - Optimization";
+            string welcomeString6 = "Copyright © by Prof. Dr. Ioannis Nicolaou, NIKIFOS Ltd.";
+            float x;
+            float y;
+
+            Color color = Color.FromArgb(0, 32, 96);
+            Brush brush = new SolidBrush(color);
+            Font fontLarge = new Font("Arial", 48);
+            Font fontBig = new Font("Arial", 36);
+            Font fontMedium = new Font("Arial", 27);
+            Font fontSmall = new Font("Arial", 22);
+            Font fontXSmall = new Font("Arial", 20);
+            Graphics Graph = this.CreateGraphics();            
+            SizeF stringSize = new SizeF();
+            stringSize = Graph.MeasureString(welcomeString1, fontBig);
+
+            x = 0;
+            y = stringSize.Height;
+            
+            x = x + (this.Width - stringSize.Width)/ 2;
+            y = y + stringSize.Height;
+            Graph.DrawString(welcomeString1, fontBig, brush, x, y);
+            x = 0;
+
+            stringSize = Graph.MeasureString(welcomeString2, fontLarge);
+            x = x + (this.Width - stringSize.Width) / 2;
+            y = y + stringSize.Height*2;
+            Graph.DrawString(welcomeString2, fontLarge, brush, x, y);
+            x = 0;
+
+            stringSize = Graph.MeasureString(welcomeString3, fontXSmall);
+            x = x + (this.Width - stringSize.Width) / 2;
+            y = y + stringSize.Height*2;
+            Graph.DrawString(welcomeString3, fontXSmall, brush, x, y);
+            x = 0;
+
+            stringSize = Graph.MeasureString(welcomeString4, fontBig);
+            x = x + (this.Width - stringSize.Width) / 2;
+            y = y + (stringSize.Height*(float)1.3);
+            Graph.DrawString(welcomeString4, fontBig, brush, x, y);
+            x = 0;
+
+            stringSize = Graph.MeasureString(welcomeString5, fontMedium);
+            x = x + (this.Width - stringSize.Width) / 2;
+            y = y + stringSize.Height;
+            Graph.DrawString(welcomeString5, fontMedium, brush, x, y);
+            x = 0;
+
+            stringSize = Graph.MeasureString(welcomeString6, fontSmall);
+            x = x + (this.Width - stringSize.Width) / 2;
+            y = y + stringSize.Height*3;
+            Graph.DrawString(welcomeString6, fontSmall, brush, x, y);
+            x = 0;
+        }
+        private void HideWelcomePicture()
+        {
+            filterSimulationWithTablesAndGraphs1.Visible = true;
         }
 
         private void SaveOnDiskToolStripMenuItemClick(object sender, EventArgs e)
@@ -219,6 +289,11 @@ namespace AdvancedCalculator
         }
 
         private void ExitToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void exitToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             Close();
         }
