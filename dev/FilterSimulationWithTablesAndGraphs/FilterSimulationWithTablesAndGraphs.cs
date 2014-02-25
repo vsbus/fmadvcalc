@@ -857,6 +857,11 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string ConfigureDiagramsWindowSize = "ConfigureDiagramsWindowSize";
             public const string ConfigureDiagramsHeight = "ConfigureDiagramsHeight";
             public const string ConfigureDiagramsWidth = "ConfigureDiagramsWidth";
+
+            public const string TopTablesColumnsSizes = "TopTablesColumnsSizes";
+            public const string TableColumnsSizes = "TableColumnsSizes";
+            public const string TableName = "TableName";
+            public const string ColumsSize = "ColumsSizes";
         }
 
         public void SerializeInterfaceAdjusting(XmlWriter writer)
@@ -864,6 +869,7 @@ namespace FilterSimulationWithTablesAndGraphs
             writer.WriteStartElement(fmInterfaceAdjustingTags.InterfaceAdjusting);
             SerializeSplitters(writer);
             SerializeConfigureDiagramsWindowSize(writer);
+            SerializeTopTablesColumnSizes(writer);
             writer.WriteEndElement();
         }
 
@@ -900,10 +906,33 @@ namespace FilterSimulationWithTablesAndGraphs
             writer.WriteElementString(splitter.Name, splitter.SplitPosition.ToString());
         }
 
+        private void SerializeTopTablesColumnSizes(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmInterfaceAdjustingTags.TopTablesColumnsSizes);
+            SerializeTableColumnsSizes(writer, projectDataGrid);
+            SerializeTableColumnsSizes(writer, suspensionDataGrid);
+            SerializeTableColumnsSizes(writer, simSeriesDataGrid);
+            writer.WriteEndElement();
+        }
+
+        private void SerializeTableColumnsSizes(XmlWriter writer, DataGridView table)
+        {
+            writer.WriteStartElement(fmInterfaceAdjustingTags.TableColumnsSizes);
+            writer.WriteElementString(fmInterfaceAdjustingTags.TableName, table.Name);
+            foreach (DataGridViewColumn column in table.Columns)
+            {
+                writer.WriteElementString(fmInterfaceAdjustingTags.ColumsSize, column.Width.ToString());
+            }
+            writer.WriteEndElement();
+        }
+
         public void DeserializeInterfaceAdjusting(XmlNode node)
         {
-            DeerializeConfigureDiagramsWindowSize(node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting));
-            DeserializeSplitters(node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting));            
+            node = node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting);
+
+            DeerializeConfigureDiagramsWindowSize(node);
+            DeserializeSplitters(node);
+            DeserializeTopTablesColumnSizes(node);
         }
 
         private void DeerializeConfigureDiagramsWindowSize(XmlNode node)
@@ -950,6 +979,41 @@ namespace FilterSimulationWithTablesAndGraphs
         private static void DeserializeSplitter(XmlNode node, Splitter splitter)
         {
             splitter.SplitPosition = Convert.ToInt32(node.SelectSingleNode(splitter.Name).InnerText);
+        }
+
+        private void DeserializeTopTablesColumnSizes(XmlNode node)
+        {
+            if (node == null)
+                return;
+
+            node = node.SelectSingleNode(fmInterfaceAdjustingTags.TopTablesColumnsSizes);
+            if (node == null)
+                return;
+
+            DeserializeTableColumnsSizes(node, projectDataGrid);
+            DeserializeTableColumnsSizes(node, suspensionDataGrid);
+            DeserializeTableColumnsSizes(node, simSeriesDataGrid);
+            
+        }
+
+        private void DeserializeTableColumnsSizes(XmlNode node, DataGridView table)
+        {
+            XmlNodeList tablesNodes = node.SelectNodes(fmInterfaceAdjustingTags.TableColumnsSizes);
+                
+            foreach (XmlNode tableNode in tablesNodes)
+            {
+                if(table.Name == tableNode.SelectSingleNode(fmInterfaceAdjustingTags.TableName).InnerText)
+                {
+                    XmlNodeList columnsSizesNodes = tableNode.SelectNodes(fmInterfaceAdjustingTags.ColumsSize);
+
+                    int i = 0;
+                    foreach (DataGridViewColumn column in table.Columns)
+                    {
+                        column.Width = Convert.ToInt32(columnsSizesNodes[i].InnerText);
+                        ++i;
+                    }   
+                }
+            }                     
         }
 
         #region Diagram Templates
