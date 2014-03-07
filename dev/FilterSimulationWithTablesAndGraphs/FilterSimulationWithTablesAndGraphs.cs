@@ -1068,6 +1068,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void DeserializeCurvesColors(XmlNode node)
         {
+            if (node == null)
+                return;
+
             node = node.SelectSingleNode(fmInterfaceAdjustingTags.CurvesColors);
 
             if (node == null)
