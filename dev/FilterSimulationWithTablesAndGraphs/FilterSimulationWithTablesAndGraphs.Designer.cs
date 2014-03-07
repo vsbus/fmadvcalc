@@ -66,7 +66,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxYAxis = new System.Windows.Forms.ListView();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.listBoxY2Axis = new System.Windows.Forms.ListView();
+            this.listBoxY2Axis = new FilterSimulationWithTablesAndGraphs.ListViewEx();
+            this.nameColumn = new System.Windows.Forms.ColumnHeader();
+            this.colorColumn = new System.Windows.Forms.ColumnHeader();
             this.panel11 = new System.Windows.Forms.Panel();
             this.xLogCheckBox = new System.Windows.Forms.CheckBox();
             this.y2LogCheckBox = new System.Windows.Forms.CheckBox();
@@ -850,14 +852,26 @@ namespace FilterSimulationWithTablesAndGraphs
             // listBoxY2Axis
             // 
             this.listBoxY2Axis.CheckBoxes = true;
+            this.listBoxY2Axis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameColumn,
+            this.colorColumn});
             this.listBoxY2Axis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxY2Axis.Location = new System.Drawing.Point(3, 16);
             this.listBoxY2Axis.Name = "listBoxY2Axis";
             this.listBoxY2Axis.Size = new System.Drawing.Size(109, 88);
-            this.listBoxY2Axis.TabIndex = 7;
+            this.listBoxY2Axis.TabIndex = 0;
             this.listBoxY2Axis.UseCompatibleStateImageBehavior = false;
-            this.listBoxY2Axis.View = System.Windows.Forms.View.List;
+            this.listBoxY2Axis.View = System.Windows.Forms.View.Details;
             this.listBoxY2Axis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ListBoxY2AxisItemCheck);
+            //this.listBoxY2Axis.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBoxY2Axis_MouseUp);
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.Text = "Name";
+            // 
+            // colorColumn
+            // 
+            this.colorColumn.Text = "Color";
             // 
             // panel11
             // 
@@ -1238,7 +1252,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn FromValueColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn ToValueColumn;
         private Button LoadDefaultRangle;
-        private ListView listBoxY2Axis;
         private SplitContainer splitContainer2;
         private GroupBox groupBox3;
         private CheckBox y2LogCheckBox;
@@ -1248,6 +1261,9 @@ namespace FilterSimulationWithTablesAndGraphs
         private CheckBox xLogCheckBox;
         private Button btnLoadDiagramTemplatesButton;
         private Button btnSaveDiagramTemplatesButton;
+        private ListViewEx listBoxY2Axis;
+        private ColumnHeader nameColumn;
+        private ColumnHeader colorColumn;
 
     }
 }

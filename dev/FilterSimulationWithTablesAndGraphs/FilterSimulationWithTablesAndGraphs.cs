@@ -614,10 +614,12 @@ namespace FilterSimulationWithTablesAndGraphs
             DeserializePartOfDiagramOptions(node);
 
             DeserializeXParameter(node);
+            XParameterWasLoadedFromConfigFile = true;
 
             DeserializeY1NodesForProgramStarting(node);
 
-            DeserializeY2Nodes(node);            
+            DeserializeY2Nodes(node);
+            Y2NodesWasLoadedFromConfigFile = true;
         }
 
         override protected void DeserializeDiagramOptionsFromDataFile(XmlNode node)
@@ -731,8 +733,16 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
+        bool XParameterWasLoadedFromConfigFile = false;
         public void DeserializeXParameter(XmlNode node)
         {
+
+            if (XParameterWasLoadedFromConfigFile)
+            {
+                XParameterWasLoadedFromConfigFile = false;
+                return;
+            }
+
             string xParameterName = "tf";
             fmSerializeTools.DeserializeStringProperty(ref xParameterName, node,
                                                        fmFilterSimulationWithDiagramsSerializeTags.XParameterName);
@@ -745,8 +755,16 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
+
+        private bool y1NodesLoaded = false;
         public void DeserializeY1NodesForMenuOpen(XmlNode node)
         {
+            if (y1NodesLoaded)
+            {
+                y1NodesLoaded = false;
+                return;
+            }
+
             XmlNodeList y1Nodes = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.Y1ParameterName);
             if (y1Nodes != null)
             {
@@ -770,10 +788,18 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     listBoxYAxis.Items.Add(y1Node.InnerText).Checked = true;
                 }
+            y1NodesLoaded = true;            
         }
 
+        bool Y2NodesWasLoadedFromConfigFile = false;
         public void DeserializeY2Nodes(XmlNode node)
         {
+            if (Y2NodesWasLoadedFromConfigFile)
+            {
+                Y2NodesWasLoadedFromConfigFile = false;
+                return;
+            }
+
             XmlNodeList y2Nodes = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.Y2ParameterName);
             if (y2Nodes != null)
                 foreach (XmlNode y2Node in y2Nodes)
@@ -849,6 +875,7 @@ namespace FilterSimulationWithTablesAndGraphs
             BindCalculatedResultsToChartAndTable();
         }
 
+        #region Interface Adjustings Serialization and Deserialization
         private static class fmInterfaceAdjustingTags
         {
             public const string InterfaceAdjusting = "Interface_Adjusting";
@@ -857,6 +884,11 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string ConfigureDiagramsWindowSize = "ConfigureDiagramsWindowSize";
             public const string ConfigureDiagramsHeight = "ConfigureDiagramsHeight";
             public const string ConfigureDiagramsWidth = "ConfigureDiagramsWidth";
+
+            public const string CurvesColors = "CurvesColors";
+            public const string CurveColorPair = "CurveColorPair";
+            public const string CurveName = "CurveName";
+            public const string CurveColor = "CurveColor";
 
             public const string TopTablesColumnsSizes = "TopTablesColumnsSizes";
             public const string TableColumnsSizes = "TableColumnsSizes";
@@ -869,6 +901,7 @@ namespace FilterSimulationWithTablesAndGraphs
             writer.WriteStartElement(fmInterfaceAdjustingTags.InterfaceAdjusting);
             SerializeSplitters(writer);
             SerializeConfigureDiagramsWindowSize(writer);
+            SerializeCurvesColors(writer);
             SerializeTopTablesColumnSizes(writer);
             writer.WriteEndElement();
         }
@@ -926,6 +959,22 @@ namespace FilterSimulationWithTablesAndGraphs
             writer.WriteEndElement();
         }
 
+        private void SerializeCurvesColors(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmInterfaceAdjustingTags.CurvesColors);
+            if (CurvesTemplates != null)
+            {
+                foreach (var ct in CurvesTemplates)
+                {
+                    writer.WriteStartElement(fmInterfaceAdjustingTags.CurveColorPair);
+                    writer.WriteElementString(fmInterfaceAdjustingTags.CurveName, ct.ParameterName);
+                    writer.WriteElementString(fmInterfaceAdjustingTags.CurveColor, ct.Color.ToArgb().ToString());
+                    writer.WriteEndElement();
+                }
+            }
+            writer.WriteEndElement();
+        }
+
         public void DeserializeInterfaceAdjusting(XmlNode node)
         {
             node = node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting);
@@ -933,6 +982,7 @@ namespace FilterSimulationWithTablesAndGraphs
             DeerializeConfigureDiagramsWindowSize(node);
             DeserializeSplitters(node);
             DeserializeTopTablesColumnSizes(node);
+            DeserializeCurvesColors(node);
         }
 
         private void DeerializeConfigureDiagramsWindowSize(XmlNode node)
@@ -1016,6 +1066,27 @@ namespace FilterSimulationWithTablesAndGraphs
             }                     
         }
 
+        private void DeserializeCurvesColors(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmInterfaceAdjustingTags.CurvesColors);
+
+            if (node == null)
+                return;
+
+            string curveName;
+            string curveColor;
+
+            XmlNodeList curvesColorsNodes = node.SelectNodes(fmInterfaceAdjustingTags.CurveColorPair);
+            foreach (XmlNode cNode in curvesColorsNodes)
+            {
+                curveName = cNode.SelectSingleNode(fmInterfaceAdjustingTags.CurveName).InnerText;
+                curveColor = cNode.SelectSingleNode(fmInterfaceAdjustingTags.CurveColor).InnerText;
+                AddCurveTemplate(curveName, Color.FromArgb(Convert.ToInt32(curveColor)));
+            }
+            BindColors();
+        }
+        #endregion
+
         #region Diagram Templates
 
         public const string DiagramTemplatesFilename = "diagrams.tpml";
@@ -1026,7 +1097,7 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string FiltrationCurves = "Filtration_Curves";
             public const string DeliqCurves = "Deliq_Curves";
             public const string MixedCurves = "Mixed_Curves";
-            public const string CurveName = "CurveName";
+            public const string CurveTemplateName = "CurveTemplateName";
             public const string RowsQuantity = "RowsQuantity";
             public const string MinMaxParameter = "MinMax_Parameter";
             public const string XParameterName = "XParameterName";
@@ -1065,10 +1136,10 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (XmlNode xn in doc.GetElementsByTagName(DiagramTemplatesSavingTags.TempCurve))
                 {
-                    foreach (XmlNode name in xn.SelectNodes(DiagramTemplatesSavingTags.CurveName)) //deliting prev tmp
+                    foreach (XmlNode name in xn.SelectNodes(DiagramTemplatesSavingTags.CurveTemplateName)) //deliting prev tmp
                         name.ParentNode.RemoveChild(name);
-                        
-                    XmlNode addNode = doc.CreateElement(DiagramTemplatesSavingTags.CurveName);
+
+                    XmlNode addNode = doc.CreateElement(DiagramTemplatesSavingTags.CurveTemplateName);
                     XmlAttribute xa = doc.CreateAttribute("id");
                     xa.Value = DiagramTemplatesSavingTags.TempCurve;
                     addNode.Attributes.Append(xa);
@@ -1076,6 +1147,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     SaveY1ParametersNames(addNode, doc);
                     SaveY2ParametersNames(addNode, doc);
                     SaveMinMaxValues(addNode, doc);
+                    SaveCurvesColors(addNode, doc);
                     xn.AppendChild(addNode);
                 }
 
@@ -1107,7 +1179,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(DiagramTemplatesFilename);
-            foreach (XmlNode xn in doc.GetElementsByTagName(DiagramTemplatesSavingTags.CurveName ))
+            foreach (XmlNode xn in doc.GetElementsByTagName(DiagramTemplatesSavingTags.CurveTemplateName))
             {
                 if (xn.Attributes["id"].Value == CurveName)
                 {
@@ -1116,6 +1188,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     DeserializeY2Nodes(xn);
                     LoadRowsQuantity(xn);
                     LoadTemplateMinMaxValuesOfTheXAxisParameter(xn);
+                    DeserializeCurvesColors(xn);
                     break;
                 }
             }
@@ -1197,7 +1270,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (XmlNode xn in doc.GetElementsByTagName(GetKindOfCurrentCurveTemplate()))
                 {
-                    foreach (XmlNode name in xn.SelectNodes(DiagramTemplatesSavingTags.CurveName)) //deliting templates with same name
+                    foreach (XmlNode name in xn.SelectNodes(DiagramTemplatesSavingTags.CurveTemplateName)) //deliting templates with same name
                         if (name.Attributes["id"].Value == GetCurveTemplateName())
                         {
                             DialogResult yndiagresult = MessageBox.Show("Curve template will be overwritten!", "Curve Template Saving Warning", MessageBoxButtons.OKCancel);
@@ -1207,7 +1280,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                 return;
                         }                                                                           //end of deliting
 
-                    XmlNode addNode = doc.CreateElement(DiagramTemplatesSavingTags.CurveName);
+                    XmlNode addNode = doc.CreateElement(DiagramTemplatesSavingTags.CurveTemplateName);
                     XmlAttribute xa = doc.CreateAttribute("id");
                     xa.Value = GetCurveTemplateName();
                     addNode.Attributes.Append(xa);
@@ -1216,6 +1289,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     SaveY1ParametersNames(addNode, doc);
                     SaveY2ParametersNames(addNode, doc);
                     SaveMinMaxValues(addNode, doc);
+                    SaveCurvesColors(addNode, doc);
                     xn.AppendChild(addNode);
                 }
                 
@@ -1346,6 +1420,29 @@ namespace FilterSimulationWithTablesAndGraphs
             node.AppendChild(newNode);
         }
 
+        private void SaveCurvesColors(XmlNode node, XmlDocument doc)
+        {
+            if (CurvesTemplates != null)
+            {
+                XmlNode curvesColorsNode = doc.CreateElement(fmInterfaceAdjustingTags.CurvesColors);
+                node.AppendChild(curvesColorsNode);
+
+                foreach (var ct in CurvesTemplates)
+                {
+                    XmlNode curveColorPairNode = doc.CreateElement(fmInterfaceAdjustingTags.CurveColorPair);
+                    curvesColorsNode.AppendChild(curveColorPairNode);
+
+                    XmlNode curveNameNode = doc.CreateElement(fmInterfaceAdjustingTags.CurveName);
+                    curveNameNode.InnerText = ct.ParameterName;
+                    curveColorPairNode.AppendChild(curveNameNode);
+
+                    XmlNode curveColorNode = doc.CreateElement(fmInterfaceAdjustingTags.CurveColor);
+                    curveColorNode.InnerText = ct.Color.ToArgb().ToString();
+                    curveColorPairNode.AppendChild(curveColorNode);                    
+                }
+            }
+        }
+
         private void SaveMinMaxValues(XmlNode node, XmlDocument doc)
         {   
             foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
@@ -1391,6 +1488,6 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
         }
-        #endregion
+        #endregion        
     }
 }

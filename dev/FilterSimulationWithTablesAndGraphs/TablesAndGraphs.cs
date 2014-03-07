@@ -246,6 +246,14 @@ namespace FilterSimulationWithTablesAndGraphs
             AddColors(fmParameterKind.MachiningSettingsDeliquoring, fmGlobalParameter.GetDeliquoringSettingParameters());
         }
 
+        public class CurveTemplate //contains data for curves coloring
+        {
+            public String ParameterName { get; set; }
+            public Color Color { get; set; }
+        }
+
+        public List<CurveTemplate> CurvesTemplates = new List<CurveTemplate>();
+
         private void FillListBox(IList listBoxItems, List<string> strings)
         {
             if (m_xyListKind == null)
@@ -1128,6 +1136,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         curve.Line.IsAntiAlias = true;
                         curve.Line.Width = dispArray.Bold ? 2 : 1;
                         curve.IsY2Axis = dispArray.IsY2Axis;
+
                         if (curve.IsY2Axis)
                         {
                             curve.Label.Text += " :Y2";
@@ -1182,6 +1191,8 @@ namespace FilterSimulationWithTablesAndGraphs
             fmZedGraphControl1.GraphPane.Title.Text = "";
             fmZedGraphControl1.GraphPane.AxisChange();
             fmZedGraphControl1.Refresh();
+
+            BindCurvesColorsToCurves();
         }
 
         private static IEnumerable<KeyValuePair<double[], double[]>> GetCurvesDoubleArrays(fmDisplayingArray xArray, fmDisplayingArray yArray)
@@ -1765,6 +1776,180 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
             }
             FillListBox(listBoxY2Axis.Items, y2OutputNames);
+            AdjustListBoxY2AxisItemsColors();
+            BindCurvesColorsToY2List();
+        }
+        
+        private void AdjustListBoxY2AxisItemsColors()
+        {
+            Color[] mainColors = new[] { Color.Blue, Color.Green, Color.Red, Color.Black, Color.Brown };
+            Color[] colors = colorPaleteForm.colorList;
+            Color[] usedColors = new Color[0];
+
+            foreach (var ct in CurvesTemplates)
+            {
+                addItemToColorsArray(ref usedColors, ct.Color);
+            }
+
+            int colorId = 0;
+            foreach (ListViewItem item in listBoxY2Axis.Items)
+            {
+                item.ForeColor = m_parameterKindProperties[m_xyListKind[item.Text]].Color;
+                item.BackColor = listBoxY2Axis.BackColor;
+                ColorButton b = new ColorButton();
+                b.Name = item.Text;
+                //b.Color = colors[colorId];
+                b.Color = getNewUnusedColor(mainColors, colors,ref usedColors);
+                listBoxY2Axis.AddEmbeddedControl(b, 1, item.Index);
+                AddNewParameterCurveTemplate(b.Name, b.Color);
+                if (++colorId == colors.Length) colorId = 0;
+            }
+        }
+
+        private Color getNewUnusedColor(Color[] mainColors,Color[] colors,ref Color[] usedColors)
+        {
+            Color unusedColor;
+
+            for (int i = 0; i < mainColors.Length; ++i)
+            {
+                if (!isColorsArrayContainsColor(usedColors, mainColors[i]))
+                {
+                    unusedColor = mainColors[i];
+                    
+                    addItemToColorsArray(ref usedColors, unusedColor); 
+
+                    return unusedColor;
+                }
+            }
+
+            for (int i = 0; i < colors.Length; ++i)
+            {
+                if (!isColorsArrayContainsColor(usedColors, colors[i]))
+                {
+                    unusedColor = colors[i];
+
+                    addItemToColorsArray(ref usedColors, unusedColor);
+
+                    return unusedColor;
+                }
+            }
+
+            return unusedColor = mainColors[0];
+        }
+
+        private bool isColorsArrayContainsColor(Color[] ColorArrayToCheck, Color lookingColor)
+        {
+            foreach (var color in ColorArrayToCheck)
+            {
+                if (color.ToArgb() == lookingColor.ToArgb())
+                    return true;
+            }
+
+            return false;
+        }
+
+        private void addItemToColorsArray(ref Color[] Array, Color colorToAdd)
+        {
+            int newLenght = Array.Length + 1;
+            Color[] newColorsArray = new Color[newLenght];
+            newColorsArray[newLenght - 1] = colorToAdd;
+            for (int k = 0; k < Array.Length; ++k)
+            {
+                newColorsArray[k] = Array[k];
+            }
+
+            Array = newColorsArray;
+        }
+
+        private void BindCurvesColorsToY2List()
+        {
+            foreach (ListViewItem item in listBoxY2Axis.Items)
+            {
+                foreach (var curve in CurvesTemplates)
+                {
+                    if (curve.ParameterName == item.Text)
+                    {
+                        foreach (var c in listBoxY2Axis.Controls)
+                        {
+                            if (c is ColorButton)
+                            {
+                                ColorButton cb = c as ColorButton;
+                                if (cb.Name == item.Text)
+                                {
+                                    cb.Color = curve.Color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }            
+        }
+
+        public void BindCurvesColorsToCurves()
+        {
+            string curveName;
+            int index;
+            foreach (var curve in fmZedGraphControl1.GraphPane.CurveList)
+            {
+                foreach (var ctmpl in CurvesTemplates)
+                {
+                    index = curve.Label.Text.IndexOf(" ");
+                    if (index > 0)
+                    {
+                        curveName = curve.Label.Text.Substring(0, index);
+                        if (ctmpl.ParameterName == curveName)
+                        {
+                            curve.Color = ctmpl.Color;
+                        }
+                    }                    
+                }
+            }
+            fmZedGraphControl1.Refresh();
+        }
+
+        private void BindColors()
+        {
+            BindCurvesColorsToY2List();
+            BindCurvesColorsToCurves();
+        }
+
+        public void AddCurveTemplate(string paramName, Color color)
+        {
+            foreach (var ctmpl in CurvesTemplates)
+            {
+                if (ctmpl.ParameterName == paramName)
+                {
+                    ctmpl.Color = color;
+                    return;
+                }
+            }
+            
+            
+            CurveTemplate ct = new CurveTemplate
+            {
+                ParameterName = paramName,
+                Color = color
+            };
+            CurvesTemplates.Add(ct);
+        }
+
+        public void AddNewParameterCurveTemplate(string paramName, Color color)
+        {
+            foreach (var ctmpl in CurvesTemplates)
+            {
+                if (ctmpl.ParameterName == paramName)
+                {
+                    return;
+                }
+            }
+
+
+            CurveTemplate ct = new CurveTemplate
+            {
+                ParameterName = paramName,
+                Color = color
+            };
+            CurvesTemplates.Add(ct);
         }
 
         private IEnumerable<fmGlobalParameter> GetCommonInputParametersList()

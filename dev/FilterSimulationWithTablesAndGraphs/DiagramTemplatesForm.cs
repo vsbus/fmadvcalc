@@ -37,7 +37,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (XmlNode xn in doc.GetElementsByTagName(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.FiltrationCurves))
                 {
-                    XmlNodeList NamesNodes = xn.SelectNodes(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveName);
+                    XmlNodeList NamesNodes = xn.SelectNodes(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveTemplateName);
                     foreach (XmlNode name in NamesNodes)
                     {
                         tvTemplatesTreeView.Nodes["FiltrationNode"].Nodes.Add(name.Attributes["id"].Value);
@@ -46,7 +46,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (XmlNode xn in doc.GetElementsByTagName(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.DeliqCurves ))
                 {
-                    XmlNodeList NamesNodes = xn.SelectNodes(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveName);
+                    XmlNodeList NamesNodes = xn.SelectNodes(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveTemplateName);
                     foreach (XmlNode name in NamesNodes)
                     {
                         tvTemplatesTreeView.Nodes["DeliqNode"].Nodes.Add(name.Attributes["id"].Value);
@@ -55,7 +55,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
                 foreach (XmlNode xn in doc.GetElementsByTagName(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.MixedCurves ))
                 {
-                    XmlNodeList NamesNodes = xn.SelectNodes(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveName);
+                    XmlNodeList NamesNodes = xn.SelectNodes(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveTemplateName);
                     foreach (XmlNode name in NamesNodes)
                     {
                         tvTemplatesTreeView.Nodes["MixedNode"].Nodes.Add(name.Attributes["id"].Value);
@@ -87,7 +87,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             XmlDocument doc = new XmlDocument();
             doc.Load(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesFilename);
-            foreach (XmlNode xn in doc.GetElementsByTagName(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveName))
+            foreach (XmlNode xn in doc.GetElementsByTagName(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveTemplateName))
             {
                 if (xn.Attributes["id"].Value == tvTemplatesTreeView.SelectedNode.Text )
                 {
