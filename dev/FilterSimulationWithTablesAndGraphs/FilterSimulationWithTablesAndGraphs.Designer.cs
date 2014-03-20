@@ -679,13 +679,11 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.panel4.Controls.Add(this.button1);
 			this.panel4.Controls.Add(this.btnLoadDiagramTemplatesButton);
-            this.panel4.Controls.Add(this.btnSaveDiagramTemplatesButton);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel4.Location = new System.Drawing.Point(0, 127);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(646, 36);
             this.panel4.TabIndex = 12;
-            this.panel4.Controls.SetChildIndex(this.btnSaveDiagramTemplatesButton, 0);
             this.panel4.Controls.SetChildIndex(this.btnLoadDiagramTemplatesButton, 0);
             // 
             // btnLoadDiagramTemplatesButton
@@ -700,9 +698,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // btnSaveDiagramTemplatesButton
             // 
-            this.btnSaveDiagramTemplatesButton.Location = new System.Drawing.Point(266, 3);
+            this.btnSaveDiagramTemplatesButton.Location = new System.Drawing.Point(370, 192);
             this.btnSaveDiagramTemplatesButton.Name = "btnSaveDiagramTemplatesButton";
-            this.btnSaveDiagramTemplatesButton.Size = new System.Drawing.Size(121, 23);
+            this.btnSaveDiagramTemplatesButton.Size = new System.Drawing.Size(111, 22);
             this.btnSaveDiagramTemplatesButton.TabIndex = 14;
             this.btnSaveDiagramTemplatesButton.Text = "Save Templates";
             this.btnSaveDiagramTemplatesButton.UseVisualStyleBackColor = true;
@@ -876,6 +874,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // panel11
             // 
             this.panel11.Controls.Add(this.xLogCheckBox);
+            this.panel11.Controls.Add(this.btnSaveDiagramTemplatesButton);
             this.panel11.Controls.Add(this.y2LogCheckBox);
             this.panel11.Controls.Add(this.yLogCheckBox);
             this.panel11.Controls.Add(this.LoadDefaultRangle);
@@ -931,7 +930,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // LoadDefaultRangle
             // 
-            this.LoadDefaultRangle.Location = new System.Drawing.Point(197, 118);
+            this.LoadDefaultRangle.Location = new System.Drawing.Point(276, 117);
             this.LoadDefaultRangle.Name = "LoadDefaultRangle";
             this.LoadDefaultRangle.Size = new System.Drawing.Size(75, 36);
             this.LoadDefaultRangle.TabIndex = 9;
