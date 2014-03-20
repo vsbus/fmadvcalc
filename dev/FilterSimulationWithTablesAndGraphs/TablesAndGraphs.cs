@@ -246,13 +246,52 @@ namespace FilterSimulationWithTablesAndGraphs
             AddColors(fmParameterKind.MachiningSettingsDeliquoring, fmGlobalParameter.GetDeliquoringSettingParameters());
         }
 
-        public class CurveTemplate //contains data for curves coloring
+        public class CurveColorTemplate //contains data for curves coloring
         {
             public String ParameterName { get; set; }
             public Color Color { get; set; }
         }
 
-        public List<CurveTemplate> CurvesTemplates = new List<CurveTemplate>();
+        public List<CurveColorTemplate> CurvesColorsTemplates = new List<CurveColorTemplate>();        
+
+        private Dictionary<System.Drawing.Drawing2D.DashStyle, string> curvesStylesWithStylesInStrings = new Dictionary<System.Drawing.Drawing2D.DashStyle,string>()
+        {
+            {System.Drawing.Drawing2D.DashStyle.Solid, "\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014"},
+            {System.Drawing.Drawing2D.DashStyle.Dash,"\u2014 \u2014 \u2014 \u2014 \u2014 \u2014 \u2014 \u2014"},
+            {System.Drawing.Drawing2D.DashStyle.DashDot,"\u2014 • \u2014 • \u2014 • \u2014 •"},
+            {System.Drawing.Drawing2D.DashStyle.DashDotDot,"\u2014 •• \u2014 •• \u2014  ••"},
+            {System.Drawing.Drawing2D.DashStyle.Dot,"••••••••••••"}
+        };
+
+        private class CurveStyleTemplate //contains data for styles for series curve
+        {
+            public fmFilterSimSerie serie {get;set; }
+            public System.Drawing.Drawing2D.DashStyle style{ get; set; }
+            public string styleInString { get; set; }
+        }
+
+        private List<CurveStyleTemplate> CurvesStylesTemplates = new List<CurveStyleTemplate>();
+
+        public void AddCurveStyleTemplate(fmFilterSimSerie serie, string styleInString)
+        {
+            foreach (var cst in CurvesStylesTemplates)
+            {
+                if (cst.serie == serie)
+                {
+                    cst.styleInString = styleInString;
+                    cst.style = curvesStylesWithStylesInStrings.FirstOrDefault(x => x.Value == styleInString).Key;
+                    return;
+                }
+            }
+
+            CurveStyleTemplate newcst = new CurveStyleTemplate
+            {
+                serie = serie,
+                styleInString = styleInString,
+                style = curvesStylesWithStylesInStrings.FirstOrDefault(x => x.Value == styleInString).Key
+            };
+            CurvesStylesTemplates.Add(newcst);
+        }
 
         private void FillListBox(IList listBoxItems, List<string> strings)
         {
@@ -747,6 +786,41 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             m_involvedSeries = newInvolvedSeries;
+            loadItemsToComboboxColumn();
+            loadCurvesStylesToTable();
+        }
+
+        private void loadCurvesStylesToTable()
+        { 
+            foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
+            {
+                DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)row.Cells[curveStyleColumn.Name];
+                cell.Value = curveStyleColumn.Items[0];
+
+                foreach (CurveStyleTemplate cst in CurvesStylesTemplates)
+                {
+                    if (m_involvedSerieFromRow[row] == cst.serie)
+                    {
+                        foreach (var item in curveStyleColumn.Items)
+                        {
+                            if (item.ToString() == cst.styleInString)
+                                cell.Value = item;
+                        }
+                    }
+                }                
+            }
+        }
+
+        private void loadItemsToComboboxColumn()
+        {
+            if (curveStyleColumn.Items.Count == 0)
+            {
+                curveStyleColumn.Items.Add(curvesStylesWithStylesInStrings[System.Drawing.Drawing2D.DashStyle.Solid]);
+                curveStyleColumn.Items.Add(curvesStylesWithStylesInStrings[System.Drawing.Drawing2D.DashStyle.Dash]);
+                curveStyleColumn.Items.Add(curvesStylesWithStylesInStrings[System.Drawing.Drawing2D.DashStyle.DashDot]);
+                curveStyleColumn.Items.Add(curvesStylesWithStylesInStrings[System.Drawing.Drawing2D.DashStyle.DashDotDot]);
+                curveStyleColumn.Items.Add(curvesStylesWithStylesInStrings[System.Drawing.Drawing2D.DashStyle.Dot]);
+            }
         }
 
         private void AddSerieToInvolvedSeriesList(Dictionary<fmFilterSimSerie, fmRange> newInvolvedSeries, fmFilterSimSerie serie, fmGlobalParameter xParameter)
@@ -1133,6 +1207,26 @@ namespace FilterSimulationWithTablesAndGraphs
                             pair.Value,
                             dispArray.Color,
                             SymbolType.None);
+
+                        bool hasDifferentVaues = false;
+                        foreach (CurveStyleTemplate cst in CurvesStylesTemplates)
+                        {
+                            foreach (fmFilterSimulation simulation in cst.serie.SimulationsList)
+                            {
+                                hasDifferentVaues = false;
+                                foreach (fmGlobalParameter parameter in simulation.Data.parameters.Keys)
+                                {
+                                    if (!simulation.Data.parameters[parameter].value.value.Equals(dispArray.OwningSimulation.parameters[parameter].value.value))
+                                        hasDifferentVaues = true;
+                                }
+
+                                if (simulation.GetName() == dispArray.OwningSimulation.name && !hasDifferentVaues)
+                                {
+                                    curve.Line.Style = cst.style;
+                                }
+                            }
+                        }
+
                         curve.Line.IsAntiAlias = true;
                         curve.Line.Width = dispArray.Bold ? 2 : 1;
                         curve.IsY2Axis = dispArray.IsY2Axis;
@@ -1786,23 +1880,20 @@ namespace FilterSimulationWithTablesAndGraphs
             Color[] colors = colorPaleteForm.colorList;
             Color[] usedColors = new Color[0];
 
-            foreach (var ct in CurvesTemplates)
+            foreach (var ct in CurvesColorsTemplates)
             {
                 addItemToColorsArray(ref usedColors, ct.Color);
             }
 
-            int colorId = 0;
             foreach (ListViewItem item in listBoxY2Axis.Items)
             {
                 item.ForeColor = m_parameterKindProperties[m_xyListKind[item.Text]].Color;
                 item.BackColor = listBoxY2Axis.BackColor;
                 ColorButton b = new ColorButton();
                 b.Name = item.Text;
-                //b.Color = colors[colorId];
                 b.Color = getNewUnusedColor(mainColors, colors,ref usedColors);
                 listBoxY2Axis.AddEmbeddedControl(b, 1, item.Index);
                 AddNewParameterCurveTemplate(b.Name, b.Color);
-                if (++colorId == colors.Length) colorId = 0;
             }
         }
 
@@ -1865,7 +1956,7 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             foreach (ListViewItem item in listBoxY2Axis.Items)
             {
-                foreach (var curve in CurvesTemplates)
+                foreach (var curve in CurvesColorsTemplates)
                 {
                     if (curve.ParameterName == item.Text)
                     {
@@ -1891,7 +1982,7 @@ namespace FilterSimulationWithTablesAndGraphs
             int index;
             foreach (var curve in fmZedGraphControl1.GraphPane.CurveList)
             {
-                foreach (var ctmpl in CurvesTemplates)
+                foreach (var ctmpl in CurvesColorsTemplates)
                 {
                     index = curve.Label.Text.IndexOf(" ");
                     if (index > 0)
@@ -1899,7 +1990,7 @@ namespace FilterSimulationWithTablesAndGraphs
                         curveName = curve.Label.Text.Substring(0, index);
                         if (ctmpl.ParameterName == curveName)
                         {
-                            curve.Color = ctmpl.Color;
+                            curve.Color = ctmpl.Color;                            
                         }
                     }                    
                 }
@@ -1915,7 +2006,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         public void AddCurveTemplate(string paramName, Color color)
         {
-            foreach (var ctmpl in CurvesTemplates)
+            foreach (var ctmpl in CurvesColorsTemplates)
             {
                 if (ctmpl.ParameterName == paramName)
                 {
@@ -1923,19 +2014,19 @@ namespace FilterSimulationWithTablesAndGraphs
                     return;
                 }
             }
-            
-            
-            CurveTemplate ct = new CurveTemplate
+
+
+            CurveColorTemplate ct = new CurveColorTemplate
             {
                 ParameterName = paramName,
                 Color = color
             };
-            CurvesTemplates.Add(ct);
+            CurvesColorsTemplates.Add(ct);
         }
 
         public void AddNewParameterCurveTemplate(string paramName, Color color)
         {
-            foreach (var ctmpl in CurvesTemplates)
+            foreach (var ctmpl in CurvesColorsTemplates)
             {
                 if (ctmpl.ParameterName == paramName)
                 {
@@ -1944,12 +2035,12 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
 
-            CurveTemplate ct = new CurveTemplate
+            CurveColorTemplate ct = new CurveColorTemplate
             {
                 ParameterName = paramName,
                 Color = color
             };
-            CurvesTemplates.Add(ct);
+            CurvesColorsTemplates.Add(ct);
         }
 
         private IEnumerable<fmGlobalParameter> GetCommonInputParametersList()

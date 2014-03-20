@@ -894,6 +894,17 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string TableColumnsSizes = "TableColumnsSizes";
             public const string TableName = "TableName";
             public const string ColumsSize = "ColumsSizes";
+
+            public const string CurvesStyles = "CurvesStyles";
+            public const string CurveStyleTemplate = "CurveStyleTemplate";
+            public const string SerieName = "SerieName";
+            public const string SerieCustomer = "SerieCustomer";
+            public const string SerieMaterial = "SerieMaterial";
+            public const string SerieCharge = "SerieCharge";
+            public const string SerieProjectName = "SerieProjectName";
+            public const string SerieFilterType = "SerieFilterType";
+            public const string SerieFilterMedium = "SerieFilterMedium";
+            public const string StyleInString = "StyleInString";
         }
 
         public void SerializeInterfaceAdjusting(XmlWriter writer)
@@ -903,6 +914,7 @@ namespace FilterSimulationWithTablesAndGraphs
             SerializeConfigureDiagramsWindowSize(writer);
             SerializeCurvesColors(writer);
             SerializeTopTablesColumnSizes(writer);
+            SerializeCurvesStyles(writer);
             writer.WriteEndElement();
         }
 
@@ -962,13 +974,35 @@ namespace FilterSimulationWithTablesAndGraphs
         private void SerializeCurvesColors(XmlWriter writer)
         {
             writer.WriteStartElement(fmInterfaceAdjustingTags.CurvesColors);
-            if (CurvesTemplates != null)
+            if (CurvesColorsTemplates != null)
             {
-                foreach (var ct in CurvesTemplates)
+                foreach (var ct in CurvesColorsTemplates)
                 {
                     writer.WriteStartElement(fmInterfaceAdjustingTags.CurveColorPair);
                     writer.WriteElementString(fmInterfaceAdjustingTags.CurveName, ct.ParameterName);
                     writer.WriteElementString(fmInterfaceAdjustingTags.CurveColor, ct.Color.ToArgb().ToString());
+                    writer.WriteEndElement();
+                }
+            }
+            writer.WriteEndElement();
+        }
+
+        private void SerializeCurvesStyles(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmInterfaceAdjustingTags.CurvesStyles);
+            if (CurvesStylesTemplates != null)
+            {
+                foreach (var cst in CurvesStylesTemplates)
+                {
+                    writer.WriteStartElement(fmInterfaceAdjustingTags.CurveStyleTemplate);
+                    writer.WriteElementString(fmInterfaceAdjustingTags.SerieName, cst.serie.GetName());
+                    writer.WriteElementString(fmInterfaceAdjustingTags.SerieCustomer, cst.serie.Parent.Customer.ToString());
+                    writer.WriteElementString(fmInterfaceAdjustingTags.SerieMaterial, cst.serie.Parent.Material.ToString());    
+                    writer.WriteElementString(fmInterfaceAdjustingTags.SerieCharge, cst.serie.Parent.GetName());
+                    writer.WriteElementString(fmInterfaceAdjustingTags.SerieProjectName, cst.serie.Parent.Parent.GetName());
+                    writer.WriteElementString(fmInterfaceAdjustingTags.SerieFilterType, cst.serie.MachineType.name);
+                    writer.WriteElementString(fmInterfaceAdjustingTags.SerieFilterMedium, cst.serie.FilterMedium);
+                    writer.WriteElementString(fmInterfaceAdjustingTags.StyleInString, cst.styleInString);
                     writer.WriteEndElement();
                 }
             }
@@ -983,6 +1017,7 @@ namespace FilterSimulationWithTablesAndGraphs
             DeserializeSplitters(node);
             DeserializeTopTablesColumnSizes(node);
             DeserializeCurvesColors(node);
+            DeserializeCurvesStyles(node);
         }
 
         private void DeerializeConfigureDiagramsWindowSize(XmlNode node)
@@ -1087,6 +1122,57 @@ namespace FilterSimulationWithTablesAndGraphs
                 AddCurveTemplate(curveName, Color.FromArgb(Convert.ToInt32(curveColor)));
             }
             BindColors();
+        }
+
+        private void DeserializeCurvesStyles(XmlNode node)
+        {
+            if (node == null)
+                return;
+
+            node = node.SelectSingleNode(fmInterfaceAdjustingTags.CurvesStyles);
+
+            if (node == null)
+                return;
+
+            string SerieName;
+            string SerieCustomer;
+            string SerieMaterial;
+            string SerieCharge;
+            string SerieProjectName;
+            string SerieFilterType;
+            string SerieFilterMedium;
+            string StyleInString;
+
+            XmlNodeList curvesStylesNodes = node.SelectNodes(fmInterfaceAdjustingTags.CurveStyleTemplate);
+            foreach (XmlNode cNode in curvesStylesNodes)
+            {
+                SerieName = cNode.SelectSingleNode(fmInterfaceAdjustingTags.SerieName).InnerText;
+                SerieCustomer = cNode.SelectSingleNode(fmInterfaceAdjustingTags.SerieCustomer).InnerText;
+                SerieMaterial = cNode.SelectSingleNode(fmInterfaceAdjustingTags.SerieMaterial).InnerText;
+                SerieCharge = cNode.SelectSingleNode(fmInterfaceAdjustingTags.SerieCharge).InnerText;
+                SerieProjectName = cNode.SelectSingleNode(fmInterfaceAdjustingTags.SerieProjectName).InnerText;
+                SerieFilterType = cNode.SelectSingleNode(fmInterfaceAdjustingTags.SerieFilterType).InnerText;
+                SerieFilterMedium = cNode.SelectSingleNode(fmInterfaceAdjustingTags.SerieFilterMedium).InnerText;
+                StyleInString = cNode.SelectSingleNode(fmInterfaceAdjustingTags.StyleInString).InnerText;
+
+                foreach (fmFilterSimProject project in Solution.projects)
+                {
+                    if (project.GetName() == SerieProjectName)
+                        foreach (fmFilterSimSerie serie in project.GetAllSeries())
+                        {
+                            if (serie.GetName() == SerieName && serie.Parent.Customer.ToString() == SerieCustomer &&
+                                serie.Parent.Material.ToString() == SerieMaterial &&
+                                serie.Parent.GetName() == SerieCharge &&
+                                serie.MachineType.name == SerieFilterType &&
+                                serie.FilterMedium == SerieFilterMedium)
+
+                                AddCurveStyleTemplate(serie, StyleInString);
+
+                        }
+                }
+            }
+            loadCurvesStylesToTable();
+            BindCalculatedResultsToChart();
         }
         #endregion
 
@@ -1425,12 +1511,12 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void SaveCurvesColors(XmlNode node, XmlDocument doc)
         {
-            if (CurvesTemplates != null)
+            if (CurvesColorsTemplates != null)
             {
                 XmlNode curvesColorsNode = doc.CreateElement(fmInterfaceAdjustingTags.CurvesColors);
                 node.AppendChild(curvesColorsNode);
 
-                foreach (var ct in CurvesTemplates)
+                foreach (var ct in CurvesColorsTemplates)
                 {
                     XmlNode curveColorPairNode = doc.CreateElement(fmInterfaceAdjustingTags.CurveColorPair);
                     curvesColorsNode.AppendChild(curveColorPairNode);
@@ -1491,6 +1577,40 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
         }
-        #endregion        
+        #endregion         
+
+        private void InvolvedSeriesDataGrid_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (e.Control is ComboBox)
+            {
+                ComboBox comboBox = e.Control as ComboBox;
+                comboBox.SelectionChangeCommitted += curveStyleColumnComboSelectionChanged;
+            }
+        }
+
+        private void curveStyleColumnComboSelectionChanged(object sender, EventArgs e)
+        {
+            ComboBox senderComboBox = (ComboBox)sender;
+            var row = InvolvedSeriesDataGrid.CurrentRow;
+            fmFilterSimSerie serie = m_involvedSerieFromRow[row];
+            AddCurveStyleTemplate(serie, senderComboBox.Text);
+            BindCalculatedResultsToChart();
+        }
+
+        private void InvolvedSeriesDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;     // Header
+            }
+            if (e.ColumnIndex != curveStyleColumn.Index)
+            {
+                return;     // Filter out other columns
+            }
+
+            InvolvedSeriesDataGrid.BeginEdit(true);
+            ComboBox comboBox = (ComboBox)InvolvedSeriesDataGrid.EditingControl;
+            comboBox.DroppedDown = true; 
+        }
     }
 }

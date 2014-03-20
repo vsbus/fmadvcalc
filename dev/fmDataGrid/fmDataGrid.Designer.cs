@@ -13,9 +13,12 @@ namespace fmDataGrid
 
         private void fmDataGridTextChanged(object sender, EventArgs e)
         {
-            CurrentCell.Value = (sender as TextBox).Text;
-            if (CellValueChangedByUser != null)
-                CellValueChangedByUser(this, new DataGridViewCellEventArgs(CurrentCell.ColumnIndex, CurrentCell.RowIndex));
+            if (sender is TextBox)
+            {
+                CurrentCell.Value = (sender as TextBox).Text;
+                if (CellValueChangedByUser != null)
+                    CellValueChangedByUser(this, new DataGridViewCellEventArgs(CurrentCell.ColumnIndex, CurrentCell.RowIndex));
+            }
         }
 
         public void ChangeDataGridText(string text, int rowindex)

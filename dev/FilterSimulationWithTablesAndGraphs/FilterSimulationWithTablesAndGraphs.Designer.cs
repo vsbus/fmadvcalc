@@ -78,6 +78,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.SerieColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FromValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
             this.ToValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.curveStyleColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.startFromOriginCheckBox = new System.Windows.Forms.CheckBox();
             this.NoScalingCheckBox = new System.Windows.Forms.CheckBox();
             this.deliquoringMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
@@ -863,7 +864,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxY2Axis.UseCompatibleStateImageBehavior = false;
             this.listBoxY2Axis.View = System.Windows.Forms.View.Details;
             this.listBoxY2Axis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ListBoxY2AxisItemCheck);
-            //this.listBoxY2Axis.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listBoxY2Axis_MouseUp);
             // 
             // nameColumn
             // 
@@ -949,15 +949,18 @@ namespace FilterSimulationWithTablesAndGraphs
             this.InvolvedSeriesDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SerieColumn,
             this.FromValueColumn,
-            this.ToValueColumn});
+            this.ToValueColumn,
+            this.curveStyleColumn});
             this.InvolvedSeriesDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.InvolvedSeriesDataGrid.HighLightCurrentRow = false;
             this.InvolvedSeriesDataGrid.Location = new System.Drawing.Point(13, 118);
             this.InvolvedSeriesDataGrid.Name = "InvolvedSeriesDataGrid";
             this.InvolvedSeriesDataGrid.RowHeadersVisible = false;
             this.InvolvedSeriesDataGrid.RowTemplate.Height = 18;
-            this.InvolvedSeriesDataGrid.Size = new System.Drawing.Size(178, 76);
+            this.InvolvedSeriesDataGrid.Size = new System.Drawing.Size(257, 76);
             this.InvolvedSeriesDataGrid.TabIndex = 8;
+            this.InvolvedSeriesDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.InvolvedSeriesDataGrid_CellClick);
+            this.InvolvedSeriesDataGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.InvolvedSeriesDataGrid_EditingControlShowing);
             this.InvolvedSeriesDataGrid.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.InvolvedSeriesDataGrid_CellValueChangedByUser);
             // 
             // SerieColumn
@@ -981,6 +984,13 @@ namespace FilterSimulationWithTablesAndGraphs
             this.ToValueColumn.FillWeight = 50F;
             this.ToValueColumn.HeaderText = "To";
             this.ToValueColumn.Name = "ToValueColumn";
+            // 
+            // curveStyleColumn
+            // 
+            this.curveStyleColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.curveStyleColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.curveStyleColumn.HeaderText = "Curve Style";
+            this.curveStyleColumn.Name = "curveStyleColumn";
             // 
             // startFromOriginCheckBox
             // 
@@ -1248,9 +1258,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private ToolStripMenuItem copyToolStripMenuItem;
         private CheckBox startFromOriginCheckBox;
         private fmDataGrid.fmDataGrid InvolvedSeriesDataGrid;
-        private DataGridViewTextBoxColumn SerieColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn FromValueColumn;
-        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn ToValueColumn;
         private Button LoadDefaultRangle;
         private SplitContainer splitContainer2;
         private GroupBox groupBox3;
@@ -1264,6 +1271,10 @@ namespace FilterSimulationWithTablesAndGraphs
         private ListViewEx listBoxY2Axis;
         private ColumnHeader nameColumn;
         private ColumnHeader colorColumn;
+        private DataGridViewTextBoxColumn SerieColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn FromValueColumn;
+        private fmDataGrid.fmDataGridViewNumericalTextBoxColumn ToValueColumn;
+        private DataGridViewComboBoxColumn curveStyleColumn;
 
     }
 }
