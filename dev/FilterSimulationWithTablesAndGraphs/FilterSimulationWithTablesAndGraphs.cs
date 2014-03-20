@@ -1200,6 +1200,7 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string SerieProjectName = "SerieProjectName";
             public const string SerieFilterType = "SerieFilterType";
             public const string SerieFilterMedium = "SerieFilterMedium";
+            public const string StyleInString = "StyleInString";
         }
 
         private DiagramTemplatesForm newDiagramTemplatesDialog = new DiagramTemplatesForm();
@@ -1235,7 +1236,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     SaveXParameterName(addNode, doc);
                     SaveY1ParametersNames(addNode, doc);
                     SaveY2ParametersNames(addNode, doc);
-                    SaveMinMaxValues(addNode, doc);
+                    SaveMinMaxValuesAndCurvesStyles(addNode, doc);
                     SaveCurvesColors(addNode, doc);
                     xn.AppendChild(addNode);
                 }
@@ -1276,7 +1277,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     DeserializeY1NodesForMenuOpen(xn);
                     DeserializeY2Nodes(xn);
                     LoadRowsQuantity(xn);
-                    LoadTemplateMinMaxValuesOfTheXAxisParameter(xn);
+                    LoadTemplateMinMaxValuesOfTheXAxisParameterAndCurveStyle(xn);
                     DeserializeCurvesColors(xn);
                     break;
                 }
@@ -1284,7 +1285,7 @@ namespace FilterSimulationWithTablesAndGraphs
             doc.Save(DiagramTemplatesFilename);
         }
 
-        protected void LoadTemplateMinMaxValuesOfTheXAxisParameter(XmlNode coreNode) //load min/max X values for serie with exact name, material, etc... 
+        protected void LoadTemplateMinMaxValuesOfTheXAxisParameterAndCurveStyle(XmlNode coreNode) //load min/max X values for serie with exact name, material, etc... 
         {
             if (coreNode == null)
             {
@@ -1298,6 +1299,7 @@ namespace FilterSimulationWithTablesAndGraphs
             string SerieProjectName;
             string SerieFilterType;
             string SerieFilterMedium;
+            string StyleInString;
 
             fmFilterSimSerie serie;
 
@@ -1319,7 +1321,12 @@ namespace FilterSimulationWithTablesAndGraphs
                         SerieFilterType = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieFilterType).InnerText;
                         SerieFilterMedium = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieFilterMedium).InnerText;
 
-                        if (SerieCharge == serie.Parent.GetName() && SerieCustomer == serie.Parent.Customer.ToString() && SerieMaterial == serie.Parent.Material.ToString() && SerieProjectName == serie.Parent.Parent.GetName() && SerieFilterType == serie.MachineType.name && SerieFilterMedium == serie.FilterMedium)
+                        if (SerieCharge == serie.Parent.GetName() && 
+                            SerieCustomer == serie.Parent.Customer.ToString() && 
+                            SerieMaterial == serie.Parent.Material.ToString() && 
+                            SerieProjectName == serie.Parent.Parent.GetName() && 
+                            SerieFilterType == serie.MachineType.name && 
+                            SerieFilterMedium == serie.FilterMedium)
                         {
 
                             var tmpCell = InvolvedSeriesDataGrid.CurrentCell;
@@ -1336,10 +1343,15 @@ namespace FilterSimulationWithTablesAndGraphs
                                 MinMaxXValueTextBoxTextChanged(null, new EventArgs());
                             }
                             InvolvedSeriesDataGrid.CurrentCell = tmpCell;
+
+                            StyleInString = node.SelectSingleNode(DiagramTemplatesSavingTags.StyleInString).InnerText;
+                            AddCurveStyleTemplate(serie, StyleInString);
                         }
                     }
                 }
             }
+            loadCurvesStylesToTable();
+            BindCalculatedResultsToChart();
         }
 
         private void LoadRowsQuantity(XmlNode node)
@@ -1377,7 +1389,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     SaveXParameterName(addNode, doc);
                     SaveY1ParametersNames(addNode, doc);
                     SaveY2ParametersNames(addNode, doc);
-                    SaveMinMaxValues(addNode, doc);
+                    SaveMinMaxValuesAndCurvesStyles(addNode, doc);
                     SaveCurvesColors(addNode, doc);
                     xn.AppendChild(addNode);
                 }
@@ -1532,7 +1544,7 @@ namespace FilterSimulationWithTablesAndGraphs
             }
         }
 
-        private void SaveMinMaxValues(XmlNode node, XmlDocument doc)
+        private void SaveMinMaxValuesAndCurvesStyles(XmlNode node, XmlDocument doc)
         {   
             foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
             {       
@@ -1549,7 +1561,11 @@ namespace FilterSimulationWithTablesAndGraphs
                 newNode3.AppendChild(newNode);
                 XmlNode newNode2 = doc.CreateElement(DiagramTemplatesSavingTags.MinMaxParameter);
                 newNode2.InnerText = row.Cells[2].Value.ToString();
-                newNode3.AppendChild(newNode2); 
+                newNode3.AppendChild(newNode2);
+
+                XmlNode newNode10 = doc.CreateElement(DiagramTemplatesSavingTags.StyleInString);
+                newNode10.InnerText = row.Cells[3].Value.ToString();
+                newNode3.AppendChild(newNode10);
 
                 XmlNode newNode4 = doc.CreateElement(DiagramTemplatesSavingTags.SerieCharge);
                 newNode4.InnerText = serie.Parent.GetName();
