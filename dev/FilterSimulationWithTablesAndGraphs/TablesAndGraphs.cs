@@ -272,6 +272,15 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private List<CurveStyleTemplate> CurvesStylesTemplates = new List<CurveStyleTemplate>();
 
+        private class CoordinatesGridColumnOrder // contains data for coordinates grid columns order
+        {
+            public string HeaderText { get; set; }
+            public int DisplayIndex { get; set; }
+            public int ColumnWidth { get; set; }
+        }
+
+        private List<CoordinatesGridColumnOrder> CoordinatesGridColumnOrderList = new List<CoordinatesGridColumnOrder>();
+
         public void AddCurveStyleTemplate(fmFilterSimSerie serie, string styleInString)
         {
             foreach (var cst in CurvesStylesTemplates)
@@ -291,6 +300,26 @@ namespace FilterSimulationWithTablesAndGraphs
                 style = curvesStylesWithStylesInStrings.FirstOrDefault(x => x.Value == styleInString).Key
             };
             CurvesStylesTemplates.Add(newcst);
+        }
+
+        public void PreserveCoordinatesGridColumsOrder()
+        {
+            if (coordinatesGrid.Columns.Count == 0)
+                return;
+
+            CoordinatesGridColumnOrderList.Clear();
+
+            for (int i = 0; i < coordinatesGrid.Columns.Count; ++i)
+            {
+                foreach (DataGridViewColumn col in coordinatesGrid.Columns)
+                {
+                    if (col.DisplayIndex == i)
+                    {
+                        CoordinatesGridColumnOrder colOrder = new CoordinatesGridColumnOrder { HeaderText = col.HeaderText, DisplayIndex = col.DisplayIndex , ColumnWidth = col.Width };
+                        CoordinatesGridColumnOrderList.Add(colOrder);
+                    }
+                }
+            }
         }
 
         private void FillListBox(IList listBoxItems, List<string> strings)
@@ -1179,6 +1208,37 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
             }
+            KeepCoordinatesGridColumsOrder();
+        }
+
+        private void KeepCoordinatesGridColumsOrder()
+        {
+            if (coordinatesGrid.Columns.Count < 2)
+                return;
+
+            if (CoordinatesGridColumnOrderList.Count == 0)
+            {
+                PreserveCoordinatesGridColumsOrder();
+                return;
+            }
+
+            List<DataGridViewColumn> tmpColumns = new List<DataGridViewColumn>();
+
+            int displayIndex = 0;
+            foreach (CoordinatesGridColumnOrder colOrder in CoordinatesGridColumnOrderList)
+            {               
+                foreach (DataGridViewColumn col in coordinatesGrid.Columns)
+                {
+                    if (col.HeaderText == colOrder.HeaderText && !tmpColumns.Contains(col))
+                    {
+                        col.DisplayIndex = displayIndex;
+                        col.Width = colOrder.ColumnWidth;
+                        ++displayIndex;
+                        tmpColumns.Add(col);
+                    }
+                }
+            }
+            PreserveCoordinatesGridColumsOrder();
         }
 
         private void BindCalculatedResultsToChart()

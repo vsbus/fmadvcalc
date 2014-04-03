@@ -905,6 +905,11 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string SerieFilterType = "SerieFilterType";
             public const string SerieFilterMedium = "SerieFilterMedium";
             public const string StyleInString = "StyleInString";
+
+            public const string CoordinatesColumnsOrder = "CoordinatesColumnsOrder";
+            public const string CoordinatesColumnOrderNode = "CoordinatesColumnOrderNode";
+            public const string CoordinatesColumnHeader = "CoordinatesColumnHeader";
+            public const string CoordinatesColumnDisplayIndex = "CoordinatesColumnDisplayIndex";
         }
 
         public void SerializeInterfaceAdjusting(XmlWriter writer)
@@ -915,6 +920,7 @@ namespace FilterSimulationWithTablesAndGraphs
             SerializeCurvesColors(writer);
             SerializeTopTablesColumnSizes(writer);
             SerializeCurvesStyles(writer);
+            SerializeCoordinatesGridColumnsOrder(writer);
             writer.WriteEndElement();
         }
 
@@ -957,6 +963,7 @@ namespace FilterSimulationWithTablesAndGraphs
             SerializeTableColumnsSizes(writer, projectDataGrid);
             SerializeTableColumnsSizes(writer, suspensionDataGrid);
             SerializeTableColumnsSizes(writer, simSeriesDataGrid);
+            SerializeTableColumnsSizes(writer, coordinatesGrid);
             writer.WriteEndElement();
         }
 
@@ -1009,6 +1016,19 @@ namespace FilterSimulationWithTablesAndGraphs
             writer.WriteEndElement();
         }
 
+        private void SerializeCoordinatesGridColumnsOrder(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmInterfaceAdjustingTags.CoordinatesColumnsOrder);
+            foreach (var colOrder in CoordinatesGridColumnOrderList)
+            {
+                writer.WriteStartElement(fmInterfaceAdjustingTags.CoordinatesColumnOrderNode);
+                writer.WriteElementString(fmInterfaceAdjustingTags.CoordinatesColumnHeader, colOrder.HeaderText);
+                writer.WriteElementString(fmInterfaceAdjustingTags.CoordinatesColumnDisplayIndex , colOrder.DisplayIndex.ToString());
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
         public void DeserializeInterfaceAdjusting(XmlNode node)
         {
             node = node.SelectSingleNode(fmInterfaceAdjustingTags.InterfaceAdjusting);
@@ -1018,6 +1038,7 @@ namespace FilterSimulationWithTablesAndGraphs
             DeserializeTopTablesColumnSizes(node);
             DeserializeCurvesColors(node);
             DeserializeCurvesStyles(node);
+            DeserializeCoordinatesGridColumnsOrder(node);
         }
 
         private void DeerializeConfigureDiagramsWindowSize(XmlNode node)
@@ -1078,7 +1099,7 @@ namespace FilterSimulationWithTablesAndGraphs
             DeserializeTableColumnsSizes(node, projectDataGrid);
             DeserializeTableColumnsSizes(node, suspensionDataGrid);
             DeserializeTableColumnsSizes(node, simSeriesDataGrid);
-            
+            DeserializeTableColumnsSizes(node, coordinatesGrid);
         }
 
         private void DeserializeTableColumnsSizes(XmlNode node, DataGridView table)
@@ -1173,6 +1194,32 @@ namespace FilterSimulationWithTablesAndGraphs
             }
             loadCurvesStylesToTable();
             BindCalculatedResultsToChart();
+        }
+
+        private void DeserializeCoordinatesGridColumnsOrder(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmInterfaceAdjustingTags.CoordinatesColumnsOrder);
+            if (node == null)
+                return;
+
+            string columnHeader;
+            int parameterIndex;
+
+            XmlNodeList columnOrderNodes = node.SelectNodes(fmInterfaceAdjustingTags.CoordinatesColumnOrderNode);
+            foreach (XmlNode columnOrderNode in columnOrderNodes)
+            {
+                columnHeader = columnOrderNode.SelectSingleNode(fmInterfaceAdjustingTags.CoordinatesColumnHeader).InnerText;
+                parameterIndex = Convert.ToInt32(columnOrderNode.SelectSingleNode(fmInterfaceAdjustingTags.CoordinatesColumnDisplayIndex).InnerText);
+
+                foreach (DataGridViewColumn column in coordinatesGrid.Columns)
+                {
+                    if (column.HeaderText == columnHeader)
+                    {
+                        column.DisplayIndex = parameterIndex;
+                    }
+                }
+            }
+            PreserveCoordinatesGridColumsOrder();
         }
         #endregion
 
@@ -1628,5 +1675,32 @@ namespace FilterSimulationWithTablesAndGraphs
             ComboBox comboBox = (ComboBox)InvolvedSeriesDataGrid.EditingControl;
             comboBox.DroppedDown = true; 
         }
+
+        private void coordinatesGrid_ColumnDisplayIndexChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (isUserChanging)
+            {
+                PreserveCoordinatesGridColumsOrder();
+            }
+        }
+
+        bool isUserChanging = false;
+
+        private void coordinatesGrid_MouseDown(object sender, MouseEventArgs e)
+        {
+            isUserChanging = true;
+        }
+
+        private void coordinatesGrid_MouseUp(object sender, MouseEventArgs e)
+        {
+            isUserChanging = false;
+        }
+
+        private void coordinatesGrid_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            if (isUserChanging)
+                PreserveCoordinatesGridColumsOrder();
+        }
+       
     }
 }

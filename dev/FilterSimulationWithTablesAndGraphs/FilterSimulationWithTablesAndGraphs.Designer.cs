@@ -514,6 +514,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.coordinatesGrid.AllowUserToAddRows = false;
             this.coordinatesGrid.AllowUserToDeleteRows = false;
+            this.coordinatesGrid.AllowUserToOrderColumns = true;
             this.coordinatesGrid.AllowUserToResizeRows = false;
             this.coordinatesGrid.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
             this.coordinatesGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -532,7 +533,11 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetShowHelp(this.coordinatesGrid, true);
             this.coordinatesGrid.Size = new System.Drawing.Size(654, 179);
             this.coordinatesGrid.TabIndex = 0;
+            this.coordinatesGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.coordinatesGrid_MouseDown);
+            this.coordinatesGrid.ColumnDisplayIndexChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.coordinatesGrid_ColumnDisplayIndexChanged);
+            this.coordinatesGrid.MouseUp += new System.Windows.Forms.MouseEventHandler(this.coordinatesGrid_MouseUp);
             this.coordinatesGrid.CurrentCellChanged += new System.EventHandler(this.coordinatesGrid_CurrentCellChanged);
+            this.coordinatesGrid.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.coordinatesGrid_ColumnWidthChanged);
             // 
             // contextMenuStrip1
             // 
