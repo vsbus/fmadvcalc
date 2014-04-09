@@ -636,6 +636,15 @@ namespace FilterSimulationWithTablesAndGraphs
 
             foreach (DataGridViewColumn col in selectedSimulationParametersTable.Columns)
             {
+                bool isDeliqParamsHidden = true;
+                foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
+                {
+                    if (simData.InternalSimulationData.deliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used)
+                    {
+                        isDeliqParamsHidden = false;
+                    }
+                }
+
                 string parName = GetParameterNameFromHeader(col.HeaderText);
                 if (fmGlobalParameter.ParametersByName.ContainsKey(parName))
                 {
@@ -675,7 +684,10 @@ namespace FilterSimulationWithTablesAndGraphs
                                 }
                                 if (xParameter == null || yParameter == null || yParameter.group != xParameter.group)
                                 {
-                                    col.Visible = true;
+                                    if(!(isDeliqParamsHidden &&
+                                        ( m_xyListKind[par.Name] == fmParameterKind.MachiningSettingsDeliquoring ||
+                                        m_xyListKind[par.Name] == fmParameterKind.MaterialDeliquoring)))
+                                        col.Visible = true;
                                     break;
                                 }
                             }
@@ -1159,9 +1171,17 @@ namespace FilterSimulationWithTablesAndGraphs
                 coordinatesGrid.Columns[0].Width = 50;
                 coordinatesGrid.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
                 coordinatesGrid.RowCount = m_displayingResults.XParameter.Values.Length;
+
+                bool isDeliquaringParamsShowen = true;
+                if (m_displayingResults.XParameter.OwningSimulation!= null)
+                    isDeliquaringParamsShowen = (m_displayingResults.XParameter.OwningSimulation.deliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+
                 for (int i = 0; i < coordinatesGrid.RowCount; ++i)
                 {
-                    coordinatesGrid[0, i].Value = m_displayingResults.XParameter.Values[i];
+                    if (isDeliquaringParamsShowen)
+                        coordinatesGrid[0, i].Value = m_displayingResults.XParameter.Values[i];
+                    else
+                        coordinatesGrid[0, i].Value = " - ";
                 }
             }
 
@@ -1172,9 +1192,19 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             int yCol = 0;
-
-            foreach (fmDisplayingYListOfArrays yArrays in m_displayingResults.YParameters)
+            bool isAllDeliquaringParamsColumnsHidden = true;
+            
+            foreach (fmDisplayingYListOfArrays yArrays in m_displayingResults.YParameters) // we are hiding delicuaring parameters if deliq option no used
             {
+                foreach (fmDisplayingArray dispArray in yArrays.Arrays)
+                {
+                    if (dispArray.OwningSimulation.deliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used)
+                    {
+                        isAllDeliquaringParamsColumnsHidden = false;
+                        break;
+                    }
+                }
+
                 foreach (fmDisplayingArray dispArray in yArrays.Arrays)
                 {
                     ++yCol;
@@ -1197,14 +1227,31 @@ namespace FilterSimulationWithTablesAndGraphs
                         coordinatesGrid.Columns[yCol].Width = 50;
                         coordinatesGrid.Columns[yCol].SortMode = DataGridViewColumnSortMode.NotSortable;
 
-                        if (dispArray.Values.Length == coordinatesGrid.RowCount)
+                        bool isDeliquaringParamsHidden = false;
+
+                        if (dispArray.OwningSimulation.deliquoringUsedCalculationOption == fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed)
                         {
-                            for (int i = 0; i < coordinatesGrid.RowCount; ++i)
+                            if (m_xyListKind[dispArray.Parameter.Name] == fmParameterKind.MachiningSettingsDeliquoring || m_xyListKind[dispArray.Parameter.Name] == fmParameterKind.MaterialDeliquoring)
                             {
-                                coordinatesGrid[yCol, i].Value = dispArray.Values[i];
-                                coordinatesGrid[yCol, i].Style.ForeColor = color;
+                                isDeliquaringParamsHidden = true;
+                                if (isAllDeliquaringParamsColumnsHidden)
+                                    coordinatesGrid.Columns[yCol].Visible = false;
                             }
                         }
+
+                        if (dispArray.Values.Length == coordinatesGrid.RowCount)
+                        {
+                            if (isDeliquaringParamsHidden)
+                                for (int i = 0; i < coordinatesGrid.RowCount; ++i)
+                                {
+                                    coordinatesGrid[yCol, i].Value = " - ";
+                                }
+                            else
+                                for (int i = 0; i < coordinatesGrid.RowCount; ++i)
+                                {
+                                    coordinatesGrid[yCol, i].Value = dispArray.Values[i];
+                                }
+                        }   
                     }
                 }
             }
@@ -1876,12 +1923,15 @@ namespace FilterSimulationWithTablesAndGraphs
             }
 
             FillListBox(listBoxXAxis.Items, inputNames);
-            if (listBoxXAxis.SelectedItems.Count == 0 && inputNames.Contains(fmGlobalParameter.tf.Name))
+            if (listBoxXAxis.SelectedItems.Count == 0)
             {
-                foreach (ListViewItem item in listBoxXAxis.Items)
-                {
-                    item.Selected = item.Text == fmGlobalParameter.tf.Name;
-                }
+                if(inputNames.Contains(fmGlobalParameter.tf.Name))
+                    foreach (ListViewItem item in listBoxXAxis.Items)
+                    {
+                        item.Selected = item.Text == fmGlobalParameter.tf.Name;
+                    }
+                else
+                    listBoxXAxis.Items[0].Selected = true;
             }
 
             var outputNames = new List<string>();
@@ -1901,11 +1951,14 @@ namespace FilterSimulationWithTablesAndGraphs
             FillListBox(listBoxYAxis.Items, outputNames);
 
             if (listBoxYAxis.CheckedItems.Count == 0)
-            {
+            {                
                 if (outputNames.Contains(fmGlobalParameter.hc.Name))
                 {
                     listBoxYAxis.Items[outputNames.IndexOf(fmGlobalParameter.hc.Name)].Checked = true;
                 }
+                else
+                    if (listBoxYAxis.Items.Count > 0)
+                        listBoxYAxis.Items[0].Checked = true;
             }
 
             BindY2List(listBoxYAxis.CheckedItems);

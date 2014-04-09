@@ -105,6 +105,7 @@ namespace FilterSimulationWithTablesAndGraphs
             InitTreeView();
             tvTemplatesTreeView.ExpandAll();
             CheckCurrentDiagramTemplate(e);
+            HideOrShowMixedAndDeliqTemplates();
         }
 
         private void CheckCurrentDiagramTemplate(EventArgs e)
@@ -128,28 +129,62 @@ namespace FilterSimulationWithTablesAndGraphs
             if (e.Node.Name !="")
                 e.Cancel = true;
             if (tvTemplatesTreeView.SelectedNode == null)
+            {
                 btnDeleteCurveTemplate.Enabled = false;
+                btnOk.Enabled = false;
+            }
             else
+            {
                 btnDeleteCurveTemplate.Enabled = true;
+                btnOk.Enabled = true;
+            }
         }
 
         private void tvTemplatesTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (tvTemplatesTreeView.SelectedNode == null)
+            {
                 btnDeleteCurveTemplate.Enabled = false;
+                btnOk.Enabled = false;
+            }
             else
             {
                 btnDeleteCurveTemplate.Enabled = true;
-                
-                SelectedCurveName=tvTemplatesTreeView.SelectedNode.Text;
+                btnOk.Enabled = true;
 
-                fmFilterSimulationWithTablesAndGraphs.SelfRef.LoadParametersFromDiagramTemplate(SelectedCurveName);          
+                SelectedCurveName = tvTemplatesTreeView.SelectedNode.Text;
+
+                if (tvTemplatesTreeView.SelectedNode.ForeColor == Color.Gray)
+                {
+                    DialogResult diagresult = MessageBox.Show("Current simulation(s) has no deliquring. This template will be loaded, but deliquoring parameters will be neglected", "Warning", MessageBoxButtons.OK);
+                }
+
+                fmFilterSimulationWithTablesAndGraphs.SelfRef.LoadParametersFromDiagramTemplate(SelectedCurveName);
             }
         }
 
         public void GetCurrentDiagramTemplateName(string DiagramTemplateName)
         {
             currentDiagramTemplateName = DiagramTemplateName;
+        }
+
+        private void HideOrShowMixedAndDeliqTemplates()
+        {
+            if (fmFilterSimulationWithTablesAndGraphs.SelfRef.isDeliqParametersHidden())
+            {
+                tvTemplatesTreeView.Nodes["DeliqNode"].ForeColor = Color.Gray;
+                tvTemplatesTreeView.Nodes["MixedNode"].ForeColor = Color.Gray;
+                foreach (TreeNode node in tvTemplatesTreeView.Nodes["DeliqNode"].Nodes)
+                {
+                    node.ForeColor = Color.Gray;
+                }
+                foreach (TreeNode node in tvTemplatesTreeView.Nodes["MixedNode"].Nodes)
+                {
+                    node.ForeColor = Color.Gray;
+                }
+                tvTemplatesTreeView.Nodes["DeliqNode"].Collapse();
+                tvTemplatesTreeView.Nodes["MixedNode"].Collapse();
+            }
         }
     }
 }

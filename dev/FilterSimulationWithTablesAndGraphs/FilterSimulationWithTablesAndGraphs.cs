@@ -79,6 +79,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 displayingSolution = true;
                 DisplayCharts(sol);
+                HideOrShowDeliqParamsInMXyDialog();
                 displayingSolution = false;
             }
         }
@@ -300,6 +301,39 @@ namespace FilterSimulationWithTablesAndGraphs
             PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
             m_xyDialogHeight = m_xyDialog.Height;
             m_xyDialogWidth = m_xyDialog.Width;
+        }
+
+        private void HideOrShowDeliqParamsInMXyDialog()
+        {
+            if (isDeliqParametersHidden())
+            {
+                deliquoringMachininglParametersCheckBox.Checked = false;
+                deliquoringMachininglParametersCheckBox.Enabled = false;
+                deliquoringMaterilParametersCheckBox.Checked = false;
+                deliquoringMaterilParametersCheckBox.Enabled = false;
+                BindXYLists();
+            }
+            else
+            {               
+                deliquoringMachininglParametersCheckBox.Enabled = true;
+                deliquoringMaterilParametersCheckBox.Enabled = true;
+                BindXYLists();
+            }
+        }
+
+        public bool isDeliqParametersHidden()
+        {
+            var justSeries = new List<fmFilterSimSerie>(m_involvedSeries.Keys);
+
+            foreach (fmFilterSimSerie serie in justSeries)
+            {
+                foreach (fmFilterSimulation simulation in serie.SimulationsList)
+                {
+                    if (simulation.DeliquoringUsedCalculationOption == fmCalculatorsLibrary.fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used)
+                        return false;
+                }
+            }
+            return true;
         }
 
         public bool IsModified()
@@ -1248,6 +1282,8 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string SerieFilterType = "SerieFilterType";
             public const string SerieFilterMedium = "SerieFilterMedium";
             public const string StyleInString = "StyleInString";
+
+            public const string ConfigCheckBoxes = "ConfigCheckBoxes";
         }
 
         private DiagramTemplatesForm newDiagramTemplatesDialog = new DiagramTemplatesForm();
@@ -1285,6 +1321,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     SaveY2ParametersNames(addNode, doc);
                     SaveMinMaxValuesAndCurvesStyles(addNode, doc);
                     SaveCurvesColors(addNode, doc);
+                    SaveConfigCheckBoxes(addNode, doc);
                     xn.AppendChild(addNode);
                 }
 
@@ -1320,6 +1357,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 if (xn.Attributes["id"].Value == CurveName)
                 {
+                    LoadConfigCheckBoxes(xn);
                     DeserializeXParameter(xn);
                     DeserializeY1NodesForMenuOpen(xn);
                     DeserializeY2Nodes(xn);
@@ -1438,6 +1476,7 @@ namespace FilterSimulationWithTablesAndGraphs
                     SaveY2ParametersNames(addNode, doc);
                     SaveMinMaxValuesAndCurvesStyles(addNode, doc);
                     SaveCurvesColors(addNode, doc);
+                    SaveConfigCheckBoxes(addNode, doc);
                     xn.AppendChild(addNode);
                 }
                 
@@ -1494,12 +1533,16 @@ namespace FilterSimulationWithTablesAndGraphs
         private string GetCurveTemplateName()
         {
             string RightPart;
-            string LeftPart;            
+            string LeftPart;
+            string CenterPart;
 
             fmGlobalParameter xParameter = GetCurrentXAxisParameter();
-            RightPart = "f(" + xParameter.Name + ")";
+            if (xParameter != null)
+                CenterPart = xParameter.Name;
+            else
+                CenterPart = "";
 
-            var color = m_xyListKind[xParameter.Name];
+            RightPart = "f(" + CenterPart + ")";
 
             LeftPart = "";
             foreach (ListViewItem item in listBoxYAxis.Items)
@@ -1510,7 +1553,8 @@ namespace FilterSimulationWithTablesAndGraphs
                 }
             }
 
-            LeftPart = LeftPart.Remove(0, 2);
+            if (LeftPart !="")
+                LeftPart = LeftPart.Remove(0, 2);
             return LeftPart+" = "+RightPart;
 
         }
@@ -1638,7 +1682,74 @@ namespace FilterSimulationWithTablesAndGraphs
                 newNode9.InnerText = serie.FilterMedium;
                 newNode3.AppendChild(newNode9);
             }
+        }
 
+        private void SaveConfigCheckBoxes(XmlNode node, XmlDocument doc)
+        {
+            XmlNode checkBoxesNode = doc.CreateElement(DiagramTemplatesSavingTags.ConfigCheckBoxes);
+            node.AppendChild(checkBoxesNode);
+
+            XmlNode newNode1 = doc.CreateElement(cakeFormationMaterilParametersCheckBox.Name);
+            newNode1.InnerText = cakeFormationMaterilParametersCheckBox.Checked.ToString();
+            checkBoxesNode.AppendChild(newNode1);
+
+            XmlNode newNode2 = doc.CreateElement(cakeFormationMachininglParametersCheckBox.Name);
+            newNode2.InnerText = cakeFormationMachininglParametersCheckBox.Checked.ToString();
+            checkBoxesNode.AppendChild(newNode2);
+
+            XmlNode newNode3 = doc.CreateElement(deliquoringMaterilParametersCheckBox.Name);
+            newNode3.InnerText = deliquoringMaterilParametersCheckBox.Checked.ToString();
+            checkBoxesNode.AppendChild(newNode3);
+
+            XmlNode newNode4 = doc.CreateElement(deliquoringMachininglParametersCheckBox.Name);
+            newNode4.InnerText = deliquoringMachininglParametersCheckBox.Checked.ToString();
+            checkBoxesNode.AppendChild(newNode4);
+
+            XmlNode newNode5 = doc.CreateElement(NoScalingCheckBox.Name);
+            newNode5.InnerText = NoScalingCheckBox.Checked.ToString();
+            checkBoxesNode.AppendChild(newNode5);
+
+            XmlNode newNode6 = doc.CreateElement(startFromOriginCheckBox.Name);
+            newNode6.InnerText = startFromOriginCheckBox.Checked.ToString();
+            checkBoxesNode.AppendChild(newNode6);
+
+            XmlNode newNode7 = doc.CreateElement(xLogCheckBox.Name);
+            newNode7.InnerText = xLogCheckBox.Checked.ToString();
+            checkBoxesNode.AppendChild(newNode7);
+
+            XmlNode newNode8 = doc.CreateElement(yLogCheckBox.Name);
+            newNode8.InnerText = yLogCheckBox.Checked.ToString();
+            checkBoxesNode.AppendChild(newNode8);
+
+            XmlNode newNode9 = doc.CreateElement(y2LogCheckBox.Name);
+            newNode9.InnerText = y2LogCheckBox.Checked.ToString();
+            checkBoxesNode.AppendChild(newNode9);
+        }
+
+        private void LoadConfigCheckBoxes(XmlNode coreNode)
+        {
+            if (coreNode == null)
+                return;
+            coreNode = coreNode.SelectSingleNode(DiagramTemplatesSavingTags.ConfigCheckBoxes);
+            if (coreNode == null)
+                return;
+
+            LoadCeckBoxCheckedFromNode(cakeFormationMaterilParametersCheckBox, coreNode);
+            LoadCeckBoxCheckedFromNode(cakeFormationMachininglParametersCheckBox, coreNode);
+            LoadCeckBoxCheckedFromNode(deliquoringMaterilParametersCheckBox, coreNode);
+            LoadCeckBoxCheckedFromNode(deliquoringMachininglParametersCheckBox, coreNode);
+            LoadCeckBoxCheckedFromNode(NoScalingCheckBox, coreNode);
+            LoadCeckBoxCheckedFromNode(startFromOriginCheckBox, coreNode);
+            LoadCeckBoxCheckedFromNode(xLogCheckBox, coreNode);
+            LoadCeckBoxCheckedFromNode(yLogCheckBox, coreNode);
+            LoadCeckBoxCheckedFromNode(y2LogCheckBox, coreNode);
+ 
+            HideOrShowDeliqParamsInMXyDialog();
+        }
+
+        private void LoadCeckBoxCheckedFromNode(CheckBox checkBox, XmlNode node)
+        {
+            checkBox.Checked = Convert.ToBoolean(node.SelectSingleNode(checkBox.Name).InnerText);
         }
         #endregion         
 
