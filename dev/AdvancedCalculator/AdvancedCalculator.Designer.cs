@@ -49,9 +49,10 @@ namespace AdvancedCalculator
             this.filterTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.filterSimulationWithTablesAndGraphs1 = new FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.exitToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.commentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -63,6 +64,7 @@ namespace AdvancedCalculator
             this.openFileToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.commentsToolStripMenuItem,
             this.createNewSimulationToolStripMenuItem,
             this.calculationPrecisionToolStripMenuItem,
             this.parametersToDisplayToolStripMenuItem,
@@ -214,6 +216,13 @@ namespace AdvancedCalculator
             this.helpStripMenuItem1.Text = "Help";
             this.helpStripMenuItem1.Click += new System.EventHandler(this.helpStripMenuItem1_Click);
             // 
+            // exitToolStripMenuItem2
+            // 
+            this.exitToolStripMenuItem2.Name = "exitToolStripMenuItem2";
+            this.exitToolStripMenuItem2.Size = new System.Drawing.Size(37, 20);
+            this.exitToolStripMenuItem2.Text = "Exit";
+            this.exitToolStripMenuItem2.Click += new System.EventHandler(this.exitToolStripMenuItem2_Click);
+            // 
             // filterSimulationWithTablesAndGraphs1
             // 
             this.filterSimulationWithTablesAndGraphs1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -228,12 +237,13 @@ namespace AdvancedCalculator
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // exitToolStripMenuItem2
+            // commentsToolStripMenuItem
             // 
-            this.exitToolStripMenuItem2.Name = "exitToolStripMenuItem2";
-            this.exitToolStripMenuItem2.Size = new System.Drawing.Size(37, 20);
-            this.exitToolStripMenuItem2.Text = "Exit";
-            this.exitToolStripMenuItem2.Click += new System.EventHandler(this.exitToolStripMenuItem2_Click);
+            this.commentsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("commentsToolStripMenuItem.Image")));
+            this.commentsToolStripMenuItem.Name = "commentsToolStripMenuItem";
+            this.commentsToolStripMenuItem.Size = new System.Drawing.Size(28, 20);
+            this.commentsToolStripMenuItem.ToolTipText = "Session comments";
+            this.commentsToolStripMenuItem.Click += new System.EventHandler(this.commentsToolStripMenuItem_Click);
             // 
             // fmAdvancedCalculator
             // 
@@ -279,6 +289,7 @@ namespace AdvancedCalculator
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem commentsToolStripMenuItem;
         
 
 

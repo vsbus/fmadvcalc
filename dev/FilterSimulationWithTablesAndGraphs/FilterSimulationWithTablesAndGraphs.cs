@@ -1812,6 +1812,22 @@ namespace FilterSimulationWithTablesAndGraphs
             if (isUserChanging)
                 PreserveCoordinatesGridColumsOrder();
         }
+
+        public Color getParamKindColor(string param)
+        {
+            return m_parameterKindProperties[m_xyListKind[param]].Color;
+        }
+
+        private void btnParamsOrder_Click(object sender, EventArgs e)
+        {
+            ColumnsOrderForm colOrFor = new ColumnsOrderForm(simulationDataGrid);
+            colOrFor.ShowDialog();
+        }
+
+        public void hook()
+        {
+            UpdateCurrentObjectAndDisplaySolution(simulationDataGrid);
+        }
        
     }
 }

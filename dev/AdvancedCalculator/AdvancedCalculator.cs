@@ -8,6 +8,8 @@ using System.Xml;
 using System.IO;
 using TheCodeKing.ActiveButtons.Controls;
 using System.Drawing;
+using System.Reflection;
+using fmControls;
 
 namespace AdvancedCalculator
 {
@@ -112,6 +114,7 @@ namespace AdvancedCalculator
                     {
                         filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(cfgFileNode);
                         filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(cfgFileNode);
+                        filterSimulationWithTablesAndGraphs1.hook();
                     }
                     return;
                 }
@@ -211,6 +214,9 @@ namespace AdvancedCalculator
         {
             public const string FiltraplusDataFile = "Filtraplus_Data_File";
             public const string FiltraplusConfigFile = "Filtraplus_Config_File";
+
+            public const string FiltraplusTemporaryFile = "^_^";
+            public const string SessionComments = "SessionComments";
         }
 
         private void SaveOnDisk(string fileName)
@@ -231,6 +237,7 @@ namespace AdvancedCalculator
             writer.Close();
         }
 
+        private TextBox textbox = new TextBox();
         private void LoadFromDiskToolStripMenuItemClick(object sender, EventArgs e)
         {
             var openDialog = new OpenFileDialog {Filter = @"Data files (*.dat)|*.dat"};
@@ -240,10 +247,85 @@ namespace AdvancedCalculator
                 string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
                 openDialog.InitialDirectory = path;
             }
-            if (openDialog.ShowDialog() == DialogResult.OK)
+
+            var tmp = m_currentFilename;
+            SaveOnDisk(fmFiltraplusSerializeTags.FiltraplusTemporaryFile);
+            File.SetAttributes(fmFiltraplusSerializeTags.FiltraplusTemporaryFile, FileAttributes.Hidden);
+            var extndOpenDialog = new FileDialogExtenders.FileDialogControlBase();
+
+            var label = new Label();
+
+            textbox.Text = LoadSessionCommentsFromFile(m_currentFilename);
+            textbox.ReadOnly = true;
+            textbox.Width = 200;
+            textbox.Multiline = true;
+            label.Text = "User Comments:";
+
+            extndOpenDialog.Controls.Add(label);
+            extndOpenDialog.Controls.Add(textbox);
+
+            label.Top = 10;
+            label.Left = (textbox.Width - label.Width) / 2;
+
+            extndOpenDialog.Width = textbox.Width + 5;
+            textbox.Top = label.Bottom+2;
+            textbox.Height = 285;
+
+            if (textbox.Text.Length > 672)
             {
-                LoadFromDisk(openDialog.FileName);
+                textbox.ScrollBars = ScrollBars.Vertical;
+            }            
+
+            extndOpenDialog.FileDlgCaption = "Open Session";
+            extndOpenDialog.FileDlgOkCaption = "OK";
+            extndOpenDialog.EventFileNameChanged +=new FileDialogExtenders.FileDialogControlBase.PathChangedEventHandler(extndOpenDialog_EventFileNameChanged);
+
+            var tmpCurDir = Directory.GetCurrentDirectory();
+
+            if (FileDialogExtenders.Extensions.ShowDialog(openDialog, extndOpenDialog, this) != DialogResult.OK)
+            {
+                LoadFromDiskWithLoadingMessage(fmFiltraplusSerializeTags.FiltraplusTemporaryFile);
+                m_currentFilename = tmp;
+                Text = m_caption + @" [" + m_currentFilename + @"]";
             }
+            Directory.SetCurrentDirectory(tmpCurDir);
+            File.Delete(fmFiltraplusSerializeTags.FiltraplusTemporaryFile);
+        }
+
+        private void extndOpenDialog_EventFileNameChanged(IWin32Window sender, string filePath)
+        {
+            FileInfo fi = new FileInfo(filePath);
+            if (fi.Extension == ".dat")
+            {
+                textbox.Text = LoadSessionCommentsFromFile(filePath);
+                LoadFromDiskWithLoadingMessage(filePath);
+            }
+        }
+
+        private void LoadFromDiskWithLoadingMessage(string filePath)
+        {
+            string loadingString = "Loading...";
+            Color color = Color.FromArgb(0, 32, 96);
+            Brush brush = new SolidBrush(color);
+            Font fontSmall = new Font("Arial", 22);
+            Graphics Graph = this.CreateGraphics();
+            float x;
+            float y;
+            
+            SizeF stringSize = new SizeF();
+            stringSize = Graph.MeasureString(loadingString, fontSmall);
+
+            x = (this.Width - stringSize.Width) / 2;
+            y = this.Height / 2;
+
+            filterSimulationWithTablesAndGraphs1.Visible = false;
+            Graph.DrawString(loadingString, fontSmall, brush, x, y);
+            var tmpCursor = this.Cursor;
+            this.Cursor = Cursors.WaitCursor;
+
+            LoadFromDisk(filePath);
+            filterSimulationWithTablesAndGraphs1.Visible = true;
+            this.Cursor = tmpCursor;
         }
 
         private string m_currentFilename;
@@ -258,9 +340,10 @@ namespace AdvancedCalculator
                 filterSimulationWithTablesAndGraphs1.DeserializeData(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
                 Text = m_caption + @" [" + fileName + @"]";
-                filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
                 filterSimulationWithTablesAndGraphs1.DeserializeConfigurationForMenuOpen(
-                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));                
+                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));  
+                filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
+
             }
             catch (Exception)
             {
@@ -458,6 +541,51 @@ namespace AdvancedCalculator
                     m_currentFilename,
                     RegistryValueKind.String);
             }
+        }
+
+        private void commentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RunSessionCommentsWindow();
+        }
+
+        private void RunSessionCommentsWindow()
+        {
+            var commentWindow = new CommentsWindow();
+            commentWindow.SetCommentedObjectName("Session");
+            commentWindow.SetCommentText(LoadSessionCommentsFromFile(m_currentFilename));
+            if (commentWindow.ShowDialog() == DialogResult.OK)
+            {
+                SaveSessionCommentsToCurrentFile(commentWindow.GetCommentText());
+            }
+        }
+
+        private void SaveSessionCommentsToCurrentFile(string commentsString)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(m_currentFilename); 
+            XmlNode root = doc.DocumentElement;
+            //Create a new node.
+            XmlElement elem = doc.CreateElement(fmFiltraplusSerializeTags.SessionComments);
+            elem.InnerText = commentsString;
+            //Add the node to the document.
+
+            if (root.SelectSingleNode(fmFiltraplusSerializeTags.SessionComments) != null)
+                root.RemoveChild(root.SelectSingleNode(fmFiltraplusSerializeTags.SessionComments));
+
+            root.AppendChild(elem);
+            doc.Save(m_currentFilename);
+        }
+
+        private string LoadSessionCommentsFromFile(string filePath)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filePath);
+            XmlNode root = doc.DocumentElement;
+            XmlNode comNode = root.SelectSingleNode(fmFiltraplusSerializeTags.SessionComments);
+            doc.Save(filePath);
+            if (comNode == null)
+                return "";
+            return comNode.InnerText;
         }
     }
 }

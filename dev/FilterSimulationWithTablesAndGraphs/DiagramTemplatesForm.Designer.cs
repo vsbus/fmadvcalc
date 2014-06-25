@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Filtration Curves");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Deliquering Curves");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Mixed Curves");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Filtration Curves");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Deliquering Curves");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Mixed Curves");
             this.tvTemplatesTreeView = new System.Windows.Forms.TreeView();
             this.btnDeleteCurveTemplate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -44,16 +44,16 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tvTemplatesTreeView.Location = new System.Drawing.Point(12, 5);
             this.tvTemplatesTreeView.Name = "tvTemplatesTreeView";
-            treeNode4.Name = "FiltrationNode";
-            treeNode4.Text = "Filtration Curves";
-            treeNode5.Name = "DeliqNode";
-            treeNode5.Text = "Deliquering Curves";
-            treeNode6.Name = "MixedNode";
-            treeNode6.Text = "Mixed Curves";
+            treeNode1.Name = "FiltrationNode";
+            treeNode1.Text = "Filtration Curves";
+            treeNode2.Name = "DeliqNode";
+            treeNode2.Text = "Deliquering Curves";
+            treeNode3.Name = "MixedNode";
+            treeNode3.Text = "Mixed Curves";
             this.tvTemplatesTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5,
-            treeNode6});
+            treeNode1,
+            treeNode2,
+            treeNode3});
             this.tvTemplatesTreeView.Size = new System.Drawing.Size(281, 233);
             this.tvTemplatesTreeView.TabIndex = 0;
             this.tvTemplatesTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvTemplatesTreeView_AfterSelect);

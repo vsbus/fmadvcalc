@@ -63,6 +63,12 @@
     <Compile Include="colorPaleteForm.Designer.cs">
       <DependentUpon>colorPaleteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ColumnsOrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ColumnsOrderForm.Designer.cs">
+      <DependentUpon>ColumnsOrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DiagramTemplatesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,9 @@
       <DependentUpon>FilterSimulationWithTablesAndGraphs.cs</DependentUpon>
     </Compile>
     <Compile Include="ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ListViewExReorder.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -140,6 +149,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="colorPaleteForm.resx">
       <DependentUpon>colorPaleteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColumnsOrderForm.resx">
+      <DependentUpon>ColumnsOrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DiagramTemplatesForm.resx">
       <DependentUpon>DiagramTemplatesForm.cs</DependentUpon>

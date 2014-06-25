@@ -92,6 +92,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.RightSplitContainer = new System.Windows.Forms.SplitContainer();
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.btnParamsOrder = new System.Windows.Forms.Button();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -189,8 +190,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // suspensionRestoreButton
             // 
             this.suspensionRestoreButton.FlatAppearance.BorderSize = 0;
-            this.suspensionRestoreButton.Location = new System.Drawing.Point(105, 0);
-			this.helpProvider1.SetHelpKeyword(this.suspensionRestoreButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpKeyword(this.suspensionRestoreButton, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.suspensionRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.suspensionRestoreButton, true);
             this.toolTip.SetToolTip(this.suspensionRestoreButton, "Restore suspension");
@@ -198,8 +198,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // suspensionDeleteButton
             // 
             this.suspensionDeleteButton.FlatAppearance.BorderSize = 0;
-            this.suspensionDeleteButton.Location = new System.Drawing.Point(125, 0);
-			this.helpProvider1.SetHelpKeyword(this.suspensionDeleteButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpKeyword(this.suspensionDeleteButton, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.suspensionDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.suspensionDeleteButton, true);
             this.toolTip.SetToolTip(this.suspensionDeleteButton, "Delete suspension");
@@ -225,6 +224,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.simulationDuplicateButton.FlatAppearance.BorderSize = 0;
             this.helpProvider1.SetHelpKeyword(this.simulationDuplicateButton, "Simulations_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.simulationDuplicateButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.simulationDuplicateButton.Location = new System.Drawing.Point(404, 0);
             this.helpProvider1.SetShowHelp(this.simulationDuplicateButton, true);
             this.toolTip.SetToolTip(this.simulationDuplicateButton, "Duplicate externalSimulation");
             // 
@@ -233,6 +233,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.simulationRestoreButton.FlatAppearance.BorderSize = 0;
             this.helpProvider1.SetHelpKeyword(this.simulationRestoreButton, "Simulations_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.simulationRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.simulationRestoreButton.Location = new System.Drawing.Point(424, 0);
             this.helpProvider1.SetShowHelp(this.simulationRestoreButton, true);
             this.toolTip.SetToolTip(this.simulationRestoreButton, "Restore externalSimulation");
             // 
@@ -241,6 +242,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.simulationDeleteButton.FlatAppearance.BorderSize = 0;
             this.helpProvider1.SetHelpKeyword(this.simulationDeleteButton, "Simulations_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.simulationDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.simulationDeleteButton.Location = new System.Drawing.Point(444, 0);
             this.helpProvider1.SetShowHelp(this.simulationDeleteButton, true);
             this.toolTip.SetToolTip(this.simulationDeleteButton, "Delete externalSimulation");
             // 
@@ -266,12 +268,14 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.helpProvider1.SetHelpKeyword(this.byCheckingSimulationsCheckBox, "Simulations_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.byCheckingSimulationsCheckBox, System.Windows.Forms.HelpNavigator.Topic);
+            this.byCheckingSimulationsCheckBox.Location = new System.Drawing.Point(299, 0);
             this.helpProvider1.SetShowHelp(this.byCheckingSimulationsCheckBox, true);
             // 
             // fullSimulationInfoCheckBox
             // 
             this.helpProvider1.SetHelpKeyword(this.fullSimulationInfoCheckBox, "Simulations_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.fullSimulationInfoCheckBox, System.Windows.Forms.HelpNavigator.Topic);
+            this.fullSimulationInfoCheckBox.Location = new System.Drawing.Point(236, 0);
             this.helpProvider1.SetShowHelp(this.fullSimulationInfoCheckBox, true);
             // 
             // panelLeft
@@ -287,14 +291,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpKeyword(this.projectPanel, "Project_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.projectPanel, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.projectPanel, true);
-            this.projectPanel.Size = new System.Drawing.Size(170, 115);
+            this.projectPanel.Size = new System.Drawing.Size(321, 115);
             // 
             // suspensionPanel
             // 
             this.helpProvider1.SetHelpKeyword(this.suspensionPanel, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.suspensionPanel, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.suspensionPanel, true);
-            this.suspensionPanel.Size = new System.Drawing.Size(192, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(41, 115);
             // 
             // splitter2
             // 
@@ -359,14 +363,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpKeyword(this.panel1, "Project_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.panel1, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.panel1, true);
-            this.panel1.Size = new System.Drawing.Size(166, 20);
+            this.panel1.Size = new System.Drawing.Size(317, 20);
             // 
             // panel2
             // 
             this.helpProvider1.SetHelpKeyword(this.panel2, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.panel2, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.panel2, true);
-            this.panel2.Size = new System.Drawing.Size(188, 20);
+            this.panel2.Size = new System.Drawing.Size(37, 20);
             // 
             // panel3
             // 
@@ -377,6 +381,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel5
             // 
+            this.panel5.Controls.Add(this.btnParamsOrder);
             this.helpProvider1.SetHelpKeyword(this.panel5, "Simulations_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.panel5, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.panel5, true);
@@ -387,6 +392,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.simulationCreateButton.FlatAppearance.BorderSize = 0;
             this.helpProvider1.SetHelpKeyword(this.simulationCreateButton, "Simulations_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.simulationCreateButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.simulationCreateButton.Location = new System.Drawing.Point(384, 0);
             this.helpProvider1.SetShowHelp(this.simulationCreateButton, true);
             this.toolTip.SetToolTip(this.simulationCreateButton, "Create new externalSimulation");
             // 
@@ -419,13 +425,14 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(366, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 170;
+            this.projectSuspensionSplitContainer.SplitterDistance = 321;
             // 
             // commentSimulationButton
             // 
             this.commentSimulationButton.FlatAppearance.BorderSize = 0;
             this.helpProvider1.SetHelpKeyword(this.commentSimulationButton, "Simulations_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.commentSimulationButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.commentSimulationButton.Location = new System.Drawing.Point(464, 0);
             this.helpProvider1.SetShowHelp(this.commentSimulationButton, true);
             // 
             // commentProjectButton
@@ -438,8 +445,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // commentSuspensionButton
             // 
             this.commentSuspensionButton.FlatAppearance.BorderSize = 0;
-            this.commentSuspensionButton.Location = new System.Drawing.Point(145, 0);
-			this.helpProvider1.SetHelpKeyword(this.commentSuspensionButton, "Suspension_Table.htm");
+            this.helpProvider1.SetHelpKeyword(this.commentSuspensionButton, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.commentSuspensionButton, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.commentSuspensionButton, true);
             // 
@@ -487,7 +493,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpKeyword(this.buttonAddRow, "Table_belonging_to_the_Diagram.htm");
             this.helpProvider1.SetHelpNavigator(this.buttonAddRow, System.Windows.Forms.HelpNavigator.Topic);
             this.buttonAddRow.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddRow.Image")));
-            this.buttonAddRow.Location = new System.Drawing.Point(125, 0);
+            this.buttonAddRow.Location = new System.Drawing.Point(201, 0);
             this.buttonAddRow.Name = "buttonAddRow";
             this.helpProvider1.SetShowHelp(this.buttonAddRow, true);
             this.buttonAddRow.Size = new System.Drawing.Size(20, 21);
@@ -504,7 +510,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.UseParamsCheckBox.Location = new System.Drawing.Point(0, 0);
             this.UseParamsCheckBox.Name = "UseParamsCheckBox";
             this.helpProvider1.SetShowHelp(this.UseParamsCheckBox, true);
-            this.UseParamsCheckBox.Size = new System.Drawing.Size(125, 21);
+            this.UseParamsCheckBox.Size = new System.Drawing.Size(201, 21);
             this.UseParamsCheckBox.TabIndex = 9;
             this.UseParamsCheckBox.Text = "Multiple Curves for Current Simulation";
             this.UseParamsCheckBox.UseVisualStyleBackColor = true;
@@ -544,12 +550,12 @@ namespace FilterSimulationWithTablesAndGraphs
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.copyToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(111, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(103, 26);
             // 
             // copyToolStripMenuItem
             // 
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItemClick);
             // 
@@ -587,7 +593,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpKeyword(this.selectedSimulationParametersTable, "Table_belonging_to_the_Diagram.htm");
             this.helpProvider1.SetHelpNavigator(this.selectedSimulationParametersTable, System.Windows.Forms.HelpNavigator.Topic);
             this.selectedSimulationParametersTable.HighLightCurrentRow = true;
-            this.selectedSimulationParametersTable.Location = new System.Drawing.Point(0, 57);
+            this.selectedSimulationParametersTable.Location = new System.Drawing.Point(0, 21);
             this.selectedSimulationParametersTable.Name = "selectedSimulationParametersTable";
             this.selectedSimulationParametersTable.RowHeadersVisible = false;
             this.selectedSimulationParametersTable.RowTemplate.Height = 18;
@@ -633,7 +639,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpKeyword(this.additionalParametersTable, "Table_belonging_to_the_Diagram.htm");
             this.helpProvider1.SetHelpNavigator(this.additionalParametersTable, System.Windows.Forms.HelpNavigator.Topic);
             this.additionalParametersTable.HighLightCurrentRow = true;
-            this.additionalParametersTable.Location = new System.Drawing.Point(0, 57);
+            this.additionalParametersTable.Location = new System.Drawing.Point(0, 21);
             this.additionalParametersTable.Name = "additionalParametersTable";
             this.additionalParametersTable.RowHeadersVisible = false;
             this.additionalParametersTable.RowTemplate.Height = 18;
@@ -689,7 +695,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(646, 36);
             this.panel4.TabIndex = 12;
-            this.panel4.Controls.SetChildIndex(this.btnLoadDiagramTemplatesButton, 0);
             // 
             // btnLoadDiagramTemplatesButton
             // 
@@ -1147,6 +1152,17 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel9.Size = new System.Drawing.Size(654, 171);
             this.panel9.TabIndex = 11;
             // 
+            // btnParamsOrder
+            // 
+            this.btnParamsOrder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnParamsOrder.Location = new System.Drawing.Point(484, 0);
+            this.btnParamsOrder.Name = "btnParamsOrder";
+            this.btnParamsOrder.Size = new System.Drawing.Size(118, 20);
+            this.btnParamsOrder.TabIndex = 17;
+            this.btnParamsOrder.Text = "Parameters Order";
+            this.btnParamsOrder.UseVisualStyleBackColor = true;
+            this.btnParamsOrder.Click += new System.EventHandler(this.btnParamsOrder_Click);
+            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1279,6 +1295,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn FromValueColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn ToValueColumn;
         private DataGridViewComboBoxColumn curveStyleColumn;
+        private Button btnParamsOrder;
 
     }
 }

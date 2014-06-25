@@ -39,6 +39,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\libs\ActiveButtons.dll</HintPath>
     </Reference>
+    <Reference Include="FileDlgExtenders, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\FileDlgExtenders.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -107,6 +111,10 @@
     <ProjectReference Include="..\fmCalculationLibrary\fmCalculationLibrary.csproj">
       <Project>{D4A4B18A-B19E-46A7-8028-EF259E24849B}</Project>
       <Name>fmCalculationLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\fmControls\fmControls.csproj">
+      <Project>{4C76F538-29C4-4595-B2DF-DBAC9F80D652}</Project>
+      <Name>fmControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\fmDataGrid\fmDataGrid.csproj">
       <Project>{30A5CD2D-C64C-402B-A957-3885E498A97C}</Project>
