@@ -113,7 +113,10 @@ namespace AdvancedCalculator
                     if (cfgFileNode != null)
                     {
                         filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(cfgFileNode);
+                        filterSimulationWithTablesAndGraphs1.DeserializeLastSelectedSimulation(cfgFileNode);
+                        filterSimulationWithTablesAndGraphs1.DeserializeProgramOptions(cfgFileNode);
                         filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(cfgFileNode);
+                        filterSimulationWithTablesAndGraphs1.DesirializeParametersOrderAndColumnSizesInHorizontalTable(cfgFileNode);
                         filterSimulationWithTablesAndGraphs1.hook();
                     }
                     return;
@@ -343,7 +346,7 @@ namespace AdvancedCalculator
                 filterSimulationWithTablesAndGraphs1.DeserializeConfigurationForMenuOpen(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));  
                 filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
-
+                filterSimulationWithTablesAndGraphs1.hook2();
             }
             catch (Exception)
             {
@@ -366,6 +369,7 @@ namespace AdvancedCalculator
             writer.WriteStartElement(fmFiltraplusSerializeTags.FiltraplusConfigFile);
             filterSimulationWithTablesAndGraphs1.SerializeConfiguration(writer);
             filterSimulationWithTablesAndGraphs1.SerializeInterfaceAdjusting(writer);
+            filterSimulationWithTablesAndGraphs1.SerializeLastSelectedSimulation(writer);
             writer.WriteEndElement();
             writer.WriteEndDocument();
             writer.Close();
@@ -454,6 +458,7 @@ namespace AdvancedCalculator
                 m_currentFilename = null;
                 Text = m_caption;
             }
+            filterSimulationWithTablesAndGraphs1.hook2();
         }
 
         private void calculationPrecisionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -541,6 +546,15 @@ namespace AdvancedCalculator
                     m_currentFilename,
                     RegistryValueKind.String);
             }
+
+            DeleteTempFile();
+        }
+
+        private void DeleteTempFile()
+        {
+            string exeName = Path.GetFileName(System.Reflection.Assembly.GetEntryAssembly().Location);
+            string programPath = Assembly.GetExecutingAssembly().Location.Replace(exeName, "");
+            File.Delete(programPath + fmFiltraplusSerializeTags.FiltraplusTemporaryFile);
         }
 
         private void commentsToolStripMenuItem_Click(object sender, EventArgs e)

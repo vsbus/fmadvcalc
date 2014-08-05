@@ -209,7 +209,7 @@ namespace FilterSimulation
             writer.WriteElementString(fmFilterSimulationSerializeTags.Precision, fmValue.outputPrecision.ToString());
         }
 
-        private void DeserializeProgramOptions(XmlNode node)
+        public void DeserializeProgramOptions(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ProgramOptions);
             if (node == null)
@@ -533,6 +533,10 @@ namespace FilterSimulation
             }
         }
 
+        public void DesirializeParametersOrderAndColumnSizesInHorizontalTable(XmlNode node)
+        {
+            DeserializeParametersOrder(node);
+        }
         #endregion
 
         private void SetUpToolTips()
@@ -948,7 +952,7 @@ namespace FilterSimulation
         }
 
         // ReSharper disable InconsistentNaming
-        private void simulationCreateButton_Click(object sender, EventArgs e)
+        protected virtual void simulationCreateButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
             fmFilterSimSerie parentSerie = Solution.currentObjects.Serie;
@@ -1092,6 +1096,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                                     {
                                         Solution.currentObjects.Simulation = new fmFilterSimulation(serie, dialog.GetSimulationName());
                                         Solution.currentObjects.Simulation.CopySuspensionParameters(currentSimulation);
+                                        Solution.currentObjects.Simulation.Ranges = serie.Ranges;
 
                                         break;
                                     }
@@ -1250,7 +1255,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
 
         #endregion
 
-        private void button1_Click_1(object sender, EventArgs e)
+        protected virtual void button1_Click_1(object sender, EventArgs e)
         {
             fmFilterSimSuspension currentSuspension = Solution.currentObjects.Suspension;
 
@@ -1270,7 +1275,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             suspensionDataGrid.BeginEdit(true);
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        protected virtual void button2_Click_1(object sender, EventArgs e)
         {
             fmFilterSimProject currentProject = Solution.currentObjects.Project;
 
@@ -1300,7 +1305,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             RunCalculationOptionChangeDialog();
         }
 
-        public void newSimulationButton_Click(object sender, EventArgs e)
+        public virtual void newSimulationButton_Click(object sender, EventArgs e)
         {
             RunCreateNewSimulationDialog();
         }
@@ -1332,6 +1337,10 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             if (Solution.currentObjects.Serie != null)
             {
                 Solution.currentObjects.Serie.Ranges = ranges;
+                foreach (fmFilterSimulation simulation in Solution.currentObjects.Serie.SimulationsList)
+                {
+                    simulation.Ranges = Solution.currentObjects.Serie.Ranges = ranges;
+                }
             }
             foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in ranges.Ranges)
             {

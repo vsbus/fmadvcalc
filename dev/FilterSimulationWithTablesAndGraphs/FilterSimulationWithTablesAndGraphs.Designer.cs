@@ -75,10 +75,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.yLogCheckBox = new System.Windows.Forms.CheckBox();
             this.LoadDefaultRangle = new System.Windows.Forms.Button();
             this.InvolvedSeriesDataGrid = new fmDataGrid.fmDataGrid();
-            this.SerieColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FromValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.ToValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.curveStyleColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.startFromOriginCheckBox = new System.Windows.Forms.CheckBox();
             this.NoScalingCheckBox = new System.Windows.Forms.CheckBox();
             this.deliquoringMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
@@ -93,6 +89,11 @@ namespace FilterSimulationWithTablesAndGraphs
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
             this.btnParamsOrder = new System.Windows.Forms.Button();
+            this.SerieColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FromValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.ToValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.curveStyleColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.simulationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -695,6 +696,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(646, 36);
             this.panel4.TabIndex = 12;
+            this.panel4.Controls.SetChildIndex(this.btnLoadDiagramTemplatesButton, 0);
             // 
             // btnLoadDiagramTemplatesButton
             // 
@@ -708,9 +710,9 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // btnSaveDiagramTemplatesButton
             // 
-            this.btnSaveDiagramTemplatesButton.Location = new System.Drawing.Point(370, 192);
+            this.btnSaveDiagramTemplatesButton.Location = new System.Drawing.Point(326, 155);
             this.btnSaveDiagramTemplatesButton.Name = "btnSaveDiagramTemplatesButton";
-            this.btnSaveDiagramTemplatesButton.Size = new System.Drawing.Size(111, 22);
+            this.btnSaveDiagramTemplatesButton.Size = new System.Drawing.Size(75, 36);
             this.btnSaveDiagramTemplatesButton.TabIndex = 14;
             this.btnSaveDiagramTemplatesButton.Text = "Save Templates";
             this.btnSaveDiagramTemplatesButton.UseVisualStyleBackColor = true;
@@ -940,7 +942,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // LoadDefaultRangle
             // 
-            this.LoadDefaultRangle.Location = new System.Drawing.Point(276, 117);
+            this.LoadDefaultRangle.Location = new System.Drawing.Point(326, 117);
             this.LoadDefaultRangle.Name = "LoadDefaultRangle";
             this.LoadDefaultRangle.Size = new System.Drawing.Size(75, 36);
             this.LoadDefaultRangle.TabIndex = 9;
@@ -959,47 +961,19 @@ namespace FilterSimulationWithTablesAndGraphs
             this.SerieColumn,
             this.FromValueColumn,
             this.ToValueColumn,
-            this.curveStyleColumn});
+            this.curveStyleColumn,
+            this.simulationColumn});
             this.InvolvedSeriesDataGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.InvolvedSeriesDataGrid.HighLightCurrentRow = false;
             this.InvolvedSeriesDataGrid.Location = new System.Drawing.Point(13, 118);
             this.InvolvedSeriesDataGrid.Name = "InvolvedSeriesDataGrid";
             this.InvolvedSeriesDataGrid.RowHeadersVisible = false;
             this.InvolvedSeriesDataGrid.RowTemplate.Height = 18;
-            this.InvolvedSeriesDataGrid.Size = new System.Drawing.Size(257, 76);
+            this.InvolvedSeriesDataGrid.Size = new System.Drawing.Size(310, 76);
             this.InvolvedSeriesDataGrid.TabIndex = 8;
             this.InvolvedSeriesDataGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.InvolvedSeriesDataGrid_CellClick);
             this.InvolvedSeriesDataGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.InvolvedSeriesDataGrid_EditingControlShowing);
             this.InvolvedSeriesDataGrid.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.InvolvedSeriesDataGrid_CellValueChangedByUser);
-            // 
-            // SerieColumn
-            // 
-            this.SerieColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SerieColumn.HeaderText = "Serie";
-            this.SerieColumn.Name = "SerieColumn";
-            this.SerieColumn.ReadOnly = true;
-            this.SerieColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // FromValueColumn
-            // 
-            this.FromValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FromValueColumn.FillWeight = 50F;
-            this.FromValueColumn.HeaderText = "From";
-            this.FromValueColumn.Name = "FromValueColumn";
-            // 
-            // ToValueColumn
-            // 
-            this.ToValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ToValueColumn.FillWeight = 50F;
-            this.ToValueColumn.HeaderText = "To";
-            this.ToValueColumn.Name = "ToValueColumn";
-            // 
-            // curveStyleColumn
-            // 
-            this.curveStyleColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.curveStyleColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.curveStyleColumn.HeaderText = "Curve Style";
-            this.curveStyleColumn.Name = "curveStyleColumn";
             // 
             // startFromOriginCheckBox
             // 
@@ -1036,7 +1010,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // deselectAllButton
             // 
-            this.deselectAllButton.Location = new System.Drawing.Point(276, 192);
+            this.deselectAllButton.Location = new System.Drawing.Point(219, 195);
             this.deselectAllButton.Name = "deselectAllButton";
             this.deselectAllButton.Size = new System.Drawing.Size(91, 22);
             this.deselectAllButton.TabIndex = 4;
@@ -1162,6 +1136,43 @@ namespace FilterSimulationWithTablesAndGraphs
             this.btnParamsOrder.Text = "Parameters Order";
             this.btnParamsOrder.UseVisualStyleBackColor = true;
             this.btnParamsOrder.Click += new System.EventHandler(this.btnParamsOrder_Click);
+            // 
+            // SerieColumn
+            // 
+            this.SerieColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SerieColumn.HeaderText = "Serie";
+            this.SerieColumn.Name = "SerieColumn";
+            this.SerieColumn.ReadOnly = true;
+            this.SerieColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // FromValueColumn
+            // 
+            this.FromValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FromValueColumn.FillWeight = 50F;
+            this.FromValueColumn.HeaderText = "From";
+            this.FromValueColumn.Name = "FromValueColumn";
+            // 
+            // ToValueColumn
+            // 
+            this.ToValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ToValueColumn.FillWeight = 50F;
+            this.ToValueColumn.HeaderText = "To";
+            this.ToValueColumn.Name = "ToValueColumn";
+            // 
+            // curveStyleColumn
+            // 
+            this.curveStyleColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.curveStyleColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.curveStyleColumn.HeaderText = "Curve Style";
+            this.curveStyleColumn.Name = "curveStyleColumn";
+            // 
+            // simulationColumn
+            // 
+            this.simulationColumn.HeaderText = "Simulation";
+            this.simulationColumn.Name = "simulationColumn";
+            this.simulationColumn.ReadOnly = true;
+            this.simulationColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.simulationColumn.Width = 59;
             // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
@@ -1291,11 +1302,12 @@ namespace FilterSimulationWithTablesAndGraphs
         private ListViewEx listBoxY2Axis;
         private ColumnHeader nameColumn;
         private ColumnHeader colorColumn;
+        private Button btnParamsOrder;
         private DataGridViewTextBoxColumn SerieColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn FromValueColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn ToValueColumn;
         private DataGridViewComboBoxColumn curveStyleColumn;
-        private Button btnParamsOrder;
+        private DataGridViewTextBoxColumn simulationColumn;
 
     }
 }

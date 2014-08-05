@@ -20,6 +20,7 @@ namespace FilterSimulationWithTablesAndGraphs
             CreateColumnsInParametersTables();
             ReadUseParamsCheckBoxAndApply();
             rowsQuantity.Text = m_rowsQuantity.ToString();
+            simulationColumn.DisplayIndex = 1;
 
             SelfRef = this;
         }
@@ -93,6 +94,12 @@ namespace FilterSimulationWithTablesAndGraphs
                 double coef = xParameter.UnitFamily.CurrentUnit.Coef;
                 fmFilterSimSerie serie = m_involvedSerieFromRow[row];
                 m_involvedSeries[serie] = new fmRange(
+                    (fmValue.ObjectToValue(row.Cells[1].Value) * coef).value,
+                    (fmValue.ObjectToValue(row.Cells[2].Value) * coef).value);
+
+                fmFilterSimulation simulation = m_involvedSimulationFromRow[row];
+
+                m_involvedSimulations[simulation] = new fmRange(
                     (fmValue.ObjectToValue(row.Cells[1].Value) * coef).value,
                     (fmValue.ObjectToValue(row.Cells[2].Value) * coef).value);
             }
@@ -180,6 +187,11 @@ namespace FilterSimulationWithTablesAndGraphs
             Solution.Serialize(writer);
         }
 
+        public void SerializeLastSelectedSimulation(XmlWriter writer)
+        {
+            Solution.SerializeLastSelectedSimulation(writer);
+        }
+
         public bool Clear()
         {
             var tempSolution = Solution;
@@ -258,6 +270,12 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
             }
+        }
+
+        public void DeserializeLastSelectedSimulation(XmlNode node)
+        {
+            Solution = Solution.DeserializeLastSelectedSimulation(node, Solution);
+            DisplaySolution(Solution); 
         }
 
         private void FmFilterSimulationWithTablesAndGraphsLoad(object sender, EventArgs e)
@@ -441,9 +459,13 @@ namespace FilterSimulationWithTablesAndGraphs
                 DataGridViewRow row = InvolvedSeriesDataGrid.CurrentCell.OwningRow;
                 fmGlobalParameter xParameter = GetCurrentXAxisParameter();
                 double coef = xParameter.UnitFamily.CurrentUnit.Coef;
-                fmFilterSimSerie serie = m_involvedSerieFromRow[row];
-                row.Cells[1].Value = new fmValue(serie.Ranges.Ranges[xParameter].MinValue / coef).ToString();
-                row.Cells[2].Value = new fmValue(serie.Ranges.Ranges[xParameter].MaxValue / coef).ToString();
+                //fmFilterSimSerie serie = m_involvedSerieFromRow[row];
+                //row.Cells[1].Value = new fmValue(serie.Ranges.Ranges[xParameter].MinValue / coef).ToString();
+                //row.Cells[2].Value = new fmValue(serie.Ranges.Ranges[xParameter].MaxValue / coef).ToString();
+
+                fmFilterSimulation simulation = m_involvedSimulationFromRow[row];
+                row.Cells[1].Value = new fmValue(simulation.Parent.Ranges.Ranges[xParameter].MinValue / coef).ToString();
+                row.Cells[2].Value = new fmValue(simulation.Parent.Ranges.Ranges[xParameter].MaxValue / coef).ToString();
             }
             MinMaxXValueTextBoxTextChanged(sender, e);
         }
@@ -1071,7 +1093,6 @@ namespace FilterSimulationWithTablesAndGraphs
             DeserializeSplitters(node);
             DeserializeTopTablesColumnSizes(node);
             DeserializeCurvesColors(node);
-            DeserializeCurvesStyles(node);
             DeserializeCoordinatesGridColumnsOrder(node);
         }
 
@@ -1232,6 +1253,8 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void DeserializeCoordinatesGridColumnsOrder(XmlNode node)
         {
+            if (node == null)
+                return;
             node = node.SelectSingleNode(fmInterfaceAdjustingTags.CoordinatesColumnsOrder);
             if (node == null)
                 return;
@@ -1282,6 +1305,7 @@ namespace FilterSimulationWithTablesAndGraphs
             public const string SerieFilterType = "SerieFilterType";
             public const string SerieFilterMedium = "SerieFilterMedium";
             public const string StyleInString = "StyleInString";
+            public const string Simulation = "Simulation";
 
             public const string ConfigCheckBoxes = "ConfigCheckBoxes";
         }
@@ -1385,8 +1409,10 @@ namespace FilterSimulationWithTablesAndGraphs
             string SerieFilterType;
             string SerieFilterMedium;
             string StyleInString;
+            string Simulation;
 
             fmFilterSimSerie serie;
+            fmFilterSimulation simulation;
 
             XmlNodeList SeriesParameters = coreNode.SelectNodes(DiagramTemplatesSavingTags.SerieName);
 
@@ -1397,45 +1423,54 @@ namespace FilterSimulationWithTablesAndGraphs
                     serie = m_involvedSerieFromRow[row];
                     SerieName = node.Attributes["id"].Value;
 
-                    if (SerieName == serie.GetName())
+                    simulation = m_involvedSimulationFromRow[row];
+                    Simulation = node.SelectSingleNode(DiagramTemplatesSavingTags.Simulation).InnerText;
+
+                    if (Simulation == simulation.GetName())
                     {
-                        SerieCustomer = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieCustomer).InnerText;
-                        SerieMaterial = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieMaterial).InnerText;
-                        SerieCharge = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieCharge).InnerText;
-                        SerieProjectName = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieProjectName).InnerText;
-                        SerieFilterType = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieFilterType).InnerText;
-                        SerieFilterMedium = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieFilterMedium).InnerText;
-
-                        if (SerieCharge == serie.Parent.GetName() && 
-                            SerieCustomer == serie.Parent.Customer.ToString() && 
-                            SerieMaterial == serie.Parent.Material.ToString() && 
-                            SerieProjectName == serie.Parent.Parent.GetName() && 
-                            SerieFilterType == serie.MachineType.name && 
-                            SerieFilterMedium == serie.FilterMedium)
+                        if (SerieName == serie.GetName())
                         {
+                            SerieCustomer = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieCustomer).InnerText;
+                            SerieMaterial = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieMaterial).InnerText;
+                            SerieCharge = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieCharge).InnerText;
+                            SerieProjectName = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieProjectName).InnerText;
+                            SerieFilterType = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieFilterType).InnerText;
+                            SerieFilterMedium = node.SelectSingleNode(DiagramTemplatesSavingTags.SerieFilterMedium).InnerText;
 
-                            var tmpCell = InvolvedSeriesDataGrid.CurrentCell;
-                            InvolvedSeriesDataGrid.CurrentCell = null;
-                            
-                            XmlNodeList MinMaxParameters = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.MinMaxParameter);
-                            int column = 1;
-                            foreach (XmlNode minmaxparameter in MinMaxParameters)
+                            if (SerieCharge == serie.Parent.GetName() &&
+                                SerieCustomer == serie.Parent.Customer.ToString() &&
+                                SerieMaterial == serie.Parent.Material.ToString() &&
+                                SerieProjectName == serie.Parent.Parent.GetName() &&
+                                SerieFilterType == serie.MachineType.name &&
+                                SerieFilterMedium == serie.FilterMedium)
                             {
-                                row.Cells[column].Value = minmaxparameter.InnerText.ToString();
-                                InvolvedSeriesDataGrid.CurrentCell = row.Cells[column];
-                                ++column;
-                                
-                                MinMaxXValueTextBoxTextChanged(null, new EventArgs());
-                            }
-                            InvolvedSeriesDataGrid.CurrentCell = tmpCell;
 
-                            StyleInString = node.SelectSingleNode(DiagramTemplatesSavingTags.StyleInString).InnerText;
-                            AddCurveStyleTemplate(serie, StyleInString);
+                                var tmpCell = InvolvedSeriesDataGrid.CurrentCell;
+                                InvolvedSeriesDataGrid.CurrentCell = null;
+
+                                XmlNodeList MinMaxParameters = node.SelectNodes(fmFilterSimulationWithDiagramsSerializeTags.MinMaxParameter);
+                                int column = 1;
+                                foreach (XmlNode minmaxparameter in MinMaxParameters)
+                                {
+                                    row.Cells[column].Value = minmaxparameter.InnerText.ToString();
+                                    InvolvedSeriesDataGrid.CurrentCell = row.Cells[column];
+                                    ++column;
+
+                                    MinMaxXValueTextBoxTextChanged(null, new EventArgs());
+                                }
+                                InvolvedSeriesDataGrid.CurrentCell = tmpCell;
+
+                                StyleInString = node.SelectSingleNode(DiagramTemplatesSavingTags.StyleInString).InnerText;
+                                simulation.curveStyle = curvesStylesWithStylesInStrings.FirstOrDefault(x => x.Value == StyleInString).Key;
+                                AddCurveStyleTemplate(serie, StyleInString);
+                            }
                         }
                     }
                 }
             }
             loadCurvesStylesToTable();
+            BindSelectedSimulationListToTable();
+            BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChart();
         }
 
@@ -1640,6 +1675,7 @@ namespace FilterSimulationWithTablesAndGraphs
             foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
             {       
                 fmFilterSimSerie serie = m_involvedSerieFromRow[row];
+                fmFilterSimulation simulation = m_involvedSimulationFromRow[row];
                 XmlNode newNode3 = doc.CreateElement(DiagramTemplatesSavingTags.SerieName);
 
                 XmlAttribute IdAtr = doc.CreateAttribute("id");
@@ -1681,6 +1717,10 @@ namespace FilterSimulationWithTablesAndGraphs
                 XmlNode newNode9 = doc.CreateElement(DiagramTemplatesSavingTags.SerieFilterMedium);
                 newNode9.InnerText = serie.FilterMedium;
                 newNode3.AppendChild(newNode9);
+
+                XmlNode newNode11 = doc.CreateElement(DiagramTemplatesSavingTags.Simulation);
+                newNode11.InnerText = simulation.GetName();
+                newNode3.AppendChild(newNode11);
             }
         }
 
@@ -1768,6 +1808,12 @@ namespace FilterSimulationWithTablesAndGraphs
             var row = InvolvedSeriesDataGrid.CurrentRow;
             fmFilterSimSerie serie = m_involvedSerieFromRow[row];
             AddCurveStyleTemplate(serie, senderComboBox.Text);
+
+            fmFilterSimulation sim = m_involvedSimulationFromRow[row];
+            sim.curveStyle = curvesStylesWithStylesInStrings.FirstOrDefault(x => x.Value == senderComboBox.Text).Key;
+            
+            BindSelectedSimulationListToTable();
+            BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChart();
         }
 
@@ -1828,6 +1874,69 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             UpdateCurrentObjectAndDisplaySolution(simulationDataGrid);
         }
-       
+        public void hook2()
+        {
+            DataGridViewCell tmpCell = InvolvedSeriesDataGrid.CurrentCell;
+            foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
+            {
+                InvolvedSeriesDataGrid.CurrentCell = row.Cells[1];
+                MinMaxXValueTextBoxTextChanged(null, new EventArgs());
+            }
+            InvolvedSeriesDataGrid.CurrentCell = tmpCell;
+        }
+
+        protected override void simulationDuplicateButton_Click(object sender, EventArgs e)
+        {
+            base.simulationDuplicateButton_Click(sender, e);
+            hook2();
+        }
+
+        protected override void simulationCreateButton_Click(object sender, EventArgs e)
+        {
+            base.simulationCreateButton_Click(sender, e);
+            hook2();
+        }
+
+        public override void newSimulationButton_Click(object sender, EventArgs e)
+        {
+            base.newSimulationButton_Click(sender, e);
+            hook2();
+        }
+
+        protected override void button1_Click_1(object sender, EventArgs e)
+        {
+            base.button1_Click_1(sender, e);
+            hook2();
+        }
+
+        protected override void button2_Click_1(object sender, EventArgs e)
+        {
+            base.button2_Click_1(sender, e);
+            hook2();
+        }
+
+        protected override void projectCreateButton_Click(object sender, EventArgs e)
+        {
+            base.projectCreateButton_Click(sender, e);
+            hook2();
+        }
+
+        protected override void suspensionCreateButton_Click(object sender, EventArgs e)
+        {
+            base.suspensionCreateButton_Click(sender, e);
+            hook2();
+        }
+
+        protected override void simSerieCreate_Click(object sender, EventArgs e)
+        {
+            base.simSerieCreate_Click(sender, e);
+            hook2();
+        }
+
+        protected override void duplicateSerieButton_Click(object sender, EventArgs e)
+        {
+            base.duplicateSerieButton_Click(sender, e);
+            hook2();
+        }
     }
 }

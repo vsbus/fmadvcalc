@@ -133,6 +133,7 @@ namespace FilterSimulation.fmFilterObjects
             }
 
             serieData.ranges = new fmRangesConfiguration();
+            var tmpRanges = new fmRangesConfiguration();
             XmlNode rangesNode = xmlNode.SelectSingleNode(fmSimSerieDataSerializeTags.Ranges);
             if (rangesNode != null)
             {
@@ -169,7 +170,7 @@ namespace FilterSimulation.fmFilterObjects
             XmlNodeList simList = xmlNode.SelectNodes(fmFilterSimulation.fmFilterSimulationSerializeTags.Simulation);
             foreach (XmlNode simNode in simList)
             {
-                fmFilterSimulation sim = fmFilterSimulation.Deserialize(simNode, parentSerie);
+                fmFilterSimulation sim = fmFilterSimulation.Deserialize(simNode, parentSerie, serieData.ranges);
             }
             return serieData;
         }

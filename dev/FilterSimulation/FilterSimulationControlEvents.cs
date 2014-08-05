@@ -9,7 +9,7 @@ namespace FilterSimulation
     {
         #region Project Buttons
         // ReSharper disable InconsistentNaming
-        private void projectCreateButton_Click(object sender, EventArgs e)
+        protected virtual void projectCreateButton_Click(object sender, EventArgs e)
         {
             CreateNewProject(Solution);
             CreateNewSuspension(Solution, Solution.currentObjects.Project);
@@ -82,8 +82,8 @@ namespace FilterSimulation
                 DisplaySolution(Solution);
             }
         }
-        
-        private void suspensionCreateButton_Click(object sender, EventArgs e)
+
+        protected virtual void suspensionCreateButton_Click(object sender, EventArgs e)
         {
             fmFilterSimProject parentProject = Solution.currentObjects.Project;
             if (parentProject == null)
@@ -158,7 +158,7 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
         #endregion
         #region simSeries Buttons
 
-        private void simSerieCreate_Click(object sender, EventArgs e)
+        protected virtual void simSerieCreate_Click(object sender, EventArgs e)
         {
             fmFilterSimSuspension parentSuspension = Solution.currentObjects.Suspension;
             if (parentSuspension == null)
@@ -293,7 +293,7 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
         #endregion
         #region simulation Buttons
         // ReSharper disable InconsistentNaming
-        private void simulationDuplicateButton_Click(object sender, EventArgs e)
+        protected virtual void simulationDuplicateButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
             fmFilterSimSerie parentSerie = Solution.currentObjects.Serie;
@@ -394,7 +394,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             simulationDataGrid.Columns[simulationMachineNameColumn.Index].Visible = isVisible;
         }
 
-        private void duplicateSerieButton_Click(object sender, EventArgs e)
+        protected virtual void duplicateSerieButton_Click(object sender, EventArgs e)
         {
             fmFilterSimSerie currentSerie = Solution.currentObjects.Serie;
 

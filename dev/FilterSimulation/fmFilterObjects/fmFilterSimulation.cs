@@ -24,6 +24,9 @@ namespace FilterSimulation.fmFilterObjects
         public fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
         public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED;
 
+        public System.Drawing.Drawing2D.DashStyle curveStyle;
+        public fmRangesConfiguration ranges = new fmRangesConfiguration();
+
         public void CopyFrom(fmFilterSimulationData from)
         {
             name = from.name;
@@ -47,6 +50,7 @@ namespace FilterSimulation.fmFilterObjects
             {
                 parameters[p].value = from.parameters[p].value;
             }
+            curveStyle = from.curveStyle;
         }
 
         public void CopyMaterialParametersValuesFrom(fmFilterSimulationData from)
@@ -498,6 +502,7 @@ namespace FilterSimulation.fmFilterObjects
             {
                 SerializeCalculationBaseParameter(writer, p);
             }
+
             writer.WriteEndElement();
         }
 
@@ -612,8 +617,8 @@ namespace FilterSimulation.fmFilterObjects
         public fmFilterMachiningBlock filterMachiningBlock;
         public fmEps0dNedEpsdBlock deliquoringEps0NeEpsBlock;
         public fmSigmaPke0PkePcdRcdAlphadBlock deliquoringSigmaPkeBlock;
-        public fmSremTettaAdAgDHRmMmoleFPeqBlock deliquoringSremTettaAdAgDHMmoleFPeqBlock;
-        
+        public fmSremTettaAdAgDHRmMmoleFPeqBlock deliquoringSremTettaAdAgDHMmoleFPeqBlock;        
+
         public Guid Guid { get; set; }
 
         public bool Modified
@@ -765,6 +770,22 @@ namespace FilterSimulation.fmFilterObjects
                     Modified = true;
                 }
                 m_data.suspensionCalculationOption = value;
+            }
+        }
+
+        public System.Drawing.Drawing2D.DashStyle curveStyle
+        {
+            get { return m_data.curveStyle; }
+            set { m_data.curveStyle = value; }
+        }
+
+        public fmRangesConfiguration Ranges
+        {
+            get { return m_data.ranges; }
+            set
+            {
+                Modified |= m_data.ranges != value;
+                m_data.ranges = value;
             }
         }
 
@@ -941,6 +962,7 @@ namespace FilterSimulation.fmFilterObjects
             public const string Simulation = "Simulation";
             public const string Checked = "m_checked";
             public const string Comments = "Comments";
+            public const string CurveStyle = "CurveStyle";
         }
 
         internal void Serialize(XmlWriter writer)
@@ -948,11 +970,12 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteStartElement(fmFilterSimulationSerializeTags.Simulation);
             writer.WriteElementString(fmFilterSimulationSerializeTags.Checked, m_checked.ToString());
             writer.WriteElementString(fmFilterSimulationSerializeTags.Comments, GetComments());
+            writer.WriteElementString(fmFilterSimulationSerializeTags.CurveStyle, curveStyle.ToString());
             m_data.Serialize(writer);
             writer.WriteEndElement();
         }
 
-        internal static fmFilterSimulation Deserialize(XmlNode xmlNode, fmFilterSimSerie parentSerie)
+        internal static fmFilterSimulation Deserialize(XmlNode xmlNode, fmFilterSimSerie parentSerie, fmRangesConfiguration ranges)
         {
             var sim = new fmFilterSimulation(parentSerie, "_noname");
             sim.m_checked = false;
@@ -982,6 +1005,33 @@ namespace FilterSimulation.fmFilterObjects
             {
                 sim.Parameters[p.globalParameter] = p;
             }
+
+            string curveStyleName = "";
+            fmSerializeTools.DeserializeStringProperty(ref curveStyleName, xmlNode, fmFilterSimulationSerializeTags.CurveStyle);
+
+            if (curveStyleName == System.Drawing.Drawing2D.DashStyle.Dash.ToString())
+            {
+                sim.curveStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            }
+            if (curveStyleName == System.Drawing.Drawing2D.DashStyle.DashDot.ToString())
+            {
+                sim.curveStyle = System.Drawing.Drawing2D.DashStyle.DashDot;
+            }
+            if (curveStyleName == System.Drawing.Drawing2D.DashStyle.DashDotDot.ToString())
+            {
+                sim.curveStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+            }
+            if (curveStyleName == System.Drawing.Drawing2D.DashStyle.Dot.ToString())
+            {
+                sim.curveStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            }
+            if (curveStyleName == System.Drawing.Drawing2D.DashStyle.Solid.ToString())
+            {
+                sim.curveStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            }
+
+            sim.Ranges = ranges;
+
             return sim;
         }
 

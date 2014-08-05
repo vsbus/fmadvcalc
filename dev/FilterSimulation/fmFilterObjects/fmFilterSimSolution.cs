@@ -239,6 +239,7 @@ namespace FilterSimulation.fmFilterObjects
             public const string CurrentSimSerie = "CurrentSimSerie";
             public const string CurrentSimulation = "CurrentSimulation";
 
+            public const string LastSelectedSimulation = "LastSelectedSimulation";
         }
 
         public void Serialize(XmlWriter writer)
@@ -262,6 +263,12 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
+        public void SerializeLastSelectedSimulation(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmSolutionSerializeTags.LastSelectedSimulation);
+            SerializeCurrentSimulationSelection(writer);
+            writer.WriteEndElement();
+        }
 
         public static fmFilterSimSolution Deserialize(XmlNode node)
         {
@@ -307,6 +314,16 @@ namespace FilterSimulation.fmFilterObjects
                     break;
                 }
             }
+        }
+
+        public fmFilterSimSolution DeserializeLastSelectedSimulation(XmlNode node, fmFilterSimSolution solution) 
+        {
+            node = node.SelectSingleNode(fmSolutionSerializeTags.LastSelectedSimulation);
+            if (node == null)
+                return solution;
+            DeserializeCurrentSimulationSelection(node, solution);
+
+            return solution;
         }
 
         internal fmFilterSimulation FindSimulation(fmSigmaPke0PkePcdRcdAlphadBlock deliquoringSigmaPkeBlock)

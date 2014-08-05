@@ -744,6 +744,7 @@ namespace FilterSimulationWithTablesAndGraphs
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInLocalParametrsTable();
             m_involvedSeries = new Dictionary<fmFilterSimSerie, fmRange>();
+            m_involvedSimulations = new Dictionary<fmFilterSimulation, fmRange>();
             LoadCurrentXRange();
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
@@ -778,7 +779,9 @@ namespace FilterSimulationWithTablesAndGraphs
         }
 
         private Dictionary<fmFilterSimSerie, fmRange> m_involvedSeries;
+        private Dictionary<fmFilterSimulation, fmRange> m_involvedSimulations;
         private Dictionary<DataGridViewRow, fmFilterSimSerie> m_involvedSerieFromRow;
+        private Dictionary<DataGridViewRow, fmFilterSimulation> m_involvedSimulationFromRow;
 
         private void LoadCurrentXRange()
         {
@@ -788,12 +791,14 @@ namespace FilterSimulationWithTablesAndGraphs
             fmGlobalParameter xParameter = GetCurrentXAxisParameter();
 
             var newInvolvedSeries = new Dictionary<fmFilterSimSerie, fmRange>();
+            var newInvolvedSimulation = new Dictionary<fmFilterSimulation, fmRange>();
             if (!m_isUseLocalParams)
             {
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
                     fmFilterSimSerie serie = simData.ExternalSimulation.Parent;
                     AddSerieToInvolvedSeriesList(newInvolvedSeries, serie, xParameter);
+                    AddSimulationToInvolvedSimulationList(newInvolvedSimulation, simData.ExternalSimulation, xParameter);
                 }
             }
             else
@@ -802,31 +807,45 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     fmFilterSimSerie serie = m_externalCurrentActiveSimulation.Parent;
                     AddSerieToInvolvedSeriesList(newInvolvedSeries, serie, xParameter);
+                    fmFilterSimulation simulation = m_externalCurrentActiveSimulation;
+                    AddSimulationToInvolvedSimulationList(newInvolvedSimulation, simulation, xParameter);
                 }
             }
 
             m_involvedSerieFromRow = new Dictionary<DataGridViewRow, fmFilterSimSerie>();
+            m_involvedSimulationFromRow = new Dictionary<DataGridViewRow, fmFilterSimulation>();
             InvolvedSeriesDataGrid.Rows.Clear();
             var justSeries = new List<fmFilterSimSerie>(newInvolvedSeries.Keys);
             foreach (fmFilterSimSerie serie in justSeries)
             {
-                var strings = new string[3];
-                strings[0] = serie.GetName();
-                
-                if (m_involvedSeries.ContainsKey(serie))
+                foreach (fmFilterSimulation simulation in serie.SimulationsList)
                 {
-                    newInvolvedSeries[serie] = m_involvedSeries[serie];
+                    var strings = new string[3];
+                    strings[0] = serie.GetName();
+
+                    if (m_involvedSeries.ContainsKey(serie))
+                    {
+                        newInvolvedSeries[serie] = m_involvedSeries[serie];
+                    }
+
+                    if (m_involvedSimulations.ContainsKey(simulation))
+                    {
+                        newInvolvedSimulation[simulation] = m_involvedSimulations[simulation];
+                    }
+
+                    var coef = new fmValue(xParameter.UnitFamily.CurrentUnit.Coef);
+                    strings[1] = (newInvolvedSeries[serie].MinValue / coef).ToString();
+                    strings[2] = (newInvolvedSeries[serie].MaxValue / coef).ToString();
+
+                    int rowIdx = InvolvedSeriesDataGrid.Rows.Add(strings);
+                    m_involvedSerieFromRow[InvolvedSeriesDataGrid.Rows[rowIdx]] = serie;
+                    m_involvedSimulationFromRow[InvolvedSeriesDataGrid.Rows[rowIdx]] = simulation;
+                    InvolvedSeriesDataGrid.Rows[rowIdx].Cells[4].Value = simulation.GetName();
                 }
-
-                var coef = new fmValue(xParameter.UnitFamily.CurrentUnit.Coef);
-                strings[1] = (newInvolvedSeries[serie].MinValue / coef).ToString();
-                strings[2] = (newInvolvedSeries[serie].MaxValue / coef).ToString();
-
-                int rowIdx = InvolvedSeriesDataGrid.Rows.Add(strings);
-                m_involvedSerieFromRow[InvolvedSeriesDataGrid.Rows[rowIdx]] = serie;
             }
 
             m_involvedSeries = newInvolvedSeries;
+            m_involvedSimulations = newInvolvedSimulation;
             loadItemsToComboboxColumn();
             loadCurvesStylesToTable();
         }
@@ -838,16 +857,13 @@ namespace FilterSimulationWithTablesAndGraphs
                 DataGridViewComboBoxCell cell = (DataGridViewComboBoxCell)row.Cells[curveStyleColumn.Name];
                 cell.Value = curveStyleColumn.Items[0];
 
-                foreach (CurveStyleTemplate cst in CurvesStylesTemplates)
+
+                fmFilterSimulation simulation = m_involvedSimulationFromRow[row];
+
+                foreach (var item in curveStyleColumn.Items)
                 {
-                    if (m_involvedSerieFromRow[row] == cst.serie)
-                    {
-                        foreach (var item in curveStyleColumn.Items)
-                        {
-                            if (item.ToString() == cst.styleInString)
-                                cell.Value = item;
-                        }
-                    }
+                    if (item.ToString() == curvesStylesWithStylesInStrings[simulation.curveStyle])
+                        cell.Value = item;
                 }                
             }
         }
@@ -871,6 +887,16 @@ namespace FilterSimulationWithTablesAndGraphs
                 newInvolvedSeries.Add(serie,
                                       new fmRange(serie.Ranges.Ranges[xParameter].MinValue,
                                                   serie.Ranges.Ranges[xParameter].MaxValue));
+            }
+        }
+
+        private void AddSimulationToInvolvedSimulationList(Dictionary<fmFilterSimulation , fmRange> newInvolvedSimulations, fmFilterSimulation simulation, fmGlobalParameter xParameter)
+        {
+            if (!newInvolvedSimulations.ContainsKey(simulation) && simulation.Ranges.Ranges.ContainsKey(xParameter))
+            {
+                newInvolvedSimulations.Add(simulation,
+                                      new fmRange(simulation.Ranges.Ranges[xParameter].MinValue,
+                                                  simulation.Ranges.Ranges[xParameter].MaxValue));
             }
         }
 
@@ -1315,24 +1341,8 @@ namespace FilterSimulationWithTablesAndGraphs
                             dispArray.Color,
                             SymbolType.None);
 
-                        bool hasDifferentVaues = false;
-                        foreach (CurveStyleTemplate cst in CurvesStylesTemplates)
-                        {
-                            foreach (fmFilterSimulation simulation in cst.serie.SimulationsList)
-                            {
-                                hasDifferentVaues = false;
-                                foreach (fmGlobalParameter parameter in simulation.Data.parameters.Keys)
-                                {
-                                    if (!simulation.Data.parameters[parameter].value.value.Equals(dispArray.OwningSimulation.parameters[parameter].value.value))
-                                        hasDifferentVaues = true;
-                                }
 
-                                if (simulation.GetName() == dispArray.OwningSimulation.name && !hasDifferentVaues)
-                                {
-                                    curve.Line.Style = cst.style;
-                                }
-                            }
-                        }
+                        curve.Line.Style = dispArray.OwningSimulation.curveStyle;
 
                         curve.Line.IsAntiAlias = true;
                         curve.Line.Width = dispArray.Bold ? 2 : 1;
@@ -1689,22 +1699,25 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 var xStarts = new List<double>();
                 var xEnds = new List<double>();
-                for (int i = 0; i < m_involvedSeries.Count; ++i)
+                
+                for (int i = 0; i < m_involvedSimulations.Count; ++i)
                 {
                     fmValue minValue = fmValue.ObjectToValue(InvolvedSeriesDataGrid[1, i].Value);
                     fmValue maxValue = fmValue.ObjectToValue(InvolvedSeriesDataGrid[2, i].Value);
                     xStarts.Add(minValue.value);
                     xEnds.Add(maxValue.value);
                 }
+
                 IEnumerable<double> xList = CreateXValues(xStarts, xEnds, m_rowsQuantity);
 
                 foreach (fmSelectedSimulationData simData in m_internalSelectedSimList)
                 {
-                    if (!m_involvedSeries.ContainsKey(simData.ExternalSimulation.Parent))
+                    
+                    if (!m_involvedSimulations.ContainsKey(simData.ExternalSimulation))
                     {
                         continue;
                     }
-                    fmRange range = m_involvedSeries[simData.ExternalSimulation.Parent];
+                    fmRange range = m_involvedSimulations[simData.ExternalSimulation];
 
                     simData.CalculatedDataList = new List<fmFilterSimulationData>();
 
