@@ -1123,15 +1123,15 @@ namespace FilterSimulationWithTablesAndGraphs
                     return;
                 }
 
-                DeserializeSplitter(node, projectSuspensionSerieSplitContainer);
                 DeserializeSplitter(node, projectSuspensionSplitContainer);
+                DeserializeSplitter(node, projectSuspensionSerieSplitContainer);
                 DeserializeSplitter(node, mainSplitContainer);
                 DeserializeSplitter(node, splitContainer1);
                 DeserializeSplitter(node, splitter3);
                 DeserializeSplitter(node, XYSplitContainer);
                 DeserializeSplitter(node, splitContainer2);
-                DeserializeSplitter(node, RightSplitContainer);
                 DeserializeSplitter(node, SimulationAndGraphSplitContainer);
+                DeserializeSplitter(node, RightSplitContainer);                
             }
         }
 
@@ -2201,6 +2201,16 @@ namespace FilterSimulationWithTablesAndGraphs
                 UnitsSchemas = unitsShemas;
             }
             UpdateAll();
+        }
+
+        private void SimulationAndGraphSplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            RightSplitContainer.Panel1MinSize = SimulationAndGraphSplitContainer.SplitterDistance + 25;
+        }
+
+        private void projectSuspensionSerieSplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            mainSplitContainer.Panel1MinSize = projectSuspensionSerieSplitContainer.SplitterDistance + 25;
         }
     }
 }

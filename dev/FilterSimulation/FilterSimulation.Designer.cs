@@ -45,6 +45,7 @@ namespace FilterSimulation
             this.simSeriesPanel = new System.Windows.Forms.Panel();
             this.simulationDataGrid = new fmDataGrid.fmDataGrid();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.newSimulationButton = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.commentSimulationButton = new System.Windows.Forms.Button();
             this.simulationDeleteButton = new System.Windows.Forms.Button();
@@ -126,7 +127,6 @@ namespace FilterSimulation
             this.errorMessageLabel = new System.Windows.Forms.Label();
             this.calculateLimitsCheckBox = new System.Windows.Forms.CheckBox();
             this.panelMaterialParameters = new System.Windows.Forms.Panel();
-            this.newSimulationButton = new System.Windows.Forms.Button();
             this.calculationOptionChangeButton = new System.Windows.Forms.Button();
             this.eps0Kappa0Pc0Rc0Alpha0DataGrid = new fmDataGrid.fmDataGrid();
             this.epsKappaParameterName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -502,6 +502,7 @@ namespace FilterSimulation
             this.splitter3.Size = new System.Drawing.Size(980, 3);
             this.splitter3.TabIndex = 1;
             this.splitter3.TabStop = false;
+            this.splitter3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitter3_SplitterMoved);
             // 
             // topPanel
             // 
@@ -516,6 +517,7 @@ namespace FilterSimulation
             // projectSuspensionSerieSplitContainer
             // 
             this.projectSuspensionSerieSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.projectSuspensionSerieSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.projectSuspensionSerieSplitContainer.Location = new System.Drawing.Point(0, 0);
             this.projectSuspensionSerieSplitContainer.Name = "projectSuspensionSerieSplitContainer";
             // 
@@ -533,6 +535,7 @@ namespace FilterSimulation
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.projectSuspensionSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.projectSuspensionSplitContainer.Location = new System.Drawing.Point(0, 0);
             this.projectSuspensionSplitContainer.Name = "projectSuspensionSplitContainer";
             // 
@@ -546,6 +549,7 @@ namespace FilterSimulation
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(543, 100);
             this.projectSuspensionSplitContainer.SplitterDistance = 177;
             this.projectSuspensionSplitContainer.TabIndex = 0;
+            this.projectSuspensionSplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.projectSuspensionSplitContainer_SplitterMoved);
             // 
             // projectPanel
             // 
@@ -1240,6 +1244,57 @@ namespace FilterSimulation
             this.commonDeliquoringSimulationBlockDataGrid.Size = new System.Drawing.Size(292, 362);
             this.commonDeliquoringSimulationBlockDataGrid.TabIndex = 17;
             // 
+            // commonDeliquoringSimulationBlockParameterNameColumn
+            // 
+            this.commonDeliquoringSimulationBlockParameterNameColumn.HeaderText = "Parameter";
+            this.commonDeliquoringSimulationBlockParameterNameColumn.Name = "commonDeliquoringSimulationBlockParameterNameColumn";
+            this.commonDeliquoringSimulationBlockParameterNameColumn.ReadOnly = true;
+            this.commonDeliquoringSimulationBlockParameterNameColumn.Width = 61;
+            // 
+            // commonDeliquoringSimulationBlockUnitColumn
+            // 
+            this.commonDeliquoringSimulationBlockUnitColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.commonDeliquoringSimulationBlockUnitColumn.HeaderText = "Units";
+            this.commonDeliquoringSimulationBlockUnitColumn.Name = "commonDeliquoringSimulationBlockUnitColumn";
+            this.commonDeliquoringSimulationBlockUnitColumn.ReadOnly = true;
+            this.commonDeliquoringSimulationBlockUnitColumn.Width = 56;
+            // 
+            // commonDeliquoringSimulationBlockMinAbsColumn
+            // 
+            this.commonDeliquoringSimulationBlockMinAbsColumn.HeaderText = "MinAbs";
+            this.commonDeliquoringSimulationBlockMinAbsColumn.Name = "commonDeliquoringSimulationBlockMinAbsColumn";
+            this.commonDeliquoringSimulationBlockMinAbsColumn.ReadOnly = true;
+            this.commonDeliquoringSimulationBlockMinAbsColumn.Visible = false;
+            this.commonDeliquoringSimulationBlockMinAbsColumn.Width = 50;
+            // 
+            // commonDeliquoringSimulationBlockMinColumn
+            // 
+            this.commonDeliquoringSimulationBlockMinColumn.HeaderText = "Min";
+            this.commonDeliquoringSimulationBlockMinColumn.Name = "commonDeliquoringSimulationBlockMinColumn";
+            this.commonDeliquoringSimulationBlockMinColumn.ReadOnly = true;
+            this.commonDeliquoringSimulationBlockMinColumn.Width = 50;
+            // 
+            // commonDeliquoringSimulationBlockParameterValueColumn
+            // 
+            this.commonDeliquoringSimulationBlockParameterValueColumn.HeaderText = "Value";
+            this.commonDeliquoringSimulationBlockParameterValueColumn.Name = "commonDeliquoringSimulationBlockParameterValueColumn";
+            this.commonDeliquoringSimulationBlockParameterValueColumn.Width = 50;
+            // 
+            // commonDeliquoringSimulationBlockMaxColumn
+            // 
+            this.commonDeliquoringSimulationBlockMaxColumn.HeaderText = "Max";
+            this.commonDeliquoringSimulationBlockMaxColumn.Name = "commonDeliquoringSimulationBlockMaxColumn";
+            this.commonDeliquoringSimulationBlockMaxColumn.ReadOnly = true;
+            this.commonDeliquoringSimulationBlockMaxColumn.Width = 50;
+            // 
+            // commonDeliquoringSimulationBlockMaxAbsColumn
+            // 
+            this.commonDeliquoringSimulationBlockMaxAbsColumn.HeaderText = "MaxAbs";
+            this.commonDeliquoringSimulationBlockMaxAbsColumn.Name = "commonDeliquoringSimulationBlockMaxAbsColumn";
+            this.commonDeliquoringSimulationBlockMaxAbsColumn.ReadOnly = true;
+            this.commonDeliquoringSimulationBlockMaxAbsColumn.Visible = false;
+            this.commonDeliquoringSimulationBlockMaxAbsColumn.Width = 50;
+            // 
             // deliquoringMaterialParametersDataGrid
             // 
             this.deliquoringMaterialParametersDataGrid.AllowUserToAddRows = false;
@@ -1781,57 +1836,6 @@ namespace FilterSimulation
             // helpProvider1
             // 
             this.helpProvider1.HelpNamespace = "filtraplus.chm";
-            // 
-            // commonDeliquoringSimulationBlockParameterNameColumn
-            // 
-            this.commonDeliquoringSimulationBlockParameterNameColumn.HeaderText = "Parameter";
-            this.commonDeliquoringSimulationBlockParameterNameColumn.Name = "commonDeliquoringSimulationBlockParameterNameColumn";
-            this.commonDeliquoringSimulationBlockParameterNameColumn.ReadOnly = true;
-            this.commonDeliquoringSimulationBlockParameterNameColumn.Width = 61;
-            // 
-            // commonDeliquoringSimulationBlockUnitColumn
-            // 
-            this.commonDeliquoringSimulationBlockUnitColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.commonDeliquoringSimulationBlockUnitColumn.HeaderText = "Units";
-            this.commonDeliquoringSimulationBlockUnitColumn.Name = "commonDeliquoringSimulationBlockUnitColumn";
-            this.commonDeliquoringSimulationBlockUnitColumn.ReadOnly = true;
-            this.commonDeliquoringSimulationBlockUnitColumn.Width = 56;
-            // 
-            // commonDeliquoringSimulationBlockMinAbsColumn
-            // 
-            this.commonDeliquoringSimulationBlockMinAbsColumn.HeaderText = "MinAbs";
-            this.commonDeliquoringSimulationBlockMinAbsColumn.Name = "commonDeliquoringSimulationBlockMinAbsColumn";
-            this.commonDeliquoringSimulationBlockMinAbsColumn.ReadOnly = true;
-            this.commonDeliquoringSimulationBlockMinAbsColumn.Visible = false;
-            this.commonDeliquoringSimulationBlockMinAbsColumn.Width = 50;
-            // 
-            // commonDeliquoringSimulationBlockMinColumn
-            // 
-            this.commonDeliquoringSimulationBlockMinColumn.HeaderText = "Min";
-            this.commonDeliquoringSimulationBlockMinColumn.Name = "commonDeliquoringSimulationBlockMinColumn";
-            this.commonDeliquoringSimulationBlockMinColumn.ReadOnly = true;
-            this.commonDeliquoringSimulationBlockMinColumn.Width = 50;
-            // 
-            // commonDeliquoringSimulationBlockParameterValueColumn
-            // 
-            this.commonDeliquoringSimulationBlockParameterValueColumn.HeaderText = "Value";
-            this.commonDeliquoringSimulationBlockParameterValueColumn.Name = "commonDeliquoringSimulationBlockParameterValueColumn";
-            this.commonDeliquoringSimulationBlockParameterValueColumn.Width = 50;
-            // 
-            // commonDeliquoringSimulationBlockMaxColumn
-            // 
-            this.commonDeliquoringSimulationBlockMaxColumn.HeaderText = "Max";
-            this.commonDeliquoringSimulationBlockMaxColumn.Name = "commonDeliquoringSimulationBlockMaxColumn";
-            this.commonDeliquoringSimulationBlockMaxColumn.ReadOnly = true;
-            this.commonDeliquoringSimulationBlockMaxColumn.Width = 50;
-            // 
-            // commonDeliquoringSimulationBlockMaxAbsColumn
-            // 
-            this.commonDeliquoringSimulationBlockMaxAbsColumn.HeaderText = "MaxAbs";
-            this.commonDeliquoringSimulationBlockMaxAbsColumn.Name = "commonDeliquoringSimulationBlockMaxAbsColumn";
-            this.commonDeliquoringSimulationBlockMaxAbsColumn.ReadOnly = true;
-            this.commonDeliquoringSimulationBlockMaxAbsColumn.Visible = false;
-            this.commonDeliquoringSimulationBlockMaxAbsColumn.Width = 50;
             // 
             // fmFilterSimulationControl
             // 

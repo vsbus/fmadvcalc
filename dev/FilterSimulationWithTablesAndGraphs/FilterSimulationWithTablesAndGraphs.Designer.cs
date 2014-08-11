@@ -420,13 +420,15 @@ namespace FilterSimulationWithTablesAndGraphs
             // projectSuspensionSerieSplitContainer
             // 
             this.projectSuspensionSerieSplitContainer.Location = new System.Drawing.Point(3, 0);
+            this.projectSuspensionSerieSplitContainer.Panel1MinSize = 216;
             this.projectSuspensionSerieSplitContainer.Size = new System.Drawing.Size(819, 115);
             this.projectSuspensionSerieSplitContainer.SplitterDistance = 366;
+            this.projectSuspensionSerieSplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.projectSuspensionSerieSplitContainer_SplitterMoved);
             // 
             // projectSuspensionSplitContainer
             // 
             this.projectSuspensionSplitContainer.Size = new System.Drawing.Size(366, 115);
-            this.projectSuspensionSplitContainer.SplitterDistance = 321;
+            this.projectSuspensionSplitContainer.SplitterDistance = 191;
             // 
             // commentSimulationButton
             // 
@@ -760,7 +762,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.XYSplitContainer.Panel2.Controls.Add(this.splitContainer2);
             this.XYSplitContainer.Panel2.Controls.Add(this.panel11);
             this.XYSplitContainer.Size = new System.Drawing.Size(556, 327);
-            this.XYSplitContainer.SplitterDistance = 182;
+            this.XYSplitContainer.SplitterDistance = 150;
             this.XYSplitContainer.TabIndex = 8;
             // 
             // groupBox2
@@ -809,7 +811,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
             this.splitContainer2.Size = new System.Drawing.Size(370, 107);
-            this.splitContainer2.SplitterDistance = 251;
+            this.splitContainer2.SplitterDistance = 283;
             this.splitContainer2.TabIndex = 10;
             // 
             // groupBox1
@@ -1100,6 +1102,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // SimulationAndGraphSplitContainer
             // 
             this.SimulationAndGraphSplitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.SimulationAndGraphSplitContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.SimulationAndGraphSplitContainer.Location = new System.Drawing.Point(0, 0);
             this.SimulationAndGraphSplitContainer.Name = "SimulationAndGraphSplitContainer";
             this.SimulationAndGraphSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -1115,6 +1118,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.SimulationAndGraphSplitContainer.Size = new System.Drawing.Size(654, 556);
             this.SimulationAndGraphSplitContainer.SplitterDistance = 373;
             this.SimulationAndGraphSplitContainer.TabIndex = 12;
+            this.SimulationAndGraphSplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.SimulationAndGraphSplitContainer_SplitterMoved);
             // 
             // panel9
             // 

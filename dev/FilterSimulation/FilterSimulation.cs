@@ -1634,5 +1634,15 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 range.Key.SpecifiedRange = range.Value;
             }
         }
+
+        private void projectSuspensionSplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            projectSuspensionSerieSplitContainer.Panel1MinSize = projectSuspensionSplitContainer.SplitterDistance + 25;
+        }
+
+        private void splitter3_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            splitContainer1.Panel1MinSize = splitter3.SplitPosition + 25;
+        }
     }
 }
