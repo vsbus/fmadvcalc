@@ -107,7 +107,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.serieTextBox);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MachineTypeSelectionDialog";
             this.Text = "Filter Types Selection";
             this.ResumeLayout(false);
