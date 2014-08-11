@@ -21,6 +21,7 @@ namespace FilterSimulation
             }
             
             DisplaySolution(Solution);
+            TakeDefaultCalculationOptionForSerie(Solution.currentObjects.Serie);
             projectDataGrid.BeginEdit(true);
         }
 
@@ -113,6 +114,7 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
             }
 
             DisplaySolution(Solution);
+            TakeDefaultCalculationOptionForSerie(Solution.currentObjects.Serie);
             if (currentCol != -1 && suspensionDataGrid.CurrentCell != null)
             {
                 suspensionDataGrid.CurrentCell = suspensionDataGrid[currentCol, suspensionDataGrid.CurrentCell.RowIndex];
@@ -180,6 +182,8 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             }
 
             DisplaySolution(Solution);
+
+            TakeDefaultCalculationOptionForSerie(Solution.currentObjects.Serie);
             SortTables();
 
             simSeriesDataGrid.BeginEdit(true);
@@ -215,6 +219,8 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
 
             AssignParametersToDisplayAndRangesOfGivenMachineWithSerie(
                 solution.currentObjects.Serie, machine);
+            
+            
 
             solution.currentObjects.Serie.Keep();
 
@@ -228,8 +234,8 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             Solution.currentObjects.Simulation.SetName(simulationName);
 
             AssignParametersToDisplayAndRangesOfGivenMachineWithSerie(
-                Solution.currentObjects.Serie, machine);
-
+                Solution.currentObjects.Serie, machine);            
+            
             Solution.currentObjects.Serie.Keep();
 
             return true;
@@ -244,6 +250,15 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             if (ShowHideSchemas.ContainsKey(value))
             {
                 serie.ParametersToDisplay = new fmParametersToDisplay(value, ShowHideSchemas[value]);
+            }
+            else
+            {
+                errorMessage += "Default parameters to display are not assigned to the selected filter type.";
+            }
+
+            if (ShowHideSchemasForEachFilterMachine.ContainsKey(machine.name))
+            {
+                serie.ParametersToDisplay = new fmParametersToDisplay(value, ShowHideSchemasForEachFilterMachine[machine.name]);
             }
             else
             {

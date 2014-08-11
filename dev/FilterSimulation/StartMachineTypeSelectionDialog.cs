@@ -47,8 +47,7 @@ namespace FilterSimulation
             {
                 SwitchView();
             }
-            CalculationsSettingsWindow.InitCalculationOptions();
-            
+            CalculationsSettingsWindow.InitCalculationOptions();            
         }
 
         private void InitCombobox(fmFilterSimSolution Solution)
@@ -241,17 +240,22 @@ namespace FilterSimulation
             CalculationsSettingsWindow.CheckScheme(machineName);
         }
 
-        public void InitCalculationsSettingsWindow(RangesDictionary ranges, Dictionary<fmFilterSimMachineType, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> rangesDictionary, fmParametersToDisplay parametersToDisplay, Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> showHideDictionary)
+        public void InitCalculationsSettingsWindow(RangesDictionary ranges, 
+            Dictionary<fmFilterSimMachineType, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> rangesDictionary, 
+            fmParametersToDisplay parametersToDisplay, 
+            Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> showHideDictionary,
+            Dictionary<string,List<fmGlobalParameter>> filtersShowHideDictionary,
+            string currentSerieFilterName)
         {
             InitCalculationsSettingsWindowComboboxes();
             CalculationsSettingsWindow.SetRanges(ranges);
             CalculationsSettingsWindow.SetRangesSchemas(rangesDictionary);            
             
             CalculationsSettingsWindow.CheckItems(parametersToDisplay.ParametersList);
-            CalculationsSettingsWindow.SetShowHideSchemas(showHideDictionary);
-            CalculationsSettingsWindow.CheckScheme(parametersToDisplay.AssignedSchema);
+            CalculationsSettingsWindow.SetShowHideSchemas(showHideDictionary, filtersShowHideDictionary);
+            CalculationsSettingsWindow.CheckScheme(parametersToDisplay.AssignedSchema, currentSerieFilterName);
 
-            CalculationsSettingsWindow.SetDefaultValues(ranges, rangesDictionary, parametersToDisplay, showHideDictionary);
+            CalculationsSettingsWindow.SetDefaultValues(ranges, rangesDictionary, parametersToDisplay, showHideDictionary, filtersShowHideDictionary);
         }
 
         private void InitCalculationsSettingsWindowComboboxes()
@@ -288,6 +292,11 @@ namespace FilterSimulation
         public Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> GetShowHideSchemas()
         {
             return CalculationsSettingsWindow.GetShowHideSchemas();
+        }
+
+        public Dictionary<string, List<fmGlobalParameter>> GetFiltersShowHideSchemas()
+        {
+            return CalculationsSettingsWindow.GetFiltersShowHideSchemas();
         }
 
         private void AcceptNewNamesAndDialogResult()
@@ -365,7 +374,7 @@ namespace FilterSimulation
             if (CalculationsSettingsWindow.ShowDialog() == DialogResult.OK)
             {
                 CalculationsSettingsWindow.SetDefaultMachine(GetRangesMachineType().name);
-                CalculationsSettingsWindow.SetDefaultValues(GetRanges(), GetRangesSchemas(), new fmParametersToDisplay(GetCheckedSchema(), GetCheckedItems()), GetShowHideSchemas()); 
+                CalculationsSettingsWindow.SetDefaultValues(GetRanges(), GetRangesSchemas(), new fmParametersToDisplay(GetCheckedSchema(), GetCheckedItems()), GetShowHideSchemas(), GetFiltersShowHideSchemas()); 
             }
             else
             {
@@ -388,8 +397,9 @@ namespace FilterSimulation
 
         private void machineTypesComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            CalculationsSettingsWindow.CheckScheme(GetSelectedType().GetFilterCycleType());
+            CalculationsSettingsWindow.CheckScheme(GetSelectedType().GetFilterCycleType(),GetSelectedType().name);
             CalculationsSettingsWindow.takeButton_Click(sender, e);
+            CalculationsSettingsWindow.UpdateDefaultCalculationOptionForSImulation(GetSelectedType().name);
         }  
 
     }

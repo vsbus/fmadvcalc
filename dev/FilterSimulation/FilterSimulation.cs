@@ -27,6 +27,8 @@ namespace FilterSimulation
         public Dictionary<fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>> UnitsSchemas = new Dictionary<fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>>();
         private Dictionary<fmGlobalParameter, DataGridViewColumn> simulationGridColumns = new Dictionary<fmGlobalParameter, DataGridViewColumn>();
 
+        public Dictionary<string, List<fmGlobalParameter>> ShowHideSchemasForEachFilterMachine = new Dictionary<string, List<fmGlobalParameter>>();
+
         public fmFilterSimulationControl()
         {
             InitializeComponent();
@@ -80,6 +82,7 @@ namespace FilterSimulation
         private static class fmFilterSimulationSerializeTags
         {
             public const string ShowHideSchemas = "ShowHideSchemas";
+            public const string ShowHideSchemasForEachFilterMachine = "ShowHideSchemasForEachFilterMachine";
             public const string ShowHideSchema = "ShowHideSchema";
             public const string ShowHideSchemaName = "ShowHideSchemaName";
             public const string ShowHideParameter = "ShowHideParameter";
@@ -134,6 +137,7 @@ namespace FilterSimulation
         {
             SerializeProgramOptions(writer);
             SerializeShowHideSchemas(writer);
+            SerializeFiltersShowHideSchemas(writer);
             SerializeParametersOrder(writer);
             SerializeRangesSchemas(writer);
             SerializeUnitsSchemas(writer);
@@ -359,6 +363,22 @@ namespace FilterSimulation
                 }
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();            
+        }
+
+        private void SerializeFiltersShowHideSchemas(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmFilterSimulationSerializeTags.ShowHideSchemasForEachFilterMachine);
+            foreach (KeyValuePair<string, List<fmGlobalParameter>> filterShowHideSchema in ShowHideSchemasForEachFilterMachine)
+            {
+                writer.WriteStartElement(fmFilterSimulationSerializeTags.ShowHideSchema);
+                writer.WriteElementString(fmFilterSimulationSerializeTags.ShowHideSchemaName, filterShowHideSchema.Key);
+                foreach (fmGlobalParameter parameter in filterShowHideSchema.Value)
+                {
+                    writer.WriteElementString(fmFilterSimulationSerializeTags.ShowHideParameter, parameter.Name);
+                }
+                writer.WriteEndElement();
+            }
             writer.WriteEndElement();
         }
 
@@ -459,13 +479,29 @@ namespace FilterSimulation
 
         private void DeserializeShowHideSchemas(XmlNode node)
         {
+            XmlNode filtersShowHideNode = node.SelectSingleNode(fmFilterSimulationSerializeTags.ShowHideSchemasForEachFilterMachine);
             node = node.SelectSingleNode(fmFilterSimulationSerializeTags.ShowHideSchemas);
-            if (node == null)
+            if (node != null)
             {
-                return;
+                XmlNodeList schemasNodes = node.SelectNodes(fmFilterSimulationSerializeTags.ShowHideSchema);
+                foreach (XmlNode schemaNode in schemasNodes)
+                {
+                    string schemaName =
+                        schemaNode.SelectSingleNode(fmFilterSimulationSerializeTags.ShowHideSchemaName).InnerText;
+                    var parametersList = new List<fmGlobalParameter>();
+                    XmlNodeList displayParamsList = schemaNode.SelectNodes(fmFilterSimulationSerializeTags.ShowHideParameter);
+                    foreach (XmlNode parameterNode in displayParamsList)
+                    {
+                        parametersList.Add(fmGlobalParameter.ParametersByName[parameterNode.InnerText]);
+                    }
+                    ShowHideSchemas[(fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), schemaName)] = parametersList;
+                }
             }
-            XmlNodeList schemasNodes = node.SelectNodes(fmFilterSimulationSerializeTags.ShowHideSchema);
-            foreach (XmlNode schemaNode in schemasNodes)
+            if (filtersShowHideNode == null)
+                return;
+
+            XmlNodeList filtersschemasNodes = filtersShowHideNode.SelectNodes(fmFilterSimulationSerializeTags.ShowHideSchema);
+            foreach (XmlNode schemaNode in filtersschemasNodes)
             {
                 string schemaName =
                     schemaNode.SelectSingleNode(fmFilterSimulationSerializeTags.ShowHideSchemaName).InnerText;
@@ -475,11 +511,11 @@ namespace FilterSimulation
                 {
                     parametersList.Add(fmGlobalParameter.ParametersByName[parameterNode.InnerText]);
                 }
-                ShowHideSchemas[(fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), schemaName)] = parametersList;
-            }
+                ShowHideSchemasForEachFilterMachine[schemaName] = parametersList;
+            }            
         }
 
-        private void SerializeParametersOrder(XmlWriter writer) //Saving the order of parmeters in horispntal table
+        private void SerializeParametersOrder(XmlWriter writer) //Saving the order of parmeters in horisontal table
         {
             string parameterName;
             int parameterIndex;
@@ -993,6 +1029,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
 
             Solution.currentColumns.simulation = simulationNameColumn.Index;
             DisplaySolution(Solution);
+            TakeDefaultCalculationOptionForSImulation(Solution.currentObjects.Simulation);
             SortTables();
             SelectCurrentItemsInSolution(Solution);
 
@@ -1076,7 +1113,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         {
             var dialog = new StartMachineTypeSelectionDialog(Solution, false);
             dialog.InitializeMachineTypesComboBox();
-            dialog.InitCalculationsSettingsWindow(this.GetCurrentSerieRanges(dialog.GetSelectedType()).Ranges, RangesSchemas, GetCurrentSerieParametersToDisplay(dialog.GetSelectedType().GetFilterCycleType()), ShowHideSchemas);
+            dialog.InitCalculationsSettingsWindow(this.GetCurrentSerieRanges(dialog.GetSelectedType()).Ranges, RangesSchemas, GetCurrentSerieParametersToDisplay(dialog.GetSelectedType().GetFilterCycleType()), ShowHideSchemas, ShowHideSchemasForEachFilterMachine, dialog.GetSelectedType().name);
             var currentSimulation = Solution.currentObjects.Simulation;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
@@ -1183,9 +1220,9 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                     MessageBox.Show(@"No ranges assigned to the selected type.");
                 }
 
-                if (ShowHideSchemas.ContainsKey(value.GetFilterCycleType()))
+                if (ShowHideSchemasForEachFilterMachine.ContainsKey(value.name))
                 {
-                    fmParametersToDisplay parametersToDisplay = new fmParametersToDisplay(value.GetFilterCycleType(), ShowHideSchemas[value.GetFilterCycleType()]);
+                    fmParametersToDisplay parametersToDisplay = new fmParametersToDisplay(value.GetFilterCycleType(), ShowHideSchemasForEachFilterMachine[value.name]);
                     if (Solution.currentObjects.Serie != null)
                     {
                         SetCurrentSerieParametersToDisplayOrDefault(parametersToDisplay);
@@ -1196,9 +1233,243 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                     MessageBox.Show(@"No show/hide assigned to the selected type.");
                 }
 
+                TakeDefaultCalculationOptionForSerie(Solution.currentObjects.Serie);
+                
                 DisplaySolution(Solution);
             }
         }
+
+        #region Default Calculation Options For Each Filter Type
+        private void TakeDefaultCalculationOptionForSerie(fmFilterSimSerie serie)
+        {
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDrumFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.RotaryPressureFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.LabVacuumFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.LabPressureFilter)
+            {
+                foreach (fmFilterSimulation sim in serie.SimulationsList)
+                {
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                }
+            }
+
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumNutche ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.PressureNutche)
+            {
+                foreach (fmFilterSimulation sim in serie.SimulationsList)
+                {
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                }
+            }
+
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.PneumaPress ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.PressureLeafFilter)
+            {
+                foreach (fmFilterSimulation sim in serie.SimulationsList)
+                {
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                }
+            }
+
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.CandleFilter)
+            {
+                foreach (fmFilterSimulation sim in serie.SimulationsList)
+                {
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                }
+            }
+
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPress ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            {
+                foreach (fmFilterSimulation sim in serie.SimulationsList)
+                {
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.NotConsider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                }
+            }
+        }
+
+        public void TakeDefaultCalculationOptionForSImulation(fmFilterSimulation sim)
+        {
+            var serie = sim.Parent;
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDrumFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.RotaryPressureFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.LabVacuumFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.LabPressureFilter)
+            {
+                
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                
+            }
+
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumNutche ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.PressureNutche)
+            {
+                
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                
+            }
+
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.PneumaPress ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.PressureLeafFilter)
+            {
+                
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                
+            }
+
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.CandleFilter)
+            {
+                
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                
+            }
+
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPress ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            {
+                
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.NotConsider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+               
+            }
+        }
+        #endregion
 
         private void button3_Click(object sender, EventArgs e)
         {

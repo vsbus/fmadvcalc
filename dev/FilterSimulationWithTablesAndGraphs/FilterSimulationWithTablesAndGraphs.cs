@@ -198,7 +198,7 @@ namespace FilterSimulationWithTablesAndGraphs
             Solution = new fmFilterSimSolution();
             var dialog = new StartMachineTypeSelectionDialog(Solution, true);
             dialog.InitializeMachineTypesComboBox();
-            dialog.InitCalculationsSettingsWindow(GetCurrentSerieRanges(dialog.GetSelectedType()).Ranges, RangesSchemas, GetCurrentSerieParametersToDisplay(dialog.GetSelectedType().GetFilterCycleType()), ShowHideSchemas);
+            dialog.InitCalculationsSettingsWindow(GetCurrentSerieRanges(dialog.GetSelectedType()).Ranges, RangesSchemas, GetCurrentSerieParametersToDisplay(dialog.GetSelectedType().GetFilterCycleType()), ShowHideSchemas, ShowHideSchemasForEachFilterMachine,dialog.GetSelectedType().name);
             if (dialog.ShowDialog() != DialogResult.OK)
             {
                 Solution = tempSolution;
@@ -625,6 +625,8 @@ namespace FilterSimulationWithTablesAndGraphs
         public void LoadLastMinMaxValues(XmlNode node)
         {
             node = node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.DiagramOptions);
+            if (node == null)
+                return;
             DeserializeMinMaxValuesOfTheXAxisParameter(node.SelectSingleNode(fmFilterSimulationWithDiagramsSerializeTags.MinMaxValuesOfTheXAxisParameter));
         }
 
@@ -1919,24 +1921,286 @@ namespace FilterSimulationWithTablesAndGraphs
         {
             base.projectCreateButton_Click(sender, e);
             hook2();
+            TakeDefaultUnitsForSerie(GetCurrentSerieMachineName());
         }
 
         protected override void suspensionCreateButton_Click(object sender, EventArgs e)
         {
             base.suspensionCreateButton_Click(sender, e);
             hook2();
+            TakeDefaultUnitsForSerie(GetCurrentSerieMachineName());
         }
 
         protected override void simSerieCreate_Click(object sender, EventArgs e)
         {
             base.simSerieCreate_Click(sender, e);
             hook2();
+            TakeDefaultUnitsForSerie(GetCurrentSerieMachineName());
         }
 
         protected override void duplicateSerieButton_Click(object sender, EventArgs e)
         {
             base.duplicateSerieButton_Click(sender, e);
             hook2();
+        }
+
+        public fmUnitsSchema GetUnitsSchemaFromFilterTypeName(string machineName)
+        {
+            if (machineName == fmFilterSimMachineType.FilterTypeNamesList.VacuumDrumFilter ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.RotaryPressureFilter)
+            {
+                return fmUnitsSchema.Industrial;
+            }
+
+            if (machineName == fmFilterSimMachineType.FilterTypeNamesList.VacuumNutche ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.PressureNutche ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.PneumaPress ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.PressureLeafFilter ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.CandleFilter ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.FilterPress ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            {
+                return fmUnitsSchema.Pilot;
+            }
+
+            if (machineName == fmFilterSimMachineType.FilterTypeNamesList.LabVacuumFilter ||
+                machineName == fmFilterSimMachineType.FilterTypeNamesList.LabPressureFilter)
+            {
+                return fmUnitsSchema.Laboratory;
+            }
+
+            return fmUnitsSchema.Industrial;
+        }
+
+        public void TakeDefaultUnitsForSerie(string machineName)
+        {
+            if (GetUnitsSchemaFromFilterTypeName(machineName) == fmUnitsSchema.Industrial)
+            {
+                var unitsSchema = fmUnitsSchema.Industrial;
+                SetIsUsUnitsUsed(false);
+                SetCurrentUnitsSchema(unitsSchema);
+
+                var unitsShemas = new Dictionary<FilterSimulation.fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>>(UnitsSchemas);
+                if (!unitsShemas.ContainsKey(unitsSchema))
+                {
+                    var schema = new Dictionary<fmUnitFamily, fmUnit>(){
+                         {fmUnitFamily.MassFamily, fmUnitFamily.MassFamily.GetUnitByName("t")},
+                         {fmUnitFamily.VolumeFamily, fmUnitFamily.VolumeFamily.GetUnitByName("m3")},
+                         {fmUnitFamily.SpecificMassFamily, fmUnitFamily.SpecificMassFamily.GetUnitByName("t/m2")},
+                         {fmUnitFamily.VolumeInAreaFamily, fmUnitFamily.VolumeInAreaFamily.GetUnitByName("l/m2")},
+                         {fmUnitFamily.DensityFamily, fmUnitFamily.DensityFamily.GetUnitByName("kg/m3")},
+                         {fmUnitFamily.ViscosityFamily, fmUnitFamily.ViscosityFamily.GetUnitByName("mPa s")},
+                         {fmUnitFamily.PressureFamily, fmUnitFamily.PressureFamily.GetUnitByName("bar")},
+                         {fmUnitFamily.AreaFamily, fmUnitFamily.AreaFamily.GetUnitByName("m2")},
+                         {fmUnitFamily.LengthFamily, fmUnitFamily.LengthFamily.GetUnitByName("mm")},
+                         {fmUnitFamily.TimeFamily, fmUnitFamily.TimeFamily.GetUnitByName("s")},
+                         {fmUnitFamily.FrequencyFamily, fmUnitFamily.FrequencyFamily.GetUnitByName("min-1")},
+                         {fmUnitFamily.FlowRateMass, fmUnitFamily.FlowRateMass.GetUnitByName("t/h")},
+                         {fmUnitFamily.FlowRateVolume, fmUnitFamily.FlowRateVolume.GetUnitByName("m3/h")},
+                         {fmUnitFamily.SpecificFlowRateMass, fmUnitFamily.SpecificFlowRateMass.GetUnitByName("t/m2h")},
+                         {fmUnitFamily.SpecificFlowRateVolume, fmUnitFamily.SpecificFlowRateVolume.GetUnitByName("m3/m2h")},
+                         {fmUnitFamily.GasVolumeFamily, fmUnitFamily.GasVolumeFamily.GetUnitByName("m3")},
+                         {fmUnitFamily.GasVolumeInMassFamily, fmUnitFamily.GasVolumeInMassFamily.GetUnitByName("l/kg")},
+                         {fmUnitFamily.GasFlowRateVolume, fmUnitFamily.GasFlowRateVolume.GetUnitByName("m3/h")}
+                     };
+                    unitsShemas[unitsSchema] = schema;
+                }
+
+                foreach (fmUnitFamily key in unitsShemas[unitsSchema].Keys)
+                {
+                    if (key.Name == fmUnitFamily.MassFamily.Name)
+                        key.SetCurrentUnit("t");
+                    if (key.Name == fmUnitFamily.VolumeFamily.Name)
+                        key.SetCurrentUnit("m3");
+                    if (key.Name == fmUnitFamily.SpecificMassFamily.Name)
+                        key.SetCurrentUnit("t/m2");
+                    if (key.Name == fmUnitFamily.VolumeInAreaFamily.Name)
+                        key.SetCurrentUnit("l/m2");
+                    if (key.Name == fmUnitFamily.DensityFamily.Name)
+                        key.SetCurrentUnit("kg/m3");
+                    if (key.Name == fmUnitFamily.ViscosityFamily.Name)
+                        key.SetCurrentUnit("mPa s");
+                    if (key.Name == fmUnitFamily.PressureFamily.Name)
+                        key.SetCurrentUnit("bar");
+                    if (key.Name == fmUnitFamily.AreaFamily.Name)
+                        key.SetCurrentUnit("m2");
+                    if (key.Name == fmUnitFamily.LengthFamily.Name)
+                        key.SetCurrentUnit("mm");
+                    if (key.Name == fmUnitFamily.TimeFamily.Name)
+                        key.SetCurrentUnit("s");
+                    if (key.Name == fmUnitFamily.FrequencyFamily.Name)
+                        key.SetCurrentUnit("min-1");
+                    if (key.Name == fmUnitFamily.FlowRateMass.Name)
+                        key.SetCurrentUnit("t/h");
+                    if (key.Name == fmUnitFamily.FlowRateVolume.Name)
+                        key.SetCurrentUnit("m3/h");
+                    if (key.Name == fmUnitFamily.SpecificFlowRateMass.Name)
+                        key.SetCurrentUnit("t/m2h");
+                    if (key.Name == fmUnitFamily.SpecificFlowRateVolume.Name)
+                        key.SetCurrentUnit("m3/m2h");
+                    if (key.Name == fmUnitFamily.GasVolumeFamily.Name)
+                        key.SetCurrentUnit("m3");
+                    if (key.Name == fmUnitFamily.GasVolumeInMassFamily.Name)
+                        key.SetCurrentUnit("l/kg");
+                    if (key.Name == fmUnitFamily.GasFlowRateVolume.Name)
+                        key.SetCurrentUnit("m3/h");
+                }
+                UnitsSchemas = unitsShemas;
+            }
+
+            if (GetUnitsSchemaFromFilterTypeName(machineName) == fmUnitsSchema.Pilot)
+            {
+                var unitsSchema = fmUnitsSchema.Pilot;
+                SetIsUsUnitsUsed(false);
+                SetCurrentUnitsSchema(unitsSchema);
+
+                var unitsShemas = new Dictionary<FilterSimulation.fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>>(UnitsSchemas);
+
+                if (!unitsShemas.ContainsKey(unitsSchema))
+                {
+                    var schema = new Dictionary<fmUnitFamily, fmUnit>(){
+                         {fmUnitFamily.MassFamily, fmUnitFamily.MassFamily.GetUnitByName("kg")},
+                         {fmUnitFamily.VolumeFamily, fmUnitFamily.VolumeFamily.GetUnitByName("l")},
+                         {fmUnitFamily.SpecificMassFamily, fmUnitFamily.SpecificMassFamily.GetUnitByName("kg/m2")},
+                         {fmUnitFamily.VolumeInAreaFamily, fmUnitFamily.VolumeInAreaFamily.GetUnitByName("l/m2")},
+                         {fmUnitFamily.DensityFamily, fmUnitFamily.DensityFamily.GetUnitByName("kg/m3")},
+                         {fmUnitFamily.ViscosityFamily, fmUnitFamily.ViscosityFamily.GetUnitByName("mPa s")},
+                         {fmUnitFamily.PressureFamily, fmUnitFamily.PressureFamily.GetUnitByName("bar")},
+                         {fmUnitFamily.AreaFamily, fmUnitFamily.AreaFamily.GetUnitByName("m2")},
+                         {fmUnitFamily.LengthFamily, fmUnitFamily.LengthFamily.GetUnitByName("mm")},
+                         {fmUnitFamily.TimeFamily, fmUnitFamily.TimeFamily.GetUnitByName("min")},
+                         {fmUnitFamily.FrequencyFamily, fmUnitFamily.FrequencyFamily.GetUnitByName("min-1")},
+                         {fmUnitFamily.FlowRateMass, fmUnitFamily.FlowRateMass.GetUnitByName("kg/h")},
+                         {fmUnitFamily.FlowRateVolume, fmUnitFamily.FlowRateVolume.GetUnitByName("l/h")},
+                         {fmUnitFamily.SpecificFlowRateMass, fmUnitFamily.SpecificFlowRateMass.GetUnitByName("kg/m2h")},
+                         {fmUnitFamily.SpecificFlowRateVolume, fmUnitFamily.SpecificFlowRateVolume.GetUnitByName("l/m2h")},
+                         {fmUnitFamily.GasVolumeFamily, fmUnitFamily.GasVolumeFamily.GetUnitByName("m3")},
+                         {fmUnitFamily.GasVolumeInMassFamily, fmUnitFamily.GasVolumeInMassFamily.GetUnitByName("l/kg")},
+                         {fmUnitFamily.GasFlowRateVolume, fmUnitFamily.GasFlowRateVolume.GetUnitByName("m3/h")}
+                     };
+                    unitsShemas[unitsSchema] = schema;
+                }
+
+                foreach (fmUnitFamily key in unitsShemas[unitsSchema].Keys)
+                {
+                    if (key.Name == fmUnitFamily.MassFamily.Name)
+                        key.SetCurrentUnit("kg");
+                    if (key.Name == fmUnitFamily.VolumeFamily.Name)
+                        key.SetCurrentUnit("l");
+                    if (key.Name == fmUnitFamily.SpecificMassFamily.Name)
+                        key.SetCurrentUnit("kg/m2");
+                    if (key.Name == fmUnitFamily.VolumeInAreaFamily.Name)
+                        key.SetCurrentUnit("l/m2");
+                    if (key.Name == fmUnitFamily.DensityFamily.Name)
+                        key.SetCurrentUnit("kg/m3");
+                    if (key.Name == fmUnitFamily.ViscosityFamily.Name)
+                        key.SetCurrentUnit("mPa s");
+                    if (key.Name == fmUnitFamily.PressureFamily.Name)
+                        key.SetCurrentUnit("bar");
+                    if (key.Name == fmUnitFamily.AreaFamily.Name)
+                        key.SetCurrentUnit("m2");
+                    if (key.Name == fmUnitFamily.LengthFamily.Name)
+                        key.SetCurrentUnit("mm");
+                    if (key.Name == fmUnitFamily.TimeFamily.Name)
+                        key.SetCurrentUnit("min");
+                    if (key.Name == fmUnitFamily.FrequencyFamily.Name)
+                        key.SetCurrentUnit("min-1");
+                    if (key.Name == fmUnitFamily.FlowRateMass.Name)
+                        key.SetCurrentUnit("kg/h");
+                    if (key.Name == fmUnitFamily.FlowRateVolume.Name)
+                        key.SetCurrentUnit("l/h");
+                    if (key.Name == fmUnitFamily.SpecificFlowRateMass.Name)
+                        key.SetCurrentUnit("kg/m2h");
+                    if (key.Name == fmUnitFamily.SpecificFlowRateVolume.Name)
+                        key.SetCurrentUnit("l/m2h");
+                    if (key.Name == fmUnitFamily.GasVolumeFamily.Name)
+                        key.SetCurrentUnit("m3");
+                    if (key.Name == fmUnitFamily.GasVolumeInMassFamily.Name)
+                        key.SetCurrentUnit("l/kg");
+                    if (key.Name == fmUnitFamily.GasFlowRateVolume.Name)
+                        key.SetCurrentUnit("m3/h");
+                }
+                UnitsSchemas = unitsShemas;
+            }
+
+            if (GetUnitsSchemaFromFilterTypeName(machineName) == fmUnitsSchema.Laboratory)
+            {
+                var unitsSchema = fmUnitsSchema.Laboratory;
+                SetIsUsUnitsUsed(false);
+                SetCurrentUnitsSchema(unitsSchema);
+
+                var unitsShemas = new Dictionary<FilterSimulation.fmUnitsSchema, Dictionary<fmUnitFamily, fmUnit>>(UnitsSchemas);
+
+                if (!unitsShemas.ContainsKey(unitsSchema))
+                {
+                    var schema = new Dictionary<fmUnitFamily, fmUnit>(){
+                         {fmUnitFamily.MassFamily, fmUnitFamily.MassFamily.GetUnitByName("g")},
+                         {fmUnitFamily.VolumeFamily, fmUnitFamily.VolumeFamily.GetUnitByName("cm3")},
+                         {fmUnitFamily.SpecificMassFamily, fmUnitFamily.SpecificMassFamily.GetUnitByName("kg/m2")},
+                         {fmUnitFamily.VolumeInAreaFamily, fmUnitFamily.VolumeInAreaFamily.GetUnitByName("l/m2")},
+                         {fmUnitFamily.DensityFamily, fmUnitFamily.DensityFamily.GetUnitByName("kg/m3")},
+                         {fmUnitFamily.ViscosityFamily, fmUnitFamily.ViscosityFamily.GetUnitByName("mPa s")},
+                         {fmUnitFamily.PressureFamily, fmUnitFamily.PressureFamily.GetUnitByName("bar")},
+                         {fmUnitFamily.AreaFamily, fmUnitFamily.AreaFamily.GetUnitByName("cm2")},
+                         {fmUnitFamily.LengthFamily, fmUnitFamily.LengthFamily.GetUnitByName("mm")},
+                         {fmUnitFamily.TimeFamily, fmUnitFamily.TimeFamily.GetUnitByName("s")},
+                         {fmUnitFamily.FrequencyFamily, fmUnitFamily.FrequencyFamily.GetUnitByName("min-1")},
+                         {fmUnitFamily.FlowRateMass, fmUnitFamily.FlowRateMass.GetUnitByName("kg/h")},
+                         {fmUnitFamily.FlowRateVolume, fmUnitFamily.FlowRateVolume.GetUnitByName("l/h")},
+                         {fmUnitFamily.SpecificFlowRateMass, fmUnitFamily.SpecificFlowRateMass.GetUnitByName("kg/m2h")},
+                         {fmUnitFamily.SpecificFlowRateVolume, fmUnitFamily.SpecificFlowRateVolume.GetUnitByName("l/m2min")},
+                         {fmUnitFamily.GasVolumeFamily, fmUnitFamily.GasVolumeFamily.GetUnitByName("l")},
+                         {fmUnitFamily.GasVolumeInMassFamily, fmUnitFamily.GasVolumeInMassFamily.GetUnitByName("l/kg")},
+                         {fmUnitFamily.GasFlowRateVolume, fmUnitFamily.GasFlowRateVolume.GetUnitByName("l/h")}
+                     };
+                    unitsShemas[unitsSchema] = schema;
+                }
+
+                foreach (fmUnitFamily key in unitsShemas[unitsSchema].Keys)
+                {
+                    if (key.Name == fmUnitFamily.MassFamily.Name)
+                        key.SetCurrentUnit("g");
+                    if (key.Name == fmUnitFamily.VolumeFamily.Name)
+                        key.SetCurrentUnit("cm3");
+                    if (key.Name == fmUnitFamily.SpecificMassFamily.Name)
+                        key.SetCurrentUnit("kg/m2");
+                    if (key.Name == fmUnitFamily.VolumeInAreaFamily.Name)
+                        key.SetCurrentUnit("l/m2");
+                    if (key.Name == fmUnitFamily.DensityFamily.Name)
+                        key.SetCurrentUnit("kg/m3");
+                    if (key.Name == fmUnitFamily.ViscosityFamily.Name)
+                        key.SetCurrentUnit("mPa s");
+                    if (key.Name == fmUnitFamily.PressureFamily.Name)
+                        key.SetCurrentUnit("bar");
+                    if (key.Name == fmUnitFamily.AreaFamily.Name)
+                        key.SetCurrentUnit("cm2");
+                    if (key.Name == fmUnitFamily.LengthFamily.Name)
+                        key.SetCurrentUnit("mm");
+                    if (key.Name == fmUnitFamily.TimeFamily.Name)
+                        key.SetCurrentUnit("s");
+                    if (key.Name == fmUnitFamily.FrequencyFamily.Name)
+                        key.SetCurrentUnit("min-1");
+                    if (key.Name == fmUnitFamily.FlowRateMass.Name)
+                        key.SetCurrentUnit("kg/h");
+                    if (key.Name == fmUnitFamily.FlowRateVolume.Name)
+                        key.SetCurrentUnit("l/h");
+                    if (key.Name == fmUnitFamily.SpecificFlowRateMass.Name)
+                        key.SetCurrentUnit("kg/m2h");
+                    if (key.Name == fmUnitFamily.SpecificFlowRateVolume.Name)
+                        key.SetCurrentUnit("l/m2min");
+                    if (key.Name == fmUnitFamily.GasVolumeFamily.Name)
+                        key.SetCurrentUnit("l");
+                    if (key.Name == fmUnitFamily.GasVolumeInMassFamily.Name)
+                        key.SetCurrentUnit("l/kg");
+                    if (key.Name == fmUnitFamily.GasFlowRateVolume.Name)
+                        key.SetCurrentUnit("l/h");
+                }
+                UnitsSchemas = unitsShemas;
+            }
+            UpdateAll();
         }
     }
 }

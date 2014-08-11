@@ -64,6 +64,7 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.filterTypeByMachineComboBox = new System.Windows.Forms.ComboBox();
             this.assignButton = new System.Windows.Forms.Button();
             this.takeButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -547,6 +548,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.filterTypeByMachineComboBox);
             this.panel3.Controls.Add(this.assignButton);
             this.panel3.Controls.Add(this.takeButton);
             this.panel3.Controls.Add(this.label2);
@@ -556,6 +558,16 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(826, 52);
             this.panel3.TabIndex = 2;
+            // 
+            // filterTypeByMachineComboBox
+            // 
+            this.filterTypeByMachineComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.filterTypeByMachineComboBox.FormattingEnabled = true;
+            this.filterTypeByMachineComboBox.Location = new System.Drawing.Point(18, 23);
+            this.filterTypeByMachineComboBox.Name = "filterTypeByMachineComboBox";
+            this.filterTypeByMachineComboBox.Size = new System.Drawing.Size(123, 21);
+            this.filterTypeByMachineComboBox.TabIndex = 4;
+            this.filterTypeByMachineComboBox.SelectionChangeCommitted += new System.EventHandler(this.filterTypeByMachineComboBox_SelectionChangeCommitted);
             // 
             // assignButton
             // 
@@ -582,9 +594,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(15, 7);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.Size = new System.Drawing.Size(62, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Filter Type – Group:";
+            this.label2.Text = "Filter Type :";
             // 
             // filterTypeGroupComboBox
             // 
@@ -594,6 +606,7 @@
             this.filterTypeGroupComboBox.Name = "filterTypeGroupComboBox";
             this.filterTypeGroupComboBox.Size = new System.Drawing.Size(123, 21);
             this.filterTypeGroupComboBox.TabIndex = 0;
+            this.filterTypeGroupComboBox.Visible = false;
             // 
             // panel4
             // 
@@ -1056,5 +1069,6 @@
         private fmControls.fmCheckedListBoxWithCheckboxes materialDeliqouringBox;
         private fmControls.fmCheckedListBoxWithCheckboxes evaporationsParameters;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ComboBox filterTypeByMachineComboBox;
     }
 }

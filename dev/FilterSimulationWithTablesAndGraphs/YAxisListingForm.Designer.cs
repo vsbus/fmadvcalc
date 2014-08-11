@@ -29,6 +29,7 @@ namespace FilterSimulationWithTablesAndGraphs
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.filterTypeByMachineComboBox = new System.Windows.Forms.ComboBox();
             this.assignButton = new System.Windows.Forms.Button();
             this.takeButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -39,6 +40,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ad0DpBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.qBigBox_dif = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.DpQpConstBox = new fmControls.fmCheckedListBoxWithCheckboxes();
@@ -57,7 +59,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.vBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.qmBigBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.sfSrTrBox = new fmControls.fmCheckedListBoxWithCheckboxes();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.gasParameters = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.qmDeliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
             this.qDeliquoringBox = new fmControls.fmCheckedListBoxWithCheckboxes();
@@ -81,6 +82,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.filterTypeByMachineComboBox);
             this.panel1.Controls.Add(this.assignButton);
             this.panel1.Controls.Add(this.takeButton);
             this.panel1.Controls.Add(this.button1);
@@ -92,6 +94,16 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(832, 50);
             this.panel1.TabIndex = 0;
+            // 
+            // filterTypeByMachineComboBox
+            // 
+            this.filterTypeByMachineComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.filterTypeByMachineComboBox.FormattingEnabled = true;
+            this.filterTypeByMachineComboBox.Location = new System.Drawing.Point(18, 21);
+            this.filterTypeByMachineComboBox.Name = "filterTypeByMachineComboBox";
+            this.filterTypeByMachineComboBox.Size = new System.Drawing.Size(123, 21);
+            this.filterTypeByMachineComboBox.TabIndex = 4;
+            this.filterTypeByMachineComboBox.SelectionChangeCommitted += new System.EventHandler(this.filterTypeByMachineComboBox_SelectionChangeCommitted);
             // 
             // assignButton
             // 
@@ -140,9 +152,9 @@ namespace FilterSimulationWithTablesAndGraphs
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
+            this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Filter Type – Group:";
+            this.label1.Text = "Filter Type :";
             // 
             // filterTypeGroupComboBox
             // 
@@ -152,6 +164,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.filterTypeGroupComboBox.Name = "filterTypeGroupComboBox";
             this.filterTypeGroupComboBox.Size = new System.Drawing.Size(123, 21);
             this.filterTypeGroupComboBox.TabIndex = 0;
+            this.filterTypeGroupComboBox.Visible = false;
             // 
             // panel2
             // 
@@ -222,6 +235,26 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cake Formation";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.gasParameters);
+            this.groupBox2.Controls.Add(this.qmDeliquoringBox);
+            this.groupBox2.Controls.Add(this.qDeliquoringBox);
+            this.groupBox2.Controls.Add(this.massFlowrateDeliquoringBox);
+            this.groupBox2.Controls.Add(this.volumeFlowrateDeliquoringBox);
+            this.groupBox2.Controls.Add(this.massDeliquoringBox);
+            this.groupBox2.Controls.Add(this.volumeDeliquoringBox);
+            this.groupBox2.Controls.Add(this.mainDeliquoringBox);
+            this.groupBox2.Controls.Add(this.materialDeliqouringBox);
+            this.groupBox2.Controls.Add(this.evaporationsParameters);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(435, 600);
+            this.groupBox2.TabIndex = 24;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Deliquoring";
             // 
             // ad0DpBox
             // 
@@ -366,26 +399,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.sfSrTrBox.Name = "sfSrTrBox";
             this.sfSrTrBox.Size = new System.Drawing.Size(106, 68);
             this.sfSrTrBox.TabIndex = 16;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.gasParameters);
-            this.groupBox2.Controls.Add(this.qmDeliquoringBox);
-            this.groupBox2.Controls.Add(this.qDeliquoringBox);
-            this.groupBox2.Controls.Add(this.massFlowrateDeliquoringBox);
-            this.groupBox2.Controls.Add(this.volumeFlowrateDeliquoringBox);
-            this.groupBox2.Controls.Add(this.massDeliquoringBox);
-            this.groupBox2.Controls.Add(this.volumeDeliquoringBox);
-            this.groupBox2.Controls.Add(this.mainDeliquoringBox);
-            this.groupBox2.Controls.Add(this.materialDeliqouringBox);
-            this.groupBox2.Controls.Add(this.evaporationsParameters);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(435, 600);
-            this.groupBox2.TabIndex = 24;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Deliquoring";
             // 
             // gasParameters
             // 
@@ -533,5 +546,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private fmControls.fmCheckedListBoxWithCheckboxes volumeDeliquoringBox;
         private fmControls.fmCheckedListBoxWithCheckboxes mainDeliquoringBox;
         private fmControls.fmCheckedListBoxWithCheckboxes qmDeliquoringBox;
+        private System.Windows.Forms.ComboBox filterTypeByMachineComboBox;
     }
 }

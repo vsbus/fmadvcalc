@@ -33,7 +33,10 @@ namespace FilterSimulation
 
         private fmSimulationLimitsBlock cakeFormationLimitsBlock;
         private fmDeliquoringLimitsBlock deliquoringLimitsBlock;
-        private Dictionary<fmFilterSimMachineType, RangesDictionary> m_schemas = new Dictionary<fmFilterSimMachineType, RangesDictionary>();       
+        private Dictionary<fmFilterSimMachineType, RangesDictionary> m_schemas = new Dictionary<fmFilterSimMachineType, RangesDictionary>();
+
+        private readonly fmFilterSimMachineType[] m_machines = fmFilterSimMachineType.filterTypesList.ToArray();
+        private Dictionary<string, List<fmGlobalParameter>> m_ShowHideSchemasForEachFilterMachine = new Dictionary<string, List<fmGlobalParameter>>();
 
         private readonly Dictionary<fmGlobalParameter, fmCheckedListBoxWithCheckboxes> m_parameterBox = new Dictionary<fmGlobalParameter, fmCheckedListBoxWithCheckboxes>();
         public string CurrentSerieMachineName = "";
@@ -46,6 +49,7 @@ namespace FilterSimulation
             public Dictionary<fmFilterSimMachineType, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> RangesDictionary;
             public fmParametersToDisplay parametersToDisplay;
             public Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> showHideDictionary;
+            public Dictionary<string, List<fmGlobalParameter>> filtersShowHideDictionary;
             public fmSuspensionCalculator.fmSuspensionCalculationOptions suspensionCalculationOption;
             public fmFilterMachiningCalculator.fmFilterMachiningCalculationOption filterMachiningCalculationOption;
             public fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption deliquoringUsedCalculationOption;
@@ -64,6 +68,7 @@ namespace FilterSimulation
             InitializeComponent();
             FillRngesFilterTypeCombobox();
             FillShowHideFilterTypeCombobox();
+            InitCombobox();
             AddParametersToShowHideTab();
         }
         
@@ -228,22 +233,8 @@ namespace FilterSimulation
             ShowHideSecondaryDeliquoringCheckboxes();
         }
 
-        public void InitCalculationOptions()//fmFilterSimSolution Solution)
-        {
-            /*try
-            {
-                suspensionCalculationOption = Solution.currentObjects.Simulation.Data.suspensionCalculationOption;
-                filterMachiningCalculationOption = Solution.currentObjects.Simulation.Data.filterMachiningCalculationOption;
-                deliquoringUsedCalculationOption = Solution.currentObjects.Simulation.Data.deliquoringUsedCalculationOption;
-                gasFlowrateUsedCalculationOption = Solution.currentObjects.Simulation.Data.gasFlowrateUsedCalculationOption;
-                evaporationUsedCalculationOption = Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption;
-                hcdEpsdCalculationOption = Solution.currentObjects.Simulation.Data.hcdEpsdCalculationOption;
-                dpdInputCalculationOption = Solution.currentObjects.Simulation.Data.dpdInputCalculationOption;
-                rhoDCalculationOption = Solution.currentObjects.Simulation.Data.rhoDCalculationOption;
-                PcDCalculationOption = Solution.currentObjects.Simulation.Data.PcDCalculationOption;
-            }
-            catch
-            {*/
+        public void InitCalculationOptions()
+        {            
             var FakeSimulation = new fmFilterSimulation();
             suspensionCalculationOption = FakeSimulation.Data.suspensionCalculationOption;
             filterMachiningCalculationOption = FakeSimulation.Data.filterMachiningCalculationOption;
@@ -254,7 +245,83 @@ namespace FilterSimulation
             dpdInputCalculationOption = FakeSimulation.Data.dpdInputCalculationOption;
             rhoDCalculationOption = FakeSimulation.Data.rhoDCalculationOption;
             PcDCalculationOption = FakeSimulation.Data.PcDCalculationOption;
-            //}
+        }
+
+        public void UpdateDefaultCalculationOptionForSImulation(string FilterName)
+        {
+            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumDrumFilter ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.RotaryPressureFilter ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.LabVacuumFilter ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.LabPressureFilter)
+            {
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
+                filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
+                deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
+                gasFlowrateUsedCalculationOption = fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
+                evaporationUsedCalculationOption = fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider;
+                hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
+                dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation;
+                rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF;
+                PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;         
+            }
+
+            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumNutche ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.PressureNutche)
+            {
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
+                filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_DP_CONST;
+                deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
+                gasFlowrateUsedCalculationOption = fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
+                evaporationUsedCalculationOption = fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider;
+                hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
+                dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation;
+                rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser;
+                PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
+            }
+
+            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.PneumaPress ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.PressureLeafFilter)
+            {
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
+                filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST;
+                deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
+                gasFlowrateUsedCalculationOption = fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
+                evaporationUsedCalculationOption = fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider;
+                hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
+                dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation;
+                rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF;
+                PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
+            }
+
+            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.CandleFilter)
+            {
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
+                filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.CYLINDRICAL_CENTRIPETAL_PUMP_QP_DP_CONST;
+                deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
+                gasFlowrateUsedCalculationOption = fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
+                evaporationUsedCalculationOption = fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider;
+                hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
+                dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation;
+                rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF;
+                PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
+            }
+
+            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.FilterPress ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            {
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
+                filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST;
+                deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed;
+                gasFlowrateUsedCalculationOption = fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.NotConsider;
+                evaporationUsedCalculationOption = fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider;
+                hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
+                dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation;
+                rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF;
+                PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;                
+            }
         }
 
         public void GetCalculationOptions(fmFilterSimulation Simulation)
@@ -927,6 +994,9 @@ namespace FilterSimulation
                 {
                     var value = (fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Text);
                     m_schemas_param[value] = GetCheckedItems();
+
+                    var selectedFilter = filterTypeByMachineComboBox.Text;
+                    m_ShowHideSchemasForEachFilterMachine[selectedFilter] = GetCheckedItems();
                 }
             }
         }
@@ -936,10 +1006,16 @@ namespace FilterSimulation
             if (filterTypeGroupComboBox.Text != "")
             {
                 var value = (fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Text);
+                var selecteFilter = filterTypeByMachineComboBox.Text;
                 if (m_schemas_param.ContainsKey(value))
                 {
                     UncheckAll();
                     CheckItems(m_schemas_param[value]);
+                }
+                if (m_ShowHideSchemasForEachFilterMachine.ContainsKey(selecteFilter))
+                {
+                    UncheckAll();
+                    CheckItems(m_ShowHideSchemasForEachFilterMachine[selecteFilter]);
                 }
                 else
                 {
@@ -953,22 +1029,42 @@ namespace FilterSimulation
             return m_schemas_param;
         }
 
-        public void SetShowHideSchemas(Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> dictionary)
+        public Dictionary<string, List<fmGlobalParameter>> GetFiltersShowHideSchemas()
+        {
+            return m_ShowHideSchemasForEachFilterMachine;
+        }
+
+        public void SetShowHideSchemas(Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> dictionary, Dictionary<string, List<fmGlobalParameter>> filtersDictionary)
         {
             m_schemas_param = new Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>>();
             foreach (KeyValuePair<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> pair in dictionary)
             {
                 m_schemas_param.Add(pair.Key, pair.Value);
             }
+
+            m_ShowHideSchemasForEachFilterMachine = new Dictionary<string, List<fmGlobalParameter>>();
+            foreach (KeyValuePair<string, List<fmGlobalParameter>> pair in filtersDictionary)
+            {
+                m_ShowHideSchemasForEachFilterMachine.Add(pair.Key, pair.Value);
+            }
         }
 
-        public void CheckScheme(fmFilterSimMachineType.FilterCycleType schema)
+        public void CheckScheme(fmFilterSimMachineType.FilterCycleType schema, string serieMachineName)
         {
             for (int i = 0; i < filterTypeGroupComboBox.Items.Count; ++i)
             {
                 if (filterTypeGroupComboBox.Items[i].ToString() == fmEnumUtils.GetEnumDescription(schema))
                 {
                     filterTypeGroupComboBox.SelectedIndex = i;
+                    break;
+                }
+            }
+
+            foreach (var item in filterTypeByMachineComboBox.Items)
+            {
+                if (item.ToString() == serieMachineName)
+                {
+                    filterTypeByMachineComboBox.SelectedItem = item;
                     break;
                 }
             }
@@ -979,9 +1075,42 @@ namespace FilterSimulation
             return (fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Text);
         }
 
+        private void InitCombobox()
+        {
+            foreach (fmFilterSimMachineType machine in m_machines)
+            {
+                filterTypeByMachineComboBox.Items.Add(machine.name);
+            }
+
+            filterTypeByMachineComboBox.SelectedIndex = 0;
+        }        
+        private void filterTypeByMachineComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var selectedFilter = filterTypeByMachineComboBox.SelectedItem;
+            foreach (fmFilterSimMachineType filterType in m_machines)
+            {
+                if (filterType.name == selectedFilter.ToString())
+                {
+                    for (int i = 0; i < filterTypeGroupComboBox.Items.Count; ++i)
+                    {
+                        var value = (fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Items[i].ToString());
+                        if (value == filterType.GetFilterCycleType())
+                        {
+                            filterTypeGroupComboBox.SelectedIndex = i;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
         #endregion
 
-        public void SetDefaultValues(RangesDictionary ranges, Dictionary<fmFilterSimMachineType, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> rangesDictionary, fmParametersToDisplay parametersToDisplay, Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> showHideDictionary)
+        public void SetDefaultValues(RangesDictionary ranges, 
+            Dictionary<fmFilterSimMachineType, Dictionary<fmGlobalParameter, fmDefaultParameterRange>> rangesDictionary, 
+            fmParametersToDisplay parametersToDisplay, 
+            Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> showHideDictionary,
+            Dictionary<string, List<fmGlobalParameter>> filtersShowHideDictionary)
         {
             DefaultValues.deliquoringUsedCalculationOption = deliquoringUsedCalculationOption;
             DefaultValues.dpdInputCalculationOption = dpdInputCalculationOption;
@@ -998,6 +1127,7 @@ namespace FilterSimulation
 
             DefaultValues.parametersToDisplay = parametersToDisplay;
             DefaultValues.showHideDictionary = showHideDictionary;
+            DefaultValues.filtersShowHideDictionary = filtersShowHideDictionary;
         }
 
         public void SetDefaultMachine(string machine)
@@ -1022,8 +1152,8 @@ namespace FilterSimulation
             SetRangesSchemas(DefaultValues.RangesDictionary);
 
             CheckItems(DefaultValues.parametersToDisplay.ParametersList);
-            SetShowHideSchemas(DefaultValues.showHideDictionary);
-            CheckScheme(DefaultValues.parametersToDisplay.AssignedSchema);
+            SetShowHideSchemas(DefaultValues.showHideDictionary, DefaultValues.filtersShowHideDictionary);
+            CheckScheme(DefaultValues.parametersToDisplay.AssignedSchema, DefaultValues.machine);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -1051,6 +1181,6 @@ namespace FilterSimulation
                 this.Close();
             }
             return base.ProcessCmdKey(ref msg, keyData);
-        }  
+        }          
     }
 }

@@ -16,6 +16,9 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> m_schemas = new Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>>();
 
+        private readonly fmFilterSimMachineType[] m_machines = fmFilterSimMachineType.filterTypesList.ToArray();
+        private Dictionary<string, List<fmGlobalParameter>> m_ShowHideSchemasForEachFilterMachine = new Dictionary<string, List<fmGlobalParameter>>();
+
         public fmYAxisListingForm()
         {
             InitializeComponent();
@@ -192,6 +195,7 @@ namespace FilterSimulationWithTablesAndGraphs
             AddParameter(qmDeliquoringBox, fmGlobalParameter.qmfd);
 
             FillFilterTypeCombobox();
+            InitCombobox();
         }
 
         private void FillFilterTypeCombobox()
@@ -282,7 +286,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (filterTypeGroupComboBox.Text != "")
             {
                 DialogResult dialogResult = MessageBox.Show(
-                    @"Are you sure you want to assign new show/hide configuration for the selected Filter Type – Group?",
+                    @"Are you sure you want to assign new show/hide configuration for the selected Filter Type?",
                     @"Confirm",
                     MessageBoxButtons.YesNo);
 
@@ -290,6 +294,9 @@ namespace FilterSimulationWithTablesAndGraphs
                 {
                     var value = (fmFilterSimMachineType.FilterCycleType) fmEnumUtils.GetEnum(typeof (fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Text);
                     m_schemas[value] = GetCheckedItems();
+
+                    var selectedFilter = filterTypeByMachineComboBox.Text;
+                    m_ShowHideSchemasForEachFilterMachine[selectedFilter] = GetCheckedItems();
                 }
             }
         }
@@ -299,10 +306,16 @@ namespace FilterSimulationWithTablesAndGraphs
             if (filterTypeGroupComboBox.Text != "")
             {
                 var value = (fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Text);
+                var selecteFilter = filterTypeByMachineComboBox.Text;
                 if (m_schemas.ContainsKey(value))
                 {
                     UncheckAll();
                     CheckItems(m_schemas[value]);
+                }
+                if (m_ShowHideSchemasForEachFilterMachine.ContainsKey(selecteFilter))
+                {
+                    UncheckAll();
+                    CheckItems(m_ShowHideSchemasForEachFilterMachine[selecteFilter]);
                 }
                 else
                 {
@@ -316,16 +329,27 @@ namespace FilterSimulationWithTablesAndGraphs
             return m_schemas;
         }
 
-        public void SetShowHideSchemas(Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> dictionary)
+        public Dictionary<string, List<fmGlobalParameter>> GetFiltersShowHideSchemas()
+        {
+            return m_ShowHideSchemasForEachFilterMachine;
+        }
+
+        public void SetShowHideSchemas(Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> dictionary, Dictionary<string, List<fmGlobalParameter>> filtersDictionary)
         {
             m_schemas = new Dictionary<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>>();
             foreach (KeyValuePair<fmFilterSimMachineType.FilterCycleType, List<fmGlobalParameter>> pair in dictionary)
             {
                 m_schemas.Add(pair.Key, pair.Value);
             }
+
+            m_ShowHideSchemasForEachFilterMachine = new Dictionary<string, List<fmGlobalParameter>>();
+            foreach (KeyValuePair<string, List<fmGlobalParameter>> pair in filtersDictionary)
+            {
+                m_ShowHideSchemasForEachFilterMachine.Add(pair.Key, pair.Value);
+            }
         }
 
-        public void CheckScheme(fmFilterSimMachineType.FilterCycleType schema)
+        public void CheckScheme(fmFilterSimMachineType.FilterCycleType schema, string serieMachineName)
         {
             for (int i = 0; i < filterTypeGroupComboBox.Items.Count; ++i)
             {
@@ -335,11 +359,51 @@ namespace FilterSimulationWithTablesAndGraphs
                     break;
                 }
             }
+
+            foreach (var item in filterTypeByMachineComboBox.Items)
+            {
+                if (item.ToString() == serieMachineName)
+                {
+                    filterTypeByMachineComboBox.SelectedItem = item;
+                    break;
+                }
+            }
         }
 
         public fmFilterSimMachineType.FilterCycleType GetCheckedSchema()
         {
             return (fmFilterSimMachineType.FilterCycleType) fmEnumUtils.GetEnum(typeof (fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Text);
+        }
+
+        private void InitCombobox()
+        {
+            foreach (fmFilterSimMachineType machine in m_machines)
+            {
+                filterTypeByMachineComboBox.Items.Add(machine.name);
+            }
+
+            filterTypeByMachineComboBox.SelectedIndex = 0;
+        }        
+
+        private void filterTypeByMachineComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var selectedFilter = filterTypeByMachineComboBox.SelectedItem;
+            foreach (fmFilterSimMachineType filterType in m_machines)
+            {
+                if (filterType.name == selectedFilter.ToString())
+                {
+                    for (int i = 0; i < filterTypeGroupComboBox.Items.Count; ++i)
+                    {
+                        var value = (fmFilterSimMachineType.FilterCycleType)fmEnumUtils.GetEnum(typeof(fmFilterSimMachineType.FilterCycleType), filterTypeGroupComboBox.Items[i].ToString());
+                        if ( value == filterType.GetFilterCycleType())
+                        {
+                            filterTypeGroupComboBox.SelectedIndex = i;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
         }
     }
 }

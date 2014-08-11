@@ -430,13 +430,14 @@ namespace AdvancedCalculator
             fmParametersToDisplay parametersToDisplay =
                 filterSimulationWithTablesAndGraphs1.GetCurrentSerieParametersToDisplay();
             yalForm.CheckItems(parametersToDisplay.ParametersList);
-            yalForm.SetShowHideSchemas(filterSimulationWithTablesAndGraphs1.ShowHideSchemas);
-            yalForm.CheckScheme(parametersToDisplay.AssignedSchema);
+            yalForm.SetShowHideSchemas(filterSimulationWithTablesAndGraphs1.ShowHideSchemas, filterSimulationWithTablesAndGraphs1.ShowHideSchemasForEachFilterMachine);
+            yalForm.CheckScheme(parametersToDisplay.AssignedSchema, filterSimulationWithTablesAndGraphs1.GetCurrentSerieMachineName());
             if (yalForm.ShowDialog() == DialogResult.OK)
             {
                 parametersToDisplay = new fmParametersToDisplay(yalForm.GetCheckedSchema(), yalForm.GetCheckedItems());
                 filterSimulationWithTablesAndGraphs1.SetCurrentSerieParametersToDisplay(parametersToDisplay);
                 filterSimulationWithTablesAndGraphs1.ShowHideSchemas = yalForm.GetShowHideSchemas();
+                filterSimulationWithTablesAndGraphs1.ShowHideSchemasForEachFilterMachine = yalForm.GetFiltersShowHideSchemas();
                 filterSimulationWithTablesAndGraphs1.UpdateAll();
             }
         }
@@ -470,8 +471,12 @@ namespace AdvancedCalculator
 
         private void filterTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            var tmpFilter = filterSimulationWithTablesAndGraphs1.GetCurrentSerieMachineName();
             filterSimulationWithTablesAndGraphs1.SelectMachineButtonClick(sender, e);
-        }
+
+            if (tmpFilter != filterSimulationWithTablesAndGraphs1.GetCurrentSerieMachineName())
+                filterSimulationWithTablesAndGraphs1.TakeDefaultUnitsForSerie(filterSimulationWithTablesAndGraphs1.GetCurrentSerieMachineName());
+        }        
 
         private void timer1_Tick(object sender, EventArgs e)
         {
