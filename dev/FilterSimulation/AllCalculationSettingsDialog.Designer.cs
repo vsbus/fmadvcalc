@@ -488,7 +488,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 35);
+            this.label1.Location = new System.Drawing.Point(15, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 7;
@@ -496,7 +496,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(272, 51);
+            this.button3.Location = new System.Drawing.Point(284, 67);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(98, 23);
             this.button3.TabIndex = 6;
@@ -506,7 +506,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(168, 51);
+            this.button2.Location = new System.Drawing.Point(180, 67);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(98, 23);
             this.button2.TabIndex = 5;
@@ -518,7 +518,7 @@
             // 
             this.filterTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.filterTypeComboBox.FormattingEnabled = true;
-            this.filterTypeComboBox.Location = new System.Drawing.Point(12, 51);
+            this.filterTypeComboBox.Location = new System.Drawing.Point(18, 67);
             this.filterTypeComboBox.Name = "filterTypeComboBox";
             this.filterTypeComboBox.Size = new System.Drawing.Size(136, 21);
             this.filterTypeComboBox.TabIndex = 4;
@@ -565,13 +565,13 @@
             this.filterTypeByMachineComboBox.FormattingEnabled = true;
             this.filterTypeByMachineComboBox.Location = new System.Drawing.Point(18, 23);
             this.filterTypeByMachineComboBox.Name = "filterTypeByMachineComboBox";
-            this.filterTypeByMachineComboBox.Size = new System.Drawing.Size(123, 21);
+            this.filterTypeByMachineComboBox.Size = new System.Drawing.Size(136, 21);
             this.filterTypeByMachineComboBox.TabIndex = 4;
             this.filterTypeByMachineComboBox.SelectionChangeCommitted += new System.EventHandler(this.filterTypeByMachineComboBox_SelectionChangeCommitted);
             // 
             // assignButton
             // 
-            this.assignButton.Location = new System.Drawing.Point(265, 21);
+            this.assignButton.Location = new System.Drawing.Point(284, 23);
             this.assignButton.Name = "assignButton";
             this.assignButton.Size = new System.Drawing.Size(98, 23);
             this.assignButton.TabIndex = 3;
@@ -581,7 +581,7 @@
             // 
             // takeButton
             // 
-            this.takeButton.Location = new System.Drawing.Point(161, 21);
+            this.takeButton.Location = new System.Drawing.Point(180, 23);
             this.takeButton.Name = "takeButton";
             this.takeButton.Size = new System.Drawing.Size(98, 23);
             this.takeButton.TabIndex = 2;
@@ -924,7 +924,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(655, 700);
+            this.button1.Location = new System.Drawing.Point(655, 662);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -934,7 +934,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(756, 700);
+            this.button4.Location = new System.Drawing.Point(750, 662);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 2;
@@ -946,7 +946,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 724);
+            this.ClientSize = new System.Drawing.Size(844, 698);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
