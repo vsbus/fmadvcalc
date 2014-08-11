@@ -288,7 +288,7 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private Form m_xyDialog;
         int m_xyDialogHeight = 600; //default Config Diagrams form size
-        int m_xyDialogWidth = 600;
+        int m_xyDialogWidth = 810;
         
         private void Button1Click(object sender, EventArgs e)
         {
