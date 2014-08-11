@@ -1049,6 +1049,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 return;
             }
 
+            var tmpEvaporationOption = Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption;
             var cosd = new fmCalculationOptionSelectionDialog
             {
                 suspensionCalculationOption =
@@ -1086,6 +1087,21 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 Solution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.deliquoringUsedCalculationOption);
                 Solution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(cosd.rhoDCalculationOption);
                 Solution.currentObjects.Simulation.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(cosd.PcDCalculationOption);
+                DisplaySolution(Solution);
+            }
+
+            if (tmpEvaporationOption != Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption)
+            {
+                var vp = Solution.currentObjects.Simulation.Data.parameters[fmGlobalParameter.DH] as fmCalculationVariableParameter;
+                vp.isInputed = true;
+                if (Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption == fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.Consider)
+                {                   
+                    vp.value = new fmValue(40e3);
+                }
+                else
+                {
+                    vp.value = new fmValue(1000e3);
+                }
                 DisplaySolution(Solution);
             }
         }

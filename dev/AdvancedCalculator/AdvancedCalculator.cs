@@ -597,6 +597,9 @@ namespace AdvancedCalculator
 
         private string LoadSessionCommentsFromFile(string filePath)
         {
+            if (filePath == null || filePath == "")
+                return "";
+
             XmlDocument doc = new XmlDocument();
             doc.Load(filePath);
             XmlNode root = doc.DocumentElement;
