@@ -22,10 +22,10 @@ namespace FilterSimulation
         }
 
         private void InitCombobox()
-        {
+        {            
             foreach (fmFilterSimMachineType machine in m_machines)
             {
-                machineTypesComboBox.Items.Add(machine.name);
+                machineTypesListView.Items.Add(machine.name).BackColor = ControlPaint.LightLight(machine.GetMachineGroup().GetColor());                
             }
         }
 
@@ -33,21 +33,23 @@ namespace FilterSimulation
         {
             string parentName = serie.Parent == null ? "" : " - " + serie.Parent.GetName();
             serieTextBox.Text = serie.GetName();
-            foreach (var item in machineTypesComboBox.Items)
+            
+            foreach (ListViewItem item in machineTypesListView.Items)
             {
-                if (item.ToString() == serie.MachineType.name)
+                if (item.Text == serie.MachineType.name)
                 {
-                    machineTypesComboBox.SelectedItem = item;
+                    machineTypesListView.Select();
+                    item.Selected = true;
                     break;
                 }
             }
         }
 
         internal fmFilterSimMachineType GetSelectedType()
-        {
+        { 
             foreach (fmFilterSimMachineType machine in m_machines)
             {
-                if (machine.name == machineTypesComboBox.Text)
+                if (machine.name == machineTypesListView.SelectedItems[0].Text)
                 {
                     return machine;
                 }
@@ -64,6 +66,6 @@ namespace FilterSimulation
         private void button2_Click(object sender, EventArgs e)
         {
             Close();
-        }
+        }       
     }
 }

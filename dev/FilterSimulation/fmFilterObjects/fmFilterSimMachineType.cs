@@ -178,6 +178,11 @@ namespace FilterSimulation.fmFilterObjects
         {
             return m_filterCycleType;
         }
+
+        public fmMachineGroup GetMachineGroup()
+        {
+            return m_machineGroup;
+        }
     }
 
     public class fmMachineGroup
