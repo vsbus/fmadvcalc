@@ -58,6 +58,7 @@ namespace FilterSimulationWithTablesAndGraphs
                 parametrsForListview[i] = new ListViewItem(param.Caption);
                 parametrsForListview[i].BackColor = FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.SelfRef.getParamKindColor(param.Caption.Remove(param.Caption.IndexOf(" (")));
                 parametrsForListview[i].BackColor = ControlPaint.LightLight(parametrsForListview[i].BackColor);
+                parametrsForListview[i].BackColor = ControlPaint.LightLight(parametrsForListview[i].BackColor);
                 ++i;
             }
 

@@ -207,7 +207,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                                     fmParameterKind.MaterialCakeFormation,
                                                     new fmParameterKindProperties
                                                         {
-                                                            Color = Color.Green,
+                                                            Color = Color.CornflowerBlue,
                                                             Checkbox = cakeFormationMaterilParametersCheckBox
                                                         }
                                                     },
@@ -231,7 +231,7 @@ namespace FilterSimulationWithTablesAndGraphs
                                                     fmParameterKind.MachiningSettingsDeliquoring,
                                                     new fmParameterKindProperties
                                                         {
-                                                            Color = Color.IndianRed,
+                                                            Color = Color.SaddleBrown,
                                                             Checkbox = deliquoringMachininglParametersCheckBox
                                                         }
                                                     }
@@ -373,6 +373,7 @@ namespace FilterSimulationWithTablesAndGraphs
                             {
                                 Color lightColor = Color.FromArgb((color.R + 255) / 2, (color.G + 255) / 2, (color.B + 255) / 2);
                                 listViewItem.BackColor = lightColor;
+                                listViewItem.BackColor = ControlPaint.LightLight(listViewItem.BackColor);
                             }
                         }
                     }
@@ -749,6 +750,7 @@ namespace FilterSimulationWithTablesAndGraphs
             RecalculateSimulationsWithIterationX();
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
+            MoveXAxisParameterColumnToTheFirstPlace();
         }
 
         private void UpdateIsInputed(fmGlobalParameter inputedParameter)
@@ -1311,6 +1313,14 @@ namespace FilterSimulationWithTablesAndGraphs
                     }
                 }
             }
+            PreserveCoordinatesGridColumsOrder();
+        }
+
+        private void MoveXAxisParameterColumnToTheFirstPlace()
+        {
+            if (coordinatesGrid.Columns == null || coordinatesGrid.Columns.Count == 0)
+                return;
+            coordinatesGrid.Columns[0].DisplayIndex = 0;
             PreserveCoordinatesGridColumsOrder();
         }
 
