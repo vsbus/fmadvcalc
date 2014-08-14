@@ -101,11 +101,13 @@ namespace FilterSimulation.fmFilterObjects
 
             var fourthGroup = new fmMachineGroup(Color.LemonChiffon);
             AddFilter(FilterTypeNamesList.PressureLeafFilter, false, FilterCycleType.BatchFilters, fourthGroup);
-            AddFilter(FilterTypeNamesList.CandleFilter, false, FilterCycleType.BatchFilters, fourthGroup);
+
+            var seventhGroup = new fmMachineGroup(Color.Bisque);
+            AddFilter(FilterTypeNamesList.CandleFilter, false, FilterCycleType.BatchFilters, seventhGroup);
 
             var fifthGroup = new fmMachineGroup(Color.Coral);
             FilterPress = AddFilter(FilterTypeNamesList.FilterPress, false, FilterCycleType.BatchFilters, fifthGroup);
-            AddFilter(FilterTypeNamesList.FilterPressAutomat, false, FilterCycleType.BatchFilters, fifthGroup);
+            AddFilter(FilterTypeNamesList.FilterPressAutomat, false, FilterCycleType.BatchFilters, fifthGroup);            
 
             var sixthGroup = new fmMachineGroup(Color.Goldenrod);
             AddFilter(FilterTypeNamesList.LabVacuumFilter, true, FilterCycleType.BatchFilters, sixthGroup);

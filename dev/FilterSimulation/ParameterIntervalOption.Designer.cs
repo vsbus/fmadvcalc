@@ -38,12 +38,12 @@ namespace FilterSimulation
             this.button1 = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.MaterialParametersGrid = new FilterSimulation.TableWithParameterRanges();
             this.CakeFormationGrid = new FilterSimulation.TableWithParameterRanges();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.deliquoringMaterialParameterGrid = new FilterSimulation.TableWithParameterRanges();
             this.deliquoringSettingsParametersGrid = new FilterSimulation.TableWithParameterRanges();
+            this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.moreParemetersGrid = new FilterSimulation.TableWithParameterRanges();
             this.panel1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -122,6 +122,7 @@ namespace FilterSimulation
             this.filterTypeComboBox.Name = "filterTypeComboBox";
             this.filterTypeComboBox.Size = new System.Drawing.Size(136, 21);
             this.filterTypeComboBox.TabIndex = 4;
+            this.filterTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.filterTypeComboBox_SelectedIndexChanged);
             // 
             // checkBox1
             // 
@@ -179,6 +180,22 @@ namespace FilterSimulation
             this.splitContainer2.SplitterDistance = 158;
             this.splitContainer2.TabIndex = 3;
             // 
+            // MaterialParametersGrid
+            // 
+            this.MaterialParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MaterialParametersGrid.Location = new System.Drawing.Point(0, 0);
+            this.MaterialParametersGrid.Name = "MaterialParametersGrid";
+            this.MaterialParametersGrid.Size = new System.Drawing.Size(322, 158);
+            this.MaterialParametersGrid.TabIndex = 1;
+            // 
+            // CakeFormationGrid
+            // 
+            this.CakeFormationGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CakeFormationGrid.Location = new System.Drawing.Point(0, 0);
+            this.CakeFormationGrid.Name = "CakeFormationGrid";
+            this.CakeFormationGrid.Size = new System.Drawing.Size(322, 85);
+            this.CakeFormationGrid.TabIndex = 2;
+            // 
             // splitContainer3
             // 
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -197,6 +214,22 @@ namespace FilterSimulation
             this.splitContainer3.SplitterDistance = 158;
             this.splitContainer3.TabIndex = 2;
             // 
+            // deliquoringMaterialParameterGrid
+            // 
+            this.deliquoringMaterialParameterGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deliquoringMaterialParameterGrid.Location = new System.Drawing.Point(0, 0);
+            this.deliquoringMaterialParameterGrid.Name = "deliquoringMaterialParameterGrid";
+            this.deliquoringMaterialParameterGrid.Size = new System.Drawing.Size(325, 158);
+            this.deliquoringMaterialParameterGrid.TabIndex = 0;
+            // 
+            // deliquoringSettingsParametersGrid
+            // 
+            this.deliquoringSettingsParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deliquoringSettingsParametersGrid.Location = new System.Drawing.Point(0, 0);
+            this.deliquoringSettingsParametersGrid.Name = "deliquoringSettingsParametersGrid";
+            this.deliquoringSettingsParametersGrid.Size = new System.Drawing.Size(325, 85);
+            this.deliquoringSettingsParametersGrid.TabIndex = 1;
+            // 
             // splitContainer4
             // 
             this.splitContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -214,38 +247,6 @@ namespace FilterSimulation
             this.splitContainer4.Size = new System.Drawing.Size(651, 529);
             this.splitContainer4.SplitterDistance = 247;
             this.splitContainer4.TabIndex = 7;
-            // 
-            // MaterialParametersGrid
-            // 
-            this.MaterialParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MaterialParametersGrid.Location = new System.Drawing.Point(0, 0);
-            this.MaterialParametersGrid.Name = "MaterialParametersGrid";
-            this.MaterialParametersGrid.Size = new System.Drawing.Size(322, 158);
-            this.MaterialParametersGrid.TabIndex = 1;
-            // 
-            // CakeFormationGrid
-            // 
-            this.CakeFormationGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CakeFormationGrid.Location = new System.Drawing.Point(0, 0);
-            this.CakeFormationGrid.Name = "CakeFormationGrid";
-            this.CakeFormationGrid.Size = new System.Drawing.Size(322, 85);
-            this.CakeFormationGrid.TabIndex = 2;
-            // 
-            // deliquoringMaterialParameterGrid
-            // 
-            this.deliquoringMaterialParameterGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.deliquoringMaterialParameterGrid.Location = new System.Drawing.Point(0, 0);
-            this.deliquoringMaterialParameterGrid.Name = "deliquoringMaterialParameterGrid";
-            this.deliquoringMaterialParameterGrid.Size = new System.Drawing.Size(325, 158);
-            this.deliquoringMaterialParameterGrid.TabIndex = 0;
-            // 
-            // deliquoringSettingsParametersGrid
-            // 
-            this.deliquoringSettingsParametersGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.deliquoringSettingsParametersGrid.Location = new System.Drawing.Point(0, 0);
-            this.deliquoringSettingsParametersGrid.Name = "deliquoringSettingsParametersGrid";
-            this.deliquoringSettingsParametersGrid.Size = new System.Drawing.Size(325, 85);
-            this.deliquoringSettingsParametersGrid.TabIndex = 1;
             // 
             // moreParemetersGrid
             // 

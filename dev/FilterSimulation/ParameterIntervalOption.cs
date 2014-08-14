@@ -427,5 +427,14 @@ namespace FilterSimulation
                 }
             }
         }
+
+        private void filterTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (GetRangesMachineType() != fmFilterSimMachineType.GetFilterTypeByName(fmFilterSimMachineType.FilterTypeNamesList.CandleFilter))
+                CakeFormationGrid.HideD0Row();            
+            else
+                CakeFormationGrid.ShowD0Row();
+
+        }
     }
 }

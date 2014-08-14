@@ -201,7 +201,7 @@ namespace AdvancedCalculator
             var saveDialog = new SaveFileDialog {Filter = @"Data files (*.dat)|*.dat"};
             if (m_currentFilename != null)
             {
-                saveDialog.FileName = m_currentFilename;
+                saveDialog.FileName = m_currentFilename.Substring(m_currentFilename.LastIndexOf('\\')+1);
                 string path = m_currentFilename.Substring(0, m_currentFilename.LastIndexOf('\\'));
                 saveDialog.InitialDirectory = path;
             }
@@ -344,7 +344,8 @@ namespace AdvancedCalculator
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
                 Text = m_caption + @" [" + fileName + @"]";
                 filterSimulationWithTablesAndGraphs1.DeserializeConfigurationForMenuOpen(
-                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));  
+                    doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
+                filterSimulationWithTablesAndGraphs1.setFlagsToOpeningFromFile();
                 filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
                 filterSimulationWithTablesAndGraphs1.hook2();
             }

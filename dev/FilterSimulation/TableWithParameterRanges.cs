@@ -22,6 +22,24 @@ namespace FilterSimulation
             return fmDataGrid1.Rows.Add(new[] { p.Name, p.UnitFamily.CurrentUnit.Name });
         }
 
+        public void HideD0Row()
+        {
+            foreach (DataGridViewRow row in fmDataGrid1.Rows)
+            {
+                if (ParameterCell(row.Index).Value.ToString() == "d0")
+                    row.Visible = false;
+            }
+        }
+
+        public void ShowD0Row()
+        {
+            foreach (DataGridViewRow row in fmDataGrid1.Rows)
+            {
+                if (ParameterCell(row.Index).Value.ToString() == "d0")
+                    row.Visible = true;
+            }
+        }
+
         internal void SetRawBackColor(int rowIndex, Color color)
         {
             fmFilterSimulationControl.SetRowBackColor(fmDataGrid1.Rows[rowIndex], color);

@@ -224,7 +224,7 @@ namespace FilterSimulation
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
-        private void simulationDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        protected virtual void simulationDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }

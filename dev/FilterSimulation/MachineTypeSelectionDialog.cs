@@ -19,6 +19,27 @@ namespace FilterSimulation
         {
             InitializeComponent();
             InitCombobox();
+            machineTypesListView.MouseWheel += new MouseEventHandler(panel1_MouseWheel);
+        }
+
+        private void panel1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta<0)
+            {
+                if (machineTypesListView.SelectedItems[0].Index < machineTypesListView.Items.Count - 1)
+                {
+                    int newSelectedItemIndex = machineTypesListView.SelectedItems[0].Index + 1;
+                    machineTypesListView.Items[newSelectedItemIndex].Selected = true;
+                }
+            }
+            if (e.Delta > 0)
+            {
+                if (machineTypesListView.SelectedItems[0].Index > 0)
+                {
+                    int newSelectedItemIndex = machineTypesListView.SelectedItems[0].Index - 1;
+                    machineTypesListView.Items[newSelectedItemIndex].Selected = true;
+                }
+            }   
         }
 
         private void InitCombobox()

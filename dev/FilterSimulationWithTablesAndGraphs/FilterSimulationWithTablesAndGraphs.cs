@@ -296,6 +296,7 @@ namespace FilterSimulationWithTablesAndGraphs
             {
                 PlaceTablesAndGraphsConfigurationPanelOnSeparateForm();
             }
+            HighlightCurrentSimulationInInvolvedSeriesGrid();
             m_xyDialog.Show();
             m_xyDialog.Activate();
         }
@@ -336,6 +337,17 @@ namespace FilterSimulationWithTablesAndGraphs
                 deliquoringMachininglParametersCheckBox.Enabled = true;
                 deliquoringMaterilParametersCheckBox.Enabled = true;
                 BindXYLists();
+            }
+        }
+
+        private void HighlightCurrentSimulationInInvolvedSeriesGrid()
+        {
+            foreach (DataGridViewRow row in InvolvedSeriesDataGrid.Rows)
+            {
+                if (Solution.currentObjects.Simulation == m_involvedSimulationFromRow[row])
+                {
+                    InvolvedSeriesDataGrid.CurrentCell = row.Cells[0];
+                }
             }
         }
 
@@ -2211,6 +2223,19 @@ namespace FilterSimulationWithTablesAndGraphs
         private void projectSuspensionSerieSplitContainer_SplitterMoved(object sender, SplitterEventArgs e)
         {
             mainSplitContainer.Panel1MinSize = projectSuspensionSerieSplitContainer.SplitterDistance + 25;
+        }
+
+        protected override void simulationDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            base.simulationDataGrid_CellClick(sender, e);
+            HighlightCurrentSimulationInInvolvedSeriesGrid();
+        }
+
+        public void setFlagsToOpeningFromFile()
+        {
+            XParameterWasLoadedFromConfigFile = false;
+            y1NodesLoaded = false;
+            Y2NodesWasLoadedFromConfigFile = false;
         }
     }
 }
