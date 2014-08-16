@@ -75,6 +75,7 @@ namespace FilterSimulation.fmFilterObjects
         private fmFilterSimSuspensionData m_backupData;
 #pragma warning restore 649
         private bool m_modified;
+        private bool m_kidsmodified;
         private bool m_checked = true;
 
         public List<fmFilterSimSerie> SimSeriesList
@@ -110,7 +111,32 @@ namespace FilterSimulation.fmFilterObjects
             set
             {
                 m_modified = value;
-                m_parentProject.Modified |= value;
+                m_parentProject.KidsModified |= value;
+            }
+        }
+        public bool KidsModified
+        {
+            get { return m_kidsmodified; }
+            set
+            {
+                m_kidsmodified = value;
+
+                if (value)
+                {
+                    m_parentProject.KidsModified |= true;
+                }
+                else
+                {
+                    bool tmpModified = false;
+                    foreach (fmFilterSimSuspension susp in Parent.SuspensionList)
+                    {
+                        if (susp.Modified || susp.KidsModified)
+                            tmpModified = true;
+                    }
+
+                    Parent.KidsModified = tmpModified;
+                }
+
             }
         }
         public fmFilterSimProject Parent
@@ -172,11 +198,14 @@ namespace FilterSimulation.fmFilterObjects
             }
             m_backupData.CopyFrom(m_data, this);
             Modified = false;
+            KidsModified = false;
         }
         public void Restore()
         {
             m_data.CopyFrom(m_backupData, this);
             Modified = false;
+
+            KidsModified = false;
         }
         public void Delete()
         {

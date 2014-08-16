@@ -739,7 +739,7 @@ namespace FilterSimulationWithTablesAndGraphs
             if (listBoxXAxis.SelectedItems[0].Text != "")
                 UpdateIsInputed(GetCurrentXAxisParameter());
 
-            xRangeLabel.Text = @"Ranges (X-Parameter: " + listBoxXAxis.SelectedItems[0].Text + @")";
+            SetXRangeLabelText();
 
             BindForeColorToSelectedSimulationsTable();
             UpdateVisibilityOfColumnsInSelectedSimulationsTable();
@@ -751,6 +751,17 @@ namespace FilterSimulationWithTablesAndGraphs
             BindCalculatedResultsToDisplayingResults();
             BindCalculatedResultsToChartAndTable();
             MoveXAxisParameterColumnToTheFirstPlace();
+        }
+
+        public void SetXRangeLabelText()
+        {
+            if (listBoxXAxis.SelectedItems.Count == 0 || listBoxXAxis.SelectedItems == null)
+            {
+                xRangeLabel.Text = @"Ranges (X-Parameter: " + " (" + ")" + @")";
+                return;
+            }
+            xRangeLabel.Text = @"Ranges (X-Parameter: " + listBoxXAxis.SelectedItems[0].Text + " (" +
+                fmGlobalParameter.ParametersByName[listBoxXAxis.SelectedItems[0].Text].UnitName + ")" + @")";
         }
 
         private void UpdateIsInputed(fmGlobalParameter inputedParameter)

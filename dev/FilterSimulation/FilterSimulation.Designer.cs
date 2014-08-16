@@ -446,6 +446,7 @@ namespace FilterSimulation
             // simulationRestoreButton
             // 
             this.simulationRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simulationRestoreButton.Enabled = false;
             this.simulationRestoreButton.FlatAppearance.BorderSize = 0;
             this.simulationRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.helpProvider1.SetHelpKeyword(this.simulationRestoreButton, "Simulations_Table.htm");
@@ -675,6 +676,7 @@ namespace FilterSimulation
             // projectRestoreButton
             // 
             this.projectRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.projectRestoreButton.Enabled = false;
             this.projectRestoreButton.FlatAppearance.BorderSize = 0;
             this.projectRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.helpProvider1.SetHelpKeyword(this.projectRestoreButton, "Project_Table.htm");
@@ -861,6 +863,7 @@ namespace FilterSimulation
             // suspensionRestoreButton
             // 
             this.suspensionRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.suspensionRestoreButton.Enabled = false;
             this.suspensionRestoreButton.FlatAppearance.BorderSize = 0;
             this.suspensionRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.helpProvider1.SetHelpKeyword(this.suspensionRestoreButton, "Suspension_Table.htm");
@@ -1138,6 +1141,7 @@ namespace FilterSimulation
             // simSeriesRestoreButton
             // 
             this.simSeriesRestoreButton.Dock = System.Windows.Forms.DockStyle.Left;
+            this.simSeriesRestoreButton.Enabled = false;
             this.simSeriesRestoreButton.FlatAppearance.BorderSize = 0;
             this.simSeriesRestoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.helpProvider1.SetHelpKeyword(this.simSeriesRestoreButton, "Series_Table.htm");

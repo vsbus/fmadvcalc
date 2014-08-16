@@ -83,6 +83,15 @@ namespace FilterSimulationWithTablesAndGraphs
                 HideOrShowDeliqParamsInMXyDialog();
                 displayingSolution = false;
             }
+
+            if (sol.currentObjects.Project != null)
+                projectRestoreButton.Enabled = sol.currentObjects.Project.Modified || sol.currentObjects.Project.KidsModified;
+            if (sol.currentObjects.Suspension != null)
+                suspensionRestoreButton.Enabled = sol.currentObjects.Suspension.Modified || sol.currentObjects.Suspension.KidsModified;
+            if (sol.currentObjects.Serie != null)
+                simSeriesRestoreButton.Enabled = sol.currentObjects.Serie.Modified || sol.currentObjects.Serie.KidsModified;
+            if (sol.currentObjects.Simulation != null)
+                simulationRestoreButton.Enabled = sol.currentObjects.Simulation.Modified;
         }
 
         private void MinMaxXValueTextBoxTextChanged(object sender, EventArgs e)
@@ -1955,6 +1964,30 @@ namespace FilterSimulationWithTablesAndGraphs
             base.duplicateSerieButton_Click(sender, e);
             hook2();
         }
+
+        protected override void projectRestore_Click(object sender, EventArgs e)
+        {
+            base.projectRestore_Click(sender, e);
+            hook2();
+        }
+
+        protected override void suspensionRestoreButton_Click(object sender, EventArgs e)
+        {
+            base.suspensionRestoreButton_Click(sender, e);
+            hook2();
+        }
+
+        protected override void simSeriesRestoreButton_Click(object sender, EventArgs e)
+        {
+            base.simSeriesRestoreButton_Click(sender, e);
+            hook2();
+        }
+
+        protected override void simulationRestoreButton_Click(object sender, EventArgs e)
+        {
+            base.simulationRestoreButton_Click(sender, e);
+            hook2();
+        }        
 
         public fmUnitsSchema GetUnitsSchemaFromFilterTypeName(string machineName)
         {

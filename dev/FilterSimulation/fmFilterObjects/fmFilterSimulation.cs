@@ -629,7 +629,7 @@ namespace FilterSimulation.fmFilterObjects
                 m_modified = value;
                 if (value && m_parentSerie != null)
                 {
-                    m_parentSerie.Modified = true;
+                    m_parentSerie.KidsModified = true;
                 }
             }
         }
@@ -862,6 +862,15 @@ namespace FilterSimulation.fmFilterObjects
         {
             m_data.CopyFrom(m_backupData);
             Modified = false;
+
+            bool tmpModified = false;
+            foreach (fmFilterSimulation sim in Parent.SimulationsList)
+            {
+                if (sim.Modified)
+                    tmpModified = true;
+            }
+
+            Parent.KidsModified = tmpModified;
         }
         public void Delete()
         {

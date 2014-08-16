@@ -185,6 +185,7 @@ namespace FilterSimulation.fmFilterObjects
         private fmFilterSimSerieData m_backupData = new fmFilterSimSerieData();
         private bool m_modified;
         private bool m_checked = true;
+        private bool m_kidsmodified = false;
 
         public List<fmFilterSimulation> SimulationsList
         {
@@ -247,7 +248,30 @@ namespace FilterSimulation.fmFilterObjects
                 m_modified = value;
                 if (value)
                 {
-                    m_parentSuspension.Modified |= true;
+                    //m_parentSuspension.Modified |= true;
+                }
+            }
+        }
+        public bool KidsModified
+        {
+            get { return m_kidsmodified; }
+            set
+            {
+                m_kidsmodified = value;
+                if (value)
+                {
+                    m_parentSuspension.KidsModified |= true;
+                }
+                else
+                {
+                    bool tmpModified = false;
+                    foreach (fmFilterSimSerie serie in Parent.SimSeriesList)
+                    {
+                        if (serie.Modified || serie.KidsModified)
+                            tmpModified = true;
+                    }
+
+                    Parent.KidsModified = tmpModified;
                 }
             }
         }
@@ -322,11 +346,14 @@ namespace FilterSimulation.fmFilterObjects
 
             m_backupData.CopyFrom(m_data, this);
             Modified = false;
+            KidsModified = false;
         }
         public void Restore()
         {
             m_data.CopyFrom(m_backupData, this);
             Modified = false;
+
+            KidsModified = false;
         }
         public void Delete()
         {

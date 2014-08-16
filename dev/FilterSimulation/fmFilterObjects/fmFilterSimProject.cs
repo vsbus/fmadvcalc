@@ -80,6 +80,7 @@ namespace FilterSimulation.fmFilterObjects
       
 
         public bool Modified { get; set; }
+        public bool KidsModified { get; set; }
 
         public fmFilterSimSolution Parent
         {
@@ -130,12 +131,14 @@ namespace FilterSimulation.fmFilterObjects
             }
             m_backupData.CopyFrom(m_data, this);
             Modified = false;
+            KidsModified = false;
         }
 
         public void Restore()
         {
             m_data.CopyFrom(m_backupData, this);
             Modified = false;
+            KidsModified = false;
         }
 
         public void Delete()

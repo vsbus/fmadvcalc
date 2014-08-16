@@ -398,6 +398,7 @@ namespace AdvancedCalculator
                 filterSimulationWithTablesAndGraphs1.SetCurrentUnitsSchema(uoForm.GetCheckedUnitsSchema());
                 filterSimulationWithTablesAndGraphs1.UnitsSchemas = uoForm.GetUnitsSchemas();
                 filterSimulationWithTablesAndGraphs1.UpdateAll();
+                filterSimulationWithTablesAndGraphs1.SetXRangeLabelText();
             }
         }
 

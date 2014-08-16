@@ -11,12 +11,22 @@ namespace FilterSimulation
         // ReSharper disable InconsistentNaming
         protected virtual void projectCreateButton_Click(object sender, EventArgs e)
         {
+            var tmpProj = Solution.currentObjects.Project;
+            var tmpSuspension = Solution.currentObjects.Suspension;
+            var tmpSerie = Solution.currentObjects.Serie;
+            var tmpSim = Solution.currentObjects.Simulation;
             CreateNewProject(Solution);
             CreateNewSuspension(Solution, Solution.currentObjects.Project);
             if (!CreateNewSerie(Solution, Solution.currentObjects.Suspension))
             {
                 Solution.currentObjects.Suspension.Delete();
                 Solution.currentObjects.Project.Delete();
+
+                Solution.currentObjects.Project = tmpProj;
+                Solution.currentObjects.Suspension = tmpSuspension;
+                Solution.currentObjects.Serie = tmpSerie;
+                Solution.currentObjects.Simulation = tmpSim;
+                DisplaySolution(Solution);
                 return;
             }
             
@@ -50,7 +60,7 @@ namespace FilterSimulation
                 DisplaySolution(Solution);
             }
         }
-        private void projectRestore_Click(object sender, EventArgs e)
+        protected virtual void projectRestore_Click(object sender, EventArgs e)
         {
             if (Solution.currentObjects.Project != null)
             {
@@ -106,10 +116,19 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
                 currentCol = suspensionDataGrid.CurrentCell.ColumnIndex;
             }
 
+            var tmpSuspension = Solution.currentObjects.Suspension;
+            var tmpSerie = Solution.currentObjects.Serie;
+            var tmpSim = Solution.currentObjects.Simulation;
+
             CreateNewSuspension(Solution, parentProject);
             if (!CreateNewSerie(Solution, Solution.currentObjects.Suspension))
             {
                 Solution.currentObjects.Suspension.Delete();
+
+                Solution.currentObjects.Suspension = tmpSuspension;
+                Solution.currentObjects.Serie = tmpSerie;
+                Solution.currentObjects.Simulation = tmpSim;
+                DisplaySolution(Solution);
                 return;
             }
 
@@ -134,7 +153,7 @@ Please create suspensions in checked projects.", @"Error!", MessageBoxButtons.OK
             Solution.currentColumns.suspension = suspensionNameColumn.Index;
         }
         // ReSharper disable InconsistentNaming
-        private void suspensionRestoreButton_Click(object sender, EventArgs e)
+        protected virtual void suspensionRestoreButton_Click(object sender, EventArgs e)
         // ReSharper restore InconsistentNaming
         {
             if (Solution.currentObjects.Suspension != null)
@@ -284,7 +303,7 @@ Please create series in checked suspensions.", @"Error!", MessageBoxButtons.OK);
             }
         }
         // ReSharper disable InconsistentNaming
-        private void simSeriesRestoreButton_Click(object sender, EventArgs e)
+        protected virtual void simSeriesRestoreButton_Click(object sender, EventArgs e)
         {
             if (Solution.currentObjects.Serie != null)
             {
@@ -354,7 +373,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 DisplaySolution(Solution);
             }
         }
-        private void simulationRestoreButton_Click(object sender, EventArgs e)
+        protected virtual void simulationRestoreButton_Click(object sender, EventArgs e)
         {
             if (Solution.currentObjects.Simulation != null)
             {
@@ -406,7 +425,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             simulationDataGrid.Columns[simulationSuspensionNameColumn.Index].Visible = isVisible;
             simulationDataGrid.Columns[simulationFilterMediumColumn.Index].Visible = isVisible;
             simulationDataGrid.Columns[simulationMachineTypeColumn.Index].Visible = isVisible;
-            simulationDataGrid.Columns[simulationMachineNameColumn.Index].Visible = isVisible;
+            simulationDataGrid.Columns[simulationMachineNameColumn.Index].Visible = false;
         }
 
         protected virtual void duplicateSerieButton_Click(object sender, EventArgs e)

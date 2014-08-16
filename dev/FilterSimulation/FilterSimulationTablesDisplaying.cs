@@ -884,7 +884,7 @@ namespace FilterSimulation
                 fmFilterSimProject proj = sol.FindProject(guid);
                 if (proj != null)
                 {
-                    SetRowFontBoldOrRegular(row, proj.Modified ? FontStyle.Bold : FontStyle.Regular);
+                    SetRowFontBoldOrRegular(row, (proj.Modified || proj.KidsModified) ? FontStyle.Bold : FontStyle.Regular);
                 }
             }
 
@@ -893,7 +893,7 @@ namespace FilterSimulation
                     var guid = (Guid)row.Cells[suspensionGuidColumn.Index].Value;
                     fmFilterSimSuspension sus = sol.FindSuspension(guid);
 
-                    SetRowFontBoldOrRegular(row, sus.Modified ? FontStyle.Bold : FontStyle.Regular);
+                    SetRowFontBoldOrRegular(row, (sus.Modified || sus.KidsModified) ? FontStyle.Bold : FontStyle.Regular);
                 }
 
             string prevVal = "";
@@ -914,7 +914,7 @@ namespace FilterSimulation
                     prevVal = val;
 
                     Color rowColor = cId ? Color.White : Color.LightGray;
-                    SetRowFontBoldOrRegular(row, serie.Modified ? FontStyle.Bold : FontStyle.Regular);
+                    SetRowFontBoldOrRegular(row, (serie.Modified || serie.KidsModified) ? FontStyle.Bold : FontStyle.Regular);
                     SetRowBackColor(row, rowColor);
                 }
 
