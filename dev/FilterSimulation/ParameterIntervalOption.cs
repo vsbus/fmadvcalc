@@ -370,6 +370,7 @@ namespace FilterSimulation
                     MessageBox.Show(@"Nothing assigned to the selected type.");
                 }
             }
+            hideOrShowD0Row();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -430,11 +431,15 @@ namespace FilterSimulation
 
         private void filterTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            hideOrShowD0Row();
+        }
+
+        private void hideOrShowD0Row()
+        {
             if (GetRangesMachineType() != fmFilterSimMachineType.GetFilterTypeByName(fmFilterSimMachineType.FilterTypeNamesList.CandleFilter))
-                CakeFormationGrid.HideD0Row();            
+                CakeFormationGrid.HideD0Row();
             else
                 CakeFormationGrid.ShowD0Row();
-
         }
     }
 }

@@ -9,6 +9,9 @@ namespace fmCalculatorsLibrary
     public class fmSremTettaAdAgDHRmMmoleFPeqCalculator : fmBaseCalculator
     {
         public fmSremTettaAdAgDHRmMmoleFPeqCalculator(IEnumerable<fmCalculationBaseParameter> parameterList) : base(parameterList) { }
+
+        public fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption calculationOption = fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider;
+
         override public void DoCalculations()
         {
             var peq = variables[fmGlobalParameter.peq] as fmCalculationVariableParameter;
@@ -23,7 +26,14 @@ namespace fmCalculatorsLibrary
             fmValue T = fmPeqEquations.Eval_T_From_Tetta(Tetta.value);
             fmValue Tboil = fmPeqEquations.Eval_T_From_Tetta(Tetta_boil.value);
 
-            peq.value = fmPeqEquations.Eval_peq_From_DH_Mmole_T_Tboil_pke_rhof(DH.value, Mmole.value, T, Tboil, pke.value, rhof.value);
+            if (calculationOption == fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider)
+            {
+                peq.value = fmPeqEquations.Eval_peq_From_DH_Mmole_T_Tboil_pke_rhof(Mmole.value, T, Tboil, pke.value, rhof.value);
+            }
+            else
+            {
+                peq.value = fmPeqEquations.Eval_peq_From_DH_Mmole_T_Tboil_pke_rhof(DH.value, Mmole.value, T, Tboil, pke.value, rhof.value);
+            }
         }
     }
 }

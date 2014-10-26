@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{D06514FC-2EC2-4D62-9583-9A4D8E8298E3}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -145,6 +145,7 @@
   <ItemGroup>
     <EmbeddedResource Include="AllCalculationSettingsDialog.resx">
       <DependentUpon>AllCalculationSettingsDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="CalculationOptionSelectionDialog.resx">
       <SubType>Designer</SubType>
@@ -164,9 +165,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewNameDialog.resx">
       <DependentUpon>NewNameDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NewSuspensionDialog.resx">
       <DependentUpon>NewSuspensionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ParameterIntervalOption.resx">
       <SubType>Designer</SubType>
@@ -179,6 +182,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StartMachineTypeSelectionDialog.resx">
       <DependentUpon>StartMachineTypeSelectionDialog.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="TableWithParameterRanges.resx">
       <DependentUpon>TableWithParameterRanges.cs</DependentUpon>

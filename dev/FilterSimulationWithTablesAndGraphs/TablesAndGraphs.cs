@@ -850,6 +850,12 @@ namespace FilterSimulationWithTablesAndGraphs
                     strings[1] = (newInvolvedSeries[serie].MinValue / coef).ToString();
                     strings[2] = (newInvolvedSeries[serie].MaxValue / coef).ToString();
 
+                    if (newInvolvedSimulation.ContainsKey(simulation))
+                    {
+                        strings[1] = (newInvolvedSimulation[simulation].MinValue / coef).ToString();
+                        strings[2] = (newInvolvedSimulation[simulation].MaxValue / coef).ToString();
+                    }
+
                     int rowIdx = InvolvedSeriesDataGrid.Rows.Add(strings);
                     m_involvedSerieFromRow[InvolvedSeriesDataGrid.Rows[rowIdx]] = serie;
                     m_involvedSimulationFromRow[InvolvedSeriesDataGrid.Rows[rowIdx]] = simulation;
@@ -1879,7 +1885,7 @@ namespace FilterSimulationWithTablesAndGraphs
             };
             sigmaPke0PkePcdRcdAlphadCalculator.DoCalculations();
 
-            var sremTettaPeqCalculator = new fmSremTettaAdAgDHRmMmoleFPeqCalculator(tempSim.parameters.Values);
+            var sremTettaPeqCalculator = new fmSremTettaAdAgDHRmMmoleFPeqCalculator(tempSim.parameters.Values) { calculationOption = motherSimulation.EvaporationUsedCalculationOption };
             sremTettaPeqCalculator.DoCalculations();
 
             var deliquoringSimualtionCalculator =

@@ -250,9 +250,7 @@ namespace FilterSimulation
         public void UpdateDefaultCalculationOptionForSImulation(string FilterName)
         {
             if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumDrumFilter ||
-                FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||
-                FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
-                FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||                
                 FilterName == fmFilterSimMachineType.FilterTypeNamesList.RotaryPressureFilter ||
                 FilterName == fmFilterSimMachineType.FilterTypeNamesList.LabVacuumFilter ||
                 FilterName == fmFilterSimMachineType.FilterTypeNamesList.LabPressureFilter)
@@ -268,7 +266,9 @@ namespace FilterSimulation
                 PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;         
             }
 
-            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumNutche ||
+            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter ||
+                FilterName == fmFilterSimMachineType.FilterTypeNamesList.VacuumNutche ||
                 FilterName == fmFilterSimMachineType.FilterTypeNamesList.PressureNutche)
             {
                 suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
@@ -309,18 +309,30 @@ namespace FilterSimulation
                 PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;
             }
 
-            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.FilterPress ||
-                FilterName == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.FilterPress)
             {
                 suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
                 filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST;
-                deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed;
-                gasFlowrateUsedCalculationOption = fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.NotConsider;
+                deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
+                gasFlowrateUsedCalculationOption = fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
                 evaporationUsedCalculationOption = fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider;
-                hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation;
-                dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation;
+                hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser;
+                dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser;
                 rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF;
-                PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated;                
+                PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser;                
+            }
+
+            if (FilterName == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            {
+                suspensionCalculationOption = fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOS_CALCULATED;
+                filterMachiningCalculationOption = fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST;
+                deliquoringUsedCalculationOption = fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used;
+                gasFlowrateUsedCalculationOption = fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider;
+                evaporationUsedCalculationOption = fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider;
+                hcdEpsdCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser;
+                dpdInputCalculationOption = fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser;
+                rhoDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser;
+                PcDCalculationOption = fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser;
             }
         }
 

@@ -18,10 +18,11 @@ namespace FilterSimulationWithTablesAndGraphs
     {
         public string SelectedCurveName;
         private string currentDiagramTemplateName;
+        private List<string> curvesTemplatesNamesToDelete;
 
         public DiagramTemplatesForm()
         {
-            InitializeComponent();                       
+            InitializeComponent();       
         }
 
         private void InitTreeView()
@@ -79,24 +80,70 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private void btnDeleteCurveTemplate_Click(object sender, EventArgs e)
         {
-            DeleteCurveTemplate();
-            CheckIfRootNodesAreEmpty();
+            addCurveTemplateToDelete();
+            CheckIfRootNodesAreEmpty();            
+        }
+
+        private void addCurveTemplateToDelete()
+        {
+            curvesTemplatesNamesToDelete.Add(tvTemplatesTreeView.SelectedNode.Text);
+            selectNewNodeAfterDelete();
+        }
+
+        private void selectNewNodeAfterDelete() // After tree node deleting we select next node or the first existing from the top
+        {
+            TreeNode tmpNode = tvTemplatesTreeView.SelectedNode;
+            if (tmpNode.NextNode != null)
+            {
+                tvTemplatesTreeView.SelectedNode = tmpNode.NextNode;
+                tmpNode.Remove();
+                tvTemplatesTreeView.Select();
+                return;
+            }
+            else
+            {
+                for (int i = 0; i < tvTemplatesTreeView.Nodes.Count; ++i)
+                {
+                    if (tvTemplatesTreeView.Nodes[i].FirstNode != null)
+                        if (tvTemplatesTreeView.Nodes[i].FirstNode != tmpNode)
+                        {
+                            tvTemplatesTreeView.SelectedNode = tvTemplatesTreeView.Nodes[i].FirstNode;
+                            tmpNode.Remove();
+                            tvTemplatesTreeView.Select();
+                            return;
+                        }
+                }
+            }
+            tmpNode.Remove();
+            // if all templates were deleted we load default curve
+            fmFilterSimulationWithTablesAndGraphs.SelfRef.LoadParametersFromDiagramTemplate(fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.TempCurve);
         }
 
         private void DeleteCurveTemplate()
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesFilename);
-            foreach (XmlNode xn in doc.GetElementsByTagName(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveTemplateName))
+            foreach (string templateName in curvesTemplatesNamesToDelete)
             {
-                if (xn.Attributes["id"].Value == tvTemplatesTreeView.SelectedNode.Text )
+                bool flag = false;
+                XmlDocument doc = new XmlDocument();
+                doc.Load(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesFilename);
+
+                List<XmlNode> templatesNodes = new List<XmlNode>();
+
+                foreach (XmlNode xn in doc.GetElementsByTagName(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesSavingTags.CurveTemplateName))
                 {
-                    xn.ParentNode.RemoveChild(xn);
-                    break;
+
+                    if (xn.Attributes["id"].Value == templateName)
+                    {
+                        xn.ParentNode.RemoveChild(xn);
+                        flag = true;
+                        break;
+                    }
+
                 }
+                doc.Save(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesFilename);
+                if (flag)
+                    DeleteCurveTemplate();
             }
-            doc.Save(FilterSimulationWithTablesAndGraphs.fmFilterSimulationWithTablesAndGraphs.DiagramTemplatesFilename);
-            tvTemplatesTreeView.SelectedNode.Remove();
         }
         
         private void DiagramTemplatesForm_Load(object sender, EventArgs e)
@@ -106,6 +153,7 @@ namespace FilterSimulationWithTablesAndGraphs
             tvTemplatesTreeView.ExpandAll();
             CheckCurrentDiagramTemplate(e);
             HideOrShowMixedAndDeliqTemplates();
+            curvesTemplatesNamesToDelete = new List<string>();
         }
 
         private void CheckCurrentDiagramTemplate(EventArgs e)
@@ -130,13 +178,11 @@ namespace FilterSimulationWithTablesAndGraphs
                 e.Cancel = true;
             if (tvTemplatesTreeView.SelectedNode == null)
             {
-                btnDeleteCurveTemplate.Enabled = false;
-                btnOk.Enabled = false;
+                btnDeleteCurveTemplate.Enabled = false;                
             }
             else
             {
-                btnDeleteCurveTemplate.Enabled = true;
-                btnOk.Enabled = true;
+                btnDeleteCurveTemplate.Enabled = true;                
             }
         }
 
@@ -145,12 +191,10 @@ namespace FilterSimulationWithTablesAndGraphs
             if (tvTemplatesTreeView.SelectedNode == null)
             {
                 btnDeleteCurveTemplate.Enabled = false;
-                btnOk.Enabled = false;
             }
             else
             {
-                btnDeleteCurveTemplate.Enabled = true;
-                btnOk.Enabled = true;
+                btnDeleteCurveTemplate.Enabled = true;                
 
                 SelectedCurveName = tvTemplatesTreeView.SelectedNode.Text;
 
@@ -185,6 +229,11 @@ namespace FilterSimulationWithTablesAndGraphs
                 tvTemplatesTreeView.Nodes["DeliqNode"].Collapse();
                 tvTemplatesTreeView.Nodes["MixedNode"].Collapse();
             }
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            DeleteCurveTemplate();
         }
     }
 }

@@ -40,9 +40,11 @@ namespace fmCalcBlocksLibrary.Blocks
         private readonly fmBlockParameterGroup Mmole_Group = new fmBlockParameterGroup();
         private readonly fmBlockParameterGroup f_Group = new fmBlockParameterGroup();
 
+        public fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption evaporationUsedCalculationOption;
+
         override public void DoCalculations()
         {
-            var fmSremTettaAdAgDHRmMmoleFPeqCalculator = new fmSremTettaAdAgDHRmMmoleFPeqCalculator(AllParameters);
+            var fmSremTettaAdAgDHRmMmoleFPeqCalculator = new fmSremTettaAdAgDHRmMmoleFPeqCalculator(AllParameters) { calculationOption = evaporationUsedCalculationOption };
             fmSremTettaAdAgDHRmMmoleFPeqCalculator.DoCalculations();
         }
 

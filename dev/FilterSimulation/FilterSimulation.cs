@@ -1092,16 +1092,20 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
 
             if (tmpEvaporationOption != Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption)
             {
-                var vp = Solution.currentObjects.Simulation.Data.parameters[fmGlobalParameter.DH] as fmCalculationVariableParameter;
-                vp.isInputed = true;
+                var vpDH = Solution.currentObjects.Simulation.Data.parameters[fmGlobalParameter.DH] as fmCalculationVariableParameter;
+                vpDH.isInputed = true;
+                var vpTboil = Solution.currentObjects.Simulation.Data.parameters[fmGlobalParameter.Tetta_boil] as fmCalculationVariableParameter;
+                vpTboil.isInputed = true;
                 if (Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption == fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.Consider)
-                {                   
-                    vp.value = new fmValue(40e3);
+                {
+                    vpDH.value = new fmValue(40e3);
+                    vpTboil.value = new fmValue(100);
                 }
                 else
                 {
-                    vp.value = new fmValue(1000e3);
-                }
+                    vpDH.value = new fmValue(1000e3);
+                    vpTboil.value = new fmValue(100);
+                }                
                 DisplaySolution(Solution);
             }
         }
@@ -1180,7 +1184,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 {
                     CreateNewProject(dialog.GetProjectName());
                     CreateNewSuspension(Solution.currentObjects.Project, dialog.GetSuspensionName(), dialog.GetMaterialName(), dialog.GetCustomerName());
-                    CreateNewSerie(Solution.currentObjects.Suspension, dialog.GetSerieName(), dialog.GetMediumName(), dialog.GetSimulationName(), dialog.GetSelectedType());                    
+                    CreateNewSerie(Solution.currentObjects.Suspension, dialog.GetSerieName(), dialog.GetMediumName(), dialog.GetSimulationName(), dialog.GetSelectedType());
                 }
 
                 Solution.currentColumns.simulation = simulationNameColumn.Index;
@@ -1192,7 +1196,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                     Ranges = dialog.GetRanges()
                 };
 
-                Solution.currentObjects.Serie.Ranges = rangesCfg;            
+                Solution.currentObjects.Serie.Ranges = rangesCfg;
                 foreach (KeyValuePair<fmGlobalParameter, fmDefaultParameterRange> range in rangesCfg.Ranges)
                 {
                     range.Key.SpecifiedRange = range.Value;
@@ -1207,9 +1211,24 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 UpdateAll();
 
                 dialog.GetCalculationOptions(Solution.currentObjects.Simulation);
+                SetDHParameterDefaulValue();
             }
         }
 
+        private void SetDHParameterDefaulValue()
+        {
+            var vp = Solution.currentObjects.Simulation.Data.parameters[fmGlobalParameter.DH] as fmCalculationVariableParameter;
+            vp.isInputed = true;
+            if (Solution.currentObjects.Simulation.Data.evaporationUsedCalculationOption == fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.Consider)
+            {
+                vp.value = new fmValue(40e3);
+            }
+            else
+            {
+                vp.value = new fmValue(1000e3);
+            }
+            DisplaySolution(Solution);
+        }
 
         public void SelectMachineButtonClick(object sender, EventArgs e)
         {
@@ -1259,9 +1278,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         private void TakeDefaultCalculationOptionForSerie(fmFilterSimSerie serie)
         {
             if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDrumFilter ||
-                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||
-                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
-                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||                
                 serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.RotaryPressureFilter ||
                 serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.LabVacuumFilter ||
                 serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.LabPressureFilter)
@@ -1286,7 +1303,9 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
             }
 
             if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumNutche ||
-                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.PressureNutche)
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.PressureNutche ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter)
             {
                 foreach (fmFilterSimulation sim in serie.SimulationsList)
                 {
@@ -1350,25 +1369,44 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 }
             }
 
-            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPress ||
-                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPress)
             {
                 foreach (fmFilterSimulation sim in serie.SimulationsList)
                 {
                     sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
 
                     sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST);
-                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
-                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.NotConsider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
                     sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
 
-                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
-                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
-                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser);
 
-                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
                     sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
-                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser);
+                }
+            }
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            {
+                foreach (fmFilterSimulation sim in serie.SimulationsList)
+                {
+                    sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser);
+
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser);
                 }
             }
         }
@@ -1377,9 +1415,7 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
         {
             var serie = sim.Parent;
             if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDrumFilter ||
-                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||
-                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
-                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumDiscFilter ||                
                 serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.RotaryPressureFilter ||
                 serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.LabVacuumFilter ||
                 serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.LabPressureFilter)
@@ -1402,7 +1438,9 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 
             }
 
-            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumNutche ||
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumPanFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumBeltFilter ||
+                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.VacuumNutche ||
                 serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.PressureNutche)
             {
                 
@@ -1464,28 +1502,46 @@ Please create simulations in checked series.", @"Error!", MessageBoxButtons.OK);
                 
             }
 
-            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPress ||
-                serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPress)
             {
                 
                     sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
 
                     sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST);
-                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
-                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.NotConsider);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
                     sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
 
-                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
-                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.CalculatedFromCakeFormation);
-                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.CalculatedFromCakeFormation);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser);
+                    sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser);
 
-                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.NotUsed);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
                     sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.EqualToRhoF);
-                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.Calculated);
+                    sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser);
                
             }
+            if (serie.MachineType.name == fmFilterSimMachineType.FilterTypeNamesList.FilterPressAutomat)
+            {
+
+                sim.susBlock.SetCalculationOptionAndRewrite(fmSuspensionCalculator.fmSuspensionCalculationOptions.RHOSUS_CALCULATED);
+
+                sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmFilterMachiningCalculationOption.PLAIN_CENTRIPETAL_PUMP_QP_DP_CONST);
+                sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                sim.filterMachiningBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmGasFlowrateUsedCalculationOption.Consider);
+                sim.filterMachiningBlock.SetCalculationOptionAndRewriteData(fmFilterMachiningCalculator.fmEvaporationUsedCalculationOption.NotConsider);
+
+                sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndUpdateCellsStyle(fmDeliquoringSimualtionCalculator.fmDeliquoringHcdEpsdCalculationOption.InputedByUser);
+                sim.deliquoringEps0NeEpsBlock.SetCalculationOptionAndRewrite(fmDeliquoringSimualtionCalculator.fmDeliquoringDpdInputOption.InputedByUser);
+
+                sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmFilterMachiningCalculator.fmDeliquoringUsedCalculationOption.Used);
+                sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndUpdateCellsStyle(fmSigmaPke0PkePcdRcdAlphadCalculator.fmRhoDEtaDCalculationOption.InputedByUser);
+                sim.deliquoringSigmaPkeBlock.SetCalculationOptionAndRewrite(fmSigmaPke0PkePcdRcdAlphadCalculator.fmPcDCalculationOption.InputedByUser);
+
+            }
         }
-        #endregion
+        #endregion        
 
         private void button3_Click(object sender, EventArgs e)
         {

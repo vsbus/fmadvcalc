@@ -29,6 +29,8 @@ namespace AdvancedCalculator
             public const string Menu_Task_Bar = "Menu_Task_Bar.htm";
         }
 
+        public const string defaultDataFileName = "FiltraPlus 2014 demo.dat";
+
         public fmAdvancedCalculator()
         {
             InitializeComponent();
@@ -60,7 +62,7 @@ namespace AdvancedCalculator
         private void Help_Click(object sender, EventArgs e)
         {
             button.Capture = false;
-            SendMessage(this.Handle, WM_SYSCOMMAND, (IntPtr)SC_CONTEXTHELP, IntPtr.Zero);
+            SendMessage(Handle, WM_SYSCOMMAND, (IntPtr)SC_CONTEXTHELP, IntPtr.Zero);
         }
 
         // ReSharper disable InconsistentNaming
@@ -112,7 +114,9 @@ namespace AdvancedCalculator
                     XmlNode cfgFileNode = doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusConfigFile);
                     if (cfgFileNode != null)
                     {
+                        filterSimulationWithTablesAndGraphs1.LoadLastCheckings(cfgFileNode);
                         filterSimulationWithTablesAndGraphs1.LoadLastMinMaxValues(cfgFileNode);
+                        filterSimulationWithTablesAndGraphs1.LoadLastCurvesStyles(cfgFileNode);
                         filterSimulationWithTablesAndGraphs1.DeserializeLastSelectedSimulation(cfgFileNode);
                         filterSimulationWithTablesAndGraphs1.DeserializeProgramOptions(cfgFileNode);
                         filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(cfgFileNode);
@@ -122,15 +126,27 @@ namespace AdvancedCalculator
                     return;
                 }
             }
-            CreateNewFile();
+            LoadFromDisk(getPathAddedToDefaultDataFuleName(defaultDataFileName));
+        }
+
+        private string getPathAddedToDefaultDataFuleName(string defaultDataFileName)
+        {
+            return getProgramPath() + defaultDataFileName;
+        }
+
+        private string getProgramPath()
+        {
+            string exeName = Path.GetFileName(Assembly.GetEntryAssembly().Location);
+            string programPath = Assembly.GetExecutingAssembly().Location.Replace(exeName, "");
+            return programPath;
         }
         private void ShowWelcomePicture()
         {
-            filterSimulationWithTablesAndGraphs1.Visible = false;//hiding main object to see welcome message
-            
+            filterSimulationWithTablesAndGraphs1.Visible = false;//hiding main object to see welcome message            
+
             string welcomeString1 = "Welcome to";
             string welcomeString2 = "FILTRAPLUS";
-            string welcomeString3 = "(Vers.  14.02.2014)";
+            string welcomeString3 = "(Vers.  20.10.2014)";
             string welcomeString4 = "Software for Industrial Filters";
             string welcomeString5 = "Design - Performance Simulation - Optimization";
             string welcomeString6 = "Copyright © by Prof. Dr. Ioannis Nicolaou, NIKIFOS Ltd.";
@@ -139,49 +155,53 @@ namespace AdvancedCalculator
 
             Color color = Color.FromArgb(0, 32, 96);
             Brush brush = new SolidBrush(color);
+            Brush backBrush = new SolidBrush(ControlPaint.Light(ControlPaint.LightLight(Color.PowderBlue)));
             Font fontLarge = new Font("Arial", 48);
             Font fontBig = new Font("Arial", 36);
             Font fontMedium = new Font("Arial", 27);
             Font fontSmall = new Font("Arial", 22);
             Font fontXSmall = new Font("Arial", 20);
-            Graphics Graph = this.CreateGraphics();            
+            Graphics Graph = CreateGraphics();            
             SizeF stringSize = new SizeF();
+
+            Graph.FillRectangle(backBrush, 0, 0, Width, Height);
+
             stringSize = Graph.MeasureString(welcomeString1, fontBig);
 
             x = 0;
             y = stringSize.Height;
             
-            x = x + (this.Width - stringSize.Width)/ 2;
+            x = x + (Width - stringSize.Width)/ 2;
             y = y + stringSize.Height;
             Graph.DrawString(welcomeString1, fontBig, brush, x, y);
             x = 0;
 
             stringSize = Graph.MeasureString(welcomeString2, fontLarge);
-            x = x + (this.Width - stringSize.Width) / 2;
+            x = x + (Width - stringSize.Width) / 2;
             y = y + stringSize.Height*2;
             Graph.DrawString(welcomeString2, fontLarge, brush, x, y);
             x = 0;
 
             stringSize = Graph.MeasureString(welcomeString3, fontXSmall);
-            x = x + (this.Width - stringSize.Width) / 2;
+            x = x + (Width - stringSize.Width) / 2;
             y = y + stringSize.Height*2;
             Graph.DrawString(welcomeString3, fontXSmall, brush, x, y);
             x = 0;
 
             stringSize = Graph.MeasureString(welcomeString4, fontBig);
-            x = x + (this.Width - stringSize.Width) / 2;
+            x = x + (Width - stringSize.Width) / 2;
             y = y + (stringSize.Height*(float)1.3);
             Graph.DrawString(welcomeString4, fontBig, brush, x, y);
             x = 0;
 
             stringSize = Graph.MeasureString(welcomeString5, fontMedium);
-            x = x + (this.Width - stringSize.Width) / 2;
+            x = x + (Width - stringSize.Width) / 2;
             y = y + stringSize.Height;
             Graph.DrawString(welcomeString5, fontMedium, brush, x, y);
             x = 0;
 
             stringSize = Graph.MeasureString(welcomeString6, fontSmall);
-            x = x + (this.Width - stringSize.Width) / 2;
+            x = x + (Width - stringSize.Width) / 2;
             y = y + stringSize.Height*3;
             Graph.DrawString(welcomeString6, fontSmall, brush, x, y);
             x = 0;
@@ -311,24 +331,24 @@ namespace AdvancedCalculator
             Color color = Color.FromArgb(0, 32, 96);
             Brush brush = new SolidBrush(color);
             Font fontSmall = new Font("Arial", 22);
-            Graphics Graph = this.CreateGraphics();
+            Graphics Graph = CreateGraphics();
             float x;
             float y;
             
             SizeF stringSize = new SizeF();
             stringSize = Graph.MeasureString(loadingString, fontSmall);
 
-            x = (this.Width - stringSize.Width) / 2;
-            y = this.Height / 2;
+            x = (Width - stringSize.Width) / 2;
+            y = Height / 2;
 
             filterSimulationWithTablesAndGraphs1.Visible = false;
             Graph.DrawString(loadingString, fontSmall, brush, x, y);
-            var tmpCursor = this.Cursor;
-            this.Cursor = Cursors.WaitCursor;
+            var tmpCursor = Cursor;
+            Cursor = Cursors.WaitCursor;
 
             LoadFromDisk(filePath);
             filterSimulationWithTablesAndGraphs1.Visible = true;
-            this.Cursor = tmpCursor;
+            Cursor = tmpCursor;
         }
 
         private string m_currentFilename;
@@ -345,7 +365,7 @@ namespace AdvancedCalculator
                 Text = m_caption + @" [" + fileName + @"]";
                 filterSimulationWithTablesAndGraphs1.DeserializeConfigurationForMenuOpen(
                     doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
-                filterSimulationWithTablesAndGraphs1.setFlagsToOpeningFromFile();
+                filterSimulationWithTablesAndGraphs1.setFlagsToOpeningFromFile();                
                 filterSimulationWithTablesAndGraphs1.DeserializeInterfaceAdjusting(doc.SelectSingleNode(fmFiltraplusSerializeTags.FiltraplusDataFile));
                 filterSimulationWithTablesAndGraphs1.hook2();
             }
@@ -361,15 +381,22 @@ namespace AdvancedCalculator
 
         private void SaveConfigurations()
         {
+            if (m_currentFilename == null)
+                return;
             var xmlSettings = new XmlWriterSettings
             {
                 Indent = true
             };
-            XmlWriter writer = XmlWriter.Create(FiltraplusConfigFilename, xmlSettings);
+
+            string exeName = Path.GetFileName(Assembly.GetEntryAssembly().Location);
+            string programPath = Assembly.GetExecutingAssembly().Location.Replace(exeName, "");
+            
+            XmlWriter writer = XmlWriter.Create(programPath + FiltraplusConfigFilename, xmlSettings);
             writer.WriteStartDocument();
             writer.WriteStartElement(fmFiltraplusSerializeTags.FiltraplusConfigFile);
             filterSimulationWithTablesAndGraphs1.SerializeConfiguration(writer);
             filterSimulationWithTablesAndGraphs1.SerializeInterfaceAdjusting(writer);
+            filterSimulationWithTablesAndGraphs1.SerializeLastDataCheckings(writer);
             filterSimulationWithTablesAndGraphs1.SerializeLastSelectedSimulation(writer);
             writer.WriteEndElement();
             writer.WriteEndDocument();
@@ -523,7 +550,6 @@ namespace AdvancedCalculator
             if (!ProtectionChecker.CheckProtection())
                 return;
 
-            SaveConfigurations();
             if (filterSimulationWithTablesAndGraphs1.IsModified())
             {
                 DialogResult dres = MessageBox.Show(@"Would you like to save data before exit?", @"Confirmation", MessageBoxButtons.YesNoCancel);
@@ -552,6 +578,7 @@ namespace AdvancedCalculator
                     "LastFile",
                     m_currentFilename,
                     RegistryValueKind.String);
+                SaveConfigurations();
             }
 
             DeleteTempFile();
@@ -559,9 +586,7 @@ namespace AdvancedCalculator
 
         private void DeleteTempFile()
         {
-            string exeName = Path.GetFileName(System.Reflection.Assembly.GetEntryAssembly().Location);
-            string programPath = Assembly.GetExecutingAssembly().Location.Replace(exeName, "");
-            File.Delete(programPath + fmFiltraplusSerializeTags.FiltraplusTemporaryFile);
+            File.Delete(getProgramPath() + fmFiltraplusSerializeTags.FiltraplusTemporaryFile);
         }
 
         private void commentsToolStripMenuItem_Click(object sender, EventArgs e)

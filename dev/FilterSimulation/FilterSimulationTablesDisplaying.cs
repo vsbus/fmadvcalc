@@ -913,7 +913,7 @@ namespace FilterSimulation
                     cId ^= (prevVal == "" || prevVal != val);
                     prevVal = val;
 
-                    Color rowColor = cId ? Color.White : Color.LightGray;
+                    Color rowColor = cId ? Color.White : ControlPaint.Light(ControlPaint.LightLight(Color.LightGray));
                     SetRowFontBoldOrRegular(row, (serie.Modified || serie.KidsModified) ? FontStyle.Bold : FontStyle.Regular);
                     SetRowBackColor(row, rowColor);
                 }
@@ -1637,6 +1637,9 @@ namespace FilterSimulation
             fmFilterSimulation.CopyAllParametersFromBlockToSimulation(sim.deliquoringSigmaPkeBlock, sim);
 
             fmFilterSimulation.CopyConstantParametersFromSimulationToBlock(sim, sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock);
+
+            sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.evaporationUsedCalculationOption = sim.EvaporationUsedCalculationOption;
+
             sim.deliquoringSremTettaAdAgDHMmoleFPeqBlock.CalculateAndDisplay();
         }
 

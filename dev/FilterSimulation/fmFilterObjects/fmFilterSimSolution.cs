@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using FilterSimulation.fmFilterObjects.Interfaces;
 using fmCalcBlocksLibrary.Blocks;
 using System.Xml;
-using fmCalculationLibrary;
 
 namespace FilterSimulation.fmFilterObjects
 {
@@ -240,6 +237,14 @@ namespace FilterSimulation.fmFilterObjects
             public const string CurrentSimulation = "CurrentSimulation";
 
             public const string LastSelectedSimulation = "LastSelectedSimulation";
+
+            public const string LastDataCheckings = "LastDataCheckings";
+            public const string Project = "Project";
+            public const string Suspension = "Suspension";
+            public const string Serie = "Serie";
+            public const string Simulation = "Simulation";
+
+            public const string FileName = "FileName";
         }
 
         public void Serialize(XmlWriter writer)
@@ -270,6 +275,37 @@ namespace FilterSimulation.fmFilterObjects
             writer.WriteEndElement();
         }
 
+        public void SerializeLastDataCheckings(XmlWriter writer)
+        {
+            writer.WriteStartElement(fmSolutionSerializeTags.LastDataCheckings);
+
+            foreach (fmFilterSimProject project in projects)
+            {
+                if (project.Checked)
+                    writer.WriteElementString(fmSolutionSerializeTags.Project, project.GetName());
+
+                foreach (fmFilterSimSuspension susp in project.SuspensionList)
+                {
+                    if(susp.Checked)
+                        writer.WriteElementString(fmSolutionSerializeTags.Suspension, susp.GetName());
+
+                    foreach (fmFilterSimSerie serie in susp.SimSeriesList)
+                    {
+                        if (serie.Checked)
+                            writer.WriteElementString(fmSolutionSerializeTags.Serie, serie.GetName());
+
+                        foreach (fmFilterSimulation sim in serie.SimulationsList)
+                        {
+                            if(sim.Checked)
+                                writer.WriteElementString(fmSolutionSerializeTags.Simulation, sim.GetName());
+                        }
+                    }
+                }
+            }
+
+            writer.WriteEndElement();
+        }
+
         public static fmFilterSimSolution Deserialize(XmlNode node)
         {
             var solution = new fmFilterSimSolution();
@@ -284,6 +320,38 @@ namespace FilterSimulation.fmFilterObjects
             }
             DeserializeCurrentSimulationSelection(node, solution);
             return solution;
+        }
+
+        public static void DeserializeDefaultData(XmlNode node, fmFilterSimulation sim)
+        {
+            node = node.SelectSingleNode(fmSolutionSerializeTags.ProjectsData);
+            fmFilterSimulationData simData = new fmFilterSimulationData();
+            if (node != null)
+            {                
+                node = node.SelectSingleNode("Project");
+                node = node.SelectSingleNode("Suspension");
+                node = node.SelectSingleNode("SuspensionData");
+                XmlNodeList nodes = node.SelectNodes("SimSerie");
+
+                foreach (XmlNode n in nodes)
+                {
+                    var sn = n.SelectSingleNode("Serie");
+                    if (sn.InnerText == "Pneuma Press")
+                    {
+                        node = node.SelectSingleNode("Simulation");
+
+                        simData = fmFilterSimulationData.Deserialize(
+                            node.SelectSingleNode(
+                                fmFilterSimulationData.fmFilterSimulationDataSerializeTags.FilterSimulationData));
+                    }
+                }               
+                
+            }
+            foreach (var p in simData.parameters.Values)
+            {
+                sim.Parameters[p.globalParameter] = p;
+            }
+            sim.Data.CopyFrom(simData);
         }
 
         private static void DeserializeCurrentSimulationSelection(XmlNode node, fmFilterSimSolution solution)
@@ -324,6 +392,56 @@ namespace FilterSimulation.fmFilterObjects
             DeserializeCurrentSimulationSelection(node, solution);
 
             return solution;
+        }
+
+        public void DeserializeLastDataCheckings(XmlNode node)
+        {
+            node = node.SelectSingleNode(fmSolutionSerializeTags.LastDataCheckings);
+            if (node == null)
+                return;
+
+            var projectNodes = node.SelectNodes(fmSolutionSerializeTags.Project);
+            var suspensionNodes = node.SelectNodes(fmSolutionSerializeTags.Suspension);
+            var seriesNodes = node.SelectNodes(fmSolutionSerializeTags.Serie);
+            var simulationNodes = node.SelectNodes(fmSolutionSerializeTags.Simulation);
+
+
+            foreach (fmFilterSimProject project in projects)
+            {
+                project.Checked = false;
+                foreach (XmlNode projNode in projectNodes)
+                {
+                    if (project.GetName() == projNode.InnerText)
+                        project.Checked = true;
+                }
+                foreach (fmFilterSimSuspension susp in project.SuspensionList)
+                {
+                    susp.Checked = false;
+                    foreach (XmlNode suspNode in suspensionNodes)
+                    {
+                        if (susp.GetName() == suspNode.InnerText)
+                            susp.Checked = true;
+                    }
+                    foreach (fmFilterSimSerie serie in susp.SimSeriesList)
+                    {
+                        serie.Checked = false;
+                        foreach (XmlNode serieNode in seriesNodes)
+                        {
+                            if (serie.GetName() == serieNode.InnerText)
+                                serie.Checked = true;
+                        }
+                        foreach (fmFilterSimulation sim in serie.SimulationsList)
+                        {
+                            sim.Checked = false;
+                            foreach (XmlNode simNode in simulationNodes)
+                            {
+                                if (sim.GetName() == simNode.InnerText)
+                                    sim.Checked = true;
+                            }
+                        }
+                    }
+                }
+            }        
         }
 
         internal fmFilterSimulation FindSimulation(fmSigmaPke0PkePcdRcdAlphadBlock deliquoringSigmaPkeBlock)

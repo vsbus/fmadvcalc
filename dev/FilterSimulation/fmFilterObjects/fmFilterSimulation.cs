@@ -826,14 +826,14 @@ namespace FilterSimulation.fmFilterObjects
             SetDefaultParameterValue(fmGlobalParameter.ag3, new fmValue(0.5));
             
             SetDefaultParameterValue(fmGlobalParameter.Tetta_boil, new fmValue(100));
-            SetDefaultParameterValue(fmGlobalParameter.DH, new fmValue(40e3));
+            SetDefaultParameterValue(fmGlobalParameter.DH, new fmValue(1000e3));
             SetDefaultParameterValue(fmGlobalParameter.Mmole, new fmValue(18e-3));
             SetDefaultParameterValue(fmGlobalParameter.f, new fmValue(0));
 
             Keep();
         }
 
-        private void SetDefaultParameterValue(fmGlobalParameter p, fmValue value)
+        public void SetDefaultParameterValue(fmGlobalParameter p, fmValue value)
         {
             var vp = Data.parameters[p] as fmCalculationVariableParameter;
             vp.isInputed = true;

@@ -248,7 +248,7 @@ namespace FilterSimulation.fmFilterObjects
                 m_modified = value;
                 if (value)
                 {
-                    //m_parentSuspension.Modified |= true;
+                    m_parentSuspension.KidsModified |= true;
                 }
             }
         }
@@ -265,6 +265,9 @@ namespace FilterSimulation.fmFilterObjects
                 else
                 {
                     bool tmpModified = false;
+
+                    if (Parent == null)
+                        return;
                     foreach (fmFilterSimSerie serie in Parent.SimSeriesList)
                     {
                         if (serie.Modified || serie.KidsModified)

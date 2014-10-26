@@ -35,15 +35,12 @@ namespace FilterSimulationWithTablesAndGraphs
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmFilterSimulationWithTablesAndGraphs));
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("ListViewGroup", System.Windows.Forms.HorizontalAlignment.Left);
-            this.xRangeLabel = new System.Windows.Forms.Label();
             this.fmZedGraphControl1 = new fmZedGraph.fmZedGraphControl();
             this.buttonAddRow = new System.Windows.Forms.Button();
             this.UseParamsCheckBox = new System.Windows.Forms.CheckBox();
             this.coordinatesGrid = new fmDataGrid.fmDataGrid();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.rowsQuantity = new fmDataGrid.fmNumericalTextBox();
             this.selectedSimulationParametersTable = new fmDataGrid.fmDataGrid();
             this.SelectedSimulationParametersCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.GridPanel = new System.Windows.Forms.Panel();
@@ -53,7 +50,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.buttonDeleteRow = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnLoadDiagramTemplatesButton = new System.Windows.Forms.Button();
-            this.btnSaveDiagramTemplatesButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tablesAndGraphsTopLeftPanel = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -61,6 +57,29 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listBoxXAxis = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.scTableY1Y2SplitConteiner = new System.Windows.Forms.SplitContainer();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.deselectAllButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.rowsQuantity = new fmDataGrid.fmNumericalTextBox();
+            this.xLogCheckBox = new System.Windows.Forms.CheckBox();
+            this.btnSaveDiagramTemplatesButton = new System.Windows.Forms.Button();
+            this.y2LogCheckBox = new System.Windows.Forms.CheckBox();
+            this.yLogCheckBox = new System.Windows.Forms.CheckBox();
+            this.LoadDefaultRangle = new System.Windows.Forms.Button();
+            this.InvolvedSeriesDataGrid = new fmDataGrid.fmDataGrid();
+            this.SerieColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FromValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.ToValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
+            this.curveStyleColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.simulationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startFromOriginCheckBox = new System.Windows.Forms.CheckBox();
+            this.NoScalingCheckBox = new System.Windows.Forms.CheckBox();
+            this.deliquoringMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
+            this.cakeFormationMaterilParametersCheckBox = new System.Windows.Forms.CheckBox();
+            this.deliquoringMaterilParametersCheckBox = new System.Windows.Forms.CheckBox();
+            this.xRangeLabel = new System.Windows.Forms.Label();
+            this.cakeFormationMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBoxYAxis = new System.Windows.Forms.ListView();
@@ -69,19 +88,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxY2Axis = new FilterSimulationWithTablesAndGraphs.ListViewEx();
             this.nameColumn = new System.Windows.Forms.ColumnHeader();
             this.colorColumn = new System.Windows.Forms.ColumnHeader();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.xLogCheckBox = new System.Windows.Forms.CheckBox();
-            this.y2LogCheckBox = new System.Windows.Forms.CheckBox();
-            this.yLogCheckBox = new System.Windows.Forms.CheckBox();
-            this.LoadDefaultRangle = new System.Windows.Forms.Button();
-            this.InvolvedSeriesDataGrid = new fmDataGrid.fmDataGrid();
-            this.startFromOriginCheckBox = new System.Windows.Forms.CheckBox();
-            this.NoScalingCheckBox = new System.Windows.Forms.CheckBox();
-            this.deliquoringMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
-            this.deselectAllButton = new System.Windows.Forms.Button();
-            this.cakeFormationMaterilParametersCheckBox = new System.Windows.Forms.CheckBox();
-            this.deliquoringMaterilParametersCheckBox = new System.Windows.Forms.CheckBox();
-            this.cakeFormationMachininglParametersCheckBox = new System.Windows.Forms.CheckBox();
             this.splitter11 = new System.Windows.Forms.Splitter();
             this.splitter6 = new System.Windows.Forms.Splitter();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -89,11 +95,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.SimulationAndGraphSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel9 = new System.Windows.Forms.Panel();
             this.btnParamsOrder = new System.Windows.Forms.Button();
-            this.SerieColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FromValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.ToValueColumn = new fmDataGrid.fmDataGridViewNumericalTextBoxColumn();
-            this.curveStyleColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.simulationColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelLeft.SuspendLayout();
             this.topPanel.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -131,13 +132,16 @@ namespace FilterSimulationWithTablesAndGraphs
             this.XYSplitContainer.Panel2.SuspendLayout();
             this.XYSplitContainer.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.scTableY1Y2SplitConteiner.Panel1.SuspendLayout();
+            this.scTableY1Y2SplitConteiner.Panel2.SuspendLayout();
+            this.scTableY1Y2SplitConteiner.SuspendLayout();
+            this.panel11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InvolvedSeriesDataGrid)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.panel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InvolvedSeriesDataGrid)).BeginInit();
             this.panel8.SuspendLayout();
             this.RightSplitContainer.Panel1.SuspendLayout();
             this.RightSplitContainer.Panel2.SuspendLayout();
@@ -193,6 +197,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.suspensionRestoreButton.FlatAppearance.BorderSize = 0;
             this.helpProvider1.SetHelpKeyword(this.suspensionRestoreButton, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.suspensionRestoreButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.suspensionRestoreButton.Location = new System.Drawing.Point(105, 0);
             this.helpProvider1.SetShowHelp(this.suspensionRestoreButton, true);
             this.toolTip.SetToolTip(this.suspensionRestoreButton, "Restore suspension");
             // 
@@ -201,6 +206,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.suspensionDeleteButton.FlatAppearance.BorderSize = 0;
             this.helpProvider1.SetHelpKeyword(this.suspensionDeleteButton, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.suspensionDeleteButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.suspensionDeleteButton.Location = new System.Drawing.Point(125, 0);
             this.helpProvider1.SetShowHelp(this.suspensionDeleteButton, true);
             this.toolTip.SetToolTip(this.suspensionDeleteButton, "Delete suspension");
             // 
@@ -292,14 +298,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpKeyword(this.projectPanel, "Project_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.projectPanel, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.projectPanel, true);
-            this.projectPanel.Size = new System.Drawing.Size(321, 115);
+            this.projectPanel.Size = new System.Drawing.Size(191, 115);
             // 
             // suspensionPanel
             // 
             this.helpProvider1.SetHelpKeyword(this.suspensionPanel, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.suspensionPanel, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.suspensionPanel, true);
-            this.suspensionPanel.Size = new System.Drawing.Size(41, 115);
+            this.suspensionPanel.Size = new System.Drawing.Size(171, 115);
             // 
             // splitter2
             // 
@@ -364,14 +370,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpKeyword(this.panel1, "Project_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.panel1, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.panel1, true);
-            this.panel1.Size = new System.Drawing.Size(317, 20);
+            this.panel1.Size = new System.Drawing.Size(187, 20);
             // 
             // panel2
             // 
             this.helpProvider1.SetHelpKeyword(this.panel2, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.panel2, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.panel2, true);
-            this.panel2.Size = new System.Drawing.Size(37, 20);
+            this.panel2.Size = new System.Drawing.Size(167, 20);
             // 
             // panel3
             // 
@@ -387,6 +393,14 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpNavigator(this.panel5, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.panel5, true);
             this.panel5.Size = new System.Drawing.Size(818, 20);
+            this.panel5.Controls.SetChildIndex(this.btnParamsOrder, 0);
+            this.panel5.Controls.SetChildIndex(this.fullSimulationInfoCheckBox, 0);
+            this.panel5.Controls.SetChildIndex(this.byCheckingSimulationsCheckBox, 0);
+            this.panel5.Controls.SetChildIndex(this.simulationCreateButton, 0);
+            this.panel5.Controls.SetChildIndex(this.simulationDuplicateButton, 0);
+            this.panel5.Controls.SetChildIndex(this.simulationRestoreButton, 0);
+            this.panel5.Controls.SetChildIndex(this.simulationDeleteButton, 0);
+            this.panel5.Controls.SetChildIndex(this.commentSimulationButton, 0);
             // 
             // simulationCreateButton
             // 
@@ -450,6 +464,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.commentSuspensionButton.FlatAppearance.BorderSize = 0;
             this.helpProvider1.SetHelpKeyword(this.commentSuspensionButton, "Suspension_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.commentSuspensionButton, System.Windows.Forms.HelpNavigator.Topic);
+            this.commentSuspensionButton.Location = new System.Drawing.Point(145, 0);
             this.helpProvider1.SetShowHelp(this.commentSuspensionButton, true);
             // 
             // commentSerieButton
@@ -458,15 +473,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.helpProvider1.SetHelpKeyword(this.commentSerieButton, "Series_Table.htm");
             this.helpProvider1.SetHelpNavigator(this.commentSerieButton, System.Windows.Forms.HelpNavigator.Topic);
             this.helpProvider1.SetShowHelp(this.commentSerieButton, true);
-            // 
-            // xRangeLabel
-            // 
-            this.xRangeLabel.AutoSize = true;
-            this.xRangeLabel.Location = new System.Drawing.Point(10, 102);
-            this.xRangeLabel.Name = "xRangeLabel";
-            this.xRangeLabel.Size = new System.Drawing.Size(44, 13);
-            this.xRangeLabel.TabIndex = 2;
-            this.xRangeLabel.Text = "Ranges";
             // 
             // fmZedGraphControl1
             // 
@@ -561,25 +567,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.copyToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
             this.copyToolStripMenuItem.Text = "Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.CopyToolStripMenuItemClick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(10, 201);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Desired amount of values:";
-            // 
-            // rowsQuantity
-            // 
-            this.rowsQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.rowsQuantity.ForeColor = System.Drawing.Color.Red;
-            this.rowsQuantity.Location = new System.Drawing.Point(141, 198);
-            this.rowsQuantity.Name = "rowsQuantity";
-            this.rowsQuantity.Size = new System.Drawing.Size(50, 20);
-            this.rowsQuantity.TabIndex = 2;
-            this.rowsQuantity.TextChanged += new System.EventHandler(this.rowsQuantity_TextChanged);
             // 
             // selectedSimulationParametersTable
             // 
@@ -710,16 +697,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.btnLoadDiagramTemplatesButton.UseVisualStyleBackColor = true;
             this.btnLoadDiagramTemplatesButton.Click += new System.EventHandler(this.btnLoadDiagramTemplatesButton_Click);
             // 
-            // btnSaveDiagramTemplatesButton
-            // 
-            this.btnSaveDiagramTemplatesButton.Location = new System.Drawing.Point(326, 155);
-            this.btnSaveDiagramTemplatesButton.Name = "btnSaveDiagramTemplatesButton";
-            this.btnSaveDiagramTemplatesButton.Size = new System.Drawing.Size(75, 36);
-            this.btnSaveDiagramTemplatesButton.TabIndex = 14;
-            this.btnSaveDiagramTemplatesButton.Text = "Save Templates";
-            this.btnSaveDiagramTemplatesButton.UseVisualStyleBackColor = true;
-            this.btnSaveDiagramTemplatesButton.Click += new System.EventHandler(this.btnSaveDiagramTemplatesButton_Click);
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(4, 3);
@@ -759,8 +736,7 @@ namespace FilterSimulationWithTablesAndGraphs
             // 
             // XYSplitContainer.Panel2
             // 
-            this.XYSplitContainer.Panel2.Controls.Add(this.splitContainer2);
-            this.XYSplitContainer.Panel2.Controls.Add(this.panel11);
+            this.XYSplitContainer.Panel2.Controls.Add(this.scTableY1Y2SplitConteiner);
             this.XYSplitContainer.Size = new System.Drawing.Size(556, 327);
             this.XYSplitContainer.SplitterDistance = 150;
             this.XYSplitContainer.TabIndex = 8;
@@ -771,7 +747,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(182, 327);
+            this.groupBox2.Size = new System.Drawing.Size(150, 327);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "X Axis Parameter";
@@ -786,7 +762,7 @@ namespace FilterSimulationWithTablesAndGraphs
             this.listBoxXAxis.Location = new System.Drawing.Point(3, 16);
             this.listBoxXAxis.MultiSelect = false;
             this.listBoxXAxis.Name = "listBoxXAxis";
-            this.listBoxXAxis.Size = new System.Drawing.Size(176, 308);
+            this.listBoxXAxis.Size = new System.Drawing.Size(144, 308);
             this.listBoxXAxis.TabIndex = 6;
             this.listBoxXAxis.UseCompatibleStateImageBehavior = false;
             this.listBoxXAxis.View = System.Windows.Forms.View.Details;
@@ -797,96 +773,34 @@ namespace FilterSimulationWithTablesAndGraphs
             this.columnHeader1.Text = "X Parameter";
             this.columnHeader1.Width = 80;
             // 
-            // splitContainer2
+            // scTableY1Y2SplitConteiner
             // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 220);
-            this.splitContainer2.Name = "splitContainer2";
+            this.scTableY1Y2SplitConteiner.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scTableY1Y2SplitConteiner.Location = new System.Drawing.Point(0, 0);
+            this.scTableY1Y2SplitConteiner.Name = "scTableY1Y2SplitConteiner";
+            this.scTableY1Y2SplitConteiner.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // splitContainer2.Panel1
+            // scTableY1Y2SplitConteiner.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.groupBox1);
+            this.scTableY1Y2SplitConteiner.Panel1.Controls.Add(this.panel11);
+            this.scTableY1Y2SplitConteiner.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             // 
-            // splitContainer2.Panel2
+            // scTableY1Y2SplitConteiner.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer2.Size = new System.Drawing.Size(370, 107);
-            this.splitContainer2.SplitterDistance = 283;
-            this.splitContainer2.TabIndex = 10;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.listBoxYAxis);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(251, 107);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Y Axis Parameters";
-            // 
-            // listBoxYAxis
-            // 
-            this.listBoxYAxis.CheckBoxes = true;
-            this.listBoxYAxis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader2});
-            this.listBoxYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
-            listViewGroup1.Header = "ListViewGroup";
-            listViewGroup1.Name = "listViewGroup1";
-            listViewGroup2.Header = "ListViewGroup";
-            listViewGroup2.Name = "listViewGroup2";
-            this.listBoxYAxis.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2});
-            this.listBoxYAxis.Location = new System.Drawing.Point(3, 16);
-            this.listBoxYAxis.Name = "listBoxYAxis";
-            this.listBoxYAxis.Size = new System.Drawing.Size(245, 88);
-            this.listBoxYAxis.TabIndex = 6;
-            this.listBoxYAxis.UseCompatibleStateImageBehavior = false;
-            this.listBoxYAxis.View = System.Windows.Forms.View.List;
-            this.listBoxYAxis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ListBoxYAxisItemCheck);
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Y Parameter";
-            this.columnHeader2.Width = 164;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.listBoxY2Axis);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(115, 107);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Y2 Axis Parameters";
-            // 
-            // listBoxY2Axis
-            // 
-            this.listBoxY2Axis.CheckBoxes = true;
-            this.listBoxY2Axis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.nameColumn,
-            this.colorColumn});
-            this.listBoxY2Axis.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxY2Axis.Location = new System.Drawing.Point(3, 16);
-            this.listBoxY2Axis.Name = "listBoxY2Axis";
-            this.listBoxY2Axis.Size = new System.Drawing.Size(109, 88);
-            this.listBoxY2Axis.TabIndex = 0;
-            this.listBoxY2Axis.UseCompatibleStateImageBehavior = false;
-            this.listBoxY2Axis.View = System.Windows.Forms.View.Details;
-            this.listBoxY2Axis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ListBoxY2AxisItemCheck);
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.Text = "Name";
-            // 
-            // colorColumn
-            // 
-            this.colorColumn.Text = "Color";
+            this.scTableY1Y2SplitConteiner.Panel2.Controls.Add(this.splitContainer2);
+            this.scTableY1Y2SplitConteiner.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.scTableY1Y2SplitConteiner.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.scTableY1Y2SplitConteiner.Size = new System.Drawing.Size(402, 327);
+            this.scTableY1Y2SplitConteiner.SplitterDistance = 223;
+            this.scTableY1Y2SplitConteiner.TabIndex = 15;
+            this.scTableY1Y2SplitConteiner.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.scTableY1Y2SplitConteiner_SplitterMoved);
             // 
             // panel11
             // 
+            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel11.Controls.Add(this.deselectAllButton);
+            this.panel11.Controls.Add(this.label1);
+            this.panel11.Controls.Add(this.rowsQuantity);
             this.panel11.Controls.Add(this.xLogCheckBox);
             this.panel11.Controls.Add(this.btnSaveDiagramTemplatesButton);
             this.panel11.Controls.Add(this.y2LogCheckBox);
@@ -896,18 +810,47 @@ namespace FilterSimulationWithTablesAndGraphs
             this.panel11.Controls.Add(this.startFromOriginCheckBox);
             this.panel11.Controls.Add(this.NoScalingCheckBox);
             this.panel11.Controls.Add(this.deliquoringMachininglParametersCheckBox);
-            this.panel11.Controls.Add(this.deselectAllButton);
             this.panel11.Controls.Add(this.cakeFormationMaterilParametersCheckBox);
             this.panel11.Controls.Add(this.deliquoringMaterilParametersCheckBox);
             this.panel11.Controls.Add(this.xRangeLabel);
             this.panel11.Controls.Add(this.cakeFormationMachininglParametersCheckBox);
-            this.panel11.Controls.Add(this.label1);
-            this.panel11.Controls.Add(this.rowsQuantity);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(370, 220);
+            this.panel11.Size = new System.Drawing.Size(402, 223);
             this.panel11.TabIndex = 8;
+            // 
+            // deselectAllButton
+            // 
+            this.deselectAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deselectAllButton.Location = new System.Drawing.Point(219, 191);
+            this.deselectAllButton.Name = "deselectAllButton";
+            this.deselectAllButton.Size = new System.Drawing.Size(91, 22);
+            this.deselectAllButton.TabIndex = 4;
+            this.deselectAllButton.Text = "Deselect All";
+            this.deselectAllButton.UseVisualStyleBackColor = true;
+            this.deselectAllButton.Click += new System.EventHandler(this.DeselectAllButtonClick);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 197);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(130, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Desired amount of values:";
+            // 
+            // rowsQuantity
+            // 
+            this.rowsQuantity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.rowsQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.rowsQuantity.ForeColor = System.Drawing.Color.Red;
+            this.rowsQuantity.Location = new System.Drawing.Point(141, 194);
+            this.rowsQuantity.Name = "rowsQuantity";
+            this.rowsQuantity.Size = new System.Drawing.Size(50, 20);
+            this.rowsQuantity.TabIndex = 2;
+            this.rowsQuantity.TextChanged += new System.EventHandler(this.rowsQuantity_TextChanged);
             // 
             // xLogCheckBox
             // 
@@ -919,6 +862,16 @@ namespace FilterSimulationWithTablesAndGraphs
             this.xLogCheckBox.Text = "X Logarithmic";
             this.xLogCheckBox.UseVisualStyleBackColor = true;
             this.xLogCheckBox.CheckedChanged += new System.EventHandler(this.xLogCheckBox_CheckedChanged);
+            // 
+            // btnSaveDiagramTemplatesButton
+            // 
+            this.btnSaveDiagramTemplatesButton.Location = new System.Drawing.Point(326, 155);
+            this.btnSaveDiagramTemplatesButton.Name = "btnSaveDiagramTemplatesButton";
+            this.btnSaveDiagramTemplatesButton.Size = new System.Drawing.Size(75, 36);
+            this.btnSaveDiagramTemplatesButton.TabIndex = 14;
+            this.btnSaveDiagramTemplatesButton.Text = "Save Templates";
+            this.btnSaveDiagramTemplatesButton.UseVisualStyleBackColor = true;
+            this.btnSaveDiagramTemplatesButton.Click += new System.EventHandler(this.btnSaveDiagramTemplatesButton_Click);
             // 
             // y2LogCheckBox
             // 
@@ -977,6 +930,43 @@ namespace FilterSimulationWithTablesAndGraphs
             this.InvolvedSeriesDataGrid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.InvolvedSeriesDataGrid_EditingControlShowing);
             this.InvolvedSeriesDataGrid.CellValueChangedByUser += new System.Windows.Forms.DataGridViewCellEventHandler(this.InvolvedSeriesDataGrid_CellValueChangedByUser);
             // 
+            // SerieColumn
+            // 
+            this.SerieColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SerieColumn.HeaderText = "Serie";
+            this.SerieColumn.Name = "SerieColumn";
+            this.SerieColumn.ReadOnly = true;
+            this.SerieColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // FromValueColumn
+            // 
+            this.FromValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.FromValueColumn.FillWeight = 50F;
+            this.FromValueColumn.HeaderText = "From";
+            this.FromValueColumn.Name = "FromValueColumn";
+            // 
+            // ToValueColumn
+            // 
+            this.ToValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ToValueColumn.FillWeight = 50F;
+            this.ToValueColumn.HeaderText = "To";
+            this.ToValueColumn.Name = "ToValueColumn";
+            // 
+            // curveStyleColumn
+            // 
+            this.curveStyleColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
+            this.curveStyleColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.curveStyleColumn.HeaderText = "Curve Style";
+            this.curveStyleColumn.Name = "curveStyleColumn";
+            // 
+            // simulationColumn
+            // 
+            this.simulationColumn.HeaderText = "Simulation";
+            this.simulationColumn.Name = "simulationColumn";
+            this.simulationColumn.ReadOnly = true;
+            this.simulationColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.simulationColumn.Width = 59;
+            // 
             // startFromOriginCheckBox
             // 
             this.startFromOriginCheckBox.AutoSize = true;
@@ -1010,16 +1000,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.deliquoringMachininglParametersCheckBox.UseVisualStyleBackColor = true;
             this.deliquoringMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.DeliquoringMachininglParametersCheckBoxCheckedChanged);
             // 
-            // deselectAllButton
-            // 
-            this.deselectAllButton.Location = new System.Drawing.Point(219, 195);
-            this.deselectAllButton.Name = "deselectAllButton";
-            this.deselectAllButton.Size = new System.Drawing.Size(91, 22);
-            this.deselectAllButton.TabIndex = 4;
-            this.deselectAllButton.Text = "Deselect All";
-            this.deselectAllButton.UseVisualStyleBackColor = true;
-            this.deselectAllButton.Click += new System.EventHandler(this.DeselectAllButtonClick);
-            // 
             // cakeFormationMaterilParametersCheckBox
             // 
             this.cakeFormationMaterilParametersCheckBox.AutoSize = true;
@@ -1042,6 +1022,15 @@ namespace FilterSimulationWithTablesAndGraphs
             this.deliquoringMaterilParametersCheckBox.UseVisualStyleBackColor = true;
             this.deliquoringMaterilParametersCheckBox.CheckedChanged += new System.EventHandler(this.DeliquoringMaterilParametersCheckBoxCheckedChanged);
             // 
+            // xRangeLabel
+            // 
+            this.xRangeLabel.AutoSize = true;
+            this.xRangeLabel.Location = new System.Drawing.Point(10, 102);
+            this.xRangeLabel.Name = "xRangeLabel";
+            this.xRangeLabel.Size = new System.Drawing.Size(44, 13);
+            this.xRangeLabel.TabIndex = 2;
+            this.xRangeLabel.Text = "Ranges";
+            // 
             // cakeFormationMachininglParametersCheckBox
             // 
             this.cakeFormationMachininglParametersCheckBox.AutoSize = true;
@@ -1054,6 +1043,94 @@ namespace FilterSimulationWithTablesAndGraphs
             this.cakeFormationMachininglParametersCheckBox.Text = "Cake Formation Setting Parameters";
             this.cakeFormationMachininglParametersCheckBox.UseVisualStyleBackColor = true;
             this.cakeFormationMachininglParametersCheckBox.CheckedChanged += new System.EventHandler(this.CakeFormationMachininglParametersCheckBoxCheckedChanged);
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.groupBox1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
+            this.splitContainer2.Size = new System.Drawing.Size(402, 100);
+            this.splitContainer2.SplitterDistance = 307;
+            this.splitContainer2.TabIndex = 10;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.listBoxYAxis);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(307, 100);
+            this.groupBox1.TabIndex = 9;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Y Axis Parameters";
+            // 
+            // listBoxYAxis
+            // 
+            this.listBoxYAxis.CheckBoxes = true;
+            this.listBoxYAxis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader2});
+            this.listBoxYAxis.Dock = System.Windows.Forms.DockStyle.Fill;
+            listViewGroup1.Header = "ListViewGroup";
+            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "ListViewGroup";
+            listViewGroup2.Name = "listViewGroup2";
+            this.listBoxYAxis.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup1,
+            listViewGroup2});
+            this.listBoxYAxis.Location = new System.Drawing.Point(3, 16);
+            this.listBoxYAxis.Name = "listBoxYAxis";
+            this.listBoxYAxis.Size = new System.Drawing.Size(301, 81);
+            this.listBoxYAxis.TabIndex = 6;
+            this.listBoxYAxis.UseCompatibleStateImageBehavior = false;
+            this.listBoxYAxis.View = System.Windows.Forms.View.List;
+            this.listBoxYAxis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ListBoxYAxisItemCheck);
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Y Parameter";
+            this.columnHeader2.Width = 164;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.listBoxY2Axis);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(91, 100);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Y2 Axis Parameters";
+            // 
+            // listBoxY2Axis
+            // 
+            this.listBoxY2Axis.CheckBoxes = true;
+            this.listBoxY2Axis.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameColumn,
+            this.colorColumn});
+            this.listBoxY2Axis.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxY2Axis.Location = new System.Drawing.Point(3, 16);
+            this.listBoxY2Axis.Name = "listBoxY2Axis";
+            this.listBoxY2Axis.Size = new System.Drawing.Size(85, 81);
+            this.listBoxY2Axis.TabIndex = 0;
+            this.listBoxY2Axis.UseCompatibleStateImageBehavior = false;
+            this.listBoxY2Axis.View = System.Windows.Forms.View.Details;
+            this.listBoxY2Axis.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ListBoxY2AxisItemCheck);
+            // 
+            // nameColumn
+            // 
+            this.nameColumn.Text = "Name";
+            // 
+            // colorColumn
+            // 
+            this.colorColumn.Text = "Color";
             // 
             // splitter11
             // 
@@ -1141,43 +1218,6 @@ namespace FilterSimulationWithTablesAndGraphs
             this.btnParamsOrder.UseVisualStyleBackColor = true;
             this.btnParamsOrder.Click += new System.EventHandler(this.btnParamsOrder_Click);
             // 
-            // SerieColumn
-            // 
-            this.SerieColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SerieColumn.HeaderText = "Serie";
-            this.SerieColumn.Name = "SerieColumn";
-            this.SerieColumn.ReadOnly = true;
-            this.SerieColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // FromValueColumn
-            // 
-            this.FromValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.FromValueColumn.FillWeight = 50F;
-            this.FromValueColumn.HeaderText = "From";
-            this.FromValueColumn.Name = "FromValueColumn";
-            // 
-            // ToValueColumn
-            // 
-            this.ToValueColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ToValueColumn.FillWeight = 50F;
-            this.ToValueColumn.HeaderText = "To";
-            this.ToValueColumn.Name = "ToValueColumn";
-            // 
-            // curveStyleColumn
-            // 
-            this.curveStyleColumn.DisplayStyle = System.Windows.Forms.DataGridViewComboBoxDisplayStyle.ComboBox;
-            this.curveStyleColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.curveStyleColumn.HeaderText = "Curve Style";
-            this.curveStyleColumn.Name = "curveStyleColumn";
-            // 
-            // simulationColumn
-            // 
-            this.simulationColumn.HeaderText = "Simulation";
-            this.simulationColumn.Name = "simulationColumn";
-            this.simulationColumn.ReadOnly = true;
-            this.simulationColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.simulationColumn.Width = 59;
-            // 
             // fmFilterSimulationWithTablesAndGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1231,14 +1271,17 @@ namespace FilterSimulationWithTablesAndGraphs
             this.XYSplitContainer.Panel2.ResumeLayout(false);
             this.XYSplitContainer.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.scTableY1Y2SplitConteiner.Panel1.ResumeLayout(false);
+            this.scTableY1Y2SplitConteiner.Panel2.ResumeLayout(false);
+            this.scTableY1Y2SplitConteiner.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.InvolvedSeriesDataGrid)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             this.splitContainer2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.InvolvedSeriesDataGrid)).EndInit();
             this.panel8.ResumeLayout(false);
             this.RightSplitContainer.Panel1.ResumeLayout(false);
             this.RightSplitContainer.Panel2.ResumeLayout(false);
@@ -1255,8 +1298,6 @@ namespace FilterSimulationWithTablesAndGraphs
 
         private fmZedGraph.fmZedGraphControl fmZedGraphControl1;
         private fmDataGrid.fmDataGrid coordinatesGrid;
-        private System.Windows.Forms.Label label1;
-        private fmDataGrid.fmNumericalTextBox rowsQuantity;
         private System.Windows.Forms.Panel GridPanel;
         private fmDataGrid.fmDataGrid selectedSimulationParametersTable;
         private System.Windows.Forms.DataGridViewCheckBoxColumn SelectedSimulationParametersCheckBoxColumn;
@@ -1267,7 +1308,6 @@ namespace FilterSimulationWithTablesAndGraphs
         private System.Windows.Forms.Panel tablesAndGraphsTopLeftPanel;
         private Splitter splitter11;
         private Splitter splitter6;
-        private Label xRangeLabel;
         private Panel panel8;
         private SplitContainer SimulationAndGraphSplitContainer;
         private Panel panel9;
@@ -1276,42 +1316,46 @@ namespace FilterSimulationWithTablesAndGraphs
         private ListView listBoxYAxis;
         private Panel panel10;
         private SplitContainer XYSplitContainer;
-        private Panel panel11;
         private GroupBox groupBox1;
         private ListView listBoxXAxis;
         private GroupBox groupBox2;
         private ColumnHeader columnHeader1;
-        private CheckBox cakeFormationMaterilParametersCheckBox;
-        private CheckBox deliquoringMachininglParametersCheckBox;
-        private CheckBox cakeFormationMachininglParametersCheckBox;
-        private CheckBox deliquoringMaterilParametersCheckBox;
-        private Button deselectAllButton;
         private ColumnHeader columnHeader2;
         private SplitContainer RightSplitContainer;
-        private CheckBox NoScalingCheckBox;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem copyToolStripMenuItem;
-        private CheckBox startFromOriginCheckBox;
-        private fmDataGrid.fmDataGrid InvolvedSeriesDataGrid;
-        private Button LoadDefaultRangle;
         private SplitContainer splitContainer2;
         private GroupBox groupBox3;
-        private CheckBox y2LogCheckBox;
-        private CheckBox yLogCheckBox;
         private DataGridViewCheckBoxColumn AdditionalParametersCheckBoxColumn;
         private Button buttonDeleteRow;
-        private CheckBox xLogCheckBox;
         private Button btnLoadDiagramTemplatesButton;
-        private Button btnSaveDiagramTemplatesButton;
         private ListViewEx listBoxY2Axis;
         private ColumnHeader nameColumn;
         private ColumnHeader colorColumn;
         private Button btnParamsOrder;
+        private SplitContainer scTableY1Y2SplitConteiner;
+        private Panel panel11;
+        private CheckBox xLogCheckBox;
+        private Button btnSaveDiagramTemplatesButton;
+        private CheckBox y2LogCheckBox;
+        private CheckBox yLogCheckBox;
+        private Button LoadDefaultRangle;
+        private fmDataGrid.fmDataGrid InvolvedSeriesDataGrid;
         private DataGridViewTextBoxColumn SerieColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn FromValueColumn;
         private fmDataGrid.fmDataGridViewNumericalTextBoxColumn ToValueColumn;
         private DataGridViewComboBoxColumn curveStyleColumn;
         private DataGridViewTextBoxColumn simulationColumn;
+        private CheckBox startFromOriginCheckBox;
+        private CheckBox NoScalingCheckBox;
+        private CheckBox deliquoringMachininglParametersCheckBox;
+        private Button deselectAllButton;
+        private CheckBox cakeFormationMaterilParametersCheckBox;
+        private CheckBox deliquoringMaterilParametersCheckBox;
+        private Label xRangeLabel;
+        private CheckBox cakeFormationMachininglParametersCheckBox;
+        private Label label1;
+        private fmDataGrid.fmNumericalTextBox rowsQuantity;
 
     }
 }

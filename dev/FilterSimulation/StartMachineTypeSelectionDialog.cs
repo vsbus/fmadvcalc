@@ -64,9 +64,14 @@ namespace FilterSimulation
                 foreach (var suspension in project.SuspensionList)
                 {
                     SuspensionsComboBox.Items.Add(suspension.Material + " - " + suspension.Customer + " - " + suspension.GetName());
+                    List<object> usedMediums = new List<object>();
                     foreach (var serie in suspension.SimSeriesList)
                     {
-                        mediumsComboBox.Items.Add(serie.FilterMedium);
+                        if (!usedMediums.Contains(serie.FilterMedium))
+                        {
+                            mediumsComboBox.Items.Add(serie.FilterMedium);
+                            usedMediums.Add(serie.FilterMedium);
+                        }
                         SeriesComboBox.Items.Add(serie.GetName());
                     }
                 }

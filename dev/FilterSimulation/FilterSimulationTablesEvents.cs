@@ -114,7 +114,7 @@ namespace FilterSimulation
             }
         }
         // ReSharper disable InconsistentNaming
-        private void simulationDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        public void simulationDataGrid_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         // ReSharper restore InconsistentNaming
         {
             var dataGrid = sender as fmDataGrid.fmDataGrid;
@@ -163,11 +163,11 @@ namespace FilterSimulation
 
         #region CurrentCellChanged
         // ReSharper disable InconsistentNaming
-        private void suspensionDataGrid_CurrentCellChanged(object sender, EventArgs e)
+        protected virtual void suspensionDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
-        private void simSeriesDataGrid_CurrentCellChanged(object sender, EventArgs e)
+        protected virtual void simSeriesDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
@@ -175,7 +175,7 @@ namespace FilterSimulation
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
-        private void projectDataGrid_CurrentCellChanged(object sender, EventArgs e)
+        protected virtual void projectDataGrid_CurrentCellChanged(object sender, EventArgs e)
         {
             UpdateCurrentObjectAndDisplaySolution((DataGridView)sender);
         }
